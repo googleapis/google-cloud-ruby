@@ -24,7 +24,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate text_content
@@ -41,7 +41,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate text_content, format: :text
@@ -58,7 +58,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate text_content, format: :text, language: :en
@@ -75,7 +75,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate text_content, language: :en
@@ -94,7 +94,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document text_content
@@ -112,7 +112,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document text_content, format: :text
@@ -130,7 +130,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document text_content, format: :text, language: :en
@@ -148,7 +148,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document text_content, language: :en
@@ -167,7 +167,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
         grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
         mock = Minitest::Mock.new
-        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
         language.service.mocked_service = mock
         doc = language.text text_content
@@ -185,7 +185,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
         grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
         mock = Minitest::Mock.new
-        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
         language.service.mocked_service = mock
         doc = language.text text_content, language: :en
@@ -206,7 +206,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate "gs://bucket/path.ext"
@@ -223,7 +223,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate "gs://bucket/path.ext", format: :text
@@ -240,7 +240,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate "gs://bucket/path.ext", format: :text, language: :en
@@ -257,7 +257,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       annotation = language.annotate "gs://bucket/path.ext", language: :en
@@ -276,7 +276,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document "gs://bucket/path.ext"
@@ -294,7 +294,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document "gs://bucket/path.ext", format: :text
@@ -312,7 +312,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document "gs://bucket/path.ext", format: :text, language: :en
@@ -330,7 +330,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       doc = language.document "gs://bucket/path.ext", language: :en
@@ -349,7 +349,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
         grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
         mock = Minitest::Mock.new
-        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
         language.service.mocked_service = mock
         doc = language.text "gs://bucket/path.ext"
@@ -367,7 +367,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
         grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
         mock = Minitest::Mock.new
-        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
         language.service.mocked_service = mock
         doc = language.text "gs://bucket/path.ext", language: :en
@@ -388,7 +388,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -406,7 +406,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -424,7 +424,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -442,7 +442,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -462,7 +462,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -481,7 +481,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -500,7 +500,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -519,7 +519,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
       grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
       mock = Minitest::Mock.new
-      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+      mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
       language.service.mocked_service = mock
       gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -539,7 +539,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
         grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
         mock = Minitest::Mock.new
-        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
         language.service.mocked_service = mock
         gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"
@@ -558,7 +558,7 @@ describe Google::Cloud::Language::Project, :full_text_annotation, :mock_language
         grpc_resp = Google::Cloud::Language::V1::AnnotateTextResponse.decode_json text_json
 
         mock = Minitest::Mock.new
-        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, :UTF8, options: default_options]
+        mock.expect :annotate_text, grpc_resp, [grpc_doc, features, encoding_type: :UTF8, options: default_options]
 
         language.service.mocked_service = mock
         gcs_fake = OpenStruct.new to_gs_url: "gs://bucket/path.ext"

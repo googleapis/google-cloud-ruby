@@ -28,6 +28,7 @@ require "pathname"
 require "google/gax"
 
 require "google/devtools/clouddebugger/v2/controller_pb"
+require "google/cloud/debugger/credentials"
 
 module Google
   module Cloud
@@ -74,21 +75,24 @@ module Google
             "https://www.googleapis.com/auth/cloud_debugger"
           ].freeze
 
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param updater_proc [Proc]
-          #   A function that transforms the metadata for requests, e.g., to give
-          #   OAuth credentials.
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
           # @param scopes [Array<String>]
           #   The OAuth scopes for this service. This parameter is ignored if
           #   an updater_proc is supplied.
-          # @param client_config[Hash]
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -101,11 +105,10 @@ module Google
               channel: nil,
               chan_creds: nil,
               updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -114,14 +117,38 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/clouddebugger/v2/controller_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            credentials ||= Google::Cloud::Debugger::Credentials.default
+
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Debugger::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -168,19 +195,21 @@ module Google
 
           # Registers the debuggee with the controller service.
           #
-          # All agents attached to the same application should call this method with
-          # the same request content to get back the same stable +debuggee_id+. Agents
-          # should call this method again whenever +google.rpc.Code.NOT_FOUND+ is
-          # returned from any controller method.
+          # All agents attached to the same application must call this method with
+          # exactly the same request content to get back the same stable +debuggee_id+.
+          # Agents should call this method again whenever +google.rpc.Code.NOT_FOUND+
+          # is returned from any controller method.
           #
-          # This allows the controller service to disable the agent or recover from any
-          # data loss. If the debuggee is disabled by the server, the response will
-          # have +is_disabled+ set to +true+.
+          # This protocol allows the controller service to disable debuggees, recover
+          # from data loss, or change the +debuggee_id+ format. Agents must handle
+          # +debuggee_id+ value changing upon re-registration.
           #
-          # @param debuggee [Google::Devtools::Clouddebugger::V2::Debuggee]
+          # @param debuggee [Google::Devtools::Clouddebugger::V2::Debuggee | Hash]
           #   Debuggee information to register.
           #   The fields +project+, +uniquifier+, +description+ and +agent_version+
           #   of the debuggee must be set.
+          #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Debuggee`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -189,25 +218,23 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
-          #   Debuggee = Google::Devtools::Clouddebugger::V2::Debuggee
-          #
-          #   controller2_client = Controller2Client.new
-          #   debuggee = Debuggee.new
+          #   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
+          #   debuggee = {}
           #   response = controller2_client.register_debuggee(debuggee)
 
           def register_debuggee \
               debuggee,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest.new({
+            req = {
               debuggee: debuggee
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest)
             @register_debuggee.call(req, options)
           end
 
           # Returns the list of all active breakpoints for the debuggee.
           #
-          # The breakpoint specification (location, condition, and expression
+          # The breakpoint specification (+location+, +condition+, and +expressions+
           # fields) is semantically immutable, although the field values may
           # change. For example, an agent may update the location line number
           # to reflect the actual line where the breakpoint was set, but this
@@ -222,16 +249,17 @@ module Google
           # @param debuggee_id [String]
           #   Identifies the debuggee.
           # @param wait_token [String]
-          #   A wait token that, if specified, blocks the method call until the list
-          #   of active breakpoints has changed, or a server selected timeout has
-          #   expired.  The value should be set from the last returned response.
+          #   A token that, if specified, blocks the method call until the list
+          #   of active breakpoints has changed, or a server-selected timeout has
+          #   expired. The value should be set from the +next_wait_token+ field in
+          #   the last response. The initial value should be set to +"init"+.
           # @param success_on_timeout [true, false]
-          #   If set to +true+, returns +google.rpc.Code.OK+ status and sets the
-          #   +wait_expired+ response field to +true+ when the server-selected timeout
-          #   has expired (recommended).
+          #   If set to +true+ (recommended), returns +google.rpc.Code.OK+ status and
+          #   sets the +wait_expired+ response field to +true+ when the server-selected
+          #   timeout has expired.
           #
-          #   If set to +false+, returns +google.rpc.Code.ABORTED+ status when the
-          #   server-selected timeout has expired (deprecated).
+          #   If set to +false+ (deprecated), returns +google.rpc.Code.ABORTED+ status
+          #   when the server-selected timeout has expired.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -240,9 +268,7 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
-          #
-          #   controller2_client = Controller2Client.new
+          #   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
           #   debuggee_id = ''
           #   response = controller2_client.list_active_breakpoints(debuggee_id)
 
@@ -251,29 +277,32 @@ module Google
               wait_token: nil,
               success_on_timeout: nil,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsRequest.new({
+            req = {
               debuggee_id: debuggee_id,
               wait_token: wait_token,
               success_on_timeout: success_on_timeout
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsRequest)
             @list_active_breakpoints.call(req, options)
           end
 
           # Updates the breakpoint state or mutable fields.
-          # The entire Breakpoint message must be sent back to the controller
-          # service.
+          # The entire Breakpoint message must be sent back to the controller service.
           #
           # Updates to active breakpoint fields are only allowed if the new value
           # does not change the breakpoint specification. Updates to the +location+,
-          # +condition+ and +expression+ fields should not alter the breakpoint
+          # +condition+ and +expressions+ fields should not alter the breakpoint
           # semantics. These may only make changes such as canonicalizing a value
           # or snapping the location to the correct line of code.
           #
           # @param debuggee_id [String]
           #   Identifies the debuggee being debugged.
-          # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint]
+          # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint | Hash]
           #   Updated breakpoint information.
-          #   The field 'id' must be set.
+          #   The field +id+ must be set.
+          #   The agent must echo all Breakpoint specification fields in the update.
+          #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Breakpoint`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -282,22 +311,20 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Breakpoint = Google::Devtools::Clouddebugger::V2::Breakpoint
-          #   Controller2Client = Google::Cloud::Debugger::V2::Controller2Client
-          #
-          #   controller2_client = Controller2Client.new
+          #   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
           #   debuggee_id = ''
-          #   breakpoint = Breakpoint.new
+          #   breakpoint = {}
           #   response = controller2_client.update_active_breakpoint(debuggee_id, breakpoint)
 
           def update_active_breakpoint \
               debuggee_id,
               breakpoint,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest.new({
+            req = {
               debuggee_id: debuggee_id,
               breakpoint: breakpoint
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest)
             @update_active_breakpoint.call(req, options)
           end
         end

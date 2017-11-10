@@ -1,6 +1,6 @@
 --no-private
---title=Stackdriver Monitoring
---exclude lib/google/monitoring/v3
+--title=Stackdriver Monitoring API
+--exclude _pb\.rb$
 --markup markdown
 
 ./lib/**/*.rb

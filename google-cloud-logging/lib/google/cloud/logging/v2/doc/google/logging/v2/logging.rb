@@ -14,6 +14,21 @@
 
 module Google
   module Logging
+    ##
+    # # Stackdriver Logging API Contents
+    #
+    # | Class | Description |
+    # | ----- | ----------- |
+    # | [LoggingServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
+    # | [ConfigServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
+    # | [MetricsServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
+    # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
+    #
+    # [LoggingServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/loggingservicev2client
+    # [ConfigServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/configservicev2client
+    # [MetricsServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/metricsservicev2client
+    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/datatypes
+    #
     module V2
       # The parameters to DeleteLog.
       # @!attribute [rw] log_name
@@ -29,7 +44,7 @@ module Google
       #     +"projects/my-project-id/logs/syslog"+,
       #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
       #     For more information about log names, see
-      #     LogEntry.
+      #     {Google::Logging::V2::LogEntry LogEntry}.
       class DeleteLogRequest; end
 
       # The parameters to WriteLogEntries.
@@ -47,7 +62,7 @@ module Google
       #     +"projects/my-project-id/logs/syslog"+ or
       #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
       #     For more information about log names, see
-      #     LogEntry.
+      #     {Google::Logging::V2::LogEntry LogEntry}.
       # @!attribute [rw] resource
       #   @return [Google::Api::MonitoredResource]
       #     Optional. A default monitored resource object that is assigned to all log
@@ -57,30 +72,36 @@ module Google
       #           "labels": {
       #             "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
       #
-      #     See LogEntry.
+      #     See {Google::Logging::V2::LogEntry LogEntry}.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     Optional. Default labels that are added to the +labels+ field of all log
       #     entries in +entries+. If a log entry already has a label with the same key
       #     as a label in this parameter, then the log entry's label is not changed.
-      #     See LogEntry.
+      #     See {Google::Logging::V2::LogEntry LogEntry}.
       # @!attribute [rw] entries
       #   @return [Array<Google::Logging::V2::LogEntry>]
-      #     Required.  The log entries to write. Values supplied for the fields
-      #     +log_name+, +resource+, and +labels+ in this +entries.write+ request are
-      #     inserted into those log entries in this list that do not provide their own
-      #     values.
+      #     Required. The log entries to send to Stackdriver Logging. The order of log
+      #     entries in this list does not matter. Values supplied in this method's
+      #     +log_name+, +resource+, and +labels+ fields are copied into those log
+      #     entries in this list that do not include values for their corresponding
+      #     fields. For more information, see the {Google::Logging::V2::LogEntry LogEntry} type.
       #
-      #     Stackdriver Logging also creates and inserts values for +timestamp+ and
-      #     +insert_id+ if the entries do not provide them. The created +insert_id+ for
-      #     the N'th entry in this list will be greater than earlier entries and less
-      #     than later entries.  Otherwise, the order of log entries in this list does
-      #     not matter.
+      #     If the +timestamp+ or +insert_id+ fields are missing in log entries, then
+      #     this method supplies the current time or a unique identifier, respectively.
+      #     The supplied values are chosen so that, among the log entries that did not
+      #     supply their own values, the entries earlier in the list will sort before
+      #     the entries later in the list. See the +entries.list+ method.
+      #
+      #     Log entries with timestamps that are more than the
+      #     [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
+      #     24 hours in the future might be discarded. Discarding does not return
+      #     an error.
       #
       #     To improve throughput and to avoid exceeding the
-      #     {quota limit}[https://cloud.google.com/logging/quota-policy] for calls to +entries.write+,
-      #     you should write multiple log entries at once rather than
-      #     calling this method for each individual log entry.
+      #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to +entries.write+,
+      #     you should try to include several log entries in this list,
+      #     rather than calling this method for each individual log entry.
       # @!attribute [rw] partial_success
       #   @return [true, false]
       #     Optional. Whether valid entries should be written even if some other
@@ -93,6 +114,17 @@ module Google
       # Result returned from WriteLogEntries.
       # empty
       class WriteLogEntriesResponse; end
+
+      # Error details for WriteLogEntries with partial success.
+      # @!attribute [rw] log_entry_errors
+      #   @return [Hash{Integer => Google::Rpc::Status}]
+      #     When +WriteLogEntriesRequest.partial_success+ is true, records the error
+      #     status for entries that were not written due to a permanent error, keyed
+      #     by the entry's zero-based index in +WriteLogEntriesRequest.entries+.
+      #
+      #     Failed requests for which no entries are written will not include
+      #     per-entry errors.
+      class WriteLogEntriesPartialErrors; end
 
       # The parameters to +ListLogEntries+.
       # @!attribute [rw] project_ids
@@ -115,8 +147,8 @@ module Google
       #     Projects listed in the +project_ids+ field are added to this list.
       # @!attribute [rw] filter
       #   @return [String]
-      #     Optional. A filter that chooses which log entries to return.  See {Advanced
-      #     Logs Filters}[https://cloud.google.com/logging/docs/view/advanced_filters].  Only log entries that
+      #     Optional. A filter that chooses which log entries to return.  See [Advanced
+      #     Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
       #     match the filter are returned.  An empty filter matches all log entries in
       #     the resources listed in +resource_names+. Referencing a parent resource
       #     that is not listed in +resource_names+ will cause the filter to return no
@@ -146,7 +178,9 @@ module Google
       # Result returned from +ListLogEntries+.
       # @!attribute [rw] entries
       #   @return [Array<Google::Logging::V2::LogEntry>]
-      #     A list of log entries.
+      #     A list of log entries.  If +entries+ is empty, +nextPageToken+ may still be
+      #     returned, indicating that more entries may exist.  See +nextPageToken+ for
+      #     more information.
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     If there might be more results than those appearing in this response, then

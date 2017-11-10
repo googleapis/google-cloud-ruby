@@ -79,10 +79,10 @@ module Google
             )
           end
 
-          # @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
           #   be many types.
-          #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
           #   authenticating requests made by this client.
           #   A `String` will be treated as the path to the keyfile to be used for the construction of
           #   credentials for this client.
@@ -146,13 +146,13 @@ module Google
             if credentials.is_a?(Proc)
               updater_proc = credentials
             end
-            if credentials.is_a?(Google::Gax::Credentials)
+            if credentials.is_a?(Google::Auth::Credentials)
               updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 

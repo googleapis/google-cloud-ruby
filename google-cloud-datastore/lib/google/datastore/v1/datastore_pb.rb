@@ -32,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.datastore.v1.BeginTransactionRequest" do
     optional :project_id, :string, 8
+    optional :transaction_options, :message, 10, "google.datastore.v1.TransactionOptions"
   end
   add_message "google.datastore.v1.BeginTransactionResponse" do
     optional :transaction, :bytes, 1
@@ -66,6 +67,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.datastore.v1.AllocateIdsResponse" do
     repeated :keys, :message, 1, "google.datastore.v1.Key"
   end
+  add_message "google.datastore.v1.ReserveIdsRequest" do
+    optional :project_id, :string, 8
+    optional :database_id, :string, 9
+    repeated :keys, :message, 1, "google.datastore.v1.Key"
+  end
+  add_message "google.datastore.v1.ReserveIdsResponse" do
+  end
   add_message "google.datastore.v1.Mutation" do
     oneof :operation do
       optional :insert, :message, 4, "google.datastore.v1.Entity"
@@ -93,6 +101,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :STRONG, 1
     value :EVENTUAL, 2
   end
+  add_message "google.datastore.v1.TransactionOptions" do
+    oneof :mode do
+      optional :read_write, :message, 1, "google.datastore.v1.TransactionOptions.ReadWrite"
+      optional :read_only, :message, 2, "google.datastore.v1.TransactionOptions.ReadOnly"
+    end
+  end
+  add_message "google.datastore.v1.TransactionOptions.ReadWrite" do
+    optional :previous_transaction, :bytes, 1
+  end
+  add_message "google.datastore.v1.TransactionOptions.ReadOnly" do
+  end
 end
 
 module Google
@@ -111,10 +130,15 @@ module Google
       CommitResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.CommitResponse").msgclass
       AllocateIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AllocateIdsRequest").msgclass
       AllocateIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AllocateIdsResponse").msgclass
+      ReserveIdsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReserveIdsRequest").msgclass
+      ReserveIdsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReserveIdsResponse").msgclass
       Mutation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Mutation").msgclass
       MutationResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.MutationResult").msgclass
       ReadOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReadOptions").msgclass
       ReadOptions::ReadConsistency = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.ReadOptions.ReadConsistency").enummodule
+      TransactionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions").msgclass
+      TransactionOptions::ReadWrite = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions.ReadWrite").msgclass
+      TransactionOptions::ReadOnly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.TransactionOptions.ReadOnly").msgclass
     end
   end
 end

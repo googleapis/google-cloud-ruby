@@ -68,7 +68,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
 
   it "has more_results not_finished" do
     query = Google::Cloud::Datastore::Query.new.kind("User")
-    dataset.service.mocked_service.expect :run_query, run_query_res_not_finished, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res_not_finished, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
     entities.count.must_equal 2
@@ -97,7 +97,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
   end
 
   it "has more_results more_after_limit" do
-    dataset.service.mocked_service.expect :run_query, run_query_res_more_after_limit, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res_more_after_limit, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
     entities.count.must_equal 2
@@ -126,7 +126,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
   end
 
   it "has more_results more_after_cursor" do
-    dataset.service.mocked_service.expect :run_query, run_query_res_more_after_cursor, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res_more_after_cursor, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
     entities.count.must_equal 2
@@ -155,7 +155,7 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
   end
 
   it "has more_results no_more" do
-    dataset.service.mocked_service.expect :run_query, run_query_res_no_more, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res_no_more, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
     entities.count.must_equal 2

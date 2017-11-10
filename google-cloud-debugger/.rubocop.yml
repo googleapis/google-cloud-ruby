@@ -6,6 +6,7 @@ AllCops:
     - "lib/google/devtools/**/*"
     # GAPIC client has too many violations. Exclude for now.
     - "lib/google/cloud/debugger/v2/**/*"
+    - "lib/google/cloud/debugger/v2.rb"
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"

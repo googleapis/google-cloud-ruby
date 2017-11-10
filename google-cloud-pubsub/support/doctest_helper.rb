@@ -568,7 +568,7 @@ def snapshot_json topic_name, snapshot_name
   }
   { "name" => snapshot_path(snapshot_name),
     "topic" => topic_path(topic_name),
-    "expiration_time" => timestamp
+    "expire_time" => timestamp
   }.to_json
 end
 

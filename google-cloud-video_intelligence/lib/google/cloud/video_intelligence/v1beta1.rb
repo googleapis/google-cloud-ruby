@@ -33,11 +33,6 @@ module Google
     # 2. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
     # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
-    # ### Installation
-    # ```
-    # $ gem install google-cloud-video_intelligence
-    # ```
-    #
     # ### Next Steps
     # - Read the [Google Cloud Video Intelligence API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
@@ -54,10 +49,10 @@ module Google
         ##
         # Service that implements Google Cloud Video Intelligence API.
         #
-        # @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+        # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
         #   Provides the means for authenticating requests made by the client. This parameter can
         #   be many types.
-        #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+        #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
         #   authenticating requests made by this client.
         #   A `String` will be treated as the path to the keyfile to be used for the construction of
         #   credentials for this client.

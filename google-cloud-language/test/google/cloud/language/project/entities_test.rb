@@ -24,7 +24,7 @@ describe Google::Cloud::Language::Project, :entities, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entities_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_entities, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_entities, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     entities = language.entities text_content
@@ -39,7 +39,7 @@ describe Google::Cloud::Language::Project, :entities, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entities_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_entities, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_entities, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     entities = language.entities text_content, language: :en
@@ -54,7 +54,7 @@ describe Google::Cloud::Language::Project, :entities, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entities_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_entities, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_entities, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     entities = language.entities text_content, format: :text
@@ -69,7 +69,7 @@ describe Google::Cloud::Language::Project, :entities, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entities_text_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_entities, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_entities, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     entities = language.entities text_content, format: :text, language: :en
@@ -84,7 +84,7 @@ describe Google::Cloud::Language::Project, :entities, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entities_html_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_entities, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_entities, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     entities = language.entities html_content, format: :html
@@ -99,7 +99,7 @@ describe Google::Cloud::Language::Project, :entities, :mock_language do
     grpc_resp = Google::Cloud::Language::V1::AnalyzeEntitiesResponse.decode_json entities_html_json
 
     mock = Minitest::Mock.new
-    mock.expect :analyze_entities, grpc_resp, [grpc_doc, :UTF8, options: default_options]
+    mock.expect :analyze_entities, grpc_resp, [grpc_doc, encoding_type: :UTF8, options: default_options]
 
     language.service.mocked_service = mock
     entities = language.entities html_content, format: :html, language: :en

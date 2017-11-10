@@ -83,7 +83,8 @@ module Google
           read_options = generate_read_options consistency, transaction
 
           execute do
-            service.lookup project, read_options, keys, options: default_options
+            service.lookup project, keys,
+                           read_options: read_options, options: default_options
           end
         end
 
@@ -101,7 +102,7 @@ module Google
           execute do
             service.run_query project,
                               partition_id,
-                              read_options,
+                              read_options: read_options,
                               query: query,
                               gql_query: gql_query,
                               options: default_options

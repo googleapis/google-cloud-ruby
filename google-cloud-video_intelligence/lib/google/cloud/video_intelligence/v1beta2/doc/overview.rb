@@ -36,44 +36,6 @@ module Google
     # $ gem install google-cloud-video_intelligence
     # ```
     #
-    # ### Preview
-    # #### VideoIntelligenceServiceClient
-    # ```rb
-    # require "google/cloud/video_intelligence"
-    #
-    # video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
-    # input_uri = "gs://cloud-ml-sandbox/video/chicago.mp4"
-    # features_element = :LABEL_DETECTION
-    # features = [features_element]
-    #
-    # # Register a callback during the method call.
-    # operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
-    #   raise op.results.message if op.error?
-    #   op_results = op.results
-    #   # Process the results.
-    #
-    #   metadata = op.metadata
-    #   # Process the metadata.
-    # end
-    #
-    # # Or use the return value to register a callback.
-    # operation.on_done do |op|
-    #   raise op.results.message if op.error?
-    #   op_results = op.results
-    #   # Process the results.
-    #
-    #   metadata = op.metadata
-    #   # Process the metadata.
-    # end
-    #
-    # # Manually reload the operation.
-    # operation.reload!
-    #
-    # # Or block until the operation completes, triggering callbacks on
-    # # completion.
-    # operation.wait_until_done!
-    # ```
-    #
     # ### Next Steps
     # - Read the [Google Cloud Video Intelligence API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.

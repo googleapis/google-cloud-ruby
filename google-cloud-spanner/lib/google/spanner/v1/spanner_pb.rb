@@ -4,7 +4,6 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/api/auth_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
@@ -16,12 +15,26 @@ require 'google/spanner/v1/type_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.spanner.v1.CreateSessionRequest" do
     optional :database, :string, 1
+    optional :session, :message, 2, "google.spanner.v1.Session"
   end
   add_message "google.spanner.v1.Session" do
     optional :name, :string, 1
+    map :labels, :string, :string, 2
+    optional :create_time, :message, 3, "google.protobuf.Timestamp"
+    optional :approximate_last_use_time, :message, 4, "google.protobuf.Timestamp"
   end
   add_message "google.spanner.v1.GetSessionRequest" do
     optional :name, :string, 1
+  end
+  add_message "google.spanner.v1.ListSessionsRequest" do
+    optional :database, :string, 1
+    optional :page_size, :int32, 2
+    optional :page_token, :string, 3
+    optional :filter, :string, 4
+  end
+  add_message "google.spanner.v1.ListSessionsResponse" do
+    repeated :sessions, :message, 1, "google.spanner.v1.Session"
+    optional :next_page_token, :string, 2
   end
   add_message "google.spanner.v1.DeleteSessionRequest" do
     optional :name, :string, 1
@@ -77,6 +90,8 @@ module Google
       CreateSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CreateSessionRequest").msgclass
       Session = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Session").msgclass
       GetSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.GetSessionRequest").msgclass
+      ListSessionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsRequest").msgclass
+      ListSessionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsResponse").msgclass
       DeleteSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.DeleteSessionRequest").msgclass
       ExecuteSqlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest").msgclass
       ExecuteSqlRequest::QueryMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryMode").enummodule

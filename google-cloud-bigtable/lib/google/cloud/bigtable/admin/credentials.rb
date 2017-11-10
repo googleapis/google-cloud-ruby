@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/gax"
+require "googleauth"
 
 module Google
   module Cloud
     module Bigtable
       module Admin
-        class Credentials < Google::Gax::Credentials
+        class Credentials < Google::Auth::Credentials
           SCOPE = [
             "https://www.googleapis.com/auth/bigtable.admin",
             "https://www.googleapis.com/auth/bigtable.admin.cluster",
@@ -32,6 +32,7 @@ module Google
           ].freeze
           PATH_ENV_VARS = %w(BIGTABLE_ADMIN_KEYFILE, GOOGLE_CLOUD_KEYFILE, GCLOUD_KEYFILE)
           JSON_ENV_VARS = %w(BIGTABLE_ADMIN_KEYFILE_JSON, GOOGLE_CLOUD_KEYFILE_JSON, GCLOUD_KEYFILE_JSON)
+          DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
         end
       end
     end

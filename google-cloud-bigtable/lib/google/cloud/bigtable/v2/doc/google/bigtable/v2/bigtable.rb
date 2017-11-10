@@ -22,8 +22,8 @@ module Google
     # | [BigtableClient][] | Google Cloud Bigtable - http://cloud.google.com/bigtable/ |
     # | [Data Types][] | Data types for Google::Cloud::Bigtable::V2 |
     #
-    # [BigtableClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest/google/bigtable/v2/v2/bigtableclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest/google/bigtable/v2/v2/datatypes
+    # [BigtableClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest/google/bigtable/v2/bigtableclient
+    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest/google/bigtable/v2/datatypes
     #
     module V2
       # Request message for Bigtable.ReadRows.

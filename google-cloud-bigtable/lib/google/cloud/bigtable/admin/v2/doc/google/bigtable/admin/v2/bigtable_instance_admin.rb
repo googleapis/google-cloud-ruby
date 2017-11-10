@@ -24,9 +24,9 @@ module Google
       # | [BigtableTableAdminClient][] |  |
       # | [Data Types][] | Data types for Google::Cloud::Bigtable::Admin::V2 |
       #
-      # [BigtableInstanceAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/v2/bigtableinstanceadminclient
-      # [BigtableTableAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/v2/bigtabletableadminclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/v2/datatypes
+      # [BigtableInstanceAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtableinstanceadminclient
+      # [BigtableTableAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtabletableadminclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/datatypes
       #
       module V2
         # Request message for BigtableInstanceAdmin.CreateInstance.

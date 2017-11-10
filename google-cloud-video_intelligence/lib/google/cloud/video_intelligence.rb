@@ -34,44 +34,6 @@ module Google
     # 2. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
     # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
-    # ### Preview
-    # #### VideoIntelligenceServiceClient
-    # ```rb
-    # require "google/cloud/video_intelligence"
-    #
-    # video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
-    # input_uri = "gs://cloud-ml-sandbox/video/chicago.mp4"
-    # features_element = :LABEL_DETECTION
-    # features = [features_element]
-    #
-    # # Register a callback during the method call.
-    # operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
-    #   raise op.results.message if op.error?
-    #   op_results = op.results
-    #   # Process the results.
-    #
-    #   metadata = op.metadata
-    #   # Process the metadata.
-    # end
-    #
-    # # Or use the return value to register a callback.
-    # operation.on_done do |op|
-    #   raise op.results.message if op.error?
-    #   op_results = op.results
-    #   # Process the results.
-    #
-    #   metadata = op.metadata
-    #   # Process the metadata.
-    # end
-    #
-    # # Manually reload the operation.
-    # operation.reload!
-    #
-    # # Or block until the operation completes, triggering callbacks on
-    # # completion.
-    # operation.wait_until_done!
-    # ```
-    #
     # ### Next Steps
     # - Read the [Google Cloud Video Intelligence API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
@@ -98,11 +60,11 @@ module Google
       # @param version [Symbol, String]
       #   The major version of the service to be used. By default :v1beta2
       #   is used.
-      # @overload
-      #   @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+      # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
+      #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
       #     Provides the means for authenticating requests made by the client. This parameter can
       #     be many types.
-      #     A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+      #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
       #     authenticating requests made by this client.
       #     A `String` will be treated as the path to the keyfile to be used for the construction of
       #     credentials for this client.

@@ -14,8 +14,19 @@
 
 module Google
   module Datastore
+    ##
+    # # Google Cloud Datastore API Contents
+    #
+    # | Class | Description |
+    # | ----- | ----------- |
+    # | [DatastoreClient][] | Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application. |
+    # | [Data Types][] | Data types for Google::Cloud::Datastore::V1 |
+    #
+    # [DatastoreClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest/google/datastore/v1/datastoreclient
+    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest/google/datastore/v1/datatypes
+    #
     module V1
-      # The request for Datastore::Lookup.
+      # The request for {Google::Datastore::V1::Datastore::Lookup Datastore::Lookup}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
@@ -27,7 +38,7 @@ module Google
       #     Keys of entities to look up.
       class LookupRequest; end
 
-      # The response for Datastore::Lookup.
+      # The response for {Google::Datastore::V1::Datastore::Lookup Datastore::Lookup}.
       # @!attribute [rw] found
       #   @return [Array<Google::Datastore::V1::EntityResult>]
       #     Entities found as +ResultType.FULL+ entities. The order of results in this
@@ -45,7 +56,7 @@ module Google
       #     order of the keys in the input.
       class LookupResponse; end
 
-      # The request for Datastore::RunQuery.
+      # The request for {Google::Datastore::V1::Datastore::RunQuery Datastore::RunQuery}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
@@ -66,7 +77,7 @@ module Google
       #     The GQL query to run.
       class RunQueryRequest; end
 
-      # The response for Datastore::RunQuery.
+      # The response for {Google::Datastore::V1::Datastore::RunQuery Datastore::RunQuery}.
       # @!attribute [rw] batch
       #   @return [Google::Datastore::V1::QueryResultBatch]
       #     A batch of query results (always present).
@@ -75,33 +86,36 @@ module Google
       #     The parsed form of the +GqlQuery+ from the request, if it was set.
       class RunQueryResponse; end
 
-      # The request for Datastore::BeginTransaction.
+      # The request for {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
+      # @!attribute [rw] transaction_options
+      #   @return [Google::Datastore::V1::TransactionOptions]
+      #     Options for a new transaction.
       class BeginTransactionRequest; end
 
-      # The response for Datastore::BeginTransaction.
+      # The response for {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction identifier (always present).
       class BeginTransactionResponse; end
 
-      # The request for Datastore::Rollback.
+      # The request for {Google::Datastore::V1::Datastore::Rollback Datastore::Rollback}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
       # @!attribute [rw] transaction
       #   @return [String]
       #     The transaction identifier, returned by a call to
-      #     Datastore::BeginTransaction.
+      #     {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       class RollbackRequest; end
 
-      # The response for Datastore::Rollback.
+      # The response for {Google::Datastore::V1::Datastore::Rollback Datastore::Rollback}.
       # (an empty message).
       class RollbackResponse; end
 
-      # The request for Datastore::Commit.
+      # The request for {Google::Datastore::V1::Datastore::Commit Datastore::Commit}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
@@ -112,7 +126,7 @@ module Google
       #   @return [String]
       #     The identifier of the transaction associated with the commit. A
       #     transaction identifier is returned by a call to
-      #     Datastore::BeginTransaction.
+      #     {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       # @!attribute [rw] mutations
       #   @return [Array<Google::Datastore::V1::Mutation>]
       #     The mutations to perform.
@@ -121,10 +135,10 @@ module Google
       #     applied in order. The following sequences of mutations affecting a single
       #     entity are not permitted in a single +Commit+ request:
       #
-      #     - +insert+ followed by +insert+
-      #     - +update+ followed by +insert+
-      #     - +upsert+ followed by +insert+
-      #     - +delete+ followed by +update+
+      #     * +insert+ followed by +insert+
+      #     * +update+ followed by +insert+
+      #     * +upsert+ followed by +insert+
+      #     * +delete+ followed by +update+
       #
       #     When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
       #     entity.
@@ -135,7 +149,7 @@ module Google
           MODE_UNSPECIFIED = 0
 
           # Transactional: The mutations are either all applied, or none are applied.
-          # Learn about transactions {here}[https://cloud.google.com/datastore/docs/concepts/transactions].
+          # Learn about transactions [here](https://cloud.google.com/datastore/docs/concepts/transactions).
           TRANSACTIONAL = 1
 
           # Non-transactional: The mutations may not apply as all or none.
@@ -143,7 +157,7 @@ module Google
         end
       end
 
-      # The response for Datastore::Commit.
+      # The response for {Google::Datastore::V1::Datastore::Commit Datastore::Commit}.
       # @!attribute [rw] mutation_results
       #   @return [Array<Google::Datastore::V1::MutationResult>]
       #     The result of performing the mutations.
@@ -154,7 +168,7 @@ module Google
       #     updated.
       class CommitResponse; end
 
-      # The request for Datastore::AllocateIds.
+      # The request for {Google::Datastore::V1::Datastore::AllocateIds Datastore::AllocateIds}.
       # @!attribute [rw] project_id
       #   @return [String]
       #     The ID of the project against which to make the request.
@@ -164,12 +178,28 @@ module Google
       #     No key may be reserved/read-only.
       class AllocateIdsRequest; end
 
-      # The response for Datastore::AllocateIds.
+      # The response for {Google::Datastore::V1::Datastore::AllocateIds Datastore::AllocateIds}.
       # @!attribute [rw] keys
       #   @return [Array<Google::Datastore::V1::Key>]
       #     The keys specified in the request (in the same order), each with
       #     its key path completed with a newly allocated ID.
       class AllocateIdsResponse; end
+
+      # The request for {Google::Datastore::V1::Datastore::ReserveIds Datastore::ReserveIds}.
+      # @!attribute [rw] project_id
+      #   @return [String]
+      #     The ID of the project against which to make the request.
+      # @!attribute [rw] database_id
+      #   @return [String]
+      #     If not empty, the ID of the database against which to make the request.
+      # @!attribute [rw] keys
+      #   @return [Array<Google::Datastore::V1::Key>]
+      #     A list of keys with complete key paths whose numeric IDs should not be
+      #     auto-allocated.
+      class ReserveIdsRequest; end
+
+      # The response for {Google::Datastore::V1::Datastore::ReserveIds Datastore::ReserveIds}.
+      class ReserveIdsResponse; end
 
       # A mutation to apply to an entity.
       # @!attribute [rw] insert
@@ -221,7 +251,7 @@ module Google
       #   @return [String]
       #     The identifier of the transaction in which to read. A
       #     transaction identifier is returned by a call to
-      #     Datastore::BeginTransaction.
+      #     {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
       class ReadOptions
         # The possible values for read consistencies.
         module ReadConsistency
@@ -234,6 +264,28 @@ module Google
           # Eventual consistency.
           EVENTUAL = 2
         end
+      end
+
+      # Options for beginning a new transaction.
+      #
+      # Transactions can be created explicitly with calls to
+      # {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction} or implicitly by setting
+      # {Google::Datastore::V1::ReadOptions#new_transaction ReadOptions#new_transaction} in read requests.
+      # @!attribute [rw] read_write
+      #   @return [Google::Datastore::V1::TransactionOptions::ReadWrite]
+      #     The transaction should allow both reads and writes.
+      # @!attribute [rw] read_only
+      #   @return [Google::Datastore::V1::TransactionOptions::ReadOnly]
+      #     The transaction should only allow reads.
+      class TransactionOptions
+        # Options specific to read / write transactions.
+        # @!attribute [rw] previous_transaction
+        #   @return [String]
+        #     The transaction identifier of the transaction being retried.
+        class ReadWrite; end
+
+        # Options specific to read-only transactions.
+        class ReadOnly; end
       end
     end
   end

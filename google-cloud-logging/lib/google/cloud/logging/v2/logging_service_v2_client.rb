@@ -28,6 +28,7 @@ require "pathname"
 require "google/gax"
 
 require "google/logging/v2/logging_pb"
+require "google/cloud/logging/credentials"
 
 module Google
   module Cloud
@@ -71,8 +72,7 @@ module Google
               [
                 "logName",
                 "resource",
-                "labels",
-                "partialSuccess"
+                "labels"
               ])
           }.freeze
 
@@ -120,36 +120,24 @@ module Google
             )
           end
 
-          # Parses the project from a project resource.
-          # @param project_name [String]
-          # @return [String]
-          def self.match_project_from_project_name project_name
-            PROJECT_PATH_TEMPLATE.match(project_name)["project"]
-          end
-
-          # Parses the project from a log resource.
-          # @param log_name [String]
-          # @return [String]
-          def self.match_project_from_log_name log_name
-            LOG_PATH_TEMPLATE.match(log_name)["project"]
-          end
-
-          # Parses the log from a log resource.
-          # @param log_name [String]
-          # @return [String]
-          def self.match_log_from_log_name log_name
-            LOG_PATH_TEMPLATE.match(log_name)["log"]
-          end
-
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param client_config[Hash]
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -161,11 +149,11 @@ module Google
               port: DEFAULT_SERVICE_PORT,
               channel: nil,
               chan_creds: nil,
+              updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -174,14 +162,38 @@ module Google
             require "google/gax/grpc"
             require "google/logging/v2/logging_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            credentials ||= Google::Cloud::Logging::Credentials.default
+
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Logging::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -207,6 +219,7 @@ module Google
               port,
               chan_creds: chan_creds,
               channel: channel,
+              updater_proc: updater_proc,
               scopes: scopes,
               &Google::Logging::V2::LoggingServiceV2::Stub.method(:new)
             )
@@ -252,48 +265,61 @@ module Google
           #   +"projects/my-project-id/logs/syslog"+,
           #   +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
           #   For more information about log names, see
-          #   LogEntry.
+          #   {Google::Logging::V2::LogEntry LogEntry}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
-          #
-          #   logging_service_v2_client = LoggingServiceV2Client.new
-          #   formatted_log_name = LoggingServiceV2Client.log_path("[PROJECT]", "[LOG]")
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
+          #   formatted_log_name = Google::Cloud::Logging::V2::LoggingServiceV2Client.log_path("[PROJECT]", "[LOG]")
           #   logging_service_v2_client.delete_log(formatted_log_name)
 
           def delete_log \
               log_name,
               options: nil
-            req = Google::Logging::V2::DeleteLogRequest.new({
+            req = {
               log_name: log_name
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteLogRequest)
             @delete_log.call(req, options)
             nil
           end
 
-          # Writes log entries to Stackdriver Logging.
+          # == Log entry resources
           #
-          # @param entries [Array<Google::Logging::V2::LogEntry>]
-          #   Required.  The log entries to write. Values supplied for the fields
-          #   +log_name+, +resource+, and +labels+ in this +entries.write+ request are
-          #   inserted into those log entries in this list that do not provide their own
-          #   values.
+          # Writes log entries to Stackdriver Logging. This API method is the
+          # only way to send log entries to Stackdriver Logging. This method
+          # is used, directly or indirectly, by the Stackdriver Logging agent
+          # (fluentd) and all logging libraries configured to use Stackdriver
+          # Logging.
           #
-          #   Stackdriver Logging also creates and inserts values for +timestamp+ and
-          #   +insert_id+ if the entries do not provide them. The created +insert_id+ for
-          #   the N'th entry in this list will be greater than earlier entries and less
-          #   than later entries.  Otherwise, the order of log entries in this list does
-          #   not matter.
+          # @param entries [Array<Google::Logging::V2::LogEntry | Hash>]
+          #   Required. The log entries to send to Stackdriver Logging. The order of log
+          #   entries in this list does not matter. Values supplied in this method's
+          #   +log_name+, +resource+, and +labels+ fields are copied into those log
+          #   entries in this list that do not include values for their corresponding
+          #   fields. For more information, see the {Google::Logging::V2::LogEntry LogEntry} type.
+          #
+          #   If the +timestamp+ or +insert_id+ fields are missing in log entries, then
+          #   this method supplies the current time or a unique identifier, respectively.
+          #   The supplied values are chosen so that, among the log entries that did not
+          #   supply their own values, the entries earlier in the list will sort before
+          #   the entries later in the list. See the +entries.list+ method.
+          #
+          #   Log entries with timestamps that are more than the
+          #   [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
+          #   24 hours in the future might be discarded. Discarding does not return
+          #   an error.
           #
           #   To improve throughput and to avoid exceeding the
-          #   {quota limit}[https://cloud.google.com/logging/quota-policy] for calls to +entries.write+,
-          #   you should write multiple log entries at once rather than
-          #   calling this method for each individual log entry.
+          #   [quota limit](https://cloud.google.com/logging/quota-policy) for calls to +entries.write+,
+          #   you should try to include several log entries in this list,
+          #   rather than calling this method for each individual log entry.
+          #   A hash of the same form as `Google::Logging::V2::LogEntry`
+          #   can also be provided.
           # @param log_name [String]
           #   Optional. A default log resource name that is assigned to all log entries
           #   in +entries+ that do not specify a value for +log_name+:
@@ -307,8 +333,8 @@ module Google
           #   +"projects/my-project-id/logs/syslog"+ or
           #   +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
           #   For more information about log names, see
-          #   LogEntry.
-          # @param resource [Google::Api::MonitoredResource]
+          #   {Google::Logging::V2::LogEntry LogEntry}.
+          # @param resource [Google::Api::MonitoredResource | Hash]
           #   Optional. A default monitored resource object that is assigned to all log
           #   entries in +entries+ that do not specify a value for +resource+. Example:
           #
@@ -316,12 +342,14 @@ module Google
           #         "labels": {
           #           "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
           #
-          #   See LogEntry.
+          #   See {Google::Logging::V2::LogEntry LogEntry}.
+          #   A hash of the same form as `Google::Api::MonitoredResource`
+          #   can also be provided.
           # @param labels [Hash{String => String}]
           #   Optional. Default labels that are added to the +labels+ field of all log
           #   entries in +entries+. If a log entry already has a label with the same key
           #   as a label in this parameter, then the log entry's label is not changed.
-          #   See LogEntry.
+          #   See {Google::Logging::V2::LogEntry LogEntry}.
           # @param partial_success [true, false]
           #   Optional. Whether valid entries should be written even if some other
           #   entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -334,11 +362,9 @@ module Google
           # @return [Google::Logging::V2::WriteLogEntriesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
-          #
-          #   logging_service_v2_client = LoggingServiceV2Client.new
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
           #   entries = []
           #   response = logging_service_v2_client.write_log_entries(entries)
 
@@ -349,19 +375,20 @@ module Google
               labels: nil,
               partial_success: nil,
               options: nil
-            req = Google::Logging::V2::WriteLogEntriesRequest.new({
+            req = {
               entries: entries,
               log_name: log_name,
               resource: resource,
               labels: labels,
               partial_success: partial_success
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::WriteLogEntriesRequest)
             @write_log_entries.call(req, options)
           end
 
           # Lists log entries.  Use this method to retrieve log entries from
           # Stackdriver Logging.  For ways to export log entries, see
-          # {Exporting Logs}[https://cloud.google.com/logging/docs/export].
+          # [Exporting Logs](https://cloud.google.com/logging/docs/export).
           #
           # @param resource_names [Array<String>]
           #   Required. Names of one or more parent resources from which to
@@ -380,8 +407,8 @@ module Google
           #   resource name format and added to the list of resources in
           #   +resource_names+.
           # @param filter [String]
-          #   Optional. A filter that chooses which log entries to return.  See {Advanced
-          #   Logs Filters}[https://cloud.google.com/logging/docs/view/advanced_filters].  Only log entries that
+          #   Optional. A filter that chooses which log entries to return.  See [Advanced
+          #   Logs Filters](/logging/docs/view/advanced_filters).  Only log entries that
           #   match the filter are returned.  An empty filter matches all log entries in
           #   the resources listed in +resource_names+. Referencing a parent resource
           #   that is not listed in +resource_names+ will cause the filter to return no
@@ -410,11 +437,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
-          #
-          #   logging_service_v2_client = LoggingServiceV2Client.new
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
           #   resource_names = []
           #
           #   # Iterate over all results.
@@ -437,13 +462,14 @@ module Google
               order_by: nil,
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListLogEntriesRequest.new({
+            req = {
               resource_names: resource_names,
               project_ids: project_ids,
               filter: filter,
               order_by: order_by,
               page_size: page_size
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::ListLogEntriesRequest)
             @list_log_entries.call(req, options)
           end
 
@@ -466,11 +492,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
-          #
-          #   logging_service_v2_client = LoggingServiceV2Client.new
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
           #
           #   # Iterate over all results.
           #   logging_service_v2_client.list_monitored_resource_descriptors.each do |element|
@@ -488,9 +512,10 @@ module Google
           def list_monitored_resource_descriptors \
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListMonitoredResourceDescriptorsRequest.new({
+            req = {
               page_size: page_size
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::ListMonitoredResourceDescriptorsRequest)
             @list_monitored_resource_descriptors.call(req, options)
           end
 
@@ -520,12 +545,10 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2/logging_service_v2_client"
+          #   require "google/cloud/logging/v2"
           #
-          #   LoggingServiceV2Client = Google::Cloud::Logging::V2::LoggingServiceV2Client
-          #
-          #   logging_service_v2_client = LoggingServiceV2Client.new
-          #   formatted_parent = LoggingServiceV2Client.project_path("[PROJECT]")
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
+          #   formatted_parent = Google::Cloud::Logging::V2::LoggingServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   logging_service_v2_client.list_logs(formatted_parent).each do |element|
@@ -544,10 +567,11 @@ module Google
               parent,
               page_size: nil,
               options: nil
-            req = Google::Logging::V2::ListLogsRequest.new({
+            req = {
               parent: parent,
               page_size: page_size
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::ListLogsRequest)
             @list_logs.call(req, options)
           end
         end

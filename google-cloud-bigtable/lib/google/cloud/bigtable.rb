@@ -61,10 +61,10 @@ module Google
       #   The major version of the service to be used. By default :v2
       #   is used.
       # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-      #   @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+      #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
       #     Provides the means for authenticating requests made by the client. This parameter can
       #     be many types.
-      #     A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+      #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
       #     authenticating requests made by this client.
       #     A `String` will be treated as the path to the keyfile to be used for the construction of
       #     credentials for this client.
