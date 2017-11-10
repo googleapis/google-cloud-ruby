@@ -1,1 +1,1 @@
-{"id":"google/cloud","name":"Cloud","title":["Google","Cloud"],"description":"","source":"google-cloud-monitoring/lib/google/cloud/monitoring/v3/group_service_client.rb#L33","resources":[],"examples":[],"methods":[]}
+{"id":"google/cloud","name":"Cloud","title":["Google","Cloud"],"description":"","source":"google-cloud-monitoring/lib/google/cloud/monitoring.rb#L19","resources":[],"examples":[],"methods":[]}
