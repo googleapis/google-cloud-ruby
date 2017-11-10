@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -67,7 +67,7 @@ end
 # Acceptance tests
 desc "Run the google-cloud-monitoring acceptance tests."
 task :acceptance do
-  puts "The google-cloud-monitoring gem does not have acceptance tests."
+  Rake::Task["smoke_test"].invoke
 end
 
 namespace :acceptance do
@@ -145,7 +145,7 @@ task :ci do
 end
 
 namespace :ci do
-  desc "Run the CI build, with smoke_tests."
+  desc "Run the CI build, with smoke tests."
   task :smoke_test do
     Rake::Task["ci"].invoke
     header "google-cloud-monitoring smoke_test", "*"
@@ -155,7 +155,7 @@ end
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
-  task :accpetance do
+  task :acceptance do
     Rake::Task["ci"].invoke
     header "google-cloud-monitoring acceptance", "*"
     sh "bundle exec rake acceptance -v"
