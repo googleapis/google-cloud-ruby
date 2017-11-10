@@ -31,20 +31,32 @@ module Google
           end
 
           ##
+          # The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.
+          # (String)
+          attr_accessor :request_method
+
+          ##
           # @overload method()
+          #   Deprecated. Use {#request_method} instead.
+          #
           #   The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`,
           #   `"POST"`. (String)
           def method *args
             # Call Object#method when args are present.
             return super if args.any?
 
-            @method
+            request_method
           end
 
           ##
-          # The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.
-          # (String)
-          attr_writer :method
+          # @overload method()
+          #   Deprecated. Use {#request_method=} instead.
+          #
+          #   The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`,
+          #   `"POST"`. (String)
+          def method= new_request_method
+            self.request_method = new_request_method
+          end
 
           ##
           # The URL. The scheme (http, https), the host name, the path and the
@@ -118,7 +130,7 @@ module Google
           def to_grpc
             return nil if empty?
             Google::Logging::Type::HttpRequest.new(
-              request_method:                     method.to_s,
+              request_method:                     request_method.to_s,
               request_url:                        url.to_s,
               request_size:                       size.to_i,
               status:                             status.to_i,
@@ -137,16 +149,16 @@ module Google
           def self.from_grpc grpc
             return new if grpc.nil?
             new.tap do |h|
-              h.method        = grpc.request_method
-              h.url           = grpc.request_url
-              h.size          = grpc.request_size
-              h.status        = grpc.status
-              h.response_size = grpc.response_size
-              h.user_agent    = grpc.user_agent
-              h.remote_ip     = grpc.remote_ip
-              h.referer       = grpc.referer
-              h.cache_hit     = grpc.cache_hit
-              h.validated     = grpc.cache_validated_with_origin_server
+              h.request_method = grpc.request_method
+              h.url            = grpc.request_url
+              h.size           = grpc.request_size
+              h.status         = grpc.status
+              h.response_size  = grpc.response_size
+              h.user_agent     = grpc.user_agent
+              h.remote_ip      = grpc.remote_ip
+              h.referer        = grpc.referer
+              h.cache_hit      = grpc.cache_hit
+              h.validated      = grpc.cache_validated_with_origin_server
             end
           end
         end

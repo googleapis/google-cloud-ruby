@@ -20,7 +20,7 @@ describe Google::Cloud::Logging::Entry::HttpRequest, :mock_logging do
   let(:http_request) { Google::Cloud::Logging::Entry::HttpRequest.from_grpc http_request_grpc }
 
   it "has attributes" do
-    http_request.method.must_equal "GET"
+    http_request.request_method.must_equal "GET"
     http_request.url.must_equal "http://test.local/foo?bar=baz"
     http_request.size.must_equal 123
     http_request.status.must_equal 200
@@ -32,7 +32,17 @@ describe Google::Cloud::Logging::Entry::HttpRequest, :mock_logging do
     http_request.validated.must_equal false
   end
 
-  it "doesn't stomp on Object#method" do
+  it "method alias (deprecated)" do
+    http_request.request_method.must_equal "GET"
+    http_request.method.must_equal http_request.request_method
+
+    http_request.method = "POST"
+
+    http_request.request_method.must_equal "POST"
+    http_request.method.must_equal http_request.request_method
+  end
+
+  it "method alias doesn't stomp on Object#method" do
     actual_method = http_request.method :validated=
     actual_method.must_be_kind_of Method
     actual_method.name.must_equal :validated=
