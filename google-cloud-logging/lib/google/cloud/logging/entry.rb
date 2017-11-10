@@ -57,6 +57,19 @@ module Google
       #
       #   logging.write_entries entry
       #
+      # @example Provide a hash to write a JSON payload to the log:
+      #   require "google/cloud/logging"
+      #
+      #   logging = Google::Cloud::Logging.new
+      #
+      #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+      #   entry = logging.entry payload: payload, log_name: "my_app_log"
+      #   entry.resource.type = "gae_app"
+      #   entry.resource.labels[:module_id] = "1"
+      #   entry.resource.labels[:version_id] = "20150925t173233"
+      #
+      #   logging.write_entries entry
+      #
       class Entry
         ##
         # Create a new Entry instance. The {#resource} attribute is
