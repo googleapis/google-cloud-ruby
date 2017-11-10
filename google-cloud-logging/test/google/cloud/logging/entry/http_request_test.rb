@@ -52,4 +52,14 @@ describe Google::Cloud::Logging::Entry::HttpRequest, :mock_logging do
     actual_method.to_proc.call true
     http_request.validated.must_equal true
   end
+
+  it "method alias being passed nil calls Object#method" do
+    http_request.request_method.must_equal "GET"
+    http_request.method.must_equal http_request.request_method
+
+    err = expect do
+      http_request.method nil
+    end.must_raise TypeError
+    err.message.must_include "nil is not a symbol"
+  end
 end

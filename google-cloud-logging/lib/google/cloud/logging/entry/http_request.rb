@@ -43,7 +43,7 @@ module Google
           #   `"POST"`. (String)
           def method *args
             # Call Object#method when args are present.
-            return super if args.any?
+            return super unless args.empty?
 
             request_method
           end
