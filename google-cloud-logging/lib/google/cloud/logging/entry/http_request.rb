@@ -31,9 +31,20 @@ module Google
           end
 
           ##
+          # @overload method()
+          #   The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`,
+          #   `"POST"`. (String)
+          def method *args
+            # Call Object#method when args are present.
+            return super if args.any?
+
+            @method
+          end
+
+          ##
           # The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.
           # (String)
-          attr_accessor :method
+          attr_writer :method
 
           ##
           # The URL. The scheme (http, https), the host name, the path and the

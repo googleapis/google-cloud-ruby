@@ -31,4 +31,15 @@ describe Google::Cloud::Logging::Entry::HttpRequest, :mock_logging do
     http_request.cache_hit.must_equal false
     http_request.validated.must_equal false
   end
+
+  it "doesn't stomp on Object#method" do
+    actual_method = http_request.method :validated=
+    actual_method.must_be_kind_of Method
+    actual_method.name.must_equal :validated=
+
+    # This is the real method object, which can be used.
+    http_request.validated.must_equal false
+    actual_method.to_proc.call true
+    http_request.validated.must_equal true
+  end
 end
