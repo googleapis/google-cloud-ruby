@@ -37,9 +37,9 @@ module Acceptance
                  "You do not have an active error stats vtk client to run the tests."
     end
 
-    def wait_until
+    def wait_until attempts=20
       delay = 2
-      while delay <= 11
+      while delay <= attempts
         sleep delay
         result = yield
         return result if result
