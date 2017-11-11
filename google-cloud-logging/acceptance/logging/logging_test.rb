@@ -248,7 +248,7 @@ describe Google::Cloud::Logging, :logging do
       filter = "resource.type = \"gce_instance\" AND " +
         "log_name = \"projects/#{logging.project}/logs/#{log_name}-#{type}\""
       entries = logging.entries filter: filter
-      if entries.count < 6 && @sleep < 7
+      if entries.count < 6 && @sleep < 10
         @sleep += 1
         puts "sleeping for #{@sleep} seconds to and retry pulling #{type} log entries"
         sleep @sleep
@@ -367,7 +367,7 @@ describe Google::Cloud::Logging, :logging do
       filter = "resource.type = \"gce_instance\" AND " +
         "log_name = \"projects/#{logging.project}/logs/#{log_name}-#{type}\""
       entries = logging.entries filter: filter
-      if entries.count < 6 && @sleep < 7
+      if entries.count < 6 && @sleep < 10
         @sleep += 1
         puts "sleeping for #{@sleep} seconds to and retry pulling #{type} log entries"
         sleep @sleep
