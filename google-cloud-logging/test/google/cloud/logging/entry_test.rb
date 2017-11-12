@@ -96,7 +96,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "has the correct http_request attributes" do
-    entry.http_request.method.must_equal "GET"
+    entry.http_request.request_method.must_equal "GET"
     entry.http_request.url.must_equal "http://test.local/foo?bar=baz"
     entry.http_request.size.must_equal 123
     entry.http_request.status.must_equal 200
@@ -113,7 +113,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
 
     entry.http_request.wont_be :nil?
     entry.http_request.must_be_kind_of Google::Cloud::Logging::Entry::HttpRequest
-    entry.http_request.method.must_be :nil?
+    entry.http_request.request_method.must_be :nil?
     entry.http_request.url.must_be :nil?
     entry.http_request.size.must_be :nil?
     entry.http_request.status.must_be :nil?
