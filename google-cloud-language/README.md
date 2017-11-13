@@ -1,72 +1,48 @@
-# google-cloud-language
+# Ruby Client for Google Cloud Natural Language API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
 
-[Google Cloud Natural Language API](https://cloud.google.com/natural-language/) ([docs](https://cloud.google.com/natural-language/docs)) reveals the structure and meaning of text by offering powerful machine learning models in an easy to use REST API. You can use it to extract information about people, places, events and much more, mentioned in text documents, news articles or blog posts. You can use it to understand sentiment about your product on social media or parse intent from customer conversations happening in a call center or a messaging app. You can analyze text uploaded in your request or integrate with your document storage on Google Cloud Storage.
+[Google Cloud Natural Language API][Product Documentation]:
+Google Cloud Natural Language API provides natural language understanding
+technologies to developers. Examples include sentiment analysis, entity
+recognition, and text annotations.
+- [Client Library Documentation][]
+- [Product Documentation][]
 
-The Cloud Natural Language API currently supports English, Spanish, and Japanese for sentiment analysis, entity analysis, and syntax analysis.
-
-- [google-cloud-language API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest)
-- [google-cloud-language on RubyGems](https://rubygems.org/gems/google-cloud-language)
-- [Google Cloud Natural Language API documentation](https://cloud.google.com/natural-language/docs)
+*This release, 0.28.0, introduces breaking changes relative to the previous
+release, 0.27.1. For more details and instructions to migrate your code, please
+visit the [migration guide](https://cloud.google.com/natural-language/docs/ruby-client-migration).*
 
 ## Quick Start
+In order to use this library, you first need to go through the following
+steps:
 
-```sh
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+2. [Enable the Google Cloud Natural Language API.](https://console.cloud.google.com/apis/api/language)
+3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+
+### Installation
+```
 $ gem install google-cloud-language
 ```
 
-## Authentication
-
-This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.
-
-Instructions and configuration options are covered in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/guides/authentication).
-
-## Example
-
-```ruby
+### Preview
+#### LanguageServiceClient
+```rb
 require "google/cloud/language"
 
-language = Google::Cloud::Language.new
-
-content = "Star Wars is a great movie. The Death Star is fearsome."
-document = language.document content
-annotation = document.annotate
-
-annotation.entities.count #=> 3
-annotation.sentiment.score #=> 0.10000000149011612
-annotation.sentiment.magnitude #=> 1.100000023841858
-annotation.sentences.count #=> 2
-annotation.tokens.count #=> 13
+language_service_client = Google::Cloud::Language.new
+content = "Hello, world!"
+type = :PLAIN_TEXT
+document = { content: content, type: type }
+response = language_service_client.analyze_sentiment(document)
 ```
 
-## Supported Ruby Versions
+### Next Steps
+- Read the [Client Library Documentation][] for Google Cloud Natural Language API
+  to see other available methods on the client.
+- Read the [Google Cloud Natural Language API Product documentation][Product Documentation]
+  to learn more about the product and see How-to Guides.
+- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+  to see the full list of Cloud APIs that we cover.
 
-This library is supported on Ruby 2.0+.
-
-## Versioning
-
-This library follows [Semantic Versioning](http://semver.org/).
-
-It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.
-
-### Lower-level (GAPIC) API versioning
-
-The lower-level API support contained within this package is versioned separately to match its corresponding Google Cloud Platform service API version.
-
-*Please note that in lower-level API support in this package, version `v1beta2` comes after version `v1`. The API version `v1beta2` contains new features that were not released in `v1`.*
-
-## Contributing
-
-Contributions to this library are always welcome and highly encouraged.
-
-See the [Contributing Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing) for more information on how to get started.
-
-Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See [Code of Conduct](../CODE_OF_CONDUCT.md) for more information.
-
-## License
-
-This library is licensed under Apache 2.0. Full license text is available in [LICENSE](LICENSE).
-
-## Support
-
-Please [report bugs at the project on Github](https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues).
-Don't hesitate to [ask questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby) about the client or APIs on [StackOverflow](http://stackoverflow.com).
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1
+[Product Documentation]: https://cloud.google.com/language

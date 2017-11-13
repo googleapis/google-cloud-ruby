@@ -1,10 +1,6 @@
 --no-private
---title=Google Cloud Language
---exclude lib/google/cloud/language/v1.rb
---exclude lib/google/cloud/language/v1/language_service_pb.rb
---exclude lib/google/cloud/language/v1/language_service_services_pb.rb
---exclude lib/google/cloud/language/v1beta2/language_service_pb.rb
---exclude lib/google/cloud/language/v1beta2/language_service_services_pb.rb
+--title=Google Cloud Natural Language API
+--exclude _pb\.rb$
 --markup markdown
 
 ./lib/**/*.rb

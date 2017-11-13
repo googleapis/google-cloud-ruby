@@ -1,13 +1,8 @@
 AllCops:
   Exclude:
-    - "acceptance/**/*"
-    - "support/**/*"
     - "google-cloud-language.gemspec"
+    - "lib/google/**/*"
     - "Rakefile"
-    - "lib/google/cloud/language/v1.rb"
-    - "lib/google/cloud/language/v1/**/*"
-    - "lib/google/cloud/language/v1beta2.rb"
-    - "lib/google/cloud/language/v1beta2/**/*"
     - "test/**/*"
 
 Documentation:
@@ -27,14 +22,24 @@ Style/EmptyLines:
   Enabled: false
 Style/EmptyElse:
   Enabled: false
+Style/HashSyntax:
+  Exclude:
+    - "lib/google/cloud/language/v1/**/*"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/language/v1/**/*"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25
+  Exclude:
+    - "lib/google/cloud/language/v1/**/*"
 Metrics/MethodLength:
   Max: 20
+  Exclude:
+    - "lib/google/cloud/language/v1/**/*"
 Metrics/ParameterLists:
   Enabled: false
 Style/RescueModifier:
@@ -44,4 +49,4 @@ Style/ClassVars:
 Style/TrivialAccessors:
   Enabled: false
 Style/FileName:
-  Enabled: false # for lib/google-cloud-language.rb file
+  Enabled: false

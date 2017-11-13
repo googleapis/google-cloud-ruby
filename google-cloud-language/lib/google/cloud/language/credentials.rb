@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,20 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-require "google/cloud/credentials"
-require "google/cloud/language/v1"
+require "googleauth"
 
 module Google
   module Cloud
     module Language
-      ##
-      # @private Represents the OAuth 2.0 signing logic for Language.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = V1::LanguageServiceClient::ALL_SCOPES
-        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
+      class Credentials < Google::Auth::Credentials
+        SCOPE = [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ].freeze
+        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE, GOOGLE_CLOUD_KEYFILE, GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON, GOOGLE_CLOUD_KEYFILE_JSON, GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end
