@@ -37,7 +37,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.wont_be :text?
+      annotation.must_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :crop_hints?
@@ -52,7 +52,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.wont_be :text?
+      annotation.must_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
@@ -65,7 +65,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.wont_be :text?
+      annotation.must_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
@@ -79,7 +79,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.wont_be :text?
+      annotation.must_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
@@ -502,7 +502,7 @@ describe "Vision", :vision do
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
 
-      text.words.count.must_equal 32
+      text.words.count.must_equal 33
       text.words[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
       text.words[0].text.must_be_kind_of String
       text.words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
@@ -522,25 +522,21 @@ describe "Vision", :vision do
       text.pages[0].width.must_equal 400
       text.pages[0].height.must_equal 80
 
-      text.pages[0].blocks.count.must_equal 3
-      text.pages[0].blocks[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks.count.must_equal 1
+      text.pages[0].blocks[0].languages.must_be :empty?
       text.pages[0].blocks[0].break_type.must_be :nil?
       text.pages[0].blocks[0].wont_be :prefix_break?
       text.pages[0].blocks[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       text.pages[0].blocks[0].bounds.count.must_equal 4
 
       text.pages[0].blocks[0].paragraphs.count.must_equal 1
-      text.pages[0].blocks[0].paragraphs[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
+      text.pages[0].blocks[0].paragraphs[0].languages.must_be :empty?
       text.pages[0].blocks[0].paragraphs[0].break_type.must_be :nil?
       text.pages[0].blocks[0].paragraphs[0].wont_be :prefix_break?
       text.pages[0].blocks[0].paragraphs[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       text.pages[0].blocks[0].paragraphs[0].bounds.count.must_equal 4
 
-      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 13
+      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 33
       text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].code.must_equal "en"
       text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be_kind_of Float
       # text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
@@ -568,7 +564,7 @@ describe "Vision", :vision do
 
       annotations.count.must_equal 3
       annotations[0].text.wont_be :nil?
-      annotations[1].text.must_be :nil?
+      annotations[1].text.wont_be :nil?
       annotations[2].text.wont_be :nil?
     end
 
@@ -582,7 +578,7 @@ describe "Vision", :vision do
 
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
-      text.words.count.must_equal 32
+      text.words.count.must_equal 33
       text.pages.count.must_equal 1
     end
   end
