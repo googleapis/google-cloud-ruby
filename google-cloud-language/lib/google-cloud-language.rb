@@ -13,9 +13,9 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .language and
-# #language methods can be available, but the library and all dependencies won't
-# be loaded until required and used.
+# This file is here to be autorequired by bundler, so that the
+# Google::Cloud.language and Google::Cloud#language methods can be available,
+# but the library and all dependencies won't be loaded until required and used.
 
 
 gem "google-cloud-core"
@@ -24,7 +24,7 @@ require "google/cloud"
 module Google
   module Cloud
     ##
-    # Creates a new object for connecting to the Language service.
+    # Creates a new object for connecting to the Natural Language API.
     # Each call creates a new connection.
     #
     # For more information on connecting to Google Cloud see the [Authentication
@@ -68,16 +68,17 @@ module Google
     end
 
     ##
-    # Creates a new object for connecting to the Language service.
+    # Creates a new object for connecting to the Natural Language API.
     # Each call creates a new connection.
     #
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # @param [String] project Project identifier for the Language service you
-    #   are connecting to.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String] project_id Identifier for a Natural Language project. If
+    #   not present, the default project for the credentials is used.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object. (See {Language::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -101,10 +102,11 @@ module Google
     #   document = language.document content
     #   annotation = document.annotate
     #
-    def self.language project = nil, keyfile = nil, scope: nil, timeout: nil,
-                      client_config: nil
+    def self.language project_id = nil, credentials = nil, scope: nil,
+                      timeout: nil, client_config: nil
       require "google/cloud/language"
-      Google::Cloud::Language.new project: project, keyfile: keyfile,
+      Google::Cloud::Language.new project_id: project_id,
+                                  credentials: credentials,
                                   scope: scope, timeout: timeout,
                                   client_config: client_config
     end
