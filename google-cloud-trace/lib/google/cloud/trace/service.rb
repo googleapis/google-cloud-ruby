@@ -54,13 +54,20 @@ module Google
 
         def lowlevel_client
           return mocked_lowlevel_client if mocked_lowlevel_client
+
           @lowlevel_client ||= \
-            V1::TraceServiceClient.new(
-              credentials: credentials,
-              timeout: timeout,
-              client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Trace::VERSION)
+            begin
+              require "grpc"
+              require "google/cloud/trace/patches/active_call_with_trace"
+              require "google/cloud/trace/patches/call_with_trace"
+
+              V1::TraceServiceClient.new(
+                credentials: credentials,
+                timeout: timeout,
+                client_config: client_config,
+                lib_name: "gccl",
+                lib_version: Google::Cloud::Trace::VERSION)
+            end
         end
         attr_accessor :mocked_lowlevel_client
 
