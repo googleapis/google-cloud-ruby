@@ -44,4 +44,15 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "<= 0.1.8"
+
+  gem.post_install_message = <<-POSTINSTALL
+------------------------------
+Thank you for installing Google Cloud!
+
+IMPORTANT NOTICE:
+The google-cloud gem contains all the google-cloud-* gems.
+Instead of depending on this gem, we encourage you to install just
+the individual gems needed for your project.
+------------------------------
+POSTINSTALL
 end
