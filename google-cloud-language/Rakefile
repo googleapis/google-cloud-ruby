@@ -41,6 +41,11 @@ end
 
 desc "Runs the smoke tests."
 task :smoke_test do
+  if ENV["SMOKE_TEST_PROJECT"].nil?
+    fail "The SMOKE_TEST_PROJECT environment variable must be set. "\
+      "e.g SMOKE_TEST_PROJECT=test123 rake smoke_test"
+  end
+
   $LOAD_PATH.unshift "lib", "smoke_test"
   Dir.glob("test/**/*smoke_test.rb").each { |file| require_relative file }
 end
@@ -61,9 +66,31 @@ end
 
 # Acceptance tests
 desc "Run the google-cloud-language acceptance tests."
-task :acceptance do
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LANGUAGE_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LANGUAGE_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["LANGUAGE_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or LANGUAGE_TEST_PROJECT=test123 LANGUAGE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["LANGUAGE_PROJECT"] = project
+  ENV["LANGUAGE_KEYFILE"] = nil
+  ENV["LANGUAGE_KEYFILE_JSON"] = keyfile
+
+  # Required for smoke tests
+  ENV["SMOKE_TEST_PROJECT"] = project
+
   Rake::Task["smoke_test"].invoke
 end
+
+
 
 namespace :acceptance do
   task :run do

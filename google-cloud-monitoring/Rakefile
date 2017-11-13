@@ -41,6 +41,11 @@ end
 
 desc "Runs the smoke tests."
 task :smoke_test do
+  if ENV["SMOKE_TEST_PROJECT"].nil?
+    fail "The SMOKE_TEST_PROJECT environment variable must be set. "\
+      "e.g SMOKE_TEST_PROJECT=test123 rake smoke_test"
+  end
+
   $LOAD_PATH.unshift "lib", "smoke_test"
   Dir.glob("test/**/*smoke_test.rb").each { |file| require_relative file }
 end
