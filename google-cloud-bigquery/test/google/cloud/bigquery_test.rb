@@ -67,7 +67,13 @@ describe Google::Cloud do
   end
 
   describe ".bigquery" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -118,7 +124,13 @@ describe Google::Cloud do
   end
 
   describe "Bigquery.new" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -136,7 +148,38 @@ describe Google::Cloud do
       end
     end
 
-    it "uses provided project_id and keyfile" do
+    it "uses provided project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "bigquery-credentials"
+      }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "bigquery-credentials"
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
+                bigquery = Google::Cloud::Bigquery.new project_id: "project-id", credentials: "path/to/keyfile.json"
+                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+                bigquery.project.must_equal "project-id"
+                bigquery.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
         scope.must_be :nil?
