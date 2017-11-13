@@ -55,7 +55,7 @@ module Google
           return mocked_service if mocked_service
           @service ||= V1::DatastoreClient.new(
             service_path: host,
-            channel: channel,
+            credentials: channel,
             timeout: timeout,
             client_config: client_config,
             lib_name: "gccl",
