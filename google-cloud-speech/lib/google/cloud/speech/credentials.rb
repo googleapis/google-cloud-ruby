@@ -13,19 +13,44 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
-require "google/cloud/speech/v1"
+require "googleauth"
 
 module Google
   module Cloud
     module Speech
       ##
-      # @private Represents the OAuth 2.0 signing logic for Speech.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = V1::SpeechClient::ALL_SCOPES
-        PATH_ENV_VARS = %w(SPEECH_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(SPEECH_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Speech API.
+      #
+      # @example
+      #   require "google/cloud/speech"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Speech::Credentials.new keyfile
+      #
+      #   speech = Google::Cloud::Speech.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   speech.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
+        SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
+        PATH_ENV_VARS = %w(SPEECH_CREDENTIALS
+                           SPEECH_KEYFILE
+                           GOOGLE_CLOUD_CREDENTIALS
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(SPEECH_CREDENTIALS_JSON
+                           SPEECH_KEYFILE_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end
