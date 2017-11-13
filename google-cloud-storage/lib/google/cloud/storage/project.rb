@@ -66,19 +66,20 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new(
-        #     project: "my-todo-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   storage.project #=> "my-todo-project"
+        #   storage.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
         # @private Default project.
-        def self.default_project
+        def self.default_project_id
           ENV["STORAGE_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||

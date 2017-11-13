@@ -47,9 +47,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.versioning?.must_equal nil
+    bucket.wont_be :versioning?
     bucket.versioning = true
-    bucket.versioning?.must_equal true
+    bucket.must_be :versioning?
 
     mock.verify
   end
@@ -66,9 +66,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     bucket.service.mocked_service = mock
     bucket.user_project = true
 
-    bucket.versioning?.must_equal nil
+    bucket.wont_be :versioning?
     bucket.versioning = true
-    bucket.versioning?.must_equal true
+    bucket.must_be :versioning?
 
     mock.verify
   end
@@ -84,7 +84,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.logging_bucket.must_equal nil
+    bucket.logging_bucket.must_be :nil?
     bucket.logging_bucket = bucket_logging_bucket
     bucket.logging_bucket.must_equal bucket_logging_bucket
 
@@ -102,7 +102,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.logging_prefix.must_equal nil
+    bucket.logging_prefix.must_be :nil?
     bucket.logging_prefix = bucket_logging_prefix
     bucket.logging_prefix.must_equal bucket_logging_prefix
 
@@ -120,8 +120,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.logging_bucket.must_equal nil
-    bucket.logging_prefix.must_equal nil
+    bucket.logging_bucket.must_be :nil?
+    bucket.logging_prefix.must_be :nil?
 
     bucket.update do |b|
       b.logging_bucket = bucket_logging_bucket
@@ -162,7 +162,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.website_main.must_equal nil
+    bucket.website_main.must_be :nil?
     bucket.website_main = bucket_website_main
     bucket.website_main.must_equal bucket_website_main
 
@@ -180,7 +180,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.website_404.must_equal nil
+    bucket.website_404.must_be :nil?
     bucket.website_404 = bucket_website_404
     bucket.website_404.must_equal bucket_website_404
 
@@ -198,8 +198,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.website_main.must_equal nil
-    bucket.website_404.must_equal nil
+    bucket.website_main.must_be :nil?
+    bucket.website_404.must_be :nil?
 
     bucket.update do |b|
       b.website_main = bucket_website_main
@@ -223,7 +223,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.requester_pays.must_equal nil
+    bucket.requester_pays.must_be :nil?
     bucket.requester_pays = bucket_requester_pays
     bucket.requester_pays.must_equal bucket_requester_pays
 
@@ -271,12 +271,12 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.versioning?.must_equal nil
-    bucket.logging_bucket.must_equal nil
-    bucket.logging_prefix.must_equal nil
-    bucket.website_main.must_equal nil
-    bucket.website_404.must_equal nil
-    bucket.requester_pays.must_equal nil
+    bucket.wont_be :versioning?
+    bucket.logging_bucket.must_be :nil?
+    bucket.logging_prefix.must_be :nil?
+    bucket.website_main.must_be :nil?
+    bucket.website_404.must_be :nil?
+    bucket.requester_pays.must_be :nil?
     bucket.labels.must_equal Hash.new
 
     bucket.update do |b|

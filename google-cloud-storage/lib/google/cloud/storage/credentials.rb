@@ -13,18 +13,44 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
+require "googleauth"
 
 module Google
   module Cloud
     module Storage
       ##
-      # @private Represents the OAuth 2.0 signing logic for Storage.
-      class Credentials < Google::Cloud::Credentials
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Storage API.
+      #
+      # @example
+      #   require "google/cloud/storage"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Storage::Credentials.new keyfile
+      #
+      #   storage = Google::Cloud::Storage.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   storage.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
         SCOPE = ["https://www.googleapis.com/auth/devstorage.full_control"]
-        PATH_ENV_VARS = %w(STORAGE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(STORAGE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+        PATH_ENV_VARS = %w(STORAGE_CREDENTIALS
+                           STORAGE_KEYFILE
+                           GOOGLE_CLOUD_CREDENTIALS
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(STORAGE_CREDENTIALS_JSON
+                           STORAGE_KEYFILE_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end

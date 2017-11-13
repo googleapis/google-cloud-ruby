@@ -24,8 +24,8 @@ Instructions and configuration options are covered in the [Authentication Guide]
 require "google/cloud/storage"
 
 storage = Google::Cloud::Storage.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 bucket = storage.bucket "task-attachments"

@@ -88,6 +88,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
   end
 end
@@ -111,7 +117,7 @@ end
 def mock_storage
   Google::Cloud::Storage.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-todo-project", credentials))
+    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-project", credentials))
 
     storage.service.mocked_service = Minitest::Mock.new
 
@@ -539,7 +545,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::Cors#add_rule" do
     mock_storage do |mock|
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -547,7 +553,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::List" do
     mock_storage do |mock|
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-project", Hash]
     end
   end
 
@@ -852,7 +858,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-project", Hash]
     end
   end
 
@@ -860,7 +866,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-project", Hash]
     end
   end
 
@@ -868,7 +874,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
