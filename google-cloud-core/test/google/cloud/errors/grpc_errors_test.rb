@@ -78,7 +78,7 @@ describe Google::Cloud::Error, :grpc do
   end
 
   it "identifies InternalError" do
-    mapped_error = Google::Cloud::Error.from_error GRPC::BadStatus.new(13, "InternalError")
+    mapped_error = Google::Cloud::Error.from_error GRPC::BadStatus.new(13, "internal")
     mapped_error.must_be_kind_of Google::Cloud::InternalError
   end
 
