@@ -170,7 +170,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
+      #     Example: +"projects/my-project/sinks/my-sink-id"+.
       class GetSinkRequest; end
 
       # The parameters to +CreateSink+.
@@ -214,7 +214,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
+      #     Example: +"projects/my-project/sinks/my-sink-id"+.
       # @!attribute [rw] sink
       #   @return [Google::Logging::V2::LogSink]
       #     Required. The updated sink, whose name is the same identifier that appears
@@ -246,7 +246,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
+      #     Example: +"projects/my-project/sinks/my-sink-id"+.
       class DeleteSinkRequest; end
 
       # Specifies a set of log entries that are not to be stored in Stackdriver
@@ -325,7 +325,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+      #     Example: +"projects/my-project/exclusions/my-exclusion-id"+.
       class GetExclusionRequest; end
 
       # The parameters to +CreateExclusion+.
@@ -355,7 +355,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+      #     Example: +"projects/my-project/exclusions/my-exclusion-id"+.
       # @!attribute [rw] exclusion
       #   @return [Google::Logging::V2::LogExclusion]
       #     Required. New values for the existing exclusion. Only the fields specified
@@ -381,7 +381,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+      #     Example: +"projects/my-project/exclusions/my-exclusion-id"+.
       class DeleteExclusionRequest; end
     end
   end

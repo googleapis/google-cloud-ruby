@@ -50,6 +50,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
     module Core
       module Environment
@@ -159,6 +165,11 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Logging.new" do
     mock_logging do |mock, mock_metrics, mock_sinks|
       mock.expect :list_log_entries, list_entries_res, [Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Logging::Credentials" do
+    mock_logging do |mock, mock_metrics, mock_sinks|
     end
   end
 
