@@ -61,7 +61,7 @@ module Google
         #
         #   Google::Cloud::Trace::Notifications.instrument "sql.activerecord"
         #
-        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project"
         #   Google::Cloud::Trace.set trace_record
         #
         #   ActiveRecord::Base.connection.execute "SHOW TABLES"

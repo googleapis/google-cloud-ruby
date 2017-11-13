@@ -61,15 +61,16 @@ module Google
         #   require "google/cloud/trace"
         #
         #   trace_client = Google::Cloud::Trace.new(
-        #     project: "my-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   trace_client.project #=> "my-project"
+        #   trace_client.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
         # Create a new empty trace record for this project. Uses the current
@@ -87,8 +88,8 @@ module Google
         #   require "google/cloud/trace"
         #
         #   trace_client = Google::Cloud::Trace.new(
-        #     project: "my-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
         #   trace = trace_client.new_trace
@@ -198,7 +199,7 @@ module Google
 
         ##
         # @private Default project.
-        def self.default_project
+        def self.default_project_id
           ENV["TRACE_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||
