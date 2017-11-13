@@ -74,19 +74,20 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   bigquery.project #=> "my-project-id"
+        #   bigquery.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
-        # @private Default project.
-        def self.default_project
+        # @private Default project_id.
+        def self.default_project_id
           ENV["BIGQUERY_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||

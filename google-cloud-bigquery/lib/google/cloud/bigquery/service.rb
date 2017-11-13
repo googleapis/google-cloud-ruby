@@ -46,7 +46,6 @@ module Google
         def initialize project, credentials, retries: nil, timeout: nil
           @project = project
           @credentials = credentials
-          @credentials = credentials
           @retries = retries
           @timeout = timeout
         end

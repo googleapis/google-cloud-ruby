@@ -132,7 +132,7 @@ module Google
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
-          Logging.configure.project_id ||= Logging::Project.default_project
+          Logging.configure.project_id ||= Logging::Project.default_project_id
           Logging.configure.log_name ||= Middleware::DEFAULT_LOG_NAME
         end
 

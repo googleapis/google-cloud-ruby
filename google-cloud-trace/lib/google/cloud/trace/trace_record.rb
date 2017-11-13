@@ -122,6 +122,7 @@ module Google
         # @return [String]
         #
         attr_reader :project
+        alias_method :project_id, :project
 
         ##
         # The context for this trace.
@@ -182,7 +183,7 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project"
         #   span = trace_record.create_span "root_span"
         #
         def create_span name, span_id: nil, parent_span_id: 0,
@@ -219,7 +220,7 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project"
         #   trace_record.in_span "root_span" do |span|
         #     # Do stuff...
         #   end

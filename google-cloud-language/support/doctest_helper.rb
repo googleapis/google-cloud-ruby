@@ -49,6 +49,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
   end
 end
@@ -56,7 +62,7 @@ end
 def mock_language
   Google::Cloud::Language.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    language = Google::Cloud::Language::Project.new(Google::Cloud::Language::Service.new("my-project-id", credentials))
+    language = Google::Cloud::Language::Project.new(Google::Cloud::Language::Service.new("my-project", credentials))
 
     language.service.mocked_service = Minitest::Mock.new
     if block_given?
@@ -157,7 +163,7 @@ end
 # Fixture helpers
 
 def default_headers
-  { "google-cloud-resource-prefix" => "projects/my-project-id" }
+  { "google-cloud-resource-prefix" => "projects/my-project" }
 end
 
 def default_options

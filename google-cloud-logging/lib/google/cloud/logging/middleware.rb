@@ -270,7 +270,7 @@ module Google
         # Fallback to default configuration values if not defined already
         def init_default_config
           configuration.project_id ||= Cloud.configure.project_id ||
-                                       Logging::Project.default_project
+                                       Logging::Project.default_project_id
           configuration.keyfile ||= Cloud.configure.keyfile
           configuration.log_name ||= DEFAULT_LOG_NAME
           configuration.log_name_map ||= DEFAULT_LOG_NAME_MAP

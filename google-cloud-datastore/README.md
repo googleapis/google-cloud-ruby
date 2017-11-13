@@ -26,8 +26,8 @@ Instructions and configuration options are covered in the [Authentication Guide]
 require "google/cloud/datastore"
 
 datastore = Google::Cloud::Datastore.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Create a new task to demo datastore

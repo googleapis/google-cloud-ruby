@@ -13,19 +13,44 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
-require "google/cloud/language/v1"
+require "googleauth"
 
 module Google
   module Cloud
     module Language
       ##
-      # @private Represents the OAuth 2.0 signing logic for Language.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = V1::LanguageServiceClient::ALL_SCOPES
-        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Natural Language API.
+      #
+      # @example
+      #   require "google/cloud/language"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Language::Credentials.new keyfile
+      #
+      #   language = Google::Cloud::Language.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   language.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
+        SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
+        PATH_ENV_VARS = %w(LANGUAGE_CREDENTIALS
+                           LANGUAGE_KEYFILE
+                           GOOGLE_CLOUD_CREDENTIALS
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(LANGUAGE_CREDENTIALS_JSON
+                           LANGUAGE_KEYFILE_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end

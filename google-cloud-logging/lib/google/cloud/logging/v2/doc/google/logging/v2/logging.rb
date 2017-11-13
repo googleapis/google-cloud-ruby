@@ -41,7 +41,7 @@ module Google
       #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
       #
       #     +[LOG_ID]+ must be URL-encoded. For example,
-      #     +"projects/my-project-id/logs/syslog"+,
+      #     +"projects/my-project/logs/syslog"+,
       #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
       #     For more information about log names, see
       #     {Google::Logging::V2::LogEntry LogEntry}.
@@ -59,7 +59,7 @@ module Google
       #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
       #
       #     +[LOG_ID]+ must be URL-encoded. For example,
-      #     +"projects/my-project-id/logs/syslog"+ or
+      #     +"projects/my-project/logs/syslog"+ or
       #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
       #     For more information about log names, see
       #     {Google::Logging::V2::LogEntry LogEntry}.

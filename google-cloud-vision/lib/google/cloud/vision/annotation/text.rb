@@ -290,6 +290,7 @@ module Google
             # @return [Array<Language>]
             #
             def languages
+              return [] if @grpc.property.nil?
               @languages ||= Array(@grpc.property.detected_languages).map do |l|
                 Language.from_grpc l
               end
@@ -301,6 +302,7 @@ module Google
             # @return [::Symbol]
             #
             def break_type
+              return nil if @grpc.property.nil?
               @grpc.property.detected_break &&
                 @grpc.property.detected_break.type.to_sym
             end
@@ -311,6 +313,7 @@ module Google
             # @return [Boolean]
             #
             def prefix_break?
+              return nil if @grpc.property.nil?
               @grpc.property.detected_break &&
                 @grpc.property.detected_break.is_prefix
             end
@@ -411,6 +414,7 @@ module Google
               # @return [Array<Language>]
               #
               def languages
+                return [] if @grpc.property.nil?
                 detected_languages = @grpc.property.detected_languages
                 @languages ||= Array(detected_languages).map do |l|
                   Language.from_grpc l
@@ -423,6 +427,7 @@ module Google
               # @return [::Symbol]
               #
               def break_type
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.type.to_sym
               end
@@ -433,6 +438,7 @@ module Google
               # @return [Boolean]
               #
               def prefix_break?
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.is_prefix
               end
@@ -555,6 +561,7 @@ module Google
               # @return [Array<Language>]
               #
               def languages
+                return [] if @grpc.property.nil?
                 detected_languages = @grpc.property.detected_languages
                 @languages ||= Array(detected_languages).map do |l|
                   Language.from_grpc l
@@ -567,6 +574,7 @@ module Google
               # @return [::Symbol]
               #
               def break_type
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.type.to_sym
               end
@@ -577,6 +585,7 @@ module Google
               # @return [Boolean]
               #
               def prefix_break?
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.is_prefix
               end
@@ -688,6 +697,7 @@ module Google
               # @return [Array<Language>]
               #
               def languages
+                return [] if @grpc.property.nil?
                 detected_languages = @grpc.property.detected_languages
                 @languages ||= Array(detected_languages).map do |l|
                   Language.from_grpc l
@@ -700,6 +710,7 @@ module Google
               # @return [::Symbol]
               #
               def break_type
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.type.to_sym
               end
@@ -710,6 +721,7 @@ module Google
               # @return [Boolean]
               #
               def prefix_break?
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.is_prefix
               end
@@ -823,6 +835,7 @@ module Google
               # @return [Array<Language>]
               #
               def languages
+                return [] if @grpc.property.nil?
                 detected_languages = @grpc.property.detected_languages
                 @languages ||= Array(detected_languages).map do |l|
                   Language.from_grpc l
@@ -835,6 +848,7 @@ module Google
               # @return [::Symbol]
               #
               def break_type
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.type.to_sym
               end
@@ -845,6 +859,7 @@ module Google
               # @return [Boolean]
               #
               def prefix_break?
+                return nil if @grpc.property.nil?
                 @grpc.property.detected_break &&
                   @grpc.property.detected_break.is_prefix
               end

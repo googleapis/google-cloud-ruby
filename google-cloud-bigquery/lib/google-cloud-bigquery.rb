@@ -13,9 +13,9 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .bigquery and
-# #bigquery methods can be available, but the library and all dependencies won't
-# be loaded until required and used.
+# This file is here to be autorequired by bundler, so that the
+# Google::Cloud.bigquery and Google::Cloud#bigquery methods can be available,
+# but the library and all dependencies won't be loaded until required and used.
 
 
 gem "google-cloud-core"
@@ -75,10 +75,11 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # @param [String] project Identifier for a BigQuery project. If not present,
-    #   the default project for the credentials is used.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String] project_id Identifier for a BigQuery project. If not
+    #   present, the default project for the credentials is used.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object. (See {Bigquery::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -100,10 +101,11 @@ module Google
     #   dataset = bigquery.dataset "my_dataset"
     #   table = dataset.table "my_table"
     #
-    def self.bigquery project = nil, keyfile = nil, scope: nil, retries: nil,
-                      timeout: nil
+    def self.bigquery project_id = nil, credentials = nil, scope: nil,
+                      retries: nil, timeout: nil
       require "google/cloud/bigquery"
-      Google::Cloud::Bigquery.new project: project, keyfile: keyfile,
+      Google::Cloud::Bigquery.new project_id: project_id,
+                                  credentials: credentials,
                                   scope: scope, retries: retries,
                                   timeout: timeout
     end

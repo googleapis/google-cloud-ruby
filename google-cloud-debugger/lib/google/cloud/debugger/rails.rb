@@ -110,16 +110,22 @@ module Google
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
           config = Debugger.configure
-          config.project_id ||= Debugger::Project.default_project
+          config.project_id ||= Debugger::Project.default_project_id
           config.service_name ||= Debugger::Project.default_service_name
           config.service_version ||= Debugger::Project.default_service_version
         end
 
         ##
         # @private Verify credentials
-        def self.valid_credentials? project_id, keyfile
+        def self.valid_credentials? project_id, credentials
           begin
-            Debugger::Credentials.credentials_with_scope keyfile
+            # if credentials is nil, get default
+            credentials ||= Debugger::Credentials.default(scope: scope)
+            # only create a new Credentials object if the val isn't one already
+            unless credentials.is_a? Google::Auth::Credentials
+              # if credentials is not a Credentials object, create one
+              Debugger::Credentials.new credentials, scope: scope
+            end
           rescue => e
             STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
               "it failed to authorize with the service. (#{e.message})"

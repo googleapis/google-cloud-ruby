@@ -17,13 +17,19 @@ require "helper"
 
 describe Google::Cloud::ErrorReporting, :mock_error_reporting do
   describe ".new" do
-    let(:default_credentials) { OpenStruct.new empty: true}
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project-id, keyfile, service, and version" do
       ENV.stub :[], nil do
-        Google::Cloud::ErrorReporting::Project.stub :default_project, "test-project-id" do
-          Google::Cloud::ErrorReporting::Credentials.stub :credentials_with_scope, default_credentials do
+        Google::Cloud::ErrorReporting::Project.stub :default_project_id, "test-project-id" do
+          Google::Cloud::ErrorReporting::Credentials.stub :default, default_credentials do
             error_reporting = Google::Cloud::ErrorReporting.new
             error_reporting.must_be_kind_of Google::Cloud::ErrorReporting::Project
             error_reporting.project.must_equal "test-project-id"
@@ -33,8 +39,8 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       end
     end
 
-    it "uses provided project-id, keyfile, service, and version" do
-      stubbed_credentials = ->(keyfile, scope) {
+    it "uses provided project_id, credentials, service, and version" do
+      stubbed_credentials = ->(keyfile, scope: scope) {
         keyfile.must_equal "/path/to/a/keyfile"
         scope.must_be_nil
         "error_reporting-credentials"
@@ -43,7 +49,29 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       ENV.stub :[], nil do
         File.stub :file?, true, ["/path/to/a/keyfile"] do
           File.stub :read, found_credentials, ["/path/to/a/keyfile"] do
-            Google::Cloud::ErrorReporting::Credentials.stub :credentials_with_scope, stubbed_credentials do
+            Google::Cloud::ErrorReporting::Credentials.stub :new, stubbed_credentials do
+              error_reporting = Google::Cloud::ErrorReporting.new project_id: "test-project-id",
+                                                                  credentials: "/path/to/a/keyfile"
+              error_reporting.must_be_kind_of Google::Cloud::ErrorReporting::Project
+              error_reporting.project.must_equal "test-project-id"
+              error_reporting.service.must_be_kind_of Google::Cloud::ErrorReporting::Service
+            end
+          end
+        end
+      end
+    end
+
+    it "uses provided project (alias), keyfile (alias), service, and version" do
+      stubbed_credentials = ->(keyfile, scope: scope) {
+        keyfile.must_equal "/path/to/a/keyfile"
+        scope.must_be_nil
+        "error_reporting-credentials"
+      }
+
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["/path/to/a/keyfile"] do
+          File.stub :read, found_credentials, ["/path/to/a/keyfile"] do
+            Google::Cloud::ErrorReporting::Credentials.stub :new, stubbed_credentials do
               error_reporting = Google::Cloud::ErrorReporting.new project: "test-project-id",
                                                                   keyfile: "/path/to/a/keyfile"
               error_reporting.must_be_kind_of Google::Cloud::ErrorReporting::Project
@@ -56,12 +84,12 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     end
 
     it "errors when provided empty project_id" do
-      Google::Cloud::ErrorReporting::Credentials.stub :credentials_with_scope, default_credentials do
+      Google::Cloud::ErrorReporting::Credentials.stub :default, default_credentials do
         exception = assert_raises ArgumentError do
           Google::Cloud::ErrorReporting.new project: ""
         end
 
-        exception.message.must_equal "project is missing"
+        exception.message.must_equal "project_id is missing"
       end
     end
   end

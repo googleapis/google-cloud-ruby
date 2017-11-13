@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# This file is now considered DEPRECATED.
+# Libraries that depend on google-cloud-core ~> 1.1 should not use this file.
+# Keep the implementation in place to remain compatible with so older gems.
+
 
 require "json"
 require "signet/oauth_2/client"

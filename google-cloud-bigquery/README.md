@@ -24,8 +24,8 @@ Instructions and configuration options are covered in the [Authentication Guide]
 require "google/cloud/bigquery"
 
 bigquery = Google::Cloud::Bigquery.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Create a new table to archive todos

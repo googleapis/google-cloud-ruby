@@ -13,9 +13,9 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .debugger and
-# #debugger methods can be available, but the library and all dependencies won't
-# be loaded until required and used.
+# This file is here to be autorequired by bundler, so that the
+# Google::Cloud.debugger and Google::Cloud#debugger methods can be available,
+# but the library and all dependencies won't be loaded until required and used.
 
 
 gem "google-cloud-core"
@@ -81,10 +81,12 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # @param [String] project Project identifier for the Stackdriver Debugger
-    #   service you are connecting to.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String] project_id Project identifier for the Stackdriver Debugger
+    #   service you are connecting to. If not present, the default project for
+    #   the credentials is used.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object. (See {Debugger::Credentials})
     # @param [String] service_name Name for the debuggee application. Optional.
     # @param [String] service_version Version identifier for the debuggee
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
@@ -108,11 +110,12 @@ module Google
     #
     #   debugger.start
     #
-    def self.debugger project = nil, keyfile = nil, service_name: nil,
+    def self.debugger project_id = nil, credentials = nil, service_name: nil,
                       service_version: nil, scope: nil, timeout: nil,
                       client_config: nil
       require "google/cloud/debugger"
-      Google::Cloud::Debugger.new project: project, keyfile: keyfile,
+      Google::Cloud::Debugger.new project_id: project_id,
+                                  credentials: credentials,
                                   service_name: service_name,
                                   service_version: service_version,
                                   scope: scope, timeout: timeout,

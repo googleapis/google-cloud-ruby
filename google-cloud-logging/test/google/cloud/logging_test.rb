@@ -66,7 +66,13 @@ describe Google::Cloud do
   end
 
   describe ".logging" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -117,7 +123,13 @@ describe Google::Cloud do
   end
 
   describe "Logging.new" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -135,7 +147,38 @@ describe Google::Cloud do
       end
     end
 
-    it "uses provided project_id and keyfile" do
+    it "uses provided project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be_nil
+        "logging-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "logging-credentials"
+        timeout.must_be_nil
+        client_config.must_be_nil
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Logging::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Logging::Service.stub :new, stubbed_service do
+                logging = Google::Cloud::Logging.new project_id: "project-id", credentials: "path/to/keyfile.json"
+                logging.must_be_kind_of Google::Cloud::Logging::Project
+                logging.project.must_equal "project-id"
+                logging.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
         scope.must_be_nil

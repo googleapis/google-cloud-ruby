@@ -24,9 +24,9 @@ module Google
     #     that defines the scope of the metric type or of its data; and (2) the
     #     metric's URL-encoded type, which also appears in the +type+ field of this
     #     descriptor. For example, following is the resource name of a custom
-    #     metric within the GCP project +my-project-id+:
+    #     metric within the GCP project +my-project+:
     #
-    #         "projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
+    #         "projects/my-project/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
     # @!attribute [rw] type
     #   @return [String]
     #     The metric type, including its DNS name prefix. The type is not

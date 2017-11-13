@@ -24,8 +24,8 @@ Instructions and configuration options are covered in the [Authentication Guide]
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::Pubsub.new(
-  project: "my-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Retrieve a topic

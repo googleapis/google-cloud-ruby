@@ -13,18 +13,44 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
+require "googleauth"
 
 module Google
   module Cloud
     module Bigquery
       ##
-      # @private Represents the Oauth2 signing logic for Bigquery.
-      class Credentials < Google::Cloud::Credentials
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # BigQuery API.
+      #
+      # @example
+      #   require "google/cloud/bigquery"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Bigquery::Credentials.new keyfile
+      #
+      #   bigquery = Google::Cloud::Bigquery.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   bigquery.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
         SCOPE = ["https://www.googleapis.com/auth/bigquery"]
-        PATH_ENV_VARS = %w(BIGQUERY_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(BIGQUERY_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+        PATH_ENV_VARS = %w(BIGQUERY_CREDENTIALS
+                           GOOGLE_CLOUD_CREDENTIALS
+                           BIGQUERY_KEYFILE
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(BIGQUERY_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           BIGQUERY_KEYFILE_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end

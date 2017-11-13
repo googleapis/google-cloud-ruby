@@ -339,10 +339,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Stackdriver Debugger
-      #   service.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
-      #   either the JSON data or the path to a readable file.
+      # @param [String] project_id Project identifier for the Stackdriver
+      #   Debugger service you are connecting to. If not present, the default
+      #   project for the credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Debugger::Credentials})
       # @param [String] service_name Name for the debuggee application.
       #   Optional.
       # @param [String] service_version Version identifier for the debuggee
@@ -353,6 +355,10 @@ module Google
       #   APIs](https://developers.google.com/identity/protocols/OAuth2).
       #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] project Project identifier for the Stackdriver Debugger
+      #   service.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
+      #   either the JSON data or the path to a readable file.
       #
       # @return [Google::Cloud::Debugger::Project]
       #
@@ -362,31 +368,31 @@ module Google
       #   debugger = Google::Cloud::Debugger.new
       #   debugger.start
       #
-      def self.new project: nil, keyfile: nil, service_name: nil,
+      def self.new project_id: nil, credentials: nil, service_name: nil,
                    service_version: nil, scope: nil, timeout: nil,
-                   client_config: nil
-        project ||= Debugger::Project.default_project
-        project = project.to_s # Always cast to a string
+                   client_config: nil, project: nil, keyfile: nil
+        project_id ||= (project || Debugger::Project.default_project_id)
+        project_id = project_id.to_s # Always cast to a string
         service_name ||= Debugger::Project.default_service_name
         service_name = service_name.to_s
         service_version ||= Debugger::Project.default_service_version
         service_version = service_version.to_s
 
-        fail ArgumentError, "project is missing" if project.empty?
+        fail ArgumentError, "project_id is missing" if project_id.empty?
         fail ArgumentError, "service_name is missing" if service_name.empty?
         fail ArgumentError, "service_version is missing" if service_version.nil?
 
-        credentials = Credentials.credentials_with_scope keyfile, scope
+        credentials ||= (keyfile || Debugger::Credentials.default(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Debugger::Credentials.new credentials, scope: scope
+        end
 
-        Google::Cloud::Debugger::Project.new(
-          Google::Cloud::Debugger::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config),
+        Debugger::Project.new(
+          Debugger::Service.new(project_id, credentials,
+                                timeout: timeout, client_config: client_config),
           service_name: service_name,
-          service_version: service_version
-        )
+          service_version: service_version)
       end
-
 
       ##
       # Configure the Stackdriver Debugger agent.

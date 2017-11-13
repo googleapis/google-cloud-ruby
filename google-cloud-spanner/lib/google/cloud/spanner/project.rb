@@ -83,20 +83,20 @@ module Google
         #   require "google/cloud"
         #
         #   spanner = Google::Cloud::Spanner.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   spanner.project #=> "my-project-id"
+        #   spanner.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
-        alias_method :project_id, :project
+        alias_method :project, :project_id
 
         ##
         # @private Default project.
-        def self.default_project
+        def self.default_project_id
           ENV["SPANNER_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||

@@ -19,13 +19,15 @@ describe Google::Cloud do
   describe "#translate" do
     it "calls out to Google::Cloud.translate" do
       gcloud = Google::Cloud.new
-      stubbed_translate = ->(key, project: nil, keyfile: nil, scope: nil, retries: nil, timeout: nil) {
-        project.must_be :nil?
-        keyfile.must_be :nil?
+      stubbed_translate = ->(key, project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, project: nil, keyfile: nil) {
         key.must_be :nil?
+        project_id.must_be :nil?
+        credentials.must_be :nil?
         scope.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
+        project.must_be :nil?
+        keyfile.must_be :nil?
         "translate-project-object-empty"
       }
       Google::Cloud.stub :translate, stubbed_translate do
@@ -36,13 +38,15 @@ describe Google::Cloud do
 
     it "passes key to Google::Cloud.translate" do
       gcloud = Google::Cloud.new
-      stubbed_translate = ->(key, project: nil, keyfile: nil, scope: nil, retries: nil, timeout: nil) {
+      stubbed_translate = ->(key, project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, project: nil, keyfile: nil) {
         key.must_equal "this-is-the-api-key"
-        project.must_be :nil?
-        keyfile.must_be :nil?
+        project_id.must_be :nil?
+        credentials.must_be :nil?
         scope.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
+        project.must_be :nil?
+        keyfile.must_be :nil?
         "translate-api-object-empty"
       }
       Google::Cloud.stub :translate, stubbed_translate do
@@ -53,13 +57,15 @@ describe Google::Cloud do
 
     it "passes key and options to Google::Cloud.translate" do
       gcloud = Google::Cloud.new
-      stubbed_translate = ->(key, project: nil, keyfile: nil, scope: nil, retries: nil, timeout: nil) {
+      stubbed_translate = ->(key, project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, project: nil, keyfile: nil) {
         key.must_equal "this-is-the-api-key"
-        project.must_be :nil?
-        keyfile.must_be :nil?
+        project_id.must_be :nil?
+        credentials.must_be :nil?
         scope.must_be :nil?
         retries.must_equal 5
         timeout.must_equal 60
+        project.must_be :nil?
+        keyfile.must_be :nil?
         "translate-api-object-empty"
       }
       Google::Cloud.stub :translate, stubbed_translate do
@@ -68,15 +74,17 @@ describe Google::Cloud do
       end
     end
 
-    it "passes project and keyfile to Google::Cloud.translate" do
+    it "passes project_id and credentials to Google::Cloud.translate" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_translate = ->(key, project: nil, keyfile: nil, scope: nil, retries: nil, timeout: nil) {
-        project.must_equal "project-id"
-        keyfile.must_equal "keyfile-path"
+      stubbed_translate = ->(key, project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, project: nil, keyfile: nil) {
+        project_id.must_equal "project-id"
+        credentials.must_equal "keyfile-path"
         scope.must_be :nil?
         key.must_be :nil?
         retries.must_be :nil?
         timeout.must_be :nil?
+        project.must_be :nil?
+        keyfile.must_be :nil?
         "translate-api-object"
       }
       Google::Cloud.stub :translate, stubbed_translate do
@@ -85,15 +93,17 @@ describe Google::Cloud do
       end
     end
 
-    it "passes project and keyfile and options to Google::Cloud.translate" do
+    it "passes project_id and credentials and options to Google::Cloud.translate" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_translate = ->(key, project: nil, keyfile: nil, scope: nil, retries: nil, timeout: nil) {
-        project.must_equal "project-id"
-        keyfile.must_equal "keyfile-path"
+      stubbed_translate = ->(key, project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, project: nil, keyfile: nil) {
+        project_id.must_equal "project-id"
+        credentials.must_equal "keyfile-path"
         scope.must_be :nil?
         key.must_be :nil?
         retries.must_equal 5
         timeout.must_equal 60
+        project.must_be :nil?
+        keyfile.must_be :nil?
         "translate-api-object-scoped"
       }
       Google::Cloud.stub :translate, stubbed_translate do
@@ -104,7 +114,13 @@ describe Google::Cloud do
   end
 
   describe ".translate" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for api key" do
@@ -121,7 +137,7 @@ describe Google::Cloud do
       }
 
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project, nil do
+      Google::Cloud::Translate::Api.stub :default_project_id, nil do
         # Clear all environment variables
         # ENV.stub :[], nil do
         ENV.stub :[], stubbed_env do
@@ -145,7 +161,7 @@ describe Google::Cloud do
         OpenStruct.new key: key
       }
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project, nil do
+      Google::Cloud::Translate::Api.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], nil do
           Google::Cloud::Translate::Service.stub :new, stubbed_service do
@@ -207,7 +223,13 @@ describe Google::Cloud do
   end
 
   describe "Translate.new" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for api key" do
@@ -224,7 +246,7 @@ describe Google::Cloud do
       }
 
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project, nil do
+      Google::Cloud::Translate::Api.stub :default_project_id, nil do
         # Clear all environment variables
         # ENV.stub :[], nil do
         ENV.stub :[], stubbed_env do
@@ -249,7 +271,7 @@ describe Google::Cloud do
       }
 
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project, nil do
+      Google::Cloud::Translate::Api.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], nil do
           Google::Cloud::Translate::Service.stub :new, stubbed_service do
@@ -262,7 +284,7 @@ describe Google::Cloud do
       end
     end
 
-    it "gets defaults for project_id and keyfile" do
+    it "gets defaults for project_id and credentials" do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
@@ -270,14 +292,47 @@ describe Google::Cloud do
           Google::Cloud::Translate::Credentials.stub :default, default_credentials do
             translate = Google::Cloud::Translate.new
             translate.must_be_kind_of Google::Cloud::Translate::Api
-            translate.project.must_equal "project-id"
+            translate.project_id.must_equal "project-id"
             translate.service.credentials.must_equal default_credentials
           end
         end
       end
     end
 
-    it "uses provided project_id and keyfile" do
+    it "uses provided project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "translate-credentials"
+      }
+      stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "translate-credentials"
+        scope.must_be :nil?
+        key.must_be :nil?
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+                translate = Google::Cloud::Translate.new project_id: "project-id", credentials: "path/to/keyfile.json"
+                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.project_id.must_equal "project-id"
+                translate.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
         scope.must_be :nil?
@@ -301,7 +356,7 @@ describe Google::Cloud do
               Google::Cloud::Translate::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new project: "project-id", keyfile: "path/to/keyfile.json"
                 translate.must_be_kind_of Google::Cloud::Translate::Api
-                translate.project.must_equal "project-id"
+                translate.project_id.must_equal "project-id"
                 translate.service.must_be_kind_of OpenStruct
               end
             end

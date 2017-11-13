@@ -20,12 +20,11 @@ require "google/cloud/debugger"
 require "grpc"
 
 # Create shared debugger clients so we don't create new for each test
-key_hash = JSON.parse ENV["DEBUGGER_KEYFILE_JSON"]
-debugger_credentials = Google::Cloud::Debugger::Credentials.credentials_with_scope key_hash
+$debugger = Google::Cloud::Debugger.new
+debugger_credentials = $debugger.service.credentials
 debugger_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
   GRPC::Core::CallCredentials.new debugger_credentials.client.updater_proc
-$vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new chan_creds: debugger_channel_cred
-$debugger = Google::Cloud::Debugger.new
+$vtk_debugger_client = Google::Cloud::Debugger::V2::Debugger2Client.new credentials: debugger_channel_cred
 
 module Acceptance
   class DebuggerTest < Minitest::Test

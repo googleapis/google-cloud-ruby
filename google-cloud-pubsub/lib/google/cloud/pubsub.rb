@@ -425,11 +425,11 @@ module Google
     # ```ruby
     # require "google/cloud/pubsub"
     #
-    # pubsub = Google::Cloud::Pubsub.new # my-project-id
+    # pubsub = Google::Cloud::Pubsub.new # my-project
     #
     # # Get a topic in the current project
     # my_topic = pubsub.topic "my-topic"
-    # my_topic.name #=> "projects/my-project-id/topics/my-topic"
+    # my_topic.name #=> "projects/my-project/topics/my-topic"
     # # Get a topic in another project
     # other_topic = pubsub.topic "other-topic", project: "other-project-id"
     # other_topic.name #=> "projects/other-project-id/topics/other-topic"
@@ -441,14 +441,14 @@ module Google
     # ```ruby
     # require "google/cloud/pubsub"
     #
-    # pubsub = Google::Cloud::Pubsub.new # my-project-id
+    # pubsub = Google::Cloud::Pubsub.new # my-project
     #
     # # Get a topic in another project
     # topic = pubsub.topic "other-topic", project: "other-project-id"
     # # Create a subscription in the current project that pulls from
     # # the topic in another project
     # sub = topic.subscribe "my-sub"
-    # sub.name #=> "projects/my-project-id/subscriptions/my-sub"
+    # sub.name #=> "projects/my-project/subscriptions/my-sub"
     # sub.topic.name #=> "projects/other-project-id/topics/other-topic"
     # ```
     #
@@ -489,10 +489,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Pub/Sub service you
-      #   are connecting to.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Project identifier for the Pub/Sub service
+      #   you are connecting to. If not present, the default project for the
+      #   credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Pubsub::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -506,6 +508,9 @@ module Google
       #   behavior of the API client. Optional.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
       #   If the param is nil, ENV["PUBSUB_EMULATOR_HOST"] will be used.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Pubsub::Project]
       #
@@ -517,37 +522,30 @@ module Google
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
       #
-      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil, emulator_host: nil
-        project ||= Google::Cloud::Pubsub::Project.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
+                   client_config: nil, emulator_host: nil, project: nil,
+                   keyfile: nil
+        project_id ||= (project || Pubsub::Project.default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        fail ArgumentError, "project_id is missing" if project_id.empty?
 
         emulator_host ||= ENV["PUBSUB_EMULATOR_HOST"]
         if emulator_host
-          ps = Google::Cloud::Pubsub::Project.new(
-            Google::Cloud::Pubsub::Service.new(
-              project, :this_channel_is_insecure))
-          ps.service.host = emulator_host
-          return ps
+          return Pubsub::Project.new(
+            Pubsub::Service.new(
+              project_id, :this_channel_is_insecure,
+              host: emulator_host))
         end
 
-        credentials = credentials_with_scope keyfile, scope
-
-        Google::Cloud::Pubsub::Project.new(
-          Google::Cloud::Pubsub::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config))
-      end
-
-      ##
-      # @private
-      def self.credentials_with_scope keyfile, scope
-        if keyfile.nil?
-          Google::Cloud::Pubsub::Credentials.default(scope: scope)
-        else
-          Google::Cloud::Pubsub::Credentials.new(keyfile, scope: scope)
+        credentials ||= (keyfile || Pubsub::Credentials.default(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Pubsub::Credentials.new credentials, scope: scope
         end
+
+        Pubsub::Project.new(
+          Pubsub::Service.new(
+            project_id, credentials, timeout: timeout,
+                                     client_config: client_config))
       end
     end
   end

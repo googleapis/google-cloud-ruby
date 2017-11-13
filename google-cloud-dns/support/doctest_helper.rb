@@ -41,6 +41,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
   end
 end
@@ -48,7 +54,7 @@ end
 def mock_dns
   Google::Cloud::Dns.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    dns = Google::Cloud::Dns::Project.new(Google::Cloud::Dns::Service.new("my-project-id", credentials))
+    dns = Google::Cloud::Dns::Project.new(Google::Cloud::Dns::Service.new("my-project", credentials))
 
     dns.service.mocked_service = Minitest::Mock.new
     yield dns.service.mocked_service
@@ -59,61 +65,63 @@ end
 YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud#dns" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
     end
   end
   doctest.before "Google::Cloud.dns" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
     end
   end
 
   doctest.before "Google::Cloud::Dns.new" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
     end
   end
 
+  doctest.skip "Google::Cloud::Dns::Credentials" # some other mock is messing up this test
+
   doctest.before "Google::Cloud::Dns::Change" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_changes, list_changes_gapi, list_changes_args
     end
   end
 
   doctest.before "Google::Cloud::Dns::Change#wait_until_done!" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
-      mock.expect :get_change, find_change_gapi(true), ["my-project-id", 123456789, 1234567890]
-      mock.expect :get_change, find_change_gapi, ["my-project-id", 123456789, 1234567890]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
+      mock.expect :get_change, find_change_gapi(true), ["my-project", 123456789, 1234567890]
+      mock.expect :get_change, find_change_gapi, ["my-project", 123456789, 1234567890]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Project" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
     end
   end
 
   doctest.before "Google::Cloud::Dns::Project#zones" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project-id", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Project#find_zones" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project-id", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Project#create_zone" do
     mock_dns do |mock|
-      mock.expect :create_managed_zone, zone_gapi, ["my-project-id", Google::Apis::DnsV1::ManagedZone]
+      mock.expect :create_managed_zone, zone_gapi, ["my-project", Google::Apis::DnsV1::ManagedZone]
     end
   end
 
@@ -129,27 +137,27 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Dns::Record" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "SOA")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
       mock.expect :list_resource_record_sets, lookup_records_gapi(3), list_resource_record_sets_args
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#delete" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
-      mock.expect :delete_managed_zone, nil, ["my-project-id", 123456789]
+      mock.expect :delete_managed_zone, nil, ["my-project", 123456789]
     end
   end
 
@@ -159,8 +167,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Dns::Zone#change" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
-      mock.expect :get_change, find_change_gapi, ["my-project-id", 123456789, "2"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
+      mock.expect :get_change, find_change_gapi, ["my-project", 123456789, "2"]
     end
   end
 
@@ -169,22 +177,22 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Dns::Zone#changes" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_changes, list_changes_gapi, list_changes_args
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#changes@The changes can be sorted by change sequence:" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
-      mock.expect :list_changes, list_changes_gapi, ["my-project-id", 123456789, {:max_results=>nil, :page_token=>nil, :sort_by=>"changeSequence", :sort_order=>"descending"}]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
+      mock.expect :list_changes, list_changes_gapi, ["my-project", 123456789, {:max_results=>nil, :page_token=>nil, :sort_by=>"changeSequence", :sort_order=>"descending"}]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#changes@The changes can be sorted by change sequence:" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
-      mock.expect :list_changes, list_changes_gapi, ["my-project-id", 123456789, {:max_results=>nil, :page_token=>nil, :sort_by=>"changeSequence", :sort_order=>"descending"}]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
+      mock.expect :list_changes, list_changes_gapi, ["my-project", 123456789, {:max_results=>nil, :page_token=>nil, :sort_by=>"changeSequence", :sort_order=>"descending"}]
     end
   end
 
@@ -193,9 +201,9 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Dns::Zone#record" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "SOA")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
@@ -204,113 +212,113 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Dns::Zone#records" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#records@Records can be filtered by name and type:" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "www.example.com.", type: "A")
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#records@Retrieve all records:" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.")
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#import" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#update@Using a block:" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "TXT")
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "MX")
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "www.example.com.", type: "CNAME")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#update@Or you can provide the record objects to add and remove:" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "SOA")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#update@Using a lambda or Proc to update current SOA serial number:" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "SOA")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#add" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "SOA")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#remove" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "A")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#replace" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "A")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#modify" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "MX")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#find_records" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "www.example.com.", type: "A")
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone#fqdn" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
     end
   end
 
   # Doctest also matches `#next?`
   doctest.before "Google::Cloud::Dns::Change::List#next" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_changes, list_changes_gapi, list_changes_args
     end
   end
 
   doctest.before "Google::Cloud::Dns::Change::List#all" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_changes, list_changes_gapi, list_changes_args
     end
   end
@@ -318,14 +326,14 @@ YARD::Doctest.configure do |doctest|
   # Doctest also matches `#next?`
   doctest.before "Google::Cloud::Dns::Record::List#next" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.")
     end
   end
 
   doctest.before "Google::Cloud::Dns::Record::List#all" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.")
     end
   end
@@ -333,47 +341,47 @@ YARD::Doctest.configure do |doctest|
   # Doctest also matches `#next?`
   doctest.before "Google::Cloud::Dns::Zone::List#next" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project-id", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone::List#all" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project-id", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone::Transaction" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "TXT")
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "MX")
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "www.example.com.", type: "CNAME")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone::Transaction#add" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "SOA")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone::Transaction#replace" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "example.com.", type: "MX")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone::Transaction#modify" do
     mock_dns do |mock|
-      mock.expect :get_managed_zone, zone_gapi, ["my-project-id", "example-com"]
+      mock.expect :get_managed_zone, zone_gapi, ["my-project", "example-com"]
       mock.expect :list_resource_record_sets, lookup_records_gapi, list_resource_record_sets_args(name: "www.example.com.", type: "CNAME")
-      mock.expect :create_change, lookup_records_gapi, ["my-project-id", 123456789, Google::Apis::DnsV1::Change]
+      mock.expect :create_change, lookup_records_gapi, ["my-project", 123456789, Google::Apis::DnsV1::Change]
     end
   end
 end
@@ -381,11 +389,11 @@ end
 # Fixture helpers
 
 def list_changes_args
-  ["my-project-id", 123456789, {:max_results=>nil, :page_token=>nil, :sort_by=>nil, :sort_order=>nil}]
+  ["my-project", 123456789, {:max_results=>nil, :page_token=>nil, :sort_by=>nil, :sort_order=>nil}]
 end
 
 def list_resource_record_sets_args name: nil, type: nil
-  ["my-project-id", 123456789, {:max_results=>nil, :name=>name, :page_token=>nil, :type=>type}]
+  ["my-project", 123456789, {:max_results=>nil, :name=>name, :page_token=>nil, :type=>type}]
 end
 
 def zone_gapi
@@ -476,6 +484,3 @@ def lookup_records_gapi count = 2
   rrsets = count.times.map { soa.to_gapi }
   Google::Apis::DnsV1::ListResourceRecordSetsResponse.new rrsets: rrsets
 end
-
-
-
