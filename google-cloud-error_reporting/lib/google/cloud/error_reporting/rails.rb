@@ -121,7 +121,7 @@ module Google
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
           config = ErrorReporting.configure
-          config.project_id ||= ErrorReporting::Project.default_project
+          config.project_id ||= ErrorReporting::Project.default_project_id
           config.service_name ||= ErrorReporting::Project.default_service_name
           config.service_version ||=
             ErrorReporting::Project.default_service_version
@@ -129,9 +129,15 @@ module Google
 
         ##
         # @private Verify credentials
-        def self.valid_credentials? project_id, keyfile
+        def self.valid_credentials? project_id, credentials
           begin
-            ErrorReporting::Credentials.credentials_with_scope keyfile
+            # if credentials is nil, get default
+            credentials ||= ErrorReporting::Credentials.default(scope: scope)
+            # only create a new Credentials object if the val isn't one already
+            unless credentials.is_a? Google::Auth::Credentials
+              # if credentials is not a Credentials object, create one
+              ErrorReporting::Credentials.new credentials, scope: scope
+            end
           rescue => e
             STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because it failed to authorize with the service. (#{e.message})"

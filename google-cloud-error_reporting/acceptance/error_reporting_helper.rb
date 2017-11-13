@@ -20,11 +20,8 @@ require "minitest/rg"
 require "google/cloud/error_reporting"
 require "grpc"
 
-key_hash = JSON.parse ENV["ERROR_REPORTING_KEYFILE_JSON"]
-er_credentials = Google::Cloud::ErrorReporting::Credentials.credentials_with_scope key_hash
-er_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
-  GRPC::Core::CallCredentials.new er_credentials.client.updater_proc
-$error_stats_vtk_client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.new chan_creds: er_channel_cred
+er_credentials = Google::Cloud::ErrorReporting::Credentials.default
+$error_stats_vtk_client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.new credentials: er_credentials
 
 module Acceptance
   class ErrorReportingTest < Minitest::Test

@@ -13,28 +13,44 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
+require "googleauth"
 
 module Google
   module Cloud
     module ErrorReporting
       ##
-      # @private Represents the OAuth 2.0 signing logic for ErrorReporting.
-      class Credentials < Google::Cloud::Credentials
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Stackdriver Error Reporting service.
+      #
+      # @example
+      #   require "google/cloud/error_reporting"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::ErrorReporting::Credentials.new keyfile
+      #
+      #   error_reporting = Google::Cloud::ErrorReporting.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   error_reporting.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
         SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
-        PATH_ENV_VARS = %w(ERROR_REPORTING_KEYFILE GOOGLE_CLOUD_KEYFILE)
-        JSON_ENV_VARS =
-          %w(ERROR_REPORTING_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON)
-
-        ##
-        # @private Create credentials with given scope and/or keyfile.
-        def self.credentials_with_scope keyfile, scope = nil
-          if keyfile.nil?
-            default(scope: scope)
-          else
-            new(keyfile, scope: scope)
-          end
-        end
+        PATH_ENV_VARS = %w(ERROR_REPORTING_CREDENTIALS
+                           GOOGLE_CLOUD_CREDENTIALS
+                           ERROR_REPORTING_KEYFILE
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(ERROR_REPORTING_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           ERROR_REPORTING_KEYFILE_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
+                           GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end

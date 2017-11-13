@@ -50,10 +50,13 @@ module Google
         #
         # @return [String] default valid GCP project_id
         #
-        def self.default_project
+        def self.default_project_id
           ENV["ERROR_REPORTING_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             Google::Cloud.env.project_id
+        end
+        class << self
+          alias_method :default_project, :default_project_id
         end
 
         ##
@@ -102,9 +105,10 @@ module Google
         #
         # @return [String] The current project_id
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
         # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to Stackdriver

@@ -75,9 +75,9 @@ describe Google::Cloud do
     it "calls out to Google::Cloud::ErrorReporting.new" do
       gcloud = Google::Cloud.new
       stubbed_new =
-        ->(project: nil, keyfile: nil, scope: nil, timeout: nil, client_config: nil) {
-          project.must_be_nil
-          keyfile.must_be_nil
+        ->(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil) {
+          project_id.must_be_nil
+          credentials.must_be_nil
           scope.must_be :nil?
           timeout.must_be :nil?
           client_config.must_be :nil?
@@ -92,9 +92,9 @@ describe Google::Cloud do
     it "passes project and keyfile to Google::Cloud::ErrorReporting.new" do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_new =
-        ->(project: nil, keyfile: nil, scope: nil, timeout: nil, client_config: nil) {
-          project.must_equal "test-project-id"
-          keyfile.must_equal "/path/to/a/keyfile"
+        ->(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil) {
+          project_id.must_equal "test-project-id"
+          credentials.must_equal "/path/to/a/keyfile"
           scope.must_be :nil?
           timeout.must_be :nil?
           client_config.must_be :nil?
@@ -109,9 +109,9 @@ describe Google::Cloud do
     it "passes project and keyfile and options to Google::Cloud::ErrorReporting.new" do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_new =
-        ->(project: nil, keyfile: nil, scope: nil, timeout: nil, client_config: nil) {
-          project.must_equal "test-project-id"
-          keyfile.must_equal "/path/to/a/keyfile"
+        ->(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil) {
+          project_id.must_equal "test-project-id"
+          credentials.must_equal "/path/to/a/keyfile"
           scope.must_equal "http://example.com/scope"
           timeout.must_equal 60
           client_config.must_equal({ "gax" => "options" })

@@ -116,11 +116,11 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     end
   end
 
-  describe ".default_project" do
+  describe ".default_project_id" do
     it "calls Google::Cloud.env.project_id if no environment variable found" do
       Google::Cloud.env.stub :project_id, "another-project" do
         ENV.stub :[], nil do
-          Google::Cloud::ErrorReporting::Project.default_project.must_equal "another-project"
+          Google::Cloud::ErrorReporting::Project.default_project_id.must_equal "another-project"
         end
       end
     end
