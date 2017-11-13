@@ -25,47 +25,28 @@ module Google
       # @private
       # Represents the service to Vision, exposing the API calls.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout, :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project, credentials, timeout: nil, client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1::ImageAnnotatorClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
-        end
-
-        def channel
-          require "grpc"
-          GRPC::Core::Channel.new host, nil, chan_creds
-        end
-
-        def chan_creds
-          return credentials if insecure?
-          require "grpc"
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def service
           return mocked_service if mocked_service
           @service ||= \
             V1::ImageAnnotatorClient.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
               lib_version: Google::Cloud::Vision::VERSION)
         end
         attr_accessor :mocked_service
-
-        def insecure?
-          credentials == :this_channel_is_insecure
-        end
 
         ##
         # Returns API::BatchAnnotateImagesResponse
