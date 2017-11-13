@@ -85,7 +85,7 @@ module Google
               if @key
                 req.params = { key: @key }
               else
-                @credentials.sign_http_request req
+                sign_http_request! req
               end
             end
           end
@@ -127,6 +127,17 @@ module Google
           end
         rescue Faraday::ConnectionFailed
           raise Google::Cloud::ResourceExhaustedError
+        end
+
+        ##
+        # Sign Oauth2 API calls.
+        def sign_http_request! request
+          client = credentials.client
+          return if client.nil?
+
+          client.fetch_access_token! if client.expires_within? 30
+          client.generate_authenticated_request request: request
+          request
         end
 
         ##

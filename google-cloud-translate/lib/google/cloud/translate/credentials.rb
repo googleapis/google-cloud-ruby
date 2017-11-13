@@ -13,29 +13,44 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
+require "googleauth"
 
 module Google
   module Cloud
     module Translate
       ##
-      # @private Represents the OAuth 2.0 signing logic for Translation API.
-      class Credentials < Google::Cloud::Credentials
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Cloud Translation API.
+      #
+      # @example
+      #   require "google/cloud/translate"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Translate::Credentials.new keyfile
+      #
+      #   translate = Google::Cloud::Translate.new(
+      #     project_id: "my-todo-project",
+      #     credentials: creds
+      #   )
+      #
+      #   translate.project_id #=> "my-todo-project"
+      #
+      class Credentials < Google::Auth::Credentials
         SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
-        PATH_ENV_VARS = %w(TRANSLATE_KEYFILE GOOGLE_CLOUD_KEYFILE
+        PATH_ENV_VARS = %w(TRANSLATE_CREDENTIALS
+                           TRANSLATE_KEYFILE
+                           GOOGLE_CLOUD_CREDENTIALS
+                           GOOGLE_CLOUD_KEYFILE
                            GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(TRANSLATE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+        JSON_ENV_VARS = %w(TRANSLATE_CREDENTIALS_JSON
+                           TRANSLATE_KEYFILE_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
-
-        ##
-        # @private Sign Oauth2 API calls.
-        def sign_http_request request #:nodoc:
-          if @client
-            @client.fetch_access_token! if @client.expires_within? 30
-            @client.generate_authenticated_request request: request
-          end
-          request
-        end
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end
