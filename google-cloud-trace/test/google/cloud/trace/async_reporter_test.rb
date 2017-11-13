@@ -56,6 +56,12 @@ describe Google::Cloud::Trace::AsyncReporter, :mock_trace do
       reporter.patch_traces nil
 
       queue.size.must_equal max_queue_size
+
+      # Empty the queue so that the reporter doesn't try to execute these
+      # bogus items when it is flushed.
+      max_queue_size.times do |i|
+        queue.pop
+      end
     end
 
     it "wakes up the child thread to dequeue the events" do

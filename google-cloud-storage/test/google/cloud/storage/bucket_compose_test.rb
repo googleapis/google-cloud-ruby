@@ -86,7 +86,6 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
       [bucket.name, file_3_name, compose_request([file_gapi, file_2_gapi]), destination_predefined_acl: nil, user_project: nil, options: {}]
 
     bucket.service.mocked_service = mock
-    puts file.gapi
 
     new_file = bucket.compose [file, file_2], file_3_name
     new_file.must_be_kind_of Google::Cloud::Storage::File

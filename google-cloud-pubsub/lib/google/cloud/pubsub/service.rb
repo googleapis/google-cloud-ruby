@@ -63,7 +63,7 @@ module Google
           @subscriber ||= begin
             V1::SubscriberClient.new(
               service_path: host,
-              channel: channel,
+              credentials: channel,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
@@ -77,7 +77,7 @@ module Google
           @publisher ||= begin
             V1::PublisherClient.new(
               service_path: host,
-              channel: channel,
+              credentials: channel,
               timeout: timeout,
               lib_name: "gccl",
               lib_version: Google::Cloud::Pubsub::VERSION)

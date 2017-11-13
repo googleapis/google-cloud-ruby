@@ -39,7 +39,7 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
     project.must_be_kind_of Google::Cloud::ResourceManager::Project
     project.project_id.must_equal "new-project-456"
-    project.name.must_equal nil
+    project.name.must_be :nil?
     project.labels.must_be :empty?
   end
 

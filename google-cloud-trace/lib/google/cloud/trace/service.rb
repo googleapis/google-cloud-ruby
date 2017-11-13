@@ -37,10 +37,6 @@ module Google
 
         ##
         # @private
-        attr_accessor :host
-
-        ##
-        # @private
         attr_accessor :timeout
 
         ##
@@ -49,41 +45,29 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project, credentials, timeout: nil, client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1::TraceServiceClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
 
-        def channel
-          load_grpc
-          GRPC::Core::Channel.new host, nil, chan_creds
-        end
-
-        def chan_creds
-          return credentials if insecure?
-          load_grpc
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
-        end
-
-        def insecure?
-          credentials == :this_channel_is_insecure
-        end
-
         def lowlevel_client
           return mocked_lowlevel_client if mocked_lowlevel_client
+
           @lowlevel_client ||= \
-            V1::TraceServiceClient.new(
-              service_path: host,
-              channel: channel,
-              timeout: timeout,
-              client_config: client_config,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Trace::VERSION)
+            begin
+              require "grpc"
+              require "google/cloud/trace/patches/active_call_with_trace"
+              require "google/cloud/trace/patches/call_with_trace"
+
+              V1::TraceServiceClient.new(
+                credentials: credentials,
+                timeout: timeout,
+                client_config: client_config,
+                lib_name: "gccl",
+                lib_version: Google::Cloud::Trace::VERSION)
+            end
         end
         attr_accessor :mocked_lowlevel_client
 
@@ -159,12 +143,6 @@ module Google
         rescue Google::Gax::GaxError => e
           # GaxError wraps BadStatus, but exposes it as #cause
           raise Google::Cloud::Error.from_error(e.cause)
-        end
-
-        def load_grpc
-          require "grpc"
-          require "google/cloud/trace/patches/active_call_with_trace"
-          require "google/cloud/trace/patches/call_with_trace"
         end
       end
     end

@@ -56,6 +56,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
   end
 end
@@ -473,7 +479,3 @@ def begin_tx_res
   tx_id = "giterdone".encode("ASCII-8BIT")
   Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
 end
-
-
-
-

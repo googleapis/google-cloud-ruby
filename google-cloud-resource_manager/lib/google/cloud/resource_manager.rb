@@ -228,8 +228,9 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {ResourceManager::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -241,6 +242,8 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::ResourceManager::Manager]
       #
@@ -252,16 +255,17 @@ module Google
       #     puts projects.project_id
       #   end
       #
-      def self.new keyfile: nil, scope: nil, retries: nil, timeout: nil
-        if keyfile.nil?
-          credentials = Google::Cloud::ResourceManager::Credentials.default(
-            scope: scope)
-        else
-          credentials = Google::Cloud::ResourceManager::Credentials.new(
-            keyfile, scope: scope)
+      def self.new credentials: nil, scope: nil, retries: nil, timeout: nil,
+                   keyfile: nil
+        credentials ||= keyfile
+        credentials ||= ResourceManager::Credentials.default(scope: scope)
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = ResourceManager::Credentials.new credentials,
+                                                         scope: scope
         end
-        Google::Cloud::ResourceManager::Manager.new(
-          Google::Cloud::ResourceManager::Service.new(
+
+        ResourceManager::Manager.new(
+          ResourceManager::Service.new(
             credentials, retries: retries, timeout: timeout))
       end
     end

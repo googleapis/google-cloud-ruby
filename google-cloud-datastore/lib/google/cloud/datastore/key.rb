@@ -64,6 +64,8 @@ module Google
         #   task.key.project #=> "my-todo-project"
         #
         attr_accessor :project
+        alias_method :project_id,  :project
+        alias_method :project_id=, :project=
         alias_method :dataset_id,  :project
         alias_method :dataset_id=, :project=
 

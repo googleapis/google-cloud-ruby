@@ -70,11 +70,12 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication)
     #
-    # @param [String] project Google Cloud Platform project identifier for the
-    #   Stackdriver Error Reporting service you are connecting to. Use
-    #   Project.default_project if not provided.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String] project_id Google Cloud Platform project identifier for
+    #   the Stackdriver Error Reporting service you are connecting to. If not
+    #   present, the default project for the credentials is used.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object. (See {ErrorReporting::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection  can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -102,10 +103,11 @@ module Google
     #                                             service_version: "v8"
     #   error_reporting.report error_event
     #
-    def self.error_reporting project = nil, keyfile = nil, scope: nil,
+    def self.error_reporting project_id = nil, credentials = nil, scope: nil,
                              timeout: nil, client_config: nil
       require "google/cloud/error_reporting"
-      Google::Cloud::ErrorReporting.new project: project, keyfile: keyfile,
+      Google::Cloud::ErrorReporting.new project_id: project_id,
+                                        credentials: credentials,
                                         scope: scope, timeout: timeout,
                                         client_config: client_config
     end

@@ -205,16 +205,21 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Stackdriver Trace
-      #   service.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
-      #   either the JSON data or the path to a readable file.
+      # @param [String] project_id Project identifier for the Stackdriver Trace
+      #   service you are connecting to. If not present, the default project for
+      #   the credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Trace::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
       #   APIs](https://developers.google.com/identity/protocols/OAuth2).
       #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Trace::Project]
       #
@@ -228,20 +233,21 @@ module Google
       #     puts "Retrieved trace ID: #{trace.trace_id}"
       #   end
       #
-      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil
-        project ||= Google::Cloud::Trace::Project.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
+                   client_config: nil, project: nil, keyfile: nil
+        project_id ||= (project || Trace::Project.default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        fail ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials =
-          Google::Cloud::Trace::Credentials.credentials_with_scope keyfile,
-                                                                   scope
+        credentials ||= (keyfile || Trace::Credentials.default(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Trace::Credentials.new credentials, scope: scope
+        end
 
-        Google::Cloud::Trace::Project.new(
-          Google::Cloud::Trace::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config))
+        Trace::Project.new(
+          Trace::Service.new(
+            project_id, credentials, timeout: timeout,
+                                     client_config: client_config))
       end
 
       ##

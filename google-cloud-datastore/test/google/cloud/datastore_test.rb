@@ -67,7 +67,13 @@ describe Google::Cloud do
   end
 
   describe ".datastore" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -118,7 +124,13 @@ describe Google::Cloud do
   end
 
   describe "Datastore.new" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -137,6 +149,37 @@ describe Google::Cloud do
     end
 
     it "uses provided project_id and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_equal nil
+        "datastore-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "datastore-credentials"
+        timeout.must_equal nil
+        client_config.must_equal nil
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Datastore::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Datastore::Service.stub :new, stubbed_service do
+                datastore = Google::Cloud::Datastore.new project_id: "project-id", credentials: "path/to/keyfile.json"
+                datastore.must_be_kind_of Google::Cloud::Datastore::Dataset
+                datastore.project.must_equal "project-id"
+                datastore.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
         scope.must_equal nil

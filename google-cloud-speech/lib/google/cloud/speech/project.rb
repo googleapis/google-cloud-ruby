@@ -70,19 +70,20 @@ module Google
         #   require "google/cloud/speech"
         #
         #   speech = Google::Cloud::Speech.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   speech.project #=> "my-project-id"
+        #   speech.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
         # @private Default project.
-        def self.default_project
+        def self.default_project_id
           ENV["SPEECH_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||

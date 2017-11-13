@@ -218,10 +218,13 @@ module Google
       # covered in the [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-translate/guides/authentication).
       #
-      # @param [String] project Identifier for the Cloud Translation API project
-      #   to which you are connecting.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Project identifier for the Cloud Translation
+      #   service you are connecting to. If not present, the default project for
+      #   the credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Translate::Credentials})
+      # @param [String] key a public API access key (not an OAuth 2.0 token)
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -230,10 +233,12 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/cloud-platform`
-      # @param [String] key a public API access key (not an OAuth 2.0 token)
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Translate::Api]
       #
@@ -241,8 +246,8 @@ module Google
       #   require "google/cloud/translate"
       #
       #   translate = Google::Cloud::Translate.new(
-      #     project: "my-todo-project",
-      #     keyfile: "/path/to/keyfile.json"
+      #     project_id: "my-todo-project",
+      #     credentials: "/path/to/keyfile.json"
       #   )
       #
       #   translation = translate.translate "Hello world!", to: "la"
@@ -268,30 +273,30 @@ module Google
       #   translation = translate.translate "Hello world!", to: "la"
       #   translation.text #=> "Salve mundi!"
       #
-      def self.new project: nil, keyfile: nil, scope: nil, key: nil,
-                   retries: nil, timeout: nil
-        project ||= Google::Cloud::Translate::Api.default_project
-        project = project.to_s # Always cast to a string
+      def self.new project_id: nil, credentials: nil, key: nil, scope: nil,
+                   retries: nil, timeout: nil, project: nil, keyfile: nil
+        project_id ||= (project || Translate::Api.default_project_id)
+        project_id = project_id.to_s # Always cast to a string
 
         key ||= ENV["TRANSLATE_KEY"]
         key ||= ENV["GOOGLE_CLOUD_KEY"]
         if key
           return Google::Cloud::Translate::Api.new(
             Google::Cloud::Translate::Service.new(
-              project, nil, retries: retries, timeout: timeout, key: key))
+              project_id, nil, retries: retries, timeout: timeout, key: key))
         end
 
-        if keyfile.nil?
-          credentials = Google::Cloud::Translate::Credentials.default(
-            scope: scope)
-        else
-          credentials = Google::Cloud::Translate::Credentials.new(
-            keyfile, scope: scope)
+        fail ArgumentError, "project_id is missing" if project_id.empty?
+
+        credentials ||= keyfile
+        credentials ||= Translate::Credentials.default(scope: scope)
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Translate::Credentials.new credentials, scope: scope
         end
 
-        Google::Cloud::Translate::Api.new(
-          Google::Cloud::Translate::Service.new(
-            project, credentials, retries: retries, timeout: timeout))
+        Translate::Api.new(
+          Translate::Service.new(
+            project_id, credentials, retries: retries, timeout: timeout))
       end
     end
   end

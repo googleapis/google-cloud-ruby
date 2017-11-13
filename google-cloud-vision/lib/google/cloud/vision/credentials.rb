@@ -13,18 +13,44 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
+require "googleauth"
 
 module Google
   module Cloud
     module Vision
       ##
-      # @private Represents the OAuth 2.0 signing logic for Vision.
-      class Credentials < Google::Cloud::Credentials
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Vision API.
+      #
+      # @example
+      #   require "google/cloud/vision"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Vision::Credentials.new keyfile
+      #
+      #   vision = Google::Cloud::Vision.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   vision.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
         SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
-        PATH_ENV_VARS = %w(VISION_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(VISION_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+        PATH_ENV_VARS = %w(VISION_CREDENTIALS
+                           VISION_KEYFILE
+                           GOOGLE_CLOUD_CREDENTIALS
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(VISION_CREDENTIALS_JSON
+                           VISION_KEYFILE_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end

@@ -339,10 +339,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Spanner service you
-      #   are connecting to.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Project identifier for the Spanner service
+      #   you are connecting to. If not present, the default project for the
+      #   credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Spanner::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -355,6 +357,9 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Spanner::Project]
       #
@@ -363,23 +368,21 @@ module Google
       #
       #   spanner = Google::Cloud::Spanner.new
       #
-      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil
-        project ||= Google::Cloud::Spanner::Project.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
+                   client_config: nil, project: nil, keyfile: nil
+        project_id ||= (project || Spanner::Project.default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        fail ArgumentError, "project_id is missing" if project_id.empty?
 
-        if keyfile.nil?
-          credentials = Google::Cloud::Spanner::Credentials.default scope: scope
-        else
-          credentials = Google::Cloud::Spanner::Credentials.new(
-            keyfile, scope: scope)
+        credentials ||= (keyfile || Spanner::Credentials.default(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Spanner::Credentials.new credentials, scope: scope
         end
 
-        Google::Cloud::Spanner::Project.new(
-          Google::Cloud::Spanner::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config))
+        Spanner::Project.new(
+          Spanner::Service.new(
+            project_id, credentials, timeout: timeout,
+                                     client_config: client_config))
       end
     end
   end

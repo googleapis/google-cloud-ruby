@@ -71,19 +71,20 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new(
-        #     project: "my-todo-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-todo-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   datastore.project #=> "my-todo-project"
+        #   datastore.project_id #=> "my-todo-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
-        # @private Default project.
-        def self.default_project
+        # @private Default project_id.
+        def self.default_project_id
           ENV["DATASTORE_DATASET"] ||
             ENV["DATASTORE_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||

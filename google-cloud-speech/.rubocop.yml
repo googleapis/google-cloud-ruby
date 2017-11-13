@@ -5,7 +5,7 @@ AllCops:
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"
-    - "lib/google/cloud/speech/v1/*"
+    - "lib/google/cloud/speech/v1/**/*"
 
 Documentation:
   Enabled: false

@@ -29,6 +29,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
     module Core
       module Environment
@@ -47,7 +53,7 @@ end
 def mock_error_reporting
   Google::Cloud::ErrorReporting.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    error_reporting = Google::Cloud::ErrorReporting::Project.new(Google::Cloud::ErrorReporting::Service.new("my-todo-project", credentials))
+    error_reporting = Google::Cloud::ErrorReporting::Project.new(Google::Cloud::ErrorReporting::Service.new("my-project", credentials))
 
     error_reporting.service.mocked_error_reporting = Minitest::Mock.new
 
@@ -97,6 +103,10 @@ YARD::Doctest.configure do |doctest|
     mock_error_reporting do |mock|
       mock.expect :report_error_event, nil, [String, Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
     end
+  end
+
+  doctest.before "Google::Cloud::ErrorReporting::Credentials" do
+    mock_error_reporting
   end
 
   doctest.before "Google::Cloud::ErrorReporting::Service" do

@@ -66,19 +66,20 @@ module Google
         #   require "google/cloud/logging"
         #
         #   logging = Google::Cloud::Logging.new(
-        #     project: "my-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   logging.project #=> "my-project"
+        #   logging.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
         # @private Default project.
-        def self.default_project
+        def self.default_project_id
           ENV["LOGGING_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||

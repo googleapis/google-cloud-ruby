@@ -13,19 +13,45 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
-require "google/cloud/spanner/v1"
+require "googleauth"
 
 module Google
   module Cloud
     module Spanner
       ##
-      # @private Represents the OAuth 2.0 signing logic for Spanner.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = V1::SpannerClient::ALL_SCOPES
-        PATH_ENV_VARS = %w(SPANNER_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(SPANNER_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Spanner API.
+      #
+      # @example
+      #   require "google/cloud/spanner"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Spanner::Credentials.new keyfile
+      #
+      #   spanner = Google::Cloud::Spanner.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   spanner.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
+        SCOPE = %w(https://www.googleapis.com/auth/cloud-platform
+                   https://www.googleapis.com/auth/spanner.data)
+        PATH_ENV_VARS = %w(SPANNER_CREDENTIALS
+                           SPANNER_KEYFILE
+                           GOOGLE_CLOUD_CREDENTIALS
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(SPANNER_CREDENTIALS_JSON
+                           SPANNER_KEYFILE_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end

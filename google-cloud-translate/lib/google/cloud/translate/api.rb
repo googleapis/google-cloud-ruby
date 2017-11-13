@@ -69,19 +69,20 @@ module Google
         #   require "google/cloud/translate"
         #
         #   translate = Google::Cloud::Translate.new(
-        #     project: "my-todo-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-todo-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   translate.project #=> "my-todo-project"
+        #   translate.project_id #=> "my-todo-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias_method :project, :project_id
 
         ##
         # @private Default project.
-        def self.default_project
+        def self.default_project_id
           ENV["TRANSLATE_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||

@@ -39,10 +39,11 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # @param [String] project Project identifier for the Pub/Sub service you are
+    # @param [String] project_id Project identifier for the service you are
     #   connecting to.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object.
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
@@ -57,12 +58,12 @@ module Google
     #   pubsub  = gcloud.pubsub
     #   storage = gcloud.storage
     #
-    def self.new project = nil, keyfile = nil, retries: nil, timeout: nil
+    def self.new project_id = nil, credentials = nil, retries: nil, timeout: nil
       gcloud = Object.new
-      gcloud.instance_variable_set "@project", project
-      gcloud.instance_variable_set "@keyfile", keyfile
-      gcloud.instance_variable_set "@retries", retries
-      gcloud.instance_variable_set "@timeout", timeout
+      gcloud.instance_variable_set :@project, project_id
+      gcloud.instance_variable_set :@keyfile, credentials
+      gcloud.instance_variable_set :@retries, retries
+      gcloud.instance_variable_set :@timeout, timeout
       gcloud.extend Google::Cloud
       gcloud
     end

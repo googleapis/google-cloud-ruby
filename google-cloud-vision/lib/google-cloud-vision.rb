@@ -13,9 +13,9 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .bigquery and
-# #bigquery methods can be available, but the library and all dependencies won't
-# be loaded until required and used.
+# This file is here to be autorequired by bundler, so that the
+# Google::Cloud.vision and Google::Cloud#vision methods can be available, but
+# the library and all dependencies won't be loaded until required and used.
 
 
 gem "google-cloud-core"
@@ -69,10 +69,12 @@ module Google
     # Creates a new object for connecting to the Vision service.
     # Each call creates a new connection.
     #
-    # @param [String] project Project identifier for the Vision service you are
-    #   connecting to.
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String] project_id Project identifier for the Vision service you
+    #   are connecting to. If not present, the default project for the
+    #   credentials is used.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object. (See {Vision::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -97,10 +99,11 @@ module Google
     #   landmark = image.landmark
     #   landmark.description #=> "Mount Rushmore"
     #
-    def self.vision project = nil, keyfile = nil, scope: nil, timeout: nil,
-                    client_config: nil
+    def self.vision project_id = nil, credentials = nil, scope: nil,
+                    timeout: nil, client_config: nil
       require "google/cloud/vision"
-      Google::Cloud::Vision.new project: project, keyfile: keyfile,
+      Google::Cloud::Vision.new project_id: project_id,
+                                credentials: credentials,
                                 scope: scope, timeout: timeout,
                                 client_config: client_config
     end

@@ -13,9 +13,10 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .bigquery and
-# #bigquery methods can be available, but the library and all dependencies won't
-# be loaded until required and used.
+# This file is here to be autorequired by bundler, so that the
+# Google::Cloud.resource_manager and Google::Cloud#resource_manager methods can
+# be available, but the library and all dependencies won't be loaded until
+# required and used.
 
 
 gem "google-cloud-core"
@@ -74,8 +75,9 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object. (See {ResourceManager::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -98,10 +100,10 @@ module Google
     #     puts projects.project_id
     #   end
     #
-    def self.resource_manager keyfile = nil, scope: nil, retries: nil,
+    def self.resource_manager credentials = nil, scope: nil, retries: nil,
                               timeout: nil
       require "google/cloud/resource_manager"
-      Google::Cloud::ResourceManager.new keyfile: keyfile, scope: scope,
+      Google::Cloud::ResourceManager.new credentials: credentials, scope: scope,
                                          retries: retries, timeout: timeout
     end
   end

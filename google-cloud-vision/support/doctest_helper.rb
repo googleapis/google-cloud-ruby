@@ -73,6 +73,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
     module Storage
       def self.stub_new
@@ -91,7 +97,7 @@ end
 def mock_vision
   Google::Cloud::Vision.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    vision = Google::Cloud::Vision::Project.new(Google::Cloud::Vision::Service.new("my-todo-project", credentials))
+    vision = Google::Cloud::Vision::Project.new(Google::Cloud::Vision::Service.new("my-project", credentials))
 
     vision.service.mocked_service = Minitest::Mock.new
     if block_given?
@@ -104,7 +110,7 @@ end
 def mock_storage
   Google::Cloud::Storage.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-todo-project", credentials))
+    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-project", credentials))
 
     storage.service.mocked_service = Minitest::Mock.new
     yield storage.service.mocked_service
@@ -391,7 +397,7 @@ end
 
 
 def default_headers
-  { "google-cloud-resource-prefix" => "projects/my-project-id" }
+  { "google-cloud-resource-prefix" => "projects/my-project" }
 end
 
 def default_options

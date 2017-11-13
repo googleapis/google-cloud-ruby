@@ -334,7 +334,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Example: +"projects/my-project/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -431,7 +431,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Example: +"projects/my-project/sinks/my-sink-id"+.
           # @param sink [Google::Logging::V2::LogSink | Hash]
           #   Required. The updated sink, whose name is the same identifier that appears
           #   as part of +sink_name+.
@@ -489,7 +489,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
+          #   Example: +"projects/my-project/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -577,7 +577,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          #   Example: +"projects/my-project/exclusions/my-exclusion-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -653,7 +653,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          #   Example: +"projects/my-project/exclusions/my-exclusion-id"+.
           # @param exclusion [Google::Logging::V2::LogExclusion | Hash]
           #   Required. New values for the existing exclusion. Only the fields specified
           #   in +update_mask+ are relevant.
@@ -707,7 +707,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
+          #   Example: +"projects/my-project/exclusions/my-exclusion-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

@@ -26,6 +26,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
   end
 end
@@ -82,6 +88,12 @@ YARD::Doctest.configure do |doctest|
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
       mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
+    end
+  end
+
+  doctest.before "Google::Cloud::Translate::Credentials" do
+    mock_translate do |mock|
+      mock.expect :project, "my-todo-project"
     end
   end
 

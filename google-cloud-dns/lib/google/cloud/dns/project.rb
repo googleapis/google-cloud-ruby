@@ -64,17 +64,17 @@ module Google
         #   require "google/cloud/dns"
         #
         #   dns = Google::Cloud::Dns.new(
-        #           project: "my-project-id",
-        #           keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
+        #   dns.project_id #=> "my-project"
         #
-        #   dns.project #=> "my-project-id"
-        #
-        def project
+        def project_id
           service.project
         end
-        alias_method :id, :project
+        alias_method :project, :project_id
+        alias_method :id, :project_id
 
         ##
         # The project number.
@@ -127,7 +127,7 @@ module Google
 
         ##
         # @private Default project.
-        def self.default_project
+        def self.default_project_id
           ENV["DNS_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             ENV["GCLOUD_PROJECT"] ||

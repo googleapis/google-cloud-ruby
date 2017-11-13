@@ -163,7 +163,7 @@ module Google
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
-          Trace.configure.project_id ||= Trace::Project.default_project
+          Trace.configure.project_id ||= Trace::Project.default_project_id
         end
 
         ##

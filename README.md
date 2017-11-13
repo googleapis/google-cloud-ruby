@@ -77,8 +77,8 @@ $ gem install google-cloud-bigquery
 require "google/cloud/bigquery"
 
 bigquery = Google::Cloud::Bigquery.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Create a new table to archive todos
@@ -120,8 +120,8 @@ $ gem install google-cloud-datastore
 require "google/cloud/datastore"
 
 datastore = Google::Cloud::Datastore.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Create a new task to demo datastore
@@ -282,9 +282,9 @@ $ gem install google-cloud-language
 ```ruby
 require "google/cloud/language"
 
-language = Google::Cloud::Language.new( 
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json" 
+language = Google::Cloud::Language.new(
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 content = "Star Wars is a great movie. The Death Star is fearsome."
@@ -317,8 +317,8 @@ $ gem install google-cloud-pubsub
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::Pubsub.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Retrieve a topic
@@ -483,8 +483,8 @@ $ gem install google-cloud-storage
 require "google/cloud/storage"
 
 storage = Google::Cloud::Storage.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 bucket = storage.bucket "task-attachments"
