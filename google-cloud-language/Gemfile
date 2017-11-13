@@ -3,9 +3,6 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 11.0"
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-env", path: "../google-cloud-env"
-gem "google-cloud-storage", path: "../google-cloud-storage"
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"

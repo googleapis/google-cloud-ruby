@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2017, Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,45 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 require "googleauth"
 
 module Google
   module Cloud
     module Language
-      ##
-      # # Credentials
-      #
-      # Represents the authentication and authorization used to connect to the
-      # Natural Language API.
-      #
-      # @example
-      #   require "google/cloud/language"
-      #
-      #   keyfile = "/path/to/keyfile.json"
-      #   creds = Google::Cloud::Language::Credentials.new keyfile
-      #
-      #   language = Google::Cloud::Language.new(
-      #     project_id: "my-project",
-      #     credentials: creds
-      #   )
-      #
-      #   language.project_id #=> "my-project"
-      #
       class Credentials < Google::Auth::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
-        PATH_ENV_VARS = %w(LANGUAGE_CREDENTIALS
-                           LANGUAGE_KEYFILE
-                           GOOGLE_CLOUD_CREDENTIALS
-                           GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(LANGUAGE_CREDENTIALS_JSON
-                           LANGUAGE_KEYFILE_JSON
-                           GOOGLE_CLOUD_CREDENTIALS_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
-        DEFAULT_PATHS = \
-          ["~/.config/gcloud/application_default_credentials.json"]
+        SCOPE = [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ].freeze
+        PATH_ENV_VARS = %w(LANGUAGE_KEYFILE, GOOGLE_CLOUD_KEYFILE, GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(LANGUAGE_KEYFILE_JSON, GOOGLE_CLOUD_KEYFILE_JSON, GCLOUD_KEYFILE_JSON)
+        DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
   end

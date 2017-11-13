@@ -1,3 +1,16 @@
+# Copyright 2017, Google LLC All rights reserved.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 require "bundler/setup"
 require "bundler/gem_tasks"
 
@@ -7,26 +20,52 @@ RuboCop::RakeTask.new
 desc "Run tests."
 task :test do
   $LOAD_PATH.unshift "lib", "test"
-  Dir.glob("test/**/*_test.rb").each { |file| require_relative file }
+  Dir.glob("test/**/*test.rb")
+    .reject { |file| file.include? "smoke_test" }
+    .each { |file| require_relative file }
 end
 
 namespace :test do
-  desc "Run tests with coverage."
+  desc "Runs tests with coverage."
   task :coverage do
     require "simplecov"
     SimpleCov.start do
       command_name "google-cloud-language"
       track_files "lib/**/*.rb"
       add_filter "test/"
-      add_filter "lib/google/cloud/language/v1/"
     end
 
     Rake::Task["test"].invoke
   end
 end
 
+desc "Runs the smoke tests."
+task :smoke_test do
+  if ENV["SMOKE_TEST_PROJECT"].nil?
+    fail "The SMOKE_TEST_PROJECT environment variable must be set. "\
+      "e.g SMOKE_TEST_PROJECT=test123 rake smoke_test"
+  end
+
+  $LOAD_PATH.unshift "lib", "smoke_test"
+  Dir.glob("test/**/*smoke_test.rb").each { |file| require_relative file }
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-language"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["smoke_test"].invoke
+  end
+end
+
 # Acceptance tests
-desc "Run the language acceptance tests."
+desc "Run the google-cloud-language acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LANGUAGE_TEST_PROJECT"]
@@ -44,51 +83,27 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["LANGUAGE_PROJECT"] = project
   ENV["LANGUAGE_KEYFILE"] = nil
   ENV["LANGUAGE_KEYFILE_JSON"] = keyfile
-  ENV["STORAGE_PROJECT"] = project
-  ENV["STORAGE_KEYFILE"] = nil
-  ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
-  Rake::Task["acceptance:run"].invoke
+  # Required for smoke tests
+  ENV["SMOKE_TEST_PROJECT"] = project
+
+  Rake::Task["smoke_test"].invoke
 end
+
+
 
 namespace :acceptance do
-  desc "Run acceptance tests with coverage."
-  task :coverage, :project, :keyfile do |t, args|
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-language"
-      track_files "lib/**/*.rb"
-      add_filter "acceptance/"
-    end
-
-    Rake::Task["acceptance"].invoke
-  end
-
   task :run do
-    $LOAD_PATH.unshift "lib", "acceptance"
-    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+    puts "This gem does not have acceptance tests."
   end
-end
 
-desc "Run yard-doctest example tests."
-task :doctest do
-  sh "bundle exec yard config -a autoload_plugins yard-doctest"
-  sh "bundle exec yard doctest"
-end
+  desc "Run acceptance tests with coverage."
+  task :coverage do
+  end
 
-desc "Start an interactive shell."
-task :console do
-  require "irb"
-  require "irb/completion"
-  require "pp"
-
-  $LOAD_PATH.unshift "lib"
-
-  require "google-cloud-language"
-  def gcloud; @gcloud ||= Google::Cloud.new; end
-
-  ARGV.clear
-  IRB.start
+  desc "Run acceptance cleanup."
+  task :cleanup do
+  end
 end
 
 require "yard"
@@ -111,16 +126,14 @@ task :jsondoc => :yard do
           {
             title: "Google::Cloud::Language::V1",
             include: ["google/cloud/language/v1"]
-          }
-        ]
-      },
-      {
-        type: "toc",
-        title: "Google::Cloud::Language::V1beta2::DataTypes",
-        modules: [
+          },
           {
-            title: "Google::Cloud::Language::V1beta2",
-            include: ["google/cloud/language/v1beta2"]
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
           }
         ]
       }
@@ -132,7 +145,12 @@ task :jsondoc => :yard do
                                              generate: toc_config
   rm_rf "jsondoc", verbose: true
   generator.write_to "jsondoc"
-  cp ["docs/authentication.md", "docs/toc.json"], "jsondoc", verbose: true
+  cp ["docs/toc.json"], "jsondoc", verbose: true
+end
+
+desc "Run yard-doctest example tests."
+task :doctest do
+  puts "The google-cloud-language gem does not have doctest tests."
 end
 
 desc "Run the CI build"
@@ -147,6 +165,16 @@ task :ci do
   header "google-cloud-language test", "*"
   sh "bundle exec rake test"
 end
+
+namespace :ci do
+  desc "Run the CI build, with smoke tests."
+  task :smoke_test do
+    Rake::Task["ci"].invoke
+    header "google-cloud-language smoke_test", "*"
+    sh "bundle exec rake smoke_test -v"
+  end
+end
+
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
