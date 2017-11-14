@@ -241,8 +241,9 @@
       "name": "google-cloud-monitoring",
       "defaultService": "google/cloud/monitoring/v3",
       "versions": [
-        "v0.25.0",
+        "v0.26.0",
         "master",
+        "v0.25.0",
         "v0.24.0",
         "v0.23.2",
         "v0.23.1",
