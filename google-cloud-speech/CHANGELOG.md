@@ -1,5 +1,14 @@
 # Release History
 
+### 0.27.0 / 2017-11-14
+
+* Add `Google::Cloud::Speech::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Update generated low level GAPIC code.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.26.2 / 2017-08-29
 
 * Correct stream example code
