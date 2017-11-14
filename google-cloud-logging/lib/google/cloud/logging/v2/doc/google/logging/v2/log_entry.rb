@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,10 @@ module Google
       #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
       #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+      #
+      #      A project number may optionally be used in place of PROJECT_ID. The
+      #      project number is translated to its corresponding PROJECT_ID internally
+      #      and the +log_name+ field will contain PROJECT_ID in queries and exports.
       #
       #     +[LOG_ID]+ must be URL-encoded within +log_name+. Example:
       #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
@@ -98,6 +102,13 @@ module Google
       #     If it contains a relative resource name, the name is assumed to be relative
       #     to +//tracing.googleapis.com+. Example:
       #     +projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824+
+      # @!attribute [rw] span_id
+      #   @return [String]
+      #     Optional. Id of the span within the trace associated with the log entry.
+      #     e.g. "0000000000000042"
+      #     For Stackdriver trace spans, this is the same format that the Stackdriver
+      #     trace API uses.
+      #     The ID is a 16-character hexadecimal encoding of an 8-byte array.
       # @!attribute [rw] source_location
       #   @return [Google::Logging::V2::LogEntrySourceLocation]
       #     Optional. Source code location information associated with the log entry,

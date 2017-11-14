@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [LoggingServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
-    # | [ConfigServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
-    # | [MetricsServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
+    # | [LoggingServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
+    # | [ConfigServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
+    # | [MetricsServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
     # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
     #
     # [LoggingServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/loggingservicev2client
@@ -59,8 +59,7 @@ module Google
       #     Optional.
       #     An [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters).  The only
       #     exported log entries are those that are in the resource owning the sink and
-      #     that match the filter. The filter must use the log entry format specified
-      #     by the +output_version_format+ parameter.  For example, in the v2 format:
+      #     that match the filter.  For example:
       #
       #         logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR
       # @!attribute [rw] output_version_format
@@ -100,17 +99,10 @@ module Google
       #         resource.type=gce_instance
       # @!attribute [rw] start_time
       #   @return [Google::Protobuf::Timestamp]
-      #     Optional. The time at which this sink will begin exporting log entries.
-      #     Log entries are exported only if their timestamp is not earlier than the
-      #     start time.  The default value of this field is the time the sink is
-      #     created or updated.
+      #     Deprecated. This field is ignored when creating or updating sinks.
       # @!attribute [rw] end_time
       #   @return [Google::Protobuf::Timestamp]
-      #     Optional. The time at which this sink will stop exporting log entries.  Log
-      #     entries are exported only if their timestamp is earlier than the end time.
-      #     If this field is not supplied, there is no end time.  If both a start time
-      #     and an end time are provided, then the end time must be later than the
-      #     start time.
+      #     Deprecated. This field is ignored when creating or updating sinks.
       class LogSink
         # Available log entry formats. Log entries can be written to Stackdriver
         # Logging in either format and can be exported in either format.
@@ -170,7 +162,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project/sinks/my-sink-id"+.
+      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
       class GetSinkRequest; end
 
       # The parameters to +CreateSink+.
@@ -214,7 +206,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project/sinks/my-sink-id"+.
+      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
       # @!attribute [rw] sink
       #   @return [Google::Logging::V2::LogSink]
       #     Required. The updated sink, whose name is the same identifier that appears
@@ -233,6 +225,22 @@ module Google
       #       +writer_identity+ is changed to a unique service account.
       #     * It is an error if the old value is true and the new value is
       #       set to false or defaulted to false.
+      # @!attribute [rw] update_mask
+      #   @return [Google::Protobuf::FieldMask]
+      #     Optional. Field mask that specifies the fields in +sink+ that need
+      #     an update. A sink field will be overwritten if, and only if, it is
+      #     in the update mask.  +name+ and output only fields cannot be updated.
+      #
+      #     An empty updateMask is temporarily treated as using the following mask
+      #     for backwards compatibility purposes:
+      #       destination,filter,includeChildren
+      #     At some point in the future, behavior will be removed and specifying an
+      #     empty updateMask will be an error.
+      #
+      #     For a detailed +FieldMask+ definition, see
+      #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+      #
+      #     Example: +updateMask=filter+.
       class UpdateSinkRequest; end
 
       # The parameters to +DeleteSink+.
@@ -246,7 +254,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
       #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
       #
-      #     Example: +"projects/my-project/sinks/my-sink-id"+.
+      #     Example: +"projects/my-project-id/sinks/my-sink-id"+.
       class DeleteSinkRequest; end
 
       # Specifies a set of log entries that are not to be stored in Stackdriver
@@ -325,7 +333,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project/exclusions/my-exclusion-id"+.
+      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
       class GetExclusionRequest; end
 
       # The parameters to +CreateExclusion+.
@@ -355,7 +363,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project/exclusions/my-exclusion-id"+.
+      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
       # @!attribute [rw] exclusion
       #   @return [Google::Logging::V2::LogExclusion]
       #     Required. New values for the existing exclusion. Only the fields specified
@@ -381,7 +389,7 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
       #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
       #
-      #     Example: +"projects/my-project/exclusions/my-exclusion-id"+.
+      #     Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
       class DeleteExclusionRequest; end
     end
   end
