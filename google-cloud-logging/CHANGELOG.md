@@ -1,5 +1,16 @@
 # Release History
 
+### 1.3.0 / 2017-11-14
+
+* Add `Google::Cloud::ErrorReporting::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Add `partial_success` optional argument to `Project#write_entries`.
+* Deprecate `HttpRequest#method`, use `HttpRequest#request_method` instead.
+* Update generated low level GAPIC code.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 1.2.3 / 2017-09-27
 
 * Updated protobuf classes.
