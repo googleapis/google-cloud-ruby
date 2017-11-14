@@ -93,6 +93,8 @@ YARD::Doctest.configure do |doctest|
     mock_debugger
   end
 
+  doctest.skip "Google::Cloud::Debugger::Credentials" # occasionally getting "This code example is not yet mocked"
+
   doctest.before "Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var@Custom compound variable conversion" do
     class Foo
       def initialize a: nil, b: nil
