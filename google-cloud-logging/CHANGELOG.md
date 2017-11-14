@@ -2,7 +2,7 @@
 
 ### 1.3.0 / 2017-11-14
 
-* Add `Google::Cloud::ErrorReporting::Credentials` class.
+* Add `Google::Cloud::Logging::Credentials` class.
 * Rename constructor arguments to `project_id` and `credentials`.
   (The previous arguments `project` and `keyfile` are still supported.)
 * Document `Google::Auth::Credentials` as `credentials` value.
