@@ -1,5 +1,13 @@
 # Release History
 
+### 0.28.0 / 2017-11-14
+
+* Add `Google::Cloud::ErrorReporting::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.27.0 / 2017-09-08
 
 * Rename `module_name` and `module_version` parameters to `service_name` and `service_version` respectively.
