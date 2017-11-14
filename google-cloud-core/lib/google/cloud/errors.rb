@@ -18,6 +18,22 @@ module Google
     ##
     # Base google-cloud exception class.
     class Error < StandardError
+      def initialize msg = nil
+        super
+        @cause = $!
+      end
+
+      # Add Error#cause (introduced in 2.1) to Ruby 2.0.
+      unless respond_to?(:cause)
+        ##
+        # The previous exception at the time this exception was raised. This is
+        # useful for wrapping exceptions and retaining the original exception
+        # information.
+        define_method(:cause) do
+          @cause
+        end
+      end
+
       # @private Create a new error object from a client error
       def self.from_error error
         klass = if error.respond_to? :code
