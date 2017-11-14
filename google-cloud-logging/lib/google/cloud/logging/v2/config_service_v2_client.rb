@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -334,7 +334,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project/sinks/my-sink-id"+.
+          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -358,8 +358,7 @@ module Google
           end
 
           # Creates a sink that exports specified log entries to a destination.  The
-          # export of newly-ingested log entries begins immediately, unless the current
-          # time is outside the sink's start and end times or the sink's
+          # export of newly-ingested log entries begins immediately, unless the sink's
           # +writer_identity+ is not permitted to write to the destination.  A sink can
           # export log entries only from the resource owning the sink.
           #
@@ -417,8 +416,7 @@ module Google
           end
 
           # Updates a sink.  This method replaces the following fields in the existing
-          # sink with values from the new sink: +destination+, +filter+,
-          # +output_version_format+, +start_time+, and +end_time+.
+          # sink with values from the new sink: +destination+, and +filter+.
           # The updated sink might also have a new +writer_identity+; see the
           # +unique_writer_identity+ field.
           #
@@ -431,7 +429,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project/sinks/my-sink-id"+.
+          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param sink [Google::Logging::V2::LogSink | Hash]
           #   Required. The updated sink, whose name is the same identifier that appears
           #   as part of +sink_name+.
@@ -450,6 +448,23 @@ module Google
           #     +writer_identity+ is changed to a unique service account.
           #   * It is an error if the old value is true and the new value is
           #     set to false or defaulted to false.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Optional. Field mask that specifies the fields in +sink+ that need
+          #   an update. A sink field will be overwritten if, and only if, it is
+          #   in the update mask.  +name+ and output only fields cannot be updated.
+          #
+          #   An empty updateMask is temporarily treated as using the following mask
+          #   for backwards compatibility purposes:
+          #     destination,filter,includeChildren
+          #   At some point in the future, behavior will be removed and specifying an
+          #   empty updateMask will be an error.
+          #
+          #   For a detailed +FieldMask+ definition, see
+          #   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          #
+          #   Example: +updateMask=filter+.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -467,11 +482,13 @@ module Google
               sink_name,
               sink,
               unique_writer_identity: nil,
+              update_mask: nil,
               options: nil
             req = {
               sink_name: sink_name,
               sink: sink,
-              unique_writer_identity: unique_writer_identity
+              unique_writer_identity: unique_writer_identity,
+              update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateSinkRequest)
             @update_sink.call(req, options)
@@ -489,7 +506,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
           #       "folders/[FOLDER_ID]/sinks/[SINK_ID]"
           #
-          #   Example: +"projects/my-project/sinks/my-sink-id"+.
+          #   Example: +"projects/my-project-id/sinks/my-sink-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -577,7 +594,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project/exclusions/my-exclusion-id"+.
+          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -653,7 +670,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project/exclusions/my-exclusion-id"+.
+          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
           # @param exclusion [Google::Logging::V2::LogExclusion | Hash]
           #   Required. New values for the existing exclusion. Only the fields specified
           #   in +update_mask+ are relevant.
@@ -707,7 +724,7 @@ module Google
           #       "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
           #       "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
           #
-          #   Example: +"projects/my-project/exclusions/my-exclusion-id"+.
+          #   Example: +"projects/my-project-id/exclusions/my-exclusion-id"+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

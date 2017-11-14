@@ -44,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :sink_name, :string, 1
     optional :sink, :message, 2, "google.logging.v2.LogSink"
     optional :unique_writer_identity, :bool, 3
+    optional :update_mask, :message, 4, "google.protobuf.FieldMask"
   end
   add_message "google.logging.v2.DeleteSinkRequest" do
     optional :sink_name, :string, 1

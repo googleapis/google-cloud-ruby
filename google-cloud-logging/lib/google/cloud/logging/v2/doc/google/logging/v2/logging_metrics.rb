@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [LoggingServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
-    # | [ConfigServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
-    # | [MetricsServiceV2Client][] | The Stackdriver Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics. |
+    # | [LoggingServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
+    # | [ConfigServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
+    # | [MetricsServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
     # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
     #
     # [LoggingServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/loggingservicev2client
@@ -33,7 +33,7 @@ module Google
       # Describes a logs-based metric.  The value of the metric is the
       # number of log entries that match a logs filter in a given time interval.
       #
-      # A logs-based metric can also be used to extract values from logs and create a
+      # Logs-based metric can also be used to extract values from logs and create a
       # a distribution of the values. The distribution records the statistics of the
       # extracted values along with an optional histogram of the values as specified
       # by the bucket options.
