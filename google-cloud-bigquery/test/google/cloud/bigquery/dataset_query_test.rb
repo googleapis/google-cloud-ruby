@@ -77,20 +77,18 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
 
     err = expect { dataset.query query }.must_raise Google::Cloud::PermissionDeniedError
     err.message.must_equal "string"
-    if err.respond_to? :cause
-      err.cause.body.must_equal({
+    err.cause.body.must_equal({
+      "debugInfo"=>"string",
+      "location"=>"string",
+      "message"=>"string",
+      "reason"=>"accessDenied",
+      "errors"=>[{
         "debugInfo"=>"string",
         "location"=>"string",
         "message"=>"string",
-        "reason"=>"accessDenied",
-        "errors"=>[{
-          "debugInfo"=>"string",
-          "location"=>"string",
-          "message"=>"string",
-          "reason"=>"accessDenied"
-        }]
-      })
-    end
+        "reason"=>"accessDenied"
+      }]
+    })
 
     mock.verify
   end
@@ -105,20 +103,18 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
 
     err = expect { dataset.query query }.must_raise Google::Cloud::InternalError
     err.message.must_equal "string"
-    if err.respond_to? :cause
-      err.cause.body.must_equal({
+    err.cause.body.must_equal({
+      "debugInfo"=>"string",
+      "location"=>"string",
+      "message"=>"string",
+      "reason"=>"backendError",
+      "errors"=>[{
         "debugInfo"=>"string",
         "location"=>"string",
         "message"=>"string",
-        "reason"=>"backendError",
-        "errors"=>[{
-          "debugInfo"=>"string",
-          "location"=>"string",
-          "message"=>"string",
-          "reason"=>"backendError"
-        }]
-      })
-    end
+        "reason"=>"backendError"
+      }]
+    })
 
     mock.verify
   end

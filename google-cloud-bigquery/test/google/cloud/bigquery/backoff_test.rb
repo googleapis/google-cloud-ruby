@@ -133,7 +133,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       end
 
       err.message.must_equal "notfound"
-      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"},{\"reason\":\"other\"}]}}" if err.respond_to? :cause
+      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"},{\"reason\":\"other\"}]}}"
     end
 
     mock.verify
@@ -211,7 +211,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       end
 
       err.message.must_equal "invalid"
-      err.cause.body.must_be :nil? if err.respond_to? :cause
+      err.cause.body.must_be :nil?
     end
 
     mock.verify
@@ -241,7 +241,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       end
 
       err.message.must_equal "invalid"
-      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"}]}}" if err.respond_to? :cause
+      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"}]}}"
     end
 
     mock.verify
