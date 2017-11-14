@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-bigquery", "~> 0.30.0"
   gem.add_dependency "google-cloud-datastore", "~> 1.2"
-  gem.add_dependency "google-cloud-dns", "~> 0.26.0"
+  gem.add_dependency "google-cloud-dns", "~> 0.27.0"
   gem.add_dependency "google-cloud-error_reporting", "~> 0.27.0"
   gem.add_dependency "google-cloud-language", "~> 0.28.0"
   gem.add_dependency "google-cloud-logging", "~> 1.2"
