@@ -59,6 +59,21 @@ module Google
           504 => DeadlineExceededError
         }[http_status_code] || self
       end
+
+      # @private
+      def respond_to? symbol, include_all = false
+        orig = super
+        return true if orig
+        return cause.respond_to?(symbol, include_all) if super(:cause)
+        false
+      end
+
+      private
+
+      def method_missing m, *args, &block
+        return cause.send(m, *args, &block) if respond_to?(:cause)
+        super
+      end
     end
 
     ##
@@ -204,6 +219,27 @@ module Google
     ##
     # DataLoss indicates unrecoverable data loss or corruption.
     class DataLossError < Error
+    end
+  end
+
+  # @private Add method_missing to Gax::GaxError
+  module Gax
+    # @private
+    class GaxError < StandardError
+      # @private
+      def respond_to? symbol, include_all = false
+        orig = super
+        return true if orig
+        return cause.respond_to?(symbol, include_all) if cause
+        false
+      end
+
+      private
+
+      # @private
+      def method_missing m, *args, &block
+        cause.send(m, *args, &block)
+      end
     end
   end
 end
