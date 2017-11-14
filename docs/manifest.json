@@ -298,8 +298,9 @@
       "name": "google-cloud-spanner",
       "defaultService": "google/cloud/spanner",
       "versions": [
-        "v1.0.0",
+        "v1.1.0",
         "master",
+        "v1.0.0",
         "v0.23.2",
         "v0.23.1",
         "v0.23.0",
