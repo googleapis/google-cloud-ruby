@@ -1,5 +1,13 @@
 # Release History
 
+### 1.2.0 / 2017-11-14
+
+* Add `Google::Cloud::Datastore::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 1.1.0 / 2017-07-11
 
 * Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.
