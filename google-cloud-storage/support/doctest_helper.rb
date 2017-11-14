@@ -184,6 +184,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Storage::Credentials" # occasionally getting "This code example is not yet mocked"
+
   # Bucket
 
   doctest.before "Google::Cloud::Storage::Bucket" do

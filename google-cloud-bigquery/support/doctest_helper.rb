@@ -101,6 +101,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Bigquery::Credentials" # occasionally getting "This code example is not yet mocked"
+
   # Google::Cloud::Bigquery::Data#all@Iterating each rows by passing a block:
   # Google::Cloud::Bigquery::Data#all@Limit the number of API calls made:
   # Google::Cloud::Bigquery::Data#all@Using the enumerator by not passing a block:

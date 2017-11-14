@@ -110,6 +110,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Pubsub::Credentials" # occasionally getting "This code example is not yet mocked"
+
   doctest.before "Google::Cloud::Pubsub::Message" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]

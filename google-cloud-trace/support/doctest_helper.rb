@@ -99,6 +99,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Trace::Credentials" # occasionally getting "This code example is not yet mocked"
+
   doctest.before "Google::Cloud::Trace::Project" do
     mock_trace do |mock|
       mock.expect :list_traces, stubbed_list_traces, [String, Hash]

@@ -70,6 +70,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::ResourceManager::Credentials" # occasionally getting "This code example is not yet mocked"
+
   doctest.before "Google::Cloud::ResourceManager::Manager" do
     mock_translate do |mock|
       mock.expect :list_project, OpenStruct.new(projects: []), [Hash]
