@@ -1,5 +1,23 @@
 # Release History
 
+### 0.30.0 / 2017-11-14
+
+* Add `Google::Cloud::Bigquery::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Support creating `Dataset` and `Table` objects without making API calls using
+  `skip_lookup` argument.
+  * Add `Dataset#reference?` and `Dataset#resource?` helper method.
+  * Add `Table#reference?` and `Table#resource?` and `Table#resource_partial?`
+    and `Table#resource_full?` helper methods.
+* `Dataset#insert_async` and `Dataset#insert_async` now yields a
+  `Table::AsyncInserter::Result` object.
+* `View` is removed, now uses `Table` class.
+  * Needed to support `skip_lookup` argument.
+  * Calling `Table#data` on a view now raises (breaking change).
+* Performance improvements for queries.
+* Updated `google-api-client`, `googleauth` dependencies.
+
 ### 0.29.0 / 2017-10-09
 
 This is a major release with many new features and several breaking changes.
