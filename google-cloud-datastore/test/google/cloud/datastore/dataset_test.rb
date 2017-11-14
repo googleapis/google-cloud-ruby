@@ -1203,11 +1203,15 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       end
 
       error.wont_be :nil?
+      error.must_be_kind_of Google::Cloud::Datastore::TransactionError
       error.message.must_equal "Transaction failed to commit and rollback."
       error.cause.wont_be :nil?
+      error.cause.must_be_kind_of RuntimeError
       error.cause.message.must_equal "rollback error"
-      error.cause.cause.wont_be :nil?
-      error.cause.cause.message.must_equal "commit error"
+      if error.cause.respond_to? :cause # RuntimeError#cause not on Ruby 2.0
+        error.cause.cause.must_be_kind_of RuntimeError
+        error.cause.cause.message.must_equal "commit error"
+      end
     ensure
       # Reset mocked service so the call to verify works.
       dataset.service = mocked_service
