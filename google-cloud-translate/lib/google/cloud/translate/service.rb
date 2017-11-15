@@ -16,7 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/translate/credentials"
 require "google/cloud/translate/version"
-require "faraday" # comes from googleauth, comes from google-cloud-core
+require "faraday"
 
 module Google
   module Cloud
