@@ -1119,11 +1119,28 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "transaction will return a Transaction" do
     tx_id = "giterdone".encode("ASCII-8BIT")
     begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
 
     tx = dataset.transaction
     tx.must_be_kind_of Google::Cloud::Datastore::Transaction
     tx.id.must_equal "giterdone"
+    tx.wont_be :read_only?
+    tx.must_be :read_write?
+  end
+
+  it "transaction will return a read-only Transaction" do
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    tx_options = Google::Datastore::V1::TransactionOptions.new(
+      read_write: nil,
+      read_only: Google::Datastore::V1::TransactionOptions::ReadOnly.new
+    )
+    begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
+
+    tx = dataset.transaction read_only: true
+    tx.must_be_kind_of Google::Cloud::Datastore::Transaction
+    tx.must_be :read_only?
+    tx.wont_be :read_write?
   end
 
   it "transaction will commit with a block" do
@@ -1139,7 +1156,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
         e.key = Google::Cloud::Datastore::Key.new "ds-test"
         e["name"] = "thingamajig"
       end.to_grpc)
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [mutation], transaction: tx_id, options: default_options]
 
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
@@ -1155,7 +1172,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     tx_id = "giterdone".encode("ASCII-8BIT")
     begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
     rollback_res = Google::Datastore::V1::RollbackResponse.new
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     dataset.service.mocked_service.expect :rollback, rollback_res, [project, tx_id, options: default_options]
 
     error = assert_raises Google::Cloud::Datastore::TransactionError do
@@ -1179,7 +1196,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
       stub = Object.new
       stub.instance_variable_set "@response", begin_tx_res
-      def stub.begin_transaction
+      def stub.begin_transaction read_only: nil
         @response
       end
       def stub.commit *args

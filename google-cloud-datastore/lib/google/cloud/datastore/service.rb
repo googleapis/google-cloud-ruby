@@ -110,8 +110,14 @@ module Google
 
         ##
         # Begin a new transaction.
-        def begin_transaction
-          execute { service.begin_transaction project }
+        def begin_transaction read_only: nil
+          transaction_options = Google::Datastore::V1::TransactionOptions.new(
+            read_only: Google::Datastore::V1::TransactionOptions::ReadOnly.new
+          ) if read_only
+          execute do
+            service.begin_transaction project,
+                                      transaction_options: transaction_options
+          end
         end
 
         ##

@@ -59,10 +59,42 @@ module Google
         ##
         # @private Creates a new Transaction instance.
         # Takes a Service instead of project and Credentials.
-        def initialize service
+        #
+        # @param [Boolean] read_only Whether the transaction should only allow
+        #   reads. A read-only transaction cannot modify entities; in return
+        #   they do not contend with other read-write or read-only transactions.
+        #   Using a read-only transaction for transactions that only read data
+        #   will potentially improve throughput.
+        #
+        def initialize service, read_only: nil
           @service = service
+          @read_only = read_only
           reset!
           start
+        end
+
+        ##
+        # Whether the transaction only allows reads. A read-only transaction
+        # cannot modify entities; in return they do not contend with other
+        # read-write or read-only transactions. Using a read-only transaction
+        # for transactions that only read data will potentially improve
+        # throughput.
+        #
+        # @return [Boolean] Returns `true` if the transaction is a read-only
+        #   transaction, or `false` if it is a read-write transaction.
+        #
+        def read_only?
+          !read_write?
+        end
+
+        ##
+        # Whether the transaction allows both reads and writes.
+        #
+        # @return [Boolean] Returns `true` if the transaction is a read-write
+        #   transaction, or `false` if it is a read-only transaction.
+        #
+        def read_write?
+          @read_only.nil?
         end
 
         ##
@@ -280,7 +312,7 @@ module Google
           fail TransactionError, "Transaction already opened." unless @id.nil?
 
           ensure_service!
-          tx_res = service.begin_transaction
+          tx_res = service.begin_transaction read_only: @read_only
           @id = tx_res.transaction
         end
         alias_method :begin_transaction, :start

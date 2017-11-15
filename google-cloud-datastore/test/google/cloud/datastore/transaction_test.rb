@@ -18,7 +18,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
   let(:service) do
     s = dataset.service
     s.mocked_service = Minitest::Mock.new
-    s.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    s.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     s
   end
   let(:transaction) { Google::Cloud::Datastore::Transaction.new service }

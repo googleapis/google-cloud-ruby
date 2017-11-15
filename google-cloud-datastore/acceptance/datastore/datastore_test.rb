@@ -596,6 +596,18 @@ describe "Datastore", :datastore do
       entities.count.must_equal 6
     end
 
+    it "should find and run query in a read-only transaction" do
+      query = dataset.query("Character").
+        ancestor(book.key)
+      entities = nil
+
+      tx = dataset.transaction read_only: true do |tx|
+        fresh = tx.find book.key
+        entities = dataset.run query
+      end
+      entities.count.must_equal 8
+    end
+
     after do
       dataset.delete *characters
     end
