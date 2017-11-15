@@ -1,5 +1,24 @@
 # Release History
 
+### 0.45.0 / 2017-11-14
+
+* BigQuery 0.30.0 release.
+* Datastore 1.2 release.
+* DNS 0.27.0 release.
+* Error Reporting 0.28.0 release.
+* Natural Language 0.28.0 release.
+* Logging 1.3 release.
+* Monitoring 0.26.0 release.
+* Pub/Sub 0.28.0 release.
+* Resource Manager 0.28.0 release.
+* Spanner 1.1 release.
+* Speech 0.27.0 release.
+* Storage 1.8 release.
+* Trace 0.28.0 release.
+* Translation 1.1 release.
+* Video Intelligence 0.24.0 release.
+* Vision 0.26.0 release.
+
 ### 0.44.0 / 2017-10-09
 
 * BigQuery 0.29.0 release.
