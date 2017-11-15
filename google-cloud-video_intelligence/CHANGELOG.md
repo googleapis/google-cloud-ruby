@@ -1,5 +1,10 @@
 # Release History
 
+### 0.24.0 / 2017-09-27
+
+* Update generated GAPIC code and documentation.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.23.0 / 2017-09-27
 
 * Beta release
