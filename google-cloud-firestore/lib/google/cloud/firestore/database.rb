@@ -126,20 +126,16 @@ module Google
           batch { |b| b.create doc, data }
         end
 
-        def set doc, data
-          batch { |b| b.set doc, data }
+        def set doc, data, merge: nil
+          batch { |b| b.set doc, data, merge: merge }
         end
 
-        def merge doc, data
-          batch { |b| b.merge doc, data }
+        def update doc, data, update_time: nil
+          batch { |b| b.update doc, data, update_time: update_time }
         end
 
-        def update doc, data
-          batch { |b| b.update doc, data }
-        end
-
-        def delete doc
-          batch { |b| b.delete doc }
+        def delete doc, exists: nil, update_time: nil
+          batch { |b| b.delete doc, exists: exists, update_time: update_time }
         end
 
         def snapshot read_time: nil

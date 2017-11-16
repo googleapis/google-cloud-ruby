@@ -70,16 +70,6 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" }))
     )]
   end
-  let :merge_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
-        name: "#{documents_path}/#{document_path}",
-        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-        field_paths: ["name"]
-      )
-    )]
-  end
   let :update_writes do
     [Google::Firestore::V1beta1::Write.new(
       update: Google::Firestore::V1beta1::Document.new(
@@ -87,7 +77,9 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
       update_mask: Google::Firestore::V1beta1::DocumentMask.new(
         field_paths: ["name"]
-      )
+      ),
+      current_document: Google::Firestore::V1beta1::Precondition.new(
+        exists: true)
     )]
   end
   let :delete_writes do
@@ -253,38 +245,6 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
     error.message.must_equal "data must be a Hash"
   end
 
-  it "merges a new document using string path" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
-    firestore_mock.expect :commit, commit_resp, [database_path, merge_writes, transaction: transaction_id, options: default_options]
-
-    resp = firestore.transaction do |tx|
-      tx.merge(document_path, { name: "Mike" })
-    end
-
-    resp.must_equal commit_time
-  end
-
-  it "merges a new document using doc ref" do
-    firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
-    firestore_mock.expect :commit, commit_resp, [database_path, merge_writes, transaction: transaction_id, options: default_options]
-
-    doc = firestore.doc document_path
-    resp = firestore.transaction do |tx|
-      tx.merge(doc, { name: "Mike" })
-    end
-
-    resp.must_equal commit_time
-  end
-
-  it "raises if merge is not given a Hash" do
-    error = expect do
-      firestore.transaction do |tx|
-        tx.merge document_path, "not a hash"
-      end
-    end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
-  end
-
   it "updates a new document using string path" do
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, commit_resp, [database_path, update_writes, transaction: transaction_id, options: default_options]
@@ -353,14 +313,13 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
   end
 
   it "performs multiple writes in the same commit" do
-    all_writes = create_writes + set_writes + merge_writes + update_writes + delete_writes
+    all_writes = create_writes + set_writes + update_writes + delete_writes
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, commit_resp, [database_path, all_writes, transaction: transaction_id, options: default_options]
 
     resp = firestore.transaction do |tx|
       tx.create(document_path, { name: "Mike" })
       tx.set(document_path, { name: "Mike" })
-      tx.merge(document_path, { name: "Mike" })
       tx.update(document_path, { name: "Mike" })
       tx.delete document_path
     end
@@ -369,7 +328,7 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
   end
 
   it "performs multiple writes in the same commit using an object" do
-    all_writes = create_writes + set_writes + merge_writes + update_writes + delete_writes
+    all_writes = create_writes + set_writes + update_writes + delete_writes
     firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
     firestore_mock.expect :commit, commit_resp, [database_path, all_writes, transaction: transaction_id, options: default_options]
 
@@ -382,7 +341,6 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
 
       inside_transaction_doc.create({ name: "Mike" })
       inside_transaction_doc.set({ name: "Mike" })
-      inside_transaction_doc.merge({ name: "Mike" })
       inside_transaction_doc.update({ name: "Mike" })
       inside_transaction_doc.delete
     end

@@ -35,7 +35,9 @@ describe Google::Cloud::Firestore::Document::Reference, :update, :empty_transact
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
       update_mask: Google::Firestore::V1beta1::DocumentMask.new(
         field_paths: ["name"]
-      )
+      ),
+      current_document: Google::Firestore::V1beta1::Precondition.new(
+        exists: true)
     )]
   end
   let :begin_tx_resp do

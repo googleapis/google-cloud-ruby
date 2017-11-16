@@ -122,6 +122,157 @@ module Google
             end
           end
 
+          def is_nested obj, target
+            return true if obj == target
+
+            if obj.is_a? Array
+              obj.each { |o| val = is_nested o, target; return true if val }
+            elsif obj.is_a? Hash
+              obj.each { |_k, v| val = is_nested v, target; return true if val }
+            end
+            false
+          end
+
+          def remove_from obj, target
+            return [nil, []] unless obj.is_a? Hash
+
+            paths = []
+            new_pairs = obj.map do |key, value|
+              if value == target
+                paths << key
+                nil # will be removed by calling compact
+              elsif value.is_a? Hash
+                nested_hash, nested_paths = remove_from value, target
+                if nested_paths.any?
+                  nested_paths.each do |nested_path|
+                    paths << "#{escape_field_path(key)}.#{nested_path}"
+                  end
+                end
+                if nested_hash.empty?
+                  nil # will be removed by calling compact
+                else
+                  [String(key), nested_hash]
+                end
+              else
+                if value.is_a? Array
+                  if is_nested value, target
+                    raise ArgumentError, "cannot nest #{target} under arrays"
+                  end
+                end
+
+                [String(key), value]
+              end
+            end
+
+            # return a new hash and paths
+            [Hash[new_pairs.compact], paths]
+          end
+
+          def extract_leaf_nodes hash
+            paths = []
+
+            hash.map do |key, value|
+              if value.is_a? Hash
+                nested_paths = extract_leaf_nodes value
+                nested_paths.each do |nested_path|
+                  paths << "#{escape_field_path(key)}.#{nested_path}"
+                end
+              else
+                paths << escape_field_path(key)
+              end
+            end
+
+            paths
+          end
+
+          def select_by_field_paths hash, field_paths
+            new_hash = {}
+            field_paths.map do |field_path|
+              selected_hash = select_field_path hash, field_path
+              # new_hash = deep_merge_hashes new_hash, selected_hash
+              deep_merge_hashes new_hash, selected_hash
+            end
+            new_hash
+          end
+
+          def select_field_path hash, field_path
+            ret_hash = {}
+            tmp_hash = ret_hash
+            prev_hash = ret_hash
+            dup_hash = hash.dup
+            nodes = unescape_field_path field_path
+            last_node = nil
+            nodes.each do |node|
+              prev_hash[last_node] = tmp_hash unless last_node.nil?
+              last_node = node
+              tmp_hash[node] = {}
+              prev_hash = tmp_hash
+              tmp_hash = tmp_hash[node]
+              dup_hash = dup_hash[node]
+            end
+            prev_hash[last_node] = dup_hash
+            ret_hash
+          end
+
+          def deep_merge_hashes left_hash, right_hash
+            right_hash.each_pair do |key, right_value|
+              left_value = left_hash[key]
+
+              if left_value.is_a?(Hash) && right_value.is_a?(Hash)
+                left_hash[key] = deep_merge_hashes left_value, right_value
+              else
+                left_hash[key] = right_value
+              end
+            end
+
+            left_hash
+          end
+
+          def extract_field_paths hash
+            invalid_field_path_chars = /[\~\*\/\[\]]/
+
+            dup_hash = {}
+            hash.each do |keys, value|
+              tmp_dup = dup_hash
+              last_key = nil
+              keys.to_s.split(".").each do |key|
+                raise ArgumentError, "empty paths not allowed" if key.empty?
+                if invalid_field_path_chars.match key
+                  raise ArgumentError, "invalid character"
+                end
+                tmp_dup = tmp_dup[last_key] unless last_key.nil?
+                last_key = key
+                if !tmp_dup[key].nil?
+                  raise ArgumentError, "one field cannot be a prefix of another"
+                end
+                tmp_dup[key] = {}
+              end
+              tmp_dup[last_key] = hash[keys]
+            end
+            dup_hash
+          end
+
+          def escape_field_path str
+            str = String(str)
+            return str if str =~ /\A[a-zA-Z_]/
+
+            "`#{str}`"
+          end
+
+          # returns an array of nodes
+          def unescape_field_path str
+            String(str).split(".").map do |node|
+              unescape_field_node node
+            end
+          end
+
+          def unescape_field_node str
+            escaped_field_path_regexp = /\A\`(.*)\`\z/
+            match = escaped_field_path_regexp.match str
+            return match[1] if match
+            str
+          end
+
           # rubocop:enable all
         end
 

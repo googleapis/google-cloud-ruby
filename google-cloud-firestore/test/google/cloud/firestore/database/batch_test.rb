@@ -36,16 +36,6 @@ describe Google::Cloud::Firestore::Database, :batch, :mock_firestore do
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" }))
     )]
   end
-  let :merge_writes do
-    [Google::Firestore::V1beta1::Write.new(
-      update: Google::Firestore::V1beta1::Document.new(
-        name: "#{documents_path}/#{document_path}",
-        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
-      update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-        field_paths: ["name"]
-      )
-    )]
-  end
   let :update_writes do
     [Google::Firestore::V1beta1::Write.new(
       update: Google::Firestore::V1beta1::Document.new(
@@ -53,7 +43,9 @@ describe Google::Cloud::Firestore::Database, :batch, :mock_firestore do
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
       update_mask: Google::Firestore::V1beta1::DocumentMask.new(
         field_paths: ["name"]
-      )
+      ),
+      current_document: Google::Firestore::V1beta1::Precondition.new(
+        exists: true)
     )]
   end
   let :delete_writes do
@@ -128,36 +120,6 @@ describe Google::Cloud::Firestore::Database, :batch, :mock_firestore do
     error.message.must_equal "data must be a Hash"
   end
 
-  it "merges a new document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, merge_writes, options: default_options]
-
-    resp = firestore.batch do |b|
-      b.merge(document_path, { name: "Mike" })
-    end
-
-    resp.must_equal commit_time
-  end
-
-  it "merges a new document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, merge_writes, options: default_options]
-
-    doc = firestore.doc document_path
-    resp = firestore.batch do |b|
-      b.merge(doc, { name: "Mike" })
-    end
-
-    resp.must_equal commit_time
-  end
-
-  it "raises if merge is not given a Hash" do
-    error = expect do
-      firestore.batch do |b|
-        b.merge document_path, "not a hash"
-      end
-    end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
-  end
-
   it "updates a new document using string path" do
     firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
 
@@ -209,6 +171,43 @@ describe Google::Cloud::Firestore::Database, :batch, :mock_firestore do
     resp.must_equal commit_time
   end
 
+  it "deletes a document with exists precondition" do
+    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(exists: true)
+
+    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
+
+    doc = firestore.doc document_path
+    resp = firestore.batch do |b|
+      b.delete doc, exists: true
+    end
+
+    resp.must_equal commit_time
+  end
+
+  it "deletes a document with update_time precondition" do
+    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(
+      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))
+
+    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
+
+    doc = firestore.doc document_path
+    resp = firestore.batch do |b|
+      b.delete doc, update_time: commit_time
+    end
+
+    resp.must_equal commit_time
+  end
+
+  it "can't specify both exists and update_time precondition" do
+    error = expect do
+      doc = firestore.doc document_path
+      resp = firestore.batch do |b|
+        b.delete doc, exists: true, update_time: commit_time
+      end
+    end.must_raise ArgumentError
+    error.message.must_equal "cannot specify both exists and update_time"
+  end
+
   it "returns nil when no work is done in the batch" do
     resp = firestore.batch do |b|
       b.database.must_equal firestore
@@ -222,13 +221,12 @@ describe Google::Cloud::Firestore::Database, :batch, :mock_firestore do
   end
 
   it "performs multiple writes in the same commit" do
-    all_writes = create_writes + set_writes + merge_writes + update_writes + delete_writes
+    all_writes = create_writes + set_writes + update_writes + delete_writes
     firestore_mock.expect :commit, commit_resp, [database_path, all_writes, options: default_options]
 
     resp = firestore.batch do |b|
       b.create(document_path, { name: "Mike" })
       b.set(document_path, { name: "Mike" })
-      b.merge(document_path, { name: "Mike" })
       b.update(document_path, { name: "Mike" })
       b.delete document_path
     end
@@ -237,7 +235,7 @@ describe Google::Cloud::Firestore::Database, :batch, :mock_firestore do
   end
 
   it "performs multiple writes in the same commit using an object" do
-    all_writes = create_writes + set_writes + merge_writes + update_writes + delete_writes
+    all_writes = create_writes + set_writes + update_writes + delete_writes
     firestore_mock.expect :commit, commit_resp, [database_path, all_writes, options: default_options]
 
     resp = firestore.batch do |b|
@@ -249,7 +247,6 @@ describe Google::Cloud::Firestore::Database, :batch, :mock_firestore do
 
       inside_batch_doc.create({ name: "Mike" })
       inside_batch_doc.set({ name: "Mike" })
-      inside_batch_doc.merge({ name: "Mike" })
       inside_batch_doc.update({ name: "Mike" })
       inside_batch_doc.delete
     end

@@ -38,14 +38,6 @@ describe Google::Cloud::Firestore::Batch, :closed, :mock_firestore do
     error.message.must_equal "batch is closed"
   end
 
-  it "merge raises when closed" do
-    error = expect do
-      batch.merge(document_path, { name: "Mike" })
-      batch.commit
-    end.must_raise RuntimeError
-    error.message.must_equal "batch is closed"
-  end
-
   it "update raises when closed" do
     error = expect do
       batch.update(document_path, { name: "Mike" })

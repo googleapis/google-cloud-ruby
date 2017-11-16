@@ -28,7 +28,9 @@ describe Google::Cloud::Firestore::Document::Reference, :update, :mock_firestore
         fields: Google::Cloud::Firestore::Convert.hash_to_fields({ name: "Mike" })),
       update_mask: Google::Firestore::V1beta1::DocumentMask.new(
         field_paths: ["name"]
-      )
+      ),
+      current_document: Google::Firestore::V1beta1::Precondition.new(
+        exists: true)
     )]
   end
   let :commit_resp do

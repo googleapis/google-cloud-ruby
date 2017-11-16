@@ -88,43 +88,34 @@ module Google
             end
           end
 
-          def set data
+          def set data, merge: nil
             ensure_context!
 
             if context.respond_to? :set
-              context.set self, data
+              context.set self, data, merge: merge
             else
-              context.database.set self, data
+              context.database.set self, data, merge: merge
             end
           end
 
-          def merge data
-            ensure_context!
-
-            if context.respond_to? :merge
-              context.merge self, data
-            else
-              context.database.merge self, data
-            end
-          end
-
-          def update data
+          def update data, update_time: nil
             ensure_context!
 
             if context.respond_to? :update
-              context.update self, data
+              context.update self, data, update_time: update_time
             else
-              context.database.update self, data
+              context.database.update self, data, update_time: update_time
             end
           end
 
-          def delete
+          def delete exists: nil, update_time: nil
             ensure_context!
 
             if context.respond_to? :delete
-              context.delete self
+              context.delete self, exists: exists, update_time: update_time
             else
-              context.database.delete self
+              context.database.delete self, exists: exists,
+                                            update_time: update_time
             end
           end
 

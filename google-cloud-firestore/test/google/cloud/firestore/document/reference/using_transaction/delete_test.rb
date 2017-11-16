@@ -50,4 +50,37 @@ describe Google::Cloud::Firestore::Document::Reference, :delete, :using_transact
     commit_resp = transaction.commit
     commit_resp.must_equal commit_time
   end
+
+  it "deletes a document with exists precondition" do
+    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(exists: true)
+
+    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, transaction: transaction_id, options: default_options]
+
+    resp = document.delete exists: true
+    resp.must_be :nil?
+
+    commit_resp = transaction.commit
+    commit_resp.must_equal commit_time
+  end
+
+  it "deletes a document with update_time precondition" do
+    delete_writes.first.current_document = Google::Firestore::V1beta1::Precondition.new(
+      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))
+
+    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, transaction: transaction_id, options: default_options]
+
+    resp = document.delete update_time: commit_time
+    resp.must_be :nil?
+
+    commit_resp = transaction.commit
+    commit_resp.must_equal commit_time
+  end
+
+  it "can't specify both exists and update_time precondition" do
+    error = expect do
+      document.delete exists: true, update_time: commit_time
+      transaction.commit
+    end.must_raise ArgumentError
+    error.message.must_equal "cannot specify both exists and update_time"
+  end
 end

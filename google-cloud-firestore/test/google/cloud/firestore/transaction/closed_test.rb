@@ -40,14 +40,6 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
     error.message.must_equal "transaction is closed"
   end
 
-  it "merge raises when closed" do
-    error = expect do
-      transaction.merge(document_path, { name: "Mike" })
-      transaction.commit
-    end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
-  end
-
   it "update raises when closed" do
     error = expect do
       transaction.update(document_path, { name: "Mike" })

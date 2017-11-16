@@ -182,6 +182,10 @@ module Google
         alias_method :run, :get
 
         def create doc_path, data
+          if Convert.is_nested data, :DELETE
+            raise ArgumentError, "DELETE not allowed on create"
+          end
+
           ensure_not_closed!
 
           full_doc_path = if doc_path.respond_to? :path
@@ -191,18 +195,43 @@ module Google
                           end
           fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
 
-          write = Google::Firestore::V1beta1::Write.new(
-            update: Google::Firestore::V1beta1::Document.new(
-              name: full_doc_path,
-              fields: Convert.hash_to_fields(data)),
-            current_document: Google::Firestore::V1beta1::Precondition.new(
-              exists: false)
-          )
-          @writes << write
+          data, server_time_paths = Convert.remove_from data, :SERVER_TIME
+
+          if data.any? || server_time_paths.empty?
+            write = Google::Firestore::V1beta1::Write.new(
+              update: Google::Firestore::V1beta1::Document.new(
+                name: full_doc_path,
+                fields: Convert.hash_to_fields(data)),
+              current_document: Google::Firestore::V1beta1::Precondition.new(
+                exists: false)
+            )
+            @writes << write
+          end
+
+          if server_time_paths.any?
+            field_transforms = server_time_paths.map do |server_time_pair|
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: server_time_pair,
+                set_to_server_value: :REQUEST_TIME
+              )
+            end
+            write = Google::Firestore::V1beta1::Write.new(
+              transform: Google::Firestore::V1beta1::DocumentTransform.new(
+                document: full_doc_path,
+                field_transforms: field_transforms
+              )
+            )
+            if data.empty?
+              write.current_document = \
+                Google::Firestore::V1beta1::Precondition.new(exists: false)
+            end
+            @writes << write
+          end
+
           nil
         end
 
-        def set doc_path, data
+        def set doc_path, data, merge: nil
           ensure_not_closed!
 
           full_doc_path = if doc_path.respond_to? :path
@@ -211,17 +240,86 @@ module Google
                             doc(doc_path).path
                           end
           fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+          data, delete_paths = Convert.remove_from data, :DELETE
+          raise ArgumentError, "DELETE not allowed on set" if delete_paths.any?
+
+          data, server_time_paths = Convert.remove_from data, :SERVER_TIME
 
           write = Google::Firestore::V1beta1::Write.new(
             update: Google::Firestore::V1beta1::Document.new(
               name: full_doc_path,
               fields: Convert.hash_to_fields(data))
           )
-          @writes << write
+
+          if merge
+            if merge == true
+              # extract the leaf node field paths from data
+              field_paths = Convert.extract_leaf_nodes data
+            else
+              field_paths = Array(merge).map do |inner_field_path|
+                if inner_field_path.is_a? Array
+                  paths = inner_field_path.map do |field_path|
+                    Convert.escape_field_path field_path.to_s
+                  end
+                  paths.join(".")
+                else
+                  inner_field_path
+                end
+              end
+            end
+
+            # Ensure provided field paths are valid.
+            all_valid = Convert.extract_leaf_nodes data
+            verify_paths = field_paths - server_time_paths
+            all_valid_check = verify_paths.map do |verify_path|
+              all_valid.include?(verify_path) ||
+                all_valid.select { |fp| fp.start_with? "#{verify_path}." }.any?
+            end
+            all_valid_check = all_valid_check.include? false
+            raise ArgumentError, "all fields must be in data" if all_valid_check
+
+            # Choose only the data there are field paths for
+            data = Convert.select_by_field_paths data, verify_paths
+
+            if data.empty?
+              if merge == true
+                raise ArgumentError, "data required for merge: true"
+              end
+              write = nil
+            else
+              write = Google::Firestore::V1beta1::Write.new(
+                update: Google::Firestore::V1beta1::Document.new(
+                  name: full_doc_path,
+                  fields: Convert.hash_to_fields(data)),
+                update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+                  field_paths: field_paths)
+              )
+            end
+          end
+
+          @writes << write if write
+
+          if server_time_paths.any?
+            field_transforms = server_time_paths.map do |server_time_pair|
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: server_time_pair,
+                set_to_server_value: :REQUEST_TIME
+              )
+            end
+            transform_write = Google::Firestore::V1beta1::Write.new(
+              transform: Google::Firestore::V1beta1::DocumentTransform.new(
+                document: full_doc_path,
+                field_transforms: field_transforms
+              )
+            )
+            @writes << transform_write
+          end
+
           nil
         end
 
-        def merge doc_path, data
+        def update doc_path, data, update_time: nil
           ensure_not_closed!
 
           full_doc_path = if doc_path.respond_to? :path
@@ -231,43 +329,69 @@ module Google
                           end
           fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
 
-          data_mask = data.keys.map(&:to_s)
+          data, server_time_paths = Convert.remove_from data, :SERVER_TIME
 
-          write = Google::Firestore::V1beta1::Write.new(
-            update: Google::Firestore::V1beta1::Document.new(
-              name: full_doc_path,
-              fields: Convert.hash_to_fields(data)),
-            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-              field_paths: data_mask)
-          )
-          @writes << write
+          field_paths = data.keys.map(&:to_s).map do |path|
+            path.split(".").map { |p| Convert.escape_field_path p }.join(".")
+          end
+
+          data, delete_paths = Convert.remove_from data, :DELETE
+          nested_delete = (delete_paths - field_paths).any?
+          fail ArgumentError, "DELETE cannot be nested" if nested_delete
+
+          # extract data after building field paths
+          data = Convert.extract_field_paths data
+
+          if data.empty? && delete_paths.empty? && server_time_paths.empty?
+            fail ArgumentError, "data is required"
+          end
+
+          if data.any? || delete_paths.any?
+            write = Google::Firestore::V1beta1::Write.new(
+              update: Google::Firestore::V1beta1::Document.new(
+                name: full_doc_path,
+                fields: Convert.hash_to_fields(data)),
+              update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+                field_paths: field_paths),
+              current_document: Google::Firestore::V1beta1::Precondition.new(
+                exists: true)
+            )
+            if update_time
+              write.current_document = \
+                Google::Firestore::V1beta1::Precondition.new(
+                  update_time: Convert.time_to_timestamp(update_time))
+            end
+            @writes << write
+          end
+
+          if server_time_paths.any?
+            field_transforms = server_time_paths.map do |server_time_pair|
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: server_time_pair,
+                set_to_server_value: :REQUEST_TIME
+              )
+            end
+            write = Google::Firestore::V1beta1::Write.new(
+              transform: Google::Firestore::V1beta1::DocumentTransform.new(
+                document: full_doc_path,
+                field_transforms: field_transforms
+              )
+            )
+            if data.empty?
+              write.current_document = \
+                Google::Firestore::V1beta1::Precondition.new(exists: true)
+            end
+            @writes << write
+          end
+
           nil
         end
 
-        def update doc_path, data
-          ensure_not_closed!
+        def delete doc_path, exists: nil, update_time: nil
+          if !exists.nil? && !update_time.nil?
+            raise ArgumentError, "cannot specify both exists and update_time"
+          end
 
-          full_doc_path = if doc_path.respond_to? :path
-                            doc_path.path
-                          else
-                            doc(doc_path).path
-                          end
-          fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
-
-          data_mask = data.keys.map(&:to_s)
-
-          write = Google::Firestore::V1beta1::Write.new(
-            update: Google::Firestore::V1beta1::Document.new(
-              name: full_doc_path,
-              fields: Convert.hash_to_fields(data)),
-            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-              field_paths: data_mask)
-          )
-          @writes << write
-          nil
-        end
-
-        def delete doc_path
           ensure_not_closed!
 
           full_doc_path = if doc_path.respond_to? :path
@@ -279,6 +403,9 @@ module Google
           write = Google::Firestore::V1beta1::Write.new(
             delete: full_doc_path
           )
+          delete_precondition = build_precondition exists: exists,
+                                                   update_time: update_time
+          write.current_document = delete_precondition if delete_precondition
           @writes << write
           nil
         end
@@ -331,6 +458,14 @@ module Google
           return obj.query if obj.is_a? Collection::Reference
 
           obj
+        end
+
+        def build_precondition exists: nil, update_time: nil
+          return nil if exists.nil? && update_time.nil?
+
+          Google::Firestore::V1beta1::Precondition.new({
+            exists: exists, update_time: Convert.time_to_timestamp(update_time)
+          }.delete_if { |_, v| v.nil? })
         end
 
         def ensure_not_closed!
