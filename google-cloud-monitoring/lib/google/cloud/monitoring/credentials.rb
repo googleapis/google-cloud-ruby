@@ -24,8 +24,8 @@ module Google
           "https://www.googleapis.com/auth/monitoring.read",
           "https://www.googleapis.com/auth/monitoring.write"
         ].freeze
-        PATH_ENV_VARS = %w(MONITORING_KEYFILE, GOOGLE_CLOUD_KEYFILE, GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(MONITORING_KEYFILE_JSON, GOOGLE_CLOUD_KEYFILE_JSON, GCLOUD_KEYFILE_JSON)
+        PATH_ENV_VARS = %w(MONITORING_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+        JSON_ENV_VARS = %w(MONITORING_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
         DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
       end
     end
