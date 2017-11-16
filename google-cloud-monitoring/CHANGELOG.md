@@ -1,5 +1,9 @@
 # Release History
 
+### 0.26.1 / 2017-11-15
+
+* Fix Credentials environment variable names.
+
 ### 0.26.0 / 2017-11-14
 
 * Update generated GAPIC code and documentation.
