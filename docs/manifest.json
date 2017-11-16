@@ -406,8 +406,9 @@
       "name": "google-cloud-video_intelligence",
       "defaultService": "google/cloud/videointelligence",
       "versions": [
-        "v0.24.0",
+        "v0.24.1",
         "master",
+        "v0.24.0",
         "v0.23.0",
         "v0.22.0",
         "v0.21.0",
