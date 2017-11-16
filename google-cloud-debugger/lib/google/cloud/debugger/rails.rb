@@ -120,11 +120,11 @@ module Google
         def self.valid_credentials? project_id, credentials
           begin
             # if credentials is nil, get default
-            credentials ||= Debugger::Credentials.default(scope: scope)
+            credentials ||= Debugger::Credentials.default
             # only create a new Credentials object if the val isn't one already
             unless credentials.is_a? Google::Auth::Credentials
               # if credentials is not a Credentials object, create one
-              Debugger::Credentials.new credentials, scope: scope
+              Debugger::Credentials.new credentials
             end
           rescue => e
             STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
