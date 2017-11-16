@@ -41,6 +41,9 @@ describe Google::Cloud::Storage::File, :storage do
     cipher.random_key
   end
 
+  let(:bucket_public_test_name) { "storage-library-test-bucket" }
+  let(:file_public_test_gzip_name) { "gzipped-text.txt" }  # content is "hello world"
+
   before do
     # always create the bucket
     bucket
@@ -314,6 +317,34 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     uploaded.delete
+  end
+
+  it "should download, verify, and decompress a gzipped file with default md5 verification" do
+    skip "Not working. See https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/1835"
+
+    lazy_bucket = storage.bucket bucket_public_test_name
+    lazy_file = lazy_bucket.file file_public_test_gzip_name
+
+    Tempfile.open ["test"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = lazy_file.download tmpfile
+
+      File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+    end
+  end
+
+  it "should download, verify, and decompress a gzipped file with crc32c verification" do
+    skip "Not working. See https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/1835"
+
+    lazy_bucket = storage.bucket bucket_public_test_name
+    lazy_file = lazy_bucket.file file_public_test_gzip_name
+
+    Tempfile.open ["test"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = lazy_file.download tmpfile,  verify: :crc32c
+
+      File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+    end
   end
 
   it "should write metadata" do
