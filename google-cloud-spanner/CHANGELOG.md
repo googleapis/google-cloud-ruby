@@ -1,5 +1,9 @@
 # Release History
 
+### 1.1.1 / 2017-11-15
+
+* Fix Admin Credentials (GAPIC) environment variable names.
+
 ### 1.1.0 / 2017-11-14
 
 * Add `Google::Cloud::Spanner::Credentials` class.
