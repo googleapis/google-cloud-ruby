@@ -129,8 +129,9 @@
       "name": "google-cloud-debugger",
       "defaultService": "google/cloud/debugger",
       "versions": [
-        "v0.29.0",
+        "v0.29.1",
         "master",
+        "v0.29.0",
         "v0.28.2",
         "v0.28.1",
         "v0.28.0",
