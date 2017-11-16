@@ -1,5 +1,9 @@
 # Release History
 
+### 0.28.1 / 2017-11-15
+
+* Fix credentials verification bug in Railtie.
+
 ### 0.28.0 / 2017-11-14
 
 * Add `Google::Cloud::ErrorReporting::Credentials` class.
