@@ -1,5 +1,9 @@
 # Release History
 
+### 1.3.1 / 2017-11-15
+
+* Fix credentials verification bug in Railtie.
+
 ### 1.3.0 / 2017-11-14
 
 * Add `Google::Cloud::Logging::Credentials` class.
