@@ -1,5 +1,9 @@
 # Release History
 
+### 0.28.1 / 2017-11-15
+
+* Fix Credentials environment variable names.
+
 ### 0.28.0 / 2017-11-14
 
 #### BREAKING CHANGE
