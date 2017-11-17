@@ -54,4 +54,11 @@ describe "Storage", :buckets, :storage do
       bucket.must_be_kind_of Google::Cloud::Storage::Bucket
     end
   end
+
+  describe "anonymous project" do
+    it "raises when listing buckets without authentication" do
+      anonymous_storage = Google::Cloud::Storage.anonymous
+      expect { anonymous_storage.buckets }.must_raise Google::Cloud::InvalidArgumentError # required: Required parameter: project
+    end
+  end
 end

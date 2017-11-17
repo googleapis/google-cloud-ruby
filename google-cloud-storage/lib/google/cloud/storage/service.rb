@@ -41,7 +41,6 @@ module Google
         def initialize project, credentials, retries: nil, timeout: nil
           @project = project
           @credentials = credentials
-          @credentials = credentials
           @service = API::StorageService.new
           @service.client_options.application_name    = "gcloud-ruby"
           @service.client_options.application_version = \
@@ -53,7 +52,7 @@ module Google
           @service.request_options.header ||= {}
           @service.request_options.header["x-goog-api-client"] = \
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
-          @service.authorization = @credentials.client
+          @service.authorization = @credentials.client if @credentials
         end
 
         def service

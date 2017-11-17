@@ -317,6 +317,23 @@ module Google
     # downloaded.read #=> "Hello world!"
     # ```
     #
+    # Download a public file with an anonymous, unauthenticated client. Use
+    # `skip_lookup` to avoid errors retrieving non-public bucket and file
+    # metadata.
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.anonymous
+    #
+    # bucket = storage.bucket "public-bucket", skip_lookup: true
+    # file = bucket.file "path/to/public-file.ext", skip_lookup: true
+    #
+    # downloaded = file.download
+    # downloaded.rewind
+    # downloaded.read #=> "Hello world!"
+    # ```
+    #
     # ## Using Signed URLs
     #
     # Access without authentication can be granted to a file for a specified
@@ -599,6 +616,34 @@ module Google
         Storage::Project.new(
           Storage::Service.new(
             project_id, credentials, retries: retries, timeout: timeout))
+      end
+
+      ##
+      # Creates an unauthenticated, anonymous client for retrieving public data
+      # from the Storage service. Each call creates a new connection.
+      #
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Storage::Project]
+      #
+      # @example Use `skip_lookup` to avoid retrieving non-public metadata:
+      #   require "google/cloud/storage"
+      #
+      #   storage = Google::Cloud::Storage.anonymous
+      #
+      #   bucket = storage.bucket "public-bucket", skip_lookup: true
+      #   file = bucket.file "path/to/public-file.ext", skip_lookup: true
+      #
+      #   downloaded = file.download
+      #   downloaded.rewind
+      #   downloaded.read #=> "Hello world!"
+      #
+      def self.anonymous retries: nil, timeout: nil
+        Storage::Project.new(
+          Storage::Service.new(nil, nil, retries: retries, timeout: timeout)
+        )
       end
     end
   end
