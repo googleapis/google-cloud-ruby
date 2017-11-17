@@ -672,4 +672,48 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded_b.delete
     composed.delete
   end
+
+  describe "anonymous project" do
+    let(:anonymous_storage) { Google::Cloud::Storage.anonymous }
+    it "should list public files without authentication" do
+      public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
+      files = public_bucket.files
+
+      files.wont_be :empty?
+    end
+
+    it "should download a public file without authentication" do
+      public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
+      file = public_bucket.file file_public_test_gzip_name, skip_lookup: true
+
+      Tempfile.open ["test"] do |tmpfile|
+        tmpfile.binmode
+        downloaded = file.download tmpfile, verify: :none # gzipped file verification bug #1835, does not affect this test
+
+        File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+      end
+    end
+
+    it "raises when downloading a private file without authentication" do
+      original = File.new files[:logo][:path]
+      file_name = "CloudLogo.png"
+      bucket.create_file original, file_name
+
+      private_bucket = anonymous_storage.bucket bucket_name, skip_lookup: true
+      file = private_bucket.file file_name, skip_lookup: true
+
+      Tempfile.open ["test"] do |tmpfile|
+        tmpfile.binmode
+        expect { file.download tmpfile }.must_raise Google::Cloud::UnauthenticatedError
+      end
+    end
+
+    it "raises when creating a file in a private bucket without authentication" do
+      original = File.new files[:logo][:path]
+      file_name = "CloudLogo-error.png"
+
+      private_bucket = anonymous_storage.bucket bucket_name, skip_lookup: true
+      expect { private_bucket.create_file original, file_name }.must_raise Google::Cloud::UnauthenticatedError
+    end
+  end
 end
