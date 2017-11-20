@@ -35,7 +35,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || "pubsub.googleapis.com"
+          @host = host || V1::PublisherClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -62,7 +62,6 @@ module Google
           return mocked_subscriber if mocked_subscriber
           @subscriber ||= begin
             V1::SubscriberClient.new(
-              service_path: host,
               credentials: channel,
               timeout: timeout,
               client_config: client_config,
@@ -76,7 +75,6 @@ module Google
           return mocked_publisher if mocked_publisher
           @publisher ||= begin
             V1::PublisherClient.new(
-              service_path: host,
               credentials: channel,
               timeout: timeout,
               lib_name: "gccl",
