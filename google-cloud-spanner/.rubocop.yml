@@ -6,6 +6,7 @@ AllCops:
     - "google-cloud-spanner.gemspec"
     - "Rakefile"
     - "test/**/*"
+    - "benchmark/**/*"
     - "lib/google/spanner/**/*"
     - "lib/google/cloud/spanner/v1/**/*"
     - "lib/google/cloud/spanner/admin/**/*"
