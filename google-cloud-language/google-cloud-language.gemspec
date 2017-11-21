@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
   gem.post_install_message =
-    "This release, 0.28.0, introduces breaking changes relative to the "\
+    "The 0.28.0 release introduced breaking changes relative to the "\
     "previous release, 0.27.1. For more details and instructions to migrate "\
     "your code, please visit the migration guide: "\
     "https://cloud.google.com/natural-language/docs/ruby-client-migration."
