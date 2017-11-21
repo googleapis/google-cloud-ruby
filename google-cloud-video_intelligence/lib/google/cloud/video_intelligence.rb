@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,10 +20,10 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
-    # [Google Cloud Video Intelligence API][Product Documentation]:
-    # Google Cloud Video Intelligence API.
+    # [Cloud Video Intelligence API][Product Documentation]:
+    # Cloud Video Intelligence API.
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -31,11 +31,11 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
+    # 2. [Enable the Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
     # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Next Steps
-    # - Read the [Google Cloud Video Intelligence API Product documentation][Product Documentation]
+    # - Read the [Cloud Video Intelligence API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
     # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
@@ -58,7 +58,7 @@ module Google
       # Service that implements Google Cloud Video Intelligence API.
       #
       # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v1beta2
+      #   The major version of the service to be used. By default :v1
       #   is used.
       # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
       #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -85,7 +85,7 @@ module Google
       #     or the specified config is missing data points.
       #   @param timeout [Numeric]
       #     The default timeout, in seconds, for calls made through this client.
-      def self.new(*args, version: :v1beta2, **kwargs)
+      def self.new(*args, version: :v1, **kwargs)
         unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
           raise "The version: #{version} is not available. The available versions " \
             "are: [#{AVAILABLE_VERSIONS.join(", ")}]"

@@ -21,7 +21,7 @@ $ gem install google-cloud-video_intelligence
 ### Preview
 #### VideoIntelligenceServiceClient
 ```rb
- require "google/cloud/video_intelligence/v1beta2"
+ require "google/cloud/video_intelligence"
 
  video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
  input_uri = "gs://cloud-ml-sandbox/video/chicago.mp4"
@@ -64,5 +64,5 @@ $ gem install google-cloud-video_intelligence
 - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1beta2
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1
 [Product Documentation]: https://cloud.google.com/video-intelligence
