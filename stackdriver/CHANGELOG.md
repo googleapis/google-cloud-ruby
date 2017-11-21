@@ -1,5 +1,12 @@
 # Release History
 
+### 0.11.0 / 2017-11-14
+
+* Debugger 0.29.0 release.
+* Error Reporting 0.28.0 release.
+* Logging 1.3.0 release.
+* Trace 0.28.0 release.
+
 ### 0.10.0 / 2017-09-08
 
 * Error Reporting 0.27.0 release.

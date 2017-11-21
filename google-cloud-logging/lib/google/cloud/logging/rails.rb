@@ -138,11 +138,17 @@ module Google
 
         ##
         # @private Verify credentials
-        def self.valid_credentials? project_id, keyfile
+        def self.valid_credentials? project_id, credentials
           # Try authenticate authorize client API. Return false if unable to
           # authorize.
           begin
-            Google::Cloud::Logging::Credentials.credentials_with_scope keyfile
+            # if credentials is nil, get default
+            credentials ||= Logging::Credentials.default
+            # only create a new Credentials object if the val isn't one already
+            unless credentials.is_a? Google::Auth::Credentials
+              # if credentials is not a Credentials object, create one
+              Logging::Credentials.new credentials
+            end
           rescue Exception => e
             STDOUT.puts "Note: Google::Cloud::Logging is disabled because " \
               "it failed to authorize with the service. (#{e.message}) " \

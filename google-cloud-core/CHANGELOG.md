@@ -1,5 +1,21 @@
 # Release History
 
+### 1.1.0 / 2017-11-14
+
+* Rename constructor arguments to `project_id` and `credentials`.
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Remove `googleauth` runtime dependency.
+* Add the following helper methods to `Google::Cloud::Error`, which access the
+  respective values on the underlying error objects.
+  * `Error#status_code`
+  * `Error#body`
+  * `Error#header`
+  * `Error#code`
+  * `Error#details`
+  * `Error#metadata`
+  * `Error#status_details`
+* Fixed mapping of `FailedPreconditionError` to 412 HTTP response code.
+
 ### 1.0.0 / 2017-03-31
 
 * Release 1.0

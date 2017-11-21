@@ -154,6 +154,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Vision::Credentials" # occasionally getting "This code example is not yet mocked"
+
   doctest.before "Google::Cloud::Vision.default_max" do
     # Reset all defaults to 100, since some examples change them to 5
     Google::Cloud::Vision.default_max_faces = 100

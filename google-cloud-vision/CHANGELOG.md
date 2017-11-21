@@ -1,5 +1,14 @@
 # Release History
 
+### 0.26.0 / 2017-11-14
+
+* Add `Google::Cloud::Vision::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Update generated low level GAPIC code.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.25.0 / 2017-07-11
 
 * Add `Image#annotate`.

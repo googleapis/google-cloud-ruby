@@ -1,5 +1,18 @@
 # Release History
 
+### 0.28.1 / 2017-11-15
+
+* Fix credentials verification bug in Railtie.
+
+### 0.28.0 / 2017-11-14
+
+* Add `Google::Cloud::Trace::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Update generated low level GAPIC code.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.27.2 / 2017-09-20
 
 * Fix the bug where `Google::Cloud::Trace::Middleware` wasn't using the shared `project_id` parameter.
@@ -10,7 +23,7 @@
 
 ### 0.27.0 / 2017-08-07
 
-* Add instrumentation to collect outbound GRPC requests information. 
+* Add instrumentation to collect outbound GRPC requests information.
 
 ### 0.26.1 / 2017-07-11
 

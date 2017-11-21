@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ module Google
     # # Ruby Client for Stackdriver Logging API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Stackdriver Logging API][Product Documentation]:
-    # The Stackdriver Logging API lets you write log entries and manage your logs,
-    # log sinks and logs-based metrics.
+    # Writes log entries and manages your Stackdriver Logging configuration.
     # - [Product Documentation][]
     #
     # ## Quick Start

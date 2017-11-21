@@ -1,5 +1,18 @@
 # Release History
 
+### 1.1.1 / 2017-11-15
+
+* Fix Admin Credentials (GAPIC) environment variable names.
+
+### 1.1.0 / 2017-11-14
+
+* Add `Google::Cloud::Spanner::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Update generated low level GAPIC code.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 1.0.0 / 2017-09-29
 
 * Release 1.0

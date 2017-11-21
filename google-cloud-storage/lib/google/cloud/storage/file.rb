@@ -49,6 +49,18 @@ module Google
       #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext"
       #
+      # @example Download a public file with an unauthenticated client:
+      #   require "google/cloud/storage"
+      #
+      #   storage = Google::Cloud::Storage.anonymous
+      #
+      #   bucket = storage.bucket "public-bucket", skip_lookup: true
+      #   file = bucket.file "path/to/public-file.ext", skip_lookup: true
+      #
+      #   downloaded = file.download
+      #   downloaded.rewind
+      #   downloaded.read #=> "Hello world!"
+      #
       class File
         ##
         # @private The Connection object.
@@ -481,6 +493,18 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #
         #   file = bucket.file "path/to/my-file.ext"
+        #   downloaded = file.download
+        #   downloaded.rewind
+        #   downloaded.read #=> "Hello world!"
+        #
+        # @example Download a public file with an unauthenticated client:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.anonymous
+        #
+        #   bucket = storage.bucket "public-bucket", skip_lookup: true
+        #   file = bucket.file "path/to/public-file.ext", skip_lookup: true
+        #
         #   downloaded = file.download
         #   downloaded.rewind
         #   downloaded.read #=> "Hello world!"

@@ -156,4 +156,11 @@ describe Google::Cloud::Storage::Bucket, :storage do
       permissions.must_equal roles
     end
   end
+
+  describe "anonymous project" do
+    it "raises when creating a bucket without authentication" do
+      anonymous_storage = Google::Cloud::Storage.anonymous
+      expect { anonymous_storage.create_bucket bucket_name }.must_raise Google::Cloud::UnauthenticatedError
+    end
+  end
 end

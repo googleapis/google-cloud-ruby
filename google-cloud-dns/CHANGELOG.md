@@ -1,5 +1,13 @@
 # Release History
 
+### 0.27.0 / 2017-11-14
+
+* Add `Google::Cloud::Dns::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Updated `google-api-client`, `googleauth` dependencies.
+
 ### 0.26.0 / 2017-09-28
 
 * Update Google API Client dependency to 0.14.x.
