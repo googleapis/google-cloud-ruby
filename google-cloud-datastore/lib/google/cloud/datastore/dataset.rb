@@ -25,6 +25,7 @@ require "google/cloud/datastore/gql_query"
 require "google/cloud/datastore/cursor"
 require "google/cloud/datastore/dataset/lookup_results"
 require "google/cloud/datastore/dataset/query_results"
+require "google/cloud/datastore/transaction"
 
 module Google
   module Cloud
@@ -542,9 +543,9 @@ module Google
         #   Transactions
         #
         # @yield [tx] a block yielding a new transaction
-        # @yieldparam [Transaction] tx the transaction object
+        # @yieldparam [ReadOnlyTransaction] tx the transaction object
         #
-        # @example Use a read-only transaction when only performing reads:
+        # @example
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
@@ -563,7 +564,7 @@ module Google
         #   end
         #
         def read_only_transaction
-          tx = Transaction.new service, read_only: true
+          tx = ReadOnlyTransaction.new service
           return tx unless block_given?
 
           begin

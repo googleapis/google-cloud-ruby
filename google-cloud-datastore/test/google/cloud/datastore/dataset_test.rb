@@ -1136,7 +1136,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
 
     tx = dataset.read_only_transaction
-    tx.must_be_kind_of Google::Cloud::Datastore::Transaction
+    tx.must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
   end
 
   it "transaction will commit with a block" do

@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/datastore/read_only_transaction"
+
 module Google
   module Cloud
     module Datastore
@@ -53,48 +55,14 @@ module Google
       #     tasks_in_list = tx.run query
       #   end
       #
-      class Transaction < Dataset
-        attr_reader :id
-
+      class Transaction < ReadOnlyTransaction
         ##
         # @private Creates a new Transaction instance.
         # Takes a Service instead of project and Credentials.
-        #
-        # @param [Boolean] read_only Whether the transaction should only allow
-        #   reads. A read-only transaction cannot modify entities; in return
-        #   they do not contend with other read-write or read-only transactions.
-        #   Using a read-only transaction for transactions that only read data
-        #   will potentially improve throughput.
-        #
-        def initialize service, read_only: nil
+        def initialize service
           @service = service
-          @read_only = read_only
           reset!
           start
-        end
-
-        ##
-        # Whether the transaction only allows reads. A read-only transaction
-        # cannot modify entities; in return they do not contend with other
-        # read-write or read-only transactions. Using a read-only transaction
-        # for transactions that only read data will potentially improve
-        # throughput.
-        #
-        # @return [Boolean] Returns `true` if the transaction is a read-only
-        #   transaction, or `false` if it is a read-write transaction.
-        #
-        def read_only?
-          !read_write?
-        end
-
-        ##
-        # Whether the transaction allows both reads and writes.
-        #
-        # @return [Boolean] Returns `true` if the transaction is a read-write
-        #   transaction, or `false` if it is a read-only transaction.
-        #
-        def read_write?
-          @read_only.nil?
         end
 
         ##
@@ -206,113 +174,13 @@ module Google
         end
 
         ##
-        # Retrieve an entity by providing key information. The lookup is run
-        # within the transaction.
-        #
-        # @param [Key, String] key_or_kind A Key object or `kind` string value.
-        #
-        # @return [Google::Cloud::Datastore::Entity, nil]
-        #
-        # @example Finding an entity with a key:
-        #   require "google/cloud/datastore"
-        #
-        #   datastore = Google::Cloud::Datastore.new
-        #
-        #   task_key = datastore.key "Task", "sampleTask"
-        #   task = datastore.find task_key
-        #
-        # @example Finding an entity with a `kind` and `id`/`name`:
-        #   require "google/cloud/datastore"
-        #
-        #   datastore = Google::Cloud::Datastore.new
-        #
-        #   task = datastore.find "Task", "sampleTask"
-        #
-        def find key_or_kind, id_or_name = nil
-          key = key_or_kind
-          unless key.is_a? Google::Cloud::Datastore::Key
-            key = Key.new key_or_kind, id_or_name
-          end
-          find_all(key).first
-        end
-        alias_method :get, :find
-
-        ##
-        # Retrieve the entities for the provided keys. The lookup is run within
-        # the transaction.
-        #
-        # @param [Key] keys One or more Key objects to find records for.
-        #
-        # @return [Google::Cloud::Datastore::Dataset::LookupResults]
-        #
-        # @example
-        #   require "google/cloud/datastore"
-        #
-        #   datastore = Google::Cloud::Datastore.new
-        #
-        #   task_key1 = datastore.key "Task", 123456
-        #   task_key2 = datastore.key "Task", 987654
-        #   tasks = datastore.find_all task_key1, task_key2
-        #
-        def find_all *keys
-          ensure_service!
-          lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
-                                      transaction: @id)
-          LookupResults.from_grpc lookup_res, service, nil, @id
-        end
-        alias_method :lookup, :find_all
-
-        ##
-        # Retrieve entities specified by a Query. The query is run within the
-        # transaction.
-        #
-        # @param [Query] query The Query object with the search criteria.
-        # @param [String] namespace The namespace the query is to run within.
-        #
-        # @return [Google::Cloud::Datastore::Dataset::QueryResults]
-        #
-        # @example
-        #   require "google/cloud/datastore"
-        #
-        #   datastore = Google::Cloud::Datastore.new
-        #
-        #   query = datastore.query("Task").
-        #     where("done", "=", false)
-        #   datastore.transaction do |tx|
-        #     tasks = tx.run query
-        #   end
-        #
-        # @example Run the query within a namespace with the `namespace` option:
-        #   require "google/cloud/datastore"
-        #
-        #   datastore = Google::Cloud::Datastore.new
-        #
-        #   query = Google::Cloud::Datastore::Query.new.kind("Task").
-        #     where("done", "=", false)
-        #   datastore.transaction do |tx|
-        #     tasks = tx.run query, namespace: "example-ns"
-        #   end
-        #
-        def run query, namespace: nil
-          ensure_service!
-          unless query.is_a?(Query) || query.is_a?(GqlQuery)
-            fail ArgumentError, "Cannot run a #{query.class} object."
-          end
-          query_res = service.run_query query.to_grpc, namespace,
-                                        transaction: @id
-          QueryResults.from_grpc query_res, service, namespace,
-                                 query.to_grpc.dup
-        end
-        alias_method :run_query, :run
-
-        ##
         # Begins a transaction.
         # This method is run when a new Transaction is created.
         def start
           fail TransactionError, "Transaction already opened." unless @id.nil?
 
           ensure_service!
-          tx_res = service.begin_transaction read_only: @read_only
+          tx_res = service.begin_transaction
           @id = tx_res.transaction
         end
         alias_method :begin_transaction, :start
@@ -377,40 +245,6 @@ module Google
           end
           # Make sure all entity keys are frozen so all show as persisted
           entities.each { |e| e.key.freeze unless e.persisted? }
-          true
-        end
-
-        ##
-        # Rolls a transaction back.
-        #
-        # @example
-        #   require "google/cloud/datastore"
-        #
-        #   datastore = Google::Cloud::Datastore.new
-        #
-        #   task = datastore.entity "Task" do |t|
-        #     t["type"] = "Personal"
-        #     t["done"] = false
-        #     t["priority"] = 4
-        #     t["description"] = "Learn Cloud Datastore"
-        #   end
-        #
-        #   tx = datastore.transaction
-        #   begin
-        #     if tx.find(task.key).nil?
-        #       tx.save task
-        #     end
-        #     tx.commit
-        #   rescue
-        #     tx.rollback
-        #   end
-        def rollback
-          if @id.nil?
-            fail TransactionError, "Cannot rollback when not in a transaction."
-          end
-
-          ensure_service!
-          service.rollback @id
           true
         end
 
