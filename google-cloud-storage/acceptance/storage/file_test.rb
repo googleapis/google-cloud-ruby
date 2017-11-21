@@ -325,7 +325,7 @@ describe Google::Cloud::Storage::File, :storage do
     lazy_bucket = storage.bucket bucket_public_test_name
     lazy_file = lazy_bucket.file file_public_test_gzip_name
 
-    Tempfile.open ["test"] do |tmpfile|
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
       downloaded = lazy_file.download tmpfile
 
@@ -339,7 +339,7 @@ describe Google::Cloud::Storage::File, :storage do
     lazy_bucket = storage.bucket bucket_public_test_name
     lazy_file = lazy_bucket.file file_public_test_gzip_name
 
-    Tempfile.open ["test"] do |tmpfile|
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
       downloaded = lazy_file.download tmpfile,  verify: :crc32c
 
@@ -686,7 +686,7 @@ describe Google::Cloud::Storage::File, :storage do
       public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
       file = public_bucket.file file_public_test_gzip_name, skip_lookup: true
 
-      Tempfile.open ["test"] do |tmpfile|
+      Tempfile.open ["hello_world", ".txt"] do |tmpfile|
         tmpfile.binmode
         downloaded = file.download tmpfile, verify: :none # gzipped file verification bug #1835, does not affect this test
 
@@ -702,7 +702,7 @@ describe Google::Cloud::Storage::File, :storage do
       private_bucket = anonymous_storage.bucket bucket_name, skip_lookup: true
       file = private_bucket.file file_name, skip_lookup: true
 
-      Tempfile.open ["test"] do |tmpfile|
+      Tempfile.open ["hello_world", ".txt"] do |tmpfile|
         tmpfile.binmode
         expect { file.download tmpfile }.must_raise Google::Cloud::UnauthenticatedError
       end
