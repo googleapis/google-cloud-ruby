@@ -1,5 +1,9 @@
 # Release History
 
+### 0.28.1 / 2017-11-21
+
+* Remove warning when connecting to Pub/Sub Emulator.
+
 ### 0.28.0 / 2017-11-14
 
 * Add `Google::Cloud::Pubsub::Credentials` class.
