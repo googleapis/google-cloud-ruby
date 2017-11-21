@@ -1,5 +1,9 @@
 # Release History
 
+### 1.3.2 / 2017-11-20
+
+* Refresh GAPIC layer (low-level API) based on updates to Protobuf types.
+
 ### 1.3.1 / 2017-11-15
 
 * Fix credentials verification bug in Railtie.
