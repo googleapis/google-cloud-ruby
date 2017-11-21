@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.1 / 2017-11-21
+
+* Remove warning when connecting to Datastore Emulator.
+
 ### 1.2.0 / 2017-11-14
 
 * Add `Google::Cloud::Datastore::Credentials` class.
