@@ -1,0 +1,8 @@
+--no-private
+--title=DLP API
+--exclude lib/google/privacy/dlp/v2beta1
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
