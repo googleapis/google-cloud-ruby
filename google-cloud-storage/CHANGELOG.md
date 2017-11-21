@@ -1,5 +1,9 @@
 # Release History
 
+### 1.9.0 / 2017-11-20
+
+* Add `Google::Cloud::Storage.anonymous` to support public data access.
+
 ### 1.8.0 / 2017-11-14
 
 * Add `Google::Cloud::Storage::Credentials` class.
