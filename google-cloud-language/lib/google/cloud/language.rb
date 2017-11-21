@@ -28,6 +28,10 @@ module Google
     # recognition, and text annotations.
     # - [Product Documentation][]
     #
+    # *The 0.28.0 release introduced breaking changes relative to the previous
+    # release, 0.27.1. For more details and instructions to migrate your code, please
+    # visit the [migration guide](https://cloud.google.com/natural-language/docs/ruby-client-migration).*
+    #
     # ## Quick Start
     # In order to use this library, you first need to go through the following
     # steps:
