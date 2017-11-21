@@ -601,7 +601,7 @@ describe "Datastore", :datastore do
         ancestor(book.key)
       entities = nil
 
-      tx = dataset.transaction read_only: true do |tx|
+      tx = dataset.read_only_transaction do |tx|
         fresh = tx.find book.key
         entities = dataset.run query
       end

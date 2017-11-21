@@ -232,7 +232,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before("Google::Cloud::Datastore::Dataset#transaction@Use a read-only transaction when only performing reads:") do
+  doctest.before("Google::Cloud::Datastore::Dataset#read_only_transaction") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]

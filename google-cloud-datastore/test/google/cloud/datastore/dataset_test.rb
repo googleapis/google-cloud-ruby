@@ -1124,8 +1124,6 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     tx = dataset.transaction
     tx.must_be_kind_of Google::Cloud::Datastore::Transaction
     tx.id.must_equal "giterdone"
-    tx.wont_be :read_only?
-    tx.must_be :read_write?
   end
 
   it "transaction will return a read-only Transaction" do
@@ -1137,10 +1135,8 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
 
-    tx = dataset.transaction read_only: true
+    tx = dataset.read_only_transaction
     tx.must_be_kind_of Google::Cloud::Datastore::Transaction
-    tx.must_be :read_only?
-    tx.wont_be :read_write?
   end
 
   it "transaction will commit with a block" do

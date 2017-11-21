@@ -469,12 +469,6 @@ module Google
         # @see https://cloud.google.com/datastore/docs/concepts/transactions
         #   Transactions
         #
-        # @param [Boolean] read_only Whether the transaction should only allow
-        #   reads. A read-only transaction cannot modify entities; in return
-        #   they do not contend with other read-write or read-only transactions.
-        #   Using a read-only transaction for transactions that only read data
-        #   will potentially improve throughput. Optional. The default is `nil`.
-        #
         # @yield [tx] a block yielding a new transaction
         # @yieldparam [Transaction] tx the transaction object
         #
@@ -518,6 +512,38 @@ module Google
         #     tx.rollback
         #   end
         #
+        def transaction
+          tx = Transaction.new service
+          return tx unless block_given?
+
+          begin
+            yield tx
+            tx.commit
+          rescue
+            begin
+              tx.rollback
+            rescue
+              raise TransactionError,
+                    "Transaction failed to commit and rollback."
+            end
+            raise TransactionError, "Transaction failed to commit."
+          end
+        end
+
+        ##
+        # Creates a read-only Datastore transaction that only allows reads.
+        #
+        # A read-only transaction cannot modify entities; in return they do not
+        # contend with other read-write or read-only transactions. Using a
+        # read-only transaction for transactions that only read data will
+        # potentially improve throughput.
+        #
+        # @see https://cloud.google.com/datastore/docs/concepts/transactions
+        #   Transactions
+        #
+        # @yield [tx] a block yielding a new transaction
+        # @yieldparam [Transaction] tx the transaction object
+        #
         # @example Use a read-only transaction when only performing reads:
         #   require "google/cloud/datastore"
         #
@@ -529,15 +555,15 @@ module Google
         #
         #   tasks = nil
         #
-        #   datastore.transaction read_only: true do |tx|
+        #   datastore.read_only_transaction do |tx|
         #     task_list = tx.find task_list_key
         #     if task_list
         #       tasks = tx.run query
         #     end
         #   end
         #
-        def transaction read_only: nil
-          tx = Transaction.new service, read_only: read_only
+        def read_only_transaction
+          tx = Transaction.new service, read_only: true
           return tx unless block_given?
 
           begin
