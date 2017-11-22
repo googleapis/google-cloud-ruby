@@ -603,7 +603,7 @@ describe "Datastore", :datastore do
 
       tx = dataset.read_only_transaction do |tx|
         fresh = tx.find book.key
-        entities = dataset.run query
+        entities = tx.run query
       end
       entities.count.must_equal 8
     end
@@ -663,7 +663,7 @@ describe "Datastore", :datastore do
       dataset.save dataset.entity("Post", "#{prefix}_post5")
 
       tx = dataset.transaction do |tx|
-        in_tx_refresh = tx.find tx.key("Post", "#{prefix}_post5")
+        in_tx_refresh = tx.find dataset.key("Post", "#{prefix}_post5")
         tx.delete in_tx_refresh if in_tx_refresh
       end
 

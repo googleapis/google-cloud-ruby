@@ -13,33 +13,51 @@
 # limitations under the License.
 
 
+require "google/cloud/datastore/dataset/lookup_results"
+require "google/cloud/datastore/dataset/query_results"
+
 module Google
   module Cloud
     module Datastore
       ##
       # # ReadOnlyTransaction
       #
-      # Special Connection instance for running transactions.
+      # Represents a read-only Datastore transaction that only allows reads.
+      #
+      # A read-only transaction cannot modify entities; in return they do not
+      # contend with other read-write or read-only transactions. Using a
+      # read-only transaction for transactions that only read data will
+      # potentially improve throughput.
       #
       # See {Google::Cloud::Datastore::Dataset#transaction}
       #
       # @see https://cloud.google.com/datastore/docs/concepts/transactions
       #   Transactions
       #
-      # @example Transactional read:
+      # @example
       #   require "google/cloud/datastore"
       #
       #   datastore = Google::Cloud::Datastore.new
       #
       #   task_list_key = datastore.key "TaskList", "default"
-      #   datastore.transaction do |tx|
+      #   query = datastore.query("Task").
+      #     ancestor(task_list_key)
+      #
+      #   tasks = nil
+      #
+      #   datastore.read_only_transaction do |tx|
       #     task_list = tx.find task_list_key
-      #     query = tx.query("Task").ancestor(task_list)
-      #     tasks_in_list = tx.run query
+      #     if task_list
+      #       tasks = tx.run query
+      #     end
       #   end
       #
-      class ReadOnlyTransaction < Dataset
+      class ReadOnlyTransaction
         attr_reader :id
+
+        ##
+        # @private The Service object.
+        attr_accessor :service
 
         ##
         # @private Creates a new ReadOnlyTransaction instance.
@@ -59,20 +77,16 @@ module Google
         #
         # @return [Google::Cloud::Datastore::Entity, nil]
         #
-        # @example Finding an entity with a key:
+        # @example
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new
         #
-        #   task_key = datastore.key "Task", "sampleTask"
-        #   task = datastore.find task_key
+        #   task_list_key = datastore.key "TaskList", "default"
         #
-        # @example Finding an entity with a `kind` and `id`/`name`:
-        #   require "google/cloud/datastore"
-        #
-        #   datastore = Google::Cloud::Datastore.new
-        #
-        #   task = datastore.find "Task", "sampleTask"
+        #   datastore.read_only_transaction do |tx|
+        #     task_list = tx.find task_list_key
+        #   end
         #
         def find key_or_kind, id_or_name = nil
           key = key_or_kind
@@ -98,13 +112,16 @@ module Google
         #
         #   task_key1 = datastore.key "Task", 123456
         #   task_key2 = datastore.key "Task", 987654
-        #   tasks = datastore.find_all task_key1, task_key2
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     tasks = tx.find_all task_key1, task_key2
+        #   end
         #
         def find_all *keys
           ensure_service!
           lookup_res = service.lookup(*Array(keys).flatten.map(&:to_grpc),
                                       transaction: @id)
-          LookupResults.from_grpc lookup_res, service, nil, @id
+          Dataset::LookupResults.from_grpc lookup_res, service, nil, @id
         end
         alias_method :lookup, :find_all
 
@@ -124,7 +141,7 @@ module Google
         #
         #   query = datastore.query("Task").
         #     where("done", "=", false)
-        #   datastore.transaction do |tx|
+        #   datastore.read_only_transaction do |tx|
         #     tasks = tx.run query
         #   end
         #
@@ -135,8 +152,8 @@ module Google
           end
           query_res = service.run_query query.to_grpc, namespace,
                                         transaction: @id
-          QueryResults.from_grpc query_res, service, namespace,
-                                 query.to_grpc.dup
+          Dataset::QueryResults.from_grpc query_res, service, namespace,
+                                          query.to_grpc.dup
         end
         alias_method :run_query, :run
 
@@ -156,6 +173,22 @@ module Google
         ##
         # Commits the transaction.
         #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task_list_key = datastore.key "TaskList", "default"
+        #   query = datastore.query("Task").
+        #     ancestor(task_list_key)
+        #
+        #   tx = datastore.transaction
+        #   task_list = tx.find task_list_key
+        #   if task_list
+        #     tasks = tx.run query
+        #   end
+        #   tx.commit
+        #
         def commit
           fail TransactionError,
                "Cannot commit when not in a transaction." if @id.nil?
@@ -174,22 +207,17 @@ module Google
         #
         #   datastore = Google::Cloud::Datastore.new
         #
-        #   task = datastore.entity "Task" do |t|
-        #     t["type"] = "Personal"
-        #     t["done"] = false
-        #     t["priority"] = 4
-        #     t["description"] = "Learn Cloud Datastore"
-        #   end
+        #   task_list_key = datastore.key "TaskList", "default"
+        #   query = datastore.query("Task").
+        #     ancestor(task_list_key)
         #
         #   tx = datastore.transaction
-        #   begin
-        #     if tx.find(task.key).nil?
-        #       tx.save task
-        #     end
-        #     tx.commit
-        #   rescue
-        #     tx.rollback
+        #   task_list = tx.find task_list_key
+        #   if task_list
+        #     tasks = tx.run query
         #   end
+        #   tx.rollback
+        #
         def rollback
           if @id.nil?
             fail TransactionError, "Cannot rollback when not in a transaction."
@@ -205,6 +233,15 @@ module Google
         # {ReadOnlyTransaction#start} must be called afterwards.
         def reset!
           @id = nil
+        end
+
+        protected
+
+        ##
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          fail "Must have active connection to service" unless service
         end
       end
     end

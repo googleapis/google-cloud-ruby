@@ -26,6 +26,7 @@ require "google/cloud/datastore/cursor"
 require "google/cloud/datastore/dataset/lookup_results"
 require "google/cloud/datastore/dataset/query_results"
 require "google/cloud/datastore/transaction"
+require "google/cloud/datastore/read_only_transaction"
 
 module Google
   module Cloud
