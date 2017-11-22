@@ -1,5 +1,9 @@
 # Release History
 
+### 0.46.0 / 2017-11-22
+
+* Video Intelligence 0.25.0 release.
+
 ### 0.45.0 / 2017-11-14
 
 * BigQuery 0.30.0 release.
