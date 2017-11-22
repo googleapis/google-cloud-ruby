@@ -293,11 +293,14 @@ module Google
         def self.from_source source, speech
           audio = new
           audio.instance_variable_set :@speech, speech
+
           if source.respond_to?(:read) && source.respond_to?(:rewind)
             source.rewind
             audio.grpc.content = source.read
+
             return audio
           end
+
           # Convert Storage::File objects to the URL
           source = source.to_gs_url if source.respond_to? :to_gs_url
           # Everything should be a string from now on
@@ -305,6 +308,7 @@ module Google
           # Create an Audio from the Google Storage URL
           if source.start_with? "gs://"
             audio.grpc.uri = source
+
             return audio
           end
           # Create an audio from a file on the filesystem
@@ -312,8 +316,10 @@ module Google
             fail ArgumentError, "Cannot read #{source}" unless \
               File.readable? source
             audio.grpc.content = File.read source, mode: "rb"
+
             return audio
           end
+
           fail ArgumentError, "Unable to convert #{source} to an Audio"
         end
 
