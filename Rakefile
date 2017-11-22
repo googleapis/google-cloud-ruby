@@ -546,6 +546,7 @@ namespace :travis do
     valid_gems.each do |gem|
       Dir.chdir gem do
         Bundler.with_clean_env do
+          sh "gem install bundler"
           sh "bundle update"
 
           if run_acceptance

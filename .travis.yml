@@ -9,6 +9,7 @@ rvm:
 - 2.1.9
 - 2.0.0-p648
 script:
+- gem install bundler
 - bundle exec rake travis:build
 notifications:
   slack:
