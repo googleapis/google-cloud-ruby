@@ -1,5 +1,9 @@
 # Release History
 
+### 0.25.0 / 2017-11-22
+
+* Add support for V1 API.
+
 ### 0.24.1 / 2017-11-15
 
 * Fix Credentials environment variable names.
