@@ -92,7 +92,7 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     entity_from_grpc.properties["name"].must_equal "User McNumber"
     entity_from_grpc.properties["email"].must_equal "number@example.net"
     entity_from_grpc.properties.exist?("avatar").must_equal true
-    entity_from_grpc.properties["avatar"].must_equal nil
+    entity_from_grpc.properties["avatar"].must_be :nil?
   end
 
   it "can store other entities as properties" do

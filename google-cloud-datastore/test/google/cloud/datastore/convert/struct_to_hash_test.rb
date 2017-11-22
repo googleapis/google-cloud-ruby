@@ -37,7 +37,7 @@ describe Google::Cloud::Datastore::Convert, :struct_to_hash do
     hash = Google::Cloud::Datastore::Convert.struct_to_hash struct
     hash.must_be_kind_of Hash
     hash.wont_be :empty?
-    hash["foo"].must_equal nil
+    hash["foo"].must_be :nil?
     hash["bar"].must_equal true
     hash["baz"].must_equal "bif"
     hash["pi"].must_equal 3.14

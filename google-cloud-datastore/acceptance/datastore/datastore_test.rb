@@ -66,7 +66,7 @@ describe "Datastore", :datastore do
 
       refresh = dataset.find post.key
       refresh.key.kind.must_equal        post.key.kind
-      refresh.key.id.must_equal          post.key.id
+      refresh.key.id.must_be :nil?
       refresh.key.name.must_equal        post.key.name
       refresh.properties.to_h.must_equal post.properties.to_h
       # Verify the index excludes are retrieved properly
@@ -84,7 +84,7 @@ describe "Datastore", :datastore do
 
       refresh = dataset.find post.key
       refresh.key.kind.must_equal        post.key.kind
-      refresh.key.id.must_equal          post.key.id
+      refresh.key.id.must_be :nil?
       refresh.key.name.must_equal        post.key.name
       refresh.properties.to_h.must_equal post.properties.to_h
 
@@ -100,7 +100,7 @@ describe "Datastore", :datastore do
       refresh = dataset.find post.key
       refresh.key.kind.must_equal        post.key.kind
       refresh.key.id.must_equal          post.key.id
-      refresh.key.name.must_equal        post.key.name
+      refresh.key.name.must_be :nil?
       refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post
@@ -120,7 +120,7 @@ describe "Datastore", :datastore do
       refresh = dataset.find "Post",     post.key.id
       refresh.key.kind.must_equal        post.key.kind
       refresh.key.id.must_equal          post.key.id
-      refresh.key.name.must_equal        post.key.name
+      refresh.key.name.must_be :nil?
       refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post
@@ -234,7 +234,7 @@ describe "Datastore", :datastore do
       refresh = dataset.find post.key, consistency: :eventual
       refresh.wont_be :nil?
       refresh.key.kind.must_equal        post.key.kind
-      refresh.key.id.must_equal          post.key.id
+      refresh.key.id.must_be :nil?
       refresh.key.name.must_equal        post.key.name
       refresh.properties.to_h.must_equal post.properties.to_h
 
@@ -287,7 +287,7 @@ describe "Datastore", :datastore do
       entity = entities.first
       entity["fullName"].must_equal      person["fullName"]
       entity["linkedTo"].kind.must_equal person["linkedTo"].kind
-      entity["linkedTo"].id.must_equal   person["linkedTo"].id
+      entity["linkedTo"].id.must_be :nil?
       entity["linkedTo"].name.must_equal person["linkedTo"].name
     end
   end
@@ -618,7 +618,7 @@ describe "Datastore", :datastore do
       entity = dataset.find obj.key
       entity.wont_be :nil?
       entity.key.kind.must_equal        obj.key.kind
-      entity.key.id.must_equal          obj.key.id
+      entity.key.id.must_be :nil?
       entity.key.name.must_equal        obj.key.name
       entity.properties.to_h.must_equal obj.properties.to_h
       dataset.delete entity
@@ -641,7 +641,7 @@ describe "Datastore", :datastore do
       entity = dataset.find obj.key
       entity.wont_be :nil?
       entity.key.kind.must_equal        obj.key.kind
-      entity.key.id.must_equal          obj.key.id
+      entity.key.id.must_be :nil?
       entity.key.name.must_equal        obj.key.name
       entity.properties.to_h.must_equal obj.properties.to_h
       dataset.delete entity
