@@ -16,7 +16,7 @@
 require "helper"
 
 describe Google::Cloud::Logging::Convert, :object_to_value do
-  let(:nil_value) { Google::Protobuf::Value.new null_value: :NULL_VALUE }
+  let(:null_value) { Google::Protobuf::Value.new null_value: :NULL_VALUE }
   let(:true_value) { Google::Protobuf::Value.new bool_value: true }
   let(:string_value) { Google::Protobuf::Value.new string_value: "bif" }
   let(:num_value) { Google::Protobuf::Value.new number_value: 3.14 }
@@ -25,7 +25,7 @@ describe Google::Cloud::Logging::Convert, :object_to_value do
 
   it "converts nil object" do
     value = Google::Cloud::Logging::Convert.object_to_value nil
-    value.must_equal nil_value
+    value.must_equal null_value
   end
 
   it "converts true object" do
