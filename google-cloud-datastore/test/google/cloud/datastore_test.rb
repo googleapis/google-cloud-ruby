@@ -20,8 +20,8 @@ describe Google::Cloud do
     it "calls out to Google::Cloud.datastore" do
       gcloud = Google::Cloud.new
       stubbed_datastore = ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
-        project.must_equal nil
-        keyfile.must_equal nil
+        project.must_be :nil?
+        keyfile.must_be :nil?
         scope.must_be :nil?
         timeout.must_be :nil?
         client_config.must_be :nil?
@@ -94,14 +94,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be :nil?
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
-        timeout.must_equal nil
-        client_config.must_equal nil
+        timeout.must_be :nil?
+        client_config.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -151,14 +151,14 @@ describe Google::Cloud do
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be :nil?
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
-        timeout.must_equal nil
-        client_config.must_equal nil
+        timeout.must_be :nil?
+        client_config.must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -182,14 +182,14 @@ describe Google::Cloud do
     it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal nil
+        scope.must_be :nil?
         "datastore-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
         project.must_equal "project-id"
         credentials.must_equal "datastore-credentials"
-        timeout.must_equal nil
-        client_config.must_equal nil
+        timeout.must_be :nil?
+        client_config.must_be :nil?
         OpenStruct.new project: project
       }
 

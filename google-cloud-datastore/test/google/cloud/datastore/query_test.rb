@@ -202,7 +202,7 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     ancestor_filter.property_filter.op.must_equal :HAS_ANCESTOR
     key = Google::Cloud::Datastore::Convert.from_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
-    key.id.must_equal   ancestor_key.id
+    key.id.must_be :nil?
     key.name.must_equal ancestor_key.name
   end
 
@@ -220,7 +220,7 @@ describe Google::Cloud::Datastore::Query, :mock_datastore do
     ancestor_filter.property_filter.op.must_equal :HAS_ANCESTOR
     key = Google::Cloud::Datastore::Convert.from_value(ancestor_filter.property_filter.value)
     key.kind.must_equal ancestor_key.kind
-    key.id.must_equal   ancestor_key.id
+    key.id.must_be :nil?
     key.name.must_equal ancestor_key.name
   end
 

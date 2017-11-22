@@ -29,7 +29,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   it "decodes empty value" do
     value = Google::Datastore::V1::Value.new
     raw = Google::Cloud::Datastore::Convert.from_value value
-    raw.must_equal nil
+    raw.must_be :nil?
   end
 
   it "encodes a string" do
@@ -57,7 +57,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
     value = Google::Datastore::V1::Value.new
     value.null_value = :NULL_VALUE
     raw = Google::Cloud::Datastore::Convert.from_value value
-    raw.must_equal nil
+    raw.must_be :nil?
   end
 
   it "encodes true" do

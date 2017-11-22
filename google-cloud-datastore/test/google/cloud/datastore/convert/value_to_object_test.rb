@@ -25,7 +25,7 @@ describe Google::Cloud::Datastore::Convert, :value_to_object do
 
   it "converts nil value" do
     obj = Google::Cloud::Datastore::Convert.value_to_object nil_value
-    obj.must_equal nil
+    obj.must_be :nil?
   end
 
   it "converts true value" do
