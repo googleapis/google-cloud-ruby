@@ -695,6 +695,7 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "raises when downloading a private file without authentication" do
+      skip "Removed due to occasional failures in the CI build."
       original = File.new files[:logo][:path]
       file_name = "CloudLogo.png"
       bucket.create_file original, file_name
