@@ -45,4 +45,4 @@ response = language_service_client.analyze_sentiment(document)
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1
-[Product Documentation]: https://cloud.google.com/language
+[Product Documentation]: https://cloud.google.com/natural-language
