@@ -134,7 +134,7 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
       #   key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc
       # )]
     )
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [], transaction: tx_id, options: default_options]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
     dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
@@ -232,7 +232,7 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
       #   key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc
       # )]
     )
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [], transaction: tx_id, options: default_options]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
     dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]
@@ -296,7 +296,7 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
       #   key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc
       # )]
     )
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [], transaction: tx_id, options: default_options]
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
     dataset.service.mocked_service.expect :lookup, first_lookup_res,  [project, first_keys, read_options: read_options, options: default_options]

@@ -369,6 +369,30 @@ module Google
     # end
     # ```
     #
+    # A read-only transaction cannot modify entities; in return they do not
+    # contend with other read-write or read-only transactions. Using a read-only
+    # transaction for transactions that only read data will potentially improve
+    # throughput.
+    #
+    # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
+    # task_list_key = datastore.key "TaskList", "default"
+    # query = datastore.query("Task").
+    #   ancestor(task_list_key)
+    #
+    # tasks = nil
+    #
+    # datastore.transaction read_only: true do |tx|
+    #   task_list = tx.find task_list_key
+    #   if task_list
+    #     tasks = tx.run query
+    #   end
+    # end
+    # ```
+    #
     # See {Google::Cloud::Datastore::Transaction} and
     # {Google::Cloud::Datastore::Dataset#transaction}
     #

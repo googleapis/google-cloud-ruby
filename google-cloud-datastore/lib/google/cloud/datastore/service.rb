@@ -110,8 +110,24 @@ module Google
 
         ##
         # Begin a new transaction.
-        def begin_transaction
-          execute { service.begin_transaction project }
+        def begin_transaction read_only: nil, previous_transaction: nil
+          if read_only
+            transaction_options = Google::Datastore::V1::TransactionOptions.new
+            transaction_options.read_only = \
+              Google::Datastore::V1::TransactionOptions::ReadOnly.new
+          end
+          if previous_transaction
+            transaction_options ||= \
+              Google::Datastore::V1::TransactionOptions.new
+            rw = Google::Datastore::V1::TransactionOptions::ReadWrite.new(
+              previous_transaction: previous_transaction.encode("ASCII-8BIT")
+            )
+            transaction_options.read_write = rw
+          end
+          execute do
+            service.begin_transaction project,
+                                      transaction_options: transaction_options
+          end
         end
 
         ##

@@ -596,6 +596,18 @@ describe "Datastore", :datastore do
       entities.count.must_equal 6
     end
 
+    it "should find and run query in a read-only transaction" do
+      query = dataset.query("Character").
+        ancestor(book.key)
+      entities = nil
+
+      tx = dataset.read_only_transaction do |tx|
+        fresh = tx.find book.key
+        entities = tx.run query
+      end
+      entities.count.must_equal 8
+    end
+
     after do
       dataset.delete *characters
     end
@@ -647,11 +659,45 @@ describe "Datastore", :datastore do
       dataset.delete entity
     end
 
+    it "should manually retry a transaction with previous_transaction" do
+      obj = Google::Cloud::Datastore::Entity.new
+      obj.key = Google::Cloud::Datastore::Key.new "Company", "#{prefix}_Google3"
+      obj["url"] = "www.google.com"
+      dataset.save obj
+
+      tx = dataset.transaction
+      tx.id.wont_be :nil?
+
+      obj2 = tx.find obj.key
+
+      obj["url"] = "1.google.com"
+      dataset.update obj
+
+      obj2["url"] = "2.google.com"
+      tx.update obj2
+
+      retried = false
+      begin
+        tx.commit
+      rescue Google::Cloud::AbortedError
+        retried = true
+        tx2 = dataset.transaction previous_transaction: tx.id
+        tx2.update obj2
+        tx2.commit
+      end
+
+      retried.must_equal true
+      entity = dataset.find obj.key
+      entity.wont_be :nil?
+      entity["url"].must_equal "2.google.com"
+      dataset.delete entity
+    end
+
     it "should find within the transaction" do
       dataset.save dataset.entity("Post", "#{prefix}_post5")
 
       tx = dataset.transaction do |tx|
-        in_tx_refresh = tx.find tx.key("Post", "#{prefix}_post5")
+        in_tx_refresh = tx.find dataset.key("Post", "#{prefix}_post5")
         tx.delete in_tx_refresh if in_tx_refresh
       end
 

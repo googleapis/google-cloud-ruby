@@ -25,6 +25,8 @@ require "google/cloud/datastore/gql_query"
 require "google/cloud/datastore/cursor"
 require "google/cloud/datastore/dataset/lookup_results"
 require "google/cloud/datastore/dataset/query_results"
+require "google/cloud/datastore/transaction"
+require "google/cloud/datastore/read_only_transaction"
 
 module Google
   module Cloud
@@ -466,6 +468,19 @@ module Google
         ##
         # Creates a Datastore Transaction.
         #
+        # @see https://cloud.google.com/datastore/docs/concepts/transactions
+        #   Transactions
+        #
+        # @param [String] previous_transaction The transaction identifier of a
+        #   transaction that is being retried. Read-write transactions may fail
+        #   due to contention. A read-write transaction can be retried by
+        #   specifying `previous_transaction` when creating the new transaction.
+        #
+        #   Specifying `previous_transaction` provides information that can be
+        #   used to improve throughput. In particular, if transactional
+        #   operations A and B conflict, specifying the `previous_transaction`
+        #   can help to prevent livelock. (See {Transaction#id})
+        #
         # @yield [tx] a block yielding a new transaction
         # @yieldparam [Transaction] tx the transaction object
         #
@@ -509,8 +524,9 @@ module Google
         #     tx.rollback
         #   end
         #
-        def transaction
-          tx = Transaction.new service
+        def transaction previous_transaction: nil
+          tx = Transaction.new service,
+                               previous_transaction: previous_transaction
           return tx unless block_given?
 
           begin
@@ -526,6 +542,64 @@ module Google
             raise TransactionError, "Transaction failed to commit."
           end
         end
+
+        ##
+        # Creates a read-only transaction that provides a consistent snapshot of
+        # Cloud Datastore. This can be useful when multiple reads are needed to
+        # render a page or export data that must be consistent.
+        #
+        # A read-only transaction cannot modify entities; in return they do not
+        # contend with other read-write or read-only transactions. Using a
+        # read-only transaction for transactions that only read data will
+        # potentially improve throughput.
+        #
+        # Read-only single-group transactions never fail due to concurrent
+        # modifications, so you don't have to implement retries upon failure.
+        # However, multi-entity-group transactions can fail due to concurrent
+        # modifications, so these should have retries.
+        #
+        # @see https://cloud.google.com/datastore/docs/concepts/transactions
+        #   Transactions
+        #
+        # @yield [tx] a block yielding a new transaction
+        # @yieldparam [ReadOnlyTransaction] tx the transaction object
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task_list_key = datastore.key "TaskList", "default"
+        #   query = datastore.query("Task").
+        #     ancestor(task_list_key)
+        #
+        #   tasks = nil
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     task_list = tx.find task_list_key
+        #     if task_list
+        #       tasks = tx.run query
+        #     end
+        #   end
+        #
+        def read_only_transaction
+          tx = ReadOnlyTransaction.new service
+          return tx unless block_given?
+
+          begin
+            yield tx
+            tx.commit
+          rescue
+            begin
+              tx.rollback
+            rescue
+              raise TransactionError,
+                    "Transaction failed to commit and rollback."
+            end
+            raise TransactionError, "Transaction failed to commit."
+          end
+        end
+        alias_method :snapshot, :read_only_transaction
 
         ##
         # Create a new Query instance. This is a convenience method to make the
