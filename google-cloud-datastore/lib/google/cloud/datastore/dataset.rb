@@ -544,12 +544,19 @@ module Google
         end
 
         ##
-        # Creates a read-only Datastore transaction that only allows reads.
+        # Creates a read-only transaction that provides a consistent snapshot of
+        # Cloud Datastore. This can be useful when multiple reads are needed to
+        # render a page or export data that must be consistent.
         #
         # A read-only transaction cannot modify entities; in return they do not
         # contend with other read-write or read-only transactions. Using a
         # read-only transaction for transactions that only read data will
         # potentially improve throughput.
+        #
+        # Read-only single-group transactions never fail due to concurrent
+        # modifications, so you don't have to implement retries upon failure.
+        # However, multi-entity-group transactions can fail due to concurrent
+        # modifications, so these should have retries.
         #
         # @see https://cloud.google.com/datastore/docs/concepts/transactions
         #   Transactions
@@ -592,6 +599,7 @@ module Google
             raise TransactionError, "Transaction failed to commit."
           end
         end
+        alias_method :snapshot, :read_only_transaction
 
         ##
         # Create a new Query instance. This is a convenience method to make the

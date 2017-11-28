@@ -90,6 +90,7 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Datastore::Dataset#get"
   doctest.skip "Google::Cloud::Datastore::Dataset#lookup"
   doctest.skip "Google::Cloud::Datastore::Dataset#run_query"
+  doctest.skip "Google::Cloud::Datastore::Dataset#snapshot"
   doctest.skip "Google::Cloud::Datastore::Key#dataset_id"
   doctest.skip "Google::Cloud::Datastore::Query#filter"
   doctest.skip "Google::Cloud::Datastore::Query#cursor"
