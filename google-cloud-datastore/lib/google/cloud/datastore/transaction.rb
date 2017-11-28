@@ -26,6 +26,8 @@ module Google
       # @see https://cloud.google.com/datastore/docs/concepts/transactions
       #   Transactions
       #
+      # @attr_reader [String] id The identifier of the transaction.
+      #
       # @example Transactional update:
       #   require "google/cloud/datastore"
       #
@@ -47,8 +49,9 @@ module Google
         ##
         # @private Creates a new Transaction instance.
         # Takes a Service instead of project and Credentials.
-        def initialize service
+        def initialize service, previous_transaction: nil
           @service = service
+          @previous_transaction = previous_transaction
           reset!
           start
         end
@@ -267,7 +270,8 @@ module Google
           fail TransactionError, "Transaction already opened." unless @id.nil?
 
           ensure_service!
-          tx_res = service.begin_transaction
+          tx_res = service.begin_transaction \
+            previous_transaction: @previous_transaction
           @id = tx_res.transaction
         end
         alias_method :begin_transaction, :start

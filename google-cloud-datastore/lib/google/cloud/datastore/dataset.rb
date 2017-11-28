@@ -471,6 +471,16 @@ module Google
         # @see https://cloud.google.com/datastore/docs/concepts/transactions
         #   Transactions
         #
+        # @param [String] previous_transaction The transaction identifier of a
+        #   transaction that is being retried. Read-write transactions may fail
+        #   due to contention. A read-write transaction can be retried by
+        #   specifying `previous_transaction` when creating the new transaction.
+        #
+        #   Specifying `previous_transaction` provides information that can be
+        #   used to improve throughput. In particular, if transactional
+        #   operations A and B conflict, specifying the `previous_transaction`
+        #   can help to prevent livelock. (See {Transaction#id})
+        #
         # @yield [tx] a block yielding a new transaction
         # @yieldparam [Transaction] tx the transaction object
         #
@@ -514,8 +524,9 @@ module Google
         #     tx.rollback
         #   end
         #
-        def transaction
-          tx = Transaction.new service
+        def transaction previous_transaction: nil
+          tx = Transaction.new service,
+                               previous_transaction: previous_transaction
           return tx unless block_given?
 
           begin

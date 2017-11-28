@@ -1126,7 +1126,22 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     tx.id.must_equal "giterdone"
   end
 
-  it "transaction will return a read-only Transaction" do
+  it "transaction will return a Transaction with previous_transaction" do
+    previous_transaction_id = "giterdone-previous".encode("ASCII-8BIT")
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    tx_options = Google::Datastore::V1::TransactionOptions.new
+    tx_options.read_write = Google::Datastore::V1::TransactionOptions::ReadWrite.new(
+        previous_transaction: previous_transaction_id
+      )
+    begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
+
+    tx = dataset.transaction previous_transaction: previous_transaction_id
+    tx.must_be_kind_of Google::Cloud::Datastore::Transaction
+    tx.id.must_equal "giterdone"
+  end
+
+  it "read_only_transaction will return a read-only Transaction" do
     tx_id = "giterdone".encode("ASCII-8BIT")
     tx_options = Google::Datastore::V1::TransactionOptions.new(
       read_write: nil,
@@ -1192,7 +1207,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
       stub = Object.new
       stub.instance_variable_set "@response", begin_tx_res
-      def stub.begin_transaction read_only: nil
+      def stub.begin_transaction read_only: nil, previous_transaction: nil
         @response
       end
       def stub.commit *args
