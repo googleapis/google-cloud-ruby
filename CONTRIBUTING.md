@@ -27,10 +27,16 @@ small amount of setup:
     $ gem install bundler
     ```
 
-3. Install the project dependencies.
+3. Install the top-level project dependencies.
 
     ```sh
     $ bundle install
+    ```
+
+4. Install the dependencies for each package.
+
+    ```sh
+    $ bundle exec rake bundleupdate
     ```
 
 ## Console
@@ -46,9 +52,10 @@ $ bundle exec rake console
 
 Tests are very important part of google-cloud-ruby. All contributions should include tests that ensure the contributed code behaves as expected.
 
-To run the unit tests, documentation tests, and code style checks together:
+To run the unit tests, documentation tests, and code style checks together for a package:
 
 ``` sh
+$ cd <package-name>
 $ rake ci
 ```
 
@@ -59,9 +66,10 @@ To run the command above, plus all acceptance tests, use `rake ci:acceptance` or
 
 The project uses the [minitest](https://github.com/seattlerb/minitest) library, including [specs](https://github.com/seattlerb/minitest#specs), [mocks](https://github.com/seattlerb/minitest#mocks) and [minitest-autotest](https://github.com/seattlerb/minitest-autotest).
 
-To run the unit tests:
+To run the unit tests for a package:
 
 ``` sh
+$ cd <package-name>
 $ rake test
 ```
 
@@ -71,9 +79,10 @@ The project tests the code examples in the each gem's [YARD]()-based documentati
 
 The example testing functions in a way that is very similar to unit testing, and in fact the library providing it, [yard-doctest](https://github.com/p0deje/yard-doctest), is based on the project's unit test library, [minitest](https://github.com/seattlerb/minitest).
 
-To run the documentation tests:
+To run the documentation tests for a package:
 
 ``` sh
+$ cd <package-name>
 $ rake doctest
 ```
 
@@ -81,7 +90,7 @@ $ rake doctest
 
 ### Acceptance Tests
 
-The google-cloud-ruby acceptance tests interact with the following live service APIs:
+The google-cloud-ruby acceptance tests interact with the live service API (or APIs) for each package, including:
 
 * BigQuery
 * Cloud Datastore
@@ -121,28 +130,31 @@ To run the DNS acceptance tests you must give your service account permissions t
 
 #### Running the acceptance tests
 
-To run the acceptance tests:
+To run the acceptance tests for a package:
 
 ``` sh
-$ rake test:acceptance[PROJECT_ID,KEYFILE_PATH]
+$ cd <package-name>
+$ rake acceptance[PROJECT_ID,KEYFILE_PATH]
 ```
 
 Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCLOUD_TEST_KEYFILE` environment variables:
 
 ``` sh
+$ cd <package-name>
 $ export GCLOUD_TEST_PROJECT=my-project-id
 $ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
-$ rake test:acceptance
+$ rake acceptance
 ```
 
 If you want to use different values for Datastore vs. Storage acceptance tests, for example, you can use the `DATASTORE_TEST_` and `STORAGE_TEST_` environment variables:
 
 ``` sh
+$ cd <package-name>
 $ export DATASTORE_TEST_PROJECT=my-project-id
 $ export DATASTORE_TEST_KEYFILE=/path/to/keyfile.json
 $ export STORAGE_TEST_PROJECT=my-other-project-id
 $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
-$ rake test:acceptance
+$ rake acceptance
 ```
 
 ### Integration Tests
@@ -167,6 +179,7 @@ Please follow the established coding style in the library. The style is is large
 You can check your code against these rules by running Rubocop like so:
 
 ```sh
+$ cd <package-name>
 $ rake rubocop
 ```
 
