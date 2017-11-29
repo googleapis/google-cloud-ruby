@@ -76,14 +76,18 @@ module Google
         # @private New Results from a SpeechRecognitionAlternative object.
         def self.from_grpc grpc
           head, *tail = *grpc.alternatives
-          return nil if head.nil?
+
+          return unless head
+
           words = Array(head.words).map do |w|
             Word.new w.word, Convert.duration_to_number(w.start_time),
                      Convert.duration_to_number(w.end_time)
           end
+
           alternatives = tail.map do |alt|
             Alternative.new alt.transcript, alt.confidence
           end
+
           new head.transcript, head.confidence, words, alternatives
         end
 
@@ -228,10 +232,13 @@ module Google
         # @private New InterimResult from a StreamingRecognitionResult object.
         def self.from_grpc grpc
           head, *tail = *grpc.alternatives
-          return nil if head.nil?
+
+          return unless head
+
           alternatives = tail.map do |alt|
             Result::Alternative.new alt.transcript, alt.confidence
           end
+
           new head.transcript, head.confidence, grpc.stability, alternatives
         end
       end

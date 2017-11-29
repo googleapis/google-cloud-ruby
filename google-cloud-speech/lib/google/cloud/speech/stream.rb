@@ -67,6 +67,7 @@ module Google
         # Starts the stream. The stream will be started in the first #send call.
         def start
           return if @request_queue
+
           @request_queue = EnumeratorQueue.new(self)
           @request_queue.push @streaming_recognize_request
 
@@ -129,7 +130,7 @@ module Google
         # sent.
         def stop
           synchronize do
-            return if @request_queue.nil?
+            return unless @request_queue
             @request_queue.push self
             @stopped = true
           end

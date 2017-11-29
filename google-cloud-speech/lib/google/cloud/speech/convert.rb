@@ -22,20 +22,22 @@ module Google
       # @private Helper module for converting Speech values.
       module Convert
         module ClassMethods
+          BILLION = 1_000_000_000
+
           def number_to_duration number
             return nil if number.nil?
 
             Google::Protobuf::Duration.new \
               seconds: number.to_i,
-              nanos: (number.remainder(1) * 1000000000).round
+              nanos: (number.remainder(1) * BILLION).round
           end
 
           def duration_to_number duration
             return nil if duration.nil?
 
-            return duration.seconds if duration.nanos == 0
+            return duration.seconds if duration.nanos.zero?
 
-            duration.seconds + (duration.nanos / 1000000000.0)
+            duration.seconds + (duration.nanos / BILLION.to_f)
           end
         end
 

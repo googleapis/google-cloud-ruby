@@ -124,6 +124,7 @@ module Google
         #
         def results
           return nil unless results?
+
           @grpc.response.results.map do |result_grpc|
             Result.from_grpc result_grpc
           end
@@ -174,7 +175,8 @@ module Google
         #   error = op.error
         #
         def error
-          return nil unless error?
+          return unless error?
+
           Google::Cloud::Error.from_error @grpc.error
         end
 

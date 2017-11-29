@@ -190,9 +190,9 @@ module Google
           else
             audio = Audio.from_source source, self
           end
-          audio.encoding = encoding unless encoding.nil?
-          audio.language = language unless language.nil?
-          audio.sample_rate = sample_rate unless sample_rate.nil?
+          audio.encoding = encoding if encoding
+          audio.language = language if language
+          audio.sample_rate = sample_rate if sample_rate
           audio
         end
 
@@ -626,7 +626,6 @@ module Google
         def audio_config encoding: nil, language: nil, sample_rate: nil,
                          max_alternatives: nil, profanity_filter: nil,
                          phrases: nil, words: nil
-          contexts = nil
           contexts = [V1::SpeechContext.new(phrases: phrases)] if phrases
           language = String(language) unless language.nil?
           V1::RecognitionConfig.new({
