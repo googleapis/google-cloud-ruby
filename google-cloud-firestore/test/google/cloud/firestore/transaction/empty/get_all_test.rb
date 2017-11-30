@@ -105,7 +105,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :empty, :mock_firestor
     docs.first.parent.database_id.must_equal "(default)"
     docs.first.parent.collection_id.must_equal "users"
     docs.first.parent.collection_path.must_equal "users"
-    docs.first.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+    docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
 
     docs.first.data.must_be_kind_of Hash
     docs.first.data.must_equal({ name: "Mike" })
@@ -133,7 +133,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :empty, :mock_firestor
     docs.first.parent.database_id.must_equal "(default)"
     docs.first.parent.collection_id.must_equal "users"
     docs.first.parent.collection_path.must_equal "users"
-    docs.first.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+    docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
 
     docs.first.data.must_be_kind_of Hash
     docs.first.data.must_equal({ name: "Mike" })
@@ -190,7 +190,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :empty, :mock_firestor
       doc.parent.database_id.must_equal "(default)"
       doc.parent.collection_id.must_equal "users"
       doc.parent.collection_path.must_equal "users"
-      doc.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+      doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
     end
 
     docs[0].must_be :exists?

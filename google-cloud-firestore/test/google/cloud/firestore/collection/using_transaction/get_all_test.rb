@@ -107,7 +107,7 @@ describe Google::Cloud::Firestore::Database, :get_all, :using_transaction, :mock
     docs.first.parent.database_id.must_equal "(default)"
     docs.first.parent.collection_id.must_equal "messages"
     docs.first.parent.collection_path.must_equal "users/mike/messages"
-    docs.first.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+    docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
     docs.first.data.must_be_kind_of Hash
     docs.first.data.must_equal({ body: "LGTM" })
@@ -138,7 +138,7 @@ describe Google::Cloud::Firestore::Database, :get_all, :using_transaction, :mock
     docs.first.parent.database_id.must_equal "(default)"
     docs.first.parent.collection_id.must_equal "messages"
     docs.first.parent.collection_path.must_equal "users/mike/messages"
-    docs.first.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+    docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
     docs.first.data.must_be_kind_of Hash
     docs.first.data.must_equal({ body: "LGTM" })
@@ -198,7 +198,7 @@ describe Google::Cloud::Firestore::Database, :get_all, :using_transaction, :mock
       doc.parent.database_id.must_equal "(default)"
       doc.parent.collection_id.must_equal "messages"
       doc.parent.collection_path.must_equal "users/mike/messages"
-      doc.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+      doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
       doc.ref.context.must_equal transaction
       doc.parent.context.must_equal transaction

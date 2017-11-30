@@ -25,14 +25,14 @@ describe Google::Cloud::Firestore::Collection, :mock_firestore do
     collection.database_id.must_equal "(default)"
     collection.collection_id.must_equal collection_id
     collection.collection_path.must_equal collection_path
-    collection.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+    collection.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
     collection.parent.must_be_kind_of Google::Cloud::Firestore::Document::Reference
     collection.parent.project_id.must_equal project
     collection.parent.database_id.must_equal "(default)"
     collection.parent.document_id.must_equal "mike"
     collection.parent.document_path.must_equal "users/mike"
-    collection.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike"
+    collection.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike"
   end
 
   it "represents a top-level collection reference" do
@@ -43,11 +43,11 @@ describe Google::Cloud::Firestore::Collection, :mock_firestore do
     collection.database_id.must_equal "(default)"
     collection.collection_id.must_equal collection_id
     collection.collection_path.must_equal collection_id
-    collection.path.must_equal "projects/test/databases/(default)/documents/messages"
+    collection.path.must_equal "projects/projectID/databases/(default)/documents/messages"
 
     collection.parent.must_be_kind_of Google::Cloud::Firestore::Database
     collection.parent.project_id.must_equal project
     collection.parent.database_id.must_equal "(default)"
-    collection.parent.path.must_equal "projects/test/databases/(default)"
+    collection.parent.path.must_equal "projects/projectID/databases/(default)"
   end
 end

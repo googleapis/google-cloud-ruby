@@ -35,14 +35,14 @@ describe Google::Cloud::Firestore::Collection, :doc, :using_snapshot, :mock_fire
     document.database_id.must_equal "(default)"
     document.document_id.must_equal document_id
     document.document_path.must_equal "#{collection_path}/#{document_id}"
-    document.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/abc123"
+    document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123"
 
     document.parent.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
     document.parent.project_id.must_equal project
     document.parent.database_id.must_equal "(default)"
     document.parent.collection_id.must_equal collection_id
     document.parent.collection_path.must_equal collection_path
-    document.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+    document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
     document.context.must_equal snapshot
     document.parent.context.must_equal snapshot
@@ -58,14 +58,14 @@ describe Google::Cloud::Firestore::Collection, :doc, :using_snapshot, :mock_fire
     document.database_id.must_equal "(default)"
     document.document_id.must_equal "xyz789"
     document.document_path.must_equal "users/mike/messages/abc123/likes/xyz789"
-    document.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/abc123/likes/xyz789"
+    document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes/xyz789"
 
     document.parent.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
     document.parent.project_id.must_equal project
     document.parent.database_id.must_equal "(default)"
     document.parent.collection_id.must_equal "likes"
     document.parent.collection_path.must_equal "users/mike/messages/abc123/likes"
-    document.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/abc123/likes"
+    document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes"
 
     document.context.must_equal snapshot
     document.parent.context.must_equal snapshot
@@ -81,14 +81,14 @@ describe Google::Cloud::Firestore::Collection, :doc, :using_snapshot, :mock_fire
       document.database_id.must_equal "(default)"
       document.document_id.must_equal random_document_id
       document.document_path.must_equal "#{collection_path}/#{random_document_id}"
-      document.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/helloiamarandomdocid"
+      document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/helloiamarandomdocid"
 
       document.parent.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
       document.parent.project_id.must_equal project
       document.parent.database_id.must_equal "(default)"
       document.parent.collection_id.must_equal collection_id
       document.parent.collection_path.must_equal collection_path
-      document.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+      document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
       document.context.must_equal snapshot
       document.parent.context.must_equal snapshot
@@ -113,14 +113,14 @@ describe Google::Cloud::Firestore::Collection, :doc, :using_snapshot, :mock_fire
       document.database_id.must_equal "(default)"
       document.document_id.must_equal document_id
       document.document_path.must_equal "#{collection_path}/#{document_id}"
-      document.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/abc123"
+      document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123"
 
       document.parent.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
       document.parent.project_id.must_equal project
       document.parent.database_id.must_equal "(default)"
       document.parent.collection_id.must_equal collection_id
       document.parent.collection_path.must_equal collection_path
-      document.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+      document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
       document.context.must_equal snapshot
       document.parent.context.must_equal snapshot
@@ -136,14 +136,14 @@ describe Google::Cloud::Firestore::Collection, :doc, :using_snapshot, :mock_fire
       document.database_id.must_equal "(default)"
       document.document_id.must_equal "xyz789"
       document.document_path.must_equal "users/mike/messages/abc123/likes/xyz789"
-      document.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/abc123/likes/xyz789"
+      document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes/xyz789"
 
       document.parent.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
       document.parent.project_id.must_equal project
       document.parent.database_id.must_equal "(default)"
       document.parent.collection_id.must_equal "likes"
       document.parent.collection_path.must_equal "users/mike/messages/abc123/likes"
-      document.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/abc123/likes"
+      document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/abc123/likes"
 
       document.context.must_equal snapshot
       document.parent.context.must_equal snapshot
@@ -159,14 +159,14 @@ describe Google::Cloud::Firestore::Collection, :doc, :using_snapshot, :mock_fire
         document.database_id.must_equal "(default)"
         document.document_id.must_equal random_document_id
         document.document_path.must_equal "#{collection_path}/#{random_document_id}"
-        document.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages/helloiamarandomdocid"
+        document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages/helloiamarandomdocid"
 
         document.parent.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
         document.parent.project_id.must_equal project
         document.parent.database_id.must_equal "(default)"
         document.parent.collection_id.must_equal collection_id
         document.parent.collection_path.must_equal collection_path
-        document.parent.path.must_equal "projects/test/databases/(default)/documents/users/mike/messages"
+        document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
         document.context.must_equal snapshot
         document.parent.context.must_equal snapshot

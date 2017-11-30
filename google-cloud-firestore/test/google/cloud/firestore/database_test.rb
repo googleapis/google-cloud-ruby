@@ -19,6 +19,6 @@ describe Google::Cloud::Firestore::Database, :mock_firestore do
     firestore.must_be_kind_of Google::Cloud::Firestore::Database
     firestore.project_id.must_equal project
     firestore.database_id.must_equal "(default)"
-    firestore.path.must_equal "projects/test/databases/(default)"
+    firestore.path.must_equal "projects/projectID/databases/(default)"
   end
 end

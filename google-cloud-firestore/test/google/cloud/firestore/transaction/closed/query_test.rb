@@ -104,7 +104,7 @@ describe Google::Cloud::Firestore::Transaction, :query, :closed, :mock_firestore
       result.parent.database_id.must_equal "(default)"
       result.parent.collection_id.must_equal "users"
       result.parent.collection_path.must_equal "users"
-      result.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+      result.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
 
       result.ref.context.must_equal firestore
       result.parent.context.must_equal firestore

@@ -77,7 +77,7 @@ describe Google::Cloud::Firestore::Snapshot, :docs, :closed, :mock_firestore do
       doc.parent.database_id.must_equal "(default)"
       doc.parent.collection_id.must_equal "users"
       doc.parent.collection_path.must_equal "users"
-      doc.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+      doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
     end
 
     docs.first.data.must_be_kind_of Hash

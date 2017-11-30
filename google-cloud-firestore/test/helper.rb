@@ -43,7 +43,7 @@ class Google::Gax::CallOptions
 end
 
 class MockFirestore < Minitest::Spec
-  let(:project) { "test" }
+  let(:project) { "projectID" }
   let(:default_project_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
   let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}/databases/(default)" }) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }

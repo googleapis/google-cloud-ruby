@@ -59,7 +59,7 @@ describe Google::Cloud::Firestore::Snapshot, :get_all, :closed, :mock_firestore 
     doc_snp.parent.database_id.must_equal "(default)"
     doc_snp.parent.collection_id.must_equal "users"
     doc_snp.parent.collection_path.must_equal "users"
-    doc_snp.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+    doc_snp.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
 
     doc_snp.data.must_be_kind_of Hash
     doc_snp.data.must_equal({ name: "Mike" })

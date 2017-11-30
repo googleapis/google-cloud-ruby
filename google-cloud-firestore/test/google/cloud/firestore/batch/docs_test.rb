@@ -99,7 +99,7 @@ describe Google::Cloud::Firestore::Batch, :docs, :mock_firestore do
       doc.parent.database_id.must_equal "(default)"
       doc.parent.collection_id.must_equal "users"
       doc.parent.collection_path.must_equal "users"
-      doc.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+      doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
 
       doc.ref.context.must_equal batch
       doc.parent.context.must_equal batch

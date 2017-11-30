@@ -108,7 +108,7 @@ describe Google::Cloud::Firestore::Snapshot, :docs, :empty, :with_read_time, :mo
       doc.parent.database_id.must_equal "(default)"
       doc.parent.collection_id.must_equal "users"
       doc.parent.collection_path.must_equal "users"
-      doc.parent.path.must_equal "projects/test/databases/(default)/documents/users"
+      doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
 
       doc.ref.context.must_equal snapshot
       doc.parent.context.must_equal snapshot
