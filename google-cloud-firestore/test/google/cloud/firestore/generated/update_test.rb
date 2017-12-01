@@ -325,7 +325,7 @@ describe "Cross-Language Update Tests", :mock_firestore do
             }
           ),
           update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-            field_paths: ["a", "b.c", "b.d"]
+            field_paths: ["a", "b.d", "b.c"]
           ),
           current_document: Google::Firestore::V1beta1::Precondition.new(
             exists: true)

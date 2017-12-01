@@ -24,9 +24,16 @@ describe Google::Cloud::Firestore::Convert, :remove_from do
 
     hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO
     hash.must_equal({ "foo" => "FOO" })
-    paths.must_equal [:bar]
+    paths.must_equal ["bar"]
   end
 
+  it "finds dotted paths belonging to the top-level nodes" do
+    orig = { "foo.bar" => :HELLO, baz: { baf: :HELLO }, hello: :world }
+
+    hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO
+    hash.must_equal({ "hello" => :world })
+    paths.must_equal ["`foo.bar`", "baz.baf"]
+  end
   it "does not find paths belonging to an array" do
     orig = ["FOO", :HELLO]
 
@@ -154,5 +161,63 @@ describe Google::Cloud::Firestore::Convert, :remove_from do
     hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO
     hash.must_be :nil?
     paths.must_be :empty?
+  end
+
+  describe "recurse: false" do
+    it "finds only paths belonging to the top-level nodes" do
+      orig = { foo: "FOO", bar: { baz: :HELLO }, biz: :HELLO }
+
+      hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO, recurse: false
+      hash.must_equal({ "foo" => "FOO", "bar" => { baz: :HELLO } })
+      paths.must_equal ["biz"]
+    end
+
+    it "finds dotted paths belonging to the top-level nodes" do
+      orig = { "foo.bar" => :HELLO, baz: { baf: :HELLO }, hello: :world }
+
+      hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO, recurse: false
+      hash.must_equal({ "baz" => { baf: :HELLO }, "hello" => :world })
+      paths.must_equal ["foo.bar"]
+    end
+
+    it "does not find value on a hash" do
+      orig = { foo: "BAR", baz: "BIF" }
+
+      hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO, recurse: false
+      hash.must_equal({ "foo" => "BAR", "baz" => "BIF" })
+      paths.must_be :empty?
+    end
+
+    it "does not find value on an array" do
+      orig = ["BAZ", "BIF"]
+
+      hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO, recurse: false
+      hash.must_be :nil?
+      paths.must_be :empty?
+    end
+
+    it "does not find value on a nested hash" do
+      orig = { foo: { bar: :BAZ } }
+
+      hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO, recurse: false
+      hash.must_equal({ "foo" => { bar: :BAZ } })
+      paths.must_be :empty?
+    end
+
+    it "does not find value on a hash nested under an array" do
+      orig = ["BAZ", "BIF", { foo: :BAR }]
+
+      hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO, recurse: false
+      hash.must_be :nil?
+      paths.must_be :empty?
+    end
+
+    it "does not find value on a nested array" do
+      orig = [:foo, :bar, ["BAZ", "BIF"]]
+
+      hash, paths = Google::Cloud::Firestore::Convert.remove_from orig, :HELLO, recurse: false
+      hash.must_be :nil?
+      paths.must_be :empty?
+    end
   end
 end

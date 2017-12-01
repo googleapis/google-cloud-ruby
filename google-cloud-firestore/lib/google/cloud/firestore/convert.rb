@@ -22,9 +22,8 @@ module Google
       ##
       # @private Helper module for converting Protobuf values.
       module Convert
+        # rubocop:disable all
         module ClassMethods
-          # rubocop:disable all
-
           def time_to_timestamp time
             return nil if time.nil?
 
@@ -122,6 +121,178 @@ module Google
             end
           end
 
+          def create_writes doc_path, data
+            writes = []
+
+            if is_nested data, :DELETE
+              fail ArgumentError, "DELETE not allowed on create"
+            end
+            fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+            data, server_time_paths = remove_from data, :SERVER_TIME
+
+            if data.any? || server_time_paths.empty?
+              write = Google::Firestore::V1beta1::Write.new(
+                update: Google::Firestore::V1beta1::Document.new(
+                  name: doc_path,
+                  fields: hash_to_fields(data)),
+                current_document: Google::Firestore::V1beta1::Precondition.new(
+                  exists: false)
+              )
+              writes << write
+            end
+
+            if server_time_paths.any?
+              transform_write = transform_write doc_path, server_time_paths
+
+              if data.empty?
+                transform_write.current_document = \
+                  Google::Firestore::V1beta1::Precondition.new(exists: false)
+              end
+
+              writes << transform_write
+            end
+
+            writes
+          end
+
+          def set_writes doc_path, data, merge: nil
+            writes = []
+
+            fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+            data, delete_paths = remove_from data, :DELETE
+            fail ArgumentError, "DELETE not allowed on set" if delete_paths.any?
+
+            data, server_time_paths = remove_from data, :SERVER_TIME
+
+            write = Google::Firestore::V1beta1::Write.new(
+              update: Google::Firestore::V1beta1::Document.new(
+                name: doc_path,
+                fields: hash_to_fields(data))
+            )
+
+            if merge
+              if merge == true
+                # extract the leaf node field paths from data
+                field_paths = identify_leaf_nodes data
+              else
+                field_paths = format_merge_field_paths merge
+              end
+
+              # Ensure provided field paths are valid.
+              all_valid = identify_leaf_nodes data
+              verify_paths = field_paths - server_time_paths
+              all_valid_check = verify_paths.map do |verify_path|
+                all_valid.include?(verify_path) ||
+                all_valid.select { |fp| fp.start_with? "#{verify_path}." }.any?
+              end
+              all_valid_check = all_valid_check.include? false
+              fail ArgumentError, "all fields must be in data" if all_valid_check
+
+              # Choose only the data there are field paths for
+              data = select_by_field_paths data, verify_paths
+
+              if data.empty?
+                if merge == true && server_time_paths.empty?
+                  fail ArgumentError, "data required for merge: true"
+                end
+                write = nil
+              else
+                write = Google::Firestore::V1beta1::Write.new(
+                  update: Google::Firestore::V1beta1::Document.new(
+                    name: doc_path,
+                    fields: hash_to_fields(data)),
+                  update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+                    field_paths: field_paths)
+                )
+              end
+            end
+
+            writes << write if write
+
+            if server_time_paths.any?
+              transform_write = transform_write doc_path, server_time_paths
+              writes << transform_write
+            end
+
+            writes
+          end
+
+          def update_writes doc_path, data, update_time: nil
+            writes = []
+
+            fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+
+            data, delete_paths = remove_from data, :DELETE, recurse: false
+            data, nested_deletes = remove_from data, :DELETE
+            fail ArgumentError, "DELETE cannot be nested" if nested_deletes.any?
+
+            data, root_server_time_paths = remove_from data, :SERVER_TIME, recurse: false
+            data, nested_server_time_paths = remove_from data, :SERVER_TIME
+            server_time_paths = root_server_time_paths + nested_server_time_paths
+
+            field_paths = data.keys.map(&:to_s).map do |path|
+              path.split(".").map { |p| escape_field_path p }.join(".")
+            end
+
+            # extract data after building field paths
+            data, field_paths = extract_field_paths data
+            field_paths += delete_paths
+
+            if data.empty? && delete_paths.empty? && server_time_paths.empty?
+              fail ArgumentError, "data is required"
+            end
+
+            if data.any? || delete_paths.any?
+              write = Google::Firestore::V1beta1::Write.new(
+                update: Google::Firestore::V1beta1::Document.new(
+                  name: doc_path,
+                  fields: hash_to_fields(data)),
+                update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+                  field_paths: field_paths),
+                current_document: Google::Firestore::V1beta1::Precondition.new(
+                  exists: true)
+              )
+              if update_time
+                write.current_document = \
+                  Google::Firestore::V1beta1::Precondition.new(
+                    update_time: time_to_timestamp(update_time))
+              end
+              writes << write
+            end
+
+            if server_time_paths.any?
+              transform_write = transform_write doc_path, server_time_paths
+              if data.empty?
+                transform_write.current_document = \
+                  Google::Firestore::V1beta1::Precondition.new(exists: true)
+              end
+              writes << transform_write
+            end
+
+            writes
+          end
+
+          def delete_write doc_path, exists: nil, update_time: nil
+            if !exists.nil? && !update_time.nil?
+              fail ArgumentError, "cannot specify both exists and update_time"
+            end
+
+            write = Google::Firestore::V1beta1::Write.new(
+              delete: doc_path
+            )
+
+            unless exists.nil? && update_time.nil?
+              write.current_document = \
+                Google::Firestore::V1beta1::Precondition.new({
+                  exists: exists, update_time: time_to_timestamp(update_time)
+                }.delete_if { |_, v| v.nil? })
+            end
+
+            write
+          end
+
           def is_nested obj, target
             return true if obj == target
 
@@ -133,33 +304,43 @@ module Google
             false
           end
 
-          def remove_from obj, target
+          def remove_from obj, target, recurse: true
             return [nil, []] unless obj.is_a? Hash
 
             paths = []
             new_pairs = obj.map do |key, value|
               if value == target
-                paths << key
-                nil # will be removed by calling compact
-              elsif value.is_a? Hash
-                nested_hash, nested_paths = remove_from value, target
-                if nested_paths.any?
-                  nested_paths.each do |nested_path|
-                    paths << "#{escape_field_path(key)}.#{nested_path}"
-                  end
-                end
-                if nested_hash.empty?
-                  nil # will be removed by calling compact
+                if recurse
+                  # escape when recursing
+                  paths << escape_field_path(key)
                 else
-                  [String(key), nested_hash]
+                  # don't escape when recursing
+                  paths << String(key)
                 end
-              else
-                if value.is_a? Array
-                  if is_nested value, target
-                    raise ArgumentError, "cannot nest #{target} under arrays"
+                nil # will be removed by calling compact
+              elsif recurse
+                if value.is_a? Hash
+                  nested_hash, nested_paths = remove_from value, target
+                  if nested_paths.any?
+                    nested_paths.each do |nested_path|
+                      paths << "#{escape_field_path(key)}.#{nested_path}"
+                    end
                   end
-                end
+                  if nested_hash.empty?
+                    nil # will be removed by calling compact
+                  else
+                    [String(key), nested_hash]
+                  end
+                else
+                  if value.is_a? Array
+                    if is_nested value, target
+                      fail ArgumentError, "cannot nest #{target} under arrays"
+                    end
+                  end
 
+                  [String(key), value]
+                end
+              else # no recurse
                 [String(key), value]
               end
             end
@@ -168,12 +349,12 @@ module Google
             [Hash[new_pairs.compact], paths]
           end
 
-          def extract_leaf_nodes hash
+          def identify_leaf_nodes hash
             paths = []
 
             hash.map do |key, value|
               if value.is_a? Hash
-                nested_paths = extract_leaf_nodes value
+                nested_paths = identify_leaf_nodes value
                 nested_paths.each do |nested_path|
                   paths << "#{escape_field_path(key)}.#{nested_path}"
                 end
@@ -228,33 +409,41 @@ module Google
             left_hash
           end
 
+          START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/
+          INVALID_FIELD_PATH_CHARS = /[\~\*\.\/\[\]]/
+          ESCAPED_FIELD_PATH = /\A\`(.*)\`\z/
+
           def extract_field_paths hash
-            invalid_field_path_chars = /[\~\*\/\[\]]/
+            field_paths = hash.keys.map do |path|
+              path.split(".").map { |p| escape_field_path p }.join(".")
+            end
 
             dup_hash = {}
             hash.each do |keys, value|
               tmp_dup = dup_hash
               last_key = nil
               keys.to_s.split(".").each do |key|
-                raise ArgumentError, "empty paths not allowed" if key.empty?
-                if invalid_field_path_chars.match key
-                  raise ArgumentError, "invalid character"
+                fail ArgumentError, "empty paths not allowed" if key.empty?
+                if INVALID_FIELD_PATH_CHARS.match key
+                  fail ArgumentError, "invalid character"
                 end
                 tmp_dup = tmp_dup[last_key] unless last_key.nil?
                 last_key = key
                 if !tmp_dup[key].nil?
-                  raise ArgumentError, "one field cannot be a prefix of another"
+                  fail ArgumentError, "one field cannot be a prefix of another"
                 end
                 tmp_dup[key] = {}
               end
               tmp_dup[last_key] = hash[keys]
             end
-            dup_hash
+            [dup_hash, field_paths]
           end
 
           def escape_field_path str
-            str = String(str)
-            return str if str =~ /\A[a-zA-Z_]/
+            str = String str
+
+            return "`#{str}`" if INVALID_FIELD_PATH_CHARS.match str
+            return str if START_FIELD_PATH_CHARS.match str
 
             "`#{str}`"
           end
@@ -267,14 +456,41 @@ module Google
           end
 
           def unescape_field_node str
-            escaped_field_path_regexp = /\A\`(.*)\`\z/
-            match = escaped_field_path_regexp.match str
+            match = ESCAPED_FIELD_PATH.match str
             return match[1] if match
             str
           end
 
-          # rubocop:enable all
+          def format_merge_field_paths merge
+            Array(merge).map do |inner_field_path|
+              if inner_field_path.is_a? Array
+                paths = inner_field_path.map do |field_path|
+                  escape_field_path field_path
+                end
+                paths.join "."
+              else
+                String inner_field_path
+              end
+            end
+          end
+
+          def transform_write doc_path, paths, server_value: :REQUEST_TIME
+            field_transforms = paths.map do |path|
+              Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                field_path: path,
+                set_to_server_value: server_value
+              )
+            end
+
+            Google::Firestore::V1beta1::Write.new(
+              transform: Google::Firestore::V1beta1::DocumentTransform.new(
+                document: doc_path,
+                field_transforms: field_transforms
+              )
+            )
+          end
         end
+        # rubocop:enable all
 
         extend ClassMethods
       end

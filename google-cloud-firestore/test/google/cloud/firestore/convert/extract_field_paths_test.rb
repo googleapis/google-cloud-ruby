@@ -22,21 +22,24 @@ describe Google::Cloud::Firestore::Convert, :extract_field_paths do
   it "extracts field paths" do
     orig = { "foo.bar" => "BAZ" }
 
-    result = Google::Cloud::Firestore::Convert.extract_field_paths orig
-    result.must_equal({ "foo" => { "bar" => "BAZ" } })
+    hash, paths = Google::Cloud::Firestore::Convert.extract_field_paths orig
+    hash.must_equal({ "foo" => { "bar" => "BAZ" } })
+    paths.must_equal ["foo.bar"]
   end
 
   it "extracts only top-level field paths" do
     orig = { "foo.bar" => { "baz.bif" => 42 } }
 
-    result = Google::Cloud::Firestore::Convert.extract_field_paths orig
-    result.must_equal({ "foo" => { "bar" => { "baz.bif" => 42 } } })
+    hash, paths = Google::Cloud::Firestore::Convert.extract_field_paths orig
+    hash.must_equal({ "foo" => { "bar" => { "baz.bif" => 42 } } })
+    paths.must_equal ["foo.bar"]
   end
 
   it "handles an empty hash" do
     orig = {}
 
-    result = Google::Cloud::Firestore::Convert.extract_field_paths orig
-    result.must_equal({})
+    hash, paths = Google::Cloud::Firestore::Convert.extract_field_paths orig
+    hash.must_equal({})
+    paths.must_equal []
   end
 end
