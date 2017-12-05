@@ -57,6 +57,6 @@ describe Google::Cloud::Firestore::Document::Reference, :create, :closed_batch, 
     error = expect do
       document.create "not a hash"
     end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
+    error.message.must_equal "data is required"
   end
 end

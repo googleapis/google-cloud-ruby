@@ -127,7 +127,7 @@ module Google
             if is_nested data, :DELETE
               fail ArgumentError, "DELETE not allowed on create"
             end
-            fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+            fail ArgumentError, "data is required" unless data.is_a? Hash
 
             data, server_time_paths = remove_from data, :SERVER_TIME
 
@@ -159,47 +159,45 @@ module Google
           def set_writes doc_path, data, merge: nil
             writes = []
 
-            fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+            fail ArgumentError, "data is required" unless data.is_a? Hash
 
             data, delete_paths = remove_from data, :DELETE
             fail ArgumentError, "DELETE not allowed on set" if delete_paths.any?
 
             data, server_time_paths = remove_from data, :SERVER_TIME
 
-            write = Google::Firestore::V1beta1::Write.new(
-              update: Google::Firestore::V1beta1::Document.new(
-                name: doc_path,
-                fields: hash_to_fields(data))
-            )
-
-            if merge
+            if merge.nil?
+              writes << Google::Firestore::V1beta1::Write.new(
+                update: Google::Firestore::V1beta1::Document.new(
+                  name: doc_path,
+                  fields: hash_to_fields(data))
+              )
+            else
               if merge == true
                 # extract the leaf node field paths from data
                 field_paths = identify_leaf_nodes data
               else
                 field_paths = format_merge_field_paths merge
-              end
+                # Ensure provided field paths are valid.
+                all_valid = identify_leaf_nodes data
+                verify_paths = field_paths - server_time_paths
+                all_valid_check = verify_paths.map do |verify_path|
+                  all_valid.include?(verify_path) ||
+                  all_valid.select { |fp| fp.start_with? "#{verify_path}." }.any?
+                end
+                all_valid_check = all_valid_check.include? false
+                fail ArgumentError, "all fields must be in data" if all_valid_check
 
-              # Ensure provided field paths are valid.
-              all_valid = identify_leaf_nodes data
-              verify_paths = field_paths - server_time_paths
-              all_valid_check = verify_paths.map do |verify_path|
-                all_valid.include?(verify_path) ||
-                all_valid.select { |fp| fp.start_with? "#{verify_path}." }.any?
+                # Choose only the data there are field paths for
+                data = select_by_field_paths data, verify_paths
               end
-              all_valid_check = all_valid_check.include? false
-              fail ArgumentError, "all fields must be in data" if all_valid_check
-
-              # Choose only the data there are field paths for
-              data = select_by_field_paths data, verify_paths
 
               if data.empty?
                 if merge == true && server_time_paths.empty?
                   fail ArgumentError, "data required for merge: true"
                 end
-                write = nil
               else
-                write = Google::Firestore::V1beta1::Write.new(
+                writes << Google::Firestore::V1beta1::Write.new(
                   update: Google::Firestore::V1beta1::Document.new(
                     name: doc_path,
                     fields: hash_to_fields(data)),
@@ -209,11 +207,8 @@ module Google
               end
             end
 
-            writes << write if write
-
             if server_time_paths.any?
-              transform_write = transform_write doc_path, server_time_paths
-              writes << transform_write
+              writes << transform_write(doc_path, server_time_paths)
             end
 
             writes
@@ -222,7 +217,23 @@ module Google
           def update_writes doc_path, data, update_time: nil
             writes = []
 
-            fail ArgumentError, "data must be a Hash" unless data.is_a? Hash
+            fail ArgumentError, "data is required" unless data.is_a? Hash
+
+            dup_keys = data.keys.map do |key|
+              key = key.map(&:to_s).join(".") if key.is_a? Array
+              key.to_s
+            end
+            if dup_keys.size != dup_keys.uniq.size
+              fail ArgumentError, "duplicate field paths"
+            end
+            dup_keys.each do |field_path|
+              prefix_check = dup_keys.select do |this_path|
+                this_path.start_with? "#{field_path}."
+              end
+              if prefix_check.any?
+                fail ArgumentError, "one field cannot be a prefix of another"
+              end
+            end
 
             data, delete_paths = remove_from data, :DELETE, recurse: false
             data, nested_deletes = remove_from data, :DELETE
@@ -232,13 +243,13 @@ module Google
             data, nested_server_time_paths = remove_from data, :SERVER_TIME
             server_time_paths = root_server_time_paths + nested_server_time_paths
 
-            field_paths = data.keys.map(&:to_s).map do |path|
-              path.split(".").map { |p| escape_field_path p }.join(".")
-            end
-
             # extract data after building field paths
             data, field_paths = extract_field_paths data
             field_paths += delete_paths
+
+            field_paths.each do |field_path|
+              fail ArgumentError, "empty paths not allowed" if field_path.empty?
+            end
 
             if data.empty? && delete_paths.empty? && server_time_paths.empty?
               fail ArgumentError, "data is required"
@@ -309,27 +320,37 @@ module Google
 
             paths = []
             new_pairs = obj.map do |key, value|
+              key = String(key) unless key.is_a? Array
+
               if value == target
                 if recurse
                   # escape when recursing
                   paths << escape_field_path(key)
                 else
                   # don't escape when recursing
-                  paths << String(key)
+                  paths << key
                 end
                 nil # will be removed by calling compact
               elsif recurse
                 if value.is_a? Hash
-                  nested_hash, nested_paths = remove_from value, target
-                  if nested_paths.any?
-                    nested_paths.each do |nested_path|
-                      paths << "#{escape_field_path(key)}.#{nested_path}"
+                  unless value.empty?
+                    nested_hash, nested_paths = remove_from value, target
+                    if nested_paths.any?
+                      nested_paths.each do |nested_path|
+                        if key.is_a? Array
+                          paths << (key.dup << nested_path)
+                        else
+                          paths << "#{escape_field_path(key)}.#{nested_path}"
+                        end
+                      end
                     end
-                  end
-                  if nested_hash.empty?
-                    nil # will be removed by calling compact
+                    if nested_hash.empty?
+                      nil # will be removed by calling compact
+                    else
+                      [key, nested_hash]
+                    end
                   else
-                    [String(key), nested_hash]
+                    [key, value]
                   end
                 else
                   if value.is_a? Array
@@ -338,10 +359,18 @@ module Google
                     end
                   end
 
-                  [String(key), value]
+                  [key, value]
                 end
               else # no recurse
-                [String(key), value]
+                [key, value]
+              end
+            end
+
+            paths.map! do |path|
+              if path.is_a? Array
+                path.map { |p| escape_field_path p }.join(".")
+              else
+                path
               end
             end
 
@@ -383,6 +412,13 @@ module Google
             dup_hash = hash.dup
             nodes = unescape_field_path field_path
             last_node = nil
+
+            # squash nodes until the key exists?
+            until dup_hash.key? nodes.first
+              nodes.unshift "#{nodes.shift}.#{nodes.shift}"
+              break if nodes.count <= 1
+            end
+
             nodes.each do |node|
               prev_hash[last_node] = tmp_hash unless last_node.nil?
               last_node = node
@@ -410,32 +446,41 @@ module Google
           end
 
           START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/
-          INVALID_FIELD_PATH_CHARS = /[\~\*\.\/\[\]]/
+          INVALID_FIELD_PATH_CHARS = /[\~\*\/\[\]]/
           ESCAPED_FIELD_PATH = /\A\`(.*)\`\z/
 
           def extract_field_paths hash
             field_paths = hash.keys.map do |path|
-              path.split(".").map { |p| escape_field_path p }.join(".")
+              unless path.is_a? Array
+                path = path.to_s.split(".")
+                path.each do |p|
+                  # Only check for invalid characters when a string
+                  if INVALID_FIELD_PATH_CHARS.match(p) || p["."]
+                    fail ArgumentError, "invalid character"
+                  end
+                end
+              end
+
+              path.map { |p| escape_field_path p }.join(".")
             end
 
             dup_hash = {}
+
             hash.each do |keys, value|
               tmp_dup = dup_hash
               last_key = nil
-              keys.to_s.split(".").each do |key|
+              # split keys on . unless using field paths
+              keys = keys.to_s.split(".") unless keys.is_a? Array
+              keys.each do |key|
+                key = String key
                 fail ArgumentError, "empty paths not allowed" if key.empty?
-                if INVALID_FIELD_PATH_CHARS.match key
-                  fail ArgumentError, "invalid character"
-                end
                 tmp_dup = tmp_dup[last_key] unless last_key.nil?
                 last_key = key
-                if !tmp_dup[key].nil?
-                  fail ArgumentError, "one field cannot be a prefix of another"
-                end
-                tmp_dup[key] = {}
+                tmp_dup[key] ||= {}
               end
-              tmp_dup[last_key] = hash[keys]
+              tmp_dup[last_key] = value
             end
+
             [dup_hash, field_paths]
           end
 
@@ -443,6 +488,7 @@ module Google
             str = String str
 
             return "`#{str}`" if INVALID_FIELD_PATH_CHARS.match str
+            return "`#{str}`" if str["."] # contains "."
             return str if START_FIELD_PATH_CHARS.match str
 
             "`#{str}`"

@@ -58,6 +58,6 @@ describe Google::Cloud::Firestore::Document::Reference, :update, :using_batch, :
     error = expect do
       document.update "not a hash"
     end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
+    error.message.must_equal "data is required"
   end
 end

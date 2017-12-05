@@ -42,6 +42,31 @@ describe Google::Cloud::Firestore::Convert, :update_writes do
     actual_writes.must_equal expected_writes
   end
 
+  it "nested empty hashes create writes" do
+    data = { "i.j" => { l: {} } }
+
+    expected_writes = [
+      Google::Firestore::V1beta1::Write.new(
+        update: Google::Firestore::V1beta1::Document.new(
+          name: document_path,
+          fields: {
+            "i" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+              "j" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "l" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {}))
+              }))
+            }))
+          }
+        ),
+        update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["i.j"]),
+        current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+      )
+    ]
+
+    actual_writes = Google::Cloud::Firestore::Convert.update_writes document_path, data
+
+    actual_writes.must_equal expected_writes
+  end
+
   it "complex update" do
     data = { a: [1, 2.5], b: { c: ["three", { d: true }] } }
 
@@ -193,8 +218,7 @@ describe Google::Cloud::Firestore::Convert, :update_writes do
             }))
           }
         ),
-        update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["h.g"]
-        ),
+        update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["h.g"]),
         current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
       )
     ]
@@ -226,6 +250,119 @@ describe Google::Cloud::Firestore::Convert, :update_writes do
     actual_writes = Google::Cloud::Firestore::Convert.update_writes document_path, data, update_time: last_updated_at
 
     actual_writes.must_equal expected_writes
+  end
+
+  describe "data using field paths" do
+    it "empty field path component" do
+      data = { ["a", "", "b"] => 1 }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.update_writes document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "empty paths not allowed"
+    end
+
+    it "prefix #1" do
+      data = { [:a, :b] => 1, [:a] => 2 }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.update_writes document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "one field cannot be a prefix of another"
+    end
+
+    it "prefix #2" do
+      data = { ["a"] => 1, ["a", "b"] => 2 }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.update_writes document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "one field cannot be a prefix of another"
+    end
+
+    it "prefix #3" do
+      data = { a: { b: 1 }, ["a", "d"] => 2 }
+
+      error = expect do
+        Google::Cloud::Firestore::Convert.update_writes document_path, data
+      end.must_raise ArgumentError
+      error.message.must_equal "one field cannot be a prefix of another"
+    end
+
+    it "quotes paths starting with non-letter starting chars, except underscore" do
+      data = { ["_0", 1, "+2"] => 1 }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "_0" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "1" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                  "+2" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+                }))
+              }))
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["_0.`1`.`+2`"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.update_writes document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "uses field paths" do
+      data = { ["a", "b", "c"] => 1 }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "b" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                  "c" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+                }))
+              }))
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a.b.c"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.update_writes document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
+
+    it "uses field paths for top-level keys only" do
+      data = { [:h, :g] => { "j.k" => 6 } }
+
+      expected_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "h" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "g" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                  "j.k" => Google::Firestore::V1beta1::Value.new(integer_value: 6)
+                }))
+              }))
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["h.g"]),
+          current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
+        )
+      ]
+
+      actual_writes = Google::Cloud::Firestore::Convert.update_writes document_path, data
+
+      actual_writes.must_equal expected_writes
+    end
   end
 
   describe :DELETE do

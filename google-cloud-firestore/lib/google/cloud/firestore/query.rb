@@ -174,7 +174,7 @@ module Google
           "=="           => :EQUAL,
           "eq"           => :EQUAL,
           "eql"          => :EQUAL }
-        UNARY_NIL_VALUES = [nil, :null]
+        UNARY_NIL_VALUES = [nil, :null, :nil]
         UNARY_NAN_VALUES = [:nan, Float::NAN]
         UNARY_VALUES = UNARY_NIL_VALUES + UNARY_NAN_VALUES
 
@@ -182,12 +182,15 @@ module Google
           field = StructuredQuery::FieldReference.new field_path: name.to_s
           op = FILTER_OPS[op.to_s.downcase] || :EQUAL
 
-          if UNARY_VALUES.include? value
+          is_value_nan = value.respond_to?(:nan?) && value.nan?
+          if UNARY_VALUES.include?(value) || is_value_nan
             if op != :EQUAL
               fail ArgumentError, "can only check equality for #{value} values."
             end
+
             op = :IS_NULL
-            op = :IS_NAN if UNARY_NAN_VALUES.include? value
+            op = :IS_NAN if UNARY_NAN_VALUES.include?(value) || is_value_nan
+
             return StructuredQuery::Filter.new(unary_filter:
               StructuredQuery::UnaryFilter.new(field: field, op: op))
           end

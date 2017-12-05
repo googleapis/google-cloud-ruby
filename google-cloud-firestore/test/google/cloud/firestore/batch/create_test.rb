@@ -63,6 +63,6 @@ describe Google::Cloud::Firestore::Batch, :create, :mock_firestore do
     error = expect do
       batch.create document_path, "not a hash"
     end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
+    error.message.must_equal "data is required"
   end
 end

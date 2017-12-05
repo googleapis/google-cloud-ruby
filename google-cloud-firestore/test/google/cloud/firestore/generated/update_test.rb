@@ -541,4 +541,403 @@ describe "Cross-Language Update Tests", :mock_firestore do
       firestore.update document_path, update_data
     end
   end
+
+  describe "using field paths" do
+    it "basic" do
+      update_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+            field_paths: ["a"]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: true)
+        )
+      ]
+
+      firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+      firestore.update document_path, a: 1
+    end
+
+    it "complex" do
+      update_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(array_value: Google::Firestore::V1beta1::ArrayValue.new(values: [
+                Google::Firestore::V1beta1::Value.new(integer_value: 1),
+                Google::Firestore::V1beta1::Value.new(double_value: 2.5)
+              ])),
+              "b" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "c" => Google::Firestore::V1beta1::Value.new(array_value: Google::Firestore::V1beta1::ArrayValue.new(values: [
+                  Google::Firestore::V1beta1::Value.new(string_value: "three"),
+                  Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                    "d" => Google::Firestore::V1beta1::Value.new(boolean_value: true)
+                  }))
+                ]))
+              }))
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+            field_paths: ["a", "b"]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: true)
+        )
+      ]
+
+      firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+      firestore.update document_path, a: [1, 2.5], b: { c: ["three", { d: true }] }
+    end
+
+    it "multiple-element field path" do
+      update_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "b" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              }))
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+            field_paths: ["a.b"]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: true)
+        )
+      ]
+
+      firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+      firestore.update document_path, [:a, :b] => 1
+    end
+
+    it "elements are not split on dots" do
+      update_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a.b" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "f.g" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                  "n.o" => Google::Firestore::V1beta1::Value.new(integer_value: 7)
+                }))
+              }))
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+            field_paths: ["`a.b`.`f.g`"]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: true)
+        )
+      ]
+
+      firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+      firestore.update document_path, ["a.b", "f.g"] => { "n.o" => 7 }
+    end
+
+    it "special characters" do
+      update_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "*" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                "`" => Google::Firestore::V1beta1::Value.new(integer_value: 2),
+                "~" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              }))
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+            field_paths: ["`*`.`~`", "`*`.```"]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            exists: true)
+        )
+      ]
+
+      firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+      firestore.update document_path, [:*, :~] => 1, [:*, :`] => 2
+    end
+
+    it "duplicate field path" do
+      error = expect do
+        firestore.update document_path, a: 1, b: 2, "a" => 3
+      end.must_raise ArgumentError
+      error.message.must_equal "duplicate field paths"
+    end
+
+    it "empty field path" do
+      error = expect do
+        firestore.update document_path, [""] => 1
+      end.must_raise ArgumentError
+      error.message.must_equal "empty paths not allowed"
+
+      error = expect do
+        firestore.update document_path, "" => 1
+      end.must_raise ArgumentError
+      error.message.must_equal "empty paths not allowed"
+    end
+
+    it "empty field path component" do
+      error = expect do
+        firestore.update document_path, ["*", ""] => 1
+      end.must_raise ArgumentError
+      error.message.must_equal "empty paths not allowed"
+    end
+
+    it "no paths" do
+      error = expect do
+        firestore.update document_path
+      end.must_raise ArgumentError
+      error.message.must_include "wrong number of arguments"
+
+      error = expect do
+        firestore.update document_path, nil
+      end.must_raise ArgumentError
+      error.message.must_equal "data is required"
+    end
+
+    it "prefix #1" do
+      error = expect do
+        firestore.update document_path, ["a", "b"] => 1, ["a"] => 2
+      end.must_raise ArgumentError
+      error.message.must_equal "one field cannot be a prefix of another"
+    end
+
+    it "prefix #2" do
+      error = expect do
+        firestore.update document_path, ["a"] => 1, ["a", "b"] => 2
+      end.must_raise ArgumentError
+      error.message.must_equal "one field cannot be a prefix of another"
+    end
+
+    it "prefix #3" do
+      error = expect do
+        firestore.update document_path, ["a"] => { b: 1 }, ["a", "d"] => 2
+      end.must_raise ArgumentError
+      error.message.must_equal "one field cannot be a prefix of another"
+    end
+
+    it "last-update-time precondition" do
+      last_updated_at = Time.now - 42 #42 seconds ago
+
+      update_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {
+              "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+            }
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+            field_paths: ["a"]
+          ),
+          current_document: Google::Firestore::V1beta1::Precondition.new(
+            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(last_updated_at))
+        )
+      ]
+
+      firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+      firestore.update document_path, { ["a"] => 1 }, update_time: last_updated_at
+    end
+
+    describe :DELETE do
+      it "Delete (inline)" do
+        update_writes = [
+          Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: "projects/projectID/databases/(default)/documents/C/d",
+              fields: {
+                "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              }
+            ),
+            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+              field_paths: ["a", "b"]
+            ),
+            current_document: Google::Firestore::V1beta1::Precondition.new(
+              exists: true)
+          )
+        ]
+
+        firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+        firestore.update document_path, a: 1, b: :DELETE
+      end
+
+      it "Delete alone" do
+        update_writes = [
+          Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: "projects/projectID/databases/(default)/documents/C/d"
+            ),
+            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+              field_paths: ["a"]
+            ),
+            current_document: Google::Firestore::V1beta1::Precondition.new(
+              exists: true)
+          )
+        ]
+
+        firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+        firestore.update document_path, a: :DELETE
+      end
+    end
+
+    describe :SERVER_TIME do
+      it "SERVER_TIME alone" do
+        update_writes = [
+          Google::Firestore::V1beta1::Write.new(
+            transform: Google::Firestore::V1beta1::DocumentTransform.new(
+              document: "projects/projectID/databases/(default)/documents/C/d",
+              field_transforms: [
+                Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                  field_path: "a",
+                  set_to_server_value: :REQUEST_TIME
+                )
+              ]
+            ),
+            current_document: Google::Firestore::V1beta1::Precondition.new(
+              exists: true)
+          )
+        ]
+
+        firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+        firestore.update document_path, ["a"] => :SERVER_TIME
+      end
+
+      it "multiple SERVER_TIME fields" do
+        update_writes = [
+          Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: "projects/projectID/databases/(default)/documents/C/d",
+              fields: {
+                "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              }
+            ),
+            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+              field_paths: ["a"]
+            ),
+            current_document: Google::Firestore::V1beta1::Precondition.new(
+              exists: true)
+          ),
+          Google::Firestore::V1beta1::Write.new(
+            transform: Google::Firestore::V1beta1::DocumentTransform.new(
+              document: "projects/projectID/databases/(default)/documents/C/d",
+              field_transforms: [
+                Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                  field_path: "b",
+                  set_to_server_value: :REQUEST_TIME
+                ),
+                Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                  field_path: "c.d",
+                  set_to_server_value: :REQUEST_TIME
+                )
+              ]
+            )
+          )
+        ]
+
+        firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+        firestore.update document_path, ["a"] => 1, ["b"] => :SERVER_TIME, ["c"] => { d: :SERVER_TIME }
+      end
+
+      it "nested SERVER_TIME field" do
+        update_writes = [
+          Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: "projects/projectID/databases/(default)/documents/C/d",
+              fields: {
+                "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              }
+            ),
+            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+              field_paths: ["a"]
+            ),
+            current_document: Google::Firestore::V1beta1::Precondition.new(
+              exists: true)
+          ),
+          Google::Firestore::V1beta1::Write.new(
+            transform: Google::Firestore::V1beta1::DocumentTransform.new(
+              document: "projects/projectID/databases/(default)/documents/C/d",
+              field_transforms: [
+                Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                  field_path: "b.c",
+                  set_to_server_value: :REQUEST_TIME
+                )
+              ]
+            )
+          )
+        ]
+
+        firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+        firestore.update document_path, ["a"] => 1, ["b"] => { c: :SERVER_TIME }
+      end
+
+      it "SERVER_TIME cannot be anywhere inside an array value" do
+        error = expect do
+          firestore.update document_path, ["a"] => [1, { b: :SERVER_TIME }]
+        end.must_raise ArgumentError
+        error.message.must_equal "cannot nest SERVER_TIME under arrays"
+      end
+
+      it "SERVER_TIME cannot be in an array value" do
+        error = expect do
+          firestore.update document_path, "a" => [1, 2, :SERVER_TIME]
+        end.must_raise ArgumentError
+        error.message.must_equal "cannot nest SERVER_TIME under arrays"
+      end
+
+      it "SERVER_TIME with data" do
+        update_writes = [
+          Google::Firestore::V1beta1::Write.new(
+            update: Google::Firestore::V1beta1::Document.new(
+              name: "projects/projectID/databases/(default)/documents/C/d",
+              fields: {
+                "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
+              }
+            ),
+            update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+              field_paths: ["a"]
+            ),
+            current_document: Google::Firestore::V1beta1::Precondition.new(
+              exists: true)
+          ),
+          Google::Firestore::V1beta1::Write.new(
+            transform: Google::Firestore::V1beta1::DocumentTransform.new(
+              document: "projects/projectID/databases/(default)/documents/C/d",
+              field_transforms: [
+                Google::Firestore::V1beta1::DocumentTransform::FieldTransform.new(
+                  field_path: "b",
+                  set_to_server_value: :REQUEST_TIME
+                )
+              ]
+            )
+          )
+        ]
+
+        firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+
+        firestore.update document_path, ["a"] => 1, ["b"] => :SERVER_TIME
+      end
+    end
+  end
 end

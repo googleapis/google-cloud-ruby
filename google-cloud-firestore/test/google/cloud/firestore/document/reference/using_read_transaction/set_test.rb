@@ -56,6 +56,6 @@ describe Google::Cloud::Firestore::Document::Reference, :set, :using_read_transa
     error = expect do
       document.set "not a hash"
     end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
+    error.message.must_equal "data is required"
   end
 end

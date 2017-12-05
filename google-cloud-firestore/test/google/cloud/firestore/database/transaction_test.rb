@@ -210,7 +210,7 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
         tx.create document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
+    error.message.must_equal "data is required"
   end
 
   it "sets a new document using string path" do
@@ -242,7 +242,7 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
         tx.set document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
+    error.message.must_equal "data is required"
   end
 
   it "updates a new document using string path" do
@@ -274,7 +274,7 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
         tx.update document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data must be a Hash"
+    error.message.must_equal "data is required"
   end
 
   it "deletes a document using string path" do

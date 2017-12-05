@@ -61,4 +61,36 @@ describe Google::Cloud::Firestore::Collection, :add, :mock_firestore do
       document.parent.path.must_equal "#{documents_path}/#{collection_path}"
     end
   end
+
+  it "creates a Document reference with a random id and provided data" do
+    random_document_id = "helloiamarandomdocid"
+
+    commit_writes = [Google::Firestore::V1beta1::Write.new(
+      update: Google::Firestore::V1beta1::Document.new(
+        name: "#{documents_path}/#{collection_path}/#{random_document_id}",
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields({ hello: "world" })),
+      current_document: Google::Firestore::V1beta1::Precondition.new(
+        exists: false)
+    )]
+
+    firestore_mock.expect :commit, commit_resp, [database_path, commit_writes, options: default_options]
+
+    Google::Cloud::Firestore::Generate.stub :unique_id, random_document_id do
+      document = collection.add hello: :world
+
+      document.must_be_kind_of Google::Cloud::Firestore::Document::Reference
+      document.project_id.must_equal project
+      document.database_id.must_equal "(default)"
+      document.document_id.must_equal random_document_id
+      document.document_path.must_equal "#{collection_path}/#{random_document_id}"
+      document.path.must_equal "#{documents_path}/#{collection_path}/#{random_document_id}"
+
+      document.parent.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
+      document.parent.project_id.must_equal project
+      document.parent.database_id.must_equal "(default)"
+      document.parent.collection_id.must_equal collection_id
+      document.parent.collection_path.must_equal collection_path
+      document.parent.path.must_equal "#{documents_path}/#{collection_path}"
+    end
+  end
 end

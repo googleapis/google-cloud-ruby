@@ -84,8 +84,9 @@ module Google
           end
           alias_method :document, :doc
 
-          def add
-            doc.tap { |d| d.create({}) }
+          def add data = nil
+            data ||= {}
+            doc.tap { |d| d.create data }
           end
 
           def get_all *document_paths, mask: nil, &block
