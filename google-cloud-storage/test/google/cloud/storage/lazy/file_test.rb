@@ -192,7 +192,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, tmpfile,
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
       bucket.service.mocked_service = mock
@@ -215,7 +215,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, tmpfile,
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket_name, file_name, download_dest: tmpfile.path, generation: nil, user_project: nil, options: {}]
 
       bucket.service.mocked_service = mock
@@ -238,7 +238,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, tmpfile,
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket.name, file_user_project.name, download_dest: tmpfile, generation: nil, user_project: "test", options: {}]
 
       bucket.service.mocked_service = mock
@@ -257,7 +257,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     end
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, StringIO.new("yay!"),
+    mock.expect :get_object_with_response, [StringIO.new("yay!"), download_http_resp],
       [bucket_name, file_name, Hash] # Can't match StringIO in mock...
 
     bucket.service.mocked_service = mock
@@ -275,7 +275,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     end
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, StringIO.new("yay!"),
+    mock.expect :get_object_with_response, [StringIO.new("yay!"), download_http_resp],
       [bucket_name, file_name, Hash] # Can't match StringIO in mock...
 
     bucket.service.mocked_service = mock
@@ -299,7 +299,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, nil, # using encryption keys seems to return nil
+      mock.expect :get_object_with_response, [nil, download_http_resp], # using encryption keys seems to return nil
         [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: key_options]
 
       bucket.service.mocked_service = mock
@@ -319,7 +319,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -346,7 +346,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -373,7 +373,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -400,7 +400,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -431,7 +431,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket_name, file_name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -456,7 +456,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket_name, file_name, download_dest: tmpfile.path, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock

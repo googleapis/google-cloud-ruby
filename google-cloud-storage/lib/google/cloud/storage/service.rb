@@ -48,10 +48,12 @@ module Google
           @service.client_options.open_timeout_sec = timeout
           @service.client_options.read_timeout_sec = timeout
           @service.client_options.send_timeout_sec = timeout
+          @service.client_options.transparent_gzip_decompression = false
           @service.request_options.retries = retries || 3
           @service.request_options.header ||= {}
           @service.request_options.header["x-goog-api-client"] = \
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
+          @service.request_options.header["Accept-Encoding"] = "gzip"
           @service.authorization = @credentials.client if @credentials
         end
 
@@ -367,14 +369,22 @@ module Google
 
         ##
         # Download contents of a file.
+        #
+        # Returns a two-element array containing:
+        #   * The IO object that is the usual return type of
+        #     StorageService#get_object (for downloads)
+        #   * The `http_resp` accessed via the monkey-patches of
+        #     Apis::StorageV1::StorageService and Apis::Core::DownloadCommand at
+        #     the end of this file.
         def download_file bucket_name, file_path, target_path, generation: nil,
                           key: nil, user_project: nil
+          options = key_options key
           execute do
-            service.get_object \
+            service.get_object_with_response \
               bucket_name, file_path,
               download_dest: target_path, generation: generation,
               user_project: user_project(user_project),
-              options: key_options(key)
+              options: options
           end
         end
 
@@ -543,4 +553,154 @@ module Google
       end
     end
   end
+
+  # rubocop:disable all
+
+  # IMPORTANT: These monkey-patches of Apis::StorageV1::StorageService and
+  # Apis::Core::DownloadCommand must be verified and updated (if needed) for
+  # every upgrade of google-api-client.
+  #
+  # The purpose of these modifications is to provide access to response headers
+  # (in particular, the Content-Encoding header) for the #download_file method,
+  # above. If google-api-client is modified to expose response headers to its
+  # clients, this code should be removed, and #download_file updated to use that
+  # solution instead.
+  #
+  module Apis
+    module StorageV1
+      class StorageService
+        # Returns a two-element array containing:
+        #   * The `result` that is the usual return type of #get_object.
+        #   * The `http_resp` from DownloadCommand#execute_once.
+        def get_object_with_response(bucket, object, generation: nil, if_generation_match: nil, if_generation_not_match: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, projection: nil, user_project: nil, fields: nil, quota_user: nil, user_ip: nil, download_dest: nil, options: nil, &block)
+          if download_dest.nil?
+            command =  make_simple_command(:get, 'b/{bucket}/o/{object}', options)
+          else
+            command = make_download_command(:get, 'b/{bucket}/o/{object}', options)
+            command.download_dest = download_dest
+          end
+          command.response_representation = Google::Apis::StorageV1::Object::Representation
+          command.response_class = Google::Apis::StorageV1::Object
+          command.params['bucket'] = bucket unless bucket.nil?
+          command.params['object'] = object unless object.nil?
+          command.query['generation'] = generation unless generation.nil?
+          command.query['ifGenerationMatch'] = if_generation_match unless if_generation_match.nil?
+          command.query['ifGenerationNotMatch'] = if_generation_not_match unless if_generation_not_match.nil?
+          command.query['ifMetagenerationMatch'] = if_metageneration_match unless if_metageneration_match.nil?
+          command.query['ifMetagenerationNotMatch'] = if_metageneration_not_match unless if_metageneration_not_match.nil?
+          command.query['projection'] = projection unless projection.nil?
+          command.query['userProject'] = user_project unless user_project.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          command.query['userIp'] = user_ip unless user_ip.nil?
+          execute_or_queue_command_with_response(command, &block)
+        end
+
+        # Returns a two-element array containing:
+        #   * The `result` that is the usual return type of #execute_or_queue_command.
+        #   * The `http_resp` from DownloadCommand#execute_once.
+        def execute_or_queue_command_with_response(command, &callback)
+          batch_command = current_batch
+          if batch_command
+            fail "Can not combine services in a batch" if Thread.current[:google_api_batch_service] != self
+            batch_command.add(command, &callback)
+            nil
+          else
+            command.execute_with_response(client, &callback)
+          end
+        end
+      end
+    end
+    module Core
+      # Streaming/resumable media download support
+      class DownloadCommand < ApiCommand
+        # Returns a two-element array containing:
+        #   * The `result` that is the usual return type of #execute.
+        #   * The `http_resp` from #execute_once.
+        def execute_with_response(client)
+          prepare!
+          begin
+            Retriable.retriable tries: options.retries + 1,
+                                base_interval: 1,
+                                multiplier: 2,
+                                on: RETRIABLE_ERRORS do |try|
+              # This 2nd level retriable only catches auth errors, and supports 1 retry, which allows
+              # auth to be re-attempted without having to retry all sorts of other failures like
+              # NotFound, etc
+              auth_tries = (try == 1 && authorization_refreshable? ? 2 : 1)
+              Retriable.retriable tries: auth_tries,
+                                  on: [Google::Apis::AuthorizationError, Signet::AuthorizationError],
+                                  on_retry: proc { |*| refresh_authorization } do
+                execute_once_with_response(client).tap do |result|
+                  if block_given?
+                    yield result, nil
+                  end
+                end
+              end
+            end
+          rescue => e
+            if block_given?
+              yield nil, e
+            else
+              raise e
+            end
+          end
+        ensure
+          release!
+        end
+
+        # Returns a two-element array containing:
+        #   * The `result` that is the usual return type of #execute_once.
+        #   * The `http_resp`.
+        def execute_once_with_response(client, &block)
+          request_header = header.dup
+          apply_request_options(request_header)
+          download_offset = nil
+
+          if @offset > 0
+            logger.debug { sprintf('Resuming download from offset %d', @offset) }
+            request_header[RANGE_HEADER] = sprintf('bytes=%d-', @offset)
+          end
+
+          http_res = client.get(url.to_s,
+                     query: query,
+                     header: request_header,
+                     follow_redirect: true) do |res, chunk|
+            status = res.http_header.status_code.to_i
+            next unless OK_STATUS.include?(status)
+
+            download_offset ||= (status == 206 ? @offset : 0)
+            download_offset  += chunk.bytesize
+
+            if download_offset - chunk.bytesize == @offset
+              next_chunk = chunk
+            else
+              # Oh no! Requested a chunk, but received the entire content
+              chunk_index = @offset - (download_offset - chunk.bytesize)
+              next_chunk = chunk.byteslice(chunk_index..-1)
+              next if next_chunk.nil?
+            end
+            # logger.debug { sprintf('Writing chunk (%d bytes, %d total)', chunk.length, bytes_read) }
+            @download_io.write(next_chunk)
+
+            @offset += next_chunk.bytesize
+          end
+
+          @download_io.flush
+
+          if @close_io_on_finish
+            result = nil
+          else
+            result = @download_io
+          end
+          check_status(http_res.status.to_i, http_res.header, http_res.body)
+          success([result, http_res], &block)
+        rescue => e
+          @download_io.flush
+          error(e, rethrow: true, &block)
+        end
+      end
+    end
+  end
+  # rubocop:enable all
 end

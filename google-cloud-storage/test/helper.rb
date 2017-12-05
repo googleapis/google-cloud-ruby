@@ -138,4 +138,11 @@ class MockStorage < Minitest::Spec
     gapi.id = id if id
     gapi
   end
+
+  # Stub for the `http_res` that is returned in the Apis::Core::DownloadCommand monkey-patch in Service.
+  def download_http_resp gzip: nil
+    headers = {}
+    headers["Content-Encoding"] = ["gzip"] if gzip
+    OpenStruct.new(header: headers)
+  end
 end

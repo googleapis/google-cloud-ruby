@@ -18,6 +18,7 @@ require "google/cloud/storage/file/acl"
 require "google/cloud/storage/file/list"
 require "google/cloud/storage/file/verifier"
 require "google/cloud/storage/file/signer"
+require "zlib"
 
 module Google
   module Cloud
@@ -515,11 +516,15 @@ module Google
             path = StringIO.new
             path.set_encoding "ASCII-8BIT"
           end
-          file = service.download_file \
+          file, resp = service.download_file \
             bucket, name, path, key: encryption_key, user_project: user_project
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new(path)
           verify_file! file, verify
+          if Array(resp.header["Content-Encoding"]).include?("gzip")
+            file = gzip_decompress file
+          end
+          file
         end
 
         ##
@@ -1105,6 +1110,26 @@ module Google
           Verifier.verify_md5! self, file    if verify_md5    && md5
           Verifier.verify_crc32c! self, file if verify_crc32c && crc32c
           file
+        end
+
+        # @return [IO] Returns an IO object representing the file data. This
+        #   will either be a `::File` object referencing the local file
+        #   system or a StringIO instance.
+        def gzip_decompress local_file
+          if local_file.respond_to? :path
+            gz = ::File.open(Pathname(local_file).to_path, "rb") do |f|
+              Zlib::GzipReader.new(StringIO.new(f.read))
+            end
+            uncompressed_string = gz.read
+            ::File.open(Pathname(local_file).to_path, "w") do |f|
+              f.write uncompressed_string
+              f
+            end
+          else # local_file is StringIO
+            local_file.rewind
+            gz = Zlib::GzipReader.new StringIO.new(local_file.read)
+            StringIO.new gz.read
+          end
         end
 
         def storage_class_for str
