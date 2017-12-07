@@ -439,6 +439,13 @@ module Google
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
+        # @param [Boolean] skip_decompress Optional. If `true`, the data for a
+        #   Storage object returning a `Content-Encoding: gzip` response header
+        #   will *not* be automatically decompressed by this client library. The
+        #   default is `nil`. Note that all requests by this client library send
+        #   the `Accept-Encoding: gzip` header, so decompressive transcoding is
+        #   not performed in the Storage service. (See [Transcoding of
+        #   gzip-compressed files](https://cloud.google.com/storage/docs/transcoding))
         #
         # @return [IO] Returns an IO object representing the file data. This
         #   will ordinarily be a `::File` object referencing the local file
@@ -510,7 +517,8 @@ module Google
         #   downloaded.rewind
         #   downloaded.read #=> "Hello world!"
         #
-        def download path = nil, verify: :md5, encryption_key: nil
+        def download path = nil, verify: :md5, encryption_key: nil,
+                     skip_decompress: nil
           ensure_service!
           if path.nil?
             path = StringIO.new
@@ -521,7 +529,8 @@ module Google
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new(path)
           verify_file! file, verify
-          if Array(resp.header["Content-Encoding"]).include?("gzip")
+          if !skip_decompress &&
+             Array(resp.header["Content-Encoding"]).include?("gzip")
             file = gzip_decompress file
           end
           file

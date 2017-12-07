@@ -201,6 +201,32 @@ describe Google::Cloud::Storage::File, :mock_storage do
     end
   end
 
+  it "can download itself to a file when Content-Encoding gzip response header with skip_decompress" do
+    data = "Hello world!"
+    gzipped_data = gzip_data data
+
+    # Stub the md5 to match.
+    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+
+    Tempfile.open "google-cloud" do |tmpfile|
+      # write to the file since the mocked call won't
+      tmpfile.write gzipped_data
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp(gzip: true)],
+        [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
+
+      bucket.service.mocked_service = mock
+
+      downloaded = file.download tmpfile, skip_decompress: true
+      downloaded.must_be_kind_of File
+      tmpfile.read.must_equal gzipped_data
+
+      mock.verify
+    end
+  end
+
   it "can download itself to a file by path" do
     # Stub the md5 to match.
     def file.md5
@@ -283,7 +309,29 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     downloaded = file.download
     downloaded.must_be_kind_of StringIO
+    downloaded.rewind
     downloaded.read.must_equal data
+
+    mock.verify
+  end
+
+  it "can download itself to an IO when Content-Encoding gzip response header with skip_decompress" do
+    data = "Hello world!"
+    gzipped_data = gzip_data data
+
+    # Stub the md5 to match.
+    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object_with_response, [StringIO.new(gzipped_data), download_http_resp(gzip: true)],
+      [bucket.name, file.name, Hash] # Can't match StringIO in mock...
+
+    bucket.service.mocked_service = mock
+
+    downloaded = file.download skip_decompress: true
+    downloaded.must_be_kind_of StringIO
+    downloaded.rewind
+    downloaded.read.must_equal gzipped_data
 
     mock.verify
   end

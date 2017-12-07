@@ -290,7 +290,6 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.name.must_equal "uploaded/with/gzip-type.txt"
     uploaded.content_type.must_equal "application/gzip"
     uploaded.content_encoding.must_be_nil
-    puts uploaded.md5.inspect
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
     downloaded.must_be_kind_of StringIO
@@ -303,7 +302,6 @@ describe Google::Cloud::Storage::File, :storage do
 
     data = downloaded.read
     data.must_equal gzipped.read
-    #data.encoding.must_equal gzipped.read.encoding # Fails: Expected: #<Encoding:ASCII-8BIT> Actual: #<Encoding:UTF-8>
     gzr = Zlib::GzipReader.new(StringIO.new(data))
     gzr.read.must_equal "Hello world!"
 
@@ -336,6 +334,20 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
+  it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
+    bucket = storage.bucket bucket_public_test_name
+    file = bucket.file file_public_test_gzip_name
+    file.content_encoding.must_equal "gzip"
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile, skip_decompress: true
+
+      data = File.read(downloaded.path, mode: "rb")
+      gzr = Zlib::GzipReader.new(StringIO.new(data))
+      gzr.read.must_equal "hello world"
+    end
+  end
+
   it "should download, verify, and decompress when Content-Encoding gzip response header with skip_lookup" do
     bucket = storage.bucket bucket_public_test_name, skip_lookup: true
     file = bucket.file file_public_test_gzip_name, skip_lookup: true
@@ -345,7 +357,7 @@ describe Google::Cloud::Storage::File, :storage do
       tmpfile.binmode
       downloaded = file.download tmpfile
 
-      File.read(downloaded.path, mode: "rb").must_equal "hello world" # FAIL
+      File.read(downloaded.path, mode: "rb").must_equal "hello world"
     end
   end
 
