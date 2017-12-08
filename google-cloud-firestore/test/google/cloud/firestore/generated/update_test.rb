@@ -311,7 +311,7 @@ describe "Cross-Language Update Tests", :mock_firestore do
     end
 
     it "Delete with a dotted field" do
-      update_data = { a: 1, "b.c": :DELETE, "b.d": 2 }
+      update_data = { a: 1, "b.c" => :DELETE, "b.d" => 2 }
 
       update_writes = [
         Google::Firestore::V1beta1::Write.new(
@@ -391,7 +391,7 @@ describe "Cross-Language Update Tests", :mock_firestore do
     end
 
     it "SERVER_TIME with dotted field" do
-      update_data = { "a.b.c": :SERVER_TIME }
+      update_data = { "a.b.c" => :SERVER_TIME }
 
       update_writes = [
         Google::Firestore::V1beta1::Write.new(

@@ -406,7 +406,7 @@ describe Google::Cloud::Firestore::Convert, :update_writes do
     end
 
     it "with a dotted field" do
-      data = { a: 1, "b.c": :DELETE, "b.d": 2 }
+      data = { a: 1, "b.c" => :DELETE, "b.d" => 2 }
 
       expected_writes = [
         Google::Firestore::V1beta1::Write.new(
@@ -514,7 +514,7 @@ describe Google::Cloud::Firestore::Convert, :update_writes do
     end
 
     it "SERVER_TIME with dotted field" do
-      data = { "a.b.c": :SERVER_TIME }
+      data = { "a.b.c" => :SERVER_TIME }
 
       expected_writes = [
         Google::Firestore::V1beta1::Write.new(
