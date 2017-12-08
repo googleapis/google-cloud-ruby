@@ -236,7 +236,6 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should upload and download a file using IO" do
-    #skip "The download verification sometimes fails on CI. Not sure why."
     inmemory = StringIO.new(File.read(files[:logo][:path], mode: "rb"))
 
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
@@ -246,8 +245,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.must_be_kind_of StringIO
 
     inmemory.rewind
-    downloaded.rewind
-
     downloaded.size.must_equal inmemory.size
     downloaded.size.must_equal uploaded.size
 
@@ -268,8 +265,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.must_equal downloadio # The object returned is the object provided
 
     inmemory.rewind
-    downloaded.rewind
-
     downloaded.size.must_equal inmemory.size
     downloaded.size.must_equal uploaded.size
 
@@ -295,7 +290,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.must_be_kind_of StringIO
     downloaded.must_equal downloadio # The object returned is the object provided
     gzipped.rewind
-    downloaded.rewind
 
     downloaded.size.must_equal gzipped.size
     downloaded.size.must_equal uploaded.size
@@ -325,7 +319,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded = uploaded.download downloadio
     downloaded.must_be_kind_of StringIO
     downloaded.wont_equal downloadio # The object returned is NOT the object provided
-    downloaded.rewind
 
     downloaded_data = downloaded.read
     downloaded_data.must_equal data

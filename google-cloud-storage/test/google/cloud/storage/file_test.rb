@@ -288,7 +288,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     downloaded = file.download
     downloaded.must_be_kind_of StringIO
-    downloaded.rewind
     downloaded.read.must_equal data
 
     mock.verify
@@ -309,7 +308,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     downloaded = file.download
     downloaded.must_be_kind_of StringIO
-    downloaded.rewind
     downloaded.read.must_equal data
 
     mock.verify
@@ -330,7 +328,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     downloaded = file.download skip_decompress: true
     downloaded.must_be_kind_of StringIO
-    downloaded.rewind
     downloaded.read.must_equal gzipped_data
 
     mock.verify
@@ -459,6 +456,24 @@ describe Google::Cloud::Storage::File, :mock_storage do
         mocked_crc32c.verify
         mock.verify
       end
+    end
+
+    it "verifies crc32c downloading to an IO when specified" do
+      data = "yay!"
+
+      file.gapi.crc32c = Digest::CRC32c.base64digest data
+
+      mock = Minitest::Mock.new
+      mock.expect :get_object_with_response, [StringIO.new(data), download_http_resp],
+        [bucket.name, file.name, Hash] # Can't match StringIO in mock...
+
+      bucket.service.mocked_service = mock
+
+      downloaded = file.download verify: :crc32c
+      downloaded.must_be_kind_of StringIO
+      downloaded.read.must_equal data
+
+      mock.verify
     end
 
     it "verifies m5d and crc32c when specified" do
