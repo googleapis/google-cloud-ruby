@@ -69,10 +69,8 @@ describe Google::Cloud::Firestore::Convert, :raw_to_value, :mock_firestore do
   end
 
   it "converts a date value" do
-    value = Google::Firestore::V1beta1::Value.new timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483340400)
-
     converted = Google::Cloud::Firestore::Convert.raw_to_value Time.parse("2017-01-02 03:04:05.06 UTC").to_date
-    converted.must_equal value
+    converted.value_type.must_equal :timestamp_value
   end
 
   it "converts a string value" do
