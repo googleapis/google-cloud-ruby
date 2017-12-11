@@ -128,13 +128,11 @@ class Workload
   end
 
   def do_read database, table, key
-    database.snapshot do |snp|
-      results = snp.execute "SELECT u.* FROM #{table} u WHERE u.id=\"#{key}\""
-      results.rows.each do |row|
-        key = row[0]
-        (1...10).each do |i|
-          field = row[i]
-        end
+    results = database.execute "SELECT u.* FROM #{table} u WHERE u.id=\"#{key}\""
+    results.rows.each do |row|
+      key = row[0]
+      (1...10).each do |i|
+        field = row[i]
       end
     end
   end
