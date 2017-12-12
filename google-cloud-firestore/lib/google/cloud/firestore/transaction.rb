@@ -53,7 +53,8 @@ module Google
         # @private New Transaction object.
         def initialize
           @writes = []
-          @transaction_id
+          @transaction_id = nil
+          @previous_transaction = nil
         end
 
         ##
@@ -983,6 +984,12 @@ module Google
         def rollback
           ensure_not_closed!
           @closed = true
+          rollback!
+        end
+
+        ##
+        # @private call rollback regardless if already closed
+        def rollback!
           return if @transaction_id.nil?
           service.rollback @transaction_id
         end
@@ -995,9 +1002,10 @@ module Google
 
         ##
         # @private New Transaction reference object from a path.
-        def self.from_database database
+        def self.from_database database, previous_transaction: nil
           new.tap do |s|
             s.instance_variable_set :@database, database
+            s.instance_variable_set :@previous_transaction, previous_transaction
           end
         end
 
@@ -1048,9 +1056,16 @@ module Google
         ##
         # @private
         def transaction_opt
+          read_write = \
+            Google::Firestore::V1beta1::TransactionOptions::ReadWrite.new
+
+          if @previous_transaction
+            read_write.retry_transaction = @previous_transaction
+            @previous_transaction = nil
+          end
+
           Google::Firestore::V1beta1::TransactionOptions.new(
-            read_write: \
-              Google::Firestore::V1beta1::TransactionOptions::ReadWrite.new
+            read_write: read_write
           )
         end
 

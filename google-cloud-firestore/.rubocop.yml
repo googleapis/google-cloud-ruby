@@ -41,7 +41,7 @@ Metrics/AbcSize:
   Exclude:
     - "lib/google/cloud/firestore/v1beta1/**/*"
 Metrics/MethodLength:
-  Max: 20
+  Max: 25
   Exclude:
     - "lib/google/cloud/firestore/v1beta1/**/*"
 Metrics/ParameterLists:

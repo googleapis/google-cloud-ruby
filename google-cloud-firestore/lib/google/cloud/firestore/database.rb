@@ -462,6 +462,16 @@ module Google
         # Transactions will be automatically retried when possible. See
         # {Transaction}.
         #
+        # @param [String] previous_transaction The transaction identifier of a
+        #   transaction that is being retried. Read-write transactions may fail
+        #   due to contention. A read-write transaction can be retried by
+        #   specifying `previous_transaction` when creating the new transaction.
+        #
+        #   Specifying `previous_transaction` provides information that can be
+        #   used to improve throughput. In particular, if transactional
+        #   operations A and B conflict, specifying the `previous_transaction`
+        #   can help to prevent livelock. (See {Transaction#transaction_id})
+        #
         # @return [Time] The time the changes were committed
         #
         # @example
@@ -480,10 +490,38 @@ module Google
         #     tx.col("cities").doc("LA").delete
         #   end
         #
-        def transaction
-          transaction = Transaction.from_database self
-          yield transaction
-          transaction.commit
+        def transaction previous_transaction: nil
+          retries = 0
+          backoff = 1.0
+          deadline = 60
+          start_time = Time.now
+
+          transaction = Transaction.from_database \
+            self, previous_transaction: previous_transaction
+          begin
+            yield transaction
+            transaction.commit
+          rescue Google::Cloud::UnavailableError => err
+            # Re-raise if deadline has passed
+            raise err if Time.now - start_time > deadline
+            # Sleep with incremental backoff
+            sleep(backoff *= 1.3)
+            # Create new transaction and retry
+            transaction = Transaction.from_database \
+              self, previous_transaction: transaction.transaction_id
+            retries += 1
+            retry
+          rescue Google::Cloud::InvalidArgumentError => err
+            # Return if a previous call has succeeded
+            return nil if retries > 0
+            # Re-raise error.
+            raise err
+          rescue => err
+            # Rollback transaction when handling unexpected error
+            transaction.rollback! rescue nil
+            # Re-raise error.
+            raise err
+          end
         end
 
         ##

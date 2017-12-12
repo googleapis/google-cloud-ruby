@@ -378,6 +378,100 @@ describe Google::Cloud::Firestore::Database, :transaction, :mock_firestore do
     outside_transaction_doc.context.must_equal firestore
   end
 
+  describe :retry do
+    it "retries when an unavailable error is raised" do
+      # Unable to use mocks to define the responses, so stub the methods instead
+      def firestore_mock.begin_transaction path, options_: nil, options: nil
+        if @first_begin_transaction.nil?
+          @first_begin_transaction = true
+          raise "bad first begin_transaction" unless options_.read_write.retry_transaction.empty?
+          return Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "transaction123")
+        end
+
+        raise "bad second begin_transaction" unless options_.read_write.retry_transaction == "transaction123"
+        Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
+      end
+      def firestore_mock.commit database, writes, transaction: nil, options: nil
+        if @first_commit.nil?
+          @first_commit = true
+          raise "bad first commit" unless transaction == "transaction123"
+          gax_error = Google::Gax::GaxError.new "unavailable"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(14, "unavailable")
+          raise gax_error
+        end
+
+        raise "bad second commit" unless transaction == "new_transaction_xyz"
+        Google::Firestore::V1beta1::CommitResponse.new(
+          commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+          write_results: [Google::Firestore::V1beta1::WriteResult.new(
+            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
+          )
+      end
+
+      firestore.transaction do |tx|
+        tx.create(document_path, { name: "Mike" })
+        tx.set(document_path, { name: "Mike" })
+        tx.update(document_path, { name: "Mike" })
+        tx.delete document_path
+      end
+    end
+
+    it "retries when unavailable, succeeds if invalid arg raised after" do
+      # Unable to use mocks to define the responses, so stub the methods instead
+      def firestore_mock.begin_transaction path, options_: nil, options: nil
+        if @first_begin_transaction.nil?
+          @first_begin_transaction = true
+          raise "bad first begin_transaction" unless options_.read_write.retry_transaction.empty?
+          return Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "transaction123")
+        end
+
+        raise "bad second begin_transaction" unless options_.read_write.retry_transaction == "transaction123"
+        Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
+      end
+      def firestore_mock.commit database, writes, transaction: nil, options: nil
+        if @first_commit.nil?
+          @first_commit = true
+          raise "bad first commit" unless transaction == "transaction123"
+          gax_error = Google::Gax::GaxError.new "unavailable"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(14, "unavailable")
+          raise gax_error
+        end
+
+        raise "bad second commit" unless transaction == "new_transaction_xyz"
+        gax_error = Google::Gax::GaxError.new "invalid"
+        gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(3, "invalid")
+        raise gax_error
+      end
+
+      firestore.transaction do |tx|
+        tx.create(document_path, { name: "Mike" })
+        tx.set(document_path, { name: "Mike" })
+        tx.update(document_path, { name: "Mike" })
+        tx.delete document_path
+      end
+    end
+
+    it "does not retry when an unsupported error is raised" do
+      firestore_mock.expect :begin_transaction, begin_tx_resp, [database_path, options_: transaction_opt, options: default_options]
+      firestore_mock.expect :rollback, nil, ["projects/#{project}/databases/(default)", transaction_id, options: default_options]
+
+      # Unable to use mocks to raise an error, so stub the method instead
+      def firestore_mock.commit database, writes, transaction: nil, options: nil
+        raise "unsupported"
+      end
+
+      error = expect do
+        firestore.transaction do |tx|
+          tx.create(document_path, { name: "Mike" })
+          tx.set(document_path, { name: "Mike" })
+          tx.update(document_path, { name: "Mike" })
+          tx.delete document_path
+        end
+      end.must_raise RuntimeError
+      error.message.must_equal "unsupported"
+    end
+  end
+
   def assert_results_enum enum
     enum.must_be_kind_of Enumerator
 
