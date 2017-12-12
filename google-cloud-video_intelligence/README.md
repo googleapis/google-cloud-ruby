@@ -1,4 +1,4 @@
-# Ruby Client for Google Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Google Cloud Video Intelligence API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
 
 [Google Cloud Video Intelligence API][Product Documentation]:
 Google Cloud Video Intelligence API.
