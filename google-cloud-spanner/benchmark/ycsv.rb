@@ -14,6 +14,9 @@
 
 # See usage at https://github.com/haih-g/YCSBClientCloudSpanner
 
+# To make a package so it can work with PerfKitBenchmarker:
+#   $ cd google-cloud-spanner; tar -cvzf ycsb-ruby.0.0.1.tar.gz benchmark/
+
 require "google/cloud/spanner"
 require "optparse"
 require "set"
