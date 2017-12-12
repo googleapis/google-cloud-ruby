@@ -22,6 +22,8 @@ module Google
       ##
       # # Document
       #
+      # (See {Document::Reference} and {Document::Snapshot}).
+      #
       module Document
         ##
         # @private New Document::Reference object from a path.

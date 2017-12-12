@@ -45,12 +45,32 @@ describe Google::Cloud::Firestore::Document::Snapshot, :get, :mock_firestore do
     document.get(:name).must_equal "Mike"
   end
 
+  it "retrieves top-level value from data given a fieldpath (array(string))" do
+    document.get(["name"]).must_equal "Mike"
+  end
+
+  it "retrieves top-level value from data given a fieldpath (array(symbol))" do
+    document.get([:name]).must_equal "Mike"
+  end
+
   it "retrieves nested value from data given a fieldpath (string)" do
     document.get("foo.bar.baz").must_equal "bif"
   end
 
   it "retrieves nested value from data given a fieldpath (symbol)" do
     document.get(:"foo.bar.baz").must_equal "bif"
+  end
+
+  it "retrieves nested value from data given a fieldpath (array(string))" do
+    document.get(["foo", "bar", "baz"]).must_equal "bif"
+  end
+
+  it "retrieves nested value from data given a fieldpath (array(symbol))" do
+    document.get([:foo, :bar, :baz]).must_equal "bif"
+  end
+
+  it "retrieves hash structure from data given a top-level node" do
+    document.get(:foo).must_equal({ bar: { baz: "bif" } })
   end
 
   it "returns nil when given a top-level fieldpath (string) that does not exist" do
@@ -83,6 +103,25 @@ describe Google::Cloud::Firestore::Document::Snapshot, :get, :mock_firestore do
     document.get("").must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
   end
 
+  describe "strange data" do
+    let :document_grpc do
+      Google::Firestore::V1beta1::Document.new(
+        name: document_ref.path,
+        fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike"),
+                  "foo" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                    "bar.baz" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                      "bif" => Google::Firestore::V1beta1::Value.new(integer_value: 42) })) })) },
+        create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
+        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
+      )
+    end
+
+    it "can still retrieve data using arrays" do
+      document.get(["foo", "bar.baz", "bif"]).must_equal 42
+      document.get([:foo, "bar.baz".to_sym]).must_equal({ bif: 42 })
+    end
+  end
+
   describe :[] do
     it "retrieves top-level value from data given a fieldpath (string)" do
       document["name"].must_equal "Mike"
@@ -92,12 +131,32 @@ describe Google::Cloud::Firestore::Document::Snapshot, :get, :mock_firestore do
       document[:name].must_equal "Mike"
     end
 
+    it "retrieves top-level value from data given a fieldpath (array(string))" do
+      document[["name"]].must_equal "Mike"
+    end
+
+    it "retrieves top-level value from data given a fieldpath (array(symbol))" do
+      document[[:name]].must_equal "Mike"
+    end
+
     it "retrieves nested value from data given a fieldpath (string)" do
       document["foo.bar.baz"].must_equal "bif"
     end
 
     it "retrieves nested value from data given a fieldpath (symbol)" do
       document[:"foo.bar.baz"].must_equal "bif"
+    end
+
+    it "retrieves nested value from data given a fieldpath (array(string))" do
+      document[["foo", "bar", "baz"]].must_equal "bif"
+    end
+
+    it "retrieves nested value from data given a fieldpath (array(symbol))" do
+      document[[:foo, :bar, :baz]].must_equal "bif"
+    end
+
+    it "retrieves hash structure from data given a top-level node" do
+      document[:foo].must_equal({ bar: { baz: "bif" } })
     end
 
     it "returns nil when given a top-level fieldpath (string) that does not exist" do
@@ -128,6 +187,25 @@ describe Google::Cloud::Firestore::Document::Snapshot, :get, :mock_firestore do
 
     it "retrieves full data given an empty string" do
       document[""].must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+    end
+
+    describe "strange data" do
+      let :document_grpc do
+        Google::Firestore::V1beta1::Document.new(
+          name: document_ref.path,
+          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike"),
+                    "foo" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                      "bar.baz" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: {
+                        "bif" => Google::Firestore::V1beta1::Value.new(integer_value: 42) })) })) },
+          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
+          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
+        )
+      end
+
+      it "can still retrieve data using arrays" do
+        document[["foo", "bar.baz", "bif"]].must_equal 42
+        document[[:foo, "bar.baz".to_sym]].must_equal({ bif: 42 })
+      end
     end
   end
 end

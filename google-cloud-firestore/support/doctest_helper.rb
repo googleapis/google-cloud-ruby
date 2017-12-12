@@ -643,6 +643,19 @@ YARD::Doctest.configure do |doctest|
   # Skip aliased methods
   doctest.skip "Google::Cloud::Firestore::Document::Snapshot#collections"
 
+  doctest.before "Google::Cloud::Firestore::Document::Snapshot#get@Nested data can be accessing with field path:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp_users, batch_get_args
+    end
+  end
+  doctest.before "Google::Cloud::Firestore::Document::Snapshot#get@Nested data can be accessing with field path array:" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp_users, batch_get_args
+    end
+  end
+  # Skip aliased methods
+  doctest.skip "Google::Cloud::Firestore::Document::Snapshot#[]"
+
   doctest.before "Google::Cloud::Firestore::Document::Snapshot#missing" do
     mock_firestore do |mock|
       mock.expect :batch_get_documents, missing_batch_get_resp, batch_get_args
@@ -700,6 +713,21 @@ def batch_get_resp
     batch_get_resp_obj("cities/NYC", { name: "New York City", population: 1000000 }),
     batch_get_resp_obj("cities/SF",  { name: "San Francisco", population: 1000000 }),
     batch_get_resp_obj("cities/LA",  { name: "Los Angeles", population: 1000000 })
+  ].to_enum
+end
+
+def batch_get_resp_users
+  user_data = {
+    name: "Frank",
+    age: 12,
+    favorites: {
+      food: "Pizza",
+      color: "Blue",
+      subject: "recess"
+    }
+  }
+  [
+    batch_get_resp_obj("users/frank", user_data),
   ].to_enum
 end
 

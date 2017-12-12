@@ -199,6 +199,9 @@ module Google
           ##
           # Retrieves the document data.
           #
+          # @param [String|Symbol, Array<String|Symbol>] field_path A string,
+          #   symbol, or array representing the path of the data to select.
+          #
           # @return [Object] The data at the field path.
           #
           # @example
@@ -221,14 +224,40 @@ module Google
           #   # Get the document data
           #   nyc_snap[:population] #=> 1000000
           #
+          # @example Nested data can be accessing with field path:
+          #   require "google/cloud/firestore"
+          #
+          #   firestore = Google::Cloud::Firestore.new
+          #
+          #   frank_snap = firestore.get "users/frank"
+          #
+          #   # Get the document data
+          #   frank_snap.get("favorites.food") #=> "Pizza"
+          #
+          # @example Nested data can be accessing with field path array:
+          #   require "google/cloud/firestore"
+          #
+          #   firestore = Google::Cloud::Firestore.new
+          #
+          #   user_snap = firestore.get "users/frank"
+          #
+          #   # Get the document data
+          #   user_snap.get([:favorites, :food]) #=> "Pizza"
+          #
           def get field_path
-            # TODO: Try replacing: Convert.select_field_path data, field_path
+            if field_path.is_a? Array
+              nodes = field_path
+            else
+              nodes = Convert.unescape_field_path field_path
+            end
+            nodes.map!(&:to_sym)
             selected_data = data
-            field_path.to_s.split(".").each do |field|
+
+            nodes.each do |node|
               unless selected_data.is_a? Hash
                 fail ArgumentError, "#{field_path} is not contained in the data"
               end
-              selected_data = selected_data[field.to_sym]
+              selected_data = selected_data[node]
             end
             selected_data
           end
