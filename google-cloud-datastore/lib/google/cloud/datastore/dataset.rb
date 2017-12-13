@@ -468,6 +468,10 @@ module Google
         ##
         # Creates a Datastore Transaction.
         #
+        # Transactions using the block syntax are committed upon block
+        # completion and are automatically retried when known errors are raised
+        # during commit.
+        #
         # @see https://cloud.google.com/datastore/docs/concepts/transactions
         #   Transactions
         #
@@ -525,13 +529,27 @@ module Google
         #   end
         #
         def transaction previous_transaction: nil
-          tx = Transaction.new service,
-                               previous_transaction: previous_transaction
+          backoff = 1.0
+          deadline = 60
+          start_time = Time.now
+
+          tx = Transaction.new \
+            service, previous_transaction: previous_transaction
           return tx unless block_given?
 
           begin
             yield tx
             tx.commit
+          rescue Google::Cloud::UnavailableError => err
+            # Re-raise if deadline has passed
+            raise err if Time.now - start_time > deadline
+
+            # Sleep with incremental backoff
+            sleep(backoff *= 1.3)
+
+            # Create new transaction and retry the block
+            tx = Transaction.new service, previous_transaction: tx.id
+            retry
           rescue
             begin
               tx.rollback

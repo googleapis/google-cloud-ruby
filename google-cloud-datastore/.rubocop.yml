@@ -32,7 +32,7 @@ Metrics/PerceivedComplexity:
 Metrics/AbcSize:
   Max: 25
 Metrics/MethodLength:
-  Max: 20
+  Max: 25
 Metrics/ParameterLists:
   Enabled: false
 Style/RescueModifier:

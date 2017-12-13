@@ -1258,4 +1258,72 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       dataset.service = mocked_service
     end
   end
+
+  describe "transaction retry" do
+    it "retries when an unavailable error is raised" do
+      tx_id = "giterdone".encode("ASCII-8BIT")
+      begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+      dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
+
+      retry_tx_id = "doitlive".encode("ASCII-8BIT")
+      retry_begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: retry_tx_id)
+      retry_tx_options = Google::Datastore::V1::TransactionOptions.new(
+        read_write: Google::Datastore::V1::TransactionOptions::ReadWrite.new(
+          previous_transaction: tx_id
+        )
+      )
+      dataset.service.mocked_service.expect :begin_transaction, retry_begin_tx_res, [project, transaction_options: retry_tx_options]
+
+      mocked_service = dataset.service.mocked_service
+      def mocked_service.commit *args
+        if @first_commit.nil?
+          @first_commit = true
+
+          gax_error = Google::Gax::GaxError.new "unavailable"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(14, "unavailable")
+          raise gax_error
+        end
+
+        Google::Datastore::V1::CommitResponse.new(mutation_results: [
+            Google::Datastore::V1::MutationResult.new(
+              key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc
+            )
+        ])
+      end
+
+      entity = Google::Cloud::Datastore::Entity.new.tap do |e|
+        e.key = Google::Cloud::Datastore::Key.new "ds-test"
+        e["name"] = "thingamajig"
+      end
+      dataset.transaction do |tx|
+        tx.save entity
+      end
+    end
+
+    it "does not retry when an unsupported error is raised" do
+      tx_id = "giterdone".encode("ASCII-8BIT")
+      begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+      rollback_res = Google::Datastore::V1::RollbackResponse.new
+      dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
+      dataset.service.mocked_service.expect :rollback, rollback_res, [project, tx_id, options: default_options]
+
+      mocked_service = dataset.service.mocked_service
+      def mocked_service.commit *args
+        raise "unsupported"
+      end
+
+      entity = Google::Cloud::Datastore::Entity.new.tap do |e|
+        e.key = Google::Cloud::Datastore::Key.new "ds-test"
+        e["name"] = "thingamajig"
+      end
+      error = expect do
+        dataset.transaction do |tx|
+          tx.save entity
+        end
+      end.must_raise Google::Cloud::Datastore::TransactionError
+      error.message.must_equal "Transaction failed to commit."
+      error.cause.must_be_kind_of StandardError
+      error.cause.message.must_equal "unsupported"
+    end
+  end
 end
