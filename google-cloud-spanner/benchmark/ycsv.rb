@@ -28,7 +28,8 @@ if command != "run"
 end
 
 options = {
-  num_bucket: 1000
+  num_bucket: 1000,
+  num_worker: '1',
 }
 OptionParser.new do |opts|
   opts.on("-P", "--workload FILE", "path to YCSB workload file") do |fname|
@@ -54,7 +55,10 @@ puts options
 
 spanner = Google::Cloud::Spanner.new project: options[:"cloudspanner.project"]
 database = spanner.client options[:"cloudspanner.instance"],
-                          options[:"cloudspanner.database"]
+                          options[:"cloudspanner.database"],
+                          pool: {
+                            threads: options[:num_worker].to_i
+                          }
 
 # Load keys
 keys = []
@@ -124,13 +128,11 @@ class Workload
   end
 
   def do_read database, table, key
-    database.snapshot do |snp|
-      results = snp.execute "SELECT u.* FROM #{table} u WHERE u.id=\"#{key}\""
-      results.rows.each do |row|
-        key = row[0]
-        (1...10).each do |i|
-          field = row[i]
-        end
+    results = database.execute "SELECT u.* FROM #{table} u WHERE u.id=\"#{key}\""
+    results.rows.each do |row|
+      key = row[0]
+      (1...10).each do |i|
+        field = row[i]
       end
     end
   end
@@ -145,21 +147,36 @@ class Workload
 end
 
 start = Time.now
-workload = Workload.new database,
-                        options,
-                        total_weight,
-                        weights,
-                        operations,
-                        keys
-workload.run
+workloads = []
+threads = []
+options[:num_worker].to_i.times do
+  workload = Workload.new database,
+                          options,
+                          total_weight,
+                          weights,
+                          operations,
+                          keys
+  workloads << workload
+  threads << Thread.new(workload) { |wl| wl.run }
+end
+
+threads.each do |t|
+  t.join
+end
+
 overall_duration = Time.now - start
 
-overall_op_count = workload.latencies_ms.values.map { |l| l.count }.reduce(:+)
+merge_latencies_ms = {}
+workloads.each do |wl|
+  merge_latencies_ms.merge!(wl.latencies_ms) { |key, a, b| a.concat(b) }
+end
+
+overall_op_count = merge_latencies_ms.values.map { |l| l.count }.reduce(:+)
 
 puts "[OVERALL], RunTime(ms), #{overall_duration*1000}"
 puts "[OVERALL], Throughput(ops/sec), #{overall_op_count.to_f/overall_duration}"
-workload.latencies_ms.keys.each do |op|
-  latencies_ms = workload.latencies_ms[op].sort
+merge_latencies_ms.keys.each do |op|
+  latencies_ms = merge_latencies_ms[op].sort
   count = latencies_ms.count
   opup = op.upcase
   puts "[#{opup}], Operations, #{count}"
