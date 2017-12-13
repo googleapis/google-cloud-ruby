@@ -561,8 +561,6 @@ module Google
     # ```
     #
     module Datastore
-      # rubocop:disable MethodLength
-
       ##
       # Creates a new object for connecting to the Datastore service.
       # Each call creates a new connection.
@@ -638,8 +636,6 @@ module Google
             project_id, credentials,
             timeout: timeout, client_config: client_config))
       end
-
-      # rubocop:enable MethodLength
     end
   end
 end
