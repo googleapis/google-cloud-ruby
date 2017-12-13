@@ -51,7 +51,7 @@ module Google
         #
         #   # Get and print all city documents
         #   cities_ref.docs do |city|
-        #     puts city.document_id
+        #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
         class Reference
@@ -143,10 +143,10 @@ module Google
           ##
           # Retrieves a list of documents.
           #
-          # @yield [documents] The block for accessing the documents.
-          # @yieldparam [Document::Reference] document A document.
+          # @yield [documents] The block for accessing the documents with data.
+          # @yieldparam [Document::Snapshot] document A document with data.
           #
-          # @return [Enumerator<Document::Reference>] documents list.
+          # @return [Enumerator<Document::Snapshot>] documents with data list.
           #
           # @example
           #   require "google/cloud/firestore"
@@ -154,11 +154,11 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Get and print all city documents
-          #   cities_ref.docs do |city|
-          #     puts city.document_id
+          #   cities_col.docs do |city|
+          #     puts "#{city.document_id} has #{city[:population]} residents."
           #   end
           #
           def docs &block
@@ -244,7 +244,7 @@ module Google
           #   # Get and print city documents
           #   cities = ["cities/NYC", "cities/SF", "cities/LA"]
           #   cities_ref.get_all(cities).each do |city|
-          #     puts city.document_id
+          #     puts "#{city.document_id} has #{city[:population]} residents."
           #   end
           #
           def get_all *docs, mask: nil, &block

@@ -175,10 +175,10 @@ module Google
         # @param [String] collection_path A string representing the path of the
         #   collection, relative to the document root of the database.
         #
-        # @yield [documents] The block for accessing the documents.
-        # @yieldparam [Document::Reference] document A document.
+        # @yield [documents] The block for accessing the documents with data.
+        # @yieldparam [Document::Snapshot] document A document with data.
         #
-        # @return [Enumerator<Document::Reference>] documents list.
+        # @return [Enumerator<Document::Snapshot>] documents with data list.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -254,7 +254,7 @@ module Google
         #   firestore.transaction do |tx|
         #     # Get and print city documents
         #     tx.get_all("cities/NYC", "cities/SF", "cities/LA").each do |city|
-        #       puts city.document_id
+        #       puts "#{city.document_id} has #{city[:population]} residents."
         #     end
         #   end
         #
