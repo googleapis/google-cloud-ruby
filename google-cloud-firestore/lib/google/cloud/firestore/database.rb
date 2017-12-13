@@ -221,6 +221,7 @@ module Google
 
           results = service.get_documents doc_paths, mask: mask
           results.each do |result|
+            next if result.result.nil?
             yield Document.from_batch_result(result, self)
           end
         end
@@ -943,7 +944,6 @@ module Google
 
           results = service.run_query obj.parent_path, obj.grpc
           results.each do |result|
-            @transaction_id ||= result.transaction
             next if result.document.nil?
             yield Document.from_query_result(result, self)
           end

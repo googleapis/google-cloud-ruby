@@ -46,15 +46,20 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
   end
 
   it "gets a document (doc ref)" do
-    get_doc_resp = Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
-      read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-      found: Google::Firestore::V1beta1::Document.new(
-        name: "projects/#{project}/databases/(default)/documents/users/mike",
-        fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
-        create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time))
-    )
-    firestore_mock.expect :batch_get_documents, [get_doc_resp].to_enum, ["projects/#{project}/databases/(default)", ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
+    batch_get_resp_enum = [
+      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+        transaction: transaction_id
+      ),
+      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+        found: Google::Firestore::V1beta1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/mike",
+          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time))
+      )
+    ].to_enum
+    firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
 
     col = firestore.col :users
     col.must_be_kind_of Google::Cloud::Firestore::Collection::Reference
@@ -62,7 +67,11 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
     doc_ref = col.doc :mike
     doc_ref.must_be_kind_of Google::Cloud::Firestore::Document::Reference
 
+    transaction.transaction_id.must_be :nil?
+
     doc = transaction.get doc_ref
+
+    transaction.transaction_id.must_equal transaction_id
 
     doc.must_be_kind_of Google::Cloud::Firestore::Document::Snapshot
     doc.project_id.must_equal doc_ref.project_id
@@ -88,20 +97,29 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
   end
 
   it "gets a document (string)" do
-    get_doc_resp = Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
-      read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-      found: Google::Firestore::V1beta1::Document.new(
-        name: "projects/#{project}/databases/(default)/documents/users/mike",
-        fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
-        create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
-        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time))
-    )
-    firestore_mock.expect :batch_get_documents, [get_doc_resp].to_enum, ["projects/#{project}/databases/(default)", ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
+    batch_get_resp_enum = [
+      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+        transaction: transaction_id
+      ),
+      Google::Firestore::V1beta1::BatchGetDocumentsResponse.new(
+        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+        found: Google::Firestore::V1beta1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/mike",
+          fields: { "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike") },
+          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time))
+      )
+    ].to_enum
+    firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
 
     doc_ref = firestore.doc "users/mike"
     doc_ref.must_be_kind_of Google::Cloud::Firestore::Document::Reference
 
+    transaction.transaction_id.must_be :nil?
+
     doc = transaction.get "users/mike"
+
+    transaction.transaction_id.must_equal transaction_id
 
     doc.must_be_kind_of Google::Cloud::Firestore::Document::Snapshot
     doc.project_id.must_equal doc_ref.project_id

@@ -60,7 +60,11 @@ describe Google::Cloud::Firestore::Transaction, :get, :mock_firestore do
     doc_ref = col.doc :mike
     doc_ref.must_be_kind_of Google::Cloud::Firestore::Document::Reference
 
+    transaction.transaction_id.must_equal transaction_id
+
     doc = transaction.get doc_ref
+
+    transaction.transaction_id.must_equal transaction_id
 
     doc.must_be_kind_of Google::Cloud::Firestore::Document::Snapshot
     doc.project_id.must_equal doc_ref.project_id
@@ -99,7 +103,11 @@ describe Google::Cloud::Firestore::Transaction, :get, :mock_firestore do
     doc_ref = firestore.doc "users/mike"
     doc_ref.must_be_kind_of Google::Cloud::Firestore::Document::Reference
 
+    transaction.transaction_id.must_equal transaction_id
+
     doc = transaction.get "users/mike"
+
+    transaction.transaction_id.must_equal transaction_id
 
     doc.must_be_kind_of Google::Cloud::Firestore::Document::Snapshot
     doc.project_id.must_equal doc_ref.project_id

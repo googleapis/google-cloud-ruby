@@ -271,6 +271,8 @@ module Google
           results = service.get_documents \
             doc_paths, mask: mask, transaction: transaction_or_create
           results.each do |result|
+            extract_transaction_from_result! result
+            next if result.result.nil?
             yield Document.from_batch_result(result, self)
           end
         end
@@ -713,8 +715,7 @@ module Google
           results = service.run_query obj.parent_path, obj.grpc,
                                       transaction: transaction_or_create
           results.each do |result|
-            # if we don't have a transaction_id yet, use what was given
-            @transaction_id ||= result.transaction
+            extract_transaction_from_result! result
             next if result.document.nil?
             yield Document.from_query_result(result, self)
           end
@@ -1067,6 +1068,16 @@ module Google
           Google::Firestore::V1beta1::TransactionOptions.new(
             read_write: read_write
           )
+        end
+
+        ##
+        # @private
+        def extract_transaction_from_result! result
+          return if @transaction_id
+          return if result.transaction.nil?
+          return if result.transaction.empty?
+
+          @transaction_id = result.transaction
         end
 
         ##
