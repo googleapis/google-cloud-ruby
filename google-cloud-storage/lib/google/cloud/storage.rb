@@ -334,6 +334,44 @@ module Google
     # downloaded.read #=> "Hello world!"
     # ```
     #
+    # ## Creating and downloading gzip-encoded files
+    #
+    # When uploading a gzip-compressed file, you should pass
+    # `content_encoding: "gzip"` if you want the file to be eligible for
+    # [decompressive transcoding](https://cloud.google.com/storage/docs/transcoding)
+    # when it is later downloaded. In addition, giving the gzip-compressed file
+    # a name containing the original file extension (for example, `.txt`) will
+    # ensure that the file's `Content-Type` metadata is set correctly. (You can
+    # also set the file's `Content-Type` metadata explicitly with the
+    # `content_type` option.)
+    #
+    # ```ruby
+    # require "zlib"
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # gz = StringIO.new ""
+    # z = Zlib::GzipWriter.new gz
+    # z.write "Hello world!"
+    # z.close
+    # data = StringIO.new gz.string
+    #
+    # bucket = storage.bucket "my-bucket"
+    #
+    # bucket.create_file data, "path/to/gzipped.txt",
+    #                    content_encoding: "gzip"
+    #
+    # file = bucket.file "path/to/gzipped.txt"
+    #
+    # # The downloaded data is decompressed by default.
+    # file.download "path/to/downloaded/hello.txt"
+    #
+    # # The downloaded data remains compressed with skip_decompress.
+    # file.download "path/to/downloaded/gzipped.txt",
+    #               skip_decompress: true
+    # ```
+    #
     # ## Using Signed URLs
     #
     # Access without authentication can be granted to a file for a specified

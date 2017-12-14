@@ -505,7 +505,7 @@ module Google
         #   downloaded.rewind
         #   downloaded.read #=> "Hello world!"
         #
-        # @example Download a public file with an unauthenticated client:
+        # @example Download a public file with an unauthenticated client.
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.anonymous
@@ -516,6 +516,32 @@ module Google
         #   downloaded = file.download
         #   downloaded.rewind
         #   downloaded.read #=> "Hello world!"
+        #
+        # @example Upload and download gzip-encoded file data.
+        #   require "zlib"
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   gz = StringIO.new ""
+        #   z = Zlib::GzipWriter.new gz
+        #   z.write "Hello world!"
+        #   z.close
+        #   data = StringIO.new gz.string
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.create_file data, "path/to/gzipped.txt",
+        #                      content_encoding: "gzip"
+        #
+        #   file = bucket.file "path/to/gzipped.txt"
+        #
+        #   # The downloaded data is decompressed by default.
+        #   file.download "path/to/downloaded/hello.txt"
+        #
+        #   # The downloaded data remains compressed with skip_decompress.
+        #   file.download "path/to/downloaded/gzipped.txt",
+        #                 skip_decompress: true
         #
         def download path = nil, verify: :md5, encryption_key: nil,
                      skip_decompress: nil

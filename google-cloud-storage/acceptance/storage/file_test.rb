@@ -275,12 +275,12 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should upload, download, and verify gzip content_type" do
-    gz = StringIO.new("")
-    z = Zlib::GzipWriter.new(gz)
+    gz = StringIO.new ""
+    z = Zlib::GzipWriter.new gz
     z.write "Hello world!"
     z.close # write the gzip footer
-
     gzipped = StringIO.new gz.string
+
     uploaded = bucket.create_file gzipped, "uploaded/with/gzip-type.txt", content_type: "application/gzip"
     uploaded.name.must_equal "uploaded/with/gzip-type.txt"
     uploaded.content_type.must_equal "application/gzip"
@@ -296,20 +296,20 @@ describe Google::Cloud::Storage::File, :storage do
 
     data = downloaded.read
     data.must_equal gzipped.read
-    gzr = Zlib::GzipReader.new(StringIO.new(data))
+    gzr = Zlib::GzipReader.new StringIO.new(data)
     gzr.read.must_equal "Hello world!"
 
     uploaded.delete
   end
 
   it "should upload, download, verify, and decompress when Content-Encoding gzip response header" do
-    gz = StringIO.new("")
-    z = Zlib::GzipWriter.new(gz)
+    gz = StringIO.new ""
+    z = Zlib::GzipWriter.new gz
     data = "Hello world!"
     z.write data
     z.close # write the gzip footer
-
     gzipped = StringIO.new gz.string
+
     uploaded = bucket.create_file gzipped, "uploaded/with/gzip-encoding.txt", content_type: "text/plain", content_encoding: "gzip"
     uploaded.name.must_equal "uploaded/with/gzip-encoding.txt"
     uploaded.content_type.must_equal "text/plain"
@@ -336,7 +336,7 @@ describe Google::Cloud::Storage::File, :storage do
       downloaded = file.download tmpfile, skip_decompress: true
 
       data = File.read(downloaded.path, mode: "rb")
-      gzr = Zlib::GzipReader.new(StringIO.new(data))
+      gzr = Zlib::GzipReader.new StringIO.new(data)
       gzr.read.must_equal "hello world"
     end
   end

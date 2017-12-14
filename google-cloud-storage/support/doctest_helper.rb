@@ -62,7 +62,7 @@ module Google
         end
       end
       class File
-        def download path = nil, verify: :md5, encryption_key: nil
+        def download path = nil, verify: :md5, encryption_key: nil, skip_decompress: nil
           # no-op stub, but ensures that calls match this copied signature
           return StringIO.new("Hello world!") if path.nil?
         end
@@ -148,6 +148,7 @@ YARD::Doctest.configure do |doctest|
 
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::Storage::Bucket#new_file"
+  doctest.skip "Google::Cloud::Storage::Bucket#upload_file"
   doctest.skip "Google::Cloud::Storage::Bucket#find_files"
   doctest.skip "Google::Cloud::Storage::Bucket#combine"
   doctest.skip "Google::Cloud::Storage::Bucket#compose_file"
@@ -239,6 +240,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#create_file@Create a file with gzip-encoded data." do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
+      # Following expectation is only used in last example
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/gzipped.txt", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#create_notification" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :create_topic, topic_gapi, ["projects/my-project/topics/my-topic", Hash]
@@ -248,15 +258,6 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :insert_notification, notification_gapi, ["my-bucket", Google::Apis::StorageV1::Notification, Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Storage::Bucket#upload_file" do
-    mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
-      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
-      # Following expectation is only used in last example
-      mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
     end
   end
 
@@ -655,6 +656,14 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#download@Upload and download gzip-encoded file data." do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/gzipped.txt", Hash]
     end
   end
 
