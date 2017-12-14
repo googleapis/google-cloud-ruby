@@ -79,7 +79,7 @@ require "google/cloud/bigquery"
 # Must have set ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "/path/to/keyfile.json"
 
 bigquery = Google::Cloud::Bigquery.new(
-  project: my-todo-project
+  project: "my-todo-project"
 )
 
 # Create a new table to archive todos
