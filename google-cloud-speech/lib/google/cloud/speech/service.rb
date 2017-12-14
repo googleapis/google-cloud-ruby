@@ -28,6 +28,12 @@ module Google
         attr_accessor :project, :credentials, :timeout, :client_config
 
         ##
+        # LRO client configured for Speech
+        class SpeechOperationsClient < Google::Longrunning::OperationsClient
+          SERVICE_ADDRESS = V1::SpeechClient::SERVICE_ADDRESS
+        end
+
+        ##
         # Creates a new Service instance.
         def initialize project, credentials, timeout: nil, client_config: nil
           @project = project
@@ -51,8 +57,7 @@ module Google
         def ops
           return mocked_ops if mocked_ops
           @ops ||= \
-            Google::Longrunning::OperationsClient.new(
-              service_path: V1::SpeechClient::SERVICE_ADDRESS,
+            SpeechOperationsClient.new(
               credentials: credentials,
               timeout: timeout,
               client_config: client_config,
