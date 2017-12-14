@@ -23,10 +23,10 @@ $ gem install google-cloud-trace
 
 Or install through Bundler:
 
-1. Add the `google-cloud-cloud` gem to your Gemfile:
+1. Add the `google-cloud-trace` gem to your Gemfile:
 
 ```ruby
-gem "google-cloud-cloud"
+gem "google-cloud-trace"
 ```
 
 2. Use Bundler to install the gem:
@@ -36,7 +36,7 @@ $ bundle install
 ```
 
 Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes 
-the `google-cloud-cloud` gem.
+the `google-cloud-trace` gem.
 
 ## Enable Stackdriver Trace API
 
