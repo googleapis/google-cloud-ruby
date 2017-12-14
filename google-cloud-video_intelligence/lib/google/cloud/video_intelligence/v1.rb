@@ -30,8 +30,47 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+    # 3. [Enable the Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
+    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    #
+    # ### Preview
+    # #### VideoIntelligenceServiceClient
+    # ```rb
+    # require "google/cloud/video_intelligence/v1"
+    #
+    # video_intelligence_service_client = Google::Cloud::VideoIntelligence::V1.new
+    # input_uri = "gs://demomaker/cat.mp4"
+    # features_element = :LABEL_DETECTION
+    # features = [features_element]
+    #
+    # # Register a callback during the method call.
+    # operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
+    #   raise op.results.message if op.error?
+    #   op_results = op.results
+    #   # Process the results.
+    #
+    #   metadata = op.metadata
+    #   # Process the metadata.
+    # end
+    #
+    # # Or use the return value to register a callback.
+    # operation.on_done do |op|
+    #   raise op.results.message if op.error?
+    #   op_results = op.results
+    #   # Process the results.
+    #
+    #   metadata = op.metadata
+    #   # Process the metadata.
+    # end
+    #
+    # # Manually reload the operation.
+    # operation.reload!
+    #
+    # # Or block until the operation completes, triggering callbacks on
+    # # completion.
+    # operation.wait_until_done!
+    # ```
     #
     # ### Next Steps
     # - Read the [Cloud Video Intelligence API Product documentation][Product Documentation]
@@ -74,11 +113,6 @@ module Google
         # @param timeout [Numeric]
         #   The default timeout, in seconds, for calls made through this client.
         def self.new \
-            service_path: nil,
-            port: nil,
-            channel: nil,
-            chan_creds: nil,
-            updater_proc: nil,
             credentials: nil,
             scopes: nil,
             client_config: nil,
@@ -86,11 +120,6 @@ module Google
             lib_name: nil,
             lib_version: nil
           kwargs = {
-            service_path: service_path,
-            port: port,
-            channel: channel,
-            chan_creds: chan_creds,
-            updater_proc: updater_proc,
             credentials: credentials,
             scopes: scopes,
             client_config: client_config,
