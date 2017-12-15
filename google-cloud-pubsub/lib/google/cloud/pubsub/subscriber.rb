@@ -109,7 +109,7 @@ module Google
               Thread.new { stream.start }
             end
           end
-          start_pool.join
+          start_pool.map(&:join)
 
           self
         end
@@ -130,7 +130,7 @@ module Google
               Thread.new { stream.stop }
             end
           end
-          stop_pool.join
+          stop_pool.map(&:join)
 
           self
         end
@@ -148,7 +148,7 @@ module Google
               Thread.new { stream.wait! }
             end
           end
-          wait_pool.join
+          wait_pool.map(&:join)
 
           self
         end
