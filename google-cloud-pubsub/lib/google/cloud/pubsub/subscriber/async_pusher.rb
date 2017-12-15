@@ -30,7 +30,7 @@ module Google
           attr_reader :batch
           attr_reader :max_bytes, :interval
 
-          def initialize stream, max_bytes: 10000000, interval: 0.25
+          def initialize stream, max_bytes: 10000000, interval: 1.0
             @stream = stream
 
             @max_bytes = max_bytes
