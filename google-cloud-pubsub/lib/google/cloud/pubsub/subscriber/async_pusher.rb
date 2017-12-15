@@ -102,31 +102,15 @@ module Google
 
           def stop
             synchronize do
-              break if @stopped
-
               @stopped = true
-              push_batch_request!
-              @cond.signal
+
+              # Stop any background activity, clean up happens in wait!
+              @background_thread.kill if @background_thread
             end
 
-            self
-          end
+            return nil if @batch.nil?
 
-          def wait!
-            synchronize do
-              @background_thread.join if @background_thread
-            end
-
-            self
-          end
-
-          def flush
-            synchronize do
-              push_batch_request!
-              @cond.signal
-            end
-
-            self
+            @batch.request
           end
 
           def started?
