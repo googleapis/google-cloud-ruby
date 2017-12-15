@@ -181,15 +181,6 @@ task :ci do
 end
 
 namespace :ci do
-  desc "Run the CI build, with smoke tests."
-  task :smoke_test do
-    Rake::Task["ci"].invoke
-    header "google-cloud-video_intelligence smoke_test", "*"
-    sh "bundle exec rake smoke_test -v"
-  end
-end
-
-namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
     Rake::Task["ci"].invoke
