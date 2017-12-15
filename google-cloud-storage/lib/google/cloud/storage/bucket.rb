@@ -608,7 +608,12 @@ module Google
         #   response header to be returned when the file is downloaded.
         # @param [String] content_encoding The [Content-Encoding
         #   ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) response
-        #   header to be returned when the file is downloaded.
+        #   header to be returned when the file is downloaded. For example,
+        #   `content_encoding: "gzip"` can indicate to clients that the uploaded
+        #   data is gzip-compressed. However, there is no check to guarantee the
+        #   specified `Content-Encoding` has actually been applied to the file
+        #   data, and incorrectly specifying the file's encoding could lead
+        #   to unintended behavior on subsequent download requests.
         # @param [String] content_language The
         #   [Content-Language](http://tools.ietf.org/html/bcp47) response
         #   header to be returned when the file is downloaded.
@@ -681,6 +686,32 @@ module Google
         #   # Store your key and hash securely for later use.
         #   file = bucket.file "destination/path/file.ext",
         #                      encryption_key: key
+        #
+        # @example Create a file with gzip-encoded data.
+        #   require "zlib"
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   gz = StringIO.new ""
+        #   z = Zlib::GzipWriter.new gz
+        #   z.write "Hello world!"
+        #   z.close
+        #   data = StringIO.new gz.string
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.create_file data, "path/to/gzipped.txt",
+        #                      content_encoding: "gzip"
+        #
+        #   file = bucket.file "path/to/gzipped.txt"
+        #
+        #   # The downloaded data is decompressed by default.
+        #   file.download "path/to/downloaded/hello.txt"
+        #
+        #   # The downloaded data remains compressed with skip_decompress.
+        #   file.download "path/to/downloaded/gzipped.txt",
+        #                 skip_decompress: true
         #
         def create_file file, path = nil, acl: nil, cache_control: nil,
                         content_disposition: nil, content_encoding: nil,

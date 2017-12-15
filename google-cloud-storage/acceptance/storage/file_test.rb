@@ -14,6 +14,7 @@
 
 require "storage_helper"
 require "net/http"
+require "zlib"
 
 describe Google::Cloud::Storage::File, :storage do
   let :bucket do
@@ -235,7 +236,6 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should upload and download a file using IO" do
-    skip "The download verification sometimes fails on CI. Not sure why."
     inmemory = StringIO.new(File.read(files[:logo][:path], mode: "rb"))
 
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
@@ -245,8 +245,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.must_be_kind_of StringIO
 
     inmemory.rewind
-    downloaded.rewind
-
     downloaded.size.must_equal inmemory.size
     downloaded.size.must_equal uploaded.size
 
@@ -258,8 +256,8 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should upload and download text using IO" do
     inmemory = StringIO.new "Hello world!"
-    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
-    uploaded.name.must_equal "uploaded/with/inmemory.png"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt"
+    uploaded.name.must_equal "uploaded/with/inmemory.txt"
 
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
@@ -267,8 +265,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.must_equal downloadio # The object returned is the object provided
 
     inmemory.rewind
-    downloaded.rewind
-
     downloaded.size.must_equal inmemory.size
     downloaded.size.must_equal uploaded.size
 
@@ -276,6 +272,98 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.read.encoding.must_equal inmemory.read.encoding
 
     uploaded.delete
+  end
+
+  it "should upload, download, and verify gzip content_type" do
+    gz = StringIO.new ""
+    z = Zlib::GzipWriter.new gz
+    z.write "Hello world!"
+    z.close # write the gzip footer
+    gzipped = StringIO.new gz.string
+
+    uploaded = bucket.create_file gzipped, "uploaded/with/gzip-type.txt", content_type: "application/gzip"
+    uploaded.name.must_equal "uploaded/with/gzip-type.txt"
+    uploaded.content_type.must_equal "application/gzip"
+    uploaded.content_encoding.must_be_nil
+    downloadio = StringIO.new()
+    downloaded = uploaded.download downloadio
+    downloaded.must_be_kind_of StringIO
+    downloaded.must_equal downloadio # The object returned is the object provided
+    gzipped.rewind
+
+    downloaded.size.must_equal gzipped.size
+    downloaded.size.must_equal uploaded.size
+
+    data = downloaded.read
+    data.must_equal gzipped.read
+    gzr = Zlib::GzipReader.new StringIO.new(data)
+    gzr.read.must_equal "Hello world!"
+
+    uploaded.delete
+  end
+
+  it "should upload, download, verify, and decompress when Content-Encoding gzip response header" do
+    gz = StringIO.new ""
+    z = Zlib::GzipWriter.new gz
+    data = "Hello world!"
+    z.write data
+    z.close # write the gzip footer
+    gzipped = StringIO.new gz.string
+
+    uploaded = bucket.create_file gzipped, "uploaded/with/gzip-encoding.txt", content_type: "text/plain", content_encoding: "gzip"
+    uploaded.name.must_equal "uploaded/with/gzip-encoding.txt"
+    uploaded.content_type.must_equal "text/plain"
+    uploaded.content_encoding.must_equal "gzip"
+
+    downloadio = StringIO.new()
+    downloaded = uploaded.download downloadio
+    downloaded.must_be_kind_of StringIO
+    downloaded.wont_equal downloadio # The object returned is NOT the object provided
+
+    downloaded_data = downloaded.read
+    downloaded_data.must_equal data
+    downloaded_data.encoding.must_equal data.encoding
+
+    uploaded.delete
+  end
+
+  it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
+    bucket = storage.bucket bucket_public_test_name
+    file = bucket.file file_public_test_gzip_name
+    file.content_encoding.must_equal "gzip"
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile, skip_decompress: true
+
+      data = File.read(downloaded.path, mode: "rb")
+      gzr = Zlib::GzipReader.new StringIO.new(data)
+      gzr.read.must_equal "hello world"
+    end
+  end
+
+  it "should download, verify, and decompress when Content-Encoding gzip response header with skip_lookup" do
+    bucket = storage.bucket bucket_public_test_name, skip_lookup: true
+    file = bucket.file file_public_test_gzip_name, skip_lookup: true
+    file.content_encoding.must_be_nil # metadata not loaded
+    file.content_type.must_be_nil # metadata not loaded
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile
+
+      File.read(downloaded.path, mode: "rb").must_equal "hello world"
+    end
+  end
+
+  it "should download, verify, and decompress when Content-Encoding gzip response header with crc32c verification" do
+    lazy_bucket = storage.bucket bucket_public_test_name
+    lazy_file = lazy_bucket.file file_public_test_gzip_name
+
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = lazy_file.download tmpfile,  verify: :crc32c
+
+      File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+    end
   end
 
   it "should upload and download a file with customer-supplied encryption key" do
@@ -317,34 +405,6 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     uploaded.delete
-  end
-
-  it "should download, verify, and decompress a gzipped file with default md5 verification" do
-    skip "Not working. See https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/1835"
-
-    lazy_bucket = storage.bucket bucket_public_test_name
-    lazy_file = lazy_bucket.file file_public_test_gzip_name
-
-    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
-      tmpfile.binmode
-      downloaded = lazy_file.download tmpfile
-
-      File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
-    end
-  end
-
-  it "should download, verify, and decompress a gzipped file with crc32c verification" do
-    skip "Not working. See https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/1835"
-
-    lazy_bucket = storage.bucket bucket_public_test_name
-    lazy_file = lazy_bucket.file file_public_test_gzip_name
-
-    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
-      tmpfile.binmode
-      downloaded = lazy_file.download tmpfile,  verify: :crc32c
-
-      File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
-    end
   end
 
   it "should write metadata" do
