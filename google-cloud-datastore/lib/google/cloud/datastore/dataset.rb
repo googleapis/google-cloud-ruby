@@ -470,11 +470,18 @@ module Google
         #
         # Transactions using the block syntax are committed upon block
         # completion and are automatically retried when known errors are raised
-        # during commit.
+        # during commit. All other errors will be passed on.
+        #
+        # All changes are accumulated in memory until the block completes.
+        # Transactions will be automatically retried when possible, until
+        # `deadline` is reached. This operation makes separate API requests to
+        # begin and commit the transaction.
         #
         # @see https://cloud.google.com/datastore/docs/concepts/transactions
         #   Transactions
         #
+        # @param [Numeric] deadline The total amount of time in seconds the
+        #   transaction has to succeed. The default is `60`.
         # @param [String] previous_transaction The transaction identifier of a
         #   transaction that is being retried. Read-write transactions may fail
         #   due to contention. A read-write transaction can be retried by
@@ -528,9 +535,9 @@ module Google
         #     tx.rollback
         #   end
         #
-        def transaction previous_transaction: nil
+        def transaction deadline: nil, previous_transaction: nil
+          deadline = validate_deadline deadline
           backoff = 1.0
-          deadline = 60
           start_time = Time.now
 
           tx = Transaction.new \
@@ -879,6 +886,12 @@ module Google
         # available.
         def ensure_service!
           fail "Must have active connection to service" unless service
+        end
+
+        def validate_deadline deadline
+          return 60 unless deadline.is_a? Numeric
+          return 60 if deadline < 0
+          deadline
         end
 
         def check_consistency! consistency
