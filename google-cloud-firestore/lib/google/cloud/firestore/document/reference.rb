@@ -225,10 +225,10 @@ module Google
           #
           # @param [Hash] data The document's fields and values.
           # @param [true, String|Symbol, Array<String|Symbol>] merge When
-          #   provided and `true` all data is merged with the existing docuemnt
-          #   data.  When provided only the specified as a list of field paths
-          #   are merged with the existing docuemnt data. The default is to
-          #   overwrite the existing docuemnt data.
+          #   provided and `true` all data is merged with the existing document
+          #   data. When provided only the specified as a list of field paths
+          #   are merged with the existing document data. The default is to
+          #   overwrite the existing document data.
           #
           # @return [Time] The time the changes were committed
           #

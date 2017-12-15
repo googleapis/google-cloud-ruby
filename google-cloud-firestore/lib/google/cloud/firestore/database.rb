@@ -38,7 +38,7 @@ module Google
         end
 
         ##
-        # The project resource the Cloud Firestore batch belongs to.
+        # The project resource the Cloud Firestore database belongs to.
         #
         # @return [Project] project resource
         def project
@@ -54,7 +54,7 @@ module Google
         end
 
         ##
-        # The database identifier for the Cloud Firestore batch.
+        # The database identifier for the Cloud Firestore database.
         #
         # @return [String] database identifier.
         def database_id
@@ -62,7 +62,7 @@ module Google
         end
 
         ##
-        # The full Database path for the Cloud Firestore batch.
+        # The full Database path for the Cloud Firestore database.
         #
         # @return [String] database resource path.
         def path
@@ -230,11 +230,21 @@ module Google
         alias_method :find, :get_all
 
         ##
-        # Create a batch to perform multiple changes at the same time.
+        # Perform multiple changes at the same time.
         #
         # All changes are accumulated in memory until the block completes.
         # Unlike `transaction`, batches are not automatically retried. See
         # {Batch}.
+        #
+        # Batched writes have fewer failure cases than transactions and use
+        # simpler code. They are not affected by contention issues, because they
+        # don't depend on consistently reading any documents.
+        #
+        # @see https://firebase.google.com/docs/firestore/manage-data/transactions
+        #   Transactions and Batched Writes
+        #
+        # @yield [batch] The block for reading data and making changes.
+        # @yieldparam [Batch] batch The write batch object for making changes.
         #
         # @return [Time] The time the changes were committed
         #
@@ -263,7 +273,7 @@ module Google
         ##
         # Create a document with the provided object values.
         #
-        # The batch will fail if the document already exists.
+        # The operation will fail if the document already exists.
         #
         # @param [String, Document::Reference] doc A string representing the
         #   path of the document, or a document reference object.
@@ -300,14 +310,18 @@ module Google
         # overwrites existing data, but the provided data can be merged into the
         # existing document using the `merge` argument.
         #
+        # If you're not sure whether the document exists, pass the option to
+        # merge the new data with any existing document to avoid overwriting
+        # entire documents.
+        #
         # @param [String, Document::Reference] doc A string representing the
         #   path of the document, or a document reference object.
         # @param [Hash] data The document's fields and values.
         # @param [true, String|Symbol, Array<String|Symbol>] merge When provided
-        #   and `true` all data is merged with the existing docuemnt data.  When
+        #   and `true` all data is merged with the existing document data. When
         #   provided only the specified as a list of field paths are merged with
-        #   the existing docuemnt data. The default is to overwrite the existing
-        #   docuemnt data.
+        #   the existing document data. The default is to overwrite the existing
+        #   document data.
         #
         # @return [Time] The time the changes were committed
         #
@@ -463,6 +477,9 @@ module Google
         # Transactions will be automatically retried when possible. See
         # {Transaction}.
         #
+        # @see https://firebase.google.com/docs/firestore/manage-data/transactions
+        #   Transactions and Batched Writes
+        #
         # @param [String] previous_transaction The transaction identifier of a
         #   transaction that is being retried. Read-write transactions may fail
         #   due to contention. A read-write transaction can be retried by
@@ -472,6 +489,10 @@ module Google
         #   used to improve throughput. In particular, if transactional
         #   operations A and B conflict, specifying the `previous_transaction`
         #   can help to prevent livelock. (See {Transaction#transaction_id})
+        #
+        # @yield [transaction] The block for reading data and making changes.
+        # @yieldparam [Transaction] transaction The transaction object for
+        #   making changes.
         #
         # @return [Time] The time the changes were committed
         #
@@ -533,6 +554,10 @@ module Google
         #
         # @param [Time] read_time The time to read the documents at. This may
         #   not be older than 60 seconds. Optional.
+        #
+        # @yield [read_transaction] The block for reading data.
+        # @yieldparam [ReadOnlyTransaction] read_transaction The read-only
+        #   transaction object for reading data.
         #
         # @example
         #   require "google/cloud/firestore"

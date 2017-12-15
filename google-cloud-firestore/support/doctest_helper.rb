@@ -569,6 +569,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Firestore::Collection::Reference#add" do
+    mock_firestore do |mock|
+      mock.expect :commit, commit_resp, commit_args
+    end
+  end
+
   doctest.before "Google::Cloud::Firestore::Collection::Reference#docs" do
     mock_firestore do |mock|
       mock.expect :run_query, run_query_resp, run_query_args

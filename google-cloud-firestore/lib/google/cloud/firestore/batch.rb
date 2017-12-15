@@ -31,6 +31,13 @@ module Google
       # {Database#batch} completes. Unlike transactions, batches are not
       # automatically retried. See {Database#batch}.
       #
+      # Batched writes have fewer failure cases than transactions and use
+      # simpler code. They are not affected by contention issues, because they
+      # don't depend on consistently reading any documents.
+      #
+      # @see https://firebase.google.com/docs/firestore/manage-data/transactions
+      #   Transactions and Batched Writes
+      #
       # @example
       #   require "google/cloud/firestore"
       #
@@ -738,10 +745,10 @@ module Google
         #   path of the document, or a document reference object.
         # @param [Hash] data The document's fields and values.
         # @param [true, String|Symbol, Array<String|Symbol>] merge When provided
-        #   and `true` all data is merged with the existing docuemnt data.  When
+        #   and `true` all data is merged with the existing document data. When
         #   provided only the specified as a list of field paths are merged with
-        #   the existing docuemnt data. The default is to overwrite the existing
-        #   docuemnt data.
+        #   the existing document data. The default is to overwrite the existing
+        #   document data.
         #
         # @example Set a document using a document path:
         #   require "google/cloud/firestore"

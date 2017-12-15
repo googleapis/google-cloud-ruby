@@ -47,10 +47,10 @@ module Google
         #   firestore = Google::Cloud::Firestore.new
         #
         #   # Get a collection reference
-        #   cities_ref = firestore.col "cities"
+        #   cities_col = firestore.col "cities"
         #
         #   # Get and print all city documents
-        #   cities_ref.docs do |city|
+        #   cities_col.docs do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
@@ -116,10 +116,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Get the document's parent collection
-          #   database = cities_ref.parent
+          #   database = cities_col.parent
           #
           # @example Returns document object for nested collections:
           #   require "google/cloud/firestore"
@@ -184,10 +184,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Get a document reference
-          #   nyc_ref = cities_ref.doc "NYC"
+          #   nyc_ref = cities_col.doc "NYC"
           #
           #   # The document ID is what was provided
           #   nyc_ref.document_id #=> "NYC"
@@ -198,10 +198,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Get a document reference without specifying path
-          #   random_ref = cities_ref.doc
+          #   random_ref = cities_col.doc
           #
           #   # The document ID is randomly generated
           #   random_ref.document_id #=> "RANDOMID123XYZ"
@@ -214,6 +214,43 @@ module Google
           end
           alias_method :document, :doc
 
+          ##
+          # Create a document with random document identifier.
+          #
+          # The batch will fail if the document already exists.
+          #
+          # @param [Hash] data The document's fields and values. Optional.
+          #
+          # @return [Document::Reference] A created document.
+          #
+          # @example Create a document with a random ID:
+          #   require "google/cloud/firestore"
+          #
+          #   firestore = Google::Cloud::Firestore.new
+          #
+          #   # Get a collection reference
+          #   cities_col = firestore.col "cities"
+          #
+          #   # Get a document reference without data
+          #   random_ref = cities_col.add
+          #
+          #   # The document ID is randomly generated
+          #   random_ref.document_id #=> "RANDOMID123XYZ"
+          #
+          # @example Create a document with data:
+          #   require "google/cloud/firestore"
+          #
+          #   firestore = Google::Cloud::Firestore.new
+          #
+          #   # Get a collection reference
+          #   cities_col = firestore.col "cities"
+          #
+          #   # Get a document reference with data
+          #   random_ref = cities_col.add({ name: "New York City" })
+          #
+          #   # The document ID is randomly generated
+          #   random_ref.document_id #=> "RANDOMID123XYZ"
+          #
           def add data = nil
             data ||= {}
             doc.tap { |d| d.create data }
@@ -239,11 +276,11 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Get and print city documents
           #   cities = ["cities/NYC", "cities/SF", "cities/LA"]
-          #   cities_ref.get_all(cities).each do |city|
+          #   cities_col.get_all(cities).each do |city|
           #     puts "#{city.document_id} has #{city[:population]} residents."
           #   end
           #
@@ -276,10 +313,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.query.select(:population).from(:cities)
+          #   query = cities_col.query.select(:population).from(:cities)
           #
           #   # Get/run a query
           #   query.get do |city|
@@ -309,10 +346,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.select(:population).from(:cities)
+          #   query = cities_col.select(:population).from(:cities)
           #
           #   # Get/run a query
           #   firestore.get(query).each do |city|
@@ -339,10 +376,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.from(:cities).select(:population)
+          #   query = cities_col.from(:cities).select(:population)
           #
           #   # Get/run a query
           #   firestore.get(query).each do |city|
@@ -378,10 +415,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.where(:population, :>=, 1000000).
+          #   query = cities_col.where(:population, :>=, 1000000).
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
@@ -409,10 +446,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.order(:name).
+          #   query = cities_col.order(:name).
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
@@ -438,10 +475,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.limit(5).offset(10).
+          #   query = cities_col.limit(5).offset(10).
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
@@ -467,10 +504,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.offset(10).limit(5).
+          #   query = cities_col.offset(10).limit(5).
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
@@ -496,10 +533,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.start_at("NYC").
+          #   query = cities_col.start_at("NYC").
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
@@ -525,10 +562,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.start_after("NYC").
+          #   query = cities_col.start_after("NYC").
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
@@ -554,10 +591,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.end_before("NYC").
+          #   query = cities_col.end_before("NYC").
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
@@ -583,10 +620,10 @@ module Google
           #   firestore = Google::Cloud::Firestore.new
           #
           #   # Get a collection reference
-          #   cities_ref = firestore.col "cities"
+          #   cities_col = firestore.col "cities"
           #
           #   # Create a query
-          #   query = cities_ref.end_at("NYC").
+          #   query = cities_col.end_at("NYC").
           #                      select(:population).from(:cities)
           #
           #   # Get/run a query
