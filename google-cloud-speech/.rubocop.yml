@@ -6,6 +6,8 @@ AllCops:
     - "support/**/*"
     - "test/**/*"
     - "lib/google/cloud/speech/v1/**/*"
+    - "lib/google/cloud/speech/v1.rb"
+
 
 Documentation:
   Enabled: false

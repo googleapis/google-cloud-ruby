@@ -6,6 +6,7 @@ AllCops:
     - "lib/google/cloud/videointelligence/**/*"
     - "Rakefile"
     - "test/**/*"
+    - "acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb"
 
 Documentation:
   Enabled: false
