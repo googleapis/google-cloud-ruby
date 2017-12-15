@@ -186,11 +186,23 @@ module Google
               begin
                 # Cannot syncronize the enumerator, causes deadlock
                 response = enum.next
+
+                # Create a list of all the received ack_id values
+                received_ack_ids = response.received_messages.map(&:ack_id)
+
+                synchronize do
+                  # Create receipt of received messages reception
+                  @async_pusher ||= AsyncPusher.new self
+                  @async_pusher.delay subscriber.deadline, received_ack_ids
+
+                  # Add received messages to inventory
+                  @inventory.add received_ack_ids
+                end
+
                 response.received_messages.each do |rec_msg_grpc|
                   rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
                   synchronize do
-                    @inventory.add rec_msg.ack_id
-
+                    # Call user provided code for received message
                     perform_callback_async rec_msg
                   end
                 end
