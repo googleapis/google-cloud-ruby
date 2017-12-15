@@ -1,4 +1,4 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017, Google LLC All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -93,6 +93,10 @@ module Google
                 "https://www.googleapis.com/auth/spanner.admin"
               ].freeze
 
+              class OperationsClient < Google::Longrunning::OperationsClient
+                SERVICE_ADDRESS = SERVICE_ADDRESS
+              end
+
               PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
                 "projects/{project}"
               )
@@ -167,11 +171,6 @@ module Google
               # @param timeout [Numeric]
               #   The default timeout, in seconds, for calls made through this client.
               def initialize \
-                  service_path: SERVICE_ADDRESS,
-                  port: DEFAULT_SERVICE_PORT,
-                  channel: nil,
-                  chan_creds: nil,
-                  updater_proc: nil,
                   credentials: nil,
                   scopes: ALL_SCOPES,
                   client_config: {},
@@ -184,21 +183,9 @@ module Google
                 require "google/gax/grpc"
                 require "google/spanner/admin/instance/v1/spanner_instance_admin_services_pb"
 
-                if channel || chan_creds || updater_proc
-                  warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                    "on 2017/09/08"
-                  credentials ||= channel
-                  credentials ||= chan_creds
-                  credentials ||= updater_proc
-                end
-                if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-                  warn "`service_path` and `port` parameters are deprecated and will be removed"
-                end
-
                 credentials ||= Google::Cloud::Spanner::Admin::Instance::Credentials.default
 
-                @operations_client = Google::Longrunning::OperationsClient.new(
-                  service_path: service_path,
+                @operations_client = OperationsClient.new(
                   credentials: credentials,
                   scopes: scopes,
                   client_config: client_config,
@@ -223,9 +210,11 @@ module Google
                   updater_proc = credentials.updater_proc
                 end
 
+                package_version = Gem.loaded_specs['google-cloud-spanner-admin-instance'].version.version
+
                 google_api_client = "gl-ruby/#{RUBY_VERSION}"
                 google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-                google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+                google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
                 google_api_client << " grpc/#{GRPC::VERSION}"
                 google_api_client.freeze
 
@@ -245,6 +234,10 @@ module Google
                     kwargs: headers
                   )
                 end
+
+                # Allow overriding the service path/port in subclasses.
+                service_path = self.class::SERVICE_ADDRESS
+                port = self.class::DEFAULT_SERVICE_PORT
                 @instance_admin_stub = Google::Gax::Grpc.create_stub(
                   service_path,
                   port,
