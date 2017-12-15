@@ -38,6 +38,18 @@ module Google
           OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
         end
       end
+      class Subscriber
+        # doctest has issues running this code, so punt on it completely
+        def start
+          self
+        end
+        def stop
+          self
+        end
+        def wait!
+          self
+        end
+      end
     end
   end
 end
@@ -117,7 +129,10 @@ YARD::Doctest.configure do |doctest|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
       mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), ["projects/my-project/topics/my-topic", [pubsub_message], Hash]
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [OpenStruct.new(message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
     end
   end
 
@@ -204,7 +219,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Pubsub::ReceivedMessage" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-sub", ["2"], Hash]
     end
   end
@@ -212,14 +230,20 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Pubsub::ReceivedMessage#delay!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
     end
   end
   doctest.before "Google::Cloud::Pubsub::ReceivedMessage#modify_ack_deadline!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 120, Hash]
     end
   end
@@ -228,20 +252,29 @@ YARD::Doctest.configure do |doctest|
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
       mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
-      mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
     end
   end
   doctest.before "Google::Cloud::Pubsub::ReceivedMessage#nack!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
     end
   end
   doctest.before "Google::Cloud::Pubsub::ReceivedMessage#ignore!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-sub", ["2"], 0, Hash]
     end
   end
@@ -282,7 +315,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Pubsub::Subscription" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
     end
   end
@@ -299,6 +335,20 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
       mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
       mock_subscriber.expect :modify_ack_deadline, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], 120, Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::Subscription#pull" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+    end
+  end
+  doctest.before "Google::Cloud::Pubsub::Subscription#wait_for_messages" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
     end
   end
 
@@ -381,7 +431,10 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Pubsub::Subscriber" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
-      mock_subscriber.expect :pull, OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)]), ["projects/my-project/subscriptions/my-topic-sub", 100, Hash]
+      mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Pubsub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
+      mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
     end
   end
