@@ -136,6 +136,10 @@ module Google
               )
             end
 
+            class OperationsClient < Google::Longrunning::OperationsClient
+              SERVICE_ADDRESS = SERVICE_ADDRESS
+            end
+            
             # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
             #   Provides the means for authenticating requests made by the client. This parameter can
             #   be many types.
@@ -161,11 +165,6 @@ module Google
             # @param timeout [Numeric]
             #   The default timeout, in seconds, for calls made through this client.
             def initialize \
-                service_path: SERVICE_ADDRESS,
-                port: DEFAULT_SERVICE_PORT,
-                channel: nil,
-                chan_creds: nil,
-                updater_proc: nil,
                 credentials: nil,
                 scopes: ALL_SCOPES,
                 client_config: {},
@@ -178,21 +177,9 @@ module Google
               require "google/gax/grpc"
               require "google/bigtable/admin/v2/bigtable_instance_admin_services_pb"
 
-              if channel || chan_creds || updater_proc
-                warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                  "on 2017/09/08"
-                credentials ||= channel
-                credentials ||= chan_creds
-                credentials ||= updater_proc
-              end
-              if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-                warn "`service_path` and `port` parameters are deprecated and will be removed"
-              end
-
               credentials ||= Google::Cloud::Bigtable::Admin::Credentials.default
 
-              @operations_client = Google::Longrunning::OperationsClient.new(
-                service_path: service_path,
+              @operations_client = OperationsClient.new(
                 credentials: credentials,
                 scopes: scopes,
                 client_config: client_config,
@@ -238,6 +225,10 @@ module Google
                   kwargs: headers
                 )
               end
+
+              # Allow overriding the service path/port in subclasses.
+              service_path = self.class::SERVICE_ADDRESS
+              port = self.class::DEFAULT_SERVICE_PORT
               @bigtable_instance_admin_stub = Google::Gax::Grpc.create_stub(
                 service_path,
                 port,
