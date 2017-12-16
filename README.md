@@ -76,9 +76,10 @@ $ gem install google-cloud-bigquery
 ```ruby
 require "google/cloud/bigquery"
 
+# Must have set ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "/path/to/keyfile.json"
+
 bigquery = Google::Cloud::Bigquery.new(
-  project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
+  project: "my-todo-project"
 )
 
 # Create a new table to archive todos
