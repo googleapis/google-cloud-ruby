@@ -4,7 +4,7 @@ gemspec
 
 gem "rake", "~> 11.0"
 gem "google-api-client", "~> 0.17.0"
-gem "google-gax", "~> 0.10.1"
+gem "google-gax", "~> 1.0"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",

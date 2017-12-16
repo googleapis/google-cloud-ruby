@@ -79,11 +79,6 @@ module Google
             # @param timeout [Numeric]
             #   The default timeout, in seconds, for calls made through this client.
             def self.new \
-                service_path: nil,
-                port: nil,
-                channel: nil,
-                chan_creds: nil,
-                updater_proc: nil,
                 credentials: nil,
                 scopes: nil,
                 client_config: nil,
@@ -91,11 +86,6 @@ module Google
                 lib_name: nil,
                 lib_version: nil
               kwargs = {
-                service_path: service_path,
-                port: port,
-                channel: channel,
-                chan_creds: chan_creds,
-                updater_proc: updater_proc,
                 credentials: credentials,
                 scopes: scopes,
                 client_config: client_config,
@@ -140,11 +130,6 @@ module Google
             # @param timeout [Numeric]
             #   The default timeout, in seconds, for calls made through this client.
             def self.new \
-                service_path: nil,
-                port: nil,
-                channel: nil,
-                chan_creds: nil,
-                updater_proc: nil,
                 credentials: nil,
                 scopes: nil,
                 client_config: nil,
@@ -152,11 +137,6 @@ module Google
                 lib_name: nil,
                 lib_version: nil
               kwargs = {
-                service_path: service_path,
-                port: port,
-                channel: channel,
-                chan_creds: chan_creds,
-                updater_proc: updater_proc,
                 credentials: credentials,
                 scopes: scopes,
                 client_config: client_config,

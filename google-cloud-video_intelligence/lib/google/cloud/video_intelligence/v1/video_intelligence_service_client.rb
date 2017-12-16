@@ -57,6 +57,10 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
+          class OperationsClient < Google::Longrunning::OperationsClient
+            SERVICE_ADDRESS = SERVICE_ADDRESS
+          end
+
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
           #   be many types.
@@ -82,8 +86,6 @@ module Google
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
@@ -96,14 +98,9 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/videointelligence/v1/video_intelligence_services_pb"
 
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
             credentials ||= Google::Cloud::VideoIntelligence::Credentials.default
 
-            @operations_client = Google::Longrunning::OperationsClient.new(
-              service_path: service_path,
+            @operations_client = OperationsClient.new(
               credentials: credentials,
               scopes: scopes,
               client_config: client_config,
@@ -128,9 +125,11 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-video_intelligence'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -149,6 +148,10 @@ module Google
                 kwargs: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
             @video_intelligence_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
