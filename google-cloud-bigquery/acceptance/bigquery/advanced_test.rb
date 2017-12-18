@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery, :advanced, :bigquery do
+describe Google::Cloud::BigQuery, :advanced, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) { bigquery.dataset(dataset_id) || bigquery.create_dataset(dataset_id) }
   let(:table_id) { "examples_table" }
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries values in standard mode" do
     rows = bigquery.query "SELECT * FROM #{dataset_id}.#{table_id} WHERE id = ?", params: [2]
 
-    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.class.must_equal Google::Cloud::BigQuery::Data
     rows.count.must_equal 1
     row = rows.first
 
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries repeated scalars in legacy mode" do
     rows = bigquery.query "SELECT name, scores FROM [#{table.id}] WHERE id = 2", legacy_sql: true
 
-    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.class.must_equal Google::Cloud::BigQuery::Data
     rows.count.must_equal 3
     rows[0].must_equal({ name: "Gandalf", scores: 100.0})
     rows[1].must_equal({ name: "Gandalf", scores: 99.0})
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries repeated records in legacy mode" do
     rows = bigquery.query "SELECT name, spells.name, spells.properties.name, spells.properties.power FROM [#{table.id}] WHERE id = 2", legacy_sql: true
 
-    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.class.must_equal Google::Cloud::BigQuery::Data
     rows.count.must_equal 3
     rows[0].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Flying",   spells_properties_power: 1.0 })
     rows[1].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Creature", spells_properties_power: 1.0 })
@@ -155,7 +155,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
         is_magic: false,
         scores: [],
         spells: [],
-        tea_time: Google::Cloud::Bigquery::Time.new("10:00:00"),
+        tea_time: Google::Cloud::BigQuery::Time.new("10:00:00"),
         next_vacation: Date.parse("2017-09-22"),
         favorite_time: Time.parse("2031-04-01T05:09:27").utc.to_datetime
       }, {
@@ -177,7 +177,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
             last_used: Time.parse("2015-10-31 23:59:56 UTC")
           }
         ],
-        tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),
+        tea_time: Google::Cloud::BigQuery::Time.new("15:00:00"),
         next_vacation: Date.parse("2666-06-06"),
         favorite_time: Time.parse("2001-12-19T23:59:59").utc.to_datetime
       }, {
@@ -195,7 +195,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
             last_used: Time.parse("2017-02-14 12:07:23 UTC")
           }
         ],
-        tea_time: Google::Cloud::Bigquery::Time.new("12:00:00"),
+        tea_time: Google::Cloud::BigQuery::Time.new("12:00:00"),
         next_vacation: Date.parse("2017-03-14"),
         favorite_time: Time.parse("2000-10-31T23:27:46").utc.to_datetime
       }

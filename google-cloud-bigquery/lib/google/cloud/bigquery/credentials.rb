@@ -17,7 +17,7 @@ require "googleauth"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # Credentials
       #
@@ -28,9 +28,9 @@ module Google
       #   require "google/cloud/bigquery"
       #
       #   keyfile = "/path/to/keyfile.json"
-      #   creds = Google::Cloud::Bigquery::Credentials.new keyfile
+      #   creds = Google::Cloud::BigQuery::Credentials.new keyfile
       #
-      #   bigquery = Google::Cloud::Bigquery.new(
+      #   bigquery = Google::Cloud::BigQuery.new(
       #     project_id: "my-project",
       #     credentials: creds
       #   )

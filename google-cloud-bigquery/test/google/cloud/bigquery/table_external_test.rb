@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Table, :external, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :external, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
@@ -35,11 +35,11 @@ describe Google::Cloud::Bigquery::Table, :external, :mock_bigquery do
     )
     gapi
   end
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
   let(:etag) { "etag123456789" }
 
   it "can have a permanent external data source" do
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    table.external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     table.external.urls.must_equal ["gs://my-bucket/path/to/file.csv"]
     table.external.format.must_equal "CSV"
     table.external.autodetect.must_equal true
@@ -82,12 +82,12 @@ describe Google::Cloud::Bigquery::Table, :external, :mock_bigquery do
 
     mock.verify
 
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::JsonSource
+    table.external.must_be_kind_of Google::Cloud::BigQuery::External::JsonSource
     table.external.urls.must_equal ["gs://my-bucket/path/to/file.json"]
     table.external.format.must_equal "NEWLINE_DELIMITED_JSON"
     table.external.autodetect.must_be :nil?
     table.external.schema.wont_be :empty?
-    table.external.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    table.external.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     table.external.schema.must_be :frozen?
     table.external.must_be :frozen?
   end

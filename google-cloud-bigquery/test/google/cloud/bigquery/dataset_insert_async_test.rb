@@ -16,11 +16,11 @@ require "helper"
 
 Thread.abort_on_exception = true
 
-describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :insert_async, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:dataset_hash) { random_dataset_hash dataset_id }
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi, bigquery.service }
 
   let(:table_id) { "my_table" }
   let(:table_hash) { random_table_hash dataset_id, table_id }
@@ -71,7 +71,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
   end
 
   describe "dataset reference" do
-    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+    let(:dataset) {Google::Cloud::BigQuery::Dataset.new_reference project, dataset_id, bigquery.service }
 
     it "inserts one row" do
       mock = Minitest::Mock.new
@@ -209,7 +209,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     end
 
     insert_result.wont_be_nil
-    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be_kind_of Google::Cloud::BigQuery::Table::AsyncInserter::Result
     insert_result.wont_be :error?
     insert_result.error.must_be_nil
     insert_result.must_be :success?

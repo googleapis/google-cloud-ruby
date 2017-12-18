@@ -26,7 +26,7 @@ require "google/cloud/bigquery/schema"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # Project
       #
@@ -34,9 +34,9 @@ module Google
       # information about billing and authorized users, and they contain
       # BigQuery data. Each project has a friendly name and a unique ID.
       #
-      # Google::Cloud::Bigquery::Project is the main object for interacting with
-      # Google BigQuery. {Google::Cloud::Bigquery::Dataset} objects are created,
-      # accessed, and deleted by Google::Cloud::Bigquery::Project.
+      # Google::Cloud::BigQuery::Project is the main object for interacting with
+      # Google BigQuery. {Google::Cloud::BigQuery::Dataset} objects are created,
+      # accessed, and deleted by Google::Cloud::BigQuery::Project.
       #
       # See {Google::Cloud#bigquery}.
       #
@@ -48,7 +48,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
@@ -73,7 +73,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new(
+        #   bigquery = Google::Cloud::BigQuery.new(
         #     project_id: "my-project",
         #     credentials: "/path/to/keyfile.json"
         #   )
@@ -230,12 +230,12 @@ module Google
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::QueryJob]
+        # @return [Google::Cloud::BigQuery::QueryJob]
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_project.my_dataset.my_table`"
@@ -250,7 +250,7 @@ module Google
         # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "[my_project:my_dataset.my_table]",
@@ -266,7 +266,7 @@ module Google
         # @example Query using positional query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_dataset.my_table`" \
@@ -283,7 +283,7 @@ module Google
         # @example Query using named query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_dataset.my_table`" \
@@ -300,7 +300,7 @@ module Google
         # @example Query using external data source:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   csv_url = "gs://bucket/path/to/data.csv"
         #   csv_table = bigquery.external csv_url do |csv|
@@ -420,12 +420,12 @@ module Google
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
         #
-        # @return [Google::Cloud::Bigquery::Data]
+        # @return [Google::Cloud::BigQuery::Data]
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sql = "SELECT name FROM `my_project.my_dataset.my_table`"
         #   data = bigquery.query sql
@@ -437,7 +437,7 @@ module Google
         # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sql = "SELECT name FROM [my_project:my_dataset.my_table]"
         #   data = bigquery.query sql, legacy_sql: true
@@ -449,7 +449,7 @@ module Google
         # @example Retrieve all rows: (See {Data#all})
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   data = bigquery.query "SELECT name FROM `my_dataset.my_table`"
         #
@@ -460,7 +460,7 @@ module Google
         # @example Query using positional query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   data = bigquery.query "SELECT name " \
         #                         "FROM `my_dataset.my_table`" \
@@ -474,7 +474,7 @@ module Google
         # @example Query using named query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   data = bigquery.query "SELECT name " \
         #                         "FROM `my_dataset.my_table`" \
@@ -488,7 +488,7 @@ module Google
         # @example Query using external data source:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   csv_url = "gs://bucket/path/to/data.csv"
         #   csv_table = bigquery.external csv_url do |csv|
@@ -556,7 +556,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   csv_url = "gs://bucket/path/to/data.csv"
         #   csv_table = bigquery.external csv_url do |csv|
@@ -586,13 +586,13 @@ module Google
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
         #
-        # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
+        # @return [Google::Cloud::BigQuery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset"
         #   puts dataset.name
@@ -600,7 +600,7 @@ module Google
         # @example Avoid retrieving the dataset resource with `skip_lookup`:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
@@ -631,22 +631,22 @@ module Google
         #   should reside. Possible values include `EU` and `US`. The default
         #   value is `US`.
         # @yield [access] a block for setting rules
-        # @yieldparam [Google::Cloud::Bigquery::Dataset] access the object
+        # @yieldparam [Google::Cloud::BigQuery::Dataset] access the object
         #   accepting rules
         #
-        # @return [Google::Cloud::Bigquery::Dataset]
+        # @return [Google::Cloud::BigQuery::Dataset]
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.create_dataset "my_dataset"
         #
         # @example A name and description can be provided:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.create_dataset "my_dataset",
         #                                     name: "My Dataset",
@@ -655,7 +655,7 @@ module Google
         # @example Or, configure access with a block: (See {Dataset::Access})
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.create_dataset "my_dataset" do |dataset|
         #     dataset.access.add_writer_user "writers@example.com"
@@ -701,13 +701,13 @@ module Google
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of datasets to return.
         #
-        # @return [Array<Google::Cloud::Bigquery::Dataset>] (See
-        #   {Google::Cloud::Bigquery::Dataset::List})
+        # @return [Array<Google::Cloud::BigQuery::Dataset>] (See
+        #   {Google::Cloud::BigQuery::Dataset::List})
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   datasets = bigquery.datasets
         #   datasets.each do |dataset|
@@ -717,14 +717,14 @@ module Google
         # @example Retrieve hidden datasets with the `all` optional arg:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   all_datasets = bigquery.datasets all: true
         #
         # @example Retrieve all datasets: (See {Dataset::List#all})
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   datasets = bigquery.datasets
         #   datasets.all do |dataset|
@@ -743,13 +743,13 @@ module Google
         #
         # @param [String] job_id The ID of a job.
         #
-        # @return [Google::Cloud::Bigquery::Job, nil] Returns `nil` if the job
+        # @return [Google::Cloud::BigQuery::Job, nil] Returns `nil` if the job
         #   does not exist.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.job "my_job"
         #
@@ -777,13 +777,13 @@ module Google
         #   * `pending` - Pending jobs
         #   * `running` - Running jobs
         #
-        # @return [Array<Google::Cloud::Bigquery::Job>] (See
-        #   {Google::Cloud::Bigquery::Job::List})
+        # @return [Array<Google::Cloud::BigQuery::Job>] (See
+        #   {Google::Cloud::BigQuery::Job::List})
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   jobs = bigquery.jobs
         #   jobs.each do |job|
@@ -793,7 +793,7 @@ module Google
         # @example Retrieve only running jobs using the `filter` optional arg:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   running_jobs = bigquery.jobs filter: "running"
         #   running_jobs.each do |job|
@@ -803,7 +803,7 @@ module Google
         # @example Retrieve all jobs: (See {Job::List#all})
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   jobs = bigquery.jobs
         #   jobs.all do |job|
@@ -828,13 +828,13 @@ module Google
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of projects to return.
         #
-        # @return [Array<Google::Cloud::Bigquery::Project>] (See
-        #   {Google::Cloud::Bigquery::Project::List})
+        # @return [Array<Google::Cloud::BigQuery::Project>] (See
+        #   {Google::Cloud::BigQuery::Project::List})
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   projects = bigquery.projects
         #   projects.each do |project|
@@ -847,7 +847,7 @@ module Google
         # @example Retrieve all projects: (See {Project::List#all})
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   projects = bigquery.projects
         #
@@ -866,7 +866,7 @@ module Google
         end
 
         ##
-        # Creates a Bigquery::Time object to represent a time, independent of a
+        # Creates a BigQuery::Time object to represent a time, independent of a
         # specific date.
         #
         # @param [Integer] hour Hour, valid values from 0 to 23.
@@ -874,12 +874,12 @@ module Google
         # @param [Integer, Float] second Second, valid values from 0 to 59. Can
         #   contain microsecond precision.
         #
-        # @return [Bigquery::Time]
+        # @return [BigQuery::Time]
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   fourpm = bigquery.time 16, 0, 0
         #   data = bigquery.query "SELECT name " \
@@ -894,7 +894,7 @@ module Google
         # @example Create Time with fractional seconds:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   precise_time = bigquery.time 16, 35, 15.376541
         #   data = bigquery.query "SELECT name " \
@@ -907,7 +907,7 @@ module Google
         #   end
         #
         def time hour, minute, second
-          Bigquery::Time.new "#{hour}:#{minute}:#{second}"
+          BigQuery::Time.new "#{hour}:#{minute}:#{second}"
         end
 
         ##
@@ -923,12 +923,12 @@ module Google
         # @yield [schema] a block for setting the schema
         # @yieldparam [Schema] schema the object accepting the schema
         #
-        # @return [Google::Cloud::Bigquery::Schema]
+        # @return [Google::Cloud::BigQuery::Schema]
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   schema = bigquery.schema do |s|
         #     s.string "first_name", mode: :required

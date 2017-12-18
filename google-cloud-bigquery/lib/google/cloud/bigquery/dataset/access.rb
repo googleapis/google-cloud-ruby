@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       class Dataset
         ##
         # # Dataset Access Control
@@ -28,7 +28,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.access do |access|
@@ -112,7 +112,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -131,7 +131,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -151,7 +151,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -171,7 +171,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -185,7 +185,7 @@ module Google
           ##
           # Add reader access to a view.
           #
-          # @param [Google::Cloud::Bigquery::Table, String] view A table object
+          # @param [Google::Cloud::BigQuery::Table, String] view A table object
           #   or a string identifier as specified by the [Query
           #   Reference](https://cloud.google.com/bigquery/query-reference#from):
           #   `project_name:datasetId.tableId`.
@@ -193,7 +193,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   other_dataset = bigquery.dataset "my_other_dataset"
           #
@@ -215,7 +215,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -234,7 +234,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -254,7 +254,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -274,7 +274,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -293,7 +293,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -312,7 +312,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -332,7 +332,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -352,7 +352,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -371,7 +371,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -390,7 +390,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -410,7 +410,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -430,7 +430,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -444,7 +444,7 @@ module Google
           ##
           # Remove reader access from a view.
           #
-          # @param [Google::Cloud::Bigquery::Table, String] view A table object
+          # @param [Google::Cloud::BigQuery::Table, String] view A table object
           #   or a string identifier as specified by the [Query
           #   Reference](https://cloud.google.com/bigquery/query-reference#from):
           #   `project_name:datasetId.tableId`.
@@ -452,7 +452,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   other_dataset = bigquery.dataset "my_other_dataset"
           #
@@ -474,7 +474,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -493,7 +493,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -513,7 +513,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -533,7 +533,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -552,7 +552,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -571,7 +571,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -591,7 +591,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -611,7 +611,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   dataset.access do |access|
@@ -630,7 +630,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -648,7 +648,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -667,7 +667,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -686,7 +686,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -699,7 +699,7 @@ module Google
           ##
           # Checks reader access for a view.
           #
-          # @param [Google::Cloud::Bigquery::Table, String] view A table object
+          # @param [Google::Cloud::BigQuery::Table, String] view A table object
           #   or a string identifier as specified by the [Query
           #   Reference](https://cloud.google.com/bigquery/query-reference#from):
           #   `project_name:datasetId.tableId`.
@@ -707,7 +707,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   other_dataset = bigquery.dataset "my_other_dataset"
           #
@@ -728,7 +728,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -746,7 +746,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -765,7 +765,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -784,7 +784,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -802,7 +802,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -820,7 +820,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -839,7 +839,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access
@@ -858,7 +858,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
           #   access = dataset.access

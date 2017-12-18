@@ -15,7 +15,7 @@
 require "bigquery_helper"
 require "csv"
 
-describe Google::Cloud::Bigquery::External, :bigquery do
+describe Google::Cloud::BigQuery::External, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id

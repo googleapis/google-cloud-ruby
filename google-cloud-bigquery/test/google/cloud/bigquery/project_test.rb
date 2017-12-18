@@ -15,7 +15,7 @@
 require "helper"
 require "json"
 
-describe Google::Cloud::Bigquery::Project, :mock_bigquery do
+describe Google::Cloud::BigQuery::Project, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:filter) { "labels.foo:bar" }
 
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
   end
 
   it "creates a dataset with options" do
@@ -61,7 +61,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.name.must_equal name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
@@ -91,7 +91,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.access.wont_be :empty?
   end
 
@@ -133,7 +133,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.name.must_equal name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
@@ -173,7 +173,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.name.must_equal name
     dataset.description.must_equal description
     dataset.default_expiration.must_equal default_expiration
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     datasets.size.must_equal 3
     datasets.each do |ds|
-      ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      ds.must_be_kind_of Google::Cloud::BigQuery::Dataset
       ds.wont_be :reference?
       ds.must_be :resource?
       ds.must_be :resource_partial?
@@ -224,7 +224,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     datasets.token.wont_be :nil?
     datasets.token.must_equal "next_page_token"
   end
@@ -240,7 +240,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     datasets.token.wont_be :nil?
     datasets.token.must_equal "next_page_token"
   end
@@ -256,7 +256,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     datasets.token.wont_be :nil?
     datasets.token.must_equal "next_page_token"
   end
@@ -275,12 +275,12 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     first_datasets.token.wont_be :nil?
     first_datasets.token.must_equal "next_page_token"
 
     second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     second_datasets.token.must_be :nil?
   end
 
@@ -298,11 +298,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     first_datasets.next?.must_equal true
 
     second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     second_datasets.next?.must_equal false
   end
 
@@ -320,11 +320,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     first_datasets.next?.must_equal true
 
     second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     second_datasets.next?.must_equal false
   end
 
@@ -342,11 +342,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     first_datasets.next?.must_equal true
 
     second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     second_datasets.next?.must_equal false
   end
 
@@ -364,11 +364,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     first_datasets.next?.must_equal true
 
     second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
     second_datasets.next?.must_equal false
   end
 
@@ -385,7 +385,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
   end
 
   it "paginates datasets with all with all/hidden set" do
@@ -401,7 +401,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
   end
 
   it "paginates datasets with all with filter set" do
@@ -417,7 +417,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
   end
 
   it "paginates datasets with all with max set" do
@@ -433,7 +433,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
   end
 
   it "iterates datasets with all using Enumerator" do
@@ -449,7 +449,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
   end
 
   it "iterates datasets with all with request_limit set" do
@@ -465,7 +465,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     datasets.count.must_equal 6
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Dataset }
   end
 
   it "finds a dataset" do
@@ -481,7 +481,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.dataset_id.must_equal dataset_id
     dataset.name.must_equal dataset_name
   end
@@ -492,7 +492,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.must_be :reference?
     dataset.wont_be :resource?
     dataset.wont_be :resource_partial?
@@ -510,7 +510,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.must_be :reference?
     dataset.wont_be :resource?
     dataset.wont_be :resource_partial?
@@ -538,7 +538,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.must_be :reference?
     dataset.project_id.must_equal project # does not call reload! internally
     dataset.dataset_id.must_equal dataset_id # does not call reload! internally
@@ -569,7 +569,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     jobs.size.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
   end
 
   it "lists jobs with max set" do
@@ -583,7 +583,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     jobs.token.wont_be :nil?
     jobs.token.must_equal "next_page_token"
   end
@@ -599,7 +599,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     jobs.token.wont_be :nil?
     jobs.token.must_equal "next_page_token"
   end
@@ -618,12 +618,12 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     first_jobs.token.wont_be :nil?
     first_jobs.token.must_equal "next_page_token"
 
     second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     second_jobs.token.must_be :nil?
   end
 
@@ -641,11 +641,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     first_jobs.next?.must_equal true
 
     second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     second_jobs.next?.must_equal false
   end
 
@@ -663,11 +663,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     first_jobs.next?.must_equal true
 
     second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
     second_jobs.next?.must_equal false
   end
 
@@ -684,7 +684,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
   end
 
   it "paginates jobs with all and filter set" do
@@ -700,7 +700,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
   end
 
   it "iterates jobs with all using Enumerator" do
@@ -716,7 +716,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
   end
 
   it "iterates jobs with all with request_limit set" do
@@ -732,7 +732,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     jobs.count.must_equal 6
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Job }
   end
 
   it "finds a job" do
@@ -747,7 +747,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.must_be_kind_of Google::Cloud::BigQuery::Job
     job.job_id.must_equal job_id
   end
 
@@ -763,7 +763,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     projects.size.must_equal 3
     projects.each do |project|
-      project.must_be_kind_of Google::Cloud::Bigquery::Project
+      project.must_be_kind_of Google::Cloud::BigQuery::Project
       project.name.must_equal "project-name"
       project.numeric_id.must_equal 1234567890
       project.project.must_equal "project-id-12345"
@@ -781,7 +781,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     projects.count.must_equal 3
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
     projects.token.wont_be :nil?
     projects.token.must_equal "next_page_token"
   end
@@ -800,12 +800,12 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_projects.count.must_equal 3
-    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
     first_projects.token.wont_be :nil?
     first_projects.token.must_equal "next_page_token"
 
     second_projects.count.must_equal 2
-    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
     second_projects.token.must_be :nil?
   end
 
@@ -823,11 +823,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     first_projects.count.must_equal 3
-    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
     first_projects.next?.must_equal true
 
     second_projects.count.must_equal 2
-    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
     second_projects.next?.must_equal false
   end
 
@@ -844,7 +844,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     projects.count.must_equal 5
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
   end
 
   it "iterates projects with all using Enumerator" do
@@ -860,7 +860,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     projects.count.must_equal 5
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
   end
 
   it "iterates projects with all with request_limit set" do
@@ -876,12 +876,12 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.verify
 
     projects.count.must_equal 6
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    projects.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Project }
   end
 
   it "creates a schema" do
     schema = bigquery.schema
-    schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     schema.wont_be :frozen?
     schema.fields.must_be :empty?
   end
@@ -890,7 +890,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     schema = bigquery.schema do |s|
       s.string "first_name", mode: :required
     end
-    schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     schema.wont_be :frozen?
     schema.fields.wont_be :empty?
     schema.fields.size.must_equal 1

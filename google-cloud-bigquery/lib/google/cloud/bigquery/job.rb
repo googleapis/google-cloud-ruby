@@ -20,7 +20,7 @@ require "json"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # Job
       #
@@ -41,7 +41,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #
       #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
       #                            "publicdata.samples.shakespeare"
@@ -282,7 +282,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
         #                            "publicdata.samples.shakespeare"
@@ -302,7 +302,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
         #                            "publicdata.samples.shakespeare"
@@ -322,7 +322,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
         #                            "publicdata.samples.shakespeare"
@@ -346,7 +346,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #

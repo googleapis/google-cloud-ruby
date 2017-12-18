@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :reference, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
@@ -26,7 +26,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   let(:view_name) { "My View" }
   let(:view_description) { "This is my view" }
   let(:query) { "SELECT * FROM [table]" }
-  let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+  let(:dataset) {Google::Cloud::BigQuery::Dataset.new_reference project, dataset_id, bigquery.service }
 
   it "knows its attributes" do
     dataset.dataset_id.must_equal dataset_id
@@ -81,7 +81,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.must_be_kind_of Google::Cloud::BigQuery::Table
     table.table_id.must_equal table_id
     table.must_be :table?
     table.wont_be :view?
@@ -107,7 +107,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.must_be_kind_of Google::Cloud::BigQuery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -128,7 +128,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     mock.verify
 
     tables.size.must_equal 3
-    tables.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Table }
+    tables.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Table }
   end
 
   it "paginates tables" do
@@ -145,13 +145,13 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     mock.verify
 
     first_tables.count.must_equal 3
-    first_tables.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Table }
+    first_tables.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Table }
     first_tables.token.wont_be :nil?
     first_tables.token.must_equal "next_page_token"
     first_tables.total.must_equal 5
 
     second_tables.count.must_equal 2
-    second_tables.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Table }
+    second_tables.each { |ds| ds.must_be_kind_of Google::Cloud::BigQuery::Table }
     second_tables.token.must_be :nil?
     second_tables.total.must_equal 5
   end
@@ -167,7 +167,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.must_be_kind_of Google::Cloud::BigQuery::Table
     table.table_id.must_equal found_table_id
   end
 

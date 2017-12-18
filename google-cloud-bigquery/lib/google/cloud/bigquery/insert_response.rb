@@ -17,7 +17,7 @@ require "json"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # InsertResponse
       #
@@ -32,7 +32,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #   dataset = bigquery.dataset "my_dataset"
       #
       #   rows = [

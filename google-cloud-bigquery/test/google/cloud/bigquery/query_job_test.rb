@@ -16,13 +16,13 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
-  let(:job) { Google::Cloud::Bigquery::Job.from_gapi query_job_gapi,
+describe Google::Cloud::BigQuery::QueryJob, :mock_bigquery do
+  let(:job) { Google::Cloud::BigQuery::Job.from_gapi query_job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
 
   it "knows it is query job" do
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
   end
 
   it "knows its destination table" do
@@ -32,7 +32,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"]
 
     destination = job.destination
-    destination.must_be_kind_of Google::Cloud::Bigquery::Table
+    destination.must_be_kind_of Google::Cloud::BigQuery::Table
     destination.project_id.must_equal "target_project_id"
     destination.dataset_id.must_equal "target_dataset_id"
     destination.table_id.must_equal   "target_table_id"
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.query_plan.must_be_kind_of Array
     job.query_plan.count.must_equal 1
     stage = job.query_plan.first
-    stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
+    stage.must_be_kind_of Google::Cloud::BigQuery::QueryJob::Stage
     stage.compute_ratio_avg.must_equal 1.0
     stage.compute_ratio_max.must_equal 1.0
     stage.id.must_equal 1
@@ -87,7 +87,7 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     stage.steps.must_be_kind_of Array
     stage.steps.count.must_equal 1
     step = stage.steps.first
-    step.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Step
+    step.must_be_kind_of Google::Cloud::BigQuery::QueryJob::Step
     step.kind.must_equal "READ"
     step.substeps.wont_be_nil
     step.substeps.must_be_kind_of Array

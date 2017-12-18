@@ -19,18 +19,18 @@ require "concurrent"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       class Table
         ##
         # # AsyncInserter
         #
         # Used to insert multiple rows in batches to a topic. See
-        # {Google::Cloud::Bigquery::Table#insert_async}.
+        # {Google::Cloud::BigQuery::Table#insert_async}.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #   inserter = table.insert_async do |result|
@@ -96,7 +96,7 @@ module Google
           ##
           # Adds rows to the async inserter to be inserted. Rows will be
           # collected in batches and inserted together.
-          # See {Google::Cloud::Bigquery::Table#insert_async}.
+          # See {Google::Cloud::BigQuery::Table#insert_async}.
           #
           # @param [Hash, Array<Hash>] rows A hash object or array of hash
           #   objects containing the data.
@@ -291,7 +291,7 @@ module Google
           # @see https://cloud.google.com/bigquery/streaming-data-into-bigquery
           #   Streaming Data Into BigQuery
           #
-          # @attr_reader [Google::Cloud::Bigquery::InsertResponse, nil]
+          # @attr_reader [Google::Cloud::BigQuery::InsertResponse, nil]
           #   insert_response The response from the insert operation if no
           #   error was encountered, or `nil` if the insert operation
           #   encountered an error.
@@ -301,7 +301,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.table "my_table"
           #   inserter = table.insert_async do |result|

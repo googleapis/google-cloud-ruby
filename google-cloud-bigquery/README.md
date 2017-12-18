@@ -23,7 +23,7 @@ Instructions and configuration options are covered in the [Authentication Guide]
 ```ruby
 require "google/cloud/bigquery"
 
-bigquery = Google::Cloud::Bigquery.new(
+bigquery = Google::Cloud::BigQuery.new(
   project_id: "my-todo-project",
   credentials: "/path/to/keyfile.json"
 )

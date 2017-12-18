@@ -14,9 +14,9 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::BigtableSource do
+describe Google::Cloud::BigQuery::External::BigtableSource do
   it "can be used for BIGTABLE" do
-    table = Google::Cloud::Bigquery::External::BigtableSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::BigtableSource.new.tap do |e|
       e.gapi.source_uris = ["https://googleapis.com/bigtable/projects/my-project/instances/my-instance/tables/my-table"]
       e.gapi.source_format = "BIGTABLE"
     end
@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
       )
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    table.must_be_kind_of Google::Cloud::BigQuery::External::DataSource
     table.urls.must_equal ["https://googleapis.com/bigtable/projects/my-project/instances/my-instance/tables/my-table"]
     table.must_be :bigtable?
     table.format.must_equal "BIGTABLE"
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
   end
 
   it "sets rowkey_as_string" do
-    table = Google::Cloud::Bigquery::External::BigtableSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::BigtableSource.new.tap do |e|
       e.gapi.source_uris = ["https://googleapis.com/bigtable/projects/my-project/instances/my-instance/tables/my-table"]
       e.gapi.source_format = "BIGTABLE"
     end
@@ -66,7 +66,7 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
   end
 
   it "adds column families using block" do
-    table = Google::Cloud::Bigquery::External::BigtableSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::BigtableSource.new.tap do |e|
       e.gapi.source_uris = ["https://googleapis.com/bigtable/projects/my-project/instances/my-instance/tables/my-table"]
       e.gapi.source_format = "BIGTABLE"
     end
@@ -100,22 +100,22 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
 
     table.families.wont_be :empty?
     table.families.count.must_equal 1
-    table.families[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily
+    table.families[0].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::ColumnFamily
     table.families[0].family_id.must_equal "user"
     table.families[0].columns.count.must_equal 5
-    table.families[0].columns[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[0].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[0].qualifier.must_equal "name"
     table.families[0].columns[0].type.must_equal "STRING"
-    table.families[0].columns[1].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[1].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[1].qualifier.must_equal "age"
     table.families[0].columns[1].type.must_equal "INTEGER"
-    table.families[0].columns[2].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[2].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[2].qualifier.must_equal "score"
     table.families[0].columns[2].type.must_equal "FLOAT"
-    table.families[0].columns[3].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[3].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[3].qualifier.must_equal "active"
     table.families[0].columns[3].type.must_equal "BOOLEAN"
-    table.families[0].columns[4].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[4].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[4].qualifier.must_equal "avatar"
     table.families[0].columns[4].type.must_equal "BYTES"
 
@@ -123,7 +123,7 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
   end
 
   it "adds column families inline" do
-    table = Google::Cloud::Bigquery::External::BigtableSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::BigtableSource.new.tap do |e|
       e.gapi.source_uris = ["https://googleapis.com/bigtable/projects/my-project/instances/my-instance/tables/my-table"]
       e.gapi.source_format = "BIGTABLE"
     end
@@ -156,22 +156,22 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
 
     table.families.wont_be :empty?
     table.families.count.must_equal 1
-    table.families[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily
+    table.families[0].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::ColumnFamily
     table.families[0].family_id.must_equal "user"
     table.families[0].columns.count.must_equal 5
-    table.families[0].columns[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[0].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[0].qualifier.must_equal "name"
     table.families[0].columns[0].type.must_equal "STRING"
-    table.families[0].columns[1].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[1].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[1].qualifier.must_equal "age"
     table.families[0].columns[1].type.must_equal "INTEGER"
-    table.families[0].columns[2].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[2].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[2].qualifier.must_equal "score"
     table.families[0].columns[2].type.must_equal "FLOAT"
-    table.families[0].columns[3].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[3].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[3].qualifier.must_equal "active"
     table.families[0].columns[3].type.must_equal "BOOLEAN"
-    table.families[0].columns[4].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    table.families[0].columns[4].must_be_kind_of Google::Cloud::BigQuery::External::BigtableSource::Column
     table.families[0].columns[4].qualifier.must_equal "avatar"
     table.families[0].columns[4].type.must_equal "BYTES"
 

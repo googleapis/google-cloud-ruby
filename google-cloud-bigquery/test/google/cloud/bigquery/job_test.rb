@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Job, :mock_bigquery do
+describe Google::Cloud::BigQuery::Job, :mock_bigquery do
   # Create a job object with the project's mocked connection object
   let(:labels) { { "foo" => "bar" } }
   let(:job_hash) { random_job_hash }
@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job_gapi.configuration.labels = labels
     job_gapi
   end
-  let(:job) { Google::Cloud::Bigquery::Job.from_gapi job_gapi,
+  let(:job) { Google::Cloud::BigQuery::Job.from_gapi job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
 
@@ -46,7 +46,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     hash
   end
   let(:failed_job_gapi) { Google::Apis::BigqueryV2::Job.from_json failed_job_hash.to_json }
-  let(:failed_job) { Google::Cloud::Bigquery::Job.from_gapi failed_job_gapi,
+  let(:failed_job) { Google::Cloud::BigQuery::Job.from_gapi failed_job_gapi,
                                               bigquery.service }
   let(:failed_job_id) { failed_job.job_id }
 

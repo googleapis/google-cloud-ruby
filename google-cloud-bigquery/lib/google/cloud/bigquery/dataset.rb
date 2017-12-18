@@ -24,7 +24,7 @@ require "google/apis/bigquery_v2"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # Dataset
       #
@@ -36,7 +36,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #
       #   dataset = bigquery.create_dataset "my_dataset",
       #                                     name: "My Dataset",
@@ -291,7 +291,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   labels = dataset.labels
@@ -328,7 +328,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.labels = { "department" => "shipping" }
@@ -356,12 +356,12 @@ module Google
         # @yield [access] a block for setting rules
         # @yieldparam [Dataset::Access] access the object accepting rules
         #
-        # @return [Google::Cloud::Bigquery::Dataset::Access] The access object.
+        # @return [Google::Cloud::BigQuery::Dataset::Access] The access object.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   access = dataset.access
@@ -370,7 +370,7 @@ module Google
         # @example Manage the access rules by passing a block:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.access do |access|
@@ -408,7 +408,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.delete
@@ -435,12 +435,12 @@ module Google
         # @yield [table] a block for setting the table
         # @yieldparam [Table] table the table object to be updated
         #
-        # @return [Google::Cloud::Bigquery::Table] A new table object.
+        # @return [Google::Cloud::BigQuery::Table] A new table object.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.create_table "my_table"
@@ -448,7 +448,7 @@ module Google
         # @example You can also pass name and description options.
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.create_table "my_table",
@@ -458,7 +458,7 @@ module Google
         # @example Or the table's schema can be configured with the block.
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.create_table "my_table" do |t|
@@ -472,7 +472,7 @@ module Google
         # @example You can define the schema using a nested block.
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.create_table "my_table" do |t|
@@ -539,12 +539,12 @@ module Google
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::Table] A new table object.
+        # @return [Google::Cloud::BigQuery::Table] A new table object.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   view = dataset.create_view "my_view",
@@ -553,7 +553,7 @@ module Google
         # @example A name and description can be provided:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   view = dataset.create_view "my_view",
@@ -592,13 +592,13 @@ module Google
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
         #
-        # @return [Google::Cloud::Bigquery::Table, nil] Returns `nil` if the
+        # @return [Google::Cloud::BigQuery::Table, nil] Returns `nil` if the
         #   table does not exist.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   table = dataset.table "my_table"
@@ -607,7 +607,7 @@ module Google
         # @example Avoid retrieving the table resource with `skip_lookup`:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset"
         #
@@ -633,13 +633,13 @@ module Google
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of tables to return.
         #
-        # @return [Array<Google::Cloud::Bigquery::Table>] An array of tables
-        #   (See {Google::Cloud::Bigquery::Table::List})
+        # @return [Array<Google::Cloud::BigQuery::Table>] An array of tables
+        #   (See {Google::Cloud::BigQuery::Table::List})
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   tables = dataset.tables
@@ -650,7 +650,7 @@ module Google
         # @example Retrieve all tables: (See {Table::List#all})
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   tables = dataset.tables
@@ -798,12 +798,12 @@ module Google
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::QueryJob] A new query job object.
+        # @return [Google::Cloud::BigQuery::QueryJob] A new query job object.
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   job = dataset.query_job "SELECT name FROM my_table"
@@ -818,7 +818,7 @@ module Google
         # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   job = dataset.query_job "SELECT name FROM my_table",
@@ -834,7 +834,7 @@ module Google
         # @example Query using positional query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   job = dataset.query_job "SELECT name FROM my_table WHERE id = ?",
@@ -850,7 +850,7 @@ module Google
         # @example Query using named query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   job = dataset.query_job "SELECT name FROM my_table WHERE id = @id",
@@ -866,7 +866,7 @@ module Google
         # @example Query using external data source:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   csv_url = "gs://bucket/path/to/data.csv"
@@ -984,12 +984,12 @@ module Google
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
         #
-        # @return [Google::Cloud::Bigquery::Data] A new data object.
+        # @return [Google::Cloud::BigQuery::Data] A new data object.
         #
         # @example Query using standard SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   data = dataset.query "SELECT name FROM my_table"
@@ -1001,7 +1001,7 @@ module Google
         # @example Query using legacy SQL:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   data = dataset.query "SELECT name FROM my_table",
@@ -1014,7 +1014,7 @@ module Google
         # @example Query using positional query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   data = dataset.query "SELECT name FROM my_table WHERE id = ?",
@@ -1027,7 +1027,7 @@ module Google
         # @example Query using named query parameters:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   data = dataset.query "SELECT name FROM my_table WHERE id = @id",
@@ -1040,7 +1040,7 @@ module Google
         # @example Query using external data source:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   csv_url = "gs://bucket/path/to/data.csv"
@@ -1110,7 +1110,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset"
         #
@@ -1236,7 +1236,7 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
-        # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
+        # @param [Google::Cloud::BigQuery::Schema] schema The schema for the
         #   destination table. Optional. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
         #   Google Cloud Datastore backup.
@@ -1271,16 +1271,16 @@ module Google
         #   table. The schema can be omitted if the destination table already
         #   exists, or if you're loading data from a Google Cloud Datastore
         #   backup.
-        # @yieldparam [Google::Cloud::Bigquery::Schema] schema The schema
+        # @yieldparam [Google::Cloud::BigQuery::Schema] schema The schema
         #   instance provided using the `schema` option, or a new, empty schema
         #   instance
         #
-        # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
+        # @return [Google::Cloud::BigQuery::LoadJob] A new load job object.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   gs_url = "gs://my-bucket/file-name.csv"
@@ -1296,7 +1296,7 @@ module Google
         #   require "google/cloud/bigquery"
         #   require "google/cloud/storage"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   storage = Google::Cloud::Storage.new
@@ -1313,7 +1313,7 @@ module Google
         # @example Upload a file directly:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   file = File.open "my_data.csv"
@@ -1328,7 +1328,7 @@ module Google
         # @example Schema is not required with a Cloud Datastore backup:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   load_job = dataset.load_job "my_new_table",
@@ -1468,7 +1468,7 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
-        # @param [Google::Cloud::Bigquery::Schema] schema The schema for the
+        # @param [Google::Cloud::BigQuery::Schema] schema The schema for the
         #   destination table. Optional. The schema can be omitted if the
         #   destination table already exists, or if you're loading data from a
         #   Google Cloud Datastore backup.
@@ -1481,7 +1481,7 @@ module Google
         #   table. The schema can be omitted if the destination table already
         #   exists, or if you're loading data from a Google Cloud Datastore
         #   backup.
-        # @yieldparam [Google::Cloud::Bigquery::Schema] schema The schema
+        # @yieldparam [Google::Cloud::BigQuery::Schema] schema The schema
         #   instance provided using the `schema` option, or a new, empty schema
         #   instance
         #
@@ -1490,7 +1490,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   gs_url = "gs://my-bucket/file-name.csv"
@@ -1506,7 +1506,7 @@ module Google
         #   require "google/cloud/bigquery"
         #   require "google/cloud/storage"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   storage = Google::Cloud::Storage.new
@@ -1523,7 +1523,7 @@ module Google
         # @example Upload a file directly:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   file = File.open "my_data.csv"
@@ -1538,7 +1538,7 @@ module Google
         # @example Schema is not required with a Cloud Datastore backup:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.load "my_new_table",
@@ -1583,13 +1583,13 @@ module Google
         ##
         # Reloads the dataset with current data from the BigQuery service.
         #
-        # @return [Google::Cloud::Bigquery::Dataset] Returns the reloaded
+        # @return [Google::Cloud::BigQuery::Dataset] Returns the reloaded
         #   dataset.
         #
         # @example Skip retrieving the dataset from the service, then load it:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #   dataset.reload!
@@ -1613,7 +1613,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #   dataset.exists? # true
@@ -1639,7 +1639,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
@@ -1661,7 +1661,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
@@ -1688,7 +1688,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.datasets.first
         #
@@ -1710,7 +1710,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset"
         #
@@ -1764,13 +1764,13 @@ module Google
         #   a new table with the given `table_id`, if no table is found for
         #   `table_id`. The default value is false.
         #
-        # @return [Google::Cloud::Bigquery::InsertResponse] An insert response
+        # @return [Google::Cloud::BigQuery::InsertResponse] An insert response
         #   object.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   rows = [
@@ -1782,7 +1782,7 @@ module Google
         # @example Avoid retrieving the dataset with `skip_lookup`:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
@@ -1795,7 +1795,7 @@ module Google
         # @example Using `autocreate` to create a new table if none exists.
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   rows = [
@@ -1865,7 +1865,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #   inserter = table.insert_async do |result|

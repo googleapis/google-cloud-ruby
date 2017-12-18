@@ -14,56 +14,56 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::BigtableSource::Column, :mock_bigquery do
+describe Google::Cloud::BigQuery::External::BigtableSource::Column, :mock_bigquery do
   it "raises if not given valid arguments" do
     expect { bigquery.external nil }.must_raise ArgumentError
   end
 
   it "creates a simple external table" do
     external = bigquery.external "gs://my-bucket/path/to/file.csv"
-    external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     external.urls.must_equal ["gs://my-bucket/path/to/file.csv"]
     external.format.must_equal "CSV"
   end
 
   it "determines CSV from one URL" do
     external = bigquery.external "gs://my-bucket/path/to/file.csv"
-    external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     external.urls.must_equal ["gs://my-bucket/path/to/file.csv"]
     external.format.must_equal "CSV"
   end
 
   it "determines CSV from multiple URL" do
     external = bigquery.external ["some url", "gs://my-bucket/path/to/file.csv"]
-    external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     external.urls.must_equal ["some url", "gs://my-bucket/path/to/file.csv"]
     external.format.must_equal "CSV"
   end
 
   it "determines CSV from the format (:csv)" do
     external = bigquery.external "some url", format: :csv
-    external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     external.urls.must_equal ["some url"]
     external.format.must_equal "CSV"
   end
 
   it "determines CSV from the format (csv)" do
     external = bigquery.external "some url", format: "csv"
-    external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     external.urls.must_equal ["some url"]
     external.format.must_equal "CSV"
   end
 
   it "determines CSV from the format (:CSV)" do
     external = bigquery.external "some url", format: :CSV
-    external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     external.urls.must_equal ["some url"]
     external.format.must_equal "CSV"
   end
 
   it "determines CSV from the format (CSV)" do
     external = bigquery.external "some url", format: "CSV"
-    external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
     external.urls.must_equal ["some url"]
     external.format.must_equal "CSV"
   end

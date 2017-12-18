@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery::Dataset, :bigquery do
+describe Google::Cloud::BigQuery::Dataset, :bigquery do
   let(:publicdata_query) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   it "has the attributes of a dataset" do
     fresh = bigquery.dataset dataset_id
-    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    fresh.must_be_kind_of Google::Cloud::BigQuery::Dataset
 
     fresh.project_id.must_equal bigquery.project
     fresh.dataset_id.must_equal dataset.dataset_id
@@ -104,7 +104,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
     fresh = bigquery.dataset dataset.dataset_id
     fresh.wont_be :nil?
-    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    fresh.must_be_kind_of Google::Cloud::BigQuery::Dataset
     fresh.dataset_id.must_equal dataset.dataset_id
     fresh.name.must_equal new_name
     fresh.description.must_equal new_desc
@@ -166,7 +166,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       schema.string    "name",  description: "name description",  mode: :required
       schema.timestamp "dob",   description: "dob description",   mode: :required
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
     job.job_id.must_equal job_id
     job.wait_until_done!
     job.output_rows.must_equal 3
@@ -227,7 +227,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     insert_response.error_rows.must_be :empty?
 
     data = table_with_schema.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?
     [nil, 0].must_include data.total
@@ -247,7 +247,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
     insert_response.insert_errors.wont_be :empty?
     insert_response.insert_errors.count.must_equal 1
-    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
+    insert_response.insert_errors.first.class.must_equal Google::Cloud::BigQuery::InsertResponse::InsertError
     insert_response.insert_errors.first.index.must_equal 1
 
     bigquery_row = invalid_rows[insert_response.insert_errors.first.index]
@@ -280,7 +280,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     table.wont_be_nil
 
     data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?
     [nil, 0].must_include data.total
@@ -312,7 +312,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     table.wont_be_nil
 
     data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?
     [nil, 0].must_include data.total

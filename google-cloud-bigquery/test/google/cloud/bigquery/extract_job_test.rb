@@ -16,13 +16,13 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
-  let(:job) { Google::Cloud::Bigquery::Job.from_gapi extract_job_gapi,
+describe Google::Cloud::BigQuery::ExtractJob, :mock_bigquery do
+  let(:job) { Google::Cloud::BigQuery::Job.from_gapi extract_job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
 
   it "knows it is extract job" do
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.must_be_kind_of Google::Cloud::BigQuery::ExtractJob
   end
 
   it "knows its destination uris" do
@@ -38,7 +38,7 @@ describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
     mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"]
 
     source = job.source
-    source.must_be_kind_of Google::Cloud::Bigquery::Table
+    source.must_be_kind_of Google::Cloud::BigQuery::Table
     source.project_id.must_equal "source_project_id"
     source.dataset_id.must_equal "source_dataset_id"
     source.table_id.must_equal   "source_table_id"

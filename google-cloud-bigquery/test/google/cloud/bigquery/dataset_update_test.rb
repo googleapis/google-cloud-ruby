@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :update, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
   let(:dataset_name) { "My Dataset" }
@@ -22,7 +22,7 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
   let(:default_expiration) { 999 }
   let(:labels) { { "foo" => "bar" } }
   let(:dataset_gapi) { random_dataset_gapi dataset_id, dataset_name, description, default_expiration }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
 
   it "updates its name" do

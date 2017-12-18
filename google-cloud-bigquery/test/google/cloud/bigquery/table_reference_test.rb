@@ -16,23 +16,23 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :reference, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_hash) { random_table_hash dataset_id, table_id }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) {Google::Cloud::Bigquery::Table.new_reference project, dataset_id, table_id, bigquery.service }
+  let(:table) {Google::Cloud::BigQuery::Table.new_reference project, dataset_id, table_id, bigquery.service }
 
   let(:etag) { "etag123456789" }
   let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_timestamp) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_timestamp_gapi }
+  let(:field_timestamp) { Google::Cloud::BigQuery::Schema::Field.from_gapi field_timestamp_gapi }
 
   let(:target_dataset) { "target_dataset" }
   let(:target_table_id) { "target_table_id" }
   let(:target_table_name) { "Target Table" }
   let(:target_description) { "This is the target table" }
   let(:target_table_gapi) { random_table_gapi target_dataset, target_table_id }
-  let(:target_table) { Google::Cloud::Bigquery::Table.from_gapi target_table_gapi, bigquery.service }
+  let(:target_table) { Google::Cloud::BigQuery::Table.from_gapi target_table_gapi, bigquery.service }
 
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
@@ -184,12 +184,12 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::JsonSource
+    table.external.must_be_kind_of Google::Cloud::BigQuery::External::JsonSource
     table.external.urls.must_equal ["gs://my-bucket/path/to/file.json"]
     table.external.format.must_equal "NEWLINE_DELIMITED_JSON"
     table.external.autodetect.must_be :nil?
     table.external.schema.wont_be :empty?
-    table.external.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    table.external.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     table.external.schema.must_be :frozen?
     table.external.must_be :frozen?
   end
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     data = table.data
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
   end
@@ -219,7 +219,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     job = table.copy_job target_table
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy itself with copy" do
@@ -246,7 +246,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     job = table.extract_job storage_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.must_be_kind_of Google::Cloud::BigQuery::ExtractJob
   end
 
   it "can extract itself with extract" do
@@ -272,7 +272,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     table.service.mocked_service = mock
 
     job = table.load_job load_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end

@@ -14,13 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Data, :mock_bigquery do
+describe Google::Cloud::BigQuery::Data, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
   let(:table_gapi) { random_table_gapi dataset_id, table_id, table_name, description }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi,
                                                   bigquery.service }
 
   it "returns data as a list of hashes" do
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data = table.data
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
     data[0][:name].must_equal "Heidi"
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data[0][:avatar].must_be_kind_of StringIO
     data[0][:avatar].read.must_equal "image data"
     data[0][:started_at].must_equal Time.parse("2016-12-25 13:00:00 UTC")
-    data[0][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
+    data[0][:duration].must_equal Google::Cloud::BigQuery::Time.new("04:00:00")
     data[0][:target_end].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     data[0][:birthday].must_equal Date.parse("1968-10-20")
 
@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data[1][:active].must_equal false
     data[1][:avatar].must_be :nil?
     data[1][:started_at].must_be :nil?
-    data[1][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
+    data[1][:duration].must_equal Google::Cloud::BigQuery::Time.new("04:32:10.555555")
     data[1][:target_end].must_be :nil?
     data[1][:birthday].must_be :nil?
 
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data = table.data
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.kind.must_equal "bigquery#tableDataList"
     data.etag.must_equal "etag1234567890"
     data.token.must_equal "token1234567890"
@@ -97,7 +97,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data = table.data
     mock.verify
 
-    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     data.schema.must_be :frozen?
     data.fields.must_equal data.schema.fields
     data.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
@@ -113,7 +113,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     nil_data = table.data
     mock.verify
 
-    nil_data.class.must_equal Google::Cloud::Bigquery::Data
+    nil_data.class.must_equal Google::Cloud::BigQuery::Data
     nil_data.count.must_equal 0
   end
 
@@ -138,7 +138,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
 
     nested_table_gapi = random_table_gapi dataset_id, table_id, table_name, description
     nested_table_gapi.schema = Google::Apis::BigqueryV2::TableSchema.from_json schema_hash.to_json
-    nested_table = Google::Cloud::Bigquery::Table.from_gapi nested_table_gapi, bigquery.service
+    nested_table = Google::Cloud::BigQuery::Table.from_gapi nested_table_gapi, bigquery.service
 
     nested_table_data_hash = table_data_hash
     nested_table_data_hash["rows"] = rows_array
@@ -153,7 +153,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     nested_data = nested_table.data
     mock.verify
 
-    nested_data.class.must_equal Google::Cloud::Bigquery::Data
+    nested_data.class.must_equal Google::Cloud::BigQuery::Data
     nested_data.count.must_equal 1
 
     nested_data.must_equal [{ nums: [1, 2, 3], scores: [100.0, 99.9, 0.001], msgs: ["hello", "world"], flags: [true, false] }]
@@ -183,7 +183,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
 
     nested_table_gapi = random_table_gapi dataset_id, table_id, table_name, description
     nested_table_gapi.schema = Google::Apis::BigqueryV2::TableSchema.from_json schema_hash.to_json
-    nested_table = Google::Cloud::Bigquery::Table.from_gapi nested_table_gapi, bigquery.service
+    nested_table = Google::Cloud::BigQuery::Table.from_gapi nested_table_gapi, bigquery.service
 
     nested_table_data_hash = table_data_hash
     nested_table_data_hash["rows"] = rows_array
@@ -198,7 +198,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     nested_data = nested_table.data
     mock.verify
 
-    nested_data.class.must_equal Google::Cloud::Bigquery::Data
+    nested_data.class.must_equal Google::Cloud::BigQuery::Data
     nested_data.count.must_equal 1
 
     nested_data.must_equal [{ name: "mike", foo: [{ bar: "hey", baz: { bif: 1 } }, { bar: "world", baz: { bif: 2 } }] }]
@@ -216,11 +216,11 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
 
     data1 = table.data
 
-    data1.class.must_equal Google::Cloud::Bigquery::Data
+    data1.class.must_equal Google::Cloud::BigQuery::Data
     data1.token.wont_be :nil?
     data1.token.must_equal "token1234567890"
     data2 = table.data token: data1.token
-    data2.class.must_equal Google::Cloud::Bigquery::Data
+    data2.class.must_equal Google::Cloud::BigQuery::Data
     mock.verify
   end
 
@@ -236,13 +236,13 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
 
     data1 = table.data
 
-    data1.class.must_equal Google::Cloud::Bigquery::Data
+    data1.class.must_equal Google::Cloud::BigQuery::Data
     data1.token.wont_be :nil?
     data1.next?.must_equal true # can't use must_be :next?
     data2 = data1.next
     data2.token.must_be :nil?
     data2.next?.must_equal false
-    data2.class.must_equal Google::Cloud::Bigquery::Data
+    data2.class.must_equal Google::Cloud::BigQuery::Data
     mock.verify
   end
 
@@ -321,7 +321,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
                 [project, dataset_id, table_id, {  max_results: 3, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data max: 3
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
   end
 
   it "paginates data with start set" do
@@ -334,6 +334,6 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data = table.data start: 25
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
   end
 end

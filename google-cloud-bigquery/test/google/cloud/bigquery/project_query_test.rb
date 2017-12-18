@@ -14,17 +14,17 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
+describe Google::Cloud::BigQuery::Project, :query, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM `some_project.some_dataset.users`" }
 
   let(:job_id) { "job_9876543210" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
   let(:table_id) { "my_table" }
   let(:table_gapi) { random_table_gapi dataset_id, table_id }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi,
                                                   bigquery.service }
 
   it "queries the data" do
@@ -42,8 +42,8 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
 
     data = bigquery.query query
     mock.verify
-    # data.must_be_kind_of Google::Cloud::Bigquery::Data
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    # data.must_be_kind_of Google::Cloud::BigQuery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
     data[0][:name].must_equal "Heidi"
@@ -79,14 +79,14 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query
-    # data.must_be_kind_of Google::Cloud::Bigquery::Data
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    # data.must_be_kind_of Google::Cloud::BigQuery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     data.token.must_equal "token1234567890"
     data.next?.must_equal true
 
     data2 = data.next
-    data2.class.must_equal Google::Cloud::Bigquery::Data
+    data2.class.must_equal Google::Cloud::BigQuery::Data
     data2.count.must_equal 3
     mock.verify
   end
@@ -105,7 +105,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 [project, "target_dataset_id", "target_table_id", {  max_results: 42, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query, max: 42
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     mock.verify
   end
@@ -127,7 +127,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query, dataset: "some_random_dataset"
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     mock.verify
   end
@@ -150,7 +150,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
 
     data = bigquery.query query, dataset: "some_random_dataset",
                                  project: "some_random_project"
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     mock.verify
   end
@@ -172,7 +172,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
 
 
     data = bigquery.query query, cache: false
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     mock.verify
   end

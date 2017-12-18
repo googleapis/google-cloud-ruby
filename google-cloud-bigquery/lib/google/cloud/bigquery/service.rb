@@ -24,9 +24,9 @@ require "date"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
-      # @private Represents the Bigquery service and API calls.
+      # @private Represents the BigQuery service and API calls.
       class Service
         ##
         # Alias to the Google Client API module
@@ -56,14 +56,14 @@ module Google
             service = API::BigqueryService.new
             service.client_options.application_name    = "gcloud-ruby"
             service.client_options.application_version = \
-              Google::Cloud::Bigquery::VERSION
+              Google::Cloud::BigQuery::VERSION
             service.client_options.open_timeout_sec = timeout
             service.client_options.read_timeout_sec = timeout
             service.client_options.send_timeout_sec = timeout
             service.request_options.retries = 0 # handle retries in #execute
             service.request_options.header ||= {}
             service.request_options.header["x-goog-api-client"] = \
-              "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
+              "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::BigQuery::VERSION}"
             service.authorization = @credentials.client
             service
           end

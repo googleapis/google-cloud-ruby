@@ -14,13 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Project, :query_job, :external, :mock_bigquery do
+describe Google::Cloud::BigQuery::Project, :query_job, :external, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active, create_date, update_timestamp FROM my_csv" }
   let(:job_id) { "job_9876543210" }
 
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi, bigquery.service }
 
   it "queries with external data" do
     job_gapi = query_job_gapi query
@@ -41,6 +41,6 @@ describe Google::Cloud::Bigquery::Project, :query_job, :external, :mock_bigquery
     job = bigquery.query_job query, external: { my_csv: external_csv }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
   end
 end

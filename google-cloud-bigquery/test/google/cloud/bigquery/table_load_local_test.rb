@@ -14,14 +14,14 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :load, :local, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :load, :local, :mock_bigquery do
   let(:dataset) { "dataset" }
   let(:table_id) { "table_id" }
   let(:table_name) { "Target Table" }
   let(:description) { "This is the target table" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   it "can upload a csv file" do
     mock = Minitest::Mock.new

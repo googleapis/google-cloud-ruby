@@ -17,7 +17,7 @@ require "delegate"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       class Job
         ##
         # Job::List is a special case Array with additional values.
@@ -44,7 +44,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   jobs = bigquery.jobs
           #   if jobs.next?
@@ -62,7 +62,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   jobs = bigquery.jobs
           #   if jobs.next?
@@ -97,7 +97,7 @@ module Google
           # @example Iterating each job by passing a block:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigquery.jobs.all do |job|
           #     puts job.state
@@ -106,7 +106,7 @@ module Google
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   all_states = bigquery.jobs.all.map do |job|
           #     job.state
@@ -115,7 +115,7 @@ module Google
           # @example Limit the number of API calls made:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigquery.jobs.all(request_limit: 10) do |job|
           #     puts job.state

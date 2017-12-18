@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :view, :mock_bigquery do
   # Create a view object with the project's mocked connection object
   let(:dataset) { "my_dataset" }
   let(:table_id) { "my_view" }
@@ -27,7 +27,7 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:view_hash) { random_view_hash dataset, table_id, table_name, description }
   let(:view_gapi) { Google::Apis::BigqueryV2::Table.from_json view_hash.to_json }
-  let(:view) { Google::Cloud::Bigquery::Table.from_gapi view_gapi,
+  let(:view) { Google::Cloud::BigQuery::Table.from_gapi view_gapi,
                                                 bigquery.service }
 
   it "knows its attributes" do
@@ -57,7 +57,7 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
   end
 
   it "knows schema, fields, and headers" do
-    view.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    view.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     view.schema.must_be :frozen?
     view.fields.map(&:name).must_equal view.schema.fields.map(&:name)
     view.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]

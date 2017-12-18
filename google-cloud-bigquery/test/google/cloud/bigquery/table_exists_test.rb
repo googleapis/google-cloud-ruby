@@ -14,12 +14,12 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :exists, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_hash) { random_table_hash dataset_id, table_id }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   it "knows if full resource exists when created with an HTTP method" do
     # The absence of a mock means this test will fail
@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
 
   describe "partial dataset resource from list of a dataset that exists" do
     let(:table_partial_gapi) { list_tables_gapi(1).tables.first }
-    let(:table) {Google::Cloud::Bigquery::Table.from_gapi table_partial_gapi, bigquery.service }
+    let(:table) {Google::Cloud::BigQuery::Table.from_gapi table_partial_gapi, bigquery.service }
 
     it "knows if partial resource exists when created with an HTTP method" do
       # The absence of a mock means this test will fail
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
   end
 
   describe "dataset reference of a dataset that exists" do
-    let(:table) {Google::Cloud::Bigquery::Table.new_reference project, dataset_id, table_id, bigquery.service }
+    let(:table) {Google::Cloud::BigQuery::Table.new_reference project, dataset_id, table_id, bigquery.service }
 
     it "checks if the dataset exists by making an HTTP call" do
       mock = Minitest::Mock.new
@@ -89,7 +89,7 @@ describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
   end
 
   describe "dataset reference of a dataset that does not exist" do
-    let(:table) { Google::Cloud::Bigquery::Table.new_reference project, dataset_id, table_id, bigquery.service }
+    let(:table) { Google::Cloud::BigQuery::Table.new_reference project, dataset_id, table_id, bigquery.service }
 
     it "checks if the dataset exists by making an HTTP call" do
       stub = Object.new

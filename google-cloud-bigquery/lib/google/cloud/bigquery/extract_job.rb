@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # ExtractJob
       #
@@ -31,7 +31,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #

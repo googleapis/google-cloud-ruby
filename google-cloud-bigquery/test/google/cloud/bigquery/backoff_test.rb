@@ -15,7 +15,7 @@
 require "helper"
 require "json"
 
-describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
+describe Google::Cloud::BigQuery::Service::Backoff, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
 
   it "finds a dataset without any retry or backoff" do
@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.dataset_id.must_equal dataset_id
   end
 
@@ -63,10 +63,10 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     end
     bigquery.service.mocked_service = stub
 
-    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+    Google::Cloud::BigQuery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       dataset = bigquery.dataset dataset_id
 
-      dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
       dataset.dataset_id.must_equal dataset_id
     end
 
@@ -104,10 +104,10 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     end
     bigquery.service.mocked_service = stub
 
-    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+    Google::Cloud::BigQuery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       dataset = bigquery.dataset dataset_id
 
-      dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
       dataset.dataset_id.must_equal dataset_id
     end
 
@@ -127,7 +127,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     end
     bigquery.service.mocked_service = stub
 
-    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+    Google::Cloud::BigQuery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       err = assert_raises Google::Cloud::InvalidArgumentError do
         bigquery.dataset dataset_id
       end
@@ -172,10 +172,10 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     end
     bigquery.service.mocked_service = stub
 
-    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+    Google::Cloud::BigQuery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       dataset = bigquery.dataset dataset_id
 
-      dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
       dataset.dataset_id.must_equal dataset_id
     end
 
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     end
     bigquery.service.mocked_service = stub
 
-    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+    Google::Cloud::BigQuery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       err = assert_raises Google::Cloud::InvalidArgumentError do
         bigquery.dataset dataset_id
       end
@@ -235,7 +235,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     end
     bigquery.service.mocked_service = stub
 
-    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+    Google::Cloud::BigQuery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       err = assert_raises Google::Cloud::InvalidArgumentError do
         bigquery.dataset dataset_id
       end
