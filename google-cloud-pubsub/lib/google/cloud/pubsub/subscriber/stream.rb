@@ -69,11 +69,11 @@ module Google
           def stop
             synchronize do
               break if @stopped
-              break if @request_queue.nil?
 
-              @request_queue.push self
               @inventory.stop
               @stopped = true
+              # Kill the thread since it may be sleeping
+              @background_thread.kill if @background_thread
             end
 
             self
@@ -89,15 +89,28 @@ module Google
 
           def wait!
             synchronize do
-              @background_thread.join if @background_thread
-
+              # Now that the reception thread is dead, make sure all recieved
+              # messages have had the callback called.
               @callback_thread_pool.shutdown
               @callback_thread_pool.wait_for_termination
 
-              @async_pusher.stop.wait! if @async_pusher
+              # Once all the callbacks are complete, we can stop the publisher
+              # and send the final request to the steeam.
+              if @async_pusher
+                request = @async_pusher.stop
+                if request
+                  Concurrent::Future.new(executor: @push_thread_pool) do
+                    @request_queue.push request
+                  end.execute
+                end
+              end
 
+              # Close the push thread pool now that the pusher is closed.
               @push_thread_pool.shutdown
               @push_thread_pool.wait_for_termination
+
+              # Close the stream now that all requests have been made.
+              @request_queue.push self unless @request_queue.nil?
             end
 
             self
@@ -186,11 +199,23 @@ module Google
               begin
                 # Cannot syncronize the enumerator, causes deadlock
                 response = enum.next
+
+                # Create a list of all the received ack_id values
+                received_ack_ids = response.received_messages.map(&:ack_id)
+
+                synchronize do
+                  # Create receipt of received messages reception
+                  @async_pusher ||= AsyncPusher.new self
+                  @async_pusher.delay subscriber.deadline, received_ack_ids
+
+                  # Add received messages to inventory
+                  @inventory.add received_ack_ids
+                end
+
                 response.received_messages.each do |rec_msg_grpc|
                   rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
                   synchronize do
-                    @inventory.add rec_msg.ack_id
-
+                    # Call user provided code for received message
                     perform_callback_async rec_msg
                   end
                 end

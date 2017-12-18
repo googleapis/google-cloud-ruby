@@ -30,7 +30,7 @@ module Google
           attr_reader :batch
           attr_reader :max_bytes, :interval
 
-          def initialize stream, max_bytes: 10000000, interval: 0.25
+          def initialize stream, max_bytes: 10000000, interval: 1.0
             @stream = stream
 
             @max_bytes = max_bytes
@@ -102,31 +102,15 @@ module Google
 
           def stop
             synchronize do
-              break if @stopped
-
               @stopped = true
-              push_batch_request!
-              @cond.signal
+
+              # Stop any background activity, clean up happens in wait!
+              @background_thread.kill if @background_thread
             end
 
-            self
-          end
+            return nil if @batch.nil?
 
-          def wait!
-            synchronize do
-              @background_thread.join if @background_thread
-            end
-
-            self
-          end
-
-          def flush
-            synchronize do
-              push_batch_request!
-              @cond.signal
-            end
-
-            self
+            @batch.request
           end
 
           def started?
