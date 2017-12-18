@@ -67,6 +67,26 @@ end
 # Acceptance tests
 desc "Run the google-cloud-video_intelligence acceptance tests."
 task :acceptance do
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["VIDEO_INTELLIGENCE_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or VIDEO_INTELLIGENCE_TEST_PROJECT=test123 VIDEO_INTELLIGENCE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["VIDEO_INTELLIGENCE_PROJECT"] = project
+  ENV["VIDEO_INTELLIGENCE_KEYFILE"] = nil
+  ENV["VIDEO_INTELLIGENCE_KEYFILE_JSON"] = keyfile
+
+  # Required for smoke tests
+  ENV["VIDEO_INTELLIGENCE_TEST_PROJECT"] = project
+
   Rake::Task["acceptance:run"].invoke
 end
 
@@ -132,7 +152,7 @@ task :jsondoc => :yard do
             include: ["google/rpc"]
           }
         ]
-      }, 
+      },
       {
         type: "toc",
         title: "Google::Cloud::VideoIntelligence::V1::DataTypes",
@@ -150,7 +170,7 @@ task :jsondoc => :yard do
             include: ["google/rpc"]
           }
         ]
-      }     
+      }
     ]
   }
 
