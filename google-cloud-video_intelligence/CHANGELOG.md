@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 / 2017-12-19
+
+* Remove deprecated constructor arguments.
+* Update documentation.
+* Update google-gax dependency to 1.0.
+
 ### 0.25.0 / 2017-11-22
 
 * Add support for V1 API.
