@@ -1,5 +1,20 @@
 # Release History
 
+### 0.47.0 / 2017-12-19
+
+* Datastore 1.3.0 release.
+* Debugger 0.30.0 release.
+* Error Reporting 0.29.0 release.
+* Natural Language 0.29.0 release.
+* Logging 1.4.0 release.
+* Monitoring 0.27.0 release.
+* Pub/Sub 0.29.0 release.
+* Spanner 1.2.0 release.
+* Speech 0.28.0 release.
+* Trace 0.29.0 release.
+* Video Intelligence 0.29.0 release.
+* Vision 0.27.0 release.
+
 ### 0.46.0 / 2017-11-22
 
 * Video Intelligence 0.25.0 release.
