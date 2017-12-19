@@ -1,0 +1,1 @@
+{"id":"google/datastore/v1/commitrequest/mode","name":"Mode","title":["Google","Datastore","V1","CommitRequest","Mode"],"description":"<p>The modes available for commits.</p>","source":"google-cloud-datastore/lib/google/cloud/datastore/v1/doc/google/datastore/v1/datastore.rb#L147","resources":[],"examples":[],"methods":[]}
