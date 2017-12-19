@@ -92,10 +92,6 @@ module Google
     # as discussed in the guide [Migrating from legacy
     # SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql).
     #
-    # In addition, BigQuery offers both synchronous and asynchronous methods, as
-    # explained in [Querying
-    # Data](https://cloud.google.com/bigquery/querying-data).
-    #
     # ### Standard SQL
     #
     # Standard SQL is the preferred SQL dialect for querying data stored in
