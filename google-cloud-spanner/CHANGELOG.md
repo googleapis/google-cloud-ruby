@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.0 / 2017-12-19
+
+* Update Low Level API code
+  * Remove deprecated constructor arguments.
+  * Update documentation.
+* Update google-gax dependency to 1.0.
+
 ### 1.1.1 / 2017-11-15
 
 * Fix Admin Credentials (GAPIC) environment variable names.
