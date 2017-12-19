@@ -1,4 +1,4 @@
-# Ruby Client for Stackdriver Monitoring API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Stackdriver Monitoring API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
 
 [Stackdriver Monitoring API][Product Documentation]:
 Manages your Stackdriver Monitoring data and configurations. Most projects must
