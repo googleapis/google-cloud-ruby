@@ -1,5 +1,14 @@
 # Release History
 
+### 1.3.0 / 2017-12-19
+
+* Support Read-Only Transactions
+  * Add ReadOnlyTransaction class.
+  * Add Dataset#read_only_transaction.
+* Dataset#transaction now automatically retries on error,
+* Add Dataset#transaction previous_transaction and deadline arguments,
+* Update google-gax dependency to 1.0.
+
 ### 1.2.1 / 2017-11-21
 
 * Remove warning when connecting to Datastore Emulator.
