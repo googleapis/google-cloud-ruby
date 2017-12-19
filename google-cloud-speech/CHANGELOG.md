@@ -1,5 +1,12 @@
 # Release History
 
+### 0.28.0 / 2017-12-19
+
+* Update Low Level API code
+  * Remove deprecated constructor arguments.
+  * Update documentation.
+* Update google-gax dependency to 1.0.
+
 ### 0.27.0 / 2017-11-14
 
 * Add `Google::Cloud::Speech::Credentials` class.
