@@ -1,5 +1,11 @@
 # Release History
 
+### 0.29.0 / 2017-12-19
+
+* Update Subscriber's receipt of received messages.
+* Refactor Subscriber implementation to fix some threading bugs.
+* Update google-gax dependency to 1.0.
+
 ### 0.28.1 / 2017-11-21
 
 * Remove warning when connecting to Pub/Sub Emulator.
