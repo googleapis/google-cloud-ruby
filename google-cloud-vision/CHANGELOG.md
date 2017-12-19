@@ -1,5 +1,9 @@
 # Release History
 
+### 0.27.0 / 2017-12-19
+
+* Update google-gax dependency to 1.0.
+
 ### 0.26.0 / 2017-11-14
 
 * Add `Google::Cloud::Vision::Credentials` class.
