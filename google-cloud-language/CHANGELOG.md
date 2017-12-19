@@ -1,5 +1,10 @@
 # Release History
 
+### 0.29.0 / 2017-12-19
+
+* Documentation updates.
+* Update google-gax dependency to 1.0.
+
 ### 0.28.1 / 2017-11-15
 
 * Fix Credentials environment variable names.
