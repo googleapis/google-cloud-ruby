@@ -23,7 +23,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
     $ bundle exec rake build
     ```
 
-1. Install the gem locally.
+1. Install the gem locally. (The `rake install` task shown below may not always work as expected. Fall back to running `gem install` in an empty gemset if needed.)
 
     ```sh
     $ bundle exec rake install
@@ -46,7 +46,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Edit the gem's entry in `docs/manifest.json`, adding your new version number to the head of the list, and moving `"master"` to be just below it.
 
-1. If the package is `< 1.0.0` and your version change is greater than the [semver](http://semver.org/) patch version, or if the package is `>= 1.0.0` and your version change increments the [semver](http://semver.org/) major version, edit the requirement for the gem in `google-cloud/google-cloud.gemspec` and `stackdriver/stackdriver.gemspec` (if the package is a dependency of stackdriver) , replacing the old version number for the gem with your new version number.
+1. If the package is `< 1.0.0` and your version change is greater than the [semver](http://semver.org/) patch version, or if the package is `>= 1.0.0` and your version change increments the [semver](http://semver.org/) major version, edit the requirement for the gem in `google-cloud/google-cloud.gemspec` and `stackdriver/stackdriver.gemspec` (if the package is a dependency of stackdriver) , replacing the old version number for the gem with your new version number. Note that the dependency versions of the `google-cloud` and `stackdriver` must gems remain compatible so the two can co-exist in the same bundle.
 
 1. In the root directory of the project, test that all the version dependencies are correct.
 
@@ -59,12 +59,6 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
     ```sh
     $ git commit -am "Release <gem> <version> ..."
-    ```
-
-1. Ensure again that you have every commit from `origin master`.
-
-    ```sh
-    $ git pull <remote> master --rebase
     ```
 
 1. Tag the version.
@@ -91,7 +85,11 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Click `Publish release`.
 
-1. Repeat steps 1 through 20 if you are releasing multiple gems.
+1. Repeat steps 1 through 19 if you are releasing multiple gems.
+
+1. If you updated `google-cloud/google-cloud.gemspec` for a version change to any gem, repeat steps 1 through 19 for the `google-cloud` gem.
+
+1. If you updated `stackdriver/stackdriver.gemspec` for a version change to any gem, repeat steps 1 through 19 for the `stackdriver` gem.
 
 1. Wait until the last tag build job has successfully completed on Circle CI. Then push your commits to the master branch. This will trigger another [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) build on master branch.
 
@@ -100,7 +98,5 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
     ```
 
 1. After the Circle CI master branch build has successfully completed, confirm that [Travis CI (Mac OS X)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-ruby) and [Appveyor CI (Windows)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-ruby) master branch builds are also green.
-
-1. If your version change is greater than the [semver](http://semver.org/) patch version, then when you are done releasing all individual packages, you should follow these same instructions to release the `google-cloud` umbrella package. Furthermore, if your major releases included at least one dependency of the `stackdriver` umbrella package (currently those dependencies are `google-cloud-debugger`, `google-cloud-error_reporting`, `google-cloud-logging`, and `google-cloud-trace`), then you should also follow these same instructions to release the `stackdriver` umbrella package. It is important that the dependencies of the `google-cloud` and `stackdriver` gems remain compatible so the two can co-exist in the same bundle.
 
 High fives all around!
