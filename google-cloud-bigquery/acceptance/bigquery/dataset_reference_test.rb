@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
+describe Google::Cloud::BigQuery::Dataset, :reference, :bigquery do
   let(:publicdata_query) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
@@ -83,7 +83,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
 
   it "has the attributes of a dataset after reload" do
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    dataset.must_be_kind_of Google::Cloud::BigQuery::Dataset
     dataset.project_id.must_equal bigquery.project
     dataset.dataset_id.must_equal dataset.dataset_id
     dataset.etag.must_be_nil
@@ -120,7 +120,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
 
     fresh = bigquery.dataset dataset.dataset_id
     fresh.wont_be_nil
-    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    fresh.must_be_kind_of Google::Cloud::BigQuery::Dataset
     fresh.dataset_id.must_equal dataset.dataset_id
     fresh.name.must_equal new_name
     fresh.description.must_equal new_desc
@@ -182,14 +182,14 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     query_job.job_id.must_equal job_id
     query_job.wait_until_done!
     query_job.done?.must_equal true
     query_job.data.total.wont_be_nil
 
     data = dataset.query query
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.total.wont_be_nil
   end
 end

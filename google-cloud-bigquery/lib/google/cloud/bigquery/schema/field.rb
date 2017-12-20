@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       class Schema
         ##
         # # Schema Field
@@ -28,7 +28,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -496,7 +496,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table"
           #

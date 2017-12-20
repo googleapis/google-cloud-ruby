@@ -15,7 +15,7 @@
 require "bigquery_helper"
 require "csv"
 
-describe Google::Cloud::Bigquery::Table, :external, :bigquery do
+describe Google::Cloud::BigQuery::Table, :external, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -57,7 +57,7 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
     table.must_be :external?
     table.external.wont_be :nil?
     table.external.must_be :frozen?
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    table.external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
 
     data = dataset.query "SELECT id, name, breed FROM #{table_id} ORDER BY id"
     data.count.must_equal 3
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
     table.must_be :external?
     table.external.wont_be :nil?
     table.external.must_be :frozen?
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    table.external.must_be_kind_of Google::Cloud::BigQuery::External::CsvSource
 
     data = dataset.query "SELECT id, name, breed FROM #{table_id} ORDER BY id"
     data.count.must_equal 3

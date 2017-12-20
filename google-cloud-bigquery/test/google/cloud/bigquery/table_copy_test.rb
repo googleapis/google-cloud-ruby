@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :copy, :mock_bigquery do
   let(:source_dataset) { "source_dataset" }
   let(:source_table_id) { "source_table_id" }
   let(:source_table_name) { "Source Table" }
@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
                                               source_table_id,
                                               source_table_name,
                                               source_description }
-  let(:source_table) { Google::Cloud::Bigquery::Table.from_gapi source_table_gapi,
+  let(:source_table) { Google::Cloud::BigQuery::Table.from_gapi source_table_gapi,
                                                          bigquery.service }
   let(:target_dataset) { "target_dataset" }
   let(:target_table_id) { "target_table_id" }
@@ -33,14 +33,14 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
                                               target_table_id,
                                               target_table_name,
                                               target_description }
-  let(:target_table) { Google::Cloud::Bigquery::Table.from_gapi target_table_gapi,
+  let(:target_table) { Google::Cloud::BigQuery::Table.from_gapi target_table_gapi,
                                                          bigquery.service }
   let(:target_table_other_proj_gapi) { random_table_gapi target_dataset,
                                               target_table_id,
                                               target_table_name,
                                               target_description,
                                               "target-project" }
-  let(:target_table_other_proj) { Google::Cloud::Bigquery::Table.from_gapi target_table_other_proj_gapi,
+  let(:target_table_other_proj) { Google::Cloud::BigQuery::Table.from_gapi target_table_other_proj_gapi,
                                                          bigquery.service }
 
   it "can copy itself" do
@@ -75,7 +75,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
   it "can copy to a table name string only" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    new_target_table = Google::Cloud::Bigquery::Table.from_gapi(
+    new_target_table = Google::Cloud::BigQuery::Table.from_gapi(
       random_table_gapi(source_dataset,
                         "new_target_table_id",
                         target_table_name,

@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery::Table, :bigquery do
+describe Google::Cloud::BigQuery::Table, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -70,7 +70,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "has the attributes of a table" do
     fresh = dataset.table table.table_id
-    fresh.must_be_kind_of Google::Cloud::Bigquery::Table
+    fresh.must_be_kind_of Google::Cloud::BigQuery::Table
 
     fresh.project_id.must_equal bigquery.project
     fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{table.table_id}"
@@ -93,7 +93,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.buffer_rows.must_be_kind_of Integer if fresh.buffer_rows
     fresh.buffer_oldest_at.must_be_kind_of Time if fresh.buffer_oldest_at
 
-    fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    fresh.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     fresh.schema.wont_be :empty?
     [:id, :breed, :name, :dob].each { |k| fresh.headers.must_include k }
 
@@ -209,7 +209,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     query_job.job_id.must_equal job_id
     query_job.wait_until_done!
 
@@ -235,7 +235,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.cache_hit?.must_equal false
     query_job.bytes_processed.wont_be :nil?
     query_job.destination.wont_be :nil?
-    query_job.data.class.must_equal Google::Cloud::Bigquery::Data
+    query_job.data.class.must_equal Google::Cloud::BigQuery::Data
     query_job.data.total.wont_be :nil?
 
     # Query Job - Statistics Query Plan
@@ -243,7 +243,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.query_plan.must_be_kind_of Array
     query_job.query_plan.wont_be :empty?
     stage = query_job.query_plan.first
-    stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
+    stage.must_be_kind_of Google::Cloud::BigQuery::QueryJob::Stage
     stage.compute_ratio_avg.must_be_kind_of Float
     stage.compute_ratio_max.must_be_kind_of Float
     stage.id.must_be_kind_of Integer
@@ -261,14 +261,14 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     stage.steps.must_be_kind_of Array
     stage.steps.wont_be :empty?
     step = stage.steps.first
-    step.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Step
+    step.must_be_kind_of Google::Cloud::BigQuery::QueryJob::Step
     step.kind.must_be_kind_of String
     step.substeps.wont_be_nil
     step.substeps.must_be_kind_of Array
     step.substeps.wont_be :empty?
 
     data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?
     [nil, 0].must_include data.total
@@ -281,9 +281,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     more_data.wont_be :nil?
 
     data = dataset.query query
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.total.wont_be(:nil?)
-    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     data.fields.count.must_equal 4
     [:id, :breed, :name, :dob].each { |k| data.headers.must_include k }
     data.all.each do |row|
@@ -300,7 +300,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     insert_response.insert_errors.wont_be :empty?
     insert_response.insert_errors.count.must_equal 1
-    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
+    insert_response.insert_errors.first.class.must_equal Google::Cloud::BigQuery::InsertResponse::InsertError
     insert_response.insert_errors.first.index.must_equal 1
 
     bigquery_row = invalid_rows[insert_response.insert_errors.first.index]
@@ -327,7 +327,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     inserter.flush
     inserter.stop.wait!
 
-    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be_kind_of Google::Cloud::BigQuery::Table::AsyncInserter::Result
     insert_result.must_be :success?
     insert_result.insert_count.must_equal 3
     insert_result.insert_errors.must_be :empty?
@@ -335,7 +335,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     query_job.job_id.must_equal job_id
     query_job.wait_until_done!
 
@@ -361,7 +361,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.cache_hit?.must_equal false
     query_job.bytes_processed.wont_be :nil?
     query_job.destination.wont_be :nil?
-    query_job.data.class.must_equal Google::Cloud::Bigquery::Data
+    query_job.data.class.must_equal Google::Cloud::BigQuery::Data
     query_job.data.total.wont_be :nil?
 
     # Query Job - Statistics Query Plan
@@ -369,7 +369,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     query_job.query_plan.must_be_kind_of Array
     query_job.query_plan.wont_be :empty?
     stage = query_job.query_plan.first
-    stage.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Stage
+    stage.must_be_kind_of Google::Cloud::BigQuery::QueryJob::Stage
     stage.compute_ratio_avg.must_be_kind_of Float
     stage.compute_ratio_max.must_be_kind_of Float
     stage.id.must_be_kind_of Integer
@@ -387,14 +387,14 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     stage.steps.must_be_kind_of Array
     stage.steps.wont_be :empty?
     step = stage.steps.first
-    step.must_be_kind_of Google::Cloud::Bigquery::QueryJob::Step
+    step.must_be_kind_of Google::Cloud::BigQuery::QueryJob::Step
     step.kind.must_be_kind_of String
     step.substeps.wont_be_nil
     step.substeps.must_be_kind_of Array
     step.substeps.wont_be :empty?
 
     data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?
     [nil, 0].must_include data.total
@@ -407,9 +407,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     more_data.wont_be :nil?
 
     data = dataset.query query
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.total.wont_be(:nil?)
-    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    data.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     data.fields.count.must_equal 4
     [:id, :breed, :name, :dob].each { |k| data.headers.must_include k }
     data.all.each do |row|
@@ -421,7 +421,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "imports data from a local file with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = table.load_job local_file, job_id: job_id, labels: labels
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
     job.job_id.must_equal job_id
     job.labels.must_equal labels
     job.wont_be :autodetect?
@@ -472,7 +472,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     copy_job = table.copy_job target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
 
-    copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    copy_job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
     copy_job.job_id.must_equal job_id
     copy_job.labels.must_equal labels
     copy_job.wait_until_done!
@@ -495,7 +495,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "creates and cancels jobs" do
     load_job = table.load_job local_file
 
-    load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    load_job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
     load_job.wont_be :done?
 
     load_job.cancel
@@ -511,7 +511,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       # Make sure there is data to extract...
       load_job = table.load_job local_file
 
-      load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      load_job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
       load_job.wait_until_done!
 
       load_job.wont_be :failed?
@@ -528,7 +528,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       load_job.backup?.must_equal false
       load_job.allow_jagged_rows?.must_equal false
       load_job.ignore_unknown_values?.must_equal false
-      load_job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+      load_job.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
       load_job.schema.wont_be :empty?
       load_job.input_files.must_equal 1
       load_job.input_file_bytes.must_be :>, 0
@@ -540,7 +540,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
         extract_job = table.extract_job extract_url, labels: labels
 
-        extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+        extract_job.must_be_kind_of Google::Cloud::BigQuery::ExtractJob
         extract_job.labels.must_equal labels
         extract_job.wait_until_done!
 

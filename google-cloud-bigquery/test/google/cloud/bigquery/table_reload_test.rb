@@ -14,13 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :reload, :mock_bigquery do
   # Create a table object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_hash) { random_table_hash dataset_id, table_id }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   it "loads the table full resource by making an HTTP call" do
     mock = Minitest::Mock.new
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
 
   describe "partial table resource from list" do
     let(:table_partial_gapi) { list_tables_gapi(1).tables.first }
-    let(:table) {Google::Cloud::Bigquery::Table.from_gapi table_partial_gapi, bigquery.service }
+    let(:table) {Google::Cloud::BigQuery::Table.from_gapi table_partial_gapi, bigquery.service }
 
     it "loads the table full resource by making an HTTP call" do
       mock = Minitest::Mock.new
@@ -66,7 +66,7 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
   end
 
   describe "table reference" do
-    let(:table) {Google::Cloud::Bigquery::Table.new_reference project, dataset_id, table_id, bigquery.service }
+    let(:table) {Google::Cloud::BigQuery::Table.new_reference project, dataset_id, table_id, bigquery.service }
 
     it "loads the table full resource by making an HTTP call" do
       mock = Minitest::Mock.new

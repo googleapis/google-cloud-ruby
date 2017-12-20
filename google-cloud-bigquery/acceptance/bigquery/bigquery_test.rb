@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery, :bigquery do
+describe Google::Cloud::BigQuery, :bigquery do
   let(:publicdata_query) { "SELECT url FROM publicdata.samples.github_nested LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
@@ -66,7 +66,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     # The code in before ensures we have at least one dataset
     datasets.count.wont_be :zero?
     datasets.all(request_limit: 1).each do |ds|
-      ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      ds.must_be_kind_of Google::Cloud::BigQuery::Dataset
       ds.created_at.must_be_kind_of Time # Loads full representation
     end
     more_datasets = datasets.next
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     datasets = bigquery.datasets filter: filter
     datasets.count.must_equal 1
     ds = datasets.first
-    ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    ds.must_be_kind_of Google::Cloud::BigQuery::Dataset
     ds.labels.must_equal labels
   end
 
@@ -96,26 +96,26 @@ describe Google::Cloud::Bigquery, :bigquery do
 
   it "should run an query" do
     rows = bigquery.query publicdata_query
-    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.class.must_equal Google::Cloud::BigQuery::Data
     rows.count.must_equal 100
   end
 
   it "should run an query without legacy SQL syntax" do
     rows = bigquery.query "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100", legacy_sql: false
-    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.class.must_equal Google::Cloud::BigQuery::Data
     rows.count.must_equal 100
   end
 
   it "should run an query with standard SQL syntax" do
     rows = bigquery.query "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100", standard_sql: true
-    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.class.must_equal Google::Cloud::BigQuery::Data
     rows.count.must_equal 100
   end
 
   it "should run a query job with job id" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = bigquery.query_job publicdata_query, job_id: job_id
-    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.must_be_kind_of Google::Cloud::BigQuery::Job
     job.job_id.must_equal job_id
     job.user_email.wont_be_nil
     job.wait_until_done!
@@ -125,31 +125,31 @@ describe Google::Cloud::Bigquery, :bigquery do
 
   it "should run a query job with job labels" do
     job = bigquery.query_job publicdata_query, labels: labels
-    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.must_be_kind_of Google::Cloud::BigQuery::Job
     job.labels.must_equal labels
   end
 
   it "should run a query job with user defined function resources" do
     job = bigquery.query_job publicdata_query, udfs: udfs
-    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.must_be_kind_of Google::Cloud::BigQuery::Job
     job.udfs.must_equal udfs
   end
 
   it "should get a list of jobs" do
     jobs = bigquery.jobs.all request_limit: 3
-    jobs.each { |job| job.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.each { |job| job.must_be_kind_of Google::Cloud::BigQuery::Job }
   end
 
   it "should get a list of projects" do
     projects = bigquery.projects.all
     projects.count.must_be :>, 0
     projects.each do |project|
-      project.must_be_kind_of Google::Cloud::Bigquery::Project
+      project.must_be_kind_of Google::Cloud::BigQuery::Project
       project.name.must_be_kind_of String
-      project.service.must_be_kind_of Google::Cloud::Bigquery::Service
+      project.service.must_be_kind_of Google::Cloud::BigQuery::Service
       project.service.project.must_be_kind_of String
       project.datasets.each do |ds|
-        ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
+        ds.must_be_kind_of Google::Cloud::BigQuery::Dataset
       end
     end
   end

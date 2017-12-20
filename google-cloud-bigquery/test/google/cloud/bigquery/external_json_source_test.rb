@@ -14,9 +14,9 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::JsonSource do
+describe Google::Cloud::BigQuery::External::JsonSource do
   it "can be used for JSON" do
-    table = Google::Cloud::Bigquery::External::JsonSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::JsonSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.json"]
       e.gapi.source_format = "NEWLINE_DELIMITED_JSON"
     end
@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       source_format: "NEWLINE_DELIMITED_JSON"
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    table.must_be_kind_of Google::Cloud::BigQuery::External::DataSource
     table.urls.must_equal ["gs://my-bucket/path/to/file.json"]
     table.must_be :json?
     table.format.must_equal "NEWLINE_DELIMITED_JSON"
@@ -40,7 +40,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
   end
 
   it "sets schema using block" do
-    table = Google::Cloud::Bigquery::External::JsonSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::JsonSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.json"]
       e.gapi.source_format = "NEWLINE_DELIMITED_JSON"
     end
@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       ])
     )
 
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    table.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     table.schema.must_be :empty?
 
     table.schema do |s|
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
   end
 
   it "sets schema using object" do
-    table = Google::Cloud::Bigquery::External::JsonSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::JsonSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.json"]
       e.gapi.source_format = "NEWLINE_DELIMITED_JSON"
     end
@@ -104,11 +104,11 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       ])
     )
 
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    table.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     table.schema.must_be :empty?
 
     # this object is usually created by calling bigquery.schema
-    schema = Google::Cloud::Bigquery::Schema.from_gapi
+    schema = Google::Cloud::BigQuery::Schema.from_gapi
     schema.string "name", mode: :required
     schema.integer "age"
     schema.float "score", description: "A score from 0.0 to 10.0"

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Service::Backoff, :delay do
+describe Google::Cloud::BigQuery::Service::Backoff, :delay do
   class BackoffVerifier
     def initialize
       @mock = Minitest::Mock.new
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :delay do
     end
 
     # Use the lambda, but give it a new binding context that will use the sleep mock.
-    define_method :backoff, &Google::Cloud::Bigquery::Service::Backoff.backoff
+    define_method :backoff, &Google::Cloud::BigQuery::Service::Backoff.backoff
   end
 
   it "has a lambda that calls sleep with the delay given 0" do

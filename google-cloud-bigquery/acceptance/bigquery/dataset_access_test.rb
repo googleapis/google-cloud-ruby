@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
+describe Google::Cloud::BigQuery::Dataset, :access, :bigquery do
   let(:publicdata_query) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do

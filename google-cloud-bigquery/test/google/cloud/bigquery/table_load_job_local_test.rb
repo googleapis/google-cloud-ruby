@@ -14,14 +14,14 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :load_job, :local, :mock_bigquery do
   let(:dataset) { "dataset" }
   let(:table_id) { "table_id" }
   let(:table_name) { "Target Table" }
   let(:description) { "This is the target table" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
   let(:labels) { { "foo" => "bar" } }
 
   it "can upload a csv file" do
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
         [project, load_job_gapi(table_gapi.table_reference, "CSV"), upload_source: file, content_type: "text/comma-separated-values"]
 
       job = table.load_job file, format: :csv
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
     end
 
     mock.verify
@@ -50,7 +50,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
       job = table.load_job file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
     end
 
     mock.verify
@@ -69,7 +69,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
         [project, load_job_gapi(table_gapi.table_reference), upload_source: file, content_type: "application/json"]
 
       job = table.load_job file, format: "JSON"
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
     end
 
     mock.verify
@@ -83,7 +83,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     local_json = "acceptance/data/kitten-test-data.json"
     job = table.load_job local_json
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -99,7 +99,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
       job = table.load_job file, format: "JSON", job_id: job_id
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
       job.job_id.must_equal job_id
     end
 
@@ -120,7 +120,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
       job = table.load_job file, format: "JSON", prefix: prefix
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
       job.job_id.must_equal job_id
     end
 
@@ -138,7 +138,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
       job = table.load_job file, format: "JSON", job_id: job_id, prefix: "IGNORED"
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
       job.job_id.must_equal job_id
     end
 
@@ -156,7 +156,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
       job = table.load_job file, format: "JSON", labels: labels
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
       job.labels.must_equal labels
     end
 

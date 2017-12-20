@@ -16,12 +16,12 @@ require "helper"
 
 Thread.abort_on_exception = true
 
-describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table::AsyncInserter, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_hash) { random_table_hash dataset_id, table_id }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   let(:rows) { [{"name"=>"Heidi", "age"=>"36", "score"=>"7.65", "active"=>"true"},
                 {"name"=>"Aaron", "age"=>"42", "score"=>"8.15", "active"=>"false"},
@@ -166,7 +166,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
     end
 
     insert_result.wont_be_nil
-    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be_kind_of Google::Cloud::BigQuery::Table::AsyncInserter::Result
     insert_result.wont_be :error?
     insert_result.error.must_be_nil
     insert_result.must_be :success?
@@ -214,7 +214,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
     inserter.batch.must_be :nil?
 
     insert_result.wont_be_nil
-    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be_kind_of Google::Cloud::BigQuery::Table::AsyncInserter::Result
     insert_result.must_be :error?
     insert_result.error.must_be_kind_of Google::Cloud::UnavailableError
     insert_result.wont_be :success?

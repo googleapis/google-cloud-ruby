@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :extract, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:extract_bucket_gapi) {  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
                                        table_id,
                                        table_name,
                                        description }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi,
                                                   bigquery.service }
 
   it "can extract itself to a storage file" do

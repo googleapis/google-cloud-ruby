@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :copy_job, :mock_bigquery do
   let(:source_dataset) { "source_dataset" }
   let(:source_table_id) { "source_table_id" }
   let(:source_table_name) { "Source Table" }
@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
                                               source_table_id,
                                               source_table_name,
                                               source_description }
-  let(:source_table) { Google::Cloud::Bigquery::Table.from_gapi source_table_gapi,
+  let(:source_table) { Google::Cloud::BigQuery::Table.from_gapi source_table_gapi,
                                                          bigquery.service }
   let(:target_dataset) { "target_dataset" }
   let(:target_table_id) { "target_table_id" }
@@ -33,14 +33,14 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
                                               target_table_id,
                                               target_table_name,
                                               target_description }
-  let(:target_table) { Google::Cloud::Bigquery::Table.from_gapi target_table_gapi,
+  let(:target_table) { Google::Cloud::BigQuery::Table.from_gapi target_table_gapi,
                                                          bigquery.service }
   let(:target_table_other_proj_gapi) { random_table_gapi target_dataset,
                                               target_table_id,
                                               target_table_name,
                                               target_description,
                                               "target-project" }
-  let(:target_table_other_proj) { Google::Cloud::Bigquery::Table.from_gapi target_table_other_proj_gapi,
+  let(:target_table_other_proj) { Google::Cloud::BigQuery::Table.from_gapi target_table_other_proj_gapi,
                                                          bigquery.service }
   let(:labels) { { "foo" => "bar" } }
 
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy to a table identified by a string" do
@@ -66,13 +66,13 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job "target-project:target_dataset.target_table_id"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy to a table name string only" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    new_target_table = Google::Cloud::Bigquery::Table.from_gapi(
+    new_target_table = Google::Cloud::BigQuery::Table.from_gapi(
       random_table_gapi(source_dataset,
                         "new_target_table_id",
                         target_table_name,
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job "new_target_table_id"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy itself as a dryrun" do
@@ -100,7 +100,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, dryrun: true
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy itself with create disposition" do
@@ -114,7 +114,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, create: "CREATE_NEVER"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy itself with create disposition symbol" do
@@ -128,7 +128,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, create: :never
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
 
@@ -143,7 +143,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, write: "WRITE_TRUNCATE"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy itself with write disposition symbol" do
@@ -157,7 +157,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, write: :truncate
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "can copy itself with job_id option" do
@@ -171,7 +171,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
     job.job_id.must_equal job_id
   end
 
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
     job.job_id.must_equal job_id
   end
 
@@ -204,7 +204,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
     job.job_id.must_equal job_id
   end
 
@@ -218,7 +218,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
     job = source_table.copy_job target_table, labels: labels
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
     job.labels.must_equal labels
   end
 end

@@ -17,7 +17,7 @@ require "delegate"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       class Project
         ##
         # Project::List is a special case Array with additional values.
@@ -45,7 +45,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   projects = bigquery.projects
           #   if projects.next?
@@ -63,7 +63,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   projects = bigquery.projects
           #   if projects.next?
@@ -98,7 +98,7 @@ module Google
           # @example Iterating each result by passing a block:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigquery.projects.all do |project|
           #     puts project.name
@@ -107,7 +107,7 @@ module Google
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   all_project_ids = bigquery.projects.all.map do |project|
           #     project.name
@@ -116,7 +116,7 @@ module Google
           # @example Limit the number of API calls made:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigquery.projects.all(request_limit: 10) do |project|
           #     puts project.name

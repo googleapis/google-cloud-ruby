@@ -3,7 +3,7 @@ require File.expand_path("../lib/google/cloud/bigquery/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-bigquery"
-  gem.version       = Google::Cloud::Bigquery::VERSION
+  gem.version       = Google::Cloud::BigQuery::VERSION
 
   gem.authors       = ["Mike Moore", "Chris Smith"]
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]

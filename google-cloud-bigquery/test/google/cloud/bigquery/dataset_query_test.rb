@@ -14,13 +14,13 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :query, :mock_bigquery do
   let(:query) { "SELECT * FROM `some_project.some_dataset.users`" }
 
   let(:job_id) { "job_9876543210" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
 
   it "queries the data with default dataset option set" do
@@ -38,13 +38,13 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query query
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     mock.verify
   end
 
   describe "dataset reference" do
-    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+    let(:dataset) {Google::Cloud::BigQuery::Dataset.new_reference project, dataset_id, bigquery.service }
 
     it "queries the data with default dataset option set" do
       mock = Minitest::Mock.new
@@ -61,7 +61,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
                   [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
       data = dataset.query query
-      data.class.must_equal Google::Cloud::Bigquery::Data
+      data.class.must_equal Google::Cloud::BigQuery::Data
       data.count.must_equal 3
       mock.verify
     end

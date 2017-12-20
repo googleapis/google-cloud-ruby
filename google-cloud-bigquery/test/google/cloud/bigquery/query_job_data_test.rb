@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
+describe Google::Cloud::BigQuery::QueryJob, :data, :mock_bigquery do
   let(:dataset_id) { "target_dataset_id" }
   let(:table_id) { "target_table_id" }
-  let(:job) { Google::Cloud::Bigquery::Job.from_gapi query_job_gapi,
+  let(:job) { Google::Cloud::BigQuery::Job.from_gapi query_job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
 
@@ -35,7 +35,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data = job.data
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
     data[0][:name].must_equal "Heidi"
@@ -45,7 +45,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data[0][:avatar].must_be_kind_of StringIO
     data[0][:avatar].read.must_equal "image data"
     data[0][:started_at].must_equal Time.parse("2016-12-25 13:00:00 UTC")
-    data[0][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
+    data[0][:duration].must_equal Google::Cloud::BigQuery::Time.new("04:00:00")
     data[0][:target_end].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     data[0][:birthday].must_equal Date.parse("1968-10-20")
 
@@ -56,7 +56,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data[1][:active].must_equal false
     data[1][:avatar].must_be :nil?
     data[1][:started_at].must_be :nil?
-    data[1][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
+    data[1][:duration].must_equal Google::Cloud::BigQuery::Time.new("04:32:10.555555")
     data[1][:target_end].must_be :nil?
     data[1][:birthday].must_be :nil?
 
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data = job.data
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.count.must_equal 3
     data[0].must_be_kind_of Hash
     data[0][:name].must_equal "Heidi"
@@ -95,7 +95,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data[0][:avatar].must_be_kind_of StringIO
     data[0][:avatar].read.must_equal "image data"
     data[0][:started_at].must_equal Time.parse("2016-12-25 13:00:00 UTC")
-    data[0][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
+    data[0][:duration].must_equal Google::Cloud::BigQuery::Time.new("04:00:00")
     data[0][:target_end].must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     data[0][:birthday].must_equal Date.parse("1968-10-20")
 
@@ -106,7 +106,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data[1][:active].must_equal false
     data[1][:avatar].must_be :nil?
     data[1][:started_at].must_be :nil?
-    data[1][:duration].must_equal Google::Cloud::Bigquery::Time.new("04:32:10.555555")
+    data[1][:duration].must_equal Google::Cloud::BigQuery::Time.new("04:32:10.555555")
     data[1][:target_end].must_be :nil?
     data[1][:birthday].must_be :nil?
 
@@ -137,11 +137,11 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
 
     data1 = job.data
 
-    data1.class.must_equal Google::Cloud::Bigquery::Data
+    data1.class.must_equal Google::Cloud::BigQuery::Data
     data1.token.wont_be :nil?
     data1.token.must_equal "token1234567890"
     data2 = job.data token: data1.token
-    data2.class.must_equal Google::Cloud::Bigquery::Data
+    data2.class.must_equal Google::Cloud::BigQuery::Data
     mock.verify
   end
 
@@ -160,13 +160,13 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
 
     data1 = job.data
 
-    data1.class.must_equal Google::Cloud::Bigquery::Data
+    data1.class.must_equal Google::Cloud::BigQuery::Data
     data1.token.wont_be :nil?
     data1.next?.must_equal true # can't use must_be :next?
     data2 = data1.next
     data2.token.must_be :nil?
     data2.next?.must_equal false
-    data2.class.must_equal Google::Cloud::Bigquery::Data
+    data2.class.must_equal Google::Cloud::BigQuery::Data
     mock.verify
   end
 
@@ -260,7 +260,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
                 [project, dataset_id, table_id, {  max_results: 3, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
 
     data = job.data max: 3
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
   end
 
   it "paginates data with start set" do
@@ -276,7 +276,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     data = job.data start: 25
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
   end
 
   def query_job_gapi

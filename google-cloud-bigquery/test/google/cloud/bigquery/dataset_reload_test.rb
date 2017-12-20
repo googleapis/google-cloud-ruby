@@ -14,11 +14,11 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :reload, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :reload, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
 
   it "loads the dataset full resource by making an HTTP call" do
@@ -42,7 +42,7 @@ describe Google::Cloud::Bigquery::Dataset, :reload, :mock_bigquery do
 
   describe "partial dataset resource from list" do
     let(:dataset_partial_gapi) { list_datasets_gapi(1).datasets.first }
-    let(:dataset) {Google::Cloud::Bigquery::Dataset.from_gapi dataset_partial_gapi, bigquery.service }
+    let(:dataset) {Google::Cloud::BigQuery::Dataset.from_gapi dataset_partial_gapi, bigquery.service }
 
     it "loads the dataset full resource by making an HTTP call" do
       mock = Minitest::Mock.new
@@ -65,7 +65,7 @@ describe Google::Cloud::Bigquery::Dataset, :reload, :mock_bigquery do
   end
 
   describe "dataset reference" do
-    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+    let(:dataset) {Google::Cloud::BigQuery::Dataset.new_reference project, dataset_id, bigquery.service }
 
     it "loads the dataset full resource by making an HTTP call" do
       mock = Minitest::Mock.new

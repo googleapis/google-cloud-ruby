@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :load_job, :storage, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:load_bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -24,7 +24,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
 
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
   let(:table_id) { "table_id" }
   let(:table_reference) { Google::Apis::BigqueryV2::TableReference.new(
@@ -46,13 +46,13 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
 
   describe "dataset reference" do
-    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+    let(:dataset) {Google::Cloud::BigQuery::Dataset.new_reference project, dataset_id, bigquery.service }
 
     it "can specify a storage file" do
       mock = Minitest::Mock.new
@@ -62,7 +62,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
       dataset.service.mocked_service = mock
 
       job = dataset.load_job table_id, load_file
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
       mock.verify
     end
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, special_file, format: :csv
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -97,7 +97,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, special_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -116,7 +116,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     job = dataset.load_job table_id, special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
       encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
       quote: "'", skip_leading: 1
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -133,7 +133,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, special_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -150,7 +150,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, special_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -169,7 +169,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, special_file, projection_fields: projection_fields
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -182,7 +182,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_url
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -196,7 +196,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_url, dryrun: true
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -210,7 +210,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_url, create: "CREATE_NEVER"
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -224,7 +224,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_url, create: :never
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -238,7 +238,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_url, write: "WRITE_TRUNCATE"
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end
@@ -252,7 +252,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :storage, :mock_bigquery d
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_url, write: :truncate
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
 
     mock.verify
   end

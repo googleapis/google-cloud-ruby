@@ -51,7 +51,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
+    # bigquery = Google::Cloud::BigQuery.new project: "publicdata"
     #
     # bigquery.datasets.count #=> 1
     # bigquery.datasets.first.dataset_id #=> "samples"
@@ -71,7 +71,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
+    # bigquery = Google::Cloud::BigQuery.new project: "publicdata"
     #
     # dataset = bigquery.dataset "samples"
     # table = dataset.table "shakespeare"
@@ -121,7 +121,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     #
     # sql = "SELECT word, SUM(word_count) AS word_count " \
     #       "FROM `bigquery-public-data.samples.shakespeare`" \
@@ -145,7 +145,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     #
     # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
     #       "FROM [publicdata:samples.shakespeare]"
@@ -164,7 +164,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     #
     # sql = "SELECT word, SUM(word_count) AS word_count " \
     #       "FROM `bigquery-public-data.samples.shakespeare`" \
@@ -209,7 +209,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     #
     # sql = "SELECT APPROX_TOP_COUNT(corpus, 10) as title, " \
     #       "COUNT(*) as unique_words " \
@@ -231,13 +231,13 @@ module Google
     # querying as well as importing, exporting, and copying data. Therefore, the
     # BigQuery API provides facilities for managing longer-running jobs. With
     # the asynchronous approach to running a query, an instance of
-    # {Google::Cloud::Bigquery::QueryJob} is returned, rather than an instance
-    # of {Google::Cloud::Bigquery::Data}.
+    # {Google::Cloud::BigQuery::QueryJob} is returned, rather than an instance
+    # of {Google::Cloud::BigQuery::Data}.
     #
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     #
     # sql = "SELECT APPROX_TOP_COUNT(corpus, 10) as title, " \
     #       "COUNT(*) as unique_words " \
@@ -252,7 +252,7 @@ module Google
     # ```
     #
     # Once you have determined that the job is done and has not failed, you can
-    # obtain an instance of {Google::Cloud::Bigquery::Data} by calling `data` on
+    # obtain an instance of {Google::Cloud::BigQuery::Data} by calling `data` on
     # the job instance. The query results for both of the above examples are
     # stored in temporary tables with a lifetime of about 24 hours. See the
     # final example below for a demonstration of how to store query results in a
@@ -261,13 +261,13 @@ module Google
     # ## Creating Datasets and Tables
     #
     # The first thing you need to do in a new BigQuery project is to create a
-    # {Google::Cloud::Bigquery::Dataset}. Datasets hold tables and control
+    # {Google::Cloud::BigQuery::Dataset}. Datasets hold tables and control
     # access to them.
     #
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     #
     # dataset = bigquery.create_dataset "my_dataset"
     # ```
@@ -282,7 +282,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     # dataset = bigquery.dataset "my_dataset"
     #
     # table = dataset.create_table "people" do |schema|
@@ -316,7 +316,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.table "people"
     #
@@ -355,7 +355,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     # dataset = bigquery.dataset "my_dataset", skip_lookup: true
     # table = dataset.table "people", skip_lookup: true
     #
@@ -400,7 +400,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.create_table "baby_names" do |schema|
     #   schema.string "name", mode: :required
@@ -429,7 +429,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new
+    # bigquery = Google::Cloud::BigQuery.new
     # dataset = bigquery.dataset "my_dataset"
     # source_table = dataset.table "baby_names"
     # result_table = dataset.create_table "baby_names_results"
@@ -479,14 +479,14 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new retries: 10, timeout: 120
+    # bigquery = Google::Cloud::BigQuery.new retries: 10, timeout: 120
     # ```
     #
     # See the [BigQuery error
     # table](https://cloud.google.com/bigquery/troubleshooting-errors#errortable)
     # for a list of error conditions.
     #
-    module Bigquery
+    module BigQuery
       # Creates a new `Project` instance connected to the BigQuery service.
       # Each call creates a new connection.
       #
@@ -498,7 +498,7 @@ module Google
       #   present, the default project for the credentials is used.
       # @param [String, Hash, Google::Auth::Credentials] credentials The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Bigquery::Credentials})
+      #   Google::Auth::Credentials object. (See {BigQuery::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See # [Using OAuth 2.0 to Access Google #
@@ -514,30 +514,34 @@ module Google
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
       #
-      # @return [Google::Cloud::Bigquery::Project]
+      # @return [Google::Cloud::BigQuery::Project]
       #
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
                    timeout: nil, project: nil, keyfile: nil
-        project_id ||= (project || Bigquery::Project.default_project_id)
+        project_id ||= (project || BigQuery::Project.default_project_id)
         project_id = project_id.to_s # Always cast to a string
         fail ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= (keyfile || Bigquery::Credentials.default(scope: scope))
+        credentials ||= (keyfile || BigQuery::Credentials.default(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
-          credentials = Bigquery::Credentials.new credentials, scope: scope
+          credentials = BigQuery::Credentials.new credentials, scope: scope
         end
 
-        Bigquery::Project.new(
-          Bigquery::Service.new(
+        BigQuery::Project.new(
+          BigQuery::Service.new(
             project_id, credentials, retries: retries, timeout: timeout))
       end
     end
+
+    ##
+    # @private Alias namespace with the old name
+    Bigquery = BigQuery
   end
 end

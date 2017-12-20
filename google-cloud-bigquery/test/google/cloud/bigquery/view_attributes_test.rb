@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :view, :attributes, :mock_bigquery do
   # Create a view object with the project's mocked connection object
   let(:table_id) { "my_view" }
   let(:table_name) { "My View" }
@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
   let(:view_full_hash) { random_view_hash "my_view", table_id, table_name, description }
   let(:view_gapi) { Google::Apis::BigqueryV2::TableList::Table.from_json view_hash.to_json }
   let(:view_full_gapi) { Google::Apis::BigqueryV2::Table.from_json view_full_hash.to_json }
-  let(:view) { Google::Cloud::Bigquery::Table.from_gapi view_gapi, bigquery.service }
+  let(:view) { Google::Cloud::BigQuery::Table.from_gapi view_gapi, bigquery.service }
 
   it "gets full data for created_at" do
     mock = Minitest::Mock.new
@@ -75,7 +75,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    view.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     view.schema.must_be :frozen?
     view.schema.fields.wont_be :empty?
     view.fields.wont_be :empty?

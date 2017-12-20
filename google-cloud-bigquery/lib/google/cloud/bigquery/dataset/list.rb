@@ -17,7 +17,7 @@ require "delegate"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       class Dataset
         ##
         # Dataset::List is a special case Array with additional values.
@@ -44,7 +44,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   datasets = bigquery.datasets
           #   if datasets.next?
@@ -62,7 +62,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   datasets = bigquery.datasets
           #   if datasets.next?
@@ -97,7 +97,7 @@ module Google
           # @example Iterating each result by passing a block:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigquery.datasets.all do |dataset|
           #     puts dataset.name
@@ -106,7 +106,7 @@ module Google
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   all_names = bigquery.datasets.all.map do |dataset|
           #     dataset.name
@@ -115,7 +115,7 @@ module Google
           # @example Limit the number of API calls made:
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigquery.datasets.all(request_limit: 10) do |dataset|
           #     puts dataset.name

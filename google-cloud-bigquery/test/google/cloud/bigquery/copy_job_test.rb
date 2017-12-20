@@ -16,13 +16,13 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
-  let(:job) { Google::Cloud::Bigquery::Job.from_gapi copy_job_gapi,
+describe Google::Cloud::BigQuery::CopyJob, :mock_bigquery do
+  let(:job) { Google::Cloud::BigQuery::Job.from_gapi copy_job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
 
   it "knows it is copy job" do
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
   end
 
   it "knows its copy tables" do
@@ -32,14 +32,14 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
     mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"]
 
     source = job.source
-    source.must_be_kind_of Google::Cloud::Bigquery::Table
+    source.must_be_kind_of Google::Cloud::BigQuery::Table
     source.project_id.must_equal "source_project_id"
     source.dataset_id.must_equal "source_dataset_id"
     source.table_id.must_equal   "source_table_id"
 
     mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"]
     destination = job.destination
-    destination.must_be_kind_of Google::Cloud::Bigquery::Table
+    destination.must_be_kind_of Google::Cloud::BigQuery::Table
     destination.project_id.must_equal "target_project_id"
     destination.dataset_id.must_equal "target_dataset_id"
     destination.table_id.must_equal   "target_table_id"

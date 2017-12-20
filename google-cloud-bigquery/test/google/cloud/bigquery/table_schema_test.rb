@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Table, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :mock_bigquery do
   # Create a table object with the project's mocked connection object
   let(:dataset) { "my_dataset" }
 
@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   let(:schema_hash) { table_gapi.schema.to_h }
 
@@ -45,17 +45,17 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi ] }
 
-  let(:field_string_required) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_string_required_gapi }
-  let(:field_integer) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_integer_gapi }
-  let(:field_float) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_float_gapi }
-  let(:field_boolean) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_boolean_gapi }
-  let(:field_timestamp) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_timestamp_gapi }
-  let(:field_record_repeated) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_record_repeated_gapi }
+  let(:field_string_required) { Google::Cloud::BigQuery::Schema::Field.from_gapi field_string_required_gapi }
+  let(:field_integer) { Google::Cloud::BigQuery::Schema::Field.from_gapi field_integer_gapi }
+  let(:field_float) { Google::Cloud::BigQuery::Schema::Field.from_gapi field_float_gapi }
+  let(:field_boolean) { Google::Cloud::BigQuery::Schema::Field.from_gapi field_boolean_gapi }
+  let(:field_timestamp) { Google::Cloud::BigQuery::Schema::Field.from_gapi field_timestamp_gapi }
+  let(:field_record_repeated) { Google::Cloud::BigQuery::Schema::Field.from_gapi field_record_repeated_gapi }
 
   let(:etag) { "etag123456789" }
 
   it "gets the schema, fields, and headers" do
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    table.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     table.schema.must_be :frozen?
     table.schema.fields.count.must_equal 9
 

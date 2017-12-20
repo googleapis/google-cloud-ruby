@@ -14,15 +14,15 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :query_job, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM `some_project.some_dataset.users`" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
   let(:table_id) { "my_table" }
   let(:table_gapi) { random_table_gapi dataset_id, table_id }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi,
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
@@ -41,11 +41,11 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
   end
 
   describe "dataset reference" do
-    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+    let(:dataset) {Google::Cloud::BigQuery::Dataset.new_reference project, dataset_id, bigquery.service }
 
     it "queries the data with default dataset option set" do
       mock = Minitest::Mock.new
@@ -61,7 +61,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
       job = dataset.query_job query
       mock.verify
 
-      job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+      job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     end
   end
 
@@ -94,7 +94,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
                             maximum_bytes_billed: 12345678901234
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
   end
 
   it "queries the data with job_id option" do
@@ -113,7 +113,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     job.job_id.must_equal job_id
   end
 
@@ -136,7 +136,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     job.job_id.must_equal job_id
   end
 
@@ -156,7 +156,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     job.job_id.must_equal job_id
   end
 
@@ -175,7 +175,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, labels: labels
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     job.labels.must_equal labels
   end
 
@@ -194,7 +194,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, udfs: udfs
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     job.udfs.must_equal udfs
   end
 
@@ -213,7 +213,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, udfs: "gs://my-bucket/my-lib.js"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     job.udfs.must_equal ["gs://my-bucket/my-lib.js"]
   end
 end

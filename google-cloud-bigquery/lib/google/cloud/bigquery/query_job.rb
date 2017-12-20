@@ -18,7 +18,7 @@ require "google/cloud/bigquery/data"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # QueryJob
       #
@@ -33,7 +33,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #
       #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
       #                            "publicdata.samples.shakespeare"
@@ -163,13 +163,13 @@ module Google
         ##
         # Describes the execution plan for the query.
         #
-        # @return [Array<Google::Cloud::Bigquery::QueryJob::Stage>] An array
+        # @return [Array<Google::Cloud::BigQuery::QueryJob::Stage>] An array
         #   containing the stages of the execution plan.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sql = "SELECT word FROM publicdata.samples.shakespeare"
         #   job = bigquery.query_job sql
@@ -251,7 +251,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sql = "SELECT word FROM publicdata.samples.shakespeare"
         #   job = bigquery.query_job sql
@@ -281,13 +281,13 @@ module Google
         # @param [Integer] max Maximum number of results to return.
         # @param [Integer] start Zero-based index of the starting row to read.
         #
-        # @return [Google::Cloud::Bigquery::Data] An object providing access to
+        # @return [Google::Cloud::BigQuery::Data] An object providing access to
         #   data read from the destination table for the job.
         #
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sql = "SELECT word FROM publicdata.samples.shakespeare"
         #   job = bigquery.query_job sql
@@ -345,7 +345,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sql = "SELECT word FROM publicdata.samples.shakespeare"
         #   job = bigquery.query_job sql
@@ -414,7 +414,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sql = "SELECT word FROM publicdata.samples.shakespeare"
         #   job = bigquery.query_job sql

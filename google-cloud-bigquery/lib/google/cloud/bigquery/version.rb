@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       VERSION = "0.30.0"
     end
   end

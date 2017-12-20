@@ -81,9 +81,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Bigquery::Credentials.stub :default, default_credentials do
+          Google::Cloud::BigQuery::Credentials.stub :default, default_credentials do
             bigquery = Google::Cloud.bigquery
-            bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+            bigquery.must_be_kind_of Google::Cloud::BigQuery::Project
             bigquery.project.must_equal "project-id"
             bigquery.service.credentials.must_equal default_credentials
           end
@@ -109,10 +109,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
+            Google::Cloud::BigQuery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::BigQuery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud.bigquery "project-id", "path/to/keyfile.json"
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+                bigquery.must_be_kind_of Google::Cloud::BigQuery::Project
                 bigquery.project.must_equal "project-id"
                 bigquery.service.must_be_kind_of OpenStruct
               end
@@ -123,7 +123,7 @@ describe Google::Cloud do
     end
   end
 
-  describe "Bigquery.new" do
+  describe "BigQuery.new" do
     let(:default_credentials) do
       creds = OpenStruct.new empty: true
       def creds.is_a? target
@@ -138,9 +138,9 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Bigquery::Credentials.stub :default, default_credentials do
-            bigquery = Google::Cloud::Bigquery.new
-            bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+          Google::Cloud::BigQuery::Credentials.stub :default, default_credentials do
+            bigquery = Google::Cloud::BigQuery.new
+            bigquery.must_be_kind_of Google::Cloud::BigQuery::Project
             bigquery.project.must_equal "project-id"
             bigquery.service.credentials.must_equal default_credentials
           end
@@ -166,10 +166,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
-                bigquery = Google::Cloud::Bigquery.new project_id: "project-id", credentials: "path/to/keyfile.json"
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+            Google::Cloud::BigQuery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::BigQuery::Service.stub :new, stubbed_service do
+                bigquery = Google::Cloud::BigQuery.new project_id: "project-id", credentials: "path/to/keyfile.json"
+                bigquery.must_be_kind_of Google::Cloud::BigQuery::Project
                 bigquery.project.must_equal "project-id"
                 bigquery.service.must_be_kind_of OpenStruct
               end
@@ -197,10 +197,10 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
-            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
-              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
-                bigquery = Google::Cloud::Bigquery.new project: "project-id", keyfile: "path/to/keyfile.json"
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+            Google::Cloud::BigQuery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::BigQuery::Service.stub :new, stubbed_service do
+                bigquery = Google::Cloud::BigQuery.new project: "project-id", keyfile: "path/to/keyfile.json"
+                bigquery.must_be_kind_of Google::Cloud::BigQuery::Project
                 bigquery.project.must_equal "project-id"
                 bigquery.service.must_be_kind_of OpenStruct
               end
@@ -209,5 +209,9 @@ describe Google::Cloud do
         end
       end
     end
+  end
+
+  it "maintains the previous namespace" do
+    Google::Cloud::Bigquery.must_equal Google::Cloud::BigQuery
   end
 end

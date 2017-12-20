@@ -18,7 +18,7 @@ require "google/cloud/bigquery/service"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # Data
       #
@@ -29,7 +29,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
@@ -96,7 +96,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -123,7 +123,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -146,7 +146,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -169,7 +169,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -191,7 +191,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -212,7 +212,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -253,7 +253,7 @@ module Google
         # @example Iterating each rows by passing a block:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -264,7 +264,7 @@ module Google
         # @example Using the enumerator by not passing a block:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
@@ -275,7 +275,7 @@ module Google
         # @example Limit the number of API calls made:
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #

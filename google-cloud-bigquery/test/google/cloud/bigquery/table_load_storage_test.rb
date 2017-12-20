@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :load, :storage, :mock_bigquery do
   let(:credentials) { OpenStruct.new }
   let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials)) }
   let(:load_bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
   let(:description) { "This is the target table" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json

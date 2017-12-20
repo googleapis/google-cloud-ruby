@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :attributes, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
   let(:dataset_name) { "My Dataset" }
@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   let(:dataset_gapi) {  Google::Apis::BigqueryV2::DatasetList::Dataset.from_json random_dataset_small_hash(dataset_id, dataset_name).to_json }
   let(:dataset_full_json) { random_dataset_hash(dataset_id, dataset_name, description, default_expiration).to_json }
   let(:dataset_full_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_full_json }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
 
   it "gets full data for created_at" do

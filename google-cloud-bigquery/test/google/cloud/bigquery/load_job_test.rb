@@ -16,15 +16,15 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
+describe Google::Cloud::BigQuery::LoadJob, :mock_bigquery do
   let(:job_defaults_gapi) { Google::Apis::BigqueryV2::Job.from_json load_job_defaults_hash.to_json }
-  let(:job_defaults) { Google::Cloud::Bigquery::Job.from_gapi job_defaults_gapi, bigquery.service }
+  let(:job_defaults) { Google::Cloud::BigQuery::Job.from_gapi job_defaults_gapi, bigquery.service }
   let(:job_gapi) { Google::Apis::BigqueryV2::Job.from_json load_job_hash.to_json }
-  let(:job) { Google::Cloud::Bigquery::Job.from_gapi job_gapi, bigquery.service }
+  let(:job) { Google::Cloud::BigQuery::Job.from_gapi job_gapi, bigquery.service }
   let(:job_id) { job.job_id }
 
   it "knows it is load job" do
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
   end
 
   it "knows its source uris" do
@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     job.service.mocked_service = mock
 
     table = job.destination
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.must_be_kind_of Google::Cloud::BigQuery::Table
 
     mock.verify
 
@@ -92,7 +92,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
   end
 
   it "knows its schema" do
-    job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    job.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     job.schema.must_be :frozen?
     job.schema.fields.wont_be :empty?
     job.schema.fields.map(&:name).must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end", "birthday"]

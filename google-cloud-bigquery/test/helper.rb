@@ -36,17 +36,17 @@ module Google::Apis::Core::Hashable
   end
 end
 
-class MockBigquery < Minitest::Spec
+class MockBigQuery < Minitest::Spec
   let(:project) { bigquery.service.project }
   let(:credentials) { bigquery.service.credentials }
   let(:service) do
-    Google::Cloud::Bigquery::Service.new("test-project", OpenStruct.new).tap do |s|
+    Google::Cloud::BigQuery::Service.new("test-project", OpenStruct.new).tap do |s|
       s.define_singleton_method :generate_id do
         "9876543210"
       end
     end
   end
-  let(:bigquery) { Google::Cloud::Bigquery::Project.new service }
+  let(:bigquery) { Google::Cloud::BigQuery::Project.new service }
 
   # Register this spec type for when :mock_bigquery is used.
   register_spec_type(self) do |desc, *addl|

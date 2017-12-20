@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Table, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :mock_bigquery do
   let(:dataset) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
@@ -27,7 +27,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   it "knows its attributes" do
     table.table_id.must_equal table_id
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   end
 
   it "knows schema, fields, and headers" do
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    table.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     table.schema.must_be :frozen?
     table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
     table.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]

@@ -14,14 +14,14 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :update, :mock_bigquery do
   let(:dataset_id) { "my_dataset" }
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
   let(:labels) { { "foo" => "bar" } }
   let(:table_gapi) { random_table_gapi dataset_id, table_id, table_name, description }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi,
                                                   bigquery.service }
 
   let(:schema) { table.schema.dup }

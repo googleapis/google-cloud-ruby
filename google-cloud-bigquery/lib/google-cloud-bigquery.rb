@@ -42,7 +42,7 @@ module Google
     #   error. The default value is `5`. Optional.
     # @param [Integer] timeout Default request timeout in seconds. Optional.
     #
-    # @return [Google::Cloud::Bigquery::Project]
+    # @return [Google::Cloud::BigQuery::Project]
     #
     # @example
     #   require "google/cloud"
@@ -79,7 +79,7 @@ module Google
     #   present, the default project for the credentials is used.
     # @param [String, Hash, Google::Auth::Credentials] credentials The path to
     #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-    #   Google::Auth::Credentials object. (See {Bigquery::Credentials})
+    #   Google::Auth::Credentials object. (See {BigQuery::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -92,7 +92,7 @@ module Google
     #   error. The default value is `5`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
-    # @return [Google::Cloud::Bigquery::Project]
+    # @return [Google::Cloud::BigQuery::Project]
     #
     # @example
     #   require "google/cloud"
@@ -104,7 +104,7 @@ module Google
     def self.bigquery project_id = nil, credentials = nil, scope: nil,
                       retries: nil, timeout: nil
       require "google/cloud/bigquery"
-      Google::Cloud::Bigquery.new project_id: project_id,
+      Google::Cloud::BigQuery.new project_id: project_id,
                                   credentials: credentials,
                                   scope: scope, retries: retries,
                                   timeout: timeout

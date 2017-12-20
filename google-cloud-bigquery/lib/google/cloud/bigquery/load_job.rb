@@ -17,7 +17,7 @@ require "google/cloud/bigquery/service"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # LoadJob
       #
@@ -33,7 +33,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #   dataset = bigquery.dataset "my_dataset"
       #
       #   gs_url = "gs://my-bucket/file-name.csv"

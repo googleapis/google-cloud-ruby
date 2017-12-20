@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
+describe Google::Cloud::BigQuery::Table, :insert, :mock_bigquery do
   let(:rows) { [{"name"=>"Heidi", "age"=>"36", "score"=>"7.65", "active"=>"true"},
                 {"name"=>"Aaron", "age"=>"42", "score"=>"8.15", "active"=>"false"},
                 {"name"=>"Sally", "age"=>nil, "score"=>nil, "active"=>nil}] }
@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
   let(:dataset_id) { "dataset" }
   let(:table_hash) { random_table_hash dataset_id }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   it "raises if rows is an empty array" do
     expect { table.insert [] }.must_raise ArgumentError
@@ -191,7 +191,7 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
           last_used: Time.parse("2015-10-31 23:59:56 UTC")
         }
       ],
-      tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),
+      tea_time: Google::Cloud::BigQuery::Time.new("15:00:00"),
       next_vacation: Date.parse("2666-06-06"),
       favorite_time: Time.parse("2001-12-19T23:59:59 UTC").utc.to_datetime
     }

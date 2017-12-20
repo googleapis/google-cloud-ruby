@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # Time
       #
@@ -26,9 +26,9 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #
-      #   fourpm = Google::Cloud::Bigquery::Time.new "16:00:00"
+      #   fourpm = Google::Cloud::BigQuery::Time.new "16:00:00"
       #   data = bigquery.query "SELECT name " \
       #                         "FROM `my_project.my_dataset.my_table`" \
       #                         "WHERE time_of_date = @time",
@@ -41,9 +41,9 @@ module Google
       # @example Create Time with fractional seconds:
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #
-      #   precise_time = Google::Cloud::Bigquery::Time.new "16:35:15.376541"
+      #   precise_time = Google::Cloud::BigQuery::Time.new "16:35:15.376541"
       #   data = bigquery.query "SELECT name " \
       #                         "FROM `my_project.my_dataset.my_table`" \
       #                         "WHERE time_of_date >= @time",

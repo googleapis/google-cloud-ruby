@@ -14,15 +14,15 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_bigquery do
+describe Google::Cloud::BigQuery::Project, :query, :positional_params, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active, create_date, update_timestamp FROM `some_project.some_dataset.users`" }
   let(:job_id) { "job_9876543210" }
 
   let(:dataset_id) { "my_dataset" }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi, bigquery.service }
 
   let(:table_id) { "my_table" }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:table) { Google::Cloud::BigQuery::Table.from_gapi table_gapi, bigquery.service }
 
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
   let(:table_gapi) { random_table_gapi dataset_id, table_id }
@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE name = ?", params: ["Testy McTesterson"]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE age > ?", params: [35]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -116,7 +116,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE score > ?", params: [90.0]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -147,7 +147,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE active = ?", params: [true]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -178,7 +178,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE active = ?", params: [false]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -211,7 +211,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE create_date = ?", params: [today]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -244,7 +244,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE update_datetime < ?", params: [now]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -277,7 +277,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE update_timestamp < ?", params: [now]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -310,7 +310,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE create_time = ?", params: [timeofday]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -343,7 +343,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE avatar = ?", params: [file]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -376,7 +376,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE avatar = ?", params: [file]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -463,7 +463,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
 
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -501,7 +501,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE name IN ?", params: [%w{name1 name2 name3}]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 
@@ -551,7 +551,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE meta = ?", params: [{name: "Testy McTesterson", age: 42, active: false, score: 98.7}]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     assert_valid_data data
   end
 

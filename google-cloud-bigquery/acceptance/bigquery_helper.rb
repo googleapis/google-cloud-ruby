@@ -41,7 +41,7 @@ module Acceptance
   #       your.code.must_be :thing?
   #     end
   #   end
-  class BigqueryTest < Minitest::Test
+  class BigQueryTest < Minitest::Test
     attr_accessor :bigquery
     attr_accessor :prefix
 

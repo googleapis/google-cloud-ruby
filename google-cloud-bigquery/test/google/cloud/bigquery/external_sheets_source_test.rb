@@ -14,9 +14,9 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::SheetsSource do
+describe Google::Cloud::BigQuery::External::SheetsSource do
   it "can be used for CSV" do
-    table = Google::Cloud::Bigquery::External::SheetsSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::SheetsSource.new.tap do |e|
       e.gapi.source_uris = ["https://docs.google.com/spreadsheets/d/1234567980"]
       e.gapi.source_format = "GOOGLE_SHEETS"
     end
@@ -26,7 +26,7 @@ describe Google::Cloud::Bigquery::External::SheetsSource do
       google_sheets_options: Google::Apis::BigqueryV2::GoogleSheetsOptions.new
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    table.must_be_kind_of Google::Cloud::BigQuery::External::DataSource
     table.urls.must_equal ["https://docs.google.com/spreadsheets/d/1234567980"]
     table.must_be :sheets?
     table.format.must_equal "GOOGLE_SHEETS"
@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::External::SheetsSource do
   end
 
   it "sets skip_leading_rows" do
-    table = Google::Cloud::Bigquery::External::SheetsSource.new.tap do |e|
+    table = Google::Cloud::BigQuery::External::SheetsSource.new.tap do |e|
       e.gapi.source_uris = ["https://docs.google.com/spreadsheets/d/1234567980"]
       e.gapi.source_format = "GOOGLE_SHEETS"
     end

@@ -18,7 +18,7 @@ require "base64"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       ##
       # # External
       #
@@ -34,7 +34,7 @@ module Google
       # @example
       #   require "google/cloud/bigquery"
       #
-      #   bigquery = Google::Cloud::Bigquery.new
+      #   bigquery = Google::Cloud::BigQuery.new
       #
       #   csv_url = "gs://bucket/path/to/data.csv"
       #   csv_table = bigquery.external csv_url do |csv|
@@ -136,7 +136,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   avro_url = "gs://bucket/path/to/data.avro"
         #   avro_table = bigquery.external avro_url do |avro|
@@ -173,7 +173,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url
@@ -192,7 +192,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url
@@ -212,7 +212,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   json_url = "gs://bucket/path/to/data.json"
           #   json_table = bigquery.external json_url
@@ -232,7 +232,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   sheets_url = "https://docs.google.com/spreadsheets/d/1234567980"
           #   sheets_table = bigquery.external sheets_url
@@ -252,7 +252,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   avro_url = "gs://bucket/path/to/data.avro"
           #   avro_table = bigquery.external avro_url
@@ -272,7 +272,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   backup_url = "gs://bucket/path/to/data.backup_info"
           #   backup_table = bigquery.external backup_url
@@ -292,7 +292,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
           #   bigtable_table = bigquery.external bigtable_url
@@ -320,7 +320,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url
@@ -340,7 +340,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -362,7 +362,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -387,7 +387,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -410,7 +410,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -441,7 +441,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -471,7 +471,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -498,7 +498,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -524,7 +524,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -572,7 +572,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   csv_url = "gs://bucket/path/to/data.csv"
         #   csv_table = bigquery.external csv_url do |csv|
@@ -604,7 +604,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -626,7 +626,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -649,7 +649,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -671,7 +671,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -693,7 +693,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -714,7 +714,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -737,7 +737,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -760,7 +760,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -782,7 +782,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -803,7 +803,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -825,7 +825,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -846,7 +846,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -869,7 +869,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -891,7 +891,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -915,12 +915,12 @@ module Google
           # @yield [schema] a block for setting the schema
           # @yieldparam [Schema] schema the object accepting the schema
           #
-          # @return [Google::Cloud::Bigquery::Schema]
+          # @return [Google::Cloud::BigQuery::Schema]
           #
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_url = "gs://bucket/path/to/data.csv"
           #   csv_table = bigquery.external csv_url do |csv|
@@ -951,7 +951,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   csv_shema = bigquery.schema do |schema|
           #     schema.string "name", mode: :required
@@ -1012,11 +1012,11 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   json_url = "gs://bucket/path/to/data.json"
         #   json_table = bigquery.external json_url do |json|
@@ -1046,12 +1046,12 @@ module Google
           # @yield [schema] a block for setting the schema
           # @yieldparam [Schema] schema the object accepting the schema
           #
-          # @return [Google::Cloud::Bigquery::Schema]
+          # @return [Google::Cloud::BigQuery::Schema]
           #
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   json_url = "gs://bucket/path/to/data.json"
           #   json_table = bigquery.external json_url do |json|
@@ -1082,7 +1082,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   json_shema = bigquery.schema do |schema|
           #     schema.string "name", mode: :required
@@ -1143,7 +1143,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   sheets_url = "https://docs.google.com/spreadsheets/d/1234567980"
         #   sheets_table = bigquery.external sheets_url do |sheets|
@@ -1188,7 +1188,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   sheets_url = "https://docs.google.com/spreadsheets/d/1234567980"
           #   sheets_table = bigquery.external sheets_url do |sheets|
@@ -1210,7 +1210,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   sheets_url = "https://docs.google.com/spreadsheets/d/1234567980"
           #   sheets_table = bigquery.external sheets_url do |sheets|
@@ -1237,7 +1237,7 @@ module Google
         # @example
         #   require "google/cloud/bigquery"
         #
-        #   bigquery = Google::Cloud::Bigquery.new
+        #   bigquery = Google::Cloud::BigQuery.new
         #
         #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
         #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1282,7 +1282,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
           #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1323,7 +1323,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
           #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1359,7 +1359,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
           #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1381,7 +1381,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
           #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1438,7 +1438,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
           #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1474,7 +1474,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1503,7 +1503,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1527,7 +1527,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1548,7 +1548,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1573,7 +1573,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1597,7 +1597,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1632,7 +1632,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1666,7 +1666,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1690,7 +1690,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1737,7 +1737,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1777,7 +1777,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1812,7 +1812,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1847,7 +1847,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1882,7 +1882,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1917,7 +1917,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -1978,7 +1978,7 @@ module Google
           # @example
           #   require "google/cloud/bigquery"
           #
-          #   bigquery = Google::Cloud::Bigquery.new
+          #   bigquery = Google::Cloud::BigQuery.new
           #
           #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
           #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2020,7 +2020,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2049,7 +2049,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2093,7 +2093,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2123,7 +2123,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2151,7 +2151,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2178,7 +2178,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2206,7 +2206,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2232,7 +2232,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2270,7 +2270,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|
@@ -2306,7 +2306,7 @@ module Google
             # @example
             #   require "google/cloud/bigquery"
             #
-            #   bigquery = Google::Cloud::Bigquery.new
+            #   bigquery = Google::Cloud::BigQuery.new
             #
             #   bigtable_url = "https://googleapis.com/bigtable/projects/..."
             #   bigtable_table = bigquery.external bigtable_url do |bt|

@@ -14,11 +14,11 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
+describe Google::Cloud::BigQuery::Dataset, :access, :mock_bigquery do
   # Create a dataset object with the project's mocked connection object
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
+  let(:dataset) { Google::Cloud::BigQuery::Dataset.from_gapi dataset_gapi,
                                                       bigquery.service }
 
   it "gets the access rules" do
@@ -34,13 +34,13 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
-    dataset.access.must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
+    dataset.access.must_be_kind_of Google::Cloud::BigQuery::Dataset::Access
     dataset.access.must_be :frozen?
 
     refute dataset.access.writer_user? "writer@example.com"
 
     dataset.access do |acl|
-      acl.must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
+      acl.must_be_kind_of Google::Cloud::BigQuery::Dataset::Access
       acl.wont_be :frozen?
 
       refute acl.writer_user? "writer@example.com"
@@ -48,7 +48,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
       assert acl.writer_user? "writer@example.com"
     end
 
-    dataset.access.must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
+    dataset.access.must_be_kind_of Google::Cloud::BigQuery::Dataset::Access
     dataset.access.must_be :frozen?
 
     assert dataset.access.writer_user? "writer@example.com"
@@ -110,7 +110,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
   describe :view do
     let(:view_id) { "new-view" }
     let(:view_gapi) { random_view_gapi dataset_id, view_id }
-    let(:view) { Google::Cloud::Bigquery::Table.from_gapi view_gapi,
+    let(:view) { Google::Cloud::BigQuery::Table.from_gapi view_gapi,
                                                   bigquery.service }
 
     it "adds an access entry with specifying a view object" do

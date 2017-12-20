@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery::Table, :view, :bigquery do
+describe Google::Cloud::BigQuery::Table, :view, :bigquery do
   let(:publicdata_query) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100" }
   let(:publicdata_query_2) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 50" }
   let(:dataset_id) { "#{prefix}_dataset" }
@@ -36,7 +36,7 @@ describe Google::Cloud::Bigquery::Table, :view, :bigquery do
 
   it "has the attributes of a view" do
     fresh = dataset.table view.table_id
-    fresh.must_be_kind_of  Google::Cloud::Bigquery::Table
+    fresh.must_be_kind_of  Google::Cloud::BigQuery::Table
 
     fresh.project_id.must_equal bigquery.project
     fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{view.table_id}"
@@ -50,7 +50,7 @@ describe Google::Cloud::Bigquery::Table, :view, :bigquery do
     fresh.table?.must_equal false
     fresh.view?.must_equal true
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
-    fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    fresh.schema.must_be_kind_of Google::Cloud::BigQuery::Schema
     fresh.headers.must_equal [:url]
   end
 

@@ -23,7 +23,9 @@ describe Gcloud do
   it "can require BigQuery" do
     require "gcloud/bigquery"
 
-    Gcloud::Bigquery.must_equal Google::Cloud::Bigquery
+    Gcloud::BigQuery.must_equal Google::Cloud::BigQuery
+    # alias
+    Gcloud::Bigquery.must_equal Google::Cloud::BigQuery
   end
 
   it "can require Datastore" do

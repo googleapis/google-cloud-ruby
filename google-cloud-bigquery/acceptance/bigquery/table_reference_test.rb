@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
+describe Google::Cloud::BigQuery::Table, :reference, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.must_be_kind_of Google::Cloud::BigQuery::Table
 
     table.table_id.must_equal table_id
     table.dataset_id.must_equal dataset_id
@@ -150,14 +150,14 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     query_job.job_id.must_equal job_id
     query_job.wait_until_done!
     query_job.done?.must_equal true
     query_job.data.total.wont_be_nil
 
     data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     [nil, 0].must_include data.total
     data.count.wont_be :nil?
     data.all(request_limit: 2).each do |row|
@@ -179,7 +179,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     inserter.flush
     inserter.stop.wait!
 
-    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be_kind_of Google::Cloud::BigQuery::Table::AsyncInserter::Result
     insert_result.must_be :success?
     insert_result.insert_count.must_equal 3
     insert_result.insert_errors.must_be :empty?
@@ -187,14 +187,14 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    query_job.must_be_kind_of Google::Cloud::BigQuery::QueryJob
     query_job.job_id.must_equal job_id
     query_job.wait_until_done!
     query_job.done?.must_equal true
     query_job.data.total.wont_be :nil?
 
     data = table.data max: 1
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.class.must_equal Google::Cloud::BigQuery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?
     [nil, 0].must_include data.total
@@ -210,7 +210,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   it "imports data from a local file with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = table.load_job local_file, job_id: job_id, labels: labels
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.must_be_kind_of Google::Cloud::BigQuery::LoadJob
     job.job_id.must_equal job_id
     job.labels.must_equal labels
     job.wont_be :autodetect?
@@ -228,7 +228,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     copy_job = table.copy_job target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
 
-    copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    copy_job.must_be_kind_of Google::Cloud::BigQuery::CopyJob
     copy_job.job_id.must_equal job_id
     copy_job.labels.must_equal labels
     copy_job.wait_until_done!

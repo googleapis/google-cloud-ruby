@@ -21,13 +21,13 @@ require "date"
 
 module Google
   module Cloud
-    module Bigquery
+    module BigQuery
       # rubocop:disable all
 
       ##
       # @private
       #
-      # Internal conversion of raw data values to/from Bigquery values
+      # Internal conversion of raw data values to/from BigQuery values
       #
       # | BigQuery    | Ruby           | Notes  |
       # |-------------|----------------|---|
@@ -90,7 +90,7 @@ module Google
           elsif field.type == "TIMESTAMP"
             ::Time.at Float(value[:v])
           elsif field.type == "TIME"
-            Bigquery::Time.new value[:v]
+            BigQuery::Time.new value[:v]
           elsif field.type == "DATETIME"
             ::Time.parse("#{value[:v]} UTC").to_datetime
           elsif field.type == "DATE"
@@ -159,7 +159,7 @@ module Google
               parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
                 value: value.strftime("%Y-%m-%d %H:%M:%S.%6N%:z"))
             )
-          elsif Bigquery::Time === value
+          elsif BigQuery::Time === value
             return Google::Apis::BigqueryV2::QueryParameter.new(
               parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
               type: "TIME"),
@@ -231,7 +231,7 @@ module Google
             value.to_s
           elsif ::Time === value
             value.strftime "%Y-%m-%d %H:%M:%S.%6N%:z"
-          elsif Bigquery::Time === value
+          elsif BigQuery::Time === value
             value.value
           elsif value.respond_to?(:read) && value.respond_to?(:rewind)
             value.rewind
