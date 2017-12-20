@@ -19,6 +19,7 @@ This client supports the following Google Cloud Platform services at a [General 
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
 * [Cloud Translation API](#cloud-translation-api-ga) (GA)
+* [Cloud Video Intelligence API](#cloud-video-intelligence-api-ga) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
@@ -26,8 +27,8 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
+* [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
-* [Cloud Video Intelligence API](#cloud-video-intelligence-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -36,7 +37,6 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
-* [Stackdriver Monitoring API](#stackdriver-monitoring-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -555,7 +555,7 @@ landmark = image.landmark
 landmark.description #=> "Mount Rushmore"
 ```
 
-### Stackdriver Monitoring API (Alpha)
+### Stackdriver Monitoring API (Beta)
 
 - [google-cloud-monitoring README](google-cloud-monitoring/README.md)
 - [google-cloud-monitoring API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest)
@@ -591,7 +591,7 @@ $ gem install google-cloud-monitoring
  end
 ```
 
-### Cloud Video Intelligence API (Beta)
+### Cloud Video Intelligence API (GA)
 
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
 - [google-cloud-video_intelligence API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest)
