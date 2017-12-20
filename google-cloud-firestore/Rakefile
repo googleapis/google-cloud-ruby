@@ -1,0 +1,230 @@
+# Copyright 2017, Google Inc. All rights reserved.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+desc "Run tests."
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*test.rb")
+    .reject { |file| file.include? "smoke_test" }
+    .each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-firestore"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the firestore acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/firestore/credentials"
+  (Google::Cloud::Firestore::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Firestore::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["FIRESTORE_PROJECT"] = project
+  ENV["FIRESTORE_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
+end
+
+namespace :acceptance do
+  desc "Run acceptance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-firestore"
+      track_files "lib/**/*.rb"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke
+  end
+
+  desc "Run acceptance cleanup."
+  task :cleanup, :project, :keyfile do |t, args|
+    project = args[:project]
+    project ||= ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+    if keyfile
+      keyfile = File.read keyfile
+    else
+      keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    end
+    if project.nil? || keyfile.nil?
+      fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    end
+    # clear any env var already set
+    require "google/cloud/firestore/credentials"
+    (Google::Cloud::Firestore::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Firestore::Credentials::JSON_ENV_VARS).each do |path|
+      ENV[path] = nil
+    end
+    # always overwrite when running tests
+    ENV["FIRESTORE_PROJECT"] = project
+    ENV["FIRESTORE_KEYFILE_JSON"] = keyfile
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/firestore"
+    puts "Cleaning up Firestore documents and collections."
+
+    firestore = Google::Cloud::Firestore.new
+    firestore.cols do |col|
+      begin
+        firestore.batch do |b|
+          col.select(:__name__).all_descendants.run do |doc|
+            b.delete doc
+          end
+        end
+      rescue => e
+        puts "Error while cleaning up #{col} documents.\n\n#{e}"
+      end
+    end
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
+  end
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-firestore"
+  def gcloud; @gcloud ||= Google::Cloud.new; end
+
+  ARGV.clear
+  IRB.start
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
+desc "Generates JSON output from google-cloud-firestore .yardoc"
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Cloud::Firestore::V1beta1::DataTypes",
+        modules: [
+          {
+            title: "Google::Firestore::V1beta1",
+            include: ["google/firestore/v1beta1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-firestore",
+                                             generate: toc_config
+  rm_rf "jsondoc", verbose: true
+  generator.write_to "jsondoc"
+  cp ["docs/toc.json"], "jsondoc", verbose: true
+end
+
+desc "Run yard-doctest example tests."
+task doctest: :yard do
+  sh "bundle exec yard config -a autoload_plugins yard-doctest"
+  sh "bundle exec yard doctest"
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-firestore"
+  header "google-cloud-firestore rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-firestore jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-firestore doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-firestore test", "*"
+  sh "bundle exec rake test"
+end
+
+
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-firestore acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end
