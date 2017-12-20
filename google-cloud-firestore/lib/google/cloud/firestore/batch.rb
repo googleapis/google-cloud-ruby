@@ -806,10 +806,8 @@ module Google
         end
 
         ##
-        # Write to document with the provided object values. If the document
-        # does not exist, it will be created. By default, the provided data
-        # overwrites existing data, but the provided data can be merged into the
-        # existing document using the `merge` argument.
+        # Update the document with the provided object values. The provided data
+        # is merged into the existing document data.
         #
         # The batch will fail if the document does not exist.
         #

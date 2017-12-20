@@ -190,7 +190,7 @@ module Google
           ##
           # Create a document with the provided object values.
           #
-          # The batch will fail if the document already exists.
+          # The operation will fail if the document already exists.
           #
           # @param [Hash] data The document's fields and values.
           #
@@ -276,12 +276,10 @@ module Google
           end
 
           ##
-          # Write to document with the provided object values. If the document
-          # does not exist, it will be created. By default, the provided data
-          # overwrites existing data, but the provided data can be merged into
-          # the existing document using the `merge` argument.
+          # Update the document with the provided object values. The provided data
+          # is merged into the existing document data.
           #
-          # The batch will fail if the document does not exist.
+          # The operation will fail if the document does not exist.
           #
           # @param [Hash] data The document's fields and values.
           # @param [Time] update_time When set, the document must have been last

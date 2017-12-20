@@ -217,7 +217,7 @@ module Google
           ##
           # Create a document with random document identifier.
           #
-          # The batch will fail if the document already exists.
+          # The operation will fail if the document already exists.
           #
           # @param [Hash] data The document's fields and values. Optional.
           #
