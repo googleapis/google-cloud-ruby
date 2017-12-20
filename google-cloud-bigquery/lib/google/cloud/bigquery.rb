@@ -92,10 +92,6 @@ module Google
     # as discussed in the guide [Migrating from legacy
     # SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql).
     #
-    # In addition, BigQuery offers both synchronous and asynchronous methods, as
-    # explained in [Querying
-    # Data](https://cloud.google.com/bigquery/querying-data).
-    #
     # ### Standard SQL
     #
     # Standard SQL is the preferred SQL dialect for querying data stored in
@@ -199,9 +195,9 @@ module Google
     # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
     # for an overview of each BigQuery data type, including allowed values.
     #
-    # ### Synchronous queries
+    # ### Running Queries
     #
-    # Let's start with the simpler synchronous approach. Notice that this time
+    # Let's start with the simplest way to run a query. Notice that this time
     # you are connecting using your own default project. It is necessary to have
     # write access to the project for running a query, since queries need to
     # create tables to hold results.
@@ -225,14 +221,13 @@ module Google
     # SQL)](https://cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators)
     # for a full listing.
     #
-    # ### Asynchronous queries
+    # ### Query Jobs
     #
     # It is usually best not to block for most BigQuery operations, including
     # querying as well as importing, exporting, and copying data. Therefore, the
     # BigQuery API provides facilities for managing longer-running jobs. With
-    # the asynchronous approach to running a query, an instance of
-    # {Google::Cloud::Bigquery::QueryJob} is returned, rather than an instance
-    # of {Google::Cloud::Bigquery::Data}.
+    # this approach, an instance of {Google::Cloud::Bigquery::QueryJob} is
+    # returned, rather than an instance of {Google::Cloud::Bigquery::Data}.
     #
     # ```ruby
     # require "google/cloud/bigquery"
