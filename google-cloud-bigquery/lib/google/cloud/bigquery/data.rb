@@ -22,22 +22,29 @@ module Google
       ##
       # # Data
       #
-      # Represents {Table} Data as a list of name/value pairs (hashes.)
-      # Also contains metadata such as `etag` and `total`, and provides access
-      # to the schema of the table from which the data was read.
+      # Represents a page of results (rows) as an array of hashes. Because Data
+      # delegates to Array, methods such as `Array#count` represent the number
+      # of rows in the page. In addition, methods of this class include result
+      # set metadata such as `total` and provide access to the schema of the
+      # query or table. See {Project#query}, {Dataset#query} and {Table#data}.
       #
       # @example
       #   require "google/cloud/bigquery"
       #
       #   bigquery = Google::Cloud::Bigquery.new
-      #   dataset = bigquery.dataset "my_dataset"
-      #   table = dataset.table "my_table"
       #
-      #   data = table.data
-      #   puts "#{data.count} of #{data.total}"
-      #   if data.next?
-      #     next_data = data.next
+      #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+      #   job = bigquery.query_job sql
+      #
+      #   job.wait_until_done!
+      #   data = job.data
+      #
+      #   data.count # 100000
+      #   data.total # 164656
+      #   data.each do |row|
+      #     puts row[:word]
       #   end
+      #   data = data.next if data.next?
       #
       class Data < DelegateClass(::Array)
         ##
@@ -97,14 +104,19 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
         #
-        #   data = table.data
-        #   puts "#{data.count} of #{data.total}"
-        #   if data.next?
-        #     next_data = data.next
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   data = job.data
+        #
+        #   data.count # 100000
+        #   data.total # 164656
+        #   data.each do |row|
+        #     puts row[:word]
         #   end
+        #   data = data.next if data.next?
         #
         def total
           Integer @gapi_json[:totalRows]
@@ -192,13 +204,19 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
         #
-        #   data = table.data
-        #   if data.next?
-        #     next_data = data.next
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   data = job.data
+        #
+        #   data.count # 100000
+        #   data.total # 164656
+        #   data.each do |row|
+        #     puts row[:word]
         #   end
+        #   data = data.next if data.next?
         #
         def next?
           !token.nil?
@@ -213,13 +231,19 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
         #
-        #   data = table.data
-        #   if data.next?
-        #     next_data = data.next
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   data = job.data
+        #
+        #   data.count # 100000
+        #   data.total # 164656
+        #   data.each do |row|
+        #     puts row[:word]
         #   end
+        #   data = data.next if data.next?
         #
         def next
           return nil unless next?
@@ -271,6 +295,7 @@ module Google
         #   words = table.data.all.map do |row|
         #     row[:word]
         #   end
+        #
         #
         # @example Limit the number of API calls made:
         #   require "google/cloud/bigquery"
