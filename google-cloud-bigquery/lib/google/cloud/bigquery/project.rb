@@ -95,8 +95,8 @@ module Google
         end
 
         ##
-        # Queries data using the [asynchronous
-        # method](https://cloud.google.com/bigquery/querying-data).
+        # Queries data by creating a [query
+        # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
         #
         # When using standard SQL and passing arguments using `params`, Ruby
         # types are mapped to BigQuery types as follows:
@@ -340,10 +340,10 @@ module Google
         end
 
         ##
-        # Queries data using a synchronous method that blocks for a response. In
-        # this method, a {QueryJob} is created and its results are saved
-        # to a temporary table, then read from the table. Timeouts and transient
-        # errors are generally handled as needed to complete the query.
+        # Queries data and waits for the results. In this method, a {QueryJob}
+        # is created and its results are saved to a temporary table, then read
+        # from the table. Timeouts and transient errors are generally handled
+        # as needed to complete the query.
         #
         # When using standard SQL and passing arguments using `params`, Ruby
         # types are mapped to BigQuery types as follows:
