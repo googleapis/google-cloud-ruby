@@ -23,7 +23,6 @@ This client supports the following Google Cloud Platform services at a [General 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
 * [BigQuery](#bigquery-beta) (Beta)
-* [Cloud Container Engine](#cloud-container-engine-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
@@ -100,67 +99,46 @@ data.each do |row|
 end
 ```
 
-### BigQuery (Beta)
+### Cloud Datastore (GA)
 
-- [google-cloud-bigquery README](google-cloud-bigquery/README.md)
-- [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/latest)
-- [google-cloud-bigquery on RubyGems](https://rubygems.org/gems/google-cloud-bigquery)
-- [Google BigQuery documentation](https://cloud.google.com/bigquery/docs)
+- [google-cloud-datastore README](google-cloud-datastore/README.md)
+- [google-cloud-datastore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest)
+- [google-cloud-datastore on RubyGems](https://rubygems.org/gems/google-cloud-datastore)
+- [Google Cloud Datastore documentation](https://cloud.google.com/datastore/docs)
+
+*Follow the [activation instructions](https://cloud.google.com/datastore/docs/activate) to use the Google Cloud Datastore API with your project.*
 
 #### Quick Start
 
 ```sh
-$ gem install google-cloud-bigquery
+$ gem install google-cloud-datastore
 ```
 
 #### Preview
 
 ```ruby
-require "google/cloud/bigquery"
+require "google/cloud/datastore"
 
-bigquery = Google::Cloud::Bigquery.new(
+datastore = Google::Cloud::Datastore.new(
   project_id: "my-todo-project",
   credentials: "/path/to/keyfile.json"
 )
 
-# Create a new table to archive todos
-dataset = bigquery.dataset "my-todo-archive"
-table = dataset.create_table "todos",
-          name: "Todos Archive",
-          description: "Archive for completed TODO records"
-
-# Load data into the table
-file = File.open "/archive/todos/completed-todos.csv"
-load_job = table.load file
-
-# Run a query for the number of completed todos by owner
-count_sql = "SELECT owner, COUNT(*) AS complete_count FROM todos GROUP BY owner"
-data = bigquery.query count_sql
-data.each do |row|
-  puts row[:name]
+# Create a new task to demo datastore
+task = datastore.entity "Task", "sampleTask" do |t|
+  t["type"] = "Personal"
+  t["done"] = false
+  t["priority"] = 4
+  t["description"] = "Learn Cloud Datastore"
 end
-```
 
-### Cloud Container Engine (Beta)
+# Save the new task
+datastore.save task
 
-- [google-cloud-container README](google-cloud-container/README.md)
-- [google-cloud-container API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest)
-- [google-cloud-container on RubyGems](https://rubygems.org/gems/google-cloud-container)
-- [Google Cloud Container Engine documentation](https://cloud.google.com/container-engine/docs)
-
-#### Quick Start
-```
-$ gem install google-cloud-container
-```
-
-### Preview
-```
-require "google/cloud/container"
-
-cluster_manager_client = Google::Cloud::Container.new
-project_id_2 = project_id
-zone = "us-central1-a"
-response = cluster_manager_client.list_clusters(project_id_2, zone)
+# Run a query for all completed tasks
+query = datastore.query("Task").
+  where("done", "=", false)
+tasks = datastore.run query
 ```
 
 ### Stackdriver Debugger (Beta)
