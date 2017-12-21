@@ -21,10 +21,10 @@ require "google/cloud/dataproc"
 
 describe "ClusterControllerSmokeTest" do
   it "runs one smoke test with list_clusters" do
-    unless ENV["SMOKE_TEST_PROJECT"]
-      fail "Usage: SMOKE_TEST_PROJECT=<project_id> ruby #{$0}"
+    unless ENV["DATAPROC_TEST_PROJECT"]
+      fail "Usage: DATAPROC_TEST_PROJECT=<project_id> ruby #{$0}"
     end
-    project_id = ENV["SMOKE_TEST_PROJECT"].freeze
+    project_id = ENV["DATAPROC_TEST_PROJECT"].freeze
 
     cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new
     project_id_2 = project_id

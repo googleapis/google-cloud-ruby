@@ -29,7 +29,6 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
-* [Cloud Dataproc](#cloud-dataproc) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
@@ -402,42 +401,6 @@ trace = Google::Cloud::Trace.new
 result_set = trace.list_traces Time.now - 3600, Time.now
 result_set.each do |trace_record|
   puts "Retrieved trace ID: #{trace_record.trace_id}"
-end
-```
-
-### Cloud Dataproc (Beta)
-
-- [google-cloud-dataproc README](google-cloud-dataproc/README.md)
-- [google-cloud-dataproc API documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1)
-- [google-cloud-dataproc on RubyGems](https://rubygems.org/gems/google-cloud-dataproc)
-- [Cloud Dataproc documentation](https://cloud.google.com/dataproc/docs/)
-
-#### Quick Start
-
-```sh
-$ gem install google-cloud-dataproc
-```
-
-#### Preview
-
-```ruby
-require "google/cloud/dataproc"
-
-cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new
-project_id_2 = project_id
-region = "global"
-
-# Iterate over all results.
-cluster_controller_client.list_clusters(project_id_2, region).each do |element|
-  # Process element.
-end
-
-# Or iterate over results one page at a time.
-cluster_controller_client.list_clusters(project_id_2, region).each_page do |page|
-  # Process each page at a time.
-  page.each do |element|
-    # Process element.
-  end
 end
 ```
 
