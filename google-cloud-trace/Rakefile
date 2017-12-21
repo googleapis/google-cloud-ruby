@@ -150,6 +150,10 @@ task :jsondoc => :yard do
             include: ["google/devtools/cloudtrace/v1"]
           },
           {
+            title: "Google::Devtools::Cloudtrace::V2",
+            include: ["google/devtools/cloudtrace/v2"]
+          },
+          {
             title: "Google::Protobuf",
             include: ["google/protobuf"]
           }
