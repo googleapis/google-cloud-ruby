@@ -70,6 +70,7 @@ YARD::Doctest.configure do |doctest|
 
   # Skip all GAPIC for now
   doctest.skip "Google::Cloud::Trace::V1::TraceServiceClient"
+  doctest.skip "Google::Cloud::Trace::V2::TraceServiceClient"
 
   ##
   # BEFORE (mocking)
