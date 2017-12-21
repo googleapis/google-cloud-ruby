@@ -1,0 +1,31 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "Dataproc",
+      "type": "google/cloud/dataproc",
+      "patterns": ["\/dataproc", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V1",
+          "type": "google/cloud/dataproc/v1",
+          "patterns": ["\/dataproc\/v1", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "ClusterControllerClient",
+              "type": "google/cloud/dataproc/v1/clustercontrollerclient"
+            },
+            {
+              "title": "JobControllerClient",
+              "type": "google/cloud/dataproc/v1/jobcontrollerclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/dataproc/v1/datatypes"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
