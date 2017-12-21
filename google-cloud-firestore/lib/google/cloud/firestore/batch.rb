@@ -252,6 +252,19 @@ module Google
         #     b.update("cities/NYC", { name: "New York City" })
         #   end
         #
+        # @example Directly update a deeply-nested field with a `FieldPath`:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   nested_field_path = Google::Cloud::Firestore::FieldPath.new(
+        #     :favorites, :food
+        #   )
+        #
+        #   firestore.batch do |b|
+        #     b.update("users/frank", { nested_field_path: "Pasta" })
+        #   end
+        #
         # @example Update a document using a document reference:
         #   require "google/cloud/firestore"
         #

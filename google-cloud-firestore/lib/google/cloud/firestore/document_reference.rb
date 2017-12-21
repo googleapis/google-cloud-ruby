@@ -316,6 +316,18 @@ module Google
         #
         #   nyc_ref.update({ name: "New York City" })
         #
+        # @example Directly update a deeply-nested field with a `FieldPath`:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   user_ref = firestore.doc "users/frank"
+        #
+        #   nested_field_path = Google::Cloud::Firestore::FieldPath.new(
+        #     :favorites, :food
+        #   )
+        #   user_ref.update({ nested_field_path: "Pasta" })
+        #
         # @example Update a document using the `update_time` precondition:
         #   require "google/cloud/firestore"
         #
