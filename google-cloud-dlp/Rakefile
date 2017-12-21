@@ -67,6 +67,26 @@ end
 # Acceptance tests
 desc "Run the google-cloud-dlp acceptance tests."
 task :acceptance do
+  project = args[:project]
+  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DLP_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DLP_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["DLP_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DLP_TEST_PROJECT=test123 DLP_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # always overwrite when running tests
+  ENV["DLP_PROJECT"] = project
+  ENV["DLP_KEYFILE"] = nil
+  ENV["DLP_KEYFILE_JSON"] = keyfile
+
+  # Required for smoke tests
+  ENV["DLP_TEST_PROJECT"] = project
+
   Rake::Task["acceptance:run"].invoke
 end
 
