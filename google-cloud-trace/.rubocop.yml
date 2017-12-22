@@ -6,6 +6,8 @@ AllCops:
     - "lib/google/devtools/**/*"
     - "lib/google/cloud/trace/v1/**/*"
     - "lib/google/cloud/trace/v1.rb"
+    - "lib/google/cloud/trace/v2/**/*"
+    - "lib/google/cloud/trace/v2.rb"
     - "Rakefile"
     - "support/**/*"
     - "test/**/*"
