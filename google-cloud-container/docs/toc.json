@@ -1,0 +1,27 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "Container",
+      "type": "google/cloud/container",
+      "patterns": ["\/container", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V1",
+          "type": "google/cloud/container/v1",
+          "patterns": ["\/container\/v1", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "ClusterManagerClient",
+              "type": "google/cloud/container/v1/clustermanagerclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/container/v1/datatypes"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
