@@ -166,6 +166,15 @@
       ]
     },
     {
+      "id": "google-cloud-dlp",
+      "name": "google-cloud-dlp",
+      "defaultService": "google/cloud/dlp",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-dns",
       "name": "google-cloud-dns",
       "defaultService": "google/cloud/dns",
