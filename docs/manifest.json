@@ -499,8 +499,9 @@
       "name": "stackdriver",
       "defaultService": "stackdriver",
       "versions": [
-        "v0.12.0",
+        "v0.13.0",
         "master",
+        "v0.12.0",
         "v0.11.0",
         "v0.10.0",
         "v0.9.0",
