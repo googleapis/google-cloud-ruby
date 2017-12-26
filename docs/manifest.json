@@ -299,7 +299,7 @@
     {
       "id": "google-cloud-os_login",
       "name": "google-cloud-os_login",
-      "defaultService": "google/cloud/os_login",
+      "defaultService": "google/cloud/oslogin",
       "versions": [
         "v0.1.0",
         "master"
