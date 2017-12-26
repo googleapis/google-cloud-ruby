@@ -7,6 +7,10 @@ rvm:
 - 2.3.5
 - 2.2.8
 - 2.1.10
+branches:
+  except:
+  - gh-pages
+  - /\/v\d/
 script:
 - gem install bundler
 - bundle exec rake travis:build
