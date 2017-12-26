@@ -296,6 +296,15 @@
       ]
     },
     {
+      "id": "google-cloud-os_login",
+      "name": "google-cloud-os_login",
+      "defaultService": "google/cloud/os_login",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-pubsub",
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
