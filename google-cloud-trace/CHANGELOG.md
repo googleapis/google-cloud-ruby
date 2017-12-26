@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.0 / 2017-12-26
+
+* Add `Google::Cloud::Trace::V2::TraceServiceClient` class.
+
 ### 0.29.0 / 2017-12-19
 
 * Update google-gax dependency to 1.0.

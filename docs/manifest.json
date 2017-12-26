@@ -384,8 +384,9 @@
       "name": "google-cloud-trace",
       "defaultService": "google/cloud/trace",
       "versions": [
-        "v0.29.0",
+        "v0.30.0",
         "master",
+        "v0.29.0",
         "v0.28.1",
         "v0.28.0",
         "v0.27.2",
