@@ -1,5 +1,13 @@
 # Release History
 
+### 0.48.0 / 2017-12-26
+
+* Container 0.1.0 release.
+* Dataproc Login 0.1.0 release.
+* DLP 0.1.0 release.
+* OS Login 0.1.0 release.
+* Trace 0.30.0 release.
+
 ### 0.47.0 / 2017-12-19
 
 * Datastore 1.3.0 release.
