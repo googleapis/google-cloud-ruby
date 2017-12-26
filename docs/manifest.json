@@ -95,6 +95,15 @@
       ]
     },
     {
+      "id": "google-cloud-container",
+      "name": "google-cloud-container",
+      "defaultService": "google/cloud/container",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-core",
       "name": "google-cloud-core",
       "defaultService": "google/cloud/error",
