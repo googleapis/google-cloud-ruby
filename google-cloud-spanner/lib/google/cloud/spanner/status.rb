@@ -42,10 +42,11 @@ module Google
       #
       #   job = spanner.create_database "my-instance",
       #                                 "my-new-database"
+      #   job.wait_until_done!
       #
-      #   job.error? # true
-      #
-      #   status = job.error
+      #   if job.error?
+      #     status = job.error
+      #   end
       #
       class Status
         attr_reader :code, :description, :message, :details

@@ -53,7 +53,11 @@ module Google
       #   job.reload! # API call
       #   job.done? #=> true
       #
-      #   instance = spanner.instance "my-new-instance"
+      #   if job.error?
+      #     status = job.error
+      #   else
+      #     instance = job.instance
+      #   end
       #
       class Instance
         ##
@@ -316,7 +320,12 @@ module Google
         #   job.done? #=> false
         #   job.reload! # API call
         #   job.done? #=> true
-        #   database = job.database
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     database = job.database
+        #   end
         #
         def create_database database_id, statements: []
           grpc = service.create_database instance_id, database_id,

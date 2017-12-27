@@ -44,7 +44,12 @@ module Google
         #   job.done? #=> false
         #   job.reload! # API call
         #   job.done? #=> true
-        #   instance = job.instance
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     instance = job.instance
+        #   end
         #
         class Job
           ##
