@@ -218,7 +218,12 @@ module Google
         #   job.done? #=> false
         #   job.reload! # API call
         #   job.done? #=> true
-        #   instance = job.instance
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     instance = job.instance
+        #   end
         #
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
                             labels: nil
@@ -396,7 +401,12 @@ module Google
         #   job.done? #=> false
         #   job.reload! # API call
         #   job.done? #=> true
-        #   database = job.database
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     database = job.database
+        #   end
         #
         def create_database instance_id, database_id, statements: []
           grpc = service.create_database instance_id, database_id,

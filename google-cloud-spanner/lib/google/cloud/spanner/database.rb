@@ -48,7 +48,11 @@ module Google
       #   job.reload! # API call
       #   job.done? #=> true
       #
-      #   database = instance.database "my-new-database"
+      #   if job.error?
+      #     status = job.error
+      #   else
+      #     database = job.database
+      #   end
       #
       class Database
         ##
