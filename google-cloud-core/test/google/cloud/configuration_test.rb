@@ -14,23 +14,23 @@
 
 
 require "helper"
-require "stackdriver/core/configuration"
+require "google/cloud/configuration"
 
-describe Stackdriver::Core::Configuration do
+describe Google::Cloud::Configuration do
   let(:nested_categories) { [:k1, {k2: [:k3]}] }
-  let(:configuration) { Stackdriver::Core::Configuration.new nested_categories }
+  let(:configuration) { Google::Cloud::Configuration.new nested_categories }
 
   describe "#initialize" do
     it "works with no parameters" do
-      config = Stackdriver::Core::Configuration.new
+      config = Google::Cloud::Configuration.new
 
-      config.must_be_kind_of Stackdriver::Core::Configuration
+      config.must_be_kind_of Google::Cloud::Configuration
     end
 
     it "accepts empty fields array" do
-      config = Stackdriver::Core::Configuration.new []
+      config = Google::Cloud::Configuration.new []
 
-      config.must_be_kind_of Stackdriver::Core::Configuration
+      config.must_be_kind_of Google::Cloud::Configuration
     end
 
     it "initializes options to nil" do
@@ -38,18 +38,18 @@ describe Stackdriver::Core::Configuration do
       configuration.opt2.must_be_nil
     end
 
-    it "initializes nested Stackdriver::Core::Configuration" do
-      configuration.k1.must_be_kind_of Stackdriver::Core::Configuration
-      configuration.k2.must_be_kind_of Stackdriver::Core::Configuration
-      configuration.k2.k3.must_be_kind_of Stackdriver::Core::Configuration
+    it "initializes nested Google::Cloud::Configuration" do
+      configuration.k1.must_be_kind_of Google::Cloud::Configuration
+      configuration.k2.must_be_kind_of Google::Cloud::Configuration
+      configuration.k2.k3.must_be_kind_of Google::Cloud::Configuration
     end
 
     it "accepts hash too" do
-      config = Stackdriver::Core::Configuration.new k1: {k2: [:k3]}
+      config = Google::Cloud::Configuration.new k1: {k2: [:k3]}
 
-      config.k1.must_be_kind_of Stackdriver::Core::Configuration
-      config.k1.k2.must_be_kind_of Stackdriver::Core::Configuration
-      config.k1.k2.k3.must_be_kind_of Stackdriver::Core::Configuration
+      config.k1.must_be_kind_of Google::Cloud::Configuration
+      config.k1.k2.must_be_kind_of Google::Cloud::Configuration
+      config.k1.k2.k3.must_be_kind_of Google::Cloud::Configuration
     end
   end
 
@@ -59,9 +59,9 @@ describe Stackdriver::Core::Configuration do
 
       configuration.add_options [:k4, {k5: [:k6]}]
 
-      configuration.k4.must_be_kind_of Stackdriver::Core::Configuration
-      configuration.k5.must_be_kind_of Stackdriver::Core::Configuration
-      configuration.k5.k6.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k4.must_be_kind_of Google::Cloud::Configuration
+      configuration.k5.must_be_kind_of Google::Cloud::Configuration
+      configuration.k5.k6.must_be_kind_of Google::Cloud::Configuration
     end
 
     it "accepts simple hash with one symbol" do
@@ -69,8 +69,8 @@ describe Stackdriver::Core::Configuration do
 
       configuration.add_options k4: :k5
 
-      configuration.k4.must_be_kind_of Stackdriver::Core::Configuration
-      configuration.k4.k5.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k4.must_be_kind_of Google::Cloud::Configuration
+      configuration.k4.k5.must_be_kind_of Google::Cloud::Configuration
     end
   end
 
@@ -82,7 +82,26 @@ describe Stackdriver::Core::Configuration do
     end
 
     it "returns true even if the key is a sub configuration group" do
-      configuration.k2.must_be_kind_of Stackdriver::Core::Configuration
+      configuration.k2.must_be_kind_of Google::Cloud::Configuration
+      configuration.option?(:k2).must_equal true
+    end
+
+    it "returns false if configuration doesn't have that option" do
+      configuration.option?(:k7).must_equal false
+    end
+  end
+
+  describe "#clear" do
+    it "removes existing options" do
+      configuration.option?(:foo).must_equal false
+      configuration.foo = true
+      configuration.option?(:foo).must_equal true
+      configuration.clear
+      configuration.option?(:foo).must_equal false
+    end
+
+    it "returns true even if the key is a sub configuration group" do
+      configuration.k2.must_be_kind_of Google::Cloud::Configuration
       configuration.option?(:k2).must_equal true
     end
 

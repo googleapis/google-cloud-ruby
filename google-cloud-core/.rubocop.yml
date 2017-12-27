@@ -17,6 +17,9 @@ Style/RescueModifier:
 Style/MutableConstant:
   Exclude:
     - "lib/google/cloud/credentials.rb"
+Style/MethodMissing:
+  Exclude:
+    - "lib/google/cloud/configuration.rb"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
