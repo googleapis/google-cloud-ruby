@@ -20,7 +20,7 @@ require "action_dispatch"
 describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
   let(:app_exception_msg) { "A serious error from application" }
   let(:project_id) { "gcp-test-name" }
-  let(:keyfile) { "/path/test.json" }
+  let(:credentials) { "/path/test.json" }
   let(:service_name) { "my-test-service" }
   let(:service_version) { "vTest" }
 
@@ -54,7 +54,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     Google::Cloud::ErrorReporting::Middleware.new rack_app,
                                                   error_reporting: error_reporting,
                                                   project_id: project_id,
-                                                  keyfile: keyfile
+                                                  credentials: credentials
   }
 
   after {
@@ -86,7 +86,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
 
     it "sets Google::Cloud::ErrorReporting.configure" do
       Google::Cloud::ErrorReporting.configure.project_id.must_be_nil
-      Google::Cloud::ErrorReporting.configure.keyfile.must_be_nil
+      Google::Cloud::ErrorReporting.configure.credentials.must_be_nil
       Google::Cloud::ErrorReporting.configure.service_name.must_be_nil
       Google::Cloud::ErrorReporting.configure.service_version.must_be_nil
 
@@ -94,7 +94,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       middleware
 
       Google::Cloud::ErrorReporting.configure.project_id.must_equal project_id
-      Google::Cloud::ErrorReporting.configure.keyfile.must_equal keyfile
+      Google::Cloud::ErrorReporting.configure.credentials.must_equal credentials
       Google::Cloud::ErrorReporting.configure.service_name.must_equal service_name
       Google::Cloud::ErrorReporting.configure.service_version.must_equal service_version
     end

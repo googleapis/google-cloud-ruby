@@ -180,12 +180,12 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
   end
 
   describe ".default_client" do
-    it "uses the config options from Google::Cloud::ErrorReporting.configure" do
-      stubbed_config = OpenStruct.new project_id: "test-project-id", keyfile: "test-keyfile"
+    it "uses the project_id and credentials from Google::Cloud::ErrorReporting.configure" do
+      stubbed_config = OpenStruct.new project_id: "test-project-id", credentials: "test-keyfile"
 
       stubbed_new = ->(args) {
-        args[:project].must_equal "test-project-id"
-        args[:keyfile].must_equal "test-keyfile"
+        args[:project_id].must_equal "test-project-id"
+        args[:credentials].must_equal "test-keyfile"
       }
 
       Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
@@ -195,13 +195,46 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       end
     end
 
-    it "uses the project_id and keyfile from Google::Cloud.configure if missing from Google::Cloud::ErrorReporting.configure" do
-      stubbed_er_config = OpenStruct.new project_id: nil, keyfile: nil
-      stubbed_gcloud_config = OpenStruct.new project_id: "test-project-id", keyfile: "test-keyfile"
+    it "uses the project and keyfile from Google::Cloud::ErrorReporting.configure" do
+      stubbed_config = OpenStruct.new project: "test-project-id", keyfile: "test-keyfile"
 
       stubbed_new = ->(args) {
-        args[:project].must_equal "test-project-id"
-        args[:keyfile].must_equal "test-keyfile"
+        args[:project_id].must_equal "test-project-id"
+        args[:credentials].must_equal "test-keyfile"
+      }
+
+      Google::Cloud::ErrorReporting.stub :configure, stubbed_config do
+        Google::Cloud::ErrorReporting.stub :new, stubbed_new do
+          Google::Cloud::ErrorReporting.send :default_client
+        end
+      end
+    end
+
+    it "uses the project_id and credentials from Google::Cloud.configure if missing from Google::Cloud::ErrorReporting.configure" do
+      stubbed_er_config = OpenStruct.new project_id: nil, credentials: nil
+      stubbed_gcloud_config = OpenStruct.new project_id: "test-project-id", credentials: "test-keyfile"
+
+      stubbed_new = ->(args) {
+        args[:project_id].must_equal "test-project-id"
+        args[:credentials].must_equal "test-keyfile"
+      }
+
+      Google::Cloud::ErrorReporting.stub :configure, stubbed_er_config do
+        Google::Cloud.stub :configure, stubbed_gcloud_config do
+          Google::Cloud::ErrorReporting.stub :new, stubbed_new do
+            Google::Cloud::ErrorReporting.send :default_client
+          end
+        end
+      end
+    end
+
+    it "uses the project and keyfile from Google::Cloud.configure if missing from Google::Cloud::ErrorReporting.configure" do
+      stubbed_er_config = OpenStruct.new project: nil, keyfile: nil
+      stubbed_gcloud_config = OpenStruct.new project: "test-project-id", keyfile: "test-keyfile"
+
+      stubbed_new = ->(args) {
+        args[:project_id].must_equal "test-project-id"
+        args[:credentials].must_equal "test-keyfile"
       }
 
       Google::Cloud::ErrorReporting.stub :configure, stubbed_er_config do

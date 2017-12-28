@@ -89,8 +89,12 @@ module Google
 
           # Verify credentials and set use_error_reporting to false if
           # credentials are invalid
-          unless valid_credentials? ErrorReporting.configure.project_id,
-                                    ErrorReporting.configure.keyfile
+          project_id = ErrorReporting.configure.project_id ||
+                       ErrorReporting.configure.project
+          credentials = ErrorReporting.configure.credentials ||
+                        ErrorReporting.configure.keyfile
+
+          unless valid_credentials? project_id, credentials
             Cloud.configure.use_error_reporting = false
             return
           end
@@ -99,6 +103,8 @@ module Google
           # production
           Google::Cloud.configure.use_error_reporting ||= Rails.env.production?
         end
+
+        # rubocop:disable all
 
         ##
         # @private Merge Rails configuration into Error Reporting
@@ -109,13 +115,19 @@ module Google
 
           Cloud.configure.use_error_reporting ||= gcp_config.use_error_reporting
           ErrorReporting.configure do |config|
-            config.project_id ||= er_config.project_id || gcp_config.project_id
-            config.keyfile ||= er_config.keyfile || gcp_config.keyfile
+            config.project_id ||= config.project
+            config.project_id ||= er_config.project_id || er_config.project
+            config.project_id ||= gcp_config.project_id || gcp_config.project
+            config.credentials ||= config.keyfile
+            config.credentials ||= er_config.credentials || er_config.keyfile
+            config.credentials ||= gcp_config.credentials || gcp_config.keyfile
             config.service_name ||= er_config.service_name
             config.service_version ||= er_config.service_version
             config.ignore_classes ||= er_config.ignore_classes
           end
         end
+
+        # rubocop:enable all
 
         ##
         # Fallback to default config values if config parameters not provided.

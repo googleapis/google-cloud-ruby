@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/error_reporting/service"
 require "google/cloud/error_reporting/credentials"
 require "google/cloud/error_reporting/error_event"
@@ -44,14 +43,17 @@ module Google
       #
       class Project
         ##
-        # Find default project_id from `ERROR_REPORTING_RPOJECT`,
-        # `GOOGLE_CLOUD_PROJECT`, `GCLOUD_PROJECT` environment varaibles, or
-        # query from GCE meta service.
+        # Find default project_id from the configuration, environment
+        # varaibles, or query from GCE meta service.
         #
         # @return [String] default valid GCP project_id
         #
         def self.default_project_id
-          ENV["ERROR_REPORTING_PROJECT"] ||
+          Google::Cloud.configure.error_reporting.project_id ||
+            Google::Cloud.configure.error_reporting.project ||
+            Google::Cloud.configure.project_id ||
+            Google::Cloud.configure.project ||
+            ENV["ERROR_REPORTING_PROJECT"] ||
             ENV["GOOGLE_CLOUD_PROJECT"] ||
             Google::Cloud.env.project_id
         end
@@ -60,25 +62,29 @@ module Google
         end
 
         ##
-        # Find default service_name from `ERROR_REPORTING_SERVICE`,
-        # `GAE_SERVICE` environment Variables, or just "ruby".
+        # Find default service_name from the configuration, environment
+        # varaibles, or query from GCE meta service, or just "ruby".
         #
         # @return [String] default GCP service_name
         #
         def self.default_service_name
-          ENV["ERROR_REPORTING_SERVICE"] ||
+          Google::Cloud.configure.error_reporting.service_name ||
+            Google::Cloud.configure.service_name ||
+            ENV["ERROR_REPORTING_SERVICE"] ||
             Google::Cloud.env.app_engine_service_id ||
             "ruby"
         end
 
         ##
-        # Find default service_version from `ERROR_REPORTING_VERSION` or
-        # `GAE_VERSION` environment varaibles.
+        # Find default service_version from the configuration, environment
+        # varaibles, or query from GCE meta service.
         #
         # @return [String] default GCP service_version
         #
         def self.default_service_version
-          ENV["ERROR_REPORTING_VERSION"] ||
+          Google::Cloud.configure.error_reporting.service_version ||
+            Google::Cloud.configure.service_version ||
+            ENV["ERROR_REPORTING_VERSION"] ||
             Google::Cloud.env.app_engine_service_version
         end
 
