@@ -305,7 +305,8 @@ module Google
             resp = connection.get METADATA_ROOT_PATH
             metadata_cache[METADATA_ROOT_PATH] = \
               resp.status == 200 && resp.headers["Metadata-Flavor"] == "Google"
-          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed
+          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed,
+                 Errno::EHOSTDOWN
             metadata_cache[METADATA_ROOT_PATH] = false
           end
         end
@@ -330,7 +331,8 @@ module Google
               req.headers = { "Metadata-Flavor" => "Google" }
             end
             metadata_cache[path] = resp.status == 200 ? resp.body.strip : nil
-          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed
+          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed,
+                 Errno::EHOSTDOWN
             metadata_cache[path] = nil
           end
         end
