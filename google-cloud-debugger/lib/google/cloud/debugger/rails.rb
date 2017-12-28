@@ -79,8 +79,12 @@ module Google
 
           # Verify credentials and set use_debugger to false if
           # credentials are invalid
-          unless valid_credentials? Debugger.configure.project_id,
-                                    Debugger.configure.keyfile
+          project_id = Debugger.configure.project_id ||
+                       Debugger.configure.project
+          credentials = Debugger.configure.credentials ||
+                        Debugger.configure.keyfile
+
+          unless valid_credentials? project_id, credentials
             Cloud.configure.use_debugger = false
             return
           end
@@ -89,6 +93,8 @@ module Google
           # the production environment
           Google::Cloud.configure.use_debugger ||= Rails.env.production?
         end
+
+        # rubocop:disable all
 
         ##
         # @private Merge Rails configuration into Debugger instrumentation
@@ -99,20 +105,26 @@ module Google
 
           Cloud.configure.use_debugger ||= gcp_config.use_debugger
           Debugger.configure do |config|
-            config.project_id ||= dbg_config.project_id || gcp_config.project_id
-            config.keyfile ||= dbg_config.keyfile || gcp_config.keyfile
+            config.project_id ||= config.project
+            config.project_id ||= dbg_config.project_id || dbg_config.project
+            config.project_id ||= gcp_config.project_id || gcp_config.project
+            config.credentials ||= config.keyfile
+            config.credentials ||= dbg_config.credentials || dbg_config.keyfile
+            config.credentials ||= gcp_config.credentials || gcp_config.keyfile
             config.service_name ||= dbg_config.service_name
             config.service_version ||= dbg_config.service_version
           end
         end
 
+        # rubocop:enable all
+
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
           config = Debugger.configure
-          config.project_id ||= Debugger::Project.default_project_id
-          config.service_name ||= Debugger::Project.default_service_name
-          config.service_version ||= Debugger::Project.default_service_version
+          config.project_id ||= Debugger.default_project_id
+          config.service_name ||= Debugger.default_service_name
+          config.service_version ||= Debugger.default_service_version
         end
 
         ##

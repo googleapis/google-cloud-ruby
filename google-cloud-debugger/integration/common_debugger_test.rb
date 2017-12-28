@@ -93,7 +93,7 @@ describe Google::Cloud::Debugger, :debugger do
     set_test_logpoint debuggee_id, agent_version, breakpoint_file_path, breakpoint_line, token
 
     project_id = gcloud_project_id
-    logging = Google::Cloud::Logging.new project: project_id
+    logging = Google::Cloud::Logging.new project_id: project_id
     timestamp = (Time.now - 60).utc.strftime('%FT%TZ')
 
     filter = "resource.type=\"#{monitored_resource_type}\" AND textPayload:#{token} AND timestamp > \"#{timestamp}\""

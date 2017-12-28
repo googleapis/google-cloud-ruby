@@ -43,7 +43,7 @@ describe Google::Cloud::Debugger::Railtie do
 
         Google::Cloud::Debugger.configure do |config|
           config.project_id.must_equal "test-project"
-          config.keyfile.must_equal "test/keyfile"
+          config.credentials.must_equal "test/keyfile"
           config.service_name.must_equal "test-module"
           config.service_version.must_equal "test-version"
         end
