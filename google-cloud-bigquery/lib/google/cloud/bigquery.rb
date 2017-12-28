@@ -27,11 +27,12 @@ module Google
     # BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery).
     #
     # The goal of google-cloud is to provide an API that is comfortable to
-    # Rubyists. Authentication is handled by {Google::Cloud#bigquery}. You can
-    # provide the project and credential information to connect to the BigQuery
-    # service, or if you are running on Google Compute Engine this configuration
-    # is taken care of for you. You can read more about the options for
-    # connecting in the [Authentication
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # To help you get started quickly, the first few examples below use a public
