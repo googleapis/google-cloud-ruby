@@ -28,9 +28,9 @@ The google-cloud-ruby library aims to make authentication as simple as possible,
 4. Discover credentials file in the Cloud SDK's path
 5. Discover GCE credentials
 
-### Compute Engine
+### Google Cloud Platform environments
 
-While running on Google Compute Engine no extra work is needed. The **Project ID** and **Credentials** and are discovered automatically. Code should be written as if already authenticated.
+While running on Google Cloud Platform environments such as Google Compute Engine, Google App Engine and Google Kubernetes Engine, no extra work is needed. The **Project ID** and **Credentials** and are discovered automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
 

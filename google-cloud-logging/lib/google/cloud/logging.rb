@@ -38,11 +38,12 @@ module Google
     # Logging Documentation](https://cloud.google.com/logging/docs/).
     #
     # The goal of google-cloud is to provide an API that is comfortable to
-    # Rubyists. Authentication is handled by {Google::Cloud#logging}. You can
-    # provide the project and credential information to connect to the
-    # Stackdriver Logging service, or if you are running on Google Compute
-    # Engine this configuration is taken care of for you. You can read more
-    # about the options for connecting in the [Authentication
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # If you just want to write your application's logs to the Stackdriver

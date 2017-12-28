@@ -23,10 +23,14 @@ require "google/cloud/core/version"
 # that allow you to create anything from simple websites to complex
 # applications.
 #
-# The goal of google-cloud is to provide a API that is familiar and comfortable
-# to Rubyists. Authentication is handled by providing project and credential
-# information, or if you are running on Google Compute Engine this configuration
-# is taken care of for you.
+# The goal of google-cloud is to provide an API that is comfortable to
+# Rubyists. Your authentication credentials are detected automatically in
+# Google Cloud Platform environments such as Google Compute Engine, Google
+# App Engine and Google Kubernetes Engine. In other environments you can
+# configure authentication easily, either directly in your code or via
+# environment variables. Read more about the options for connecting in the
+# [Authentication
+# Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
 #
 # You can learn more about various options for connection on the [Authentication
 # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
