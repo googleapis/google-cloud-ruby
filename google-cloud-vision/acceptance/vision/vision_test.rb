@@ -241,7 +241,7 @@ describe "Vision", :vision do
       landmark = annotation.landmark
       landmark.must_be_kind_of Google::Cloud::Vision::Annotation::Entity
 
-      landmark.mid.must_equal "/m/019dvv"
+      landmark.mid.must_be_kind_of String
       landmark.locale.must_be :empty?
       landmark.description.must_equal "Mount Rushmore"
       landmark.score.must_be_close_to 0.9, 0.1
@@ -397,62 +397,67 @@ describe "Vision", :vision do
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
 
-      text.words.count.must_equal 28
-      text.words[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
-      text.words[0].text.must_be_kind_of String
-      text.words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.words[0].text.must_equal "Google"
-      text.words[0].bounds.count.must_equal 4
-      text.words[27].text.must_equal "Storage."
-      text.words[27].bounds.count.must_equal 4
+      text.words.count.must_be :>, 0
+      text.words.each do |word|
+        word.must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
+        word.text.must_be_kind_of String
+        word.bounds.count.must_be :>, 0
+        word.bounds.each do |bound|
+          bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+        end
+      end
 
-      text.pages.count.must_equal 1
-      text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
-      text.pages[0].languages.count.must_equal 1
-      text.pages[0].languages[0].code.must_equal "en"
-      text.pages[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].break_type.must_be :nil?
-      text.pages[0].wont_be :prefix_break?
-      text.pages[0].width.must_equal 400
-      text.pages[0].height.must_equal 80
+      text.pages.count.must_be :>, 0
+      text.pages.each do |page|
+        page.must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
+        page.languages.count.must_equal 1
+        page.languages[0].code.wont_be :empty?
+        page.languages[0].confidence.must_be_kind_of Float
+        page.break_type.must_be :nil?
+        page.wont_be :prefix_break?
+        page.width.must_be_kind_of Integer
+        page.height.must_be_kind_of Integer
 
-      text.pages[0].blocks.count.must_equal 1
-      text.pages[0].blocks[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].blocks[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].bounds.count.must_equal 4
+        page.blocks.count.must_be :>, 0
+        page.blocks.each do |block|
+          block.break_type.must_be :nil?
+          block.wont_be :prefix_break?
+          block.bounds.count.must_be :>, 0
+          block.bounds.each do |bound|
+            bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+          end
 
-      text.pages[0].blocks[0].paragraphs.count.must_equal 1
-      text.pages[0].blocks[0].paragraphs[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].paragraphs[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].blocks[0].paragraphs[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].paragraphs[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].paragraphs[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].bounds.count.must_equal 4
+          block.paragraphs.count.must_be :>, 0
+          block.paragraphs.each do |paragraph|
+            paragraph.break_type.must_be :nil?
+            paragraph.wont_be :prefix_break?
+            paragraph.bounds.count.must_be :>, 0
+            paragraph.bounds.each do |paragraph_bound|
+              paragraph_bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+            end
 
-      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 28
-      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].blocks[0].paragraphs[0].words[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].paragraphs[0].words[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.count.must_equal 4
+            paragraph.words.count.must_be :>, 0
+            paragraph.words.each do |word|
+              word.break_type.must_be :nil?
+              word.wont_be :prefix_break?
+              word.bounds.count.must_be :>, 0
+              word.bounds.each do |word_bound|
+                word_bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+              end
 
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols.count.must_equal 6
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.count.must_equal 4
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
+              word.symbols.count.must_be :>, 0
+              word.symbols.each do |symbol|
+                symbol.wont_be :prefix_break?
+                symbol.bounds.count.must_be :>, 0
+                symbol.bounds.each do |symbol_bound|
+                  symbol_bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+                end
+                symbol.text.wont_be :empty?
+              end
+            end
+          end
+        end
+      end
     end
 
     it "detects text from multiple images" do
@@ -502,58 +507,67 @@ describe "Vision", :vision do
       text.text.must_include "Google Cloud Client Library for Ruby"
       text.locale.must_equal "en"
 
-      text.words.count.must_equal 33
-      text.words[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
-      text.words[0].text.must_be_kind_of String
-      text.words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.words[0].text.must_equal "Google"
-      text.words[0].bounds.count.must_equal 4
-      text.words[27].text.must_equal "Cloud"
-      text.words[27].bounds.count.must_equal 4
+      text.words.count.must_be :>, 0
+      text.words.each do |word|
+        word.must_be_kind_of Google::Cloud::Vision::Annotation::Text::Word
+        word.text.must_be_kind_of String
+        word.bounds.count.must_be :>, 0
+        word.bounds.each do |bound|
+          bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+        end
+      end
 
-      text.pages.count.must_equal 1
-      text.pages[0].must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
-      text.pages[0].languages.count.must_equal 1
-      text.pages[0].languages[0].code.must_equal "en"
-      text.pages[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].break_type.must_be :nil?
-      text.pages[0].wont_be :prefix_break?
-      text.pages[0].width.must_equal 400
-      text.pages[0].height.must_equal 80
+      text.pages.count.must_be :>, 0
+      text.pages.each do |page|
+        page.must_be_kind_of Google::Cloud::Vision::Annotation::Text::Page
+        page.languages.count.must_equal 1
+        page.languages[0].code.wont_be :empty?
+        page.languages[0].confidence.must_be_kind_of Float
+        page.break_type.must_be :nil?
+        page.wont_be :prefix_break?
+        page.width.must_be_kind_of Integer
+        page.height.must_be_kind_of Integer
 
-      text.pages[0].blocks.count.must_equal 1
-      text.pages[0].blocks[0].languages.must_be :empty?
-      text.pages[0].blocks[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].bounds.count.must_equal 4
+        page.blocks.count.must_be :>, 0
+        page.blocks.each do |block|
+          block.break_type.must_be :nil?
+          block.wont_be :prefix_break?
+          block.bounds.count.must_be :>, 0
+          block.bounds.each do |bound|
+            bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+          end
 
-      text.pages[0].blocks[0].paragraphs.count.must_equal 1
-      text.pages[0].blocks[0].paragraphs[0].languages.must_be :empty?
-      text.pages[0].blocks[0].paragraphs[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].paragraphs[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].paragraphs[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].bounds.count.must_equal 4
+          block.paragraphs.count.must_be :>, 0
+          block.paragraphs.each do |paragraph|
+            paragraph.break_type.must_be :nil?
+            paragraph.wont_be :prefix_break?
+            paragraph.bounds.count.must_be :>, 0
+            paragraph.bounds.each do |paragraph_bound|
+              paragraph_bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+            end
 
-      text.pages[0].blocks[0].paragraphs[0].words.count.must_equal 33
-      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].paragraphs[0].words[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].blocks[0].paragraphs[0].words[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].paragraphs[0].words[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].words[0].bounds.count.must_equal 4
+            paragraph.words.count.must_be :>, 0
+            paragraph.words.each do |word|
+              word.break_type.must_be :nil?
+              word.wont_be :prefix_break?
+              word.bounds.count.must_be :>, 0
+              word.bounds.each do |word_bound|
+                word_bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+              end
 
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols.count.must_equal 6
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].code.must_equal "en"
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be_kind_of Float
-      # text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].languages[0].confidence.must_be :>, 0  #TODO: investigate why 0.0 returned for obvious english text
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].break_type.must_be :nil?
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].wont_be :prefix_break?
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.first.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].bounds.count.must_equal 4
-      text.pages[0].blocks[0].paragraphs[0].words[0].symbols[0].text.must_equal "G"
+              word.symbols.count.must_be :>, 0
+              word.symbols.each do |symbol|
+                symbol.wont_be :prefix_break?
+                symbol.bounds.count.must_be :>, 0
+                symbol.bounds.each do |symbol_bound|
+                  symbol_bound.must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
+                end
+                symbol.text.wont_be :empty?
+              end
+            end
+          end
+        end
+      end
     end
 
     it "detects text from multiple images with document option" do
@@ -750,10 +764,10 @@ describe "Vision", :vision do
 
       annotation.web.entities.count.must_be :>, 0
       annotation.web.entities[0].must_be_kind_of Google::Cloud::Vision::Annotation::Web::Entity
-      annotation.web.entities[0].entity_id.must_equal "/m/019dvv"
+      annotation.web.entities[0].entity_id.must_be_kind_of String
       annotation.web.entities[0].score.must_be_kind_of Float
       annotation.web.entities[0].score.wont_be :zero?
-      annotation.web.entities[0].description.must_equal "Mount Rushmore National Memorial"
+      annotation.web.entities[0].description.wont_be :empty?
 
       annotation.web.full_matching_images.count.wont_be :zero?
       annotation.web.full_matching_images.each do |full_matching_image|
@@ -823,7 +837,7 @@ describe "Vision", :vision do
       it "detects landmarks" do
         landmarks = vision.image(landmark_image).landmarks 10
 
-        landmarks.count.must_equal 1
+        landmarks.count.must_be :>, 0
       end
 
       it "detects a single landmark" do
@@ -837,7 +851,7 @@ describe "Vision", :vision do
       it "detects logos" do
         logos = vision.image(logo_image).logos 10
 
-        logos.count.must_equal 1
+        logos.count.must_be :>, 0
       end
 
       it "detects a single logo" do
@@ -865,7 +879,7 @@ describe "Vision", :vision do
       it "detects text" do
         text = vision.image(text_image).text
 
-        text.text.must_include "Google Cloud Client Library for Ruby"
+        text.text.wont_be :empty?
         text.locale.must_equal "en"
         text.words.count.must_equal 28
         text.words[0].text.must_equal "Google"
