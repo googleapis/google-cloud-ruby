@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/datastore/convert"
 require "google/cloud/datastore/credentials"
 require "google/cloud/datastore/service"
@@ -83,16 +82,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project_id.
-        def self.default_project_id
-          ENV["DATASTORE_DATASET"] ||
-            ENV["DATASTORE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
 
         ##
         # Generate IDs for a Key before creating an entity.

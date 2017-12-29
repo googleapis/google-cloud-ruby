@@ -18,6 +18,8 @@ require "google/cloud/datastore/errors"
 require "google/cloud/datastore/dataset"
 require "google/cloud/datastore/transaction"
 require "google/cloud/datastore/credentials"
+require "google/cloud/configuration"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -564,6 +566,8 @@ module Google
     # ```
     #
     module Datastore
+      # rubocop:disable all
+
       ##
       # Creates a new object for connecting to the Datastore service.
       # Each call creates a new connection.
@@ -616,11 +620,15 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, emulator_host: nil, project: nil,
                    keyfile: nil
-        project_id ||= (project || Datastore::Dataset.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        emulator_host ||= ENV["DATASTORE_EMULATOR_HOST"]
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        emulator_host ||= (configure.emulator_host ||
+                           ENV["DATASTORE_EMULATOR_HOST"])
         if emulator_host
           return Datastore::Dataset.new(
             Datastore::Service.new(
@@ -630,8 +638,7 @@ module Google
           )
         end
 
-        credentials ||= keyfile
-        credentials ||= Datastore::Credentials.default(scope: scope)
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Datastore::Credentials.new credentials, scope: scope
         end
@@ -642,6 +649,64 @@ module Google
             timeout: timeout, client_config: client_config
           )
         )
+      end
+
+      # rubocop:enable all
+
+      # Initialize :datastore as a nested Configuration under Google::Cloud if
+      # haven't already
+      unless Google::Cloud.configure.option? :datastore
+        Google::Cloud.configure.add_options :datastore
+      end
+
+      ##
+      # Configure the Google Cloud Datastore library.
+      #
+      # The following Datastore configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Datastore project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Datastore::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      #
+      # @return [Google::Cloud::Configuration] The configuration object the
+      #   Google::Cloud::Bigquery library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.datastore if block_given?
+
+        Google::Cloud.configure.datastore
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.datastore.project_id ||
+          Google::Cloud.configure.datastore.project ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.configure.project ||
+          ENV["DATASTORE_DATASET"] ||
+          ENV["DATASTORE_PROJECT"] ||
+          ENV["GOOGLE_CLOUD_PROJECT"] ||
+          ENV["GCLOUD_PROJECT"] ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.datastore.credentials ||
+          Google::Cloud.configure.datastore.keyfile ||
+          Google::Cloud.configure.credentials ||
+          Google::Cloud.configure.keyfile ||
+          Datastore::Credentials.default(scope: scope)
       end
     end
   end
