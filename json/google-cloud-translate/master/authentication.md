@@ -20,7 +20,7 @@ Here are the environment variables (in the order they are checked) for the API k
 
 ### Project and Credential Lookup
 
-Gcloud aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
+The google-cloud library aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
 
 **Project ID** is discovered in the following order:
 

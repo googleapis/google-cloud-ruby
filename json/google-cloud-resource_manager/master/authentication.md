@@ -2,9 +2,13 @@
 
 With `google-cloud-ruby` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis.
 
+### Google Cloud Platform environments
+
+While running on Google Cloud Platform environments such as Google Compute Engine, Google App Engine and Google Kubernetes Engine, no extra work is needed. The **Project ID** and **Credentials** and are discovered automatically. Code should be written as if already authenticated.
+
 ### Project and Credential Lookup
 
-Gcloud aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
+The google-cloud library aims to make authentication as simple as possible, and provides several mechanisms to configure your system without providing **Project ID** and **Service Account Credentials** directly in code.
 
 **Project ID** is discovered in the following order:
 
