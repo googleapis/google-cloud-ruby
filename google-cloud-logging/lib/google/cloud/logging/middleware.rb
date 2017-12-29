@@ -60,8 +60,8 @@ module Google
             @logger = logger
           else
             log_name = configuration.log_name
-            logging = Logging.new project: configuration.project_id,
-                                  keyfile: configuration.keyfile
+            logging = Logging.new project_id: configuration.project_id,
+                                  credentials: configuration.credentials
             resource = Middleware.build_monitored_resource(
               configuration.monitored_resource.type,
               configuration.monitored_resource.labels
@@ -261,9 +261,13 @@ module Google
         #
         def load_config **kwargs
           configuration.project_id = kwargs[:project_id] ||
-                                     configuration.project_id
-          configuration.keyfile = kwargs[:keyfile] ||
-                                  configuration.keyfile
+                                     kwargs[:project] ||
+                                     configuration.project_id ||
+                                     configuration.project
+          configuration.credentials = kwargs[:credentials] ||
+                                      kwargs[:keyfile] ||
+                                      configuration.credentials ||
+                                      configuration.keyfile
           configuration.log_name_map ||= kwargs[:log_name_map] ||
                                          configuration.log_name_map
 
@@ -273,9 +277,12 @@ module Google
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
-          configuration.project_id ||= Cloud.configure.project_id ||
-                                       Logging::Project.default_project_id
-          configuration.keyfile ||= Cloud.configure.keyfile
+          configuration.project_id ||= begin
+            (Cloud.configure.project_id || Cloud.configure.project ||
+             Logging.default_project_id)
+          end
+          configuration.credentials ||= \
+            (Cloud.configure.credentials || Cloud.configure.keyfile)
           configuration.log_name ||= DEFAULT_LOG_NAME
           configuration.log_name_map ||= DEFAULT_LOG_NAME_MAP
         end

@@ -15,6 +15,8 @@
 
 require "google-cloud-logging"
 require "google/cloud/logging/project"
+require "google/cloud/configuration"
+require "google/cloud/env"
 require "stackdriver/core"
 
 module Google
@@ -348,12 +350,6 @@ module Google
     # ```
     #
     module Logging
-      # Initialize :error_reporting as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :logging
-        Google::Cloud.configure.add_options logging: :monitored_resource
-      end
-
       ##
       # Creates a new object for connecting to the Stackdriver Logging service.
       # Each call creates a new connection.
@@ -376,6 +372,7 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/logging.admin`
+      #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
@@ -397,11 +394,15 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || Logging::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= (keyfile || Logging::Credentials.default(scope: scope))
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Logging::Credentials.new credentials, scope: scope
         end
@@ -414,21 +415,79 @@ module Google
         )
       end
 
+      # Initialize :logging as a nested Configuration under
+      # Google::Cloud if haven't already
+      unless Google::Cloud.configure.option? :logging
+        Google::Cloud.configure.add_options logging: :monitored_resource
+      end
+
       ##
       # Configure the Google::Cloud::Logging::Middleware when used in a
       # Rack-based application.
+      #
+      # The following Stackdriver Logging configuration parameters are
+      # supported:
+      #
+      # * `project_id` - (String) Project identifier for the Stackdriver
+      #   Logging service you are connecting to. (The parameter `project` is
+      #   considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Logging::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `log_name` - (String) Name of the application log file. Default:
+      #   `"ruby_app_log"`
+      # * `log_name_map` - (Hash) Map specific request routes to other log.
+      #   Default: `{ "/_ah/health" => "ruby_health_check_log" }`
+      # * `monitored_resource.type` (String) Resource type name. See [full
+      #   list](https://cloud.google.com/logging/docs/api/v2/resource-list).
+      #   Self discovered on GCP.
+      # * `monitored_resource.labels` -(Hash) Resource labels. See [full
+      #   list](https://cloud.google.com/logging/docs/api/v2/resource-list).
+      #   Self discovered on GCP.
+      # * `labels` - (Hash) User defined labels. A `Hash` of label names to
+      #   string label values or callables/`Proc` which are functions of the
+      #   Rack environment.
       #
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # for full configuration parameters.
       #
-      # @return [Stackdriver::Core::Configuration] The configuration object
+      # @return [Google::Cloud::Configuration] The configuration object
       #   the Google::Cloud::Logging module uses.
       #
       def self.configure
         yield Google::Cloud.configure.logging if block_given?
 
         Google::Cloud.configure.logging
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.logging.project_id ||
+          Google::Cloud.configure.logging.project ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.configure.project ||
+          ENV["LOGGING_PROJECT"] ||
+          ENV["GOOGLE_CLOUD_PROJECT"] ||
+          ENV["GCLOUD_PROJECT"] ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.logging.credentials ||
+          Google::Cloud.configure.logging.keyfile ||
+          Google::Cloud.configure.credentials ||
+          Google::Cloud.configure.keyfile ||
+          Logging::Credentials.default(scope: scope)
       end
     end
   end

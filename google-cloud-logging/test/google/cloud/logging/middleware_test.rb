@@ -67,7 +67,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     end
 
     it "creates a default logger object if one isn't provided" do
-      Google::Cloud::Logging::Project.stub :default_project_id, project do
+      Google::Cloud::Logging.stub :default_project_id, project do
         Google::Cloud::Logging::Credentials.stub :default, default_credentials do
           middleware = Google::Cloud::Logging::Middleware.new rack_app
         end
