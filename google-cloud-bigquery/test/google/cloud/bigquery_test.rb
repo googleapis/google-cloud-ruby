@@ -210,4 +210,164 @@ describe Google::Cloud do
       end
     end
   end
+
+  describe "Bigquery.configure" do
+    let(:found_credentials) { "{}" }
+
+    after do
+      Google::Cloud.configure.delete :project_id
+      Google::Cloud.configure.delete :project
+      Google::Cloud.configure.delete :credentials
+      Google::Cloud.configure.delete :keyfile
+      Google::Cloud.configure.bigquery.clear
+    end
+
+    it "uses shared config for project and keyfile" do
+      Google::Cloud.configure do |config|
+        config.project = "project-id"
+        config.keyfile = "path/to/keyfile.json"
+      end
+
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "bigquery-credentials"
+      }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "bigquery-credentials"
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
+                bigquery = Google::Cloud::Bigquery.new
+                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+                bigquery.project.must_equal "project-id"
+                bigquery.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses shared config for project_id and credentials" do
+      Google::Cloud.configure do |config|
+        config.project_id = "project-id"
+        config.credentials = "path/to/keyfile.json"
+      end
+
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "bigquery-credentials"
+      }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "bigquery-credentials"
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
+                bigquery = Google::Cloud::Bigquery.new
+                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+                bigquery.project.must_equal "project-id"
+                bigquery.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses bigquery config for project and keyfile" do
+      Google::Cloud::Bigquery.configure do |config|
+        config.project = "project-id"
+        config.keyfile = "path/to/keyfile.json"
+        config.retries = 3
+        config.timeout = 42
+      end
+
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "bigquery-credentials"
+      }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "bigquery-credentials"
+        retries.must_equal 3
+        timeout.must_equal 42
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
+                bigquery = Google::Cloud::Bigquery.new
+                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+                bigquery.project.must_equal "project-id"
+                bigquery.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses bigquery config for project_id and credentials" do
+      Google::Cloud::Bigquery.configure do |config|
+        config.project_id = "project-id"
+        config.credentials = "path/to/keyfile.json"
+        config.retries = 3
+        config.timeout = 42
+      end
+
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "bigquery-credentials"
+      }
+      stubbed_service = ->(project, credentials, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "bigquery-credentials"
+        retries.must_equal 3
+        timeout.must_equal 42
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
+                bigquery = Google::Cloud::Bigquery.new
+                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
+                bigquery.project.must_equal "project-id"
+                bigquery.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+  end
 end
