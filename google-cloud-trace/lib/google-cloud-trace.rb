@@ -34,7 +34,11 @@ module Google
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
     #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud-platform`
+    #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::Trace::Project]
@@ -73,7 +77,11 @@ module Google
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
     #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-    #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
+    #
+    #   The default scope is:
+    #
+    #   * `https://www.googleapis.com/auth/cloud-platform`
+    #
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::Trace::Project]

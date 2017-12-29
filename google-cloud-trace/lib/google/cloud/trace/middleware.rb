@@ -128,12 +128,12 @@ module Google
           if service
             @service = service
           else
-            project_id = configuration.project_id
+            project_id = configuration.project_id || configuration.project
 
             if project_id
-              keyfile = configuration.keyfile
-              tracer = Google::Cloud::Trace.new project: project_id,
-                                                keyfile: keyfile
+              credentials = configuration.credentials || configuration.keyfile
+              tracer = Google::Cloud::Trace.new project_id: project_id,
+                                                credentials: credentials
               @service = Google::Cloud::Trace::AsyncReporter.new tracer.service
             end
           end
@@ -378,8 +378,10 @@ module Google
         # Fallback to default configuration values if not defined already
         def init_default_config
           configuration.project_id ||= Cloud.configure.project_id ||
-                                       Trace::Project.default_project_id
-          configuration.keyfile ||= Cloud.configure.keyfile
+                                       Cloud.configure.project ||
+                                       Trace.default_project_id
+          configuration.credentials ||= Cloud.configure.credentials ||
+                                        Cloud.configure.keyfile
           configuration.capture_stack ||= false
         end
 

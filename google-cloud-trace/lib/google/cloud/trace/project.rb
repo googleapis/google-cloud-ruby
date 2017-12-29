@@ -197,15 +197,6 @@ module Google
                               page_token: page_token
         end
 
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["TRACE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
-
         protected
 
         ##

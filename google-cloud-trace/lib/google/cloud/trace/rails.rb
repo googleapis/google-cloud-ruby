@@ -130,8 +130,12 @@ module Google
 
           # Verify credentials and set use_error_reporting to false if
           # credentials are invalid
-          unless valid_credentials? Trace.configure.project_id,
-                                    Trace.configure.keyfile
+          project_id = Trace.configure.project_id ||
+                       Trace.configure.project
+          credentials = Trace.configure.credentials ||
+                        Trace.configure.keyfile
+
+          unless valid_credentials? project_id, credentials
             Cloud.configure.use_trace = false
             return
           end
@@ -139,6 +143,8 @@ module Google
           # Otherwise set use_trace to true if Rails is running in production
           Google::Cloud.configure.use_trace ||= Rails.env.production?
         end
+
+        # rubocop:disable all
 
         ##
         # @private Merge Rails configuration into Trace instrumentation
@@ -149,9 +155,12 @@ module Google
 
           Cloud.configure.use_trace ||= gcp_config.use_trace
           Trace.configure do |config|
-            config.project_id ||= trace_config.project_id ||
-                                  gcp_config.project_id
-            config.keyfile ||= trace_config.keyfile || gcp_config.keyfile
+            config.project_id ||= (config.project ||
+              trace_config.project_id || trace_config.project ||
+              gcp_config.project_id || gcp_config.project)
+            config.credentials ||= (config.keyfile ||
+              trace_config.credentials || trace_config.keyfile ||
+              gcp_config.credentials || gcp_config.keyfile)
             config.notifications ||= trace_config.notifications
             config.max_data_length ||= trace_config.max_data_length
             config.capture_stack ||= trace_config.capture_stack
@@ -160,10 +169,12 @@ module Google
           end
         end
 
+        # rubocop:enable all
+
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
-          Trace.configure.project_id ||= Trace::Project.default_project_id
+          Trace.configure.project_id ||= Trace.default_project_id
         end
 
         ##
