@@ -320,7 +320,7 @@ module Google
     # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
     module Debugger
-      # Initialize :error_reporting as a nested Configuration under
+      # Initialize :debugger as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :debugger
         Google::Cloud.configure.add_options :debugger
@@ -402,12 +402,58 @@ module Google
       # for full configuration parameters.
       #
       # @return [Stackdriver::Core::Configuration] The configuration object
-      #   the Google::Cloud::ErrorReporting module uses.
+      #   the Google::Cloud::Debugger module uses.
       #
       def self.configure
         yield Google::Cloud.configure[:debugger] if block_given?
 
         Google::Cloud.configure[:debugger]
+      end
+
+      ##
+      # Allow calling of potentially state-changing methods even if mutation
+      # detection is configured to be active.
+      #
+      # Generally it is unwise to run code that may change the program state
+      # (e.g. modifying instance variables or causing other side effects) in a
+      # breakpoint expression, because it could change the behavior of your
+      # program. However, the checks are currently quite conservative, and may
+      # block code that is actually safe to run. If you are certain your
+      # expression is safe to evaluate, you may use this method to disable
+      # side effect checks.
+      #
+      # This method may be called with a block, in which case checks are
+      # disabled within the block. It may also be called without a block to
+      # disable side effect checks for the rest of the current expression; the
+      # default setting will be restored for the next expression.
+      #
+      # This method may be called only from a debugger condition or expression
+      # evaluation, and will throw an exception if you call it from normal
+      # application code. Set the `allow_mutating_methods` configuration if you
+      # want to disable the side effect checker globally for your app.
+      #
+      # @example Disabling side effect detection in a block
+      #   # This is an expression evaluated in a debugger snapshot
+      #   Google::Cloud::Debugger.allow_mutating_methods! do
+      #     obj1.method_with_potential_side_effects
+      #   end
+      #
+      # @example Disabling side effect detection for the rest of the expression
+      #   # This is an expression evaluated in a debugger snapshot
+      #   Google::Cloud::Debugger.allow_mutating_methods!
+      #   obj1.method_with_potential_side_effects
+      #   obj2.another_method_with_potential_side_effects
+      #
+      # @example Globally disabling side effect detection at app initialization
+      #   require "google/cloud/debugger"
+      #   Google::Cloud::Debugger.configure.allow_mutating_methods = true
+      #
+      def self.allow_mutating_methods! &block
+        evaluator = Breakpoint::Evaluator.current
+        if evaluator.nil?
+          fail "allow_mutating_methods can be called only during evaluation"
+        end
+        evaluator.allow_mutating_methods!(&block)
       end
     end
   end
