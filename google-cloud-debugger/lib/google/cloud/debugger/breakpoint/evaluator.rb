@@ -37,7 +37,7 @@ module Google
         # Doc](https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint)
         # for details.
         #
-        module Evaluator
+        class Evaluator
           ##
           # @private YARV bytecode that the evaluator blocks during expression
           # evaluation. If the breakpoint contains expressions that uses the
@@ -770,235 +770,351 @@ module Google
             }).freeze
           }.freeze
 
+          ##
+          # @private List of Ruby class methods that the evaluator allows
+          # during expression evaluation
+          RUBY_CLASS_METHOD_WHITELIST = {
+            # Classes
+            Debugger => hashify(%I{
+              allow_mutating_methods!
+            }).freeze
+          }.freeze
+
+          ##
+          # @private List of Ruby instance methods that the evaluator allows
+          # during expression evaluation
+          RUBY_INSTANCE_METHOD_WHITELIST = {
+            Evaluator => hashify(%I{
+              allow_mutating_methods!
+            }).freeze
+          }.freeze
+
           PROHIBITED_OPERATION_MSG = "Prohibited operation detected".freeze
           MUTATION_DETECTED_MSG = "Mutation detected!".freeze
           COMPILATION_FAIL_MSG = "Unable to compile expression".freeze
           LONG_EVAL_MSG = "Evaluation exceeded time limit".freeze
 
-          EXPRESSION_EVALUATION_TIME_THRESHOLD = 0.05
+          DEFAULT_TIME_LIMIT = 0.05
+          EVALUATOR_REFERENCE = :__evaluator__
 
-          class << self
-            ##
-            # @private Read-only evaluates a single expression in a given
-            # context binding. Handles any exceptions raised.
-            #
-            # @param [Binding] binding The binding object from the context
-            # @param [String] expression A string of code to be evaluates
-            #
-            # @return [Object] The result Ruby object from evaluating the
-            #   expression. If the expression is blocked from mutating
-            #   the state of program. A
-            #   {Google::Cloud::Debugger::MutationError} will be returned.
-            #
-            def readonly_eval_expression binding, expression
-              compilation_result = validate_compiled_expression expression
-              return compilation_result if compilation_result.is_a?(Exception)
+          ##
+          # @private
+          # Read-only evaluates a single expression in a given
+          # context binding. Handles any exceptions raised.
+          #
+          # @param [Binding] binding The binding object from the context
+          # @param [String] expression A string of code to be evaluates
+          #
+          # @return [Object] The result Ruby object from evaluating the
+          #   expression. If the expression is blocked from mutating
+          #   the state of program. A
+          #   {Google::Cloud::Debugger::MutationError} will be returned.
+          #
+          def self.readonly_eval_expression binding, expression
+            new.readonly_eval_expression binding, expression
+          end
 
-              readonly_eval_expression_exec binding, expression
-            rescue => e
-              "Unable to evaluate expression: #{e.message}"
-            end
+          ##
+          # @private
+          # Returns the evaluator currently running, or nil if an evaluation
+          # is not currently running.
+          #
+          # @return [Evaluator, nil]
+          #
+          def self.current
+            Thread.current.thread_variable_get EVALUATOR_REFERENCE
+          end
 
-            private
-
-            ##
-            # @private Actually read-only evaluates an expression in a given
-            # context binding. The evaluation is done in a separate thread due
-            # to this method may be run from Ruby Trace call back, where
-            # addtional code tracing is disabled in original thread.
-            #
-            # @param [Binding] binding The binding object from the context
-            # @param [String] expression A string of code to be evaluates
-            #
-            # @return [Object] The result Ruby object from evaluating the
-            #   expression. It returns Google::Cloud::Debugger::MutationError
-            #   if a mutation is caught.
-            #
-            def readonly_eval_expression_exec binding, expression
-              # The evaluation is most likely triggered from a trace callback,
-              # where addtional nested tracing is disabled by VM. So we need to
-              # do evaluation in a new thread, where function calls can be
-              # traced.
-              thr = Thread.new do
-                begin
-                  binding.eval wrap_expression(expression)
-                rescue => e
-                  # Treat all StandardError as mutation and set @mutation_cause
-                  unless e.instance_variable_get :@mutation_cause
-                    e.instance_variable_set(
-                      :@mutation_cause,
-                      Google::Cloud::Debugger::EvaluationError::UNKNOWN_CAUSE)
-                  end
-
-                  e
-                end
-              end
-
-              thr.join EXPRESSION_EVALUATION_TIME_THRESHOLD
-
-              # Force terminate evaluation thread if not finished already and
-              # return an Exception
-              if thr.alive?
-                thr.kill
-
-                Google::Cloud::Debugger::EvaluationError.new LONG_EVAL_MSG
+          ##
+          # Create a new Evaluator.
+          # @private
+          #
+          # @param [boolean, nil] allow_mutating_methods whether to allow
+          #     calling of potentially mutating methods, or nil to default to
+          #     the current configuration setting.
+          # @param [Numeric, nil] time_limit the time limit in seconds, or nil
+          #     to default to the current configuration setting.
+          #
+          def initialize allow_mutating_methods: nil, time_limit: nil
+            @allow_mutating_methods =
+              if allow_mutating_methods.nil?
+                Debugger.configure.allow_mutating_methods
               else
-                thr.value
+                allow_mutating_methods
               end
-            end
+            @time_limit = time_limit ||
+                          Debugger.configure.evaluation_time_limit ||
+                          DEFAULT_TIME_LIMIT
+          end
 
-            ##
-            # @private Compile the expression into YARV instructions. Return
-            # Google::Cloud::Debugger::MutationError if any prohibited YARV
-            # instructions are found.
-            #
-            # @param [String] expression String of code expression
-            #
-            # @return [String,Google::Cloud::Debugger::MutationError] It returns
-            #   the compile YARV instructions if no prohibited bytecodes are
-            #   found. Otherwise return Google::Cloud::Debugger::MutationError.
-            #
-            def validate_compiled_expression expression
+          ##
+          # Allow calling of mutating methods even if mutation detection is
+          # configured to be active. This may be called only during debugger
+          # condition or expression evaluation.
+          #
+          # If you pass in a block, it will be evaluated with mutation
+          # detection disabled, and the original setting will be restored
+          # afterward. If you do not pass a block, this evaluator will
+          # permanently allow mutating methods.
+          # @private
+          #
+          def allow_mutating_methods!
+            old = @allow_mutating_methods
+            @allow_mutating_methods = true
+            if block_given?
+              result = yield
+              @allow_mutating_methods = old
+              result
+            else
+              nil
+            end
+          end
+
+          ##
+          # Read-only evaluates a single expression in a given
+          # context binding. Handles any exceptions raised.
+          # @private
+          #
+          # @param [Binding] binding The binding object from the context
+          # @param [String] expression A string of code to be evaluates
+          #
+          # @return [Object] The result Ruby object from evaluating the
+          #   expression. If the expression is blocked from mutating
+          #   the state of program. A
+          #   {Google::Cloud::Debugger::MutationError} will be returned.
+          #
+          def readonly_eval_expression binding, expression
+            compilation_result = validate_compiled_expression expression
+            return compilation_result if compilation_result.is_a?(Exception)
+
+            readonly_eval_expression_exec binding, expression
+          rescue => e
+            "Unable to evaluate expression: #{e.message}"
+          end
+
+          private
+
+          ##
+          # @private Actually read-only evaluates an expression in a given
+          # context binding. The evaluation is done in a separate thread due
+          # to this method may be run from Ruby Trace call back, where
+          # addtional code tracing is disabled in original thread.
+          #
+          # @param [Binding] binding The binding object from the context
+          # @param [String] expression A string of code to be evaluates
+          #
+          # @return [Object] The result Ruby object from evaluating the
+          #   expression. It returns Google::Cloud::Debugger::MutationError
+          #   if a mutation is caught.
+          #
+          def readonly_eval_expression_exec binding, expression
+            # The evaluation is most likely triggered from a trace callback,
+            # where addtional nested tracing is disabled by VM. So we need to
+            # do evaluation in a new thread, where function calls can be
+            # traced.
+            thr = Thread.new do
               begin
-                yarv_instructions =
-                  RubyVM::InstructionSequence.compile(expression).disasm
-              rescue ScriptError
-                return Google::Cloud::Debugger::MutationError.new(
-                  COMPILATION_FAIL_MSG,
-                  Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV
-                )
-              end
-
-              unless immutable_yarv_instructions? yarv_instructions
-                return Google::Cloud::Debugger::MutationError.new(
-                  MUTATION_DETECTED_MSG,
-                  Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV
-                )
-              end
-
-              yarv_instructions
-            end
-
-            ##
-            # @private Helps checking if a given set of YARV instructions
-            # contains any prohibited bytecode or instructions.
-            #
-            # @param [String] yarv_instructions Compiled YARV instructions
-            #   string
-            # @param [Boolean] allow_localops Whether allows local variable
-            #   write operations
-            #
-            # @return [Boolean] True if the YARV instructions don't contain any
-            #   prohibited operations. Otherwise false.
-            #
-            def immutable_yarv_instructions? yarv_instructions,
-                                             allow_localops: false
-              if allow_localops
-                byte_code_blacklist_regex = BYTE_CODE_BLACKLIST_REGEX
-              else
-                byte_code_blacklist_regex = FULL_BYTE_CODE_BLACKLIST_REGEX
-              end
-
-              func_call_flag_blacklist_regex = FUNC_CALL_FLAG_BLACKLIST_REGEX
-
-              catch_table_type_blacklist_regex = CATCH_TABLE_BLACKLIST_REGEX
-
-              !(yarv_instructions.match(func_call_flag_blacklist_regex) ||
-                yarv_instructions.match(byte_code_blacklist_regex) ||
-                yarv_instructions.match(catch_table_type_blacklist_regex))
-            end
-
-            ##
-            # @private Wraps expression with tracing code
-            def wrap_expression expression
-              """
-                begin
-                  Google::Cloud::Debugger::Breakpoint::Evaluator.send(
-                    :enable_method_trace_for_thread)
-                  #{expression}
-                ensure
-                  Google::Cloud::Debugger::Breakpoint::Evaluator.send(
-                    :disable_method_trace_for_thread)
+                Thread.current.thread_variable_set EVALUATOR_REFERENCE, self
+                binding.eval wrap_expression(expression)
+              rescue => e
+                # Treat all StandardError as mutation and set @mutation_cause
+                unless e.instance_variable_get :@mutation_cause
+                  e.instance_variable_set(
+                    :@mutation_cause,
+                    Google::Cloud::Debugger::EvaluationError::UNKNOWN_CAUSE)
                 end
-              """
+
+                e
+              end
             end
 
-            ##
-            # @private Evaluation tracing callback function. This is called
-            # everytime a Ruby function is called during evaluation of
-            # an expression.
-            #
-            # @param [Object] receiver The receiver of the function being called
-            # @param [Symbol] mid The method name
-            #
-            # @return [NilClass] Nil if no prohibited operations are found.
-            #   Otherwise raise Google::Cloud::Debugger::MutationError error.
-            #
-            def trace_func_callback receiver, mid
-              meth = nil
-              begin
-                meth = receiver.method mid
-              rescue
-                raise Google::Cloud::Debugger::EvaluationError.new(
-                  PROHIBITED_OPERATION_MSG,
-                  Google::Cloud::Debugger::EvaluationError::META_PROGRAMMING)
-              end
+            thr.join @time_limit
 
-              yarv_instructions = RubyVM::InstructionSequence.disasm meth
+            # Force terminate evaluation thread if not finished already and
+            # return an Exception
+            if thr.alive?
+              thr.kill
 
-              return if immutable_yarv_instructions?(yarv_instructions,
-                                                     allow_localops: true)
-              fail Google::Cloud::Debugger::MutationError.new(
+              Google::Cloud::Debugger::EvaluationError.new LONG_EVAL_MSG
+            else
+              thr.value
+            end
+          end
+
+          ##
+          # @private Compile the expression into YARV instructions. Return
+          # Google::Cloud::Debugger::MutationError if any prohibited YARV
+          # instructions are found.
+          #
+          # @param [String] expression String of code expression
+          #
+          # @return [String,Google::Cloud::Debugger::MutationError] It returns
+          #   the compile YARV instructions if no prohibited bytecodes are
+          #   found. Otherwise return Google::Cloud::Debugger::MutationError.
+          #
+          def validate_compiled_expression expression
+            begin
+              yarv_instructions =
+                RubyVM::InstructionSequence.compile(expression).disasm
+            rescue ScriptError
+              return Google::Cloud::Debugger::MutationError.new(
+                COMPILATION_FAIL_MSG,
+                Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV
+              )
+            end
+
+            unless immutable_yarv_instructions? yarv_instructions
+              return Google::Cloud::Debugger::MutationError.new(
                 MUTATION_DETECTED_MSG,
-                Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV)
+                Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV
+              )
             end
 
-            ##
-            # @private Evaluation tracing callback function. This is called
-            # everytime a C function is called during evaluation of
-            # an expression.
-            #
-            # @param [Object] receiver The receiver of the function being called
-            # @param [Class] defined_class The Class of where the function is
-            #   defined
-            # @param [Symbol] mid The method name
-            #
-            # @return [NilClass] Nil if no prohibited operations are found.
-            #   Otherwise raise Google::Cloud::Debugger::MutationError error.
-            #
-            def trace_c_func_callback receiver, defined_class, mid
-              if receiver.is_a?(Class) || receiver.is_a?(Module)
-                invalid_op =
-                  !validate_c_class_method(defined_class, receiver, mid)
-              else
-                invalid_op = !validate_c_instance_method(defined_class, mid)
+            yarv_instructions
+          end
+
+          ##
+          # @private Helps checking if a given set of YARV instructions
+          # contains any prohibited bytecode or instructions.
+          #
+          # @param [String] yarv_instructions Compiled YARV instructions
+          #   string
+          # @param [Boolean] allow_localops Whether allows local variable
+          #   write operations
+          #
+          # @return [Boolean] True if the YARV instructions don't contain any
+          #   prohibited operations. Otherwise false.
+          #
+          def immutable_yarv_instructions? yarv_instructions,
+                                           allow_localops: false
+            if allow_localops
+              byte_code_blacklist_regex = BYTE_CODE_BLACKLIST_REGEX
+            else
+              byte_code_blacklist_regex = FULL_BYTE_CODE_BLACKLIST_REGEX
+            end
+
+            func_call_flag_blacklist_regex = FUNC_CALL_FLAG_BLACKLIST_REGEX
+
+            catch_table_type_blacklist_regex = CATCH_TABLE_BLACKLIST_REGEX
+
+            !(yarv_instructions.match(func_call_flag_blacklist_regex) ||
+              yarv_instructions.match(byte_code_blacklist_regex) ||
+              yarv_instructions.match(catch_table_type_blacklist_regex))
+          end
+
+          ##
+          # @private Wraps expression with tracing code
+          def wrap_expression expression
+            """
+              begin
+                ::Google::Cloud::Debugger::Breakpoint::Evaluator.send(
+                  :enable_method_trace_for_thread)
+                #{expression}
+              ensure
+                ::Google::Cloud::Debugger::Breakpoint::Evaluator.send(
+                  :disable_method_trace_for_thread)
               end
+            """
+          end
 
-              return unless invalid_op
+          ##
+          # @private Evaluation tracing callback function. This is called
+          # everytime a Ruby function is called during evaluation of
+          # an expression.
+          #
+          # @param [Object] receiver The receiver of the function being called
+          # @param [Symbol] mid The method name
+          #
+          # @return [NilClass] Nil if no prohibited operations are found.
+          #   Otherwise raise Google::Cloud::Debugger::MutationError error.
+          #
+          def trace_func_callback receiver, defined_class, mid
+            return if @allow_mutating_methods
+            if receiver.is_a?(Class) || receiver.is_a?(Module)
+              return if whitelisted_ruby_class_method? defined_class,
+                                                       receiver, mid
+            else
+              return if whitelisted_ruby_instance_method? defined_class, mid
+            end
 
-              Google::Cloud::Debugger::Breakpoint::Evaluator.send(
-                :disable_method_trace_for_thread)
-              fail Google::Cloud::Debugger::MutationError.new(
+            yarv_instructions = begin
+              RubyVM::InstructionSequence.disasm receiver.method mid
+            rescue
+              raise Google::Cloud::Debugger::EvaluationError.new(
                 PROHIBITED_OPERATION_MSG,
-                Google::Cloud::Debugger::EvaluationError::PROHIBITED_C_FUNC)
+                Google::Cloud::Debugger::EvaluationError::META_PROGRAMMING)
             end
 
-            ##
-            # @private Helper method to verify wehter a C level class method
-            # is allowed or not.
-            def validate_c_class_method klass, receiver, mid
-              IMMUTABLE_CLASSES.include?(receiver) ||
-                (C_CLASS_METHOD_WHITELIST[receiver] || {})[mid] ||
-                (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
+            return if immutable_yarv_instructions?(yarv_instructions,
+                                                   allow_localops: true)
+            fail Google::Cloud::Debugger::MutationError.new(
+              MUTATION_DETECTED_MSG,
+              Google::Cloud::Debugger::EvaluationError::PROHIBITED_YARV)
+          end
+
+          ##
+          # @private Evaluation tracing callback function. This is called
+          # everytime a C function is called during evaluation of
+          # an expression.
+          #
+          # @param [Object] receiver The receiver of the function being called
+          # @param [Class] defined_class The Class of where the function is
+          #   defined
+          # @param [Symbol] mid The method name
+          #
+          # @return [NilClass] Nil if no prohibited operations are found.
+          #   Otherwise raise Google::Cloud::Debugger::MutationError error.
+          #
+          def trace_c_func_callback receiver, defined_class, mid
+            return if @allow_mutating_methods
+            if receiver.is_a?(Class) || receiver.is_a?(Module)
+              invalid_op =
+                !validate_c_class_method(defined_class, receiver, mid)
+            else
+              invalid_op = !validate_c_instance_method(defined_class, mid)
             end
 
-            ##
-            # @private Helper method to verify wehter a C level instance method
-            # is allowed or not.
-            def validate_c_instance_method klass, mid
-              IMMUTABLE_CLASSES.include?(klass) ||
-                (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
-            end
+            return unless invalid_op
+
+            Google::Cloud::Debugger::Breakpoint::Evaluator.send(
+              :disable_method_trace_for_thread)
+            fail Google::Cloud::Debugger::MutationError.new(
+              PROHIBITED_OPERATION_MSG,
+              Google::Cloud::Debugger::EvaluationError::PROHIBITED_C_FUNC)
+          end
+
+          ##
+          # @private Helper method to verify whether a C level class method
+          # is allowed or not.
+          def validate_c_class_method klass, receiver, mid
+            IMMUTABLE_CLASSES.include?(receiver) ||
+              (C_CLASS_METHOD_WHITELIST[receiver] || {})[mid] ||
+              (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
+          end
+
+          ##
+          # @private Helper method to verify whether a C level instance method
+          # is allowed or not.
+          def validate_c_instance_method klass, mid
+            IMMUTABLE_CLASSES.include?(klass) ||
+              (C_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
+          end
+
+          ##
+          # @private Helper method to verify whether a ruby class method
+          # is allowed or not.
+          def whitelisted_ruby_class_method? klass, receiver, mid
+            IMMUTABLE_CLASSES.include?(klass) ||
+              (RUBY_CLASS_METHOD_WHITELIST[receiver] || {})[mid] ||
+              (RUBY_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
+          end
+
+          ##
+          # @private Helper method to verify whether a ruby instance method
+          # is allowed or not.
+          def whitelisted_ruby_instance_method? klass, mid
+            IMMUTABLE_CLASSES.include?(klass) ||
+              (RUBY_INSTANCE_METHOD_WHITELIST[klass] || {})[mid]
           end
         end
       end

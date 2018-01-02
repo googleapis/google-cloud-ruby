@@ -53,6 +53,10 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
   let(:evaluator) { Google::Cloud::Debugger::Breakpoint::Evaluator }
 
   describe ".readonly_eval_expression" do
+    after do
+      Google::Cloud::Debugger.configure.allow_mutating_methods = false
+    end
+
     it "uses the binding object passed in" do
       mock_binding = MiniTest::Mock.new
       mock_binding.expect :eval, nil, [String]
@@ -204,6 +208,54 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       result = evaluator.readonly_eval_expression binding, expression
       result.must_be_kind_of Google::Cloud::Debugger::EvaluationError
       result.message.must_match "Evaluation exceeded time limit"
+    end
+
+    it "does not allow direct mutating in allow_mutating_methods" do
+      $global_var = "global"
+      expression = <<-EXPR
+        Google::Cloud::Debugger.allow_mutating_methods! do
+          $global_var = 2
+        end
+      EXPR
+      expression_triggers_mutation expression, binding
+    end
+
+    it "allows calling a mutating method in allow_mutating_methods" do
+      $global_var = "global"
+      expression = <<-EXPR
+        Google::Cloud::Debugger.allow_mutating_methods! do
+          mutating_func2()
+        end
+        $global_var
+      EXPR
+      expression_must_equal expression, 2, binding
+    end
+
+    it "restores mutation detection after allow_mutating_methods block" do
+      $global_var = "global"
+      expression = <<-EXPR
+        Google::Cloud::Debugger.allow_mutating_methods! do
+          mutating_func2()
+        end
+        mutating_func2()
+      EXPR
+      expression_triggers_mutation expression, binding
+    end
+
+    it "allows calling a mutating method after allow_mutating_methods" do
+      $global_var = "global"
+      expression = <<-EXPR
+        Google::Cloud::Debugger.allow_mutating_methods!
+        mutating_func2()
+        $global_var
+      EXPR
+      expression_must_equal expression, 2, binding
+    end
+
+    it "allows calling a mutating method with the right config" do
+      Google::Cloud::Debugger.configure.allow_mutating_methods = true
+      $global_var = "global"
+      expression_must_equal "mutating_func2()", 2, binding
     end
   end
 end

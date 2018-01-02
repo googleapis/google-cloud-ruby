@@ -320,7 +320,7 @@ module Google
     # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
     module Debugger
-      # Initialize :error_reporting as a nested Configuration under
+      # Initialize :debugger as a nested Configuration under
       # Google::Cloud if haven't already
       unless Google::Cloud.configure.option? :debugger
         Google::Cloud.configure.add_options :debugger
@@ -402,12 +402,30 @@ module Google
       # for full configuration parameters.
       #
       # @return [Stackdriver::Core::Configuration] The configuration object
-      #   the Google::Cloud::ErrorReporting module uses.
+      #   the Google::Cloud::Debugger module uses.
       #
       def self.configure
         yield Google::Cloud.configure[:debugger] if block_given?
 
         Google::Cloud.configure[:debugger]
+      end
+
+      ##
+      # Allow calling of mutating methods even if mutation detection is
+      # configured to be active. This may be called only during debugger
+      # condition or expression evaluation.
+      #
+      # If you pass in a block, it will be evaluated with mutation detection
+      # disabled, and the original setting will be restored afterward. If you
+      # do not pass a block, mutation detection will be disabled for the
+      # remainder of the current evaluation.
+      #
+      def self.allow_mutating_methods! &block
+        evaluator = Breakpoint::Evaluator.current
+        if evaluator.nil?
+          fail "allow_mutating_methods can be called only during evaluation"
+        end
+        evaluator.allow_mutating_methods!(&block)
       end
     end
   end
