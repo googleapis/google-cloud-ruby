@@ -411,14 +411,44 @@ module Google
       end
 
       ##
-      # Allow calling of mutating methods even if mutation detection is
-      # configured to be active. This may be called only during debugger
-      # condition or expression evaluation.
+      # Allow calling of potentially state-changing methods even if mutation
+      # detection is configured to be active.
       #
-      # If you pass in a block, it will be evaluated with mutation detection
-      # disabled, and the original setting will be restored afterward. If you
-      # do not pass a block, mutation detection will be disabled for the
-      # remainder of the current evaluation.
+      # Generally it is unwise to run code that may change the program state
+      # (e.g. modifying instance variables or causing other side effects) in a
+      # breakpoint expression, because it could change the behavior of your
+      # program. However, the checks are currently quite conservative, and may
+      # block code that is actually safe to run. If you are certain your
+      # expression is safe to evaluate, you may wrap it in a block using this
+      # method. Here is an example expression:
+      #
+      # ```ruby
+      # # An expression to evaluate in your debugger snapshot
+      # Google::Cloud::Debugger.allow_mutating_methods! do
+      #   obj1.method_with_potential_side_effects
+      # end
+      # ```
+      #
+      # You may also call this method without a block to disable side effect
+      # checks for the rest of the current expression. The default setting
+      # will be restored for the next expression.
+      #
+      # ```ruby
+      # # An expression to evaluate in your debugger snapshot
+      # Google::Cloud::Debugger.allow_mutating_methods!
+      # obj1.method_with_potential_side_effects
+      # obj2.another_method_with_potential_side_effects
+      # ```
+      #
+      # This may be called only from a debugger condition or expression
+      # evaluation, and will throw an exception if you call it from normal
+      # application code. If you want to disable the side effect checker
+      # globally for your app, you may set the following configuration:
+      #
+      # ```ruby
+      # # In your application initialization code
+      # Google::Cloud::Debugger.configure.allow_mutating_methods = true
+      # ```
       #
       def self.allow_mutating_methods! &block
         evaluator = Breakpoint::Evaluator.current
