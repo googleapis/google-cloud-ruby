@@ -1146,9 +1146,9 @@ module Google
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # @param [String] table_id The destination table to load the data into.
-        # @param [File, Google::Cloud::Storage::File, String] file A file or the
-        #   URI of a Google Cloud Storage file containing data to load into the
-        #   table.
+        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
+        #   or the URI of a Google Cloud Storage file containing data to load
+        #   into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1378,9 +1378,9 @@ module Google
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # @param [String] table_id The destination table to load the data into.
-        # @param [File, Google::Cloud::Storage::File, String] file A file or the
-        #   URI of a Google Cloud Storage file containing data to load into the
-        #   table.
+        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
+        #   or the URI of a Google Cloud Storage file containing data to load
+        #   into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1948,6 +1948,7 @@ module Google
         def load_storage table_id, url, options = {}
           # Convert to storage URL
           url = url.to_gs_url if url.respond_to? :to_gs_url
+          url = url.to_s if url.is_a? URI
 
           gapi = service.load_table_gs_url dataset_id, table_id, url, options
           Job.from_gapi gapi, service
@@ -1964,7 +1965,9 @@ module Google
         def storage_url? file
           file.respond_to?(:to_gs_url) ||
             (file.respond_to?(:to_str) &&
-            file.to_str.downcase.start_with?("gs://"))
+            file.to_str.downcase.start_with?("gs://")) ||
+            (file.is_a?(URI) &&
+            file.to_s.downcase.start_with?("gs://"))
         end
 
         def local_file? file
