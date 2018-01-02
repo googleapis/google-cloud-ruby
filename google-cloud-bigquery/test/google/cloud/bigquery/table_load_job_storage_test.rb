@@ -155,7 +155,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :storage, :mock_bigquery do
     mock.verify
   end
 
-  it "can specify a storage url" do
+  it "can specify a storage url as a string" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
     mock.expect :insert_job, load_job_resp_gapi(table, load_url),
@@ -163,6 +163,19 @@ describe Google::Cloud::Bigquery::Table, :load_job, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     job = table.load_job load_url
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
+  it "can specify a storage url as a URI" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job URI load_url
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
