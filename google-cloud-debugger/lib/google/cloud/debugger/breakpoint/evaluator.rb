@@ -803,7 +803,7 @@ module Google
           # context binding. Handles any exceptions raised.
           #
           # @param [Binding] binding The binding object from the context
-          # @param [String] expression A string of code to be evaluates
+          # @param [String] expression A string of code to be evaluated
           #
           # @return [Object] The result Ruby object from evaluating the
           #   expression. If the expression is blocked from mutating
