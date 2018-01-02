@@ -419,36 +419,34 @@ module Google
       # breakpoint expression, because it could change the behavior of your
       # program. However, the checks are currently quite conservative, and may
       # block code that is actually safe to run. If you are certain your
-      # expression is safe to evaluate, you may wrap it in a block using this
-      # method. Here is an example expression:
+      # expression is safe to evaluate, you may use this method to disable
+      # side effect checks.
       #
-      # ```ruby
-      # # An expression to evaluate in your debugger snapshot
-      # Google::Cloud::Debugger.allow_mutating_methods! do
-      #   obj1.method_with_potential_side_effects
-      # end
-      # ```
+      # This method may be called with a block, in which case checks are
+      # disabled within the block. It may also be called without a block to
+      # disable side effect checks for the rest of the current expression; the
+      # default setting will be restored for the next expression.
       #
-      # You may also call this method without a block to disable side effect
-      # checks for the rest of the current expression. The default setting
-      # will be restored for the next expression.
-      #
-      # ```ruby
-      # # An expression to evaluate in your debugger snapshot
-      # Google::Cloud::Debugger.allow_mutating_methods!
-      # obj1.method_with_potential_side_effects
-      # obj2.another_method_with_potential_side_effects
-      # ```
-      #
-      # This may be called only from a debugger condition or expression
+      # This method may be called only from a debugger condition or expression
       # evaluation, and will throw an exception if you call it from normal
-      # application code. If you want to disable the side effect checker
-      # globally for your app, you may set the following configuration:
+      # application code. Set the `allow_mutating_methods` configuration if you
+      # want to disable the side effect checker globally for your app.
       #
-      # ```ruby
-      # # In your application initialization code
-      # Google::Cloud::Debugger.configure.allow_mutating_methods = true
-      # ```
+      # @example Disabling side effect detection in a block
+      #   # This is an expression evaluated in a debugger snapshot
+      #   Google::Cloud::Debugger.allow_mutating_methods! do
+      #     obj1.method_with_potential_side_effects
+      #   end
+      #
+      # @example Disabling side effect detection for the rest of the expression
+      #   # This is an expression evaluated in a debugger snapshot
+      #   Google::Cloud::Debugger.allow_mutating_methods!
+      #   obj1.method_with_potential_side_effects
+      #   obj2.another_method_with_potential_side_effects
+      #
+      # @example Globally disabling side effect detection at app initialization
+      #   require "google/cloud/debugger"
+      #   Google::Cloud::Debugger.configure.allow_mutating_methods = true
       #
       def self.allow_mutating_methods! &block
         evaluator = Breakpoint::Evaluator.current
