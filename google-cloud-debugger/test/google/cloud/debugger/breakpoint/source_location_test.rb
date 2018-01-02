@@ -22,18 +22,18 @@ describe Google::Cloud::Debugger::Breakpoint::SourceLocation, :mock_debugger do
     Google::Devtools::Clouddebugger::V2::SourceLocation.decode_json \
       source_location_json
   }
-  let(:source_location) {
+  let(:source_loc) {
     Google::Cloud::Debugger::Breakpoint::SourceLocation.from_grpc \
       source_location_grpc
   }
 
   it "knows its attributes" do
-    source_location.path.must_equal "my_app/my_class.rb"
-    source_location.line.must_equal 321
+    source_loc.path.must_equal "my_app/my_class.rb"
+    source_loc.line.must_equal 321
   end
 
   it "converts to grpc" do
-    grpc = source_location.to_grpc
+    grpc = source_loc.to_grpc
     grpc.path.must_equal source_location_grpc.path
     grpc.line.must_equal source_location_grpc.line
   end
