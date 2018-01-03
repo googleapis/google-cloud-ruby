@@ -28,19 +28,19 @@ end
 desc "Run the translate acceptance tests."
 task :acceptance, :project, :keyfile, :key do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["TRANSLATE_TEST_PROJECT"]
+  project ||= ENV["TRANSLATE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["TRANSLATE_TEST_KEYFILE"]
+  keyfile ||= ENV["TRANSLATE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["TRANSLATE_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["TRANSLATE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TRANSLATE_TEST_PROJECT=test123 TRANSLATE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   key = args[:key]
-  key ||= ENV["GCLOUD_TEST_KEY"] || ENV["TRANSLATE_TEST_KEY"]
+  key ||= ENV["TRANSLATE_TEST_KEY"] || ENV["GCLOUD_TEST_KEY"]
 
   # run tests with api key credentials when available
   if key
@@ -52,9 +52,14 @@ task :acceptance, :project, :keyfile, :key do |t, args|
   # always run tests with service account credentials
   puts "running acceptance tests with service account"
 
+  # clear any env var already set
+  require "google/cloud/translate/credentials"
+  (Google::Cloud::Translate::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Translate::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["TRANSLATE_PROJECT"] = project
-  ENV["TRANSLATE_KEYFILE"] = nil
   ENV["TRANSLATE_KEYFILE_JSON"] = keyfile
   ENV["TRANSLATE_KEY"] = nil
 
@@ -64,18 +69,17 @@ end
 namespace :acceptance do
   task :key, :key do |t, args|
     key = args[:key]
-    key ||= ENV["GCLOUD_TEST_KEY"] || ENV["TRANSLATE_TEST_KEY"]
+    key ||= ENV["TRANSLATE_TEST_KEY"] || ENV["GCLOUD_TEST_KEY"]
     if key.nil?
       fail "unable to run acceptance tests with api key credentials"
     end
+    # clear any env var already set
+    require "google/cloud/translate/credentials"
+    (Google::Cloud::Translate::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Translate::Credentials::JSON_ENV_VARS).each do |path|
+      ENV[path] = nil
+    end
     # always overwrite when running tests
-    ENV["TRANSLATE_PROJECT"] = nil
-    ENV["TRANSLATE_KEYFILE"] = nil
-    ENV["GOOGLE_CLOUD_KEYFILE"] = nil
-    ENV["GCLOUD_KEYFILE"] = nil
-    ENV["TRANSLATE_KEYFILE_JSON"] = nil
-    ENV["GOOGLE_CLOUD_KEYFILE_JSON"] = nil
-    ENV["GCLOUD_KEYFILE_JSON"] = nil
     ENV["TRANSLATE_KEY"] = key
 
     Rake::Task["acceptance:run"].invoke

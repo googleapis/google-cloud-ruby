@@ -68,20 +68,25 @@ end
 desc "Run the google-cloud-language acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LANGUAGE_TEST_PROJECT"]
+  project ||= ENV["LANGUAGE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LANGUAGE_TEST_KEYFILE"]
+  keyfile ||= ENV["LANGUAGE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["LANGUAGE_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["LANGUAGE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or LANGUAGE_TEST_PROJECT=test123 LANGUAGE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
+  # clear any env var already set
+  require "google/cloud/language/credentials"
+  (Google::Cloud::Language::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Language::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["LANGUAGE_PROJECT"] = project
-  ENV["LANGUAGE_KEYFILE"] = nil
   ENV["LANGUAGE_KEYFILE_JSON"] = keyfile
 
   # Required for smoke tests

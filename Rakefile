@@ -104,15 +104,15 @@ task :acceptance, [:project, :keyfile, :key] => :compile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or GCLOUD_TEST_PROJECT=test123 GCLOUD_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # always overwrite when running tests
-  ENV["GOOGLE_CLOUD_PROJECT"] = project
-  ENV["GOOGLE_CLOUD_KEYFILE"] = nil
-  ENV["GOOGLE_CLOUD_KEYFILE_JSON"] = keyfile
+  ENV["GCLOUD_TEST_PROJECT"] = project
+  ENV["GCLOUD_TEST_KEYFILE"] = nil
+  ENV["GCLOUD_TEST_KEYFILE_JSON"] = keyfile
 
   key = args[:key] || ENV["GCLOUD_TEST_KEY"]
   if key.nil?
     fail "You must provide an API KEY for translate acceptance tests."
   end  # always overwrite when running tests
-  ENV["GOOGLE_CLOUD_KEY"] = key
+  ENV["GCLOUD_TEST_KEY"] = key
 
   valid_gems.each do |gem|
     $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/acceptance"
