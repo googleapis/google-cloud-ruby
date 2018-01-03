@@ -371,7 +371,7 @@ module Google
           type = type.to_s.upcase
           unless Field::TYPES.include? type
             fail ArgumentError,
-                 "Type '#{type}' not found in #{TYPES.inspect}"
+                 "Type '#{type}' not found"
           end
           type
         end
