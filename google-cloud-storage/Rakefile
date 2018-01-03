@@ -28,23 +28,32 @@ end
 desc "Run the storage acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
+  project ||= ENV["STORAGE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
+  keyfile ||= ENV["STORAGE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["STORAGE_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["STORAGE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
+  # clear any env var already set
+  require "google/cloud/storage/credentials"
+  (Google::Cloud::Storage::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Storage::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  require "google/cloud/pubsub/credentials"
+  (Google::Cloud::Pubsub::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Pubsub::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["STORAGE_PROJECT"] = project
-  ENV["STORAGE_KEYFILE"] = nil
   ENV["STORAGE_KEYFILE_JSON"] = keyfile
   ENV["PUBSUB_PROJECT"] = project
-  ENV["PUBSUB_KEYFILE"] = nil
   ENV["PUBSUB_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
@@ -66,20 +75,25 @@ namespace :acceptance do
   desc "Removes *ALL* buckets and files. Use with caution."
   task :cleanup do |t, args|
     project = args[:project]
-    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["STORAGE_TEST_PROJECT"]
+    project ||= ENV["STORAGE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["STORAGE_TEST_KEYFILE"]
+    keyfile ||= ENV["STORAGE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
     if keyfile
       keyfile = File.read keyfile
     else
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["STORAGE_TEST_KEYFILE_JSON"]
+      keyfile ||= ENV["STORAGE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
     end
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or STORAGE_TEST_PROJECT=test123 STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
+    # clear any env var already set
+    require "google/cloud/storage/credentials"
+    (Google::Cloud::Storage::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Storage::Credentials::JSON_ENV_VARS).each do |path|
+      ENV[path] = nil
+    end
     # always overwrite when running tests
     ENV["STORAGE_PROJECT"] = project
-    ENV["STORAGE_KEYFILE"] = nil
     ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
     $LOAD_PATH.unshift "lib"

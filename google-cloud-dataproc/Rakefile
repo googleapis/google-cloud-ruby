@@ -68,20 +68,25 @@ end
 desc "Run the google-cloud-dataproc acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["DATAPROC_TEST_PROJECT"]
+  project ||= ENV["DATAPROC_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["DATAPROC_TEST_KEYFILE"]
+  keyfile ||= ENV["DATAPROC_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["DATAPROC_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["DATAPROC_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATAPROC_TEST_PROJECT=test123 VIDEO_INTELLIGENCE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
+  # clear any env var already set
+  require "google/cloud/dataproc/credentials"
+  (Google::Cloud::Dataproc::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Dataproc::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["DATAPROC_PROJECT"] = project
-  ENV["DATAPROC_KEYFILE"] = nil
   ENV["DATAPROC_KEYFILE_JSON"] = keyfile
 
   # Required for smoke tests

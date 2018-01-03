@@ -68,16 +68,22 @@ end
 desc "Run the google-cloud-video_intelligence acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["VIDEO_INTELLIGENCE_TEST_PROJECT"]
+  project ||= ENV["VIDEO_INTELLIGENCE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE"]
+  keyfile ||= ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or VIDEO_INTELLIGENCE_TEST_PROJECT=test123 VIDEO_INTELLIGENCE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/video_intelligence/credentials"
+  (Google::Cloud::VideoIntelligence::Credentials::PATH_ENV_VARS +
+   Google::Cloud::VideoIntelligence::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
   end
   # always overwrite when running tests
   ENV["VIDEO_INTELLIGENCE_PROJECT"] = project
