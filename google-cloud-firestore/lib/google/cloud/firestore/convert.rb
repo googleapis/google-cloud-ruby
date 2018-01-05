@@ -43,9 +43,9 @@ module Google
             Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
           end
 
-          def fields_to_hash fields, context
+          def fields_to_hash fields, client
             Hash[fields.map do |key, value|
-              [key.to_sym, value_to_raw(value, context)]
+              [key.to_sym, value_to_raw(value, client)]
             end]
           end
 
@@ -55,7 +55,7 @@ module Google
             end]
           end
 
-          def value_to_raw value, context
+          def value_to_raw value, client
             case value.value_type
             when :null_value
               nil
@@ -73,13 +73,13 @@ module Google
               StringIO.new value.bytes_value
             when :reference_value
               Google::Cloud::Firestore::DocumentReference.from_path \
-                value.reference_value, context
+                value.reference_value, client
             when :geo_point_value
               value.geo_point_value.to_hash
             when :array_value
-              value.array_value.values.map { |v| value_to_raw v, context }
+              value.array_value.values.map { |v| value_to_raw v, client }
             when :map_value
-              fields_to_hash value.map_value.fields, context
+              fields_to_hash value.map_value.fields, client
             end
           end
 

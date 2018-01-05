@@ -16,6 +16,7 @@
 require "google/cloud/firestore/v1beta1"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_reference"
+require "google/cloud/firestore/document_listener"
 
 module Google
   module Cloud
@@ -146,6 +147,40 @@ module Google
 
           client.get_all([self]).first
         end
+
+        ##
+        # Listen to this document reference for changes.
+        #
+        # @yield [callback] The block for accessing the document snapshot.
+        # @yieldparam [DocumentSnapshot] snapshot A document snapshot.
+        #
+        # @return [DocumentListener] The ongoing listen operation on the
+        #   document reference.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   listener = nyc_ref.listen do |snapshot|
+        #     puts "The population of #{snapshot[:name]} "
+        #     puts "is #{snapshot[:population]}."
+        #   end
+        #
+        #   # When ready, stop the listen operation and close the stream.
+        #   listener.stop
+        #
+        def listen &callback
+          raise ArgumentError, "callback required" if callback.nil?
+
+          ensure_client!
+
+          DocumentListener.new(self, &callback).start
+        end
+        alias on_snapshot listen
 
         ##
         # The collection the document reference belongs to.

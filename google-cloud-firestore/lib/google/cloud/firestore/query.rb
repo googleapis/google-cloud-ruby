@@ -15,6 +15,7 @@
 
 require "google/cloud/firestore/v1beta1"
 require "google/cloud/firestore/document_snapshot"
+require "google/cloud/firestore/query_listener"
 require "google/cloud/firestore/convert"
 
 module Google
@@ -39,6 +40,22 @@ module Google
       #   query.get do |city|
       #     puts "#{city.document_id} has #{city[:population]} residents."
       #   end
+      #
+      # @example Listen to a query for changes:
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #
+      #   # Create a query
+      #   query = firestore.col(:cities).order(:population, :desc)
+      #
+      #   listener = query.listen do |snapshot|
+      #     puts "The query snapshot has #{snapshot.docs.count} documents "
+      #     puts "and has #{snapshot.changes.count} changes."
+      #   end
+      #
+      #   # When ready, stop the listen operation and close the stream.
+      #   listener.stop
       #
       class Query
         ##
@@ -807,7 +824,7 @@ module Google
         def get
           ensure_service!
 
-          return enum_for(:run) unless block_given?
+          return enum_for(:get) unless block_given?
 
           results = service.run_query parent_path, @query
           results.each do |result|
@@ -816,6 +833,39 @@ module Google
           end
         end
         alias run get
+
+        ##
+        # Listen to this query for changes.
+        #
+        # @yield [callback] The block for accessing the query snapshot.
+        # @yieldparam [QuerySnapshot] snapshot A query snapshot.
+        #
+        # @return [QueryListener] The ongoing listen operation on the query.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Create a query
+        #   query = firestore.col(:cities).order(:population, :desc)
+        #
+        #   listener = query.listen do |snapshot|
+        #     puts "The query snapshot has #{snapshot.docs.count} documents "
+        #     puts "and has #{snapshot.changes.count} changes."
+        #   end
+        #
+        #   # When ready, stop the listen operation and close the stream.
+        #   listener.stop
+        #
+        def listen &callback
+          raise ArgumentError, "callback required" if callback.nil?
+
+          ensure_service!
+
+          QueryListener.new(self, &callback).start
+        end
+        alias on_snapshot listen
 
         ##
         # @private Start a new Query.

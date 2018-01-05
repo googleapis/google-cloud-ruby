@@ -60,6 +60,27 @@ module Google
           "RANDOMID123XYZ"
         end
       end
+      # doctest has issues running listen operations, so punt on it completely
+      class StubbedListener
+        def initialize *args
+          @stopped = false
+        end
+
+        def start
+          self
+        end
+
+        def stop
+          @stopped = true
+          self
+        end
+
+        def stopped?
+          @stopped
+        end
+      end
+      DocumentListener = StubbedListener
+      QueryListener = StubbedListener
     end
   end
 end

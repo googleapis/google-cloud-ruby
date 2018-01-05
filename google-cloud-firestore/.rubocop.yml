@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - "benchmark/**/*"
     - "google-cloud-firestore.gemspec"
     - "lib/google/firestore/v1beta1/**/*"
     - "lib/google/cloud/firestore/v1beta1/**/*"

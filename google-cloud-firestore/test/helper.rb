@@ -42,6 +42,22 @@ class Google::Gax::CallOptions
   end
 end
 
+class StreamingListenStub
+  attr_reader :request_enum, :responses
+
+  def initialize responses
+    # EnumeratorQueue will return an enum that blocks
+    @responses = Google::Cloud::Firestore::EnumeratorQueue.new
+    responses.each { |response| @responses.push response }
+  end
+
+  def listen request_enum, options: nil
+    @request_enum = request_enum
+    # return response enumerator
+    @responses.each
+  end
+end
+
 class MockFirestore < Minitest::Spec
   let(:project) { "projectID" }
   let(:default_project_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }

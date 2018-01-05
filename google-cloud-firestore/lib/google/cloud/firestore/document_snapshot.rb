@@ -29,6 +29,9 @@ module Google
       #
       # The snapshot can reference a non-existing document.
       #
+      # See {DocumentReference#get}, {DocumentReference#listen},
+      # {Query#get}, {Query#listen}, and {QuerySnapshot#docs}.
+      #
       # @example
       #   require "google/cloud/firestore"
       #
@@ -39,6 +42,22 @@ module Google
       #
       #   # Get the document data
       #   nyc_snap[:population] #=> 1000000
+      #
+      # @example Listen to a document reference for changes:
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #
+      #   # Get a document reference
+      #   nyc_ref = firestore.doc "cities/NYC"
+      #
+      #   listener = nyc_ref.listen do |snapshot|
+      #     puts "The population of #{snapshot[:name]} "
+      #     puts "is #{snapshot[:population]}."
+      #   end
+      #
+      #   # When ready, stop the listen operation and close the stream.
+      #   listener.stop
       #
       class DocumentSnapshot
         ##
@@ -192,8 +211,9 @@ module Google
           end
 
           nodes = field_path.fields.map(&:to_sym)
-          selected_data = data
+          return path if nodes == [:__name__] # asking for document_id
 
+          selected_data = data
           nodes.each do |node|
             unless selected_data.is_a? Hash
               err_msg = "#{field_path.formatted_string} is not " \
@@ -288,8 +308,8 @@ module Google
         ##
         # @private New DocumentSnapshot from a
         # Google::Firestore::V1beta1::RunQueryResponse object.
-        def self.from_query_result result, context
-          ref = DocumentReference.from_path result.document.name, context
+        def self.from_query_result result, client
+          ref = DocumentReference.from_path result.document.name, client
           read_at = Convert.timestamp_to_time result.read_time
 
           new.tap do |s|
@@ -301,21 +321,45 @@ module Google
 
         ##
         # @private New DocumentSnapshot from a
+        # Google::Firestore::V1beta1::DocumentChange object.
+        def self.from_document document, client, read_at: nil
+          ref = DocumentReference.from_path document.name, client
+
+          new.tap do |s|
+            s.grpc = document
+            s.instance_variable_set :@ref, ref
+            s.instance_variable_set :@read_at, read_at
+          end
+        end
+
+        ##
+        # @private New DocumentSnapshot from a
         # Google::Firestore::V1beta1::BatchGetDocumentsResponse object.
-        def self.from_batch_result result, context
+        def self.from_batch_result result, client
           ref = nil
           grpc = nil
           if result.result == :found
             grpc = result.found
-            ref = DocumentReference.from_path grpc.name, context
+            ref = DocumentReference.from_path grpc.name, client
           else
-            ref = DocumentReference.from_path result.missing, context
+            ref = DocumentReference.from_path result.missing, client
           end
           read_at = Convert.timestamp_to_time result.read_time
 
           new.tap do |s|
             s.grpc = grpc
             s.instance_variable_set :@ref, ref
+            s.instance_variable_set :@read_at, read_at
+          end
+        end
+
+        ##
+        # @private New non-existant DocumentSnapshot from a
+        # DocumentReference object.
+        def self.missing doc_ref, read_at: nil
+          new.tap do |s|
+            s.grpc = nil
+            s.instance_variable_set :@ref, doc_ref
             s.instance_variable_set :@read_at, read_at
           end
         end
