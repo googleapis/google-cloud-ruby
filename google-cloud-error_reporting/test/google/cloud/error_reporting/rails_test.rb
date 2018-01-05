@@ -20,6 +20,8 @@ require "active_support/ordered_options"
 require "google/cloud/error_reporting/rails"
 
 describe Google::Cloud::ErrorReporting::Railtie do
+  let(:simple_ignore_classes) { [Integer] }
+  let(:another_ignore_classes) { [String] }
   let(:rails_config) do
     config = ::ActiveSupport::OrderedOptions.new
     config.google_cloud = ::ActiveSupport::OrderedOptions.new
@@ -28,13 +30,12 @@ describe Google::Cloud::ErrorReporting::Railtie do
     config.google_cloud.credentials = "test/keyfile"
     config.google_cloud.error_reporting.service_name = "test-service"
     config.google_cloud.error_reporting.service_version = "test-version"
-    config.google_cloud.error_reporting.ignore_classes = "test class"
+    config.google_cloud.error_reporting.ignore_classes = simple_ignore_classes
     config
   end
 
   after {
-    Google::Cloud::ErrorReporting.configure.instance_variable_get(:@configs).clear
-    Google::Cloud.configure.delete :use_error_reporting
+    Google::Cloud.configure.reset!
   }
 
   describe ".consolidate_rails_config" do
@@ -47,7 +48,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
           config.credentials.must_equal "test/keyfile"
           config.service_name.must_equal "test-service"
           config.service_version.must_equal "test-version"
-          config.ignore_classes.must_equal "test class"
+          config.ignore_classes.must_equal simple_ignore_classes
         end
       end
     end
@@ -58,7 +59,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
         config.credentials = "/another/test/keyfile"
         config.service_name = "another-test-service"
         config.service_version = "another-test-version"
-        config.ignore_classes = "another test class"
+        config.ignore_classes = another_ignore_classes
       end
 
       STDOUT.stub :puts, nil do
@@ -69,7 +70,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
           config.credentials.must_equal "/another/test/keyfile"
           config.service_name.must_equal "another-test-service"
           config.service_version.must_equal "another-test-version"
-          config.ignore_classes.must_equal "another test class"
+          config.ignore_classes.must_equal another_ignore_classes
         end
       end
     end
@@ -114,7 +115,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
       config.google_cloud.keyfile = "test/keyfile"
       config.google_cloud.error_reporting.service_name = "test-service"
       config.google_cloud.error_reporting.service_version = "test-version"
-      config.google_cloud.error_reporting.ignore_classes = "test class"
+      config.google_cloud.error_reporting.ignore_classes = simple_ignore_classes
       config
     end
 
@@ -127,7 +128,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
           config.credentials.must_equal "test/keyfile"
           config.service_name.must_equal "test-service"
           config.service_version.must_equal "test-version"
-          config.ignore_classes.must_equal "test class"
+          config.ignore_classes.must_equal simple_ignore_classes
         end
       end
     end
@@ -138,7 +139,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
         config.keyfile = "/another/test/keyfile"
         config.service_name = "another-test-service"
         config.service_version = "another-test-version"
-        config.ignore_classes = "another test class"
+        config.ignore_classes = another_ignore_classes
       end
 
       STDOUT.stub :puts, nil do
@@ -149,7 +150,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
           config.credentials.must_equal "/another/test/keyfile"
           config.service_name.must_equal "another-test-service"
           config.service_version.must_equal "another-test-version"
-          config.ignore_classes.must_equal "another test class"
+          config.ignore_classes.must_equal another_ignore_classes
         end
       end
     end

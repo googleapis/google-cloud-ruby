@@ -19,23 +19,24 @@ require "active_support/ordered_options"
 require "google/cloud/trace/rails"
 
 describe Google::Cloud::Trace::Railtie do
+  let(:a_test_generator) { Proc.new { 0 } }
+  let(:another_generator) { Proc.new { 1 } }
   let(:rails_config) do
     config = ::ActiveSupport::OrderedOptions.new
     config.google_cloud = ::ActiveSupport::OrderedOptions.new
     config.google_cloud.trace = ::ActiveSupport::OrderedOptions.new
     config.google_cloud.project_id = "test-project"
     config.google_cloud.credentials = "test/keyfile"
-    config.google_cloud.trace.capture_stack = "true"
+    config.google_cloud.trace.capture_stack = true
     config.google_cloud.trace.notifications = ["foo", "boo"]
     config.google_cloud.trace.max_data_length = 123
     config.google_cloud.trace.sampler = "test-sampler"
-    config.google_cloud.trace.span_id_generator = "test-generator"
+    config.google_cloud.trace.span_id_generator = a_test_generator
     config
   end
 
   after {
-    Google::Cloud.configure.delete :use_trace
-    Google::Cloud::Trace.configure.instance_variable_get(:@configs).clear
+    Google::Cloud.configure.reset!
   }
 
   describe ".consolidate_rails_config" do
@@ -46,11 +47,11 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace.configure do |config|
           config.project_id.must_equal "test-project"
           config.credentials.must_equal "test/keyfile"
-          config.capture_stack.must_equal "true"
+          config.capture_stack.must_equal true
           config.notifications.must_equal ["foo", "boo"]
           config.max_data_length.must_equal 123
           config.sampler.must_equal "test-sampler"
-          config.span_id_generator.must_equal "test-generator"
+          config.span_id_generator.must_equal a_test_generator
         end
       end
     end
@@ -59,11 +60,11 @@ describe Google::Cloud::Trace::Railtie do
       Google::Cloud::Trace.configure do |config|
         config.project_id = "another-test-project"
         config.credentials = "/another/test/keyfile"
-        config.capture_stack = "false"
+        config.capture_stack = false
         config.notifications = ["blah"]
         config.max_data_length = 345
         config.sampler = "another-test-sampler"
-        config.span_id_generator = "another-test-generator"
+        config.span_id_generator = another_generator
       end
 
       STDOUT.stub :puts, nil do
@@ -72,11 +73,11 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace.configure do |config|
           config.project_id.must_equal "another-test-project"
           config.credentials.must_equal "/another/test/keyfile"
-          config.capture_stack.must_equal "false"
+          config.capture_stack.must_equal false
           config.notifications.must_equal ["blah"]
           config.max_data_length.must_equal 345
           config.sampler.must_equal "another-test-sampler"
-          config.span_id_generator.must_equal "another-test-generator"
+          config.span_id_generator.must_equal another_generator
         end
       end
     end
@@ -119,11 +120,11 @@ describe Google::Cloud::Trace::Railtie do
       config.google_cloud.trace = ::ActiveSupport::OrderedOptions.new
       config.google_cloud.project = "test-project"
       config.google_cloud.keyfile = "test/keyfile"
-      config.google_cloud.trace.capture_stack = "true"
+      config.google_cloud.trace.capture_stack = true
       config.google_cloud.trace.notifications = ["foo", "boo"]
       config.google_cloud.trace.max_data_length = 123
       config.google_cloud.trace.sampler = "test-sampler"
-      config.google_cloud.trace.span_id_generator = "test-generator"
+      config.google_cloud.trace.span_id_generator = a_test_generator
       config
     end
 
@@ -134,11 +135,11 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace.configure do |config|
           config.project_id.must_equal "test-project"
           config.credentials.must_equal "test/keyfile"
-          config.capture_stack.must_equal "true"
+          config.capture_stack.must_equal true
           config.notifications.must_equal ["foo", "boo"]
           config.max_data_length.must_equal 123
           config.sampler.must_equal "test-sampler"
-          config.span_id_generator.must_equal "test-generator"
+          config.span_id_generator.must_equal a_test_generator
         end
       end
     end
@@ -147,11 +148,11 @@ describe Google::Cloud::Trace::Railtie do
       Google::Cloud::Trace.configure do |config|
         config.project = "another-test-project"
         config.keyfile = "/another/test/keyfile"
-        config.capture_stack = "false"
+        config.capture_stack = false
         config.notifications = ["blah"]
         config.max_data_length = 345
         config.sampler = "another-test-sampler"
-        config.span_id_generator = "another-test-generator"
+        config.span_id_generator = another_generator
       end
 
       STDOUT.stub :puts, nil do
@@ -160,11 +161,11 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace.configure do |config|
           config.project_id.must_equal "another-test-project"
           config.credentials.must_equal "/another/test/keyfile"
-          config.capture_stack.must_equal "false"
+          config.capture_stack.must_equal false
           config.notifications.must_equal ["blah"]
           config.max_data_length.must_equal 345
           config.sampler.must_equal "another-test-sampler"
-          config.span_id_generator.must_equal "another-test-generator"
+          config.span_id_generator.must_equal another_generator
         end
       end
     end

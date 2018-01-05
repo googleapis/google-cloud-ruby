@@ -15,7 +15,7 @@
 
 require "google-cloud-debugger"
 require "google/cloud/debugger/project"
-require "google/cloud/configuration"
+require "google/cloud/config"
 require "google/cloud/env"
 require "stackdriver/core"
 
@@ -408,8 +408,22 @@ module Google
 
       # Initialize :debugger as a nested Configuration under Google::Cloud if
       # haven't already
-      unless Google::Cloud.configure.option? :debugger
-        Google::Cloud.configure.add_options :debugger
+      unless Google::Cloud.configure.valid_config_name? :debugger
+        Google::Cloud.configure.add_config! :debugger do |config|
+          config.add_field! :project_id, nil, match: String
+          config.add_field! :project, nil, match: String
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :keyfile, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :service_name, nil, match: String
+          config.add_field! :service_version, nil, match: String
+          config.add_field! :app_root, nil, match: String
+          config.add_field! :root, nil, match: String
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+        end
       end
 
       ##
@@ -440,7 +454,7 @@ module Google
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # for full configuration parameters.
       #
-      # @return [Google::Cloud::Configuration] The configuration object the
+      # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Debugger module uses.
       #
       def self.configure

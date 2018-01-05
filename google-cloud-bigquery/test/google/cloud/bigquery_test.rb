@@ -215,11 +215,7 @@ describe Google::Cloud do
     let(:found_credentials) { "{}" }
 
     after do
-      Google::Cloud.configure.delete :project_id
-      Google::Cloud.configure.delete :project
-      Google::Cloud.configure.delete :credentials
-      Google::Cloud.configure.delete :keyfile
-      Google::Cloud.configure.bigquery.clear
+      Google::Cloud.configure.reset!
     end
 
     it "uses shared config for project and keyfile" do

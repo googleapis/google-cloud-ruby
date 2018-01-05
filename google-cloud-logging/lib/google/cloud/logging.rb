@@ -15,7 +15,7 @@
 
 require "google-cloud-logging"
 require "google/cloud/logging/project"
-require "google/cloud/configuration"
+require "google/cloud/config"
 require "google/cloud/env"
 require "stackdriver/core"
 
@@ -416,9 +416,26 @@ module Google
       end
 
       # Initialize :logging as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :logging
-        Google::Cloud.configure.add_options logging: :monitored_resource
+      # Google::Cloud if we haven't already
+      unless Google::Cloud.configure.valid_config_name? :logging
+        Google::Cloud.configure.add_config! :logging do |config|
+          config.add_field! :project_id, nil, match: String
+          config.add_field! :project, nil, match: String
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :keyfile, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :log_name, nil, match: String
+          config.add_field! :log_name_map, nil, match: Hash
+          config.add_field! :labels, nil, match: Hash
+          config.add_config! :monitored_resource do |mrconfig|
+            mrconfig.add_field! :type, nil, match: String
+            mrconfig.add_field! :labels, nil, match: Hash
+          end
+        end
       end
 
       ##
@@ -458,7 +475,7 @@ module Google
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # for full configuration parameters.
       #
-      # @return [Google::Cloud::Configuration] The configuration object
+      # @return [Google::Cloud::Config] The configuration object
       #   the Google::Cloud::Logging module uses.
       #
       def self.configure

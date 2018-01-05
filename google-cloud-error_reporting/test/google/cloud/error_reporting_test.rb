@@ -40,7 +40,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     end
 
     it "uses provided project_id, credentials, service, and version" do
-      stubbed_credentials = ->(keyfile, scope: scope) {
+      stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "/path/to/a/keyfile"
         scope.must_be_nil
         "error_reporting-credentials"
@@ -62,7 +62,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     end
 
     it "uses provided project (alias), keyfile (alias), service, and version" do
-      stubbed_credentials = ->(keyfile, scope: scope) {
+      stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "/path/to/a/keyfile"
         scope.must_be_nil
         "error_reporting-credentials"
@@ -100,7 +100,7 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     end
 
     it "operates on the same Configuration object as Google::Cloud.configure.error_reporting" do
-      Google::Cloud::ErrorReporting.configure.must_equal Google::Cloud.configure.error_reporting
+      assert Google::Cloud::ErrorReporting.configure.equal? Google::Cloud.configure.error_reporting
     end
   end
 

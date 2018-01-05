@@ -32,8 +32,7 @@ describe Google::Cloud::Debugger::Railtie do
   end
 
   after {
-    Google::Cloud::Debugger.configure.instance_variable_get(:@configs).clear
-    Google::Cloud.configure.delete :use_debugger
+    Google::Cloud.configure.reset!
   }
 
   describe ".consolidate_rails_config" do

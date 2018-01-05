@@ -48,13 +48,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
 
   after {
     # Clear configuration values between each test
-    Google::Cloud::Logging.configure.delete :project_id
-    Google::Cloud::Logging.configure.delete :keyfile
-    Google::Cloud::Logging.configure.delete :log_name
-    Google::Cloud::Logging.configure.delete :log_name_map
-    Google::Cloud::Logging.configure.monitored_resource.delete :type
-    Google::Cloud::Logging.configure.monitored_resource.delete :labels
-    Google::Cloud.configure.delete :use_logging
+    Google::Cloud.configure.reset!
   }
 
   describe "#initialize" do

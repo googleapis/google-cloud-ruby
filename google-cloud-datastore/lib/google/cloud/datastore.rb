@@ -18,7 +18,7 @@ require "google/cloud/datastore/errors"
 require "google/cloud/datastore/dataset"
 require "google/cloud/datastore/transaction"
 require "google/cloud/datastore/credentials"
-require "google/cloud/configuration"
+require "google/cloud/config"
 require "google/cloud/env"
 
 module Google
@@ -654,9 +654,20 @@ module Google
       # rubocop:enable all
 
       # Initialize :datastore as a nested Configuration under Google::Cloud if
-      # haven't already
-      unless Google::Cloud.configure.option? :datastore
-        Google::Cloud.configure.add_options :datastore
+      # we haven't already
+      unless Google::Cloud.configure.valid_config_name? :datastore
+        Google::Cloud.configure.add_config! :datastore do |config|
+          config.add_field! :project_id, nil, match: String
+          config.add_field! :project, nil, match: String
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :keyfile, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :emulator_host, nil, match: String
+        end
       end
 
       ##
@@ -676,7 +687,7 @@ module Google
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
       #
-      # @return [Google::Cloud::Configuration] The configuration object the
+      # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigquery library uses.
       #
       def self.configure

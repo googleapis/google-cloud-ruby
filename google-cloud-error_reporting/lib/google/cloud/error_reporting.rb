@@ -17,7 +17,7 @@ require "google-cloud-error_reporting"
 require "google/cloud/error_reporting/async_error_reporter"
 require "google/cloud/error_reporting/project"
 require "google/cloud/error_reporting/middleware"
-require "google/cloud/configuration"
+require "google/cloud/config"
 require "google/cloud/env"
 require "stackdriver/core"
 
@@ -143,9 +143,22 @@ module Google
       end
 
       # Initialize :error_reporting as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :error_reporting
-        Google::Cloud.configure.add_options :error_reporting
+      # Google::Cloud if we haven't already
+      unless Google::Cloud.configure.valid_config_name? :error_reporting
+        Google::Cloud.configure.add_config! :error_reporting do |config|
+          config.add_field! :project_id, nil, match: String
+          config.add_field! :project, nil, match: String
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :keyfile, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :service_name, nil, match: String
+          config.add_field! :service_version, nil, match: String
+          config.add_field! :ignore_classes, nil, match: Array
+        end
       end
 
       ##
@@ -192,7 +205,7 @@ module Google
       #     Google::Cloud::ErrorReporting.report exception
       #   end
       #
-      # @return [Google::Cloud::Configuration] The configuration object
+      # @return [Google::Cloud::Config] The configuration object
       #   the Google::Cloud::ErrorReporting module uses.
       #
       def self.configure

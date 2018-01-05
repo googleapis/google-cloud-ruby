@@ -35,15 +35,7 @@ describe Google::Cloud::Logging::Railtie do
   end
 
   after {
-    Google::Cloud::Logging.configure.delete :project_id
-    Google::Cloud::Logging.configure.delete :project
-    Google::Cloud::Logging.configure.delete :credentials
-    Google::Cloud::Logging.configure.delete :keyfile
-    Google::Cloud::Logging.configure.delete :log_name
-    Google::Cloud::Logging.configure.delete :log_name_map
-    Google::Cloud::Logging.configure.monitored_resource.delete :type
-    Google::Cloud::Logging.configure.monitored_resource.delete :labels
-    Google::Cloud.configure.delete :use_logging
+    Google::Cloud.configure.reset!
   }
 
   describe ".consolidate_rails_config?" do

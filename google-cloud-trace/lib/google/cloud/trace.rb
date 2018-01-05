@@ -27,7 +27,7 @@ require "google/cloud/trace/span_kind"
 require "google/cloud/trace/time_sampler"
 require "google/cloud/trace/trace_record"
 require "google/cloud/trace/utils"
-require "google/cloud/configuration"
+require "google/cloud/config"
 require "stackdriver/core"
 
 module Google
@@ -256,9 +256,24 @@ module Google
       end
 
       # Initialize :trace as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :trace
-        Google::Cloud.configure.add_options :trace
+      # Google::Cloud if we haven't already
+      unless Google::Cloud.configure.valid_config_name? :trace
+        Google::Cloud.configure.add_config! :trace do |config|
+          config.add_field! :project_id, nil, match: String
+          config.add_field! :project, nil, match: String
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :keyfile, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :capture_stack, nil, enum: [true, false]
+          config.add_field! :sampler, nil
+          config.add_field! :span_id_generator, nil, match: Proc
+          config.add_field! :notifications, nil, match: Array
+          config.add_field! :max_data_length, nil, match: Integer
+        end
       end
 
       ##
@@ -297,7 +312,7 @@ module Google
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # for full configuration parameters.
       #
-      # @return [Google::Cloud::Configuration] The configuration object
+      # @return [Google::Cloud::Config] The configuration object
       #   the Google::Cloud::Trace module uses.
       #
       def self.configure

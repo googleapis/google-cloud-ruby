@@ -13,12 +13,12 @@
 # limitations under the License.
 
 
-require "google/cloud/configuration"
+require "google/cloud/config"
 
 module Stackdriver
   module Core
     ##
     # Keep this for backwards compatibility
-    Configuration = Google::Cloud::Configuration
+    Configuration = Google::Cloud::Config
   end
 end

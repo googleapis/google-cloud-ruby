@@ -149,7 +149,7 @@ describe Google::Cloud do
     end
 
     it "operates on the same Configuration object as Google::Cloud.configure.debugger" do
-      Google::Cloud::Debugger.configure.must_equal Google::Cloud.configure.debugger
+      assert Google::Cloud::Debugger.configure.equal? Google::Cloud.configure.debugger
     end
   end
 

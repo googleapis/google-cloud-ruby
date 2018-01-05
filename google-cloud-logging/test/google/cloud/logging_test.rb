@@ -216,7 +216,7 @@ describe Google::Cloud do
     end
 
     it "operates on the same Configuration object as Google::Cloud.configure.logging" do
-      Google::Cloud::Logging.configure.must_equal Google::Cloud.configure.logging
+      assert Google::Cloud::Logging.configure.equal? Google::Cloud.configure.logging
     end
   end
 end

@@ -15,7 +15,7 @@
 
 require "google-cloud-bigquery"
 require "google/cloud/bigquery/project"
-require "google/cloud/configuration"
+require "google/cloud/config"
 require "google/cloud/env"
 
 module Google
@@ -543,10 +543,20 @@ module Google
         )
       end
 
-      # Initialize :debugger as a nested Configuration under Google::Cloud if
-      # haven't already
-      unless Google::Cloud.configure.option? :bigquery
-        Google::Cloud.configure.add_options :bigquery
+      # Initialize :bigquery as a nested Configuration under Google::Cloud if
+      # we haven't already
+      unless Google::Cloud.configure.valid_config_name? :bigquery
+        Google::Cloud.configure.add_config! :bigquery do |config|
+          config.add_field! :project_id, nil, match: String
+          config.add_field! :project, nil, match: String
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :keyfile, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :retries, nil, match: Integer
+          config.add_field! :timeout, nil, match: Integer
+        end
       end
 
       ##
@@ -566,7 +576,7 @@ module Google
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
       #
-      # @return [Google::Cloud::Configuration] The configuration object the
+      # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigquery library uses.
       #
       def self.configure

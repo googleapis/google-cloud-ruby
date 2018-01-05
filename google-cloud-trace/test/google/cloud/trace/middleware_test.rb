@@ -77,8 +77,7 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
   }
 
   after {
-    Google::Cloud.configure.delete :use_trace
-    Google::Cloud::Trace.configure.instance_variable_get(:@configs).clear
+    Google::Cloud.configure.reset!
   }
 
   def base_app(&block)

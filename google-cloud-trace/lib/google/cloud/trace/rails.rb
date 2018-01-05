@@ -153,7 +153,9 @@ module Google
           gcp_config = rails_config.google_cloud
           trace_config = gcp_config.trace
 
-          Cloud.configure.use_trace ||= gcp_config.use_trace
+          if Cloud.configure.use_trace.nil?
+            Cloud.configure.use_trace = gcp_config.use_trace
+          end
           Trace.configure do |config|
             config.project_id ||= (config.project ||
               trace_config.project_id || trace_config.project ||
@@ -163,7 +165,9 @@ module Google
               gcp_config.credentials || gcp_config.keyfile)
             config.notifications ||= trace_config.notifications
             config.max_data_length ||= trace_config.max_data_length
-            config.capture_stack ||= trace_config.capture_stack
+            if config.capture_stack.nil?
+              config.capture_stack = trace_config.capture_stack
+            end
             config.sampler ||= trace_config.sampler
             config.span_id_generator ||= trace_config.span_id_generator
           end

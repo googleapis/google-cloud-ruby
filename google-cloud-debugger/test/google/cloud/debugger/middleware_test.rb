@@ -28,8 +28,7 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
   }
 
   after {
-    Google::Cloud::Debugger.configure.instance_variable_get(:@configs).clear
-    Google::Cloud.configure.delete :use_debugger
+    Google::Cloud.configure.reset!
 
     debugger.stop
   }
