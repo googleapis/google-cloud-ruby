@@ -27,11 +27,17 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
     Google::Cloud::Debugger::Middleware.new rack_app, debugger: debugger
   }
 
-  after {
+  before do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    # Clear configuration values between each test
     Google::Cloud.configure.reset!
 
     debugger.stop
-  }
+  end
 
   describe "#call" do
     it "calls Tracer#start and Tracer#disable_traces_for_thread for each request" do

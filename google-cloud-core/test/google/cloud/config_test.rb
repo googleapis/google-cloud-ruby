@@ -41,14 +41,14 @@ describe Google::Cloud::Config do
       config = Google::Cloud::Config.new
 
       config.must_be_kind_of Google::Cloud::Config
-      config.valid_config_names!.must_equal []
+      config.subconfigs!.must_equal []
     end
 
     it "accepts empty fields array" do
       config = Google::Cloud::Config.new []
 
       config.must_be_kind_of Google::Cloud::Config
-      config.valid_config_names!.must_equal []
+      config.subconfigs!.must_equal []
     end
 
     it "initializes options to nil" do
@@ -95,8 +95,8 @@ describe Google::Cloud::Config do
   describe "#add_field!" do
     it "adds a simple field with no validator" do
       new_config.add_field! :opt1
-      new_config.valid_field_names!.must_equal [:opt1]
-      new_config.valid_field_name?(:opt1).must_equal true
+      new_config.fields!.must_equal [:opt1]
+      new_config.field?(:opt1).must_equal true
       -> () {
         obj = Object.new
         new_config.opt1.must_be_nil
@@ -107,8 +107,8 @@ describe Google::Cloud::Config do
 
     it "adds a simple field with an integer default value" do
       new_config.add_field! :opt1, 1
-      new_config.valid_field_names!.must_equal [:opt1]
-      new_config.valid_field_name?(:opt1).must_equal true
+      new_config.fields!.must_equal [:opt1]
+      new_config.field?(:opt1).must_equal true
       -> () {
         new_config.opt1.must_equal 1
         new_config.opt1 = 2
@@ -120,24 +120,41 @@ describe Google::Cloud::Config do
     end
   end
 
+  describe "#add_alias!" do
+    it "creates an alias" do
+      checked_config.add_alias! :opt1_int_alias, :opt1_int
+      checked_config.alias?(:opt1_int_alias).must_equal :opt1_int
+      checked_config.alias?(:opt1_int).must_be_nil
+      checked_config.aliases!.must_equal [:opt1_int_alias]
+    end
+
+    it "causes the alias to act as an alias" do
+      checked_config.add_alias! :opt1_int_alias, :opt1_int
+      checked_config.opt1_int_alias = 4
+      checked_config.opt1_int.must_equal 4
+      checked_config.opt1_int = 6
+      checked_config.opt1_int_alias.must_equal 6
+    end
+  end
+
   describe "#add_config!" do
     it "adds an empty subconfig" do
       new_config.add_config! :sub1
-      new_config.valid_config_names!.must_equal [:sub1]
-      new_config.valid_config_name?(:sub1).must_equal true
+      new_config.subconfigs!.must_equal [:sub1]
+      new_config.subconfig?(:sub1).must_equal true
       assert Google::Cloud::Config === new_config.sub1
-      new_config.sub1.valid_config_names!.must_equal []
+      new_config.sub1.subconfigs!.must_equal []
     end
   end
 
   describe ".create" do
     it "creates nested subconfigs" do
-      checked_config.valid_field_names!.must_equal [:opt1_int]
-      checked_config.valid_config_names!.must_equal [:sub1]
-      checked_config.sub1.valid_field_names!.must_equal [:opt2_sym]
-      checked_config.sub1.valid_config_names!.must_equal [:sub2]
-      checked_config.sub1.sub2.valid_field_names!.must_include :opt3_bool
-      checked_config.sub1.sub2.valid_config_names!.must_equal []
+      checked_config.fields!.must_equal [:opt1_int]
+      checked_config.subconfigs!.must_equal [:sub1]
+      checked_config.sub1.fields!.must_equal [:opt2_sym]
+      checked_config.sub1.subconfigs!.must_equal [:sub2]
+      checked_config.sub1.sub2.fields!.must_include :opt3_bool
+      checked_config.sub1.sub2.subconfigs!.must_equal []
     end
   end
 
@@ -181,6 +198,31 @@ describe Google::Cloud::Config do
 
       checked_config.opt1_int.must_equal 1
       checked_config.sub1.sub2.opt3_bool.must_equal true
+    end
+  end
+
+  describe "#delete!" do
+    it "deletes a single field" do
+      checked_config.field?(:opt1_int).must_equal true
+      checked_config.subconfigs!.wont_equal []
+
+      checked_config.delete! :opt1_int
+
+      checked_config.field?(:opt1_int).must_equal false
+      checked_config.subconfigs!.wont_equal []
+    end
+
+    it "deletes everything" do
+      checked_config.add_alias! :opt1_int_alias, :opt1_int
+      checked_config.fields!.wont_equal []
+      checked_config.subconfigs!.wont_equal []
+      checked_config.aliases!.wont_equal []
+
+      checked_config.delete!
+
+      checked_config.fields!.must_equal []
+      checked_config.subconfigs!.must_equal []
+      checked_config.aliases!.must_equal []
     end
   end
 

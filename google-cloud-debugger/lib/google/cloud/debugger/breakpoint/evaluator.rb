@@ -733,7 +733,6 @@ module Google
           COMPILATION_FAIL_MSG = "Unable to compile expression".freeze
           LONG_EVAL_MSG = "Evaluation exceeded time limit".freeze
 
-          DEFAULT_TIME_LIMIT = 0.05
           EVALUATOR_REFERENCE = :__evaluator__
 
           ##
@@ -782,8 +781,7 @@ module Google
                 allow_mutating_methods
               end
             @time_limit = time_limit ||
-                          Debugger.configure.evaluation_time_limit ||
-                          DEFAULT_TIME_LIMIT
+                          Debugger.configure.evaluation_time_limit
           end
 
           ##

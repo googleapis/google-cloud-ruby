@@ -566,8 +566,6 @@ module Google
     # ```
     #
     module Datastore
-      # rubocop:disable all
-
       ##
       # Creates a new object for connecting to the Datastore service.
       # Each call creates a new connection.
@@ -593,7 +591,7 @@ module Google
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. See Google::Gax::CallSettings. Optional.
       # @param [String] emulator_host Datastore emulator host. Optional.
-      #   If the param is nil, ENV["DATASTORE_EMULATOR_HOST"] will be used.
+      #   If the param is nil, uses the value of the `emulator_host` config.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -627,8 +625,7 @@ module Google
         scope ||= configure.scope
         timeout ||= configure.timeout
         client_config ||= configure.client_config
-        emulator_host ||= (configure.emulator_host ||
-                           ENV["DATASTORE_EMULATOR_HOST"])
+        emulator_host ||= configure.emulator_host
         if emulator_host
           return Datastore::Dataset.new(
             Datastore::Service.new(
@@ -651,24 +648,30 @@ module Google
         )
       end
 
-      # rubocop:enable all
-
-      # Initialize :datastore as a nested Configuration under Google::Cloud if
-      # we haven't already
-      unless Google::Cloud.configure.valid_config_name? :datastore
+      ##
+      # Reload datastore configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :datastore
         Google::Cloud.configure.add_config! :datastore do |config|
-          config.add_field! :project_id, nil, match: String
-          config.add_field! :project, nil, match: String
+          config.add_field! :project_id,
+                            (ENV["DATASTORE_DATASET"] ||
+                             ENV["DATASTORE_PROJECT"]),
+                            match: String
+          config.add_alias! :project, :project_id
           config.add_field! :credentials, nil,
                             match: [String, Hash, Google::Auth::Credentials]
-          config.add_field! :keyfile, nil,
-                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]
           config.add_field! :timeout, nil, match: Integer
           config.add_field! :client_config, nil, match: Hash
-          config.add_field! :emulator_host, nil, match: String
+          config.add_field! :emulator_host, ENV["DATASTORE_EMULATOR_HOST"],
+                            match: String
         end
       end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :datastore
 
       ##
       # Configure the Google Cloud Datastore library.
@@ -686,6 +689,8 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["DATASTORE_EMULATOR_HOST"]`
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigquery library uses.
@@ -700,13 +705,7 @@ module Google
       # @private Default project.
       def self.default_project_id
         Google::Cloud.configure.datastore.project_id ||
-          Google::Cloud.configure.datastore.project ||
           Google::Cloud.configure.project_id ||
-          Google::Cloud.configure.project ||
-          ENV["DATASTORE_DATASET"] ||
-          ENV["DATASTORE_PROJECT"] ||
-          ENV["GOOGLE_CLOUD_PROJECT"] ||
-          ENV["GCLOUD_PROJECT"] ||
           Google::Cloud.env.project_id
       end
 
@@ -714,9 +713,7 @@ module Google
       # @private Default credentials.
       def self.default_credentials scope: nil
         Google::Cloud.configure.datastore.credentials ||
-          Google::Cloud.configure.datastore.keyfile ||
           Google::Cloud.configure.credentials ||
-          Google::Cloud.configure.keyfile ||
           Datastore::Credentials.default(scope: scope)
       end
     end

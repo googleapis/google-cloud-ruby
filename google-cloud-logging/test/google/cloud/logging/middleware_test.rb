@@ -46,10 +46,15 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
                                                      project_id: project
   }
 
-  after {
+  before do
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
-  }
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
 
   describe "#initialize" do
     let(:default_credentials) do

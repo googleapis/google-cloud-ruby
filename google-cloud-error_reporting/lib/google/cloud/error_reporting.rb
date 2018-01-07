@@ -142,23 +142,32 @@ module Google
         )
       end
 
-      # Initialize :error_reporting as a nested Configuration under
-      # Google::Cloud if we haven't already
-      unless Google::Cloud.configure.valid_config_name? :error_reporting
+      ##
+      # Reload error reporting configuration to defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :error_reporting
         Google::Cloud.configure.add_config! :error_reporting do |config|
-          config.add_field! :project_id, nil, match: String
-          config.add_field! :project, nil, match: String
+          config.add_field! :project_id, ENV["ERROR_REPORTING_PROJECT"],
+                            match: String
+          config.add_alias! :project, :project_id
           config.add_field! :credentials, nil,
                             match: [String, Hash, Google::Auth::Credentials]
-          config.add_field! :keyfile, nil,
-                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]
           config.add_field! :timeout, nil, match: Integer
           config.add_field! :client_config, nil, match: Hash
-          config.add_field! :service_name, nil, match: String
-          config.add_field! :service_version, nil, match: String
+          config.add_field! :service_name, ENV["ERROR_REPORTING_SERVICE"],
+                            match: String
+          config.add_field! :service_version, ENV["ERROR_REPORTING_VERSION"],
+                            match: String
           config.add_field! :ignore_classes, nil, match: Array
         end
+      end
+
+      unless Google::Cloud.configure.subconfig? :error_reporting
+        reload_configuration!
       end
 
       ##
@@ -182,6 +191,10 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `service_name` - (String) Name for the application.
+      # * `service_version` - (String) Version identifier for the application.
+      # * `ignore_classes` - (Array<Exception>) Array of exception types that
+      #   should not be reported.
       #
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
@@ -262,10 +275,8 @@ module Google
       def self.report exception, service_name: nil, service_version: nil
         return if Google::Cloud.configure.use_error_reporting == false
 
-        service_name ||= configure.service_name ||
-                         Project.default_service_name
-        service_version ||= configure.service_version ||
-                            Project.default_service_version
+        service_name ||= Project.default_service_name
+        service_version ||= Project.default_service_version
 
         error_event = ErrorEvent.from_exception(exception).tap do |event|
           event.service_name = service_name
@@ -281,12 +292,8 @@ module Google
       # @private Create a private client to
       def self.default_client
         unless @@default_client
-          project_id = configure.project_id || configure.project ||
-                       Google::Cloud.configure.project_id ||
-                       Google::Cloud.configure.project
-          credentials = configure.credentials || configure.keyfile ||
-                        Google::Cloud.configure.credentials ||
-                        Google::Cloud.configure.keyfile
+          project_id = Project.default_project_id
+          credentials = default_credentials
 
           @@default_client = AsyncErrorReporter.new(
             new(project_id: project_id, credentials: credentials)
@@ -302,9 +309,7 @@ module Google
       # @private Default credentials.
       def self.default_credentials scope: nil
         Google::Cloud.configure.error_reporting.credentials ||
-          Google::Cloud.configure.error_reporting.keyfile ||
           Google::Cloud.configure.credentials ||
-          Google::Cloud.configure.keyfile ||
           ErrorReporting::Credentials.default(scope: scope)
       end
 

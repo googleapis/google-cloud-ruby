@@ -76,9 +76,15 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
     Google::Cloud::Trace::Middleware.new base_app
   }
 
-  after {
+  before do
+    # Clear configuration values between each test
     Google::Cloud.configure.reset!
-  }
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
 
   def base_app(&block)
     app = ::Struct.new(:block).new(block)

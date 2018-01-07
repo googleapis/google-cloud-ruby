@@ -406,25 +406,33 @@ module Google
 
       # rubocop:enable all
 
-      # Initialize :debugger as a nested Configuration under Google::Cloud if
-      # haven't already
-      unless Google::Cloud.configure.valid_config_name? :debugger
+      ##
+      # Reload debugger configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :debugger
         Google::Cloud.configure.add_config! :debugger do |config|
-          config.add_field! :project_id, nil, match: String
-          config.add_field! :project, nil, match: String
+          config.add_field! :project_id, ENV["DEBUGGER_PROJECT"], match: String
+          config.add_alias! :project, :project_id
           config.add_field! :credentials, nil,
                             match: [String, Hash, Google::Auth::Credentials]
-          config.add_field! :keyfile, nil,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_field! :service_name, nil, match: String
-          config.add_field! :service_version, nil, match: String
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :service_name, ENV["DEBUGGER_SERVICE_NAME"],
+                            match: String
+          config.add_field! :service_version, ENV["DEBUGGER_SERVICE_VERSION"],
+                            match: String
           config.add_field! :app_root, nil, match: String
           config.add_field! :root, nil, match: String
           config.add_field! :scope, nil, match: [String, Array]
           config.add_field! :timeout, nil, match: Integer
           config.add_field! :client_config, nil, match: Hash
+          config.add_field! :allow_mutating_methods, false
+          config.add_field! :evaluation_time_limit, 0.05, match: Numeric
         end
       end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :debugger
 
       ##
       # Configure the Stackdriver Debugger agent.
@@ -449,6 +457,11 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `client_config` - (Hash) A hash of values to override the default
       #   behavior of the API client.
+      # * `allow_mutating_methods` - (boolean) Whether expressions and
+      #   conditional breakpoints can call methods that could modify program
+      #   state. Defaults to false.
+      # * `evaluation_time_limit` - (Numeric) Time limit in seconds for
+      #   expression evaluation. Defaults to 0.05.
       #
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
@@ -467,12 +480,7 @@ module Google
       # @private Default project.
       def self.default_project_id
         Google::Cloud.configure.debugger.project_id ||
-          Google::Cloud.configure.debugger.project ||
           Google::Cloud.configure.project_id ||
-          Google::Cloud.configure.project ||
-          ENV["DEBUGGER_PROJECT"] ||
-          ENV["GOOGLE_CLOUD_PROJECT"] ||
-          ENV["GCLOUD_PROJECT"] ||
           Google::Cloud.env.project_id
       end
 
@@ -480,7 +488,6 @@ module Google
       # @private Default service name identifier.
       def self.default_service_name
         Google::Cloud.configure.debugger.service_name ||
-          ENV["DEBUGGER_SERVICE_NAME"] ||
           Google::Cloud.env.app_engine_service_id ||
           "ruby-app"
       end
@@ -489,7 +496,6 @@ module Google
       # @private Default service version identifier.
       def self.default_service_version
         Google::Cloud.configure.debugger.service_version ||
-          ENV["DEBUGGER_SERVICE_VERSION"] ||
           Google::Cloud.env.app_engine_service_version ||
           ""
       end
@@ -498,9 +504,7 @@ module Google
       # @private Default credentials.
       def self.default_credentials scope: nil
         Google::Cloud.configure.debugger.credentials ||
-          Google::Cloud.configure.debugger.keyfile ||
           Google::Cloud.configure.credentials ||
-          Google::Cloud.configure.keyfile ||
           Debugger::Credentials.default(scope: scope)
       end
 

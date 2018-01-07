@@ -13,10 +13,6 @@
 # limitations under the License.
 
 
-# This dependency is not found google-cloud-core's dependencies,
-# but it is a dependency for all gems that depend on google-cloud-core.
-require "googleauth"
-
 module Google
   module Cloud
     ##
@@ -105,7 +101,7 @@ module Google
       #
       # @return [boolean]
       #
-      def self.created? obj
+      def self.config? obj
         Config.send :===, obj
       end
 
@@ -228,7 +224,19 @@ module Google
         end
         @values[key] = config
         @defaults[key] = config
-        @validators[key] = :subconfig
+        @validators[key] = SUBCONFIG
+        self
+      end
+
+      ##
+      # Cause a key to be an alias of another key. The two keys will refer to
+      # the same field.
+      #
+      def add_alias! key, to_key
+        key = validate_new_key! key
+        @values.delete key
+        @defaults.delete key
+        @validators[key] = to_key.to_sym
         self
       end
 
@@ -247,7 +255,7 @@ module Google
           key = key.to_sym
           if @defaults.key? key
             @values[key] = @defaults[key]
-            @values[key].reset! if @validators[key] == :subconfig
+            @values[key].reset! if @validators[key] == SUBCONFIG
           elsif @values.key? key
             warn! "Key #{key.inspect} has not been added, but has a value." \
                   " Removing the value."
@@ -256,6 +264,28 @@ module Google
             warn! "Key #{key.inspect} does not exist. Nothing to reset."
           end
         end
+        self
+      end
+
+      ##
+      # Remove the given key from the configuration, deleting any validation
+      # and value. If the key is omitted, delete all keys. If the key is an
+      # alias, deletes the alias but leaves the original.
+      #
+      # @param [Symbol, nil] key The key to delete. If omitted or `nil`,
+      #     delete all fields and subconfigs.
+      #
+      def delete! key = nil
+        if key.nil?
+          @values.clear
+          @defaults.clear
+          @validators.clear
+        else
+          @values.delete key
+          @defaults.delete key
+          @validators.delete key
+        end
+        self
       end
 
       ##
@@ -265,7 +295,7 @@ module Google
       # @param [Object] value The new option value
       #
       def []= key, value
-        key = key.to_sym
+        key = resolve_key! key
         validate_value! key, @validators[key], value
         @values[key] = value
       end
@@ -277,7 +307,7 @@ module Google
       # @return [Object] The option value or subconfig object
       #
       def [] key
-        key = key.to_sym
+        key = resolve_key! key
         unless @validators.key? key
           warn! "Key #{key.inspect} does not exist. Returning nil."
         end
@@ -306,14 +336,15 @@ module Google
       end
 
       ##
-      # Check if the given key has been set in this object as a normal field
-      # or a subconfig, even if the key has not been added explicitly.
+      # Check if the given key has been set in this object. Returns true if the
+      # key has been added as a normal field, subconfig, or alias, or if it has
+      # not been added explicitly but still has a value.
       #
       # @param [Symbol] key The key to check for.
       # @return [boolean]
       #
       def value_set? key
-        @values.key? key.to_sym
+        @values.key? resolve_key! key
       end
       alias option? value_set?
 
@@ -323,7 +354,7 @@ module Google
       # @param [Symbol] key The key to check for.
       # @return [boolean]
       #
-      def valid_field_name? key
+      def field? key
         @validators[key.to_sym].is_a? ::Proc
       end
 
@@ -333,8 +364,20 @@ module Google
       # @param [Symbol] key The key to check for.
       # @return [boolean]
       #
-      def valid_config_name? key
-        @validators[key.to_sym] == :subconfig
+      def subconfig? key
+        @validators[key.to_sym] == SUBCONFIG
+      end
+
+      ##
+      # Check if the given key has been explicitly added as an alias.
+      # If so, return the target, otherwise return nil.
+      #
+      # @param [Symbol] key The key to check for.
+      # @return [Symbol,nil] The alias target, or nil if not an alias.
+      #
+      def alias? key
+        target = @validators[key.to_sym]
+        target.is_a?(::Symbol) ? target : nil
       end
 
       ##
@@ -342,7 +385,7 @@ module Google
       #
       # @return [Array<Symbol>] a list of field names as symbols.
       #
-      def valid_field_names!
+      def fields!
         @validators.keys.find_all { |key| @validators[key].is_a? ::Proc }
       end
 
@@ -351,8 +394,17 @@ module Google
       #
       # @return [Array<Symbol>] a list of subconfig names as symbols.
       #
-      def valid_config_names!
-        @validators.keys.find_all { |key| @validators[key] == :subconfig }
+      def subconfigs!
+        @validators.keys.find_all { |key| @validators[key] == SUBCONFIG }
+      end
+
+      ##
+      # Return a list of alias names.
+      #
+      # @return [Array<Symbol>] a list of alias names as symbols.
+      #
+      def aliases!
+        @validators.keys.find_all { |key| @validators[key].is_a? ::Symbol }
       end
 
       ##
@@ -364,7 +416,7 @@ module Google
       def to_s!
         elems = @validators.keys.map do |k|
           v = @values[k]
-          vstr = Config.created?(v) ? v.to_s! : value.inspect
+          vstr = Config.config?(v) ? v.to_s! : value.inspect
           " #{k}=#{vstr}"
         end
         "<Config:#{elems.join}>"
@@ -381,7 +433,7 @@ module Google
         h = {}
         @validators.each_key do |k|
           v = @values[k]
-          h[k] = Config.created?(v) ? v.to_h! : v.inspect
+          h[k] = Config.config?(v) ? v.to_h! : v.inspect
         end
         h
       end
@@ -417,6 +469,17 @@ module Google
         singleton_method_undefined
       ].freeze
 
+      ##
+      # @private sentinel indicating a subconfig in the validators hash
+      #
+      SUBCONFIG = ::Object.new
+
+      def resolve_key! key
+        key = key.to_sym
+        alias_target = @validators[key]
+        alias_target.is_a?(::Symbol) ? alias_target : key
+      end
+
       def validate_new_key! key
         key_str = key.to_s
         key = key.to_sym
@@ -443,7 +506,7 @@ module Google
         elsif initial.nil?
           OPEN_VALIDATOR
         else
-          klass = Config.created?(initial) ? Config : initial.class
+          klass = Config.config?(initial) ? Config : initial.class
           build_match_validator! klass, allow_nil
         end
       end
@@ -490,25 +553,6 @@ module Google
       end
     end
 
-    # Shared Configuration object that all libraries will use.
-    @config = Config.create do |config|
-      creds_types = [String, Hash]
-      if defined? Google::Auth::Credentials
-        creds_types << Google::Auth::Credentials
-      end
-
-      config.add_field! :project_id, nil, match: String
-      config.add_field! :project, nil, match: String
-      config.add_field! :credentials, nil, match: creds_types
-      config.add_field! :keyfile, nil, match: creds_types
-      config.add_field! :service_name, nil, match: String
-      config.add_field! :service_version, nil, match: String
-      config.add_field! :use_debugger, nil, enum: [true, false]
-      config.add_field! :use_error_reporting, nil, enum: [true, false]
-      config.add_field! :use_logging, nil, enum: [true, false]
-      config.add_field! :use_trace, nil, enum: [true, false]
-    end
-
     ##
     # Configure the default parameter for Google::Cloud. The values defined on
     # this top level will be shared across all Stackdriver instrumentation
@@ -539,5 +583,32 @@ module Google
 
       @config
     end
+
+    ##
+    # Reload local the global config fields from defaults. For testing. Does not
+    # affect subconfigs.
+    # @private
+    #
+    def self.reload_configuration!
+      configure do |config|
+        (config.fields! + config.aliases!).each { |key| config.delete! key }
+
+        config.add_field! :project_id,
+                          ENV["GOOGLE_CLOUD_PROJECT"] || ENV["GCLOUD_PROJECT"],
+                          match: String
+        config.add_alias! :project, :project_id
+        config.add_field! :credentials, nil, match: Object
+        config.add_alias! :keyfile, :credentials
+        config.add_field! :service_name, nil, match: String
+        config.add_field! :service_version, nil, match: String
+        config.add_field! :use_debugger, nil, enum: [true, false]
+        config.add_field! :use_error_reporting, nil, enum: [true, false]
+        config.add_field! :use_logging, nil, enum: [true, false]
+        config.add_field! :use_trace, nil, enum: [true, false]
+      end
+    end
+
+    @config = Config.create
+    reload_configuration!
   end
 end

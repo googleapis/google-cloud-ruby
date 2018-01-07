@@ -262,12 +262,10 @@ module Google
         def load_config **kwargs
           configuration.project_id = kwargs[:project_id] ||
                                      kwargs[:project] ||
-                                     configuration.project_id ||
-                                     configuration.project
+                                     configuration.project_id
           configuration.credentials = kwargs[:credentials] ||
                                       kwargs[:keyfile] ||
-                                      configuration.credentials ||
-                                      configuration.keyfile
+                                      configuration.credentials
           configuration.log_name_map ||= kwargs[:log_name_map] ||
                                          configuration.log_name_map
 
@@ -278,11 +276,9 @@ module Google
         # Fallback to default configuration values if not defined already
         def init_default_config
           configuration.project_id ||= begin
-            (Cloud.configure.project_id || Cloud.configure.project ||
-             Logging.default_project_id)
+            (Cloud.configure.project_id || Logging.default_project_id)
           end
-          configuration.credentials ||= \
-            (Cloud.configure.credentials || Cloud.configure.keyfile)
+          configuration.credentials ||= Cloud.configure.credentials
           configuration.log_name ||= DEFAULT_LOG_NAME
           configuration.log_name_map ||= DEFAULT_LOG_NAME_MAP
         end

@@ -57,10 +57,15 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
                                                   credentials: credentials
   }
 
-  after {
+  before do
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
-  }
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
 
   describe "#initialize" do
     it "uses the error_reporting given" do

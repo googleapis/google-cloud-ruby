@@ -100,12 +100,10 @@ module Google
         def load_config **kwargs
           configuration.project_id = kwargs[:project] ||
                                      kwargs[:project_id] ||
-                                     configuration.project_id ||
-                                     configuration.project
+                                     configuration.project_id
           configuration.credentials = kwargs[:credentials] ||
                                       kwargs[:keyfile] ||
-                                      configuration.credentials ||
-                                      configuration.keyfile
+                                      configuration.credentials
 
           configuration.service_name = kwargs[:service_name] ||
                                        configuration.service_name

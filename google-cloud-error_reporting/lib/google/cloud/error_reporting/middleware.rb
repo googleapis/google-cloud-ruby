@@ -148,8 +148,6 @@ module Google
 
         private
 
-        # rubocop:disable all
-
         ##
         # Consolidate configurations from various sources. Also set
         # instrumentation config parameters to default values if not set
@@ -158,12 +156,10 @@ module Google
         def load_config **kwargs
           configuration.project_id = kwargs[:project_id] ||
                                      kwargs[:project] ||
-                                     configuration.project_id ||
-                                     configuration.project
+                                     configuration.project_id
           configuration.credentials = kwargs[:credentials] ||
                                       kwargs[:keyfile] ||
-                                      configuration.credentials ||
-                                      configuration.keyfile
+                                      configuration.credentials
           configuration.service_name = kwargs[:service_name] ||
                                        configuration.service_name
           configuration.service_version = kwargs[:service_version] ||
@@ -174,17 +170,14 @@ module Google
           init_default_config
         end
 
-        # rubocop:enable all
-
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
           configuration.project_id ||= begin
-            (Cloud.configure.project_id || Cloud.configure.project ||
+            (Cloud.configure.project_id ||
              ErrorReporting::Project.default_project_id)
           end
-          configuration.credentials ||= \
-            (Cloud.configure.credentials || Cloud.configure.keyfile)
+          configuration.credentials ||= Cloud.configure.credentials
           configuration.service_name ||=
             ErrorReporting::Project.default_service_name
           configuration.service_version ||=

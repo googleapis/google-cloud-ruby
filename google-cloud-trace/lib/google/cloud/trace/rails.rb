@@ -130,12 +130,8 @@ module Google
 
           # Verify credentials and set use_error_reporting to false if
           # credentials are invalid
-          project_id = Trace.configure.project_id ||
-                       Trace.configure.project
-          credentials = Trace.configure.credentials ||
-                        Trace.configure.keyfile
-
-          unless valid_credentials? project_id, credentials
+          unless valid_credentials? Trace.configure.project_id,
+                                    Trace.configure.credentials
             Cloud.configure.use_trace = false
             return
           end

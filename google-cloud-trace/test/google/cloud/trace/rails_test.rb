@@ -35,9 +35,15 @@ describe Google::Cloud::Trace::Railtie do
     config
   end
 
-  after {
+  before do
+    # Clear configuration values between each test
     Google::Cloud.configure.reset!
-  }
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
 
   describe ".consolidate_rails_config" do
     it "merges configs from Rails configuration" do

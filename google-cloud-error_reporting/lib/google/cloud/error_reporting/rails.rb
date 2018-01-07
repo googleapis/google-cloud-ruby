@@ -89,12 +89,8 @@ module Google
 
           # Verify credentials and set use_error_reporting to false if
           # credentials are invalid
-          project_id = ErrorReporting.configure.project_id ||
-                       ErrorReporting.configure.project
-          credentials = ErrorReporting.configure.credentials ||
-                        ErrorReporting.configure.keyfile
-
-          unless valid_credentials? project_id, credentials
+          unless valid_credentials? ErrorReporting.configure.project_id,
+                                    ErrorReporting.configure.credentials
             Cloud.configure.use_error_reporting = false
             return
           end

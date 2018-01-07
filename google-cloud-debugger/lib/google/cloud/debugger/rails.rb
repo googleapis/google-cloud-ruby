@@ -79,12 +79,8 @@ module Google
 
           # Verify credentials and set use_debugger to false if
           # credentials are invalid
-          project_id = Debugger.configure.project_id ||
-                       Debugger.configure.project
-          credentials = Debugger.configure.credentials ||
-                        Debugger.configure.keyfile
-
-          unless valid_credentials? project_id, credentials
+          unless valid_credentials? Debugger.configure.project_id,
+                                    Debugger.configure.credentials
             Cloud.configure.use_debugger = false
             return
           end

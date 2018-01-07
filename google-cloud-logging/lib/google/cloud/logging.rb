@@ -415,16 +415,18 @@ module Google
         )
       end
 
-      # Initialize :logging as a nested Configuration under
-      # Google::Cloud if we haven't already
-      unless Google::Cloud.configure.valid_config_name? :logging
+      ##
+      # Reload logging configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :logging
         Google::Cloud.configure.add_config! :logging do |config|
-          config.add_field! :project_id, nil, match: String
-          config.add_field! :project, nil, match: String
+          config.add_field! :project_id, ENV["LOGGING_PROJECT"], match: String
+          config.add_alias! :project, :project_id
           config.add_field! :credentials, nil,
                             match: [String, Hash, Google::Auth::Credentials]
-          config.add_field! :keyfile, nil,
-                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]
           config.add_field! :timeout, nil, match: Integer
           config.add_field! :client_config, nil, match: Hash
@@ -437,6 +439,8 @@ module Google
           end
         end
       end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :logging
 
       ##
       # Configure the Google::Cloud::Logging::Middleware when used in a
@@ -488,12 +492,7 @@ module Google
       # @private Default project.
       def self.default_project_id
         Google::Cloud.configure.logging.project_id ||
-          Google::Cloud.configure.logging.project ||
           Google::Cloud.configure.project_id ||
-          Google::Cloud.configure.project ||
-          ENV["LOGGING_PROJECT"] ||
-          ENV["GOOGLE_CLOUD_PROJECT"] ||
-          ENV["GCLOUD_PROJECT"] ||
           Google::Cloud.env.project_id
       end
 
@@ -501,9 +500,7 @@ module Google
       # @private Default credentials.
       def self.default_credentials scope: nil
         Google::Cloud.configure.logging.credentials ||
-          Google::Cloud.configure.logging.keyfile ||
           Google::Cloud.configure.credentials ||
-          Google::Cloud.configure.keyfile ||
           Logging::Credentials.default(scope: scope)
       end
     end

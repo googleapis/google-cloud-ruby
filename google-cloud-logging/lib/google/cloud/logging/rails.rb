@@ -58,10 +58,8 @@ module Google
         # @private Init Logging integration for Rails. Setup configuration and
         # insert the Middleware.
         def self.init_middleware app
-          project_id = Logging.configure.project_id ||
-                       Logging.configure.project
-          credentials = Logging.configure.credentials ||
-                        Logging.configure.keyfile
+          project_id = Logging.configure.project_id
+          credentials = Logging.configure.credentials
           resource_type = Logging.configure.monitored_resource.type
           resource_labels = Logging.configure.monitored_resource.labels
           log_name = Logging.configure.log_name

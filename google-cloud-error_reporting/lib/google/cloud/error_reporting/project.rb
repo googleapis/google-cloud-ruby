@@ -50,11 +50,7 @@ module Google
         #
         def self.default_project_id
           Google::Cloud.configure.error_reporting.project_id ||
-            Google::Cloud.configure.error_reporting.project ||
             Google::Cloud.configure.project_id ||
-            Google::Cloud.configure.project ||
-            ENV["ERROR_REPORTING_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
             Google::Cloud.env.project_id
         end
         class << self
@@ -70,7 +66,6 @@ module Google
         def self.default_service_name
           Google::Cloud.configure.error_reporting.service_name ||
             Google::Cloud.configure.service_name ||
-            ENV["ERROR_REPORTING_SERVICE"] ||
             Google::Cloud.env.app_engine_service_id ||
             "ruby"
         end
@@ -84,7 +79,6 @@ module Google
         def self.default_service_version
           Google::Cloud.configure.error_reporting.service_version ||
             Google::Cloud.configure.service_version ||
-            ENV["ERROR_REPORTING_VERSION"] ||
             Google::Cloud.env.app_engine_service_version
         end
 
