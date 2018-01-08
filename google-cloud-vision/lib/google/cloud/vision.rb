@@ -15,6 +15,8 @@
 
 require "google-cloud-vision"
 require "google/cloud/vision/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -227,6 +229,9 @@ module Google
         #
         # The default value is `100`.
         #
+        # This is also available on the configuration as
+        # `Google::Cloud::Vision.configure.default_max_faces`
+        #
         # @example Using the default setting on {Project#annotate}:
         #   require "google/cloud/vision"
         #
@@ -274,13 +279,25 @@ module Google
         #   # This is the same as calling
         #   # faces = vision.image("path/to/faces.jpg").faces 5
         #
-        attr_accessor :default_max_faces
+        def default_max_faces= value
+          configure.default_max_faces = value
+        end
+
+        ##
+        # The default max results to return for face detection requests.
+        #
+        def default_max_faces
+          configure.default_max_faces
+        end
 
         ##
         # The default max results to return for landmark detection requests.
         # This is used on {Project#annotate} as well as {Image#landmarks}.
         #
         # The default value is 100.
+        #
+        # This is also available on the configuration as
+        # `Google::Cloud::Vision.configure.default_max_landmarks`
         #
         # @example Using the default setting on {Project#annotate}:
         #   require "google/cloud/vision"
@@ -331,13 +348,25 @@ module Google
         #   # This is the same as calling
         #   # landmarks = vision.image("path/to/landmarks.jpg").landmarks 5
         #
-        attr_accessor :default_max_landmarks
+        def default_max_landmarks= value
+          configure.default_max_landmarks = value
+        end
+
+        ##
+        # The default max results to return for landmark detection requests.
+        #
+        def default_max_landmarks
+          configure.default_max_landmarks
+        end
 
         ##
         # The default max results to return for logo detection requests. This is
         # used on {Project#annotate} as well as {Image#logos}.
         #
         # The default value is 100.
+        #
+        # This is also available on the configuration as
+        # `Google::Cloud::Vision.configure.default_max_logos`
         #
         # @example Using the default setting on {Project#annotate}:
         #   require "google/cloud/vision"
@@ -386,13 +415,25 @@ module Google
         #   # This is the same as calling
         #   # logos = vision.image("path/to/logos.jpg").logos 5
         #
-        attr_accessor :default_max_logos
+        def default_max_logos= value
+          configure.default_max_logos = value
+        end
+
+        ##
+        # The default max results to return for logo detection requests.
+        #
+        def default_max_logos
+          configure.default_max_logos
+        end
 
         ##
         # The default max results to return for label detection requests. This
         # is used on {Project#annotate} as well as {Image#labels}.
         #
         # The default value is 100.
+        #
+        # This is also available on the configuration as
+        # `Google::Cloud::Vision.configure.default_max_labels`
         #
         # @example Using the default setting on {Project#annotate}:
         #   require "google/cloud/vision"
@@ -441,13 +482,25 @@ module Google
         #   # This is the same as calling
         #   # labels = vision.image("path/to/labels.jpg").labels 5
         #
-        attr_accessor :default_max_labels
+        def default_max_labels= value
+          configure.default_max_labels = value
+        end
+
+        ##
+        # The default max results to return for label detection requests.
+        #
+        def default_max_labels
+          configure.default_max_labels
+        end
 
         ##
         # The default max results to return for crop hints detection requests.
         # This is used on {Project#annotate} as well as {Image#crop_hints}.
         #
         # The default value is 100.
+        #
+        # This is also available on the configuration as
+        # `Google::Cloud::Vision.configure.default_max_crop_hints`
         #
         # @example Using the default setting on {Project#annotate}:
         #   require "google/cloud/vision"
@@ -498,13 +551,25 @@ module Google
         #   # This is the same as calling
         #   # crop_hints = vision.image("path/to/landmarks.jpg").crop_hints 5
         #
-        attr_accessor :default_max_crop_hints
+        def default_max_crop_hints= value
+          configure.default_max_crop_hints = value
+        end
+
+        ##
+        # The default max results to return for crop hints detection requests.
+        #
+        def default_max_crop_hints
+          configure.default_max_crop_hints
+        end
 
         ##
         # The default max results to return for web detection requests.
         # This is used on {Project#annotate} as well as {Image#web}.
         #
         # The default value is 100.
+        #
+        # This is also available on the configuration as
+        # `Google::Cloud::Vision.configure.default_max_web`
         #
         # @example Using the default setting on {Project#annotate}:
         #   require "google/cloud/vision"
@@ -555,17 +620,17 @@ module Google
         #   # This is the same as calling
         #   # web = vision.image("path/to/landmarks.jpg").web 5
         #
-        attr_accessor :default_max_web
-      end
+        def default_max_web= value
+          configure.default_max_web = value
+        end
 
-      # Set the default values.
-      # Update the comments documentation when these change.
-      self.default_max_faces      = 100
-      self.default_max_landmarks  = 100
-      self.default_max_logos      = 100
-      self.default_max_labels     = 100
-      self.default_max_crop_hints = 100
-      self.default_max_web        = 100
+        ##
+        # The default max results to return for web detection requests.
+        #
+        def default_max_web
+          configure.default_max_web
+        end
+      end
 
       ##
       # Creates a new object for connecting to the Vision service.
@@ -606,11 +671,14 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || Vision::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= (keyfile || Vision::Credentials.default(scope: scope))
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Vision::Credentials.new credentials, scope: scope
         end
@@ -621,6 +689,89 @@ module Google
                                      client_config: client_config
           )
         )
+      end
+
+      ##
+      # Reload vision configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :vision
+        Google::Cloud.configure.add_config! :vision do |config|
+          config.add_field! :project_id, ENV["VISION_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          # Update the documentation on the Vision module methods when these
+          # defaults change.
+          config.add_field! :default_max_faces, 100
+          config.add_field! :default_max_landmarks, 100
+          config.add_field! :default_max_logos, 100
+          config.add_field! :default_max_labels, 100
+          config.add_field! :default_max_crop_hints, 100
+          config.add_field! :default_max_web, 100
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :vision
+
+      ##
+      # Configure the Google Cloud Vision library.
+      #
+      # The following Vision configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Vision project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Vision::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `default_max_faces` - (Integer) The default max results to return for
+      #   facial detection requests. See {Vision.default_max_faces=}.
+      # * `default_max_landmarks` - (Integer) The default max results to return
+      #   for landmark detection requests. See {Vision.default_max_landmarks=}.
+      # * `default_max_logos` - (Integer) The default max results to return for
+      #   logo detection requests. See {Vision.default_max_logos=}.
+      # * `default_max_labels` - (Integer) The default max results to return for
+      #   label detection requests. See {Vision.default_max_labels=}.
+      # * `default_max_crop_hints` - (Integer) The default max results to return
+      #   for crop hints detection requests. See
+      #   {Vision.default_max_crop_hints=}.
+      # * `default_max_web` - (Integer) The default max results to return for
+      #   web detection requests. See {Vision.default_max_faces=}.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Vision library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.vision if block_given?
+
+        Google::Cloud.configure.vision
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.vision.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.vision.credentials ||
+          Google::Cloud.configure.credentials ||
+          Vision::Credentials.default(scope: scope)
       end
     end
   end
