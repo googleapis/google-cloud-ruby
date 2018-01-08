@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/dns/service"
 require "google/cloud/dns/credentials"
 require "google/cloud/dns/zone"
@@ -123,15 +122,6 @@ module Google
         def total_data_per_change
           reload! if @gapi.nil?
           @gapi.quota.total_rrdata_size_per_change if @gapi.quota
-        end
-
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["DNS_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
         end
 
         ##

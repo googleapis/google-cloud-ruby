@@ -15,6 +15,8 @@
 
 require "google-cloud-dns"
 require "google/cloud/dns/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -313,11 +315,15 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
                    timeout: nil, project: nil, keyfile: nil
-        project_id ||= (project || Dns::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= (keyfile || Dns::Credentials.default(scope: scope))
+        scope ||= configure.scope
+        retries ||= configure.retries
+        timeout ||= configure.timeout
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Dns::Credentials.new credentials, scope: scope
         end
@@ -327,6 +333,68 @@ module Google
             project_id, credentials, retries: retries, timeout: timeout
           )
         )
+      end
+
+      ##
+      # Reload DNS configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :dns
+        Google::Cloud.configure.add_config! :dns do |config|
+          config.add_field! :project_id, ENV["DNS_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :retries, nil, match: Integer
+          config.add_field! :timeout, nil, match: Integer
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :dns
+
+      ##
+      # Configure the Google Cloud DNS library.
+      #
+      # The following DNS configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a DNS project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Dns::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Dns library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.dns if block_given?
+
+        Google::Cloud.configure.dns
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.dns.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.dns.credentials ||
+          Google::Cloud.configure.credentials ||
+          Dns::Credentials.default(scope: scope)
       end
     end
   end
