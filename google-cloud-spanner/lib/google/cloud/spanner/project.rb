@@ -14,7 +14,6 @@
 
 
 require "google/cloud/spanner/errors"
-require "google/cloud/env"
 require "google/cloud/spanner/service"
 require "google/cloud/spanner/client"
 require "google/cloud/spanner/instance"
@@ -93,15 +92,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["SPANNER_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
 
         ##
         # Retrieves the list of Cloud Spanner instances for the project.
