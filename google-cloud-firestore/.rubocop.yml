@@ -1,0 +1,58 @@
+AllCops:
+  Exclude:
+    - "google-cloud-firestore.gemspec"
+    - "lib/google/firestore/v1beta1/**/*"
+    - "lib/google/cloud/firestore/v1beta1/**/*"
+    - "lib/google/cloud/firestore/v1beta1.rb"
+    - "support/**/*"
+    - "Rakefile"
+    - "acceptance/**/*"
+    - "test/**/*"
+
+Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+Style/NumericLiterals:
+  Enabled: false
+Style/SpaceAroundOperators:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Style/EmptyLines:
+  Enabled: false
+Style/EmptyElse:
+  Enabled: false
+# Style/RegexpLiteral:
+#   EnforcedStyle: use_slashes
+Style/HashSyntax:
+  Exclude:
+    - "lib/google/cloud/firestore/v1beta1/**/*"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/firestore/v1beta1/**/*"
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/PerceivedComplexity:
+  Max: 10
+Metrics/AbcSize:
+  Max: 25
+  Exclude:
+    - "lib/google/cloud/firestore/v1beta1/**/*"
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - "lib/google/cloud/firestore/v1beta1/**/*"
+Metrics/ParameterLists:
+  Enabled: false
+Style/RescueModifier:
+  Enabled: false
+Style/ClassVars:
+  Enabled: false
+Style/TrivialAccessors:
+  Enabled: false
+Style/FileName:
+  Enabled: false
