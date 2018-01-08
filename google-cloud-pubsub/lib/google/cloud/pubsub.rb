@@ -15,6 +15,8 @@
 
 require "google-cloud-pubsub"
 require "google/cloud/pubsub/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -510,7 +512,7 @@ module Google
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
-      #   If the param is nil, ENV["PUBSUB_EMULATOR_HOST"] will be used.
+      #   If the param is nil, uses the value of the `emulator_host` config.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -528,11 +530,14 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, emulator_host: nil, project: nil,
                    keyfile: nil
-        project_id ||= (project || Pubsub::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        emulator_host ||= ENV["PUBSUB_EMULATOR_HOST"]
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        emulator_host ||= configure.emulator_host
         if emulator_host
           return Pubsub::Project.new(
             Pubsub::Service.new(
@@ -542,7 +547,7 @@ module Google
           )
         end
 
-        credentials ||= (keyfile || Pubsub::Credentials.default(scope: scope))
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Pubsub::Credentials.new credentials, scope: scope
         end
@@ -553,6 +558,74 @@ module Google
                                      client_config: client_config
           )
         )
+      end
+
+      ##
+      # Reload pubsub configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :pubsub
+        Google::Cloud.configure.add_config! :pubsub do |config|
+          config.add_field! :project_id, ENV["PUBSUB_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :emulator_host, ENV["PUBSUB_EMULATOR_HOST"],
+                            match: String
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :pubsub
+
+      ##
+      # Configure the Google Cloud Pubsub library.
+      #
+      # The following Pubsub configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Pubsub project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Pubsub::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["PUBSUB_EMULATOR_HOST"]`
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Pubsub library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.pubsub if block_given?
+
+        Google::Cloud.configure.pubsub
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.pubsub.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.pubsub.credentials ||
+          Google::Cloud.configure.credentials ||
+          Pubsub::Credentials.default(scope: scope)
       end
     end
   end
