@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/storage/errors"
 require "google/cloud/storage/service"
 require "google/cloud/storage/credentials"
@@ -76,15 +75,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["STORAGE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
 
         ##
         # Retrieves a list of buckets for the given project.
