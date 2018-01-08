@@ -252,11 +252,16 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "SPEECH_CREDENTIALS", "SPEECH_CREDENTIALS_JSON",
+          "SPEECH_KEYFILE", "SPEECH_KEYFILE_JSON"
+        )
+
         Google::Cloud.configure.delete! :speech
         Google::Cloud.configure.add_config! :speech do |config|
           config.add_field! :project_id, ENV["SPEECH_PROJECT"], match: String
           config.add_alias! :project, :project_id
-          config.add_field! :credentials, nil,
+          config.add_field! :credentials, default_creds,
                             match: [String, Hash, Google::Auth::Credentials]
           config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]

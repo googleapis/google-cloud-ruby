@@ -565,11 +565,16 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "PUBSUB_CREDENTIALS", "PUBSUB_CREDENTIALS_JSON",
+          "PUBSUB_KEYFILE", "PUBSUB_KEYFILE_JSON"
+        )
+
         Google::Cloud.configure.delete! :pubsub
         Google::Cloud.configure.add_config! :pubsub do |config|
           config.add_field! :project_id, ENV["PUBSUB_PROJECT"], match: String
           config.add_alias! :project, :project_id
-          config.add_field! :credentials, nil,
+          config.add_field! :credentials, default_creds,
                             match: [String, Hash, Google::Auth::Credentials]
           config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]

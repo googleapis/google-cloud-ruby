@@ -653,14 +653,17 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        default_project = ENV["DATASTORE_DATASET"] || ENV["DATASTORE_PROJECT"]
+        default_creds = Google::Cloud.credentials_from_env(
+          "DATASTORE_CREDENTIALS", "DATASTORE_CREDENTIALS_JSON",
+          "DATASTORE_KEYFILE", "DATASTORE_KEYFILE_JSON"
+        )
+
         Google::Cloud.configure.delete! :datastore
         Google::Cloud.configure.add_config! :datastore do |config|
-          config.add_field! :project_id,
-                            (ENV["DATASTORE_DATASET"] ||
-                             ENV["DATASTORE_PROJECT"]),
-                            match: String
+          config.add_field! :project_id, default_project, match: String
           config.add_alias! :project, :project_id
-          config.add_field! :credentials, nil,
+          config.add_field! :credentials, default_creds,
                             match: [String, Hash, Google::Auth::Credentials]
           config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]
@@ -693,7 +696,7 @@ module Google
       #   `ENV["DATASTORE_EMULATOR_HOST"]`
       #
       # @return [Google::Cloud::Config] The configuration object the
-      #   Google::Cloud::Bigquery library uses.
+      #   Google::Cloud::Datastore library uses.
       #
       def self.configure
         yield Google::Cloud.configure.datastore if block_given?

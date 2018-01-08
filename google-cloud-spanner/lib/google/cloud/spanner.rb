@@ -408,11 +408,16 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "SPANNER_CREDENTIALS", "SPANNER_CREDENTIALS_JSON",
+          "SPANNER_KEYFILE", "SPANNER_KEYFILE_JSON"
+        )
+
         Google::Cloud.configure.delete! :spanner
         Google::Cloud.configure.add_config! :spanner do |config|
           config.add_field! :project_id, ENV["SPANNER_PROJECT"], match: String
           config.add_alias! :project, :project_id
-          config.add_field! :credentials, nil,
+          config.add_field! :credentials, default_creds,
                             match: [String, Hash, Google::Auth::Credentials]
           config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]

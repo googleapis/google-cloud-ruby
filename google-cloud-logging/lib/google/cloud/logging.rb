@@ -420,11 +420,16 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "LOGGING_CREDENTIALS", "LOGGING_CREDENTIALS_JSON",
+          "LOGGING_KEYFILE", "LOGGING_KEYFILE_JSON"
+        )
+
         Google::Cloud.configure.delete! :logging
         Google::Cloud.configure.add_config! :logging do |config|
           config.add_field! :project_id, ENV["LOGGING_PROJECT"], match: String
           config.add_alias! :project, :project_id
-          config.add_field! :credentials, nil,
+          config.add_field! :credentials, default_creds,
                             match: [String, Hash, Google::Auth::Credentials]
           config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]

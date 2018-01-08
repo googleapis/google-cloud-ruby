@@ -359,4 +359,30 @@ describe Google::Cloud::Config do
       }.must_be_silent
     end
   end
+
+  describe "shared config" do
+    after {
+      Google::Cloud.reload_configuration!
+    }
+
+    it "loads default credentials from a file path environment variable" do
+      path = File.join __dir__, "config_test.rb"
+      env = {"GOOGLE_CLOUD_CREDENTIALS" => path,
+             "GOOGLE_CLOUD_CREDENTIALS_JSON" => '{"a": 1}'}
+      ENV.stub(:[], ->(k) { env[k] }) do
+        Google::Cloud.reload_configuration!
+        Google::Cloud.configure.credentials.must_equal path
+      end
+    end
+
+    it "loads default credentials from a json environment variable" do
+      path = File.join __dir__, "$nonexistent-file$"
+      env = {"GOOGLE_CLOUD_CREDENTIALS" => path,
+             "GOOGLE_CLOUD_CREDENTIALS_JSON" => '{"a": 1}'}
+      ENV.stub(:[], ->(k) { env[k] }) do
+        Google::Cloud.reload_configuration!
+        Google::Cloud.configure.credentials.must_equal({"a" => 1})
+      end
+    end
+  end
 end

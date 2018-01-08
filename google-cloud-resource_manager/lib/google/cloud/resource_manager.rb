@@ -281,9 +281,14 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "RESOURCE_MANAGER_CREDENTIALS", "RESOURCE_MANAGER_CREDENTIALS_JSON",
+          "RESOURCE_MANAGER_KEYFILE", "RESOURCE_MANAGER_KEYFILE_JSON"
+        )
+
         Google::Cloud.configure.delete! :resource_manager
         Google::Cloud.configure.add_config! :resource_manager do |config|
-          config.add_field! :credentials, nil,
+          config.add_field! :credentials, default_creds,
                             match: [String, Hash, Google::Auth::Credentials]
           config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]

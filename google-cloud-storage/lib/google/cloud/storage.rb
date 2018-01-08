@@ -699,11 +699,16 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "STORAGE_CREDENTIALS", "STORAGE_CREDENTIALS_JSON",
+          "STORAGE_KEYFILE", "STORAGE_KEYFILE_JSON"
+        )
+
         Google::Cloud.configure.delete! :storage
         Google::Cloud.configure.add_config! :storage do |config|
           config.add_field! :project_id, ENV["STORAGE_PROJECT"], match: String
           config.add_alias! :project, :project_id
-          config.add_field! :credentials, nil,
+          config.add_field! :credentials, default_creds,
                             match: [String, Hash, Google::Auth::Credentials]
           config.add_alias! :keyfile, :credentials
           config.add_field! :scope, nil, match: [String, Array]
