@@ -26,6 +26,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 * [BigQuery](#bigquery-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
+* [Cloud Firestore](#cloud-firestore-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
@@ -222,6 +223,42 @@ begin
   fail "Boom!"
 rescue => exception
   Google::Cloud::ErrorReporting.report exception
+end
+```
+
+### Cloud Firestore (Beta)
+
+- [google-cloud-firestore README](google-cloud-firestore/README.md)
+- [google-cloud-firestore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest)
+- [google-cloud-firestore on RubyGems](https://rubygems.org/gems/[google-cloud-firestore)
+- [Google Cloud Firestore documentation](https://cloud.google.com/firestore/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-firestore
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/firestore"
+
+firestore = Google::Cloud::Firestore.new(
+  project_id: "my-project",
+  credentials: "/path/to/keyfile.json"
+)
+
+city = firestore.col("cities").doc("SF")
+city.set({ name: "San Francisco",
+           state: "CA",
+           country: "USA",
+           capital: false,
+           population: 860000 })
+
+firestore.transaction do |tx|
+  new_population = tx.get(city).data[:population] + 1
+  tx.update(city, { population: new_population })
 end
 ```
 
