@@ -13,8 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "json"
-require "uri"
 
 describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
   let(:bucket_name) { "bucket" }

@@ -13,8 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "json"
-require "uri"
 
 describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
   let(:bucket_name) { "bucket" }
@@ -144,14 +142,14 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     it "properly escapes the path when generating signed_url" do
       Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
         signing_key_mock = Minitest::Mock.new
-        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/hello%20world.txt"]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/hello+world.txt"]
         credentials.issuer = "native_client_email"
         credentials.signing_key = signing_key_mock
 
         signed_url = file.signed_url
 
         signed_uri = URI signed_url
-        signed_uri.path.must_equal "/bucket/hello%20world.txt"
+        signed_uri.path.must_equal "/bucket/hello+world.txt"
 
         signed_url_params = CGI::parse signed_uri.query
         signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]

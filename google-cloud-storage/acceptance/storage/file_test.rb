@@ -14,6 +14,7 @@
 
 require "storage_helper"
 require "net/http"
+require "uri"
 require "zlib"
 
 describe Google::Cloud::Storage::File, :storage do

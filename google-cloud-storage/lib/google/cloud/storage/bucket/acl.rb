@@ -46,7 +46,7 @@ module Google
                     "public" => "publicRead",
                     "public_read" => "publicRead",
                     "publicReadWrite" => "publicReadWrite",
-                    "public_write" => "publicReadWrite" }
+                    "public_write" => "publicReadWrite" }.freeze
 
           ##
           # A boolean value or a project ID string to indicate the project to
@@ -98,7 +98,7 @@ module Google
             @writers = entities_from_acls acls, "WRITER"
             @readers = entities_from_acls acls, "READER"
           end
-          alias_method :refresh!, :reload!
+          alias refresh! reload!
 
           ##
           # Lists the owners of the bucket.
@@ -344,10 +344,10 @@ module Google
           def auth!
             update_predefined_acl! "authenticatedRead"
           end
-          alias_method :authenticatedRead!, :auth!
-          alias_method :auth_read!, :auth!
-          alias_method :authenticated!, :auth!
-          alias_method :authenticated_read!, :auth!
+          alias authenticatedRead! auth!
+          alias auth_read! auth!
+          alias authenticated! auth!
+          alias authenticated_read! auth!
 
           ##
           # Convenience method to apply the `private` predefined ACL
@@ -382,7 +382,7 @@ module Google
           def project_private!
             update_predefined_acl! "projectPrivate"
           end
-          alias_method :projectPrivate!, :project_private!
+          alias projectPrivate! project_private!
 
           ##
           # Convenience method to apply the `publicRead` predefined ACL
@@ -400,8 +400,8 @@ module Google
           def public!
             update_predefined_acl! "publicRead"
           end
-          alias_method :publicRead!, :public!
-          alias_method :public_read!, :public!
+          alias publicRead! public!
+          alias public_read! public!
 
           # Convenience method to apply the `publicReadWrite` predefined ACL
           # rule to the bucket.
@@ -418,7 +418,7 @@ module Google
           def public_write!
             update_predefined_acl! "publicReadWrite"
           end
-          alias_method :publicReadWrite!, :public_write!
+          alias publicReadWrite! public_write!
 
           protected
 
@@ -472,7 +472,7 @@ module Google
                     "project_private" => "projectPrivate",
                     "publicRead" => "publicRead",
                     "public" => "publicRead",
-                    "public_read" => "publicRead" }
+                    "public_read" => "publicRead" }.freeze
 
           ##
           # A boolean value or a project ID string to indicate the project to
@@ -521,13 +521,13 @@ module Google
                                               user_project: user_project
             acls = Array(gapi.items).map do |acl|
               next acl if acl.is_a? Google::Apis::StorageV1::ObjectAccessControl
-              fail "Unknown ACL format: #{acl.class}" unless acl.is_a? Hash
+              raise "Unknown ACL format: #{acl.class}" unless acl.is_a? Hash
               Google::Apis::StorageV1::ObjectAccessControl.from_json acl.to_json
             end
             @owners  = entities_from_acls acls, "OWNER"
             @readers = entities_from_acls acls, "READER"
           end
-          alias_method :refresh!, :reload!
+          alias refresh! reload!
 
           ##
           # Lists the default owners for files in the bucket.
@@ -710,10 +710,10 @@ module Google
           def auth!
             update_predefined_default_acl! "authenticatedRead"
           end
-          alias_method :authenticatedRead!, :auth!
-          alias_method :auth_read!, :auth!
-          alias_method :authenticated!, :auth!
-          alias_method :authenticated_read!, :auth!
+          alias authenticatedRead! auth!
+          alias auth_read! auth!
+          alias authenticated! auth!
+          alias authenticated_read! auth!
 
           ##
           # Convenience method to apply the default `bucketOwnerFullControl`
@@ -731,7 +731,7 @@ module Google
           def owner_full!
             update_predefined_default_acl! "bucketOwnerFullControl"
           end
-          alias_method :bucketOwnerFullControl!, :owner_full!
+          alias bucketOwnerFullControl! owner_full!
 
           ##
           # Convenience method to apply the default `bucketOwnerRead`
@@ -749,7 +749,7 @@ module Google
           def owner_read!
             update_predefined_default_acl! "bucketOwnerRead"
           end
-          alias_method :bucketOwnerRead!, :owner_read!
+          alias bucketOwnerRead! owner_read!
 
           ##
           # Convenience method to apply the default `private`
@@ -784,7 +784,7 @@ module Google
           def project_private!
             update_predefined_default_acl! "projectPrivate"
           end
-          alias_method :projectPrivate!, :project_private!
+          alias projectPrivate! project_private!
 
           ##
           # Convenience method to apply the default `publicRead`
@@ -802,8 +802,8 @@ module Google
           def public!
             update_predefined_default_acl! "publicRead"
           end
-          alias_method :publicRead!, :public!
-          alias_method :public_read!, :public!
+          alias publicRead! public!
+          alias public_read! public!
 
           protected
 

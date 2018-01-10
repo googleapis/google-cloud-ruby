@@ -349,7 +349,7 @@ module Google
         def requester_pays
           @gapi.billing.requester_pays if @gapi.billing
         end
-        alias_method :requester_pays?, :requester_pays
+        alias requester_pays? requester_pays
 
         ##
         # Enables requester pays for the bucket. If enabled, a client accessing
@@ -508,7 +508,7 @@ module Google
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions, user_project: user_project
         end
-        alias_method :find_files, :files
+        alias find_files files
 
         ##
         # Retrieves a file matching the path.
@@ -557,7 +557,7 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_file, :file
+        alias find_file file
 
         ##
         # Creates a new {File} object by providing a path to a local file (or
@@ -729,13 +729,13 @@ module Google
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
-          fail ArgumentError, "must provide path" if path.nil?
+          raise ArgumentError, "must provide path" if path.nil?
 
           gapi = service.insert_file name, file, path, options
           File.from_gapi gapi, service, user_project: user_project
         end
-        alias_method :upload_file, :create_file
-        alias_method :new_file, :create_file
+        alias upload_file create_file
+        alias new_file create_file
 
         ##
         # Concatenates a list of existing files in the bucket into a new file in
@@ -827,7 +827,7 @@ module Google
           ensure_service!
           sources = Array sources
           if sources.size < 2
-            fail ArgumentError, "must provide at least two source files"
+            raise ArgumentError, "must provide at least two source files"
           end
 
           options = { acl: File::Acl.predefined_rule_for(acl),
@@ -844,8 +844,8 @@ module Google
                                       destination_gapi, options
           File.from_gapi gapi, service, user_project: user_project
         end
-        alias_method :compose_file, :compose
-        alias_method :combine, :compose
+        alias compose_file compose
+        alias combine compose
 
         ##
         # Access without authentication can be granted to a File for a specified
@@ -1301,7 +1301,7 @@ module Google
                                    user_project: user_project
           end
         end
-        alias_method :find_notifications, :notifications
+        alias find_notifications notifications
 
         ##
         # Retrieves a Pub/Sub notification subscription for the bucket.
@@ -1331,7 +1331,7 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_notification, :notification
+        alias find_notification notification
 
 
         ##
@@ -1412,7 +1412,7 @@ module Google
           gapi = service.insert_notification name, topic, options
           Notification.from_gapi name, gapi, service, user_project: user_project
         end
-        alias_method :new_notification, :create_notification
+        alias new_notification create_notification
 
         ##
         # Reloads the bucket with current data from the Storage service.
@@ -1423,7 +1423,7 @@ module Google
           @lazy = nil
           self
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Determines whether the bucket exists in the Storage service.
@@ -1473,7 +1473,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
 
         ##
@@ -1503,7 +1503,7 @@ module Google
         def ensure_io_or_file_exists! file
           return if file.respond_to?(:read) && file.respond_to?(:rewind)
           return if ::File.file? file
-          fail ArgumentError, "cannot find file #{file}"
+          raise ArgumentError, "cannot find file #{file}"
         end
 
         def storage_class_for str

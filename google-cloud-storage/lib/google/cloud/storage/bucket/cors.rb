@@ -125,7 +125,7 @@ module Google
               @origin = Array(origin)
               @methods = Array(methods)
               @headers = Array(headers)
-              @max_age = (max_age||1800)
+              @max_age = (max_age || 1800)
             end
 
             def to_gapi

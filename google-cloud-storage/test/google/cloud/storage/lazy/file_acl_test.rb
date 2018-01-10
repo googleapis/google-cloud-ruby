@@ -13,8 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "json"
-require "uri"
 
 describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
   let(:bucket_name) { "bucket" }
