@@ -104,7 +104,7 @@ module Google
         #   experimental feature and the accuracy of the time offset can vary.
         class Word
           attr_reader :word, :start_time, :end_time
-          alias_method :to_str, :word
+          alias to_str word
 
           ##
           # @private Creates a new Result::Word instance.
@@ -218,7 +218,7 @@ module Google
         ##
         # @private Creates a new InterimResult instance.
         def initialize transcript, confidence, stability, alternatives = []
-          @transcript  = transcript
+          @transcript = transcript
           @confidence = confidence
           @stability = stability
           @alternatives = alternatives

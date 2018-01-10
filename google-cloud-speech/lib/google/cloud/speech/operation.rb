@@ -224,7 +224,7 @@ module Google
           @grpc.reload!
           self
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Reloads the op until the operation is complete. The delay between

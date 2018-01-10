@@ -279,8 +279,8 @@ module Google
                                profanity_filter: profanity_filter,
                                phrases: phrases, words: words
         end
-        alias_method :long_running_recognize, :process
-        alias_method :recognize_job, :process
+        alias long_running_recognize process
+        alias recognize_job process
 
         ##
         # @private The Google API Client object for the Audio.
@@ -309,12 +309,12 @@ module Google
           end
           # Create an audio from a file on the filesystem
           if File.file? source
-            fail ArgumentError, "Cannot read #{source}" unless \
+            raise ArgumentError, "Cannot read #{source}" unless \
               File.readable? source
             audio.grpc.content = File.read source, mode: "rb"
             return audio
           end
-          fail ArgumentError, "Unable to convert #{source} to an Audio"
+          raise ArgumentError, "Unable to convert #{source} to an Audio"
         end
 
         protected
@@ -322,7 +322,7 @@ module Google
         ##
         # Raise an error unless an active Speech Project object is available.
         def ensure_speech!
-          fail "Must have active connection" unless @speech
+          raise "Must have active connection" unless @speech
         end
       end
     end
