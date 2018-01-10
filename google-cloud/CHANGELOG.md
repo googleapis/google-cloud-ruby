@@ -1,5 +1,15 @@
 # Release History
 
+### 0.49.0 / 2018-01-10
+
+* BigQuery 1.0.0 release
+  * Update authentication documentation
+    * Update Data documentation and code examples
+    * Remove reference to sync and async queries
+  * Allow use of URI objects for Dataset#load, Table#load, and Table#load_job
+* Firestore 0.20.0 release
+  * First release
+
 ### 0.48.0 / 2017-12-26
 
 * Container 0.1.0 release.
