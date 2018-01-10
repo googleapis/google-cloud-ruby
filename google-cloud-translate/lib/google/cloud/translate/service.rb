@@ -25,8 +25,8 @@ module Google
       # @private
       # Represents the Translation API REST service, exposing the API calls.
       class Service #:nodoc:
-        API_VERSION = "v2"
-        API_URL = "https://translation.googleapis.com"
+        API_VERSION = "v2".freeze
+        API_URL = "https://translation.googleapis.com".freeze
 
         # @private
         attr_accessor :project, :credentials, :retries, :timeout, :key
@@ -71,7 +71,7 @@ module Google
         end
 
         def inspect
-          "#{self.class}"
+          self.class.to_s
         end
 
         protected
@@ -92,7 +92,7 @@ module Google
 
           return JSON.parse(response.body)["data"] if response.success?
 
-          fail Google::Cloud::Error.gapi_error_class_for(response.status)
+          raise Google::Cloud::Error.gapi_error_class_for(response.status)
         rescue Faraday::ConnectionFailed
           raise Google::Cloud::ResourceExhaustedError
         end
@@ -153,7 +153,7 @@ module Google
           # Set the default values
           self.retries = 3
           self.http_codes = [500, 503]
-          self.reasons = %w(rateLimitExceeded userRateLimitExceeded)
+          self.reasons = %w[rateLimitExceeded userRateLimitExceeded]
           self.backoff = ->(retries) { sleep retries.to_i }
 
           def initialize options = {} #:nodoc:

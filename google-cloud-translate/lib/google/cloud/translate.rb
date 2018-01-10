@@ -283,10 +283,12 @@ module Google
         if key
           return Google::Cloud::Translate::Api.new(
             Google::Cloud::Translate::Service.new(
-              project_id, nil, retries: retries, timeout: timeout, key: key))
+              project_id, nil, retries: retries, timeout: timeout, key: key
+            )
+          )
         end
 
-        fail ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         credentials ||= keyfile
         credentials ||= Translate::Credentials.default(scope: scope)
@@ -296,7 +298,9 @@ module Google
 
         Translate::Api.new(
           Translate::Service.new(
-            project_id, credentials, retries: retries, timeout: timeout))
+            project_id, credentials, retries: retries, timeout: timeout
+          )
+        )
       end
     end
   end

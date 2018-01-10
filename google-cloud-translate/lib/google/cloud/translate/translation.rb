@@ -45,8 +45,8 @@ module Google
         #
         # @return [String]
         attr_reader :text
-        alias_method :to_s, :text
-        alias_method :to_str, :text
+        alias to_s text
+        alias to_str text
 
         ##
         # The original query text that was translated.
@@ -59,15 +59,15 @@ module Google
         #
         # @return [String]
         attr_reader :to
-        alias_method :language, :to
-        alias_method :target, :to
+        alias language to
+        alias target to
 
         ##
         # The source language from which the text was translated.
         #
         # @return [String]
         attr_reader :from
-        alias_method :source, :from
+        alias source from
 
         ##
         # The translation model. Can be either `base` for the Phrase-Based
