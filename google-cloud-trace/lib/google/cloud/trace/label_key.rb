@@ -22,59 +22,60 @@ module Google
       # A collection of well-known label keys for trace spans.
       #
       module LabelKey
-        AGENT = "/agent"
-        COMPONENT = "/component"
-        ERROR_MESSAGE = "/error/message"
-        ERROR_NAME = "/error/name"
-        HTTP_CLIENT_CITY = "/http/client_city"
-        HTTP_CLIENT_COUNTRY = "/http/client_country"
-        HTTP_CLIENT_PROTOCOL = "/http/client_protocol"
-        HTTP_CLIENT_REGION = "/http/client_region"
-        HTTP_HOST = "/http/host"
-        HTTP_METHOD = "/http/method"
-        HTTP_REDIRECTED_URL = "/http/redirected_url"
-        HTTP_REQUEST_SIZE = "/http/request/size"
-        HTTP_RESPONSE_SIZE = "/http/response/size"
-        HTTP_STATUS_CODE = "/http/status_code"
-        HTTP_URL = "/http/url"
-        HTTP_USER_AGENT = "/http/user_agent"
-        PID = "/pid"
-        STACKTRACE = "/stacktrace"
-        TID = "/tid"
+        AGENT = "/agent".freeze
+        COMPONENT = "/component".freeze
+        ERROR_MESSAGE = "/error/message".freeze
+        ERROR_NAME = "/error/name".freeze
+        HTTP_CLIENT_CITY = "/http/client_city".freeze
+        HTTP_CLIENT_COUNTRY = "/http/client_country".freeze
+        HTTP_CLIENT_PROTOCOL = "/http/client_protocol".freeze
+        HTTP_CLIENT_REGION = "/http/client_region".freeze
+        HTTP_HOST = "/http/host".freeze
+        HTTP_METHOD = "/http/method".freeze
+        HTTP_REDIRECTED_URL = "/http/redirected_url".freeze
+        HTTP_REQUEST_SIZE = "/http/request/size".freeze
+        HTTP_RESPONSE_SIZE = "/http/response/size".freeze
+        HTTP_STATUS_CODE = "/http/status_code".freeze
+        HTTP_URL = "/http/url".freeze
+        HTTP_USER_AGENT = "/http/user_agent".freeze
+        PID = "/pid".freeze
+        STACKTRACE = "/stacktrace".freeze
+        TID = "/tid".freeze
 
-        GAE_APPLICATION_ERROR = "g.co/gae/application_error"
-        GAE_APP_MODULE = "g.co/gae/app/module"
-        GAE_APP_MODULE_VERSION = "g.co/gae/app/module_version"
-        GAE_APP_VERSION = "g.co/gae/app/version"
-        GAE_DATASTORE_COUNT = "g.co/gae/datastore/count"
-        GAE_DATASTORE_CURSOR = "g.co/gae/datastore/cursor"
-        GAE_DATASTORE_ENTITY_WRITES = "g.co/gae/datastore/entity_writes"
-        GAE_DATASTORE_HAS_ANCESTOR = "g.co/gae/datastore/has_ancestor"
-        GAE_DATASTORE_HAS_CURSOR = "g.co/gae/datastore/has_cursor"
-        GAE_DATASTORE_HAS_TRANSACTION = "g.co/gae/datastore/has_transaction"
-        GAE_DATASTORE_INDEX_WRITES = "g.co/gae/datastore/index_writes"
-        GAE_DATASTORE_KIND = "g.co/gae/datastore/kind"
-        GAE_DATASTORE_LIMIT = "g.co/gae/datastore/limit"
-        GAE_DATASTORE_MORE_RESULTS = "g.co/gae/datastore/more_results"
-        GAE_DATASTORE_OFFSET = "g.co/gae/datastore/offset"
+        GAE_APPLICATION_ERROR = "g.co/gae/application_error".freeze
+        GAE_APP_MODULE = "g.co/gae/app/module".freeze
+        GAE_APP_MODULE_VERSION = "g.co/gae/app/module_version".freeze
+        GAE_APP_VERSION = "g.co/gae/app/version".freeze
+        GAE_DATASTORE_COUNT = "g.co/gae/datastore/count".freeze
+        GAE_DATASTORE_CURSOR = "g.co/gae/datastore/cursor".freeze
+        GAE_DATASTORE_ENTITY_WRITES = "g.co/gae/datastore/entity_writes".freeze
+        GAE_DATASTORE_HAS_ANCESTOR = "g.co/gae/datastore/has_ancestor".freeze
+        GAE_DATASTORE_HAS_CURSOR = "g.co/gae/datastore/has_cursor".freeze
+        GAE_DATASTORE_HAS_TRANSACTION =
+          "g.co/gae/datastore/has_transaction".freeze
+        GAE_DATASTORE_INDEX_WRITES = "g.co/gae/datastore/index_writes".freeze
+        GAE_DATASTORE_KIND = "g.co/gae/datastore/kind".freeze
+        GAE_DATASTORE_LIMIT = "g.co/gae/datastore/limit".freeze
+        GAE_DATASTORE_MORE_RESULTS = "g.co/gae/datastore/more_results".freeze
+        GAE_DATASTORE_OFFSET = "g.co/gae/datastore/offset".freeze
         GAE_DATASTORE_REQUESTED_ENTITY_DELETES =
-          "g.co/gae/datastore/requested_entity_deletes"
+          "g.co/gae/datastore/requested_entity_deletes".freeze
         GAE_DATASTORE_REQUESTED_ENTITY_PUTS =
-          "g.co/gae/datastore/requested_entity_puts"
-        GAE_DATASTORE_SIZE = "g.co/gae/datastore/size"
-        GAE_DATASTORE_SKIPPED = "g.co/gae/datastore/skipped"
+          "g.co/gae/datastore/requested_entity_puts".freeze
+        GAE_DATASTORE_SIZE = "g.co/gae/datastore/size".freeze
+        GAE_DATASTORE_SKIPPED = "g.co/gae/datastore/skipped".freeze
         GAE_DATASTORE_TRANSACTION_HANDLE =
-          "g.co/gae/datastore/transaction_handle"
-        GAE_ERROR_MESSAGE = "g.co/gae/error_message"
-        GAE_MEMCACHE_COUNT = "g.co/gae/memcache/count"
-        GAE_MEMCACHE_SIZE = "g.co/gae/memcache/size"
-        GAE_REQUEST_LOG_ID = "g.co/gae/request_log_id"
+          "g.co/gae/datastore/transaction_handle".freeze
+        GAE_ERROR_MESSAGE = "g.co/gae/error_message".freeze
+        GAE_MEMCACHE_COUNT = "g.co/gae/memcache/count".freeze
+        GAE_MEMCACHE_SIZE = "g.co/gae/memcache/size".freeze
+        GAE_REQUEST_LOG_ID = "g.co/gae/request_log_id".freeze
 
-        RPC_HOST = "/rpc/host"
-        RPC_REQUEST_TYPE = "/rpc/request/type"
-        RPC_REQUEST_SIZE = "/rpc/request/size"
-        RPC_RESPONSE_SIZE = "/rpc/response/size"
-        RPC_STATUS_CODE = "/rpc/status_code"
+        RPC_HOST = "/rpc/host".freeze
+        RPC_REQUEST_TYPE = "/rpc/request/type".freeze
+        RPC_REQUEST_SIZE = "/rpc/request/size".freeze
+        RPC_RESPONSE_SIZE = "/rpc/response/size".freeze
+        RPC_STATUS_CODE = "/rpc/status_code".freeze
 
         ##
         # Set the stack trace label in the given labels hash. The current call

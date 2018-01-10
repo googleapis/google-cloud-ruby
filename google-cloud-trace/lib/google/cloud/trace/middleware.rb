@@ -212,7 +212,7 @@ module Google
           if @service && trace.trace_context.sampled?
             begin
               @service.patch_traces trace
-            rescue => ex
+            rescue StandardError => ex
               msg = "Transmit to Stackdriver Trace failed: #{ex.inspect}"
               logger = env["rack.logger"]
               if logger
@@ -349,9 +349,9 @@ module Google
         def configure_result span, result
           if result.is_a?(::Array) && result.size == 3
             span.labels[Google::Cloud::Trace::LabelKey::HTTP_STATUS_CODE] =
-                result[0].to_s
+              result[0].to_s
             result[1]["X-Cloud-Trace-Context"] =
-                span.trace.trace_context.to_string
+              span.trace.trace_context.to_string
           end
           result
         end

@@ -68,7 +68,7 @@ module Google
                     response_body.bytesize.to_s
           set_label labels, label_keys::HTTP_STATUS_CODE, response_status.to_s
 
-          if 300 <= response_status && response_status < 400 && response_url
+          if response_status >= 300 && response_status < 400 && response_url
             set_label labels, label_keys::HTTP_REDIRECTED_URL, response_url
           end
         end

@@ -116,13 +116,14 @@ module Google
           @labels = labels
         end
 
+        # rubocop:disable Metrics/AbcSize
+
         ##
         # Standard value equality check for this object.
         #
         # @param [Object] other
         # @return [Boolean]
         #
-        # rubocop:disable Metrics/AbcSize
         def eql? other
           other.is_a?(Google::Cloud::Trace::Span) &&
             trace.trace_context == other.trace.trace_context &&
@@ -135,7 +136,9 @@ module Google
             end_time == other.end_time &&
             labels == other.labels
         end
-        alias_method :==, :eql?
+        alias == eql?
+
+        # rubocop:enable Metrics/AbcSize
 
         ##
         # Create a new Span object from a TraceSpan protobuf and insert it
@@ -297,7 +300,7 @@ module Google
         # starts them if not.
         #
         def start!
-          fail "Span already started" if start_time
+          raise "Span already started" if start_time
           ensure_started
         end
 
@@ -309,8 +312,8 @@ module Google
         # finishes them if not.
         #
         def finish!
-          fail "Span not yet started" unless start_time
-          fail "Span already finished" if end_time
+          raise "Span not yet started" unless start_time
+          raise "Span already finished" if end_time
           ensure_finished
         end
 
@@ -417,7 +420,7 @@ module Google
         # @private
         #
         def ensure_exists!
-          fail "Span has been deleted" unless trace
+          raise "Span has been deleted" unless trace
         end
 
         ##
@@ -429,7 +432,7 @@ module Google
         def ensure_no_cycle! new_parent
           ptr = new_parent
           until ptr.nil?
-            fail "Move would result in a cycle" if ptr.equal?(self)
+            raise "Move would result in a cycle" if ptr.equal?(self)
             ptr = ptr.parent
           end
         end
