@@ -1,5 +1,13 @@
 # Release History
 
+### 1.0.0 / 2018-01-10
+
+* Release 1.0.0
+* Update authentication documentation
+  * Update Data documentation and code examples
+  * Remove reference to sync and async queries
+* Allow use of URI objects for Dataset#load, Table#load, and Table#load_job
+
 ### 0.30.0 / 2017-11-14
 
 * Add `Google::Cloud::Bigquery::Credentials` class.

@@ -14,6 +14,7 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
+* [BigQuery](#bigquery-ga) (ga)
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
@@ -23,7 +24,6 @@ This client supports the following Google Cloud Platform services at a [General 
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [BigQuery](#bigquery-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Firestore](#cloud-firestore-beta) (Beta)
@@ -59,7 +59,7 @@ General instructions, environment variables, and configuration options are cover
 
 The preview examples below demonstrate how to provide the **Project ID** and **Credentials JSON file path** directly in code.
 
-### BigQuery (Beta)
+### BigQuery (GA)
 
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
 - [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/latest)

@@ -79,8 +79,9 @@
       "name": "google-cloud-bigquery",
       "defaultService": "google/cloud/bigquery",
       "versions": [
-        "v0.30.0",
+        "v1.0.0",
         "master",
+        "v0.30.0",
         "v0.29.0",
         "v0.28.0",
         "v0.27.1",
@@ -226,6 +227,15 @@
       ]
     },
     {
+      "id": "google-cloud-firestore",
+      "name": "google-cloud-firestore",
+      "defaultService": "google/cloud/firestore",
+      "versions": [
+        "v0.20.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-language",
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
@@ -354,7 +364,7 @@
       "defaultService": "google/cloud/spanner",
       "versions": [
         "v1.2.0",
-        "master", 
+        "master",
         "v1.1.1",
         "v1.1.0",
         "v1.0.0",
