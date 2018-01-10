@@ -31,7 +31,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "faraday", "~> 0.8"
   gem.add_development_dependency "railties", "~> 4.0"
-  gem.add_development_dependency "rubocop", "<= 0.35.1"
+  gem.add_development_dependency "rubocop", "~> 0.52"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "~> 0.1.6"
