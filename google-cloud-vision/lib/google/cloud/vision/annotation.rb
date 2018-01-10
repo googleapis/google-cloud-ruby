@@ -376,7 +376,8 @@ module Google
         def properties
           return nil unless @grpc.image_properties_annotation
           @properties ||= Properties.from_grpc(
-            @grpc.image_properties_annotation)
+            @grpc.image_properties_annotation
+          )
         end
 
         ##

@@ -173,7 +173,7 @@ module Google
             def yaw
               @grpc.pan_angle
             end
-            alias_method :pan, :yaw
+            alias pan yaw
 
             ##
             # Pitch (tilt) angle. Indicates the upwards/downwards angle that the
@@ -184,7 +184,7 @@ module Google
             def pitch
               @grpc.tilt_angle
             end
-            alias_method :tilt, :pitch
+            alias tilt pitch
 
             ##
             # Returns the object's property values as an array.
@@ -1109,8 +1109,8 @@ module Google
             class Lips
               attr_reader :top, :bottom
 
-              alias_method :upper, :top
-              alias_method :lower, :bottom
+              alias upper top
+              alias lower bottom
 
               ##
               # @private Creates a new Lips instance.
@@ -1325,7 +1325,7 @@ module Google
           #   face.likelihood.sorrow #=> :VERY_UNLIKELY
           #
           class Likelihood
-            POSITIVE_RATINGS = %i(POSSIBLE LIKELY VERY_LIKELY)
+            POSITIVE_RATINGS = %i[POSSIBLE LIKELY VERY_LIKELY].freeze
 
             ##
             # @private The FaceAnnotation GRPC object.
