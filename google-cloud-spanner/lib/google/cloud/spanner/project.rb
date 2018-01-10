@@ -92,7 +92,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project.
@@ -473,16 +473,18 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         def database_path instance_id, database_id
           Admin::Database::V1::DatabaseAdminClient.database_path(
-            project, instance_id, database_id)
+            project, instance_id, database_id
+          )
         end
 
         def valid_session_pool_options opts = {}
-          { min: opts[:min], max: opts[:max], keepalive: opts[:keepalive],
+          {
+            min: opts[:min], max: opts[:max], keepalive: opts[:keepalive],
             write_ratio: opts[:write_ratio], fail: opts[:fail],
             threads: opts[:threads]
           }.delete_if { |_k, v| v.nil? }

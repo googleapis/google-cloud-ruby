@@ -105,7 +105,7 @@ module Google
           end
           rows
         end
-        alias_method :save, :upsert
+        alias save upsert
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
@@ -308,7 +308,8 @@ module Google
           @mutations += [
             Google::Spanner::V1::Mutation.new(
               delete: Google::Spanner::V1::Mutation::Delete.new(
-                table: table, key_set: key_set(keys))
+                table: table, key_set: key_set(keys)
+              )
             )
           ]
           keys
