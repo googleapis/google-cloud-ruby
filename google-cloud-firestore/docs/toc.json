@@ -35,8 +35,24 @@
       "patterns": ["\/firestore"],
       "nav": [
         {
-          "title": "Project",
-          "type": "google/cloud/firestore/project"
+          "title": "Client",
+          "type": "google/cloud/firestore/client"
+        },
+        {
+          "title": "DocumentReference",
+          "type": "google/cloud/firestore/documentreference"
+        },
+        {
+          "title": "DocumentSnapshot",
+          "type": "google/cloud/firestore/documentsnaphot"
+        },
+        {
+          "title": "CollectionReference",
+          "type": "google/cloud/firestore/collectionreference"
+        },
+        {
+          "title": "Query",
+          "type": "google/cloud/firestore/query"
         },
         {
           "title": "V1beta1",
