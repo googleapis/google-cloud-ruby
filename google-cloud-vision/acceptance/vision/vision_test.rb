@@ -245,8 +245,8 @@ describe "Vision", :vision do
       landmark.locale.must_be :empty?
       landmark.description.must_equal "Mount Rushmore"
       landmark.score.must_be_close_to 0.9, 0.1
-      landmark.confidence.must_be :zero?
-      landmark.topicality.must_be :zero?
+      landmark.confidence.must_be_kind_of Float
+      landmark.topicality.must_be_kind_of Float
       landmark.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       landmark.bounds[0].x.must_equal 9
       landmark.bounds[0].y.must_equal 35
@@ -300,8 +300,8 @@ describe "Vision", :vision do
       logo.locale.must_be :empty?
       logo.description.must_equal "Google"
       logo.score.must_be_close_to 0.7, 0.1
-      logo.confidence.must_be :zero?
-      logo.topicality.must_be :zero?
+      logo.confidence.must_be_kind_of Float
+      logo.topicality.must_be_kind_of Float
       logo.bounds[0].must_be_kind_of Google::Cloud::Vision::Annotation::Vertex
       logo.bounds[0].x.must_equal 11
       logo.bounds[0].y.must_equal 14
@@ -353,8 +353,8 @@ describe "Vision", :vision do
       label.locale.must_be :empty?
       label.description.must_be_kind_of String
       label.score.must_be_kind_of Float
-      label.confidence.must_be :zero?
-      label.topicality.must_be :zero?
+      label.confidence.must_be_kind_of Float
+      label.topicality.must_be_kind_of Float
       label.bounds.must_be :empty?
       label.locations.must_be :empty?
       label.properties.must_be :empty?
