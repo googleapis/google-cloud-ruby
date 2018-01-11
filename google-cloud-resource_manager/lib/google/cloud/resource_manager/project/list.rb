@@ -157,7 +157,7 @@ module Google
           ##
           # Raise an error unless an active connection is available.
           def ensure_manager!
-            fail "Must have active connection" unless @manager
+            raise "Must have active connection" unless @manager
           end
         end
       end

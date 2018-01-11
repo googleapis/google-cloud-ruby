@@ -266,7 +266,9 @@ module Google
 
         ResourceManager::Manager.new(
           ResourceManager::Service.new(
-            credentials, retries: retries, timeout: timeout))
+            credentials, retries: retries, timeout: timeout
+          )
+        )
       end
     end
   end
