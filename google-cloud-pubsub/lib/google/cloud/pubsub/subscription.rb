@@ -103,7 +103,6 @@ module Google
           @grpc = service.update_subscription update_grpc,
                                               :ack_deadline_seconds
           @lazy = nil
-          self
         end
 
         ##
@@ -126,7 +125,6 @@ module Google
           @grpc = service.update_subscription update_grpc,
                                               :retain_acked_messages
           @lazy = nil
-          self
         end
 
         ##
@@ -152,7 +150,6 @@ module Google
           @grpc = service.update_subscription update_grpc,
                                               :message_retention_duration
           @lazy = nil
-          self
         end
 
         ##
@@ -168,10 +165,13 @@ module Google
         def endpoint= new_endpoint
           ensure_service!
           service.modify_push_config name, new_endpoint, {}
+
+          return unless @grpc
+
           @grpc.push_config = Google::Pubsub::V1::PushConfig.new(
             push_endpoint: new_endpoint,
             attributes: {}
-          ) if @grpc
+          )
         end
 
         ##
@@ -429,7 +429,7 @@ module Google
           service.acknowledge name, *ack_ids
           true
         end
-        alias_method :ack, :acknowledge
+        alias ack acknowledge
 
         ##
         # Modifies the acknowledge deadline for messages.
@@ -463,7 +463,7 @@ module Google
           service.modify_ack_deadline name, ack_ids, new_deadline
           true
         end
-        alias_method :modify_ack_deadline, :delay
+        alias modify_ack_deadline delay
 
         ##
         # Creates a new {Snapshot} from the subscription. The created snapshot
@@ -510,7 +510,7 @@ module Google
           grpc = service.create_snapshot name, snapshot_name
           Snapshot.from_grpc grpc, service
         end
-        alias_method :new_snapshot, :create_snapshot
+        alias new_snapshot create_snapshot
 
         ##
         # Resets the subscription's backlog to a given {Snapshot} or to a point
@@ -707,7 +707,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         ##

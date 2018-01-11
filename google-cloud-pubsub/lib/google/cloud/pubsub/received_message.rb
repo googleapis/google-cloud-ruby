@@ -68,7 +68,7 @@ module Google
         def message
           Message.from_grpc @grpc.message
         end
-        alias_method :msg, :message
+        alias msg message
 
         ##
         # The received message payload. This data is a list of bytes encoded as
@@ -89,14 +89,14 @@ module Google
         def message_id
           message.message_id
         end
-        alias_method :msg_id, :message_id
+        alias msg_id message_id
 
         ##
         # The time at which the message was published.
         def published_at
           message.published_at
         end
-        alias_method :publish_time, :published_at
+        alias publish_time published_at
 
         ##
         # Acknowledges receipt of the message.
@@ -123,7 +123,7 @@ module Google
           ensure_subscription!
           subscription.acknowledge ack_id
         end
-        alias_method :ack!, :acknowledge!
+        alias ack! acknowledge!
 
         ##
         # Modifies the acknowledge deadline for the message.
@@ -160,7 +160,7 @@ module Google
           ensure_subscription!
           subscription.delay new_deadline, ack_id
         end
-        alias_method :modify_ack_deadline!, :delay!
+        alias modify_ack_deadline! delay!
 
         ##
         # Resets the acknowledge deadline for the message without acknowledging
@@ -190,8 +190,8 @@ module Google
         def reject!
           delay! 0
         end
-        alias_method :nack!, :reject!
-        alias_method :ignore!, :reject!
+        alias nack! reject!
+        alias ignore! reject!
 
         ##
         # @private New ReceivedMessage from a
@@ -208,7 +208,7 @@ module Google
         ##
         # Raise an error unless an active subscription is available.
         def ensure_subscription!
-          fail "Must have active subscription" unless subscription
+          raise "Must have active subscription" unless subscription
         end
       end
     end

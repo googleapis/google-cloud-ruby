@@ -38,19 +38,19 @@ module Google
       #   pubsub.project_id #=> "my-project"
       #
       class Credentials < Google::Auth::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/pubsub"]
-        PATH_ENV_VARS = %w(PUBSUB_CREDENTIALS
+        SCOPE = ["https://www.googleapis.com/auth/pubsub"].freeze
+        PATH_ENV_VARS = %w[PUBSUB_CREDENTIALS
                            PUBSUB_KEYFILE
                            GOOGLE_CLOUD_CREDENTIALS
                            GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(PUBSUB_CREDENTIALS_JSON
+                           GCLOUD_KEYFILE].freeze
+        JSON_ENV_VARS = %w[PUBSUB_CREDENTIALS_JSON
                            PUBSUB_KEYFILE_JSON
                            GOOGLE_CLOUD_CREDENTIALS_JSON
                            GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
+                           GCLOUD_KEYFILE_JSON].freeze
         DEFAULT_PATHS = \
-          ["~/.config/gcloud/application_default_credentials.json"]
+          ["~/.config/gcloud/application_default_credentials.json"].freeze
       end
     end
   end

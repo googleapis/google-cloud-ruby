@@ -161,8 +161,8 @@ module Google
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service
         end
-        alias_method :create_subscription, :subscribe
-        alias_method :new_subscription, :subscribe
+        alias create_subscription subscribe
+        alias new_subscription subscribe
 
         ##
         # Retrieves subscription by name.
@@ -205,8 +205,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :get_subscription, :subscription
-        alias_method :find_subscription, :subscription
+        alias get_subscription subscription
+        alias find_subscription subscription
 
         ##
         # Retrieves a list of subscription names for the given project.
@@ -246,8 +246,8 @@ module Google
           grpc = service.list_topics_subscriptions name, options
           Subscription::List.from_topic_grpc grpc, service, name, max
         end
-        alias_method :find_subscriptions, :subscriptions
-        alias_method :list_subscriptions, :subscriptions
+        alias find_subscriptions subscriptions
+        alias list_subscriptions subscriptions
 
         ##
         # Publishes one or more messages to the topic.
@@ -555,7 +555,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         ##

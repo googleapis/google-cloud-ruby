@@ -66,7 +66,8 @@ module Google
 
           @grpc = Google::Pubsub::V1::PubsubMessage.new(
             data: String(data).encode("ASCII-8BIT"),
-            attributes: attributes)
+            attributes: attributes
+          )
         end
 
         ##
@@ -90,14 +91,14 @@ module Google
         def message_id
           @grpc.message_id
         end
-        alias_method :msg_id, :message_id
+        alias msg_id message_id
 
         ##
         # The time at which the message was published.
         def published_at
           Convert.timestamp_to_time @grpc.publish_time
         end
-        alias_method :publish_time, :published_at
+        alias publish_time published_at
 
         ##
         # @private New Message from a Google::Pubsub::V1::PubsubMessage object.
