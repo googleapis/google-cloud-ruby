@@ -19,7 +19,24 @@ module Google
   module Cloud
     module Firestore
       ##
-      # @private Represents the OAuth 2.0 signing logic for Firestore.
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Firestore service.
+      #
+      # @example
+      #   require "google/cloud/firestore"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Firestore::Credentials.new keyfile
+      #
+      #   firestore = Google::Cloud::Firestore.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   firestore.project_id #=> "my-project"
+      #
       class Credentials < Google::Auth::Credentials
         SCOPE = ["https://www.googleapis.com/auth/datastore"].freeze
         PATH_ENV_VARS = %w[FIRESTORE_CREDENTIALS FIRESTORE_KEYFILE
@@ -29,6 +46,8 @@ module Google
                            GOOGLE_CLOUD_CREDENTIALS_JSON
                            GOOGLE_CLOUD_KEYFILE_JSON
                            GCLOUD_KEYFILE_JSON].freeze
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"].freeze
       end
     end
   end
