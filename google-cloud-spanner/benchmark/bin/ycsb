@@ -1,5 +1,19 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# A YCSB-like executable that can be integrated into PerfKitBenchmarker.
+#
+# Assume the following are installed on the VM.
+# gpg --keyserver hkp://keys.gnupg.net \
+#   --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 \
+#   7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+# curl -sSL https://get.rvm.io | bash -s stable --ruby
+# source $HOME/.rvm/scripts/rvm; gem install bundler
+# sudo apt-get install -y git
+# git clone https://github.com/GoogleCloudPlatform/google-cloud-ruby.git
+# cd google-cloud-ruby; bundle install
 
-bundle exec ruby ${DIR}/../ycsb.rb "${@:1}"
+source $HOME/.rvm/scripts/rvm
+
+cd $HOME/google-cloud-ruby
+
+bundle exec ruby google-cloud-spanner/benchmark/ycsb.rb "${@:1}"
