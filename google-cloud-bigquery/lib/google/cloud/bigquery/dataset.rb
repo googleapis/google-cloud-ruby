@@ -202,7 +202,7 @@ module Google
           ensure_full_data!
           begin
             Integer @gapi.default_table_expiration_ms
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -239,7 +239,7 @@ module Google
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.creation_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -257,7 +257,7 @@ module Google
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -494,7 +494,9 @@ module Google
           new_tb = Google::Apis::BigqueryV2::Table.new(
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
               project_id: project_id, dataset_id: dataset_id,
-              table_id: table_id))
+              table_id: table_id
+            )
+          )
           updater = Table::Updater.new(new_tb).tap do |tb|
             tb.name = name unless name.nil?
             tb.description = description unless description.nil?
@@ -1070,8 +1072,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1363,7 +1365,7 @@ module Google
                       null_marker: null_marker }
           return load_storage(table_id, file, options) if storage_url? file
           return load_local(table_id, file, options) if local_file? file
-          fail Google::Cloud::Error, "Don't know how to load #{file}"
+          raise Google::Cloud::Error, "Don't know how to load #{file}"
         end
 
         ##
@@ -1570,8 +1572,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1601,7 +1603,7 @@ module Google
           @gapi = reloaded_gapi
           self
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Determines whether the dataset exists in the BigQuery service. The
@@ -1904,7 +1906,7 @@ module Google
 
         def insert_data table_id, rows, skip_invalid: nil, ignore_unknown: nil
           rows = [rows] if rows.is_a? Hash
-          fail ArgumentError, "No rows provided" if rows.empty?
+          raise ArgumentError, "No rows provided" if rows.empty?
           ensure_service!
           options = { skip_invalid: skip_invalid,
                       ignore_unknown: ignore_unknown }
@@ -1915,7 +1917,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
 
         ##
@@ -1972,7 +1974,7 @@ module Google
 
         def local_file? file
           ::File.file? file
-        rescue
+        rescue StandardError
           false
         end
 

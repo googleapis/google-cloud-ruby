@@ -211,12 +211,11 @@ module Google
         #
         def time_partitioning_type= type
           reload! unless resource_full?
-          @gapi.time_partitioning ||=
-              Google::Apis::BigqueryV2::TimePartitioning.new
+          @gapi.time_partitioning ||= \
+            Google::Apis::BigqueryV2::TimePartitioning.new
           @gapi.time_partitioning.type = type
           patch_gapi! :time_partitioning
         end
-
 
         ###
         # The expiration for the table partitions, if any, in seconds. See
@@ -264,8 +263,8 @@ module Google
         #
         def time_partitioning_expiration= expiration
           reload! unless resource_full?
-          @gapi.time_partitioning ||=
-              Google::Apis::BigqueryV2::TimePartitioning.new
+          @gapi.time_partitioning ||= \
+            Google::Apis::BigqueryV2::TimePartitioning.new
           @gapi.time_partitioning.expiration_ms = expiration * 1000
           patch_gapi! :time_partitioning
         end
@@ -426,7 +425,7 @@ module Google
           ensure_full_data!
           begin
             Integer @gapi.num_bytes
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -444,7 +443,7 @@ module Google
           ensure_full_data!
           begin
             Integer @gapi.num_rows
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -462,7 +461,7 @@ module Google
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.creation_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -482,7 +481,7 @@ module Google
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.expiration_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -500,7 +499,7 @@ module Google
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -829,7 +828,7 @@ module Google
           oldest_entry_time = @gapi.streaming_buffer.oldest_entry_time
           begin
             ::Time.at(Integer(oldest_entry_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -1163,8 +1162,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1303,8 +1302,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1486,7 +1485,7 @@ module Google
                       autodetect: autodetect, null_marker: null_marker }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
-          fail Google::Cloud::Error, "Don't know how to load #{file}"
+          raise Google::Cloud::Error, "Don't know how to load #{file}"
         end
 
         ##
@@ -1642,8 +1641,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1701,7 +1700,7 @@ module Google
         #
         def insert rows, skip_invalid: nil, ignore_unknown: nil
           rows = [rows] if rows.is_a? Hash
-          fail ArgumentError, "No rows provided" if rows.empty?
+          raise ArgumentError, "No rows provided" if rows.empty?
           ensure_service!
           options = { skip_invalid: skip_invalid,
                       ignore_unknown: ignore_unknown }
@@ -1812,7 +1811,7 @@ module Google
           gapi = service.get_table dataset_id, table_id
           @gapi = gapi
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Determines whether the table exists in the BigQuery service. The
@@ -1965,7 +1964,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
 
         ##
@@ -2019,7 +2018,7 @@ module Google
 
         def local_file? file
           ::File.file? file
-        rescue
+        rescue StandardError
           false
         end
 

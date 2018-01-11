@@ -235,7 +235,7 @@ module Google
                                          skip_invalid:   @skip_invalid,
                                          ignore_unknown: @ignore_unknown
                 result = Result.new response
-              rescue => e
+              rescue StandardError => e
                 result = Result.new nil, e
               ensure
                 @callback.call result if @callback
@@ -357,7 +357,6 @@ module Google
               insert_response.success?
             end
 
-
             ##
             # The count of rows in the response, minus the count of errors for
             # rows that were not inserted.
@@ -369,7 +368,6 @@ module Google
               return nil if error?
               insert_response.insert_count
             end
-
 
             ##
             # The count of errors for rows that were not inserted.
