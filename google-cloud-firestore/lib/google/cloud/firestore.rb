@@ -496,7 +496,7 @@ module Google
                    client_config: nil, project: nil, keyfile: nil
         project_id ||= (project || Firestore::Service.default_project_id)
         project_id = project_id.to_s # Always cast to a string
-        fail ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         credentials ||= keyfile
         credentials ||= Firestore::Credentials.default(scope: scope)

@@ -130,7 +130,7 @@ module Google
           new_query ||= StructuredQuery.new
 
           if new_query.from.empty?
-            fail "missing collection_id to specify descendants."
+            raise "missing collection_id to specify descendants."
           end
 
           new_query.from.last.all_descendants = true
@@ -166,7 +166,7 @@ module Google
           new_query ||= StructuredQuery.new
 
           if new_query.from.empty?
-            fail "missing collection_id to specify descendants."
+            raise "missing collection_id to specify descendants."
           end
 
           new_query.from.last.all_descendants = false
@@ -283,11 +283,12 @@ module Google
             field: StructuredQuery::FieldReference.new(
               field_path: field.formatted_string
             ),
-            direction: order_direction(direction))
+            direction: order_direction(direction)
+          )
 
           Query.start new_query, parent_path, client
         end
-        alias_method :order_by, :order
+        alias order_by order
 
         ##
         # Skips to an offset in a query. If the current query already has
@@ -389,11 +390,11 @@ module Google
 
           values = values.flatten.map { |value| Convert.raw_to_value value }
           new_query.start_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: true)
+            values: values, before: true
+          )
 
           Query.start new_query, parent_path, client
         end
-
 
         ##
         # Starts query results after a set of field values. The result set will
@@ -431,7 +432,8 @@ module Google
 
           values = values.flatten.map { |value| Convert.raw_to_value value }
           new_query.start_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: false)
+            values: values, before: false
+          )
 
           Query.start new_query, parent_path, client
         end
@@ -472,7 +474,8 @@ module Google
 
           values = values.flatten.map { |value| Convert.raw_to_value value }
           new_query.end_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: true)
+            values: values, before: true
+          )
 
           Query.start new_query, parent_path, client
         end
@@ -513,7 +516,8 @@ module Google
 
           values = values.flatten.map { |value| Convert.raw_to_value value }
           new_query.end_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: false)
+            values: values, before: false
+          )
 
           Query.start new_query, parent_path, client
         end
@@ -552,7 +556,7 @@ module Google
             yield DocumentSnapshot.from_query_result(result, self)
           end
         end
-        alias_method :run, :get
+        alias run get
 
         ##
         # @private Start a new Query.
@@ -567,25 +571,36 @@ module Google
 
         protected
 
+        ##
+        # @private
         StructuredQuery = Google::Firestore::V1beta1::StructuredQuery
 
+        ##
+        # @private
         FILTER_OPS = {
-          "<"            => :LESS_THAN,
-          "lt"           => :LESS_THAN,
-          "<="           => :LESS_THAN_OR_EQUAL,
-          "lte"          => :LESS_THAN_OR_EQUAL,
-          ">"            => :GREATER_THAN,
-          "gt"           => :GREATER_THAN,
-          ">="           => :GREATER_THAN_OR_EQUAL,
-          "gte"          => :GREATER_THAN_OR_EQUAL,
-          "="            => :EQUAL,
-          "=="           => :EQUAL,
-          "eq"           => :EQUAL,
-          "eql"          => :EQUAL,
-          "is"           => :EQUAL }
-        UNARY_NIL_VALUES = [nil, :null, :nil]
-        UNARY_NAN_VALUES = [:nan, Float::NAN]
-        UNARY_VALUES = UNARY_NIL_VALUES + UNARY_NAN_VALUES
+          "<"   => :LESS_THAN,
+          "lt"  => :LESS_THAN,
+          "<="  => :LESS_THAN_OR_EQUAL,
+          "lte" => :LESS_THAN_OR_EQUAL,
+          ">"   => :GREATER_THAN,
+          "gt"  => :GREATER_THAN,
+          ">="  => :GREATER_THAN_OR_EQUAL,
+          "gte" => :GREATER_THAN_OR_EQUAL,
+          "="   => :EQUAL,
+          "=="  => :EQUAL,
+          "eq"  => :EQUAL,
+          "eql" => :EQUAL,
+          "is"  => :EQUAL
+        }.freeze
+        ##
+        # @private
+        UNARY_NIL_VALUES = [nil, :null, :nil].freeze
+        ##
+        # @private
+        UNARY_NAN_VALUES = [:nan, Float::NAN].freeze
+        ##
+        # @private
+        UNARY_VALUES = (UNARY_NIL_VALUES + UNARY_NAN_VALUES).freeze
 
         def filter name, op, value
           field = StructuredQuery::FieldReference.new field_path: name.to_s
@@ -594,7 +609,8 @@ module Google
           is_value_nan = value.respond_to?(:nan?) && value.nan?
           if UNARY_VALUES.include?(value) || is_value_nan
             if op != :EQUAL
-              fail ArgumentError, "can only check equality for #{value} values."
+              raise ArgumentError,
+                    "can only check equality for #{value} values."
             end
 
             op = :IS_NULL
@@ -628,7 +644,7 @@ module Google
         ##
         # @private Raise an error unless an database available.
         def ensure_client!
-          fail "Must have active connection to service" unless client
+          raise "Must have active connection to service" unless client
         end
 
         ##
@@ -643,7 +659,7 @@ module Google
         # @private Raise an error unless an active connection to the service
         # is available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

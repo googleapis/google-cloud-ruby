@@ -59,7 +59,7 @@ module Google
         def initialize *fields
           @fields = fields.flatten.map(&:to_s)
           @fields.each do |field|
-            fail ArgumentError, "empty paths not allowed" if field.empty?
+            raise ArgumentError, "empty paths not allowed" if field.empty?
           end
         end
 
@@ -167,7 +167,7 @@ module Google
           fields = String(dotted_string).split(".")
           fields.each do |field|
             if INVALID_FIELD_PATH_CHARS.match field
-              fail ArgumentError, "invalid character, use FieldPath instead"
+              raise ArgumentError, "invalid character, use FieldPath instead"
             end
           end
           new fields

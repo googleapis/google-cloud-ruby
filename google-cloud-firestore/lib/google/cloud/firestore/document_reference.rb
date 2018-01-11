@@ -95,7 +95,7 @@ module Google
           collection_ids = service.list_collections path
           collection_ids.each { |collection_id| yield col(collection_id) }
         end
-        alias_method :collections, :cols
+        alias collections cols
 
         ##
         # Retrieves a collection nested under the document snapshot.
@@ -118,12 +118,12 @@ module Google
         #
         def col collection_path
           if collection_path.to_s.split("/").count.even?
-            fail ArgumentError, "collection_path must refer to a collection."
+            raise ArgumentError, "collection_path must refer to a collection."
           end
 
           CollectionReference.from_path "#{path}/#{collection_path}", client
         end
-        alias_method :collection, :col
+        alias collection col
 
         ##
         # Retrieve the document data.
@@ -453,14 +453,14 @@ module Google
         ##
         # @private Raise an error unless an database available.
         def ensure_client!
-          fail "Must have active connection to service" unless client
+          raise "Must have active connection to service" unless client
         end
 
         ##
         # @private Raise an error unless an active connection to the service
         # is available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

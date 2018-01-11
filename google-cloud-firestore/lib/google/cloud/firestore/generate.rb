@@ -21,11 +21,11 @@ module Google
       ##
       # @private Helper module for generating random values
       module Generate
-        CHARS = [*"a".."z", *"A".."Z", *"0".."9"]
+        CHARS = [*"a".."z", *"A".."Z", *"0".."9"].freeze
 
         def self.unique_id length: 20, chars: CHARS
           size = chars.size
-          length.times.map do
+          Array.new(length) do
             chars[SecureRandom.random_number(size)]
           end.join
         end

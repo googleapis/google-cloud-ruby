@@ -107,7 +107,7 @@ module Google
           collection_ids = service.list_collections "#{path}/documents"
           collection_ids.each { |collection_id| yield col(collection_id) }
         end
-        alias_method :collections, :cols
+        alias collections cols
 
         ##
         # Retrieves a collection.
@@ -130,13 +130,13 @@ module Google
         #
         def col collection_path
           if collection_path.to_s.split("/").count.even?
-            fail ArgumentError, "collection_path must refer to a collection."
+            raise ArgumentError, "collection_path must refer to a collection."
           end
 
           CollectionReference.from_path \
             "#{path}/documents/#{collection_path}", self
         end
-        alias_method :collection, :col
+        alias collection col
 
         ##
         # Retrieves a document reference.
@@ -158,14 +158,14 @@ module Google
         #
         def doc document_path
           if document_path.to_s.split("/").count.odd?
-            fail ArgumentError, "document_path must refer to a document."
+            raise ArgumentError, "document_path must refer to a document."
           end
 
           doc_path = "#{path}/documents/#{document_path}"
 
           DocumentReference.from_path doc_path, self
         end
-        alias_method :document, :doc
+        alias document doc
 
         ##
         # Retrieves a list of document snapshots.
@@ -205,9 +205,9 @@ module Google
             yield DocumentSnapshot.from_batch_result(result, self)
           end
         end
-        alias_method :get_docs, :get_all
-        alias_method :get_documents, :get_all
-        alias_method :find, :get_all
+        alias get_docs get_all
+        alias get_documents get_all
+        alias find get_all
 
         ##
         # Creates a field path object representing the sentinel ID of a
@@ -401,7 +401,7 @@ module Google
             return nil if retries > 0
             # Re-raise error.
             raise err
-          rescue => err
+          rescue StandardError => err
             # Rollback transaction when handling unexpected error
             transaction.rollback rescue nil
             # Re-raise error.
@@ -416,17 +416,13 @@ module Google
         ##
         # @private
         def coalesce_get_argument obj
-          if obj.is_a?(String) || obj.is_a?(Symbol)
-            if obj.to_s.split("/").count.even?
-              return doc obj # Convert a DocumentReference
-            else
-              return col obj # Convert to Query
-            end
-          end
-
           return obj.ref if obj.is_a? DocumentSnapshot
 
-          obj
+          return obj unless obj.is_a?(String) || obj.is_a?(Symbol)
+
+          return doc obj if obj.to_s.split("/").count.even?
+
+          col obj # Convert to CollectionReference
         end
 
         ##
@@ -441,7 +437,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end
