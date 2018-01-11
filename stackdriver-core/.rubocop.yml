@@ -11,35 +11,31 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
-Style/NumericLiterals:
-  Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Style/EmptyLines:
-  Enabled: false
-Style/EmptyElse:
-  Enabled: false
+Style/ClassVars:
+  Exclude:
+    - "lib/google/cloud/configuration.rb"
+Style/MethodMissing:
+  Exclude:
+    - "lib/stackdriver/core/configuration.rb"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25
+Metrics/ClassLength:
+  Enabled: false
 Metrics/MethodLength:
   Max: 20
 Metrics/ModuleLength:
   Enabled: false
 Metrics/ParameterLists:
   Enabled: false
-Style/AccessorMethodName:
+Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
-Style/RescueModifier:
-  Enabled: false
-Style/ClassVars:
-  Enabled: false
-Style/TrivialAccessors:
-  Enabled: false
-Style/FileName:
-  Enabled: false # for lib/stackdriver-core.rb file
+Naming/AccessorMethodName:
+  Exclude:
+    - "lib/stackdriver/core/async_actor.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/stackdriver-core.rb"
