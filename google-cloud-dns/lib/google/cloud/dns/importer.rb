@@ -123,54 +123,62 @@ module Google
         end
 
         # rubocop:disable all
+
+        ##
         # Rubocop's line-length and branch condition restrictions prevent
         # the most straightforward approach to converting zonefile's records
         # to our own. So disable rubocop for this operation.
-
         def data_from_zonefile_record type, zf_record
           case type.to_s.upcase
           when "A"
-            "#{zf_record[:host]}"
+            String zf_record[:host]
           when "AAAA"
-            "#{zf_record[:host]}"
+            String zf_record[:host]
           when "CNAME"
-            "#{zf_record[:host]}"
+            String zf_record[:host]
           when "MX"
             "#{zf_record[:pri]} #{zf_record[:host]}"
           when "NAPTR"
-            "#{zf_record[:order]} #{zf_record[:preference]} #{zf_record[:flags]} #{zf_record[:service]} #{zf_record[:regexp]} #{zf_record[:replacement]}"
+            "#{zf_record[:order]} #{zf_record[:preference]} " \
+              "#{zf_record[:flags]} #{zf_record[:service]} " \
+              "#{zf_record[:regexp]} #{zf_record[:replacement]}"
           when "NS"
-            "#{zf_record[:host]}"
+            String zf_record[:host]
           when "PTR"
-            "#{zf_record[:host]}"
+            String zf_record[:host]
           when "SOA"
-            "#{zf_record[:primary]} #{zf_record[:email]} #{zf_record[:serial]} #{zf_record[:refresh]} #{zf_record[:retry]} #{zf_record[:expire]} #{zf_record[:minimumTTL]}"
+            "#{zf_record[:primary]} #{zf_record[:email]} " \
+              "#{zf_record[:serial]} #{zf_record[:refresh]} " \
+              "#{zf_record[:retry]} #{zf_record[:expire]} " \
+              "#{zf_record[:minimumTTL]}"
           when "SPF"
-            "#{zf_record[:data]}"
+            String zf_record[:data]
           when "SRV"
-            "#{zf_record[:pri]} #{zf_record[:weight]} #{zf_record[:port]} #{zf_record[:host]}"
+            "#{zf_record[:pri]} #{zf_record[:weight]} " \
+              "#{zf_record[:port]} #{zf_record[:host]}"
           when "TXT"
-            "#{zf_record[:text]}"
+            String zf_record[:text]
           else
-            fail ArgumentError, "record type '#{type}' is not supported"
+            raise ArgumentError, "record type '#{type}' is not supported"
           end
         end
 
         # rubocop:enable all
 
-        MULTIPLIER = { "s" => (1),
-                       "m" => (60),
+        ##
+        # @private
+        MULTIPLIER = { "s" => 1,
+                       "m" => 60,
                        "h" => (60 * 60),
                        "d" => (60 * 60 * 24),
-                       "w" => (60 * 60 * 24 * 7) } # :nodoc:
+                       "w" => (60 * 60 * 24 * 7) }.freeze # :nodoc:
 
         def ttl_to_i ttl
           if ttl.respond_to?(:to_int) || ttl.to_s =~ /\A\d+\z/
-            return ttl.to_i
+            ttl.to_i
           elsif (m = /\A(\d+)(w|d|h|m|s)\z/.match ttl)
-            return m[1].to_i * MULTIPLIER[m[2]].to_i
+            m[1].to_i * MULTIPLIER[m[2]].to_i
           end
-          nil
         end
 
         def create_zonefile path_or_io # :nodoc:

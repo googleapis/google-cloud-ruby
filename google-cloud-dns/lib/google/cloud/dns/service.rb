@@ -137,7 +137,7 @@ module Google
         # Fully Qualified Domain Name
         def self.fqdn name, origin_dns
           name = name.to_s.strip
-          return name if self.ip_addr? name
+          return name if ip_addr? name
           name = origin_dns if name.empty?
           name = origin_dns if name == "@"
           name = "#{name}.#{origin_dns}" unless name.include? "."
