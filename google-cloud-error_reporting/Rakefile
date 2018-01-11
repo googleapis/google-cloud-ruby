@@ -89,11 +89,6 @@ task doctest: :yard do
   sh "bundle exec yard doctest"
 end
 
-desc "Run rubocop."
-task :rubocop do
-  puts "The google-cloud-error_reporting gem does not use rubocop."
-end
-
 namespace :integration do
   desc "Run integration tests against GAE"
   task :gae, :project_uri do |t, args|

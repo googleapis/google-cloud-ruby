@@ -62,7 +62,6 @@ module Google
                                     client_config: client_config
     end
 
-
     ##
     # Create a new object for connecting to the Stackdriver Error Reporting
     # service. Each call creates a new connection.

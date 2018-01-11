@@ -56,7 +56,7 @@ module Google
             Google::Cloud.env.project_id
         end
         class << self
-          alias_method :default_project, :default_project_id
+          alias default_project default_project_id
         end
 
         ##
@@ -108,7 +108,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to Stackdriver
