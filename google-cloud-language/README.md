@@ -7,17 +7,14 @@ recognition, and text annotations.
 - [Client Library Documentation][]
 - [Product Documentation][]
 
-*The 0.28.0 release introduced breaking changes relative to the previous
-release, 0.27.1. For more details and instructions to migrate your code, please
-visit the [migration guide](https://cloud.google.com/natural-language/docs/ruby-client-migration).*
-
 ## Quick Start
 In order to use this library, you first need to go through the following
 steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable the Google Cloud Natural Language API.](https://console.cloud.google.com/apis/api/language)
-3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+3. [Enable the Google Cloud Natural Language API.](https://console.cloud.google.com/apis/api/language)
+4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
 ```
