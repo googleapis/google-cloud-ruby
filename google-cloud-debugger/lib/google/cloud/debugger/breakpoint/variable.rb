@@ -99,11 +99,12 @@ module Google
           ##
           # @private Message to display on variables when snapshot buffer is
           # full.
-          BUFFER_FULL_MSG = "Buffer full. Use an expression to see more data."
+          BUFFER_FULL_MSG =
+            "Buffer full. Use an expression to see more data.".freeze
 
           ##
           # @private Error message when variable can't be converted.
-          FAIL_CONVERSION_MSG = "Error: Unable to inspect value"
+          FAIL_CONVERSION_MSG = "Error: Unable to inspect value".freeze
 
           ##
           # @private Name of the variable, if any.
@@ -249,7 +250,7 @@ module Google
             else
               from_primitive_var source, name: name, limit: limit
             end
-          rescue
+          rescue StandardError
             new.tap do |var|
               var.name = name.to_s if name
               var.set_error_state FAIL_CONVERSION_MSG
@@ -576,11 +577,9 @@ module Google
           # @private Exports the Variable var_table_index attribute to
           # an Int32Value gRPC struct
           def var_table_index_to_grpc
-            if var_table_index
-              Google::Protobuf::Int32Value.new value: var_table_index
-            else
-              nil
-            end
+            return unless var_table_index
+
+            Google::Protobuf::Int32Value.new value: var_table_index
           end
 
           ##

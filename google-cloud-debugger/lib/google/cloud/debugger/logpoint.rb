@@ -45,7 +45,7 @@ module Google
 
             begin
               evaluate_log_message binding
-            rescue
+            rescue StandardError
               return false
             end
           end

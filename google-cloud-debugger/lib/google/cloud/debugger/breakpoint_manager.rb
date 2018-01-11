@@ -85,7 +85,7 @@ module Google
         def sync_active_breakpoints debuggee_id
           begin
             response = service.list_active_breakpoints debuggee_id, @wait_token
-          rescue
+          rescue StandardError
             return false
           end
 

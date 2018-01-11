@@ -44,7 +44,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Debugger::VERSION)
+              lib_version: Google::Cloud::Debugger::VERSION
+            )
         end
         attr_accessor :mocked_debugger
 
@@ -56,7 +57,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Debugger::VERSION)
+              lib_version: Google::Cloud::Debugger::VERSION
+            )
         end
         attr_accessor :mocked_transmitter
 

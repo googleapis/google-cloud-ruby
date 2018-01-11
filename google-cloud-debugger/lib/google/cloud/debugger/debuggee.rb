@@ -86,7 +86,7 @@ module Google
           begin
             response = service.register_debuggee to_grpc
             @id = response.debuggee.id
-          rescue
+          rescue StandardError
             revoke_registration
           end
 
@@ -219,7 +219,7 @@ module Google
         # @private Helper method to parse json file
         def read_app_json_file file_path
           JSON.parse File.read(file_path), symbolize_names: true
-        rescue
+        rescue StandardError
           nil
         end
       end
