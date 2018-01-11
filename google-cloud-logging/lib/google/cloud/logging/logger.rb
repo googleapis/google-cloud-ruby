@@ -71,7 +71,7 @@ module Google
         ##
         # The Google Cloud log_name to write the log entry with.
         attr_reader :log_name
-        alias_method :progname, :log_name
+        alias progname log_name
 
         ##
         # The Google Cloud resource to write the log entry with.
@@ -84,8 +84,8 @@ module Google
         ##
         # The logging severity threshold (e.g. `Logger::INFO`)
         attr_reader :level
-        alias_method :sev_threshold, :level
-        alias_method :local_level, :level
+        alias sev_threshold level
+        alias local_level level
 
         ##
         # Boolean flag that indicates whether this logger can be silenced or
@@ -317,7 +317,7 @@ module Google
           write_entry severity, message unless @closed
           true
         end
-        alias_method :log, :add
+        alias log add
 
         ##
         # Logs the given message at UNKNOWN severity.
@@ -393,11 +393,13 @@ module Google
         #
         def level= severity
           new_level = derive_severity severity
-          fail ArgumentError, "invalid log level: #{severity}" if new_level.nil?
+          if new_level.nil?
+            raise ArgumentError, "invalid log level: #{severity}"
+          end
           @level = new_level
         end
-        alias_method :sev_threshold=, :level=
-        alias_method :local_level=, :level=
+        alias sev_threshold= level=
+        alias local_level= level=
 
         ##
         # Close the logging "device". This effectively disables logging from
@@ -482,7 +484,7 @@ module Google
 
         ##
         # @deprecated Use delete_request_info
-        alias_method :delete_trace_id, :delete_request_info
+        alias delete_trace_id delete_request_info
 
         ##
         # No-op method. Created to match the spec of ActiveSupport::Logger#flush
@@ -584,15 +586,14 @@ module Google
           when "error".freeze then ::Logger::ERROR
           when "fatal".freeze then ::Logger::FATAL
           when "unknown".freeze then ::Logger::UNKNOWN
-          else nil
           end
         end
 
         ##
         # @private Get Google Cloud deverity from logger level number.
         def gcloud_severity severity_int
-          %i(DEBUG INFO WARNING ERROR CRITICAL DEFAULT)[severity_int]
-        rescue
+          %i[DEBUG INFO WARNING ERROR CRITICAL DEFAULT][severity_int]
+        rescue StandardError
           :DEFAULT
         end
 

@@ -75,7 +75,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project.
@@ -164,7 +164,7 @@ module Google
                                 filter: filter, order: order,
                                 projects: projects
         end
-        alias_method :find_entries, :entries
+        alias find_entries entries
 
         ##
         # Creates an new Entry instance that may be populated and written to the
@@ -226,7 +226,7 @@ module Google
           e.payload = payload if payload
           e
         end
-        alias_method :new_entry, :entry
+        alias new_entry entry
 
         ##
         # Writes log entries to the Stackdriver Logging service.
@@ -469,9 +469,9 @@ module Google
                                         max: max
           Log::List.from_grpc list_grpc, service, resource: resource, max: max
         end
-        alias_method :find_logs, :logs
-        alias_method :log_names, :logs
-        alias_method :find_log_names, :logs
+        alias find_logs logs
+        alias log_names logs
+        alias find_log_names logs
 
         ##
         # Deletes a log and all its log entries. The log will reappear if it
@@ -537,7 +537,7 @@ module Google
           list_grpc = service.list_resource_descriptors token: token, max: max
           ResourceDescriptor::List.from_grpc list_grpc, service, max
         end
-        alias_method :find_resource_descriptors, :resource_descriptors
+        alias find_resource_descriptors resource_descriptors
 
         ##
         # Creates a new monitored resource instance.
@@ -564,7 +564,7 @@ module Google
             r.labels = labels
           end
         end
-        alias_method :new_resource, :resource
+        alias new_resource resource
 
         ##
         # Retrieves the list of sinks belonging to the project.
@@ -600,7 +600,7 @@ module Google
           list_grpc = service.list_sinks token: token, max: max
           Sink::List.from_grpc list_grpc, service, max
         end
-        alias_method :find_sinks, :sinks
+        alias find_sinks sinks
 
         ##
         # Creates a new project sink. When you create a sink, only new log
@@ -687,7 +687,7 @@ module Google
             unique_writer_identity: unique_writer_identity
           Sink.from_grpc grpc, service
         end
-        alias_method :new_sink, :create_sink
+        alias new_sink create_sink
 
         ##
         # Retrieves a sink by name.
@@ -716,8 +716,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :get_sink, :sink
-        alias_method :find_sink, :sink
+        alias get_sink sink
+        alias find_sink sink
 
         ##
         # Retrieves the list of metrics belonging to the project.
@@ -753,7 +753,7 @@ module Google
           grpc = service.list_metrics token: token, max: max
           Metric::List.from_grpc grpc, service, max
         end
-        alias_method :find_metrics, :metrics
+        alias find_metrics metrics
 
         ##
         # Creates a new logs-based metric for Google Cloud Monitoring.
@@ -786,7 +786,7 @@ module Google
           grpc = service.create_metric name, filter, description
           Metric.from_grpc grpc, service
         end
-        alias_method :new_metric, :create_metric
+        alias new_metric create_metric
 
         ##
         # Retrieves metric by name.
@@ -815,8 +815,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :get_metric, :metric
-        alias_method :find_metric, :metric
+        alias get_metric metric
+        alias find_metric metric
 
         protected
 
@@ -824,7 +824,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

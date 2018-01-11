@@ -19,33 +19,26 @@ Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
 Style/NumericLiterals:
   Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Style/EmptyLines:
-  Enabled: false
-Style/EmptyElse:
-  Enabled: false
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/logging/middleware.rb"
 Metrics/CyclomaticComplexity:
   Max: 12
 Metrics/PerceivedComplexity:
   Max: 12
 Metrics/AbcSize:
   Max: 28
+Metrics/ClassLength:
+  Enabled: false
 Metrics/MethodLength:
-  Max: 22
+  Max: 25
 Metrics/ParameterLists:
   Enabled: false
-Style/RescueModifier:
+Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
-Style/ClassVars:
-  Enabled: false
-Style/TrivialAccessors:
-  Enabled: false
-Style/CaseEquality:
-  Enabled: false
-Style/FileName:
-  Enabled: false # for lib/google-cloud-logging.rb file
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-logging.rb"
 Lint/RescueException:
-  Enabled: false # for lib/google/cloud/logging/rails.rb file
+  Exclude:
+    - "lib/google/cloud/logging/rails.rb"
