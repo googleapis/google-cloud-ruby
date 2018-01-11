@@ -64,10 +64,10 @@ module Google
         #   task.key.project #=> "my-todo-project"
         #
         attr_accessor :project
-        alias_method :project_id,  :project
-        alias_method :project_id=, :project=
-        alias_method :dataset_id,  :project
-        alias_method :dataset_id=, :project=
+        alias project_id project
+        alias project_id= project=
+        alias dataset_id project
+        alias dataset_id= project=
 
         ##
         # The namespace of the Key.
@@ -282,7 +282,8 @@ module Google
           grpc = Google::Datastore::V1::Key.new(path: grpc_path)
           if project || namespace
             grpc.partition_id = Google::Datastore::V1::PartitionId.new(
-              project_id: project.to_s, namespace_id: namespace.to_s)
+              project_id: project.to_s, namespace_id: namespace.to_s
+            )
           end
           grpc
         end

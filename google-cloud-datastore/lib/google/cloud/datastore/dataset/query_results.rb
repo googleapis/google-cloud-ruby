@@ -59,7 +59,7 @@ module Google
           #
           # @return [Google::Cloud::Datastore::Cursor]
           attr_reader :end_cursor
-          alias_method :cursor, :end_cursor
+          alias cursor end_cursor
 
           ##
           # The state of the query after the current batch.
@@ -378,7 +378,7 @@ module Google
           # is available.
           def ensure_service!
             msg = "Must have active connection to datastore service to get next"
-            fail msg if @service.nil? || @query.nil?
+            raise msg if @service.nil? || @query.nil?
           end
         end
       end

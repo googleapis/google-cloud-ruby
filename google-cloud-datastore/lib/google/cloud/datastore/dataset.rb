@@ -82,7 +82,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project_id.
@@ -112,12 +112,11 @@ module Google
         #
         def allocate_ids incomplete_key, count = 1
           if incomplete_key.complete?
-            fail Google::Cloud::Datastore::KeyError,
-                 "An incomplete key must be provided."
+            raise Datastore::KeyError, "An incomplete key must be provided."
           end
 
           ensure_service!
-          incomplete_keys = count.times.map { incomplete_key.to_grpc }
+          incomplete_keys = Array.new(count) { incomplete_key.to_grpc }
           allocate_res = service.allocate_ids(*incomplete_keys)
           allocate_res.keys.map { |key| Key.from_grpc key }
         end
@@ -177,7 +176,7 @@ module Google
         def save *entities
           commit { |c| c.save(*entities) }
         end
-        alias_method :upsert, :save
+        alias upsert save
 
         ##
         # Insert one or more entities to the Datastore. An InvalidArgumentError
@@ -353,7 +352,7 @@ module Google
           end
           find_all(key, consistency: consistency).first
         end
-        alias_method :get, :find
+        alias get find
 
         ##
         # Retrieve the entities for the provided keys. The order of results is
@@ -387,7 +386,7 @@ module Google
                                       consistency: consistency)
           LookupResults.from_grpc lookup_res, service, consistency
         end
-        alias_method :lookup, :find_all
+        alias lookup find_all
 
         ##
         # Retrieve entities specified by a Query.
@@ -455,7 +454,7 @@ module Google
         def run query, namespace: nil, consistency: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
-            fail ArgumentError, "Cannot run a #{query.class} object."
+            raise ArgumentError, "Cannot run a #{query.class} object."
           end
           check_consistency! consistency
           query_res = service.run_query query.to_grpc, namespace,
@@ -463,7 +462,7 @@ module Google
           QueryResults.from_grpc query_res, service, namespace,
                                  query.to_grpc.dup
         end
-        alias_method :run_query, :run
+        alias run_query run
 
         ##
         # Creates a Datastore Transaction.
@@ -557,10 +556,10 @@ module Google
             # Create new transaction and retry the block
             tx = Transaction.new service, previous_transaction: tx.id
             retry
-          rescue
+          rescue StandardError
             begin
               tx.rollback
-            rescue
+            rescue StandardError
               raise TransactionError,
                     "Transaction failed to commit and rollback."
             end
@@ -614,17 +613,17 @@ module Google
           begin
             yield tx
             tx.commit
-          rescue
+          rescue StandardError
             begin
               tx.rollback
-            rescue
+            rescue StandardError
               raise TransactionError,
                     "Transaction failed to commit and rollback."
             end
             raise TransactionError, "Transaction failed to commit."
           end
         end
-        alias_method :snapshot, :read_only_transaction
+        alias snapshot read_only_transaction
 
         ##
         # Create a new Query instance. This is a convenience method to make the
@@ -868,11 +867,11 @@ module Google
           entity = Entity.new
 
           # Set the key
-          if key_or_path.flatten.first.is_a? Google::Cloud::Datastore::Key
-            entity.key = key_or_path.flatten.first
-          else
-            entity.key = key key_or_path, project: project, namespace: namespace
-          end
+          entity.key = if key_or_path.flatten.first.is_a? Datastore::Key
+                         key_or_path.flatten.first
+                       else
+                         key key_or_path, project: project, namespace: namespace
+                       end
 
           yield entity if block_given?
 
@@ -885,7 +884,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         def validate_deadline deadline
@@ -895,10 +894,12 @@ module Google
         end
 
         def check_consistency! consistency
-          fail(ArgumentError,
-               format("Consistency must be :eventual or :strong, not %s.",
-                      consistency.inspect)
-              ) unless [:eventual, :strong, nil].include? consistency
+          return if [:eventual, :strong, nil].include? consistency
+
+          error_msg = format("Consistency must be :eventual or :strong, " \
+                             "not %<bad_consistency>s.",
+                             bad_consistency: consistency.inspect)
+          raise ArgumentError, error_msg
         end
       end
     end

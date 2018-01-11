@@ -272,7 +272,7 @@ module Google
         #   task.key.id = 9876543221 #=> raise RuntimeError
         #
         def key= new_key
-          fail "This entity's key is immutable." if persisted?
+          raise "This entity's key is immutable." if persisted?
           @key = new_key
         end
 

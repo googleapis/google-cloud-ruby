@@ -58,7 +58,8 @@ module Google
             timeout: timeout,
             client_config: client_config,
             lib_name: "gccl",
-            lib_version: Google::Cloud::Datastore::VERSION)
+            lib_version: Google::Cloud::Datastore::VERSION
+          )
         end
         attr_accessor :mocked_service
 
@@ -95,8 +96,11 @@ module Google
             query = nil
           end
           read_options = generate_read_options consistency, transaction
-          partition_id = Google::Datastore::V1::PartitionId.new(
-            namespace_id: namespace) if namespace
+          if namespace
+            partition_id = Google::Datastore::V1::PartitionId.new(
+              namespace_id: namespace
+            )
+          end
 
           execute do
             service.run_query project,
@@ -158,13 +162,16 @@ module Google
         def generate_read_options consistency, transaction
           if consistency == :eventual
             return Google::Datastore::V1::ReadOptions.new(
-              read_consistency: :EVENTUAL)
+              read_consistency: :EVENTUAL
+            )
           elsif consistency == :strong
-            return  Google::Datastore::V1::ReadOptions.new(
-              read_consistency: :STRONG)
+            return Google::Datastore::V1::ReadOptions.new(
+              read_consistency: :STRONG
+            )
           elsif transaction
-            return  Google::Datastore::V1::ReadOptions.new(
-              transaction: transaction)
+            return Google::Datastore::V1::ReadOptions.new(
+              transaction: transaction
+            )
           end
           nil
         end
