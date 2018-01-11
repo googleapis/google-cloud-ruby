@@ -146,18 +146,21 @@ module Google
       def self.grpc_error_class_for grpc_error_code
         # The gRPC status code 0 is for a successful response.
         # So there is no error subclass for a 0 status code, use current class.
-        [self, CanceledError, UnknownError, InvalidArgumentError,
-         DeadlineExceededError, NotFoundError, AlreadyExistsError,
-         PermissionDeniedError, ResourceExhaustedError, FailedPreconditionError,
-         AbortedError, OutOfRangeError, UnimplementedError, InternalError,
-         UnavailableError, DataLossError, UnauthenticatedError
+        [
+          self, CanceledError, UnknownError, InvalidArgumentError,
+          DeadlineExceededError, NotFoundError, AlreadyExistsError,
+          PermissionDeniedError, ResourceExhaustedError,
+          FailedPreconditionError, AbortedError, OutOfRangeError,
+          UnimplementedError, InternalError, UnavailableError, DataLossError,
+          UnauthenticatedError
         ][grpc_error_code] || self
       end
 
       # @private Identify the subclass for a Google API Client error
       def self.gapi_error_class_for http_status_code
         # The http status codes mapped to their error classes.
-        { 400 => InvalidArgumentError, # FailedPreconditionError/OutOfRangeError
+        {
+          400 => InvalidArgumentError, # FailedPreconditionError/OutOfRangeError
           401 => UnauthenticatedError,
           403 => PermissionDeniedError,
           404 => NotFoundError,
