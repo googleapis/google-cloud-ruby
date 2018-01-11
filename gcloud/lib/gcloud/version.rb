@@ -14,5 +14,5 @@
 
 
 module Gcloud
-  GCLOUD_VERSION = "0.23.0"
+  GCLOUD_VERSION = "0.23.0".freeze
 end
