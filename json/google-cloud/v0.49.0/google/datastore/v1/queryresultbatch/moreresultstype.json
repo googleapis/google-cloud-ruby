@@ -1,0 +1,1 @@
+{"id":"google/datastore/v1/queryresultbatch/moreresultstype","name":"MoreResultsType","title":["Google","Datastore","V1","QueryResultBatch","MoreResultsType"],"description":"<p>The possible values for the +more_results+ field.</p>","source":"google-cloud-datastore/lib/google/cloud/datastore/v1/doc/google/datastore/v1/query.rb#L273","resources":[],"examples":[],"methods":[]}
