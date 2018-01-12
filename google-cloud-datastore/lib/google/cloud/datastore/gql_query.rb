@@ -160,11 +160,13 @@ module Google
             if value.is_a? Google::Cloud::Datastore::Cursor
               @grpc.named_bindings[name.to_s] = \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  cursor: value.to_grpc)
+                  cursor: value.to_grpc
+                )
             else
               @grpc.named_bindings[name.to_s] = \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  value: Convert.to_value(value))
+                  value: Convert.to_value(value)
+                )
             end
           end
         end
@@ -209,11 +211,13 @@ module Google
             if value.is_a? Google::Cloud::Datastore::Cursor
               @grpc.positional_bindings << \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  cursor: value.to_grpc)
+                  cursor: value.to_grpc
+                )
             else
               @grpc.positional_bindings << \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  value: Convert.to_value(value))
+                  value: Convert.to_value(value)
+                )
             end
           end
         end

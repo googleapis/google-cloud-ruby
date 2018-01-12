@@ -70,7 +70,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # Create a new empty trace record for this project. Uses the current
@@ -212,7 +212,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

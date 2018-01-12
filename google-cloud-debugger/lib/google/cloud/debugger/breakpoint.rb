@@ -315,7 +315,7 @@ module Google
 
 
           condition_result ? true : false
-        rescue => e
+        rescue StandardError => e
           set_error_state "Error: #{e.message}",
                           refers_to: StatusMessage::BREAKPOINT_CONDITION
           false
@@ -424,7 +424,7 @@ module Google
         # @private Exports Breakpoint status to
         # Google::Devtools::Clouddebugger::V2::StatusMessage object
         def status_to_grpc
-          status.nil? ? nil: status.to_grpc
+          status.nil? ? nil : status.to_grpc
         end
 
         ##

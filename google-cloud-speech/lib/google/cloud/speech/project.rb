@@ -79,7 +79,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project.
@@ -185,11 +185,11 @@ module Google
         #                        sample_rate: 16000
         #
         def audio source, encoding: nil, language: nil, sample_rate: nil
-          if source.is_a? Audio
-            audio = source.dup
-          else
-            audio = Audio.from_source source, self
-          end
+          audio = if source.is_a? Audio
+                    source.dup
+                  else
+                    Audio.from_source source, self
+                  end
           audio.encoding = encoding unless encoding.nil?
           audio.language = language unless language.nil?
           audio.sample_rate = sample_rate unless sample_rate.nil?
@@ -324,7 +324,8 @@ module Google
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
             language: audio_obj.language, max_alternatives: max_alternatives,
             profanity_filter: profanity_filter, phrases: phrases,
-            words: words)
+            words: words
+          )
 
           grpc = service.recognize_sync audio_obj.to_grpc, config
           grpc.results.map do |result_grpc|
@@ -462,13 +463,14 @@ module Google
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
             language: audio_obj.language, max_alternatives: max_alternatives,
             profanity_filter: profanity_filter, phrases: phrases,
-            words: words)
+            words: words
+          )
 
           grpc = service.recognize_async audio_obj.to_grpc, config
           Operation.from_grpc grpc
         end
-        alias_method :long_running_recognize, :process
-        alias_method :recognize_job, :process
+        alias long_running_recognize process
+        alias recognize_job process
 
         ##
         # Creates a Stream object to perform bidirectional streaming
@@ -587,7 +589,7 @@ module Google
 
           Stream.new service, grpc_req
         end
-        alias_method :stream_recognize, :stream
+        alias stream_recognize stream
 
         ##
         # Performs asynchronous speech recognition. Requests are processed
@@ -651,7 +653,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

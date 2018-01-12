@@ -47,7 +47,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Spanner::VERSION)
+              lib_version: Google::Cloud::Spanner::VERSION
+            )
         end
         attr_accessor :mocked_service
 
@@ -59,7 +60,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Spanner::VERSION)
+              lib_version: Google::Cloud::Spanner::VERSION
+            )
         end
         attr_accessor :mocked_instances
 
@@ -71,7 +73,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Spanner::VERSION)
+              lib_version: Google::Cloud::Spanner::VERSION
+            )
         end
         attr_accessor :mocked_databases
 
@@ -110,7 +113,8 @@ module Google
 
         def update_instance instance_obj
           mask = Google::Protobuf::FieldMask.new(
-            paths: %w(display_name node_count labels))
+            paths: %w[display_name node_count labels]
+          )
 
           execute do
             instances.update_instance instance_obj, mask
@@ -258,7 +262,8 @@ module Google
           unless params.nil?
             input_param_pairs = Convert.to_query_params params, types
             input_params = Google::Protobuf::Struct.new(
-              fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }])
+              fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }]
+            )
             input_param_types = Hash[
               input_param_pairs.map { |k, v| [k, v.last] }]
           end
@@ -287,8 +292,9 @@ module Google
         def commit session_name, mutations = [], transaction_id: nil
           tx_opts = nil
           if transaction_id.nil?
-            tx_opts = Google::Spanner::V1::TransactionOptions.new(read_write:
-              Google::Spanner::V1::TransactionOptions::ReadWrite.new)
+            tx_opts = Google::Spanner::V1::TransactionOptions.new(
+              read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new
+            )
           end
           opts = default_options_from_session session_name
           execute do
@@ -307,8 +313,9 @@ module Google
         end
 
         def begin_transaction session_name
-          tx_opts = Google::Spanner::V1::TransactionOptions.new(read_write:
-            Google::Spanner::V1::TransactionOptions::ReadWrite.new)
+          tx_opts = Google::Spanner::V1::TransactionOptions.new(
+            read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new
+          )
           opts = default_options_from_session session_name
           execute do
             service.begin_transaction session_name, tx_opts, options: opts
@@ -317,13 +324,16 @@ module Google
 
         def create_snapshot session_name, strong: nil, timestamp: nil,
                             staleness: nil
-          tx_opts = Google::Spanner::V1::TransactionOptions.new(read_only:
-            Google::Spanner::V1::TransactionOptions::ReadOnly.new({
-              strong: strong,
-              read_timestamp: Convert.time_to_timestamp(timestamp),
-              exact_staleness: Convert.number_to_duration(staleness),
-              return_read_timestamp: true
-            }.delete_if { |_, v| v.nil? }))
+          tx_opts = Google::Spanner::V1::TransactionOptions.new(
+            read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
+              {
+                strong: strong,
+                read_timestamp: Convert.time_to_timestamp(timestamp),
+                exact_staleness: Convert.number_to_duration(staleness),
+                return_read_timestamp: true
+              }.delete_if { |_, v| v.nil? }
+            )
+          )
           opts = default_options_from_session session_name
           execute do
             service.begin_transaction session_name, tx_opts, options: opts
@@ -374,23 +384,27 @@ module Google
         def instance_path name
           return name if name.to_s.include? "/"
           Admin::Instance::V1::InstanceAdminClient.instance_path(
-            project, name)
+            project, name
+          )
         end
 
         def instance_config_path name
           return name if name.to_s.include? "/"
           Admin::Instance::V1::InstanceAdminClient.instance_config_path(
-            project, name.to_s)
+            project, name.to_s
+          )
         end
 
         def database_path instance_id, database_id
           Admin::Database::V1::DatabaseAdminClient.database_path(
-            project, instance_id, database_id)
+            project, instance_id, database_id
+          )
         end
 
         def session_path instance_id, database_id, session_id
           V1::SpannerClient.session_path(
-            project, instance_id, database_id, session_id)
+            project, instance_id, database_id, session_id
+          )
         end
 
         def execute

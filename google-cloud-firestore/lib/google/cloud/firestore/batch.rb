@@ -67,7 +67,7 @@ module Google
         def firestore
           @client
         end
-        alias_method :client, :firestore
+        alias client firestore
 
         # @!group Modifications
 
@@ -388,7 +388,8 @@ module Google
           doc_path = coalesce_doc_path_argument doc
 
           @writes << Convert.write_for_delete(
-            doc_path, exists: exists, update_time: update_time)
+            doc_path, exists: exists, update_time: update_time
+          )
 
           nil
         end
@@ -441,20 +442,20 @@ module Google
         ##
         # @private
         def ensure_not_closed!
-          fail "batch is closed" if closed?
+          raise "batch is closed" if closed?
         end
 
         ##
         # @private Raise an error unless an database available.
         def ensure_client!
-          fail "Must have active connection to service" unless firestore
+          raise "Must have active connection to service" unless firestore
         end
 
         ##
         # @private Raise an error unless an active connection to the service
         # is available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

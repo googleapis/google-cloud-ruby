@@ -85,7 +85,7 @@ module Google
           # Do not save yet
           entities
         end
-        alias_method :upsert, :save
+        alias upsert save
 
         ##
         # Insert entities in a transaction. An InvalidArgumentError will raised
@@ -194,7 +194,7 @@ module Google
           end
           find_all(key).first
         end
-        alias_method :get, :find
+        alias get find
 
         ##
         # Retrieve the entities for the provided keys. The lookup is run within
@@ -219,7 +219,7 @@ module Google
                                       transaction: @id)
           LookupResults.from_grpc lookup_res, service, nil, @id
         end
-        alias_method :lookup, :find_all
+        alias lookup find_all
 
         ##
         # Retrieve entities specified by a Query. The query is run within the
@@ -254,27 +254,27 @@ module Google
         def run query, namespace: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
-            fail ArgumentError, "Cannot run a #{query.class} object."
+            raise ArgumentError, "Cannot run a #{query.class} object."
           end
           query_res = service.run_query query.to_grpc, namespace,
                                         transaction: @id
           QueryResults.from_grpc query_res, service, namespace,
                                  query.to_grpc.dup
         end
-        alias_method :run_query, :run
+        alias run_query run
 
         ##
         # Begins a transaction.
         # This method is run when a new Transaction is created.
         def start
-          fail TransactionError, "Transaction already opened." unless @id.nil?
+          raise TransactionError, "Transaction already opened." unless @id.nil?
 
           ensure_service!
           tx_res = service.begin_transaction \
             previous_transaction: @previous_transaction
           @id = tx_res.transaction
         end
-        alias_method :begin_transaction, :start
+        alias begin_transaction start
 
         ##
         # Commits a transaction.
@@ -320,8 +320,9 @@ module Google
         #   end
         #
         def commit
-          fail TransactionError,
-               "Cannot commit when not in a transaction." if @id.nil?
+          if @id.nil?
+            raise TransactionError, "Cannot commit when not in a transaction."
+          end
 
           yield @commit if block_given?
 
@@ -365,7 +366,7 @@ module Google
         #   end
         def rollback
           if @id.nil?
-            fail TransactionError, "Cannot rollback when not in a transaction."
+            raise TransactionError, "Cannot rollback when not in a transaction."
           end
 
           ensure_service!

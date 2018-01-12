@@ -110,7 +110,8 @@ module Google
             ensure_service!
             lookup_res = @service.lookup(
               *Array(@deferred).flatten.map(&:to_grpc),
-              consistency: @consistency, transaction: @transaction)
+              consistency: @consistency, transaction: @transaction
+            )
             self.class.from_grpc lookup_res, @service, @consistency
           end
 
@@ -199,18 +200,8 @@ module Google
             end
           end
 
-          protected
-
           ##
-          # @private Raise an error unless an active connection to the service
-          # is available.
-          def ensure_service!
-            msg = "Must have active connection to datastore service to get next"
-            fail msg if @service.nil?
-          end
-
-          ##
-          # Convenience method to convert GRPC entities to google-cloud
+          # @private Convenience method to convert GRPC entities to google-cloud
           # entities.
           def self.to_gcloud_entities grpc_entity_results
             # Entities are nested in an object.
@@ -221,10 +212,21 @@ module Google
           end
 
           ##
-          # Convenience method to convert GRPC keys to google-cloud keys.
+          # @private Convenience method to convert GRPC keys to google-cloud
+          # keys.
           def self.to_gcloud_keys grpc_keys
             # Keys are not nested in an object like entities are.
             Array(grpc_keys).map { |key| Key.from_grpc key }
+          end
+
+          protected
+
+          ##
+          # @private Raise an error unless an active connection to the service
+          # is available.
+          def ensure_service!
+            msg = "Must have active connection to datastore service to get next"
+            raise msg if @service.nil?
           end
         end
       end

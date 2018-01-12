@@ -91,7 +91,7 @@ module Google
         def ref
           @ref
         end
-        alias_method :reference, :ref
+        alias reference ref
 
         ##
         # The collection the document snapshot belongs to.
@@ -136,7 +136,7 @@ module Google
           return nil if missing?
           Convert.fields_to_hash grpc.fields, ref.client
         end
-        alias_method :fields, :data
+        alias fields data
 
         ##
         # Retrieves the document data.
@@ -196,14 +196,15 @@ module Google
 
           nodes.each do |node|
             unless selected_data.is_a? Hash
-              fail ArgumentError,
-                   "#{field_path.formatted_string} is not contained in the data"
+              err_msg = "#{field_path.formatted_string} is not " \
+                        "contained in the data"
+              raise ArgumentError, err_msg
             end
             selected_data = selected_data[node]
           end
           selected_data
         end
-        alias_method :[], :get
+        alias [] get
 
         # @!endgroup
 
@@ -218,7 +219,7 @@ module Google
           return nil if missing?
           Convert.timestamp_to_time grpc.create_time
         end
-        alias_method :create_time, :created_at
+        alias create_time created_at
 
         ##
         # The time at which the document was last changed.
@@ -232,7 +233,7 @@ module Google
           return nil if missing?
           Convert.timestamp_to_time grpc.update_time
         end
-        alias_method :update_time, :updated_at
+        alias update_time updated_at
 
         ##
         # The time at which the document was read.
@@ -244,7 +245,7 @@ module Google
         def read_at
           @read_at
         end
-        alias_method :read_time, :read_at
+        alias read_time read_at
 
         ##
         # Determines whether the document exists.

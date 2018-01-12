@@ -21,7 +21,7 @@ module GRPC
   # class. Intercept each GRPC request and create a Trace span with basic
   # request information.
   module ActiveCallWithTrace
-    SPAN_NAME = "gRPC request"
+    SPAN_NAME = "gRPC request".freeze
 
     ##
     # Override GRPC::ActiveCall#request_response method. Wrap the original

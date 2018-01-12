@@ -64,7 +64,7 @@ module Google
           action = nil
           @mutex.synchronize do
             loop do
-              fail ClientClosedError if @closed
+              raise ClientClosedError if @closed
 
               read_session = session_queue.shift
               return read_session if read_session
@@ -77,7 +77,7 @@ module Google
                 break
               end
 
-              fail SessionLimitError if @fail
+              raise SessionLimitError if @fail
 
               @resource.wait @mutex
             end
@@ -89,7 +89,7 @@ module Google
         def checkin_session session
           @mutex.synchronize do
             unless all_sessions.include? session
-              fail ArgumentError, "Cannot checkin session"
+              raise ArgumentError, "Cannot checkin session"
             end
 
             session_queue.push session
@@ -117,7 +117,7 @@ module Google
           action = nil
           @mutex.synchronize do
             loop do
-              fail ClientClosedError if @closed
+              raise ClientClosedError if @closed
 
               write_transaction = transaction_queue.shift
               return write_transaction if write_transaction
@@ -133,7 +133,7 @@ module Google
                 break
               end
 
-              fail SessionLimitError if @fail
+              raise SessionLimitError if @fail
 
               @resource.wait @mutex
             end
@@ -147,7 +147,7 @@ module Google
         def checkin_transaction tx
           @mutex.synchronize do
             unless all_sessions.include? tx.session
-              fail ArgumentError, "Cannot checkin session"
+              raise ArgumentError, "Cannot checkin session"
             end
 
             transaction_queue.push tx

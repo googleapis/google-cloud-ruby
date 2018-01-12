@@ -50,7 +50,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Speech::VERSION)
+              lib_version: Google::Cloud::Speech::VERSION
+            )
         end
         attr_accessor :mocked_service
 
@@ -62,7 +63,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Speech::VERSION)
+              lib_version: Google::Cloud::Speech::VERSION
+            )
         end
         attr_accessor :mocked_ops
 

@@ -71,7 +71,7 @@ module Google
         #
         def report error_event
           if error_event.message.nil? || error_event.message.empty?
-            fail ArgumentError, "Cannot report empty message"
+            raise ArgumentError, "Cannot report empty message"
           end
 
           error_event_grpc = error_event.to_grpc

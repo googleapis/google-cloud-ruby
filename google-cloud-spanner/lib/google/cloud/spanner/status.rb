@@ -68,12 +68,12 @@ module Google
 
         # @private Get a descriptive symbol for a google.rpc.Code integer
         def self.description_for code
-          descriptions = %w(
+          descriptions = %w[
             OK CANCELLED UNKNOWN INVALID_ARGUMENT DEADLINE_EXCEEDED NOT_FOUND
             ALREADY_EXISTS PERMISSION_DENIED RESOURCE_EXHAUSTED
             FAILED_PRECONDITION ABORTED OUT_OF_RANGE UNIMPLEMENTED INTERNAL
             UNAVAILABLE DATA_LOSS UNAUTHENTICATED
-          )
+          ]
           descriptions[code]
         end
       end

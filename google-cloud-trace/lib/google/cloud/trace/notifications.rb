@@ -27,7 +27,7 @@ module Google
 
         ##
         # The default prefix for label keys
-        DEFAULT_LABEL_NAMESPACE = "/ruby/"
+        DEFAULT_LABEL_NAMESPACE = "/ruby/".freeze
 
         ##
         # Stack truncation method that removes the ActiveSupport::Notifications
@@ -104,7 +104,7 @@ module Google
           labels = {}
           event.payload.each do |k, v|
             if v.is_a? ::String
-              v = v[0, maxlen-3] + "..." if maxlen && v.size > maxlen
+              v = v[0, maxlen - 3] + "..." if maxlen && v.size > maxlen
               labels["#{label_namespace}#{k}"] = v
             end
           end

@@ -177,10 +177,12 @@ module Google
                               safe_search, properties, crop_hints, web
           return default_features if default_features?(
             faces, landmarks, logos, labels, text, document, safe_search,
-            properties, crop_hints, web)
+            properties, crop_hints, web
+          )
 
           faces, landmarks, logos, labels, crop_hints, web = validate_max_args(
-            faces, landmarks, logos, labels, crop_hints, web)
+            faces, landmarks, logos, labels, crop_hints, web
+          )
 
           f = value_features faces, landmarks, logos, labels, crop_hints, web
           f + boolean_features(text, document, safe_search, properties)
@@ -208,7 +210,8 @@ module Google
 
         def feature type, max_results
           Google::Cloud::Vision::V1::Feature.new(
-            type: type, max_results: max_results)
+            type: type, max_results: max_results
+          )
         end
 
         def default_features? faces, landmarks, logos, labels, text, document,
@@ -237,18 +240,24 @@ module Google
         end
 
         def validate_max_args faces, landmarks, logos, labels, crop_hints, web
-          faces      = validate_max_value(
-            faces, Google::Cloud::Vision.default_max_faces)
-          landmarks  = validate_max_value(
-            landmarks, Google::Cloud::Vision.default_max_landmarks)
-          logos      = validate_max_value(
-            logos, Google::Cloud::Vision.default_max_logos)
-          labels     = validate_max_value(
-            labels, Google::Cloud::Vision.default_max_labels)
+          faces = validate_max_value(
+            faces, Google::Cloud::Vision.default_max_faces
+          )
+          landmarks = validate_max_value(
+            landmarks, Google::Cloud::Vision.default_max_landmarks
+          )
+          logos = validate_max_value(
+            logos, Google::Cloud::Vision.default_max_logos
+          )
+          labels = validate_max_value(
+            labels, Google::Cloud::Vision.default_max_labels
+          )
           crop_hints = validate_max_value(
-            crop_hints, Google::Cloud::Vision.default_max_crop_hints)
-          web        = validate_max_value(
-            web, Google::Cloud::Vision.default_max_web)
+            crop_hints, Google::Cloud::Vision.default_max_crop_hints
+          )
+          web = validate_max_value(
+            web, Google::Cloud::Vision.default_max_web
+          )
           [faces, landmarks, logos, labels, crop_hints, web]
         end
 

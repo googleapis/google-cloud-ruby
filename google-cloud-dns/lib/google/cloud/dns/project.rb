@@ -73,8 +73,8 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
-        alias_method :id, :project_id
+        alias project project_id
+        alias id project_id
 
         ##
         # The project number.
@@ -156,8 +156,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_zone, :zone
-        alias_method :get_zone, :zone
+        alias find_zone zone
+        alias get_zone zone
 
         ##
         # Retrieves the list of zones belonging to the project.
@@ -192,7 +192,7 @@ module Google
           gapi = service.list_zones token: token, max: max
           Zone::List.from_gapi gapi, service, max
         end
-        alias_method :find_zones, :zones
+        alias find_zones zones
 
         ##
         # Creates a new zone.
@@ -233,14 +233,14 @@ module Google
           ensure_service!
           @gapi = service.get_project
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         protected
 
         ##
         # Raise an error unless an active connection is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

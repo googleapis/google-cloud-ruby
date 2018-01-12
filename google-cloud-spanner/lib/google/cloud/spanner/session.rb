@@ -188,7 +188,7 @@ module Google
           @last_updated_at = Time.now
           results
         end
-        alias_method :query, :execute
+        alias query execute
 
         ##
         # Read rows from a database table, as a simple alternative to
@@ -313,7 +313,7 @@ module Google
             c.upsert table, rows
           end
         end
-        alias_method :save, :upsert
+        alias save upsert
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
@@ -503,7 +503,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           @grpc = service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id)
+              project_id, instance_id, database_id
+            )
           @last_updated_at = Time.now
           return self
         end
@@ -518,7 +519,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           @grpc = service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id)
+              project_id, instance_id, database_id
+            )
           return false
         end
 
@@ -557,7 +559,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

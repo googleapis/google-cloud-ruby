@@ -124,7 +124,7 @@ module Google
           ensure_client!
           client.doc "#{collection_path}/#{document_path}"
         end
-        alias_method :document, :doc
+        alias document doc
 
         ##
         # The document reference or database the collection reference belongs
@@ -241,7 +241,7 @@ module Google
         ##
         # @private Raise an error unless an database available.
         def ensure_client!
-          fail "Must have active connection to service" unless client
+          raise "Must have active connection to service" unless client
         end
       end
     end

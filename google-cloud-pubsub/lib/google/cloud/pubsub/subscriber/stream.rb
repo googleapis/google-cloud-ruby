@@ -175,7 +175,8 @@ module Google
 
           # @private
           def to_s
-            format "(inventory: %i, status: %s)", inventory.count, status
+            format "(inventory: %<inv>i, status: %<sts>s)",
+                   inv: inventory.count, sts: status
           end
 
           # @private
@@ -232,8 +233,8 @@ module Google
             # Also stealthly restart the stream on Unavailable, Cancelled,
             # ResourceExhausted, and Internal.
             synchronize { start_streaming! }
-          rescue => e
-            fail Google::Cloud::Error.from_error(e)
+          rescue StandardError => e
+            raise Google::Cloud::Error.from_error(e)
           end
 
           # rubocop:enable all
@@ -286,7 +287,7 @@ module Google
           def unpause_streaming?
             return if @paused.nil?
 
-            @inventory.count < @inventory.limit*0.8
+            @inventory.count < @inventory.limit * 0.8
           end
 
           def initial_input_request

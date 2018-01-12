@@ -22,12 +22,13 @@ module Google
         ##
         # The default log name used to instantiate the default logger if one
         # isn't provided.
-        DEFAULT_LOG_NAME = "ruby_app_log"
+        DEFAULT_LOG_NAME = "ruby_app_log".freeze
 
         ##
         # A default value for the log_name_map argument. Directs health check
         # logs to a separate log name so they don't spam the main log.
-        DEFAULT_LOG_NAME_MAP = { "/_ah/health" => "ruby_health_check_log" }
+        DEFAULT_LOG_NAME_MAP =
+          { "/_ah/health" => "ruby_health_check_log" }.freeze
 
         ##
         # The Google::Cloud::Logging::Logger instance
@@ -63,7 +64,8 @@ module Google
                                   keyfile: configuration.keyfile
             resource = Middleware.build_monitored_resource(
               configuration.monitored_resource.type,
-              configuration.monitored_resource.labels)
+              configuration.monitored_resource.labels
+            )
             @logger = logging.logger log_name, resource
           end
         end
@@ -225,7 +227,8 @@ module Google
             if Google::Cloud.env.app_engine?
               ["gae_app", {
                 module_id: Google::Cloud.env.app_engine_service_id,
-                version_id: Google::Cloud.env.app_engine_service_version }]
+                version_id: Google::Cloud.env.app_engine_service_version
+              }]
             elsif Google::Cloud.env.container_engine?
               ["container", {
                 cluster_name: Google::Cloud.env.container_engine_cluster_name,
@@ -235,7 +238,8 @@ module Google
             elsif Google::Cloud.env.compute_engine?
               ["gce_instance", {
                 instance_id: Google::Cloud.env.instance_name,
-                zone: Google::Cloud.env.instance_zone }]
+                zone: Google::Cloud.env.instance_zone
+              }]
             else
               ["global", {}]
             end

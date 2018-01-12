@@ -29,11 +29,11 @@ module Stackdriver
     class TraceContext
       ##
       # @private
-      HEADER_RACK_KEY = "HTTP_X_CLOUD_TRACE_CONTEXT"
+      HEADER_RACK_KEY = "HTTP_X_CLOUD_TRACE_CONTEXT".freeze
 
       ##
       # @private
-      MEMO_RACK_KEY = "google.cloud.trace_context"
+      MEMO_RACK_KEY = "google.cloud.trace_context".freeze
 
       ##
       # @private
@@ -70,11 +70,11 @@ module Stackdriver
       def initialize trace_id: nil, is_new: nil, span_id: nil, sampled: nil,
                      capture_stack: false
         @trace_id = trace_id || new_random_trace_id
-        if is_new.nil?
-          @is_new = !trace_id
-        else
-          @is_new = is_new ? true : false
-        end
+        @is_new = if is_new.nil?
+                    !trace_id
+                  else
+                    is_new ? true : false
+                  end
         @span_id = span_id ? span_id.to_i : nil
         @sampled = sampled
         if @sampled.nil?
@@ -145,7 +145,7 @@ module Stackdriver
           sampled? == other.sampled? &&
           capture_stack? == other.capture_stack?
       end
-      alias_method :==, :eql?
+      alias == eql?
 
       ##
       # Generate standard hash code for this object.
@@ -206,7 +206,7 @@ module Stackdriver
         end
         str
       end
-      alias_method :to_s, :to_string
+      alias to_s to_string
 
       ##
       # Attempts to parse the given string as a trace context representation.
@@ -226,21 +226,19 @@ module Stackdriver
       #
       def self.parse_string str
         match = %r|^(\w{32})(/(\d+))?(;o=(\d+))?|.match str
-        if match
-          trace_id = match[1]
-          span_id = match[3] ? match[3].to_i : nil
-          options = match[5] ? match[5].to_i : nil
-          if options.nil?
-            sampled = capture_stack = nil
-          else
-            sampled = options & 1 != 0
-            capture_stack = options & 2 != 0
-          end
-          new trace_id: trace_id, span_id: span_id, sampled: sampled,
-              capture_stack: capture_stack
+        return unless match
+
+        trace_id = match[1]
+        span_id = match[3] ? match[3].to_i : nil
+        options = match[5] ? match[5].to_i : nil
+        if options.nil?
+          sampled = capture_stack = nil
         else
-          nil
+          sampled = options & 1 != 0
+          capture_stack = options & 2 != 0
         end
+        new trace_id: trace_id, span_id: span_id, sampled: sampled,
+            capture_stack: capture_stack
       end
 
       ##

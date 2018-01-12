@@ -80,7 +80,7 @@ module Google
         # @return [Array<Object>] An array containing the values.
         #
         def values
-          keys.count.times.map { |i| self[i] }
+          Array.new(keys.count) { |i| self[i] }
         end
 
         ##
@@ -113,8 +113,8 @@ module Google
                                         @grpc_fields[key].type)
           end
           name_count = @grpc_fields.find_all { |f| f.name == String(key) }.count
-          return nil if name_count == 0
-          fail DuplicateNameError if name_count > 1
+          return nil if name_count.zero?
+          raise DuplicateNameError if name_count > 1
           index = @grpc_fields.find_index { |f| f.name == String(key) }
           Convert.value_to_raw(@grpc_values[index], @grpc_fields[index].type)
         end
@@ -148,7 +148,7 @@ module Google
         #   or indexes and corresponding values.
         #
         def to_h
-          fail DuplicateNameError if fields.duplicate_names?
+          raise DuplicateNameError if fields.duplicate_names?
           hashified_pairs = pairs.map do |key, value|
             if value.is_a? Data
               [key, value.to_h]
@@ -171,7 +171,7 @@ module Google
         def to_s
           named_values = pairs.map do |key, value|
             if key.is_a? Integer
-              "#{value.inspect}"
+              value.inspect
             else
               "(#{key})#{value.inspect}"
             end

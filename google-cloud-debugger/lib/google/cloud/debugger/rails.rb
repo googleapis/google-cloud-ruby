@@ -126,7 +126,7 @@ module Google
               # if credentials is not a Credentials object, create one
               Debugger::Credentials.new credentials
             end
-          rescue => e
+          rescue StandardError => e
             STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
               "it failed to authorize with the service. (#{e.message})"
             return false

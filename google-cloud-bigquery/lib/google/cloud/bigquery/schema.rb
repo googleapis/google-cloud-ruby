@@ -300,8 +300,8 @@ module Google
         #   end
         #
         def record name, description: nil, mode: nil
-          # TODO: do we need to fail if no block was given?
-          fail ArgumentError, "a block is required" unless block_given?
+          # TODO: do we need to raise if no block was given?
+          raise ArgumentError, "a block is required" unless block_given?
 
           nested_field = add_field name, :record, description: description,
                                                   mode: mode
@@ -343,7 +343,7 @@ module Google
 
         def frozen_check!
           return unless frozen?
-          fail ArgumentError, "Cannot modify a frozen schema"
+          raise ArgumentError, "Cannot modify a frozen schema"
         end
 
         def add_field name, type, description: nil, mode: :nullable
@@ -354,7 +354,8 @@ module Google
             type: verify_type(type),
             description: description,
             mode: verify_mode(mode),
-            fields: [])
+            fields: []
+          )
 
           # Remove any existing field of this name
           @gapi.fields ||= []
@@ -370,8 +371,7 @@ module Google
         def verify_type type
           type = type.to_s.upcase
           unless Field::TYPES.include? type
-            fail ArgumentError,
-                 "Type '#{type}' not found"
+            raise ArgumentError, "Type '#{type}' not found"
           end
           type
         end
@@ -380,7 +380,7 @@ module Google
           mode = :nullable if mode.nil?
           mode = mode.to_s.upcase
           unless Field::MODES.include? mode
-            fail ArgumentError "Unable to determine mode for '#{mode}'"
+            raise ArgumentError "Unable to determine mode for '#{mode}'"
           end
           mode
         end

@@ -60,7 +60,6 @@ module Google
           error_count.zero?
         end
 
-
         ##
         # The count of rows in the response, minus the count of errors for rows
         # that were not inserted.
@@ -70,7 +69,6 @@ module Google
         def insert_count
           @rows.count - error_count
         end
-
 
         ##
         # The count of errors for rows that were not inserted.

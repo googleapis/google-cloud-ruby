@@ -163,7 +163,7 @@ module Google
           ##
           # Raise an error unless an active connection is available.
           def ensure_zone!
-            fail "Must have active connection" unless @zone
+            raise "Must have active connection" unless @zone
           end
         end
       end

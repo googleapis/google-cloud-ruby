@@ -153,7 +153,7 @@ module Google
           session.execute sql, params: params, types: types,
                                transaction: tx_selector
         end
-        alias_method :query, :execute
+        alias query execute
 
         ##
         # Read rows from a database table, as a simple alternative to
@@ -252,7 +252,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_session!
-          fail "Must have active connection to service" unless session
+          raise "Must have active connection to service" unless session
         end
       end
     end

@@ -44,7 +44,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Vision::VERSION)
+              lib_version: Google::Cloud::Vision::VERSION
+            )
         end
         attr_accessor :mocked_service
 

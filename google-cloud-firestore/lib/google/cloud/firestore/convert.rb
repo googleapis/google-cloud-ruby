@@ -118,7 +118,7 @@ module Google
               encoded_content = Base64.strict_encode64 content
               Google::Firestore::V1beta1::Value.new bytes_value: encoded_content
             else
-              fail ArgumentError,
+              raise ArgumentError,
                    "A value of type #{obj.class} is not supported."
             end
           end
@@ -127,9 +127,9 @@ module Google
             writes = []
 
             if is_field_value_nested data, :delete
-              fail ArgumentError, "DELETE not allowed on create"
+              raise ArgumentError, "DELETE not allowed on create"
             end
-            fail ArgumentError, "data is required" unless data.is_a? Hash
+            raise ArgumentError, "data is required" unless data.is_a? Hash
 
             data, server_time_paths = remove_field_value_from data, :server_time
 
@@ -159,7 +159,7 @@ module Google
           end
 
           def writes_for_set doc_path, data, merge: nil
-            fail ArgumentError, "data is required" unless data.is_a? Hash
+            raise ArgumentError, "data is required" unless data.is_a? Hash
 
             if merge
               if merge == true
@@ -178,7 +178,7 @@ module Google
 
             data, delete_paths = remove_field_value_from data, :delete
             if delete_paths.any?
-              fail ArgumentError, "DELETE not allowed on set"
+              raise ArgumentError, "DELETE not allowed on set"
             end
 
             data, server_time_paths = remove_field_value_from data, :server_time
@@ -197,7 +197,7 @@ module Google
           end
 
           def writes_for_set_merge doc_path, data, field_paths
-            fail ArgumentError, "data is required" unless data.is_a? Hash
+            raise ArgumentError, "data is required" unless data.is_a? Hash
 
             writes = []
 
@@ -214,7 +214,7 @@ module Google
               end
             end
             all_valid_check = all_valid_check.include? false
-            fail ArgumentError, "all fields must be in data" if all_valid_check
+            raise ArgumentError, "all fields must be in data" if all_valid_check
 
             data, delete_paths = remove_field_value_from data, :delete
             data, server_time_paths = remove_field_value_from data, :server_time
@@ -230,7 +230,7 @@ module Google
               end
             end
             delete_valid_check = delete_valid_check.include? false
-            fail ArgumentError, "deleted field not included in merge" if delete_valid_check
+            raise ArgumentError, "deleted field not included in merge" if delete_valid_check
 
             # Choose only the data there are field paths for
             field_paths -= delete_paths
@@ -239,7 +239,7 @@ module Google
 
             if data.empty?
               if server_time_paths.empty?
-                fail ArgumentError, "data required for set with merge"
+                raise ArgumentError, "data required for set with merge"
               end
             else
               writes << Google::Firestore::V1beta1::Write.new(
@@ -261,7 +261,7 @@ module Google
           def writes_for_update doc_path, data, update_time: nil
             writes = []
 
-            fail ArgumentError, "data is required" unless data.is_a? Hash
+            raise ArgumentError, "data is required" unless data.is_a? Hash
 
             # Convert data to use FieldPath
             new_data_pairs = data.map do |key, value|
@@ -272,14 +272,14 @@ module Google
             # Duplicate field paths check
             dup_keys = new_data_pairs.map(&:first).map(&:formatted_string)
             if dup_keys.size != dup_keys.uniq.size
-              fail ArgumentError, "duplicate field paths"
+              raise ArgumentError, "duplicate field paths"
             end
             dup_keys.each do |field_path|
               prefix_check = dup_keys.select do |this_path|
                 this_path.start_with? "#{field_path}."
               end
               if prefix_check.any?
-                fail ArgumentError, "one field cannot be a prefix of another"
+                raise ArgumentError, "one field cannot be a prefix of another"
               end
             end
 
@@ -298,7 +298,7 @@ module Google
             root_server_time_paths.map!(&:first)
 
             data, nested_deletes = remove_field_value_from data, :delete
-            fail ArgumentError, "DELETE cannot be nested" if nested_deletes.any?
+            raise ArgumentError, "DELETE cannot be nested" if nested_deletes.any?
 
             data, nested_server_time_paths = remove_field_value_from data, :server_time
 
@@ -307,11 +307,11 @@ module Google
 
             field_paths = (field_paths - (field_paths - identify_all_file_paths(data)) + delete_paths).uniq
             field_paths.each do |field_path|
-              fail ArgumentError, "empty paths not allowed" if field_path.fields.empty?
+              raise ArgumentError, "empty paths not allowed" if field_path.fields.empty?
             end
 
             if data.empty? && delete_paths.empty? && server_time_paths.empty?
-              fail ArgumentError, "data is required"
+              raise ArgumentError, "data is required"
             end
 
             if data.any? || delete_paths.any?
@@ -346,7 +346,7 @@ module Google
 
           def write_for_delete doc_path, exists: nil, update_time: nil
             if !exists.nil? && !update_time.nil?
-              fail ArgumentError, "cannot specify both exists and update_time"
+              raise ArgumentError, "cannot specify both exists and update_time"
             end
 
             write = Google::Firestore::V1beta1::Write.new(
@@ -402,7 +402,7 @@ module Google
                 else
                   if value.is_a? Array
                     if is_field_value_nested value, field_value_type
-                      fail ArgumentError, "cannot nest #{field_value_type} under arrays"
+                      raise ArgumentError, "cannot nest #{field_value_type} under arrays"
                     end
                   end
 
@@ -515,7 +515,7 @@ module Google
               tmp_dup = dup_hash
               last_field = nil
               field_path.fields.map(&:to_sym).each do |field|
-                fail ArgumentError, "empty paths not allowed" if field.empty?
+                raise ArgumentError, "empty paths not allowed" if field.empty?
                 tmp_dup = tmp_dup[last_field] unless last_field.nil?
                 last_field = field
                 tmp_dup[field] ||= {}

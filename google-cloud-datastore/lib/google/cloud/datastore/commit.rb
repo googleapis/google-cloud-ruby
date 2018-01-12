@@ -64,7 +64,7 @@ module Google
           # Do not save yet
           entities
         end
-        alias_method :upsert, :save
+        alias upsert save
 
         ##
         # Inserts entities to the Datastore.

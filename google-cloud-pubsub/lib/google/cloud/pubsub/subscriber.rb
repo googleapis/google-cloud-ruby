@@ -87,7 +87,7 @@ module Google
           @started = nil
           @stopped = nil
 
-          stream_pool = @streams.times.map do
+          stream_pool = Array.new(@streams) do
             Thread.new { Stream.new self }
           end
           @stream_pool = stream_pool.map(&:value)
@@ -172,7 +172,8 @@ module Google
         ##
         # @private
         def to_s
-          format "(subscription: %s, streams: %i)", subscription_name, streams
+          format "(subscription: %<sub>s, streams: %<count>i)",
+                 sub: subscription_name, count: streams
         end
 
         ##

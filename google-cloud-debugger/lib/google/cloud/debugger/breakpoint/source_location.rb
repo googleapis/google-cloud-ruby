@@ -37,8 +37,7 @@ module Google
 
           ##
           # @private Create an empty SourceLocation object.
-          def initialize
-          end
+          def initialize; end
 
           ##
           # @private New Google::Cloud::Debugger::Breakpoint::SourceLocation

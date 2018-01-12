@@ -84,7 +84,8 @@ module Google
         def kind *kinds
           kinds.each do |kind|
             grpc_kind = Google::Datastore::V1::KindExpression.new(
-              name: kind)
+              name: kind
+            )
             @grpc.kind << grpc_kind
           end
 
@@ -185,7 +186,8 @@ module Google
             Google::Datastore::V1::Filter.new(
               property_filter: Google::Datastore::V1::PropertyFilter.new(
                 property: Google::Datastore::V1::PropertyReference.new(
-                  name: name),
+                  name: name
+                ),
                 op: Convert.to_prop_filter_op(operator),
                 value: Convert.to_value(value)
               )
@@ -193,7 +195,7 @@ module Google
 
           self
         end
-        alias_method :filter, :where
+        alias filter where
 
         ##
         # Add a filter for entities that inherit from a key.
@@ -273,7 +275,8 @@ module Google
         def order name, direction = :asc
           @grpc.order << Google::Datastore::V1::PropertyOrder.new(
             property: Google::Datastore::V1::PropertyReference.new(
-              name: name),
+              name: name
+            ),
             direction: prop_order_direction(direction)
           )
 
@@ -342,12 +345,12 @@ module Google
           elsif cursor.is_a? String
             @grpc.start_cursor = Convert.decode_bytes cursor
           else
-            fail ArgumentError, "Can't set a cursor using a #{cursor.class}."
+            raise ArgumentError, "Can't set a cursor using a #{cursor.class}."
           end
 
           self
         end
-        alias_method :cursor, :start
+        alias cursor start
 
         ##
         # Retrieve only select properties from the matched entities.
@@ -383,13 +386,15 @@ module Google
           names.each do |name|
             grpc_projection = Google::Datastore::V1::Projection.new(
               property: Google::Datastore::V1::PropertyReference.new(
-                name: name))
+                name: name
+              )
+            )
             @grpc.projection << grpc_projection
           end
 
           self
         end
-        alias_method :projection, :select
+        alias projection select
 
         ##
         # Group results by a list of properties.
@@ -410,13 +415,14 @@ module Google
         def group_by *names
           names.each do |name|
             grpc_property = Google::Datastore::V1::PropertyReference.new(
-              name: name)
+              name: name
+            )
             @grpc.distinct_on << grpc_property
           end
 
           self
         end
-        alias_method :distinct_on, :group_by
+        alias distinct_on group_by
 
         # @private
         def to_grpc

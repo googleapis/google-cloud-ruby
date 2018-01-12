@@ -14,6 +14,7 @@
 
 
 require "base64"
+require "cgi"
 require "openssl"
 require "google/cloud/storage/errors"
 
@@ -41,7 +42,10 @@ module Google
           ##
           # The external path to the file.
           def ext_path
-            URI.escape "/#{@bucket}/#{@path}"
+            escaped_path = String(@path).split("/").map do |node|
+              CGI.escape node
+            end.join("/")
+            "/#{CGI.escape @bucket}/#{escaped_path}"
           end
 
           ##
@@ -53,7 +57,7 @@ module Google
           def apply_option_defaults options
             adjusted_expires = (Time.now.utc + (options[:expires] || 300)).to_i
             options[:expires] = adjusted_expires
-            options[:method]  ||= "GET"
+            options[:method] ||= "GET"
             options
           end
 
@@ -81,12 +85,12 @@ module Google
             }
 
             p = options[:policy] || {}
-            fail "Policy must be given in a Hash" unless p.is_a? Hash
+            raise "Policy must be given in a Hash" unless p.is_a? Hash
 
             i = determine_issuer options
             s = determine_signing_key options
 
-            fail SignedUrlUnavailable unless i && s
+            raise SignedUrlUnavailable unless i && s
 
             policy_str = p.to_json
             policy = Base64.strict_encode64(policy_str).delete("\n")
@@ -106,7 +110,7 @@ module Google
             i = determine_issuer options
             s = determine_signing_key options
 
-            fail SignedUrlUnavailable unless i && s
+            raise SignedUrlUnavailable unless i && s
 
             sig = generate_signature s, signature_str(options)
             generate_signed_url i, sig, options[:expires], options[:query]
@@ -136,7 +140,7 @@ module Google
 
           def format_extension_headers headers
             return "" if headers.nil?
-            fail "Headers must be given in a Hash" unless headers.is_a? Hash
+            raise "Headers must be given in a Hash" unless headers.is_a? Hash
             flatten = headers.map do |key, value|
               "#{key.to_s.downcase}:#{value.gsub(/\s+/, ' ')}\n"
             end

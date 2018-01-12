@@ -276,7 +276,7 @@ module Google
         #
         def input_files
           Integer @gapi.statistics.load.input_files
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -287,7 +287,7 @@ module Google
         #
         def input_file_bytes
           Integer @gapi.statistics.load.input_file_bytes
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -299,7 +299,7 @@ module Google
         #
         def output_rows
           Integer @gapi.statistics.load.output_rows
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -311,7 +311,7 @@ module Google
         #
         def output_bytes
           Integer @gapi.statistics.load.output_bytes
-        rescue
+        rescue StandardError
           nil
         end
       end

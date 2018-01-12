@@ -100,7 +100,7 @@ module Google
         #
         def started_at
           Time.parse @gapi.start_time
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -110,7 +110,7 @@ module Google
           ensure_service!
           @gapi = zone.service.get_change @zone.id, id
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Refreshes the change until the status is `done`.
@@ -150,7 +150,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless zone && zone.service
+          raise "Must have active connection" unless zone && zone.service
         end
       end
     end

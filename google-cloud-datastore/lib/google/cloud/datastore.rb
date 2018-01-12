@@ -618,14 +618,16 @@ module Google
                    keyfile: nil
         project_id ||= (project || Datastore::Dataset.default_project_id)
         project_id = project_id.to_s # Always cast to a string
-        fail ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         emulator_host ||= ENV["DATASTORE_EMULATOR_HOST"]
         if emulator_host
           return Datastore::Dataset.new(
             Datastore::Service.new(
               project_id, :this_channel_is_insecure,
-              host: emulator_host, client_config: client_config))
+              host: emulator_host, client_config: client_config
+            )
+          )
         end
 
         credentials ||= keyfile
@@ -637,7 +639,9 @@ module Google
         Datastore::Dataset.new(
           Datastore::Service.new(
             project_id, credentials,
-            timeout: timeout, client_config: client_config))
+            timeout: timeout, client_config: client_config
+          )
+        )
       end
     end
   end

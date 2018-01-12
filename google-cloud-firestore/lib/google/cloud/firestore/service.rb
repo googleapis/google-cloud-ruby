@@ -53,7 +53,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Firestore::VERSION)
+              lib_version: Google::Cloud::Firestore::VERSION
+            )
         end
 
         def get_documents document_paths, mask: nil, transaction: nil

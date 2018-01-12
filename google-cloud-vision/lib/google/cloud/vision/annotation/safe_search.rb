@@ -38,7 +38,7 @@ module Google
         #   safe_search.spoof #=> :VERY_UNLIKELY
         #
         class SafeSearch
-          POSITIVE_RATINGS = %i(POSSIBLE LIKELY VERY_LIKELY)
+          POSITIVE_RATINGS = %i[POSSIBLE LIKELY VERY_LIKELY].freeze
 
           ##
           # @private The SafeSearchAnnotation GRPC object.

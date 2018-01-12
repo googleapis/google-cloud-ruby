@@ -75,7 +75,7 @@ module Stackdriver
               self[k] = self.class.new v
             end
           else
-            fail ArgumentError \
+            raise ArgumentError \
               "Configuration option can only be Symbol or Hash"
           end
         end
@@ -121,6 +121,11 @@ module Stackdriver
         else
           self[mid]
         end
+      end
+
+      def respond_to_missing? name, include_private
+        return true if option? name.to_s.chomp("=")
+        super
       end
     end
   end

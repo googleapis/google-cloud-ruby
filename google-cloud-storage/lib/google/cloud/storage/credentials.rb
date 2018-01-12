@@ -38,19 +38,20 @@ module Google
       #   storage.project_id #=> "my-project"
       #
       class Credentials < Google::Auth::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/devstorage.full_control"]
-        PATH_ENV_VARS = %w(STORAGE_CREDENTIALS
+        SCOPE = \
+          ["https://www.googleapis.com/auth/devstorage.full_control"].freeze
+        PATH_ENV_VARS = %w[STORAGE_CREDENTIALS
                            STORAGE_KEYFILE
                            GOOGLE_CLOUD_CREDENTIALS
                            GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(STORAGE_CREDENTIALS_JSON
+                           GCLOUD_KEYFILE].freeze
+        JSON_ENV_VARS = %w[STORAGE_CREDENTIALS_JSON
                            STORAGE_KEYFILE_JSON
                            GOOGLE_CLOUD_CREDENTIALS_JSON
                            GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
+                           GCLOUD_KEYFILE_JSON].freeze
         DEFAULT_PATHS = \
-          ["~/.config/gcloud/application_default_credentials.json"]
+          ["~/.config/gcloud/application_default_credentials.json"].freeze
       end
     end
   end

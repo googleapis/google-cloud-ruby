@@ -66,7 +66,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Pubsub::VERSION)
+              lib_version: Google::Cloud::Pubsub::VERSION
+            )
           end
         end
         attr_accessor :mocked_subscriber
@@ -78,7 +79,8 @@ module Google
               credentials: channel,
               timeout: timeout,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Pubsub::VERSION)
+              lib_version: Google::Cloud::Pubsub::VERSION
+            )
           end
         end
         attr_accessor :mocked_publisher

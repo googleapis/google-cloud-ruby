@@ -30,17 +30,15 @@ module Google
           def self.verify_md5! gcloud_file, local_file
             gcloud_digest = gcloud_file.md5
             local_digest = md5_for local_file
-            if gcloud_digest != local_digest
-              fail FileVerificationError.for_md5(gcloud_digest, local_digest)
-            end
+            return if gcloud_digest == local_digest
+            raise FileVerificationError.for_md5(gcloud_digest, local_digest)
           end
 
           def self.verify_crc32c! gcloud_file, local_file
             gcloud_digest = gcloud_file.crc32c
             local_digest = crc32c_for local_file
-            if gcloud_digest != local_digest
-              fail FileVerificationError.for_crc32c(gcloud_digest, local_digest)
-            end
+            return if gcloud_digest == local_digest
+            raise FileVerificationError.for_crc32c(gcloud_digest, local_digest)
           end
 
           def self.verify_md5 gcloud_file, local_file
