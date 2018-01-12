@@ -592,6 +592,9 @@ module Google
         end
         alias find_sinks sinks
 
+        # rubocop:disable Metrics/LineLength
+        # overload is too long...
+
         ##
         # Creates a new project sink. When you create a sink, only new log
         # entries that match the sink's filter are exported. Stackdriver Logging
@@ -611,40 +614,27 @@ module Google
         # @see https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs
         #   Permissions for writing exported logs
         #
-        # @param [String] name The client-assigned sink identifier. Sink
-        #   identifiers are limited to 1000 characters and can include only the
-        #   following characters: `A-Z`, `a-z`, `0-9`, and the special
-        #   characters `_-.`.
-        # @param [String] destination The resource name of the export
-        #   destination. See [About
-        #   sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs#about_sinks)
-        #   for examples.
-        # @param [String, nil] filter An [advanced logs
-        #  filter](https://cloud.google.com/logging/docs/view/advanced_filters)
-        #  that defines the log entries to be exported. The filter must be
-        #  consistent with the log entry format designed by the `version`
-        #  parameter, regardless of the format of the log entry that was
-        #  originally written to Stackdriver Logging.
-        # @param [Time, nil] start_at The time at which this sink will begin
-        #   exporting log entries. If this value is present, then log entries
-        #   are exported only if `start_at` is less than the log entry's
-        #   timestamp. Optional.
-        # @param [Time, nil] end_at Time at which this sink will stop exporting
-        #   log entries. If this value is present, then log entries are exported
-        #   only if the log entry's timestamp is less than `end_at`. Optional.
-        # @param [Symbol] version The log entry version used when exporting log
-        #   entries from this sink. This version does not have to correspond to
-        #   the version of the log entry when it was written to Stackdriver
-        #   Logging. Accepted values are `:unspecified`, `:v2`, and `:v1`.
-        #   Version 2 is currently the preferred format. An unspecified version
-        #   format currently defaults to V2 in the service. The default value is
-        #   `:unspecified`.
-        # @param [Boolean] unique_writer_identity Whether the sink will have a
-        #    dedicated service account returned in the sink's `writer_identity`.
-        #    Set this field to be true to export logs from one project to a
-        #    different project. This field is ignored for non-project sinks
-        #    (e.g. organization sinks) because those sinks are required to have
-        #    dedicated service accounts. Optional.
+        # @overload create_sink(name, destination, filter: nil, unique_writer_identity: nil)
+        #   @param [String] name The client-assigned sink identifier. Sink
+        #     identifiers are limited to 1000 characters and can include only
+        #     the following characters: `A-Z`, `a-z`, `0-9`, and the special
+        #     characters `_-.`.
+        #   @param [String] destination The resource name of the export
+        #     destination. See [About
+        #     sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs#about_sinks)
+        #     for examples.
+        #   @param [String, nil] filter An [advanced logs
+        #    filter](https://cloud.google.com/logging/docs/view/advanced_filters)
+        #    that defines the log entries to be exported. The filter must be
+        #    consistent with the log entry format designed by the `version`
+        #    parameter, regardless of the format of the log entry that was
+        #    originally written to Stackdriver Logging.
+        #   @param [Boolean] unique_writer_identity Whether the sink will have a
+        #      dedicated service account returned in the sink's
+        #      `writer_identity`. Set this field to be true to export logs from
+        #      one project to a different project. This field is ignored for
+        #      non-project sinks (e.g. organization sinks) because those sinks
+        #      are required to have dedicated service accounts. Optional.
         #
         # @return [Google::Cloud::Logging::Sink] a project sink
         #
@@ -666,18 +656,29 @@ module Google
         #   sink = logging.create_sink "my-sink",
         #                              "storage.googleapis.com/#{bucket.id}"
         #
-        def create_sink name, destination, filter: nil, start_at: nil,
-                        end_at: nil, version: :unspecified,
-                        unique_writer_identity: nil
-          version = Sink.resolve_version version
+        def create_sink name, destination, filter: nil,
+                        unique_writer_identity: nil,
+                        start_at: nil, end_at: nil, version: nil
           ensure_service!
+
+          if start_at
+            warn "[DEPRECATION] start_at is deprecated and will be ignored."
+          end
+          if end_at
+            warn "[DEPRECATION] end_at is deprecated and will be ignored."
+          end
+          if version
+            warn "[DEPRECATION] version is deprecated and will be ignored."
+          end
+
           grpc = service.create_sink \
-            name, destination, filter, version,
-            start_time: start_at, end_time: end_at,
+            name, destination, filter,
             unique_writer_identity: unique_writer_identity
           Sink.from_grpc grpc, service
         end
         alias new_sink create_sink
+
+        # rubocop:enable Metrics/LineLength
 
         ##
         # Retrieves a sink by name.

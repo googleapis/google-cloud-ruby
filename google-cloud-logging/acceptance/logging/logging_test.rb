@@ -23,8 +23,7 @@ describe Google::Cloud::Logging, :logging do
       pubsub_dest = "pubsub.googleapis.com/projects/#{logging.project}/topics/#{prefix}-topic"
       sink = logging.create_sink "#{prefix}-sink",
                                  pubsub_dest,
-                                 filter: "severity = ALERT",
-                                 start_at: Time.now
+                                 filter: "severity = ALERT"
 
       sink.name.must_equal "#{prefix}-sink"
       sink.destination.must_equal pubsub_dest
