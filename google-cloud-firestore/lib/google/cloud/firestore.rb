@@ -15,6 +15,8 @@
 
 require "google-cloud-firestore"
 require "google/cloud/firestore/client"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -469,7 +471,7 @@ module Google
       #   present, the default project for the credentials is used.
       # @param [String, Hash, Google::Auth::Credentials] credentials The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {Datastore::Credentials})
+      #   Google::Auth::Credentials object. (See {Firestore::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -494,20 +496,92 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || Firestore::Service.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= keyfile
-        credentials ||= Firestore::Credentials.default(scope: scope)
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Firestore::Credentials.new credentials, scope: scope
         end
 
-        Firestore::Client.new \
-          Firestore::Service.new \
-            project_id, credentials,
-            timeout: timeout, client_config: client_config
+        Firestore::Client.new(
+          Firestore::Service.new(
+            project_id, credentials, timeout: timeout,
+                                     client_config: client_config
+          )
+        )
+      end
+
+      ##
+      # Reload firestore configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "FIRESTORE_CREDENTIALS", "FIRESTORE_CREDENTIALS_JSON",
+          "FIRESTORE_KEYFILE", "FIRESTORE_KEYFILE_JSON"
+        )
+
+        Google::Cloud.configure.delete! :firestore
+        Google::Cloud.configure.add_config! :firestore do |config|
+          config.add_field! :project_id, ENV["FIRESTORE_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, default_creds,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :firestore
+
+      ##
+      # Configure the Google Cloud Firestore library.
+      #
+      # The following Firestore configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Firestore project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Firestore::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Firestore library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.firestore if block_given?
+
+        Google::Cloud.configure.firestore
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.firestore.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.firestore.credentials ||
+          Google::Cloud.configure.credentials ||
+          Firestore::Credentials.default(scope: scope)
       end
     end
   end
