@@ -24,6 +24,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"
 
   gem.add_development_dependency "minitest", "~> 5.10"
-  gem.add_development_dependency "rubocop", "~> 0.52"
+  gem.add_development_dependency "rubocop", "~> 0.50.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
 end

@@ -37,3 +37,6 @@ Layout/EmptyLines: # for the extra line between copyright and code
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-firestore.rb"
+Lint/RescueWithoutErrorClass:
+  Exclude:
+  - "lib/google/cloud/firestore/client.rb"

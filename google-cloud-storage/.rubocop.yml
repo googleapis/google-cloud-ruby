@@ -36,3 +36,6 @@ Naming/VariableNumber:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-storage.rb"
+Lint/RescueWithoutErrorClass:
+  Exclude:
+  - "lib/google/cloud/storage/policy.rb"
