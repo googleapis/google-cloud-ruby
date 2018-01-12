@@ -120,6 +120,9 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "calls Google::Cloud.env.project_id if no environment variable found" do
       Google::Cloud.env.stub :project_id, "another-project" do
         ENV.stub :[], nil do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::ErrorReporting.reload_configuration!
           Google::Cloud::ErrorReporting::Project.default_project_id.must_equal "another-project"
         end
       end
@@ -130,6 +133,9 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "calls Google::Cloud.env.app_engine_service_id if no environment variable found" do
       Google::Cloud.env.stub :app_engine_service_id, "another-service-id" do
         ENV.stub :[], nil do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::ErrorReporting.reload_configuration!
           Google::Cloud::ErrorReporting::Project.default_service_name.must_equal "another-service-id"
         end
       end
@@ -138,6 +144,9 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "defaults to 'ruby'" do
       Google::Cloud.env.stub :app_engine_service_id, nil do
         ENV.stub :[], nil do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::ErrorReporting.reload_configuration!
           Google::Cloud::ErrorReporting::Project.default_service_name.must_equal "ruby"
         end
       end
@@ -148,6 +157,9 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "calls Google::Cloud.env.app_engine_service_version if no environment variable found" do
       Google::Cloud.env.stub :app_engine_service_version, "another-service-version" do
         ENV.stub :[], nil do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::ErrorReporting.reload_configuration!
           Google::Cloud::ErrorReporting::Project.default_service_version.must_equal "another-service-version"
         end
       end
