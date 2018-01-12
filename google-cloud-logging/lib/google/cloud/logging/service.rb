@@ -161,13 +161,9 @@ module Google
           end
         end
 
-        def create_sink name, destination, filter, version, start_time: nil,
-                        end_time: nil, unique_writer_identity: nil
+        def create_sink name, destination, filter, unique_writer_identity: nil
           sink = Google::Logging::V2::LogSink.new({
-            name: name, destination: destination, filter: filter,
-            output_version_format: version,
-            start_time: time_to_timestamp(start_time),
-            end_time: time_to_timestamp(end_time)
+            name: name, destination: destination, filter: filter
           }.delete_if { |_, v| v.nil? })
 
           execute do
@@ -181,14 +177,10 @@ module Google
           execute { sinks.get_sink sink_path(name), options: default_options }
         end
 
-        def update_sink name, destination, filter, version, start_time: nil,
-                        end_time: nil, unique_writer_identity: nil
+        def update_sink name, destination, filter, unique_writer_identity: nil
           sink = Google::Logging::V2::LogSink.new(
             {
-              name: name, destination: destination, filter: filter,
-              output_version_format: version,
-              start_time: time_to_timestamp(start_time),
-              end_time: time_to_timestamp(end_time)
+              name: name, destination: destination, filter: filter
             }.delete_if { |_, v| v.nil? }
           )
 

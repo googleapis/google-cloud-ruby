@@ -242,11 +242,6 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     sink.name.must_equal new_sink_name
     sink.destination.must_equal new_sink_destination
     sink.filter.must_be :empty?
-    sink.must_be :unspecified?
-    sink.start_at.must_be :nil?
-    sink.start_time.must_be :nil?
-    sink.end_at.must_be :nil?
-    sink.end_time.must_be :nil?
     sink.writer_identity.must_equal "roles/owner"
   end
 
@@ -254,25 +249,15 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     new_sink_name = "new-sink-#{Time.now.to_i}"
     new_sink_destination = "storage.googleapis.com/new-sinks"
     new_sink_filter = "logName:syslog AND severity>=WARN"
-    start_timestamp = Time.now
-    end_timestamp = Time.now + (3600*24)
-    start_timestamp_grpc = Google::Protobuf::Timestamp.new seconds: start_timestamp.to_i, nanos: start_timestamp.nsec
-    end_timestamp_grpc = Google::Protobuf::Timestamp.new seconds: end_timestamp.to_i, nanos: end_timestamp.nsec
     new_sink = Google::Logging::V2::LogSink.new(
       name: new_sink_name,
       destination: new_sink_destination,
-      filter: new_sink_filter,
-      output_version_format: :V2,
-      start_time: start_timestamp_grpc,
-      end_time: end_timestamp_grpc
+      filter: new_sink_filter
     )
     create_res = Google::Logging::V2::LogSink.decode_json(empty_sink_hash.merge(
                                                           "name" => new_sink_name,
                                                           "destination" => new_sink_destination,
                                                           "filter" => new_sink_filter,
-                                                          "output_version_format" => "V2",
-                                                          "start_time" => start_timestamp_grpc,
-                                                          "end_time" => end_timestamp_grpc,
                                                           "writer_identity" => "roles/owner").to_json)
 
     mock = Minitest::Mock.new
@@ -281,10 +266,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     sink = logging.create_sink new_sink_name,
                                new_sink_destination,
-                               filter: new_sink_filter,
-                               version: :v2,
-                               start_at: start_timestamp,
-                               end_at: end_timestamp
+                               filter: new_sink_filter
 
     mock.verify
 
@@ -292,11 +274,6 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     sink.name.must_equal new_sink_name
     sink.destination.must_equal new_sink_destination
     sink.filter.must_equal new_sink_filter
-    sink.must_be :v2?
-    sink.start_at.must_equal start_timestamp
-    sink.start_time.must_equal start_timestamp
-    sink.end_at.must_equal end_timestamp
-    sink.end_time.must_equal end_timestamp
     sink.writer_identity.must_equal "roles/owner"
   end
 
@@ -321,11 +298,6 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
     sink.name.must_equal new_sink_name
     sink.destination.must_equal new_sink_destination
     sink.filter.must_be :empty?
-    sink.must_be :unspecified?
-    sink.start_at.must_be :nil?
-    sink.start_time.must_be :nil?
-    sink.end_at.must_be :nil?
-    sink.end_time.must_be :nil?
     sink.writer_identity.must_equal "serviceAccount:cloud-logs@system.gserviceaccount.com"
   end
 
@@ -343,10 +315,6 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     sink.must_be_kind_of Google::Cloud::Logging::Sink
     sink.name.must_equal sink_name
-    sink.start_at.wont_be :nil?
-    sink.start_time.wont_be :nil?
-    sink.end_at.must_be :nil?
-    sink.end_time.must_be :nil?
     sink.writer_identity.must_equal "roles/owner"
   end
 

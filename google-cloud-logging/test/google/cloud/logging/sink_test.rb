@@ -24,60 +24,51 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.name.must_equal        sink_hash["name"]
     sink.destination.must_equal sink_hash["destination"]
     sink.filter.must_equal      sink_hash["filter"]
-    sink.version.must_equal     :VERSION_FORMAT_UNSPECIFIED
     sink.writer_identity.must_equal  "roles/owner"
-    sink.start_at.must_be_close_to   Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
-    sink.start_time.must_be_close_to Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
-    sink.end_at.must_be_nil
-    sink.end_time.must_be_nil
   end
 
-  it "can set different sink format versions" do
-    sink.must_be :unspecified?
-    sink.version = :v2
-    sink.must_be :v2?
-    sink.version = :v1
-    sink.must_be :v1?
+  it "has deprecated values" do
+    assert_output nil, /version is deprecated/ do
+      sink.version.must_equal :V2
+    end
+    assert_output nil, /version= is deprecated and will be ignored/ do
+      sink.version = :V1
+    end
+    assert_output nil, /unspecified\? is deprecated/ do
+      sink.wont_be :unspecified?
+    end
+    assert_output nil, /v2\? is deprecated/ do
+      sink.must_be :v2?
+    end
+    assert_output nil, /v1\? is deprecated/ do
+      sink.wont_be :v1?
+    end
 
-    sink.version = "VERSION_FORMAT_UNSPECIFIED"
-    sink.must_be :unspecified?
-    sink.version = "V2"
-    sink.must_be :v2?
-    sink.version = "V1"
-    sink.must_be :v1?
-  end
+    assert_output nil, /start_at is deprecated/ do
+      sink.start_at.must_be :nil?
+    end
+    assert_output nil, /start_at= is deprecated and will be ignored/ do
+      sink.start_at = Time.now
+    end
+    assert_output nil, /start_at is deprecated/ do
+      sink.start_time.must_be :nil?
+    end
+    assert_output nil, /start_at= is deprecated and will be ignored/ do
+      sink.start_time = Time.now
+    end
 
-  it "can set different start and end times" do
-    time = Time.at(sink_hash["start_time"]["seconds"], sink_hash["start_time"]["nanos"]/1000.0)
-
-    sink.start_at.must_be_close_to   time
-    sink.start_time.must_be_close_to time
-    sink.end_at.must_be_nil
-    sink.end_time.must_be_nil
-
-    sink.start_time = nil
-    sink.end_time   = time
-
-    sink.start_at.must_be_nil
-    sink.start_time.must_be_nil
-    sink.end_at.must_be_close_to   time
-    sink.end_time.must_be_close_to time
-
-    sink.start_at = time
-    sink.end_at   = nil
-
-    sink.start_at.must_be_close_to   time
-    sink.start_time.must_be_close_to time
-    sink.end_at.must_be_nil
-    sink.end_time.must_be_nil
-
-    sink.start_at = nil
-    sink.end_at   = time
-
-    sink.start_at.must_be_nil
-    sink.start_time.must_be_nil
-    sink.end_at.must_be_close_to   time
-    sink.end_time.must_be_close_to time
+    assert_output nil, /end_at is deprecated/ do
+      sink.end_at.must_be :nil?
+    end
+    assert_output nil, /end_at= is deprecated and will be ignored/ do
+      sink.end_at = Time.now
+    end
+    assert_output nil, /end_at is deprecated/ do
+      sink.end_time.must_be :nil?
+    end
+    assert_output nil, /end_at= is deprecated and will be ignored/ do
+      sink.end_time = Time.now
+    end
   end
 
   it "can save itself" do
@@ -91,9 +82,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     new_sink = Google::Logging::V2::LogSink.new(
       name: sink.name,
       destination: new_sink_destination,
-      filter: new_sink_filter,
-      output_version_format: :V1,
-      end_time: now_grpc
+      filter: new_sink_filter
     )
     mock = Minitest::Mock.new
     mock.expect :update_sink, sink_grpc, ["projects/test/sinks/#{sink.name}", new_sink, unique_writer_identity: nil, options: default_options]
@@ -101,9 +90,6 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
     sink.destination = new_sink_destination
     sink.filter = new_sink_filter
-    sink.version = :v1
-    sink.start_at = nil
-    sink.end_at = now
     sink.save
 
     mock.verify
@@ -111,7 +97,6 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.must_be_kind_of Google::Cloud::Logging::Sink
     sink.destination.must_equal new_sink_destination
     sink.filter.must_equal new_sink_filter
-    sink.must_be :v1?
     sink.writer_identity.must_equal "roles/owner"
   end
 
@@ -126,9 +111,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     new_sink = Google::Logging::V2::LogSink.new(
       name: sink.name,
       destination: new_sink_destination,
-      filter: new_sink_filter,
-      output_version_format: :V1,
-      end_time: now_grpc
+      filter: new_sink_filter
     )
     mock = Minitest::Mock.new
     mock.expect :update_sink, sink_grpc, ["projects/test/sinks/#{sink.name}", new_sink, unique_writer_identity: true, options: default_options]
@@ -136,9 +119,6 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
     sink.destination = new_sink_destination
     sink.filter = new_sink_filter
-    sink.version = :v1
-    sink.start_at = nil
-    sink.end_at   = now
 
     sink.save unique_writer_identity: true
 
@@ -147,11 +127,6 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
     sink.must_be_kind_of Google::Cloud::Logging::Sink
     sink.destination.must_equal new_sink_destination
     sink.filter.must_equal new_sink_filter
-    sink.must_be :v1?
-    sink.start_at.must_be :nil?
-    sink.start_time.must_be :nil?
-    sink.end_at.wont_be :nil?
-    sink.end_time.wont_be :nil?
     sink.writer_identity.must_equal "serviceAccount:cloud-logs@system.gserviceaccount.com"
   end
 
