@@ -1,1 +1,1 @@
-{"id":"google/cloud/datalosserror","name":"DataLossError","title":["Google","Cloud","DataLossError"],"description":"<p>DataLoss indicates unrecoverable data loss or corruption.</p>","source":"google-cloud-core/lib/google/cloud/errors.rb#L318","resources":[],"examples":[],"methods":[]}
+{"id":"google/cloud/datalosserror","name":"DataLossError","title":["Google","Cloud","DataLossError"],"description":"<p>DataLoss indicates unrecoverable data loss or corruption.</p>","source":"google-cloud-core/lib/google/cloud/errors.rb#L321","resources":[],"examples":[],"methods":[]}
