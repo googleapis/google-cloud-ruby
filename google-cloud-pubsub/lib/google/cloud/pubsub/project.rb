@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
@@ -72,15 +71,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["PUBSUB_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
 
         ##
         # Retrieves topic by name.

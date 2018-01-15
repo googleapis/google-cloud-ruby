@@ -31,10 +31,15 @@ describe Google::Cloud::Debugger::Railtie do
     config
   end
 
-  after {
-    Google::Cloud::Debugger.configure.instance_variable_get(:@configs).clear
-    Google::Cloud.configure.delete :use_debugger
-  }
+  before do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
 
   describe ".consolidate_rails_config" do
     it "merges configs from Rails configuration" do
@@ -43,7 +48,7 @@ describe Google::Cloud::Debugger::Railtie do
 
         Google::Cloud::Debugger.configure do |config|
           config.project_id.must_equal "test-project"
-          config.keyfile.must_equal "test/keyfile"
+          config.credentials.must_equal "test/keyfile"
           config.service_name.must_equal "test-module"
           config.service_version.must_equal "test-version"
         end

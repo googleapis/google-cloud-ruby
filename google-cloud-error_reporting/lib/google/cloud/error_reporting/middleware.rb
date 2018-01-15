@@ -54,7 +54,7 @@ module Google
             error_reporting ||
             ErrorReporting::AsyncErrorReporter.new(
               ErrorReporting.new(project: configuration.project_id,
-                                 keyfile: configuration.keyfile)
+                                 credentials: configuration.credentials)
             )
 
           # Set module default client to reuse the same client. Update module
@@ -155,9 +155,11 @@ module Google
         #
         def load_config **kwargs
           configuration.project_id = kwargs[:project_id] ||
+                                     kwargs[:project] ||
                                      configuration.project_id
-          configuration.keyfile = kwargs[:keyfile] ||
-                                  configuration.keyfile
+          configuration.credentials = kwargs[:credentials] ||
+                                      kwargs[:keyfile] ||
+                                      configuration.credentials
           configuration.service_name = kwargs[:service_name] ||
                                        configuration.service_name
           configuration.service_version = kwargs[:service_version] ||
@@ -172,10 +174,10 @@ module Google
         # Fallback to default configuration values if not defined already
         def init_default_config
           configuration.project_id ||= begin
-            Cloud.configure.project_id ||
-              ErrorReporting::Project.default_project_id
+            (Cloud.configure.project_id ||
+             ErrorReporting::Project.default_project_id)
           end
-          configuration.keyfile ||= Cloud.configure.keyfile
+          configuration.credentials ||= Cloud.configure.credentials
           configuration.service_name ||=
             ErrorReporting::Project.default_service_name
           configuration.service_version ||=

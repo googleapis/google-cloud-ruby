@@ -51,8 +51,9 @@ module Google
 end
 
 def mock_error_reporting
+  credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+  Google::Cloud::ErrorReporting.configure.credentials = credentials
   Google::Cloud::ErrorReporting.stub_new do |*args|
-    credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
     error_reporting = Google::Cloud::ErrorReporting::Project.new(Google::Cloud::ErrorReporting::Service.new("my-project", credentials))
 
     error_reporting.service.mocked_error_reporting = Minitest::Mock.new

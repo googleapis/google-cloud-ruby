@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/debugger/agent"
 require "google/cloud/debugger/credentials"
 require "google/cloud/debugger/middleware"
@@ -75,31 +74,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["DEBUGGER_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
-
-        ##
-        # @private Default service name identifier.
-        def self.default_service_name
-          ENV["DEBUGGER_SERVICE_NAME"] ||
-            Google::Cloud.env.app_engine_service_id ||
-            "ruby-app"
-        end
-
-        ##
-        # @private Default service version identifier.
-        def self.default_service_version
-          ENV["DEBUGGER_SERVICE_VERSION"] ||
-            Google::Cloud.env.app_engine_service_version ||
-            ""
-        end
 
         ##
         # Start the Stackdriver Debugger Agent.

@@ -27,70 +27,82 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
     Google::Cloud::Debugger::Middleware.new rack_app, debugger: debugger
   }
 
-  after {
-    Google::Cloud::Debugger.configure.instance_variable_get(:@configs).clear
-    Google::Cloud.configure.delete :use_debugger
+  before do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
 
     debugger.stop
-  }
+  end
 
   describe "#call" do
     it "calls Tracer#start and Tracer#disable_traces_for_thread for each request" do
-      mocked_tracer = Minitest::Mock.new
-      mocked_tracer.expect :start, nil
-      mocked_tracer.expect :disable_traces_for_thread, nil
+      Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
+        mocked_tracer = Minitest::Mock.new
+        mocked_tracer.expect :start, nil
+        mocked_tracer.expect :disable_traces_for_thread, nil
 
-      # Construct middleware
-      middleware
+        # Construct middleware
+        middleware
 
-      debugger.agent.stub :tracer, mocked_tracer do
-        middleware.call({})
+        debugger.agent.stub :tracer, mocked_tracer do
+          middleware.call({})
+        end
+
+        mocked_tracer.verify
       end
-
-      mocked_tracer.verify
     end
 
     it "swaps debugger agent's logger if there's an Stackdriver Logger set for the Rack already" do
-      logger = Google::Cloud::Logging::Logger.new nil, nil, nil
-      debugger = middleware.instance_variable_get :@debugger
-      env = { "rack.logger" => logger }
+      Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
+        logger = Google::Cloud::Logging::Logger.new nil, nil, nil
+        debugger = middleware.instance_variable_get :@debugger
+        env = { "rack.logger" => logger }
 
-      debugger.agent.logger.wont_equal logger
+        debugger.agent.logger.wont_equal logger
 
-      middleware.call env
+        middleware.call env
 
-      debugger.agent.logger.must_equal logger
+        debugger.agent.logger.must_equal logger
+      end
     end
 
     it "doesn't swap debugger agent's logger if rack.logger isn't a Stackdriver Logger" do
-      logger = Logger.new(STDOUT)
-      debugger = middleware.instance_variable_get :@debugger
-      env = { "rack.logger" => logger }
+      Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
+        logger = Logger.new(STDOUT)
+        debugger = middleware.instance_variable_get :@debugger
+        env = { "rack.logger" => logger }
 
-      debugger.agent.logger.wont_equal logger
+        debugger.agent.logger.wont_equal logger
 
-      middleware.call env
+        middleware.call env
 
-      debugger.agent.logger.wont_equal logger
+        debugger.agent.logger.wont_equal logger
+      end
     end
 
     it "resets quota after each request" do
-      debugger.agent.quota_manager = Google::Cloud::Debugger::RequestQuotaManager.new
+      Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
+        debugger.agent.quota_manager = Google::Cloud::Debugger::RequestQuotaManager.new
 
-      stubbed_call = ->(_) {
-        debugger.agent.quota_manager.count_quota.times do
-          debugger.agent.quota_manager.consume
+        stubbed_call = ->(_) {
+          debugger.agent.quota_manager.count_quota.times do
+            debugger.agent.quota_manager.consume
+          end
+
+          debugger.agent.quota_manager.more?.must_equal false
+        }
+
+        rack_app.stub :call, stubbed_call do
+          middleware.call({})
+
+          debugger.agent.quota_manager.more?.must_equal true
         end
-
-        debugger.agent.quota_manager.more?.must_equal false
-      }
-
-      rack_app.stub :call, stubbed_call do
-        middleware.call({})
-
-        debugger.agent.quota_manager.more?.must_equal true
       end
     end
   end
 end
-

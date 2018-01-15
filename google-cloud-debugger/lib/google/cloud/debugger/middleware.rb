@@ -49,8 +49,8 @@ module Google
             @debugger = debugger
           else
             @debugger =
-              Debugger.new(project: configuration.project_id,
-                           keyfile: configuration.keyfile,
+              Debugger.new(project_id: configuration.project_id,
+                           credentials: configuration.credentials,
                            service_name: configuration.service_name,
                            service_version: configuration.service_version)
 
@@ -101,8 +101,9 @@ module Google
           configuration.project_id = kwargs[:project] ||
                                      kwargs[:project_id] ||
                                      configuration.project_id
-          configuration.keyfile = kwargs[:keyfile] ||
-                                  configuration.keyfile
+          configuration.credentials = kwargs[:credentials] ||
+                                      kwargs[:keyfile] ||
+                                      configuration.credentials
 
           configuration.service_name = kwargs[:service_name] ||
                                        configuration.service_name
@@ -115,13 +116,10 @@ module Google
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
-          configuration.project_id ||= Cloud.configure.project_id ||
-                                       Debugger::Project.default_project_id
-          configuration.keyfile ||= Cloud.configure.keyfile
-
-          configuration.service_name ||= Debugger::Project.default_service_name
-          configuration.service_version ||=
-            Debugger::Project.default_service_version
+          configuration.project_id ||= Debugger.default_project_id
+          configuration.credentials ||= Debugger.default_credentials
+          configuration.service_name ||= Debugger.default_service_name
+          configuration.service_version ||= Debugger.default_service_version
         end
 
         ##

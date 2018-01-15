@@ -59,14 +59,14 @@ module Google
         # insert the Middleware.
         def self.init_middleware app
           project_id = Logging.configure.project_id
-          keyfile = Logging.configure.keyfile
+          credentials = Logging.configure.credentials
           resource_type = Logging.configure.monitored_resource.type
           resource_labels = Logging.configure.monitored_resource.labels
           log_name = Logging.configure.log_name
           labels = Logging.configure.labels
 
-          logging = Google::Cloud::Logging.new project: project_id,
-                                               keyfile: keyfile
+          logging = Google::Cloud::Logging.new project_id: project_id,
+                                               credentials: credentials
           resource =
             Logging::Middleware.build_monitored_resource resource_type,
                                                          resource_labels
@@ -112,27 +112,30 @@ module Google
         # configuration.
         def self.merge_rails_config rails_config # rubocop:disable AbcSize
           gcp_config = rails_config.google_cloud
-          logging_config = gcp_config.logging
+          log_config = gcp_config.logging
 
           Cloud.configure.use_logging ||= gcp_config.use_logging
           Logging.configure do |config|
-            config.project_id ||= logging_config.project_id ||
-                                  gcp_config.project_id
-            config.keyfile ||= logging_config.keyfile || gcp_config.keyfile
-            config.log_name ||= logging_config.log_name
-            config.labels ||= logging_config.labels
-            config.log_name_map ||= logging_config.log_name_map
+            config.project_id ||= config.project
+            config.project_id ||= log_config.project_id || log_config.project
+            config.project_id ||= gcp_config.project_id || gcp_config.project
+            config.credentials ||= config.keyfile
+            config.credentials ||= log_config.credentials || log_config.keyfile
+            config.credentials ||= gcp_config.credentials || gcp_config.keyfile
+            config.log_name ||= log_config.log_name
+            config.labels ||= log_config.labels
+            config.log_name_map ||= log_config.log_name_map
             config.monitored_resource.type ||=
-              logging_config.monitored_resource.type
+              log_config.monitored_resource.type
             config.monitored_resource.labels ||=
-              logging_config.monitored_resource.labels.to_h
+              log_config.monitored_resource.labels.to_h
           end
         end
 
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
-          Logging.configure.project_id ||= Logging::Project.default_project_id
+          Logging.configure.project_id ||= Logging.default_project_id
           Logging.configure.log_name ||= Middleware::DEFAULT_LOG_NAME
         end
 

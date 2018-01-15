@@ -15,6 +15,8 @@
 
 require "google-cloud-speech"
 require "google/cloud/speech/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -225,11 +227,14 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || Speech::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= (keyfile || Speech::Credentials.default(scope: scope))
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Speech::Credentials.new credentials, scope: scope
         end
@@ -240,6 +245,73 @@ module Google
                                      client_config: client_config
           )
         )
+      end
+
+      ##
+      # Reload speech configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "SPEECH_CREDENTIALS", "SPEECH_CREDENTIALS_JSON",
+          "SPEECH_KEYFILE", "SPEECH_KEYFILE_JSON"
+        )
+
+        Google::Cloud.configure.delete! :speech
+        Google::Cloud.configure.add_config! :speech do |config|
+          config.add_field! :project_id, ENV["SPEECH_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, default_creds,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :speech
+
+      ##
+      # Configure the Google Cloud Speech library.
+      #
+      # The following Speech configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Speech project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Speech::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Speech library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.speech if block_given?
+
+        Google::Cloud.configure.speech
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.speech.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.speech.credentials ||
+          Google::Cloud.configure.credentials ||
+          Speech::Credentials.default(scope: scope)
       end
     end
   end

@@ -29,15 +29,6 @@ module Google
         attr_accessor :project, :credentials, :timeout, :client_config
 
         ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["FIRESTORE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
-
-        ##
         # Creates a new Service instance.
         def initialize project, credentials, timeout: nil, client_config: nil
           @project = project

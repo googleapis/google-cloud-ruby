@@ -15,6 +15,8 @@
 
 require "google-cloud-resource_manager"
 require "google/cloud/resource_manager/manager"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -257,8 +259,11 @@ module Google
       #
       def self.new credentials: nil, scope: nil, retries: nil, timeout: nil,
                    keyfile: nil
+        scope ||= configure.scope
+        retries ||= configure.retries
+        timeout ||= configure.timeout
         credentials ||= keyfile
-        credentials ||= ResourceManager::Credentials.default(scope: scope)
+        credentials ||= default_credentials(scope: scope)
         unless credentials.is_a? Google::Auth::Credentials
           credentials = ResourceManager::Credentials.new credentials,
                                                          scope: scope
@@ -269,6 +274,63 @@ module Google
             credentials, retries: retries, timeout: timeout
           )
         )
+      end
+
+      ##
+      # Reload resource manager configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "RESOURCE_MANAGER_CREDENTIALS", "RESOURCE_MANAGER_CREDENTIALS_JSON",
+          "RESOURCE_MANAGER_KEYFILE", "RESOURCE_MANAGER_KEYFILE_JSON"
+        )
+
+        Google::Cloud.configure.delete! :resource_manager
+        Google::Cloud.configure.add_config! :resource_manager do |config|
+          config.add_field! :credentials, default_creds,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :retries, nil, match: Integer
+          config.add_field! :timeout, nil, match: Integer
+        end
+      end
+
+      unless Google::Cloud.configure.subconfig? :resource_manager
+        reload_configuration!
+      end
+
+      ##
+      # Configure the Google Cloud Resource Manager library.
+      #
+      # The following Resource Manager configuration parameters are supported:
+      #
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {ResourceManager::Credentials})
+      #   (The parameter `keyfile` is also available but deprecated.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::ResourceManager library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.resource_manager if block_given?
+
+        Google::Cloud.configure.resource_manager
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.resource_manager.credentials ||
+          Google::Cloud.configure.credentials ||
+          ResourceManager::Credentials.default(scope: scope)
       end
     end
   end

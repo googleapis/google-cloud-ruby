@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/vision/service"
 require "google/cloud/vision/credentials"
 require "google/cloud/vision/annotate"
@@ -73,15 +72,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["VISION_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
 
         ##
         # Returns a new image from the given source.

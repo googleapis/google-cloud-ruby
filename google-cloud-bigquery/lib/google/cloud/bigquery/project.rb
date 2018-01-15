@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/credentials"
@@ -84,15 +83,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project_id.
-        def self.default_project_id
-          ENV["BIGQUERY_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
 
         ##
         # Queries data by creating a [query

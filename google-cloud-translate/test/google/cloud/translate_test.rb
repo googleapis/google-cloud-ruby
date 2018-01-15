@@ -137,10 +137,13 @@ describe Google::Cloud do
       }
 
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project_id, nil do
+      Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
-        # ENV.stub :[], nil do
         ENV.stub :[], stubbed_env do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::Translate.reload_configuration!
+
           Google::Cloud::Translate::Service.stub :new, stubbed_service do
             translate = Google::Cloud.translate
             translate.must_be_kind_of Google::Cloud::Translate::Api
@@ -161,9 +164,13 @@ describe Google::Cloud do
         OpenStruct.new key: key
       }
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project_id, nil do
+      Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], nil do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::Translate.reload_configuration!
+
           Google::Cloud::Translate::Service.stub :new, stubbed_service do
             translate = Google::Cloud.translate "my-api-key"
             translate.must_be_kind_of Google::Cloud::Translate::Api
@@ -177,6 +184,10 @@ describe Google::Cloud do
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Translate::Credentials.stub :default, default_credentials do
@@ -206,6 +217,10 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
@@ -246,10 +261,13 @@ describe Google::Cloud do
       }
 
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project_id, nil do
+      Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
-        # ENV.stub :[], nil do
         ENV.stub :[], stubbed_env do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::Translate.reload_configuration!
+
           Google::Cloud::Translate::Service.stub :new, stubbed_service do
             translate = Google::Cloud::Translate.new
             translate.must_be_kind_of Google::Cloud::Translate::Api
@@ -271,9 +289,13 @@ describe Google::Cloud do
       }
 
       # Prevent return of actual project in any environment including GCE, etc.
-      Google::Cloud::Translate::Api.stub :default_project_id, nil do
+      Google::Cloud::Translate.stub :default_project_id, nil do
         # Clear all environment variables
         ENV.stub :[], nil do
+          # Reload config so the dev env does not leak through
+          Google::Cloud.reload_configuration!
+          Google::Cloud::Translate.reload_configuration!
+
           Google::Cloud::Translate::Service.stub :new, stubbed_service do
             translate = Google::Cloud::Translate.new key: "my-api-key"
             translate.must_be_kind_of Google::Cloud::Translate::Api
@@ -287,6 +309,10 @@ describe Google::Cloud do
     it "gets defaults for project_id and credentials" do
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Translate::Credentials.stub :default, default_credentials do
@@ -317,6 +343,10 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
@@ -350,6 +380,10 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
@@ -357,6 +391,228 @@ describe Google::Cloud do
                 translate = Google::Cloud::Translate.new project: "project-id", keyfile: "path/to/keyfile.json"
                 translate.must_be_kind_of Google::Cloud::Translate::Api
                 translate.project_id.must_equal "project-id"
+                translate.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  describe "Translate.configure" do
+    let(:found_credentials) { "{}" }
+
+    it "uses shared config for project and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "translate-credentials"
+      }
+      stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "translate-credentials"
+        scope.must_be :nil?
+        key.must_be :nil?
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
+        # Set new configuration
+        Google::Cloud.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+                translate = Google::Cloud::Translate.new
+                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.project.must_equal "project-id"
+                translate.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses shared config for project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "translate-credentials"
+      }
+      stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "translate-credentials"
+        scope.must_be :nil?
+        key.must_be :nil?
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
+        # Set new configurations
+        Google::Cloud.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+                translate = Google::Cloud::Translate.new
+                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.project.must_equal "project-id"
+                translate.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses translate config for project and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "translate-credentials"
+      }
+      stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "translate-credentials"
+        scope.must_be :nil?
+        key.must_be :nil?
+        retries.must_equal 3
+        timeout.must_equal 42
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
+        # Set new configuration
+        Google::Cloud::Translate.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+          config.retries = 3
+          config.timeout = 42
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+                translate = Google::Cloud::Translate.new
+                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.project.must_equal "project-id"
+                translate.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses translate config for project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "translate-credentials"
+      }
+      stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "translate-credentials"
+        scope.must_be :nil?
+        key.must_be :nil?
+        retries.must_equal 3
+        timeout.must_equal 42
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
+        # Set new configurations
+        Google::Cloud::Translate.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+          config.retries = 3
+          config.timeout = 42
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+                translate = Google::Cloud::Translate.new
+                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.project.must_equal "project-id"
+                translate.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses translate config for key" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "translate-credentials"
+      }
+      stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
+        key.must_equal "this-is-the-api-key"
+        project.must_be :empty?
+        credentials.must_be :nil?
+        scope.must_be :nil?
+        retries.must_be :nil?
+        timeout.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Translate.reload_configuration!
+
+        # Set new configurations
+        Google::Cloud::Translate.configure do |config|
+          config.key = "this-is-the-api-key"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Translate::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Translate::Service.stub :new, stubbed_service do
+                translate = Google::Cloud::Translate.new
+                translate.must_be_kind_of Google::Cloud::Translate::Api
+                translate.project.must_be :empty?
                 translate.service.must_be_kind_of OpenStruct
               end
             end

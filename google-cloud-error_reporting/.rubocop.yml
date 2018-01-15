@@ -29,6 +29,8 @@ Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
   Max: 20
+  Exclude:
+    - "lib/google/cloud/error_reporting.rb"
 Metrics/ParameterLists:
   Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code

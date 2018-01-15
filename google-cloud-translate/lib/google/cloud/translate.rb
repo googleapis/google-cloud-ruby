@@ -15,6 +15,8 @@
 
 require "google-cloud-translate"
 require "google/cloud/translate/api"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -275,11 +277,10 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, key: nil, scope: nil,
                    retries: nil, timeout: nil, project: nil, keyfile: nil
-        project_id ||= (project || Translate::Api.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
 
-        key ||= ENV["TRANSLATE_KEY"]
-        key ||= ENV["GOOGLE_CLOUD_KEY"]
+        key ||= configure.key
         if key
           return Google::Cloud::Translate::Api.new(
             Google::Cloud::Translate::Service.new(
@@ -290,8 +291,10 @@ module Google
 
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= keyfile
-        credentials ||= Translate::Credentials.default(scope: scope)
+        scope ||= configure.scope
+        retries ||= configure.retries
+        timeout ||= configure.timeout
+        credentials ||= keyfile || default_credentials(scope: scope)
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Translate::Credentials.new credentials, scope: scope
         end
@@ -301,6 +304,75 @@ module Google
             project_id, credentials, retries: retries, timeout: timeout
           )
         )
+      end
+
+      ##
+      # Reload Translate configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        default_key = ENV["TRANSLATE_KEY"] || ENV["GOOGLE_CLOUD_KEY"]
+        default_creds = Google::Cloud.credentials_from_env(
+          "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON",
+          "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
+        )
+
+        Google::Cloud.configure.delete! :translate
+        Google::Cloud.configure.add_config! :translate do |config|
+          config.add_field! :project_id, ENV["TRANSLATE_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, default_creds,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :key, default_key, match: String
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :retries, nil, match: Integer
+          config.add_field! :timeout, nil, match: Integer
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :translate
+
+      ##
+      # Configure the Google Cloud Translate library.
+      #
+      # The following Translate configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Translate project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Translate::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Translate library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.translate if block_given?
+
+        Google::Cloud.configure.translate
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.translate.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.translate.credentials ||
+          Google::Cloud.configure.credentials ||
+          Translate::Credentials.default(scope: scope)
       end
     end
   end

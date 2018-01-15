@@ -96,10 +96,6 @@ YARD::Doctest.configure do |doctest|
 
   doctest.skip "Google::Cloud::Firestore::Credentials" # occasionally getting "This code example is not yet mocked"
 
-  doctest.before "Google::Cloud::Firestore::Project" do
-    mock_firestore
-  end
-
   doctest.before "Google::Cloud::Firestore::Client" do
     mock_firestore do |mock|
       mock.expect :commit, commit_resp, commit_args

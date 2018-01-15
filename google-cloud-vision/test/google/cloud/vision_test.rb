@@ -78,6 +78,10 @@ describe Google::Cloud do
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Vision::Credentials.stub :default, default_credentials do
@@ -106,6 +110,10 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Vision::Credentials.stub :new, stubbed_credentials do
@@ -135,6 +143,10 @@ describe Google::Cloud do
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Vision::Credentials.stub :default, default_credentials do
@@ -163,6 +175,10 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Vision::Credentials.stub :new, stubbed_credentials do
@@ -194,11 +210,192 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Vision::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Vision::Service.stub :new, stubbed_service do
                 vision = Google::Cloud::Vision.new project: "project-id", keyfile: "path/to/keyfile.json"
+                vision.must_be_kind_of Google::Cloud::Vision::Project
+                vision.project.must_equal "project-id"
+                vision.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  describe "Vision.configure" do
+    let(:found_credentials) { "{}" }
+    let :vision_client_config do
+      {"interfaces"=>
+        {"google.vision.v1.Vision"=>
+          {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
+    end
+
+    it "uses shared config for project and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "vision-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "vision-credentials"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
+        # Set new configuration
+        Google::Cloud.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Vision::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Vision::Service.stub :new, stubbed_service do
+                vision = Google::Cloud::Vision.new
+                vision.must_be_kind_of Google::Cloud::Vision::Project
+                vision.project.must_equal "project-id"
+                vision.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses shared config for project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "vision-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "vision-credentials"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
+        # Set new configuration
+        Google::Cloud.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Vision::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Vision::Service.stub :new, stubbed_service do
+                vision = Google::Cloud::Vision.new
+                vision.must_be_kind_of Google::Cloud::Vision::Project
+                vision.project.must_equal "project-id"
+                vision.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses vision config for project and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "vision-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "vision-credentials"
+        timeout.must_equal 42
+        client_config.must_equal vision_client_config
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
+        # Set new configuration
+        Google::Cloud::Vision.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+          config.timeout = 42
+          config.client_config = vision_client_config
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Vision::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Vision::Service.stub :new, stubbed_service do
+                vision = Google::Cloud::Vision.new
+                vision.must_be_kind_of Google::Cloud::Vision::Project
+                vision.project.must_equal "project-id"
+                vision.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses vision config for project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "vision-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "vision-credentials"
+        timeout.must_equal 42
+        client_config.must_equal vision_client_config
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Reload config so the dev env does not leak through
+        Google::Cloud.reload_configuration!
+        Google::Cloud::Vision.reload_configuration!
+
+        # Set new configuration
+        Google::Cloud::Vision.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+          config.timeout = 42
+          config.client_config = vision_client_config
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Vision::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Vision::Service.stub :new, stubbed_service do
+                vision = Google::Cloud::Vision.new
                 vision.must_be_kind_of Google::Cloud::Vision::Project
                 vision.project.must_equal "project-id"
                 vision.service.must_be_kind_of OpenStruct

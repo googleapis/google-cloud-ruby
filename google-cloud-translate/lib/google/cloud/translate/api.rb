@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/translate/service"
 require "google/cloud/translate/translation"
 require "google/cloud/translate/detection"
@@ -79,15 +78,6 @@ module Google
           service.project
         end
         alias project project_id
-
-        ##
-        # @private Default project.
-        def self.default_project_id
-          ENV["TRANSLATE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
 
         ##
         # Returns text translations from one language to another.

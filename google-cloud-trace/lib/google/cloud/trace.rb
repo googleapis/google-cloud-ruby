@@ -27,6 +27,7 @@ require "google/cloud/trace/span_kind"
 require "google/cloud/trace/time_sampler"
 require "google/cloud/trace/trace_record"
 require "google/cloud/trace/utils"
+require "google/cloud/config"
 require "stackdriver/core"
 
 module Google
@@ -191,12 +192,6 @@ module Google
     module Trace
       THREAD_KEY = :__stackdriver_trace_span__
 
-      # Initialize :error_reporting as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :trace
-        Google::Cloud.configure.add_options :trace
-      end
-
       ##
       # Creates a new object for connecting to the Stackdriver Trace service.
       # Each call creates a new connection.
@@ -215,7 +210,11 @@ module Google
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
       #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-      #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud-platform`
+      #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
@@ -235,11 +234,15 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || Trace::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= (keyfile || Trace::Credentials.default(scope: scope))
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Trace::Credentials.new credentials, scope: scope
         end
@@ -250,6 +253,92 @@ module Google
                                      client_config: client_config
           )
         )
+      end
+
+      ##
+      # Reload trace configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        Google::Cloud.configure.delete! :trace
+        Google::Cloud.configure.add_config! :trace do |config|
+          config.add_field! :project_id, ENV["TRACE_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, nil,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :capture_stack, nil, enum: [true, false]
+          config.add_field! :sampler, nil
+          config.add_field! :span_id_generator, nil, match: Proc
+          config.add_field! :notifications, nil, match: Array
+          config.add_field! :max_data_length, nil, match: Integer
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :trace
+
+      ##
+      # Configure the Stackdriver Trace instrumentation Middleware.
+      #
+      # The following Stackdriver Trace configuration parameters are
+      # supported:
+      #
+      # * `project_id` - (String) Project identifier for the Stackdriver
+      #   Trace service you are connecting to. (The parameter `project` is
+      #   considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Trace::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `capture_stack` - (Boolean) Whether to capture stack traces for each
+      #   span. Default: `false`
+      # * `sampler` - (Proc) A sampler Proc makes the decision whether to record
+      #   a trace for each request. Default: `Google::Cloud::Trace::TimeSampler`
+      # * `span_id_generator` - (Proc) A generator Proc that generates the name
+      #   String for new TraceRecord. Default: `random numbers`
+      # * `notifications` - (Array) An array of ActiveSupport notification types
+      #   to include in traces. Rails-only option. Default:
+      #   `Google::Cloud::Trace::Railtie::DEFAULT_NOTIFICATIONS`
+      # * `max_data_length` - (Integer) The maximum length of span properties
+      #   recorded with ActiveSupport notification events. Rails-only option.
+      #   Default:
+      #   `Google::Cloud::Trace::Notifications::DEFAULT_MAX_DATA_LENGTH`
+      #
+      # See the [Configuration
+      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
+      # for full configuration parameters.
+      #
+      # @return [Google::Cloud::Config] The configuration object
+      #   the Google::Cloud::Trace module uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.trace if block_given?
+
+        Google::Cloud.configure.trace
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.trace.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.trace.credentials ||
+          Google::Cloud.configure.credentials ||
+          Trace::Credentials.default(scope: scope)
       end
 
       ##
@@ -348,22 +437,6 @@ module Google
         else
           yield nil
         end
-      end
-
-      ##
-      # Configure the Stackdriver Trace instrumentation Middleware.
-      #
-      # See the [Configuration
-      # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
-      # for full configuration parameters.
-      #
-      # @return [Stackdriver::Core::Configuration] The configuration object
-      #   the Google::Cloud::ErrorReporting module uses.
-      #
-      def self.configure
-        yield Google::Cloud.configure.trace if block_given?
-
-        Google::Cloud.configure.trace
       end
     end
   end

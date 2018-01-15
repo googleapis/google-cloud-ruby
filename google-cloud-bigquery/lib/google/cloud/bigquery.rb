@@ -15,6 +15,8 @@
 
 require "google-cloud-bigquery"
 require "google/cloud/bigquery/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -521,11 +523,15 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
                    timeout: nil, project: nil, keyfile: nil
-        project_id ||= (project || Bigquery::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials ||= (keyfile || Bigquery::Credentials.default(scope: scope))
+        scope ||= configure.scope
+        retries ||= configure.retries
+        timeout ||= configure.timeout
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Bigquery::Credentials.new credentials, scope: scope
         end
@@ -535,6 +541,73 @@ module Google
             project_id, credentials, retries: retries, timeout: timeout
           )
         )
+      end
+
+      ##
+      # Reload bigquery configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "BIGQUERY_CREDENTIALS", "BIGQUERY_CREDENTIALS_JSON",
+          "BIGQUERY_KEYFILE", "BIGQUERY_KEYFILE_JSON"
+        )
+
+        Google::Cloud.configure.delete! :bigquery
+        Google::Cloud.configure.add_config! :bigquery do |config|
+          config.add_field! :project_id, ENV["BIGQUERY_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, default_creds,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :retries, nil, match: Integer
+          config.add_field! :timeout, nil, match: Integer
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :bigquery
+
+      ##
+      # Configure the Google Cloud BigQuery library.
+      #
+      # The following BigQuery configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a BigQuery project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Bigquery::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Bigquery library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.bigquery if block_given?
+
+        Google::Cloud.configure.bigquery
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.bigquery.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.bigquery.credentials ||
+          Google::Cloud.configure.credentials ||
+          Bigquery::Credentials.default(scope: scope)
       end
     end
   end

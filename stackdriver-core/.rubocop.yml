@@ -14,9 +14,6 @@ Style/MethodDefParentheses:
 Style/ClassVars:
   Exclude:
     - "lib/google/cloud/configuration.rb"
-Style/MethodMissing:
-  Exclude:
-    - "lib/stackdriver/core/configuration.rb"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:

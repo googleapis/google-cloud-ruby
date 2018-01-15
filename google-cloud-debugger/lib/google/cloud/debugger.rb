@@ -15,6 +15,8 @@
 
 require "google-cloud-debugger"
 require "google/cloud/debugger/project"
+require "google/cloud/config"
+require "google/cloud/env"
 require "stackdriver/core"
 
 module Google
@@ -320,15 +322,7 @@ module Google
     # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
     module Debugger
-      # Initialize :debugger as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :debugger
-        Google::Cloud.configure.add_options :debugger
-
-        Google::Cloud.configure.define_singleton_method :debugger do
-          Google::Cloud.configure[:debugger]
-        end
-      end
+      # rubocop:disable all
 
       ##
       # Creates a new debugger object for instrumenting Stackdriver Debugger for
@@ -353,8 +347,15 @@ module Google
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
       #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-      #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud_debugger`
+      #   * `https://www.googleapis.com/auth/logging.admin`
+      #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
       # @param [String] project Project identifier for the Stackdriver Debugger
       #   service.
       # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
@@ -371,11 +372,13 @@ module Google
       def self.new project_id: nil, credentials: nil, service_name: nil,
                    service_version: nil, scope: nil, timeout: nil,
                    client_config: nil, project: nil, keyfile: nil
-        project_id ||= (project || Debugger::Project.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
-        service_name ||= Debugger::Project.default_service_name
+
+        service_name ||= default_service_name
         service_name = service_name.to_s
-        service_version ||= Debugger::Project.default_service_version
+
+        service_version ||= default_service_version
         service_version = service_version.to_s
 
         raise ArgumentError, "project_id is missing" if project_id.empty?
@@ -384,7 +387,11 @@ module Google
           raise ArgumentError, "service_version is missing"
         end
 
-        credentials ||= (keyfile || Debugger::Credentials.default(scope: scope))
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Debugger::Credentials.new credentials, scope: scope
         end
@@ -397,20 +404,113 @@ module Google
         )
       end
 
+      # rubocop:enable all
+
+      ##
+      # Reload debugger configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        default_creds = Google::Cloud.credentials_from_env(
+          "DEBUGGER_CREDENTIALS", "DEBUGGER_CREDENTIALS_JSON",
+          "DEBUGGER_KEYFILE", "DEBUGGER_KEYFILE_JSON"
+        )
+
+        Google::Cloud.configure.delete! :debugger
+        Google::Cloud.configure.add_config! :debugger do |config|
+          config.add_field! :project_id, ENV["DEBUGGER_PROJECT"], match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, default_creds,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :service_name, ENV["DEBUGGER_SERVICE_NAME"],
+                            match: String
+          config.add_field! :service_version, ENV["DEBUGGER_SERVICE_VERSION"],
+                            match: String
+          config.add_field! :app_root, nil, match: String
+          config.add_field! :root, nil, match: String
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :allow_mutating_methods, false
+          config.add_field! :evaluation_time_limit, 0.05, match: Numeric
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :debugger
+
       ##
       # Configure the Stackdriver Debugger agent.
+      #
+      # The following Stackdriver Debugger configuration parameters are
+      # supported:
+      #
+      # * `project_id` - (String) Project identifier for the Stackdriver
+      #   Debugger service you are connecting to. (The parameter `project` is
+      #   considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Debugger::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `service_name` - (String) Name for the debuggee application.
+      # * `service_version` - (String) Version identifier for the debuggee
+      #   application.
+      # * `root` - (String) The root directory of the debuggee application as an
+      #   absolute file path.
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `allow_mutating_methods` - (boolean) Whether expressions and
+      #   conditional breakpoints can call methods that could modify program
+      #   state. Defaults to false.
+      # * `evaluation_time_limit` - (Numeric) Time limit in seconds for
+      #   expression evaluation. Defaults to 0.05.
       #
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # for full configuration parameters.
       #
-      # @return [Stackdriver::Core::Configuration] The configuration object
-      #   the Google::Cloud::Debugger module uses.
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Debugger module uses.
       #
       def self.configure
-        yield Google::Cloud.configure[:debugger] if block_given?
+        yield Google::Cloud.configure.debugger if block_given?
 
-        Google::Cloud.configure[:debugger]
+        Google::Cloud.configure.debugger
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.debugger.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default service name identifier.
+      def self.default_service_name
+        Google::Cloud.configure.debugger.service_name ||
+          Google::Cloud.env.app_engine_service_id ||
+          "ruby-app"
+      end
+
+      ##
+      # @private Default service version identifier.
+      def self.default_service_version
+        Google::Cloud.configure.debugger.service_version ||
+          Google::Cloud.env.app_engine_service_version ||
+          ""
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.debugger.credentials ||
+          Google::Cloud.configure.credentials ||
+          Debugger::Credentials.default(scope: scope)
       end
 
       ##

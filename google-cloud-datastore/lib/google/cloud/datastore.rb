@@ -18,6 +18,8 @@ require "google/cloud/datastore/errors"
 require "google/cloud/datastore/dataset"
 require "google/cloud/datastore/transaction"
 require "google/cloud/datastore/credentials"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -589,7 +591,7 @@ module Google
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. See Google::Gax::CallSettings. Optional.
       # @param [String] emulator_host Datastore emulator host. Optional.
-      #   If the param is nil, ENV["DATASTORE_EMULATOR_HOST"] will be used.
+      #   If the param is nil, uses the value of the `emulator_host` config.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -616,11 +618,14 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, emulator_host: nil, project: nil,
                    keyfile: nil
-        project_id ||= (project || Datastore::Dataset.default_project_id)
+        project_id ||= (project || default_project_id)
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        emulator_host ||= ENV["DATASTORE_EMULATOR_HOST"]
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        emulator_host ||= configure.emulator_host
         if emulator_host
           return Datastore::Dataset.new(
             Datastore::Service.new(
@@ -630,8 +635,7 @@ module Google
           )
         end
 
-        credentials ||= keyfile
-        credentials ||= Datastore::Credentials.default(scope: scope)
+        credentials ||= (keyfile || default_credentials(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Datastore::Credentials.new credentials, scope: scope
         end
@@ -642,6 +646,78 @@ module Google
             timeout: timeout, client_config: client_config
           )
         )
+      end
+
+      ##
+      # Reload datastore configuration from defaults. For testing.
+      # @private
+      #
+      def self.reload_configuration!
+        default_project = ENV["DATASTORE_DATASET"] || ENV["DATASTORE_PROJECT"]
+        default_creds = Google::Cloud.credentials_from_env(
+          "DATASTORE_CREDENTIALS", "DATASTORE_CREDENTIALS_JSON",
+          "DATASTORE_KEYFILE", "DATASTORE_KEYFILE_JSON"
+        )
+
+        Google::Cloud.configure.delete! :datastore
+        Google::Cloud.configure.add_config! :datastore do |config|
+          config.add_field! :project_id, default_project, match: String
+          config.add_alias! :project, :project_id
+          config.add_field! :credentials, default_creds,
+                            match: [String, Hash, Google::Auth::Credentials]
+          config.add_alias! :keyfile, :credentials
+          config.add_field! :scope, nil, match: [String, Array]
+          config.add_field! :timeout, nil, match: Integer
+          config.add_field! :client_config, nil, match: Hash
+          config.add_field! :emulator_host, ENV["DATASTORE_EMULATOR_HOST"],
+                            match: String
+        end
+      end
+
+      reload_configuration! unless Google::Cloud.configure.subconfig? :datastore
+
+      ##
+      # Configure the Google Cloud Datastore library.
+      #
+      # The following Datastore configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Datastore project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Datastore::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["DATASTORE_EMULATOR_HOST"]`
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Datastore library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.datastore if block_given?
+
+        Google::Cloud.configure.datastore
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.datastore.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.datastore.credentials ||
+          Google::Cloud.configure.credentials ||
+          Datastore::Credentials.default(scope: scope)
       end
     end
   end
