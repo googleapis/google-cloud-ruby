@@ -315,27 +315,6 @@ module Google
       end
 
       ##
-      # Dynamic methods accessed as keys.
-      #
-      def method_missing name, *args
-        name_str = name.to_s
-        super unless name_str =~ /^[a-zA-Z]\w*=?$/
-        if name_str.chomp! "="
-          self[name_str] = args.first
-        else
-          self[name]
-        end
-      end
-
-      ##
-      # Dynamic methods accessed as keys.
-      #
-      def respond_to_missing? name, include_private
-        return true if value_set? name.to_s.chomp("=")
-        super
-      end
-
-      ##
       # Check if the given key has been set in this object. Returns true if the
       # key has been added as a normal field, subconfig, or alias, or if it has
       # not been added explicitly but still has a value.
@@ -463,6 +442,30 @@ module Google
       end
 
       ##
+      # @private
+      # Dynamic methods accessed as keys.
+      #
+      def method_missing name, *args
+        name_str = name.to_s
+        super unless name_str =~ /^[a-zA-Z]\w*=?$/
+        if name_str.chomp! "="
+          self[name_str] = args.first
+        else
+          self[name]
+        end
+      end
+
+      ##
+      # @private
+      # Dynamic methods accessed as keys.
+      #
+      def respond_to_missing? name, include_private
+        return true if value_set? name.to_s.chomp("=")
+        super
+      end
+
+      ##
+      # @private
       # Implement standard nil check
       #
       # @return [false]
