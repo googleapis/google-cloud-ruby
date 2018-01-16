@@ -582,19 +582,15 @@ module Google
 
     ##
     # Configure the default parameter for Google::Cloud. The values defined on
-    # this top level will be shared across all Stackdriver instrumentation
-    # libraries (Debugger, ErrorReporting, Logging, and Trace). These other
-    # libraries may also add sub configuration options under this.
+    # this top level will be shared across all Google::Cloud libraries, which
+    # may also add fields to this object or add sub configuration options under
+    # this object.
     #
     # Possible configuration parameters:
     #   * project_id: The Google Cloud Project ID. Automatically discovered
     #                 when running from GCP environments.
     #   * credentials: The service account JSON file path. Automatically
     #                  discovered when running from GCP environments.
-    #   * service_name: The service name for diagnostics reporting.
-    #   * service_version: The service version for diagnostics reporting.
-    #   * use_debugger: Explicitly enable or disable Stackdriver Debugger
-    #                   instrumentation
     #   * use_error_reporting: Explicitly enable or disable Stackdriver Error
     #                          Reporting instrumentation
     #   * use_logging: Explicitly enable or disable Stackdriver Logging
@@ -602,7 +598,7 @@ module Google
     #   * use_trace: Explicitly enable or disable Stackdriver Trace
     #                instrumentation
     #
-    # @return [Google::Cloud::Config] The toplevel configuration object for
+    # @return [Google::Cloud::Config] The top-level configuration object for
     #     Google::Cloud libraries.
     #
     def self.configure
@@ -630,9 +626,6 @@ module Google
         config.add_alias! :project, :project_id
         config.add_field! :credentials, default_creds, match: Object
         config.add_alias! :keyfile, :credentials
-        config.add_field! :service_name, nil, match: String
-        config.add_field! :service_version, nil, match: String
-        config.add_field! :use_debugger, nil, enum: [true, false]
         config.add_field! :use_error_reporting, nil, enum: [true, false]
         config.add_field! :use_logging, nil, enum: [true, false]
         config.add_field! :use_trace, nil, enum: [true, false]

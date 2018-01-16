@@ -404,8 +404,6 @@ module Google
         )
       end
 
-      # rubocop:enable all
-
       ##
       # Reload debugger configuration from defaults. For testing.
       # @private
@@ -415,6 +413,19 @@ module Google
           "DEBUGGER_CREDENTIALS", "DEBUGGER_CREDENTIALS_JSON",
           "DEBUGGER_KEYFILE", "DEBUGGER_KEYFILE_JSON"
         )
+
+        unless Google::Cloud.configure.field? :use_debugger
+          Google::Cloud.configure.add_field! :use_debugger, nil,
+                                             enum: [true, false]
+        end
+        unless Google::Cloud.configure.field? :service_name
+          Google::Cloud.configure.add_field! :service_name, nil,
+                                             match: String
+        end
+        unless Google::Cloud.configure.field? :service_version
+          Google::Cloud.configure.add_field! :service_version, nil,
+                                             match: String
+        end
 
         Google::Cloud.configure.delete! :debugger
         Google::Cloud.configure.add_config! :debugger do |config|
@@ -436,6 +447,8 @@ module Google
           config.add_field! :evaluation_time_limit, 0.05, match: Numeric
         end
       end
+
+      # rubocop:enable all
 
       reload_configuration! unless Google::Cloud.configure.subconfig? :debugger
 
