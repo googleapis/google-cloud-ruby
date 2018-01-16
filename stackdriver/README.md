@@ -100,12 +100,11 @@ send data.
     # In your app initialization code
     Google::Cloud.configure do |config|
       config.project_id = "your-project-id"
-      config.keyfile = "/path/to/servce-account-keyfile.json"
+      config.credentials = "/path/to/servce-account-keyfile.json"
     end
     ```
 
-For more information, consult the
-[Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication).
+See the individual gem documentation for each gem for more information.
 
 ## Compatibility
 
