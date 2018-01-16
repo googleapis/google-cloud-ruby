@@ -420,7 +420,7 @@ module Google
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "LOGGING_CREDENTIALS", "LOGGING_CREDENTIALS_JSON",
           "LOGGING_KEYFILE", "LOGGING_KEYFILE_JSON"
         )

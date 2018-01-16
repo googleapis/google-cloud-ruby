@@ -654,7 +654,7 @@ module Google
       #
       def self.reload_configuration!
         default_project = ENV["DATASTORE_DATASET"] || ENV["DATASTORE_PROJECT"]
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "DATASTORE_CREDENTIALS", "DATASTORE_CREDENTIALS_JSON",
           "DATASTORE_KEYFILE", "DATASTORE_KEYFILE_JSON"
         )

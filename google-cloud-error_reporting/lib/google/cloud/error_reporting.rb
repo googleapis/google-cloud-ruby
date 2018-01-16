@@ -147,7 +147,7 @@ module Google
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "ERROR_REPORTING_CREDENTIALS", "ERROR_REPORTING_CREDENTIALS_JSON",
           "ERROR_REPORTING_KEYFILE", "ERROR_REPORTING_KEYFILE_JSON"
         )

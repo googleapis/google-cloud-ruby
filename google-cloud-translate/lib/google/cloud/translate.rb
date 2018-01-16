@@ -312,7 +312,7 @@ module Google
       #
       def self.reload_configuration!
         default_key = ENV["TRANSLATE_KEY"] || ENV["GOOGLE_CLOUD_KEY"]
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON",
           "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
         )

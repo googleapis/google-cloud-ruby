@@ -411,7 +411,7 @@ module Google
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "DEBUGGER_CREDENTIALS", "DEBUGGER_CREDENTIALS_JSON",
           "DEBUGGER_KEYFILE", "DEBUGGER_KEYFILE_JSON"
         )

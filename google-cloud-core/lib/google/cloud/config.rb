@@ -439,6 +439,30 @@ module Google
       end
 
       ##
+      # Search the given environment variable names for valid credential data
+      # that can be passed to `Google::Auth::Credentials.new`.
+      # If a variable contains a valid file path, returns that path as a string.
+      # If a variable contains valid JSON, returns the parsed JSON as a hash.
+      # If no variables contain valid data, returns nil.
+      # @private
+      #
+      def self.credentials_from_env *vars
+        vars.each do |var|
+          data = ::ENV[var]
+          next unless data
+          str = data.strip
+          return str if ::File.file? str
+          json = begin
+            ::JSON.parse str
+          rescue ::StandardError
+            nil
+          end
+          return json if json.is_a? ::Hash
+        end
+        nil
+      end
+
+      ##
       # Implement standard nil check
       #
       # @return [false]
@@ -585,37 +609,13 @@ module Google
     end
 
     ##
-    # Search the given environment variable names for valid credential data
-    # that can be passed to `Google::Auth::Credentials.new`.
-    # If a variable contains a valid file path, returns that path as a string.
-    # If a variable contains valid JSON, returns the parsed JSON as a hash.
-    # If no variables contain valid data, returns nil.
-    # @private
-    #
-    def self.credentials_from_env *vars
-      vars.each do |var|
-        data = ENV[var]
-        next unless data
-        str = data.strip
-        return str if File.file? str
-        json = begin
-          JSON.parse str
-        rescue StandardError
-          nil
-        end
-        return json if json.is_a? Hash
-      end
-      nil
-    end
-
-    ##
     # Reload local the global config fields from defaults. For testing. Does not
     # affect subconfigs.
     # @private
     #
     def self.reload_configuration!
       default_project = ENV["GOOGLE_CLOUD_PROJECT"] || ENV["GCLOUD_PROJECT"]
-      default_creds = credentials_from_env \
+      default_creds = Google::Cloud::Config.credentials_from_env \
         "GOOGLE_CLOUD_CREDENTIALS", "GOOGLE_CLOUD_CREDENTIALS_JSON",
         "GOOGLE_CLOUD_KEYFILE", "GOOGLE_CLOUD_KEYFILE_JSON",
         "GCLOUD_KEYFILE", "GCLOUD_KEYFILE_JSON"

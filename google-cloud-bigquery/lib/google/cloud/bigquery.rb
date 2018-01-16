@@ -548,7 +548,7 @@ module Google
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "BIGQUERY_CREDENTIALS", "BIGQUERY_CREDENTIALS_JSON",
           "BIGQUERY_KEYFILE", "BIGQUERY_KEYFILE_JSON"
         )
