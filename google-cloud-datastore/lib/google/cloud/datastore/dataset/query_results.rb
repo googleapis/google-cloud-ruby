@@ -157,6 +157,7 @@ module Google
             return nil if end_cursor.nil?
             ensure_service!
             query.start_cursor = cursor.to_grpc # should always be a Cursor...
+            query.offset = 0 # Never carry an offset across batches
             query_res = service.run_query query, namespace
             self.class.from_grpc query_res, service, namespace, query
           end
