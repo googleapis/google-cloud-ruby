@@ -1,32 +1,115 @@
 # stackdriver
 
-This gem instruments a Ruby web application for Stackdriver diagnostics. When loaded, it integrates with Rails, Sinatra, or other Rack-based web frameworks to collect application diagnostic and monitoring information for your application.
+This gem instruments a Ruby web application for Stackdriver diagnostics. When
+loaded, it integrates with Rails, Sinatra, or other Rack-based web frameworks
+to collect application diagnostic and monitoring information for your
+application.
 
-Specifically, this gem is a convenience package that loads and automatically activates the instrumentation features of the following gems:
-- [google-cloud-debugger](../google-cloud-debugger)
-- [google-cloud-error_reporting](../google-cloud-error_reporting)
-- [google-cloud-logging](../google-cloud-logging)
-- [google-cloud-trace](../google-cloud-trace)
+Specifically, this gem is a convenience package that loads and automatically
+activates the instrumentation features of the following gems:
 
-Please see the top-level project [README](../README.md) for more information about the individual Stackdriver google-cloud-ruby gems.
+*   [google-cloud-debugger](../google-cloud-debugger) which enables remote
+    debugging using [Stackdriver Debugger](https://cloud.google.com/debugger/)
+*   [google-cloud-error_reporting](../google-cloud-error_reporting) which
+    reports unhandled exceptions and other errors to
+    [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/)
+*   [google-cloud-logging](../google-cloud-logging) which collects application
+    logs in [Stackdriver logging](https://cloud.google.com/logging/)
+*   [google-cloud-trace](../google-cloud-trace) which reports distributed
+    latency traces to [Stackdriver Trace](https://cloud.google.com/trace/)
 
 ## Quick Start
 
-```sh
-$ gem install stackdriver
+### Install the gem
+
+Add the `stackdriver` gem to your Gemfile:
+
+```ruby
+gem "stackdriver"
 ```
 
-## Overview
-Instead of requiring multiple Stackdriver client library gems and explicitly load each built-in Railtie classes, now users can achieve all these through requiring this single **stackdriver** umbrella gem.
+### Instrument your code
+
+#### Using Ruby on Rails
+
+If you are running Ruby on Rails, the `stackdriver` gem will automatically
+install Railties that will instrument your application for basic diagnostics.
+In most applications, the gem will initialize itself, and you will not need to
+write any additional code.
+
+If your Rails application has removed the `Bundler.require` line in the
+`application.rb` initialization file, then you might need to require the gem
+explicitly with:
+
 ```ruby
+# In application.rb
 require "stackdriver"
 ```
 
-## Supported Ruby Versions
+#### Other Rack-based frameworks
+
+If you are running another Rack-based framework, such as Sinatra, you should
+install the Rack Middleware provided by each library you want to use:
+
+```ruby
+# In your Rack middleware configuration code.
+require "stackdriver"
+use Google::Cloud::Logging::Middleware
+use Google::Cloud::ErrorReporting::Middleware
+use Google::Cloud::Trace::Middleware
+use Google::Cloud::Debugger::Middleware
+```
+
+#### Advanced instrumentation
+
+See the individual gem documentation for each gem for information on how to
+customize the instrumentation, e.g. how to manually report errors or add custom
+spans to latency traces.
+
+### Viewing diagnostic reports
+
+Logs, errors, traces, and other reports can be viewed on the Google Cloud
+Console. If your app is hosted on Google Cloud (such as on Google App Engine,
+Google Kubernetes Engine, or Google Compute Engine), you can use the same
+project. Otherwise, if your application is hosted elsewhere, create a new
+project on [Google Cloud](https://console.cloud.google.com/).
+
+Make sure the
+[Stackdriver Error Reporting API](https://console.cloud.google.com/apis/library/clouderrorreporting.googleapis.com)
+is enabled on your Google Cloud project. (The other service APIs---debugging,
+logging, and tracing---are enabled by default on all new projects.)
+
+#### Authentication
+
+Your app also needs to authenticate with the Stackdriver services in order to
+send data.
+
+*   If you are running on **Google App Engine**, authentication happens
+    automatically. You do not need to do anything.
+*   If you are running on **Google Kubernetes Engine**, you must explicitly add
+    `https://www.googleapis.com/auth/cloud-platform` to the API access scopes
+    when creating the cluster. Authentication will then happen automatically.
+*   If you are running on **Google Compute Engine**, you must explicitly add
+    `https://www.googleapis.com/auth/cloud-platform` to the API access scopes
+    when creating the VM. Authentication will then happen automatically.
+*   If you are not running on a Google Cloud hosting environment, you must set
+    up a service account, and provide the Stackdriver library with the ID of
+    your Google Cloud project, and the service account credentials.
+
+    ```ruby
+    # In your app initialization code
+    Google::Cloud.configure do |config|
+      config.project_id = "your-project-id"
+      config.keyfile = "/path/to/servce-account-keyfile.json"
+    end
+    ```
+
+For more information, consult the
+[Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication).
+
+## Compatibility
 
 This library is supported on Ruby 2.2+.
-
-## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
 
