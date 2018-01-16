@@ -26,7 +26,7 @@ Alternatively, consider installing the [`stackdriver`](../stackdriver) gem. It
 includes the `google-cloud-debugger` gem as a dependency, and automatically
 initializes it for some application frameworks.
 
-### Initializing the debugger
+### Initializing the Debugger
 
 The Stackdriver Debugger library provides a Debugger agent that helps create
 breakpoints in your running applications. It then collects application snapshot
@@ -35,7 +35,7 @@ the Google Cloud Console. The library also comes with a Railtie and a Rack
 Middleware to help control the Debugger agent in popular Rack based frameworks,
 such as Ruby on Rails and Sinatra.
 
-#### Using Ruby on Rails
+#### Setup with Ruby on Rails
 
 You can load the Railtie that comes with the library into your Ruby
 on Rails application by explicitly requiring it during the application startup:
@@ -48,7 +48,7 @@ require "google/cloud/debugger/rails"
 If you're using the `stackdriver` gem, it automatically loads the Railtie into
 your application when it starts.
 
-#### Using other Rack-based frameworks
+#### Setup with other Rack-based frameworks
 
 Other Rack-based frameworks, such as Sinatra, can use the Rack Middleware
 provided by the library:
@@ -58,7 +58,7 @@ require "google/cloud/debugger"
 use Google::Cloud::Debugger::Middleware
 ```
 
-#### Without a Rack-based framework
+#### Setup without a Rack-based framework
 
 Non-rack-based applications can start the agent explicitly during the
 initialization code:
@@ -84,13 +84,13 @@ To connect to the Stackdriver Debugger service, the agent needs to be
 authenticated. If your application is hosted on Google Cloud Platform, much of
 this is handled for you automatically.
 
-#### From Google App Engine
+#### Connecting from Google App Engine (GAE)
 
 If your app is running on Google App Engine, the Stackdriver Debugger agent
 authenticates automatically by default, and no additional configuration is
 required.
 
-#### From Google Kubernetes Engine
+#### Connecting from Google Kubernetes Engine (GKE)
 
 If your app is running on Google Kubernetes Engine, you must explicitly add the
 `cloud_debugger` OAuth scope when creating the cluster:
@@ -105,7 +105,7 @@ You can also do this through the Google Cloud Platform Console. Select
 After the OAuth scope is enabled, the Stackdriver Debugger agent authenticates
 automatically by default, and no additional configuration is required.
 
-#### From Google Compute Engine
+#### Connecting from Google Compute Engine (GCE)
 
 If your app is running on Google Compute Engine, its VM instances should have
 one of the following access scopes. These are only relevant when you use
@@ -127,7 +127,7 @@ After the OAuth scope is enabled, the Stackdriver Debugger agent authenticates
 automatically by default using the VM's service account, and no additional
 configuration is required.
 
-#### Running locally and elsewhere
+#### Connecting from other hosting environments
 
 To run the Stackdriver Debugger agent outside of Google Cloud Platform, you must
 supply your GCP project ID and appropriate service account credentials directly
@@ -177,7 +177,7 @@ This library also supports the other authentication methods provided by the
 `google-cloud-ruby` suite. Instructions and configuration options are covered
 in the [Authentication Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication).
 
-### Using the debugger
+### Using the Debugger
 
 When you set a breakpoint in the Stackdriver Debugger console, the agent takes
 a snapshot of application data when the breakpoint is hit. The application then
@@ -193,7 +193,7 @@ methods, or indeed, any Ruby expression.
 For more information on using the debugger features, see the
 [Stackdriver Debugger Documentation](https://cloud.google.com/debugger/docs/).
 
-#### Mutation protection
+#### Working with Mutation Protection
 
 To reduce the risk of corrupting your application data or changing your
 application's behavior, the debugger agent checks all expressions you provide
