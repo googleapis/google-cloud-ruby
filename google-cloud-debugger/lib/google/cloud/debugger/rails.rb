@@ -107,8 +107,10 @@ module Google
             config.credentials ||= config.keyfile
             config.credentials ||= dbg_config.credentials || dbg_config.keyfile
             config.credentials ||= gcp_config.credentials || gcp_config.keyfile
-            config.service_name ||= dbg_config.service_name
-            config.service_version ||= dbg_config.service_version
+            config.service_name ||= \
+              (dbg_config.service_name || gcp_config.service_name)
+            config.service_version ||= \
+              (dbg_config.service_version || gcp_config.service_version)
           end
         end
 

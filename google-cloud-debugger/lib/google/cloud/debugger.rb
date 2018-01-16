@@ -493,6 +493,7 @@ module Google
       # @private Default service name identifier.
       def self.default_service_name
         Google::Cloud.configure.debugger.service_name ||
+          Google::Cloud.configure.service_name ||
           Google::Cloud.env.app_engine_service_id ||
           "ruby-app"
       end
@@ -501,6 +502,7 @@ module Google
       # @private Default service version identifier.
       def self.default_service_version
         Google::Cloud.configure.debugger.service_version ||
+          Google::Cloud.configure.service_version ||
           Google::Cloud.env.app_engine_service_version ||
           ""
       end
