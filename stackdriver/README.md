@@ -104,7 +104,7 @@ send data.
     end
     ```
 
-See the individual gem documentation for each gem for more information.
+See the gem documentation for each individual gem for more information.
 
 ## Compatibility
 
