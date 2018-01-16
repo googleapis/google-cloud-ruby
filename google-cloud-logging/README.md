@@ -28,7 +28,7 @@ gem "google-cloud-logging"
 $ bundle install
 ```
 
-Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes 
+Alternatively, check out the [`stackdriver`](../stackdriver) gem that includes
 the `google-cloud-logging` gem.
 
 ## Logging using client library
@@ -61,13 +61,13 @@ logging.write_entries entry
 
 ## Using Stackdriver Logging in frameworks
 
-The `google-cloud-logging` library provides framework integration for popular 
-Rack-based frameworks, such as Ruby on Rails and Sinatra, which sets the default 
+The `google-cloud-logging` library provides framework integration for popular
+Rack-based frameworks, such as Ruby on Rails and Sinatra, which sets the default
 Rack logger to an instance of the Stackdriver Logging logger.
 
 ### With Ruby on Rails
 
-You can load the Railtie that comes with the library into your Ruby 
+You can load the Railtie that comes with the library into your Ruby
 on Rails application by explicitly requiring it during the application startup:
 
 ```ruby
@@ -75,7 +75,7 @@ on Rails application by explicitly requiring it during the application startup:
 require "google/cloud/logging/rails"
 ```
 
-If you're using the `stackdriver` gem, it automatically loads the Railtie into 
+If you're using the `stackdriver` gem, it automatically loads the Railtie into
 your application when it starts.
 
 You'll be able to use Stackdriver logger through the standard Rails logger:
@@ -88,7 +88,7 @@ logger.warn "Hola Mundo"
 
 ### With other Rack-based frameworks
 
-Other Rack-based applications can use the Rack Middleware to replace the Rack 
+Other Rack-based applications can use the Rack Middleware to replace the Rack
 logger with the Stackdriver Logging logger:
 
 ```ruby
@@ -96,8 +96,8 @@ require "google/cloud/logging"
 use Google::Cloud::Logging::Middleware
 ```
 
-Once the Rack logger is set, some Rack-based frameworks, such as Ruby on Rails 
-and Sinatra, automatically initialize the default application logger to use the 
+Once the Rack logger is set, some Rack-based frameworks, such as Ruby on Rails
+and Sinatra, automatically initialize the default application logger to use the
 Rack logger:
 
 ```ruby
@@ -106,26 +106,26 @@ logger.warn "Hola Mundo"
 logger.error "Bonjour Monde"
 ```
 
-For other frameworks, consult the documentations on how to utilize the Rack 
+For other frameworks, consult the documentations on how to utilize the Rack
 logger.
 
 ### Configuring the framework integration
 
-You can customize the behavior of the Stackdriver Logging framework integration 
-for Ruby. See the [configuration guide](../stackdriver/configuration.md) for a 
+You can customize the behavior of the Stackdriver Logging framework integration
+for Ruby. See the [configuration guide](../stackdriver/configuration.md) for a
 list of possible configuration options.
 
 ## Authentication
 
-This library uses Service Account credentials to connect to Google Cloud 
-services. When running on Compute Engine the credentials will be discovered 
-automatically. When running on other environments the Service Account 
+This library uses Service Account credentials to connect to Google Cloud
+services. When running on Compute Engine the credentials will be discovered
+automatically. When running on other environments the Service Account
 credentials can be specified by providing in several ways.
 
-If you're using Ruby on Rails and the library's Rails integration feature, you 
-can provide the authentication parameters through the Rails configuration 
+If you're using Ruby on Rails and the library's Rails integration feature, you
+can provide the authentication parameters through the Rails configuration
 interface:
- 
+
 ```ruby
 # Add this to config/environments/*.rb
 Rails.application.configure do |config|
@@ -137,7 +137,7 @@ Rails.application.configure do |config|
   config.google_cloud.logging.keyfile    = "/path/to/key.json"
 end
 ```
-Other Rack-based applications that are loading the Rack Middleware directly can 
+Other Rack-based applications that are loading the Rack Middleware directly can
 use the configration interface:
 
 ```ruby
@@ -152,7 +152,7 @@ Google::Cloud.configure do |config|
 end
 ```
 
-See the [Authentication 
+See the [Authentication
 Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/guides/authentication).
 for more ways to authenticate the client library.
 
