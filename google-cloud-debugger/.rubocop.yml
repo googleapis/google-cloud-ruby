@@ -27,6 +27,9 @@ Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25
+Metrics/BlockLength:
+  Exclude:
+    - "lib/google-cloud-debugger.rb"
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:

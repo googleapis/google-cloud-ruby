@@ -404,53 +404,7 @@ module Google
         )
       end
 
-      ##
-      # Reload debugger configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "DEBUGGER_CREDENTIALS", "DEBUGGER_CREDENTIALS_JSON",
-          "DEBUGGER_KEYFILE", "DEBUGGER_KEYFILE_JSON"
-        )
-
-        unless Google::Cloud.configure.field? :use_debugger
-          Google::Cloud.configure.add_field! :use_debugger, nil,
-                                             enum: [true, false]
-        end
-        unless Google::Cloud.configure.field? :service_name
-          Google::Cloud.configure.add_field! :service_name, nil,
-                                             match: String
-        end
-        unless Google::Cloud.configure.field? :service_version
-          Google::Cloud.configure.add_field! :service_version, nil,
-                                             match: String
-        end
-
-        Google::Cloud.configure.delete! :debugger
-        Google::Cloud.configure.add_config! :debugger do |config|
-          config.add_field! :project_id, ENV["DEBUGGER_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :service_name, ENV["DEBUGGER_SERVICE_NAME"],
-                            match: String
-          config.add_field! :service_version, ENV["DEBUGGER_SERVICE_VERSION"],
-                            match: String
-          config.add_field! :app_root, nil, match: String
-          config.add_field! :root, nil, match: String
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-          config.add_field! :allow_mutating_methods, false
-          config.add_field! :evaluation_time_limit, 0.05, match: Numeric
-        end
-      end
-
       # rubocop:enable all
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :debugger
 
       ##
       # Configure the Stackdriver Debugger agent.
