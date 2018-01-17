@@ -142,6 +142,8 @@ module Google
         )
       end
 
+      # rubocop:disable all
+
       ##
       # Reload error reporting configuration to defaults. For testing.
       # @private
@@ -151,6 +153,19 @@ module Google
           "ERROR_REPORTING_CREDENTIALS", "ERROR_REPORTING_CREDENTIALS_JSON",
           "ERROR_REPORTING_KEYFILE", "ERROR_REPORTING_KEYFILE_JSON"
         )
+
+        unless Google::Cloud.configure.field? :use_error_reporting
+          Google::Cloud.configure.add_field! :use_error_reporting, nil,
+                                             enum: [true, false]
+        end
+        unless Google::Cloud.configure.field? :service_name
+          Google::Cloud.configure.add_field! :service_name, nil,
+                                             match: String
+        end
+        unless Google::Cloud.configure.field? :service_version
+          Google::Cloud.configure.add_field! :service_version, nil,
+                                             match: String
+        end
 
         Google::Cloud.configure.delete! :error_reporting
         Google::Cloud.configure.add_config! :error_reporting do |config|
@@ -170,6 +185,8 @@ module Google
           config.add_field! :ignore_classes, nil, match: Array
         end
       end
+
+      # rubocop:enable all
 
       unless Google::Cloud.configure.subconfig? :error_reporting
         reload_configuration!
