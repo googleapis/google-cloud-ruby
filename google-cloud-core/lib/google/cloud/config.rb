@@ -591,8 +591,6 @@ module Google
     #                 when running from GCP environments.
     #   * credentials: The service account JSON file path. Automatically
     #                  discovered when running from GCP environments.
-    #   * use_logging: Explicitly enable or disable Stackdriver Logging
-    #                  instrumentation
     #   * use_trace: Explicitly enable or disable Stackdriver Trace
     #                instrumentation
     #
@@ -624,7 +622,6 @@ module Google
         config.add_alias! :project, :project_id
         config.add_field! :credentials, default_creds, match: Object
         config.add_alias! :keyfile, :credentials
-        config.add_field! :use_logging, nil, enum: [true, false]
         config.add_field! :use_trace, nil, enum: [true, false]
       end
     end

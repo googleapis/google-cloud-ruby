@@ -415,6 +415,8 @@ module Google
         )
       end
 
+      # rubocop:disable all
+
       ##
       # Reload logging configuration from defaults. For testing.
       # @private
@@ -424,6 +426,11 @@ module Google
           "LOGGING_CREDENTIALS", "LOGGING_CREDENTIALS_JSON",
           "LOGGING_KEYFILE", "LOGGING_KEYFILE_JSON"
         )
+
+        unless Google::Cloud.configure.field? :use_logging
+          Google::Cloud.configure.add_field! :use_logging, nil,
+                                             enum: [true, false]
+        end
 
         Google::Cloud.configure.delete! :logging
         Google::Cloud.configure.add_config! :logging do |config|
@@ -444,6 +451,8 @@ module Google
           end
         end
       end
+
+      # rubocop:enable all
 
       reload_configuration! unless Google::Cloud.configure.subconfig? :logging
 
