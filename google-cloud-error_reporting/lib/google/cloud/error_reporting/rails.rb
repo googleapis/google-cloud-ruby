@@ -117,8 +117,10 @@ module Google
             config.credentials ||= config.keyfile
             config.credentials ||= er_config.credentials || er_config.keyfile
             config.credentials ||= gcp_config.credentials || gcp_config.keyfile
-            config.service_name ||= er_config.service_name
-            config.service_version ||= er_config.service_version
+            config.service_name ||= \
+              (er_config.service_name || gcp_config.service_name)
+            config.service_version ||= \
+              (er_config.service_version || gcp_config.service_version)
             config.ignore_classes ||= er_config.ignore_classes
           end
         end

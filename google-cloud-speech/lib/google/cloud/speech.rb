@@ -252,7 +252,7 @@ module Google
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "SPEECH_CREDENTIALS", "SPEECH_CREDENTIALS_JSON",
           "SPEECH_KEYFILE", "SPEECH_KEYFILE_JSON"
         )

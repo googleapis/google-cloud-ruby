@@ -315,27 +315,6 @@ module Google
       end
 
       ##
-      # Dynamic methods accessed as keys.
-      #
-      def method_missing name, *args
-        name_str = name.to_s
-        super unless name_str =~ /^[a-zA-Z]\w*=?$/
-        if name_str.chomp! "="
-          self[name_str] = args.first
-        else
-          self[name]
-        end
-      end
-
-      ##
-      # Dynamic methods accessed as keys.
-      #
-      def respond_to_missing? name, include_private
-        return true if value_set? name.to_s.chomp("=")
-        super
-      end
-
-      ##
       # Check if the given key has been set in this object. Returns true if the
       # key has been added as a normal field, subconfig, or alias, or if it has
       # not been added explicitly but still has a value.
@@ -439,6 +418,54 @@ module Google
       end
 
       ##
+      # Search the given environment variable names for valid credential data
+      # that can be passed to `Google::Auth::Credentials.new`.
+      # If a variable contains a valid file path, returns that path as a string.
+      # If a variable contains valid JSON, returns the parsed JSON as a hash.
+      # If no variables contain valid data, returns nil.
+      # @private
+      #
+      def self.credentials_from_env *vars
+        vars.each do |var|
+          data = ::ENV[var]
+          next unless data
+          str = data.strip
+          return str if ::File.file? str
+          json = begin
+            ::JSON.parse str
+          rescue ::StandardError
+            nil
+          end
+          return json if json.is_a? ::Hash
+        end
+        nil
+      end
+
+      ##
+      # @private
+      # Dynamic methods accessed as keys.
+      #
+      def method_missing name, *args
+        name_str = name.to_s
+        super unless name_str =~ /^[a-zA-Z]\w*=?$/
+        if name_str.chomp! "="
+          self[name_str] = args.first
+        else
+          self[name]
+        end
+      end
+
+      ##
+      # @private
+      # Dynamic methods accessed as keys.
+      #
+      def respond_to_missing? name, include_private
+        return true if value_set? name.to_s.chomp("=")
+        super
+      end
+
+      ##
+      # @private
       # Implement standard nil check
       #
       # @return [false]
@@ -552,91 +579,5 @@ module Google
         ::Kernel.warn "#{msg} at #{location}"
       end
     end
-
-    ##
-    # Configure the default parameter for Google::Cloud. The values defined on
-    # this top level will be shared across all Stackdriver instrumentation
-    # libraries (Debugger, ErrorReporting, Logging, and Trace). These other
-    # libraries may also add sub configuration options under this.
-    #
-    # Possible configuration parameters:
-    #   * project_id: The Google Cloud Project ID. Automatically discovered
-    #                 when running from GCP environments.
-    #   * credentials: The service account JSON file path. Automatically
-    #                  discovered when running from GCP environments.
-    #   * service_name: The service name for diagnostics reporting.
-    #   * service_version: The service version for diagnostics reporting.
-    #   * use_debugger: Explicitly enable or disable Stackdriver Debugger
-    #                   instrumentation
-    #   * use_error_reporting: Explicitly enable or disable Stackdriver Error
-    #                          Reporting instrumentation
-    #   * use_logging: Explicitly enable or disable Stackdriver Logging
-    #                  instrumentation
-    #   * use_trace: Explicitly enable or disable Stackdriver Trace
-    #                instrumentation
-    #
-    # @return [Google::Cloud::Config] The toplevel configuration object for
-    #     Google::Cloud libraries.
-    #
-    def self.configure
-      yield @config if block_given?
-
-      @config
-    end
-
-    ##
-    # Search the given environment variable names for valid credential data
-    # that can be passed to `Google::Auth::Credentials.new`.
-    # If a variable contains a valid file path, returns that path as a string.
-    # If a variable contains valid JSON, returns the parsed JSON as a hash.
-    # If no variables contain valid data, returns nil.
-    # @private
-    #
-    def self.credentials_from_env *vars
-      vars.each do |var|
-        data = ENV[var]
-        next unless data
-        str = data.strip
-        return str if File.file? str
-        json = begin
-          JSON.parse str
-        rescue StandardError
-          nil
-        end
-        return json if json.is_a? Hash
-      end
-      nil
-    end
-
-    ##
-    # Reload local the global config fields from defaults. For testing. Does not
-    # affect subconfigs.
-    # @private
-    #
-    def self.reload_configuration!
-      default_project = ENV["GOOGLE_CLOUD_PROJECT"] || ENV["GCLOUD_PROJECT"]
-      default_creds = credentials_from_env \
-        "GOOGLE_CLOUD_CREDENTIALS", "GOOGLE_CLOUD_CREDENTIALS_JSON",
-        "GOOGLE_CLOUD_KEYFILE", "GOOGLE_CLOUD_KEYFILE_JSON",
-        "GCLOUD_KEYFILE", "GCLOUD_KEYFILE_JSON"
-
-      configure do |config|
-        (config.fields! + config.aliases!).each { |key| config.delete! key }
-
-        config.add_field! :project_id, default_project, match: String
-        config.add_alias! :project, :project_id
-        config.add_field! :credentials, default_creds, match: Object
-        config.add_alias! :keyfile, :credentials
-        config.add_field! :service_name, nil, match: String
-        config.add_field! :service_version, nil, match: String
-        config.add_field! :use_debugger, nil, enum: [true, false]
-        config.add_field! :use_error_reporting, nil, enum: [true, false]
-        config.add_field! :use_logging, nil, enum: [true, false]
-        config.add_field! :use_trace, nil, enum: [true, false]
-      end
-    end
-
-    @config = Config.create
-    reload_configuration!
   end
 end

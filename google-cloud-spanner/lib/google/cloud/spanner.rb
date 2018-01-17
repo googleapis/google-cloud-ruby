@@ -408,7 +408,7 @@ module Google
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "SPANNER_CREDENTIALS", "SPANNER_CREDENTIALS_JSON",
           "SPANNER_KEYFILE", "SPANNER_KEYFILE_JSON"
         )

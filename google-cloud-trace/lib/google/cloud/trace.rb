@@ -260,6 +260,11 @@ module Google
       # @private
       #
       def self.reload_configuration!
+        unless Google::Cloud.configure.field? :use_trace
+          Google::Cloud.configure.add_field! :use_trace, nil,
+                                             enum: [true, false]
+        end
+
         Google::Cloud.configure.delete! :trace
         Google::Cloud.configure.add_config! :trace do |config|
           config.add_field! :project_id, ENV["TRACE_PROJECT"], match: String

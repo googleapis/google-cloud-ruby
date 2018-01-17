@@ -404,17 +404,28 @@ module Google
         )
       end
 
-      # rubocop:enable all
-
       ##
       # Reload debugger configuration from defaults. For testing.
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "DEBUGGER_CREDENTIALS", "DEBUGGER_CREDENTIALS_JSON",
           "DEBUGGER_KEYFILE", "DEBUGGER_KEYFILE_JSON"
         )
+
+        unless Google::Cloud.configure.field? :use_debugger
+          Google::Cloud.configure.add_field! :use_debugger, nil,
+                                             enum: [true, false]
+        end
+        unless Google::Cloud.configure.field? :service_name
+          Google::Cloud.configure.add_field! :service_name, nil,
+                                             match: String
+        end
+        unless Google::Cloud.configure.field? :service_version
+          Google::Cloud.configure.add_field! :service_version, nil,
+                                             match: String
+        end
 
         Google::Cloud.configure.delete! :debugger
         Google::Cloud.configure.add_config! :debugger do |config|
@@ -436,6 +447,8 @@ module Google
           config.add_field! :evaluation_time_limit, 0.05, match: Numeric
         end
       end
+
+      # rubocop:enable all
 
       reload_configuration! unless Google::Cloud.configure.subconfig? :debugger
 
@@ -493,6 +506,7 @@ module Google
       # @private Default service name identifier.
       def self.default_service_name
         Google::Cloud.configure.debugger.service_name ||
+          Google::Cloud.configure.service_name ||
           Google::Cloud.env.app_engine_service_id ||
           "ruby-app"
       end
@@ -501,6 +515,7 @@ module Google
       # @private Default service version identifier.
       def self.default_service_version
         Google::Cloud.configure.debugger.service_version ||
+          Google::Cloud.configure.service_version ||
           Google::Cloud.env.app_engine_service_version ||
           ""
       end

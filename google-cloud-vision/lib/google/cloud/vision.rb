@@ -696,7 +696,7 @@ module Google
       # @private
       #
       def self.reload_configuration!
-        default_creds = Google::Cloud.credentials_from_env(
+        default_creds = Google::Cloud::Config.credentials_from_env(
           "VISION_CREDENTIALS", "VISION_CREDENTIALS_JSON",
           "VISION_KEYFILE", "VISION_KEYFILE_JSON"
         )
