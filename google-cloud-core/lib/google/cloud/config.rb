@@ -579,51 +579,5 @@ module Google
         ::Kernel.warn "#{msg} at #{location}"
       end
     end
-
-    ##
-    # Configure the default parameter for Google::Cloud. The values defined on
-    # this top level will be shared across all Google::Cloud libraries, which
-    # may also add fields to this object or add sub configuration options under
-    # this object.
-    #
-    # Possible configuration parameters:
-    #   * project_id: The Google Cloud Project ID. Automatically discovered
-    #                 when running from GCP environments.
-    #   * credentials: The service account JSON file path. Automatically
-    #                  discovered when running from GCP environments.
-    #
-    # @return [Google::Cloud::Config] The top-level configuration object for
-    #     Google::Cloud libraries.
-    #
-    def self.configure
-      yield @config if block_given?
-
-      @config
-    end
-
-    ##
-    # Reload local the global config fields from defaults. For testing. Does not
-    # affect subconfigs.
-    # @private
-    #
-    def self.reload_configuration!
-      default_project = ENV["GOOGLE_CLOUD_PROJECT"] || ENV["GCLOUD_PROJECT"]
-      default_creds = Google::Cloud::Config.credentials_from_env \
-        "GOOGLE_CLOUD_CREDENTIALS", "GOOGLE_CLOUD_CREDENTIALS_JSON",
-        "GOOGLE_CLOUD_KEYFILE", "GOOGLE_CLOUD_KEYFILE_JSON",
-        "GCLOUD_KEYFILE", "GCLOUD_KEYFILE_JSON"
-
-      configure do |config|
-        (config.fields! + config.aliases!).each { |key| config.delete! key }
-
-        config.add_field! :project_id, default_project, match: String
-        config.add_alias! :project, :project_id
-        config.add_field! :credentials, default_creds, match: Object
-        config.add_alias! :keyfile, :credentials
-      end
-    end
-
-    @config = Config.create
-    reload_configuration!
   end
 end
