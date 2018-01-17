@@ -389,7 +389,7 @@ describe Google::Cloud::Config do
 
   describe "shared config" do
     after {
-      Google::Cloud.reload_configuration!
+      Google::Cloud.configure.reset!
     }
 
     it "loads default credentials from a file path environment variable" do
@@ -397,7 +397,6 @@ describe Google::Cloud::Config do
       env = {"GOOGLE_CLOUD_CREDENTIALS" => path,
              "GOOGLE_CLOUD_CREDENTIALS_JSON" => '{"a": 1}'}
       ENV.stub(:[], ->(k) { env[k] }) do
-        Google::Cloud.reload_configuration!
         Google::Cloud.configure.credentials.must_equal path
       end
     end
@@ -407,7 +406,6 @@ describe Google::Cloud::Config do
       env = {"GOOGLE_CLOUD_CREDENTIALS" => path,
              "GOOGLE_CLOUD_CREDENTIALS_JSON" => '{"a": 1}'}
       ENV.stub(:[], ->(k) { env[k] }) do
-        Google::Cloud.reload_configuration!
         Google::Cloud.configure.credentials.must_equal({"a" => 1})
       end
     end
