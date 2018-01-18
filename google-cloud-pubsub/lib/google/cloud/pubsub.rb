@@ -561,33 +561,6 @@ module Google
       end
 
       ##
-      # Reload pubsub configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "PUBSUB_CREDENTIALS", "PUBSUB_CREDENTIALS_JSON",
-          "PUBSUB_KEYFILE", "PUBSUB_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :pubsub
-        Google::Cloud.configure.add_config! :pubsub do |config|
-          config.add_field! :project_id, ENV["PUBSUB_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-          config.add_field! :emulator_host, ENV["PUBSUB_EMULATOR_HOST"],
-                            match: String
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :pubsub
-
-      ##
       # Configure the Google Cloud Pubsub library.
       #
       # The following Pubsub configuration parameters are supported:
