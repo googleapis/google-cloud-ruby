@@ -277,31 +277,6 @@ module Google
       end
 
       ##
-      # Reload resource manager configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "RESOURCE_MANAGER_CREDENTIALS", "RESOURCE_MANAGER_CREDENTIALS_JSON",
-          "RESOURCE_MANAGER_KEYFILE", "RESOURCE_MANAGER_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :resource_manager
-        Google::Cloud.configure.add_config! :resource_manager do |config|
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :retries, nil, match: Integer
-          config.add_field! :timeout, nil, match: Integer
-        end
-      end
-
-      unless Google::Cloud.configure.subconfig? :resource_manager
-        reload_configuration!
-      end
-
-      ##
       # Configure the Google Cloud Resource Manager library.
       #
       # The following Resource Manager configuration parameters are supported:

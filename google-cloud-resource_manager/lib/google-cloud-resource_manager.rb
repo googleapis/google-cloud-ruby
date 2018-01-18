@@ -21,6 +21,8 @@
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -107,4 +109,21 @@ module Google
                                          retries: retries, timeout: timeout
     end
   end
+end
+
+# Set the default resource manager configuration
+Google::Cloud.configure.add_config! :resource_manager do |config|
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "RESOURCE_MANAGER_CREDENTIALS", "RESOURCE_MANAGER_CREDENTIALS_JSON",
+      "RESOURCE_MANAGER_KEYFILE", "RESOURCE_MANAGER_KEYFILE_JSON"
+    )
+  end
+
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials]
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :retries, nil, match: Integer
+  config.add_field! :timeout, nil, match: Integer
 end
