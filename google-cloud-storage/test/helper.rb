@@ -19,6 +19,7 @@ require "minitest/rg"
 require "ostruct"
 require "json"
 require "base64"
+require "uri"
 require "google/cloud/storage"
 
 ##

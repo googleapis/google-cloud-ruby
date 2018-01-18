@@ -138,7 +138,7 @@ module Google
               # if credentials is not a Credentials object, create one
               ErrorReporting::Credentials.new credentials
             end
-          rescue => e
+          rescue StandardError => e
             STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because it failed to authorize with the service. (#{e.message})"
             return false

@@ -6,7 +6,7 @@ gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.1"
 gem "minitest-rg", "~> 5.2"
 gem "autotest-suffix", "~> 1.1"
-gem "rubocop", "<= 0.35.1"
+gem "rubocop", "~> 0.50.0"
 gem "simplecov", "~> 0.9"
 gem "coveralls", "~> 0.7"
 gem "yard", "~> 0.9"
@@ -52,10 +52,6 @@ end
 # WORKAROUND: builds are having problems since the release of 3.0.0
 # pin to the last known good version
 gem "public_suffix", "~> 2.0"
-
-# TEMP: rainbow (a dependency of rubocop) version 2.2 seems to have a problem,
-# so pinning to 2.1 for now.
-gem "rainbow", "~> 2.1.0"
 
 # TEMP: nokogiri (a dependency of rails) 1.7 requires Ruby 2.1 or later.
 # Since we're still testing on Ruby 2.0, pin nokogiri to 1.6 for now.

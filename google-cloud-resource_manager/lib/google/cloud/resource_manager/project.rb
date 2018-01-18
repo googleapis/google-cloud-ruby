@@ -169,7 +169,7 @@ module Google
         #
         def created_at
           Time.parse @gapi.create_time
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -258,7 +258,7 @@ module Google
         def reload!
           @gapi = service.get_project project_id
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Marks the project for deletion. This method will only affect the
@@ -445,7 +445,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

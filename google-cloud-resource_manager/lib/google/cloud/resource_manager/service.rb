@@ -122,7 +122,7 @@ module Google
         end
 
         def inspect
-          "#{self.class}"
+          self.class.to_s
         end
 
         protected

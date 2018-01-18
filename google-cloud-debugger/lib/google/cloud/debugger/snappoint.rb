@@ -86,7 +86,7 @@ module Google
               eval_call_stack call_stack_bindings
 
               complete
-            rescue
+            rescue StandardError
               return false
             end
           end

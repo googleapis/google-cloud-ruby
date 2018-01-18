@@ -267,7 +267,7 @@ module Google
             return left
           elsif left.kind == :struct_value
             # Don't worry about this yet since Spanner isn't return STRUCT
-            fail "STRUCT not implemented yet"
+            raise "STRUCT not implemented yet"
           else
             raise "Can't merge #{left.kind} values"
           end

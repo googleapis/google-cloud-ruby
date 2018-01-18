@@ -73,7 +73,8 @@ module Google
             return nil unless next?
             ensure_service!
             list_grpc = @service.list_resource_descriptors(
-              token: token, max: @max)
+              token: token, max: @max
+            )
             self.class.from_grpc list_grpc, @service
           end
 
@@ -165,7 +166,7 @@ module Google
           ##
           # Raise an error unless an active service is available.
           def ensure_service!
-            fail "Must have active service" unless @service
+            raise "Must have active service" unless @service
           end
         end
       end

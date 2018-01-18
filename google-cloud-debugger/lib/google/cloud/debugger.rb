@@ -378,9 +378,11 @@ module Google
         service_version ||= Debugger::Project.default_service_version
         service_version = service_version.to_s
 
-        fail ArgumentError, "project_id is missing" if project_id.empty?
-        fail ArgumentError, "service_name is missing" if service_name.empty?
-        fail ArgumentError, "service_version is missing" if service_version.nil?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "service_name is missing" if service_name.empty?
+        if service_version.nil?
+          raise ArgumentError, "service_version is missing"
+        end
 
         credentials ||= (keyfile || Debugger::Credentials.default(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
@@ -391,7 +393,8 @@ module Google
           Debugger::Service.new(project_id, credentials,
                                 timeout: timeout, client_config: client_config),
           service_name: service_name,
-          service_version: service_version)
+          service_version: service_version
+        )
       end
 
       ##
@@ -451,7 +454,7 @@ module Google
       def self.allow_mutating_methods! &block
         evaluator = Breakpoint::Evaluator.current
         if evaluator.nil?
-          fail "allow_mutating_methods can be called only during evaluation"
+          raise "allow_mutating_methods can be called only during evaluation"
         end
         evaluator.allow_mutating_methods!(&block)
       end

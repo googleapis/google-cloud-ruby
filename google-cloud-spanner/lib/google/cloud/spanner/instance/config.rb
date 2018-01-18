@@ -73,7 +73,7 @@ module Google
           def name
             @grpc.display_name
           end
-          alias_method :display_name, :name
+          alias display_name name
 
           ##
           # @private Creates a new Instance::Config instance from a
@@ -88,7 +88,7 @@ module Google
           # @private Raise an error unless an active connection to the service
           # is available.
           def ensure_service!
-            fail "Must have active connection to service" unless service
+            raise "Must have active connection to service" unless service
           end
         end
       end

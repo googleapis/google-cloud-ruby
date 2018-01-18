@@ -78,7 +78,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project.
@@ -184,7 +184,7 @@ module Google
         def translate *text, to: nil, from: nil, format: nil, model: nil,
                       cid: nil
           return nil if text.empty?
-          fail ArgumentError, "to is required" if to.nil?
+          raise ArgumentError, "to is required" if to.nil?
           to = to.to_s
           from = from.to_s if from
           format = format.to_s if format

@@ -32,7 +32,7 @@ module Google
         def message
           @message
         end
-        alias_method :msg, :message
+        alias msg message
 
         ##
         # The message's data.
@@ -52,14 +52,14 @@ module Google
         def message_id
           message.message_id
         end
-        alias_method :msg_id, :message_id
+        alias msg_id message_id
 
         ##
         # The time at which the message was published.
         def published_at
           message.published_at
         end
-        alias_method :publish_time, :published_at
+        alias publish_time published_at
 
         ##
         # The error that was raised when published, if any.

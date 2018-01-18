@@ -37,11 +37,11 @@ module Google
         #
         class Field
           # @private
-          MODES = %w( NULLABLE REQUIRED REPEATED )
+          MODES = %w[NULLABLE REQUIRED REPEATED].freeze
 
           # @private
-          TYPES = %w( STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME DATETIME
-                      DATE RECORD )
+          TYPES = %w[STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME DATETIME
+                     DATE RECORD].freeze
 
           ##
           # The name of the field.
@@ -514,8 +514,8 @@ module Google
           def record name, description: nil, mode: nil
             record_check!
 
-            # TODO: do we need to fail if no block was given?
-            fail ArgumentError, "a block is required" unless block_given?
+            # TODO: do we need to raise if no block was given?
+            raise ArgumentError, "a block is required" unless block_given?
 
             nested_field = add_field name, :record, description: description,
                                                     mode: mode
@@ -546,13 +546,13 @@ module Google
 
           def frozen_check!
             return unless frozen?
-            fail ArgumentError, "Cannot modify a frozen field"
+            raise ArgumentError, "Cannot modify a frozen field"
           end
 
           def record_check!
             return unless type != "RECORD"
-            fail ArgumentError,
-                 "Cannot add fields to a non-RECORD field (#{type})"
+            raise ArgumentError,
+                  "Cannot add fields to a non-RECORD field (#{type})"
           end
 
           def add_field name, type, description: nil, mode: :nullable
@@ -563,7 +563,8 @@ module Google
               type: verify_type(type),
               description: description,
               mode: verify_mode(mode),
-              fields: [])
+              fields: []
+            )
 
             # Remove any existing field of this name
             @gapi.fields ||= []
@@ -578,8 +579,7 @@ module Google
           def verify_type type
             type = type.to_s.upcase
             unless TYPES.include? type
-              fail ArgumentError,
-                   "Type '#{type}' not found in #{TYPES.inspect}"
+              raise ArgumentError, "Type '#{type}' not found"
             end
             type
           end
@@ -588,7 +588,7 @@ module Google
             mode = :nullable if mode.nil?
             mode = mode.to_s.upcase
             unless MODES.include? mode
-              fail ArgumentError "Unable to determine mode for '#{mode}'"
+              raise ArgumentError "Unable to determine mode for '#{mode}'"
             end
             mode
           end

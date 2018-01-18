@@ -208,7 +208,7 @@ module Google
               )
             )
           else
-            fail "A query parameter of type #{value.class} is not supported."
+            raise "A query parameter of type #{value.class} is not supported."
           end
         end
 

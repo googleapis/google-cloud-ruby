@@ -38,19 +38,19 @@ module Google
       #   translate.project_id #=> "my-todo-project"
       #
       class Credentials < Google::Auth::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/cloud-platform"]
-        PATH_ENV_VARS = %w(TRANSLATE_CREDENTIALS
+        SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze
+        PATH_ENV_VARS = %w[TRANSLATE_CREDENTIALS
                            TRANSLATE_KEYFILE
                            GOOGLE_CLOUD_CREDENTIALS
                            GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(TRANSLATE_CREDENTIALS_JSON
+                           GCLOUD_KEYFILE].freeze
+        JSON_ENV_VARS = %w[TRANSLATE_CREDENTIALS_JSON
                            TRANSLATE_KEYFILE_JSON
                            GOOGLE_CLOUD_CREDENTIALS_JSON
                            GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
+                           GCLOUD_KEYFILE_JSON].freeze
         DEFAULT_PATHS = \
-          ["~/.config/gcloud/application_default_credentials.json"]
+          ["~/.config/gcloud/application_default_credentials.json"].freeze
       end
     end
   end

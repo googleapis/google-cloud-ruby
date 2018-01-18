@@ -53,8 +53,6 @@ module Google
             nil
           end
 
-          private
-
           ##
           # @private Recursively parse files and directories.
           def self.process_directory sha, path, depth = 1

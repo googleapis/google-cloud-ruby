@@ -97,7 +97,7 @@ module Google
         def name
           @grpc.display_name
         end
-        alias_method :display_name, :name
+        alias display_name name
 
         ##
         # The instance configuration resource.
@@ -116,7 +116,7 @@ module Google
         def name= display_name
           @grpc.display_name = display_name
         end
-        alias_method :display_name=, :name=
+        alias display_name= name=
 
         ##
         # The number of nodes allocated to this instance.
@@ -124,7 +124,7 @@ module Google
         def nodes
           @grpc.node_count
         end
-        alias_method :node_count, :nodes
+        alias node_count nodes
 
         ##
         # Updates the number of nodes allocated to this instance.
@@ -132,7 +132,7 @@ module Google
         def nodes= nodes
           @grpc.node_count = nodes
         end
-        alias_method :node_count=, :nodes=
+        alias node_count= nodes=
 
         ##
         # The current instance state. Possible values are `:CREATING` and
@@ -184,14 +184,15 @@ module Google
         def labels= labels
           @grpc.labels = Google::Protobuf::Map.new(
             :string, :string,
-            Hash[labels.map { |k, v| [String(k), String(v)] }])
+            Hash[labels.map { |k, v| [String(k), String(v)] }]
+          )
         end
 
         def save
           job_grpc = service.update_instance @grpc
           Instance::Job.from_grpc job_grpc, service
         end
-        alias_method :update, :save
+        alias update save
 
         ##
         # Permanently deletes the instance.
@@ -465,13 +466,14 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         def instance_config_path name
           return name if name.to_s.include? "/"
           Admin::Instance::V1::InstanceAdminClient.instance_config_path(
-            project, name.to_s)
+            project, name.to_s
+          )
         end
       end
     end

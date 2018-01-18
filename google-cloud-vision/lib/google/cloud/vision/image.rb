@@ -521,8 +521,8 @@ module Google
                                  properties: properties, crop_hints: crop_hints,
                                  web: web)
         end
-        alias_method :mark, :annotate
-        alias_method :detect, :annotate
+        alias mark annotate
+        alias detect annotate
 
         # @private
         def to_s
@@ -550,9 +550,11 @@ module Google
           elsif url?
             Google::Cloud::Vision::V1::Image.new(
               source: Google::Cloud::Vision::V1::ImageSource.new(
-                image_uri: @url))
+                image_uri: @url
+              )
+            )
           else
-            fail ArgumentError, "Unable to use Image with Vision service."
+            raise ArgumentError, "Unable to use Image with Vision service."
           end
         end
 
@@ -571,18 +573,18 @@ module Google
           # Create an image from a file on the filesystem
           if File.file? source
             unless File.readable? source
-              fail ArgumentError, "Cannot read #{source}"
+              raise ArgumentError, "Cannot read #{source}"
             end
             return from_io(File.open(source, "rb"), vision)
           end
-          fail ArgumentError, "Unable to convert #{source} to an Image"
+          raise ArgumentError, "Unable to convert #{source} to an Image"
         end
 
         ##
         # @private New Image from an IO object.
         def self.from_io io, vision
           if !io.respond_to?(:read) && !io.respond_to?(:rewind)
-            fail ArgumentError, "Cannot create an Image without an IO object"
+            raise ArgumentError, "Cannot create an Image without an IO object"
           end
           new.tap do |i|
             i.instance_variable_set :@io, io
@@ -595,7 +597,7 @@ module Google
         def self.from_url url, vision
           url = String url
           unless url? url
-            fail ArgumentError, "Cannot create an Image without a URL"
+            raise ArgumentError, "Cannot create an Image without a URL"
           end
           new.tap do |i|
             i.instance_variable_set :@url, url
@@ -615,7 +617,7 @@ module Google
         ##
         # Raise an error unless an active vision project object is available.
         def ensure_vision!
-          fail "Must have active connection" unless @vision
+          raise "Must have active connection" unless @vision
         end
       end
 
@@ -740,11 +742,12 @@ module Google
             #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
             def min= location
               if location.respond_to?(:to_h) &&
-                 location.to_h.keys.sort == [:latitude, :longitude]
-                return @min = Location.new(location.to_h[:latitude],
-                                           location.to_h[:longitude])
+                 location.to_h.keys.sort == %i[latitude longitude]
+                @min = Location.new(location.to_h[:latitude],
+                                    location.to_h[:longitude])
+                return
               end
-              fail ArgumentError, "Must pass a proper location value."
+              raise ArgumentError, "Must pass a proper location value."
             end
 
             ##
@@ -756,11 +759,12 @@ module Google
             #   standard](http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf).
             def max= location
               if location.respond_to?(:to_h) &&
-                 location.to_h.keys.sort == [:latitude, :longitude]
-                return @max = Location.new(location.to_h[:latitude],
-                                           location.to_h[:longitude])
+                 location.to_h.keys.sort == %i[latitude longitude]
+                @max = Location.new(location.to_h[:latitude],
+                                    location.to_h[:longitude])
+                return
               end
-              fail ArgumentError, "Must pass a proper location value."
+              raise ArgumentError, "Must pass a proper location value."
             end
 
             ##

@@ -66,7 +66,8 @@ module Google
                 timeout: timeout,
                 client_config: client_config,
                 lib_name: "gccl",
-                lib_version: Google::Cloud::Trace::VERSION)
+                lib_version: Google::Cloud::Trace::VERSION
+              )
             end
         end
         attr_accessor :mocked_lowlevel_client
@@ -94,21 +95,22 @@ module Google
           Google::Cloud::Trace::TraceRecord.from_grpc trace_proto
         end
 
+        # rubocop:disable Metrics/MethodLength
+
         ##
         # Searches for traces matching the given criteria.
         #
-        # rubocop:disable Metrics/MethodLength
         def list_traces project_id, start_time, end_time,
                         filter: nil,
                         order_by: nil,
                         view: nil,
                         page_size: nil,
                         page_token: nil
-          if page_token
-            call_opts = Google::Gax::CallOptions.new page_token: page_token
-          else
-            call_opts = Google::Gax::CallOptions.new
-          end
+          call_opts = if page_token
+                        Google::Gax::CallOptions.new page_token: page_token
+                      else
+                        Google::Gax::CallOptions.new
+                      end
           start_proto = Google::Cloud::Trace::Utils.time_to_grpc start_time
           end_proto = Google::Cloud::Trace::Utils.time_to_grpc end_time
           paged_enum = execute do
@@ -121,6 +123,7 @@ module Google
                                         order_by: order_by,
                                         options: call_opts
           end
+
           Google::Cloud::Trace::ResultSet.from_gax_page \
             self, project_id,
             paged_enum.page, start_time, end_time,
@@ -130,6 +133,8 @@ module Google
             page_size: page_size,
             page_token: page_token
         end
+
+        # rubocop:enable Metrics/MethodLength
 
         # @private
         def inspect

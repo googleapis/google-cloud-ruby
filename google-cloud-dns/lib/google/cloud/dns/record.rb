@@ -95,10 +95,10 @@ module Google
         #   For example: ["10 mail.example.com.", "20 mail2.example.com."].
         #
         def initialize name, type, ttl, data
-          fail ArgumentError, "name is required" unless name
-          fail ArgumentError, "type is required" unless type
-          fail ArgumentError, "ttl is required" unless ttl
-          fail ArgumentError, "data is required" unless data
+          raise ArgumentError, "name is required" unless name
+          raise ArgumentError, "type is required" unless type
+          raise ArgumentError, "ttl is required" unless ttl
+          raise ArgumentError, "data is required" unless data
           @name = name.to_s
           @type = type.to_s.upcase
           @ttl = Integer(ttl)
@@ -154,11 +154,8 @@ module Google
           name == other.name && type == other.type &&
             ttl == other.ttl && data == other.data
         end
-
         # @private
-        def == other
-          self.eql? other
-        end
+        alias == eql?
 
         # @private
         def <=> other

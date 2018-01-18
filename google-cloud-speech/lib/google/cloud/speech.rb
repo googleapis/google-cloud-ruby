@@ -227,7 +227,7 @@ module Google
                    client_config: nil, project: nil, keyfile: nil
         project_id ||= (project || Speech::Project.default_project_id)
         project_id = project_id.to_s # Always cast to a string
-        fail ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         credentials ||= (keyfile || Speech::Credentials.default(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
@@ -237,7 +237,9 @@ module Google
         Speech::Project.new(
           Speech::Service.new(
             project_id, credentials, timeout: timeout,
-                                     client_config: client_config))
+                                     client_config: client_config
+          )
+        )
       end
     end
   end

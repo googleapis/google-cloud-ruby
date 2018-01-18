@@ -40,36 +40,42 @@ module Google
         #
         class Access
           # @private
-          ROLES = { "reader" => "READER",
-                    "writer" => "WRITER",
-                    "owner"  => "OWNER" }
+          ROLES = {
+            "reader" => "READER",
+            "writer" => "WRITER",
+            "owner"  => "OWNER"
+          }.freeze
 
           # @private
-          SCOPES = { "user"           => :user_by_email,
-                     "user_by_email"  => :user_by_email,
-                     "userByEmail"    => :user_by_email,
-                     "group"          => :group_by_email,
-                     "group_by_email" => :group_by_email,
-                     "groupByEmail"   => :group_by_email,
-                     "domain"         => :domain,
-                     "special"        => :special_group,
-                     "special_group"  => :special_group,
-                     "specialGroup"   => :special_group,
-                     "view"           => :view }
+          SCOPES = {
+            "user"           => :user_by_email,
+            "user_by_email"  => :user_by_email,
+            "userByEmail"    => :user_by_email,
+            "group"          => :group_by_email,
+            "group_by_email" => :group_by_email,
+            "groupByEmail"   => :group_by_email,
+            "domain"         => :domain,
+            "special"        => :special_group,
+            "special_group"  => :special_group,
+            "specialGroup"   => :special_group,
+            "view"           => :view
+          }.freeze
 
           # @private
-          GROUPS = { "owners"                  => "projectOwners",
-                     "project_owners"          => "projectOwners",
-                     "projectOwners"           => "projectOwners",
-                     "readers"                 => "projectReaders",
-                     "project_readers"         => "projectReaders",
-                     "projectReaders"          => "projectReaders",
-                     "writers"                 => "projectWriters",
-                     "project_writers"         => "projectWriters",
-                     "projectWriters"          => "projectWriters",
-                     "all"                     => "allAuthenticatedUsers",
-                     "all_authenticated_users" => "allAuthenticatedUsers",
-                     "allAuthenticatedUsers"   => "allAuthenticatedUsers" }
+          GROUPS = {
+            "owners"                  => "projectOwners",
+            "project_owners"          => "projectOwners",
+            "projectOwners"           => "projectOwners",
+            "readers"                 => "projectReaders",
+            "project_readers"         => "projectReaders",
+            "projectReaders"          => "projectReaders",
+            "writers"                 => "projectWriters",
+            "project_writers"         => "projectWriters",
+            "projectWriters"          => "projectWriters",
+            "all"                     => "allAuthenticatedUsers",
+            "all_authenticated_users" => "allAuthenticatedUsers",
+            "allAuthenticatedUsers"   => "allAuthenticatedUsers"
+          }.freeze
 
           ##
           # @private
@@ -891,7 +897,7 @@ module Google
           def validate_role role
             good_role = ROLES[role.to_s]
             if good_role.nil?
-              fail ArgumentError "Unable to determine role for #{role}"
+              raise ArgumentError "Unable to determine role for #{role}"
             end
             good_role
           end
@@ -900,7 +906,7 @@ module Google
           def validate_scope scope
             good_scope = SCOPES[scope.to_s]
             if good_scope.nil?
-              fail ArgumentError "Unable to determine scope for #{scope}"
+              raise ArgumentError "Unable to determine scope for #{scope}"
             end
             good_scope
           end
@@ -953,7 +959,8 @@ module Google
             value = validate_special_group(value) if scope == :special_group
             # Remove any rules of this role, scope, and value
             @rules.reject!(
-              &find_by_role_and_scope_and_value(role, scope, value))
+              &find_by_role_and_scope_and_value(role, scope, value)
+            )
           end
 
           # @private
@@ -972,7 +979,8 @@ module Google
             value = validate_special_group(value) if scope == :special_group
             # Detect any rules of this role, scope, and value
             !(!@rules.detect(
-              &find_by_role_and_scope_and_value(role, scope, value)))
+              &find_by_role_and_scope_and_value(role, scope, value)
+            ))
           end
 
           # @private

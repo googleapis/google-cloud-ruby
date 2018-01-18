@@ -74,7 +74,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project.
@@ -114,7 +114,7 @@ module Google
         def start
           agent.start
         end
-        alias_method :attach, :start
+        alias attach start
 
         ##
         # Stop the Stackdriver Debugger Agent.

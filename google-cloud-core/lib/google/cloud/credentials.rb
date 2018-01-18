@@ -33,8 +33,8 @@ module Google
       TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
       AUDIENCE = "https://accounts.google.com/o/oauth2/token"
       SCOPE = []
-      PATH_ENV_VARS = %w(GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-      JSON_ENV_VARS = %w(GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
+      PATH_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE]
+      JSON_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON]
       DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
 
       attr_accessor :client
@@ -72,10 +72,9 @@ module Google
         path = ->(p) { ::File.file? p }
 
         # First try to find keyfile file from environment variables.
-        self::PATH_ENV_VARS.map(&env).compact.select(&path)
-          .each do |file|
-            return new file, scope: scope
-          end
+        self::PATH_ENV_VARS.map(&env).compact.select(&path).each do |file|
+          return new file, scope: scope
+        end
         # Second try to find keyfile json from environment variables.
         self::JSON_ENV_VARS.map(&json).compact.each do |hash|
           return new hash, scope: scope
@@ -95,14 +94,14 @@ module Google
       ##
       # Verify that the keyfile argument is provided.
       def verify_keyfile_provided! keyfile
-        fail "You must provide a keyfile to connect with." if keyfile.nil?
+        raise "You must provide a keyfile to connect with." if keyfile.nil?
       end
 
       ##
       # Verify that the keyfile argument is a file.
       def verify_keyfile_exists! keyfile
         exists = ::File.file? keyfile
-        fail "The keyfile '#{keyfile}' is not a valid file." unless exists
+        raise "The keyfile '#{keyfile}' is not a valid file." unless exists
       end
 
       ##

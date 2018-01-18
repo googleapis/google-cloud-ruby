@@ -72,7 +72,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project.
@@ -278,21 +278,21 @@ module Google
 
           grpc = service.annotate a.requests
           annotations = Array(grpc.responses).map do |g|
-            fail Error.from_error(g.error) if g.error
+            raise Error.from_error(g.error) if g.error
             Annotation.from_grpc g
           end
           return annotations.first if annotations.count == 1
           annotations
         end
-        alias_method :mark, :annotate
-        alias_method :detect, :annotate
+        alias mark annotate
+        alias detect annotate
 
         protected
 
         ##
         # Raise an error unless an active connection is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

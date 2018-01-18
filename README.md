@@ -14,7 +14,7 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
-* [BigQuery](#bigquery-ga) (ga)
+* [BigQuery](#bigquery-ga) (GA)
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)

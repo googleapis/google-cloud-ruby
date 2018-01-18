@@ -28,8 +28,7 @@ module Google
         class SourceLocation
           ##
           # @private Create an empty SourceLocation object.
-          def initialize
-          end
+          def initialize; end
 
           ##
           # Source file name. Depending on the runtime environment, this might

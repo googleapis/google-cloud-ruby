@@ -113,7 +113,7 @@ module Google
 
         ##
         # Limits the billing tier for this job. Queries that have resource usage
-        # beyond this tier will fail (without incurring a charge). If
+        # beyond this tier will raise (without incurring a charge). If
         # unspecified, this will be set to your project default. For more
         # information, see [High-Compute
         # queries](https://cloud.google.com/bigquery/pricing#high-compute).
@@ -127,7 +127,7 @@ module Google
 
         ##
         # Limits the bytes billed for this job. Queries that will have bytes
-        # billed beyond this limit will fail (without incurring a charge). If
+        # billed beyond this limit will raise (without incurring a charge). If
         # `nil`, this will be set to your project default.
         #
         # @return [Integer, nil] The number of bytes, or `nil` for the project
@@ -135,7 +135,7 @@ module Google
         #
         def maximum_bytes_billed
           Integer @gapi.configuration.query.maximum_bytes_billed
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -156,7 +156,7 @@ module Google
         #
         def bytes_processed
           Integer @gapi.statistics.query.total_bytes_processed
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -311,7 +311,7 @@ module Google
             options
           Data.from_gapi_json data_hash, destination_table_gapi, service
         end
-        alias_method :query_results, :data
+        alias query_results data
 
         ##
         # Represents a stage in the execution plan for the query.
@@ -453,7 +453,7 @@ module Google
           return unless destination_schema.nil?
 
           query_results_gapi = service.job_query_results job_id, max: 0
-          # fail "unable to retrieve schema" if query_results_gapi.schema.nil?
+          # raise "unable to retrieve schema" if query_results_gapi.schema.nil?
           @destination_schema_gapi = query_results_gapi.schema
         end
 

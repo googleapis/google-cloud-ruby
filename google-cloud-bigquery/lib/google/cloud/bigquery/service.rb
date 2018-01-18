@@ -216,7 +216,8 @@ module Google
           # The insertAll with insertId operation is considered idempotent
           execute backoff: true do
             service.insert_all_table_data(
-              @project, dataset_id, table_id, insert_req)
+              @project, dataset_id, table_id, insert_req
+            )
           end
         end
 
@@ -280,7 +281,8 @@ module Google
           # Jobs have generated id, so this operation is considered idempotent
           execute backoff: true do
             service.insert_job @project, copy_table_config(
-              source, target, options)
+              source, target, options
+            )
           end
         end
 
@@ -306,7 +308,8 @@ module Google
           execute backoff: true do
             service.insert_job \
               @project, load_table_file_config(
-                dataset_id, table_id, file, options),
+                dataset_id, table_id, file, options
+              ),
               upload_source: file, content_type: mime_type_for(file)
           end
         end
@@ -320,7 +323,7 @@ module Google
           str = str.to_s
           m = /\A(((?<prj>\S*):)?(?<dts>\S*)\.)?(?<tbl>\S*)\z/.match str
           unless m
-            fail ArgumentError, "unable to identify table from #{str.inspect}"
+            raise ArgumentError, "unable to identify table from #{str.inspect}"
           end
           str_table_ref_hash = {
             project_id: m["prj"],
@@ -391,7 +394,8 @@ module Google
           path = Pathname(file).to_path
           {
             destination_table: Google::Apis::BigqueryV2::TableReference.new(
-              project_id: @project, dataset_id: dataset_id, table_id: table_id),
+              project_id: @project, dataset_id: dataset_id, table_id: table_id
+            ),
             create_disposition: create_disposition(options[:create]),
             write_disposition: write_disposition(options[:write]),
             source_format: source_format(path, options[:format]),
@@ -423,7 +427,8 @@ module Google
         def load_table_url_opts dataset_id, table_id, url, options = {}
           {
             destination_table: Google::Apis::BigqueryV2::TableReference.new(
-              project_id: @project, dataset_id: dataset_id, table_id: table_id),
+              project_id: @project, dataset_id: dataset_id, table_id: table_id
+            ),
             source_uris: Array(url),
             create_disposition: create_disposition(options[:create]),
             write_disposition: write_disposition(options[:write]),
@@ -500,7 +505,7 @@ module Google
                 end
               end
             else
-              fail "Query parameters must be an Array or a Hash."
+              raise "Query parameters must be an Array or a Hash."
             end
           end
 
@@ -545,7 +550,7 @@ module Google
                 end
               end
             else
-              fail "Query parameters must be an Array or a Hash."
+              raise "Query parameters must be an Array or a Hash."
             end
           end
 
@@ -624,14 +629,15 @@ module Google
         end
 
         def source_format path, format
-          val = { "csv" => "CSV",
-                  "json" => "NEWLINE_DELIMITED_JSON",
-                  "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
-                  "avro" => "AVRO",
-                  "datastore" => "DATASTORE_BACKUP",
-                  "backup" => "DATASTORE_BACKUP",
-                  "datastore_backup" => "DATASTORE_BACKUP"
-                }[format.to_s.downcase]
+          val = {
+            "csv" => "CSV",
+            "json" => "NEWLINE_DELIMITED_JSON",
+            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
+            "avro" => "AVRO",
+            "datastore" => "DATASTORE_BACKUP",
+            "backup" => "DATASTORE_BACKUP",
+            "datastore_backup" => "DATASTORE_BACKUP"
+          }[format.to_s.downcase]
           return val unless val.nil?
           return nil if path.nil?
           return "CSV" if path.end_with? ".csv"
@@ -649,7 +655,7 @@ module Google
           mime_type = MIME::Types.of(Pathname(file).to_path).first.to_s
           return nil if mime_type.empty?
           mime_type
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -682,13 +688,13 @@ module Google
             attr_accessor :backoff
           end
           self.retries = 5
-          self.reasons = %w(rateLimitExceeded backendError)
+          self.reasons = %w[rateLimitExceeded backendError]
           self.backoff = lambda do |retries|
             # Max delay is 32 seconds
             # See "Back-off Requirements" here:
             # https://cloud.google.com/bigquery/sla
             retries = 5 if retries > 5
-            delay = 2 ** retries
+            delay = 2**retries
             sleep delay
           end
 
@@ -729,7 +735,7 @@ module Google
               return false unless @reasons.include? json_error["reason"]
             end
             true
-          rescue
+          rescue StandardError
             false
           end
         end

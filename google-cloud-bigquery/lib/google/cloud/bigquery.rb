@@ -523,7 +523,7 @@ module Google
                    timeout: nil, project: nil, keyfile: nil
         project_id ||= (project || Bigquery::Project.default_project_id)
         project_id = project_id.to_s # Always cast to a string
-        fail ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         credentials ||= (keyfile || Bigquery::Credentials.default(scope: scope))
         unless credentials.is_a? Google::Auth::Credentials
@@ -532,7 +532,9 @@ module Google
 
         Bigquery::Project.new(
           Bigquery::Service.new(
-            project_id, credentials, retries: retries, timeout: timeout))
+            project_id, credentials, retries: retries, timeout: timeout
+          )
+        )
       end
     end
   end

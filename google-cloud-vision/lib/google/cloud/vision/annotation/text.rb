@@ -151,16 +151,16 @@ module Google
             text, *words = Array grpc_text_annotations
             return nil if text.nil?
 
+            words = words.map { |w| Word.from_grpc w }
+
             # Since text is taken from grpc_text_annotations, do not use text
             # from grpc_full_text_annotation in this merged model.
             # Instead, just take the pages.
-            pages = grpc_full_text_annotation.pages
+            pages = grpc_full_text_annotation.pages.map { |p| Page.from_grpc p }
             new.tap do |t|
               t.instance_variable_set :@grpc, text
-              t.instance_variable_set :@words,
-                                      words.map { |w| Word.from_grpc w }
-              t.instance_variable_set :@pages,
-                                      pages.map { |p| Page.from_grpc p }
+              t.instance_variable_set :@words, words
+              t.instance_variable_set :@pages, pages
             end
           end
 

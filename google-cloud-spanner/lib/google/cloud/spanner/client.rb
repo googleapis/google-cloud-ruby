@@ -245,7 +245,7 @@ module Google
           end
           results
         end
-        alias_method :query, :execute
+        alias query execute
 
         ##
         # Read rows from a database table, as a simple alternative to
@@ -414,7 +414,7 @@ module Google
             session.upsert table, rows
           end
         end
-        alias_method :save, :upsert
+        alias save upsert
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
@@ -654,7 +654,7 @@ module Google
         #   end
         #
         def commit &block
-          fail ArgumentError, "Must provide a block" unless block_given?
+          raise ArgumentError, "Must provide a block" unless block_given?
 
           @pool.with_session do |session|
             session.commit(&block)
@@ -721,10 +721,10 @@ module Google
         #     end
         #   end
         #
-        def transaction deadline: 120, &block
+        def transaction deadline: 120
           ensure_service!
           unless Thread.current[:transaction_id].nil?
-            fail "Nested transactions are not allowed"
+            raise "Nested transactions are not allowed"
           end
 
           deadline = validate_deadline deadline
@@ -734,7 +734,7 @@ module Google
           @pool.with_transaction do |tx|
             begin
               Thread.current[:transaction_id] = tx.transaction_id
-              block.call tx
+              yield tx
               commit_resp = @project.service.commit \
                 tx.session.path, tx.mutations, transaction_id: tx.transaction_id
               return Convert.timestamp_to_time commit_resp.commit_timestamp
@@ -751,7 +751,7 @@ module Google
               # Create new transaction on the session and retry the block
               tx = tx.session.create_transaction
               retry
-            rescue => err
+            rescue StandardError => err
               # Rollback transaction when handling unexpected error
               tx.session.rollback tx.transaction_id
               # Return nil if raised with rollback.
@@ -829,7 +829,7 @@ module Google
 
           ensure_service!
           unless Thread.current[:transaction_id].nil?
-            fail "Nested snapshots are not allowed"
+            raise "Nested snapshots are not allowed"
           end
 
           @pool.with_session do |session|
@@ -945,7 +945,8 @@ module Google
           ensure_service!
           grpc = @project.service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id)
+              project_id, instance_id, database_id
+            )
           Session.from_grpc(grpc, @project.service)
         end
 
@@ -966,22 +967,22 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless @project.service
+          raise "Must have active connection to service" unless @project.service
         end
 
         ##
         # Check for valid snapshot arguments
         def validate_single_use_args! opts
           return true if opts.nil? || opts.empty?
-          valid_keys = [:strong, :timestamp, :read_timestamp, :staleness,
-                        :exact_staleness, :bounded_timestamp,
-                        :min_read_timestamp, :bounded_staleness, :max_staleness]
+          valid_keys = %i[strong timestamp read_timestamp staleness
+                          exact_staleness bounded_timestamp
+                          min_read_timestamp bounded_staleness max_staleness]
           if opts.keys.count == 1 && valid_keys.include?(opts.keys.first)
             return true
           end
-          fail ArgumentError,
-               "Must provide only one of the following single_use values: " \
-               "#{valid_keys}"
+          raise ArgumentError,
+                "Must provide only one of the following single_use values: " \
+                "#{valid_keys}"
         end
 
         ##
@@ -1018,9 +1019,10 @@ module Google
           valid_args_count = [strong, timestamp, read_timestamp, staleness,
                               exact_staleness].compact.count
           return true if valid_args_count <= 1
-          fail ArgumentError,
-               "Can only provide one of the following arguments: " \
-               "(strong, timestamp, read_timestamp, staleness, exact_staleness)"
+          raise ArgumentError,
+                "Can only provide one of the following arguments: " \
+                "(strong, timestamp, read_timestamp, staleness, " \
+                "exact_staleness)"
         end
 
         def validate_deadline deadline
@@ -1050,7 +1052,7 @@ module Google
           end
           # No metadata? Try the inner error
           delay_from_aborted(err.cause)
-        rescue
+        rescue StandardError
           # Any error indicates the backoff should be handled elsewhere
           return nil
         end

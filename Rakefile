@@ -538,8 +538,6 @@ namespace :travis do
     run_acceptance = false
     if ENV["TRAVIS_BRANCH"] == "master" &&
        ENV["TRAVIS_PULL_REQUEST"] == "false"
-      # Decrypt the keyfile
-      `openssl aes-256-cbc -K $encrypted_629ec55f39b2_key -iv $encrypted_629ec55f39b2_iv -in keyfile.json.enc -out keyfile.json -d`
       run_acceptance = true
     end
 

@@ -75,7 +75,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project.
@@ -147,7 +147,7 @@ module Google
           Bucket::List.from_gapi \
             gapi, service, prefix, max, user_project: user_project
         end
-        alias_method :find_buckets, :buckets
+        alias find_buckets buckets
 
         ##
         # Retrieves bucket by name.
@@ -210,7 +210,7 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_bucket, :bucket
+        alias find_bucket bucket
 
         ##
         # Creates a new bucket with optional attributes. Also accepts a block

@@ -83,7 +83,7 @@ module Google
         def project_id
           service.project
         end
-        alias_method :project, :project_id
+        alias project project_id
 
         ##
         # @private Default project_id.
@@ -516,8 +516,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -667,7 +667,9 @@ module Google
 
           new_ds = Google::Apis::BigqueryV2::Dataset.new(
             dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-              project_id: project, dataset_id: dataset_id))
+              project_id: project, dataset_id: dataset_id
+            )
+          )
 
           # Can set location only on creation, no Dataset#location method
           new_ds.update! location: location unless location.nil?
@@ -973,7 +975,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

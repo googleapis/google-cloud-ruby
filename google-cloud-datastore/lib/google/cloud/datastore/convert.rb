@@ -146,7 +146,7 @@ module Google
             value.rewind
             v.blob_value = value.read.force_encoding("ASCII-8BIT")
           else
-            fail Google::Cloud::Datastore::PropertyError,
+            raise Google::Cloud::Datastore::PropertyError,
                  "A property of type #{value.class} is not supported."
           end
           v

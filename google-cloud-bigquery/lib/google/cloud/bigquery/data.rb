@@ -120,7 +120,7 @@ module Google
         #
         def total
           Integer @gapi_json[:totalRows]
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -343,7 +343,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

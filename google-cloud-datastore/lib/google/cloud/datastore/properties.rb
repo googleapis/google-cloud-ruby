@@ -38,14 +38,14 @@ module Google
           key = ensure_key_type key
           @hash[key]
         end
-        alias_method :read, :[]
+        alias read []
 
         def []= key, value
           key   = ensure_key_type key
           value = ensure_value_type value
           @hash[key] = value
         end
-        alias_method :write, :[]=
+        alias write []=
 
         def exist? key
           key = ensure_key_type key
@@ -70,7 +70,7 @@ module Google
         def to_h
           @hash.dup
         end
-        alias_method :to_hash, :to_h
+        alias to_hash to_h
 
         def to_grpc
           # Convert to Hash with Google::Datastore::V1::Value values.
@@ -89,7 +89,7 @@ module Google
         # otherwise a PropertyError is raised.
         def ensure_key_type key
           return key.to_s if key.respond_to? :to_s
-          fail "Property key #{key} must be a String."
+          raise "Property key #{key} must be a String."
         end
 
         # rubocop:disable all
@@ -120,7 +120,7 @@ module Google
           elsif defined?(BigDecimal) && BigDecimal === value
             return value
           end
-          fail PropertyError, "A property of type #{value.class} is not supported."
+          raise PropertyError, "A property of type #{value.class} is not supported."
         end
         # rubocop:enable all
       end

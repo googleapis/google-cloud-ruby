@@ -38,20 +38,20 @@ module Google
       #   spanner.project_id #=> "my-project"
       #
       class Credentials < Google::Auth::Credentials
-        SCOPE = %w(https://www.googleapis.com/auth/cloud-platform
-                   https://www.googleapis.com/auth/spanner.data)
-        PATH_ENV_VARS = %w(SPANNER_CREDENTIALS
+        SCOPE = %w[https://www.googleapis.com/auth/cloud-platform
+                   https://www.googleapis.com/auth/spanner.data].freeze
+        PATH_ENV_VARS = %w[SPANNER_CREDENTIALS
                            SPANNER_KEYFILE
                            GOOGLE_CLOUD_CREDENTIALS
                            GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(SPANNER_CREDENTIALS_JSON
+                           GCLOUD_KEYFILE].freeze
+        JSON_ENV_VARS = %w[SPANNER_CREDENTIALS_JSON
                            SPANNER_KEYFILE_JSON
                            GOOGLE_CLOUD_CREDENTIALS_JSON
                            GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
+                           GCLOUD_KEYFILE_JSON].freeze
         DEFAULT_PATHS = \
-          ["~/.config/gcloud/application_default_credentials.json"]
+          ["~/.config/gcloud/application_default_credentials.json"].freeze
       end
     end
   end

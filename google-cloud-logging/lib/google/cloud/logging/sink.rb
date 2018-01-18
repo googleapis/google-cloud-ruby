@@ -164,7 +164,7 @@ module Google
         def start_at
           timestamp_to_time @grpc.start_time
         end
-        alias_method :start_time, :start_at
+        alias start_time start_at
 
         ##
         # Sets the time at which this sink will begin exporting log entries. If
@@ -173,7 +173,7 @@ module Google
         def start_at= new_start_at
           @grpc.start_time = time_to_timestamp new_start_at
         end
-        alias_method :start_time=, :start_at=
+        alias start_time= start_at=
 
         ##
         # Time at which this sink will stop exporting log entries. If this
@@ -182,7 +182,7 @@ module Google
         def end_at
           timestamp_to_time @grpc.end_time
         end
-        alias_method :end_time, :end_at
+        alias end_time end_at
 
         ##
         # Sets the time at which this sink will stop exporting log entries. If
@@ -191,7 +191,7 @@ module Google
         def end_at= new_end_at
           @grpc.end_time = time_to_timestamp new_end_at
         end
-        alias_method :end_time=, :end_at=
+        alias end_time= end_at=
 
         ##
         # An IAM identity (a service account or group) that will write exported
@@ -236,7 +236,7 @@ module Google
           ensure_service!
           @grpc = service.get_sink name
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Permanently deletes the logs-based sink.
@@ -281,7 +281,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         ##

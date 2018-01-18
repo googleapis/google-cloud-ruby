@@ -95,7 +95,7 @@ module Google
           end
           find_all(key).first
         end
-        alias_method :get, :find
+        alias get find
 
         ##
         # Retrieve the entities for the provided keys. The lookup is run within
@@ -123,7 +123,7 @@ module Google
                                       transaction: @id)
           Dataset::LookupResults.from_grpc lookup_res, service, nil, @id
         end
-        alias_method :lookup, :find_all
+        alias lookup find_all
 
         ##
         # Retrieve entities specified by a Query. The query is run within the
@@ -148,27 +148,27 @@ module Google
         def run query, namespace: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
-            fail ArgumentError, "Cannot run a #{query.class} object."
+            raise ArgumentError, "Cannot run a #{query.class} object."
           end
           query_res = service.run_query query.to_grpc, namespace,
                                         transaction: @id
           Dataset::QueryResults.from_grpc query_res, service, namespace,
                                           query.to_grpc.dup
         end
-        alias_method :run_query, :run
+        alias run_query run
 
         ##
         # Begins a transaction.
         # This method is run when a new ReadOnlyTransaction is created.
         #
         def start
-          fail TransactionError, "Transaction already opened." unless @id.nil?
+          raise TransactionError, "Transaction already opened." unless @id.nil?
 
           ensure_service!
           tx_res = service.begin_transaction read_only: true
           @id = tx_res.transaction
         end
-        alias_method :begin_transaction, :start
+        alias begin_transaction start
 
         ##
         # Commits the transaction.
@@ -190,8 +190,9 @@ module Google
         #   tx.commit
         #
         def commit
-          fail TransactionError,
-               "Cannot commit when not in a transaction." if @id.nil?
+          if @id.nil?
+            raise TransactionError, "Cannot commit when not in a transaction."
+          end
 
           ensure_service!
 
@@ -220,7 +221,7 @@ module Google
         #
         def rollback
           if @id.nil?
-            fail TransactionError, "Cannot rollback when not in a transaction."
+            raise TransactionError, "Cannot rollback when not in a transaction."
           end
 
           ensure_service!
@@ -241,7 +242,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

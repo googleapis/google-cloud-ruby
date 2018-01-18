@@ -53,7 +53,7 @@ module Google
               @fields << field(type)
             end
           else
-            fail ArgumentError, "can only accept Array or Hash"
+            raise ArgumentError, "can only accept Array or Hash"
           end
         end
 
@@ -135,8 +135,8 @@ module Google
         def [] key
           return types[key] if key.is_a? Integer
           name_count = @fields.find_all { |f| f.name == String(key) }.count
-          return nil if name_count == 0
-          fail DuplicateNameError if name_count > 1
+          return nil if name_count.zero?
+          raise DuplicateNameError if name_count > 1
           index = @fields.find_index { |f| f.name == String(key) }
           types[index]
         end
@@ -151,7 +151,8 @@ module Google
         # @return [Array<Symbol>] An array containing the type codes.
         #
         def to_a
-          keys.count.times.map { |i| self[i] }.map do |field|
+          Array.new(keys.count) do |i|
+            field = self[i]
             if field.is_a? Fields
               field.to_h
             elsif field.is_a? Array
@@ -169,7 +170,7 @@ module Google
         #   or indexes and corresponding types.
         #
         def to_h
-          fail DuplicateNameError if duplicate_names?
+          raise DuplicateNameError if duplicate_names?
           hashified_pairs = pairs.map do |key, value|
             if value.is_a? Fields
               [key, value.to_h]
@@ -189,7 +190,7 @@ module Google
           values = data.map { |datum| Convert.raw_to_value datum }
           Data.from_grpc values, @fields
         end
-        alias_method :new, :data
+        alias new data
 
         # @private
         def == other
@@ -201,7 +202,7 @@ module Google
         def to_s
           named_types = pairs.map do |key, type|
             if key.is_a? Integer
-              "#{type.inspect}"
+              type.inspect
             else
               "(#{key})#{type.inspect}"
             end
@@ -228,22 +229,25 @@ module Google
         def field pair
           if pair.is_a?(Array)
             unless pair.count == 2
-              fail ArgumentError, "can only accept pairs of name and type"
+              raise ArgumentError, "can only accept pairs of name and type"
             end
             if pair.first.nil? || pair.first.is_a?(Integer)
               Google::Spanner::V1::StructType::Field.new(
-                type: Google::Spanner::V1::Type.new(code: pair.last))
+                type: Google::Spanner::V1::Type.new(code: pair.last)
+              )
             else
               Google::Spanner::V1::StructType::Field.new(
                 name: String(pair.first),
-                type: Google::Spanner::V1::Type.new(code: pair.last))
+                type: Google::Spanner::V1::Type.new(code: pair.last)
+              )
             end
           else
             unless pair.is_a?(Symbol)
-              fail ArgumentError, "type must be a symbol"
+              raise ArgumentError, "type must be a symbol"
             end
             Google::Spanner::V1::StructType::Field.new(
-              type: Google::Spanner::V1::Type.new(code: pair))
+              type: Google::Spanner::V1::Type.new(code: pair)
+            )
           end
         end
       end

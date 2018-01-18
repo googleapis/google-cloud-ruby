@@ -181,7 +181,7 @@ module Google
           session.execute sql, params: params, types: types,
                                transaction: tx_selector
         end
-        alias_method :query, :execute
+        alias query execute
 
         ##
         # Read rows from a database table, as a simple alternative to
@@ -268,7 +268,7 @@ module Google
           ensure_session!
           @commit.upsert table, rows
         end
-        alias_method :save, :upsert
+        alias save upsert
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
@@ -548,7 +548,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_session!
-          fail "Must have active connection to service" unless session
+          raise "Must have active connection to service" unless session
         end
 
         def service

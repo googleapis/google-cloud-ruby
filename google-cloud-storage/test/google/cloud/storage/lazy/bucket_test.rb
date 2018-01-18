@@ -13,8 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "json"
-require "uri"
 
 describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
   let(:bucket_hash) { random_bucket_hash }

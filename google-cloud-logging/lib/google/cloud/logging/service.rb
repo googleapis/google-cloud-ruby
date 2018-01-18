@@ -44,7 +44,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION)
+              lib_version: Google::Cloud::Logging::VERSION
+            )
         end
         attr_accessor :mocked_logging
 
@@ -56,7 +57,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION)
+              lib_version: Google::Cloud::Logging::VERSION
+            )
         end
         attr_accessor :mocked_sinks
 
@@ -68,7 +70,8 @@ module Google
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION)
+              lib_version: Google::Cloud::Logging::VERSION
+            )
         end
         attr_accessor :mocked_metrics
 
@@ -180,11 +183,14 @@ module Google
 
         def update_sink name, destination, filter, version, start_time: nil,
                         end_time: nil, unique_writer_identity: nil
-          sink = Google::Logging::V2::LogSink.new({
-            name: name, destination: destination, filter: filter,
-            output_version_format: version,
-            start_time: time_to_timestamp(start_time),
-            end_time: time_to_timestamp(end_time) }.delete_if { |_, v| v.nil? })
+          sink = Google::Logging::V2::LogSink.new(
+            {
+              name: name, destination: destination, filter: filter,
+              output_version_format: version,
+              start_time: time_to_timestamp(start_time),
+              end_time: time_to_timestamp(end_time)
+            }.delete_if { |_, v| v.nil? }
+          )
 
           execute do
             sinks.update_sink sink_path(name), sink,
@@ -214,9 +220,10 @@ module Google
         end
 
         def create_metric name, filter, description
-          metric = Google::Logging::V2::LogMetric.new({
-            name: name, description: description,
-            filter: filter }.delete_if { |_, v| v.nil? })
+          metric = Google::Logging::V2::LogMetric.new(
+            { name: name, description: description,
+              filter: filter }.delete_if { |_, v| v.nil? }
+          )
 
           execute do
             metrics.create_log_metric project_path, metric,
@@ -231,9 +238,10 @@ module Google
         end
 
         def update_metric name, description, filter
-          metric = Google::Logging::V2::LogMetric.new({
-            name: name, description: description,
-            filter: filter }.delete_if { |_, v| v.nil? })
+          metric = Google::Logging::V2::LogMetric.new(
+            { name: name, description: description,
+              filter: filter }.delete_if { |_, v| v.nil? }
+          )
 
           execute do
             metrics.update_log_metric metric_path(name), metric,

@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "uri"
 require "google/cloud/storage/file/acl"
 require "google/cloud/storage/file/list"
 require "google/cloud/storage/file/verifier"
@@ -814,7 +813,7 @@ module Google
         def public_url protocol: :https
           "#{protocol}://storage.googleapis.com/#{bucket}/#{name}"
         end
-        alias_method :url, :public_url
+        alias url public_url
 
         ##
         # Access without authentication can be granted to a File for a specified
@@ -1017,7 +1016,7 @@ module Google
           @lazy = nil
           self
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Determines whether the file exists in the Storage service.
@@ -1077,7 +1076,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
 
         ##
@@ -1096,12 +1095,12 @@ module Google
 
           ensure_service!
 
-          if attributes.include? :storage_class
-            @gapi = rewrite_gapi bucket, name, update_gapi
-          else
-            @gapi = service.patch_file \
-              bucket, name, update_gapi, user_project: user_project
-          end
+          @gapi = if attributes.include? :storage_class
+                    rewrite_gapi bucket, name, update_gapi
+                  else
+                    service.patch_file \
+                      bucket, name, update_gapi, user_project: user_project
+                  end
         end
 
         def gapi_from_attrs *attributes

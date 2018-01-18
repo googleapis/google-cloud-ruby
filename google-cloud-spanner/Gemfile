@@ -2,12 +2,11 @@ source "http://rubygems.org"
 
 gemspec
 
-gem "rake", "~> 11.0"
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-env", path: "../google-cloud-env"
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"
+gem "google-cloud-core", path: "../google-cloud-core"
+gem "google-cloud-env", path: "../google-cloud-env"
 
 if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
   # WORKAROUND: builds on Travis-CI are resolving a version that cannot run on
@@ -19,7 +18,4 @@ end
 # WORKAROUND: builds are having problems since the release of 3.0.0
 # pin to the last known good version
 gem "public_suffix", "~> 2.0"
-
-# TEMP: rainbow (a dependency of rubocop) version 2.2 seems to have a problem,
-# so pinning to 2.1 for now.
-gem "rainbow", "~> 2.1.0"
+gem "rake", "~> 11.0"

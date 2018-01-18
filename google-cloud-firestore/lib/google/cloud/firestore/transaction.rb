@@ -74,7 +74,7 @@ module Google
         def firestore
           @client
         end
-        alias_method :client, :firestore
+        alias client firestore
 
         # @!group Access
 
@@ -120,9 +120,9 @@ module Google
             yield DocumentSnapshot.from_batch_result(result, self)
           end
         end
-        alias_method :get_docs, :get_all
-        alias_method :get_documents, :get_all
-        alias_method :find, :get_all
+        alias get_docs get_all
+        alias get_documents get_all
+        alias find get_all
 
         ##
         # Retrieves document snapshots for the given value. Valid values can be
@@ -233,7 +233,7 @@ module Google
             yield DocumentSnapshot.from_query_result(result, self)
           end
         end
-        alias_method :run, :get
+        alias run get
 
         # @!endgroup
 
@@ -562,7 +562,8 @@ module Google
           doc_path = coalesce_doc_path_argument doc
 
           @writes << Convert.write_for_delete(
-            doc_path, exists: exists, update_time: update_time)
+            doc_path, exists: exists, update_time: update_time
+          )
 
           nil
         end
@@ -637,17 +638,13 @@ module Google
         ##
         # @private
         def coalesce_get_argument obj
-          if obj.is_a?(String) || obj.is_a?(Symbol)
-            if obj.to_s.split("/").count.even?
-              return client.doc obj # Convert a DocumentReference
-            else
-              return client.col obj # Convert to CollectionReference
-            end
-          end
-
           return obj.ref if obj.is_a? DocumentSnapshot
 
-          obj
+          return obj unless obj.is_a?(String) || obj.is_a?(Symbol)
+
+          return client.doc obj if obj.to_s.split("/").count.even?
+
+          client.col obj # Convert to CollectionReference
         end
 
         ##
@@ -695,7 +692,7 @@ module Google
         ##
         # @private
         def ensure_not_closed!
-          fail "transaction is closed" if closed?
+          raise "transaction is closed" if closed?
         end
 
         ##
@@ -711,14 +708,14 @@ module Google
         ##
         # @private Raise an error unless an database available.
         def ensure_client!
-          fail "Must have active connection to service" unless firestore
+          raise "Must have active connection to service" unless firestore
         end
 
         ##
         # @private Raise an error unless an active connection to the service
         # is available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

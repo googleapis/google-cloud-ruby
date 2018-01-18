@@ -81,7 +81,8 @@ module Google
             breakpoints_hash[breakpoint_path] ||= {}
             breakpoints_hash[breakpoint_path][breakpoint_line] ||= []
             breakpoints_hash[breakpoint_path][breakpoint_line].push(
-              active_breakpoint)
+              active_breakpoint
+            )
           end
 
           # Tracer is explicitly designed to not have a lock. This should be the

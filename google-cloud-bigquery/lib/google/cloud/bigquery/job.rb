@@ -162,7 +162,7 @@ module Google
         #
         def created_at
           ::Time.at(Integer(@gapi.statistics.creation_time) / 1000.0)
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -175,7 +175,7 @@ module Google
         #
         def started_at
           ::Time.at(Integer(@gapi.statistics.start_time) / 1000.0)
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -187,7 +187,7 @@ module Google
         #
         def ended_at
           ::Time.at(Integer(@gapi.statistics.end_time) / 1000.0)
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -199,7 +199,7 @@ module Google
         def configuration
           JSON.parse @gapi.configuration.to_json
         end
-        alias_method :config, :configuration
+        alias config configuration
 
         ##
         # The statistics for the job. Returns a hash.
@@ -212,7 +212,7 @@ module Google
         def statistics
           JSON.parse @gapi.statistics.to_json
         end
-        alias_method :stats, :statistics
+        alias stats statistics
 
         ##
         # The job's status. Returns a hash. The values contained in the hash are
@@ -336,7 +336,7 @@ module Google
           gapi = service.get_job job_id
           @gapi = gapi
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Refreshes the job until the job is `DONE`. The delay between refreshes
@@ -357,7 +357,7 @@ module Google
         #
         def wait_until_done!
           backoff = lambda do |retries|
-            delay = [retries ** 2 + 5, 60].min # Maximum delay is 60
+            delay = [retries**2 + 5, 60].min # Maximum delay is 60
             sleep delay
           end
           retries = 0
@@ -392,27 +392,29 @@ module Google
                                   body: error_body
         end
 
+        ##
+        # @private
+        # Get the subclass for a job type
+        def self.klass_for gapi
+          if gapi.configuration.copy
+            CopyJob
+          elsif gapi.configuration.extract
+            ExtractJob
+          elsif gapi.configuration.load
+            LoadJob
+          elsif gapi.configuration.query
+            QueryJob
+          else
+            Job
+          end
+        end
+
         protected
 
         ##
         # Raise an error unless an active connection is available.
         def ensure_service!
-          fail "Must have active connection" unless service
-        end
-
-        ##
-        # Get the subclass for a job type
-        def self.klass_for gapi
-          if gapi.configuration.copy
-            return CopyJob
-          elsif gapi.configuration.extract
-            return ExtractJob
-          elsif gapi.configuration.load
-            return LoadJob
-          elsif gapi.configuration.query
-            return QueryJob
-          end
-          Job
+          raise "Must have active connection" unless service
         end
 
         def retrieve_table project_id, dataset_id, table_id
@@ -427,8 +429,8 @@ module Google
           codes = { "accessDenied" => 403, "backendError" => 500,
                     "billingNotEnabled" => 403,
                     "billingTierLimitExceeded" => 400, "blocked" => 403,
-                    "duplicate" => 409, "internalError" =>500, "invalid" => 400,
-                    "invalidQuery" => 400, "notFound" =>404,
+                    "duplicate" => 409, "internalError" => 500,
+                    "invalid" => 400, "invalidQuery" => 400, "notFound" => 404,
                     "notImplemented" => 501, "quotaExceeded" => 403,
                     "rateLimitExceeded" => 403, "resourceInUse" => 400,
                     "resourcesExceeded" => 400, "responseTooLarge" => 403,

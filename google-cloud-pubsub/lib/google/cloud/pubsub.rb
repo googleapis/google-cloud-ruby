@@ -530,14 +530,16 @@ module Google
                    keyfile: nil
         project_id ||= (project || Pubsub::Project.default_project_id)
         project_id = project_id.to_s # Always cast to a string
-        fail ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
         emulator_host ||= ENV["PUBSUB_EMULATOR_HOST"]
         if emulator_host
           return Pubsub::Project.new(
             Pubsub::Service.new(
               project_id, :this_channel_is_insecure,
-              host: emulator_host))
+              host: emulator_host
+            )
+          )
         end
 
         credentials ||= (keyfile || Pubsub::Credentials.default(scope: scope))
@@ -548,7 +550,9 @@ module Google
         Pubsub::Project.new(
           Pubsub::Service.new(
             project_id, credentials, timeout: timeout,
-                                     client_config: client_config))
+                                     client_config: client_config
+          )
+        )
       end
     end
   end
