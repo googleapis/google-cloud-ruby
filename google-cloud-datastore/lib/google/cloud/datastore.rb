@@ -649,34 +649,6 @@ module Google
       end
 
       ##
-      # Reload datastore configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_project = ENV["DATASTORE_DATASET"] || ENV["DATASTORE_PROJECT"]
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "DATASTORE_CREDENTIALS", "DATASTORE_CREDENTIALS_JSON",
-          "DATASTORE_KEYFILE", "DATASTORE_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :datastore
-        Google::Cloud.configure.add_config! :datastore do |config|
-          config.add_field! :project_id, default_project, match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-          config.add_field! :emulator_host, ENV["DATASTORE_EMULATOR_HOST"],
-                            match: String
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :datastore
-
-      ##
       # Configure the Google Cloud Datastore library.
       #
       # The following Datastore configuration parameters are supported:
