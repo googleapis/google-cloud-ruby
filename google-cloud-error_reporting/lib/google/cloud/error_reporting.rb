@@ -142,56 +142,6 @@ module Google
         )
       end
 
-      # rubocop:disable all
-
-      ##
-      # Reload error reporting configuration to defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "ERROR_REPORTING_CREDENTIALS", "ERROR_REPORTING_CREDENTIALS_JSON",
-          "ERROR_REPORTING_KEYFILE", "ERROR_REPORTING_KEYFILE_JSON"
-        )
-
-        unless Google::Cloud.configure.field? :use_error_reporting
-          Google::Cloud.configure.add_field! :use_error_reporting, nil,
-                                             enum: [true, false]
-        end
-        unless Google::Cloud.configure.field? :service_name
-          Google::Cloud.configure.add_field! :service_name, nil,
-                                             match: String
-        end
-        unless Google::Cloud.configure.field? :service_version
-          Google::Cloud.configure.add_field! :service_version, nil,
-                                             match: String
-        end
-
-        Google::Cloud.configure.delete! :error_reporting
-        Google::Cloud.configure.add_config! :error_reporting do |config|
-          config.add_field! :project_id, ENV["ERROR_REPORTING_PROJECT"],
-                            match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-          config.add_field! :service_name, ENV["ERROR_REPORTING_SERVICE"],
-                            match: String
-          config.add_field! :service_version, ENV["ERROR_REPORTING_VERSION"],
-                            match: String
-          config.add_field! :ignore_classes, nil, match: Array
-        end
-      end
-
-      # rubocop:enable all
-
-      unless Google::Cloud.configure.subconfig? :error_reporting
-        reload_configuration!
-      end
-
       ##
       # Configure the default {Google::Cloud::ErrorReporting::Project}
       # client, allows the {.report} public method to reuse these
