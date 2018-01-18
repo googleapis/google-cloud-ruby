@@ -19,6 +19,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.bigtable.admin.v2.CreateTableRequest.Split" do
     optional :key, :bytes, 1
   end
+  add_message "google.bigtable.admin.v2.CreateTableFromSnapshotRequest" do
+    optional :parent, :string, 1
+    optional :table_id, :string, 2
+    optional :source_snapshot, :string, 3
+  end
   add_message "google.bigtable.admin.v2.DropRowRangeRequest" do
     optional :name, :string, 1
     oneof :target do
@@ -54,6 +59,51 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :drop, :bool, 4
     end
   end
+  add_message "google.bigtable.admin.v2.GenerateConsistencyTokenRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.bigtable.admin.v2.GenerateConsistencyTokenResponse" do
+    optional :consistency_token, :string, 1
+  end
+  add_message "google.bigtable.admin.v2.CheckConsistencyRequest" do
+    optional :name, :string, 1
+    optional :consistency_token, :string, 2
+  end
+  add_message "google.bigtable.admin.v2.CheckConsistencyResponse" do
+    optional :consistent, :bool, 1
+  end
+  add_message "google.bigtable.admin.v2.SnapshotTableRequest" do
+    optional :name, :string, 1
+    optional :cluster, :string, 2
+    optional :snapshot_id, :string, 3
+    optional :ttl, :message, 4, "google.protobuf.Duration"
+    optional :description, :string, 5
+  end
+  add_message "google.bigtable.admin.v2.GetSnapshotRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.bigtable.admin.v2.ListSnapshotsRequest" do
+    optional :parent, :string, 1
+    optional :page_size, :int32, 2
+    optional :page_token, :string, 3
+  end
+  add_message "google.bigtable.admin.v2.ListSnapshotsResponse" do
+    repeated :snapshots, :message, 1, "google.bigtable.admin.v2.Snapshot"
+    optional :next_page_token, :string, 2
+  end
+  add_message "google.bigtable.admin.v2.DeleteSnapshotRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.bigtable.admin.v2.SnapshotTableMetadata" do
+    optional :original_request, :message, 1, "google.bigtable.admin.v2.SnapshotTableRequest"
+    optional :request_time, :message, 2, "google.protobuf.Timestamp"
+    optional :finish_time, :message, 3, "google.protobuf.Timestamp"
+  end
+  add_message "google.bigtable.admin.v2.CreateTableFromSnapshotMetadata" do
+    optional :original_request, :message, 1, "google.bigtable.admin.v2.CreateTableFromSnapshotRequest"
+    optional :request_time, :message, 2, "google.protobuf.Timestamp"
+    optional :finish_time, :message, 3, "google.protobuf.Timestamp"
+  end
 end
 
 module Google
@@ -62,6 +112,7 @@ module Google
       module V2
         CreateTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest").msgclass
         CreateTableRequest::Split = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableRequest.Split").msgclass
+        CreateTableFromSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotRequest").msgclass
         DropRowRangeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DropRowRangeRequest").msgclass
         ListTablesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesRequest").msgclass
         ListTablesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesResponse").msgclass
@@ -69,6 +120,17 @@ module Google
         DeleteTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteTableRequest").msgclass
         ModifyColumnFamiliesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest").msgclass
         ModifyColumnFamiliesRequest::Modification = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest.Modification").msgclass
+        GenerateConsistencyTokenRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GenerateConsistencyTokenRequest").msgclass
+        GenerateConsistencyTokenResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GenerateConsistencyTokenResponse").msgclass
+        CheckConsistencyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CheckConsistencyRequest").msgclass
+        CheckConsistencyResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CheckConsistencyResponse").msgclass
+        SnapshotTableRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.SnapshotTableRequest").msgclass
+        GetSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetSnapshotRequest").msgclass
+        ListSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListSnapshotsRequest").msgclass
+        ListSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListSnapshotsResponse").msgclass
+        DeleteSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteSnapshotRequest").msgclass
+        SnapshotTableMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.SnapshotTableMetadata").msgclass
+        CreateTableFromSnapshotMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateTableFromSnapshotMetadata").msgclass
       end
     end
   end

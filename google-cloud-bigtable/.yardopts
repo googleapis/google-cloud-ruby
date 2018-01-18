@@ -1,5 +1,5 @@
 --no-private
---title=Google Cloud Bigtable API
+--title=Cloud Bigtable API
 --exclude _pb\.rb$
 --markup markdown
 

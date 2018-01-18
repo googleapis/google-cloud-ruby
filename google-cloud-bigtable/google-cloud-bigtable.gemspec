@@ -5,10 +5,10 @@ Gem::Specification.new do |gem|
   gem.name          = "google-cloud-bigtable"
   gem.version       = "0.6.8"
 
-  gem.authors       = ["Google Inc"]
+  gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-bigtable is the official library for Google Cloud Bigtable API."
-  gem.summary       = "API Client library for Google Cloud Bigtable API"
+  gem.description   = "google-cloud-bigtable is the official library for Cloud Bigtable API."
+  gem.summary       = "API Client library for Cloud Bigtable API"
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
 

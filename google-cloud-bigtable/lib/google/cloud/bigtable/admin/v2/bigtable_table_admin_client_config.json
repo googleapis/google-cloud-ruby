@@ -25,6 +25,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateTableFromSnapshot": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListTables": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -46,6 +51,36 @@
           "retry_params_name": "default"
         },
         "DropRowRange": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GenerateConsistencyToken": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "CheckConsistency": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SnapshotTable": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetSnapshot": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListSnapshots": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteSnapshot": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

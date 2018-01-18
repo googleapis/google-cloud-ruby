@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -54,6 +51,15 @@ module Google
 
             DEFAULT_TIMEOUT = 30
 
+            PAGE_DESCRIPTORS = {
+              "list_app_profiles" => Google::Gax::PageDescriptor.new(
+                "page_token",
+                "next_page_token",
+                "app_profiles")
+            }.freeze
+
+            private_constant :PAGE_DESCRIPTORS
+
             # The scopes needed to make gRPC calls to all of the methods defined in
             # this service.
             ALL_SCOPES = [
@@ -68,6 +74,10 @@ module Google
               "https://www.googleapis.com/auth/cloud-platform.read-only"
             ].freeze
 
+            class OperationsClient < Google::Longrunning::OperationsClient
+              self::SERVICE_ADDRESS = BigtableInstanceAdminClient::SERVICE_ADDRESS
+            end
+
             PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}"
             )
@@ -79,6 +89,12 @@ module Google
             )
 
             private_constant :INSTANCE_PATH_TEMPLATE
+
+            APP_PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/instances/{instance}/appProfiles/{app_profile}"
+            )
+
+            private_constant :APP_PROFILE_PATH_TEMPLATE
 
             CLUSTER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/instances/{instance}/clusters/{cluster}"
@@ -112,6 +128,19 @@ module Google
               )
             end
 
+            # Returns a fully-qualified app_profile resource name string.
+            # @param project [String]
+            # @param instance [String]
+            # @param app_profile [String]
+            # @return [String]
+            def self.app_profile_path project, instance, app_profile
+              APP_PROFILE_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"instance" => instance,
+                :"app_profile" => app_profile
+              )
+            end
+
             # Returns a fully-qualified cluster resource name string.
             # @param project [String]
             # @param instance [String]
@@ -136,10 +165,6 @@ module Google
               )
             end
 
-            class OperationsClient < Google::Longrunning::OperationsClient
-              SERVICE_ADDRESS = SERVICE_ADDRESS
-            end
-            
             # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
             #   Provides the means for authenticating requests made by the client. This parameter can
             #   be many types.
@@ -204,9 +229,11 @@ module Google
                 updater_proc = credentials.updater_proc
               end
 
+              package_version = Gem.loaded_specs['google-cloud-bigtable'].version.version
+
               google_api_client = "gl-ruby/#{RUBY_VERSION}"
               google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-              google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+              google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
               google_api_client << " grpc/#{GRPC::VERSION}"
               google_api_client.freeze
 
@@ -221,6 +248,7 @@ module Google
                   client_config,
                   Google::Gax::Grpc::STATUS_CODE_NAMES,
                   timeout,
+                  page_descriptors: PAGE_DESCRIPTORS,
                   errors: Google::Gax::Grpc::API_ERRORS,
                   kwargs: headers
                 )
@@ -255,6 +283,10 @@ module Google
                 @bigtable_instance_admin_stub.method(:update_instance),
                 defaults["update_instance"]
               )
+              @partial_update_instance = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:partial_update_instance),
+                defaults["partial_update_instance"]
+              )
               @delete_instance = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:delete_instance),
                 defaults["delete_instance"]
@@ -278,6 +310,38 @@ module Google
               @delete_cluster = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:delete_cluster),
                 defaults["delete_cluster"]
+              )
+              @create_app_profile = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:create_app_profile),
+                defaults["create_app_profile"]
+              )
+              @get_app_profile = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:get_app_profile),
+                defaults["get_app_profile"]
+              )
+              @list_app_profiles = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:list_app_profiles),
+                defaults["list_app_profiles"]
+              )
+              @update_app_profile = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:update_app_profile),
+                defaults["update_app_profile"]
+              )
+              @delete_app_profile = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:delete_app_profile),
+                defaults["delete_app_profile"]
+              )
+              @get_iam_policy = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:get_iam_policy),
+                defaults["get_iam_policy"]
+              )
+              @set_iam_policy = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:set_iam_policy),
+                defaults["set_iam_policy"]
+              )
+              @test_iam_permissions = Google::Gax.create_api_call(
+                @bigtable_instance_admin_stub.method(:test_iam_permissions),
+                defaults["test_iam_permissions"]
               )
             end
 
@@ -440,6 +504,18 @@ module Google
             #   to avoid confusion.
             # @param type [Google::Bigtable::Admin::V2::Instance::Type]
             #   The type of the instance. Defaults to +PRODUCTION+.
+            # @param labels [Hash{String => String}]
+            #   Labels are a flexible and lightweight mechanism for organizing cloud
+            #   resources into groups that reflect a customer's organizational needs and
+            #   deployment strategies. They can be used to filter resources and aggregate
+            #   metrics.
+            #
+            #   * Label keys must be between 1 and 63 characters long and must conform to
+            #     the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.
+            #   * Label values must be between 0 and 63 characters long and must conform to
+            #     the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.
+            #   * No more than 64 labels can be associated with a given resource.
+            #   * Keys and values must both be under 128 bytes.
             # @param state [Google::Bigtable::Admin::V2::Instance::State]
             #   (+OutputOnly+)
             #   The current state of the instance.
@@ -455,22 +531,61 @@ module Google
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #   display_name = ''
             #   type = :TYPE_UNSPECIFIED
-            #   response = bigtable_instance_admin_client.update_instance(formatted_name, display_name, type)
+            #   labels = {}
+            #   response = bigtable_instance_admin_client.update_instance(formatted_name, display_name, type, labels)
 
             def update_instance \
                 name,
                 display_name,
                 type,
+                labels,
                 state: nil,
                 options: nil
               req = {
                 name: name,
                 display_name: display_name,
                 type: type,
+                labels: labels,
                 state: state
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::Instance)
               @update_instance.call(req, options)
+            end
+
+            # Partially updates an instance within a project.
+            #
+            # @param instance [Google::Bigtable::Admin::V2::Instance | Hash]
+            #   The Instance which will (partially) replace the current value.
+            #   A hash of the same form as `Google::Bigtable::Admin::V2::Instance`
+            #   can also be provided.
+            # @param update_mask [Google::Protobuf::FieldMask | Hash]
+            #   The subset of Instance fields which should be replaced.
+            #   Must be explicitly set.
+            #   A hash of the same form as `Google::Protobuf::FieldMask`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Longrunning::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   instance = {}
+            #   update_mask = {}
+            #   response = bigtable_instance_admin_client.partial_update_instance(instance, update_mask)
+
+            def partial_update_instance \
+                instance,
+                update_mask,
+                options: nil
+              req = {
+                instance: instance,
+                update_mask: update_mask
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::PartialUpdateInstanceRequest)
+              @partial_update_instance.call(req, options)
             end
 
             # Delete an instance from a project.
@@ -646,19 +761,19 @@ module Google
             # @param location [String]
             #   (+CreationOnly+)
             #   The location where this cluster's nodes and storage reside. For best
-            #   performance, clients should be located as close as possible to this cluster.
-            #   Currently only zones are supported, so values should be of the form
-            #   +projects/<project>/locations/<zone>+.
+            #   performance, clients should be located as close as possible to this
+            #   cluster. Currently only zones are supported, so values should be of the
+            #   form +projects/<project>/locations/<zone>+.
             # @param serve_nodes [Integer]
             #   The number of nodes allocated to this cluster. More nodes enable higher
             #   throughput and more consistent performance.
+            # @param state [Google::Bigtable::Admin::V2::Cluster::State]
+            #   (+OutputOnly+)
+            #   The current state of the cluster.
             # @param default_storage_type [Google::Bigtable::Admin::V2::StorageType]
             #   (+CreationOnly+)
             #   The type of storage used by this cluster to serve its
             #   parent instance's tables, unless explicitly overridden.
-            # @param state [Google::Bigtable::Admin::V2::Cluster::State]
-            #   (+OutputOnly+)
-            #   The current state of the cluster.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -671,10 +786,9 @@ module Google
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
             #   location = ''
             #   serve_nodes = 0
-            #   default_storage_type = :STORAGE_TYPE_UNSPECIFIED
             #
             #   # Register a callback during the method call.
-            #   operation = bigtable_instance_admin_client.update_cluster(formatted_name, location, serve_nodes, default_storage_type) do |op|
+            #   operation = bigtable_instance_admin_client.update_cluster(formatted_name, location, serve_nodes) do |op|
             #     raise op.results.message if op.error?
             #     op_results = op.results
             #     # Process the results.
@@ -704,15 +818,15 @@ module Google
                 name,
                 location,
                 serve_nodes,
-                default_storage_type,
                 state: nil,
+                default_storage_type: nil,
                 options: nil
               req = {
                 name: name,
                 location: location,
                 serve_nodes: serve_nodes,
-                default_storage_type: default_storage_type,
-                state: state
+                state: state,
+                default_storage_type: default_storage_type
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::Cluster)
               operation = Google::Gax::Operation.new(
@@ -751,6 +865,343 @@ module Google
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DeleteClusterRequest)
               @delete_cluster.call(req, options)
               nil
+            end
+
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Creates an app profile within an instance.
+            #
+            # @param parent [String]
+            #   The unique name of the instance in which to create the new app profile.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>+.
+            # @param app_profile_id [String]
+            #   The ID to be used when referring to the new app profile within its
+            #   instance, e.g., just +myprofile+ rather than
+            #   +projects/myproject/instances/myinstance/appProfiles/myprofile+.
+            # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
+            #   The app profile to be created.
+            #   Fields marked +OutputOnly+ will be ignored.
+            #   A hash of the same form as `Google::Bigtable::Admin::V2::AppProfile`
+            #   can also be provided.
+            # @param ignore_warnings [true, false]
+            #   If true, ignore safety checks when creating the app profile.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Bigtable::Admin::V2::AppProfile]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #   app_profile_id = ''
+            #   app_profile = {}
+            #   response = bigtable_instance_admin_client.create_app_profile(formatted_parent, app_profile_id, app_profile)
+
+            def create_app_profile \
+                parent,
+                app_profile_id,
+                app_profile,
+                ignore_warnings: nil,
+                options: nil
+              req = {
+                parent: parent,
+                app_profile_id: app_profile_id,
+                app_profile: app_profile,
+                ignore_warnings: ignore_warnings
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CreateAppProfileRequest)
+              @create_app_profile.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Gets information about an app profile.
+            #
+            # @param name [String]
+            #   The unique name of the requested app profile. Values are of the form
+            #   +projects/<project>/instances/<instance>/appProfiles/<app_profile>+.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Bigtable::Admin::V2::AppProfile]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path("[PROJECT]", "[INSTANCE]", "[APP_PROFILE]")
+            #   response = bigtable_instance_admin_client.get_app_profile(formatted_name)
+
+            def get_app_profile \
+                name,
+                options: nil
+              req = {
+                name: name
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::GetAppProfileRequest)
+              @get_app_profile.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Lists information about app profiles in an instance.
+            #
+            # @param parent [String]
+            #   The unique name of the instance for which a list of app profiles is
+            #   requested. Values are of the form
+            #   +projects/<project>/instances/<instance>+.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::AppProfile>]
+            #   An enumerable of Google::Bigtable::Admin::V2::AppProfile instances.
+            #   See Google::Gax::PagedEnumerable documentation for other
+            #   operations such as per-page iteration or access to the response
+            #   object.
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # Iterate over all results.
+            #   bigtable_instance_admin_client.list_app_profiles(formatted_parent).each do |element|
+            #     # Process element.
+            #   end
+            #
+            #   # Or iterate over results one page at a time.
+            #   bigtable_instance_admin_client.list_app_profiles(formatted_parent).each_page do |page|
+            #     # Process each page at a time.
+            #     page.each do |element|
+            #       # Process element.
+            #     end
+            #   end
+
+            def list_app_profiles \
+                parent,
+                options: nil
+              req = {
+                parent: parent
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ListAppProfilesRequest)
+              @list_app_profiles.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Updates an app profile within an instance.
+            #
+            # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
+            #   The app profile which will (partially) replace the current value.
+            #   A hash of the same form as `Google::Bigtable::Admin::V2::AppProfile`
+            #   can also be provided.
+            # @param update_mask [Google::Protobuf::FieldMask | Hash]
+            #   The subset of app profile fields which should be replaced.
+            #   If unset, all fields will be replaced.
+            #   A hash of the same form as `Google::Protobuf::FieldMask`
+            #   can also be provided.
+            # @param ignore_warnings [true, false]
+            #   If true, ignore safety checks when updating the app profile.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Longrunning::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   app_profile = {}
+            #   update_mask = {}
+            #   response = bigtable_instance_admin_client.update_app_profile(app_profile, update_mask)
+
+            def update_app_profile \
+                app_profile,
+                update_mask,
+                ignore_warnings: nil,
+                options: nil
+              req = {
+                app_profile: app_profile,
+                update_mask: update_mask,
+                ignore_warnings: ignore_warnings
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::UpdateAppProfileRequest)
+              @update_app_profile.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Deletes an app profile from an instance.
+            #
+            # @param name [String]
+            #   The unique name of the app profile to be deleted. Values are of the form
+            #   +projects/<project>/instances/<instance>/appProfiles/<app_profile>+.
+            # @param ignore_warnings [true, false]
+            #   If true, ignore safety checks when deleting the app profile.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path("[PROJECT]", "[INSTANCE]", "[APP_PROFILE]")
+            #   ignore_warnings = false
+            #   bigtable_instance_admin_client.delete_app_profile(formatted_name, ignore_warnings)
+
+            def delete_app_profile \
+                name,
+                ignore_warnings,
+                options: nil
+              req = {
+                name: name,
+                ignore_warnings: ignore_warnings
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DeleteAppProfileRequest)
+              @delete_app_profile.call(req, options)
+              nil
+            end
+
+            # This is a private alpha release of Cloud Bigtable instance level
+            # permissions. This feature is not currently available to most Cloud Bigtable
+            # customers. This feature might be changed in backward-incompatible ways and
+            # is not recommended for production use. It is not subject to any SLA or
+            # deprecation policy.
+            #
+            # Gets the access control policy for an instance resource. Returns an empty
+            # policy if an instance exists but does not have a policy set.
+            #
+            # @param resource [String]
+            #   REQUIRED: The resource for which the policy is being requested.
+            #   +resource+ is usually specified as a path. For example, a Project
+            #   resource is specified as +projects/{project}+.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Iam::V1::Policy]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #   response = bigtable_instance_admin_client.get_iam_policy(formatted_resource)
+
+            def get_iam_policy \
+                resource,
+                options: nil
+              req = {
+                resource: resource
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Iam::V1::GetIamPolicyRequest)
+              @get_iam_policy.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable instance level
+            # permissions. This feature is not currently available to most Cloud Bigtable
+            # customers. This feature might be changed in backward-incompatible ways and
+            # is not recommended for production use. It is not subject to any SLA or
+            # deprecation policy.
+            #
+            # Sets the access control policy on an instance resource. Replaces any
+            # existing policy.
+            #
+            # @param resource [String]
+            #   REQUIRED: The resource for which the policy is being specified.
+            #   +resource+ is usually specified as a path. For example, a Project
+            #   resource is specified as +projects/{project}+.
+            # @param policy [Google::Iam::V1::Policy | Hash]
+            #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+            #   the policy is limited to a few 10s of KB. An empty policy is a
+            #   valid policy but certain Cloud Platform services (such as Projects)
+            #   might reject them.
+            #   A hash of the same form as `Google::Iam::V1::Policy`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Iam::V1::Policy]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #   policy = {}
+            #   response = bigtable_instance_admin_client.set_iam_policy(formatted_resource, policy)
+
+            def set_iam_policy \
+                resource,
+                policy,
+                options: nil
+              req = {
+                resource: resource,
+                policy: policy
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Iam::V1::SetIamPolicyRequest)
+              @set_iam_policy.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable instance level
+            # permissions. This feature is not currently available to most Cloud Bigtable
+            # customers. This feature might be changed in backward-incompatible ways and
+            # is not recommended for production use. It is not subject to any SLA or
+            # deprecation policy.
+            #
+            # Returns permissions that the caller has on the specified instance resource.
+            #
+            # @param resource [String]
+            #   REQUIRED: The resource for which the policy detail is being requested.
+            #   +resource+ is usually specified as a path. For example, a Project
+            #   resource is specified as +projects/{project}+.
+            # @param permissions [Array<String>]
+            #   The set of permissions to check for the +resource+. Permissions with
+            #   wildcards (such as '*' or 'storage.*') are not allowed. For more
+            #   information see
+            #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #   permissions = []
+            #   response = bigtable_instance_admin_client.test_iam_permissions(formatted_resource, permissions)
+
+            def test_iam_permissions \
+                resource,
+                permissions,
+                options: nil
+              req = {
+                resource: resource,
+                permissions: permissions
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
+              @test_iam_permissions.call(req, options)
             end
           end
         end

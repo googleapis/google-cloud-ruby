@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,6 +41,14 @@ module Google
             # The table can be created with a full set of initial column families,
             # specified in the request.
             rpc :CreateTable, CreateTableRequest, Table
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Creates a new table from the specified snapshot. The target table must
+            # not exist. The snapshot and the table must be in the same instance.
+            rpc :CreateTableFromSnapshot, CreateTableFromSnapshotRequest, Google::Longrunning::Operation
             # Lists all tables served from a specified instance.
             rpc :ListTables, ListTablesRequest, ListTablesResponse
             # Gets metadata information about the specified table.
@@ -56,6 +64,54 @@ module Google
             # specify whether to delete all rows in a table, or only those that match a
             # particular prefix.
             rpc :DropRowRange, DropRowRangeRequest, Google::Protobuf::Empty
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Generates a consistency token for a Table, which can be used in
+            # CheckConsistency to check whether mutations to the table that finished
+            # before this call started have been replicated. The tokens will be available
+            # for 90 days.
+            rpc :GenerateConsistencyToken, GenerateConsistencyTokenRequest, GenerateConsistencyTokenResponse
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Checks replication consistency based on a consistency token, that is, if
+            # replication has caught up based on the conditions specified in the token
+            # and the check request.
+            rpc :CheckConsistency, CheckConsistencyRequest, CheckConsistencyResponse
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Creates a new snapshot in the specified cluster from the specified
+            # source table. The cluster and the table must be in the same instance.
+            rpc :SnapshotTable, SnapshotTableRequest, Google::Longrunning::Operation
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Gets metadata information about the specified snapshot.
+            rpc :GetSnapshot, GetSnapshotRequest, Snapshot
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Lists all snapshots associated with the specified cluster.
+            rpc :ListSnapshots, ListSnapshotsRequest, ListSnapshotsResponse
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Permanently deletes the specified snapshot.
+            rpc :DeleteSnapshot, DeleteSnapshotRequest, Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

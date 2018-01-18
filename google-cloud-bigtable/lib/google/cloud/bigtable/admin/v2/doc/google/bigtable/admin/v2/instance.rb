@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,19 @@ module Google
         # @!attribute [rw] type
         #   @return [Google::Bigtable::Admin::V2::Instance::Type]
         #     The type of the instance. Defaults to +PRODUCTION+.
+        # @!attribute [rw] labels
+        #   @return [Hash{String => String}]
+        #     Labels are a flexible and lightweight mechanism for organizing cloud
+        #     resources into groups that reflect a customer's organizational needs and
+        #     deployment strategies. They can be used to filter resources and aggregate
+        #     metrics.
+        #
+        #     * Label keys must be between 1 and 63 characters long and must conform to
+        #       the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.
+        #     * Label values must be between 0 and 63 characters long and must conform to
+        #       the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.
+        #     * No more than 64 labels can be associated with a given resource.
+        #     * Keys and values must both be under 128 bytes.
         class Instance
           # Possible states of an instance.
           module State
@@ -86,9 +99,9 @@ module Google
         #   @return [String]
         #     (+CreationOnly+)
         #     The location where this cluster's nodes and storage reside. For best
-        #     performance, clients should be located as close as possible to this cluster.
-        #     Currently only zones are supported, so values should be of the form
-        #     +projects/<project>/locations/<zone>+.
+        #     performance, clients should be located as close as possible to this
+        #     cluster. Currently only zones are supported, so values should be of the
+        #     form +projects/<project>/locations/<zone>+.
         # @!attribute [rw] state
         #   @return [Google::Bigtable::Admin::V2::Cluster::State]
         #     (+OutputOnly+)
@@ -127,6 +140,58 @@ module Google
             # exist, but no operations can be performed on the cluster.
             DISABLED = 4
           end
+        end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # A configuration object describing how Cloud Bigtable should treat traffic
+        # from a particular end user application.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     (+OutputOnly+)
+        #     The unique name of the app profile. Values are of the form
+        #     +projects/<project>/instances/<instance>/appProfiles/[_a-zA-Z0-9][-_.a-zA-Z0-9]*+.
+        # @!attribute [rw] etag
+        #   @return [String]
+        #     Strongly validated etag for optimistic concurrency control. Preserve the
+        #     value returned from +GetAppProfile+ when calling +UpdateAppProfile+ to
+        #     fail the request if there has been a modification in the mean time. The
+        #     +update_mask+ of the request need not include +etag+ for this protection
+        #     to apply.
+        #     See [Wikipedia](https://en.wikipedia.org/wiki/HTTP_ETag) and
+        #     [RFC 7232](https://tools.ietf.org/html/rfc7232#section-2.3) for more
+        #     details.
+        # @!attribute [rw] description
+        #   @return [String]
+        #     Optional long form description of the use case for this AppProfile.
+        # @!attribute [rw] multi_cluster_routing_use_any
+        #   @return [Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
+        #     Use a multi-cluster routing policy that may pick any cluster.
+        # @!attribute [rw] single_cluster_routing
+        #   @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
+        #     Use a single-cluster routing policy.
+        class AppProfile
+          # Read/write requests may be routed to any cluster in the instance, and will
+          # fail over to another cluster in the event of transient errors or delays.
+          # Choosing this option sacrifices read-your-writes consistency to improve
+          # availability.
+          class MultiClusterRoutingUseAny; end
+
+          # Unconditionally routes all read/write requests to a specific cluster.
+          # This option preserves read-your-writes consistency, but does not improve
+          # availability.
+          # @!attribute [rw] cluster_id
+          #   @return [String]
+          #     The cluster to which read/write requests should be routed.
+          # @!attribute [rw] allow_transactional_writes
+          #   @return [true, false]
+          #     Whether or not +CheckAndMutateRow+ and +ReadModifyWriteRow+ requests are
+          #     allowed by this app profile. It is unsafe to send these requests to
+          #     the same table/row/column in multiple clusters.
+          class SingleClusterRouting; end
         end
       end
     end

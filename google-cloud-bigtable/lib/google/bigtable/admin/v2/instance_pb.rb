@@ -11,6 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :display_name, :string, 2
     optional :state, :enum, 3, "google.bigtable.admin.v2.Instance.State"
     optional :type, :enum, 4, "google.bigtable.admin.v2.Instance.Type"
+    map :labels, :string, :string, 5
   end
   add_enum "google.bigtable.admin.v2.Instance.State" do
     value :STATE_NOT_KNOWN, 0
@@ -36,6 +37,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :RESIZING, 3
     value :DISABLED, 4
   end
+  add_message "google.bigtable.admin.v2.AppProfile" do
+    optional :name, :string, 1
+    optional :etag, :string, 2
+    optional :description, :string, 3
+    oneof :routing_policy do
+      optional :multi_cluster_routing_use_any, :message, 5, "google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny"
+      optional :single_cluster_routing, :message, 6, "google.bigtable.admin.v2.AppProfile.SingleClusterRouting"
+    end
+  end
+  add_message "google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny" do
+  end
+  add_message "google.bigtable.admin.v2.AppProfile.SingleClusterRouting" do
+    optional :cluster_id, :string, 1
+    optional :allow_transactional_writes, :bool, 2
+  end
 end
 
 module Google
@@ -47,6 +63,9 @@ module Google
         Instance::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.Type").enummodule
         Cluster = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster").msgclass
         Cluster::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.State").enummodule
+        AppProfile = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile").msgclass
+        AppProfile::MultiClusterRoutingUseAny = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny").msgclass
+        AppProfile::SingleClusterRouting = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.SingleClusterRouting").msgclass
       end
     end
   end

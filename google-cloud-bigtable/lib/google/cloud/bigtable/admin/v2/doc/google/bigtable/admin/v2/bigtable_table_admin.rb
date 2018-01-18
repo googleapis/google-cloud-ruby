@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,11 +20,9 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [BigtableInstanceAdminClient][] |  |
-      # | [BigtableTableAdminClient][] |  |
+      # | [BigtableTableAdminClient][] | Service for creating, configuring, and deleting Cloud Bigtable tables. |
       # | [Data Types][] | Data types for Google::Cloud::Bigtable::Admin::V2 |
       #
-      # [BigtableInstanceAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtableinstanceadminclient
       # [BigtableTableAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtabletableadminclient
       # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/datatypes
       #
@@ -67,6 +65,29 @@ module Google
           #     Row key to use as an initial tablet boundary.
           class Split; end
         end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CreateTableFromSnapshot}
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     The unique name of the instance in which to create the table.
+        #     Values are of the form +projects/<project>/instances/<instance>+.
+        # @!attribute [rw] table_id
+        #   @return [String]
+        #     The name by which the new table should be referred to within the parent
+        #     instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.
+        # @!attribute [rw] source_snapshot
+        #   @return [String]
+        #     The unique name of the snapshot from which to restore the table. The
+        #     snapshot and the table must be in the same instance.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+        class CreateTableFromSnapshotRequest; end
 
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::DropRowRange}
@@ -165,6 +186,198 @@ module Google
           #     family exists.
           class Modification; end
         end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GenerateConsistencyToken}
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The unique name of the Table for which to create a consistency token.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        class GenerateConsistencyTokenRequest; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Response message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GenerateConsistencyToken}
+        # @!attribute [rw] consistency_token
+        #   @return [String]
+        #     The generated consistency token.
+        class GenerateConsistencyTokenResponse; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CheckConsistency}
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The unique name of the Table for which to check replication consistency.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        # @!attribute [rw] consistency_token
+        #   @return [String]
+        #     The token created using GenerateConsistencyToken for the Table.
+        class CheckConsistencyRequest; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Response message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CheckConsistency}
+        # @!attribute [rw] consistent
+        #   @return [true, false]
+        #     True only if the token is consistent. A token is consistent if replication
+        #     has caught up with the restrictions specified in the request.
+        class CheckConsistencyResponse; end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::SnapshotTable}
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The unique name of the table to have the snapshot taken.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/tables/<table>+.
+        # @!attribute [rw] cluster
+        #   @return [String]
+        #     The name of the cluster where the snapshot will be created in.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/clusters/<cluster>+.
+        # @!attribute [rw] snapshot_id
+        #   @return [String]
+        #     The ID by which the new snapshot should be referred to within the parent
+        #     cluster, e.g., +mysnapshot+ of the form: +[_a-zA-Z0-9][-_.a-zA-Z0-9]*+
+        #     rather than
+        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.
+        # @!attribute [rw] ttl
+        #   @return [Google::Protobuf::Duration]
+        #     The amount of time that the new snapshot can stay active after it is
+        #     created. Once 'ttl' expires, the snapshot will get deleted. The maximum
+        #     amount of time a snapshot can stay active is 7 days. If 'ttl' is not
+        #     specified, the default value of 24 hours will be used.
+        # @!attribute [rw] description
+        #   @return [String]
+        #     Description of the snapshot.
+        class SnapshotTableRequest; end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GetSnapshot}
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The unique name of the requested snapshot.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+        class GetSnapshotRequest; end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListSnapshots}
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     The unique name of the cluster for which snapshots should be listed.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/clusters/<cluster>+.
+        #     Use +<cluster> = '-'+ to list snapshots for all clusters in an instance,
+        #     e.g., +projects/<project>/instances/<instance>/clusters/-+.
+        # @!attribute [rw] page_size
+        #   @return [Integer]
+        #     The maximum number of snapshots to return.
+        # @!attribute [rw] page_token
+        #   @return [String]
+        #     The value of +next_page_token+ returned by a previous call.
+        class ListSnapshotsRequest; end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Response message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListSnapshots}
+        # @!attribute [rw] snapshots
+        #   @return [Array<Google::Bigtable::Admin::V2::Snapshot>]
+        #     The snapshots present in the requested cluster.
+        # @!attribute [rw] next_page_token
+        #   @return [String]
+        #     Set if not all snapshots could be returned in a single response.
+        #     Pass this value to +page_token+ in another request to get the next
+        #     page of results.
+        class ListSnapshotsResponse; end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::DeleteSnapshot}
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The unique name of the snapshot to be deleted.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+        class DeleteSnapshotRequest; end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # The metadata for the Operation returned by SnapshotTable.
+        # @!attribute [rw] original_request
+        #   @return [Google::Bigtable::Admin::V2::SnapshotTableRequest]
+        #     The request that prompted the initiation of this SnapshotTable operation.
+        # @!attribute [rw] request_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time at which the original request was received.
+        # @!attribute [rw] finish_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time at which the operation failed or was completed successfully.
+        class SnapshotTableMetadata; end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # The metadata for the Operation returned by CreateTableFromSnapshot.
+        # @!attribute [rw] original_request
+        #   @return [Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest]
+        #     The request that prompted the initiation of this CreateTableFromSnapshot
+        #     operation.
+        # @!attribute [rw] request_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time at which the original request was received.
+        # @!attribute [rw] finish_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time at which the operation failed or was completed successfully.
+        class CreateTableFromSnapshotMetadata; end
       end
     end
   end

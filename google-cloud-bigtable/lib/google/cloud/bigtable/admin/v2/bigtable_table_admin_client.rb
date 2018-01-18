@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,14 +18,13 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
 
 require "google/gax"
+require "google/gax/operation"
+require "google/longrunning/operations_client"
 
 require "google/bigtable/admin/v2/bigtable_table_admin_pb"
 require "google/cloud/bigtable/admin/credentials"
@@ -58,7 +57,11 @@ module Google
               "list_tables" => Google::Gax::PageDescriptor.new(
                 "page_token",
                 "next_page_token",
-                "tables")
+                "tables"),
+              "list_snapshots" => Google::Gax::PageDescriptor.new(
+                "page_token",
+                "next_page_token",
+                "snapshots")
             }.freeze
 
             private_constant :PAGE_DESCRIPTORS
@@ -77,11 +80,27 @@ module Google
               "https://www.googleapis.com/auth/cloud-platform.read-only"
             ].freeze
 
+            class OperationsClient < Google::Longrunning::OperationsClient
+              self::SERVICE_ADDRESS = BigtableTableAdminClient::SERVICE_ADDRESS
+            end
+
             INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/instances/{instance}"
             )
 
             private_constant :INSTANCE_PATH_TEMPLATE
+
+            CLUSTER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/instances/{instance}/clusters/{cluster}"
+            )
+
+            private_constant :CLUSTER_PATH_TEMPLATE
+
+            SNAPSHOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}"
+            )
+
+            private_constant :SNAPSHOT_PATH_TEMPLATE
 
             TABLE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/instances/{instance}/tables/{table}"
@@ -97,6 +116,34 @@ module Google
               INSTANCE_PATH_TEMPLATE.render(
                 :"project" => project,
                 :"instance" => instance
+              )
+            end
+
+            # Returns a fully-qualified cluster resource name string.
+            # @param project [String]
+            # @param instance [String]
+            # @param cluster [String]
+            # @return [String]
+            def self.cluster_path project, instance, cluster
+              CLUSTER_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"instance" => instance,
+                :"cluster" => cluster
+              )
+            end
+
+            # Returns a fully-qualified snapshot resource name string.
+            # @param project [String]
+            # @param instance [String]
+            # @param cluster [String]
+            # @param snapshot [String]
+            # @return [String]
+            def self.snapshot_path project, instance, cluster, snapshot
+              SNAPSHOT_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"instance" => instance,
+                :"cluster" => cluster,
+                :"snapshot" => snapshot
               )
             end
 
@@ -152,6 +199,15 @@ module Google
 
               credentials ||= Google::Cloud::Bigtable::Admin::Credentials.default
 
+              @operations_client = OperationsClient.new(
+                credentials: credentials,
+                scopes: scopes,
+                client_config: client_config,
+                timeout: timeout,
+                lib_name: lib_name,
+                lib_version: lib_version,
+              )
+
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 updater_proc = Google::Cloud::Bigtable::Admin::Credentials.new(credentials).updater_proc
               end
@@ -168,9 +224,11 @@ module Google
                 updater_proc = credentials.updater_proc
               end
 
+              package_version = Gem.loaded_specs['google-cloud-bigtable'].version.version
+
               google_api_client = "gl-ruby/#{RUBY_VERSION}"
               google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-              google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+              google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
               google_api_client << " grpc/#{GRPC::VERSION}"
               google_api_client.freeze
 
@@ -208,6 +266,10 @@ module Google
                 @bigtable_table_admin_stub.method(:create_table),
                 defaults["create_table"]
               )
+              @create_table_from_snapshot = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:create_table_from_snapshot),
+                defaults["create_table_from_snapshot"]
+              )
               @list_tables = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:list_tables),
                 defaults["list_tables"]
@@ -227,6 +289,30 @@ module Google
               @drop_row_range = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:drop_row_range),
                 defaults["drop_row_range"]
+              )
+              @generate_consistency_token = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:generate_consistency_token),
+                defaults["generate_consistency_token"]
+              )
+              @check_consistency = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:check_consistency),
+                defaults["check_consistency"]
+              )
+              @snapshot_table = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:snapshot_table),
+                defaults["snapshot_table"]
+              )
+              @get_snapshot = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:get_snapshot),
+                defaults["get_snapshot"]
+              )
+              @list_snapshots = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:list_snapshots),
+                defaults["list_snapshots"]
+              )
+              @delete_snapshot = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:delete_snapshot),
+                defaults["delete_snapshot"]
               )
             end
 
@@ -293,6 +379,87 @@ module Google
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CreateTableRequest)
               @create_table.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Creates a new table from the specified snapshot. The target table must
+            # not exist. The snapshot and the table must be in the same instance.
+            #
+            # @param parent [String]
+            #   The unique name of the instance in which to create the table.
+            #   Values are of the form +projects/<project>/instances/<instance>+.
+            # @param table_id [String]
+            #   The name by which the new table should be referred to within the parent
+            #   instance, e.g., +foobar+ rather than +<parent>/tables/foobar+.
+            # @param source_snapshot [String]
+            #   The unique name of the snapshot from which to restore the table. The
+            #   snapshot and the table must be in the same instance.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Gax::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #   table_id = ''
+            #   source_snapshot = ''
+            #
+            #   # Register a callback during the method call.
+            #   operation = bigtable_table_admin_client.create_table_from_snapshot(formatted_parent, table_id, source_snapshot) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
+
+            def create_table_from_snapshot \
+                parent,
+                table_id,
+                source_snapshot,
+                options: nil
+              req = {
+                parent: parent,
+                table_id: table_id,
+                source_snapshot: source_snapshot
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest)
+              operation = Google::Gax::Operation.new(
+                @create_table_from_snapshot.call(req, options),
+                @operations_client,
+                Google::Bigtable::Admin::V2::Table,
+                Google::Bigtable::Admin::V2::CreateTableFromSnapshotMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
             end
 
             # Lists all tables served from a specified instance.
@@ -481,6 +648,270 @@ module Google
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DropRowRangeRequest)
               @drop_row_range.call(req, options)
+              nil
+            end
+
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Generates a consistency token for a Table, which can be used in
+            # CheckConsistency to check whether mutations to the table that finished
+            # before this call started have been replicated. The tokens will be available
+            # for 90 days.
+            #
+            # @param name [String]
+            #   The unique name of the Table for which to create a consistency token.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #   response = bigtable_table_admin_client.generate_consistency_token(formatted_name)
+
+            def generate_consistency_token \
+                name,
+                options: nil
+              req = {
+                name: name
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::GenerateConsistencyTokenRequest)
+              @generate_consistency_token.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Checks replication consistency based on a consistency token, that is, if
+            # replication has caught up based on the conditions specified in the token
+            # and the check request.
+            #
+            # @param name [String]
+            #   The unique name of the Table for which to check replication consistency.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            # @param consistency_token [String]
+            #   The token created using GenerateConsistencyToken for the Table.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Bigtable::Admin::V2::CheckConsistencyResponse]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #   consistency_token = ''
+            #   response = bigtable_table_admin_client.check_consistency(formatted_name, consistency_token)
+
+            def check_consistency \
+                name,
+                consistency_token,
+                options: nil
+              req = {
+                name: name,
+                consistency_token: consistency_token
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CheckConsistencyRequest)
+              @check_consistency.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Creates a new snapshot in the specified cluster from the specified
+            # source table. The cluster and the table must be in the same instance.
+            #
+            # @param name [String]
+            #   The unique name of the table to have the snapshot taken.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/tables/<table>+.
+            # @param cluster [String]
+            #   The name of the cluster where the snapshot will be created in.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
+            # @param snapshot_id [String]
+            #   The ID by which the new snapshot should be referred to within the parent
+            #   cluster, e.g., +mysnapshot+ of the form: +[_a-zA-Z0-9][-_.a-zA-Z0-9]*+
+            #   rather than
+            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.
+            # @param description [String]
+            #   Description of the snapshot.
+            # @param ttl [Google::Protobuf::Duration | Hash]
+            #   The amount of time that the new snapshot can stay active after it is
+            #   created. Once 'ttl' expires, the snapshot will get deleted. The maximum
+            #   amount of time a snapshot can stay active is 7 days. If 'ttl' is not
+            #   specified, the default value of 24 hours will be used.
+            #   A hash of the same form as `Google::Protobuf::Duration`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Longrunning::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #   cluster = ''
+            #   snapshot_id = ''
+            #   description = ''
+            #   response = bigtable_table_admin_client.snapshot_table(formatted_name, cluster, snapshot_id, description)
+
+            def snapshot_table \
+                name,
+                cluster,
+                snapshot_id,
+                description,
+                ttl: nil,
+                options: nil
+              req = {
+                name: name,
+                cluster: cluster,
+                snapshot_id: snapshot_id,
+                description: description,
+                ttl: ttl
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::SnapshotTableRequest)
+              @snapshot_table.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Gets metadata information about the specified snapshot.
+            #
+            # @param name [String]
+            #   The unique name of the requested snapshot.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Bigtable::Admin::V2::Snapshot]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
+            #   response = bigtable_table_admin_client.get_snapshot(formatted_name)
+
+            def get_snapshot \
+                name,
+                options: nil
+              req = {
+                name: name
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::GetSnapshotRequest)
+              @get_snapshot.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Lists all snapshots associated with the specified cluster.
+            #
+            # @param parent [String]
+            #   The unique name of the cluster for which snapshots should be listed.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
+            #   Use +<cluster> = '-'+ to list snapshots for all clusters in an instance,
+            #   e.g., +projects/<project>/instances/<instance>/clusters/-+.
+            # @param page_size [Integer]
+            #   The maximum number of resources contained in the underlying API
+            #   response. If page streaming is performed per-resource, this
+            #   parameter does not affect the return value. If page streaming is
+            #   performed per-page, this determines the maximum number of
+            #   resources in a page.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Snapshot>]
+            #   An enumerable of Google::Bigtable::Admin::V2::Snapshot instances.
+            #   See Google::Gax::PagedEnumerable documentation for other
+            #   operations such as per-page iteration or access to the response
+            #   object.
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+            #
+            #   # Iterate over all results.
+            #   bigtable_table_admin_client.list_snapshots(formatted_parent).each do |element|
+            #     # Process element.
+            #   end
+            #
+            #   # Or iterate over results one page at a time.
+            #   bigtable_table_admin_client.list_snapshots(formatted_parent).each_page do |page|
+            #     # Process each page at a time.
+            #     page.each do |element|
+            #       # Process element.
+            #     end
+            #   end
+
+            def list_snapshots \
+                parent,
+                page_size: nil,
+                options: nil
+              req = {
+                parent: parent,
+                page_size: page_size
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ListSnapshotsRequest)
+              @list_snapshots.call(req, options)
+            end
+
+            # This is a private alpha release of Cloud Bigtable snapshots. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Permanently deletes the specified snapshot.
+            #
+            # @param name [String]
+            #   The unique name of the snapshot to be deleted.
+            #   Values are of the form
+            #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin/v2"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
+            #   bigtable_table_admin_client.delete_snapshot(formatted_name)
+
+            def delete_snapshot \
+                name,
+                options: nil
+              req = {
+                name: name
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DeleteSnapshotRequest)
+              @delete_snapshot.call(req, options)
               nil
             end
           end
