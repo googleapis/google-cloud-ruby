@@ -20,6 +20,8 @@
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -107,4 +109,26 @@ module Google
                              scope: scope, retries: retries, timeout: timeout
     end
   end
+end
+
+# Set the default dns configuration
+Google::Cloud.configure.add_config! :dns do |config|
+  default_project = Google::Cloud::Config.deferred do
+    ENV["DNS_PROJECT"]
+  end
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "DNS_CREDENTIALS", "DNS_CREDENTIALS_JSON",
+      "DNS_KEYFILE", "DNS_KEYFILE_JSON"
+    )
+  end
+
+  config.add_field! :project_id, default_project, match: String
+  config.add_alias! :project, :project_id
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials]
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :retries, nil, match: Integer
+  config.add_field! :timeout, nil, match: Integer
 end
