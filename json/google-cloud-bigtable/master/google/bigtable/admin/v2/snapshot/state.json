@@ -1,0 +1,1 @@
+{"id":"google/bigtable/admin/v2/snapshot/state","name":"State","title":["Google","Bigtable","Admin","V2","Snapshot","State"],"description":"<p>Possible states of a snapshot.</p>","source":"google-cloud-bigtable/lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/table.rb#L213","resources":[],"examples":[],"methods":[]}
