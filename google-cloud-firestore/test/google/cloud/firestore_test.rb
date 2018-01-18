@@ -78,10 +78,6 @@ describe Google::Cloud do
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Firestore::Credentials.stub :default, default_credentials do
@@ -111,10 +107,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Firestore::Credentials.stub :new, stubbed_credentials do
@@ -145,10 +137,6 @@ describe Google::Cloud do
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Firestore::Credentials.stub :default, default_credentials do
@@ -178,10 +166,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Firestore::Credentials.stub :new, stubbed_credentials do
@@ -214,10 +198,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Firestore::Credentials.stub :new, stubbed_credentials do
@@ -243,6 +223,10 @@ describe Google::Cloud do
           {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
     end
 
+    after do
+      Google::Cloud.configure.reset!
+    end
+
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
@@ -259,10 +243,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project = "project-id"
@@ -300,10 +280,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project_id = "project-id"
@@ -341,10 +317,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         # Set new configuration
         Google::Cloud::Firestore.configure do |config|
           config.project = "project-id"
@@ -384,10 +356,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Firestore.reload_configuration!
-
         # Set new configuration
         Google::Cloud::Firestore.configure do |config|
           config.project_id = "project-id"

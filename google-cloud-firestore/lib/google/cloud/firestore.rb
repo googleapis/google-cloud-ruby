@@ -518,31 +518,6 @@ module Google
       end
 
       ##
-      # Reload firestore configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "FIRESTORE_CREDENTIALS", "FIRESTORE_CREDENTIALS_JSON",
-          "FIRESTORE_KEYFILE", "FIRESTORE_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :firestore
-        Google::Cloud.configure.add_config! :firestore do |config|
-          config.add_field! :project_id, ENV["FIRESTORE_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :firestore
-
-      ##
       # Configure the Google Cloud Firestore library.
       #
       # The following Firestore configuration parameters are supported:

@@ -20,6 +20,8 @@
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -103,4 +105,26 @@ module Google
                                    client_config: client_config
     end
   end
+end
+
+# Set the default firestore configuration
+Google::Cloud.configure.add_config! :firestore do |config|
+  default_project = Google::Cloud::Config.deferred do
+    ENV["FIRESTORE_PROJECT"]
+  end
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "FIRESTORE_CREDENTIALS", "FIRESTORE_CREDENTIALS_JSON",
+      "FIRESTORE_KEYFILE", "FIRESTORE_KEYFILE_JSON"
+    )
+  end
+
+  config.add_field! :project_id, default_project, match: String
+  config.add_alias! :project, :project_id
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials]
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :timeout, nil, match: Integer
+  config.add_field! :client_config, nil, match: Hash
 end
