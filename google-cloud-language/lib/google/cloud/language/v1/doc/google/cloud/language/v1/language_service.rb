@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [LanguageServiceClient][] | Google Cloud Natural Language API provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, and text annotations. |
+      # | [LanguageServiceClient][] | Provides text analysis operations such as sentiment analysis and entity recognition. |
       # | [Data Types][] | Data types for Google::Cloud::Language::V1 |
       #
       # [LanguageServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1/languageserviceclient
