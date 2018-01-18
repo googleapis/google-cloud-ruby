@@ -248,31 +248,6 @@ module Google
       end
 
       ##
-      # Reload speech configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "SPEECH_CREDENTIALS", "SPEECH_CREDENTIALS_JSON",
-          "SPEECH_KEYFILE", "SPEECH_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :speech
-        Google::Cloud.configure.add_config! :speech do |config|
-          config.add_field! :project_id, ENV["SPEECH_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :speech
-
-      ##
       # Configure the Google Cloud Speech library.
       #
       # The following Speech configuration parameters are supported:
