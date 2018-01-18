@@ -20,6 +20,8 @@
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -115,5 +117,41 @@ module Google
                                  scope: scope, timeout: timeout,
                                  client_config: client_config
     end
+  end
+end
+
+# Add logging to top-level configuration
+Google::Cloud.configure do |config|
+  unless config.field? :use_logging
+    config.add_field! :use_logging, nil, enum: [true, false]
+  end
+end
+
+# Set the default logging configuration
+Google::Cloud.configure.add_config! :logging do |config|
+  default_project = Google::Cloud::Config.deferred do
+    ENV["LOGGING_PROJECT"]
+  end
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "LOGGING_CREDENTIALS", "LOGGING_CREDENTIALS_JSON",
+      "LOGGING_KEYFILE", "LOGGING_KEYFILE_JSON"
+    )
+  end
+
+  config.add_field! :project_id, default_project, match: String
+  config.add_alias! :project, :project_id
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials]
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :timeout, nil, match: Integer
+  config.add_field! :client_config, nil, match: Hash
+  config.add_field! :log_name, nil, match: String
+  config.add_field! :log_name_map, nil, match: Hash
+  config.add_field! :labels, nil, match: Hash
+  config.add_config! :monitored_resource do |mrconfig|
+    mrconfig.add_field! :type, nil, match: String
+    mrconfig.add_field! :labels, nil, match: Hash
   end
 end
