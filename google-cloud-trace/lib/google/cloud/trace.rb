@@ -28,6 +28,7 @@ require "google/cloud/trace/time_sampler"
 require "google/cloud/trace/trace_record"
 require "google/cloud/trace/utils"
 require "google/cloud/config"
+require "google/cloud/env"
 require "stackdriver/core"
 
 module Google
@@ -254,36 +255,6 @@ module Google
           )
         )
       end
-
-      ##
-      # Reload trace configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        unless Google::Cloud.configure.field? :use_trace
-          Google::Cloud.configure.add_field! :use_trace, nil,
-                                             enum: [true, false]
-        end
-
-        Google::Cloud.configure.delete! :trace
-        Google::Cloud.configure.add_config! :trace do |config|
-          config.add_field! :project_id, ENV["TRACE_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, nil,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-          config.add_field! :capture_stack, nil, enum: [true, false]
-          config.add_field! :sampler, nil
-          config.add_field! :span_id_generator, nil, match: Proc
-          config.add_field! :notifications, nil, match: Array
-          config.add_field! :max_data_length, nil, match: Integer
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :trace
 
       ##
       # Configure the Stackdriver Trace instrumentation Middleware.
