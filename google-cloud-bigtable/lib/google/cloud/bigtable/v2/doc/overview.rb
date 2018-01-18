@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,11 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Bigtable API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Bigtable API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
-    # [Google Cloud Bigtable API][Product Documentation]:
-    # Google Cloud Bigtable - http://cloud.google.com/bigtable/
+    # [Cloud Bigtable API][Product Documentation]:
+    # API for reading and writing the contents of Bigtables associated with a
+    # cloud project.
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -28,8 +29,9 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Google Cloud Bigtable API.](https://console.cloud.google.com/apis/api/bigtable)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+    # 3. [Enable the Cloud Bigtable API.](https://console.cloud.google.com/apis/api/bigtable)
+    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
     # ```
@@ -37,7 +39,7 @@ module Google
     # ```
     #
     # ### Next Steps
-    # - Read the [Google Cloud Bigtable API Product documentation][Product Documentation]
+    # - Read the [Cloud Bigtable API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
     # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.

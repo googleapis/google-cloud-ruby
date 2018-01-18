@@ -5,8 +5,11 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/bigtable/admin/v2/instance_pb'
+require 'google/iam/v1/iam_policy_pb'
+require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.bigtable.admin.v2.CreateInstanceRequest" do
@@ -26,6 +29,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :instances, :message, 1, "google.bigtable.admin.v2.Instance"
     repeated :failed_locations, :string, 2
     optional :next_page_token, :string, 3
+  end
+  add_message "google.bigtable.admin.v2.PartialUpdateInstanceRequest" do
+    optional :instance, :message, 1, "google.bigtable.admin.v2.Instance"
+    optional :update_mask, :message, 2, "google.protobuf.FieldMask"
   end
   add_message "google.bigtable.admin.v2.DeleteInstanceRequest" do
     optional :name, :string, 1
@@ -55,6 +62,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :request_time, :message, 2, "google.protobuf.Timestamp"
     optional :finish_time, :message, 3, "google.protobuf.Timestamp"
   end
+  add_message "google.bigtable.admin.v2.UpdateInstanceMetadata" do
+    optional :original_request, :message, 1, "google.bigtable.admin.v2.PartialUpdateInstanceRequest"
+    optional :request_time, :message, 2, "google.protobuf.Timestamp"
+    optional :finish_time, :message, 3, "google.protobuf.Timestamp"
+  end
   add_message "google.bigtable.admin.v2.CreateClusterMetadata" do
     optional :original_request, :message, 1, "google.bigtable.admin.v2.CreateClusterRequest"
     optional :request_time, :message, 2, "google.protobuf.Timestamp"
@@ -64,6 +76,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :original_request, :message, 1, "google.bigtable.admin.v2.Cluster"
     optional :request_time, :message, 2, "google.protobuf.Timestamp"
     optional :finish_time, :message, 3, "google.protobuf.Timestamp"
+  end
+  add_message "google.bigtable.admin.v2.CreateAppProfileRequest" do
+    optional :parent, :string, 1
+    optional :app_profile_id, :string, 2
+    optional :app_profile, :message, 3, "google.bigtable.admin.v2.AppProfile"
+    optional :ignore_warnings, :bool, 4
+  end
+  add_message "google.bigtable.admin.v2.GetAppProfileRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.bigtable.admin.v2.ListAppProfilesRequest" do
+    optional :parent, :string, 1
+    optional :page_token, :string, 2
+  end
+  add_message "google.bigtable.admin.v2.ListAppProfilesResponse" do
+    repeated :app_profiles, :message, 1, "google.bigtable.admin.v2.AppProfile"
+    optional :next_page_token, :string, 2
+  end
+  add_message "google.bigtable.admin.v2.UpdateAppProfileRequest" do
+    optional :app_profile, :message, 1, "google.bigtable.admin.v2.AppProfile"
+    optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    optional :ignore_warnings, :bool, 3
+  end
+  add_message "google.bigtable.admin.v2.DeleteAppProfileRequest" do
+    optional :name, :string, 1
+    optional :ignore_warnings, :bool, 2
   end
 end
 
@@ -75,6 +113,7 @@ module Google
         GetInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetInstanceRequest").msgclass
         ListInstancesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListInstancesRequest").msgclass
         ListInstancesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListInstancesResponse").msgclass
+        PartialUpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateInstanceRequest").msgclass
         DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteInstanceRequest").msgclass
         CreateClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterRequest").msgclass
         GetClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetClusterRequest").msgclass
@@ -82,8 +121,15 @@ module Google
         ListClustersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListClustersResponse").msgclass
         DeleteClusterRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteClusterRequest").msgclass
         CreateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateInstanceMetadata").msgclass
+        UpdateInstanceMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateInstanceMetadata").msgclass
         CreateClusterMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata").msgclass
         UpdateClusterMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateClusterMetadata").msgclass
+        CreateAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateAppProfileRequest").msgclass
+        GetAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetAppProfileRequest").msgclass
+        ListAppProfilesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesRequest").msgclass
+        ListAppProfilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesResponse").msgclass
+        UpdateAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileRequest").msgclass
+        DeleteAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteAppProfileRequest").msgclass
       end
     end
   end

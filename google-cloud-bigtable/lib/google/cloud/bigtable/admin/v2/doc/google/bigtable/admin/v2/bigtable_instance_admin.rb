@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,12 +20,10 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [BigtableInstanceAdminClient][] |  |
-      # | [BigtableTableAdminClient][] |  |
+      # | [BigtableInstanceAdminClient][] | Service for creating, configuring, and deleting Cloud Bigtable Instances and Clusters. |
       # | [Data Types][] | Data types for Google::Cloud::Bigtable::Admin::V2 |
       #
       # [BigtableInstanceAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtableinstanceadminclient
-      # [BigtableTableAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtabletableadminclient
       # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/datatypes
       #
       module V2
@@ -86,6 +84,16 @@ module Google
         #     Pass this value to +page_token+ in another request to get the next
         #     page of results.
         class ListInstancesResponse; end
+
+        # Request message for BigtableInstanceAdmin.PartialUpdateInstance.
+        # @!attribute [rw] instance
+        #   @return [Google::Bigtable::Admin::V2::Instance]
+        #     The Instance which will (partially) replace the current value.
+        # @!attribute [rw] update_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     The subset of Instance fields which should be replaced.
+        #     Must be explicitly set.
+        class PartialUpdateInstanceRequest; end
 
         # Request message for BigtableInstanceAdmin.DeleteInstance.
         # @!attribute [rw] name
@@ -166,6 +174,18 @@ module Google
         #     The time at which the operation failed or was completed successfully.
         class CreateInstanceMetadata; end
 
+        # The metadata for the Operation returned by UpdateInstance.
+        # @!attribute [rw] original_request
+        #   @return [Google::Bigtable::Admin::V2::PartialUpdateInstanceRequest]
+        #     The request that prompted the initiation of this UpdateInstance operation.
+        # @!attribute [rw] request_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time at which the original request was received.
+        # @!attribute [rw] finish_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time at which the operation failed or was completed successfully.
+        class UpdateInstanceMetadata; end
+
         # The metadata for the Operation returned by CreateCluster.
         # @!attribute [rw] original_request
         #   @return [Google::Bigtable::Admin::V2::CreateClusterRequest]
@@ -189,6 +209,108 @@ module Google
         #   @return [Google::Protobuf::Timestamp]
         #     The time at which the operation failed or was completed successfully.
         class UpdateClusterMetadata; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for BigtableInstanceAdmin.CreateAppProfile.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     The unique name of the instance in which to create the new app profile.
+        #     Values are of the form
+        #     +projects/<project>/instances/<instance>+.
+        # @!attribute [rw] app_profile_id
+        #   @return [String]
+        #     The ID to be used when referring to the new app profile within its
+        #     instance, e.g., just +myprofile+ rather than
+        #     +projects/myproject/instances/myinstance/appProfiles/myprofile+.
+        # @!attribute [rw] app_profile
+        #   @return [Google::Bigtable::Admin::V2::AppProfile]
+        #     The app profile to be created.
+        #     Fields marked +OutputOnly+ will be ignored.
+        # @!attribute [rw] ignore_warnings
+        #   @return [true, false]
+        #     If true, ignore safety checks when creating the app profile.
+        class CreateAppProfileRequest; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for BigtableInstanceAdmin.GetAppProfile.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The unique name of the requested app profile. Values are of the form
+        #     +projects/<project>/instances/<instance>/appProfiles/<app_profile>+.
+        class GetAppProfileRequest; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for BigtableInstanceAdmin.ListAppProfiles.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     The unique name of the instance for which a list of app profiles is
+        #     requested. Values are of the form
+        #     +projects/<project>/instances/<instance>+.
+        # @!attribute [rw] page_token
+        #   @return [String]
+        #     The value of +next_page_token+ returned by a previous call.
+        class ListAppProfilesRequest; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Response message for BigtableInstanceAdmin.ListAppProfiles.
+        # @!attribute [rw] app_profiles
+        #   @return [Array<Google::Bigtable::Admin::V2::AppProfile>]
+        #     The list of requested app profiles.
+        # @!attribute [rw] next_page_token
+        #   @return [String]
+        #     Set if not all app profiles could be returned in a single response.
+        #     Pass this value to +page_token+ in another request to get the next
+        #     page of results.
+        class ListAppProfilesResponse; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for BigtableInstanceAdmin.UpdateAppProfile.
+        # @!attribute [rw] app_profile
+        #   @return [Google::Bigtable::Admin::V2::AppProfile]
+        #     The app profile which will (partially) replace the current value.
+        # @!attribute [rw] update_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     The subset of app profile fields which should be replaced.
+        #     If unset, all fields will be replaced.
+        # @!attribute [rw] ignore_warnings
+        #   @return [true, false]
+        #     If true, ignore safety checks when updating the app profile.
+        class UpdateAppProfileRequest; end
+
+        # This is a private alpha release of Cloud Bigtable replication. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Request message for BigtableInstanceAdmin.DeleteAppProfile.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The unique name of the app profile to be deleted. Values are of the form
+        #     +projects/<project>/instances/<instance>/appProfiles/<app_profile>+.
+        # @!attribute [rw] ignore_warnings
+        #   @return [true, false]
+        #     If true, ignore safety checks when deleting the app profile.
+        class DeleteAppProfileRequest; end
       end
     end
   end

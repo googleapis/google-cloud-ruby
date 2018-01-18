@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 module Google
   module Bigtable
     ##
-    # # Google Cloud Bigtable API Contents
+    # # Cloud Bigtable API Contents
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [BigtableClient][] | Google Cloud Bigtable - http://cloud.google.com/bigtable/ |
+    # | [BigtableClient][] | Service for reading from and writing to existing Bigtable tables. |
     # | [Data Types][] | Data types for Google::Cloud::Bigtable::V2 |
     #
     # [BigtableClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest/google/bigtable/v2/bigtableclient
@@ -32,6 +32,15 @@ module Google
       #     The unique name of the table from which to read.
       #     Values are of the form
       #     +projects/<project>/instances/<instance>/tables/<table>+.
+      # @!attribute [rw] app_profile_id
+      #   @return [String]
+      #     This is a private alpha release of Cloud Bigtable replication. This feature
+      #     is not currently available to most Cloud Bigtable customers. This feature
+      #     might be changed in backward-incompatible ways and is not recommended for
+      #     production use. It is not subject to any SLA or deprecation policy.
+      #
+      #     This value specifies routing for replication. If not specified, the
+      #     "default" application profile will be used.
       # @!attribute [rw] rows
       #   @return [Google::Bigtable::V2::RowSet]
       #     The row keys and/or ranges to read. If not specified, reads from all rows.
@@ -126,6 +135,15 @@ module Google
       #     The unique name of the table from which to sample row keys.
       #     Values are of the form
       #     +projects/<project>/instances/<instance>/tables/<table>+.
+      # @!attribute [rw] app_profile_id
+      #   @return [String]
+      #     This is a private alpha release of Cloud Bigtable replication. This feature
+      #     is not currently available to most Cloud Bigtable customers. This feature
+      #     might be changed in backward-incompatible ways and is not recommended for
+      #     production use. It is not subject to any SLA or deprecation policy.
+      #
+      #     This value specifies routing for replication. If not specified, the
+      #     "default" application profile will be used.
       class SampleRowKeysRequest; end
 
       # Response message for Bigtable.SampleRowKeys.
@@ -152,6 +170,15 @@ module Google
       #     The unique name of the table to which the mutation should be applied.
       #     Values are of the form
       #     +projects/<project>/instances/<instance>/tables/<table>+.
+      # @!attribute [rw] app_profile_id
+      #   @return [String]
+      #     This is a private alpha release of Cloud Bigtable replication. This feature
+      #     is not currently available to most Cloud Bigtable customers. This feature
+      #     might be changed in backward-incompatible ways and is not recommended for
+      #     production use. It is not subject to any SLA or deprecation policy.
+      #
+      #     This value specifies routing for replication. If not specified, the
+      #     "default" application profile will be used.
       # @!attribute [rw] row_key
       #   @return [String]
       #     The key of the row to which the mutation should be applied.
@@ -169,6 +196,15 @@ module Google
       # @!attribute [rw] table_name
       #   @return [String]
       #     The unique name of the table to which the mutations should be applied.
+      # @!attribute [rw] app_profile_id
+      #   @return [String]
+      #     This is a private alpha release of Cloud Bigtable replication. This feature
+      #     is not currently available to most Cloud Bigtable customers. This feature
+      #     might be changed in backward-incompatible ways and is not recommended for
+      #     production use. It is not subject to any SLA or deprecation policy.
+      #
+      #     This value specifies routing for replication. If not specified, the
+      #     "default" application profile will be used.
       # @!attribute [rw] entries
       #   @return [Array<Google::Bigtable::V2::MutateRowsRequest::Entry>]
       #     The row keys and corresponding mutations to be applied in bulk.
@@ -214,6 +250,15 @@ module Google
       #     applied.
       #     Values are of the form
       #     +projects/<project>/instances/<instance>/tables/<table>+.
+      # @!attribute [rw] app_profile_id
+      #   @return [String]
+      #     This is a private alpha release of Cloud Bigtable replication. This feature
+      #     is not currently available to most Cloud Bigtable customers. This feature
+      #     might be changed in backward-incompatible ways and is not recommended for
+      #     production use. It is not subject to any SLA or deprecation policy.
+      #
+      #     This value specifies routing for replication. If not specified, the
+      #     "default" application profile will be used.
       # @!attribute [rw] row_key
       #   @return [String]
       #     The key of the row to which the conditional mutation should be applied.
@@ -253,6 +298,15 @@ module Google
       #     applied.
       #     Values are of the form
       #     +projects/<project>/instances/<instance>/tables/<table>+.
+      # @!attribute [rw] app_profile_id
+      #   @return [String]
+      #     This is a private alpha release of Cloud Bigtable replication. This feature
+      #     is not currently available to most Cloud Bigtable customers. This feature
+      #     might be changed in backward-incompatible ways and is not recommended for
+      #     production use. It is not subject to any SLA or deprecation policy.
+      #
+      #     This value specifies routing for replication. If not specified, the
+      #     "default" application profile will be used.
       # @!attribute [rw] row_key
       #   @return [String]
       #     The key of the row to which the read/modify/write rules should be applied.

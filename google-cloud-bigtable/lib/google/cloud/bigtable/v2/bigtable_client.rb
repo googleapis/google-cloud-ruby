@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -59,6 +56,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform",
             "https://www.googleapis.com/auth/cloud-platform.read-only"
           ].freeze
+
 
           TABLE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/instances/{instance}/tables/{table}"
@@ -104,11 +102,6 @@ module Google
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
@@ -120,17 +113,6 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/bigtable/v2/bigtable_services_pb"
-
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
 
             credentials ||= Google::Cloud::Bigtable::Credentials.default
 
@@ -150,9 +132,11 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-bigtable'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -171,6 +155,10 @@ module Google
                 kwargs: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
             @bigtable_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -219,6 +207,14 @@ module Google
           #   The unique name of the table from which to read.
           #   Values are of the form
           #   +projects/<project>/instances/<instance>/tables/<table>+.
+          # @param app_profile_id [String]
+          #   This is a private alpha release of Cloud Bigtable replication. This feature
+          #   is not currently available to most Cloud Bigtable customers. This feature
+          #   might be changed in backward-incompatible ways and is not recommended for
+          #   production use. It is not subject to any SLA or deprecation policy.
+          #
+          #   This value specifies routing for replication. If not specified, the
+          #   "default" application profile will be used.
           # @param rows [Google::Bigtable::V2::RowSet | Hash]
           #   The row keys and/or ranges to read. If not specified, reads from all rows.
           #   A hash of the same form as `Google::Bigtable::V2::RowSet`
@@ -249,12 +245,14 @@ module Google
 
           def read_rows \
               table_name,
+              app_profile_id: nil,
               rows: nil,
               filter: nil,
               rows_limit: nil,
               options: nil
             req = {
               table_name: table_name,
+              app_profile_id: app_profile_id,
               rows: rows,
               filter: filter,
               rows_limit: rows_limit
@@ -272,6 +270,14 @@ module Google
           #   The unique name of the table from which to sample row keys.
           #   Values are of the form
           #   +projects/<project>/instances/<instance>/tables/<table>+.
+          # @param app_profile_id [String]
+          #   This is a private alpha release of Cloud Bigtable replication. This feature
+          #   is not currently available to most Cloud Bigtable customers. This feature
+          #   might be changed in backward-incompatible ways and is not recommended for
+          #   production use. It is not subject to any SLA or deprecation policy.
+          #
+          #   This value specifies routing for replication. If not specified, the
+          #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -290,9 +296,11 @@ module Google
 
           def sample_row_keys \
               table_name,
+              app_profile_id: nil,
               options: nil
             req = {
-              table_name: table_name
+              table_name: table_name,
+              app_profile_id: app_profile_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Bigtable::V2::SampleRowKeysRequest)
             @sample_row_keys.call(req, options)
@@ -313,6 +321,14 @@ module Google
           #   Must contain at least one entry and at most 100000.
           #   A hash of the same form as `Google::Bigtable::V2::Mutation`
           #   can also be provided.
+          # @param app_profile_id [String]
+          #   This is a private alpha release of Cloud Bigtable replication. This feature
+          #   is not currently available to most Cloud Bigtable customers. This feature
+          #   might be changed in backward-incompatible ways and is not recommended for
+          #   production use. It is not subject to any SLA or deprecation policy.
+          #
+          #   This value specifies routing for replication. If not specified, the
+          #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -331,11 +347,13 @@ module Google
               table_name,
               row_key,
               mutations,
+              app_profile_id: nil,
               options: nil
             req = {
               table_name: table_name,
               row_key: row_key,
-              mutations: mutations
+              mutations: mutations,
+              app_profile_id: app_profile_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Bigtable::V2::MutateRowRequest)
             @mutate_row.call(req, options)
@@ -355,6 +373,14 @@ module Google
           #   contain at most 100000 mutations.
           #   A hash of the same form as `Google::Bigtable::V2::MutateRowsRequest::Entry`
           #   can also be provided.
+          # @param app_profile_id [String]
+          #   This is a private alpha release of Cloud Bigtable replication. This feature
+          #   is not currently available to most Cloud Bigtable customers. This feature
+          #   might be changed in backward-incompatible ways and is not recommended for
+          #   production use. It is not subject to any SLA or deprecation policy.
+          #
+          #   This value specifies routing for replication. If not specified, the
+          #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -375,10 +401,12 @@ module Google
           def mutate_rows \
               table_name,
               entries,
+              app_profile_id: nil,
               options: nil
             req = {
               table_name: table_name,
-              entries: entries
+              entries: entries,
+              app_profile_id: app_profile_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Bigtable::V2::MutateRowsRequest)
             @mutate_rows.call(req, options)
@@ -393,6 +421,14 @@ module Google
           #   +projects/<project>/instances/<instance>/tables/<table>+.
           # @param row_key [String]
           #   The key of the row to which the conditional mutation should be applied.
+          # @param app_profile_id [String]
+          #   This is a private alpha release of Cloud Bigtable replication. This feature
+          #   is not currently available to most Cloud Bigtable customers. This feature
+          #   might be changed in backward-incompatible ways and is not recommended for
+          #   production use. It is not subject to any SLA or deprecation policy.
+          #
+          #   This value specifies routing for replication. If not specified, the
+          #   "default" application profile will be used.
           # @param predicate_filter [Google::Bigtable::V2::RowFilter | Hash]
           #   The filter to be applied to the contents of the specified row. Depending
           #   on whether or not any results are yielded, either +true_mutations+ or
@@ -432,6 +468,7 @@ module Google
           def check_and_mutate_row \
               table_name,
               row_key,
+              app_profile_id: nil,
               predicate_filter: nil,
               true_mutations: nil,
               false_mutations: nil,
@@ -439,6 +476,7 @@ module Google
             req = {
               table_name: table_name,
               row_key: row_key,
+              app_profile_id: app_profile_id,
               predicate_filter: predicate_filter,
               true_mutations: true_mutations,
               false_mutations: false_mutations
@@ -447,11 +485,11 @@ module Google
             @check_and_mutate_row.call(req, options)
           end
 
-          # Modifies a row atomically. The method reads the latest existing timestamp
-          # and value from the specified columns and writes a new entry based on
-          # pre-defined read/modify/write rules. The new value for the timestamp is the
-          # greater of the existing timestamp or the current server time. The method
-          # returns the new contents of all modified cells.
+          # Modifies a row atomically on the server. The method reads the latest
+          # existing timestamp and value from the specified columns and writes a new
+          # entry based on pre-defined read/modify/write rules. The new value for the
+          # timestamp is the greater of the existing timestamp or the current server
+          # time. The method returns the new contents of all modified cells.
           #
           # @param table_name [String]
           #   The unique name of the table to which the read/modify/write rules should be
@@ -466,6 +504,14 @@ module Google
           #   affect the results of later ones.
           #   A hash of the same form as `Google::Bigtable::V2::ReadModifyWriteRule`
           #   can also be provided.
+          # @param app_profile_id [String]
+          #   This is a private alpha release of Cloud Bigtable replication. This feature
+          #   is not currently available to most Cloud Bigtable customers. This feature
+          #   might be changed in backward-incompatible ways and is not recommended for
+          #   production use. It is not subject to any SLA or deprecation policy.
+          #
+          #   This value specifies routing for replication. If not specified, the
+          #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -484,11 +530,13 @@ module Google
               table_name,
               row_key,
               rules,
+              app_profile_id: nil,
               options: nil
             req = {
               table_name: table_name,
               row_key: row_key,
-              rules: rules
+              rules: rules,
+              app_profile_id: app_profile_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Bigtable::V2::ReadModifyWriteRowRequest)
             @read_modify_write_row.call(req, options)

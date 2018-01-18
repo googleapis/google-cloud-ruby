@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,6 +43,8 @@ module Google
             rpc :ListInstances, ListInstancesRequest, ListInstancesResponse
             # Updates an instance within a project.
             rpc :UpdateInstance, Instance, Instance
+            # Partially updates an instance within a project.
+            rpc :PartialUpdateInstance, PartialUpdateInstanceRequest, Google::Longrunning::Operation
             # Delete an instance from a project.
             rpc :DeleteInstance, DeleteInstanceRequest, Google::Protobuf::Empty
             # Creates a cluster within an instance.
@@ -55,6 +57,67 @@ module Google
             rpc :UpdateCluster, Cluster, Google::Longrunning::Operation
             # Deletes a cluster from an instance.
             rpc :DeleteCluster, DeleteClusterRequest, Google::Protobuf::Empty
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Creates an app profile within an instance.
+            rpc :CreateAppProfile, CreateAppProfileRequest, AppProfile
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Gets information about an app profile.
+            rpc :GetAppProfile, GetAppProfileRequest, AppProfile
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Lists information about app profiles in an instance.
+            rpc :ListAppProfiles, ListAppProfilesRequest, ListAppProfilesResponse
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Updates an app profile within an instance.
+            rpc :UpdateAppProfile, UpdateAppProfileRequest, Google::Longrunning::Operation
+            # This is a private alpha release of Cloud Bigtable replication. This feature
+            # is not currently available to most Cloud Bigtable customers. This feature
+            # might be changed in backward-incompatible ways and is not recommended for
+            # production use. It is not subject to any SLA or deprecation policy.
+            #
+            # Deletes an app profile from an instance.
+            rpc :DeleteAppProfile, DeleteAppProfileRequest, Google::Protobuf::Empty
+            # This is a private alpha release of Cloud Bigtable instance level
+            # permissions. This feature is not currently available to most Cloud Bigtable
+            # customers. This feature might be changed in backward-incompatible ways and
+            # is not recommended for production use. It is not subject to any SLA or
+            # deprecation policy.
+            #
+            # Gets the access control policy for an instance resource. Returns an empty
+            # policy if an instance exists but does not have a policy set.
+            rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
+            # This is a private alpha release of Cloud Bigtable instance level
+            # permissions. This feature is not currently available to most Cloud Bigtable
+            # customers. This feature might be changed in backward-incompatible ways and
+            # is not recommended for production use. It is not subject to any SLA or
+            # deprecation policy.
+            #
+            # Sets the access control policy on an instance resource. Replaces any
+            # existing policy.
+            rpc :SetIamPolicy, Google::Iam::V1::SetIamPolicyRequest, Google::Iam::V1::Policy
+            # This is a private alpha release of Cloud Bigtable instance level
+            # permissions. This feature is not currently available to most Cloud Bigtable
+            # customers. This feature might be changed in backward-incompatible ways and
+            # is not recommended for production use. It is not subject to any SLA or
+            # deprecation policy.
+            #
+            # Returns permissions that the caller has on the specified instance resource.
+            rpc :TestIamPermissions, Google::Iam::V1::TestIamPermissionsRequest, Google::Iam::V1::TestIamPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class

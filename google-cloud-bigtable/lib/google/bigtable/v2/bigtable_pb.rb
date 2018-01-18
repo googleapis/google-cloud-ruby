@@ -10,6 +10,7 @@ require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.bigtable.v2.ReadRowsRequest" do
     optional :table_name, :string, 1
+    optional :app_profile_id, :string, 5
     optional :rows, :message, 2, "google.bigtable.v2.RowSet"
     optional :filter, :message, 3, "google.bigtable.v2.RowFilter"
     optional :rows_limit, :int64, 4
@@ -33,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.bigtable.v2.SampleRowKeysRequest" do
     optional :table_name, :string, 1
+    optional :app_profile_id, :string, 2
   end
   add_message "google.bigtable.v2.SampleRowKeysResponse" do
     optional :row_key, :bytes, 1
@@ -40,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.bigtable.v2.MutateRowRequest" do
     optional :table_name, :string, 1
+    optional :app_profile_id, :string, 4
     optional :row_key, :bytes, 2
     repeated :mutations, :message, 3, "google.bigtable.v2.Mutation"
   end
@@ -47,6 +50,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.bigtable.v2.MutateRowsRequest" do
     optional :table_name, :string, 1
+    optional :app_profile_id, :string, 3
     repeated :entries, :message, 2, "google.bigtable.v2.MutateRowsRequest.Entry"
   end
   add_message "google.bigtable.v2.MutateRowsRequest.Entry" do
@@ -62,6 +66,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.bigtable.v2.CheckAndMutateRowRequest" do
     optional :table_name, :string, 1
+    optional :app_profile_id, :string, 7
     optional :row_key, :bytes, 2
     optional :predicate_filter, :message, 6, "google.bigtable.v2.RowFilter"
     repeated :true_mutations, :message, 4, "google.bigtable.v2.Mutation"
@@ -72,6 +77,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.bigtable.v2.ReadModifyWriteRowRequest" do
     optional :table_name, :string, 1
+    optional :app_profile_id, :string, 4
     optional :row_key, :bytes, 2
     repeated :rules, :message, 3, "google.bigtable.v2.ReadModifyWriteRule"
   end

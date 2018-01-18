@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     https://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,11 +52,11 @@ module Google
           rpc :MutateRows, MutateRowsRequest, stream(MutateRowsResponse)
           # Mutates a row atomically based on the output of a predicate Reader filter.
           rpc :CheckAndMutateRow, CheckAndMutateRowRequest, CheckAndMutateRowResponse
-          # Modifies a row atomically. The method reads the latest existing timestamp
-          # and value from the specified columns and writes a new entry based on
-          # pre-defined read/modify/write rules. The new value for the timestamp is the
-          # greater of the existing timestamp or the current server time. The method
-          # returns the new contents of all modified cells.
+          # Modifies a row atomically on the server. The method reads the latest
+          # existing timestamp and value from the specified columns and writes a new
+          # entry based on pre-defined read/modify/write rules. The new value for the
+          # timestamp is the greater of the existing timestamp or the current server
+          # time. The method returns the new contents of all modified cells.
           rpc :ReadModifyWriteRow, ReadModifyWriteRowRequest, ReadModifyWriteRowResponse
         end
 
