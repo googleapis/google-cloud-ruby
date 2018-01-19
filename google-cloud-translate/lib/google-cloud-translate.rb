@@ -20,6 +20,8 @@
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -139,4 +141,30 @@ module Google
                                    project: project, keyfile: keyfile
     end
   end
+end
+
+# Set the default translate configuration
+Google::Cloud.configure.add_config! :translate do |config|
+  default_project = Google::Cloud::Config.deferred do
+    ENV["TRANSLATE_PROJECT"]
+  end
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON",
+      "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
+    )
+  end
+  default_key = Google::Cloud::Config.deferred do
+    ENV["TRANSLATE_KEY"] || ENV["GOOGLE_CLOUD_KEY"]
+  end
+
+  config.add_field! :project_id, default_project, match: String
+  config.add_alias! :project, :project_id
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials]
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :key, default_key, match: String
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :retries, nil, match: Integer
+  config.add_field! :timeout, nil, match: Integer
 end
