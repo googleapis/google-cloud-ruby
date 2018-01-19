@@ -79,10 +79,6 @@ describe Google::Cloud do
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
@@ -111,10 +107,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
@@ -142,16 +134,12 @@ describe Google::Cloud do
     let(:found_credentials) { "{}" }
 
     after do
-      Google::Cloud::Pubsub.reload_configuration!
+      Google::Cloud.configure.reset!
     end
 
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
@@ -180,10 +168,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
@@ -215,10 +199,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Pubsub::Credentials.stub :new, stubbed_credentials do
@@ -239,10 +219,6 @@ describe Google::Cloud do
       emulator_check = ->(name) { (name == "PUBSUB_EMULATOR_HOST") ? emulator_host : nil }
       # Clear all environment variables, except PUBSUB_EMULATOR_HOST
       ENV.stub :[], emulator_check do
-        # Reload config so the new env gets picked up
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
@@ -260,10 +236,6 @@ describe Google::Cloud do
       emulator_host = "localhost:4567"
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Pubsub::Credentials.stub :default, default_credentials do
@@ -286,6 +258,10 @@ describe Google::Cloud do
           {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
     end
 
+    after do
+      Google::Cloud.configure.reset!
+    end
+
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
@@ -302,10 +278,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project = "project-id"
@@ -343,10 +315,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project_id = "project-id"
@@ -384,10 +352,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Set new configuration
         Google::Cloud::Pubsub.configure do |config|
           config.project = "project-id"
@@ -427,10 +391,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Set new configuration
         Google::Cloud::Pubsub.configure do |config|
           config.project_id = "project-id"
@@ -457,10 +417,6 @@ describe Google::Cloud do
     it "uses pubsub config for emulator_host" do
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Pubsub.reload_configuration!
-
         # Set new configuration
         Google::Cloud::Pubsub.configure do |config|
           config.project_id = "project-id"

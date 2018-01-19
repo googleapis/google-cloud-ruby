@@ -101,12 +101,14 @@ module Google
 
           Cloud.configure.use_debugger ||= gcp_config.use_debugger
           Debugger.configure do |config|
-            config.project_id ||= config.project
-            config.project_id ||= dbg_config.project_id || dbg_config.project
-            config.project_id ||= gcp_config.project_id || gcp_config.project
-            config.credentials ||= config.keyfile
-            config.credentials ||= dbg_config.credentials || dbg_config.keyfile
-            config.credentials ||= gcp_config.credentials || gcp_config.keyfile
+            config.project_id ||= begin
+              config.project || dbg_config.project_id || dbg_config.project
+                gcp_config.project_id || gcp_config.project
+            end
+            config.credentials ||= begin
+              config.keyfile || dbg_config.credentials || dbg_config.keyfile
+                gcp_config.credentials || gcp_config.keyfile
+            end
             config.service_name ||= \
               (dbg_config.service_name || gcp_config.service_name)
             config.service_version ||= \

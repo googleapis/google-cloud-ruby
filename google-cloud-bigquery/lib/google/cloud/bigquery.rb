@@ -544,31 +544,6 @@ module Google
       end
 
       ##
-      # Reload bigquery configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "BIGQUERY_CREDENTIALS", "BIGQUERY_CREDENTIALS_JSON",
-          "BIGQUERY_KEYFILE", "BIGQUERY_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :bigquery
-        Google::Cloud.configure.add_config! :bigquery do |config|
-          config.add_field! :project_id, ENV["BIGQUERY_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :retries, nil, match: Integer
-          config.add_field! :timeout, nil, match: Integer
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :bigquery
-
-      ##
       # Configure the Google Cloud BigQuery library.
       #
       # The following BigQuery configuration parameters are supported:

@@ -311,7 +311,9 @@ module Google
         unless @validators.key? key
           warn! "Key #{key.inspect} does not exist. Returning nil."
         end
-        @values[key]
+        value = @values[key]
+        value = value.call if Config::DeferredValue === value
+        value
       end
 
       ##
@@ -443,6 +445,14 @@ module Google
 
       ##
       # @private
+      # Create a configuration value that will be invoked when retrieved.
+      #
+      def self.deferred &block
+        DeferredValue.new(&block)
+      end
+
+      ##
+      # @private
       # Dynamic methods accessed as keys.
       #
       def method_missing name, *args
@@ -555,6 +565,7 @@ module Google
       end
 
       def validate_value! key, validator, value
+        value = value.call if Config::DeferredValue === value
         case validator
         when ::Proc
           unless validator.call value
@@ -577,6 +588,19 @@ module Google
           !s.to_s.include? "/google/cloud/config.rb:"
         end
         ::Kernel.warn "#{msg} at #{location}"
+      end
+
+      ##
+      # @private
+      #
+      class DeferredValue
+        def initialize &block
+          @callback = block
+        end
+
+        def call
+          @callback.call
+        end
       end
     end
   end

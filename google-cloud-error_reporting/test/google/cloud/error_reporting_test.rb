@@ -28,10 +28,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
     it "gets defaults for project-id, keyfile, service, and version" do
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::ErrorReporting.reload_configuration!
-
         Google::Cloud::ErrorReporting::Project.stub :default_project_id, "test-project-id" do
           Google::Cloud::ErrorReporting::Credentials.stub :default, default_credentials do
             error_reporting = Google::Cloud::ErrorReporting.new
@@ -51,10 +47,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       }
 
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::ErrorReporting.reload_configuration!
-
         File.stub :file?, true, ["/path/to/a/keyfile"] do
           File.stub :read, found_credentials, ["/path/to/a/keyfile"] do
             Google::Cloud::ErrorReporting::Credentials.stub :new, stubbed_credentials do
@@ -77,10 +69,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       }
 
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::ErrorReporting.reload_configuration!
-
         File.stub :file?, true, ["/path/to/a/keyfile"] do
           File.stub :read, found_credentials, ["/path/to/a/keyfile"] do
             Google::Cloud::ErrorReporting::Credentials.stub :new, stubbed_credentials do
@@ -270,6 +258,10 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
           {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
     end
 
+    after do
+      Google::Cloud.configure.reset!
+    end
+
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
@@ -286,10 +278,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::ErrorReporting.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project = "project-id"
@@ -327,10 +315,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::ErrorReporting.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project_id = "project-id"
@@ -368,10 +352,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::ErrorReporting.reload_configuration!
-
         # Set new configuration
         Google::Cloud::ErrorReporting.configure do |config|
           config.project = "project-id"
@@ -411,10 +391,6 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::ErrorReporting.reload_configuration!
-
         # Set new configuration
         Google::Cloud::ErrorReporting.configure do |config|
           config.project_id = "project-id"

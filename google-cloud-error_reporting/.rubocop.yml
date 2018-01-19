@@ -25,6 +25,9 @@ Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25
+Metrics/BlockLength:
+  Exclude:
+    - "lib/google-cloud-error_reporting.rb"
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:

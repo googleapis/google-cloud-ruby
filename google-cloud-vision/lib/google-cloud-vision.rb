@@ -20,6 +20,8 @@
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -108,4 +110,34 @@ module Google
                                 client_config: client_config
     end
   end
+end
+
+# Set the default vision configuration
+Google::Cloud.configure.add_config! :vision do |config|
+  default_project = Google::Cloud::Config.deferred do
+    ENV["VISION_PROJECT"]
+  end
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "VISION_CREDENTIALS", "VISION_CREDENTIALS_JSON",
+      "VISION_KEYFILE", "VISION_KEYFILE_JSON"
+    )
+  end
+
+  config.add_field! :project_id, default_project, match: String
+  config.add_alias! :project, :project_id
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials]
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :timeout, nil, match: Integer
+  config.add_field! :client_config, nil, match: Hash
+  # Update the documentation on the Vision module methods when these
+  # defaults change.
+  config.add_field! :default_max_faces, 100
+  config.add_field! :default_max_landmarks, 100
+  config.add_field! :default_max_logos, 100
+  config.add_field! :default_max_labels, 100
+  config.add_field! :default_max_crop_hints, 100
+  config.add_field! :default_max_web, 100
 end

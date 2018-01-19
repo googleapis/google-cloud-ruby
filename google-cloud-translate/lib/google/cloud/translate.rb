@@ -307,33 +307,6 @@ module Google
       end
 
       ##
-      # Reload Translate configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_key = ENV["TRANSLATE_KEY"] || ENV["GOOGLE_CLOUD_KEY"]
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON",
-          "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :translate
-        Google::Cloud.configure.add_config! :translate do |config|
-          config.add_field! :project_id, ENV["TRANSLATE_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :key, default_key, match: String
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :retries, nil, match: Integer
-          config.add_field! :timeout, nil, match: Integer
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :translate
-
-      ##
       # Configure the Google Cloud Translate library.
       #
       # The following Translate configuration parameters are supported:

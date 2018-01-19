@@ -415,47 +415,6 @@ module Google
         )
       end
 
-      # rubocop:disable all
-
-      ##
-      # Reload logging configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "LOGGING_CREDENTIALS", "LOGGING_CREDENTIALS_JSON",
-          "LOGGING_KEYFILE", "LOGGING_KEYFILE_JSON"
-        )
-
-        unless Google::Cloud.configure.field? :use_logging
-          Google::Cloud.configure.add_field! :use_logging, nil,
-                                             enum: [true, false]
-        end
-
-        Google::Cloud.configure.delete! :logging
-        Google::Cloud.configure.add_config! :logging do |config|
-          config.add_field! :project_id, ENV["LOGGING_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-          config.add_field! :log_name, nil, match: String
-          config.add_field! :log_name_map, nil, match: Hash
-          config.add_field! :labels, nil, match: Hash
-          config.add_config! :monitored_resource do |mrconfig|
-            mrconfig.add_field! :type, nil, match: String
-            mrconfig.add_field! :labels, nil, match: Hash
-          end
-        end
-      end
-
-      # rubocop:enable all
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :logging
-
       ##
       # Configure the Google::Cloud::Logging::Middleware when used in a
       # Rack-based application.

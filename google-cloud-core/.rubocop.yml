@@ -17,6 +17,9 @@ Style/RescueModifier:
 Style/MutableConstant:
   Exclude:
     - "lib/google/cloud/credentials.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/config.rb"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:

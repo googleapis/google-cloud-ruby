@@ -20,6 +20,8 @@
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -126,4 +128,50 @@ module Google
                                   client_config: client_config
     end
   end
+end
+
+# Add debugger to top-level configuration
+Google::Cloud.configure do |config|
+  unless config.field? :use_debugger
+    config.add_field! :use_debugger, nil, enum: [true, false]
+  end
+  unless config.field? :service_name
+    config.add_field! :service_name, nil, match: String
+  end
+  unless config.field? :service_version
+    config.add_field! :service_version, nil, match: String
+  end
+end
+
+# Set the default debugger configuration
+Google::Cloud.configure.add_config! :debugger do |config|
+  default_project = Google::Cloud::Config.deferred do
+    ENV["DEBUGGER_PROJECT"]
+  end
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env \
+      "DEBUGGER_CREDENTIALS", "DEBUGGER_CREDENTIALS_JSON",
+      "DEBUGGER_KEYFILE", "DEBUGGER_KEYFILE_JSON"
+  end
+  default_service = Google::Cloud::Config.deferred do
+    ENV["DEBUGGER_SERVICE_NAME"]
+  end
+  default_version = Google::Cloud::Config.deferred do
+    ENV["DEBUGGER_SERVICE_VERSION"]
+  end
+
+  config.add_field! :project_id, default_project, match: String
+  config.add_alias! :project, :project_id
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials]
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :service_name, default_service, match: String
+  config.add_field! :service_version, default_version, match: String
+  config.add_field! :app_root, nil, match: String
+  config.add_field! :root, nil, match: String
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :timeout, nil, match: Integer
+  config.add_field! :client_config, nil, match: Hash
+  config.add_field! :allow_mutating_methods, false
+  config.add_field! :evaluation_time_limit, 0.05, match: Numeric
 end

@@ -262,6 +262,13 @@ describe Google::Cloud::Config do
       }.must_be_silent
 
       -> () {
+        checked_config.opt1_int = Google::Cloud::Config.deferred { rand(10) }
+        checked_config.opt1_int.must_be :>=, 0
+        checked_config.opt1_int.must_be :<, 10
+        checked_config.opt1_int.must_be_kind_of Integer
+      }.must_be_silent
+
+      -> () {
         checked_config.opt1_int = "20"
       }.must_output nil, %r{Invalid value}
       checked_config.opt1_int.must_equal "20"
@@ -279,6 +286,11 @@ describe Google::Cloud::Config do
       }.must_be_silent
 
       -> () {
+        checked_config.sub1.opt2_sym = Google::Cloud::Config.deferred { "foo".to_sym }
+        checked_config.sub1.opt2_sym.must_equal :foo
+      }.must_be_silent
+
+      -> () {
         checked_config.sub1.opt2_sym = "bye"
       }.must_output nil, %r{Invalid value}
       checked_config.sub1.opt2_sym.must_equal "bye"
@@ -293,6 +305,11 @@ describe Google::Cloud::Config do
       -> () {
         checked_config.sub1.sub2.opt3_bool = false
         checked_config.sub1.sub2.opt3_bool.must_equal false
+      }.must_be_silent
+
+      -> () {
+        checked_config.sub1.sub2.opt3_bool = Google::Cloud::Config.deferred { true }
+        checked_config.sub1.sub2.opt3_bool.must_equal true
       }.must_be_silent
 
       -> () {
@@ -322,6 +339,11 @@ describe Google::Cloud::Config do
       }.must_be_silent
 
       -> () {
+        checked_config.sub1.sub2.opt3_enum = Google::Cloud::Config.deferred { :one }
+        checked_config.sub1.sub2.opt3_enum.must_equal :one
+      }.must_be_silent
+
+      -> () {
         checked_config.sub1.sub2.opt3_enum = :four
       }.must_output nil, %r{Invalid value}
       checked_config.sub1.sub2.opt3_enum.must_equal :four
@@ -331,6 +353,11 @@ describe Google::Cloud::Config do
       -> () {
         checked_config.sub1.sub2.opt3_regex = "bye"
         checked_config.sub1.sub2.opt3_regex.must_equal "bye"
+      }.must_be_silent
+
+      -> () {
+        checked_config.sub1.sub2.opt3_regex = Google::Cloud::Config.deferred { String :foo }
+        checked_config.sub1.sub2.opt3_regex.must_equal "foo"
       }.must_be_silent
 
       -> () {
@@ -362,7 +389,7 @@ describe Google::Cloud::Config do
 
   describe "shared config" do
     after {
-      Google::Cloud.reload_configuration!
+      Google::Cloud.configure.reset!
     }
 
     it "loads default credentials from a file path environment variable" do
@@ -370,7 +397,6 @@ describe Google::Cloud::Config do
       env = {"GOOGLE_CLOUD_CREDENTIALS" => path,
              "GOOGLE_CLOUD_CREDENTIALS_JSON" => '{"a": 1}'}
       ENV.stub(:[], ->(k) { env[k] }) do
-        Google::Cloud.reload_configuration!
         Google::Cloud.configure.credentials.must_equal path
       end
     end
@@ -380,7 +406,6 @@ describe Google::Cloud::Config do
       env = {"GOOGLE_CLOUD_CREDENTIALS" => path,
              "GOOGLE_CLOUD_CREDENTIALS_JSON" => '{"a": 1}'}
       ENV.stub(:[], ->(k) { env[k] }) do
-        Google::Cloud.reload_configuration!
         Google::Cloud.configure.credentials.must_equal({"a" => 1})
       end
     end

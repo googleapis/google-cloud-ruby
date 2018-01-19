@@ -692,39 +692,6 @@ module Google
       end
 
       ##
-      # Reload vision configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "VISION_CREDENTIALS", "VISION_CREDENTIALS_JSON",
-          "VISION_KEYFILE", "VISION_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :vision
-        Google::Cloud.configure.add_config! :vision do |config|
-          config.add_field! :project_id, ENV["VISION_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-          # Update the documentation on the Vision module methods when these
-          # defaults change.
-          config.add_field! :default_max_faces, 100
-          config.add_field! :default_max_landmarks, 100
-          config.add_field! :default_max_logos, 100
-          config.add_field! :default_max_labels, 100
-          config.add_field! :default_max_crop_hints, 100
-          config.add_field! :default_max_web, 100
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :vision
-
-      ##
       # Configure the Google Cloud Vision library.
       #
       # The following Vision configuration parameters are supported:

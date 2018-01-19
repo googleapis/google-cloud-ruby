@@ -93,10 +93,6 @@ describe Google::Cloud do
                                    app_engine_service_version: default_service_version
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, stubbed_env do
           Google::Cloud::Debugger::Credentials.stub :default, default_credentials do
@@ -129,10 +125,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Debugger::Credentials.stub :new, stubbed_credentials do
@@ -180,10 +172,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, stubbed_env do
           Google::Cloud::Debugger::Credentials.stub :default, default_credentials do
@@ -216,10 +204,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Debugger::Credentials.stub :new, stubbed_credentials do
@@ -255,10 +239,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         File.stub :file?, true, ["path/to/keyfile.json"] do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Debugger::Credentials.stub :new, stubbed_credentials do
@@ -285,6 +265,10 @@ describe Google::Cloud do
           {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
     end
 
+    after do
+      Google::Cloud.configure.reset!
+    end
+
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
@@ -301,10 +285,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project = "project-id"
@@ -342,10 +322,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         # Set new configuration
         Google::Cloud.configure do |config|
           config.project_id = "project-id"
@@ -383,10 +359,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         # Set new configuration
         Google::Cloud::Debugger.configure do |config|
           config.project = "project-id"
@@ -426,10 +398,6 @@ describe Google::Cloud do
 
       # Clear all environment variables
       ENV.stub :[], nil do
-        # Reload config so the dev env does not leak through
-        Google::Cloud.reload_configuration!
-        Google::Cloud::Debugger.reload_configuration!
-
         # Set new configuration
         Google::Cloud::Debugger.configure do |config|
           config.project_id = "project-id"

@@ -336,31 +336,6 @@ module Google
       end
 
       ##
-      # Reload DNS configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "DNS_CREDENTIALS", "DNS_CREDENTIALS_JSON",
-          "DNS_KEYFILE", "DNS_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :dns
-        Google::Cloud.configure.add_config! :dns do |config|
-          config.add_field! :project_id, ENV["DNS_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :retries, nil, match: Integer
-          config.add_field! :timeout, nil, match: Integer
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :dns
-
-      ##
       # Configure the Google Cloud DNS library.
       #
       # The following DNS configuration parameters are supported:

@@ -404,31 +404,6 @@ module Google
       end
 
       ##
-      # Reload spanner configuration from defaults. For testing.
-      # @private
-      #
-      def self.reload_configuration!
-        default_creds = Google::Cloud::Config.credentials_from_env(
-          "SPANNER_CREDENTIALS", "SPANNER_CREDENTIALS_JSON",
-          "SPANNER_KEYFILE", "SPANNER_KEYFILE_JSON"
-        )
-
-        Google::Cloud.configure.delete! :spanner
-        Google::Cloud.configure.add_config! :spanner do |config|
-          config.add_field! :project_id, ENV["SPANNER_PROJECT"], match: String
-          config.add_alias! :project, :project_id
-          config.add_field! :credentials, default_creds,
-                            match: [String, Hash, Google::Auth::Credentials]
-          config.add_alias! :keyfile, :credentials
-          config.add_field! :scope, nil, match: [String, Array]
-          config.add_field! :timeout, nil, match: Integer
-          config.add_field! :client_config, nil, match: Hash
-        end
-      end
-
-      reload_configuration! unless Google::Cloud.configure.subconfig? :spanner
-
-      ##
       # Configure the Google Cloud Spanner library.
       #
       # The following Spanner configuration parameters are supported:
