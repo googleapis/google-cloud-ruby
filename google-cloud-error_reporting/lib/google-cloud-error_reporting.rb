@@ -148,15 +148,18 @@ Google::Cloud.configure.add_config! :error_reporting do |config|
     ENV["ERROR_REPORTING_VERSION"]
   end
 
-  config.add_field! :project_id, default_project, match: String
+  config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds,
-                    match: [String, Hash, Google::Auth::Credentials]
+                    match: [String, Hash, Google::Auth::Credentials],
+                    allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
-  config.add_field! :service_name, default_service, match: String
-  config.add_field! :service_version, default_version, match: String
+  config.add_field! :service_name, default_service,
+                    match: String, allow_nil: true
+  config.add_field! :service_version, default_version,
+                    match: String, allow_nil: true
   config.add_field! :ignore_classes, nil, match: Array
 end

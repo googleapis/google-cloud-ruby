@@ -111,7 +111,7 @@ Google::Cloud.configure do |config|
       "GCLOUD_KEYFILE", "GCLOUD_KEYFILE_JSON"
   end
 
-  config.add_field! :project_id, default_project, match: String
+  config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds, match: Object
   config.add_alias! :keyfile, :credentials

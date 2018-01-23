@@ -121,7 +121,8 @@ Google::Cloud.configure.add_config! :resource_manager do |config|
   end
 
   config.add_field! :credentials, default_creds,
-                    match: [String, Hash, Google::Auth::Credentials]
+                    match: [String, Hash, Google::Auth::Credentials],
+                    allow_nil: true
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :retries, nil, match: Integer

@@ -364,12 +364,14 @@ module Google
         # already.
         #
         def load_config **kwargs
-          configuration.capture_stack = kwargs[:capture_stack] ||
-                                        configuration.capture_stack
-          configuration.sampler = kwargs[:sampler] ||
-                                  configuration.sampler
-          configuration.span_id_generator = kwargs[:span_id_generator] ||
-                                            configuration.span_id_generator
+          capture_stack = kwargs[:capture_stack]
+          configuration.capture_stack = capture_stack unless capture_stack.nil?
+
+          sampler = kwargs[:sampler]
+          configuration.sampler = sampler unless sampler.nil?
+
+          generator = kwargs[:span_id_generator]
+          configuration.span_id_generator = generator unless generator.nil?
 
           init_default_config
         end
