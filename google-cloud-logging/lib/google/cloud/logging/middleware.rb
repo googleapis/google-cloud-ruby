@@ -260,14 +260,14 @@ module Google
         # already.
         #
         def load_config **kwargs
-          configuration.project_id = kwargs[:project_id] ||
-                                     kwargs[:project] ||
-                                     configuration.project_id
-          configuration.credentials = kwargs[:credentials] ||
-                                      kwargs[:keyfile] ||
-                                      configuration.credentials
-          configuration.log_name_map ||= kwargs[:log_name_map] ||
-                                         configuration.log_name_map
+          project_id = kwargs[:project] || kwargs[:project_id]
+          configuration.project_id = project_id unless project_id.nil?
+
+          creds = kwargs[:credentials] || kwargs[:keyfile]
+          configuration.credentials = creds unless creds.nil?
+
+          log_name_map = kwargs[:log_name_map]
+          configuration.log_name_map = log_name_map unless log_name_map.nil?
 
           init_default_config
         end

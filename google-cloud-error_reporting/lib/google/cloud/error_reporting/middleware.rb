@@ -154,18 +154,20 @@ module Google
         # already.
         #
         def load_config **kwargs
-          configuration.project_id = kwargs[:project_id] ||
-                                     kwargs[:project] ||
-                                     configuration.project_id
-          configuration.credentials = kwargs[:credentials] ||
-                                      kwargs[:keyfile] ||
-                                      configuration.credentials
-          configuration.service_name = kwargs[:service_name] ||
-                                       configuration.service_name
-          configuration.service_version = kwargs[:service_version] ||
-                                          configuration.service_version
-          configuration.ignore_classes = kwargs[:ignore_classes] ||
-                                         configuration.ignore_classes
+          project_id = kwargs[:project] || kwargs[:project_id]
+          configuration.project_id = project_id unless project_id.nil?
+
+          creds = kwargs[:credentials] || kwargs[:keyfile]
+          configuration.credentials = creds unless creds.nil?
+
+          service_name = kwargs[:service_name]
+          configuration.service_name = service_name unless service_name.nil?
+
+          service_vers = kwargs[:service_version]
+          configuration.service_version = service_vers unless service_vers.nil?
+
+          ignores = kwargs[:ignore_classes]
+          configuration.ignore_classes = ignores unless ignores.nil?
 
           init_default_config
         end
