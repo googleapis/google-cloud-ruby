@@ -73,7 +73,8 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       config.sampler = sampler
       config.span_id_generator = mock_span_id_generator
     end
-    Google::Cloud::Trace::Middleware.new base_app
+    tracer.service.mocked_lowlevel_client = Minitest::Mock.new
+    Google::Cloud::Trace::Middleware.new base_app, service: tracer.service
   }
 
   before do
@@ -120,7 +121,8 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
     it "creates a default AsyncReporter if service isn't passed in" do
       Google::Cloud::Trace.configure.project_id = "test"
       Google::Cloud::Trace.stub :new, OpenStruct.new(service: nil) do
-        base_middleware.instance_variable_get(:@service).must_be_kind_of Google::Cloud::Trace::AsyncReporter
+        middleware = Google::Cloud::Trace::Middleware.new base_app, credentials: credentials
+        middleware.instance_variable_get(:@service).must_be_kind_of Google::Cloud::Trace::AsyncReporter
       end
     end
   end
