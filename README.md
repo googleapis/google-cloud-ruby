@@ -33,6 +33,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
+* [Container Engine](#container-engine-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
@@ -198,6 +199,30 @@ change = zone.update do |tx|
   end
 end
 
+```
+
+### Container Engine (Alpha)
+
+- [google-cloud-container README](google-cloud-container/README.md)
+- [google-cloud-container API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-container/latest)
+- [google-cloud-container on RubyGems](https://rubygems.org/gems/google-cloud-container)
+- [Container Engine documentation](https://cloud.google.com/kubernetes-engine/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-container
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/container"
+
+cluster_manager_client = Google::Cloud::Container.new
+project_id_2 = project_id
+zone = "us-central1-a"
+response = cluster_manager_client.list_clusters(project_id_2, zone)
 ```
 
 ### Stackdriver Error Reporting (Beta)
