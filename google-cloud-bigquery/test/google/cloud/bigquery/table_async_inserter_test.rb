@@ -28,19 +28,20 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
                 {"name"=>"Sally", "age"=>nil, "score"=>nil, "active"=>nil}] }
   let(:insert_id) { "abc123" }
   let(:insert_rows) { rows.map do |row|
-                        Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-                          insert_id: insert_id,
+                        {
+                          insertId: insert_id,
                           json: row
-                        )
+                        }
                       end }
   let(:success_table_insert_gapi) { Google::Apis::BigqueryV2::InsertAllTableDataResponse.new insert_errors: [] }
 
   it "inserts one row" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: [insert_rows.first], ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: [insert_rows.first], ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     inserter = table.insert_async
@@ -68,10 +69,11 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
   it "inserts three rows at the same time" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     inserter = table.insert_async
@@ -99,10 +101,11 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
   it "inserts three rows one at a time" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     inserter = table.insert_async
@@ -132,10 +135,11 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
   it "inserts rows with a callback" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     callback_called = false
@@ -230,11 +234,11 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
   it "inserts multiple batches when row byte size limit is reached" do
     mock = Minitest::Mock.new
     # It makes two requests, but we can't control what order they occur.
-    # So only specify that two InsertAllTableDataRequests are made.
+    # So only specify that two requests are made.
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+      [table.project_id, table.dataset_id, table.table_id, String, Hash]
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+      [table.project_id, table.dataset_id, table.table_id, String, Hash]
     table.service.mocked_service = mock
 
     callbacks = 0
@@ -268,11 +272,11 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
   it "inserts multiple batches when row count limit is reached" do
     mock = Minitest::Mock.new
     # It makes two requests, but we can't control what order they occur.
-    # So only specify that two InsertAllTableDataRequests are made.
+    # So only specify that two requests are made.
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+      [table.project_id, table.dataset_id, table.table_id, String, Hash]
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+      [table.project_id, table.dataset_id, table.table_id, String, Hash]
     table.service.mocked_service = mock
 
     callbacks = 0
