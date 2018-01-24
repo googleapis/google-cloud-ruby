@@ -187,7 +187,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
 
   it "returns error in callback result when inserting rows with a callback" do
     mock = Minitest::Mock.new
-    def mock.insert_tabledata dataset_id, table_id, rows, options = {}
+    def mock.insert_tabledata_json_rows dataset_id, table_id, json_rows, options = {}
       raise Google::Cloud::UnavailableError.new
     end
     table.service = mock
