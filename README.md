@@ -35,6 +35,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 
 * [Container Engine](#container-engine-alpha) (Alpha)
 * [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
+* [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
@@ -260,6 +261,34 @@ cluster_controller_client.list_clusters(project_id_2, region).each_page do |page
     # Process element.
   end
 end
+```
+
+### Data Loss Prevention (Alpha)
+
+- [google-cloud-dlp README](google-cloud-dlp/README.md)
+- [google-cloud-dlp API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest)
+- [google-cloud-dlp on RubyGems](https://rubygems.org/gems/google-cloud-dlp)
+- [Data Loss Prevention documentation](https://cloud.google.com/dlp/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-dlp
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/dlp"
+
+dlp_service_client = Google::Cloud::Dlp.new
+min_likelihood = :POSSIBLE
+inspect_config = { min_likelihood: min_likelihood }
+type = "text/plain"
+value = "my phone number is 215-512-1212"
+items_element = { type: type, value: value }
+items = [items_element]
+response = dlp_service_client.inspect_content(inspect_config, items)
 ```
 
 ### Stackdriver Error Reporting (Beta)
