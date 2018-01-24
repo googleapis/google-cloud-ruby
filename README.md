@@ -34,6 +34,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
 * [Container Engine](#container-engine-alpha) (Alpha)
+* [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
@@ -223,6 +224,42 @@ cluster_manager_client = Google::Cloud::Container.new
 project_id_2 = project_id
 zone = "us-central1-a"
 response = cluster_manager_client.list_clusters(project_id_2, zone)
+```
+
+### Cloud Dataproc (Alpha)
+
+- [google-cloud-dataproc README](google-cloud-dataproc/README.md)
+- [google-cloud-dataproc API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest)
+- [google-cloud-dataproc on RubyGems](https://rubygems.org/gems/google-cloud-dataproc)
+- [Google Cloud Dataproc documentation](https://cloud.google.com/dataproc/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-dataproc
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/dataproc"
+
+cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new
+project_id_2 = project_id
+region = "global"
+
+# Iterate over all results.
+cluster_controller_client.list_clusters(project_id_2, region).each do |element|
+  # Process element.
+end
+
+# Or iterate over results one page at a time.
+cluster_controller_client.list_clusters(project_id_2, region).each_page do |page|
+  # Process each page at a time.
+  page.each do |element|
+    # Process element.
+  end
+end
 ```
 
 ### Stackdriver Error Reporting (Beta)
