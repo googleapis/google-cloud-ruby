@@ -1869,8 +1869,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
-        #   inserter = table.insert_async do |result|
+        #   inserter = dataset.insert_async "my_table" do |result|
         #     if result.error?
         #       log_error result.error
         #     else
