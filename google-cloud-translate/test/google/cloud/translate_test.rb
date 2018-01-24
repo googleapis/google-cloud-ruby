@@ -539,7 +539,6 @@ describe Google::Cloud do
       }
       stubbed_service = ->(project, credentials, scope: nil, key: nil, retries: nil, timeout: nil) {
         key.must_equal "this-is-the-api-key"
-        project.must_be :empty?
         credentials.must_be :nil?
         scope.must_be :nil?
         retries.must_be :nil?
@@ -560,7 +559,6 @@ describe Google::Cloud do
               Google::Cloud::Translate::Service.stub :new, stubbed_service do
                 translate = Google::Cloud::Translate.new
                 translate.must_be_kind_of Google::Cloud::Translate::Api
-                translate.project.must_be :empty?
                 translate.service.must_be_kind_of OpenStruct
               end
             end
