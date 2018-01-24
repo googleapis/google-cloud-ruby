@@ -38,6 +38,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
+* [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
@@ -424,6 +425,19 @@ annotation.sentiment.score #=> 0.10000000149011612
 annotation.sentiment.magnitude #=> 1.100000023841858
 annotation.sentences.count #=> 2
 annotation.tokens.count #=> 13
+```
+
+### Cloud OS Login (Alpha)
+
+- [google-cloud-os_login README](google-cloud-os_login/README.md)
+- [google-cloud-os_login API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest)
+- [google-cloud-os_login on RubyGems](https://rubygems.org/gems/google-cloud-os_login)
+- [Google Cloud DNS documentation](https://cloud.google.com/compute/docs/oslogin/rest/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-os_login
 ```
 
 ### Cloud Pub/Sub (Beta)
