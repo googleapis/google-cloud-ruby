@@ -134,12 +134,8 @@ module Google
           debuggee_args[:id] = id if id
 
           source_context = read_app_json_file "source-context.json"
-          debuggee_args[:source_contexts] = [source_context] if source_context
-
-          source_contexts = read_app_json_file "source-contexts.json"
-          if source_contexts
-            debuggee_args[:ext_source_contexts] = source_contexts
-          elsif source_context
+          if source_context
+            debuggee_args[:source_contexts] = [source_context]
             debuggee_args[:ext_source_contexts] = [{ context: source_context }]
           end
 
