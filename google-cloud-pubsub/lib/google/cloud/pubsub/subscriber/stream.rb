@@ -70,10 +70,12 @@ module Google
             synchronize do
               break if @stopped
 
-              @inventory.stop
               @stopped = true
-              # Kill the thread since it may be sleeping
-              @background_thread.kill if @background_thread
+
+              @inventory.stop
+
+              # signal to the background thread that we are unpaused
+              @pause_cond.broadcast
             end
 
             self
@@ -189,13 +191,16 @@ module Google
           # rubocop:disable all
 
           def background_run enum
-            until synchronize { @stopped }
+            loop do
               synchronize do
-                if @paused
+                if @paused && !@stopped
                   @pause_cond.wait
                   next
                 end
               end
+
+              # Break loop, close thread if stopped
+              break if synchronize { @stopped }
 
               begin
                 # Cannot syncronize the enumerator, causes deadlock
@@ -246,6 +251,9 @@ module Google
           end
 
           def start_streaming!
+            # Don't allow a stream to restart if already stopped
+            return if @stopped
+
             # signal to the previous queue to shut down
             old_queue = []
             old_queue = @request_queue.dump_queue if @request_queue
@@ -271,6 +279,7 @@ module Google
           end
 
           def pause_streaming?
+            return if @stopped
             return if @paused
 
             @inventory.full?
@@ -285,6 +294,7 @@ module Google
           end
 
           def unpause_streaming?
+            return if @stopped
             return if @paused.nil?
 
             @inventory.count < @inventory.limit * 0.8
@@ -342,7 +352,9 @@ module Google
               ack_ids = Array(ack_ids).flatten
               synchronize do
                 @_ack_ids += ack_ids
-                @background_thread ||= Thread.new { background_run }
+                unless @stopped
+                  @background_thread ||= Thread.new { background_run }
+                end
               end
             end
 
