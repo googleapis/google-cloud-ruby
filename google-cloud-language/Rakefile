@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -41,13 +41,8 @@ end
 
 desc "Runs the smoke tests."
 task :smoke_test do
-  if ENV["SMOKE_TEST_PROJECT"].nil?
-    fail "The SMOKE_TEST_PROJECT environment variable must be set. "\
-      "e.g SMOKE_TEST_PROJECT=test123 rake smoke_test"
-  end
-
   $LOAD_PATH.unshift "lib", "smoke_test"
-  Dir.glob("test/**/*smoke_test.rb").each { |file| require_relative file }
+  Dir.glob("acceptance/**/*smoke_test.rb").each { |file| require_relative file }
 end
 
 namespace :smoke_test do
@@ -68,38 +63,41 @@ end
 desc "Run the google-cloud-language acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["LANGUAGE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  project ||=
+    ENV["LANGUAGE_TEST_PROJECT"] ||
+    ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["LANGUAGE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  keyfile ||=
+    ENV["LANGUAGE_TEST_KEYFILE"] ||
+    ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["LANGUAGE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    keyfile ||=
+      ENV["LANGUAGE_TEST_KEYFILE_JSON"] ||
+      ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or LANGUAGE_TEST_PROJECT=test123 LANGUAGE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  # clear any env var already set
   require "google/cloud/language/credentials"
   (Google::Cloud::Language::Credentials::PATH_ENV_VARS +
    Google::Cloud::Language::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
-  # always overwrite when running tests
   ENV["LANGUAGE_PROJECT"] = project
+  ENV["LANGUAGE_TEST_PROJECT"] = project
   ENV["LANGUAGE_KEYFILE_JSON"] = keyfile
 
   # Required for smoke tests
   ENV["SMOKE_TEST_PROJECT"] = project
 
-  Rake::Task["smoke_test"].invoke
+  Rake::Task["acceptance:run"].invoke
 end
-
-
 
 namespace :acceptance do
   task :run do
-    puts "This gem does not have acceptance tests."
+    Rake::Task["smoke_test"].invoke
   end
 
   desc "Run acceptance tests with coverage."
@@ -169,15 +167,6 @@ task :ci do
   sh "bundle exec rake doctest"
   header "google-cloud-language test", "*"
   sh "bundle exec rake test"
-end
-
-namespace :ci do
-  desc "Run the CI build, with smoke tests."
-  task :smoke_test do
-    Rake::Task["ci"].invoke
-    header "google-cloud-language smoke_test", "*"
-    sh "bundle exec rake smoke_test -v"
-  end
 end
 
 namespace :ci do
