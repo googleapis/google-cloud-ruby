@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>google-cloud-ruby SLO</title>
+</head>
+
+<body>
+
+  <h1>SLO Links</h1>
+  <p>A series of links for tracking the response and closure SLO for Google Cloud for Ruby issues.</p>
+
+  <script>
+  function daysAgo(days) {
+    ago = new Date();
+    ago.setTime(ago.getTime() - 24*60*60*1000*days)
+
+    formattedDate = [
+      ago.getFullYear(),
+      ('0' + (ago.getMonth() + 1)).slice(-2),
+      ('0' + ago.getDate()).slice(-2)
+    ].join('-');
+
+    return formattedDate;
+  }
+  </script>
+
+  <ul>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20-label%3A%22type%3A%20bug%22%20-label%3A%22type%3A%20feature%20request%22%20-label%3A%22type%3A%20question%22%20-label%3A%22type%3A%20cleanup%22%20-label%3A%22type%3A%20process%22'">Issues with no type</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20question%22%20no%3Aassignee'">Questions with no assignee</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22%20no%3Aassignee%20'">Bugs with no assignee</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22%20-label%3A%22priority%3A%20p0%22%20-label%3A%22priority%3A%20p1%22%20%20-label%3A%22priority%3A%20p2%22'">Bugs with no priority</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22%20label%3A%22priority%3A%20p0%22%20updated%3A%3C%3D' + daysAgo(1)">Bugs with priority p0 outside response SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22%20label%3A%22priority%3A%20p0%22%20created%3A%3C%3D' + daysAgo(5)">Bugs with priority p0 outside closure SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22%20label%3A%22priority%3A%20p1%22%20updated%3A%3C%3D' + daysAgo(5)">Bugs with priority p1 outside response SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22%20label%3A%22priority%3A%20p1%22%20created%3A%3C%3D' + daysAgo(42)">Bugs with priority p1 outside closure SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20bug%22%20label%3A%22priority%3A%20p2%22%20created%3A%3C%3D' + daysAgo(120)">Bugs with priority p2 outside closure SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20question%22%20updated%3A%3C%3D' + daysAgo(5)">Questions outside response SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20feature%20request%22%20created%3A%3C%3D' + daysAgo(120)">Feature requests outside SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22type%3A%20cleanup%22%20created%3A%3C%3D' + daysAgo(120)">Cleanup items outside closure SLO</button></li>
+    <li><button onclick="javascript:window.location='https://github.com/GoogleCloudPlatform/google-cloud-ruby/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Aopen+updated%3A%3C%3D' + daysAgo(5)">Pull requests outside response SLO</button></li>
+  </ul>
+
+</body>
+</html>
