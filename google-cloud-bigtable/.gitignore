@@ -11,3 +11,7 @@ jsondoc/*
 # IDE settings
 .idea
 *.iml
+
+# Dev and tmp files
+*keyfile.json
+tmp/*
