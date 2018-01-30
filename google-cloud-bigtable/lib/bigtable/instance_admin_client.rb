@@ -304,9 +304,9 @@ module Bigtable
 
     # Create or return bigtable instance admin client
     # @return [Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient]
+
     def client
       @client ||= begin
-        # Longrunning operation not using OAuth scope for keyfile as credentials
         if options[:credentials].is_a?(String)
           options[:credentials] =
             Google::Cloud::Bigtable::Admin::Credentials.new(
@@ -315,9 +315,7 @@ module Bigtable
             )
         end
 
-        Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new(
-          options
-        )
+        Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new options
       end
     end
 
@@ -326,6 +324,7 @@ module Bigtable
     # @return [String]
     #   Formatted instance path
     #   +projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]+.
+
     def instance_path instance_id
       Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient
         .instance_path(

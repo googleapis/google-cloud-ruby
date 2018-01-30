@@ -14,6 +14,7 @@ module Bigtable
 
   class TableAdminError < StandardError; end # :nodoc:
 
+  # rubocop:disable ClassLength, MethodLength
   class TableAdminClient
     # Client for table admin operations
     #
@@ -198,16 +199,24 @@ module Bigtable
     # Create table admin client or return existing client object
     # @return [Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient]
     def client
-      @client ||=
-        Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new(
-          options
-        )
+      @client ||= begin
+        if options[:credentials].is_a?(String)
+          options[:credentials] =
+            Google::Cloud::Bigtable::Admin::Credentials.new(
+              options[:credentials],
+              scopes: options[:scopes]
+            )
+        end
+
+        Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new options
+      end
     end
 
     # Created formatted instance path
     # @return [String]
     #   Formatted instance path
     #   +projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]+.
+
     def instance_path
       Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient
         .instance_path(
@@ -221,6 +230,7 @@ module Bigtable
     # @return [String]
     #   Formatted table path
     #   +projects/<project>/instances/<instance>/tables/<table>+
+
     def table_path table_id
       Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient
         .table_path(
