@@ -292,7 +292,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :insert_all_table_data,
                   Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(insert_errors: []),
-                  ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+                  ["my-project", "my_dataset", "my_table", String, Hash]
     end
   end
 
@@ -374,7 +374,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :insert_all_table_data,
                   Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(insert_errors: []),
-                  ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+                  ["my-project", "my_dataset", "my_table", String, Hash]
     end
   end
 
@@ -585,7 +585,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "my_dataset", "my_table", Hash]
       mock.expect :insert_all_table_data,
                   Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(insert_errors: []),
-                  ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+                  ["my-project", "my_dataset", "my_table", String, Hash]
     end
   end
 
@@ -647,7 +647,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :insert_all_table_data,
                   Google::Apis::BigqueryV2::InsertAllTableDataResponse.new(insert_errors: []),
-                  ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::InsertAllTableDataRequest]
+                  ["my-project", "my_dataset", "my_table", String, Hash]
     end
   end
 

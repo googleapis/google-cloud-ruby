@@ -228,13 +228,19 @@ module Google
           def push_batch_request!
             return unless @batch
 
-            batch_rows = @batch.rows
+            orig_rows = @batch.rows
+            json_rows = @batch.json_rows
             Concurrent::Future.new(executor: @thread_pool) do
               begin
-                response = @table.insert batch_rows,
-                                         skip_invalid:   @skip_invalid,
-                                         ignore_unknown: @ignore_unknown
-                result = Result.new response
+                raise ArgumentError, "No rows provided" if json_rows.empty?
+                options = { skip_invalid: @skip_invalid,
+                            ignore_unknown: @ignore_unknown }
+                insert_resp = @table.service.insert_tabledata_json_rows(
+                  @table.dataset_id, @table.table_id, json_rows, options
+                )
+                result = Result.new(
+                  InsertResponse.from_gapi(orig_rows, insert_resp)
+                )
               rescue StandardError => e
                 result = Result.new nil, e
               ensure
@@ -249,34 +255,55 @@ module Google
           ##
           # @private
           class Batch
-            attr_reader :max_bytes, :max_rows, :rows
+            attr_reader :max_bytes, :max_rows, :rows, :json_rows
 
             def initialize max_bytes: 10000000, max_rows: 500
               @max_bytes = max_bytes
               @max_rows = max_rows
               @rows = []
+              @json_rows = []
+              @current_bytes = 0
             end
 
             def insert row
-              @rows << row
+              json_row = to_json_row row
+
+              insert_rows_bytes row, json_row, addl_bytes_for_json_row(json_row)
             end
 
             def try_insert row
-              addl_bytes = row.to_json.bytes.size + 1
-              return false if current_bytes + addl_bytes >= @max_bytes
+              json_row = to_json_row row
+              addl_bytes = addl_bytes_for_json_row json_row
+
+              return false if @current_bytes + addl_bytes >= @max_bytes
               return false if @rows.count + 1 >= @max_rows
 
-              insert row
+              insert_rows_bytes row, json_row, addl_bytes
               true
             end
 
             def ready?
-              current_bytes >= @max_bytes || rows.count >= @max_rows
+              @current_bytes >= @max_bytes || rows.count >= @max_rows
             end
 
-            def current_bytes
-              # TODO: add to a counter instead of calling #to_json each time
-              Convert.to_json_rows(rows).to_json.bytes.size
+            private
+
+            def insert_rows_bytes row, json_row, addl_bytes
+              @rows << row
+              @json_rows << json_row
+              @current_bytes += addl_bytes
+            end
+
+            def to_json_row row
+              Convert.to_json_row row
+            end
+
+            def addl_bytes_for row
+              addl_bytes_for_json_row Convert.to_json_row(row)
+            end
+
+            def addl_bytes_for_json_row json_row
+              json_row.to_json.bytesize + 1
             end
           end
 

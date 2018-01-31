@@ -201,22 +201,31 @@ module Google
         end
 
         def insert_tabledata dataset_id, table_id, rows, options = {}
-          insert_rows = Array(rows).map do |row|
-            Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-              insert_id: SecureRandom.uuid,
-              json: Convert.to_json_row(row)
-            )
+          json_rows = Array(rows).map { |row| Convert.to_json_row row }
+
+          insert_tabledata_json_rows dataset_id, table_id, json_rows, options
+        end
+
+        def insert_tabledata_json_rows dataset_id, table_id, json_rows,
+                                       options = {}
+          insert_rows = Array(json_rows).map do |json_row|
+            {
+              insertId: SecureRandom.uuid,
+              json: json_row
+            }
           end
-          insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+
+          insert_req = {
             rows: insert_rows,
-            ignore_unknown_values: options[:ignore_unknown],
-            skip_invalid_rows: options[:skip_invalid]
-          )
+            ignoreUnknownValues: options[:ignore_unknown],
+            skipInvalidRows: options[:skip_invalid]
+          }.to_json
 
           # The insertAll with insertId operation is considered idempotent
           execute backoff: true do
             service.insert_all_table_data(
-              @project, dataset_id, table_id, insert_req
+              @project, dataset_id, table_id, insert_req,
+              options: { skip_serialization: true }
             )
           end
         end
