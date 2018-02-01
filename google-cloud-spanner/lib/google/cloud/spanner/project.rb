@@ -16,6 +16,7 @@
 require "google/cloud/spanner/errors"
 require "google/cloud/spanner/service"
 require "google/cloud/spanner/client"
+require "google/cloud/spanner/batch_client"
 require "google/cloud/spanner/instance"
 require "google/cloud/spanner/database"
 require "google/cloud/spanner/range"
@@ -455,6 +456,34 @@ module Google
         def client instance_id, database_id, pool: {}
           Client.new self, instance_id, database_id,
                      valid_session_pool_options(pool)
+        end
+
+        ##
+        # Creates a Cloud Spanner batch client. A batch client is used to read
+        # data across multiple machines or processes.
+        #
+        # @param [String] instance_id The unique identifier for the instance.
+        #   Required.
+        # @param [String] database_id The unique identifier for the database.
+        #   Required.
+        #
+        # @return [Client] The newly created client.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_transaction_id = transaction.batch_transaction_id
+        #
+        #   new_transaction = batch_client.batch_read_only_transaction \
+        #     batch_transaction_id
+        #
+        def batch_client instance_id, database_id
+          BatchClient.new self, instance_id, database_id
         end
 
         protected

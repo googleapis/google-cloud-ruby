@@ -241,6 +241,7 @@ require "date"
 require "securerandom"
 # prefix is already 22 characters, can only add 7 additional characters
 $spanner_prefix = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(4)}"
+$spanner_instance_id = "google-cloud-ruby-tests"
 
 # Setup main instance and database for the tests
 fixture = Object.new
@@ -259,11 +260,11 @@ db_job.wait_until_done!
 fail GRPC::BadStatus.new(db_job.error.code, db_job.error.message) if db_job.error?
 
 # Create one client for all tests, to minimize resource usage
-$spanner_client = $spanner.client "google-cloud-ruby-tests", $spanner_prefix
+$spanner_client = $spanner.client $spanner_instance_id, $spanner_prefix
 
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
-  $spanner.instance("google-cloud-ruby-tests").database($spanner_prefix).drop
+  $spanner.instance($spanner_instance_id).database($spanner_prefix).drop
   puts "Closing the Spanner Client."
   $spanner_client.close
 rescue => e

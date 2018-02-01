@@ -16,6 +16,7 @@
 require "google/cloud/spanner/data"
 require "google/cloud/spanner/results"
 require "google/cloud/spanner/commit"
+require "google/cloud/spanner/partition"
 
 module Google
   module Cloud
@@ -180,11 +181,13 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute sql, params: nil, types: nil, transaction: nil
+        def execute sql, params: nil, types: nil, transaction: nil,
+                    partition_token: nil
           ensure_service!
           results = Results.execute service, path, sql,
                                     params: params, types: types,
-                                    transaction: transaction
+                                    transaction: transaction,
+                                    partition_token: partition_token
           @last_updated_at = Time.now
           results
         end
@@ -227,13 +230,82 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 transaction: nil
+                 transaction: nil, partition_token: nil
           ensure_service!
           results = Results.read service, path, table, columns,
                                  keys: keys, index: index, limit: limit,
-                                 transaction: transaction
+                                 transaction: transaction,
+                                 partition_token: partition_token
           @last_updated_at = Time.now
           results
+        end
+
+        ##
+        # Read rows from a database table, as a simple alternative to
+        # {#execute}.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   read.
+        # @param [Array<String, Symbol>] columns The columns of table to be
+        #   returned for each row matching this request.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
+        # @param [String] index The name of an index to use instead of the
+        #   table's primary key when interpreting `id` and sorting result rows.
+        #   Optional.
+        # @param [Google::Spanner::V1::TransactionSelector] transaction The
+        #   transaction selector value to send. Only used for single-use
+        #   transactions.
+        #
+        # @return [Google::Cloud::Spanner::Results] The results of the read
+        #   operation.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   results = db.read "users", [:id, :name]
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        def partition_read table, columns, transaction, keys: nil,
+                           index: nil, partition_size_bytes: nil,
+                           max_partitions: nil
+
+          partition_options = { keys: keys, index: index,
+                                partition_size_bytes: partition_size_bytes,
+                                max_partitions: max_partitions }
+          ensure_service!
+          results = service.partition_read path, table, columns, transaction,
+                                           partition_options
+          @last_updated_at = Time.now
+          results.partitions.map do |p|
+            Partition.from_grpc p, table, keys, columns, index, nil, nil, nil,
+                                partition_size_bytes, max_partitions
+          end
+        end
+
+        def partition_query sql, transaction, params: nil, types: nil,
+                            partition_size_bytes: nil, max_partitions: nil
+
+          partition_options = { params: params, types: types,
+                                partition_size_bytes: partition_size_bytes,
+                                max_partitions: max_partitions }
+          ensure_service!
+          results = service.partition_query path, sql, transaction,
+                                            partition_options
+          @last_updated_at = Time.now
+
+          results.partitions.map do |p|
+            Partition.from_grpc p, nil, nil, nil, nil, sql, params, types,
+                                partition_size_bytes, max_partitions
+          end
         end
 
         ##

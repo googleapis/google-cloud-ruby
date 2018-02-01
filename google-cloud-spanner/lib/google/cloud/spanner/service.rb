@@ -256,7 +256,8 @@ module Google
         end
 
         def streaming_execute_sql session_name, sql, transaction: nil,
-                                  params: nil, types: nil, resume_token: nil
+                                  params: nil, types: nil, resume_token: nil,
+                                  partition_token: nil
           input_params = nil
           input_param_types = nil
           unless params.nil?
@@ -272,20 +273,64 @@ module Google
             service.execute_streaming_sql \
               session_name, sql, transaction: transaction, params: input_params,
                                  param_types: input_param_types,
-                                 resume_token: resume_token, options: opts
+                                 resume_token: resume_token,
+                                 partition_token: partition_token, options: opts
           end
         end
 
         def streaming_read_table session_name, table_name, columns, keys: nil,
                                  index: nil, transaction: nil, limit: nil,
-                                 resume_token: nil
+                                 resume_token: nil, partition_token: nil
           columns.map!(&:to_s)
           opts = default_options_from_session session_name
           execute do
             service.streaming_read \
               session_name, table_name, columns, key_set(keys),
               transaction: transaction, index: index, limit: limit,
-              resume_token: resume_token, options: opts
+              resume_token: resume_token, partition_token: partition_token,
+              options: opts
+          end
+        end
+
+        def partition_read session_name, table_name, columns, transaction,
+                           keys: nil, index: nil, partition_size_bytes: nil,
+                           max_partitions: nil
+          columns.map!(&:to_s)
+          partition_opts = partition_options partition_size_bytes,
+                                             max_partitions
+
+          opts = default_options_from_session session_name
+          execute do
+            service.partition_read \
+              session_name, table_name, key_set(keys),
+              transaction: transaction, index: index, columns: columns,
+              partition_options: partition_opts, options: opts
+          end
+        end
+
+        def partition_query session_name, sql, transaction, params: nil,
+                            types: nil, partition_size_bytes: nil,
+                            max_partitions: nil
+          input_params = nil
+          input_param_types = nil
+          unless params.nil?
+            input_param_pairs = Convert.to_query_params params, types
+            input_params = Google::Protobuf::Struct.new \
+              fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }]
+            input_param_types = Hash[
+                input_param_pairs.map { |k, v| [k, v.last] }]
+          end
+
+          partition_opts = partition_options partition_size_bytes,
+                                             max_partitions
+
+          opts = default_options_from_session session_name
+          execute do
+            service.partition_query \
+              session_name, sql,
+              transaction: transaction,
+              params: input_params, param_types: input_param_types,
+              partition_options: partition_opts, options: opts
           end
         end
 
@@ -375,6 +420,16 @@ module Google
           default_prefix = session_name.split("/sessions/").first
           Google::Gax::CallOptions.new kwargs: \
             { "google-cloud-resource-prefix" => default_prefix }
+        end
+
+        def partition_options partition_size_bytes, max_partitions
+          return nil unless partition_size_bytes || max_partitions
+          partition_opts = Google::Spanner::V1::PartitionOptions.new
+          if partition_size_bytes
+            partition_opts.partition_size_bytes = partition_size_bytes
+          end
+          partition_opts.max_partitions = max_partitions if max_partitions
+          partition_opts
         end
 
         def project_path
