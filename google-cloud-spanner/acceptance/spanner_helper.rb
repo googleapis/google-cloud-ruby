@@ -263,10 +263,7 @@ $spanner_client = $spanner.client "google-cloud-ruby-tests", $spanner_prefix
 
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
-  $spanner.instances.all.select { |i| i.instance_id.start_with? $spanner_prefix }.each do |instance|
-    instance.databases.all.each &:drop
-    instance.delete
-  end
+  $spanner.instance("google-cloud-ruby-tests").database($spanner_prefix).drop
   puts "Closing the Spanner Client."
   $spanner_client.close
 rescue => e
