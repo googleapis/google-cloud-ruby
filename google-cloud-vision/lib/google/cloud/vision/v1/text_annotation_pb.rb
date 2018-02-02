@@ -35,12 +35,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :width, :int32, 2
     optional :height, :int32, 3
     repeated :blocks, :message, 4, "google.cloud.vision.v1.Block"
+    optional :confidence, :float, 5
   end
   add_message "google.cloud.vision.v1.Block" do
     optional :property, :message, 1, "google.cloud.vision.v1.TextAnnotation.TextProperty"
     optional :bounding_box, :message, 2, "google.cloud.vision.v1.BoundingPoly"
     repeated :paragraphs, :message, 3, "google.cloud.vision.v1.Paragraph"
     optional :block_type, :enum, 4, "google.cloud.vision.v1.Block.BlockType"
+    optional :confidence, :float, 5
   end
   add_enum "google.cloud.vision.v1.Block.BlockType" do
     value :UNKNOWN, 0
@@ -54,16 +56,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :property, :message, 1, "google.cloud.vision.v1.TextAnnotation.TextProperty"
     optional :bounding_box, :message, 2, "google.cloud.vision.v1.BoundingPoly"
     repeated :words, :message, 3, "google.cloud.vision.v1.Word"
+    optional :confidence, :float, 4
   end
   add_message "google.cloud.vision.v1.Word" do
     optional :property, :message, 1, "google.cloud.vision.v1.TextAnnotation.TextProperty"
     optional :bounding_box, :message, 2, "google.cloud.vision.v1.BoundingPoly"
     repeated :symbols, :message, 3, "google.cloud.vision.v1.Symbol"
+    optional :confidence, :float, 4
   end
   add_message "google.cloud.vision.v1.Symbol" do
     optional :property, :message, 1, "google.cloud.vision.v1.TextAnnotation.TextProperty"
     optional :bounding_box, :message, 2, "google.cloud.vision.v1.BoundingPoly"
     optional :text, :string, 3
+    optional :confidence, :float, 4
   end
 end
 
