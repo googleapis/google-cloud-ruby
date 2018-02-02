@@ -104,6 +104,27 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     assert_results results
   end
 
+  it "can read rows by id (timestamp keys)" do
+    time1 = Time.now - 1*60*60
+    time2 = Time.now - 2*60*60
+    time3 = Time.now - 3*60*60
+
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([time1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([time2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([time3]).list_value]), transaction: nil, index: nil, limit: nil, resume_token: nil, options: default_options]
+    spanner.service.mocked_service = mock
+
+    results = client.read "my-table", columns, keys: [time1, time2, time3]
+
+    shutdown_client! client
+
+    mock.verify
+
+    assert_results results
+  end
+
   it "can read rows with index" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
