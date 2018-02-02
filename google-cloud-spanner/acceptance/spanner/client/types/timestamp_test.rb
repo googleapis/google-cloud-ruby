@@ -29,6 +29,16 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     results.rows.first.to_h.must_equal({ id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") })
   end
 
+  it "writes and reads commit_timestamp timestamp" do
+    id = SecureRandom.int64
+    commit_timestamp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
+    results = db.read table_name, [:id, :timestamp], keys: id
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    results.rows.first.to_h.must_equal({ id: id, timestamp: commit_timestamp })
+  end
+
   it "writes and queries timestamp" do
     id = SecureRandom.int64
     db.upsert table_name, { id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") }
@@ -37,6 +47,16 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     results.must_be_kind_of Google::Cloud::Spanner::Results
     results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
     results.rows.first.to_h.must_equal({ id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") })
+  end
+
+  it "writes and queries commit_timestamp timestamp" do
+    id = SecureRandom.int64
+    commit_timestamp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
+    results = db.execute "SELECT id, timestamp FROM #{table_name} WHERE id = @id", params: { id: id }
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    results.rows.first.to_h.must_equal({ id: id, timestamp: commit_timestamp })
   end
 
   it "writes and reads NULL timestamp" do
