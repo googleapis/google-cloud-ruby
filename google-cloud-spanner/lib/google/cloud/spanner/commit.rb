@@ -327,14 +327,14 @@ module Google
           keys = [keys] unless keys.is_a? Array
           return Google::Spanner::V1::KeySet.new(all: true) if keys.empty?
           if keys_are_ranges? keys
-            keys = [keys] unless keys.is_a? Array
             key_ranges = keys.map do |r|
               Convert.to_key_range(r)
             end
             return Google::Spanner::V1::KeySet.new(ranges: key_ranges)
           end
-          key_list = Array(keys).map do |i|
-            Convert.raw_to_value(Array(i)).list_value
+          key_list = keys.map do |key|
+            key = [key] unless key.is_a? Array
+            Convert.raw_to_value(key).list_value
           end
           Google::Spanner::V1::KeySet.new keys: key_list
         end
