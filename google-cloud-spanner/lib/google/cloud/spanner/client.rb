@@ -21,6 +21,7 @@ require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
 require "google/cloud/spanner/range"
+require "google/cloud/spanner/field_value"
 require "google/cloud/spanner/convert"
 
 module Google
@@ -934,6 +935,32 @@ module Google
           Range.new beginning, ending,
                     exclude_begin: exclude_begin,
                     exclude_end: exclude_end
+        end
+
+        ##
+        # Creates a field value object representing setting a field's value to
+        # the timestamp of the commit. (See {Client#commit_timestamp})
+        #
+        # @return [FieldValue] The commit timestamp field value object.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   # create field value object
+        #   commit_timestamp = db.commit_timestamp
+        #
+        #   db.commit do |c|
+        #     c.insert "users", [
+        #       { id: 5, name: "Murphy", updated_at: commit_timestamp }
+        #     ]
+        #   end
+        #
+        def commit_timestamp
+          FieldValue.commit_timestamp
         end
 
         ##
