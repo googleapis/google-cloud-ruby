@@ -67,12 +67,13 @@ module Google
           # @!macro [attach] create_feature_method
           #   @method $1(request, options: nil)
           #   Annotate a single image with the feature +$1+.
-          #   @param request [String | IO | Hash | Google::Cloud::Vision::V1::AnnotateImageRequest]
+          #   @param [String, IO, Hash,
+          #       Google::Cloud::Vision::V1::AnnotateImageRequest] request
           #     The image to be annotated, specified as a
           #     {Google::Cloud::Vision::V1::AnnotateImageRequest} or Hash of
           #     the same form. In simple cases, you may instead specify a String
           #     (the URL or filename of the image) or an IO (the image iteself).
-          #   @param options [Google::Gax::CallOptions]
+          #   @param [Google::Gax::CallOptions] options
           #     Overrides the default settings for this call, e.g, timeout,
           #     retries, etc.
           #   @return [Google::CLoud::Vision::V1::AnnotateImageResponse]
