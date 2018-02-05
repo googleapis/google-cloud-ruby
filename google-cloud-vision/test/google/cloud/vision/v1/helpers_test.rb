@@ -65,12 +65,20 @@ end
 
 describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
   describe 'feature methods' do
-    client = Google::Cloud::Vision::V1::ImageAnnotatorClient.new
     it 'has feature methods' do
-      # Some examples of feature methods that should have been dynamically
-      # attached to the client object
-      assert(client.respond_to?(:logo_detection))
-      assert(client.respond_to?(:face_detection))
+      mock_stub = MockGrpcClientStub.new(:batch_annotate_images, Proc.new { nil })
+      mock_credentials = MockImageAnnotatorCredentials.new("test_feature_method")
+
+      Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision.new(version: :v1)
+
+          # Some examples of feature methods that should have been dynamically
+          # attached to the client object
+          assert(client.respond_to?(:logo_detection))
+          assert(client.respond_to?(:face_detection))
+        end
+      end
     end
 
     it 'modifies request for URL' do
@@ -97,11 +105,11 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Vision.new(version: :v1)
+
+          # Call method
+          request = client.face_detection("https://www.google.com/to/an/image")
         end
       end
-
-      # Call method
-      request = client.face_detection("https://www.google.com/to/an/image")
     end
 
     it 'modifies request for file path' do
@@ -128,11 +136,11 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Vision.new(version: :v1)
+
+          # Call method
+          request = client.face_detection("test/testdata/file.txt")
         end
       end
-
-      # Call method
-      request = client.face_detection("test/testdata/file.txt")
     end
 
     it 'modifies request for IO' do
@@ -159,12 +167,12 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Vision.new(version: :v1)
+
+          # Call method
+          f = File.new("test/testdata/file.txt")
+          request = client.face_detection(f)
         end
       end
-
-      # Call method
-      f = File.new("test/testdata/file.txt")
-      request = client.face_detection(f)
     end
     
     it 'validates request' do
@@ -188,20 +196,19 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Vision.new(version: :v1)
+
+          # Method should fail because FACE_DETECTION label is asked for in a
+          # LABEL_DECTION call.
+          assert_raises ArgumentError do
+            client.label_detection(
+              {
+                image: {content: "expected content\n"},
+                features: [{type: :FACE_DETECTION}]
+              }
+            )
+          end
         end
       end
-   
-      # Method should fail because FACE_DETECTION label is asked for in a
-      # LABEL_DECTION call.
-      assert_raises ArgumentError do
-        client.label_detection(
-          {
-            image: {content: "expected content\n"},
-            features: [{type: :FACE_DETECTION}]
-          }
-        )
-      end
-      
     end
   end
 end
