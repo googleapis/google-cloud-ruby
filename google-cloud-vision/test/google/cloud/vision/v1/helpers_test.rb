@@ -66,8 +66,8 @@ end
 describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
   describe 'feature methods' do
     it 'has feature methods' do
-      mock_stub = MockGrpcClientStub.new(:batch_annotate_images, Proc.new { nil })
-      mock_credentials = MockImageAnnotatorCredentials.new("test_feature_method")
+      mock_stub = MockGrpcClientStub.new(:feature_method, Proc.new { nil })
+      mock_credentials = MockImageAnnotatorCredentials.new("nil")
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::Credentials.stub(:default, mock_credentials) do
