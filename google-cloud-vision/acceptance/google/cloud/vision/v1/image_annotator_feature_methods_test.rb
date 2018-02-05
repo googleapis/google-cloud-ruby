@@ -30,7 +30,40 @@ describe "ImageAnnotatorFeatureMethods" do
     image_annotator_client = Google::Cloud::Vision.new
     response = image_annotator_client.text_detection("acceptance/data/text.png")
     assert(response.text_annotations.size >= 5)
-    assert(response.full_text_annotation.text.include?("RUBY ON GOOGLE CLOUD"))
+    assert(
+      response.full_text_annotation.text.include?(
+        "Google Cloud Client Library for Ruby"
+      )
+    )
+  end
+
+  it "detects a landmark from a local image" do
+    image_annotator_client = Google::Cloud::Vision.new
+    response = image_annotator_client.landmark_detection("acceptance/data/landmark.jpg")
+    assert(response.landmark_annotations.size >= 1)
+    assert(
+      response.landmark_annotations.map { |a| a.description }.include?(
+        "Mount Rushmore"
+      )
+    )
+  end
+
+  it "detects a face from a local image" do
+    image_annotator_client = Google::Cloud::Vision.new
+    response = image_annotator_client.face_detection("acceptance/data/face.jpg")
+    assert(response.face_annotations.size >= 1)
+  end
+
+  it "detects a logo from a local image" do
+    image_annotator_client = Google::Cloud::Vision.new
+    response = image_annotator_client.logo_detection("acceptance/data/logo.jpg")
+    assert(response.logo_annotations.size >= 1)
+    assert(
+      response.logo_annotations.map { |a| a.description }.include?(
+        "Google"
+      )
+    )
+
   end
 
   it "detects multiple features" do

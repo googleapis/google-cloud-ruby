@@ -138,7 +138,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
           client = Google::Cloud::Vision.new(version: :v1)
 
           # Call method
-          request = client.face_detection("test/testdata/file.txt")
+          request = client.face_detection("acceptance/data/file.txt")
         end
       end
     end
@@ -169,7 +169,9 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
           client = Google::Cloud::Vision.new(version: :v1)
 
           # Call method
-          f = File.new("test/testdata/file.txt")
+          file = StringIO.new("expected content")
+          
+          f = File.new("acceptance/data/file.txt")
           request = client.face_detection(f)
         end
       end
