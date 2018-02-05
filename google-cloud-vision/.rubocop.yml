@@ -17,6 +17,9 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
+Metrics/BlockLength:
+  Exclude:
+    - "acceptance/google/cloud/vision/v1/image_annotator_feature_methods_test.rb"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:

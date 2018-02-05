@@ -39,10 +39,12 @@ describe "ImageAnnotatorFeatureMethods" do
 
   it "detects a landmark from a local image" do
     image_annotator_client = Google::Cloud::Vision.new
-    response = image_annotator_client.landmark_detection("acceptance/data/landmark.jpg")
+    response = image_annotator_client.landmark_detection(
+      "acceptance/data/landmark.jpg"
+    )
     assert(response.landmark_annotations.size >= 1)
     assert(
-      response.landmark_annotations.map { |a| a.description }.include?(
+      response.landmark_annotations.map(&:description).include?(
         "Mount Rushmore"
       )
     )
@@ -59,11 +61,10 @@ describe "ImageAnnotatorFeatureMethods" do
     response = image_annotator_client.logo_detection("acceptance/data/logo.jpg")
     assert(response.logo_annotations.size >= 1)
     assert(
-      response.logo_annotations.map { |a| a.description }.include?(
+      response.logo_annotations.map(&:description).include?(
         "Google"
       )
     )
-
   end
 
   it "detects multiple features" do
