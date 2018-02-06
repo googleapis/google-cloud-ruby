@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-##
+#
 # This file is here to be autorequired by bundler, so that the
 # Google::Cloud#bigtable method can be available,
 # but the library and all dependencies won't be loaded until required and used.

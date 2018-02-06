@@ -59,30 +59,4 @@ module Bigtable
 
     TableAdminClient.new(project_id, instance_id, options)
   end
-
-  # Create client for data operations.
-  # @param project_id [String]
-  # @param instance_id [String]
-  # @param options [Hash]
-  # @example
-  #   require "google-cloud-bigtable"
-  #
-  #   client = Bigtable.client("project-id", "instance_id")
-  #
-  #   # Or with keyfile
-  #   client = Bigtable.table_admin_client(
-  #     "project-id",
-  #     "instance-id"
-  #     credentials: "keyfile.json"
-  #   )
-  #
-  def self.client \
-      project_id,
-      instance_id,
-      options = {}
-
-    require "bigtable/client"
-
-    Client.new(project_id, instance_id, options)
-  end
 end
