@@ -51,7 +51,6 @@ module Bigtable
     #
     # @param page_token [String]
     #   The value of +next_page_token+ returned by a previous call.
-    # @param next_page_token [String]
     # @return [Google::Bigtable::Admin::V2::ListInstancesResponse]
     #   Response has list of instances, failed locations and next page token
     # @example
