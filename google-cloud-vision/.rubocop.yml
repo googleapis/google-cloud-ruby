@@ -7,7 +7,7 @@ AllCops:
     - "lib/google/cloud/vision/v1/image_annotator_client.rb"
     - "lib/google/cloud/vision/v1/doc/**/*"
     - "Rakefile"
-    - "test/**/*"
+    - "test/**/*client_test.rb"
     - "acceptance/**/*smoke_test.rb"
 
 Documentation:
@@ -20,6 +20,7 @@ Style/MethodDefParentheses:
 Metrics/BlockLength:
   Exclude:
     - "acceptance/google/cloud/vision/v1/image_annotator_feature_methods_test.rb"
+    - "test/**/*"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
