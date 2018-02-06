@@ -10,7 +10,6 @@ module Bigtable
 
   class InstanceAdminError < StandardError; end # :nodoc:
 
-  # rubocop:disable ClassLength, MethodLength, Metrics/AbcSize
   class InstanceAdminClient
     # Bigtable instance admin client for creating, configuring, and deleting
     # instances and clusters
