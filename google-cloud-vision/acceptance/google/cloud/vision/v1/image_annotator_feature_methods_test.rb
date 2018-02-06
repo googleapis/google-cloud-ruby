@@ -67,7 +67,7 @@ describe "ImageAnnotatorFeatureMethods" do
     )
   end
 
-  it "detects multiple features" do
+  it "detects multiple features when none specified" do
     image_annotator_client = Google::Cloud::Vision.new
     response = image_annotator_client.annotate_image(
       "gs://gapic-toolkit/President_Barack_Obama.jpg"
@@ -75,5 +75,18 @@ describe "ImageAnnotatorFeatureMethods" do
     assert(response.face_annotations.size >= 1)
     assert(response.label_annotations.size >= 1)
     assert(response.crop_hints_annotation.crop_hints.size >= 1)
+  end
+
+  it "detects multiple specified features" do
+    image_annotator_client = Google::Cloud::Vision.new
+    response = image_annotator_client.annotate_image(
+      "gs://gapic-toolkit/President_Barack_Obama.jpg",
+      features: [{ type: :FACE_DETECTION }, { type: :CROP_HINTS }]
+    )
+    assert(response.face_annotations.size >= 1)
+    assert(response.crop_hints_annotation.crop_hints.size >= 1)
+
+    # Label annotations were not requested, so should be empty
+    assert(response.label_annotations.empty?)
   end
 end

@@ -48,8 +48,37 @@ module Google
             VisionV1::AnnotateImageRequest.new(kwargs)
           end
 
-          def annotate_image request, options: nil
-            request = request_to_object(request)
+          #   Annotate a single image.
+          #   @param [String, IO, Hash,
+          #       Google::Cloud::Vision::V1::AnnotateImageRequest] request
+          #     The image to be annotated, specified as a
+          #     {Google::Cloud::Vision::V1::AnnotateImageRequest} or Hash of
+          #     the same form. In simple cases, you may instead specify a String
+          #     (the URL or filename of the image) or an +IO+ (the image
+          #     itself).
+          #   @param [Array<Google::Cloud::Vision::V1::Feature>,
+          #       Array<Hash>] features
+          #     The features to annotate, specified as an array of
+          #     {Google::Cloud::Vision::V1::Feature} or Hash of the same form.
+          #   @param [Hash, Object] **kwargs
+          #     Any other fields of +AnnotateImageRequest+ to intialize, if the
+          #     +request+ parameter is a filename, URL, or +IO+.
+          #   @param [Google::Gax::CallOptions] options
+          #     Overrides the default settings for this call, e.g, timeout,
+          #     retries, etc.
+          #   @return [Google::CLoud::Vision::V1::AnnotateImageResponse]
+          #     The annotations for the image.
+          #   @raise [Google::Gax::GaxError] if the RPC is aborted.
+          #   @example
+          #     require "google/cloud/vision/v1"
+          #
+          #     image_annotator_client = Google::Cloud::Vision.new
+          #     response = image_annotator_client.annotate_image(
+          #       "path/to/image",
+          #       features: [{ type: :FACE_DETECTION }, { type: :CROP_HINTS }]
+          #     )
+          def annotate_image request, options: nil, **kwargs
+            request = request_to_object(request, **kwargs)
 
             # If features not set, use all of them
             if request.features.empty?
@@ -72,7 +101,8 @@ module Google
           #     The image to be annotated, specified as a
           #     {Google::Cloud::Vision::V1::AnnotateImageRequest} or Hash of
           #     the same form. In simple cases, you may instead specify a String
-          #     (the URL or filename of the image) or an IO (the image iteself).
+          #     (the URL or filename of the image) or an +IO+ (the image
+          #     itself).
           #   @param [Google::Gax::CallOptions] options
           #     Overrides the default settings for this call, e.g, timeout,
           #     retries, etc.
@@ -85,7 +115,6 @@ module Google
           #
           #     image_annotator_client = Google::Cloud::Vision.new
           #     response = image_annotator_client.$1("path/to/image")
-
           def self.create_feature_method feature
             define_method(feature) do |request, options: nil, **kwargs|
               # Convert String or IO input to request object

@@ -176,6 +176,42 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
         end
       end
     end
+
+    it 'passes keyword args to AnnotateImagesRequest constructor' do
+      expected_request =
+        Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(
+          requests: [
+            {
+              image: {
+                source: { image_uri: "https://www.google.com/to/an/image" }
+              },
+              features: [{ type: :FACE_DETECTION }, { type: :LABEL_DETECTION }]
+            }
+          ]
+        )
+
+
+      # Mock Grpc layer to check that request has been put into expected format
+      check_expected_request = Proc.new do |request|
+        assert_equal(request, expected_request)
+        Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new
+      end
+
+      mock_stub = MockGrpcClientStub.new(
+        :batch_annotate_images, check_expected_request
+      )
+      mock_credentials = MockImageAnnotatorCredentials.new("annotate_image")
+
+      Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Vision::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Vision.new(version: :v1)
+          request = client.annotate_image(
+            "https://www.google.com/to/an/image",
+            features: [{ type: :FACE_DETECTION }, { type: :LABEL_DETECTION }]
+          )
+        end
+      end
+    end
     
     it 'validates request' do
       expected_request =
