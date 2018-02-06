@@ -14,7 +14,6 @@ module Bigtable
 
   class TableAdminError < StandardError; end # :nodoc:
 
-  # rubocop:disable ClassLength, MethodLength
   class TableAdminClient
     # Client for table admin operations
     #
