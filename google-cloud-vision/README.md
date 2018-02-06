@@ -1,4 +1,4 @@
-o# Ruby Client for Google Cloud Vision API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Google Cloud Vision API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
 
 [Google Cloud Vision API][Product Documentation]:
 Integrates Google Vision features, including image labeling, face, logo, and
