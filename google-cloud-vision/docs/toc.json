@@ -37,7 +37,7 @@
         {
           "title": "V1",
           "type": "google/cloud/vision/v1",
-          "patterns": ["\/vision\/v1$", "\/vision\/v1\/"],
+          "patterns": ["\/vision\/v1\/", "google\/protobuf", "google\/rpc"],
           "nav": [
             {
               "title": "ImageAnnotatorClient",
