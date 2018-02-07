@@ -32,7 +32,7 @@
     {
       "title": "Vision",
       "type": "google/cloud/vision",
-      "patterns": ["\/vision"],
+      "patterns": ["\/vision", "google\/protobuf", "google\/rpc"],
       "nav": [
         {
           "title": "V1",
