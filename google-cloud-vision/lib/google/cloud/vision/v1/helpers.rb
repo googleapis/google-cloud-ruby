@@ -72,8 +72,10 @@ module Google
           #       Array<Hash>, Array<Symbol>] features
           #     The features to annotate, specified as an array of
           #     {Google::Cloud::Vision::V1::Feature} or Hash of the same form.
-          #     Only read if the +request+ parameter is a filename, URL, or
-          #     +IO+; otherwise +features+ should be specified in the +request+.
+          #     In simple cases, elements of the array may instead be specified
+          #     as a symbol containing the feature requested. Only read if the
+          #     +request+ parameter is a filename, URL, or +IO+; otherwise
+          #     +features+ should be specified in the +request+.
           #   @param [Hash, Object] **kwargs
           #     Any other fields of +AnnotateImageRequest+ to intialize. Only
           #     read if the +request+ parameter is a filename, URL, or
