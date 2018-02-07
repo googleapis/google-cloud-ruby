@@ -246,23 +246,24 @@ $spanner_prefix = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(4)}
 fixture = Object.new
 fixture.extend Acceptance::SpannerTest::Fixtures
 
-job = $spanner.create_instance $spanner_prefix, name: $spanner_prefix, config: "regional-us-central1", nodes: 1
-job.wait_until_done!
-fail GRPC::BadStatus.new(job.error.code, job.error.message) if job.error?
+instance = $spanner.instance "google-cloud-ruby-tests"
+instance ||= begin
+  inst_job = $spanner.create_instance "google-cloud-ruby-tests", name: "google-cloud-ruby-tests", config: "regional-us-central1", nodes: 1
+  inst_job.wait_until_done!
+  fail GRPC::BadStatus.new(inst_job.error.code, inst_job.error.message) if inst_job.error?
+  inst_job.instance
+end
 
-job2 = job.instance.create_database "main", statements: fixture.schema_ddl_statements
-job2.wait_until_done!
-fail GRPC::BadStatus.new(job.error.code, job.error.message) if job.error?
+db_job = instance.create_database $spanner_prefix, statements: fixture.schema_ddl_statements
+db_job.wait_until_done!
+fail GRPC::BadStatus.new(db_job.error.code, db_job.error.message) if db_job.error?
 
 # Create one client for all tests, to minimize resource usage
-$spanner_client = $spanner.client $spanner_prefix, "main"
+$spanner_client = $spanner.client "google-cloud-ruby-tests", $spanner_prefix
 
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
-  $spanner.instances.all.select { |i| i.instance_id.start_with? $spanner_prefix }.each do |instance|
-    instance.databases.all.each &:drop
-    instance.delete
-  end
+  $spanner.instance("google-cloud-ruby-tests").database($spanner_prefix).drop
   puts "Closing the Spanner Client."
   $spanner_client.close
 rescue => e

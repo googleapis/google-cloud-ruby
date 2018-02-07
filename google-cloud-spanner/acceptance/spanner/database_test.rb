@@ -15,10 +15,10 @@
 require "spanner_helper"
 
 describe "Spanner Databases", :spanner do
-  let(:instance_id) { $spanner_prefix }
+  let(:instance_id) { "google-cloud-ruby-tests" }
 
   it "creates, updates, and drops a database" do
-    database_id = "crud"
+    database_id = "#{$spanner_prefix}-crud"
 
     spanner.database(instance_id, database_id).must_be :nil?
 

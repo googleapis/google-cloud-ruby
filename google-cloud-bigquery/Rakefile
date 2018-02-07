@@ -115,12 +115,21 @@ namespace :acceptance do
   end
 end
 
-desc "Run benchmark script."
-task :benchmark, :queries do |t, args|
-  queries = args[:queries]
-  queries ||= "benchmark/queries.json"
+namespace :benchmark do
+  desc "Run queries benchmark script."
+  task :queries, :query_file do |t, args|
+    query_file = args[:query_file]
+    query_file ||= "benchmark/queries.json"
 
-  sh "bundle exec ruby benchmark/benchmark.rb #{queries}"
+    sh "bundle exec ruby benchmark/benchmark.rb #{query_file}"
+  end
+
+  desc "Run inserts benchmark script."
+  task :inserts, :insert_count do |t, args|
+    insert_count = args[:insert_count]
+
+    sh "bundle exec ruby benchmark/inserts.rb #{insert_count}"
+  end
 end
 
 desc "Run yard-doctest example tests."

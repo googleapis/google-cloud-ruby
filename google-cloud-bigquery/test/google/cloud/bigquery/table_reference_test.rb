@@ -49,10 +49,10 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
                 {"name"=>"Sally", "age"=>nil, "score"=>nil, "active"=>nil}] }
   let(:insert_id) { "abc123" }
   let(:insert_rows) { rows.map do |row|
-                        Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-                          insert_id: insert_id,
+                        {
+                          insertId: insert_id,
                           json: row
-                        )
+                        }
                       end }
 
   it "knows its attributes" do
@@ -296,10 +296,11 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
   it "can insert multiple rows" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     result = nil
@@ -316,10 +317,11 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
   it "inserts three rows one at a time with insert_async" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     inserter = table.insert_async
