@@ -81,7 +81,7 @@ describe "ImageAnnotatorFeatureMethods" do
     image_annotator_client = Google::Cloud::Vision.new
     response = image_annotator_client.annotate_image(
       "gs://gapic-toolkit/President_Barack_Obama.jpg",
-      features: [{ type: :FACE_DETECTION }, { type: :CROP_HINTS }]
+      features: [:face_detection, { type: :CROP_HINTS, max_results: 3 }]
     )
     assert(response.face_annotations.size >= 1)
     assert(response.crop_hints_annotation.crop_hints.size >= 1)

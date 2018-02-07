@@ -22,12 +22,24 @@ module Google
           # Alias to save some repetition
           VisionV1 = Google::Cloud::Vision::V1
 
-          def request_to_object request, **kwargs
+          def feature_to_object feature
+            if feature.is_a?(::Symbol)
+              { type: feature.upcase }
+            else
+              feature
+            end
+          end
+
+          def request_to_object request, features: nil, **kwargs
             # Sanity check: if request is already an AnnotateImageRequest, do
             # nothing
             if request.is_a?(VisionV1::AnnotateImageRequest)
               return request if kwargs.empty?
               raise "Invalid to pass both AnnotateImageRequest and kwargs."
+            end
+
+            unless features.nil?
+              kwargs[:features] = features.map { |f| feature_to_object(f) }
             end
 
             if request.is_a?(String)
@@ -57,12 +69,15 @@ module Google
           #     (the URL or filename of the image) or an +IO+ (the image
           #     itself).
           #   @param [Array<Google::Cloud::Vision::V1::Feature>,
-          #       Array<Hash>] features
+          #       Array<Hash>, Array<Symbol>] features
           #     The features to annotate, specified as an array of
           #     {Google::Cloud::Vision::V1::Feature} or Hash of the same form.
+          #     Only read if the +request+ parameter is a filename, URL, or
+          #     +IO+; otherwise +features+ should be specified in the +request+.
           #   @param [Hash, Object] **kwargs
-          #     Any other fields of +AnnotateImageRequest+ to intialize, if the
-          #     +request+ parameter is a filename, URL, or +IO+.
+          #     Any other fields of +AnnotateImageRequest+ to intialize. Only
+          #     read if the +request+ parameter is a filename, URL, or
+          #     +IO+; otherwise +features+ should be specified in the +request+.
           #   @param [Google::Gax::CallOptions] options
           #     Overrides the default settings for this call, e.g, timeout,
           #     retries, etc.
@@ -77,8 +92,8 @@ module Google
           #       "path/to/image",
           #       features: [{ type: :FACE_DETECTION }, { type: :CROP_HINTS }]
           #     )
-          def annotate_image request, options: nil, **kwargs
-            request = request_to_object(request, **kwargs)
+          def annotate_image request, features: nil, options: nil, **kwargs
+            request = request_to_object(request, features: features, **kwargs)
 
             # If features not set, use all of them
             if request.features.empty?
@@ -145,6 +160,7 @@ module Google
           create_feature_method(:crop_hints)
 
           private_class_method :create_feature_method
+          private :feature_to_object, :request_to_object
         end
       end
     end
