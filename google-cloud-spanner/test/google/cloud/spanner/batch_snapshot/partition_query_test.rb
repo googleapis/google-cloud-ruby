@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spanner do
+describe Google::Cloud::Spanner::BatchSnapshot, :execute, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -22,7 +22,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
-  let(:batch_tx) { Google::Cloud::Spanner::BatchReadOnlyTransaction.from_grpc transaction_grpc, session }
+  let(:batch_snapshot) { Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session }
   let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:partitions_resp) { Google::Spanner::V1::PartitionResponse.new partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")] }
@@ -33,7 +33,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql
+    partitions = batch_snapshot.partition_query sql
 
     mock.verify
 
@@ -48,7 +48,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { active: true }
+    partitions = batch_snapshot.partition_query sql, params: { active: true }
 
     mock.verify
 
@@ -63,7 +63,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { age: 29 }
+    partitions = batch_snapshot.partition_query sql, params: { age: 29 }
 
     mock.verify
 
@@ -78,7 +78,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { score: 0.9 }
+    partitions = batch_snapshot.partition_query sql, params: { score: 0.9 }
 
     mock.verify
 
@@ -95,7 +95,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { updated_at: timestamp }
+    partitions = batch_snapshot.partition_query sql, params: { updated_at: timestamp }
 
     mock.verify
 
@@ -112,7 +112,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { birthday: date }
+    partitions = batch_snapshot.partition_query sql, params: { birthday: date }
 
     mock.verify
 
@@ -127,7 +127,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { name: "Charlie" }
+    partitions = batch_snapshot.partition_query sql, params: { name: "Charlie" }
 
     mock.verify
 
@@ -144,7 +144,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { avatar: file }
+    partitions = batch_snapshot.partition_query sql, params: { avatar: file }
 
     mock.verify
 
@@ -159,7 +159,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { list: [1,2,3] }
+    partitions = batch_snapshot.partition_query sql, params: { list: [1,2,3] }
 
     mock.verify
 
@@ -174,7 +174,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { list: [] }, types: { list: [:INT64] }
+    partitions = batch_snapshot.partition_query sql, params: { list: [] }, types: { list: [:INT64] }
 
     mock.verify
 
@@ -191,7 +191,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { dict: { env: :production } }
+    partitions = batch_snapshot.partition_query sql, params: { dict: { env: :production } }
 
     mock.verify
 
@@ -208,7 +208,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } }
+    partitions = batch_snapshot.partition_query sql, params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } }
 
     mock.verify
 
@@ -225,7 +225,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, params: { dict: { } }
+    partitions = batch_snapshot.partition_query sql, params: { dict: { } }
 
     mock.verify
 
@@ -240,7 +240,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: partition_options, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, partition_size_bytes: partition_size_bytes
+    partitions = batch_snapshot.partition_query sql, partition_size_bytes: partition_size_bytes
 
     mock.verify
 
@@ -255,7 +255,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: partition_options, options: default_options]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_query sql, max_partitions: max_partitions
+    partitions = batch_snapshot.partition_query sql, max_partitions: max_partitions
 
     mock.verify
 

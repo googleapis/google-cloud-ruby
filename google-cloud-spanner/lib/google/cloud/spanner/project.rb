@@ -476,10 +476,10 @@ module Google
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #
-        #   transaction = batch_client.create_batch_read_only_transaction
-        #   batch_transaction_id = transaction.batch_transaction_id
+        #   batch_snapshot = batch_client.batch_snapshot
+        #   batch_transaction_id = batch_snapshot.batch_transaction_id
         #
-        #   new_transaction = batch_client.batch_read_only_transaction \
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
         #     batch_transaction_id
         #
         def batch_client instance_id, database_id

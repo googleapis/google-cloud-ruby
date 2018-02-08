@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :mock_spanner do
+describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -22,7 +22,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
-  let(:batch_tx) { Google::Cloud::Spanner::BatchReadOnlyTransaction.from_grpc transaction_grpc, session }
+  let(:batch_snapshot) { Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session }
   let(:tx_selector) { Google::Spanner::V1::TransactionSelector.new id: transaction_id }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:columns) { [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids] }
@@ -36,7 +36,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
     mock.expect :partition_read, partitions_resp, [session_grpc.name, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil, options: default_options}]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_read "my-table", columns
+    partitions = batch_snapshot.partition_read "my-table", columns
 
     mock.verify
 
@@ -50,7 +50,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
     mock.expect :partition_read, partitions_resp, [session_grpc.name, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil, options: default_options}]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_read "my-table", columns, keys: [1, 2, 3]
+    partitions = batch_snapshot.partition_read "my-table", columns, keys: [1, 2, 3]
 
     mock.verify
 
@@ -64,7 +64,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
     mock.expect :partition_read, partitions_resp, [session_grpc.name, "my-table", key_set, {transaction: tx_selector, index: "MyTableCompositeKey", columns: columns_arg, partition_options: nil, options: default_options}]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_read "my-table", columns, keys: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey"
+    partitions = batch_snapshot.partition_read "my-table", columns, keys: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey"
 
     mock.verify
 
@@ -79,7 +79,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
     session.service.mocked_service = mock
 
     lookup_range = Google::Cloud::Spanner::Range.new [1,1], [3,3]
-    partitions = batch_tx.partition_read "my-table", columns, keys: lookup_range, index: "MyTableCompositeKey"
+    partitions = batch_snapshot.partition_read "my-table", columns, keys: lookup_range, index: "MyTableCompositeKey"
 
     mock.verify
 
@@ -94,7 +94,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
     mock.expect :partition_read, partitions_resp, [session_grpc.name, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: partition_options, options: default_options}]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_read "my-table", columns, partition_size_bytes: partition_size_bytes
+    partitions = batch_snapshot.partition_read "my-table", columns, partition_size_bytes: partition_size_bytes
 
     mock.verify
 
@@ -109,7 +109,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
     mock.expect :partition_read, partitions_resp, [session_grpc.name, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: partition_options, options: default_options}]
     session.service.mocked_service = mock
 
-    partitions = batch_tx.partition_read "my-table", columns, max_partitions: max_partitions
+    partitions = batch_snapshot.partition_read "my-table", columns, max_partitions: max_partitions
 
     mock.verify
 

@@ -16,7 +16,7 @@
 require "google/cloud/spanner/errors"
 require "google/cloud/spanner/project"
 require "google/cloud/spanner/session"
-require "google/cloud/spanner/batch_read_only_transaction"
+require "google/cloud/spanner/batch_snapshot"
 
 module Google
   module Cloud
@@ -43,11 +43,11 @@ module Google
       #
       #   batch_client = spanner.batch_client "my-instance", "my-database"
       #
-      #   transaction = batch_client.create_batch_read_only_transaction
-      #   batch_transaction_id = transaction.batch_transaction_id
+      #   batch_snapshot = batch_client.batch_snapshot
+      #   batch_transaction_id = batch_snapshot.batch_transaction_id
       #
       #   # In a separate process
-      #   new_transaction = batch_client.batch_read_only_transaction \
+      #   new_batch_snapshot = batch_client.load_batch_snapshot \
       #     batch_transaction_id
       #
       class BatchClient
@@ -96,8 +96,8 @@ module Google
         end
 
         ##
-        # Returns a {BatchReadOnlyTransaction} context in which multiple reads
-        # and/or queries can be performed. All reads/queries will use the same
+        # Returns a {BatchSnapshot} context in which multiple reads and/or
+        # queries can be performed. All reads/queries will use the same
         # timestamp, and the timestamp can be inspected after this transaction
         # is created successfully. This is a blocking method since it waits to
         # finish the RPCs.
@@ -134,7 +134,7 @@ module Google
         # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
         #   object.
         #
-        # @return [Google::Cloud::Spanner::BatchReadOnlyTransaction]
+        # @return [Google::Cloud::Spanner::BatchSnapshot]
         #
         # @example
         #   require "google/cloud/spanner"
@@ -143,19 +143,16 @@ module Google
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #
-        #   transaction = batch_client.create_batch_read_only_transaction
-        #   batch_transaction_id = transaction.batch_transaction_id
+        #   batch_snapshot = batch_client.batch_snapshot
+        #   batch_transaction_id = batch_snapshot.batch_transaction_id
         #
         #   # In a separate process
-        #   new_transaction = batch_client.batch_read_only_transaction \
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
         #     batch_transaction_id
         #
         #
-        def create_batch_read_only_transaction strong: nil, timestamp: nil,
-                                               read_timestamp: nil,
-                                               staleness: nil,
-                                               exact_staleness: nil
-          # TODO: Verify that all args are appropriate here.
+        def batch_snapshot strong: nil, timestamp: nil, read_timestamp: nil,
+                           staleness: nil, exact_staleness: nil
           validate_snapshot_args! strong: strong, timestamp: timestamp,
                                   read_timestamp: read_timestamp,
                                   staleness: staleness,
@@ -167,20 +164,20 @@ module Google
             snp_session.path, strong: strong,
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
-          BatchReadOnlyTransaction.from_grpc snp_grpc, snp_session
+          BatchSnapshot.from_grpc snp_grpc, snp_session
         end
 
         ##
-        # Returns a {BatchReadOnlyTransaction} context in which multiple reads
+        # Returns a {BatchSnapshot} context in which multiple reads
         # and/or queries can be performed. All reads/queries will use the same
         # timestamp, and the timestamp can be inspected after this transaction
         # is created successfully.
         #
         # @param [Google::Cloud::Spanner::BatchTransactionId]
         #   batch_transaction_id The unique ID of an existing transaction.
-        #   See {BatchReadOnlyTransaction#batch_transaction_id}.
+        #   See {BatchSnapshot#batch_transaction_id}.
         #
-        # @return [Google::Cloud::Spanner::BatchReadOnlyTransaction]
+        # @return [Google::Cloud::Spanner::BatchSnapshot]
         #
         # @example
         #   require "google/cloud/spanner"
@@ -189,19 +186,19 @@ module Google
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #
-        #   transaction = batch_client.create_batch_read_only_transaction
-        #   batch_transaction_id = transaction.batch_transaction_id
+        #   batch_snapshot = batch_client.batch_snapshot
+        #   batch_transaction_id = batch_snapshot.batch_transaction_id
         #
         #   # In a separate process
-        #   new_transaction = batch_client.batch_read_only_transaction \
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
         #     batch_transaction_id
         #
         #
-        def batch_read_only_transaction batch_transaction_id
+        def load_batch_snapshot batch_transaction_id
           ensure_service!
           grpc = @project.service.get_session batch_transaction_id.session_path
           tx_session = Session.from_grpc grpc, @project.service
-          BatchReadOnlyTransaction.new \
+          BatchSnapshot.new \
             tx_session, batch_transaction_id.transaction_id,
             batch_transaction_id.timestamp
         end
@@ -226,11 +223,11 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
         #   key_range = batch_client.range 1, 100
         #
-        #   partitions = transaction.partition_read "users", [:id, :name],
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name],
         #                                           keys: key_range
         #
         def range beginning, ending, exclude_begin: false, exclude_end: false

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :metadata, :mock_spanner do
+describe Google::Cloud::Spanner::BatchSnapshot, :metadata, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -24,17 +24,17 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :metadata, :mock_span
   let(:time_obj) { Time.parse "2014-10-02T15:01:23.045123456Z" }
   let(:timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp time_obj }
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id, read_timestamp: timestamp }
-  let(:batch_tx) { Google::Cloud::Spanner::BatchReadOnlyTransaction.from_grpc transaction_grpc, session }
+  let(:batch_snapshot) { Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session }
 
   it "knows it has a transaction_id" do
-    batch_tx.must_be_kind_of Google::Cloud::Spanner::BatchReadOnlyTransaction
+    batch_snapshot.must_be_kind_of Google::Cloud::Spanner::BatchSnapshot
 
-    batch_tx.transaction_id.must_equal transaction_id
+    batch_snapshot.transaction_id.must_equal transaction_id
   end
 
   it "knows it has a timestamp" do
-    batch_tx.must_be_kind_of Google::Cloud::Spanner::BatchReadOnlyTransaction
+    batch_snapshot.must_be_kind_of Google::Cloud::Spanner::BatchSnapshot
 
-    batch_tx.timestamp.must_equal time_obj
+    batch_snapshot.timestamp.must_equal time_obj
   end
 end

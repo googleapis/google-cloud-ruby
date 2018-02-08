@@ -21,26 +21,25 @@ module Google
   module Cloud
     module Spanner
       ##
-      # # BatchReadOnlyTransaction
+      # # BatchSnapshot
       #
       # Represents a read-only transaction that can be configured to read at
       # timestamps in the past and allows for exporting arbitrarily large
       # amounts of data from Cloud Spanner databases. This is a snapshot which
       # additionally allows to partition a read or query request. The read/query
       # request can then be executed independently over each partition while
-      # observing the same snapshot of the database. A BatchReadOnlyTransaction
+      # observing the same snapshot of the database. A BatchSnapshot
       # can also be shared across multiple processes/machines by passing around
       # its {BatchTransactionId} and then recreating the transaction using
-      # {BatchClient#batch_read_only_transaction}.
+      # {BatchClient#load_batch_snapshot}.
       #
-      # Unlike locking read-write transactions, BatchReadOnlyTransaction will
+      # Unlike locking read-write transactions, BatchSnapshot will
       # never abort. They can fail if the chosen read timestamp is garbage
       # collected; however any read or query activity within an hour on the
       # transaction avoids garbage collection and most applications do not need
       # to worry about this in practice.
       #
-      # See {BatchClient#create_batch_read_only_transaction} and
-      # {BatchClient#batch_read_only_transaction}.
+      # See {BatchClient#batch_snapshot} and {BatchClient#load_batch_snapshot}.
       #
       # @example
       #   require "google/cloud/spanner"
@@ -48,16 +47,16 @@ module Google
       #   spanner = Google::Cloud::Spanner.new
       #
       #   batch_client = spanner.batch_client "my-instance", "my-database"
-      #   transaction = batch_client.create_batch_read_only_transaction
+      #   batch_snapshot = batch_client.batch_snapshot
       #
-      #   partitions = transaction.partition_read "users", [:id, :name]
+      #   partitions = batch_snapshot.partition_read "users", [:id, :name]
       #
       #   partition = partitions.first
-      #   results = transaction.execute_partition partition
+      #   results = batch_snapshot.execute_partition partition
       #
-      #   transaction.close
+      #   batch_snapshot.close
       #
-      class BatchReadOnlyTransaction
+      class BatchSnapshot
         # TODO: add Snapshot methods
         # @private The Session object.
         attr_reader :session
@@ -81,7 +80,7 @@ module Google
         end
 
         ##
-        # @private Creates a BatchReadOnlyTransaction object.
+        # @private Creates a BatchSnapshot object.
         def initialize session, transaction_id, timestamp
           @session = session
           @transaction_id = transaction_id
@@ -124,14 +123,14 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   partitions = transaction.partition_read "users", [:id, :name]
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
         #
         #   partition = partitions.first
-        #   results = transaction.execute_partition partition
+        #   results = batch_snapshot.execute_partition partition
         #
-        #   transaction.close
+        #   batch_snapshot.close
         #
         def partition_read table, columns, keys: nil, index: nil,
                            partition_size_bytes: nil, max_partitions: nil
@@ -212,16 +211,16 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
         #   sql = "SELECT u.id, u.active FROM users AS u \
         #          WHERE u.id < 2000 AND u.active = false"
-        #   partitions = transaction.partition_query sql
+        #   partitions = batch_snapshot.partition_query sql
         #
         #   partition = partitions.first
-        #   results = transaction.execute_partition partition
+        #   results = batch_snapshot.execute_partition partition
         #
-        #   transaction.close
+        #   batch_snapshot.close
         #
         def partition_query sql, params: nil, types: nil,
                             partition_size_bytes: nil, max_partitions: nil
@@ -247,15 +246,15 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   partitions = transaction.partition_read "users", [:id, :name]
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
         #
         #   partition = partitions.first
         #
-        #   results = transaction.execute_partition partition
+        #   results = batch_snapshot.execute_partition partition
         #
-        #   transaction.close
+        #   batch_snapshot.close
         #
         def execute_partition partition
           ensure_session!
@@ -275,12 +274,12 @@ module Google
         end
 
         ##
-        # Closes this transaction and releases the underlying resources.
+        # Closes the batch snapshot and releases the underlying resources.
         #
-        # This should only be called once this transaction is no longer needed
-        # anywhere. In particular if this transaction is being used across
+        # This should only be called once the batch snapshot is no longer needed
+        # anywhere. In particular if this batch snapshot is being used across
         # multiple machines, calling this method on any of the machines will
-        # render the transaction invalid everywhere.
+        # render the batch snapshot invalid everywhere.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -288,14 +287,14 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   partitions = transaction.partition_read "users", [:id, :name]
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
         #
         #   partition = partitions.first
-        #   results = transaction.execute_partition partition
+        #   results = batch_snapshot.execute_partition partition
         #
-        #   transaction.close
+        #   batch_snapshot.close
         #
         def close
           session.release!
@@ -365,9 +364,9 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   results = transaction.execute "SELECT * FROM users"
+        #   results = batch_snapshot.execute "SELECT * FROM users"
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -378,9 +377,9 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   results = transaction.execute "SELECT * FROM users " \
+        #   results = batch_snapshot.execute "SELECT * FROM users " \
         #                         "WHERE active = @active",
         #                         params: { active: true }
         #
@@ -420,9 +419,9 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   transaction = batch_client.create_batch_read_only_transaction
+        #   batch_snapshot = batch_client.batch_snapshot
         #
-        #   results = transaction.read "users", [:id, :name]
+        #   results = batch_snapshot.read "users", [:id, :name]
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -435,7 +434,7 @@ module Google
         end
 
         ##
-        # @private Creates a new BatchReadOnlyTransaction instance from a
+        # @private Creates a new BatchSnapshot instance from a
         # Google::Spanner::V1::Transaction.
         def self.from_grpc grpc, session
           timestamp = Convert.timestamp_to_time grpc.read_timestamp

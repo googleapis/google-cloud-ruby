@@ -19,7 +19,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   let(:batch_client) { $spanner.batch_client $spanner_instance_id, $spanner_prefix }
   let(:table_name) { "stuffs" }
   let(:table_index) { "IsStuffsIdPrime" }
-  let(:transaction) { batch_client.create_batch_read_only_transaction }
+  let(:batch_snapshot) { batch_client.batch_snapshot }
 
   before do
     db.delete table_name # remove all data
@@ -40,25 +40,25 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   after do
-    transaction.close
+    batch_snapshot.close
     db.delete table_name # remove all data
   end
 
   it "reads all by default" do
-    transaction.timestamp.must_be_kind_of Time
-    batch_transaction_id = transaction.batch_transaction_id
+    batch_snapshot.timestamp.must_be_kind_of Time
+    batch_transaction_id = batch_snapshot.batch_transaction_id
 
     columns = [:id]
-    partitions = transaction.partition_read table_name, columns
+    partitions = batch_snapshot.partition_read table_name, columns
     partitions.each do |partition|
       partition.partition_token.wont_be_nil
       partition.columns.must_equal columns
       partition.table.must_equal "stuffs"
 
 
-      new_transaction = batch_client.batch_read_only_transaction batch_transaction_id
-      new_transaction.timestamp.must_be_kind_of Time
-      results = new_transaction.execute_partition partition
+      new_batch_snapshot = batch_client.load_batch_snapshot batch_transaction_id
+      new_batch_snapshot.timestamp.must_be_kind_of Time
+      results = new_batch_snapshot.execute_partition partition
       results.must_be_kind_of Google::Cloud::Spanner::Results
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
         results.rows.map(&:to_h).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
@@ -68,21 +68,21 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "queries all by default" do
-    transaction = batch_client.create_batch_read_only_transaction
-    batch_transaction_id = transaction.batch_transaction_id
+    batch_snapshot = batch_client.batch_snapshot
+    batch_transaction_id = batch_snapshot.batch_transaction_id
 
     sql = "SELECT s.id, s.bool FROM stuffs AS s WHERE s.id = 2 AND s.bool = false"
-    partitions = transaction.partition_query sql
+    partitions = batch_snapshot.partition_query sql
     partitions.each do |partition|
       partition.partition_token.wont_be_nil
 
-      new_transaction = batch_client.batch_read_only_transaction batch_transaction_id
-      results = new_transaction.execute_partition partition
+      new_batch_snapshot = batch_client.load_batch_snapshot batch_transaction_id
+      results = new_batch_snapshot.execute_partition partition
       results.must_be_kind_of Google::Cloud::Spanner::Results
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
         results.rows.map(&:to_h).must_equal [{:id=>2, :bool=>false}]
       end
     end
-    transaction.close
+    batch_snapshot.close
   end
 end

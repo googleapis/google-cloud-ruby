@@ -19,9 +19,9 @@ module Google
       ##
       # # BatchTransactionId
       #
-      # Represents a unique identifier for a {BatchReadOnlyTransaction}. It can
-      # be used to re-initialize a BatchReadOnlyTransaction on a different
-      # machine or process by calling {BatchClient#batch_read_only_transaction}.
+      # Represents a unique identifier for a {BatchSnapshot}. It can be used to
+      # re-initialize a BatchSnapshot on a different machine or process by
+      # calling {BatchClient#load_batch_snapshot}.
       #
       # @attr [String] session_path The name of the session associated with the
       #   transaction. See {Session#path}.
@@ -41,11 +41,11 @@ module Google
       #
       #   batch_client = spanner.batch_client "my-instance", "my-database"
       #
-      #   transaction = batch_client.create_batch_read_only_transaction
-      #   batch_transaction_id = transaction.batch_transaction_id
+      #   batch_snapshot = batch_client.batch_snapshot
+      #   batch_transaction_id = batch_snapshot.batch_transaction_id
       #
       #   # In a separate process
-      #   new_transaction = batch_client.batch_read_only_transaction \
+      #   new_batch_snapshot = batch_client.load_batch_snapshot \
       #     batch_transaction_id
       #
       class BatchTransactionId

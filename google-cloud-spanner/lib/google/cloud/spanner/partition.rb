@@ -23,9 +23,8 @@ module Google
       # Partition instance can be serialized and used across several different
       # machines or processes.
       #
-      # See {BatchReadOnlyTransaction#partition_read},
-      # {BatchReadOnlyTransaction#partition_query}, and
-      # {BatchReadOnlyTransaction#execute_partition}.
+      # See {BatchSnapshot#partition_read}, {BatchSnapshot#partition_query}, and
+      # {BatchSnapshot#execute_partition}.
       #
       # @attr [String] partition_token
       # @attr [String] table The name of the table in the database to be read or
@@ -62,12 +61,12 @@ module Google
       #
       #   batch_client = spanner.batch_client "my-instance", "my-database"
       #
-      #   transaction = batch_client.create_batch_read_only_transaction
-      #   partitions = transaction.partition_read "users", [:id, :name]
+      #   batch_snapshot = batch_client.batch_snapshot
+      #   partitions = batch_snapshot.partition_read "users", [:id, :name]
       #
       #   partition = partitions.first
       #
-      #   results = transaction.execute_partition partition
+      #   results = batch_snapshot.execute_partition partition
       #
       class Partition
         attr_reader :partition_token, :table, :keys, :columns, :index,
