@@ -286,8 +286,7 @@ module Google
                                            partition_options
           @last_updated_at = Time.now
           results.partitions.map do |p|
-            Partition.from_grpc p, table, keys, columns, index, nil, nil, nil,
-                                partition_size_bytes, max_partitions
+            Partition.from_grpc p, table, keys, columns, index, nil, nil, nil
           end
         end
 
@@ -303,8 +302,7 @@ module Google
           @last_updated_at = Time.now
 
           results.partitions.map do |p|
-            Partition.from_grpc p, nil, nil, nil, nil, sql, params, types,
-                                partition_size_bytes, max_partitions
+            Partition.from_grpc p, nil, nil, nil, nil, sql, params, types
           end
         end
 

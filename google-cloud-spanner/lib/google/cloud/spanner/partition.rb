@@ -54,11 +54,6 @@ module Google
       #   a value in `params`. In these cases, the `types` hash can be used to
       #   specify the exact SQL type for some or all of the SQL query
       #   parameters.
-      # @attr [Integer] partition_size_bytes
-      # @attr [Integer] max_partitions The desired maximum number of partitions
-      #   specified when the partition was created. For example, this may be set
-      #   to the number of workers available. This is only a hint and may
-      #   provide different results based on the request.
       #
       # @example
       #   require "google/cloud/spanner"
@@ -76,14 +71,12 @@ module Google
       #
       class Partition
         attr_reader :partition_token, :table, :keys, :columns, :index,
-                    :sql, :params, :param_types, :partition_size_bytes,
-                    :max_partitions
+                    :sql, :params, :param_types
 
         ##
         # @private Creates a Partition object.
         def initialize partition_token, table, keys, columns, index,
-                       sql, params, param_types, partition_size_bytes,
-                       max_partitions
+                       sql, params, param_types
           @partition_token = partition_token
           @table = table
           @keys = keys
@@ -92,17 +85,14 @@ module Google
           @sql = sql
           @params = params
           @param_types = param_types
-          @partition_size_bytes = partition_size_bytes
-          @max_partitions = max_partitions
         end
 
         ##
         # @private New Partition from a Google::Rpc::Partition object.
         def self.from_grpc grpc, table, keys, columns, index,
-                           sql, params, param_types, partition_size_bytes,
-                           max_partitions
+                           sql, params, param_types
           new grpc.partition_token, table, keys, columns, index,
-              sql, params, param_types, partition_size_bytes, max_partitions
+              sql, params, param_types
         end
       end
     end

@@ -244,7 +244,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
 
     mock.verify
 
-    assert_partitions partitions, partition_size_bytes: partition_size_bytes
+    assert_partitions partitions
   end
 
   it "can execute a query with max_partitions" do
@@ -259,10 +259,10 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
 
     mock.verify
 
-    assert_partitions partitions, max_partitions: max_partitions
+    assert_partitions partitions
   end
 
-  def assert_partitions partitions, sql = "SELECT * FROM users", params: nil, types: nil, partition_size_bytes: nil, max_partitions: nil
+  def assert_partitions partitions, sql = "SELECT * FROM users", params: nil, types: nil
     partitions.must_be_kind_of Array
     partitions.wont_be :empty?
 
@@ -275,8 +275,6 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute, :mock_spann
       partition.sql.must_equal sql
       partition.params.must_equal params
       partition.param_types.must_equal types
-      partition.partition_size_bytes.must_equal partition_size_bytes
-      partition.max_partitions.must_equal max_partitions
     end
   end
 end

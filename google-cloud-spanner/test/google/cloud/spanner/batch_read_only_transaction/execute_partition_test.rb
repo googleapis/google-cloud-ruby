@@ -291,11 +291,9 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute_partition, :
   end
 
   def partition table: nil, keys: nil, columns: nil, index: nil, sql: nil,
-                params: nil, param_types: nil, partition_size_bytes: nil,
-                max_partitions: nil
+                params: nil, param_types: nil
     Google::Cloud::Spanner::Partition.new partition_token, table, keys, columns, index,
-                                          sql, params, param_types, partition_size_bytes,
-                                          max_partitions
+                                          sql, params, param_types
   end
 
 
