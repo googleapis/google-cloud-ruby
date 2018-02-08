@@ -78,7 +78,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :partition_read, :moc
     mock.expect :partition_read, partitions_resp, [session_grpc.name, "my-table", key_set, {transaction: tx_selector, index: "MyTableCompositeKey", columns: columns_arg, partition_options: nil, options: default_options}]
     session.service.mocked_service = mock
 
-    lookup_range = batch_tx.range [1,1], [3,3]
+    lookup_range = Google::Cloud::Spanner::Range.new [1,1], [3,3]
     partitions = batch_tx.partition_read "my-table", columns, keys: lookup_range, index: "MyTableCompositeKey"
 
     mock.verify

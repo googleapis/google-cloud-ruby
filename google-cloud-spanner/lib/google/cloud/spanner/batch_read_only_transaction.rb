@@ -433,41 +433,6 @@ module Google
         end
 
         ##
-        # Creates a Cloud Spanner Range. This can be used in place of a Ruby
-        # Range when needing to exclude the beginning value.
-        #
-        # @param [Object] beginning The object that defines the beginning of the
-        #   range.
-        # @param [Object] ending The object that defines the end of the range.
-        # @param [Boolean] exclude_begin Determines if the range excludes its
-        #   beginning value. Default is `false`.
-        # @param [Boolean] exclude_end Determines if the range excludes its
-        #   ending value. Default is `false`.
-        #
-        # @return [Google::Cloud::Spanner::Range] The new Range instance.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
-        #
-        #   db.snapshot do |snp|
-        #     key_range = db.range 1, 100
-        #     results = snp.read "users", [:id, :name], keys: key_range
-        #
-        #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}"
-        #     end
-        #   end
-        #
-        def range beginning, ending, exclude_begin: false, exclude_end: false
-          Range.new beginning, ending,
-                    exclude_begin: exclude_begin,
-                    exclude_end: exclude_end
-        end
-
-        ##
         # @private Creates a new BatchReadOnlyTransaction instance from a
         # Google::Spanner::V1::Transaction.
         def self.from_grpc grpc, session

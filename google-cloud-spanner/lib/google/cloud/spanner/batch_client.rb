@@ -206,6 +206,39 @@ module Google
             batch_transaction_id.timestamp
         end
 
+        ##
+        # Creates a Spanner Range. This can be used in place of a Ruby Range
+        # when needing to exclude the beginning value.
+        #
+        # @param [Object] beginning The object that defines the beginning of the
+        #   range.
+        # @param [Object] ending The object that defines the end of the range.
+        # @param [Boolean] exclude_begin Determines if the range excludes its
+        #   beginning value. Default is `false`.
+        # @param [Boolean] exclude_end Determines if the range excludes its
+        #   ending value. Default is `false`.
+        #
+        # @return [Google::Cloud::Spanner::Range] The new Range instance.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   transaction = batch_client.create_batch_read_only_transaction
+        #
+        #   key_range = batch_client.range 1, 100
+        #
+        #   partitions = transaction.partition_read "users", [:id, :name],
+        #                                           keys: key_range
+        #
+        def range beginning, ending, exclude_begin: false, exclude_end: false
+          Range.new beginning, ending,
+                    exclude_begin: exclude_begin,
+                    exclude_end: exclude_end
+        end
+
         # @private
         def to_s
           "(project_id: #{project_id}, instance_id: #{instance_id}, " \

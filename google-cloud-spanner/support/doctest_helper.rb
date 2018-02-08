@@ -209,6 +209,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::BatchClient#range" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock.expect :create_session, OpenStruct.new(name: "session-name"), ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
+    end
+  end
+
   # BatchReadOnlyTransaction
 
   doctest.before "Google::Cloud::Spanner::BatchReadOnlyTransaction" do

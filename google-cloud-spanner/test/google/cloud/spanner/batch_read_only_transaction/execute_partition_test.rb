@@ -282,7 +282,7 @@ describe Google::Cloud::Spanner::BatchReadOnlyTransaction, :execute_partition, :
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])]), transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
     session.service.mocked_service = mock
 
-    lookup_range = batch_tx.range [1,1], [3,3]
+    lookup_range = Google::Cloud::Spanner::Range.new [1,1], [3,3]
     results = batch_tx.execute_partition partition(table: "my-table", columns: columns, keys: lookup_range, index: "MyTableCompositeKey")
 
     mock.verify

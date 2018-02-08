@@ -255,4 +255,44 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
     batch_transaction_id.transaction_id.must_equal transaction_id
     batch_transaction_id.timestamp.must_equal timestamp
   end
+
+  it "creates an inclusive range" do
+    range = batch_client.range 1, 100
+
+    range.begin.must_equal 1
+    range.end.must_equal 100
+
+    range.wont_be :exclude_begin?
+    range.wont_be :exclude_end?
+  end
+
+  it "creates an exclusive range" do
+    range = batch_client.range 1, 100, exclude_begin: true, exclude_end: true
+
+    range.begin.must_equal 1
+    range.end.must_equal 100
+
+    range.must_be :exclude_begin?
+    range.must_be :exclude_end?
+  end
+
+  it "creates a range that excludes beginning" do
+    range = batch_client.range 1, 100, exclude_begin: true
+
+    range.begin.must_equal 1
+    range.end.must_equal 100
+
+    range.must_be :exclude_begin?
+    range.wont_be :exclude_end?
+  end
+
+  it "creates a range that excludes ending" do
+    range = batch_client.range 1, 100, exclude_end: true
+
+    range.begin.must_equal 1
+    range.end.must_equal 100
+
+    range.wont_be :exclude_begin?
+    range.must_be :exclude_end?
+  end
 end
