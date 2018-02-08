@@ -277,6 +277,11 @@ module Google
         ##
         # Closes this transaction and releases the underlying resources.
         #
+        # This should only be called once this transaction is no longer needed
+        # anywhere. In particular if this transaction is being used across
+        # multiple machines, calling this method on any of the machines will
+        # render the transaction invalid everywhere.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -359,30 +364,28 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   transaction = batch_client.create_batch_read_only_transaction
         #
-        #   db.snapshot do |snp|
-        #     results = snp.execute "SELECT * FROM users"
+        #   results = transaction.execute "SELECT * FROM users"
         #
-        #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}"
-        #     end
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
         # @example Query using query parameters:
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   transaction = batch_client.create_batch_read_only_transaction
         #
-        #   db.snapshot do |snp|
-        #     results = snp.execute "SELECT * FROM users " \
-        #                           "WHERE active = @active",
-        #                           params: { active: true }
+        #   results = transaction.execute "SELECT * FROM users " \
+        #                         "WHERE active = @active",
+        #                         params: { active: true }
         #
-        #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}"
-        #     end
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
         def execute sql, params: nil, types: nil
@@ -416,14 +419,13 @@ module Google
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new
-        #   db = spanner.client "my-instance", "my-database"
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   transaction = batch_client.create_batch_read_only_transaction
         #
-        #   db.snapshot do |snp|
-        #     results = snp.read "users", [:id, :name]
+        #   results = transaction.read "users", [:id, :name]
         #
-        #     results.rows.each do |row|
-        #       puts "User #{row[:id]} is #{row[:name]}"
-        #     end
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil
