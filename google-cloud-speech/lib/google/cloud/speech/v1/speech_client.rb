@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -58,7 +55,7 @@ module Google
           ].freeze
 
           class OperationsClient < Google::Longrunning::OperationsClient
-            SERVICE_ADDRESS = SERVICE_ADDRESS
+            self::SERVICE_ADDRESS = SpeechClient::SERVICE_ADDRESS
           end
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
