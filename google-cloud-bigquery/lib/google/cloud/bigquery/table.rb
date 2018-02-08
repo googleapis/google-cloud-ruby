@@ -18,6 +18,7 @@ require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/data"
 require "google/cloud/bigquery/table/list"
 require "google/cloud/bigquery/schema"
+require "google/cloud/bigquery/encryption"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/insert_response"
 require "google/cloud/bigquery/table/async_inserter"
@@ -780,6 +781,53 @@ module Google
         def headers
           return nil if reference?
           schema.headers
+        end
+
+        ##
+        # The {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect the table. If not set, default
+        # encryption is used.
+        #
+        # Present only if the table is using custom encryption.
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration, nil] The encryption configuration.
+        #
+        #   @!group Attributes
+        #
+        def encryption_configuration
+          return nil if reference?
+          ensure_full_data!
+          return nil if @gapi.encryption_configuration.nil?
+          External.from_gapi(@gapi.encryption_configuration).freeze
+        end
+
+        ##
+
+        # Set the {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect the table. If not set, default
+        # encryption is used.
+        #
+        # Present only if the table is using custom encryption.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration] The encryption configuration.
+        #
+        # @!group Attributes
+        #
+        def encryption_configuration= encryption_configuration
+          reload! unless resource_full?
+          @gapi.encryption_configuration = encryption_configuration.to_gapi
+          patch_gapi! :encryption_configuration
         end
 
         ##
