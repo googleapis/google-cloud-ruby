@@ -205,7 +205,6 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, OpenStruct.new(name: "session-name"), ["projects/my-project/instances/my-instance/databases/my-database", Hash]
       mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :get_session, OpenStruct.new(name: "session-name"), ["session-name", Hash]
     end
   end
 
@@ -285,7 +284,6 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock.expect :create_session, OpenStruct.new(name: "session-name"), ["projects/my-project/instances/my-instance/databases/my-database", Hash]
       mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
-      mock.expect :get_session, OpenStruct.new(name: "session-name"), ["session-name", Hash]
     end
   end
 

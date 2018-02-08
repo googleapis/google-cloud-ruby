@@ -164,14 +164,14 @@ module Google
             snp_session.path, strong: strong,
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
-          BatchSnapshot.from_grpc snp_grpc, snp_session
+          BatchSnapshot.from_grpc snp_grpc, @project.service, snp_session.path
         end
 
         ##
         # Returns a {BatchSnapshot} context in which multiple reads
         # and/or queries can be performed. All reads/queries will use the same
         # timestamp, and the timestamp can be inspected after this transaction
-        # is created successfully.
+        # is created successfully. This method does not perform an RPC.
         #
         # @param [Google::Cloud::Spanner::BatchTransactionId]
         #   batch_transaction_id The unique ID of an existing transaction.
@@ -193,13 +193,10 @@ module Google
         #   new_batch_snapshot = batch_client.load_batch_snapshot \
         #     batch_transaction_id
         #
-        #
         def load_batch_snapshot batch_transaction_id
-          ensure_service!
-          grpc = @project.service.get_session batch_transaction_id.session_path
-          tx_session = Session.from_grpc grpc, @project.service
           BatchSnapshot.new \
-            tx_session, batch_transaction_id.transaction_id,
+            @project.service, batch_transaction_id.session_path,
+            batch_transaction_id.transaction_id,
             batch_transaction_id.timestamp
         end
 

@@ -237,14 +237,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
     end
   end
 
-  it "retrieves a batch_snapshot" do
-    mock = Minitest::Mock.new
-    mock.expect :get_session, session_grpc, [session.path, options: default_options]
-    spanner.service.mocked_service = mock
+  it "loads a batch_snapshot" do
 
     batch_snapshot = batch_client.load_batch_snapshot batch_tx_id
-
-    mock.verify
 
     batch_snapshot.transaction_id.must_equal transaction_id
     batch_snapshot.timestamp.must_equal timestamp

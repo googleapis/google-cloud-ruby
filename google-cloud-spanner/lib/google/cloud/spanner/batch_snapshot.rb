@@ -13,9 +13,10 @@
 # limitations under the License.
 
 
-require "google/cloud/spanner/session"
 require "google/cloud/spanner/convert"
 require "google/cloud/spanner/batch_transaction_id"
+require "google/cloud/spanner/partition"
+require "google/cloud/spanner/results"
 
 module Google
   module Cloud
@@ -57,9 +58,10 @@ module Google
       #   batch_snapshot.close
       #
       class BatchSnapshot
-        # TODO: add Snapshot methods
-        # @private The Session object.
-        attr_reader :session
+        # @private The Service object.
+        attr_accessor :service
+        # @private The Session name.
+        attr_reader :session_path
 
         # The transaction id string.
         attr_reader :transaction_id
@@ -76,13 +78,15 @@ module Google
         #   transaction ID object.
         #
         def batch_transaction_id
-          BatchTransactionId.new session.path, transaction_id, timestamp
+          BatchTransactionId.new session_path, transaction_id, timestamp
         end
 
         ##
         # @private Creates a BatchSnapshot object.
-        def initialize session, transaction_id, timestamp
-          @session = session
+        def initialize service, session_path, transaction_id, timestamp
+          @service = service
+          raise "Must have session path." unless session_path
+          @session_path = session_path
           @transaction_id = transaction_id
           @timestamp = timestamp
         end
@@ -137,9 +141,12 @@ module Google
           partition_options = { keys: keys, index: index,
                                 partition_size_bytes: partition_size_bytes,
                                 max_partitions: max_partitions }
-
-          ensure_session!
-          session.partition_read table, columns, tx_selector, partition_options
+          ensure_service!
+          results = service.partition_read session_path, table, columns,
+                                           tx_selector, partition_options
+          results.partitions.map do |p|
+            Partition.from_grpc p, table, keys, columns, index, nil, nil, nil
+          end
         end
 
         ##
@@ -227,9 +234,13 @@ module Google
           partition_options = { params: params, types: types,
                                 partition_size_bytes: partition_size_bytes,
                                 max_partitions: max_partitions }
+          ensure_service!
+          results = service.partition_query session_path, sql, tx_selector,
+                                            partition_options
 
-          ensure_session!
-          session.partition_query sql, tx_selector, partition_options
+          results.partitions.map do |p|
+            Partition.from_grpc p, nil, nil, nil, nil, sql, params, types
+          end
         end
 
         ##
@@ -257,17 +268,19 @@ module Google
         #   batch_snapshot.close
         #
         def execute_partition partition
-          ensure_session!
+          ensure_service!
           if partition.sql
-            session.execute partition.sql,
+            Results.execute service, session_path, partition.sql,
                             params: partition.params,
                             types: partition.param_types,
                             transaction: tx_selector,
                             partition_token: partition.partition_token
 
           else
-            session.read partition.table, partition.columns,
-                         keys: partition.keys, index: partition.index,
+            Results.read service, session_path, partition.table,
+                         partition.columns,
+                         keys: partition.keys,
+                         index: partition.index,
                          transaction: tx_selector,
                          partition_token: partition.partition_token
           end
@@ -297,7 +310,8 @@ module Google
         #   batch_snapshot.close
         #
         def close
-          session.release!
+          ensure_service!
+          service.delete_session session_path
         end
 
         ##
@@ -388,9 +402,11 @@ module Google
         #   end
         #
         def execute sql, params: nil, types: nil
-          ensure_session!
-          session.execute sql, params: params, types: types,
-                               transaction: tx_selector
+          ensure_service!
+          Results.execute service, session_path, sql,
+                          params: params,
+                          types: types,
+                          transaction: tx_selector
         end
         alias query execute
 
@@ -428,17 +444,20 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil
-          ensure_session!
-          session.read table, columns, keys: keys, index: index, limit: limit,
-                                       transaction: tx_selector
+          ensure_service!
+          Results.read service, session_path, table, columns,
+                       keys: keys,
+                       index: index,
+                       limit: limit,
+                       transaction: tx_selector
         end
 
         ##
         # @private Creates a new BatchSnapshot instance from a
         # Google::Spanner::V1::Transaction.
-        def self.from_grpc grpc, session
+        def self.from_grpc grpc, service, session_path
           timestamp = Convert.timestamp_to_time grpc.read_timestamp
-          new session, grpc.id, timestamp
+          new service, session_path, grpc.id, timestamp
         end
 
         protected
@@ -451,8 +470,8 @@ module Google
         ##
         # @private Raise an error unless an active connection to the service is
         # available.
-        def ensure_session!
-          raise "Must have active connection to service" unless session
+        def ensure_service!
+          raise "Must have active connection to service" unless service
         end
       end
     end
