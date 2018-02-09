@@ -28,4 +28,27 @@ describe Google::Cloud::Bigquery::EncryptionConfiguration do
 
     config.to_gapi.to_h.must_equal config_gapi.to_h
   end
+
+  it "can set KMS keys" do
+    config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+    config.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+
+    config.kms_key_name =  "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+    config.kms_key_name.must_equal "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+
+    config.kms_key_name =  "projects/1/locations/2/keyRings/3/cryptoKeys/4"
+    config.kms_key_name.must_equal "projects/1/locations/2/keyRings/3/cryptoKeys/4"
+  end
+
+  it "can be converted from gapi" do
+    config_gapi = Google::Apis::BigqueryV2::EncryptionConfiguration.new(
+      kms_key_name: "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+    )
+    config = Google::Cloud::Bigquery::EncryptionConfiguration.from_gapi config_gapi
+
+    config.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    config.kms_key_name.must_equal "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+
+    config.to_gapi.to_h.must_equal config_gapi.to_h
+  end
 end
