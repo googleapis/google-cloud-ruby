@@ -14,9 +14,11 @@
 
 
 require "google/cloud/spanner/convert"
-require "google/cloud/spanner/batch_transaction_id"
+require "google/cloud/spanner/session"
 require "google/cloud/spanner/partition"
 require "google/cloud/spanner/results"
+require "json"
+require "base64"
 
 module Google
   module Cloud
@@ -29,16 +31,16 @@ module Google
       # amounts of data from Cloud Spanner databases. This is a snapshot which
       # additionally allows to partition a read or query request. The read/query
       # request can then be executed independently over each partition while
-      # observing the same snapshot of the database. A BatchSnapshot
-      # can also be shared across multiple processes/machines by passing around
-      # its {BatchTransactionId} and then recreating the transaction using
-      # {BatchClient#load_batch_snapshot}.
+      # observing the same snapshot of the database. A BatchSnapshot can also be
+      # shared across multiple processes/machines by passing around its
+      # serialized value and then recreating the transaction using
+      # {BatchClient#dump}.
       #
-      # Unlike locking read-write transactions, BatchSnapshot will
-      # never abort. They can fail if the chosen read timestamp is garbage
-      # collected; however any read or query activity within an hour on the
-      # transaction avoids garbage collection and most applications do not need
-      # to worry about this in practice.
+      # Unlike locking read-write transactions, BatchSnapshot will never abort.
+      # They can fail if the chosen read timestamp is garbage collected; however
+      # any read or query activity within an hour on the transaction avoids
+      # garbage collection and most applications do not need to worry about this
+      # in practice.
       #
       # See {BatchClient#batch_snapshot} and {BatchClient#load_batch_snapshot}.
       #
@@ -58,95 +60,33 @@ module Google
       #   batch_snapshot.close
       #
       class BatchSnapshot
-        # @private The Service object.
-        attr_accessor :service
-        # @private The Session name.
-        attr_reader :session_path
+        # @private The transaction grpc object.
+        attr_reader :grpc
 
-        # The transaction id string.
-        attr_reader :transaction_id
-
-        # The transaction timestamp.
-        attr_reader :timestamp
-
-        ##
-        # Returns a serializable batch transaction ID object to be re-used
-        # across several machines/processes. This ID guarantees the subsequent
-        # read/query to be executed at the same timestamp.
-        #
-        # @return [Google::Cloud::Spanner::BatchTransactionId] The batch
-        #   transaction ID object.
-        #
-        def batch_transaction_id
-          BatchTransactionId.new session_path, transaction_id, timestamp
-        end
+        # @private The Session object.
+        attr_reader :session
 
         ##
         # @private Creates a BatchSnapshot object.
-        def initialize service, session_path, transaction_id, timestamp
-          @service = service
-          raise "Must have session path." unless session_path
-          @session_path = session_path
-          @transaction_id = transaction_id
-          @timestamp = timestamp
+        def initialize grpc, session
+          @grpc = grpc
+          @session = session
         end
 
         ##
-        # Returns a list of {Partition} objects to read zero or more rows from a
-        # database.
-        #
-        # These partitions can be executed across multiple processes, even
-        # across different machines. The partition size and count can be
-        # configured, although the values given may not necessarily be honored
-        # depending on the query and options in the request.
-        #
-        # @param [String] table The name of the table in the database to be
-        #   read.
-        # @param [Array<String, Symbol>] columns The columns of table to be
-        #   returned for each row matching this request.
-        # @param [Object, Array<Object>] keys A single, or list of keys or key
-        #   ranges to match returned data to. Values should have exactly as many
-        #   elements as there are columns in the primary key.
-        # @param [String] index The name of an index to use instead of the
-        #   table's primary key when interpreting `id` and sorting result rows.
-        #   Optional.
-        # @param [Integer] partition_size_bytes The desired data size for each
-        #   partition generated. This is only a hint. The actual size of each
-        #   partition may be smaller or larger than this size request.
-        # @param [Integer] max_partitions The desired maximum number of
-        #   partitions to return. For example, this may be set to the number of
-        #   workers available. This is only a hint and may provide different
-        #   results based on the request.
-        #
-        # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
-        #   created by the read partition.
-        #
-        # @example
-        #   require "google/cloud/spanner"
-        #
-        #   spanner = Google::Cloud::Spanner.new
-        #
-        #   batch_client = spanner.batch_client "my-instance", "my-database"
-        #   batch_snapshot = batch_client.batch_snapshot
-        #
-        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
-        #
-        #   partition = partitions.first
-        #   results = batch_snapshot.execute_partition partition
-        #
-        #   batch_snapshot.close
-        #
-        def partition_read table, columns, keys: nil, index: nil,
-                           partition_size_bytes: nil, max_partitions: nil
-          partition_options = { keys: keys, index: index,
-                                partition_size_bytes: partition_size_bytes,
-                                max_partitions: max_partitions }
-          ensure_service!
-          results = service.partition_read session_path, table, columns,
-                                           tx_selector, partition_options
-          results.partitions.map do |p|
-            Partition.from_grpc p, table, keys, columns, index, nil, nil, nil
-          end
+        # Identifier of the batch snapshot transaction.
+        # @return [String] The transaction id.
+        def transaction_id
+          return nil if grpc.nil?
+          grpc.id
+        end
+
+        ##
+        # The read timestamp chosen for batch snapshot.
+        # @return [Time] The chosen timestamp.
+        def timestamp
+          return nil if grpc.nil?
+          Convert.timestamp_to_time grpc.read_timestamp
         end
 
         ##
@@ -231,15 +171,103 @@ module Google
         #
         def partition_query sql, params: nil, types: nil,
                             partition_size_bytes: nil, max_partitions: nil
-          partition_options = { params: params, types: types,
-                                partition_size_bytes: partition_size_bytes,
-                                max_partitions: max_partitions }
-          ensure_service!
-          results = service.partition_query session_path, sql, tx_selector,
-                                            partition_options
+          ensure_session!
 
-          results.partitions.map do |p|
-            Partition.from_grpc p, nil, nil, nil, nil, sql, params, types
+          params, types = Convert.to_input_params_and_types params, types
+
+          results = session.partition_query \
+            sql, tx_selector, params: params, types: types,
+                              partition_size_bytes: partition_size_bytes,
+                              max_partitions: max_partitions
+
+          results.partitions.map do |grpc|
+            # Convert partition protos to execute sql request protos
+            execute_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
+              {
+                session: session.path,
+                sql: sql,
+                params: params,
+                param_types: types,
+                transaction: tx_selector,
+                partition_token: grpc.partition_token
+              }.delete_if { |_, v| v.nil? }
+            )
+            Partition.from_execute_grpc execute_grpc
+          end
+        end
+
+        ##
+        # Returns a list of {Partition} objects to read zero or more rows from a
+        # database.
+        #
+        # These partitions can be executed across multiple processes, even
+        # across different machines. The partition size and count can be
+        # configured, although the values given may not necessarily be honored
+        # depending on the query and options in the request.
+        #
+        # @param [String] table The name of the table in the database to be
+        #   read.
+        # @param [Array<String, Symbol>] columns The columns of table to be
+        #   returned for each row matching this request.
+        # @param [Object, Array<Object>] keys A single, or list of keys or key
+        #   ranges to match returned data to. Values should have exactly as many
+        #   elements as there are columns in the primary key.
+        # @param [String] index The name of an index to use instead of the
+        #   table's primary key when interpreting `id` and sorting result rows.
+        #   Optional.
+        # @param [Integer] partition_size_bytes The desired data size for each
+        #   partition generated. This is only a hint. The actual size of each
+        #   partition may be smaller or larger than this size request.
+        # @param [Integer] max_partitions The desired maximum number of
+        #   partitions to return. For example, this may be set to the number of
+        #   workers available. This is only a hint and may provide different
+        #   results based on the request.
+        #
+        # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
+        #   created by the read partition.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #   results = batch_snapshot.execute_partition partition
+        #
+        #   batch_snapshot.close
+        #
+        def partition_read table, columns, keys: nil, index: nil,
+                           partition_size_bytes: nil, max_partitions: nil
+          ensure_session!
+
+          columns = Array(columns).map(&:to_s)
+          keys = Convert.to_key_set keys
+
+          results = session.partition_read \
+            table, columns, tx_selector,
+            keys: keys, index: index,
+            partition_size_bytes: partition_size_bytes,
+            max_partitions: max_partitions
+
+          results.partitions.map do |grpc|
+            # Convert partition protos to read request protos
+            read_grpc = Google::Spanner::V1::ReadRequest.new(
+              {
+                session: session.path,
+                table: table,
+                columns: columns,
+                key_set: keys,
+                index: index,
+                transaction: tx_selector,
+                partition_token: grpc.partition_token
+              }.delete_if { |_, v| v.nil? }
+            )
+            Partition.from_read_grpc read_grpc
           end
         end
 
@@ -262,27 +290,23 @@ module Google
         #   partitions = batch_snapshot.partition_read "users", [:id, :name]
         #
         #   partition = partitions.first
-        #
         #   results = batch_snapshot.execute_partition partition
         #
         #   batch_snapshot.close
         #
         def execute_partition partition
-          ensure_service!
-          if partition.sql
-            Results.execute service, session_path, partition.sql,
-                            params: partition.params,
-                            types: partition.param_types,
-                            transaction: tx_selector,
-                            partition_token: partition.partition_token
+          ensure_session!
 
-          else
-            Results.read service, session_path, partition.table,
-                         partition.columns,
-                         keys: partition.keys,
-                         index: partition.index,
-                         transaction: tx_selector,
-                         partition_token: partition.partition_token
+          partition = Partition.load partition unless partition.is_a? Partition
+          # TODO: raise if partition.empty?
+
+          # TODO: raise if session.path != partition.session
+          # TODO: raise if grpc.transaction != partition.transaction
+
+          if partition.execute?
+            execute_partition_query partition
+          elsif partition.read?
+            execute_partition_read partition
           end
         end
 
@@ -310,8 +334,9 @@ module Google
         #   batch_snapshot.close
         #
         def close
-          ensure_service!
-          service.delete_session session_path
+          ensure_session!
+
+          session.release!
         end
 
         ##
@@ -402,11 +427,12 @@ module Google
         #   end
         #
         def execute sql, params: nil, types: nil
-          ensure_service!
-          Results.execute service, session_path, sql,
-                          params: params,
-                          types: types,
-                          transaction: tx_selector
+          ensure_session!
+
+          params, types = Convert.to_input_params_and_types params, types
+
+          session.execute sql, params: params, types: types,
+                               transaction: tx_selector
         end
         alias query execute
 
@@ -444,20 +470,86 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil
-          ensure_service!
-          Results.read service, session_path, table, columns,
-                       keys: keys,
-                       index: index,
-                       limit: limit,
-                       transaction: tx_selector
+          ensure_session!
+
+          columns = Array(columns).map(&:to_s)
+          keys = Convert.to_key_set keys
+
+          session.read table, columns, keys: keys, index: index, limit: limit,
+                                       transaction: tx_selector
+        end
+
+        ##
+        # @private
+        # Converts the the batch snapshot object to a Hash ready for
+        # serialization.
+        #
+        # @return [Hash] A hash containing a representation of the batch
+        #   snapshot object.
+        #
+        def to_h
+          {
+            session: Base64.strict_encode64(@session.grpc.to_proto),
+            transaction: Base64.strict_encode64(@grpc.to_proto)
+          }
+        end
+
+        ##
+        # Serializes the batch snapshot object so it can be recreated on another
+        # process. See {BatchClient#load_batch_snapshot}.
+        #
+        # @return [String] The serialized representation of the batch snapshot.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #
+        #   serialized_snapshot = batch_snapshot.dump
+        #   serialized_partition = partition.dump
+        #
+        #   # In a separate process
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
+        #     serialized_snapshot
+        #
+        #   new_partition = batch_client.load_partition \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
+        #
+        def dump
+          JSON.dump to_h
+        end
+        alias serialize dump
+
+        ##
+        # @private Loads the serialized batch snapshot. See
+        # {BatchClient#load_batch_snapshot}.
+        def self.load data, service: nil
+          data = JSON.parse data, symbolize_names: true unless data.is_a? Hash
+
+          session_grpc = Google::Spanner::V1::Session.decode \
+            Base64.decode64(data[:session])
+          transaction_grpc = Google::Spanner::V1::Transaction.decode \
+            Base64.decode64(data[:transaction])
+
+          from_grpc transaction_grpc, Session.from_grpc(session_grpc, service)
         end
 
         ##
         # @private Creates a new BatchSnapshot instance from a
         # Google::Spanner::V1::Transaction.
-        def self.from_grpc grpc, service, session_path
-          timestamp = Convert.timestamp_to_time grpc.read_timestamp
-          new service, session_path, grpc.id, timestamp
+        def self.from_grpc grpc, session
+          new grpc, session
         end
 
         protected
@@ -470,8 +562,25 @@ module Google
         ##
         # @private Raise an error unless an active connection to the service is
         # available.
-        def ensure_service!
-          raise "Must have active connection to service" unless service
+        def ensure_session!
+          raise "Must have active connection to service" unless session
+        end
+
+        def execute_partition_query partition
+          session.execute partition.execute.sql,
+                          params: partition.execute.params,
+                          types: partition.execute.param_types.to_h,
+                          transaction: partition.execute.transaction,
+                          partition_token: partition.execute.partition_token
+        end
+
+        def execute_partition_read partition
+          session.read partition.read.table,
+                       partition.read.columns.to_a,
+                       keys: partition.read.key_set,
+                       index: partition.read.index,
+                       transaction: partition.read.transaction,
+                       partition_token: partition.read.partition_token
         end
       end
     end

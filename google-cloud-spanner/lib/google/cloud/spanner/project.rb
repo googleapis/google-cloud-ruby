@@ -477,10 +477,22 @@ module Google
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #
         #   batch_snapshot = batch_client.batch_snapshot
-        #   batch_transaction_id = batch_snapshot.batch_transaction_id
+        #   serialized_snapshot = batch_snapshot.dump
         #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #   serialized_partition = partition.dump
+        #
+        #   # In a separate process
         #   new_batch_snapshot = batch_client.load_batch_snapshot \
-        #     batch_transaction_id
+        #     serialized_snapshot
+        #
+        #   new_partition = batch_client.load_partition \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
         #
         def batch_client instance_id, database_id
           BatchClient.new self, instance_id, database_id

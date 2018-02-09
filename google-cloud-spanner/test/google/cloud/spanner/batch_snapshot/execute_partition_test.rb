@@ -18,10 +18,11 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
-  let(:session_name) { session_path(instance_id, database_id, session_id) }
+  let(:session_grpc) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id) }
+  let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id }
-  let(:batch_snapshot) { Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, spanner.service, session_name }
+  let(:batch_snapshot) { Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session }
   let(:partition_token) { "my-partition" }
   let(:table) { "my-table" }
   let(:sql) { "SELECT * FROM users" }
@@ -66,8 +67,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   it "can execute a simple query" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, sql, transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, sql, transaction: tx_selector, params: nil, param_types: {}, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql: sql)
 
@@ -78,8 +79,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   it "can execute a query with bool param" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE active = @active", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "active" => Google::Protobuf::Value.new(bool_value: true) }), param_types: { "active" => Google::Spanner::V1::Type.new(code: :BOOL) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE active = @active", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "active" => Google::Protobuf::Value.new(bool_value: true) }), param_types: { "active" => Google::Spanner::V1::Type.new(code: :BOOL).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql: "SELECT * FROM users WHERE active = @active", params: { active: true } )
 
@@ -90,8 +91,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   it "can execute a query with int param" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE age = @age", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "age" => Google::Protobuf::Value.new(string_value: "29") }), param_types: { "age" => Google::Spanner::V1::Type.new(code: :INT64) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE age = @age", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "age" => Google::Protobuf::Value.new(string_value: "29") }), param_types: { "age" => Google::Spanner::V1::Type.new(code: :INT64).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE age = @age", params: { age: 29 } )
 
@@ -102,8 +103,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   it "can execute a query with float param" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE score = @score", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9) }), param_types: { "score" => Google::Spanner::V1::Type.new(code: :FLOAT64) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE score = @score", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9) }), param_types: { "score" => Google::Spanner::V1::Type.new(code: :FLOAT64).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE score = @score", params: { score: 0.9 } )
 
@@ -116,8 +117,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     timestamp = Time.parse "2017-01-01 20:04:05.06 -0700"
 
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE updated_at = @updated_at", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "updated_at" => Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z") }), param_types: { "updated_at" => Google::Spanner::V1::Type.new(code: :TIMESTAMP) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE updated_at = @updated_at", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "updated_at" => Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z") }), param_types: { "updated_at" => Google::Spanner::V1::Type.new(code: :TIMESTAMP).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE updated_at = @updated_at", params: { updated_at: timestamp } )
 
@@ -130,8 +131,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     date = Date.parse "2017-01-02"
 
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE birthday = @birthday", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "birthday" => Google::Protobuf::Value.new(string_value: "2017-01-02") }), param_types: { "birthday" => Google::Spanner::V1::Type.new(code: :DATE) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE birthday = @birthday", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "birthday" => Google::Protobuf::Value.new(string_value: "2017-01-02") }), param_types: { "birthday" => Google::Spanner::V1::Type.new(code: :DATE).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE birthday = @birthday", params: { birthday: date } )
 
@@ -142,8 +143,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   it "can execute a query with String param" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE name = @name", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "name" => Google::Protobuf::Value.new(string_value: "Charlie") }), param_types: { "name" => Google::Spanner::V1::Type.new(code: :STRING) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE name = @name", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "name" => Google::Protobuf::Value.new(string_value: "Charlie") }), param_types: { "name" => Google::Spanner::V1::Type.new(code: :STRING).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE name = @name", params: { name: "Charlie" } )
 
@@ -156,8 +157,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     file = StringIO.new "contents"
 
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE avatar = @avatar", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")) }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE avatar = @avatar", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")) }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE avatar = @avatar", params: { avatar: file } )
 
@@ -168,8 +169,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   it "can execute a query with an Array param" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE project_ids = @list", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE project_ids = @list", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE project_ids = @list", params: { list: [1,2,3] } )
 
@@ -180,8 +181,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   it "can execute a query with an empty Array param" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE project_ids = @list", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE project_ids = @list", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE project_ids = @list", params: { list: [] }, param_types: { list: [:INT64] } )
 
@@ -194,8 +195,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     skip "Spanner does not accept STRUCT values in query parameters"
 
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE settings = @dict", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"env"=>Google::Protobuf::Value.new(string_value: "production")})) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING))])) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE settings = @dict", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"env"=>Google::Protobuf::Value.new(string_value: "production")})) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING))])).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: :production } } )
 
@@ -208,8 +209,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     skip "Spanner does not accept STRUCT values in query parameters"
 
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE settings = @dict", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9), "env" => Google::Protobuf::Value.new(string_value: "production"), "project_ids" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) })) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))] )) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE settings = @dict", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9), "env" => Google::Protobuf::Value.new(string_value: "production"), "project_ids" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) })) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))] )).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE settings = @dict", params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } } )
 
@@ -222,8 +223,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     skip "Spanner does not accept STRUCT values in query parameters"
 
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_name, "SELECT * FROM users WHERE settings = @dict", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {})) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [])) }, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT * FROM users WHERE settings = @dict", transaction: tx_selector, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {})) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [])).to_h }, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(sql:  "SELECT * FROM users WHERE settings = @dict", params: { dict: { } } )
 
@@ -236,8 +237,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, index: nil, limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(table: "my-table", columns: columns)
 
@@ -250,8 +251,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: tx_selector, index: nil, limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value]), transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(table: "my-table", columns: columns, keys: [1, 2, 3])
 
@@ -264,8 +265,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1,1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2,2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3,3]).list_value]), transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1,1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2,2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3,3]).list_value]), transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     results = batch_snapshot.execute_partition partition(table: "my-table", columns: columns, keys: [[1,1], [2,2], [3,3]], index: "MyTableCompositeKey")
 
@@ -278,8 +279,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :streaming_read, results_enum, [session_name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])]), transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
-    batch_snapshot.service.mocked_service = mock
+    mock.expect :streaming_read, results_enum, [session.path, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])]), transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
 
     lookup_range = Google::Cloud::Spanner::Range.new [1,1], [3,3]
     results = batch_snapshot.execute_partition partition(table: "my-table", columns: columns, keys: lookup_range, index: "MyTableCompositeKey")
@@ -291,8 +292,39 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
 
   def partition table: nil, keys: nil, columns: nil, index: nil, sql: nil,
                 params: nil, param_types: nil
-    Google::Cloud::Spanner::Partition.new partition_token, table, keys, columns, index,
-                                          sql, params, param_types
+    if table
+      columns = Array(columns).map(&:to_s)
+      keys = Google::Cloud::Spanner::Convert.to_key_set keys
+
+      read_grpc = Google::Spanner::V1::ReadRequest.new(
+        {
+          session: session.path,
+          table: table,
+          columns: columns,
+          key_set: keys,
+          index: index,
+          transaction: tx_selector,
+          partition_token: partition_token
+        }.delete_if { |_, v| v.nil? }
+      )
+
+      Google::Cloud::Spanner::Partition.from_read_grpc read_grpc
+    else #sql
+      params, param_types = Google::Cloud::Spanner::Convert.to_input_params_and_types params, param_types
+
+      execute_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
+        {
+          session: session.path,
+          sql: sql,
+          params: params,
+          param_types: param_types,
+          transaction: tx_selector,
+          partition_token: partition_token
+        }.delete_if { |_, v| v.nil? }
+      )
+
+      Google::Cloud::Spanner::Partition.from_execute_grpc execute_grpc
+    end
   end
 
 

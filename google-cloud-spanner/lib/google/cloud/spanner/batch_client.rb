@@ -44,11 +44,23 @@ module Google
       #   batch_client = spanner.batch_client "my-instance", "my-database"
       #
       #   batch_snapshot = batch_client.batch_snapshot
-      #   batch_transaction_id = batch_snapshot.batch_transaction_id
+      #
+      #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+      #
+      #   partition = partitions.first
+      #
+      #   serialized_snapshot = batch_snapshot.dump
+      #   serialized_partition = partition.dump
       #
       #   # In a separate process
       #   new_batch_snapshot = batch_client.load_batch_snapshot \
-      #     batch_transaction_id
+      #     serialized_snapshot
+      #
+      #   new_partition = batch_client.load_partition \
+      #     serialized_partition
+      #
+      #   results = new_batch_snapshot.execute_partition \
+      #     new_partition
       #
       class BatchClient
         ##
@@ -144,12 +156,23 @@ module Google
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #
         #   batch_snapshot = batch_client.batch_snapshot
-        #   batch_transaction_id = batch_snapshot.batch_transaction_id
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #
+        #   serialized_snapshot = batch_snapshot.dump
+        #   serialized_partition = partition.dump
         #
         #   # In a separate process
         #   new_batch_snapshot = batch_client.load_batch_snapshot \
-        #     batch_transaction_id
+        #     serialized_snapshot
         #
+        #   new_partition = batch_client.load_partition \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
         #
         def batch_snapshot strong: nil, timestamp: nil, read_timestamp: nil,
                            staleness: nil, exact_staleness: nil
@@ -164,18 +187,17 @@ module Google
             snp_session.path, strong: strong,
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
-          BatchSnapshot.from_grpc snp_grpc, @project.service, snp_session.path
+          BatchSnapshot.from_grpc snp_grpc, snp_session
         end
 
         ##
-        # Returns a {BatchSnapshot} context in which multiple reads
-        # and/or queries can be performed. All reads/queries will use the same
+        # Returns a {BatchSnapshot} context in which multiple reads and/or
+        # queries can be performed. All reads/queries will use the same
         # timestamp, and the timestamp can be inspected after this transaction
         # is created successfully. This method does not perform an RPC.
         #
-        # @param [Google::Cloud::Spanner::BatchTransactionId]
-        #   batch_transaction_id The unique ID of an existing transaction.
-        #   See {BatchSnapshot#batch_transaction_id}.
+        # @param [String] serialized_snapshot The serialized representation of
+        #   an existing batch snapshot. See {BatchSnapshot#dump}.
         #
         # @return [Google::Cloud::Spanner::BatchSnapshot]
         #
@@ -187,17 +209,67 @@ module Google
         #   batch_client = spanner.batch_client "my-instance", "my-database"
         #
         #   batch_snapshot = batch_client.batch_snapshot
-        #   batch_transaction_id = batch_snapshot.batch_transaction_id
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #
+        #   serialized_snapshot = batch_snapshot.dump
+        #   serialized_partition = partition.dump
         #
         #   # In a separate process
         #   new_batch_snapshot = batch_client.load_batch_snapshot \
-        #     batch_transaction_id
+        #     serialized_snapshot
         #
-        def load_batch_snapshot batch_transaction_id
-          BatchSnapshot.new \
-            @project.service, batch_transaction_id.session_path,
-            batch_transaction_id.transaction_id,
-            batch_transaction_id.timestamp
+        #   new_partition = batch_client.load_partition \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
+        #
+        def load_batch_snapshot serialized_snapshot
+          ensure_service!
+
+          BatchSnapshot.load serialized_snapshot, service: @project.service
+        end
+
+        ##
+        # Returns a {Partition} from a serialized representation. See
+        # {Partition.load}.
+        #
+        # @param [String] serialized_partition The serialized representation of
+        #   an existing batch partition. See {Partition#dump}.
+        #
+        # @return [Google::Cloud::Spanner::Partition]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #
+        #   serialized_snapshot = batch_snapshot.dump
+        #   serialized_partition = partition.dump
+        #
+        #   # In a separate process
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
+        #     serialized_snapshot
+        #
+        #   new_partition = batch_client.load_partition \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
+        #
+        def load_partition serialized_partition
+          Partition.load serialized_partition
         end
 
         ##

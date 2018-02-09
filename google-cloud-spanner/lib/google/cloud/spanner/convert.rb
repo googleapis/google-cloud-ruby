@@ -258,6 +258,45 @@ module Google
 
             Google::Spanner::V1::KeyRange.new range_opts
           end
+
+          def to_key_set keys
+            return Google::Spanner::V1::KeySet.new(all: true) if keys.nil?
+            keys = [keys] unless keys.is_a? Array
+            return Google::Spanner::V1::KeySet.new(all: true) if keys.empty?
+
+            if keys_are_ranges? keys
+              key_ranges = keys.map { |r| to_key_range(r) }
+              return Google::Spanner::V1::KeySet.new(ranges: key_ranges)
+            end
+
+            key_list = keys.map do |key|
+              key = [key] unless key.is_a? Array
+              raw_to_value(key).list_value
+            end
+            Google::Spanner::V1::KeySet.new keys: key_list
+          end
+
+          def keys_are_ranges? keys
+            keys.each do |key|
+              return true if key.is_a? ::Range
+              return true if key.is_a? Google::Cloud::Spanner::Range
+            end
+            false
+          end
+
+          def to_input_params_and_types params, types
+            input_params = nil
+            input_param_types = nil
+            unless params.nil?
+              input_param_pairs = to_query_params params, types
+              input_params = Google::Protobuf::Struct.new \
+                fields: Hash[input_param_pairs.map { |k, v| [k, v.first] }]
+              input_param_types = Hash[
+                  input_param_pairs.map { |k, v| [k, v.last] }]
+            end
+
+            [input_params, input_param_types]
+          end
         end
 
         # rubocop:enable all

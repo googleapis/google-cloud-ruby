@@ -13,6 +13,9 @@
 # limitations under the License.
 
 
+require "json"
+require "base64"
+
 module Google
   module Cloud
     module Spanner
@@ -25,34 +28,6 @@ module Google
       #
       # See {BatchSnapshot#partition_read}, {BatchSnapshot#partition_query}, and
       # {BatchSnapshot#execute_partition}.
-      #
-      # @attr [String] partition_token
-      # @attr [String] table The name of the table in the database to be read or
-      #   queried.
-      # @attr [Object, Array<Object>, nil] keys A single, or list of keys or key
-      #   ranges to match returned data to. Values should have exactly as many
-      #   elements as there are columns in the primary key.
-      # @attr [Array<String, Symbol>] columns The columns of table to be
-      #   returned for each row.
-      # @attr [String] index The name of an index to use instead of the table's
-      #   primary key when interpreting `id` and sorting result rows. Optional.
-      # @attr [String] sql The SQL query string. See [Query
-      #   syntax](https://cloud.google.com/spanner/docs/query-syntax).
-      #
-      #   The SQL query string can contain parameter placeholders. A parameter
-      #   placeholder consists of "@" followed by the parameter name.
-      #   Parameter names consist of any combination of letters, numbers, and
-      #   underscores.
-      # @attr [Hash] params SQL parameters for the query string. The
-      #   parameter placeholders, minus the "@", are the the hash keys, and
-      #   the literal values are the hash values. If the query string contains
-      #   something like "WHERE id > @msg_id", then the params must contain
-      #   something like `:msg_id => 1`.
-      # @attr [Hash] param_types Types of the SQL parameters in `params`. It is
-      #   not always possible for Cloud Spanner to infer the right SQL type from
-      #   a value in `params`. In these cases, the `types` hash can be used to
-      #   specify the exact SQL type for some or all of the SQL query
-      #   parameters.
       #
       # @example
       #   require "google/cloud/spanner"
@@ -69,29 +44,163 @@ module Google
       #   results = batch_snapshot.execute_partition partition
       #
       class Partition
-        attr_reader :partition_token, :table, :keys, :columns, :index,
-                    :sql, :params, :param_types
+        # @ private
+        attr_reader :execute, :read
 
         ##
         # @private Creates a Partition object.
-        def initialize partition_token, table, keys, columns, index,
-                       sql, params, param_types
-          @partition_token = partition_token
-          @table = table
-          @keys = keys
-          @columns = columns
-          @index = index
-          @sql = sql
-          @params = params
-          @param_types = param_types
+        def initialize; end
+
+        ##
+        # Whether the partition was created for an execute/query operation.
+        # @return [Boolean]
+        def execute?
+          !@execute.nil?
         end
 
         ##
-        # @private New Partition from a Google::Rpc::Partition object.
-        def self.from_grpc grpc, table, keys, columns, index,
-                           sql, params, param_types
-          new grpc.partition_token, table, keys, columns, index,
-              sql, params, param_types
+        # Whether the partition was created for a read operation.
+        # @return [Boolean]
+        def read?
+          !@read.nil?
+        end
+
+        ##
+        # @private
+        # Whether the partition does not have an execute or read operation.
+        # @return [Boolean]
+        def empty?
+          @execute.nil? && @read.nil?
+        end
+
+        ##
+        # @private
+        # Converts the the batch partition object to a Hash ready for
+        # serialization.
+        #
+        # @return [Hash] A hash containing a representation of the batch
+        #   partition object.
+        #
+        def to_h
+          {}.tap do |h|
+            h[:execute] = Base64.strict_encode64(@execute.to_proto) if @execute
+            h[:read] = Base64.strict_encode64(@read.to_proto) if @read
+          end
+        end
+
+        ##
+        # Serializes the batch partition object so it can be recreated on
+        # another process. See {Partition.load} and
+        # {BatchClient#load_partition}.
+        #
+        # @return [String] The serialized representation of the batch partition.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #
+        #   serialized_snapshot = batch_snapshot.dump
+        #   serialized_partition = partition.dump
+        #
+        #   # In a separate process
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
+        #     serialized_snapshot
+        #
+        #   new_partition = batch_client.load_partition \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
+        #
+        def dump
+          JSON.dump to_h
+        end
+        alias serialize dump
+
+        ##
+        # Returns a {Partition} from a serialized representation.
+        #
+        # @param [String] data The serialized representation of an existing
+        #   batch partition. See {Partition#dump}.
+        #
+        # @return [Google::Cloud::Spanner::Partition]
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #
+        #   serialized_snapshot = batch_snapshot.dump
+        #   serialized_partition = partition.dump
+        #
+        #   # In a separate process
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
+        #     serialized_snapshot
+        #
+        #   new_partition = Google::Cloud::Spanner::Partition.load \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
+        #
+        def self.load data
+          data = JSON.parse data, symbolize_names: true unless data.is_a? Hash
+
+          # TODO: raise if hash[:execute].nil? && hash[:read].nil?
+          new.tap do |p|
+            if data[:execute]
+              execute_grpc = Google::Spanner::V1::ExecuteSqlRequest.decode \
+                Base64.decode64(data[:execute])
+              p.instance_variable_set :@execute, execute_grpc
+            end
+            if data[:read]
+              read_grpc = Google::Spanner::V1::ReadRequest.decode \
+                Base64.decode64(data[:read])
+              p.instance_variable_set :@read, read_grpc
+            end
+          end
+        end
+
+        # @private
+        def inspect
+          status = "empty"
+          status = "execute" if execute?
+          status = "read" if read?
+          "#<#{self.class.name} #{status}>"
+        end
+
+        ##
+        # @private New Partition from a Google::Spanner::V1::ExecuteSqlRequest
+        # object.
+        def self.from_execute_grpc grpc
+          new.tap do |p|
+            p.instance_variable_set :@execute, grpc
+          end
+        end
+
+        ##
+        # @private New Partition from a Google::Spanner::V1::ReadRequest object.
+        def self.from_read_grpc grpc
+          new.tap do |p|
+            p.instance_variable_set :@read, grpc
+          end
         end
       end
     end

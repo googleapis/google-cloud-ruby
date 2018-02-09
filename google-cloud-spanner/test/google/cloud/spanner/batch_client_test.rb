@@ -22,8 +22,10 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:transaction_id) { "tx789" }
   let(:timestamp) { Google::Protobuf::Timestamp.new seconds: 1412262083, nanos: 45123456 }
+  let(:timestamp_time) { Google::Cloud::Spanner::Convert.timestamp_to_time timestamp }
   let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id, read_timestamp: timestamp }
-  let(:batch_tx_id) { Google::Cloud::Spanner::BatchTransactionId.new session.path, transaction_id, timestamp }
+  let(:batch_tx_hash) { { session: Base64.strict_encode64(session_grpc.to_proto), transaction: Base64.strict_encode64(transaction_grpc.to_proto) } }
+  let(:batch_tx_json) { batch_tx_hash.to_json }
   let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
   let(:default_options) { Google::Gax::CallOptions.new kwargs: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
@@ -87,11 +89,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
     mock.verify
 
     batch_snapshot.transaction_id.must_equal transaction_id
-
-    batch_transaction_id = batch_snapshot.batch_transaction_id
-    batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-    batch_transaction_id.session_path.must_equal session.path
-    batch_transaction_id.transaction_id.must_equal transaction_id
+    batch_snapshot.timestamp.must_equal timestamp_time
+    batch_snapshot.session.path.must_equal session.path
   end
 
   describe :strong do
@@ -108,11 +107,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
       mock.verify
 
       batch_snapshot.transaction_id.must_equal transaction_id
-
-      batch_transaction_id = batch_snapshot.batch_transaction_id
-      batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-      batch_transaction_id.session_path.must_equal session.path
-      batch_transaction_id.transaction_id.must_equal transaction_id
+      batch_snapshot.timestamp.must_equal timestamp_time
+      batch_snapshot.session.path.must_equal session.path
     end
   end
 
@@ -133,11 +129,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
       mock.verify
 
       batch_snapshot.transaction_id.must_equal transaction_id
-
-      batch_transaction_id = batch_snapshot.batch_transaction_id
-      batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-      batch_transaction_id.session_path.must_equal session.path
-      batch_transaction_id.transaction_id.must_equal transaction_id
+      batch_snapshot.timestamp.must_equal timestamp_time
+      batch_snapshot.session.path.must_equal session.path
     end
 
     it "creates a batch_snapshot with read_timestamp option (Time)" do
@@ -151,11 +144,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
       mock.verify
 
       batch_snapshot.transaction_id.must_equal transaction_id
-
-      batch_transaction_id = batch_snapshot.batch_transaction_id
-      batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-      batch_transaction_id.session_path.must_equal session.path
-      batch_transaction_id.transaction_id.must_equal transaction_id
+      batch_snapshot.timestamp.must_equal timestamp_time
+      batch_snapshot.session.path.must_equal session.path
     end
 
     it "creates a batch_snapshot with timestamp option (DateTime)" do
@@ -169,11 +159,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
       mock.verify
 
       batch_snapshot.transaction_id.must_equal transaction_id
-
-      batch_transaction_id = batch_snapshot.batch_transaction_id
-      batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-      batch_transaction_id.session_path.must_equal session.path
-      batch_transaction_id.transaction_id.must_equal transaction_id
+      batch_snapshot.timestamp.must_equal timestamp_time
+      batch_snapshot.session.path.must_equal session.path
     end
 
     it "creates a batch_snapshot with read_timestamp option (DateTime)" do
@@ -187,11 +174,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
       mock.verify
 
       batch_snapshot.transaction_id.must_equal transaction_id
-
-      batch_transaction_id = batch_snapshot.batch_transaction_id
-      batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-      batch_transaction_id.session_path.must_equal session.path
-      batch_transaction_id.transaction_id.must_equal transaction_id
+      batch_snapshot.timestamp.must_equal timestamp_time
+      batch_snapshot.session.path.must_equal session.path
     end
   end
 
@@ -211,11 +195,8 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
       mock.verify
 
       batch_snapshot.transaction_id.must_equal transaction_id
-
-      batch_transaction_id = batch_snapshot.batch_transaction_id
-      batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-      batch_transaction_id.session_path.must_equal session.path
-      batch_transaction_id.transaction_id.must_equal transaction_id
+      batch_snapshot.timestamp.must_equal timestamp_time
+      batch_snapshot.session.path.must_equal session.path
     end
 
     it "creates a batch_snapshot with the exact_staleness option" do
@@ -229,26 +210,25 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
       mock.verify
 
       batch_snapshot.transaction_id.must_equal transaction_id
-
-      batch_transaction_id = batch_snapshot.batch_transaction_id
-      batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-      batch_transaction_id.session_path.must_equal session.path
-      batch_transaction_id.transaction_id.must_equal transaction_id
+      batch_snapshot.timestamp.must_equal timestamp_time
+      batch_snapshot.session.path.must_equal session.path
     end
   end
 
-  it "loads a batch_snapshot" do
-
-    batch_snapshot = batch_client.load_batch_snapshot batch_tx_id
+  it "loads a batch_snapshot (hash)" do
+    batch_snapshot = batch_client.load_batch_snapshot batch_tx_hash
 
     batch_snapshot.transaction_id.must_equal transaction_id
-    batch_snapshot.timestamp.must_equal timestamp
+    batch_snapshot.timestamp.must_equal timestamp_time
+    batch_snapshot.session.path.must_equal session.path
+  end
 
-    batch_transaction_id = batch_snapshot.batch_transaction_id
-    batch_transaction_id.must_be_kind_of Google::Cloud::Spanner::BatchTransactionId
-    batch_transaction_id.session_path.must_equal session.path
-    batch_transaction_id.transaction_id.must_equal transaction_id
-    batch_transaction_id.timestamp.must_equal timestamp
+  it "loads a batch_snapshot (json)" do
+    batch_snapshot = batch_client.load_batch_snapshot batch_tx_json
+
+    batch_snapshot.transaction_id.must_equal transaction_id
+    batch_snapshot.timestamp.must_equal timestamp_time
+    batch_snapshot.session.path.must_equal session.path
   end
 
   it "creates an inclusive range" do

@@ -237,6 +237,8 @@ module Google
           validate_single_use_args! single_use
           ensure_service!
 
+          params, types = Convert.to_input_params_and_types params, types
+
           single_use_tx = single_use_transaction single_use
           results = nil
           @pool.with_session do |session|
@@ -348,6 +350,9 @@ module Google
                  single_use: nil
           validate_single_use_args! single_use
           ensure_service!
+
+          columns = Array(columns).map(&:to_s)
+          keys = Convert.to_key_set keys
 
           single_use_tx = single_use_transaction single_use
           results = nil
