@@ -146,7 +146,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     err.message.must_equal "conditionNotMet: Precondition Failed"
   end
 
-  it "create dataset returns valid etag equal to get dataset" do
+  it "create table returns valid etag equal to get table" do
     fresh_table_id = "#{rand 100}_kittens"
     fresh = dataset.create_table fresh_table_id do |schema|
       schema.integer   "id",    description: "id description",    mode: :required
@@ -159,6 +159,34 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     stale = dataset.table fresh_table_id
     stale.etag.wont_be :nil?
     stale.etag.must_equal fresh.etag
+  end
+
+  it "create table with cmek sets encryption_configuration" do
+    begin
+      encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+      encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
+                                     "/keyRings/test/cryptoKeys/test"
+      cmek_table = dataset.create_table "cmek_kittens",
+                                        encryption_configuration: encrypt_config
+
+      cmek_table.reload!
+      cmek_table.table_id.must_equal "cmek_kittens"
+      cmek_table.encryption_configuration.kms_key_name.must_equal "projects/cloud-samples-tests" +
+        "/locations/us-central1/keyRings/test/cryptoKeys/test"
+
+      new_encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+      new_encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
+                                         "/keyRings/test/cryptoKeys/otherkey"
+      cmek_table.encryption_configuration = new_encrypt_config
+
+      cmek_table.reload!
+      cmek_table.encryption_configuration.kms_key_name.must_equal "projects/cloud-samples-tests" +
+        "/locations/us-central1/keyRings/test/cryptoKeys/otherkey"
+
+    ensure
+      t2 = dataset.table "cmek_kittens"
+      t2.delete if t2
+    end
   end
 
   it "gets and sets time partitioning" do

@@ -20,8 +20,9 @@ module Google
       ##
       # # Encryption Configuration
       #
-      # A builder for BigQuery table encryption configurations, passed to block arguments to
-      # {Dataset#create_table} and {Table#encryption_configuration}.
+      # A builder for BigQuery table encryption configurations, passed to block
+      # arguments to {Dataset#create_table} and
+      # {Table#encryption_configuration}.
       #
       # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
       #   Protecting Data with Cloud KMS Keys
@@ -33,8 +34,8 @@ module Google
       #   dataset = bigquery.dataset "my_dataset"
       #   encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
       #   encrypt_config.kms_key_name = "my_key_name"
-      #   table = dataset.create_table(
-      #       "my_table", encryption_configuration: encrypt_config)
+      #   table = dataset.create_table "my_table",
+      #                                encryption_configuration: encrypt_config
       #
       class EncryptionConfiguration
         ##

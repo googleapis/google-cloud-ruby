@@ -801,7 +801,8 @@ module Google
           return nil if reference?
           ensure_full_data!
           return nil if @gapi.encryption_configuration.nil?
-          External.from_gapi(@gapi.encryption_configuration).freeze
+          EncryptionConfiguration.from_gapi(@gapi.encryption_configuration)
+                                 .freeze
         end
 
         ##
