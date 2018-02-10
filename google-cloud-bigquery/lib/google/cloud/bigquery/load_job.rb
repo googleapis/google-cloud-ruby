@@ -72,6 +72,19 @@ module Google
         end
 
         ##
+        # The custom encryption method used to protect the destination table.
+        # If not set, default encryption is used.
+        #
+        # @return [EncryptionConfiguration] A custom encryption configuration.
+        #
+        def destination_encryption_configuration
+          encrypt_config =
+            @gapi.configuration.load.destination_encryption_configuration
+          return nil unless encrypt_config
+          EncryptionConfiguration.from_gapi encrypt_config
+        end
+
+        ##
         # The delimiter used between fields in the source data. The default is a
         # comma (,).
         #

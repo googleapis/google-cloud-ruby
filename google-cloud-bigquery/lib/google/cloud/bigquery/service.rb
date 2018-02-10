@@ -430,6 +430,10 @@ module Google
             )
           )
           req.configuration.labels = options[:labels] if options[:labels]
+          unless options[:destination_encryption_configuration].nil?
+            req.configuration.load.destination_encryption_configuration =
+              options[:destination_encryption_configuration].to_gapi
+          end
           req
         end
 
@@ -464,6 +468,10 @@ module Google
             )
           )
           req.configuration.labels = options[:labels] if options[:labels]
+          unless options[:destination_encryption_configuration].nil?
+            req.configuration.load.destination_encryption_configuration =
+              options[:destination_encryption_configuration].to_gapi
+          end
           req
         end
 

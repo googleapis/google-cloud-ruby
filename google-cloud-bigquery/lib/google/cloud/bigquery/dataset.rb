@@ -1274,6 +1274,9 @@ module Google
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
+        # @param [EncryptionConfiguration] destination_encryption_configuration
+        #   The custom encryption method used to protect the destination table.
+        #   If not set, default encryption is used.
         #
         # @yield [schema] A block for setting the schema for the destination
         #   table. The schema can be omitted if the destination table already
@@ -1350,7 +1353,9 @@ module Google
                      quoted_newlines: nil, encoding: nil, delimiter: nil,
                      ignore_unknown: nil, max_bad_records: nil, quote: nil,
                      skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
-                     prefix: nil, labels: nil, autodetect: nil, null_marker: nil
+                     prefix: nil, labels: nil, autodetect: nil,
+                     null_marker: nil,
+                     destination_encryption_configuration: nil
           ensure_service!
 
           if block_given?
@@ -1368,7 +1373,9 @@ module Google
                       skip_leading: skip_leading, dryrun: dryrun,
                       schema: schema_gapi, job_id: job_id, prefix: prefix,
                       labels: labels, autodetect: autodetect,
-                      null_marker: null_marker }
+                      null_marker: null_marker,
+                      destination_encryption_configuration:
+                        destination_encryption_configuration }
           return load_storage(table_id, file, options) if storage_url? file
           return load_local(table_id, file, options) if local_file? file
           raise Google::Cloud::Error, "Don't know how to load #{file}"
@@ -1484,6 +1491,9 @@ module Google
         #   See {Project#schema} for the creation of the schema for use with
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
+        # @param [EncryptionConfiguration] destination_encryption_configuration
+        #   The custom encryption method used to protect the destination table.
+        #   If not set, default encryption is used.
         #
         # @yield [schema] A block for setting the schema for the destination
         #   table. The schema can be omitted if the destination table already
@@ -1559,7 +1569,8 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 schema: nil, autodetect: nil, null_marker: nil
+                 schema: nil, autodetect: nil, null_marker: nil,
+                 destination_encryption_configuration: nil
 
           yield (schema ||= Schema.from_gapi) if block_given?
 
@@ -1570,7 +1581,9 @@ module Google
                       delimiter: delimiter, ignore_unknown: ignore_unknown,
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, schema: schema,
-                      autodetect: autodetect, null_marker: null_marker }
+                      autodetect: autodetect, null_marker: null_marker,
+                      destination_encryption_configuration:
+                        destination_encryption_configuration }
           job = load_job table_id, file, options
 
           job.wait_until_done!
