@@ -1,6 +1,6 @@
 --no-private
---title=Google Cloud Vision
---exclude lib/google/cloud/vision/v1.rb
+--title=Google Cloud Vision API
+--exclude _pb\.rb$
 --markup markdown
 
 ./lib/**/*.rb
