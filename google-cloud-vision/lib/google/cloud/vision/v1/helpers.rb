@@ -137,7 +137,7 @@ module Google
               # Convert String or IO input to request object
               request = request_to_object(request, **kwargs)
               feature_enum = feature.upcase
-              if request.features.any? { |f| f.type = feature_enum }
+              if request.features.any? { |f| f.type != feature_enum }
                 raise ArgumentError, "Feature cannot be set explicitly"
               end
 
