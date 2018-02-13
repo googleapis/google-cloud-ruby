@@ -101,6 +101,11 @@ module Google
           end
 
           fields = @metadata.row_type.fields
+          if fields.count.zero?
+            @closed = true
+            return []
+          end
+
           values = []
           buffered_responses = []
           buffer_upper_bound = 10

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::Results, :empty, :mock_spanner do
+describe Google::Cloud::Spanner::Results, :empty_field_names, :mock_spanner do
   let :results_types do
     {
       metadata: {
