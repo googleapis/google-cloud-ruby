@@ -18,6 +18,7 @@ require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/data"
 require "google/cloud/bigquery/table/list"
 require "google/cloud/bigquery/schema"
+require "google/cloud/bigquery/encryption"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/insert_response"
 require "google/cloud/bigquery/table/async_inserter"
@@ -722,6 +723,54 @@ module Google
         def headers
           return nil if reference?
           schema.headers
+        end
+
+        ##
+        # The {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect the table. If not set, default
+        # encryption is used.
+        #
+        # Present only if the table is using custom encryption.
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration, nil] The encryption configuration.
+        #
+        #   @!group Attributes
+        #
+        def encryption_configuration
+          return nil if reference?
+          ensure_full_data!
+          return nil if @gapi.encryption_configuration.nil?
+          EncryptionConfiguration.from_gapi(@gapi.encryption_configuration)
+                                 .freeze
+        end
+
+        ##
+
+        # Set the {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect the table. If not set, default
+        # encryption is used.
+        #
+        # Present only if the table is using custom encryption.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration] The encryption configuration.
+        #
+        # @!group Attributes
+        #
+        def encryption_configuration= encryption_configuration
+          reload! unless resource_full?
+          @gapi.encryption_configuration = encryption_configuration.to_gapi
+          patch_gapi! :encryption_configuration
         end
 
         ##
@@ -1430,6 +1479,9 @@ module Google
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
+        # @param [EncryptionConfiguration] destination_encryption_configuration
+        #   The custom encryption method used to protect the destination table.
+        #   If not set, default encryption is used.
         #
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
@@ -1472,7 +1524,8 @@ module Google
                      quoted_newlines: nil, encoding: nil, delimiter: nil,
                      ignore_unknown: nil, max_bad_records: nil, quote: nil,
                      skip_leading: nil, dryrun: nil, job_id: nil, prefix: nil,
-                     labels: nil, autodetect: nil, null_marker: nil
+                     labels: nil, autodetect: nil, null_marker: nil,
+                     destination_encryption_configuration: nil
           ensure_service!
           options = { format: format, create: create, write: write,
                       projection_fields: projection_fields,
@@ -1482,7 +1535,9 @@ module Google
                       max_bad_records: max_bad_records, quote: quote,
                       skip_leading: skip_leading, dryrun: dryrun,
                       job_id: job_id, prefix: prefix, labels: labels,
-                      autodetect: autodetect, null_marker: null_marker }
+                      autodetect: autodetect, null_marker: null_marker,
+                      destination_encryption_configuration:
+                        destination_encryption_configuration }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
           raise Google::Cloud::Error, "Don't know how to load #{file}"
@@ -1584,6 +1639,11 @@ module Google
         #   file that BigQuery will skip when loading the data. The default
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
+        # @param [EncryptionConfiguration] destination_encryption_configuration
+        #   The custom encryption method used to protect the destination table.
+        #   If not set, default encryption is used.
+        #
+        # Present only if the table is using custom encryption.
         #
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
@@ -1625,7 +1685,8 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 autodetect: nil, null_marker: nil
+                 autodetect: nil, null_marker: nil,
+                 destination_encryption_configuration: nil
           job = load_job file, format: format, create: create, write: write,
                                projection_fields: projection_fields,
                                jagged_rows: jagged_rows,
@@ -1634,7 +1695,9 @@ module Google
                                ignore_unknown: ignore_unknown,
                                max_bad_records: max_bad_records, quote: quote,
                                skip_leading: skip_leading,
-                               autodetect: autodetect, null_marker: null_marker
+                               autodetect: autodetect, null_marker: null_marker,
+                               destination_encryption_configuration:
+                                 destination_encryption_configuration
 
           job.wait_until_done!
 

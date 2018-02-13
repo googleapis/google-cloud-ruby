@@ -76,6 +76,30 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
     mock.verify
   end
 
+  it "can upload a json file with encryption configuration" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    temp_json do |file|
+      encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+      encrypt_config.kms_key_name =  "projects/1/locations/1/keyRings/1/cryptoKeys/1"
+
+      load_job_req = load_job_gapi(table_reference)
+      load_job_req.configuration.load.destination_encryption_configuration = encrypt_config.to_gapi
+      load_job_resp = load_job_resp_gapi("some/file/path.json")
+      load_job_resp.configuration.load.destination_encryption_configuration = encrypt_config.to_gapi
+      mock.expect :insert_job, load_job_resp,
+        [project, load_job_req, upload_source: file, content_type: "application/json"]
+
+      job = dataset.load_job table_id, file, format: "JSON",
+                             destination_encryption_configuration: encrypt_config
+      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.destination_encryption_configuration.kms_key_name.must_equal "projects/1/locations/1/keyRings/1/cryptoKeys/1"
+    end
+
+    mock.verify
+  end
+
   it "can upload a json file and derive the format" do
     mock = Minitest::Mock.new
     mock.expect :insert_job, load_job_resp_gapi("some/file/path.json"),

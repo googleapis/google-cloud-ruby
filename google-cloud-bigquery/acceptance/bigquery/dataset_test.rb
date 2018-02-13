@@ -192,6 +192,34 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     job.output_rows.must_equal 3
   end
 
+  it "imports data from a local file and creates a new table with specified encryption configuration with load_job" do
+    begin
+      encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+      encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
+                                      "/keyRings/test/cryptoKeys/test"
+
+      job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+      job = dataset.load_job "load_job_local_file_cmek_table", local_file, job_id: job_id,
+                            destination_encryption_configuration: encrypt_config do |schema|
+        schema.integer   "id",    description: "id description",    mode: :required
+        schema.string    "breed", description: "breed description", mode: :required
+        schema.string    "name",  description: "name description",  mode: :required
+        schema.timestamp "dob",   description: "dob description",   mode: :required
+      end
+      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      job.job_id.must_equal job_id
+      job.wait_until_done!
+
+      cmek_table = dataset.table "load_job_local_file_cmek_table"
+      cmek_table.reload!
+      cmek_table.encryption_configuration.kms_key_name.must_equal "projects/cloud-samples-tests" +
+        "/locations/us-central1/keyRings/test/cryptoKeys/test"
+    ensure
+      t2 = dataset.table "load_job_local_file_cmek_table"
+      t2.delete if t2
+    end
+  end
+
   it "imports data from a local file and creates a new table with specified schema in a block with load" do
     result = dataset.load "local_file_table", local_file do |schema|
       schema.integer   "id",    description: "id description",    mode: :required
@@ -212,6 +240,33 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
     result = dataset.load "local_file_table_2", local_file, schema: schema
     result.must_equal true
+  end
+
+  it "imports data from a local file and creates a new table with specified encryption configuration with load" do
+    begin
+      schema = bigquery.schema do |s|
+        s.integer  "id",     description: "id description",    mode: :required
+        s.string    "breed", description: "breed description", mode: :required
+        s.string    "name",  description: "name description",  mode: :required
+        s.timestamp "dob",   description: "dob description",   mode: :required
+      end
+
+      encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+      encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
+                                      "/keyRings/test/cryptoKeys/test"
+
+      result = dataset.load "local_file_cmek_table", local_file, schema: schema,
+                            destination_encryption_configuration: encrypt_config
+      result.must_equal true
+
+      cmek_table = dataset.table "local_file_cmek_table"
+      cmek_table.reload!
+      cmek_table.encryption_configuration.kms_key_name.must_equal "projects/cloud-samples-tests" +
+        "/locations/us-central1/keyRings/test/cryptoKeys/test"
+    ensure
+      t2 = dataset.table "local_file_cmek_table"
+      t2.delete if t2
+    end
   end
 
   it "imports data from a local file and creates a new table without a schema with load" do
