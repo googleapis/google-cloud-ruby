@@ -267,9 +267,11 @@ module Google
         #
         #   task = datastore.find "Task", "sampleTask"
         #   task.persisted? #=> true
-        #   task.key = datastore.key "Task" #=> raise RuntimeError
+        #   # Because the entity is persisted, the following would raise
+        #   # task.key = datastore.key "Task"
         #   task.key.frozen? #=> true
-        #   task.key.id = 9876543221 #=> raise RuntimeError
+        #   # Because the key is frozen, the following would raise
+        #   # task.key.id = 9876543221
         #
         def key= new_key
           raise "This entity's key is immutable." if persisted?
