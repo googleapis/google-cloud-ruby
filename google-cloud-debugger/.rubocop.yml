@@ -46,3 +46,6 @@ Naming/FileName:
 Lint/UnifiedInteger:
   Exclude:
     - "lib/google/cloud/debugger/breakpoint/evaluator.rb"
+Lint/InheritException:
+  Exclude:
+    - "lib/google/cloud/debugger/breakpoint/evaluator.rb"
