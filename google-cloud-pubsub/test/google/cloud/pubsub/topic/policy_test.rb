@@ -40,6 +40,7 @@ describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Pubsub::Policy
+    policy.etag.must_equal "\b\x01"
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be_kind_of Array
@@ -63,7 +64,7 @@ describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
     mock = Minitest::Mock.new
     mock.expect :get_iam_policy, get_res, [topic_path(topic_name), options: default_options]
 
-    new_policy = {
+    updated_policy = {
       "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/owner",
@@ -73,10 +74,20 @@ describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
         ]
       }]
     }
+    new_policy = {
+      "etag"=>"CBD=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "serviceAccount:0987654321@developer.gserviceaccount.com",
+          "user:newowner@example.com"
+        ]
+      }]
+    }
 
-    policy = Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+    set_req = Google::Iam::V1::Policy.decode_json(JSON.dump(updated_policy))
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [topic_path(topic_name), policy, options: default_options]
+    mock.expect :set_iam_policy, set_res, [topic_path(topic_name), set_req, options: default_options]
     topic.service.mocked_publisher = mock
 
     policy = topic.policy
@@ -84,11 +95,12 @@ describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
     policy.add "roles/owner", "user:newowner@example.com"
     policy.remove "roles/owner", "user:owner@example.com"
 
-    policy_2 = topic.policy = policy
+    policy_2 = topic.update_policy policy
 
     mock.verify
 
     policy_2.must_be_kind_of Google::Cloud::Pubsub::Policy
+    policy_2.etag.must_equal "\b\x10"
     policy_2.roles.must_be_kind_of Hash
     policy_2.roles.size.must_equal 1
     policy_2.roles["roles/viewer"].must_be :nil?
@@ -113,7 +125,7 @@ describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
     mock = Minitest::Mock.new
     mock.expect :get_iam_policy, get_res, [topic_path(topic_name), options: default_options]
 
-    new_policy = {
+    updated_policy = {
       "etag"=>"CAE=",
       "bindings" => [{
         "role" => "roles/owner",
@@ -123,10 +135,20 @@ describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
         ]
       }]
     }
+    new_policy = {
+      "etag"=>"CBD=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "serviceAccount:0987654321@developer.gserviceaccount.com",
+          "user:newowner@example.com"
+        ]
+      }]
+    }
 
-    policy = Google::Iam::V1::Policy.decode_json(JSON.dump(new_policy))
+    set_req = Google::Iam::V1::Policy.decode_json(JSON.dump(updated_policy))
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [topic_path(topic_name), policy, options: default_options]
+    mock.expect :set_iam_policy, set_res, [topic_path(topic_name), set_req, options: default_options]
     topic.service.mocked_publisher = mock
 
     policy = topic.policy do |p|
@@ -137,6 +159,7 @@ describe Google::Cloud::Pubsub::Topic, :policy, :mock_pubsub do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Pubsub::Policy
+    policy.etag.must_equal "\b\x10"
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be :nil?

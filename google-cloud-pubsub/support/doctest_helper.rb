@@ -367,6 +367,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Pubsub::Subscription#update_policy" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-subscription"), ["projects/my-project/subscriptions/my-subscription", Hash]
+      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Hash]
+      mock_subscriber.expect :set_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-subscription", Google::Iam::V1::Policy, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Pubsub::Subscription#pull@A maximum number of messages returned can also be specified:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", Hash]
@@ -464,11 +472,11 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Pubsub::Topic#policy@Use `force` to retrieve the latest policy from the service:" do
+  doctest.before "Google::Cloud::Pubsub::Topic#update_policy" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
       mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Hash]
-      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_publisher.expect :set_iam_policy, policy_resp, ["projects/my-project/topics/my-topic", Google::Iam::V1::Policy, Hash]
     end
   end
 

@@ -412,7 +412,7 @@ module Google
           policy = Policy.from_grpc grpc
           return policy unless block_given?
           yield policy
-          self.policy = policy
+          update_policy policy
         end
 
         ##
@@ -442,13 +442,14 @@ module Google
         #
         #   policy.add "roles/owner", "user:owner@example.com"
         #
-        #   topic.policy = policy # API call
+        #   topic.update_policy policy # API call
         #
-        def policy= new_policy
+        def update_policy new_policy
           ensure_service!
           grpc = service.set_topic_policy name, new_policy.to_grpc
           @policy = Policy.from_grpc grpc
         end
+        alias policy= update_policy
 
         ##
         # Tests the specified permissions against the [Cloud
