@@ -851,7 +851,7 @@ module Google
               begin
                 Thread.current.thread_variable_set EVALUATOR_REFERENCE, self
                 binding.eval wrap_expression(expression)
-              rescue StandardError => e
+              rescue StandardError, EvaluationError => e
                 # Treat all StandardError as mutation and set @mutation_cause
                 unless e.instance_variable_get :@mutation_cause
                   e.instance_variable_set(
@@ -1063,7 +1063,7 @@ module Google
       ##
       # @private Custom error type used to identify evaluation error during
       # breakpoint expression evaluation.
-      class EvaluationError < StandardError
+      class EvaluationError < Exception
         UNKNOWN_CAUSE = :unknown_cause
         PROHIBITED_YARV = :prohibited_yarv
         PROHIBITED_C_FUNC = :prohibited_c_func
