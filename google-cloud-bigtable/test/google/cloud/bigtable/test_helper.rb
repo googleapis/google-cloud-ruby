@@ -1,9 +1,9 @@
 require "minitest/autorun"
 require "minitest/spec"
 
-require "bigtable"
-require "bigtable/instance_admin_client"
-require "bigtable/table_admin_client"
+require "google/cloud"
+require "google/cloud/bigtable"
+require "google/cloud/bigtable/admin/credentials"
 
 class MockBigtableAdminCredentials < Google::Cloud::Bigtable::Admin::Credentials
   def initialize method_name

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "test_helper"
+require "google/cloud/bigtable/instance_admin_client"
 
 class InstanceAdminTestError < StandardError
   def initialize(operation_name)
@@ -21,14 +22,20 @@ def stub_instance_admin_grpc service_name, mock_method
   end
 end
 
-describe Bigtable::InstanceAdminClient do
-  BigtableInstanceAdminClient = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient
+describe Google::Cloud::Bigtable::InstanceAdminClient do
+  # Class aliases
+  Bigtable = Google::Cloud::Bigtable unless Object.const_defined?("Bigtable")
+  BigtableInstanceAdminClient =
+    Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient
 
   before do
     @project_id = "test-project-id"
     @project_path =
       BigtableInstanceAdminClient.project_path(@project_id)
-    @client = Bigtable.instance_admin_client(@project_id)
+    @client = Google::Cloud.bigtable(
+      project_id: @project_id,
+      client_type: :instance
+    )
   end
 
   describe "create_instance" do
@@ -131,7 +138,7 @@ describe Bigtable::InstanceAdminClient do
     it 'get instance without error' do
       # Create expected grpc response
       expected_response = { name: @instance_id, display_name: @display_name }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Instance)
+      expected_response = Google::Gax::to_proto(expected_response, Bigtable::Instance)
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -220,11 +227,11 @@ describe Bigtable::InstanceAdminClient do
 
       # Create expected grpc response
       expected_response = { name: @instance_id, display_name: display_name}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Instance)
+      expected_response = Google::Gax::to_proto(expected_response, Bigtable::Instance)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::Instance, request)
+        assert_instance_of(Bigtable::Instance, request)
         assert_equal(@instance_path, request.name)
         assert_equal(display_name, request.display_name)
         assert_equal(type, request.type)
@@ -253,7 +260,7 @@ describe Bigtable::InstanceAdminClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::Instance, request)
+        assert_instance_of(Bigtable::Instance, request)
         assert_equal(@instance_path, request.name)
         assert_equal(display_name, request.display_name)
         assert_equal(type, request.type)
@@ -319,7 +326,10 @@ describe Bigtable::InstanceAdminClient do
   describe 'create_cluster' do
     before do
       @instance_id = "name4"
-      @instance_path = BigtableInstanceAdminClient.instance_path(@project_id, @instance_id)
+      @instance_path = BigtableInstanceAdminClient.instance_path(
+        @project_id,
+        @instance_id
+      )
       @cluster_id = "cluster_1"
       @location = "us-east1-a"
       @serve_nodes = 3
@@ -348,7 +358,7 @@ describe Bigtable::InstanceAdminClient do
           serve_nodes: @serve_nodes
         }
 
-        assert_equal(Google::Gax::to_proto(req_cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
+        assert_equal(Google::Gax::to_proto(req_cluster, Bigtable::Cluster), request.cluster)
         operation
       end
 
@@ -378,7 +388,7 @@ describe Bigtable::InstanceAdminClient do
           location: BigtableInstanceAdminClient.location_path(@project_id, @location),
           serve_nodes: @serve_nodes
         }
-        assert_equal(Google::Gax::to_proto(req_cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
+        assert_equal(Google::Gax::to_proto(req_cluster, Bigtable::Cluster), request.cluster)
         operation
       end
 
@@ -407,7 +417,7 @@ describe Bigtable::InstanceAdminClient do
           serve_nodes: @serve_nodes
         }
 
-        assert_equal(Google::Gax::to_proto(req_cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
+        assert_equal(Google::Gax::to_proto(req_cluster, Bigtable::Cluster), request.cluster)
         raise custom_error
       end
 
@@ -544,7 +554,7 @@ describe Bigtable::InstanceAdminClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::Cluster, request)
+        assert_instance_of(Bigtable::Cluster, request)
         assert_equal(@cluster_path, request.name)
         assert_equal('', request.location)
         assert_equal(serve_nodes, request.serve_nodes)
@@ -573,7 +583,7 @@ describe Bigtable::InstanceAdminClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::Cluster, request)
+        assert_instance_of(Bigtable::Cluster, request)
         assert_equal(@cluster_path, request.name)
         assert_equal('', request.location)
         assert_equal(serve_nodes, request.serve_nodes)
@@ -599,7 +609,7 @@ describe Bigtable::InstanceAdminClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::Cluster, request)
+        assert_instance_of(Bigtable::Cluster, request)
         assert_equal(@cluster_path, request.name)
         assert_equal('', request.location)
         assert_equal(serve_nodes, request.serve_nodes)

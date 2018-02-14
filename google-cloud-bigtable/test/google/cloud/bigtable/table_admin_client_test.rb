@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require_relative "test_helper"
+require "google/cloud/bigtable/table_admin_client"
 
 class TableAdminTestError < StandardError
   def initialize(operation_name)
-    super("Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient##{operation_name}.")
+    super("Custom test error for \
+Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient##{operation_name}")
   end
 end
 
@@ -20,14 +22,24 @@ def stub_table_admin_grpc service_name, mock_method
   end
 end
 
-describe Bigtable::TableAdminClient do
-  BigtableTableAdminClient = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient
+describe Google::Cloud::Bigtable::TableAdminClient do
+  # Class aliases
+  Bigtable = Google::Cloud::Bigtable unless Object.const_defined?("Bigtable")
+  BigtableTableAdminClient =
+    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient
 
   before do
     @project_id = "test-project-id"
     @instance_id = "test-instance-id"
-    @instance_path = BigtableTableAdminClient.instance_path(@project_id, @instance_id)
-    @client = Bigtable.table_admin_client(@project_id, @instance_id)
+    @instance_path = BigtableTableAdminClient.instance_path(
+      @project_id,
+      @instance_id
+    )
+    @client = Google::Cloud.bigtable(
+      project_id: @project_id,
+      instance_id: @instance_id,
+      client_type: :table
+    )
   end
 
   describe 'create_table' do
@@ -62,7 +74,7 @@ describe Bigtable::TableAdminClient do
         assert_instance_of(Google::Bigtable::Admin::V2::CreateTableRequest, request)
         assert_equal(@instance_path, request.parent)
         assert_equal(table_id, request.table_id)
-        assert_equal(Google::Gax::to_proto(table, Google::Bigtable::Admin::V2::Table), request.table)
+        assert_equal(Google::Gax::to_proto(table, Bigtable::Table), request.table)
         raise custom_error
       end
 

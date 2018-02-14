@@ -17,6 +17,9 @@ Style/NumericLiterals:
   Enabled: false
 Style/TrivialAccessors:
   Enabled: false
+Metrics/LineLength:
+  Max: 80
+  IgnoredPatterns: ['(\A|\s)#']
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
