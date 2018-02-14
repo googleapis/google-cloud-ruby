@@ -314,40 +314,6 @@ module Google
         rescue StandardError
           nil
         end
-
-        ##
-        # Yielded to a block to accumulate changes for a patch request.
-        class Updater < LoadJob
-          ##
-          # A list of attributes that were updated.
-          attr_reader :updates
-
-          ##
-          # Create an Updater object.
-          def initialize gapi
-            @updates = []
-            @gapi = gapi
-          end
-
-          def to_gapi
-            @gapi
-          end
-
-          protected
-
-          ##
-          # Change to a NOOP
-          def ensure_full_data!
-            # Do nothing because we trust the gapi is full before we get here.
-          end
-
-          ##
-          # Queue up all the updates instead of making them.
-          def patch_gapi! attribute
-            @updates << attribute
-            @updates.uniq!
-          end
-        end
       end
     end
   end
