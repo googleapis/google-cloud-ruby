@@ -163,9 +163,9 @@ module Google
         #   modifications = [
         #     Bigtable::ColumnFamilyModification.new({
         #       id: 'cf1',
-        #       create: Bigtable::ColumnFamily.new(gc_rule: { max_num_versions: 1 })
+        #       create: Google::Cloud::Bigtable::ColumnFamily.new(gc_rule: { max_num_versions: 1 })
         #     }),
-        #     Bigtable::ColumnFamilyModification.new({
+        #     Google::Cloud::Bigtable::ColumnFamilyModification.new({
         #       id: 'cf2',
         #       drop: true
         #     })
