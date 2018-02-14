@@ -25,6 +25,9 @@ module Bigtable
 
     # each method for Enumerable interface. the method fetches and yields
     # BigTable Instance objects.
+    # @example
+    #   # object can be used as a ruby enumerable.
+    #   names = instances.collect(:name).to_a
     def each
       page_token = nil
       loop do
@@ -38,6 +41,16 @@ module Bigtable
 
         break if page_token.nil?
       end
+    end
+
+    # finds the instance object corresponding to given instance id in the
+    # project
+    # @param instance_id [String]
+    # @return [Google::Bigtable::Admin::V2::Instance]
+    # @example
+    #  instances.find 'my-instance'
+    def find instance_id
+      client.get_instance @config.instance_path(instance_id)
     end
 
     private

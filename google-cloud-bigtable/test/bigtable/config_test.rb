@@ -40,4 +40,14 @@ describe Bigtable::Config do
       assert_equal config.project_path, "projects/#{@project_id}"
     end
   end
+
+  describe '#instance_path' do
+    it 'should return instance_path for current project and instance id' do
+      instance_id = "instance_#{Time.now.to_i}"
+      config = Bigtable::Config.new @project_id
+
+      assert_equal config.instance_path(instance_id), 
+      "projects/#{@project_id}/instances/#{instance_id}"
+    end
+  end
 end

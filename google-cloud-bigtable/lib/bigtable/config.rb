@@ -44,5 +44,15 @@ module Bigtable
       Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient
         .project_path(project_id)
     end
+
+    # Created formatted instance path
+    # @param instance_id [String]
+    # @return [String]
+    #   Formatted instance path
+    #   +projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]+.
+    def instance_path instance_id
+      Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient
+        .instance_path project_id, instance_id
+    end
   end
 end
