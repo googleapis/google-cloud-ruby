@@ -1197,7 +1197,7 @@ module Google
           policy = Policy.from_gapi gapi
           return policy unless block_given?
           yield policy
-          self.policy = policy
+          update_policy policy
         end
 
         ##
@@ -1230,14 +1230,15 @@ module Google
         #
         #   policy.add "roles/owner", "user:owner@example.com"
         #
-        #   bucket.policy = policy # API call
+        #   bucket.update_policy policy # API call
         #
-        def policy= new_policy
+        def update_policy new_policy
           ensure_service!
           gapi = service.set_bucket_policy name, new_policy.to_gapi,
                                            user_project: user_project
           Policy.from_gapi gapi
         end
+        alias policy= update_policy
 
         ##
         # Tests the specified permissions against the [Cloud
