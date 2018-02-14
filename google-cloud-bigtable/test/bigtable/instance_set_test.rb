@@ -93,4 +93,23 @@ describe Bigtable::InstanceSet do
       mock_instance_client.verify
     end
   end
+
+  describe '#find' do
+    it 'should return an instance for a given id' do
+      instance_id = "instance_id_#{Time.now.to_i}"
+      instance_set = Bigtable::InstanceSet.new @config
+      
+      response = OpenStruct.new name: instance_id, state: :READY, display_name: 'Instance Name'
+      mock_instance_client = Minitest::Mock.new
+      mock_instance_client.expect :get_instance, response, [@config.instance_path(instance_id)]
+
+      instance_set.stub(:client, mock_instance_client) do
+        instance = instance_set.find instance_id
+        assert_equal instance.name, instance_id
+        assert_equal instance.display_name, 'Instance Name'
+      end
+
+      mock_instance_client.verify
+    end
+  end
 end
