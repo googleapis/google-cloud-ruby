@@ -51,4 +51,18 @@ describe Google::Cloud::Bigquery::EncryptionConfiguration do
 
     config.to_gapi.to_h.must_equal config_gapi.to_h
   end
+
+  it "can compare using equality" do
+    config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+    config_other = Google::Cloud::Bigquery::EncryptionConfiguration.new
+    config.kms_key_name =  "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+    config_other.kms_key_name =  "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+
+    config.must_equal config_other
+
+    config_other.kms_key_name =  "projects/1/locations/2/keyRings/3/cryptoKeys/4"
+    config.wont_equal config_other
+
+    config.wont_equal "not a config"
+  end
 end
