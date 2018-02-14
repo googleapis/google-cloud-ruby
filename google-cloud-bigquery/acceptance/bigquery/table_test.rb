@@ -161,13 +161,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
       encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
                                      "/keyRings/test/cryptoKeys/test"
-      cmek_table = dataset.create_table "cmek_kittens",
-                                        encryption_configuration: encrypt_config
+      cmek_table = dataset.create_table "cmek_kittens" do |updater|
+        updater.encryption_configuration = encrypt_config
+      end
 
       cmek_table.reload!
       cmek_table.table_id.must_equal "cmek_kittens"
-      cmek_table.encryption_configuration.kms_key_name.must_equal "projects/cloud-samples-tests" +
-        "/locations/us-central1/keyRings/test/cryptoKeys/test"
+      cmek_table.encryption_configuration.must_equal encrypt_config
 
       new_encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
       new_encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
@@ -175,8 +175,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       cmek_table.encryption_configuration = new_encrypt_config
 
       cmek_table.reload!
-      cmek_table.encryption_configuration.kms_key_name.must_equal "projects/cloud-samples-tests" +
-        "/locations/us-central1/keyRings/test/cryptoKeys/otherkey"
+      cmek_table.encryption_configuration.must_equal new_encrypt_config
 
     ensure
       t2 = dataset.table "cmek_kittens"

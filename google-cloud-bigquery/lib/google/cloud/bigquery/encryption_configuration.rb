@@ -107,7 +107,7 @@ module Google
 
         # @private
         def == other
-          return false unless other.is_a? Schema
+          return false unless other.is_a? EncryptionConfiguration
           to_gapi.to_json == other.to_gapi.to_json
         end
 

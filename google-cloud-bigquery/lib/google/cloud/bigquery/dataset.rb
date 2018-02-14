@@ -432,8 +432,6 @@ module Google
         #   length is 1,024 characters.
         # @param [String] name A descriptive name for the table.
         # @param [String] description A user-friendly description of the table.
-        # @param [EncryptionConfiguration] encryption_configuration A
-        #   configuration for custom table data encryption.
         # @yield [table] a block for setting the table
         # @yieldparam [Table] table the table object to be updated
         #
@@ -491,8 +489,7 @@ module Google
         #
         # @!group Table
         #
-        def create_table table_id, name: nil, description: nil,
-                         encryption_configuration: nil
+        def create_table table_id, name: nil, description: nil
           ensure_service!
           new_tb = Google::Apis::BigqueryV2::Table.new(
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
@@ -500,9 +497,6 @@ module Google
               table_id: table_id
             )
           )
-          unless encryption_configuration.nil?
-            new_tb.encryption_configuration = encryption_configuration.to_gapi
-          end
           updater = Table::Updater.new(new_tb).tap do |tb|
             tb.name = name unless name.nil?
             tb.description = description unless description.nil?
