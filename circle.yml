@@ -23,9 +23,10 @@ dependencies:
     # The following three commands install 2.0.0
     - rvm get stable
     - gem update --system
-    - rvm-exec 2.4.0 gem update --system
-    - rvm-exec 2.3.1 gem update --system
-    - rvm-exec 2.2.5 gem update --system
+    - rvm-exec 2.5.0 gem update --system
+    - rvm-exec 2.4.2 gem update --system
+    - rvm-exec 2.3.5 gem update --system
+    - rvm-exec 2.2.7 gem update --system
     - rvm install 2.0.0-p648
     - rvm-exec 2.0.0-p648 gem update --system
 
@@ -43,7 +44,7 @@ deployment:
     tag: /(\S*)\/v(\S*)/
     owner: GoogleCloudPlatform
     commands:
-      - rvm-exec 2.4.0 bundle exec rake circleci:release
+      - rvm-exec 2.5.0 bundle exec rake circleci:release
 
 notify:
   webhooks:
