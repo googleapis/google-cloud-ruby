@@ -152,6 +152,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::ResourceManager::Project#update_policy" do
+    mock_translate do |mock|
+      mock.expect :get_project, project_gapi, ["tokyo-rain-123"]
+      mock.expect :get_policy, policy_gapi, ["tokyo-rain-123"]
+      mock.expect :set_policy, policy_gapi, ["tokyo-rain-123", Google::Apis::CloudresourcemanagerV1::Policy]
+    end
+  end
+
   doctest.before "Google::Cloud::ResourceManager::Project#test_permissions" do
     mock_translate do |mock|
       mock.expect :get_project, project_gapi, ["tokyo-rain-123"]
