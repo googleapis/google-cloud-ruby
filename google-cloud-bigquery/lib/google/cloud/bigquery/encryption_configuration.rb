@@ -34,8 +34,9 @@ module Google
       #   dataset = bigquery.dataset "my_dataset"
       #   encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
       #   encrypt_config.kms_key_name = "my_key_name"
-      #   table = dataset.create_table "my_table",
-      #                                encryption_configuration: encrypt_config
+      #   table = dataset.create_table "my_table" do |updater|
+      #     updater.encryption_configuration = encrypt_config
+      #   end
       #
       class EncryptionConfiguration
         ##
