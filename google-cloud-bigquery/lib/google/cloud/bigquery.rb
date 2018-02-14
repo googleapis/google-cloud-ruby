@@ -48,13 +48,13 @@ module Google
     #
     # A BigQuery project contains datasets, which in turn contain tables.
     # Assuming that you have not yet created datasets or tables in your own
-    # project, let's connect to Google's `publicdata` project, and see what we
-    # find.
+    # project, let's connect to Google's `bigquery-public-data` project, and see
+    # what we find.
     #
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
+    # bigquery = Google::Cloud::Bigquery.new project: "bigquery-public-data"
     #
     # bigquery.datasets.count #=> 1
     # bigquery.datasets.first.dataset_id #=> "samples"
@@ -74,7 +74,7 @@ module Google
     # ```ruby
     # require "google/cloud/bigquery"
     #
-    # bigquery = Google::Cloud::Bigquery.new project: "publicdata"
+    # bigquery = Google::Cloud::Bigquery.new project: "bigquery-public-data"
     #
     # dataset = bigquery.dataset "samples"
     # table = dataset.table "shakespeare"
@@ -147,7 +147,7 @@ module Google
     # bigquery = Google::Cloud::Bigquery.new
     #
     # sql = "SELECT TOP(word, 50) as word, COUNT(*) as count " \
-    #       "FROM [publicdata:samples.shakespeare]"
+    #       "FROM [bigquery-public-data:samples.shakespeare]"
     # data = bigquery.query sql, legacy_sql: true
     # ```
     #
@@ -212,7 +212,7 @@ module Google
     #
     # sql = "SELECT APPROX_TOP_COUNT(corpus, 10) as title, " \
     #       "COUNT(*) as unique_words " \
-    #       "FROM publicdata.samples.shakespeare"
+    #       "FROM `bigquery-public-data.samples.shakespeare`"
     # data = bigquery.query sql
     #
     # data.next? #=> false
@@ -239,7 +239,7 @@ module Google
     #
     # sql = "SELECT APPROX_TOP_COUNT(corpus, 10) as title, " \
     #       "COUNT(*) as unique_words " \
-    #       "FROM publicdata.samples.shakespeare"
+    #       "FROM `bigquery-public-data.samples.shakespeare`"
     # job = bigquery.query_job sql
     #
     # job.wait_until_done!

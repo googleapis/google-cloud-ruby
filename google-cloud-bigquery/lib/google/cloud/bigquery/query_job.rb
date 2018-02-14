@@ -36,7 +36,7 @@ module Google
       #   bigquery = Google::Cloud::Bigquery.new
       #
       #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
-      #                            "publicdata.samples.shakespeare"
+      #                            "`bigquery-public-data.samples.shakespeare`"
       #
       #   job.wait_until_done!
       #
@@ -171,7 +171,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   sql = "SELECT word FROM `bigquery-public-data.samples.shakespeare`"
         #   job = bigquery.query_job sql
         #
         #   job.wait_until_done!
@@ -253,7 +253,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   sql = "SELECT word FROM `bigquery-public-data.samples.shakespeare`"
         #   job = bigquery.query_job sql
         #
         #   job.wait_until_done!
@@ -289,7 +289,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   sql = "SELECT word FROM `bigquery-public-data.samples.shakespeare`"
         #   job = bigquery.query_job sql
         #
         #   job.wait_until_done!
@@ -347,7 +347,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   sql = "SELECT word FROM `bigquery-public-data.samples.shakespeare`"
         #   job = bigquery.query_job sql
         #
         #   job.wait_until_done!
@@ -416,7 +416,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   sql = "SELECT word FROM `bigquery-public-data.samples.shakespeare`"
         #   job = bigquery.query_job sql
         #
         #   job.wait_until_done!

@@ -44,7 +44,7 @@ module Google
       #   bigquery = Google::Cloud::Bigquery.new
       #
       #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
-      #                            "publicdata.samples.shakespeare"
+      #                            "`bigquery-public-data.samples.shakespeare`"
       #
       #   job.wait_until_done!
       #
@@ -236,7 +236,7 @@ module Google
         #
         #   {
         #     "reason"=>"notFound",
-        #     "message"=>"Not found: Table publicdata:samples.BAD_ID"
+        #     "message"=>"Not found: Table bigquery-public-data:samples.BAD_ID"
         #   }
         #
         def error
@@ -252,7 +252,7 @@ module Google
         #
         #   {
         #     "reason"=>"notFound",
-        #     "message"=>"Not found: Table publicdata:samples.BAD_ID"
+        #     "message"=>"Not found: Table bigquery-public-data:samples.BAD_ID"
         #   }
         #
         def errors
@@ -284,8 +284,10 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
-        #                            "publicdata.samples.shakespeare"
+        #   query = "SELECT COUNT(word) as count FROM " \
+        #           "`bigquery-public-data.samples.shakespeare`"
+        #
+        #   job = bigquery.query_job query
         #
         #   job.cancel
         #
@@ -304,8 +306,10 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
-        #                            "publicdata.samples.shakespeare"
+        #   query = "SELECT COUNT(word) as count FROM " \
+        #           "`bigquery-public-data.samples.shakespeare`"
+        #
+        #   job = bigquery.query_job query
         #
         #   job.wait_until_done!
         #   job.rerun!
@@ -324,8 +328,10 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT COUNT(word) as count FROM " \
-        #                            "publicdata.samples.shakespeare"
+        #   query = "SELECT COUNT(word) as count FROM " \
+        #           "`bigquery-public-data.samples.shakespeare`"
+        #
+        #   job = bigquery.query_job query
         #
         #   job.done?
         #   job.reload!
