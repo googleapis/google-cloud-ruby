@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,10 +39,18 @@ module Google
       #   message = topic.publish "task completed"
       #   message.data #=> "task completed"
       #
-      #   # Pull a message
+      #   # Listen for messages
       #   sub = pubsub.subscription "my-topic-sub"
-      #   received_message = sub.pull.first
-      #   received_message.message.data #=> "task completed"
+      #   subscriber = sub.listen do |received_message|
+      #     # process message
+      #     received_message.acknowledge!
+      #   end
+      #
+      #   # Start background threads that will call the block passed to listen.
+      #   subscriber.start
+      #
+      #   # Shut down the subscriber when ready to stop receiving messages.
+      #   subscriber.stop.wait!
       #
       class Message
         ##
@@ -58,7 +66,8 @@ module Google
 
           @grpc = Google::Pubsub::V1::PubsubMessage.new(
             data: String(data).encode("ASCII-8BIT"),
-            attributes: attributes)
+            attributes: attributes
+          )
         end
 
         ##
@@ -82,14 +91,14 @@ module Google
         def message_id
           @grpc.message_id
         end
-        alias_method :msg_id, :message_id
+        alias msg_id message_id
 
         ##
         # The time at which the message was published.
         def published_at
           Convert.timestamp_to_time @grpc.publish_time
         end
-        alias_method :publish_time, :published_at
+        alias publish_time published_at
 
         ##
         # @private New Message from a Google::Pubsub::V1::PubsubMessage object.

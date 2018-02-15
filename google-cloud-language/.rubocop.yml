@@ -1,14 +1,10 @@
 AllCops:
   Exclude:
-    - "acceptance/**/*"
-    - "support/**/*"
     - "google-cloud-language.gemspec"
+    - "lib/google/**/*"
     - "Rakefile"
-    - "lib/google/cloud/language/v1.rb"
-    - "lib/google/cloud/language/v1/**/*"
-    - "lib/google/cloud/language/v1beta2.rb"
-    - "lib/google/cloud/language/v1beta2/**/*"
     - "test/**/*"
+    - "acceptance/**/*smoke_test.rb"
 
 Documentation:
   Enabled: false
@@ -17,31 +13,3 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
-Style/NumericLiterals:
-  Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Style/EmptyLines:
-  Enabled: false
-Style/EmptyElse:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Max: 10
-Metrics/PerceivedComplexity:
-  Max: 10
-Metrics/AbcSize:
-  Max: 25
-Metrics/MethodLength:
-  Max: 20
-Metrics/ParameterLists:
-  Enabled: false
-Style/RescueModifier:
-  Enabled: false
-Style/ClassVars:
-  Enabled: false
-Style/TrivialAccessors:
-  Enabled: false
-Style/FileName:
-  Enabled: false # for lib/google-cloud-language.rb file

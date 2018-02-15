@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,7 @@
 
 require "bigquery_helper"
 
-describe Google::Cloud::Bigquery::View, :bigquery do
+describe Google::Cloud::Bigquery::Table, :view, :bigquery do
   let(:publicdata_query) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 100" }
   let(:publicdata_query_2) { "SELECT url FROM `publicdata.samples.github_nested` LIMIT 50" }
   let(:dataset_id) { "#{prefix}_dataset" }
@@ -36,7 +36,7 @@ describe Google::Cloud::Bigquery::View, :bigquery do
 
   it "has the attributes of a view" do
     fresh = dataset.table view.table_id
-    fresh.must_be_kind_of Google::Cloud::Bigquery::View
+    fresh.must_be_kind_of  Google::Cloud::Bigquery::Table
 
     fresh.project_id.must_equal bigquery.project
     fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{view.table_id}"
@@ -82,12 +82,5 @@ describe Google::Cloud::Bigquery::View, :bigquery do
     stale.etag.wont_equal fresh.etag
     err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
     err.message.must_equal "conditionNotMet: Precondition Failed"
-  end
-
-  it "returns data" do
-    data = view.data max: 2
-
-    data.class.name.must_equal "Google::Cloud::Bigquery::Data" # Array delegate
-    data.count.must_equal 2
   end
 end

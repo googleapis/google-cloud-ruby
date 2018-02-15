@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a extract of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,6 +42,27 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  describe "dataset reference" do
+    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+
+    it "queries the data with default dataset option set" do
+      mock = Minitest::Mock.new
+      bigquery.service.mocked_service = mock
+
+      job_gapi = query_job_gapi(query)
+      job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project,
+        dataset_id: dataset_id
+      )
+      mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+      job = dataset.query_job query
+      mock.verify
+
+      job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    end
   end
 
   it "queries the data with table options" do

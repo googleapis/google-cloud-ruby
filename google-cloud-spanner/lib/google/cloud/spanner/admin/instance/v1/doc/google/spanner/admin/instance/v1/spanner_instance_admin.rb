@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,17 @@ module Google
   module Spanner
     module Admin
       module Instance
+        ##
+        # # Cloud Spanner Instance Admin API Contents
+        #
+        # | Class | Description |
+        # | ----- | ----------- |
+        # | [InstanceAdminClient][] |  |
+        # | [Data Types][] | Data types for Google::Cloud::Spanner::Admin::Instance::V1 |
+        #
+        # [InstanceAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner-admin-instance/latest/google/spanner/admin/instance/v1/instanceadminclient
+        # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner-admin-instance/latest/google/spanner/admin/instance/v1/datatypes
+        #
         module V1
           # A possible configuration for a Cloud Spanner instance. Configurations
           # define the geographic placement of nodes and their replication.
@@ -40,21 +51,25 @@ module Google
           #   @return [String]
           #     Required. The name of the instance's configuration. Values are of the form
           #     +projects/<project>/instanceConfigs/<configuration>+. See
-          #     also InstanceConfig and
-          #     ListInstanceConfigs.
+          #     also {Google::Spanner::Admin::Instance::V1::InstanceConfig InstanceConfig} and
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}.
           # @!attribute [rw] display_name
           #   @return [String]
           #     Required. The descriptive name for this instance as it appears in UIs.
           #     Must be unique per project and between 4 and 30 characters in length.
           # @!attribute [rw] node_count
           #   @return [Integer]
-          #     Required. The number of nodes allocated to this instance.
+          #     Required. The number of nodes allocated to this instance. This may be zero
+          #     in API responses for instances that are not yet in state +READY+.
+          #
+          #     See [the documentation](https://cloud.google.com/spanner/docs/instances#node_count)
+          #     for more information about nodes.
           # @!attribute [rw] state
           #   @return [Google::Spanner::Admin::Instance::V1::Instance::State]
           #     Output only. The current instance state. For
-          #     CreateInstance, the state must be
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance}, the state must be
           #     either omitted or set to +CREATING+. For
-          #     UpdateInstance, the state must be
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}, the state must be
           #     either omitted or set to +READY+.
           # @!attribute [rw] labels
           #   @return [Hash{String => String}]
@@ -65,11 +80,11 @@ module Google
           #     And they can be used as arguments to policy management rules (e.g. route,
           #     firewall, load balancing, etc.).
           #
-          #      * Label keys must be between 1 and 63 characters long and must conform to
-          #        the following regular expression: +{a-z}[https://cloud.google.com[-a-z0-9]*[a-z0-9]]?+.
-          #      * Label values must be between 0 and 63 characters long and must conform
-          #        to the regular expression +({a-z}[https://cloud.google.com[-a-z0-9]*[a-z0-9]]?)?+.
-          #      * No more than 64 labels can be associated with a given resource.
+          #     * Label keys must be between 1 and 63 characters long and must conform to
+          #       the following regular expression: +[a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?+.
+          #     * Label values must be between 0 and 63 characters long and must conform
+          #       to the regular expression +([a-z](https://cloud.google.com[-a-z0-9]*[a-z0-9])?)?+.
+          #     * No more than 64 labels can be associated with a given resource.
           #
           #     See https://goo.gl/xmQnxf for more information on and examples of labels.
           #
@@ -96,7 +111,7 @@ module Google
             end
           end
 
-          # The request for ListInstanceConfigs.
+          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The name of the project for which a list of supported instance
@@ -109,37 +124,37 @@ module Google
           # @!attribute [rw] page_token
           #   @return [String]
           #     If non-empty, +page_token+ should contain a
-          #     Next_page_token
-          #     from a previous ListInstanceConfigsResponse.
+          #     {Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse#next_page_token next_page_token}
+          #     from a previous {Google::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse ListInstanceConfigsResponse}.
           class ListInstanceConfigsRequest; end
 
-          # The response for ListInstanceConfigs.
+          # The response for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs}.
           # @!attribute [rw] instance_configs
           #   @return [Array<Google::Spanner::Admin::Instance::V1::InstanceConfig>]
           #     The list of requested instance configurations.
           # @!attribute [rw] next_page_token
           #   @return [String]
           #     +next_page_token+ can be sent in a subsequent
-          #     ListInstanceConfigs call to
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstanceConfigs ListInstanceConfigs} call to
           #     fetch more of the matching instance configurations.
           class ListInstanceConfigsResponse; end
 
           # The request for
-          # GetInstanceConfigRequest.
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::GetInstanceConfig GetInstanceConfigRequest}.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The name of the requested instance configuration. Values are of
           #     the form +projects/<project>/instanceConfigs/<config>+.
           class GetInstanceConfigRequest; end
 
-          # The request for GetInstance.
+          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::GetInstance GetInstance}.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The name of the requested instance. Values are of the form
           #     +projects/<project>/instances/<instance>+.
           class GetInstanceRequest; end
 
-          # The request for CreateInstance.
+          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance}.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The name of the project in which to create the instance. Values
@@ -155,7 +170,7 @@ module Google
           #     specified must be +<parent>/instances/<instance_id>+.
           class CreateInstanceRequest; end
 
-          # The request for ListInstances.
+          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances}.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The name of the project for which a list of instances is
@@ -167,43 +182,43 @@ module Google
           # @!attribute [rw] page_token
           #   @return [String]
           #     If non-empty, +page_token+ should contain a
-          #     Next_page_token from a
-          #     previous ListInstancesResponse.
+          #     {Google::Spanner::Admin::Instance::V1::ListInstancesResponse#next_page_token next_page_token} from a
+          #     previous {Google::Spanner::Admin::Instance::V1::ListInstancesResponse ListInstancesResponse}.
           # @!attribute [rw] filter
           #   @return [String]
           #     An expression for filtering the results of the request. Filter rules are
           #     case insensitive. The fields eligible for filtering are:
           #
-          #       * name
-          #       * display_name
-          #       * labels.key where key is the name of a label
+          #     * +name+
+          #       * +display_name+
+          #       * +labels.key+ where key is the name of a label
           #
-          #     Some examples of using filters are:
+          #       Some examples of using filters are:
           #
-          #       * name:* --> The instance has a name.
-          #       * name:Howl --> The instance's name contains the string "howl".
-          #       * name:HOWL --> Equivalent to above.
-          #       * NAME:howl --> Equivalent to above.
-          #       * labels.env:* --> The instance has the label "env".
-          #       * labels.env:dev --> The instance has the label "env" and the value of
-          #                            the label contains the string "dev".
-          #       * name:howl labels.env:dev --> The instance's name contains "howl" and
-          #                                      it has the label "env" with its value
-          #                                      containing "dev".
+          #       * +name:*+ --> The instance has a name.
+          #       * +name:Howl+ --> The instance's name contains the string "howl".
+          #       * +name:HOWL+ --> Equivalent to above.
+          #       * +NAME:howl+ --> Equivalent to above.
+          #       * +labels.env:*+ --> The instance has the label "env".
+          #       * +labels.env:dev+ --> The instance has the label "env" and the value of
+          #         the label contains the string "dev".
+          #       * +name:howl labels.env:dev+ --> The instance's name contains "howl" and
+          #         it has the label "env" with its value
+          #         containing "dev".
           class ListInstancesRequest; end
 
-          # The response for ListInstances.
+          # The response for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances}.
           # @!attribute [rw] instances
           #   @return [Array<Google::Spanner::Admin::Instance::V1::Instance>]
           #     The list of requested instances.
           # @!attribute [rw] next_page_token
           #   @return [String]
           #     +next_page_token+ can be sent in a subsequent
-          #     ListInstances call to fetch more
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::ListInstances ListInstances} call to fetch more
           #     of the matching instances.
           class ListInstancesResponse; end
 
-          # The request for UpdateInstance.
+          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}.
           # @!attribute [rw] instance
           #   @return [Google::Spanner::Admin::Instance::V1::Instance]
           #     Required. The instance to update, which must always include the instance
@@ -216,7 +231,7 @@ module Google
           #     about them.
           class UpdateInstanceRequest; end
 
-          # The request for DeleteInstance.
+          # The request for {Google::Spanner::Admin::Instance::V1::InstanceAdmin::DeleteInstance DeleteInstance}.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The name of the instance to be deleted. Values are of the form
@@ -224,14 +239,14 @@ module Google
           class DeleteInstanceRequest; end
 
           # Metadata type for the operation returned by
-          # CreateInstance.
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance}.
           # @!attribute [rw] instance
           #   @return [Google::Spanner::Admin::Instance::V1::Instance]
           #     The instance being created.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
           #     The time at which the
-          #     CreateInstance request was
+          #     {Google::Spanner::Admin::Instance::V1::InstanceAdmin::CreateInstance CreateInstance} request was
           #     received.
           # @!attribute [rw] cancel_time
           #   @return [Google::Protobuf::Timestamp]
@@ -244,13 +259,13 @@ module Google
           class CreateInstanceMetadata; end
 
           # Metadata type for the operation returned by
-          # UpdateInstance.
+          # {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}.
           # @!attribute [rw] instance
           #   @return [Google::Spanner::Admin::Instance::V1::Instance]
           #     The desired end state of the update.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
-          #     The time at which UpdateInstance
+          #     The time at which {Google::Spanner::Admin::Instance::V1::InstanceAdmin::UpdateInstance UpdateInstance}
           #     request was received.
           # @!attribute [rw] cancel_time
           #   @return [Google::Protobuf::Timestamp]

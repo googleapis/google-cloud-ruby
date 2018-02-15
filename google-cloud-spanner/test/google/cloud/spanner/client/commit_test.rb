@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -223,6 +223,37 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     mock.verify
   end
 
+  it "deletes multiple rows of keys (timestamp keys) directly" do
+    time1 = Time.now - 5*60*60
+    time2 = Time.now - 5*60*60
+    time3 = Time.now - 5*60*60
+    time4 = Time.now - 5*60*60
+
+    mutations = [
+      Google::Spanner::V1::Mutation.new(
+        delete: Google::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Spanner::V1::KeySet.new(
+            keys: [time1, time2, time3, time4].map do |i|
+              Google::Cloud::Spanner::Convert.raw_to_value([i]).list_value
+            end
+          )
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
+    spanner.service.mocked_service = mock
+
+    timestamp = client.delete "users", [time1, time2, time3, time4]
+    timestamp.must_equal commit_time
+
+    shutdown_client! client
+
+    mock.verify
+  end
+
   it "deletes multiple rows of key rangess directly" do
     mutations = [
       Google::Spanner::V1::Mutation.new(
@@ -266,6 +297,34 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", 5
+    timestamp.must_equal commit_time
+
+    shutdown_client! client
+
+    mock.verify
+  end
+
+  it "deletes a single rows (timestamp key) directly" do
+    time5 = Time.now - 5*60*60
+
+    mutations = [
+      Google::Spanner::V1::Mutation.new(
+        delete: Google::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Spanner::V1::KeySet.new(
+            keys: [time5].map do |i|
+              Google::Cloud::Spanner::Convert.raw_to_value([i]).list_value
+            end
+          )
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :commit, commit_resp, [session_grpc.name, mutations, transaction_id: nil, single_use_transaction: tx_opts, options: default_options]
+    spanner.service.mocked_service = mock
+
+    timestamp = client.delete "users", time5
     timestamp.must_equal commit_time
 
     shutdown_client! client

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -87,7 +87,7 @@ module Google
         # The current state. Either :running, :suspended, :stopping, or :stopped
         #
         # DEPRECATED. Use #async_state instead.
-        alias_method :state, :async_state
+        alias state async_state
 
         ##
         # The last exception thrown by the background thread, or nil if nothing
@@ -96,11 +96,13 @@ module Google
 
         ##
         # @private Creates a new AsyncWriter instance.
-        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE
+        def initialize logging, max_queue_size = DEFAULT_MAX_QUEUE_SIZE,
+                       partial_success = false
           super()
 
           @logging = logging
           @max_queue_size = max_queue_size
+          @partial_success = partial_success
           @queue_resource = new_cond
           @queue = []
           @queue_size = 0
@@ -150,7 +152,7 @@ module Google
           ensure_thread
           entries = Array(entries)
           synchronize do
-            fail "AsyncWriter has been stopped" unless writable?
+            raise "AsyncWriter has been stopped" unless writable?
             queue_item = QueueItem.new entries, log_name, resource, labels
             if @queue.empty? || !@queue.last.try_combine(queue_item)
               @queue.push queue_item
@@ -211,7 +213,7 @@ module Google
         # @return [Boolean] Returns true if the writer was running, or false
         #   if the writer had already been stopped.
         #
-        alias_method :stop, :async_stop
+        alias stop async_stop
 
         ##
         # Suspends this asynchronous writer.
@@ -224,7 +226,7 @@ module Google
         # @return [Boolean] Returns true if the writer had been running and was
         #   suspended, otherwise false.
         #
-        alias_method :suspend, :async_suspend
+        alias suspend async_suspend
 
         ##
         # Resumes this suspended asynchronous writer.
@@ -237,7 +239,7 @@ module Google
         # @return [Boolean] Returns true if the writer had been suspended and
         #   is now running, otherwise false.
         #
-        alias_method :resume, :async_resume
+        alias resume async_resume
 
         ##
         # Returns true if this writer is running.
@@ -246,7 +248,7 @@ module Google
         #
         # @return [Boolean] Returns true if the writer is currently running.
         #
-        alias_method :running?, :async_running?
+        alias running? async_running?
 
         ##
         # Returns true if this writer is suspended.
@@ -255,7 +257,7 @@ module Google
         #
         # @return [Boolean] Returns true if the writer is currently suspended.
         #
-        alias_method :suspended?, :async_suspended?
+        alias suspended? async_suspended?
 
         ##
         # Returns true if this writer is still accepting writes. This means
@@ -265,7 +267,7 @@ module Google
         #
         # @return [Boolean] Returns true if the writer is accepting writes.
         #
-        alias_method :writable?, :async_working?
+        alias writable? async_working?
 
         ##
         # Returns true if this writer is fully stopped.
@@ -274,7 +276,7 @@ module Google
         #
         # @return [Boolean] Returns true if the writer is fully stopped.
         #
-        alias_method :stopped?, :async_stopped?
+        alias stopped? async_stopped?
 
         ##
         # Blocks until this asynchronous writer has been stopped, or the given
@@ -288,7 +290,7 @@ module Google
         # @return [Boolean] Returns true if the writer is stopped, or false
         #   if the timeout expired.
         #
-        alias_method :wait_until_stopped, :wait_until_async_stopped
+        alias wait_until_stopped wait_until_async_stopped
 
         ##
         # Stop this asynchronous writer and block until it has been stopped.
@@ -335,9 +337,10 @@ module Google
               queue_item.entries,
               log_name: queue_item.log_name,
               resource: queue_item.resource,
-              labels: queue_item.labels
+              labels: queue_item.labels,
+              partial_success: @partial_success
             )
-          rescue => e
+          rescue StandardError => e
             # Ignore any exceptions thrown from the background thread, but
             # keep running to ensure its state behavior remains consistent.
             @last_exception = e

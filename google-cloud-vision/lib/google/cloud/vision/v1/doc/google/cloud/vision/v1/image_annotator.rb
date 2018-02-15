@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,19 +15,35 @@
 module Google
   module Cloud
     module Vision
+      ##
+      # # Google Cloud Vision API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [ImageAnnotatorClient][] | Service that performs Google Cloud Vision API detection tasks over client images, such as face, landmark, logo, label, and text detection. |
+      # | [Data Types][] | Data types for Google::Cloud::Vision::V1 |
+      #
+      # [ImageAnnotatorClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/latest/google/cloud/vision/v1/imageannotatorclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/latest/google/cloud/vision/v1/datatypes
+      #
       module V1
-        # Users describe the type of Google Cloud Vision API tasks to perform over
-        # images by using *Feature*s. Each Feature indicates a type of image
-        # detection task to perform. Features encode the Cloud Vision API
-        # vertical to operate on and the number of top-scoring results to return.
+        # The type of Google Cloud Vision API detection to perform, and the maximum
+        # number of results to return for that type. Multiple +Feature+ objects can
+        # be specified in the +features+ list.
         # @!attribute [rw] type
         #   @return [Google::Cloud::Vision::V1::Feature::Type]
         #     The feature type.
         # @!attribute [rw] max_results
         #   @return [Integer]
-        #     Maximum number of results of this type.
+        #     Maximum number of results of this type. Does not apply to
+        #     +TEXT_DETECTION+, +DOCUMENT_TEXT_DETECTION+, or +CROP_HINTS+.
+        # @!attribute [rw] model
+        #   @return [String]
+        #     Model to use for the feature.
+        #     Supported values: "builtin/stable" (the default if unset) and
+        #     "builtin/latest".
         class Feature
-          # Type of image feature.
+          # Type of Google Cloud Vision API feature to be extracted.
           module Type
             # Unspecified feature type.
             TYPE_UNSPECIFIED = 0
@@ -44,17 +60,21 @@ module Google
             # Run label detection.
             LABEL_DETECTION = 4
 
-            # Run OCR.
+            # Run text detection / optical character recognition (OCR). Text detection
+            # is optimized for areas of text within a larger image; if the image is
+            # a document, use +DOCUMENT_TEXT_DETECTION+ instead.
             TEXT_DETECTION = 5
 
             # Run dense text document OCR. Takes precedence when both
-            # DOCUMENT_TEXT_DETECTION and TEXT_DETECTION are present.
+            # +DOCUMENT_TEXT_DETECTION+ and +TEXT_DETECTION+ are present.
             DOCUMENT_TEXT_DETECTION = 11
 
-            # Run computer vision models to compute image safe-search properties.
+            # Run Safe Search to detect potentially unsafe
+            # or undesirable content.
             SAFE_SEARCH_DETECTION = 6
 
-            # Compute a set of image properties, such as the image's dominant colors.
+            # Compute a set of image properties, such as the
+            # image's dominant colors.
             IMAGE_PROPERTIES = 7
 
             # Run crop hints.
@@ -65,26 +85,33 @@ module Google
           end
         end
 
-        # External image source (Google Cloud Storage image location).
+        # External image source (Google Cloud Storage or web URL image location).
         # @!attribute [rw] gcs_image_uri
         #   @return [String]
-        #     NOTE: For new code +image_uri+ below is preferred.
-        #     Google Cloud Storage image URI, which must be in the following form:
-        #     +gs://bucket_name/object_name+ (for details, see
-        #     {Google Cloud Storage Request
-        #     URIs}[https://cloud.google.com/storage/docs/reference-uris]).
-        #     NOTE: Cloud Storage object versioning is not supported.
+        #     **Use +image_uri+ instead.**
+        #
+        #     The Google Cloud Storage  URI of the form
+        #     +gs://bucket_name/object_name+. Object versioning is not supported. See
+        #     [Google Cloud Storage Request
+        #     URIs](https://cloud.google.com/storage/docs/reference-uris) for more info.
         # @!attribute [rw] image_uri
         #   @return [String]
-        #     Image URI which supports:
-        #     1) Google Cloud Storage image URI, which must be in the following form:
-        #     +gs://bucket_name/object_name+ (for details, see
-        #     {Google Cloud Storage Request
-        #     URIs}[https://cloud.google.com/storage/docs/reference-uris]).
-        #     NOTE: Cloud Storage object versioning is not supported.
-        #     2) Publicly accessible image HTTP/HTTPS URL.
-        #     This is preferred over the legacy +gcs_image_uri+ above. When both
-        #     +gcs_image_uri+ and +image_uri+ are specified, +image_uri+ takes
+        #     The URI of the source image. Can be either:
+        #
+        #     1. A Google Cloud Storage URI of the form
+        #        +gs://bucket_name/object_name+. Object versioning is not supported. See
+        #        [Google Cloud Storage Request
+        #        URIs](https://cloud.google.com/storage/docs/reference-uris) for more
+        #        info.
+        #
+        #     2. A publicly-accessible image HTTP/HTTPS URL. When fetching images from
+        #        HTTP/HTTPS URLs, Google cannot guarantee that the request will be
+        #        completed. Your request may fail if the specified host denies the
+        #        request (e.g. due to request throttling or DOS prevention), or if Google
+        #        throttles requests to the site for abuse prevention. You should not
+        #        depend on externally-hosted images for production applications.
+        #
+        #     When both +gcs_image_uri+ and +image_uri+ are specified, +image_uri+ takes
         #     precedence.
         class ImageSource; end
 
@@ -92,13 +119,13 @@ module Google
         # @!attribute [rw] content
         #   @return [String]
         #     Image content, represented as a stream of bytes.
-        #     Note: as with all +bytes+ fields, protobuffers use a pure binary
+        #     Note: As with all +bytes+ fields, protobuffers use a pure binary
         #     representation, whereas JSON representations use base64.
         # @!attribute [rw] source
         #   @return [Google::Cloud::Vision::V1::ImageSource]
-        #     Google Cloud Storage image location. If both +content+ and +source+
-        #     are provided for an image, +content+ takes precedence and is
-        #     used to perform the image annotation request.
+        #     Google Cloud Storage image location, or publicly-accessible image
+        #     URL. If both +content+ and +source+ are provided for an image, +content+
+        #     takes precedence and is used to perform the image annotation request.
         class Image; end
 
         # A face annotation object contains the results of face detection.
@@ -165,10 +192,6 @@ module Google
         #     Headwear likelihood.
         class FaceAnnotation
           # A face-specific landmark (for example, a face feature).
-          # Landmark positions may fall outside the bounds of the image
-          # if the face is near one or more edges of the image.
-          # Therefore it is NOT guaranteed that +0 <= x < width+ or
-          # +0 <= y < height+.
           # @!attribute [rw] type
           #   @return [Google::Cloud::Vision::V1::FaceAnnotation::Landmark::Type]
           #     Face landmark type.
@@ -302,13 +325,17 @@ module Google
         # @!attribute [rw] value
         #   @return [String]
         #     Value of the property.
+        # @!attribute [rw] uint64_value
+        #   @return [Integer]
+        #     Value of numeric properties.
         class Property; end
 
         # Set of detected entity features.
         # @!attribute [rw] mid
         #   @return [String]
         #     Opaque entity ID. Some IDs may be available in
-        #     {Google Knowledge Graph Search API}[https://developers.google.com/knowledge-graph/].
+        #     [Google Knowledge Graph Search
+        #     API](https://developers.google.com/knowledge-graph/).
         # @!attribute [rw] locale
         #   @return [String]
         #     The language code for the locale in which the entity textual
@@ -321,6 +348,7 @@ module Google
         #     Overall score of the result. Range [0, 1].
         # @!attribute [rw] confidence
         #   @return [Float]
+        #     **Deprecated. Use +score+ instead.**
         #     The accuracy of the entity detection in an image.
         #     For example, for an image in which the "Eiffel Tower" entity is detected,
         #     this field represents the confidence that there is a tower in the query
@@ -334,10 +362,8 @@ module Google
         #     there is a tower in each image may be the same. Range [0, 1].
         # @!attribute [rw] bounding_poly
         #   @return [Google::Cloud::Vision::V1::BoundingPoly]
-        #     Image region to which this entity belongs. Currently not produced
-        #     for +LABEL_DETECTION+ features. For +TEXT_DETECTION+ (OCR), +boundingPoly+s
-        #     are produced for the entire text detected in an image region, followed by
-        #     +boundingPoly+s for each word within the detected text.
+        #     Image region to which this entity belongs. Not produced
+        #     for +LABEL_DETECTION+ features.
         # @!attribute [rw] locations
         #   @return [Array<Google::Cloud::Vision::V1::LocationInfo>]
         #     The location information for the detected entity. Multiple
@@ -356,7 +382,9 @@ module Google
         # violence).
         # @!attribute [rw] adult
         #   @return [Google::Cloud::Vision::V1::Likelihood]
-        #     Represents the adult content likelihood for the image.
+        #     Represents the adult content likelihood for the image. Adult content may
+        #     contain elements such as nudity, pornographic images or cartoons, or
+        #     sexual activities.
         # @!attribute [rw] spoof
         #   @return [Google::Cloud::Vision::V1::Likelihood]
         #     Spoof likelihood. The likelihood that an modification
@@ -367,7 +395,13 @@ module Google
         #     Likelihood that this is a medical image.
         # @!attribute [rw] violence
         #   @return [Google::Cloud::Vision::V1::Likelihood]
-        #     Violence likelihood.
+        #     Likelihood that this image contains violent content.
+        # @!attribute [rw] racy
+        #   @return [Google::Cloud::Vision::V1::Likelihood]
+        #     Likelihood that the request image contains racy content. Racy content may
+        #     include (but is not limited to) skimpy or sheer clothing, strategically
+        #     covered nudity, lewd or provocative poses, or close-ups of sensitive
+        #     body areas.
         class SafeSearchAnnotation; end
 
         # Rectangle determined by min and max +LatLng+ pairs.
@@ -422,6 +456,7 @@ module Google
         # Set of crop hints that are used to generate new crops when serving images.
         # @!attribute [rw] crop_hints
         #   @return [Array<Google::Cloud::Vision::V1::CropHint>]
+        #     Crop hint results.
         class CropHintsAnnotation; end
 
         # Parameters for crop hints annotation request.
@@ -434,6 +469,12 @@ module Google
         #     limited to a maximum of 16; any aspect ratios provided after the 16th are
         #     ignored.
         class CropHintsParams; end
+
+        # Parameters for web detection request.
+        # @!attribute [rw] include_geo_results
+        #   @return [true, false]
+        #     Whether to include results derived from the geo information in the image.
+        class WebDetectionParams; end
 
         # Image context and/or feature-specific parameters.
         # @!attribute [rw] lat_long_rect
@@ -448,10 +489,13 @@ module Google
         #     setting a hint will help get better results (although it will be a
         #     significant hindrance if the hint is wrong). Text detection returns an
         #     error if one or more of the specified languages is not one of the
-        #     {supported languages}[https://cloud.google.com/vision/docs/languages].
+        #     [supported languages](https://cloud.google.com/vision/docs/languages).
         # @!attribute [rw] crop_hints_params
         #   @return [Google::Cloud::Vision::V1::CropHintsParams]
         #     Parameters for crop hints annotation request.
+        # @!attribute [rw] web_detection_params
+        #   @return [Google::Cloud::Vision::V1::WebDetectionParams]
+        #     Parameters for web detection.
         class ImageContext; end
 
         # Request for performing Google Cloud Vision API tasks over a user-provided
@@ -482,8 +526,7 @@ module Google
         #     If present, label detection has completed successfully.
         # @!attribute [rw] text_annotations
         #   @return [Array<Google::Cloud::Vision::V1::EntityAnnotation>]
-        #     If present, text (OCR) detection or document (OCR) text detection has
-        #     completed successfully.
+        #     If present, text (OCR) detection has completed successfully.
         # @!attribute [rw] full_text_annotation
         #   @return [Google::Cloud::Vision::V1::TextAnnotation]
         #     If present, text (OCR) detection or document (OCR) text detection has

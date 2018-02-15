@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -154,6 +154,13 @@ describe Google::Cloud::Storage::Bucket, :storage do
       roles = ["storage.buckets.delete", "storage.buckets.get"]
       permissions = bucket.test_permissions roles
       permissions.must_equal roles
+    end
+  end
+
+  describe "anonymous project" do
+    it "raises when creating a bucket without authentication" do
+      anonymous_storage = Google::Cloud::Storage.anonymous
+      expect { anonymous_storage.create_bucket bucket_name }.must_raise Google::Cloud::UnauthenticatedError
     end
   end
 end

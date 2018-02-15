@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,6 +28,7 @@ require "pathname"
 require "google/gax"
 
 require "google/devtools/clouddebugger/v2/debugger_pb"
+require "google/cloud/debugger/credentials"
 
 module Google
   module Cloud
@@ -38,9 +39,9 @@ module Google
         # and without modifying its state.  An application may include one or
         # more replicated processes performing the same work.
         #
-        # The application is represented using the Debuggee concept. The Debugger
-        # service provides a way to query for available Debuggees, but does not
-        # provide a way to create one.  A debuggee is created using the Controller
+        # A debugged application is represented using the Debuggee concept. The
+        # Debugger service provides a way to query for available debuggees, but does
+        # not provide a way to create one.  A debuggee is created using the Controller
         # service, usually by running a debugger agent with the application.
         #
         # The Debugger service enables the client to set one or more Breakpoints on a
@@ -66,21 +67,24 @@ module Google
             "https://www.googleapis.com/auth/cloud_debugger"
           ].freeze
 
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param updater_proc [Proc]
-          #   A function that transforms the metadata for requests, e.g., to give
-          #   OAuth credentials.
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
           # @param scopes [Array<String>]
           #   The OAuth scopes for this service. This parameter is ignored if
           #   an updater_proc is supplied.
-          # @param client_config[Hash]
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -93,11 +97,10 @@ module Google
               channel: nil,
               chan_creds: nil,
               updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -106,14 +109,38 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/clouddebugger/v2/debugger_services_pb"
 
+            if channel || chan_creds || updater_proc
+              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
+                "on 2017/09/08"
+              credentials ||= channel
+              credentials ||= chan_creds
+              credentials ||= updater_proc
+            end
+            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
+              warn "`service_path` and `port` parameters are deprecated and will be removed"
+            end
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            credentials ||= Google::Cloud::Debugger::Credentials.default
+
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Debugger::Credentials.new(credentials).updater_proc
+            end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
             end
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -170,12 +197,14 @@ module Google
           #
           # @param debuggee_id [String]
           #   ID of the debuggee where the breakpoint is to be set.
-          # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint]
+          # @param breakpoint [Google::Devtools::Clouddebugger::V2::Breakpoint | Hash]
           #   Breakpoint specification to set.
-          #   The field 'location' of the breakpoint must be set.
+          #   The field +location+ of the breakpoint must be set.
+          #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::Breakpoint`
+          #   can also be provided.
           # @param client_version [String]
           #   The client version making the call.
-          #   Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -184,12 +213,9 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Breakpoint = Google::Devtools::Clouddebugger::V2::Breakpoint
-          #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-          #
-          #   debugger2_client = Debugger2Client.new
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #   debuggee_id = ''
-          #   breakpoint = Breakpoint.new
+          #   breakpoint = {}
           #   client_version = ''
           #   response = debugger2_client.set_breakpoint(debuggee_id, breakpoint, client_version)
 
@@ -198,11 +224,12 @@ module Google
               breakpoint,
               client_version,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::SetBreakpointRequest.new({
+            req = {
               debuggee_id: debuggee_id,
               breakpoint: breakpoint,
               client_version: client_version
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::SetBreakpointRequest)
             @set_breakpoint.call(req, options)
           end
 
@@ -214,7 +241,7 @@ module Google
           #   ID of the breakpoint to get.
           # @param client_version [String]
           #   The client version making the call.
-          #   Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -223,9 +250,7 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-          #
-          #   debugger2_client = Debugger2Client.new
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #   debuggee_id = ''
           #   breakpoint_id = ''
           #   client_version = ''
@@ -236,11 +261,12 @@ module Google
               breakpoint_id,
               client_version,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::GetBreakpointRequest.new({
+            req = {
               debuggee_id: debuggee_id,
               breakpoint_id: breakpoint_id,
               client_version: client_version
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::GetBreakpointRequest)
             @get_breakpoint.call(req, options)
           end
 
@@ -252,7 +278,7 @@ module Google
           #   ID of the breakpoint to delete.
           # @param client_version [String]
           #   The client version making the call.
-          #   Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -260,9 +286,7 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-          #
-          #   debugger2_client = Debugger2Client.new
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #   debuggee_id = ''
           #   breakpoint_id = ''
           #   client_version = ''
@@ -273,11 +297,12 @@ module Google
               breakpoint_id,
               client_version,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest.new({
+            req = {
               debuggee_id: debuggee_id,
               breakpoint_id: breakpoint_id,
               client_version: client_version
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest)
             @delete_breakpoint.call(req, options)
             nil
           end
@@ -288,15 +313,17 @@ module Google
           #   ID of the debuggee whose breakpoints to list.
           # @param client_version [String]
           #   The client version making the call.
-          #   Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
           # @param include_all_users [true, false]
           #   When set to +true+, the response includes the list of breakpoints set by
           #   any user. Otherwise, it includes only breakpoints set by the caller.
           # @param include_inactive [true, false]
           #   When set to +true+, the response includes active and inactive
           #   breakpoints. Otherwise, it includes only active breakpoints.
-          # @param action [Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest::BreakpointActionValue]
+          # @param action [Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest::BreakpointActionValue | Hash]
           #   When set, the response includes only breakpoints with the specified action.
+          #   A hash of the same form as `Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest::BreakpointActionValue`
+          #   can also be provided.
           # @param strip_results [true, false]
           #   This field is deprecated. The following fields are always stripped out of
           #   the result: +stack_frames+, +evaluated_expressions+ and +variable_table+.
@@ -314,9 +341,7 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-          #
-          #   debugger2_client = Debugger2Client.new
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #   debuggee_id = ''
           #   client_version = ''
           #   response = debugger2_client.list_breakpoints(debuggee_id, client_version)
@@ -330,7 +355,7 @@ module Google
               strip_results: nil,
               wait_token: nil,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest.new({
+            req = {
               debuggee_id: debuggee_id,
               client_version: client_version,
               include_all_users: include_all_users,
@@ -338,17 +363,18 @@ module Google
               action: action,
               strip_results: strip_results,
               wait_token: wait_token
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest)
             @list_breakpoints.call(req, options)
           end
 
-          # Lists all the debuggees that the user can set breakpoints to.
+          # Lists all the debuggees that the user has access to.
           #
           # @param project [String]
           #   Project number of a Google Cloud project whose debuggees to list.
           # @param client_version [String]
           #   The client version making the call.
-          #   Following: +domain/type/version+ (e.g., +google.com/intellij/v1+).
+          #   Schema: +domain/type/version+ (e.g., +google.com/intellij/v1+).
           # @param include_inactive [true, false]
           #   When set to +true+, the result includes all debuggees. Otherwise, the
           #   result includes only debuggees that are active.
@@ -360,9 +386,7 @@ module Google
           # @example
           #   require "google/cloud/debugger/v2"
           #
-          #   Debugger2Client = Google::Cloud::Debugger::V2::Debugger2Client
-          #
-          #   debugger2_client = Debugger2Client.new
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #   project = ''
           #   client_version = ''
           #   response = debugger2_client.list_debuggees(project, client_version)
@@ -372,11 +396,12 @@ module Google
               client_version,
               include_inactive: nil,
               options: nil
-            req = Google::Devtools::Clouddebugger::V2::ListDebuggeesRequest.new({
+            req = {
               project: project,
               client_version: client_version,
               include_inactive: include_inactive
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::ListDebuggeesRequest)
             @list_debuggees.call(req, options)
           end
         end

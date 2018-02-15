@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,8 +45,8 @@ module Google
         #
         # @return [String]
         attr_reader :text
-        alias_method :to_s, :text
-        alias_method :to_str, :text
+        alias to_s text
+        alias to_str text
 
         ##
         # The original query text that was translated.
@@ -59,15 +59,15 @@ module Google
         #
         # @return [String]
         attr_reader :to
-        alias_method :language, :to
-        alias_method :target, :to
+        alias language to
+        alias target to
 
         ##
         # The source language from which the text was translated.
         #
         # @return [String]
         attr_reader :from
-        alias_method :source, :from
+        alias source from
 
         ##
         # The translation model. Can be either `base` for the Phrase-Based

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
 require "google/cloud/errors"
 require "google/cloud/translate/credentials"
 require "google/cloud/translate/version"
-require "faraday" # comes from googleauth, comes from google-cloud-core
+require "faraday"
 
 module Google
   module Cloud
@@ -25,8 +25,8 @@ module Google
       # @private
       # Represents the Translation API REST service, exposing the API calls.
       class Service #:nodoc:
-        API_VERSION = "v2"
-        API_URL = "https://translation.googleapis.com"
+        API_VERSION = "v2".freeze
+        API_URL = "https://translation.googleapis.com".freeze
 
         # @private
         attr_accessor :project, :credentials, :retries, :timeout, :key
@@ -71,7 +71,7 @@ module Google
         end
 
         def inspect
-          "#{self.class}"
+          self.class.to_s
         end
 
         protected
@@ -85,14 +85,14 @@ module Google
               if @key
                 req.params = { key: @key }
               else
-                @credentials.sign_http_request req
+                sign_http_request! req
               end
             end
           end
 
           return JSON.parse(response.body)["data"] if response.success?
 
-          fail Google::Cloud::Error.gapi_error_class_for(response.status)
+          raise Google::Cloud::Error.gapi_error_class_for(response.status)
         rescue Faraday::ConnectionFailed
           raise Google::Cloud::ResourceExhaustedError
         end
@@ -130,6 +130,17 @@ module Google
         end
 
         ##
+        # Sign Oauth2 API calls.
+        def sign_http_request! request
+          client = credentials.client
+          return if client.nil?
+
+          client.fetch_access_token! if client.expires_within? 30
+          client.generate_authenticated_request request: request
+          request
+        end
+
+        ##
         # @private Backoff
         class Backoff
           class << self
@@ -142,7 +153,7 @@ module Google
           # Set the default values
           self.retries = 3
           self.http_codes = [500, 503]
-          self.reasons = %w(rateLimitExceeded userRateLimitExceeded)
+          self.reasons = %w[rateLimitExceeded userRateLimitExceeded]
           self.backoff = ->(retries) { sleep retries.to_i }
 
           def initialize options = {} #:nodoc:

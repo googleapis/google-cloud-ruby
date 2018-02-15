@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::View, :attributes, :mock_bigquery do
+describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
   # Create a view object with the project's mocked connection object
   let(:table_id) { "my_view" }
   let(:table_name) { "My View" }

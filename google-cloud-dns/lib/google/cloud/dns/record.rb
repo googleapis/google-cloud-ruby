@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -95,10 +95,10 @@ module Google
         #   For example: ["10 mail.example.com.", "20 mail2.example.com."].
         #
         def initialize name, type, ttl, data
-          fail ArgumentError, "name is required" unless name
-          fail ArgumentError, "type is required" unless type
-          fail ArgumentError, "ttl is required" unless ttl
-          fail ArgumentError, "data is required" unless data
+          raise ArgumentError, "name is required" unless name
+          raise ArgumentError, "type is required" unless type
+          raise ArgumentError, "ttl is required" unless ttl
+          raise ArgumentError, "data is required" unless data
           @name = name.to_s
           @type = type.to_s.upcase
           @ttl = Integer(ttl)
@@ -154,11 +154,8 @@ module Google
           name == other.name && type == other.type &&
             ttl == other.ttl && data == other.data
         end
-
         # @private
-        def == other
-          self.eql? other
-        end
+        alias == eql?
 
         # @private
         def <=> other

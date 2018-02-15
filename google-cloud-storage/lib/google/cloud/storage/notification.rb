@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,7 +60,8 @@ module Google
         attr_accessor :gapi
 
         ##
-        # @private The project ID string for a requester pays bucket.
+        # @private A boolean value or a project ID string to indicate the
+        # project to be billed for operations.
         attr_accessor :user_project
 
         attr_reader :bucket
@@ -207,7 +208,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -59,7 +59,7 @@ module Google
           #
           # @return [Google::Cloud::Datastore::Cursor]
           attr_reader :end_cursor
-          alias_method :cursor, :end_cursor
+          alias cursor end_cursor
 
           ##
           # The state of the query after the current batch.
@@ -157,6 +157,7 @@ module Google
             return nil if end_cursor.nil?
             ensure_service!
             query.start_cursor = cursor.to_grpc # should always be a Cursor...
+            query.offset = 0 # Never carry an offset across batches
             query_res = service.run_query query, namespace
             self.class.from_grpc query_res, service, namespace, query
           end
@@ -378,7 +379,7 @@ module Google
           # is available.
           def ensure_service!
             msg = "Must have active connection to datastore service to get next"
-            fail msg if @service.nil? || @query.nil?
+            raise msg if @service.nil? || @query.nil?
           end
         end
       end

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -54,12 +54,12 @@ module Google
         def service
           return mocked_service if mocked_service
           @service ||= V1::DatastoreClient.new(
-            service_path: host,
-            channel: channel,
+            credentials: channel,
             timeout: timeout,
             client_config: client_config,
             lib_name: "gccl",
-            lib_version: Google::Cloud::Datastore::VERSION)
+            lib_version: Google::Cloud::Datastore::VERSION
+          )
         end
         attr_accessor :mocked_service
 
@@ -83,7 +83,8 @@ module Google
           read_options = generate_read_options consistency, transaction
 
           execute do
-            service.lookup project, read_options, keys, options: default_options
+            service.lookup project, keys,
+                           read_options: read_options, options: default_options
           end
         end
 
@@ -95,13 +96,16 @@ module Google
             query = nil
           end
           read_options = generate_read_options consistency, transaction
-          partition_id = Google::Datastore::V1::PartitionId.new(
-            namespace_id: namespace) if namespace
+          if namespace
+            partition_id = Google::Datastore::V1::PartitionId.new(
+              namespace_id: namespace
+            )
+          end
 
           execute do
             service.run_query project,
                               partition_id,
-                              read_options,
+                              read_options: read_options,
                               query: query,
                               gql_query: gql_query,
                               options: default_options
@@ -110,8 +114,24 @@ module Google
 
         ##
         # Begin a new transaction.
-        def begin_transaction
-          execute { service.begin_transaction project }
+        def begin_transaction read_only: nil, previous_transaction: nil
+          if read_only
+            transaction_options = Google::Datastore::V1::TransactionOptions.new
+            transaction_options.read_only = \
+              Google::Datastore::V1::TransactionOptions::ReadOnly.new
+          end
+          if previous_transaction
+            transaction_options ||= \
+              Google::Datastore::V1::TransactionOptions.new
+            rw = Google::Datastore::V1::TransactionOptions::ReadWrite.new(
+              previous_transaction: previous_transaction.encode("ASCII-8BIT")
+            )
+            transaction_options.read_write = rw
+          end
+          execute do
+            service.begin_transaction project,
+                                      transaction_options: transaction_options
+          end
         end
 
         ##
@@ -142,13 +162,16 @@ module Google
         def generate_read_options consistency, transaction
           if consistency == :eventual
             return Google::Datastore::V1::ReadOptions.new(
-              read_consistency: :EVENTUAL)
+              read_consistency: :EVENTUAL
+            )
           elsif consistency == :strong
-            return  Google::Datastore::V1::ReadOptions.new(
-              read_consistency: :STRONG)
+            return Google::Datastore::V1::ReadOptions.new(
+              read_consistency: :STRONG
+            )
           elsif transaction
-            return  Google::Datastore::V1::ReadOptions.new(
-              transaction: transaction)
+            return Google::Datastore::V1::ReadOptions.new(
+              transaction: transaction
+            )
           end
           nil
         end

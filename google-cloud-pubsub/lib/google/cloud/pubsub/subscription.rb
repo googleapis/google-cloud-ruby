@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,8 +35,16 @@ module Google
       #   pubsub = Google::Cloud::Pubsub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   msgs = sub.pull
-      #   msgs.each { |msg| msg.acknowledge! }
+      #   subscriber = sub.listen do |received_message|
+      #     # process message
+      #     received_message.acknowledge!
+      #   end
+      #
+      #   # Start background threads that will call the block passed to listen.
+      #   subscriber.start
+      #
+      #   # Shut down the subscriber when ready to stop receiving messages.
+      #   subscriber.stop.wait!
       #
       class Subscription
         ##
@@ -95,7 +103,6 @@ module Google
           @grpc = service.update_subscription update_grpc,
                                               :ack_deadline_seconds
           @lazy = nil
-          self
         end
 
         ##
@@ -118,7 +125,6 @@ module Google
           @grpc = service.update_subscription update_grpc,
                                               :retain_acked_messages
           @lazy = nil
-          self
         end
 
         ##
@@ -144,7 +150,6 @@ module Google
           @grpc = service.update_subscription update_grpc,
                                               :message_retention_duration
           @lazy = nil
-          self
         end
 
         ##
@@ -160,10 +165,13 @@ module Google
         def endpoint= new_endpoint
           ensure_service!
           service.modify_push_config name, new_endpoint, {}
+
+          return unless @grpc
+
           @grpc.push_config = Google::Pubsub::V1::PushConfig.new(
             push_endpoint: new_endpoint,
             attributes: {}
-          ) if @grpc
+          )
         end
 
         ##
@@ -231,11 +239,17 @@ module Google
         # `UNAVAILABLE` if there are too many concurrent pull requests pending
         # for the given subscription.
         #
+        # See also {#listen} for the preferred way to process messages as they
+        # become available.
+        #
         # @param [Boolean] immediate When `true` the system will respond
         #   immediately even if it is not able to return messages. When `false`
         #   the system is allowed to wait until it can return least one message.
         #   No messages are returned when a request times out. The default value
         #   is `true`.
+        #
+        #   See also {#listen} for the preferred way to process messages as they
+        #   become available.
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
@@ -248,7 +262,7 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.pull.each { |msg| msg.acknowledge! }
+        #   sub.pull.each { |received_message| received_message.acknowledge! }
         #
         # @example A maximum number of messages returned can also be specified:
         #   require "google/cloud/pubsub"
@@ -256,7 +270,9 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.pull(max: 10).each { |msg| msg.acknowledge! }
+        #   sub.pull(max: 10).each do |received_message|
+        #     received_message.acknowledge!
+        #   end
         #
         # @example The call can block until messages are available:
         #   require "google/cloud/pubsub"
@@ -264,8 +280,10 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   msgs = sub.pull immediate: false
-        #   msgs.each { |msg| msg.acknowledge! }
+        #   received_messages = sub.pull immediate: false
+        #   received_messages.each do |received_message|
+        #     received_message.acknowledge!
+        #   end
         #
         def pull immediate: true, max: 100
           ensure_service!
@@ -284,6 +302,9 @@ module Google
         #
         #   subscription.pull immediate: false
         #
+        # See also {#listen} for the preferred way to process messages as they
+        # become available.
+        #
         # @param [Integer] max The maximum number of messages to return for this
         #   request. The Pub/Sub system may return fewer than the number
         #   specified. The default value is `100`, the maximum value is `1000`.
@@ -296,8 +317,10 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   msgs = sub.wait_for_messages
-        #   msgs.each { |msg| msg.acknowledge! }
+        #   received_messages = sub.wait_for_messages
+        #   received_messages.each do |received_message|
+        #     received_message.acknowledge!
+        #   end
         #
         def wait_for_messages max: 100
           pull immediate: false, max: max
@@ -327,8 +350,9 @@ module Google
         #       ({ReceivedMessage#nack!}, {ReceivedMessage#delay!}). Default is
         #       4.
         #
-        # @yield [msg] a block for processing new messages
-        # @yieldparam [ReceivedMessage] msg the newly received message
+        # @yield [received_message] a block for processing new messages
+        # @yieldparam [ReceivedMessage] received_message the newly received
+        #   message
         #
         # @return [Subscriber]
         #
@@ -339,11 +363,12 @@ module Google
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #
-        #   subscriber = sub.listen do |msg|
-        #     # process msg
-        #     msg.ack!
+        #   subscriber = sub.listen do |received_message|
+        #     # process message
+        #     received_message.acknowledge!
         #   end
         #
+        #   # Start background threads that will call block passed to listen.
         #   subscriber.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
@@ -356,12 +381,13 @@ module Google
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #
-        #   subscriber = sub.listen threads: { callback: 16 } do |msg|
+        #   subscriber = sub.listen threads: { callback: 16 } do |rec_message|
         #     # store the message somewhere before acknowledging
-        #     store_in_backend msg.data # takes a few seconds
-        #     msg.ack!
+        #     store_in_backend rec_message.data # takes a few seconds
+        #     rec_message.acknowledge!
         #   end
         #
+        #   # Start background threads that will call block passed to listen.
         #   subscriber.start
         #
         def listen deadline: nil, streams: nil, inventory: nil, threads: {},
@@ -382,6 +408,8 @@ module Google
         # Acknowledging a message more than once will not result in an error.
         # This is only used for messages received via pull.
         #
+        # See also {ReceivedMessage#acknowledge!}.
+        #
         # @param [ReceivedMessage, String] messages One or more
         #   {ReceivedMessage} objects or ack_id values.
         #
@@ -391,8 +419,8 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   messages = sub.pull
-        #   sub.acknowledge messages
+        #   received_messages = sub.pull
+        #   sub.acknowledge received_messages
         #
         def acknowledge *messages
           ack_ids = coerce_ack_ids messages
@@ -401,7 +429,7 @@ module Google
           service.acknowledge name, *ack_ids
           true
         end
-        alias_method :ack, :acknowledge
+        alias ack acknowledge
 
         ##
         # Modifies the acknowledge deadline for messages.
@@ -409,6 +437,8 @@ module Google
         # This indicates that more time is needed to process the messages, or to
         # make the messages available for redelivery if the processing was
         # interrupted.
+        #
+        # See also {ReceivedMessage#delay!}.
         #
         # @param [Integer] new_deadline The new ack deadline in seconds from the
         #   time this request is sent to the Pub/Sub system. Must be >= 0. For
@@ -424,8 +454,8 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   messages = sub.pull
-        #   sub.delay 120, messages
+        #   received_messages = sub.pull
+        #   sub.delay 120, received_messages
         #
         def delay new_deadline, *messages
           ack_ids = coerce_ack_ids messages
@@ -433,7 +463,7 @@ module Google
           service.modify_ack_deadline name, ack_ids, new_deadline
           true
         end
-        alias_method :modify_ack_deadline, :delay
+        alias modify_ack_deadline delay
 
         ##
         # Creates a new {Snapshot} from the subscription. The created snapshot
@@ -480,7 +510,7 @@ module Google
           grpc = service.create_snapshot name, snapshot_name
           Snapshot.from_grpc grpc, service
         end
-        alias_method :new_snapshot, :create_snapshot
+        alias new_snapshot create_snapshot
 
         ##
         # Resets the subscription's backlog to a given {Snapshot} or to a point
@@ -510,8 +540,8 @@ module Google
         #
         #   snapshot = sub.create_snapshot
         #
-        #   messages = sub.pull
-        #   sub.acknowledge messages
+        #   received_messages = sub.pull
+        #   sub.acknowledge received_messages
         #
         #   sub.seek snapshot
         #
@@ -523,8 +553,8 @@ module Google
         #
         #   time = Time.now
         #
-        #   messages = sub.pull
-        #   sub.acknowledge messages
+        #   received_messages = sub.pull
+        #   sub.acknowledge received_messages
         #
         #   sub.seek time
         #
@@ -677,7 +707,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         ##

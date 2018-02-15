@@ -18,12 +18,14 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
+  gem.add_dependency "google-cloud-core", "~> 1.1"
+
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
-  gem.add_development_dependency "rubocop", "<= 0.35.1"
+  gem.add_development_dependency "rubocop", "~> 0.50.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "<= 0.1.8"

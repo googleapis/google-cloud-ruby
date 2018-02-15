@@ -18,30 +18,46 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
-  gem.add_dependency "google-cloud-bigquery", "~> 0.28.0"
-  gem.add_dependency "google-cloud-datastore", "~> 1.1"
-  gem.add_dependency "google-cloud-dns", "~> 0.26.0"
-  gem.add_dependency "google-cloud-error_reporting", "~> 0.27.0"
-  gem.add_dependency "google-cloud-language", "~> 0.27.0"
-  gem.add_dependency "google-cloud-logging", "~> 1.2"
-  gem.add_dependency "google-cloud-monitoring", "~> 0.25.0"
-  gem.add_dependency "google-cloud-pubsub", "~> 0.27.0"
-  gem.add_dependency "google-cloud-resource_manager", "~> 0.27.0"
-  gem.add_dependency "google-cloud-spanner", "~> 1.0"
-  gem.add_dependency "google-cloud-speech", "~> 0.26.0"
-  gem.add_dependency "google-cloud-storage", "~> 1.6"
-  gem.add_dependency "google-cloud-trace", "~> 0.27.0"
-  gem.add_dependency "google-cloud-translate", "~> 1.0"
-  gem.add_dependency "google-cloud-video_intelligence", "~> 0.23.0"
-  gem.add_dependency "google-cloud-vision", "~> 0.25.0"
+  gem.add_dependency "google-cloud-bigquery", "~> 1.0"
+  gem.add_dependency "google-cloud-container", "~> 0.1.0"
+  gem.add_dependency "google-cloud-dataproc", "~> 0.1.0"
+  gem.add_dependency "google-cloud-datastore", "~> 1.3"
+  gem.add_dependency "google-cloud-dlp", "~> 0.1.0"
+  gem.add_dependency "google-cloud-dns", "~> 0.27.0"
+  gem.add_dependency "google-cloud-error_reporting", "~> 0.29.0"
+  gem.add_dependency "google-cloud-firestore", "~> 0.20.0"
+  gem.add_dependency "google-cloud-language", "~> 0.29.0"
+  gem.add_dependency "google-cloud-logging", "~> 1.4"
+  gem.add_dependency "google-cloud-monitoring", "~> 0.27.0"
+  gem.add_dependency "google-cloud-os_login", "~> 0.1.0"
+  gem.add_dependency "google-cloud-pubsub", "~> 0.29.0"
+  gem.add_dependency "google-cloud-resource_manager", "~> 0.28.0"
+  gem.add_dependency "google-cloud-spanner", "~> 1.2"
+  gem.add_dependency "google-cloud-speech", "~> 0.28.0"
+  gem.add_dependency "google-cloud-storage", "~> 1.8"
+  gem.add_dependency "google-cloud-trace", "~> 0.30.0"
+  gem.add_dependency "google-cloud-translate", "~> 1.1"
+  gem.add_dependency "google-cloud-video_intelligence", "~> 1.0.0"
+  gem.add_dependency "google-cloud-vision", "~> 0.27.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
-  gem.add_development_dependency "rubocop", "<= 0.35.1"
+  gem.add_development_dependency "rubocop", "~> 0.50.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "<= 0.1.8"
+
+  gem.post_install_message = <<-POSTINSTALL
+------------------------------
+Thank you for installing Google Cloud!
+
+IMPORTANT NOTICE:
+The google-cloud gem contains all the google-cloud-* gems.
+Instead of depending on this gem, we encourage you to install just
+the individual gems needed for your project.
+------------------------------
+POSTINSTALL
 end

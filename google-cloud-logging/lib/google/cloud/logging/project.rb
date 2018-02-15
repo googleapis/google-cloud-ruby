@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/logging/service"
 require "google/cloud/logging/credentials"
 require "google/cloud/logging/log/list"
@@ -66,24 +65,16 @@ module Google
         #   require "google/cloud/logging"
         #
         #   logging = Google::Cloud::Logging.new(
-        #     project: "my-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   logging.project #=> "my-project"
+        #   logging.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["LOGGING_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
+        alias project project_id
 
         ##
         # Lists log entries. Use this method to retrieve log entries from Cloud
@@ -163,7 +154,7 @@ module Google
                                 filter: filter, order: order,
                                 projects: projects
         end
-        alias_method :find_entries, :entries
+        alias find_entries entries
 
         ##
         # Creates an new Entry instance that may be populated and written to the
@@ -203,6 +194,16 @@ module Google
         #
         #   logging.write_entries entry
         #
+        # @example Provide a hash to write a JSON payload to the log:
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+        #   entry = logging.entry severity: :INFO, payload: payload
+        #
+        #   logging.write_entries entry
+        #
         def entry log_name: nil, resource: nil, timestamp: nil, severity: nil,
                   insert_id: nil, labels: nil, payload: nil
           e = Entry.new
@@ -215,7 +216,7 @@ module Google
           e.payload = payload if payload
           e
         end
-        alias_method :new_entry, :entry
+        alias new_entry entry
 
         ##
         # Writes log entries to the Stackdriver Logging service.
@@ -238,6 +239,10 @@ module Google
         #   items that are added to the `labels` field of each log entry in
         #   `entries`, except when a log entry specifies its own `key:value`
         #   item with the same key. See also {Entry#labels=}.
+        # @param [Boolean] partial_success Whether valid entries should be
+        #   written even if some other entries fail due to INVALID_ARGUMENT or
+        #   PERMISSION_DENIED errors when communicating to the Stackdriver
+        #   Logging API.
         #
         # @return [Boolean] Returns `true` if the entries were written.
         #
@@ -253,6 +258,22 @@ module Google
         #   entry.resource.labels[:version_id] = "20150925t173233"
         #
         #   logging.write_entries entry
+        #
+        # @example Provide a hash to write a JSON payload to the log:
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+        #
+        #   entry = logging.entry payload: payload,
+        #                         log_name: "my_app_log"
+        #   entry.resource.type = "gae_app"
+        #   entry.resource.labels[:module_id] = "1"
+        #   entry.resource.labels[:version_id] = "20150925t173233"
+        #
+        #   logging.write_entries entry
+        #
         #
         # @example Optionally pass log name, resource, and labels for entries.
         #   require "google/cloud/logging"
@@ -270,13 +291,15 @@ module Google
         #   logging.write_entries [entry1, entry2],
         #                         log_name: "my_app_log",
         #                         resource: resource,
-        #                         labels: labels
+        #                         labels: labels,
+        #                         partial_success: true
         #
-        def write_entries entries, log_name: nil, resource: nil, labels: nil
+        def write_entries entries, log_name: nil, resource: nil, labels: nil,
+                          partial_success: nil
           ensure_service!
           service.write_entries Array(entries).map(&:to_grpc),
                                 log_name: log_name, resource: resource,
-                                labels: labels
+                                labels: labels, partial_success: partial_success
           true
         end
 
@@ -380,6 +403,20 @@ module Google
         #   logger = logging.logger "my_app_log", resource, env: :production
         #   logger.info "Job started."
         #
+        # @example Provide a hash to write a JSON payload to the log:
+        #   require "google/cloud/logging"
+        #
+        #   logging = Google::Cloud::Logging.new
+        #
+        #   resource = logging.resource "gae_app",
+        #                               module_id: "1",
+        #                               version_id: "20150925t173233"
+        #
+        #   logger = logging.logger "my_app_log", resource, env: :production
+        #
+        #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+        #   logger.info payload
+        #
         def logger log_name, resource, labels = {}
           Logger.new shared_async_writer, log_name, resource, labels
         end
@@ -422,9 +459,9 @@ module Google
                                         max: max
           Log::List.from_grpc list_grpc, service, resource: resource, max: max
         end
-        alias_method :find_logs, :logs
-        alias_method :log_names, :logs
-        alias_method :find_log_names, :logs
+        alias find_logs logs
+        alias log_names logs
+        alias find_log_names logs
 
         ##
         # Deletes a log and all its log entries. The log will reappear if it
@@ -490,7 +527,7 @@ module Google
           list_grpc = service.list_resource_descriptors token: token, max: max
           ResourceDescriptor::List.from_grpc list_grpc, service, max
         end
-        alias_method :find_resource_descriptors, :resource_descriptors
+        alias find_resource_descriptors resource_descriptors
 
         ##
         # Creates a new monitored resource instance.
@@ -517,7 +554,7 @@ module Google
             r.labels = labels
           end
         end
-        alias_method :new_resource, :resource
+        alias new_resource resource
 
         ##
         # Retrieves the list of sinks belonging to the project.
@@ -553,7 +590,10 @@ module Google
           list_grpc = service.list_sinks token: token, max: max
           Sink::List.from_grpc list_grpc, service, max
         end
-        alias_method :find_sinks, :sinks
+        alias find_sinks sinks
+
+        # rubocop:disable Metrics/LineLength
+        # overload is too long...
 
         ##
         # Creates a new project sink. When you create a sink, only new log
@@ -574,40 +614,27 @@ module Google
         # @see https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs
         #   Permissions for writing exported logs
         #
-        # @param [String] name The client-assigned sink identifier. Sink
-        #   identifiers are limited to 1000 characters and can include only the
-        #   following characters: `A-Z`, `a-z`, `0-9`, and the special
-        #   characters `_-.`.
-        # @param [String] destination The resource name of the export
-        #   destination. See [About
-        #   sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs#about_sinks)
-        #   for examples.
-        # @param [String, nil] filter An [advanced logs
-        #  filter](https://cloud.google.com/logging/docs/view/advanced_filters)
-        #  that defines the log entries to be exported. The filter must be
-        #  consistent with the log entry format designed by the `version`
-        #  parameter, regardless of the format of the log entry that was
-        #  originally written to Stackdriver Logging.
-        # @param [Time, nil] start_at The time at which this sink will begin
-        #   exporting log entries. If this value is present, then log entries
-        #   are exported only if `start_at` is less than the log entry's
-        #   timestamp. Optional.
-        # @param [Time, nil] end_at Time at which this sink will stop exporting
-        #   log entries. If this value is present, then log entries are exported
-        #   only if the log entry's timestamp is less than `end_at`. Optional.
-        # @param [Symbol] version The log entry version used when exporting log
-        #   entries from this sink. This version does not have to correspond to
-        #   the version of the log entry when it was written to Stackdriver
-        #   Logging. Accepted values are `:unspecified`, `:v2`, and `:v1`.
-        #   Version 2 is currently the preferred format. An unspecified version
-        #   format currently defaults to V2 in the service. The default value is
-        #   `:unspecified`.
-        # @param [Boolean] unique_writer_identity Whether the sink will have a
-        #    dedicated service account returned in the sink's `writer_identity`.
-        #    Set this field to be true to export logs from one project to a
-        #    different project. This field is ignored for non-project sinks
-        #    (e.g. organization sinks) because those sinks are required to have
-        #    dedicated service accounts. Optional.
+        # @overload create_sink(name, destination, filter: nil, unique_writer_identity: nil)
+        #   @param [String] name The client-assigned sink identifier. Sink
+        #     identifiers are limited to 1000 characters and can include only
+        #     the following characters: `A-Z`, `a-z`, `0-9`, and the special
+        #     characters `_-.`.
+        #   @param [String] destination The resource name of the export
+        #     destination. See [About
+        #     sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs#about_sinks)
+        #     for examples.
+        #   @param [String, nil] filter An [advanced logs
+        #    filter](https://cloud.google.com/logging/docs/view/advanced_filters)
+        #    that defines the log entries to be exported. The filter must be
+        #    consistent with the log entry format designed by the `version`
+        #    parameter, regardless of the format of the log entry that was
+        #    originally written to Stackdriver Logging.
+        #   @param [Boolean] unique_writer_identity Whether the sink will have a
+        #      dedicated service account returned in the sink's
+        #      `writer_identity`. Set this field to be true to export logs from
+        #      one project to a different project. This field is ignored for
+        #      non-project sinks (e.g. organization sinks) because those sinks
+        #      are required to have dedicated service accounts. Optional.
         #
         # @return [Google::Cloud::Logging::Sink] a project sink
         #
@@ -629,18 +656,29 @@ module Google
         #   sink = logging.create_sink "my-sink",
         #                              "storage.googleapis.com/#{bucket.id}"
         #
-        def create_sink name, destination, filter: nil, start_at: nil,
-                        end_at: nil, version: :unspecified,
-                        unique_writer_identity: nil
-          version = Sink.resolve_version version
+        def create_sink name, destination, filter: nil,
+                        unique_writer_identity: nil,
+                        start_at: nil, end_at: nil, version: nil
           ensure_service!
+
+          if start_at
+            warn "[DEPRECATION] start_at is deprecated and will be ignored."
+          end
+          if end_at
+            warn "[DEPRECATION] end_at is deprecated and will be ignored."
+          end
+          if version
+            warn "[DEPRECATION] version is deprecated and will be ignored."
+          end
+
           grpc = service.create_sink \
-            name, destination, filter, version,
-            start_time: start_at, end_time: end_at,
+            name, destination, filter,
             unique_writer_identity: unique_writer_identity
           Sink.from_grpc grpc, service
         end
-        alias_method :new_sink, :create_sink
+        alias new_sink create_sink
+
+        # rubocop:enable Metrics/LineLength
 
         ##
         # Retrieves a sink by name.
@@ -669,8 +707,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :get_sink, :sink
-        alias_method :find_sink, :sink
+        alias get_sink sink
+        alias find_sink sink
 
         ##
         # Retrieves the list of metrics belonging to the project.
@@ -706,7 +744,7 @@ module Google
           grpc = service.list_metrics token: token, max: max
           Metric::List.from_grpc grpc, service, max
         end
-        alias_method :find_metrics, :metrics
+        alias find_metrics metrics
 
         ##
         # Creates a new logs-based metric for Google Cloud Monitoring.
@@ -739,7 +777,7 @@ module Google
           grpc = service.create_metric name, filter, description
           Metric.from_grpc grpc, service
         end
-        alias_method :new_metric, :create_metric
+        alias new_metric create_metric
 
         ##
         # Retrieves metric by name.
@@ -768,8 +806,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :get_metric, :metric
-        alias_method :find_metric, :metric
+        alias get_metric metric
+        alias find_metric metric
 
         protected
 
@@ -777,7 +815,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -46,22 +46,27 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
                                                      project_id: project
   }
 
-  after {
+  before do
     # Clear configuration values between each test
-    Google::Cloud::Logging.configure.delete :project_id
-    Google::Cloud::Logging.configure.delete :keyfile
-    Google::Cloud::Logging.configure.delete :log_name
-    Google::Cloud::Logging.configure.delete :log_name_map
-    Google::Cloud::Logging.configure.monitored_resource.delete :type
-    Google::Cloud::Logging.configure.monitored_resource.delete :labels
-    Google::Cloud.configure.delete :use_logging
-  }
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
 
   describe "#initialize" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
 
     it "creates a default logger object if one isn't provided" do
-      Google::Cloud::Logging::Project.stub :default_project, project do
+      Google::Cloud::Logging.stub :default_project_id, project do
         Google::Cloud::Logging::Credentials.stub :default, default_credentials do
           middleware = Google::Cloud::Logging::Middleware.new rack_app
         end

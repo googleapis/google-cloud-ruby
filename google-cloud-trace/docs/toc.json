@@ -93,6 +93,21 @@
               "type": "google/devtools/cloudtrace/v1/datatypes"
             }
           ]
+        },
+        {
+          "title": "V2",
+          "type": "google/cloud/trace/v2",
+          "patterns": ["\/trace\/v2", "\/cloudtrace", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "TraceServiceClient",
+              "type": "google/cloud/trace/v2/traceserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/devtools/cloudtrace/v2/datatypes"
+            }
+          ]
         }
       ]
     }

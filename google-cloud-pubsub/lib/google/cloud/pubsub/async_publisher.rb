@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -93,7 +93,7 @@ module Google
           msg = create_pubsub_message data, attributes
 
           synchronize do
-            fail "Can't publish when stopped." if @stopped
+            raise "Can't publish when stopped." if @stopped
 
             if @batch.nil?
               @batch ||= Batch.new self
@@ -238,7 +238,7 @@ module Google
                 publish_result = PublishResult.from_grpc(item.msg)
                 execute_callback_async item.callback, publish_result
               end
-            rescue => e
+            rescue StandardError => e
               batch.items.each do |item|
                 next unless item.callback
 

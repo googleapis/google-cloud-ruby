@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a load of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -155,7 +155,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     mock.verify
   end
 
-  it "can specify a storage url" do
+  it "can specify a storage url as a string" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
     mock.expect :insert_job, load_job_resp_gapi(table, load_url),
@@ -163,6 +163,19 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load load_url
+    result.must_equal true
+
+    mock.verify
+  end
+
+  it "can specify a storage url as a URI" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    mock.expect :insert_job, load_job_resp_gapi(table, load_url),
+      [project, job_gapi]
+    table.service.mocked_service = mock
+
+    result = table.load URI load_url
     result.must_equal true
 
     mock.verify

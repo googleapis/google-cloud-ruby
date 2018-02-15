@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -141,7 +141,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     err.message.must_equal "conditionNotMet: Precondition Failed"
   end
 
-  it "create dataset returns valid etag equal to get dataset" do
+  it "create table returns valid etag equal to get table" do
     fresh_table_id = "#{rand 100}_kittens"
     fresh = dataset.create_table fresh_table_id do |schema|
       schema.integer   "id",    description: "id description",    mode: :required
@@ -154,6 +154,33 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     stale = dataset.table fresh_table_id
     stale.etag.wont_be :nil?
     stale.etag.must_equal fresh.etag
+  end
+
+  it "create table with cmek sets encryption_configuration" do
+    begin
+      encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+      encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
+                                     "/keyRings/test/cryptoKeys/test"
+      cmek_table = dataset.create_table "cmek_kittens" do |updater|
+        updater.encryption_configuration = encrypt_config
+      end
+
+      cmek_table.reload!
+      cmek_table.table_id.must_equal "cmek_kittens"
+      cmek_table.encryption_configuration.must_equal encrypt_config
+
+      new_encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
+      new_encrypt_config.kms_key_name =  "projects/cloud-samples-tests/locations/us-central1" +
+                                         "/keyRings/test/cryptoKeys/otherkey"
+      cmek_table.encryption_configuration = new_encrypt_config
+
+      cmek_table.reload!
+      cmek_table.encryption_configuration.must_equal new_encrypt_config
+
+    ensure
+      t2 = dataset.table "cmek_kittens"
+      t2.delete if t2
+    end
   end
 
   it "gets and sets time partitioning" do
@@ -317,20 +344,21 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "inserts rows asynchonously and gets its data" do
     # data = table.data
-    insert_response = nil
+    insert_result = nil
 
-    inserter = table.insert_async do |response|
-      insert_response = response
+    inserter = table.insert_async do |result|
+      insert_result = result
     end
     inserter.insert rows
 
     inserter.flush
     inserter.stop.wait!
 
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be :success?
+    insert_result.insert_count.must_equal 3
+    insert_result.insert_errors.must_be :empty?
+    insert_result.error_rows.must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id

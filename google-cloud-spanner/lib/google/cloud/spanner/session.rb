@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -57,25 +57,25 @@ module Google
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          V1::SpannerClient.match_project_from_session_name @grpc.name
+          @grpc.name.split("/")[1]
         end
 
         # The unique identifier for the instance.
         # @return [String]
         def instance_id
-          V1::SpannerClient.match_instance_from_session_name @grpc.name
+          @grpc.name.split("/")[3]
         end
 
         # The unique identifier for the database.
         # @return [String]
         def database_id
-          V1::SpannerClient.match_database_from_session_name @grpc.name
+          @grpc.name.split("/")[5]
         end
 
         # The unique identifier for the session.
         # @return [String]
         def session_id
-          V1::SpannerClient.match_session_from_session_name @grpc.name
+          @grpc.name.split("/")[7]
         end
 
         # rubocop:disable LineLength
@@ -188,7 +188,7 @@ module Google
           @last_updated_at = Time.now
           results
         end
-        alias_method :query, :execute
+        alias query execute
 
         ##
         # Read rows from a database table, as a simple alternative to
@@ -313,7 +313,7 @@ module Google
             c.upsert table, rows
           end
         end
-        alias_method :save, :upsert
+        alias save upsert
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
@@ -503,7 +503,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           @grpc = service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id)
+              project_id, instance_id, database_id
+            )
           @last_updated_at = Time.now
           return self
         end
@@ -518,7 +519,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           @grpc = service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
-              project_id, instance_id, database_id)
+              project_id, instance_id, database_id
+            )
           return false
         end
 
@@ -557,7 +559,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,23 +48,20 @@ module Google
         attr_accessor :gapi
 
         ##
-        # A boolean value or a project ID string for a requester pays
-        # bucket and its files. If this attribute is set to `true`, transit
-        # costs for operations on the bucket will be billed to the current
-        # project for this client. (See {Project#project} for the ID of the
-        # current project.) If this attribute is set to a project ID, and that
-        # project is authorized for the currently authenticated service account,
-        # transit costs will be billed to the that project. The default is
-        # `nil`.
+        # A boolean value or a project ID string to indicate the project to
+        # be billed for operations on the bucket and its files. If this
+        # attribute is set to `true`, transit costs for operations on the bucket
+        # will be billed to the current project for this client. (See
+        # {Project#project} for the ID of the current project.) If this
+        # attribute is set to a project ID, and that project is authorized for
+        # the currently authenticated service account, transit costs will be
+        # billed to that project. This attribute is required with requester
+        # pays-enabled buckets. The default is `nil`.
         #
         # In general, this attribute should be set when first retrieving the
         # bucket by providing the `user_project` option to {Project#bucket}.
         #
-        # The requester pays feature is currently available only to whitelisted
-        # projects.
-        #
-        # See also {#requester_pays=} and {#requester_pays} to enable requester
-        # pays for a bucket.
+        # See also {#requester_pays=} and {#requester_pays}.
         #
         # @example Setting a non-default project:
         #   require "google/cloud/storage"
@@ -346,15 +343,13 @@ module Google
         # {Project#buckets} to indicate the project to which the access costs
         # should be billed.
         #
-        # This feature is currently available only to whitelisted projects.
-        #
         # @return [Boolean, nil] Returns `true` if requester pays is enabled for
         #   the bucket.
         #
         def requester_pays
           @gapi.billing.requester_pays if @gapi.billing
         end
-        alias_method :requester_pays?, :requester_pays
+        alias requester_pays? requester_pays
 
         ##
         # Enables requester pays for the bucket. If enabled, a client accessing
@@ -362,8 +357,6 @@ module Google
         # to the access. The requester must pass the `user_project` option to
         # {Project#bucket} and {Project#buckets} to indicate the project to
         # which the access costs should be billed.
-        #
-        # This feature is currently available only to whitelisted projects.
         #
         # @param [Boolean] new_requester_pays When set to `true`, requester pays
         #   is enabled for the bucket.
@@ -515,7 +508,7 @@ module Google
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions, user_project: user_project
         end
-        alias_method :find_files, :files
+        alias find_files files
 
         ##
         # Retrieves a file matching the path.
@@ -564,7 +557,7 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_file, :file
+        alias find_file file
 
         ##
         # Creates a new {File} object by providing a path to a local file (or
@@ -615,7 +608,12 @@ module Google
         #   response header to be returned when the file is downloaded.
         # @param [String] content_encoding The [Content-Encoding
         #   ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) response
-        #   header to be returned when the file is downloaded.
+        #   header to be returned when the file is downloaded. For example,
+        #   `content_encoding: "gzip"` can indicate to clients that the uploaded
+        #   data is gzip-compressed. However, there is no check to guarantee the
+        #   specified `Content-Encoding` has actually been applied to the file
+        #   data, and incorrectly specifying the file's encoding could lead
+        #   to unintended behavior on subsequent download requests.
         # @param [String] content_language The
         #   [Content-Language](http://tools.ietf.org/html/bcp47) response
         #   header to be returned when the file is downloaded.
@@ -689,6 +687,32 @@ module Google
         #   file = bucket.file "destination/path/file.ext",
         #                      encryption_key: key
         #
+        # @example Create a file with gzip-encoded data.
+        #   require "zlib"
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   gz = StringIO.new ""
+        #   z = Zlib::GzipWriter.new gz
+        #   z.write "Hello world!"
+        #   z.close
+        #   data = StringIO.new gz.string
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.create_file data, "path/to/gzipped.txt",
+        #                      content_encoding: "gzip"
+        #
+        #   file = bucket.file "path/to/gzipped.txt"
+        #
+        #   # The downloaded data is decompressed by default.
+        #   file.download "path/to/downloaded/hello.txt"
+        #
+        #   # The downloaded data remains compressed with skip_decompress.
+        #   file.download "path/to/downloaded/gzipped.txt",
+        #                 skip_decompress: true
+        #
         def create_file file, path = nil, acl: nil, cache_control: nil,
                         content_disposition: nil, content_encoding: nil,
                         content_language: nil, content_type: nil,
@@ -705,13 +729,123 @@ module Google
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
-          fail ArgumentError, "must provide path" if path.nil?
+          raise ArgumentError, "must provide path" if path.nil?
 
           gapi = service.insert_file name, file, path, options
-          File.from_gapi gapi, service
+          File.from_gapi gapi, service, user_project: user_project
         end
-        alias_method :upload_file, :create_file
-        alias_method :new_file, :create_file
+        alias upload_file create_file
+        alias new_file create_file
+
+        ##
+        # Concatenates a list of existing files in the bucket into a new file in
+        # the bucket. There is a limit (currently 32) to the number of files
+        # that can be composed in a single operation.
+        #
+        # To compose files encrypted with a customer-supplied encryption key,
+        # use the `encryption_key` option. All source files must have been
+        # encrypted with the same key, and the resulting destination file will
+        # also be encrypted with the same key.
+        #
+        # @param [Array<String, Google::Cloud::Storage::File>] sources The list
+        #   of source file names or objects that will be concatenated into a
+        #   single file.
+        # @param [String] destination The name of the new file.
+        # @param [String] acl A predefined set of access controls to apply to
+        #   this file.
+        #
+        #   Acceptable values are:
+        #
+        #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+        #     `authenticatedRead` - File owner gets OWNER access, and
+        #     allAuthenticatedUsers get READER access.
+        #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
+        #     access, and project team owners get OWNER access.
+        #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access,
+        #     and project team owners get READER access.
+        #   * `private` - File owner gets OWNER access.
+        #   * `project_private`, `projectPrivate` - File owner gets OWNER
+        #     access, and project team members get access according to their
+        #     roles.
+        #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
+        #     access, and allUsers get READER access.
+        #
+        # @param [String, nil] encryption_key Optional. The customer-supplied,
+        #   AES-256 encryption key used to encrypt the source files, if one was
+        #   used. All source files must have been encrypted with the same key,
+        #   and the resulting destination file will also be encrypted with the
+        #   key.
+        #
+        # @yield [file] A block yielding a delegate file object for setting the
+        #   properties of the destination file.
+        #
+        # @return [Google::Cloud::Storage::File] The new file.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   sources = ["path/to/my-file-1.ext", "path/to/my-file-2.ext"]
+        #
+        #   new_file = bucket.compose sources, "path/to/new-file.ext"
+        #
+        # @example Set the properties of the new file in a block:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   sources = ["path/to/my-file-1.ext", "path/to/my-file-2.ext"]
+        #
+        #   new_file = bucket.compose sources, "path/to/new-file.ext" do |f|
+        #     f.cache_control = "private, max-age=0, no-cache"
+        #     f.content_disposition = "inline; filename=filename.ext"
+        #     f.content_encoding = "deflate"
+        #     f.content_language = "de"
+        #     f.content_type = "application/json"
+        #   end
+        #
+        # @example Specify the generation of source files (but skip retrieval):
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file_1 = bucket.file "path/to/my-file-1.ext",
+        #                        generation: 1490390259479000, skip_lookup: true
+        #   file_2 = bucket.file "path/to/my-file-2.ext",
+        #                        generation: 1490310974144000, skip_lookup: true
+        #
+        #   new_file = bucket.compose [file_1, file_2], "path/to/new-file.ext"
+        #
+        def compose sources, destination, acl: nil, encryption_key: nil
+          ensure_service!
+          sources = Array sources
+          if sources.size < 2
+            raise ArgumentError, "must provide at least two source files"
+          end
+
+          options = { acl: File::Acl.predefined_rule_for(acl),
+                      key: encryption_key,
+                      user_project: user_project }
+          destination_gapi = nil
+          if block_given?
+            destination_gapi = Google::Apis::StorageV1::Object.new
+            updater = File::Updater.new destination_gapi
+            yield updater
+            updater.check_for_changed_metadata!
+          end
+          gapi = service.compose_file name, sources, destination,
+                                      destination_gapi, options
+          File.from_gapi gapi, service, user_project: user_project
+        end
+        alias compose_file compose
+        alias combine compose
 
         ##
         # Access without authentication can be granted to a File for a specified
@@ -1167,7 +1301,7 @@ module Google
                                    user_project: user_project
           end
         end
-        alias_method :find_notifications, :notifications
+        alias find_notifications notifications
 
         ##
         # Retrieves a Pub/Sub notification subscription for the bucket.
@@ -1197,7 +1331,7 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_notification, :notification
+        alias find_notification notification
 
 
         ##
@@ -1278,7 +1412,7 @@ module Google
           gapi = service.insert_notification name, topic, options
           Notification.from_gapi name, gapi, service, user_project: user_project
         end
-        alias_method :new_notification, :create_notification
+        alias new_notification create_notification
 
         ##
         # Reloads the bucket with current data from the Storage service.
@@ -1289,7 +1423,7 @@ module Google
           @lazy = nil
           self
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Determines whether the bucket exists in the Storage service.
@@ -1339,7 +1473,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
 
         ##
@@ -1369,7 +1503,7 @@ module Google
         def ensure_io_or_file_exists! file
           return if file.respond_to?(:read) && file.respond_to?(:rewind)
           return if ::File.file? file
-          fail ArgumentError, "cannot find file #{file}"
+          raise ArgumentError, "cannot find file #{file}"
         end
 
         def storage_class_for str

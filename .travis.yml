@@ -1,14 +1,18 @@
 language: ruby
 os:
 - osx
-osx_image: xcode8.2
+osx_image: xcode8.3
 rvm:
-- 2.4.0
-- 2.3.1
-- 2.2.5
-- 2.1.9
-- 2.0.0-p648
+- 2.4.1
+- 2.3.5
+- 2.2.8
+- 2.1.10
+branches:
+  except:
+  - gh-pages
+  - /\/v\d/
 script:
+- gem install bundler
 - bundle exec rake travis:build
 notifications:
   slack:

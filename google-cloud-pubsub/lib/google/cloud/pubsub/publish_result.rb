@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,7 +32,7 @@ module Google
         def message
           @message
         end
-        alias_method :msg, :message
+        alias msg message
 
         ##
         # The message's data.
@@ -52,14 +52,14 @@ module Google
         def message_id
           message.message_id
         end
-        alias_method :msg_id, :message_id
+        alias msg_id message_id
 
         ##
         # The time at which the message was published.
         def published_at
           message.published_at
         end
-        alias_method :publish_time, :published_at
+        alias publish_time published_at
 
         ##
         # The error that was raised when published, if any.

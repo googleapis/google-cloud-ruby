@@ -218,6 +218,48 @@
       ]
     },
     {
+      "title": "Firestore",
+      "type": "google/cloud/firestore",
+      "patterns": ["\/firestore"],
+      "nav": [
+        {
+          "title": "Client",
+          "type": "google/cloud/firestore/client"
+        },
+        {
+          "title": "DocumentReference",
+          "type": "google/cloud/firestore/documentreference"
+        },
+        {
+          "title": "DocumentSnapshot",
+          "type": "google/cloud/firestore/documentsnaphot"
+        },
+        {
+          "title": "CollectionReference",
+          "type": "google/cloud/firestore/collectionreference"
+        },
+        {
+          "title": "Query",
+          "type": "google/cloud/firestore/query"
+        },
+        {
+          "title": "V1beta1",
+          "type": "google/cloud/firestore//v1beta1",
+          "patterns": ["\/firestore\/v1beta1$", "\/firestore\/v1beta1\/"],
+          "nav": [
+            {
+              "title": "FirestoreClient",
+              "type": "google/cloud/firestore/v1beta1/firestoreclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/firestore/v1beta1/datatypes"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Logging",
       "type": "google/cloud/logging",
       "patterns": ["\/logging"],
@@ -585,6 +627,21 @@
       "type": "google/cloud/videointelligence",
       "patterns": ["\/videointelligence", "google\/protobuf", "google\/rpc"],
       "nav": [
+        {
+          "title": "V1",
+          "type": "google/cloud/videointelligence/v1",
+          "patterns": ["\/videointelligence\/v1", "google\/protobuf", "google\/rpc"],
+          "nav": [
+            {
+              "title": "VideoIntelligenceServiceClient",
+              "type": "google/cloud/videointelligence/v1/videointelligenceserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/videointelligence/v1/datatypes"
+            }
+          ]
+        },
         {
           "title": "V1beta2",
           "type": "google/cloud/videointelligence/v1beta2",

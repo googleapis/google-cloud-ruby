@@ -29,23 +29,32 @@ end
 desc "Run the speech acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["SPEECH_TEST_PROJECT"]
+  project ||= ENV["SPEECH_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["SPEECH_TEST_KEYFILE"]
+  keyfile ||= ENV["SPEECH_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["SPEECH_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["SPEECH_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPEECH_TEST_PROJECT=test123 SPEECH_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
+  # clear any env var already set
+  require "google/cloud/speech/credentials"
+  (Google::Cloud::Speech::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Speech::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  require "google/cloud/storage/credentials"
+  (Google::Cloud::Storage::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Storage::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["SPEECH_PROJECT"] = project
-  ENV["SPEECH_KEYFILE"] = nil
   ENV["SPEECH_KEYFILE_JSON"] = keyfile
   ENV["STORAGE_PROJECT"] = project
-  ENV["STORAGE_KEYFILE"] = nil
   ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke

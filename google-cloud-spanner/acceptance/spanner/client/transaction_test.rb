@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -208,13 +208,38 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   def assert_accounts_equal expected, actual
-    expected[:account_id].must_equal actual[:account_id]
-    expected[:username].must_equal actual[:username]
-    expected[:reputation].must_equal actual[:reputation]
-    expected[:active].must_equal actual[:active]
+    if actual[:account_id].nil?
+      expected[:account_id].must_be :nil?
+    else
+      expected[:account_id].must_equal actual[:account_id]
+    end
+
+    if actual[:username].nil?
+      expected[:username].must_be :nil?
+    else
+      expected[:username].must_equal actual[:username]
+    end
+
+    if actual[:reputation].nil?
+      expected[:reputation].must_be :nil?
+    else
+      expected[:reputation].must_equal actual[:reputation]
+    end
+
+    if actual[:active].nil?
+      expected[:active].must_be :nil?
+    else
+      expected[:active].must_equal actual[:active]
+    end
+
     if expected[:avatar] && actual[:avatar]
       expected[:avatar].read.must_equal actual[:avatar].read
     end
-    expected[:friends].must_equal actual[:friends]
+
+    if actual[:friends].nil?
+      expected[:friends].must_be :nil?
+    else
+      expected[:friends].must_equal actual[:friends]
+    end
   end
 end

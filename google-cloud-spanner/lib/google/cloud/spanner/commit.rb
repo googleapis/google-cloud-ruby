@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -105,7 +105,7 @@ module Google
           end
           rows
         end
-        alias_method :save, :upsert
+        alias save upsert
 
         ##
         # Inserts new rows in a table. If any of the rows already exist, the
@@ -308,7 +308,8 @@ module Google
           @mutations += [
             Google::Spanner::V1::Mutation.new(
               delete: Google::Spanner::V1::Mutation::Delete.new(
-                table: table, key_set: key_set(keys))
+                table: table, key_set: key_set(keys)
+              )
             )
           ]
           keys
@@ -326,14 +327,14 @@ module Google
           keys = [keys] unless keys.is_a? Array
           return Google::Spanner::V1::KeySet.new(all: true) if keys.empty?
           if keys_are_ranges? keys
-            keys = [keys] unless keys.is_a? Array
             key_ranges = keys.map do |r|
               Convert.to_key_range(r)
             end
             return Google::Spanner::V1::KeySet.new(ranges: key_ranges)
           end
-          key_list = Array(keys).map do |i|
-            Convert.raw_to_value(Array(i)).list_value
+          key_list = keys.map do |key|
+            key = [key] unless key.is_a? Array
+            Convert.raw_to_value(key).list_value
           end
           Google::Spanner::V1::KeySet.new keys: key_list
         end

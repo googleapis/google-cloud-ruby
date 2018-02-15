@@ -1,0 +1,8 @@
+--no-private
+--title=Cloud Bigtable API
+--exclude _pb\.rb$
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md

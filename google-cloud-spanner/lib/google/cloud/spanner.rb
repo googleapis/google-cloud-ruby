@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,8 @@
 
 require "google-cloud-spanner"
 require "google/cloud/spanner/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -30,11 +32,12 @@ module Google
     # Spanner Documentation](https://cloud.google.com/spanner/docs/).
     #
     # The goal of google-cloud is to provide an API that is comfortable to
-    # Rubyists. Authentication is handled by {Google::Cloud#spanner}. You can
-    # provide the project and credential information to connect to the Cloud
-    # Spanner service, or if you are running on Google Compute Engine this
-    # configuration is taken care of for you. You can read more about the
-    # options for connecting in the [Authentication
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ## Creating instances
@@ -61,7 +64,12 @@ module Google
     # job.done? #=> false
     # job.reload! # API call
     # job.done? #=> true
-    # instance = job.instance
+    #
+    # if job.error?
+    #   status = job.error
+    # else
+    #   instance = job.instance
+    # end
     # ```
     #
     # ## Creating databases
@@ -83,7 +91,12 @@ module Google
     # job.done? #=> false
     # job.reload! # API call
     # job.done? #=> true
-    # database = job.database
+    #
+    # if job.error?
+    #   status = job.error
+    # else
+    #   database = job.database
+    # end
     # ```
     #
     # ## Updating database schemas
@@ -339,10 +352,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Spanner service you
-      #   are connecting to.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Project identifier for the Spanner service
+      #   you are connecting to. If not present, the default project for the
+      #   credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Spanner::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -355,6 +370,9 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Spanner::Project]
       #
@@ -363,23 +381,68 @@ module Google
       #
       #   spanner = Google::Cloud::Spanner.new
       #
-      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil
-        project ||= Google::Cloud::Spanner::Project.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
+                   client_config: nil, project: nil, keyfile: nil
+        project_id ||= (project || default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        if keyfile.nil?
-          credentials = Google::Cloud::Spanner::Credentials.default scope: scope
-        else
-          credentials = Google::Cloud::Spanner::Credentials.new(
-            keyfile, scope: scope)
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        credentials ||= (keyfile || default_credentials(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Spanner::Credentials.new credentials, scope: scope
         end
 
-        Google::Cloud::Spanner::Project.new(
-          Google::Cloud::Spanner::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config))
+        Spanner::Project.new(
+          Spanner::Service.new(
+            project_id, credentials, timeout: timeout,
+                                     client_config: client_config
+          )
+        )
+      end
+
+      ##
+      # Configure the Google Cloud Spanner library.
+      #
+      # The following Spanner configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Spanner project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Spanner::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Spanner library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.spanner if block_given?
+
+        Google::Cloud.configure.spanner
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.spanner.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.spanner.credentials ||
+          Google::Cloud.configure.credentials ||
+          Spanner::Credentials.default(scope: scope)
       end
     end
   end

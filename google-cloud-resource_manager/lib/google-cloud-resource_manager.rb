@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,16 @@
 # limitations under the License.
 
 ##
-# This file is here to be autorequired by bundler, so that the .bigquery and
-# #bigquery methods can be available, but the library and all dependencies won't
-# be loaded until required and used.
+# This file is here to be autorequired by bundler, so that the
+# Google::Cloud.resource_manager and Google::Cloud#resource_manager methods can
+# be available, but the library and all dependencies won't be loaded until
+# required and used.
 
 
 gem "google-cloud-core"
 require "google/cloud"
+require "google/cloud/config"
+require "googleauth"
 
 module Google
   module Cloud
@@ -74,8 +77,9 @@ module Google
     # For more information on connecting to Google Cloud see the [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
-    # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-    #   file path the file must be readable.
+    # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+    #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+    #   Google::Auth::Credentials object. (See {ResourceManager::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google
@@ -98,11 +102,29 @@ module Google
     #     puts projects.project_id
     #   end
     #
-    def self.resource_manager keyfile = nil, scope: nil, retries: nil,
+    def self.resource_manager credentials = nil, scope: nil, retries: nil,
                               timeout: nil
       require "google/cloud/resource_manager"
-      Google::Cloud::ResourceManager.new keyfile: keyfile, scope: scope,
+      Google::Cloud::ResourceManager.new credentials: credentials, scope: scope,
                                          retries: retries, timeout: timeout
     end
   end
+end
+
+# Set the default resource manager configuration
+Google::Cloud.configure.add_config! :resource_manager do |config|
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "RESOURCE_MANAGER_CREDENTIALS", "RESOURCE_MANAGER_CREDENTIALS_JSON",
+      "RESOURCE_MANAGER_KEYFILE", "RESOURCE_MANAGER_KEYFILE_JSON"
+    )
+  end
+
+  config.add_field! :credentials, default_creds,
+                    match: [String, Hash, Google::Auth::Credentials],
+                    allow_nil: true
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :retries, nil, match: Integer
+  config.add_field! :timeout, nil, match: Integer
 end

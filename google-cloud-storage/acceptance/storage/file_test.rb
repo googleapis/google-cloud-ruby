@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,6 +14,8 @@
 
 require "storage_helper"
 require "net/http"
+require "uri"
+require "zlib"
 
 describe Google::Cloud::Storage::File, :storage do
   let :bucket do
@@ -40,6 +42,9 @@ describe Google::Cloud::Storage::File, :storage do
   let(:encryption_key_2) do
     cipher.random_key
   end
+
+  let(:bucket_public_test_name) { "storage-library-test-bucket" }
+  let(:file_public_test_gzip_name) { "gzipped-text.txt" }  # content is "hello world"
 
   before do
     # always create the bucket
@@ -232,7 +237,6 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should upload and download a file using IO" do
-    skip "The download verification sometimes fails on CI. Not sure why."
     inmemory = StringIO.new(File.read(files[:logo][:path], mode: "rb"))
 
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
@@ -242,8 +246,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.must_be_kind_of StringIO
 
     inmemory.rewind
-    downloaded.rewind
-
     downloaded.size.must_equal inmemory.size
     downloaded.size.must_equal uploaded.size
 
@@ -255,8 +257,8 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should upload and download text using IO" do
     inmemory = StringIO.new "Hello world!"
-    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
-    uploaded.name.must_equal "uploaded/with/inmemory.png"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt"
+    uploaded.name.must_equal "uploaded/with/inmemory.txt"
 
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
@@ -264,8 +266,6 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.must_equal downloadio # The object returned is the object provided
 
     inmemory.rewind
-    downloaded.rewind
-
     downloaded.size.must_equal inmemory.size
     downloaded.size.must_equal uploaded.size
 
@@ -273,6 +273,98 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded.read.encoding.must_equal inmemory.read.encoding
 
     uploaded.delete
+  end
+
+  it "should upload, download, and verify gzip content_type" do
+    gz = StringIO.new ""
+    z = Zlib::GzipWriter.new gz
+    z.write "Hello world!"
+    z.close # write the gzip footer
+    gzipped = StringIO.new gz.string
+
+    uploaded = bucket.create_file gzipped, "uploaded/with/gzip-type.txt", content_type: "application/gzip"
+    uploaded.name.must_equal "uploaded/with/gzip-type.txt"
+    uploaded.content_type.must_equal "application/gzip"
+    uploaded.content_encoding.must_be_nil
+    downloadio = StringIO.new()
+    downloaded = uploaded.download downloadio
+    downloaded.must_be_kind_of StringIO
+    downloaded.must_equal downloadio # The object returned is the object provided
+    gzipped.rewind
+
+    downloaded.size.must_equal gzipped.size
+    downloaded.size.must_equal uploaded.size
+
+    data = downloaded.read
+    data.must_equal gzipped.read
+    gzr = Zlib::GzipReader.new StringIO.new(data)
+    gzr.read.must_equal "Hello world!"
+
+    uploaded.delete
+  end
+
+  it "should upload, download, verify, and decompress when Content-Encoding gzip response header" do
+    gz = StringIO.new ""
+    z = Zlib::GzipWriter.new gz
+    data = "Hello world!"
+    z.write data
+    z.close # write the gzip footer
+    gzipped = StringIO.new gz.string
+
+    uploaded = bucket.create_file gzipped, "uploaded/with/gzip-encoding.txt", content_type: "text/plain", content_encoding: "gzip"
+    uploaded.name.must_equal "uploaded/with/gzip-encoding.txt"
+    uploaded.content_type.must_equal "text/plain"
+    uploaded.content_encoding.must_equal "gzip"
+
+    downloadio = StringIO.new()
+    downloaded = uploaded.download downloadio
+    downloaded.must_be_kind_of StringIO
+    downloaded.wont_equal downloadio # The object returned is NOT the object provided
+
+    downloaded_data = downloaded.read
+    downloaded_data.must_equal data
+    downloaded_data.encoding.must_equal data.encoding
+
+    uploaded.delete
+  end
+
+  it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
+    bucket = storage.bucket bucket_public_test_name
+    file = bucket.file file_public_test_gzip_name
+    file.content_encoding.must_equal "gzip"
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile, skip_decompress: true
+
+      data = File.read(downloaded.path, mode: "rb")
+      gzr = Zlib::GzipReader.new StringIO.new(data)
+      gzr.read.must_equal "hello world"
+    end
+  end
+
+  it "should download, verify, and decompress when Content-Encoding gzip response header with skip_lookup" do
+    bucket = storage.bucket bucket_public_test_name, skip_lookup: true
+    file = bucket.file file_public_test_gzip_name, skip_lookup: true
+    file.content_encoding.must_be_nil # metadata not loaded
+    file.content_type.must_be_nil # metadata not loaded
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile
+
+      File.read(downloaded.path, mode: "rb").must_equal "hello world"
+    end
+  end
+
+  it "should download, verify, and decompress when Content-Encoding gzip response header with crc32c verification" do
+    lazy_bucket = storage.bucket bucket_public_test_name
+    lazy_file = lazy_bucket.file file_public_test_gzip_name
+
+    Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = lazy_file.download tmpfile,  verify: :crc32c
+
+      File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+    end
   end
 
   it "should upload and download a file with customer-supplied encryption key" do
@@ -595,6 +687,96 @@ describe Google::Cloud::Storage::File, :storage do
       tmpfile.size.must_equal local_file.size
 
       File.read(local_file.path, mode: "rb").must_equal File.read(tmpfile.path, mode: "rb")
+    end
+  end
+
+  it "should compose existing files into a new file" do
+    uploaded_a = bucket.create_file StringIO.new("a"), "a.txt"
+    uploaded_b = bucket.create_file StringIO.new("b"), "b.txt"
+
+    composed = try_with_backoff "copying existing file" do
+      bucket.compose [uploaded_a, uploaded_b], "ab.txt"
+    end
+
+    composed.name.must_equal "ab.txt"
+    composed.size.must_equal uploaded_a.size + uploaded_b.size
+
+    Tempfile.open ["ab", ".txt"] do |tmpfile|
+      downloaded = composed.download tmpfile
+
+      File.read(downloaded.path).must_equal "ab"
+    end
+
+    uploaded_a.delete
+    uploaded_b.delete
+    composed.delete
+  end
+
+  it "should compose existing files with customer-supplied encryption key into a new file with customer-supplied encryption key" do
+    uploaded_a = bucket.create_file StringIO.new("a"), "a.txt", encryption_key: encryption_key
+    uploaded_b = bucket.create_file StringIO.new("b"), "b.txt", encryption_key: encryption_key
+
+    composed = try_with_backoff "copying existing file" do
+      bucket.compose [uploaded_a, uploaded_b], "ab.txt", encryption_key: encryption_key
+    end
+
+    composed.name.must_equal "ab.txt"
+    composed.size.must_equal uploaded_a.size + uploaded_b.size
+
+    Tempfile.open ["ab", ".txt"] do |tmpfile|
+      downloaded = composed.download tmpfile, encryption_key: encryption_key
+
+      File.read(downloaded.path).must_equal "ab"
+    end
+
+    uploaded_a.delete
+    uploaded_b.delete
+    composed.delete
+  end
+
+  describe "anonymous project" do
+    let(:anonymous_storage) { Google::Cloud::Storage.anonymous }
+    it "should list public files without authentication" do
+      public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
+      files = public_bucket.files
+
+      files.wont_be :empty?
+    end
+
+    it "should download a public file without authentication" do
+      public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
+      file = public_bucket.file file_public_test_gzip_name, skip_lookup: true
+
+      Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+        tmpfile.binmode
+        downloaded = file.download tmpfile, verify: :none # gzipped file verification bug #1835, does not affect this test
+
+        File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+      end
+    end
+
+    it "raises when downloading a private file without authentication" do
+      skip "Removed due to occasional failures in the CI build."
+      original = File.new files[:logo][:path]
+      file_name = "CloudLogo.png"
+      bucket.create_file original, file_name
+
+      private_bucket = anonymous_storage.bucket bucket_name, skip_lookup: true
+      file = private_bucket.file file_name, skip_lookup: true
+
+      Tempfile.open ["hello_world", ".txt"] do |tmpfile|
+        tmpfile.binmode
+        expect { file.download tmpfile }.must_raise Google::Cloud::UnauthenticatedError
+      end
+    end
+
+    it "raises when creating a file in a private bucket without authentication" do
+      skip "Removed due to occasional failures in the CI build."
+      original = File.new files[:logo][:path]
+      file_name = "CloudLogo-error.png"
+
+      private_bucket = anonymous_storage.bucket bucket_name, skip_lookup: true
+      expect { private_bucket.create_file original, file_name }.must_raise Google::Cloud::UnauthenticatedError
     end
   end
 end

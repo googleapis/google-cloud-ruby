@@ -3,13 +3,13 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-monitoring"
-  gem.version       = "0.25.0"
+  gem.version       = "0.27.0"
 
   gem.authors       = ["Google Inc"]
-  gem.email         = ["googleapis-packages@google.com"]
-  gem.description   = "google-cloud-monitoring is the official library for Stackdriver Monitoring."
-  gem.summary       = "API Cient library for Stackdriver Monitoring"
-  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-monitoring"
+  gem.email         = "googleapis-packages@google.com"
+  gem.description   = "google-cloud-monitoring is the official library for Stackdriver Monitoring API."
+  gem.summary       = "API Client library for Stackdriver Monitoring API"
+  gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY
@@ -20,7 +20,9 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
-  gem.add_dependency "google-gax", "~> 0.8.0"
+  gem.add_dependency "google-gax", "~> 1.0"
 
-  gem.add_development_dependency "rubocop", "<= 0.35.1"
+  gem.add_development_dependency "minitest", "~> 5.10"
+  gem.add_development_dependency "rubocop", "~> 0.50.0"
+  gem.add_development_dependency "simplecov", "~> 0.9"
 end

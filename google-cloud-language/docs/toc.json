@@ -35,18 +35,6 @@
       "patterns": ["\/language"],
       "nav": [
         {
-          "title": "Project",
-          "type": "google/cloud/language/project"
-        },
-        {
-          "title": "Document",
-          "type": "google/cloud/language/document"
-        },
-        {
-          "title": "Annotation",
-          "type": "google/cloud/language/annotation"
-        },
-        {
           "title": "V1",
           "type": "google/cloud/language/v1",
           "patterns": ["\/language\/v1$", "\/language\/v1\/"],

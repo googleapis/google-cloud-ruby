@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,13 +23,13 @@ module Google
       #
       # Partition dimensions:
       #
-      # - May be +""+.
-      # - Must be valid UTF-8 bytes.
-      # - Must have values that match regex +[A-Za-z\d\.\-_]{1,100}+
-      # If the value of any dimension matches regex +__.*__+, the partition is
-      # reserved/read-only.
-      # A reserved/read-only partition ID is forbidden in certain documented
-      # contexts.
+      # * May be +""+.
+      # * Must be valid UTF-8 bytes.
+      # * Must have values that match regex +[A-Za-z\d\.\-_]{1,100}+
+      #   If the value of any dimension matches regex +__.*__+, the partition is
+      #   reserved/read-only.
+      #   A reserved/read-only partition ID is forbidden in certain documented
+      #   contexts.
       #
       # Foreign partition IDs (in which the project ID does
       # not match the context project ID ) are discouraged.
@@ -142,9 +142,9 @@ module Google
       #   @return [Google::Datastore::V1::Entity]
       #     An entity value.
       #
-      #     - May have no key.
-      #     - May have a key with an incomplete key path.
-      #     - May have a reserved/read-only key.
+      #     * May have no key.
+      #     * May have a key with an incomplete key path.
+      #     * May have a reserved/read-only key.
       # @!attribute [rw] array_value
       #   @return [Google::Datastore::V1::ArrayValue]
       #     An array value.

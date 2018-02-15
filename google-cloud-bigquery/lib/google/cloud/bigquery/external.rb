@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,7 +55,7 @@ module Google
         def self.from_urls urls, format = nil
           external_format = source_format_for urls, format
           if external_format.nil?
-            fail ArgumentError, "Unable to determine external table format"
+            raise ArgumentError, "Unable to determine external table format"
           end
           external_class = table_class_for external_format
           external_class.new.tap do |e|
@@ -70,7 +70,7 @@ module Google
           external_format = source_format_for gapi.source_uris,
                                               gapi.source_format
           if external_format.nil?
-            fail ArgumentError, "Unable to determine external table format"
+            raise ArgumentError, "Unable to determine external table format"
           end
           external_class = table_class_for external_format
           external_class.from_gapi gapi
@@ -79,17 +79,17 @@ module Google
         ##
         # @private Determine source_format from inputs
         def self.source_format_for urls, format
-          val = { "csv"                    => "CSV",
-                  "json"                   => "NEWLINE_DELIMITED_JSON",
-                  "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
-                  "sheets"                 => "GOOGLE_SHEETS",
-                  "google_sheets"          => "GOOGLE_SHEETS",
-                  "avro"                   => "AVRO",
-                  "datastore"              => "DATASTORE_BACKUP",
-                  "backup"                 => "DATASTORE_BACKUP",
-                  "datastore_backup"       => "DATASTORE_BACKUP",
-                  "bigtable"               => "BIGTABLE"
-                }[format.to_s.downcase]
+          val = {
+            "csv" => "CSV",          "avro" => "AVRO",
+            "json"                   => "NEWLINE_DELIMITED_JSON",
+            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
+            "sheets"                 => "GOOGLE_SHEETS",
+            "google_sheets"          => "GOOGLE_SHEETS",
+            "datastore"              => "DATASTORE_BACKUP",
+            "backup"                 => "DATASTORE_BACKUP",
+            "datastore_backup"       => "DATASTORE_BACKUP",
+            "bigtable"               => "BIGTABLE"
+          }[format.to_s.downcase]
           return val unless val.nil?
           Array(urls).each do |url|
             return "CSV" if url.end_with? ".csv"
@@ -556,7 +556,8 @@ module Google
 
           def frozen_check!
             return unless frozen?
-            fail ArgumentError, "Cannot modify external data source when frozen"
+            raise ArgumentError,
+                  "Cannot modify external data source when frozen"
           end
         end
 
@@ -1426,7 +1427,8 @@ module Google
 
           def frozen_check!
             return unless frozen?
-            fail ArgumentError, "Cannot modify external data source when frozen"
+            raise ArgumentError,
+                  "Cannot modify external data source when frozen"
           end
 
           ##
@@ -1964,8 +1966,8 @@ module Google
 
             def frozen_check!
               return unless frozen?
-              fail ArgumentError,
-                   "Cannot modify external data source when frozen"
+              raise ArgumentError,
+                    "Cannot modify external data source when frozen"
             end
           end
 
@@ -2064,7 +2066,7 @@ module Google
             #
             def qualifier= new_qualifier
               frozen_check!
-              fail ArgumentError if new_qualifier.nil?
+              raise ArgumentError if new_qualifier.nil?
 
               utf8_qualifier = new_qualifier.encode Encoding::UTF_8
               if utf8_qualifier.valid_encoding?
@@ -2342,8 +2344,8 @@ module Google
 
             def frozen_check!
               return unless frozen?
-              fail ArgumentError,
-                   "Cannot modify external data source when frozen"
+              raise ArgumentError,
+                    "Cannot modify external data source when frozen"
             end
           end
         end

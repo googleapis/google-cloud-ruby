@@ -1,9 +1,9 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,6 +36,77 @@ namespace :test do
     end
 
     Rake::Task["test"].invoke
+  end
+end
+
+desc "Runs the smoke tests."
+task :smoke_test do
+  if ENV["VIDEO_INTELLIGENCE_TEST_PROJECT"].nil?
+    fail "The VIDEO_INTELLIGENCE_TEST_PROJECT environment variable must be set. "\
+      "e.g VIDEO_INTELLIGENCE_TEST_PROJECT=test123 rake smoke_test"
+  end
+
+  $LOAD_PATH.unshift "lib", "smoke_test"
+  Dir.glob("acceptance/**/*smoke_test.rb").each { |file| require_relative file }
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-video_intelligence"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["smoke_test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the google-cloud-video_intelligence acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["VIDEO_INTELLIGENCE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["VIDEO_INTELLIGENCE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or VIDEO_INTELLIGENCE_TEST_PROJECT=test123 VIDEO_INTELLIGENCE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/video_intelligence/credentials"
+  (Google::Cloud::VideoIntelligence::Credentials::PATH_ENV_VARS +
+   Google::Cloud::VideoIntelligence::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["VIDEO_INTELLIGENCE_PROJECT"] = project
+  ENV["VIDEO_INTELLIGENCE_KEYFILE"] = nil
+  ENV["VIDEO_INTELLIGENCE_KEYFILE_JSON"] = keyfile
+
+  # Required for smoke tests
+  ENV["VIDEO_INTELLIGENCE_TEST_PROJECT"] = project
+
+  Rake::Task["acceptance:run"].invoke
+end
+
+namespace :acceptance do
+  task :run do
+    Rake::Task["smoke_test"].invoke
+  end
+
+  desc "Run acceptance tests with coverage."
+  task :coverage do
+  end
+
+  desc "Run acceptance cleanup."
+  task :cleanup do
   end
 end
 
@@ -87,6 +158,24 @@ task :jsondoc => :yard do
             include: ["google/rpc"]
           }
         ]
+      },
+      {
+        type: "toc",
+        title: "Google::Cloud::VideoIntelligence::V1::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Videointelligence::V1",
+            include: ["google/cloud/videointelligence/v1/"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
+          }
+        ]
       }
     ]
   }
@@ -104,26 +193,6 @@ task :doctest do
   puts "The google-cloud-video_intelligence gem does not have doctest tests."
 end
 
-# Acceptance tests
-desc "Run the video_intelligence acceptance tests."
-task :acceptance do
-  puts "The google-cloud-video_intelligence gem does not have acceptance tests."
-end
-
-namespace :acceptance do
-  task :run do
-    puts "This gem does not have acceptance tests."
-  end
-
-  desc "Run acceptance tests with coverage."
-  task :coverage do
-  end
-
-  desc "Run acceptance cleanup."
-  task :cleanup do
-  end
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-video_intelligence"
@@ -136,6 +205,7 @@ task :ci do
   header "google-cloud-video_intelligence test", "*"
   sh "bundle exec rake test"
 end
+
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do

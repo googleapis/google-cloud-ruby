@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,60 +25,48 @@ module Google
       # @private Represents the gRPC Speech service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout, :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config
+
+        ##
+        # LRO client configured for Speech
+        class SpeechOperationsClient < Google::Longrunning::OperationsClient
+          SERVICE_ADDRESS = V1::SpeechClient::SERVICE_ADDRESS
+        end
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project, credentials, timeout: nil, client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1::SpeechClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
-        end
-
-        def channel
-          require "grpc"
-          GRPC::Core::Channel.new host, nil, chan_creds
-        end
-
-        def chan_creds
-          return credentials if insecure?
-          require "grpc"
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def service
           return mocked_service if mocked_service
           @service ||= \
             V1::SpeechClient.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Speech::VERSION)
+              lib_version: Google::Cloud::Speech::VERSION
+            )
         end
         attr_accessor :mocked_service
 
         def ops
           return mocked_ops if mocked_ops
           @ops ||= \
-            Google::Longrunning::OperationsClient.new(
-              service_path: host,
-              channel: channel,
+            SpeechOperationsClient.new(
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Speech::VERSION)
+              lib_version: Google::Cloud::Speech::VERSION
+            )
         end
         attr_accessor :mocked_ops
-
-        def insecure?
-          credentials == :this_channel_is_insecure
-        end
 
         def recognize_sync audio, config
           execute do

@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,6 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/language/v1/language_service_pb"
+require "google/cloud/language/credentials"
 
 module Google
   module Cloud
@@ -55,21 +53,25 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
-          # @param service_path [String]
-          #   The domain name of the API remote host.
-          # @param port [Integer]
-          #   The port on which to connect to the remote host.
-          # @param channel [Channel]
-          #   A Channel object through which to make calls.
-          # @param chan_creds [Grpc::ChannelCredentials]
-          #   A ChannelCredentials for the setting up the RPC client.
-          # @param updater_proc [Proc]
-          #   A function that transforms the metadata for requests, e.g., to give
-          #   OAuth credentials.
+
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
           # @param scopes [Array<String>]
           #   The OAuth scopes for this service. This parameter is ignored if
           #   an updater_proc is supplied.
-          # @param client_config[Hash]
+          # @param client_config [Hash]
           #   A Hash for call options for each method. See
           #   Google::Gax#construct_settings for the structure of
           #   this data. Falls back to the default config if not specified
@@ -77,16 +79,10 @@ module Google
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
+              credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
-              app_name: nil,
-              app_version: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -95,14 +91,29 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/language/v1/language_service_services_pb"
 
+            credentials ||= Google::Cloud::Language::Credentials.default
 
-            if app_name || app_version
-              warn "`app_name` and `app_version` are no longer being used in the request headers."
+            if credentials.is_a?(String) || credentials.is_a?(Hash)
+              updater_proc = Google::Cloud::Language::Credentials.new(credentials).updater_proc
             end
+            if credentials.is_a?(GRPC::Core::Channel)
+              channel = credentials
+            end
+            if credentials.is_a?(GRPC::Core::ChannelCredentials)
+              chan_creds = credentials
+            end
+            if credentials.is_a?(Proc)
+              updater_proc = credentials
+            end
+            if credentials.is_a?(Google::Auth::Credentials)
+              updater_proc = credentials.updater_proc
+            end
+
+            package_version = Gem.loaded_specs['google-cloud-language'].version.version
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -121,6 +132,10 @@ module Google
                 kwargs: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
             @language_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -139,9 +154,17 @@ module Google
               @language_service_stub.method(:analyze_entities),
               defaults["analyze_entities"]
             )
+            @analyze_entity_sentiment = Google::Gax.create_api_call(
+              @language_service_stub.method(:analyze_entity_sentiment),
+              defaults["analyze_entity_sentiment"]
+            )
             @analyze_syntax = Google::Gax.create_api_call(
               @language_service_stub.method(:analyze_syntax),
               defaults["analyze_syntax"]
+            )
+            @classify_text = Google::Gax.create_api_call(
+              @language_service_stub.method(:classify_text),
+              defaults["classify_text"]
             )
             @annotate_text = Google::Gax.create_api_call(
               @language_service_stub.method(:annotate_text),
@@ -153,9 +176,10 @@ module Google
 
           # Analyzes the sentiment of the provided text.
           #
-          # @param document [Google::Cloud::Language::V1::Document]
-          #   Input document. Currently, +analyzeSentiment+ only supports English text
-          #   (Document#language="EN").
+          # @param document [Google::Cloud::Language::V1::Document | Hash]
+          #   Input document.
+          #   A hash of the same form as `Google::Cloud::Language::V1::Document`
+          #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1::EncodingType]
           #   The encoding type used by the API to calculate sentence offsets.
           # @param options [Google::Gax::CallOptions]
@@ -166,21 +190,19 @@ module Google
           # @example
           #   require "google/cloud/language/v1"
           #
-          #   Document = Google::Cloud::Language::V1::Document
-          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
-          #
-          #   language_service_client = LanguageServiceClient.new
-          #   document = Document.new
+          #   language_service_client = Google::Cloud::Language::V1.new
+          #   document = {}
           #   response = language_service_client.analyze_sentiment(document)
 
           def analyze_sentiment \
               document,
               encoding_type: nil,
               options: nil
-            req = Google::Cloud::Language::V1::AnalyzeSentimentRequest.new({
+            req = {
               document: document,
               encoding_type: encoding_type
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeSentimentRequest)
             @analyze_sentiment.call(req, options)
           end
 
@@ -188,8 +210,10 @@ module Google
           # along with entity types, salience, mentions for each entity, and
           # other properties.
           #
-          # @param document [Google::Cloud::Language::V1::Document]
+          # @param document [Google::Cloud::Language::V1::Document | Hash]
           #   Input document.
+          #   A hash of the same form as `Google::Cloud::Language::V1::Document`
+          #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1::EncodingType]
           #   The encoding type used by the API to calculate offsets.
           # @param options [Google::Gax::CallOptions]
@@ -200,32 +224,63 @@ module Google
           # @example
           #   require "google/cloud/language/v1"
           #
-          #   Document = Google::Cloud::Language::V1::Document
-          #   EncodingType = Google::Cloud::Language::V1::EncodingType
-          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
-          #
-          #   language_service_client = LanguageServiceClient.new
-          #   document = Document.new
-          #   encoding_type = EncodingType::NONE
-          #   response = language_service_client.analyze_entities(document, encoding_type)
+          #   language_service_client = Google::Cloud::Language::V1.new
+          #   document = {}
+          #   response = language_service_client.analyze_entities(document)
 
           def analyze_entities \
               document,
-              encoding_type,
+              encoding_type: nil,
               options: nil
-            req = Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new({
+            req = {
               document: document,
               encoding_type: encoding_type
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeEntitiesRequest)
             @analyze_entities.call(req, options)
+          end
+
+          # Finds entities, similar to {Google::Cloud::Language::V1::LanguageService::AnalyzeEntities AnalyzeEntities} in the text and analyzes
+          # sentiment associated with each entity and its mentions.
+          #
+          # @param document [Google::Cloud::Language::V1::Document | Hash]
+          #   Input document.
+          #   A hash of the same form as `Google::Cloud::Language::V1::Document`
+          #   can also be provided.
+          # @param encoding_type [Google::Cloud::Language::V1::EncodingType]
+          #   The encoding type used by the API to calculate offsets.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/language/v1"
+          #
+          #   language_service_client = Google::Cloud::Language::V1.new
+          #   document = {}
+          #   response = language_service_client.analyze_entity_sentiment(document)
+
+          def analyze_entity_sentiment \
+              document,
+              encoding_type: nil,
+              options: nil
+            req = {
+              document: document,
+              encoding_type: encoding_type
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest)
+            @analyze_entity_sentiment.call(req, options)
           end
 
           # Analyzes the syntax of the text and provides sentence boundaries and
           # tokenization along with part of speech tags, dependency trees, and other
           # properties.
           #
-          # @param document [Google::Cloud::Language::V1::Document]
+          # @param document [Google::Cloud::Language::V1::Document | Hash]
           #   Input document.
+          #   A hash of the same form as `Google::Cloud::Language::V1::Document`
+          #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1::EncodingType]
           #   The encoding type used by the API to calculate offsets.
           # @param options [Google::Gax::CallOptions]
@@ -236,33 +291,61 @@ module Google
           # @example
           #   require "google/cloud/language/v1"
           #
-          #   Document = Google::Cloud::Language::V1::Document
-          #   EncodingType = Google::Cloud::Language::V1::EncodingType
-          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
-          #
-          #   language_service_client = LanguageServiceClient.new
-          #   document = Document.new
-          #   encoding_type = EncodingType::NONE
-          #   response = language_service_client.analyze_syntax(document, encoding_type)
+          #   language_service_client = Google::Cloud::Language::V1.new
+          #   document = {}
+          #   response = language_service_client.analyze_syntax(document)
 
           def analyze_syntax \
               document,
-              encoding_type,
+              encoding_type: nil,
               options: nil
-            req = Google::Cloud::Language::V1::AnalyzeSyntaxRequest.new({
+            req = {
               document: document,
               encoding_type: encoding_type
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeSyntaxRequest)
             @analyze_syntax.call(req, options)
+          end
+
+          # Classifies a document into categories.
+          #
+          # @param document [Google::Cloud::Language::V1::Document | Hash]
+          #   Input document.
+          #   A hash of the same form as `Google::Cloud::Language::V1::Document`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Cloud::Language::V1::ClassifyTextResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/language/v1"
+          #
+          #   language_service_client = Google::Cloud::Language::V1.new
+          #   document = {}
+          #   response = language_service_client.classify_text(document)
+
+          def classify_text \
+              document,
+              options: nil
+            req = {
+              document: document
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::ClassifyTextRequest)
+            @classify_text.call(req, options)
           end
 
           # A convenience method that provides all the features that analyzeSentiment,
           # analyzeEntities, and analyzeSyntax provide in one call.
           #
-          # @param document [Google::Cloud::Language::V1::Document]
+          # @param document [Google::Cloud::Language::V1::Document | Hash]
           #   Input document.
-          # @param features [Google::Cloud::Language::V1::AnnotateTextRequest::Features]
+          #   A hash of the same form as `Google::Cloud::Language::V1::Document`
+          #   can also be provided.
+          # @param features [Google::Cloud::Language::V1::AnnotateTextRequest::Features | Hash]
           #   The enabled features.
+          #   A hash of the same form as `Google::Cloud::Language::V1::AnnotateTextRequest::Features`
+          #   can also be provided.
           # @param encoding_type [Google::Cloud::Language::V1::EncodingType]
           #   The encoding type used by the API to calculate offsets.
           # @param options [Google::Gax::CallOptions]
@@ -273,27 +356,22 @@ module Google
           # @example
           #   require "google/cloud/language/v1"
           #
-          #   Document = Google::Cloud::Language::V1::Document
-          #   EncodingType = Google::Cloud::Language::V1::EncodingType
-          #   Features = Google::Cloud::Language::V1::AnnotateTextRequest::Features
-          #   LanguageServiceClient = Google::Cloud::Language::V1::LanguageServiceClient
-          #
-          #   language_service_client = LanguageServiceClient.new
-          #   document = Document.new
-          #   features = Features.new
-          #   encoding_type = EncodingType::NONE
-          #   response = language_service_client.annotate_text(document, features, encoding_type)
+          #   language_service_client = Google::Cloud::Language::V1.new
+          #   document = {}
+          #   features = {}
+          #   response = language_service_client.annotate_text(document, features)
 
           def annotate_text \
               document,
               features,
-              encoding_type,
+              encoding_type: nil,
               options: nil
-            req = Google::Cloud::Language::V1::AnnotateTextRequest.new({
+            req = {
               document: document,
               features: features,
               encoding_type: encoding_type
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnnotateTextRequest)
             @annotate_text.call(req, options)
           end
         end

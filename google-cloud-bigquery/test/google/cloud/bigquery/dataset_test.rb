@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -318,7 +318,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -352,7 +352,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.name.must_equal view_name
@@ -384,7 +384,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -414,7 +414,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.wont_be :query_standard_sql?
@@ -449,7 +449,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -481,7 +481,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -513,7 +513,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     mock.verify
 
 
-    table.must_be_kind_of Google::Cloud::Bigquery::View
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal view_id
     table.query.must_equal query
     table.must_be :query_standard_sql?
@@ -721,13 +721,5 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
   def find_table_gapi id, name = nil, description = nil
     Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
-  end
-
-  def list_tables_gapi count = 2, token = nil, total = nil
-    tables = count.times.map { random_table_small_hash(dataset_id) }
-    hash = {"kind" => "bigquery#tableList", "tables" => tables,
-            "totalItems" => (total || count)}
-    hash["nextPageToken"] = token unless token.nil?
-    Google::Apis::BigqueryV2::TableList.from_json hash.to_json
   end
 end

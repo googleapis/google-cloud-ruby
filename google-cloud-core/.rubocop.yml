@@ -11,31 +11,30 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
-Style/NumericLiterals:
-  Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Style/EmptyLines:
-  Enabled: false
-Style/EmptyElse:
-  Enabled: false
+Style/RescueModifier:
+  Exclude:
+    - "lib/google/cloud/credentials.rb"
+Style/MutableConstant:
+  Exclude:
+    - "lib/google/cloud/credentials.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/config.rb"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25
+Metrics/ClassLength:
+  Enabled: false
 Metrics/MethodLength:
   Max: 20
-Metrics/ParameterLists:
+Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
-Style/RescueModifier:
-  Enabled: false
-Style/ClassVars:
-  Enabled: false
-Style/TrivialAccessors:
-  Enabled: false
-Style/FileName:
-  Enabled: false # for lib/google-cloud-core.rb file
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-core.rb"
+Lint/RescueWithoutErrorClass:
+  Exclude:
+    - "lib/google/cloud/credentials.rb"

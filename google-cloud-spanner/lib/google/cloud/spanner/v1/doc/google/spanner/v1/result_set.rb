@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,24 @@
 module Google
   module Spanner
     module V1
-      # Results from Read or
-      # ExecuteSql.
+      # Results from {Google::Spanner::V1::Spanner::Read Read} or
+      # {Google::Spanner::V1::Spanner::ExecuteSql ExecuteSql}.
       # @!attribute [rw] metadata
       #   @return [Google::Spanner::V1::ResultSetMetadata]
       #     Metadata about the result set, such as row type information.
       # @!attribute [rw] rows
       #   @return [Array<Google::Protobuf::ListValue>]
       #     Each element in +rows+ is a row whose format is defined by
-      #     Metadata::Row_type. The ith element
+      #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. The ith element
       #     in each row matches the ith field in
-      #     Metadata::Row_type. Elements are
+      #     {Google::Spanner::V1::ResultSetMetadata#row_type metadata::row_type}. Elements are
       #     encoded based on type as described
-      #     Here.
+      #     {Google::Spanner::V1::TypeCode here}.
       # @!attribute [rw] stats
       #   @return [Google::Spanner::V1::ResultSetStats]
       #     Query plan and execution statistics for the query that produced this
       #     result set. These can be requested by setting
-      #     ExecuteSqlRequest#query_mode.
+      #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode}.
       class ResultSet; end
 
       # Partial results from a streaming read or SQL query. Streaming reads and
@@ -48,18 +48,18 @@ module Google
       #     be split into many +PartialResultSet+ messages to accommodate
       #     large rows and/or large values. Every N complete values defines a
       #     row, where N is equal to the number of entries in
-      #     Metadata::Row_type::Fields.
+      #     {Google::Spanner::V1::StructType#fields metadata::row_type::fields}.
       #
       #     Most values are encoded based on type as described
-      #     Here.
+      #     {Google::Spanner::V1::TypeCode here}.
       #
       #     It is possible that the last value in values is "chunked",
       #     meaning that the rest of the value is sent in subsequent
-      #     +PartialResultSet+(s). This is denoted by the Chunked_value
+      #     +PartialResultSet+(s). This is denoted by the {Google::Spanner::V1::PartialResultSet#chunked_value chunked_value}
       #     field. Two or more chunked values can be merged to form a
       #     complete value as follows:
       #
-      #       * +bool/number/null+: cannot be chunked
+      #     * +bool/number/null+: cannot be chunked
       #       * +string+: concatenate the strings
       #       * +list+: concatenate the lists. If the last element in a list is a
       #         +string+, +list+, or +object+, merge it with the first element in
@@ -68,31 +68,31 @@ module Google
       #         field name is duplicated, then apply these rules recursively
       #         to merge the field values.
       #
-      #     Some examples of merging:
+      #       Some examples of merging:
       #
-      #         # Strings are concatenated.
-      #         "foo", "bar" => "foobar"
+      #       = Strings are concatenated.
+      #       "foo", "bar" => "foobar"
       #
-      #         # Lists of non-strings are concatenated.
-      #         [2, 3], [4] => [2, 3, 4]
+      #       = Lists of non-strings are concatenated.
+      #       [2, 3], [4] => [2, 3, 4]
       #
-      #         # Lists are concatenated, but the last and first elements are merged
-      #         # because they are strings.
-      #         ["a", "b"], ["c", "d"] => ["a", "bc", "d"]
+      #       = Lists are concatenated, but the last and first elements are merged
+      #       = because they are strings.
+      #       ["a", "b"], ["c", "d"] => ["a", "bc", "d"]
       #
-      #         # Lists are concatenated, but the last and first elements are merged
-      #         # because they are lists. Recursively, the last and first elements
-      #         # of the inner lists are merged because they are strings.
-      #         ["a", ["b", "c"]], [["d"], "e"] => ["a", ["b", "cd"], "e"]
+      #       = Lists are concatenated, but the last and first elements are merged
+      #       = because they are lists. Recursively, the last and first elements
+      #       = of the inner lists are merged because they are strings.
+      #       ["a", ["b", "c"]], [["d"], "e"] => ["a", ["b", "cd"], "e"]
       #
-      #         # Non-overlapping object fields are combined.
-      #         {"a": "1"}, {"b": "2"} => {"a": "1", "b": 2"}
+      #       = Non-overlapping object fields are combined.
+      #       {"a": "1"}, {"b": "2"} => {"a": "1", "b": 2"}
       #
-      #         # Overlapping object fields are merged.
-      #         {"a": "1"}, {"a": "2"} => {"a": "12"}
+      #       = Overlapping object fields are merged.
+      #       {"a": "1"}, {"a": "2"} => {"a": "12"}
       #
-      #         # Examples of merging objects containing lists of strings.
-      #         {"a": ["1"]}, {"a": ["2"]} => {"a": ["12"]}
+      #       = Examples of merging objects containing lists of strings.
+      #       {"a": ["1"]}, {"a": ["2"]} => {"a": ["12"]}
       #
       #     For a more complete example, suppose a streaming SQL query is
       #     yielding a result set whose rows contain a single string
@@ -119,7 +119,7 @@ module Google
       #     field value +"World" = "W" + "orl" + "d"+.
       # @!attribute [rw] chunked_value
       #   @return [true, false]
-      #     If true, then the final value in Values is chunked, and must
+      #     If true, then the final value in {Google::Spanner::V1::PartialResultSet#values values} is chunked, and must
       #     be combined with more values from subsequent +PartialResultSet+s
       #     to obtain a complete field value.
       # @!attribute [rw] resume_token
@@ -133,11 +133,11 @@ module Google
       #   @return [Google::Spanner::V1::ResultSetStats]
       #     Query plan and execution statistics for the query that produced this
       #     streaming result set. These can be requested by setting
-      #     ExecuteSqlRequest#query_mode and are sent
+      #     {Google::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest#query_mode} and are sent
       #     only once with the last response in the stream.
       class PartialResultSet; end
 
-      # Metadata about a ResultSet or PartialResultSet.
+      # Metadata about a {Google::Spanner::V1::ResultSet ResultSet} or {Google::Spanner::V1::PartialResultSet PartialResultSet}.
       # @!attribute [rw] row_type
       #   @return [Google::Spanner::V1::StructType]
       #     Indicates the field names and types for the rows in the result
@@ -154,10 +154,10 @@ module Google
       #     information about the new transaction is yielded here.
       class ResultSetMetadata; end
 
-      # Additional statistics about a ResultSet or PartialResultSet.
+      # Additional statistics about a {Google::Spanner::V1::ResultSet ResultSet} or {Google::Spanner::V1::PartialResultSet PartialResultSet}.
       # @!attribute [rw] query_plan
       #   @return [Google::Spanner::V1::QueryPlan]
-      #     QueryPlan for the query associated with this result.
+      #     {Google::Spanner::V1::QueryPlan QueryPlan} for the query associated with this result.
       # @!attribute [rw] query_stats
       #   @return [Google::Protobuf::Struct]
       #     Aggregated statistics from the execution of the query. Only present when

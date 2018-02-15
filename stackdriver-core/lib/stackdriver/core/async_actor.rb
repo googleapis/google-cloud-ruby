@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -228,7 +228,7 @@ module Stackdriver
       # This should be the main task job that will be run asynchronously and
       # repeatly.
       def run_backgrounder
-        fail "#{self.class} class should override #run_backgrounder method"
+        raise "#{self.class} class should override #run_backgrounder method"
       end
 
       ##
@@ -302,7 +302,7 @@ module Stackdriver
       #   to run async_run_job. Also make calls register_for_cleanup on the
       #   async job to make sure it exits properly.
       def ensure_thread
-        fail "async_actor not initialized" if @startup_lock.nil?
+        raise "async_actor not initialized" if @startup_lock.nil?
         @startup_lock.synchronize do
           if (@thread.nil? || !@thread.alive?) && @async_state != :stopped
             @lock_cond = new_cond
@@ -352,8 +352,7 @@ module Stackdriver
       # @private Default abstract definition of this function that's a no-op.
       # The extending classes can override this method to handle state changing
       # logic.
-      def on_async_state_change
-      end
+      def on_async_state_change; end
     end
   end
 end

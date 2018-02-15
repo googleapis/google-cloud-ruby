@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,6 +25,12 @@ module Google
       # Create default unmocked methods that will raise if ever called
       def self.new *args
         raise "This code example is not yet mocked"
+      end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
       end
     end
   end
@@ -63,6 +69,8 @@ YARD::Doctest.configure do |doctest|
       mock.expect :list_project, OpenStruct.new(projects: []), [Hash]
     end
   end
+
+  doctest.skip "Google::Cloud::ResourceManager::Credentials" # occasionally getting "This code example is not yet mocked"
 
   doctest.before "Google::Cloud::ResourceManager::Manager" do
     mock_translate do |mock|

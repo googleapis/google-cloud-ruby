@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,41 +25,27 @@ module Google
       # @private Represents the gRPC Debugger service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout, :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project, credentials, timeout: nil, client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V2::Controller2Client::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
-        end
-
-        def channel
-          require "grpc"
-          GRPC::Core::Channel.new host, nil, chan_creds
-        end
-
-        def chan_creds
-          return credentials if insecure?
-          require "grpc"
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def cloud_debugger
           return mocked_debugger if mocked_debugger
           @debugger ||=
             V2::Controller2Client.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Debugger::VERSION)
+              lib_version: Google::Cloud::Debugger::VERSION
+            )
         end
         attr_accessor :mocked_debugger
 
@@ -67,18 +53,14 @@ module Google
           return mocked_transmitter if mocked_transmitter
           @transmitter ||=
             V2::Controller2Client.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Debugger::VERSION)
+              lib_version: Google::Cloud::Debugger::VERSION
+            )
         end
         attr_accessor :mocked_transmitter
-
-        def insecure?
-          credentials == :this_channel_is_insecure
-        end
 
         def register_debuggee debuggee_grpc
           execute do

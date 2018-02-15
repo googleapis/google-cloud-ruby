@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0oud
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,41 +25,22 @@ module Google
       # @private Represents the gRPC Error Reporting service, including all the
       #   API methods.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout, :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials,
-                       host: nil, timeout: nil, client_config: nil
+        def initialize project, credentials, timeout: nil, client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V1beta1::ReportErrorsServiceClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
-        end
-
-        def channel
-          require "grpc"
-          GRPC::Core::Channel.new host, nil, chan_creds
-        end
-
-        def chan_creds
-          require "grpc"
-          return credentials if insecure?
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
-        end
-
-        def insecure?
-          credentials == :this_channel_is_insecure
         end
 
         def error_reporting
           return mocked_error_reporting if mocked_error_reporting
           @error_reporting ||= \
             V1beta1::ReportErrorsServiceClient.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
@@ -90,7 +71,7 @@ module Google
         #
         def report error_event
           if error_event.message.nil? || error_event.message.empty?
-            fail ArgumentError, "Cannot report empty message"
+            raise ArgumentError, "Cannot report empty message"
           end
 
           error_event_grpc = error_event.to_grpc

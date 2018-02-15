@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -69,11 +69,13 @@ module Google
           def stop
             synchronize do
               break if @stopped
-              break if @request_queue.nil?
 
-              @request_queue.push self
-              @inventory.stop
               @stopped = true
+
+              @inventory.stop
+
+              # signal to the background thread that we are unpaused
+              @pause_cond.broadcast
             end
 
             self
@@ -89,15 +91,28 @@ module Google
 
           def wait!
             synchronize do
-              @background_thread.join if @background_thread
-
+              # Now that the reception thread is dead, make sure all recieved
+              # messages have had the callback called.
               @callback_thread_pool.shutdown
               @callback_thread_pool.wait_for_termination
 
-              @async_pusher.stop.wait! if @async_pusher
+              # Once all the callbacks are complete, we can stop the publisher
+              # and send the final request to the steeam.
+              if @async_pusher
+                request = @async_pusher.stop
+                if request
+                  Concurrent::Future.new(executor: @push_thread_pool) do
+                    @request_queue.push request
+                  end.execute
+                end
+              end
 
+              # Close the push thread pool now that the pusher is closed.
               @push_thread_pool.shutdown
               @push_thread_pool.wait_for_termination
+
+              # Close the stream now that all requests have been made.
+              @request_queue.push self unless @request_queue.nil?
             end
 
             self
@@ -162,7 +177,8 @@ module Google
 
           # @private
           def to_s
-            format "(inventory: %i, status: %s)", inventory.count, status
+            format "(inventory: %<inv>i, status: %<sts>s)",
+                   inv: inventory.count, sts: status
           end
 
           # @private
@@ -175,22 +191,37 @@ module Google
           # rubocop:disable all
 
           def background_run enum
-            until synchronize { @stopped }
+            loop do
               synchronize do
-                if @paused
+                if @paused && !@stopped
                   @pause_cond.wait
                   next
                 end
               end
 
+              # Break loop, close thread if stopped
+              break if synchronize { @stopped }
+
               begin
                 # Cannot syncronize the enumerator, causes deadlock
                 response = enum.next
+
+                # Create a list of all the received ack_id values
+                received_ack_ids = response.received_messages.map(&:ack_id)
+
+                synchronize do
+                  # Create receipt of received messages reception
+                  @async_pusher ||= AsyncPusher.new self
+                  @async_pusher.delay subscriber.deadline, received_ack_ids
+
+                  # Add received messages to inventory
+                  @inventory.add received_ack_ids
+                end
+
                 response.received_messages.each do |rec_msg_grpc|
                   rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
                   synchronize do
-                    @inventory.add rec_msg.ack_id
-
+                    # Call user provided code for received message
                     perform_callback_async rec_msg
                   end
                 end
@@ -207,8 +238,8 @@ module Google
             # Also stealthly restart the stream on Unavailable, Cancelled,
             # ResourceExhausted, and Internal.
             synchronize { start_streaming! }
-          rescue => e
-            fail Google::Cloud::Error.from_error(e)
+          rescue StandardError => e
+            raise Google::Cloud::Error.from_error(e)
           end
 
           # rubocop:enable all
@@ -220,6 +251,9 @@ module Google
           end
 
           def start_streaming!
+            # Don't allow a stream to restart if already stopped
+            return if @stopped
+
             # signal to the previous queue to shut down
             old_queue = []
             old_queue = @request_queue.dump_queue if @request_queue
@@ -245,6 +279,7 @@ module Google
           end
 
           def pause_streaming?
+            return if @stopped
             return if @paused
 
             @inventory.full?
@@ -259,9 +294,10 @@ module Google
           end
 
           def unpause_streaming?
+            return if @stopped
             return if @paused.nil?
 
-            @inventory.count < @inventory.limit*0.8
+            @inventory.count < @inventory.limit * 0.8
           end
 
           def initial_input_request
@@ -316,7 +352,9 @@ module Google
               ack_ids = Array(ack_ids).flatten
               synchronize do
                 @_ack_ids += ack_ids
-                @background_thread ||= Thread.new { background_run }
+                unless @stopped
+                  @background_thread ||= Thread.new { background_run }
+                end
               end
             end
 

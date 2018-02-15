@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,7 +48,11 @@ module Google
       #   job.reload! # API call
       #   job.done? #=> true
       #
-      #   database = instance.database "my-new-database"
+      #   if job.error?
+      #     status = job.error
+      #   else
+      #     database = job.database
+      #   end
       #
       class Database
         ##
@@ -64,22 +68,19 @@ module Google
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          Admin::Database::V1::DatabaseAdminClient
-            .match_project_from_database_name @grpc.name
+          @grpc.name.split("/")[1]
         end
 
         # The unique identifier for the instance.
         # @return [String]
         def instance_id
-          Admin::Database::V1::DatabaseAdminClient
-            .match_instance_from_database_name @grpc.name
+          @grpc.name.split("/")[3]
         end
 
         # The unique identifier for the database.
         # @return [String]
         def database_id
-          Admin::Database::V1::DatabaseAdminClient
-            .match_database_from_database_name @grpc.name
+          @grpc.name.split("/")[5]
         end
 
         # rubocop:disable LineLength
@@ -104,7 +105,7 @@ module Google
 
         ##
         # The database is still being created. Operations on the database may
-        # fail with `FAILED_PRECONDITION` in this state.
+        # raise with `FAILED_PRECONDITION` in this state.
         # @return [Boolean]
         def creating?
           state == :CREATING
@@ -364,12 +365,13 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         def session_path instance_id, database_id, session_id
           V1::SpannerClient.session_path(
-            project_id, instance_id, database_id, session_id)
+            project_id, instance_id, database_id, session_id
+          )
         end
       end
     end

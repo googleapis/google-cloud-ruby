@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a load of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,6 +49,23 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     result.must_equal true
 
     mock.verify
+  end
+
+  describe "dataset reference" do
+    let(:dataset) {Google::Cloud::Bigquery::Dataset.new_reference project, dataset_id, bigquery.service }
+
+    it "can specify a storage file" do
+      mock = Minitest::Mock.new
+      job_gapi = load_job_url_gapi(table_reference, load_url)
+      mock.expect :insert_job, load_job_resp_gapi(load_url),
+        [project, job_gapi]
+      dataset.service.mocked_service = mock
+
+      result = dataset.load table_id, load_file
+      result.must_equal true
+
+      mock.verify
+    end
   end
 
   it "can specify a storage file with format" do
@@ -157,7 +174,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock.verify
   end
 
-  it "can specify a storage url" do
+  it "can specify a storage url as a string" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
     mock.expect :insert_job, load_job_resp_gapi(load_url),
@@ -165,6 +182,19 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = dataset.load table_id, load_url
+    result.must_equal true
+
+    mock.verify
+  end
+
+  it "can specify a storage url as a URI" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_reference, load_url
+    mock.expect :insert_job, load_job_resp_gapi(load_url),
+                [project, job_gapi]
+    dataset.service.mocked_service = mock
+
+    result = dataset.load table_id, URI(load_url)
     result.must_equal true
 
     mock.verify

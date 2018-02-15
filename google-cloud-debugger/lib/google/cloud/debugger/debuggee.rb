@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@ require "digest/sha1"
 require "google/cloud/debugger/backoff"
 require "google/cloud/debugger/debuggee/app_uniquifier_generator"
 require "google/cloud/debugger/version"
+require "google/cloud/env"
 require "json"
 
 module Google
@@ -68,6 +69,7 @@ module Google
           @service = service
           @service_name = service_name
           @service_version = service_version
+          @env = Google::Cloud.env
           @computed_uniquifier = nil
           @id = nil
           @register_backoff = Google::Cloud::Debugger::Backoff.new
@@ -84,7 +86,7 @@ module Google
           begin
             response = service.register_debuggee to_grpc
             @id = response.debuggee.id
-          rescue
+          rescue StandardError
             revoke_registration
           end
 
@@ -123,7 +125,7 @@ module Google
         # @private Build the parameters for this debuggee
         def build_request_arg
           debuggee_args = {
-            project: project_id,
+            project: project_id_for_request_arg,
             description: description,
             labels: labels,
             agent_version: agent_version
@@ -132,12 +134,8 @@ module Google
           debuggee_args[:id] = id if id
 
           source_context = read_app_json_file "source-context.json"
-          debuggee_args[:source_contexts] = [source_context] if source_context
-
-          source_contexts = read_app_json_file "source-contexts.json"
-          if source_contexts
-            debuggee_args[:ext_source_contexts] = source_contexts
-          elsif source_context
+          if source_context
+            debuggee_args[:source_contexts] = [source_context]
             debuggee_args[:ext_source_contexts] = [{ context: source_context }]
           end
 
@@ -178,6 +176,19 @@ module Google
         end
 
         ##
+        # @private
+        # Get project to send as a debuggee argument. This is the numeric
+        # project ID if available (and if it matches the project set in the
+        # configuration). Otherwise, use the configured project.
+        def project_id_for_request_arg
+          if project_id == @env.project_id
+            numeric_id = @env.numeric_project_id
+            return numeric_id.to_s if numeric_id
+          end
+          project_id
+        end
+
+        ##
         # @private Build debuggee agent version identifier
         def agent_version
           "google.com/ruby#{RUBY_VERSION}-#{Google::Cloud::Debugger::VERSION}"
@@ -204,7 +215,7 @@ module Google
         # @private Helper method to parse json file
         def read_app_json_file file_path
           JSON.parse File.read(file_path), symbolize_names: true
-        rescue
+        rescue StandardError
           nil
         end
       end

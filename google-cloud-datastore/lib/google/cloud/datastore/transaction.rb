@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,6 +26,8 @@ module Google
       # @see https://cloud.google.com/datastore/docs/concepts/transactions
       #   Transactions
       #
+      # @attr_reader [String] id The identifier of the transaction.
+      #
       # @example Transactional update:
       #   require "google/cloud/datastore"
       #
@@ -41,26 +43,15 @@ module Google
       #     end
       #   end
       #
-      # @example Transactional read:
-      #   require "google/cloud/datastore"
-      #
-      #   datastore = Google::Cloud::Datastore.new
-      #
-      #   task_list_key = datastore.key "TaskList", "default"
-      #   datastore.transaction do |tx|
-      #     task_list = tx.find task_list_key
-      #     query = tx.query("Task").ancestor(task_list)
-      #     tasks_in_list = tx.run query
-      #   end
-      #
       class Transaction < Dataset
         attr_reader :id
 
         ##
         # @private Creates a new Transaction instance.
         # Takes a Service instead of project and Credentials.
-        def initialize service
+        def initialize service, previous_transaction: nil
           @service = service
+          @previous_transaction = previous_transaction
           reset!
           start
         end
@@ -94,7 +85,7 @@ module Google
           # Do not save yet
           entities
         end
-        alias_method :upsert, :save
+        alias upsert save
 
         ##
         # Insert entities in a transaction. An InvalidArgumentError will raised
@@ -203,7 +194,7 @@ module Google
           end
           find_all(key).first
         end
-        alias_method :get, :find
+        alias get find
 
         ##
         # Retrieve the entities for the provided keys. The lookup is run within
@@ -228,7 +219,7 @@ module Google
                                       transaction: @id)
           LookupResults.from_grpc lookup_res, service, nil, @id
         end
-        alias_method :lookup, :find_all
+        alias lookup find_all
 
         ##
         # Retrieve entities specified by a Query. The query is run within the
@@ -244,9 +235,8 @@ module Google
         #
         #   datastore = Google::Cloud::Datastore.new
         #
-        #   query = datastore.query("Task").
-        #     where("done", "=", false)
         #   datastore.transaction do |tx|
+        #     query = datastore.query("Task")
         #     tasks = tx.run query
         #   end
         #
@@ -264,26 +254,27 @@ module Google
         def run query, namespace: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
-            fail ArgumentError, "Cannot run a #{query.class} object."
+            raise ArgumentError, "Cannot run a #{query.class} object."
           end
           query_res = service.run_query query.to_grpc, namespace,
                                         transaction: @id
           QueryResults.from_grpc query_res, service, namespace,
                                  query.to_grpc.dup
         end
-        alias_method :run_query, :run
+        alias run_query run
 
         ##
         # Begins a transaction.
         # This method is run when a new Transaction is created.
         def start
-          fail TransactionError, "Transaction already opened." unless @id.nil?
+          raise TransactionError, "Transaction already opened." unless @id.nil?
 
           ensure_service!
-          tx_res = service.begin_transaction
+          tx_res = service.begin_transaction \
+            previous_transaction: @previous_transaction
           @id = tx_res.transaction
         end
-        alias_method :begin_transaction, :start
+        alias begin_transaction start
 
         ##
         # Commits a transaction.
@@ -329,8 +320,9 @@ module Google
         #   end
         #
         def commit
-          fail TransactionError,
-               "Cannot commit when not in a transaction." if @id.nil?
+          if @id.nil?
+            raise TransactionError, "Cannot commit when not in a transaction."
+          end
 
           yield @commit if block_given?
 
@@ -374,7 +366,7 @@ module Google
         #   end
         def rollback
           if @id.nil?
-            fail TransactionError, "Cannot rollback when not in a transaction."
+            raise TransactionError, "Cannot rollback when not in a transaction."
           end
 
           ensure_service!

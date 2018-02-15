@@ -2,16 +2,23 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "rake", "~> 11.0"
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-env", path: "../google-cloud-env"
+gem "gcloud-jsondoc",
+    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
+    branch: "gcloud-jsondoc"
 gem "google-cloud-bigquery", path: "../google-cloud-bigquery"
+gem "google-cloud-container", path: "../google-cloud-container"
+gem "google-cloud-core", path: "../google-cloud-core"
+gem "google-cloud-dataproc", path: "../google-cloud-dataproc"
 gem "google-cloud-datastore", path: "../google-cloud-datastore"
+gem "google-cloud-dlp", path: "../google-cloud-dlp"
 gem "google-cloud-dns", path: "../google-cloud-dns"
+gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-error_reporting", path: "../google-cloud-error_reporting"
+gem "google-cloud-firestore", path: "../google-cloud-firestore"
 gem "google-cloud-language", path: "../google-cloud-language"
 gem "google-cloud-logging", path: "../google-cloud-logging"
 gem "google-cloud-monitoring", path: "../google-cloud-monitoring"
+gem "google-cloud-os_login", path: "../google-cloud-os_login"
 gem "google-cloud-pubsub", path: "../google-cloud-pubsub"
 gem "google-cloud-resource_manager", path: "../google-cloud-resource_manager"
 gem "google-cloud-spanner", path: "../google-cloud-spanner"
@@ -19,19 +26,11 @@ gem "google-cloud-speech", path: "../google-cloud-speech"
 gem "google-cloud-storage", path: "../google-cloud-storage"
 gem "google-cloud-trace", path: "../google-cloud-trace"
 gem "google-cloud-translate", path: "../google-cloud-translate"
-gem "google-cloud-vision", path: "../google-cloud-vision"
 gem "google-cloud-video_intelligence",
     path: "../google-cloud-video_intelligence"
-gem "stackdriver-core", path: "../stackdriver-core"
-
-gem "gcloud-jsondoc",
-    git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
-    branch: "gcloud-jsondoc"
-
+gem "google-cloud-vision", path: "../google-cloud-vision"
 # WORKAROUND: builds are having problems since the release of 3.0.0
 # pin to the last known good version
 gem "public_suffix", "~> 2.0"
-
-# TEMP: rainbow (a dependency of rubocop) version 2.2 seems to have a problem,
-# so pinning to 2.1 for now.
-gem "rainbow", "~> 2.1.0"
+gem "rake", "~> 11.0"
+gem "stackdriver-core", path: "../stackdriver-core"

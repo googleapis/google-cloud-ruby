@@ -24,8 +24,8 @@ Instructions and configuration options are covered in the [Authentication Guide]
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::Pubsub.new(
-  project: "my-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Retrieve a topic
@@ -37,8 +37,17 @@ msg = topic.publish "new-message"
 # Retrieve a subscription
 sub = pubsub.subscription "my-topic-sub"
 
-# Pull available messages
-msgs = sub.pull
+# Create a subscriber to listen for available messages
+subscriber = sub.listen do |received_message|
+  # process message
+  received_message.acknowledge!
+end
+
+# Start background threads that will call the block passed to listen.
+subscriber.start
+
+# Shut down the subscriber when ready to stop receiving messages.
+subscriber.stop.wait!
 ```
 
 ## Supported Ruby Versions

@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,6 +27,12 @@ module Google
       # Create default unmocked methods that will raise if ever called
       def self.new *args
         raise "This code example is not yet mocked"
+      end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
       end
     end
     module Core
@@ -71,6 +77,8 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Debugger::V2::Debugger2Client"
   doctest.skip "Google::Devtools::Clouddebugger::V2"
 
+  # Skip methods that work only during evaluation
+  doctest.skip "Google::Cloud::Debugger.allow_mutating_methods!"
 
   # Skip all aliases
   doctest.skip "Google::Cloud::Debugger::Project#attach"
@@ -86,6 +94,8 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud.debugger" do
     mock_debugger
   end
+
+  doctest.skip "Google::Cloud::Debugger::Credentials" # occasionally getting "This code example is not yet mocked"
 
   doctest.before "Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var@Custom compound variable conversion" do
     class Foo

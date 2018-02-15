@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,8 @@ require "google-cloud-error_reporting"
 require "google/cloud/error_reporting/async_error_reporter"
 require "google/cloud/error_reporting/project"
 require "google/cloud/error_reporting/middleware"
+require "google/cloud/config"
+require "google/cloud/env"
 require "stackdriver/core"
 
 module Google
@@ -34,12 +36,13 @@ module Google
     # [Stackdriver Error Reporting
     # Documentation](https://cloud.google.com/error-reporting/docs/).
     #
-    # The goal of google-cloud-ruby is to provide an API that is comfortable to
-    # Rubyists. Authentication is handled by the client. You can provide the
-    # project and credential information to connect to the Stackdriver Error
-    # Reporting service, or if you are running on Google Cloud Platform this
-    # configuration is taken care of for you. You can read more about the
-    # options for connecting in the [Authentication
+    # The goal of google-cloud is to provide an API that is comfortable to
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ## How to report errors
@@ -72,12 +75,6 @@ module Google
     # for more examples.
     #
     module ErrorReporting
-      # Initialize :error_reporting as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :error_reporting
-        Google::Cloud.configure.add_options :error_reporting
-      end
-
       ##
       # @private The default Google::Cloud::ErrorReporting::Project client used
       # for the Google::Cloud::ErrorReporting.report API.
@@ -91,10 +88,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Stackdriver Error
-      #   Reporting service.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Google Cloud Platform project identifier for
+      #   the Stackdriver Error Reporting service you are connecting to. If not
+      #   present, the default project for the credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {ErrorReporting::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -107,6 +106,9 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::ErrorReporting::Project]
       #
@@ -116,19 +118,26 @@ module Google
       #   error_reporting = Google::Cloud::ErrorReporting.new
       #   # ...
       #
-      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil
-        project ||= Google::Cloud::ErrorReporting::Project.default_project
-        project = project.to_s
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
+                   client_config: nil, project: nil, keyfile: nil
+        project_id ||= (project || ErrorReporting::Project.default_project_id)
+        project_id = project_id.to_s
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        credentials =
-          Google::Cloud::ErrorReporting::Credentials.credentials_with_scope(
-            keyfile, scope)
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
 
-        Google::Cloud::ErrorReporting::Project.new(
-          Google::Cloud::ErrorReporting::Service.new(
-            project, credentials, timeout: timeout, client_config: client_config
+        credentials ||= (keyfile || default_credentials(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = ErrorReporting::Credentials.new credentials,
+                                                        scope: scope
+        end
+
+        ErrorReporting::Project.new(
+          ErrorReporting::Service.new(
+            project_id, credentials, timeout: timeout,
+                                     client_config: client_config
           )
         )
       end
@@ -137,6 +146,27 @@ module Google
       # Configure the default {Google::Cloud::ErrorReporting::Project}
       # client, allows the {.report} public method to reuse these
       # configured parameters.
+      #
+      # The following Stackdriver ErrorReporting configuration parameters are
+      # supported:
+      #
+      # * `project_id` - (String)  Google Cloud Platform project identifier for
+      #   the Stackdriver Error Reporting service you are connecting to. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {ErrorReporting::Credentials})
+      #   (The parameter `keyfile` is considered deprecated, but may also be
+      #   used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `service_name` - (String) Name for the application.
+      # * `service_version` - (String) Version identifier for the application.
+      # * `ignore_classes` - (Array<Exception>) Array of exception types that
+      #   should not be reported.
       #
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
@@ -147,8 +177,8 @@ module Google
       #   require "google/cloud/error_reporting"
       #
       #   Google::Cloud::ErrorReporting.configure do |config|
-      #     config.project_id = "my-project-id"
-      #     config.keyfile = "/path/to/keyfile.json"
+      #     config.project_id = "my-project"
+      #     config.credentials = "/path/to/keyfile.json"
       #     config.service_name = "my-service"
       #     config.service_version = "v8"
       #   end
@@ -160,7 +190,7 @@ module Google
       #     Google::Cloud::ErrorReporting.report exception
       #   end
       #
-      # @return [Stackdriver::Core::Configuration] The configuration object
+      # @return [Google::Cloud::Config] The configuration object
       #   the Google::Cloud::ErrorReporting module uses.
       #
       def self.configure
@@ -217,10 +247,8 @@ module Google
       def self.report exception, service_name: nil, service_version: nil
         return if Google::Cloud.configure.use_error_reporting == false
 
-        service_name ||= configure.service_name ||
-                         Project.default_service_name
-        service_version ||= configure.service_version ||
-                            Project.default_service_version
+        service_name ||= Project.default_service_name
+        service_version ||= Project.default_service_version
 
         error_event = ErrorEvent.from_exception(exception).tap do |event|
           event.service_name = service_name
@@ -236,13 +264,11 @@ module Google
       # @private Create a private client to
       def self.default_client
         unless @@default_client
-          project_id = configure.project_id ||
-                       Google::Cloud.configure.project_id
-          keyfile = configure.keyfile ||
-                    Google::Cloud.configure.keyfile
+          project_id = Project.default_project_id
+          credentials = default_credentials
 
           @@default_client = AsyncErrorReporter.new(
-            new(project: project_id, keyfile: keyfile)
+            new(project_id: project_id, credentials: credentials)
           )
         end
 
@@ -250,6 +276,16 @@ module Google
       end
 
       private_class_method :default_client
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.error_reporting.credentials ||
+          Google::Cloud.configure.credentials ||
+          ErrorReporting::Credentials.default(scope: scope)
+      end
+
+      private_class_method :default_credentials
     end
   end
 end

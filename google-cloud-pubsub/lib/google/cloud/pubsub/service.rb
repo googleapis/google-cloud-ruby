@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,7 +35,7 @@ module Google
                        client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || "pubsub.googleapis.com"
+          @host = host || V1::PublisherClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
         end
@@ -47,7 +47,8 @@ module Google
 
         def chan_args
           { "grpc.max_send_message_length"    => -1,
-            "grpc.max_receive_message_length" => -1 }
+            "grpc.max_receive_message_length" => -1,
+            "grpc.keepalive_time_ms"          => 300000 }
         end
 
         def chan_creds
@@ -61,12 +62,12 @@ module Google
           return mocked_subscriber if mocked_subscriber
           @subscriber ||= begin
             V1::SubscriberClient.new(
-              service_path: host,
-              channel: channel,
+              credentials: channel,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Pubsub::VERSION)
+              lib_version: Google::Cloud::Pubsub::VERSION
+            )
           end
         end
         attr_accessor :mocked_subscriber
@@ -75,11 +76,11 @@ module Google
           return mocked_publisher if mocked_publisher
           @publisher ||= begin
             V1::PublisherClient.new(
-              service_path: host,
-              channel: channel,
+              credentials: channel,
               timeout: timeout,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Pubsub::VERSION)
+              lib_version: Google::Cloud::Pubsub::VERSION
+            )
           end
         end
         attr_accessor :mocked_publisher

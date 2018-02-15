@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,6 +52,13 @@ describe "Storage", :buckets, :storage do
   it "gets all buckets with request_limit" do
     storage.buckets(max: 2).all(request_limit: 1) do |bucket|
       bucket.must_be_kind_of Google::Cloud::Storage::Bucket
+    end
+  end
+
+  describe "anonymous project" do
+    it "raises when listing buckets without authentication" do
+      anonymous_storage = Google::Cloud::Storage.anonymous
+      expect { anonymous_storage.buckets }.must_raise Google::Cloud::InvalidArgumentError # required: Required parameter: project
     end
   end
 end

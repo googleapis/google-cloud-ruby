@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -56,6 +56,12 @@ describe Google::Cloud::Trace::AsyncReporter, :mock_trace do
       reporter.patch_traces nil
 
       queue.size.must_equal max_queue_size
+
+      # Empty the queue so that the reporter doesn't try to execute these
+      # bogus items when it is flushed.
+      max_queue_size.times do |i|
+        queue.pop
+      end
     end
 
     it "wakes up the child thread to dequeue the events" do

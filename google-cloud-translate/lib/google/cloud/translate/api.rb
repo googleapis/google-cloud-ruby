@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/translate/service"
 require "google/cloud/translate/translation"
 require "google/cloud/translate/detection"
@@ -69,24 +68,16 @@ module Google
         #   require "google/cloud/translate"
         #
         #   translate = Google::Cloud::Translate.new(
-        #     project: "my-todo-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-todo-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   translate.project #=> "my-todo-project"
+        #   translate.project_id #=> "my-todo-project"
         #
-        def project
+        def project_id
           service.project
         end
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["TRANSLATE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
+        alias project project_id
 
         ##
         # Returns text translations from one language to another.
@@ -183,7 +174,7 @@ module Google
         def translate *text, to: nil, from: nil, format: nil, model: nil,
                       cid: nil
           return nil if text.empty?
-          fail ArgumentError, "to is required" if to.nil?
+          raise ArgumentError, "to is required" if to.nil?
           to = to.to_s
           from = from.to_s if from
           format = format.to_s if format

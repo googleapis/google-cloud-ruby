@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,7 +49,7 @@ module Google
       class Agent
         ##
         # Name of the logpoints log file.
-        DEFAULT_LOG_NAME = "debugger_logpoints"
+        DEFAULT_LOG_NAME = "debugger_logpoints".freeze
 
         ##
         # @private Debugger Agent is an asynchronous actor
@@ -182,7 +182,7 @@ module Google
               breakpoint_manager.sync_active_breakpoints debuggee.id
             debuggee.revoke_registration unless sync_result
           end
-        rescue => e
+        rescue StandardError => e
           warn ["#{e.class}: #{e.message}", e.backtrace].join("\n\t")
           @last_exception = e
         end
@@ -242,8 +242,8 @@ module Google
           project_id = @service.project
           credentials = @service.credentials
           logging = Google::Cloud::Logging::Project.new(
-            Google::Cloud::Logging::Service.new(
-              project_id, credentials))
+            Google::Cloud::Logging::Service.new(project_id, credentials)
+          )
           resource =
             Google::Cloud::Logging::Middleware.build_monitored_resource
 

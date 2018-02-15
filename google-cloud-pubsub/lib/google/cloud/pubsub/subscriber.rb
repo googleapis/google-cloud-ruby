@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,11 +31,12 @@ module Google
       #
       #   sub = pubsub.subscription "my-topic-sub"
       #
-      #   subscriber = sub.listen do |msg|
-      #     # process msg
-      #     msg.ack!
+      #   subscriber = sub.listen do |received_message|
+      #     # process message
+      #     received_message.acknowledge!
       #   end
       #
+      #   # Start background threads that will call the block passed to listen.
       #   subscriber.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
@@ -86,7 +87,7 @@ module Google
           @started = nil
           @stopped = nil
 
-          stream_pool = @streams.times.map do
+          stream_pool = Array.new(@streams) do
             Thread.new { Stream.new self }
           end
           @stream_pool = stream_pool.map(&:value)
@@ -108,7 +109,7 @@ module Google
               Thread.new { stream.start }
             end
           end
-          start_pool.join
+          start_pool.map(&:join)
 
           self
         end
@@ -129,7 +130,7 @@ module Google
               Thread.new { stream.stop }
             end
           end
-          stop_pool.join
+          stop_pool.map(&:join)
 
           self
         end
@@ -147,7 +148,7 @@ module Google
               Thread.new { stream.wait! }
             end
           end
-          wait_pool.join
+          wait_pool.map(&:join)
 
           self
         end
@@ -171,7 +172,8 @@ module Google
         ##
         # @private
         def to_s
-          format "(subscription: %s, streams: %i)", subscription_name, streams
+          format "(subscription: %<sub>s, streams: %<count>i)",
+                 sub: subscription_name, count: streams
         end
 
         ##

@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/storage/errors"
 require "google/cloud/storage/service"
 require "google/cloud/storage/credentials"
@@ -66,24 +65,16 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new(
-        #     project: "my-todo-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   storage.project #=> "my-todo-project"
+        #   storage.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["STORAGE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
+        alias project project_id
 
         ##
         # Retrieves a list of buckets for the given project.
@@ -99,8 +90,8 @@ module Google
         #   {#project} for the ID of the current project.) If this parameter is
         #   set to a project ID other than the current project, and that project
         #   is authorized for the currently authenticated service account,
-        #   transit costs will be billed to the given project. The default is
-        #   `nil`.
+        #   transit costs will be billed to the given project. This parameter is
+        #   required with requester pays-enabled buckets. The default is `nil`.
         #
         #   The value provided will be applied to all operations on the returned
         #   bucket instances and their files.
@@ -146,7 +137,7 @@ module Google
           Bucket::List.from_gapi \
             gapi, service, prefix, max, user_project: user_project
         end
-        alias_method :find_buckets, :buckets
+        alias find_buckets buckets
 
         ##
         # Retrieves bucket by name.
@@ -162,7 +153,8 @@ module Google
         #   client. (See {#project} for the ID of the current project.) If this
         #   parameter is set to a project ID other than the current project, and
         #   that project is authorized for the currently authenticated service
-        #   account, transit costs will be billed to the given project. The
+        #   account, transit costs will be billed to the given project. This
+        #   parameter is required with requester pays-enabled buckets. The
         #   default is `nil`.
         #
         #   The value provided will be applied to all operations on the returned
@@ -181,7 +173,7 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   puts bucket.name
         #
-        # @example With `user_project` set to pay for a requester pays bucket:
+        # @example With `user_project` set to bill costs to the default project:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
@@ -208,7 +200,7 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_bucket, :bucket
+        alias find_bucket bucket
 
         ##
         # Creates a new bucket with optional attributes. Also accepts a block

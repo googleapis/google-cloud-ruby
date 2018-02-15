@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,8 +60,8 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more, :mock_datastore do
 
   before do
     dataset.service.mocked_service = Minitest::Mock.new
-    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, nil, nil, query: first_run_query, gql_query: nil, options: default_options]
-    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, nil, nil, query: next_run_query, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, nil, read_options: nil, query: first_run_query, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, nil, read_options: nil, query: next_run_query, gql_query: nil, options: default_options]
   end
 
   after do
@@ -70,7 +70,7 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more, :mock_datastore do
 
   it "run will fulfill a query and can use the all and limit api calls" do
     entities = dataset.run dataset.query("Task")
-    # change request_limit to 2 to see more requests attempted
+    # set request_limit to 1 to only make one more request
     entities.all(request_limit: 1) do |entity|
       entity.must_be_kind_of Google::Cloud::Datastore::Entity
     end
@@ -78,13 +78,13 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more, :mock_datastore do
 
   it "run will fulfill a query and can use the all as a lazy enumerator" do
     entities = dataset.run dataset.query("Task")
-    # change request_limit to 2 to see more requests attempted
+    # no request_limit set, enumerator should only make 2 total requests though
     entities.all.lazy.take(30).count.must_equal 30
   end
 
   it "run will fulfill a query and can use the all_with_cursor and limit api calls" do
     entities = dataset.run dataset.query("Task")
-    # change request_limit to 2 to see more requests attempted
+    # set request_limit to 1 to only make one more request
     entities.all_with_cursor(request_limit: 1) do |entity, cursor|
       entity.must_be_kind_of Google::Cloud::Datastore::Entity
       cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
@@ -93,7 +93,7 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more, :mock_datastore do
 
   it "run will fulfill a query and can use the all_with_cursor as a lazy enumerator" do
     entities = dataset.run dataset.query("Task")
-    # change request_limit to 2 to see more requests attempted
+    # no request_limit set, enumerator should only make 2 total requests though
     entities.all_with_cursor.lazy.take(30).count.must_equal 30
   end
 end

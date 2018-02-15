@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
 require "helper"
 
 describe Google::Cloud::Logging::Convert, :object_to_value do
-  let(:nil_value) { Google::Protobuf::Value.new null_value: :NULL_VALUE }
+  let(:null_value) { Google::Protobuf::Value.new null_value: :NULL_VALUE }
   let(:true_value) { Google::Protobuf::Value.new bool_value: true }
   let(:string_value) { Google::Protobuf::Value.new string_value: "bif" }
   let(:num_value) { Google::Protobuf::Value.new number_value: 3.14 }
@@ -25,7 +25,7 @@ describe Google::Cloud::Logging::Convert, :object_to_value do
 
   it "converts nil object" do
     value = Google::Cloud::Logging::Convert.object_to_value nil
-    value.must_equal nil_value
+    value.must_equal null_value
   end
 
   it "converts true object" do

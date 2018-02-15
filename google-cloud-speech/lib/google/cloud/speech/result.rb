@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -104,7 +104,7 @@ module Google
         #   experimental feature and the accuracy of the time offset can vary.
         class Word
           attr_reader :word, :start_time, :end_time
-          alias_method :to_str, :word
+          alias to_str word
 
           ##
           # @private Creates a new Result::Word instance.
@@ -218,7 +218,7 @@ module Google
         ##
         # @private Creates a new InterimResult instance.
         def initialize transcript, confidence, stability, alternatives = []
-          @transcript  = transcript
+          @transcript = transcript
           @confidence = confidence
           @stability = stability
           @alternatives = alternatives

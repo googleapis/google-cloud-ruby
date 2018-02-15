@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +18,8 @@ require "google/cloud/datastore/errors"
 require "google/cloud/datastore/dataset"
 require "google/cloud/datastore/transaction"
 require "google/cloud/datastore/credentials"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -29,18 +31,21 @@ module Google
     # relational databases, but there are some key differences to be aware of to
     # make the most of using Datastore.
     #
-    # The goal of google-cloud is to provide a API that is comfortable to
-    # Rubyists. Authentication is handled by {Google::Cloud#datastore}. You can
-    # provide the project and credential information to connect to the Datastore
-    # service, or if you are running on Google Compute Engine this configuration
-    # is taken care of for you.
+    # The goal of google-cloud is to provide an API that is comfortable to
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ```ruby
     # require "google/cloud/datastore"
     #
     # datastore = Google::Cloud::Datastore.new(
-    #   project: "my-todo-project",
-    #   keyfile: "/path/to/keyfile.json"
+    #   project_id: "my-todo-project",
+    #   credentials: "/path/to/keyfile.json"
     # )
     #
     # task = datastore.find "Task", "sampleTask"
@@ -369,6 +374,30 @@ module Google
     # end
     # ```
     #
+    # A read-only transaction cannot modify entities; in return they do not
+    # contend with other read-write or read-only transactions. Using a read-only
+    # transaction for transactions that only read data will potentially improve
+    # throughput.
+    #
+    # ```ruby
+    # require "google/cloud/datastore"
+    #
+    # datastore = Google::Cloud::Datastore.new
+    #
+    # task_list_key = datastore.key "TaskList", "default"
+    # query = datastore.query("Task").
+    #   ancestor(task_list_key)
+    #
+    # tasks = nil
+    #
+    # datastore.transaction read_only: true do |tx|
+    #   task_list = tx.find task_list_key
+    #   if task_list
+    #     tasks = tx.run query
+    #   end
+    # end
+    # ```
+    #
     # See {Google::Cloud::Datastore::Transaction} and
     # {Google::Cloud::Datastore::Dataset#transaction}
     #
@@ -545,10 +574,11 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Dataset identifier for the Datastore you are
-      #   connecting to.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Identifier for a Datastore project. If not
+      #   present, the default project for the credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Datastore::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -561,7 +591,10 @@ module Google
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. See Google::Gax::CallSettings. Optional.
       # @param [String] emulator_host Datastore emulator host. Optional.
-      #   If the param is nil, ENV["DATASTORE_EMULATOR_HOST"] will be used.
+      #   If the param is nil, uses the value of the `emulator_host` config.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Datastore::Dataset]
       #
@@ -569,8 +602,8 @@ module Google
       #   require "google/cloud/datastore"
       #
       #   datastore = Google::Cloud::Datastore.new(
-      #     project: "my-todo-project",
-      #     keyfile: "/path/to/keyfile.json"
+      #     project_id: "my-todo-project",
+      #     credentials: "/path/to/keyfile.json"
       #   )
       #
       #   task = datastore.entity "Task", "sampleTask" do |t|
@@ -582,35 +615,81 @@ module Google
       #
       #   datastore.save task
       #
-      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil, emulator_host: nil
-        project ||= Google::Cloud::Datastore::Dataset.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
+                   client_config: nil, emulator_host: nil, project: nil,
+                   keyfile: nil
+        project_id ||= (project || default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        emulator_host ||= ENV["DATASTORE_EMULATOR_HOST"]
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        emulator_host ||= configure.emulator_host
         if emulator_host
-          return Google::Cloud::Datastore::Dataset.new(
-            Google::Cloud::Datastore::Service.new(
-              project, :this_channel_is_insecure,
-              host: emulator_host,
-              client_config: client_config))
+          return Datastore::Dataset.new(
+            Datastore::Service.new(
+              project_id, :this_channel_is_insecure,
+              host: emulator_host, client_config: client_config
+            )
+          )
         end
-        credentials = credentials_with_scope keyfile, scope
-        Google::Cloud::Datastore::Dataset.new(
-          Google::Cloud::Datastore::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config))
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Datastore::Credentials.new credentials, scope: scope
+        end
+
+        Datastore::Dataset.new(
+          Datastore::Service.new(
+            project_id, credentials,
+            timeout: timeout, client_config: client_config
+          )
+        )
       end
 
       ##
-      # @private
-      def self.credentials_with_scope keyfile, scope
-        if keyfile.nil?
-          Google::Cloud::Datastore::Credentials.default(scope: scope)
-        else
-          Google::Cloud::Datastore::Credentials.new(keyfile, scope: scope)
-        end
+      # Configure the Google Cloud Datastore library.
+      #
+      # The following Datastore configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Datastore project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Datastore::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["DATASTORE_EMULATOR_HOST"]`
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Datastore library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.datastore if block_given?
+
+        Google::Cloud.configure.datastore
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.datastore.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.datastore.credentials ||
+          Google::Cloud.configure.credentials ||
+          Datastore::Credentials.default(scope: scope)
       end
     end
   end

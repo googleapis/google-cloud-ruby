@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -116,11 +116,11 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     end
   end
 
-  describe ".default_project" do
+  describe ".default_project_id" do
     it "calls Google::Cloud.env.project_id if no environment variable found" do
       Google::Cloud.env.stub :project_id, "another-project" do
         ENV.stub :[], nil do
-          Google::Cloud::ErrorReporting::Project.default_project.must_equal "another-project"
+          Google::Cloud::ErrorReporting::Project.default_project_id.must_equal "another-project"
         end
       end
     end

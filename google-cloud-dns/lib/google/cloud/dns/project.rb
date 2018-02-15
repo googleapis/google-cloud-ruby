@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/dns/service"
 require "google/cloud/dns/credentials"
 require "google/cloud/dns/zone"
@@ -64,17 +63,17 @@ module Google
         #   require "google/cloud/dns"
         #
         #   dns = Google::Cloud::Dns.new(
-        #           project: "my-project-id",
-        #           keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
+        #   dns.project_id #=> "my-project"
         #
-        #   dns.project #=> "my-project-id"
-        #
-        def project
+        def project_id
           service.project
         end
-        alias_method :id, :project
+        alias project project_id
+        alias id project_id
 
         ##
         # The project number.
@@ -126,15 +125,6 @@ module Google
         end
 
         ##
-        # @private Default project.
-        def self.default_project
-          ENV["DNS_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
-
-        ##
         # Retrieves an existing zone by name or id.
         #
         # @param [String, Integer] zone_id The name or id of a zone.
@@ -156,8 +146,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_zone, :zone
-        alias_method :get_zone, :zone
+        alias find_zone zone
+        alias get_zone zone
 
         ##
         # Retrieves the list of zones belonging to the project.
@@ -192,7 +182,7 @@ module Google
           gapi = service.list_zones token: token, max: max
           Zone::List.from_gapi gapi, service, max
         end
-        alias_method :find_zones, :zones
+        alias find_zones zones
 
         ##
         # Creates a new zone.
@@ -233,14 +223,14 @@ module Google
           ensure_service!
           @gapi = service.get_project
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         protected
 
         ##
         # Raise an error unless an active connection is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,7 +29,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
   it "decodes empty value" do
     value = Google::Datastore::V1::Value.new
     raw = Google::Cloud::Datastore::Convert.from_value value
-    raw.must_equal nil
+    raw.must_be :nil?
   end
 
   it "encodes a string" do
@@ -57,7 +57,7 @@ describe Google::Cloud::Datastore::Properties, :mock_datastore do
     value = Google::Datastore::V1::Value.new
     value.null_value = :NULL_VALUE
     raw = Google::Cloud::Datastore::Convert.from_value value
-    raw.must_equal nil
+    raw.must_be :nil?
   end
 
   it "encodes true" do

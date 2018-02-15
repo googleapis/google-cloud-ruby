@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -66,7 +66,7 @@ describe "Datastore", :datastore do
 
       refresh = dataset.find post.key
       refresh.key.kind.must_equal        post.key.kind
-      refresh.key.id.must_equal          post.key.id
+      refresh.key.id.must_be :nil?
       refresh.key.name.must_equal        post.key.name
       refresh.properties.to_h.must_equal post.properties.to_h
       # Verify the index excludes are retrieved properly
@@ -84,7 +84,7 @@ describe "Datastore", :datastore do
 
       refresh = dataset.find post.key
       refresh.key.kind.must_equal        post.key.kind
-      refresh.key.id.must_equal          post.key.id
+      refresh.key.id.must_be :nil?
       refresh.key.name.must_equal        post.key.name
       refresh.properties.to_h.must_equal post.properties.to_h
 
@@ -100,7 +100,7 @@ describe "Datastore", :datastore do
       refresh = dataset.find post.key
       refresh.key.kind.must_equal        post.key.kind
       refresh.key.id.must_equal          post.key.id
-      refresh.key.name.must_equal        post.key.name
+      refresh.key.name.must_be :nil?
       refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post
@@ -120,7 +120,7 @@ describe "Datastore", :datastore do
       refresh = dataset.find "Post",     post.key.id
       refresh.key.kind.must_equal        post.key.kind
       refresh.key.id.must_equal          post.key.id
-      refresh.key.name.must_equal        post.key.name
+      refresh.key.name.must_be :nil?
       refresh.properties.to_h.must_equal post.properties.to_h
 
       dataset.delete post
@@ -234,7 +234,7 @@ describe "Datastore", :datastore do
       refresh = dataset.find post.key, consistency: :eventual
       refresh.wont_be :nil?
       refresh.key.kind.must_equal        post.key.kind
-      refresh.key.id.must_equal          post.key.id
+      refresh.key.id.must_be :nil?
       refresh.key.name.must_equal        post.key.name
       refresh.properties.to_h.must_equal post.properties.to_h
 
@@ -287,7 +287,7 @@ describe "Datastore", :datastore do
       entity = entities.first
       entity["fullName"].must_equal      person["fullName"]
       entity["linkedTo"].kind.must_equal person["linkedTo"].kind
-      entity["linkedTo"].id.must_equal   person["linkedTo"].id
+      entity["linkedTo"].id.must_be :nil?
       entity["linkedTo"].name.must_equal person["linkedTo"].name
     end
   end
@@ -596,6 +596,18 @@ describe "Datastore", :datastore do
       entities.count.must_equal 6
     end
 
+    it "should find and run query in a read-only transaction" do
+      query = dataset.query("Character").
+        ancestor(book.key)
+      entities = nil
+
+      tx = dataset.read_only_transaction do |tx|
+        fresh = tx.find book.key
+        entities = tx.run query
+      end
+      entities.count.must_equal 8
+    end
+
     after do
       dataset.delete *characters
     end
@@ -618,7 +630,7 @@ describe "Datastore", :datastore do
       entity = dataset.find obj.key
       entity.wont_be :nil?
       entity.key.kind.must_equal        obj.key.kind
-      entity.key.id.must_equal          obj.key.id
+      entity.key.id.must_be :nil?
       entity.key.name.must_equal        obj.key.name
       entity.properties.to_h.must_equal obj.properties.to_h
       dataset.delete entity
@@ -641,9 +653,43 @@ describe "Datastore", :datastore do
       entity = dataset.find obj.key
       entity.wont_be :nil?
       entity.key.kind.must_equal        obj.key.kind
-      entity.key.id.must_equal          obj.key.id
+      entity.key.id.must_be :nil?
       entity.key.name.must_equal        obj.key.name
       entity.properties.to_h.must_equal obj.properties.to_h
+      dataset.delete entity
+    end
+
+    it "should manually retry a transaction with previous_transaction" do
+      obj = Google::Cloud::Datastore::Entity.new
+      obj.key = Google::Cloud::Datastore::Key.new "Company", "#{prefix}_Google3"
+      obj["url"] = "www.google.com"
+      dataset.save obj
+
+      tx = dataset.transaction
+      tx.id.wont_be :nil?
+
+      obj2 = tx.find obj.key
+
+      obj["url"] = "1.google.com"
+      dataset.update obj
+
+      obj2["url"] = "2.google.com"
+      tx.update obj2
+
+      retried = false
+      begin
+        tx.commit
+      rescue Google::Cloud::AbortedError
+        retried = true
+        tx2 = dataset.transaction previous_transaction: tx.id
+        tx2.update obj2
+        tx2.commit
+      end
+
+      retried.must_equal true
+      entity = dataset.find obj.key
+      entity.wont_be :nil?
+      entity["url"].must_equal "2.google.com"
       dataset.delete entity
     end
 
@@ -651,7 +697,7 @@ describe "Datastore", :datastore do
       dataset.save dataset.entity("Post", "#{prefix}_post5")
 
       tx = dataset.transaction do |tx|
-        in_tx_refresh = tx.find tx.key("Post", "#{prefix}_post5")
+        in_tx_refresh = tx.find dataset.key("Post", "#{prefix}_post5")
         tx.delete in_tx_refresh if in_tx_refresh
       end
 

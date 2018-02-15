@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -100,7 +100,7 @@ module Google
         #
         def started_at
           Time.parse @gapi.start_time
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -110,7 +110,7 @@ module Google
           ensure_service!
           @gapi = zone.service.get_change @zone.id, id
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Refreshes the change until the status is `done`.
@@ -150,7 +150,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless zone && zone.service
+          raise "Must have active connection" unless zone && zone.service
         end
       end
     end

@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -67,9 +67,10 @@ module Google
       #
       # @param [Hash] env Mock environment variables.
       # @param [Faraday::Connection] connection Faraday connection to use.
+      # @param [Hash] metadata_cache Mock cache.
       #
-      def initialize env: nil, connection: nil
-        @metadata_cache = {}
+      def initialize env: nil, connection: nil, metadata_cache: nil
+        @metadata_cache = metadata_cache || {}
         @env = env || ::ENV
         @connection = connection ||
                       ::Faraday.new(url: METADATA_HOST,
@@ -304,7 +305,8 @@ module Google
             resp = connection.get METADATA_ROOT_PATH
             metadata_cache[METADATA_ROOT_PATH] = \
               resp.status == 200 && resp.headers["Metadata-Flavor"] == "Google"
-          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed
+          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed,
+                 Errno::EHOSTDOWN
             metadata_cache[METADATA_ROOT_PATH] = false
           end
         end
@@ -329,7 +331,8 @@ module Google
               req.headers = { "Metadata-Flavor" => "Google" }
             end
             metadata_cache[path] = resp.status == 200 ? resp.body.strip : nil
-          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed
+          rescue ::Faraday::TimeoutError, ::Faraday::ConnectionFailed,
+                 Errno::EHOSTDOWN
             metadata_cache[path] = nil
           end
         end

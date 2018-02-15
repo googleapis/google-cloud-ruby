@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,8 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "json"
-require "uri"
 
 describe Google::Cloud::Storage::File, :mock_storage do
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash("bucket").to_json }
@@ -152,21 +150,76 @@ describe Google::Cloud::Storage::File, :mock_storage do
   it "can download itself to a file" do
     # Stub the md5 to match.
     def file.md5
-      "1B2M2Y8AsgTpgAmY7PhCfg=="
+      "X7A8HRvZUCT5gbq0KNDL8Q=="
     end
 
     Tempfile.open "google-cloud" do |tmpfile|
       # write to the file since the mocked call won't
-      tmpfile.write "yay!"
+      data = "yay!"
+      tmpfile.write data
+      tmpfile.rewind
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, tmpfile,
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile
       downloaded.must_be_kind_of File
+      tmpfile.read.must_equal data
+
+      mock.verify
+    end
+  end
+
+  it "can download and decompress itself to a file when Content-Encoding gzip response header" do
+    data = "Hello world!"
+    gzipped_data = gzip_data data
+
+    # Stub the md5 to match.
+    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+
+    Tempfile.open "google-cloud" do |tmpfile|
+      # write to the file since the mocked call won't
+      tmpfile.write gzipped_data
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp(gzip: true)],
+        [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
+
+      bucket.service.mocked_service = mock
+
+      downloaded = file.download tmpfile
+      downloaded.must_be_kind_of File
+      tmpfile.read.must_equal data
+
+      mock.verify
+    end
+  end
+
+  it "can download itself to a file when Content-Encoding gzip response header with skip_decompress" do
+    data = "Hello world!"
+    gzipped_data = gzip_data data
+
+    # Stub the md5 to match.
+    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+
+    Tempfile.open "google-cloud" do |tmpfile|
+      # write to the file since the mocked call won't
+      tmpfile.write gzipped_data
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp(gzip: true)],
+        [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
+
+      bucket.service.mocked_service = mock
+
+      downloaded = file.download tmpfile, skip_decompress: true
+      downloaded.must_be_kind_of File
+      tmpfile.read.must_equal gzipped_data
 
       mock.verify
     end
@@ -183,7 +236,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, tmpfile,
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket.name, file.name, download_dest: tmpfile.path, generation: nil, user_project: nil, options: {}]
 
       bucket.service.mocked_service = mock
@@ -206,7 +259,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, tmpfile,
+      mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket.name, file_user_project.name, download_dest: tmpfile, generation: nil, user_project: "test", options: {}]
 
       bucket.service.mocked_service = mock
@@ -224,14 +277,56 @@ describe Google::Cloud::Storage::File, :mock_storage do
       "X7A8HRvZUCT5gbq0KNDL8Q=="
     end
 
+    data = "yay!"
     mock = Minitest::Mock.new
-    mock.expect :get_object, StringIO.new("yay!"),
+    mock.expect :get_object_with_response, [StringIO.new(data), download_http_resp],
       [bucket.name, file.name, Hash] # Can't match StringIO in mock...
 
     bucket.service.mocked_service = mock
 
     downloaded = file.download
     downloaded.must_be_kind_of StringIO
+    downloaded.read.must_equal data
+
+    mock.verify
+  end
+
+  it "can download and decompress itself to an IO when Content-Encoding gzip response header" do
+    data = "Hello world!"
+    gzipped_data = gzip_data data
+
+    # Stub the md5 to match.
+    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object_with_response, [StringIO.new(gzipped_data), download_http_resp(gzip: true)],
+      [bucket.name, file.name, Hash] # Can't match StringIO in mock...
+
+    bucket.service.mocked_service = mock
+
+    downloaded = file.download
+    downloaded.must_be_kind_of StringIO
+    downloaded.read.must_equal data
+
+    mock.verify
+  end
+
+  it "can download itself to an IO when Content-Encoding gzip response header with skip_decompress" do
+    data = "Hello world!"
+    gzipped_data = gzip_data data
+
+    # Stub the md5 to match.
+    file.gapi.md5_hash = Digest::MD5.base64digest gzipped_data
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object_with_response, [StringIO.new(gzipped_data), download_http_resp(gzip: true)],
+      [bucket.name, file.name, Hash] # Can't match StringIO in mock...
+
+    bucket.service.mocked_service = mock
+
+    downloaded = file.download skip_decompress: true
+    downloaded.must_be_kind_of StringIO
+    downloaded.read.must_equal gzipped_data
 
     mock.verify
   end
@@ -243,7 +338,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
     end
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, StringIO.new("yay!"),
+    mock.expect :get_object_with_response, [StringIO.new("yay!"), download_http_resp],
       [bucket.name, file.name, Hash] # Can't match StringIO in mock...
 
     bucket.service.mocked_service = mock
@@ -267,7 +362,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_object, nil, # using encryption keys seems to return nil
+      mock.expect :get_object_with_response, [nil, download_http_resp], # using encryption keys seems to return nil
         [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: key_options]
 
       bucket.service.mocked_service = mock
@@ -287,7 +382,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -314,7 +409,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -341,7 +436,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -361,6 +456,24 @@ describe Google::Cloud::Storage::File, :mock_storage do
       end
     end
 
+    it "verifies crc32c downloading to an IO when specified" do
+      data = "yay!"
+
+      file.gapi.crc32c = Digest::CRC32c.base64digest data
+
+      mock = Minitest::Mock.new
+      mock.expect :get_object_with_response, [StringIO.new(data), download_http_resp],
+        [bucket.name, file.name, Hash] # Can't match StringIO in mock...
+
+      bucket.service.mocked_service = mock
+
+      downloaded = file.download verify: :crc32c
+      downloaded.must_be_kind_of StringIO
+      downloaded.read.must_equal data
+
+      mock.verify
+    end
+
     it "verifies m5d and crc32c when specified" do
       # Stub these values
       def file.md5; "md5="; end
@@ -368,7 +481,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -399,7 +512,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -424,7 +537,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
       Tempfile.open "google-cloud" do |tmpfile|
         mock = Minitest::Mock.new
-        mock.expect :get_object, tmpfile,
+        mock.expect :get_object_with_response, [tmpfile, download_http_resp],
           [bucket.name, file.name, download_dest: tmpfile.path, generation: nil, user_project: nil, options: {}]
 
         bucket.service.mocked_service = mock
@@ -514,7 +627,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.copy "new-file.ext"
+    copied = file_user_project.copy "new-file.ext"
+    copied.user_project.must_equal true
 
     mock.verify
   end
@@ -618,7 +732,8 @@ describe Google::Cloud::Storage::File, :mock_storage do
     def file_user_project.sleep *args
     end
 
-    file_user_project.copy "new-file.ext"
+    copied = file_user_project.copy "new-file.ext"
+    copied.user_project.must_equal true
 
     mock.verify
   end
@@ -669,7 +784,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.copy "new-file.ext" do |f|
+    copied = file_user_project.copy "new-file.ext" do |f|
       f.cache_control = "private, max-age=0, no-cache"
       f.content_disposition = "inline; filename=filename.ext"
       f.content_encoding = "deflate"
@@ -679,6 +794,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       f.metadata["score"] = "10"
       f.storage_class = :nearline
     end
+    copied.user_project.must_equal true
 
     mock.verify
   end
@@ -711,6 +827,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
     updated.name.must_equal file_user_project.name
+    updated.user_project.must_equal true
 
     mock.verify
   end
@@ -791,6 +908,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
     updated.name.must_equal file_user_project.name
+    updated.user_project.must_equal true
 
     mock.verify
   end
@@ -896,5 +1014,14 @@ describe Google::Cloud::Storage::File, :mock_storage do
     generations.map(&:generation).must_equal [1234567894, 1234567893, 1234567892, 1234567891]
 
     mock.verify
+  end
+
+  def gzip_data data
+    gz = StringIO.new("")
+    z = Zlib::GzipWriter.new(gz)
+    z.write data
+    z.close # write the gzip footer
+
+    gz.string
   end
 end

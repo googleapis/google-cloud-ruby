@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -93,7 +93,7 @@ describe Google::Cloud::Debugger, :debugger do
     set_test_logpoint debuggee_id, agent_version, breakpoint_file_path, breakpoint_line, token
 
     project_id = gcloud_project_id
-    logging = Google::Cloud::Logging.new project: project_id
+    logging = Google::Cloud::Logging.new project_id: project_id
     timestamp = (Time.now - 60).utc.strftime('%FT%TZ')
 
     filter = "resource.type=\"#{monitored_resource_type}\" AND textPayload:#{token} AND timestamp > \"#{timestamp}\""

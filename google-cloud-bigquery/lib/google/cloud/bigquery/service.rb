@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,7 +45,6 @@ module Google
         # Creates a new Service instance.
         def initialize project, credentials, retries: nil, timeout: nil
           @project = project
-          @credentials = credentials
           @credentials = credentials
           @retries = retries
           @timeout = timeout
@@ -191,30 +190,43 @@ module Google
         def list_tabledata dataset_id, table_id, options = {}
           # The list operation is considered idempotent
           execute backoff: true do
-            service.list_table_data @project, dataset_id, table_id,
-                                    max_results: options.delete(:max),
-                                    page_token: options.delete(:token),
-                                    start_index: options.delete(:start)
+            json_txt = service.list_table_data \
+              @project, dataset_id, table_id,
+              max_results: options.delete(:max),
+              page_token: options.delete(:token),
+              start_index: options.delete(:start),
+              options: { skip_deserialization: true }
+            JSON.parse json_txt, symbolize_names: true
           end
         end
 
         def insert_tabledata dataset_id, table_id, rows, options = {}
-          insert_rows = Array(rows).map do |row|
-            Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-              insert_id: SecureRandom.uuid,
-              json: Convert.to_json_row(row)
-            )
+          json_rows = Array(rows).map { |row| Convert.to_json_row row }
+
+          insert_tabledata_json_rows dataset_id, table_id, json_rows, options
+        end
+
+        def insert_tabledata_json_rows dataset_id, table_id, json_rows,
+                                       options = {}
+          insert_rows = Array(json_rows).map do |json_row|
+            {
+              insertId: SecureRandom.uuid,
+              json: json_row
+            }
           end
-          insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
+
+          insert_req = {
             rows: insert_rows,
-            ignore_unknown_values: options[:ignore_unknown],
-            skip_invalid_rows: options[:skip_invalid]
-          )
+            ignoreUnknownValues: options[:ignore_unknown],
+            skipInvalidRows: options[:skip_invalid]
+          }.to_json
 
           # The insertAll with insertId operation is considered idempotent
           execute backoff: true do
             service.insert_all_table_data(
-              @project, dataset_id, table_id, insert_req)
+              @project, dataset_id, table_id, insert_req,
+              options: { skip_serialization: true }
+            )
           end
         end
 
@@ -278,7 +290,8 @@ module Google
           # Jobs have generated id, so this operation is considered idempotent
           execute backoff: true do
             service.insert_job @project, copy_table_config(
-              source, target, options)
+              source, target, options
+            )
           end
         end
 
@@ -304,7 +317,8 @@ module Google
           execute backoff: true do
             service.insert_job \
               @project, load_table_file_config(
-                dataset_id, table_id, file, options),
+                dataset_id, table_id, file, options
+              ),
               upload_source: file, content_type: mime_type_for(file)
           end
         end
@@ -318,7 +332,7 @@ module Google
           str = str.to_s
           m = /\A(((?<prj>\S*):)?(?<dts>\S*)\.)?(?<tbl>\S*)\z/.match str
           unless m
-            fail ArgumentError, "unable to identify table from #{str.inspect}"
+            raise ArgumentError, "unable to identify table from #{str.inspect}"
           end
           str_table_ref_hash = {
             project_id: m["prj"],
@@ -389,7 +403,8 @@ module Google
           path = Pathname(file).to_path
           {
             destination_table: Google::Apis::BigqueryV2::TableReference.new(
-              project_id: @project, dataset_id: dataset_id, table_id: table_id),
+              project_id: @project, dataset_id: dataset_id, table_id: table_id
+            ),
             create_disposition: create_disposition(options[:create]),
             write_disposition: write_disposition(options[:write]),
             source_format: source_format(path, options[:format]),
@@ -421,7 +436,8 @@ module Google
         def load_table_url_opts dataset_id, table_id, url, options = {}
           {
             destination_table: Google::Apis::BigqueryV2::TableReference.new(
-              project_id: @project, dataset_id: dataset_id, table_id: table_id),
+              project_id: @project, dataset_id: dataset_id, table_id: table_id
+            ),
             source_uris: Array(url),
             create_disposition: create_disposition(options[:create]),
             write_disposition: write_disposition(options[:write]),
@@ -498,7 +514,7 @@ module Google
                 end
               end
             else
-              fail "Query parameters must be an Array or a Hash."
+              raise "Query parameters must be an Array or a Hash."
             end
           end
 
@@ -543,7 +559,7 @@ module Google
                 end
               end
             else
-              fail "Query parameters must be an Array or a Hash."
+              raise "Query parameters must be an Array or a Hash."
             end
           end
 
@@ -622,14 +638,15 @@ module Google
         end
 
         def source_format path, format
-          val = { "csv" => "CSV",
-                  "json" => "NEWLINE_DELIMITED_JSON",
-                  "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
-                  "avro" => "AVRO",
-                  "datastore" => "DATASTORE_BACKUP",
-                  "backup" => "DATASTORE_BACKUP",
-                  "datastore_backup" => "DATASTORE_BACKUP"
-                }[format.to_s.downcase]
+          val = {
+            "csv" => "CSV",
+            "json" => "NEWLINE_DELIMITED_JSON",
+            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
+            "avro" => "AVRO",
+            "datastore" => "DATASTORE_BACKUP",
+            "backup" => "DATASTORE_BACKUP",
+            "datastore_backup" => "DATASTORE_BACKUP"
+          }[format.to_s.downcase]
           return val unless val.nil?
           return nil if path.nil?
           return "CSV" if path.end_with? ".csv"
@@ -647,7 +664,7 @@ module Google
           mime_type = MIME::Types.of(Pathname(file).to_path).first.to_s
           return nil if mime_type.empty?
           mime_type
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -680,13 +697,13 @@ module Google
             attr_accessor :backoff
           end
           self.retries = 5
-          self.reasons = %w(rateLimitExceeded backendError)
+          self.reasons = %w[rateLimitExceeded backendError]
           self.backoff = lambda do |retries|
             # Max delay is 32 seconds
             # See "Back-off Requirements" here:
             # https://cloud.google.com/bigquery/sla
             retries = 5 if retries > 5
-            delay = 2 ** retries
+            delay = 2**retries
             sleep delay
           end
 
@@ -727,7 +744,7 @@ module Google
               return false unless @reasons.include? json_error["reason"]
             end
             true
-          rescue
+          rescue StandardError
             false
           end
         end

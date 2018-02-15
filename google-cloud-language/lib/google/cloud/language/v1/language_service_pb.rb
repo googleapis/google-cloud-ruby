@@ -28,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :metadata, :string, :string, 3
     optional :salience, :float, 4
     repeated :mentions, :message, 5, "google.cloud.language.v1.EntityMention"
+    optional :sentiment, :message, 6, "google.cloud.language.v1.Sentiment"
   end
   add_enum "google.cloud.language.v1.Entity.Type" do
     value :UNKNOWN, 0
@@ -251,10 +252,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :NUMC, 74
     value :COP, 75
     value :DISLOCATED, 76
+    value :ASP, 77
+    value :GMOD, 78
+    value :GOBJ, 79
+    value :INFMOD, 80
+    value :MES, 81
+    value :NCOMP, 82
   end
   add_message "google.cloud.language.v1.EntityMention" do
     optional :text, :message, 1, "google.cloud.language.v1.TextSpan"
     optional :type, :enum, 2, "google.cloud.language.v1.EntityMention.Type"
+    optional :sentiment, :message, 3, "google.cloud.language.v1.Sentiment"
   end
   add_enum "google.cloud.language.v1.EntityMention.Type" do
     value :TYPE_UNKNOWN, 0
@@ -265,6 +273,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :content, :string, 1
     optional :begin_offset, :int32, 2
   end
+  add_message "google.cloud.language.v1.ClassificationCategory" do
+    optional :name, :string, 1
+    optional :confidence, :float, 2
+  end
   add_message "google.cloud.language.v1.AnalyzeSentimentRequest" do
     optional :document, :message, 1, "google.cloud.language.v1.Document"
     optional :encoding_type, :enum, 2, "google.cloud.language.v1.EncodingType"
@@ -273,6 +285,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :document_sentiment, :message, 1, "google.cloud.language.v1.Sentiment"
     optional :language, :string, 2
     repeated :sentences, :message, 3, "google.cloud.language.v1.Sentence"
+  end
+  add_message "google.cloud.language.v1.AnalyzeEntitySentimentRequest" do
+    optional :document, :message, 1, "google.cloud.language.v1.Document"
+    optional :encoding_type, :enum, 2, "google.cloud.language.v1.EncodingType"
+  end
+  add_message "google.cloud.language.v1.AnalyzeEntitySentimentResponse" do
+    repeated :entities, :message, 1, "google.cloud.language.v1.Entity"
+    optional :language, :string, 2
   end
   add_message "google.cloud.language.v1.AnalyzeEntitiesRequest" do
     optional :document, :message, 1, "google.cloud.language.v1.Document"
@@ -291,6 +311,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :tokens, :message, 2, "google.cloud.language.v1.Token"
     optional :language, :string, 3
   end
+  add_message "google.cloud.language.v1.ClassifyTextRequest" do
+    optional :document, :message, 1, "google.cloud.language.v1.Document"
+  end
+  add_message "google.cloud.language.v1.ClassifyTextResponse" do
+    repeated :categories, :message, 1, "google.cloud.language.v1.ClassificationCategory"
+  end
   add_message "google.cloud.language.v1.AnnotateTextRequest" do
     optional :document, :message, 1, "google.cloud.language.v1.Document"
     optional :features, :message, 2, "google.cloud.language.v1.AnnotateTextRequest.Features"
@@ -300,6 +326,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :extract_syntax, :bool, 1
     optional :extract_entities, :bool, 2
     optional :extract_document_sentiment, :bool, 3
+    optional :extract_entity_sentiment, :bool, 4
+    optional :classify_text, :bool, 6
   end
   add_message "google.cloud.language.v1.AnnotateTextResponse" do
     repeated :sentences, :message, 1, "google.cloud.language.v1.Sentence"
@@ -307,6 +335,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :entities, :message, 3, "google.cloud.language.v1.Entity"
     optional :document_sentiment, :message, 4, "google.cloud.language.v1.Sentiment"
     optional :language, :string, 5
+    repeated :categories, :message, 6, "google.cloud.language.v1.ClassificationCategory"
   end
   add_enum "google.cloud.language.v1.EncodingType" do
     value :NONE, 0
@@ -345,12 +374,17 @@ module Google
         EntityMention = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.EntityMention").msgclass
         EntityMention::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.EntityMention.Type").enummodule
         TextSpan = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.TextSpan").msgclass
+        ClassificationCategory = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.ClassificationCategory").msgclass
         AnalyzeSentimentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeSentimentRequest").msgclass
         AnalyzeSentimentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeSentimentResponse").msgclass
+        AnalyzeEntitySentimentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeEntitySentimentRequest").msgclass
+        AnalyzeEntitySentimentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeEntitySentimentResponse").msgclass
         AnalyzeEntitiesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeEntitiesRequest").msgclass
         AnalyzeEntitiesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeEntitiesResponse").msgclass
         AnalyzeSyntaxRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeSyntaxRequest").msgclass
         AnalyzeSyntaxResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnalyzeSyntaxResponse").msgclass
+        ClassifyTextRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.ClassifyTextRequest").msgclass
+        ClassifyTextResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.ClassifyTextResponse").msgclass
         AnnotateTextRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnnotateTextRequest").msgclass
         AnnotateTextRequest::Features = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnnotateTextRequest.Features").msgclass
         AnnotateTextResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.language.v1.AnnotateTextResponse").msgclass

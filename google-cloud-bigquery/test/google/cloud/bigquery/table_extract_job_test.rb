@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a extract of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -242,34 +242,6 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
     job.labels.must_equal labels
-  end
-
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210"
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id)
-  end
-
-  def extract_job_json table, extract_file, job_id
-    {
-      "jobReference" => {
-        "projectId" => project,
-        "jobId" => job_id
-      },
-      "configuration" => {
-        "extract" => {
-          "destinationUris" => [extract_file.to_gs_url],
-          "sourceTable" => {
-            "projectId" => table.project_id,
-            "datasetId" => table.dataset_id,
-            "tableId" => table.table_id
-          },
-          "printHeader" => nil,
-          "compression" => nil,
-          "fieldDelimiter" => nil,
-          "destinationFormat" => nil
-        },
-        "dryRun" => nil
-      }
-    }.to_json
   end
 
   # Borrowed from MockStorage, extract to a common module?

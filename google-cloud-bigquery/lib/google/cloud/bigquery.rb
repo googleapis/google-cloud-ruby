@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,8 @@
 
 require "google-cloud-bigquery"
 require "google/cloud/bigquery/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -27,11 +29,12 @@ module Google
     # BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery).
     #
     # The goal of google-cloud is to provide an API that is comfortable to
-    # Rubyists. Authentication is handled by {Google::Cloud#bigquery}. You can
-    # provide the project and credential information to connect to the BigQuery
-    # service, or if you are running on Google Compute Engine this configuration
-    # is taken care of for you. You can read more about the options for
-    # connecting in the [Authentication
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
     # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # To help you get started quickly, the first few examples below use a public
@@ -91,10 +94,6 @@ module Google
     # SQL)](https://cloud.google.com/bigquery/docs/reference/legacy-sql),
     # as discussed in the guide [Migrating from legacy
     # SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql).
-    #
-    # In addition, BigQuery offers both synchronous and asynchronous methods, as
-    # explained in [Querying
-    # Data](https://cloud.google.com/bigquery/querying-data).
     #
     # ### Standard SQL
     #
@@ -199,9 +198,9 @@ module Google
     # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
     # for an overview of each BigQuery data type, including allowed values.
     #
-    # ### Synchronous queries
+    # ### Running Queries
     #
-    # Let's start with the simpler synchronous approach. Notice that this time
+    # Let's start with the simplest way to run a query. Notice that this time
     # you are connecting using your own default project. It is necessary to have
     # write access to the project for running a query, since queries need to
     # create tables to hold results.
@@ -225,14 +224,13 @@ module Google
     # SQL)](https://cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators)
     # for a full listing.
     #
-    # ### Asynchronous queries
+    # ### Query Jobs
     #
     # It is usually best not to block for most BigQuery operations, including
     # querying as well as importing, exporting, and copying data. Therefore, the
     # BigQuery API provides facilities for managing longer-running jobs. With
-    # the asynchronous approach to running a query, an instance of
-    # {Google::Cloud::Bigquery::QueryJob} is returned, rather than an instance
-    # of {Google::Cloud::Bigquery::Data}.
+    # this approach, an instance of {Google::Cloud::Bigquery::QueryJob} is
+    # returned, rather than an instance of {Google::Cloud::Bigquery::Data}.
     #
     # ```ruby
     # require "google/cloud/bigquery"
@@ -319,6 +317,45 @@ module Google
     # bigquery = Google::Cloud::Bigquery.new
     # dataset = bigquery.dataset "my_dataset"
     # table = dataset.table "people"
+    #
+    # rows = [
+    #     {
+    #         "first_name" => "Anna",
+    #         "cities_lived" => [
+    #             {
+    #                 "place" => "Stockholm",
+    #                 "number_of_years" => 2
+    #             }
+    #         ]
+    #     },
+    #     {
+    #         "first_name" => "Bob",
+    #         "cities_lived" => [
+    #             {
+    #                 "place" => "Seattle",
+    #                 "number_of_years" => 5
+    #             },
+    #             {
+    #                 "place" => "Austin",
+    #                 "number_of_years" => 6
+    #             }
+    #         ]
+    #     }
+    # ]
+    # table.insert rows
+    # ```
+    #
+    # To avoid making RPCs (network requests) to retrieve the dataset and table
+    # resources when streaming records, pass the `skip_lookup` option. This
+    # creates local objects without verifying that the resources exist on the
+    # BigQuery service.
+    #
+    # ```ruby
+    # require "google/cloud/bigquery"
+    #
+    # bigquery = Google::Cloud::Bigquery.new
+    # dataset = bigquery.dataset "my_dataset", skip_lookup: true
+    # table = dataset.table "people", skip_lookup: true
     #
     # rows = [
     #     {
@@ -455,10 +492,11 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Identifier for a BigQuery project. If not
+      # @param [String] project_id Identifier for a BigQuery project. If not
       #   present, the default project for the credentials is used.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Bigquery::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See # [Using OAuth 2.0 to Access Google #
@@ -470,6 +508,9 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `5`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Bigquery::Project]
       #
@@ -480,23 +521,68 @@ module Google
       #   dataset = bigquery.dataset "my_dataset"
       #   table = dataset.table "my_table"
       #
-      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
-                   timeout: nil
-        project ||= Google::Cloud::Bigquery::Project.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
+                   timeout: nil, project: nil, keyfile: nil
+        project_id ||= (project || default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        if keyfile.nil?
-          credentials = Google::Cloud::Bigquery::Credentials.default(
-            scope: scope)
-        else
-          credentials = Google::Cloud::Bigquery::Credentials.new(
-            keyfile, scope: scope)
+        scope ||= configure.scope
+        retries ||= configure.retries
+        timeout ||= configure.timeout
+
+        credentials ||= (keyfile || default_credentials(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Bigquery::Credentials.new credentials, scope: scope
         end
 
-        Google::Cloud::Bigquery::Project.new(
-          Google::Cloud::Bigquery::Service.new(
-            project, credentials, retries: retries, timeout: timeout))
+        Bigquery::Project.new(
+          Bigquery::Service.new(
+            project_id, credentials, retries: retries, timeout: timeout
+          )
+        )
+      end
+
+      ##
+      # Configure the Google Cloud BigQuery library.
+      #
+      # The following BigQuery configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a BigQuery project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Bigquery::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Bigquery library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.bigquery if block_given?
+
+        Google::Cloud.configure.bigquery
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.bigquery.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.bigquery.credentials ||
+          Google::Cloud.configure.credentials ||
+          Bigquery::Credentials.default(scope: scope)
       end
     end
   end

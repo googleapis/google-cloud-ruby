@@ -1,5 +1,22 @@
 # Release History
 
+### 0.30.0 / 2017-12-19
+
+* Update google-gax dependency to 1.0.
+
+### 0.29.1 / 2017-11-15
+
+* Fix credentials verification bug in Railtie.
+
+### 0.29.0 / 2017-11-14
+
+* Add `Google::Cloud::Debugger::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Add Debugger Agent Design Document.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.28.2 / 2017-09-28
 
 * Improve Breakpoint tracer performance by not tracking C function calls in file tracing.
@@ -20,12 +37,12 @@
 ### 0.27.0 / 2017-08-07
 
 * Optimize breakpoint evaluation memory usage by adopting shared variable table.
-* Update breakpoint to error state if the breakpoint is set at an invalid position or 
+* Update breakpoint to error state if the breakpoint is set at an invalid position or
     if condition evaluation fail with an error.
 * Set errored variable evaluation to error state.
 * Restrict the amount of time spent on evaluating breakpoints within each rack application request.
-* Restrict total memory usage on collecting variables within each breakpoint evaluation. Prioritize 
-    memory allocation to user defined variables over local variables. 
+* Restrict total memory usage on collecting variables within each breakpoint evaluation. Prioritize
+    memory allocation to user defined variables over local variables.
 
 ### 0.26.1 / 2017-07-11
 

@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -54,18 +54,18 @@ module Google
 
             # Registers the debuggee with the controller service.
             #
-            # All agents attached to the same application should call this method with
-            # the same request content to get back the same stable `debuggee_id`. Agents
-            # should call this method again whenever `google.rpc.Code.NOT_FOUND` is
-            # returned from any controller method.
+            # All agents attached to the same application must call this method with
+            # exactly the same request content to get back the same stable `debuggee_id`.
+            # Agents should call this method again whenever `google.rpc.Code.NOT_FOUND`
+            # is returned from any controller method.
             #
-            # This allows the controller service to disable the agent or recover from any
-            # data loss. If the debuggee is disabled by the server, the response will
-            # have `is_disabled` set to `true`.
+            # This protocol allows the controller service to disable debuggees, recover
+            # from data loss, or change the `debuggee_id` format. Agents must handle
+            # `debuggee_id` value changing upon re-registration.
             rpc :RegisterDebuggee, RegisterDebuggeeRequest, RegisterDebuggeeResponse
             # Returns the list of all active breakpoints for the debuggee.
             #
-            # The breakpoint specification (location, condition, and expression
+            # The breakpoint specification (`location`, `condition`, and `expressions`
             # fields) is semantically immutable, although the field values may
             # change. For example, an agent may update the location line number
             # to reflect the actual line where the breakpoint was set, but this
@@ -78,12 +78,11 @@ module Google
             # setting those breakpoints again.
             rpc :ListActiveBreakpoints, ListActiveBreakpointsRequest, ListActiveBreakpointsResponse
             # Updates the breakpoint state or mutable fields.
-            # The entire Breakpoint message must be sent back to the controller
-            # service.
+            # The entire Breakpoint message must be sent back to the controller service.
             #
             # Updates to active breakpoint fields are only allowed if the new value
             # does not change the breakpoint specification. Updates to the `location`,
-            # `condition` and `expression` fields should not alter the breakpoint
+            # `condition` and `expressions` fields should not alter the breakpoint
             # semantics. These may only make changes such as canonicalizing a value
             # or snapping the location to the correct line of code.
             rpc :UpdateActiveBreakpoint, UpdateActiveBreakpointRequest, UpdateActiveBreakpointResponse

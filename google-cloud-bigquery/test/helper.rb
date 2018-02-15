@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -103,6 +103,13 @@ class MockBigquery < Minitest::Spec
       },
       "friendlyName" => name
     }
+  end
+
+  def list_datasets_gapi count = 2, token = nil
+    datasets = count.times.map { random_dataset_small_hash }
+    hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
+    hash["nextPageToken"] = token unless token.nil?
+    Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
   end
 
   def random_schema_hash
@@ -256,6 +263,14 @@ class MockBigquery < Minitest::Spec
     }
   end
 
+  def list_tables_gapi count = 2, token = nil, total = nil
+    tables = count.times.map { random_table_small_hash(dataset_id) }
+    hash = {"kind" => "bigquery#tableList", "tables" => tables,
+            "totalItems" => (total || count)}
+    hash["nextPageToken"] = token unless token.nil?
+    Google::Apis::BigqueryV2::TableList.from_json hash.to_json
+  end
+
   def source_table_gapi
     Google::Apis::BigqueryV2::Table.from_json source_table_json
   end
@@ -282,6 +297,36 @@ class MockBigquery < Minitest::Spec
       "tableId"   => "target_table_id"
     }
     hash.to_json
+  end
+
+  def copy_job_gapi source, target, job_id: "job_9876543210"
+    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id)
+  end
+
+  def copy_job_json source, target, job_id
+    {
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => job_id
+      },
+      "configuration" => {
+        "copy" => {
+          "sourceTable" => {
+            "projectId" => source.project_id,
+            "datasetId" => source.dataset_id,
+            "tableId" => source.table_id
+          },
+          "destinationTable" => {
+            "projectId" => target.project_id,
+            "datasetId" => target.dataset_id,
+            "tableId" => target.table_id
+          },
+          "createDisposition" => nil,
+          "writeDisposition" => nil
+        },
+        "dryRun" => nil
+      }
+    }.to_json
   end
 
   def random_view_gapi dataset, id = nil, name = nil, description = nil
@@ -483,6 +528,34 @@ class MockBigquery < Minitest::Spec
           "maximumBytesBilled" => nil,
           "userDefinedFunctionResources" => []
         }
+      }
+    }.to_json
+  end
+
+  def extract_job_gapi table, extract_file, job_id: "job_9876543210"
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id)
+  end
+
+  def extract_job_json table, extract_file, job_id
+    {
+      "jobReference" => {
+        "projectId" => project,
+        "jobId" => job_id
+      },
+      "configuration" => {
+        "extract" => {
+          "destinationUris" => [extract_file.to_gs_url],
+          "sourceTable" => {
+            "projectId" => table.project_id,
+            "datasetId" => table.dataset_id,
+            "tableId" => table.table_id
+          },
+          "printHeader" => nil,
+          "compression" => nil,
+          "fieldDelimiter" => nil,
+          "destinationFormat" => nil
+        },
+        "dryRun" => nil
       }
     }.to_json
   end

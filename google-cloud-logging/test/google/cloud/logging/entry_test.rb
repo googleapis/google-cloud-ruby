@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -96,7 +96,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
   end
 
   it "has the correct http_request attributes" do
-    entry.http_request.method.must_equal "GET"
+    entry.http_request.request_method.must_equal "GET"
     entry.http_request.url.must_equal "http://test.local/foo?bar=baz"
     entry.http_request.size.must_equal 123
     entry.http_request.status.must_equal 200
@@ -113,7 +113,7 @@ describe Google::Cloud::Logging::Entry, :mock_logging do
 
     entry.http_request.wont_be :nil?
     entry.http_request.must_be_kind_of Google::Cloud::Logging::Entry::HttpRequest
-    entry.http_request.method.must_be :nil?
+    entry.http_request.request_method.must_be :nil?
     entry.http_request.url.must_be :nil?
     entry.http_request.size.must_be :nil?
     entry.http_request.status.must_be :nil?

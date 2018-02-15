@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,10 +15,10 @@
 require "spanner_helper"
 
 describe "Spanner Databases", :spanner do
-  let(:instance_id) { $spanner_prefix }
+  let(:instance_id) { "google-cloud-ruby-tests" }
 
   it "creates, updates, and drops a database" do
-    database_id = "crud"
+    database_id = "#{$spanner_prefix}-crud"
 
     spanner.database(instance_id, database_id).must_be :nil?
 

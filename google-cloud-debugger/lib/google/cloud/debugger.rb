@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,8 @@
 
 require "google-cloud-debugger"
 require "google/cloud/debugger/project"
+require "google/cloud/config"
+require "google/cloud/env"
 require "stackdriver/core"
 
 module Google
@@ -320,15 +322,7 @@ module Google
     # See {Google::Cloud::Debugger::V2::Debugger2Client} for details.
     #
     module Debugger
-      # Initialize :error_reporting as a nested Configuration under
-      # Google::Cloud if haven't already
-      unless Google::Cloud.configure.option? :debugger
-        Google::Cloud.configure.add_options :debugger
-
-        Google::Cloud.configure.define_singleton_method :debugger do
-          Google::Cloud.configure[:debugger]
-        end
-      end
+      # rubocop:disable all
 
       ##
       # Creates a new debugger object for instrumenting Stackdriver Debugger for
@@ -339,10 +333,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Stackdriver Debugger
-      #   service.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
-      #   either the JSON data or the path to a readable file.
+      # @param [String] project_id Project identifier for the Stackdriver
+      #   Debugger service you are connecting to. If not present, the default
+      #   project for the credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Debugger::Credentials})
       # @param [String] service_name Name for the debuggee application.
       #   Optional.
       # @param [String] service_version Version identifier for the debuggee
@@ -351,8 +347,19 @@ module Google
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
       #   APIs](https://developers.google.com/identity/protocols/OAuth2).
-      #   The default scope is `https://www.googleapis.com/auth/cloud-platform`
+      #
+      #   The default scope is:
+      #
+      #   * `https://www.googleapis.com/auth/cloud_debugger`
+      #   * `https://www.googleapis.com/auth/logging.admin`
+      #
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Hash] client_config A hash of values to override the default
+      #   behavior of the API client. Optional.
+      # @param [String] project Project identifier for the Stackdriver Debugger
+      #   service.
+      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud:
+      #   either the JSON data or the path to a readable file.
       #
       # @return [Google::Cloud::Debugger::Project]
       #
@@ -362,46 +369,163 @@ module Google
       #   debugger = Google::Cloud::Debugger.new
       #   debugger.start
       #
-      def self.new project: nil, keyfile: nil, service_name: nil,
+      def self.new project_id: nil, credentials: nil, service_name: nil,
                    service_version: nil, scope: nil, timeout: nil,
-                   client_config: nil
-        project ||= Debugger::Project.default_project
-        project = project.to_s # Always cast to a string
-        service_name ||= Debugger::Project.default_service_name
+                   client_config: nil, project: nil, keyfile: nil
+        project_id ||= (project || default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+
+        service_name ||= default_service_name
         service_name = service_name.to_s
-        service_version ||= Debugger::Project.default_service_version
+
+        service_version ||= default_service_version
         service_version = service_version.to_s
 
-        fail ArgumentError, "project is missing" if project.empty?
-        fail ArgumentError, "service_name is missing" if service_name.empty?
-        fail ArgumentError, "service_version is missing" if service_version.nil?
+        raise ArgumentError, "project_id is missing" if project_id.empty?
+        raise ArgumentError, "service_name is missing" if service_name.empty?
+        if service_version.nil?
+          raise ArgumentError, "service_version is missing"
+        end
 
-        credentials = Credentials.credentials_with_scope keyfile, scope
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
 
-        Google::Cloud::Debugger::Project.new(
-          Google::Cloud::Debugger::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config),
+        credentials ||= (keyfile || default_credentials(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Debugger::Credentials.new credentials, scope: scope
+        end
+
+        Debugger::Project.new(
+          Debugger::Service.new(project_id, credentials,
+                                timeout: timeout, client_config: client_config),
           service_name: service_name,
           service_version: service_version
         )
       end
 
+      # rubocop:enable all
 
       ##
       # Configure the Stackdriver Debugger agent.
+      #
+      # The following Stackdriver Debugger configuration parameters are
+      # supported:
+      #
+      # * `project_id` - (String) Project identifier for the Stackdriver
+      #   Debugger service you are connecting to. (The parameter `project` is
+      #   considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Debugger::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `service_name` - (String) Name for the debuggee application.
+      # * `service_version` - (String) Version identifier for the debuggee
+      #   application.
+      # * `root` - (String) The root directory of the debuggee application as an
+      #   absolute file path.
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `allow_mutating_methods` - (boolean) Whether expressions and
+      #   conditional breakpoints can call methods that could modify program
+      #   state. Defaults to false.
+      # * `evaluation_time_limit` - (Numeric) Time limit in seconds for
+      #   expression evaluation. Defaults to 0.05.
       #
       # See the [Configuration
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration)
       # for full configuration parameters.
       #
-      # @return [Stackdriver::Core::Configuration] The configuration object
-      #   the Google::Cloud::ErrorReporting module uses.
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Debugger module uses.
       #
       def self.configure
-        yield Google::Cloud.configure[:debugger] if block_given?
+        yield Google::Cloud.configure.debugger if block_given?
 
-        Google::Cloud.configure[:debugger]
+        Google::Cloud.configure.debugger
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.debugger.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default service name identifier.
+      def self.default_service_name
+        Google::Cloud.configure.debugger.service_name ||
+          Google::Cloud.configure.service_name ||
+          Google::Cloud.env.app_engine_service_id ||
+          "ruby-app"
+      end
+
+      ##
+      # @private Default service version identifier.
+      def self.default_service_version
+        Google::Cloud.configure.debugger.service_version ||
+          Google::Cloud.configure.service_version ||
+          Google::Cloud.env.app_engine_service_version ||
+          ""
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.debugger.credentials ||
+          Google::Cloud.configure.credentials ||
+          Debugger::Credentials.default(scope: scope)
+      end
+
+      ##
+      # Allow calling of potentially state-changing methods even if mutation
+      # detection is configured to be active.
+      #
+      # Generally it is unwise to run code that may change the program state
+      # (e.g. modifying instance variables or causing other side effects) in a
+      # breakpoint expression, because it could change the behavior of your
+      # program. However, the checks are currently quite conservative, and may
+      # block code that is actually safe to run. If you are certain your
+      # expression is safe to evaluate, you may use this method to disable
+      # side effect checks.
+      #
+      # This method may be called with a block, in which case checks are
+      # disabled within the block. It may also be called without a block to
+      # disable side effect checks for the rest of the current expression; the
+      # default setting will be restored for the next expression.
+      #
+      # This method may be called only from a debugger condition or expression
+      # evaluation, and will throw an exception if you call it from normal
+      # application code. Set the `allow_mutating_methods` configuration if you
+      # want to disable the side effect checker globally for your app.
+      #
+      # @example Disabling side effect detection in a block
+      #   # This is an expression evaluated in a debugger snapshot
+      #   Google::Cloud::Debugger.allow_mutating_methods! do
+      #     obj1.method_with_potential_side_effects
+      #   end
+      #
+      # @example Disabling side effect detection for the rest of the expression
+      #   # This is an expression evaluated in a debugger snapshot
+      #   Google::Cloud::Debugger.allow_mutating_methods!
+      #   obj1.method_with_potential_side_effects
+      #   obj2.another_method_with_potential_side_effects
+      #
+      # @example Globally disabling side effect detection at app initialization
+      #   require "google/cloud/debugger"
+      #   Google::Cloud::Debugger.configure.allow_mutating_methods = true
+      #
+      def self.allow_mutating_methods! &block
+        evaluator = Breakpoint::Evaluator.current
+        if evaluator.nil?
+          raise "allow_mutating_methods can be called only during evaluation"
+        end
+        evaluator.allow_mutating_methods!(&block)
       end
     end
   end

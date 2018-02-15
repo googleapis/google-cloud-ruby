@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ module Google
       #
       # A {Job} subclass representing a query operation that may be performed
       # on a {Table}. A QueryJob instance is created when you call
-      # {Project#query_job}, {Dataset#query_job}, or {View#data}.
+      # {Project#query_job}, {Dataset#query_job}.
       #
       # @see https://cloud.google.com/bigquery/querying-data Querying Data
       # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
@@ -113,7 +113,7 @@ module Google
 
         ##
         # Limits the billing tier for this job. Queries that have resource usage
-        # beyond this tier will fail (without incurring a charge). If
+        # beyond this tier will raise (without incurring a charge). If
         # unspecified, this will be set to your project default. For more
         # information, see [High-Compute
         # queries](https://cloud.google.com/bigquery/pricing#high-compute).
@@ -127,7 +127,7 @@ module Google
 
         ##
         # Limits the bytes billed for this job. Queries that will have bytes
-        # billed beyond this limit will fail (without incurring a charge). If
+        # billed beyond this limit will raise (without incurring a charge). If
         # `nil`, this will be set to your project default.
         #
         # @return [Integer, nil] The number of bytes, or `nil` for the project
@@ -135,7 +135,7 @@ module Google
         #
         def maximum_bytes_billed
           Integer @gapi.configuration.query.maximum_bytes_billed
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -156,7 +156,7 @@ module Google
         #
         def bytes_processed
           Integer @gapi.statistics.query.total_bytes_processed
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -305,11 +305,13 @@ module Google
           ensure_schema!
 
           options = { token: token, max: max, start: start }
-          data_gapi = service.list_tabledata destination_table_dataset_id,
-                                             destination_table_table_id, options
-          Data.from_gapi data_gapi, destination_table_gapi, service
+          data_hash = service.list_tabledata \
+            destination_table_dataset_id,
+            destination_table_table_id,
+            options
+          Data.from_gapi_json data_hash, destination_table_gapi, service
         end
-        alias_method :query_results, :data
+        alias query_results data
 
         ##
         # Represents a stage in the execution plan for the query.
@@ -451,7 +453,7 @@ module Google
           return unless destination_schema.nil?
 
           query_results_gapi = service.job_query_results job_id, max: 0
-          # fail "unable to retrieve schema" if query_results_gapi.schema.nil?
+          # raise "unable to retrieve schema" if query_results_gapi.schema.nil?
           @destination_schema_gapi = query_results_gapi.schema
         end
 

@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,27 +48,24 @@ module Google
                     "project_private" => "projectPrivate",
                     "publicRead" => "publicRead",
                     "public" => "publicRead",
-                    "public_read" => "publicRead" }
+                    "public_read" => "publicRead" }.freeze
 
           ##
-          # A boolean value or a project ID string for a requester pays
-          # bucket and its files. If this attribute is set to `true`, transit
-          # costs for operations on the file will be billed to the current
-          # project for this client. (See {Project#project} for the ID of the
-          # current project.) If this attribute is set to a project ID, and that
-          # project is authorized for the currently authenticated service
-          # account, transit costs will be billed to the that project. The
-          # default is `nil`.
+          # A boolean value or a project ID string to indicate the project to
+          # be billed for operations on the bucket and its files. If this
+          # attribute is set to `true`, transit costs for operations on the
+          # bucket will be billed to the current project for this client. (See
+          # {Project#project} for the ID of the current project.) If this
+          # attribute is set to a project ID, and that project is authorized for
+          # the currently authenticated service account, transit costs will be
+          # billed to that project. This attribute is required with requester
+          # pays-enabled buckets. The default is `nil`.
           #
           # In general, this attribute should be set when first retrieving the
           # owning bucket by providing the `user_project` option to
           # {Project#bucket}.
           #
-          # The requester pays feature is currently available only to
-          # whitelisted projects.
-          #
-          # See also {Bucket#requester_pays=} and {Bucket#requester_pays} to
-          # enable requester pays for a bucket.
+          # See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
           #
           attr_accessor :user_project
 
@@ -104,7 +101,7 @@ module Google
             @owners  = entities_from_acls acls, "OWNER"
             @readers = entities_from_acls acls, "READER"
           end
-          alias_method :refresh!, :reload!
+          alias refresh! reload!
 
           ##
           # Lists the owners of the file.
@@ -306,10 +303,10 @@ module Google
           def auth!
             update_predefined_acl! "authenticatedRead"
           end
-          alias_method :authenticatedRead!, :auth!
-          alias_method :auth_read!, :auth!
-          alias_method :authenticated!, :auth!
-          alias_method :authenticated_read!, :auth!
+          alias authenticatedRead! auth!
+          alias auth_read! auth!
+          alias authenticated! auth!
+          alias authenticated_read! auth!
 
           ##
           # Convenience method to apply the `bucketOwnerFullControl` predefined
@@ -328,7 +325,7 @@ module Google
           def owner_full!
             update_predefined_acl! "bucketOwnerFullControl"
           end
-          alias_method :bucketOwnerFullControl!, :owner_full!
+          alias bucketOwnerFullControl! owner_full!
 
           ##
           # Convenience method to apply the `bucketOwnerRead` predefined ACL
@@ -347,7 +344,7 @@ module Google
           def owner_read!
             update_predefined_acl! "bucketOwnerRead"
           end
-          alias_method :bucketOwnerRead!, :owner_read!
+          alias bucketOwnerRead! owner_read!
 
           ##
           # Convenience method to apply the `private` predefined ACL
@@ -384,7 +381,7 @@ module Google
           def project_private!
             update_predefined_acl! "projectPrivate"
           end
-          alias_method :projectPrivate!, :project_private!
+          alias projectPrivate! project_private!
 
           ##
           # Convenience method to apply the `publicRead` predefined ACL
@@ -403,8 +400,8 @@ module Google
           def public!
             update_predefined_acl! "publicRead"
           end
-          alias_method :publicRead!, :public!
-          alias_method :public_read!, :public!
+          alias publicRead! public!
+          alias public_read! public!
 
           protected
 

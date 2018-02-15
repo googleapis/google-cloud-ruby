@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a extract of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,8 +27,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data
     mock.verify
@@ -74,8 +74,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data
     mock.verify
@@ -91,8 +91,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data
     mock.verify
@@ -107,8 +107,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                nil_table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                nil_table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     nil_data = table.data
     mock.verify
@@ -147,8 +147,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                nested_table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                nested_table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     nested_data = nested_table.data
     mock.verify
@@ -192,8 +192,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                nested_table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                nested_table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     nested_data = nested_table.data
     mock.verify
@@ -208,11 +208,11 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data1 = table.data
 
@@ -228,11 +228,11 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
     mock.expect :list_table_data,
-                table_data_gapi(token: nil),
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
+                table_data_gapi(token: nil).to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data1 = table.data
 
@@ -250,11 +250,11 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
     mock.expect :list_table_data,
-                table_data_gapi(token: nil),
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
+                table_data_gapi(token: nil).to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data.all.to_a
 
@@ -267,11 +267,11 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
     mock.expect :list_table_data,
-                table_data_gapi(token: nil),
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
+                table_data_gapi(token: nil).to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data
 
@@ -283,11 +283,11 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data.all.take(5)
 
@@ -300,11 +300,11 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data.all(request_limit: 1).to_a
 
@@ -317,8 +317,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: 3, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: 3, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = table.data max: 3
     data.class.must_equal Google::Cloud::Bigquery::Data
@@ -328,8 +328,8 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: 25 }]
+                table_data_gapi.to_json,
+                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: 25, options: {skip_deserialization: true} }]
 
     data = table.data start: 25
     mock.verify

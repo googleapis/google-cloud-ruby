@@ -1,5 +1,24 @@
 # Release History
 
+### 1.0.0 / 2017-12-19
+
+* Remove deprecated constructor arguments.
+* Update documentation.
+* Update google-gax dependency to 1.0.
+
+### 0.25.0 / 2017-11-22
+
+* Add support for V1 API.
+
+### 0.24.1 / 2017-11-15
+
+* Fix Credentials environment variable names.
+
+### 0.24.0 / 2017-11-14
+
+* Update generated GAPIC code and documentation.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.23.0 / 2017-09-27
 
 * Beta release

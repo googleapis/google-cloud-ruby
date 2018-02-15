@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -107,7 +107,7 @@ module Google
         #   snapshot.expiration_time
         #
         def expiration_time
-          self.class.timestamp_from_grpc @grpc.expiration_time
+          self.class.timestamp_from_grpc @grpc.expire_time
         end
 
         ##
@@ -157,7 +157,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -44,19 +44,20 @@ module Google
         # Create an empty Trace object. If a trace context is provided, it is
         # used to locate this trace within that context.
         #
-        # @param [String] project The ID of the project containing this trace.
+        # @param [String] project_id The ID of the project containing this
+        #   trace.
         # @param [Stackdriver::Core::TraceContext] trace_context The context
         #     within which to locate this trace (i.e. sets the trace ID and
         #     the context parent span, if present.) If no context is provided,
         #     a new trace with a new trace ID is created.
         #
-        def initialize project, trace_context = nil, span_id_generator: nil
-          @project = project
+        def initialize project_id, trace_context = nil, span_id_generator: nil
+          @project_id = project_id
           @trace_context = trace_context || Stackdriver::Core::TraceContext.new
           @root_spans = []
           @spans_by_id = {}
           @span_id_generator =
-            span_id_generator || ::Proc.new { rand(0xffffffffffffffff) + 1 }
+            span_id_generator || ::Proc.new { rand(1..0xffffffffffffffff) }
         end
 
         ##
@@ -70,7 +71,7 @@ module Google
             trace_context == other.trace_context &&
             @spans_by_id == other.instance_variable_get(:@spans_by_id)
         end
-        alias_method :==, :eql?
+        alias == eql?
 
         ##
         # Create a new Trace object from a trace protobuf.
@@ -88,7 +89,7 @@ module Google
           parent_span_ids = find_root_span_ids span_protos
 
           span_id = parent_span_ids.size == 1 ? parent_span_ids.first : 0
-          span_id = nil if span_id == 0
+          span_id = nil if span_id.zero?
           tc = Stackdriver::Core::TraceContext.new trace_id: trace_id,
                                                    span_id: span_id
           trace = new trace_proto.project_id, tc
@@ -111,7 +112,7 @@ module Google
             span.to_grpc trace_context.span_id.to_i
           end
           Google::Devtools::Cloudtrace::V1::Trace.new \
-            project_id: project,
+            project_id: project_id,
             trace_id: trace_id,
             spans: span_protos
         end
@@ -121,7 +122,8 @@ module Google
         #
         # @return [String]
         #
-        attr_reader :project
+        attr_reader :project_id
+        alias project project_id
 
         ##
         # The context for this trace.
@@ -182,7 +184,7 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project"
         #   span = trace_record.create_span "root_span"
         #
         def create_span name, span_id: nil, parent_span_id: 0,
@@ -190,7 +192,7 @@ module Google
                         start_time: nil, end_time: nil,
                         labels: {}
           parent_span_id = parent_span_id.to_i
-          parent_span_id = trace_context.span_id.to_i if parent_span_id == 0
+          parent_span_id = trace_context.span_id.to_i if parent_span_id.zero?
           parent_span = @spans_by_id[parent_span_id]
           if parent_span
             parent_span.create_span name,
@@ -219,7 +221,7 @@ module Google
         # @example
         #   require "google/cloud/trace"
         #
-        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project"
         #   trace_record.in_span "root_span" do |span|
         #     # Do stuff...
         #   end
@@ -242,7 +244,7 @@ module Google
                                  start_time, end_time, labels
           span_id = span_id.to_i
           parent_span_id = parent_span_id.to_i
-          span_id = unique_span_id if span_id == 0
+          span_id = unique_span_id if span_id.zero?
           span = Google::Cloud::Trace::Span.new \
             self, span_id, parent_span_id, parent, name, kind,
             start_time, end_time, labels

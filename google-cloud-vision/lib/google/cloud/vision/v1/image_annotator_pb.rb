@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.Feature" do
     optional :type, :enum, 1, "google.cloud.vision.v1.Feature.Type"
     optional :max_results, :int32, 2
+    optional :model, :string, 3
   end
   add_enum "google.cloud.vision.v1.Feature.Type" do
     value :TYPE_UNSPECIFIED, 0
@@ -100,6 +101,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.Property" do
     optional :name, :string, 1
     optional :value, :string, 2
+    optional :uint64_value, :uint64, 3
   end
   add_message "google.cloud.vision.v1.EntityAnnotation" do
     optional :mid, :string, 1
@@ -117,6 +119,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :spoof, :enum, 2, "google.cloud.vision.v1.Likelihood"
     optional :medical, :enum, 3, "google.cloud.vision.v1.Likelihood"
     optional :violence, :enum, 4, "google.cloud.vision.v1.Likelihood"
+    optional :racy, :enum, 9, "google.cloud.vision.v1.Likelihood"
   end
   add_message "google.cloud.vision.v1.LatLongRect" do
     optional :min_lat_lng, :message, 1, "google.type.LatLng"
@@ -144,10 +147,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.CropHintsParams" do
     repeated :aspect_ratios, :float, 1
   end
+  add_message "google.cloud.vision.v1.WebDetectionParams" do
+    optional :include_geo_results, :bool, 2
+  end
   add_message "google.cloud.vision.v1.ImageContext" do
     optional :lat_long_rect, :message, 1, "google.cloud.vision.v1.LatLongRect"
     repeated :language_hints, :string, 2
     optional :crop_hints_params, :message, 4, "google.cloud.vision.v1.CropHintsParams"
+    optional :web_detection_params, :message, 6, "google.cloud.vision.v1.WebDetectionParams"
   end
   add_message "google.cloud.vision.v1.AnnotateImageRequest" do
     optional :image, :message, 1, "google.cloud.vision.v1.Image"
@@ -205,6 +212,7 @@ module Google
         CropHint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHint").msgclass
         CropHintsAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHintsAnnotation").msgclass
         CropHintsParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHintsParams").msgclass
+        WebDetectionParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetectionParams").msgclass
         ImageContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ImageContext").msgclass
         AnnotateImageRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageRequest").msgclass
         AnnotateImageResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageResponse").msgclass

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -59,14 +59,14 @@ module Google
         # insert the Middleware.
         def self.init_middleware app
           project_id = Logging.configure.project_id
-          keyfile = Logging.configure.keyfile
+          credentials = Logging.configure.credentials
           resource_type = Logging.configure.monitored_resource.type
           resource_labels = Logging.configure.monitored_resource.labels
           log_name = Logging.configure.log_name
           labels = Logging.configure.labels
 
-          logging = Google::Cloud::Logging.new project: project_id,
-                                               keyfile: keyfile
+          logging = Google::Cloud::Logging.new project_id: project_id,
+                                               credentials: credentials
           resource =
             Logging::Middleware.build_monitored_resource resource_type,
                                                          resource_labels
@@ -112,37 +112,46 @@ module Google
         # configuration.
         def self.merge_rails_config rails_config # rubocop:disable AbcSize
           gcp_config = rails_config.google_cloud
-          logging_config = gcp_config.logging
+          log_config = gcp_config.logging
 
           Cloud.configure.use_logging ||= gcp_config.use_logging
           Logging.configure do |config|
-            config.project_id ||= logging_config.project_id ||
-                                  gcp_config.project_id
-            config.keyfile ||= logging_config.keyfile || gcp_config.keyfile
-            config.log_name ||= logging_config.log_name
-            config.labels ||= logging_config.labels
-            config.log_name_map ||= logging_config.log_name_map
+            config.project_id ||= config.project
+            config.project_id ||= log_config.project_id || log_config.project
+            config.project_id ||= gcp_config.project_id || gcp_config.project
+            config.credentials ||= config.keyfile
+            config.credentials ||= log_config.credentials || log_config.keyfile
+            config.credentials ||= gcp_config.credentials || gcp_config.keyfile
+            config.log_name ||= log_config.log_name
+            config.labels ||= log_config.labels
+            config.log_name_map ||= log_config.log_name_map
             config.monitored_resource.type ||=
-              logging_config.monitored_resource.type
+              log_config.monitored_resource.type
             config.monitored_resource.labels ||=
-              logging_config.monitored_resource.labels.to_h
+              log_config.monitored_resource.labels.to_h
           end
         end
 
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
-          Logging.configure.project_id ||= Logging::Project.default_project
+          Logging.configure.project_id ||= Logging.default_project_id
           Logging.configure.log_name ||= Middleware::DEFAULT_LOG_NAME
         end
 
         ##
         # @private Verify credentials
-        def self.valid_credentials? project_id, keyfile
+        def self.valid_credentials? project_id, credentials
           # Try authenticate authorize client API. Return false if unable to
           # authorize.
           begin
-            Google::Cloud::Logging::Credentials.credentials_with_scope keyfile
+            # if credentials is nil, get default
+            credentials ||= Logging::Credentials.default
+            # only create a new Credentials object if the val isn't one already
+            unless credentials.is_a? Google::Auth::Credentials
+              # if credentials is not a Credentials object, create one
+              Logging::Credentials.new credentials
+            end
           rescue Exception => e
             STDOUT.puts "Note: Google::Cloud::Logging is disabled because " \
               "it failed to authorize with the service. (#{e.message}) " \

@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,17 @@
 module Google
   module Devtools
     module Cloudtrace
+      ##
+      # # Stackdriver Trace API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [TraceServiceClient][] | Send and retrieve trace data from Stackdriver Trace. Data is generated and available by default for all App Engine applications. Data from other applications can be written to Stackdriver Trace for display, reporting, and analysis. |
+      # | [Data Types][] | Data types for Google::Cloud::Trace::V1 |
+      #
+      # [TraceServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace/latest/google/devtools/cloudtrace/v1/traceserviceclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace/latest/google/devtools/cloudtrace/v1/datatypes
+      #
       module V1
         # A trace describes how long it takes for an application to perform an
         # operation. It consists of a set of spans, each of which represent a single
@@ -53,8 +64,9 @@ module Google
         #     and +RPC_SERVER+ to identify queueing latency associated with the span.
         # @!attribute [rw] name
         #   @return [String]
-        #     Name of the trace. The trace name is sanitized and displayed in the
-        #     Stackdriver Trace tool in the Google Developers Console.
+        #     Name of the span. Must be less than 128 bytes. The span name is sanitized
+        #     and displayed in the Stackdriver Trace tool in the
+        #     {% dynamic print site_values.console_name %}.
         #     The name may be a method name or some other per-call site name.
         #     For the same executable and the same call point, a best practice is
         #     to use a consistent name, which makes it easier to correlate
@@ -70,7 +82,39 @@ module Google
         #     ID of the parent span, if any. Optional.
         # @!attribute [rw] labels
         #   @return [Hash{String => String}]
-        #     Collection of labels associated with the span.
+        #     Collection of labels associated with the span. Label keys must be less than
+        #     128 bytes. Label values must be less than 16 kilobytes (10MB for
+        #     +/stacktrace+ values).
+        #
+        #     Some predefined label keys exist, or you may create your own. When creating
+        #     your own, we recommend the following formats:
+        #
+        #     * +/category/product/key+ for agents of well-known products (e.g.
+        #       +/db/mongodb/read_size+).
+        #     * +short_host/path/key+ for domain-specific keys (e.g.
+        #       +foo.com/myproduct/bar+)
+        #
+        #     Predefined labels include:
+        #
+        #     * +/agent+
+        #     * +/component+
+        #     * +/error/message+
+        #     * +/error/name+
+        #     * +/http/client_city+
+        #     * +/http/client_country+
+        #     * +/http/client_protocol+
+        #     * +/http/client_region+
+        #     * +/http/host+
+        #     * +/http/method+
+        #     * +/http/redirected_url+
+        #     * +/http/request/size+
+        #     * +/http/response/size+
+        #     * +/http/status_code+
+        #     * +/http/url+
+        #     * +/http/user_agent+
+        #     * +/pid+
+        #     * +/stacktrace+
+        #     * +/tid+
         class TraceSpan
           # Type of span. Can be used to specify additional relationships between spans
           # in addition to a parent/child relationship.
@@ -108,25 +152,54 @@ module Google
         #     value of the +next_page_token+ field from a previous request. Optional.
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
-        #     End of the time interval (inclusive) during which the trace data was
+        #     Start of the time interval (inclusive) during which the trace data was
         #     collected from the application.
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Start of the time interval (inclusive) during which the trace data was
+        #     End of the time interval (inclusive) during which the trace data was
         #     collected from the application.
         # @!attribute [rw] filter
         #   @return [String]
-        #     An optional filter for the request.
+        #     An optional filter against labels for the request.
+        #
+        #     By default, searches use prefix matching. To specify exact match, prepend
+        #     a plus symbol (+++) to the search term.
+        #     Multiple terms are ANDed. Syntax:
+        #
+        #     * +root:NAME_PREFIX+ or +NAME_PREFIX+: Return traces where any root
+        #       span starts with +NAME_PREFIX+.
+        #     * ++root:NAME+ or ++NAME+: Return traces where any root span's name is
+        #       exactly +NAME+.
+        #     * +span:NAME_PREFIX+: Return traces where any span starts with
+        #       +NAME_PREFIX+.
+        #     * ++span:NAME+: Return traces where any span's name is exactly
+        #       +NAME+.
+        #     * +latency:DURATION+: Return traces whose overall latency is
+        #       greater or equal to than +DURATION+. Accepted units are nanoseconds
+        #       (+ns+), milliseconds (+ms+), and seconds (+s+). Default is +ms+. For
+        #       example, +latency:24ms+ returns traces whose overall latency
+        #       is greater than or equal to 24 milliseconds.
+        #     * +label:LABEL_KEY+: Return all traces containing the specified
+        #       label key (exact match, case-sensitive) regardless of the key:value
+        #       pair's value (including empty values).
+        #     * +LABEL_KEY:VALUE_PREFIX+: Return all traces containing the specified
+        #       label key (exact match, case-sensitive) whose value starts with
+        #       +VALUE_PREFIX+. Both a key and a value must be specified.
+        #     * ++LABEL_KEY:VALUE+: Return all traces containing a key:value pair
+        #       exactly matching the specified text. Both a key and a value must be
+        #       specified.
+        #     * +method:VALUE+: Equivalent to +/http/method:VALUE+.
+        #     * +url:VALUE+: Equivalent to +/http/url:VALUE+.
         # @!attribute [rw] order_by
         #   @return [String]
         #     Field used to sort the returned traces. Optional.
         #     Can be one of the following:
         #
-        #     *   +trace_id+
-        #     *   +name+ (+name+ field of root span in the trace)
-        #     *   +duration+ (difference between +end_time+ and +start_time+ fields of
-        #          the root span)
-        #     *   +start+ (+start_time+ field of the root span)
+        #     * +trace_id+
+        #     * +name+ (+name+ field of root span in the trace)
+        #     * +duration+ (difference between +end_time+ and +start_time+ fields of
+        #       the root span)
+        #     * +start+ (+start_time+ field of the root span)
         #
         #     Descending order can be specified by appending +desc+ to the sort field
         #     (for example, +name desc+).

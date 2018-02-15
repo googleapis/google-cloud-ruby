@@ -1,5 +1,18 @@
 # Release History
 
+### 0.27.0 / 2017-12-19
+
+* Update google-gax dependency to 1.0.
+
+### 0.26.1 / 2017-11-15
+
+* Fix Credentials environment variable names.
+
+### 0.26.0 / 2017-11-14
+
+* Update generated GAPIC code and documentation.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.25.0 / 2017-07-11
 
 * Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.

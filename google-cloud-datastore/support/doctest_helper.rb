@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -56,6 +56,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
   end
 end
@@ -84,6 +90,7 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Datastore::Dataset#get"
   doctest.skip "Google::Cloud::Datastore::Dataset#lookup"
   doctest.skip "Google::Cloud::Datastore::Dataset#run_query"
+  doctest.skip "Google::Cloud::Datastore::Dataset#snapshot"
   doctest.skip "Google::Cloud::Datastore::Key#dataset_id"
   doctest.skip "Google::Cloud::Datastore::Query#filter"
   doctest.skip "Google::Cloud::Datastore::Query#cursor"
@@ -94,6 +101,11 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Datastore::Transaction#lookup"
   doctest.skip "Google::Cloud::Datastore::Transaction#run_query"
   doctest.skip "Google::Cloud::Datastore::Transaction#begin_transaction"
+  doctest.skip "Google::Cloud::Datastore::ReadOnlyTransaction#upsert"
+  doctest.skip "Google::Cloud::Datastore::ReadOnlyTransaction#get"
+  doctest.skip "Google::Cloud::Datastore::ReadOnlyTransaction#lookup"
+  doctest.skip "Google::Cloud::Datastore::ReadOnlyTransaction#run_query"
+  doctest.skip "Google::Cloud::Datastore::ReadOnlyTransaction#begin_transaction"
 
   ##
   # BEFORE (mocking)
@@ -122,6 +134,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Datastore::Credentials" # occasionally getting "This code example is not yet mocked"
+
   doctest.before("Google::Cloud::Datastore::Commit") do
     mock_datastore do |mock|
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
@@ -130,13 +144,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Cursor") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
     end
   end
 
@@ -154,7 +168,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Dataset#save@Update an existing entity:") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
     end
   end
@@ -167,21 +181,21 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Dataset#update") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#update@Update multiple new entities in a batch:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#delete") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
     end
   end
@@ -194,153 +208,205 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Dataset#find") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#run@Run an ancestor query with eventual consistency:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Google::Datastore::V1::ReadOptions, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#run@Run the query within a namespace with the `namespace` option:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#run@Run the GQL query within a namespace with `namespace` option:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#transaction") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :lookup, lookup_res, ["my-todo-project", Google::Datastore::V1::ReadOptions, Array, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+    end
+  end
+
+  doctest.before("Google::Cloud::Datastore::Dataset#read_only_transaction") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before('Google::Cloud::Datastore::Dataset::LookupResults') do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res(3), ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res(3), ["my-todo-project", Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset::QueryResults") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, nil, Hash]
-      mock.expect :run_query, run_query_res(:NO_MORE_RESULTS), ["my-todo-project", nil, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res(:NO_MORE_RESULTS), ["my-todo-project", nil, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Entity") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Entity#key=") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Entity#properties") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::GqlQuery") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Key") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Key#parent") do
     mock_datastore do |mock|
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, nil, Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Query") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Query@Run the query within a namespace with the `namespace` option:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
+    end
+  end
+
+  doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+    end
+  end
+
+  doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#commit") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+    end
+  end
+
+  doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#find") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+    end
+  end
+
+  doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#rollback") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :rollback, OpenStruct.new(mutation_results: []), ["my-todo-project", String, Hash]
+    end
+  end
+
+  doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#run") do
+    mock_datastore do |mock|
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :lookup, lookup_res, ["my-todo-project", Google::Datastore::V1::ReadOptions, Array, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction@Transactional read:") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :lookup, lookup_res, ["my-todo-project", Google::Datastore::V1::ReadOptions, Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Google::Datastore::V1::ReadOptions, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction#delete") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :lookup, lookup_res, ["my-todo-project", Google::Datastore::V1::ReadOptions, Array, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction#find") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :lookup, lookup_res, ["my-todo-project", nil, Array, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction#run") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Google::Datastore::V1::ReadOptions, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction#run@Run the query within a namespace with the `namespace` option:") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Google::Datastore::V1::ReadOptions, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction#commit") do
     mock_datastore do |mock|
-      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project"]
-      mock.expect :lookup, lookup_res, ["my-todo-project", Google::Datastore::V1::ReadOptions, Array, Hash]
+      mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
+      mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
       mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
     end
   end
@@ -473,7 +539,3 @@ def begin_tx_res
   tx_id = "giterdone".encode("ASCII-8BIT")
   Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
 end
-
-
-
-

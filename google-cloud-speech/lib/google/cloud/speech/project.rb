@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/speech/service"
 require "google/cloud/speech/audio"
 require "google/cloud/speech/result"
@@ -70,24 +69,16 @@ module Google
         #   require "google/cloud/speech"
         #
         #   speech = Google::Cloud::Speech.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   speech.project #=> "my-project-id"
+        #   speech.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["SPEECH_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
+        alias project project_id
 
         ##
         # Returns a new Audio instance from the given source. No API call is
@@ -184,11 +175,11 @@ module Google
         #                        sample_rate: 16000
         #
         def audio source, encoding: nil, language: nil, sample_rate: nil
-          if source.is_a? Audio
-            audio = source.dup
-          else
-            audio = Audio.from_source source, self
-          end
+          audio = if source.is_a? Audio
+                    source.dup
+                  else
+                    Audio.from_source source, self
+                  end
           audio.encoding = encoding unless encoding.nil?
           audio.language = language unless language.nil?
           audio.sample_rate = sample_rate unless sample_rate.nil?
@@ -323,7 +314,8 @@ module Google
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
             language: audio_obj.language, max_alternatives: max_alternatives,
             profanity_filter: profanity_filter, phrases: phrases,
-            words: words)
+            words: words
+          )
 
           grpc = service.recognize_sync audio_obj.to_grpc, config
           grpc.results.map do |result_grpc|
@@ -461,13 +453,14 @@ module Google
             encoding: audio_obj.encoding, sample_rate: audio_obj.sample_rate,
             language: audio_obj.language, max_alternatives: max_alternatives,
             profanity_filter: profanity_filter, phrases: phrases,
-            words: words)
+            words: words
+          )
 
           grpc = service.recognize_async audio_obj.to_grpc, config
           Operation.from_grpc grpc
         end
-        alias_method :long_running_recognize, :process
-        alias_method :recognize_job, :process
+        alias long_running_recognize process
+        alias recognize_job process
 
         ##
         # Creates a Stream object to perform bidirectional streaming
@@ -586,7 +579,7 @@ module Google
 
           Stream.new service, grpc_req
         end
-        alias_method :stream_recognize, :stream
+        alias stream_recognize stream
 
         ##
         # Performs asynchronous speech recognition. Requests are processed
@@ -650,7 +643,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
       end
     end

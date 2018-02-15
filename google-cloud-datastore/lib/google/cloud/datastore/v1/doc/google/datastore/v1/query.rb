@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,10 +24,10 @@ module Google
       #     The version of the entity, a strictly positive number that monotonically
       #     increases with changes to the entity.
       #
-      #     This field is set for +FULL+ entity
+      #     This field is set for {Google::Datastore::V1::EntityResult::ResultType::FULL +FULL+} entity
       #     results.
       #
-      #     For Missing entities in +LookupResponse+, this
+      #     For {Google::Datastore::V1::LookupResponse#missing missing} entities in +LookupResponse+, this
       #     is the version of the snapshot that was used to look up the entity, and it
       #     is always set except for eventually consistent reads.
       # @!attribute [rw] cursor
@@ -78,12 +78,12 @@ module Google
       #   @return [String]
       #     A starting point for the query results. Query cursors are
       #     returned in query result batches and
-      #     {can only be used to continue the same query}[https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets].
+      #     [can only be used to continue the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
       # @!attribute [rw] end_cursor
       #   @return [String]
       #     An ending point for the query results. Query cursors are
       #     returned in query result batches and
-      #     {can only be used to limit the same query}[https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets].
+      #     [can only be used to limit the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
       # @!attribute [rw] offset
       #   @return [Integer]
       #     The number of results to skip. Applies before limit, but after all other
@@ -200,11 +200,11 @@ module Google
         end
       end
 
-      # A {GQL query}[https://cloud.google.com/datastore/docs/apis/gql/gql_reference].
+      # A [GQL query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
       # @!attribute [rw] query_string
       #   @return [String]
       #     A string of the format described
-      #     {here}[https://cloud.google.com/datastore/docs/apis/gql/gql_reference].
+      #     [here](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
       # @!attribute [rw] allow_literals
       #   @return [true, false]
       #     When false, the query string must not contain any literals and instead must
@@ -284,7 +284,7 @@ module Google
           # cursor.
           MORE_RESULTS_AFTER_CURSOR = 4
 
-          # The query has been exhausted.
+          # The query is finished, and there are no more results.
           NO_MORE_RESULTS = 3
         end
       end

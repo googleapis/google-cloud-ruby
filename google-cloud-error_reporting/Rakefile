@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,21 +35,26 @@ end
 desc "Run the logging acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["ERROR_REPORTING_TEST_PROJECT"]
+  project ||= ENV["ERROR_REPORTING_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["ERROR_REPORTING_TEST_KEYFILE"]
+  keyfile ||= ENV["ERROR_REPORTING_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["ERROR_REPORTING_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["ERROR_REPORTING_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123,/path/to/keyfile.json] " \
       "or ERROR_REPORTING_TEST_PROJECT=test123 ERROR_REPORTING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
+  # clear any env var already set
+  require "google/cloud/error_reporting/credentials"
+  (Google::Cloud::ErrorReporting::Credentials::PATH_ENV_VARS +
+   Google::Cloud::ErrorReporting::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["ERROR_REPORTING_PROJECT"] = project
-  ENV["ERROR_REPORTING_KEYFILE"] = nil
   ENV["ERROR_REPORTING_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
@@ -82,11 +87,6 @@ desc "Run yard-doctest example tests."
 task doctest: :yard do
   sh "bundle exec yard config -a autoload_plugins yard-doctest"
   sh "bundle exec yard doctest"
-end
-
-desc "Run rubocop."
-task :rubocop do
-  puts "The google-cloud-error_reporting gem does not use rubocop."
 end
 
 namespace :integration do

@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,10 @@ module Google
       #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
       #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+      #
+      #      A project number may optionally be used in place of PROJECT_ID. The
+      #      project number is translated to its corresponding PROJECT_ID internally
+      #      and the +log_name+ field will contain PROJECT_ID in queries and exports.
       #
       #     +[LOG_ID]+ must be URL-encoded within +log_name+. Example:
       #     +"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"+.
@@ -56,11 +60,18 @@ module Google
       #     expressed as a JSON object.
       # @!attribute [rw] timestamp
       #   @return [Google::Protobuf::Timestamp]
-      #     Optional. The time the event described by the log entry occurred.  If
-      #     omitted in a new log entry, Stackdriver Logging will insert the time the
-      #     log entry is received.  Stackdriver Logging might reject log entries whose
-      #     time stamps are more than a couple of hours in the future. Log entries
-      #     with time stamps in the past are accepted.
+      #     Optional. The time the event described by the log entry occurred.
+      #     This time is used to compute the log entry's age and to enforce
+      #     the logs retention period. If this field is omitted in a new log
+      #     entry, then Stackdriver Logging assigns it the current time.
+      #
+      #     Incoming log entries should have timestamps that are no more than
+      #     the [logs retention period](https://cloud.google.com/logging/quota-policy) in the past,
+      #     and no more than 24 hours in the future.
+      #     See the +entries.write+ API method for more information.
+      # @!attribute [rw] receive_timestamp
+      #   @return [Google::Protobuf::Timestamp]
+      #     Output only. The time the log entry was received by Stackdriver Logging.
       # @!attribute [rw] severity
       #   @return [Google::Logging::Type::LogSeverity]
       #     Optional. The severity of the log entry. The default value is
@@ -71,7 +82,7 @@ module Google
       #     then Stackdriver Logging considers other log entries in the same project,
       #     with the same +timestamp+, and with the same +insert_id+ to be duplicates
       #     which can be removed.  If omitted in new log entries, then Stackdriver
-      #     Logging will insert its own unique identifier. The +insert_id+ is used
+      #     Logging assigns its own unique identifier. The +insert_id+ is also used
       #     to order log entries that have the same +timestamp+ value.
       # @!attribute [rw] http_request
       #   @return [Google::Logging::Type::HttpRequest]
@@ -91,6 +102,13 @@ module Google
       #     If it contains a relative resource name, the name is assumed to be relative
       #     to +//tracing.googleapis.com+. Example:
       #     +projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824+
+      # @!attribute [rw] span_id
+      #   @return [String]
+      #     Optional. Id of the span within the trace associated with the log entry.
+      #     e.g. "0000000000000042"
+      #     For Stackdriver trace spans, this is the same format that the Stackdriver
+      #     trace API uses.
+      #     The ID is a 16-character hexadecimal encoding of an 8-byte array.
       # @!attribute [rw] source_location
       #   @return [Google::Logging::V2::LogEntrySourceLocation]
       #     Optional. Source code location information associated with the log entry,

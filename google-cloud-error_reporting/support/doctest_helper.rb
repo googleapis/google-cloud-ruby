@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,6 +29,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
     module Core
       module Environment
@@ -45,9 +51,10 @@ module Google
 end
 
 def mock_error_reporting
+  credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+  Google::Cloud::ErrorReporting.configure.credentials = credentials
   Google::Cloud::ErrorReporting.stub_new do |*args|
-    credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    error_reporting = Google::Cloud::ErrorReporting::Project.new(Google::Cloud::ErrorReporting::Service.new("my-todo-project", credentials))
+    error_reporting = Google::Cloud::ErrorReporting::Project.new(Google::Cloud::ErrorReporting::Service.new("my-project", credentials))
 
     error_reporting.service.mocked_error_reporting = Minitest::Mock.new
 
@@ -98,6 +105,8 @@ YARD::Doctest.configure do |doctest|
       mock.expect :report_error_event, nil, [String, Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent]
     end
   end
+
+  doctest.skip "Google::Cloud::ErrorReporting::Credentials" # occasionally getting "This code example is not yet mocked"
 
   doctest.before "Google::Cloud::ErrorReporting::Service" do
     mock_error_reporting do |mock|

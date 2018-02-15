@@ -1,16 +1,20 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# This file is now considered DEPRECATED.
+# Libraries that depend on google-cloud-core ~> 1.1 should not use this file.
+# Keep the implementation in place to remain compatible with so older gems.
 
 
 require "json"
@@ -29,8 +33,8 @@ module Google
       TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
       AUDIENCE = "https://accounts.google.com/o/oauth2/token"
       SCOPE = []
-      PATH_ENV_VARS = %w(GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-      JSON_ENV_VARS = %w(GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
+      PATH_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE]
+      JSON_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON]
       DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
 
       attr_accessor :client
@@ -68,10 +72,9 @@ module Google
         path = ->(p) { ::File.file? p }
 
         # First try to find keyfile file from environment variables.
-        self::PATH_ENV_VARS.map(&env).compact.select(&path)
-          .each do |file|
-            return new file, scope: scope
-          end
+        self::PATH_ENV_VARS.map(&env).compact.select(&path).each do |file|
+          return new file, scope: scope
+        end
         # Second try to find keyfile json from environment variables.
         self::JSON_ENV_VARS.map(&json).compact.each do |hash|
           return new hash, scope: scope
@@ -91,14 +94,14 @@ module Google
       ##
       # Verify that the keyfile argument is provided.
       def verify_keyfile_provided! keyfile
-        fail "You must provide a keyfile to connect with." if keyfile.nil?
+        raise "You must provide a keyfile to connect with." if keyfile.nil?
       end
 
       ##
       # Verify that the keyfile argument is a file.
       def verify_keyfile_exists! keyfile
         exists = ::File.file? keyfile
-        fail "The keyfile '#{keyfile}' is not a valid file." unless exists
+        raise "The keyfile '#{keyfile}' is not a valid file." unless exists
       end
 
       ##

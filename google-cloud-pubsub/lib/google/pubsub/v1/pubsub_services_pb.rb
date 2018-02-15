@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,6 +48,10 @@ module Google
           rpc :GetSubscription, GetSubscriptionRequest, Subscription
           # Updates an existing subscription. Note that certain properties of a
           # subscription, such as its topic, are not modifiable.
+          # NOTE:  The style guide requires body: "subscription" instead of body: "*".
+          # Keeping the latter for internal consistency in V1, however it should be
+          # corrected in V2.  See
+          # https://cloud.google.com/apis/design/standard_methods#update for details.
           rpc :UpdateSubscription, UpdateSubscriptionRequest, Subscription
           # Lists matching subscriptions.
           rpc :ListSubscriptions, ListSubscriptionsRequest, ListSubscriptionsResponse
@@ -109,6 +113,13 @@ module Google
           # The generated name is populated in the returned Snapshot object.
           # Note that for REST API requests, you must specify a name in the request.
           rpc :CreateSnapshot, CreateSnapshotRequest, Snapshot
+          # Updates an existing snapshot. Note that certain properties of a snapshot
+          # are not modifiable.
+          # NOTE:  The style guide requires body: "snapshot" instead of body: "*".
+          # Keeping the latter for internal consistency in V1, however it should be
+          # corrected in V2.  See
+          # https://cloud.google.com/apis/design/standard_methods#update for details.
+          rpc :UpdateSnapshot, UpdateSnapshotRequest, Snapshot
           # Removes an existing snapshot. All messages retained in the snapshot
           # are immediately dropped. After a snapshot is deleted, a new one may be
           # created with the same name, but the new one has no association with the old
@@ -134,6 +145,13 @@ module Google
 
           # Creates the given topic with the given name.
           rpc :CreateTopic, Topic, Topic
+          # Updates an existing topic. Note that certain properties of a topic are not
+          # modifiable.  Options settings follow the style guide:
+          # NOTE:  The style guide requires body: "topic" instead of body: "*".
+          # Keeping the latter for internal consistency in V1, however it should be
+          # corrected in V2.  See
+          # https://cloud.google.com/apis/design/standard_methods#update for details.
+          rpc :UpdateTopic, UpdateTopicRequest, Topic
           # Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
           # does not exist. The message payload must not be empty; it must contain
           #  either a non-empty data field, or at least one attribute.

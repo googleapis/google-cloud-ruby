@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,41 +25,27 @@ module Google
       # @private Represents the gRPC Logging service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout, :client_config
+        attr_accessor :project, :credentials, :timeout, :client_config
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+        def initialize project, credentials, timeout: nil, client_config: nil
           @project = project
           @credentials = credentials
-          @host = host || V2::LoggingServiceV2Client::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
-        end
-
-        def channel
-          require "grpc"
-          GRPC::Core::Channel.new host, nil, chan_creds
-        end
-
-        def chan_creds
-          return credentials if insecure?
-          require "grpc"
-          GRPC::Core::ChannelCredentials.new.compose \
-            GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
         def logging
           return mocked_logging if mocked_logging
           @logging ||= \
             V2::LoggingServiceV2Client.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION)
+              lib_version: Google::Cloud::Logging::VERSION
+            )
         end
         attr_accessor :mocked_logging
 
@@ -67,12 +53,12 @@ module Google
           return mocked_sinks if mocked_sinks
           @sinks ||= \
             V2::ConfigServiceV2Client.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION)
+              lib_version: Google::Cloud::Logging::VERSION
+            )
         end
         attr_accessor :mocked_sinks
 
@@ -80,18 +66,14 @@ module Google
           return mocked_metrics if mocked_metrics
           @metrics ||= \
             V2::MetricsServiceV2Client.new(
-              service_path: host,
-              channel: channel,
+              credentials: credentials,
               timeout: timeout,
               client_config: client_config,
               lib_name: "gccl",
-              lib_version: Google::Cloud::Logging::VERSION)
+              lib_version: Google::Cloud::Logging::VERSION
+            )
         end
         attr_accessor :mocked_metrics
-
-        def insecure?
-          credentials == :this_channel_is_insecure
-        end
 
         def list_entries resources: nil, filter: nil, order: nil, token: nil,
                          max: nil, projects: nil
@@ -113,7 +95,8 @@ module Google
           end
         end
 
-        def write_entries entries, log_name: nil, resource: nil, labels: nil
+        def write_entries entries, log_name: nil, resource: nil, labels: nil,
+                          partial_success: nil
           # Fix log names so they are the full path
           entries = Array(entries).each do |entry|
             entry.log_name = log_path(entry.log_name)
@@ -125,6 +108,7 @@ module Google
             logging.write_log_entries entries,
                                       log_name: log_path(log_name),
                                       resource: resource, labels: labels,
+                                      partial_success: partial_success,
                                       options: default_options
           end
         end
@@ -177,13 +161,9 @@ module Google
           end
         end
 
-        def create_sink name, destination, filter, version, start_time: nil,
-                        end_time: nil, unique_writer_identity: nil
+        def create_sink name, destination, filter, unique_writer_identity: nil
           sink = Google::Logging::V2::LogSink.new({
-            name: name, destination: destination, filter: filter,
-            output_version_format: version,
-            start_time: time_to_timestamp(start_time),
-            end_time: time_to_timestamp(end_time)
+            name: name, destination: destination, filter: filter
           }.delete_if { |_, v| v.nil? })
 
           execute do
@@ -197,13 +177,12 @@ module Google
           execute { sinks.get_sink sink_path(name), options: default_options }
         end
 
-        def update_sink name, destination, filter, version, start_time: nil,
-                        end_time: nil, unique_writer_identity: nil
-          sink = Google::Logging::V2::LogSink.new({
-            name: name, destination: destination, filter: filter,
-            output_version_format: version,
-            start_time: time_to_timestamp(start_time),
-            end_time: time_to_timestamp(end_time) }.delete_if { |_, v| v.nil? })
+        def update_sink name, destination, filter, unique_writer_identity: nil
+          sink = Google::Logging::V2::LogSink.new(
+            {
+              name: name, destination: destination, filter: filter
+            }.delete_if { |_, v| v.nil? }
+          )
 
           execute do
             sinks.update_sink sink_path(name), sink,
@@ -233,9 +212,10 @@ module Google
         end
 
         def create_metric name, filter, description
-          metric = Google::Logging::V2::LogMetric.new({
-            name: name, description: description,
-            filter: filter }.delete_if { |_, v| v.nil? })
+          metric = Google::Logging::V2::LogMetric.new(
+            { name: name, description: description,
+              filter: filter }.delete_if { |_, v| v.nil? }
+          )
 
           execute do
             metrics.create_log_metric project_path, metric,
@@ -250,9 +230,10 @@ module Google
         end
 
         def update_metric name, description, filter
-          metric = Google::Logging::V2::LogMetric.new({
-            name: name, description: description,
-            filter: filter }.delete_if { |_, v| v.nil? })
+          metric = Google::Logging::V2::LogMetric.new(
+            { name: name, description: description,
+              filter: filter }.delete_if { |_, v| v.nil? }
+          )
 
           execute do
             metrics.update_log_metric metric_path(name), metric,

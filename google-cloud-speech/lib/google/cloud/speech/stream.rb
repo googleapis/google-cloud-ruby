@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -119,7 +119,8 @@ module Google
           # TODO: do not send if stopped?
           synchronize do
             req = V1::StreamingRecognizeRequest.new(
-              audio_content: bytes.encode("ASCII-8BIT"))
+              audio_content: bytes.encode("ASCII-8BIT")
+            )
             @request_queue.push req
           end
         end
@@ -489,11 +490,11 @@ module Google
               background_results response
               background_event_type response.speech_event_type
               background_error response.error
-            rescue => e
+            rescue StandardError => e
               error! Google::Cloud::Error.from_error(e)
             end
           end
-        rescue => e
+        rescue StandardError => e
           error! Google::Cloud::Error.from_error(e)
         ensure
           pass_complete!
@@ -532,7 +533,7 @@ module Google
           return if error.nil?
 
           require "grpc/errors"
-          fail GRPC::BadStatus.new(error.code, error.message)
+          raise GRPC::BadStatus.new(error.code, error.message)
         end
 
         # @private
@@ -552,7 +553,7 @@ module Google
             loop do
               r = @q.pop
               break if r.equal? @sentinel
-              fail r if r.is_a? Exception
+              raise r if r.is_a? Exception
               yield r
             end
           end

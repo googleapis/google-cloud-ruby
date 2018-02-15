@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -137,7 +137,7 @@ module Google
         # Fully Qualified Domain Name
         def self.fqdn name, origin_dns
           name = name.to_s.strip
-          return name if self.ip_addr? name
+          return name if ip_addr? name
           name = origin_dns if name.empty?
           name = origin_dns if name == "@"
           name = "#{name}.#{origin_dns}" unless name.include? "."

@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,8 +13,6 @@
 # limitations under the License.
 
 require "helper"
-require "json"
-require "uri"
 
 describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
   let(:bucket_name) { "found-bucket" }
@@ -59,14 +57,14 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock.verify
   end
 
-  it "adds to the ACL" do
-    writer_entity = "user-user@example.net"
+  it "adds a writer to the ACL" do
+    entity = "user-user@example.net"
     writer_acl = {
        "kind" => "storage#bucketAccessControl",
-       "id" => "#{bucket_name}-UUID/#{writer_entity}",
-       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{writer_entity}",
+       "id" => "#{bucket_name}-UUID/#{entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{entity}",
        "bucket" => "#{bucket_name}-UUID",
-       "entity" => writer_entity,
+       "entity" => entity,
        "email" => "user@example.net",
        "role" => "WRITER",
        "etag" => "CAE="
@@ -79,7 +77,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
       [bucket_name, user_project: nil]
     mock.expect :insert_bucket_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(writer_acl.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: writer_entity, role: "WRITER"), user_project: nil]
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "WRITER"), user_project: nil]
 
     storage.service.mocked_service = mock
 
@@ -89,23 +87,51 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     bucket.acl.writers.must_be :empty?
     bucket.acl.readers.wont_be :empty?
 
-    bucket.acl.add_writer writer_entity
+    bucket.acl.add_writer entity
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.wont_be :empty?
     bucket.acl.readers.wont_be :empty?
-    bucket.acl.writers.must_include writer_entity
+    bucket.acl.writers.must_include entity
 
     mock.verify
   end
 
-  it "adds to the ACL with user_project set to true" do
-    writer_entity = "user-user@example.net"
-    writer_acl = {
+  it "adds a reader to the ACL with user_project set to true" do
+    entity = "user-user@example.net"
+    acl_hash = {
        "kind" => "storage#bucketAccessControl",
-       "id" => "#{bucket_name}-UUID/#{writer_entity}",
-       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{writer_entity}",
+       "id" => "#{bucket_name}-UUID/#{entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{entity}",
        "bucket" => "#{bucket_name}-UUID",
-       "entity" => writer_entity,
+       "entity" => entity,
+       "email" => "user@example.net",
+       "role" => "READER",
+       "etag" => "CAE="
+      }
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :insert_bucket_access_control,
+      Google::Apis::StorageV1::BucketAccessControl.from_json(acl_hash.to_json),
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "READER"), user_project: "test"]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
+
+    bucket.acl.add_reader entity
+
+    mock.verify
+  end
+
+  it "adds a writer to the ACL with user_project set to true" do
+    entity = "user-user@example.net"
+    acl_hash = {
+       "kind" => "storage#bucketAccessControl",
+       "id" => "#{bucket_name}-UUID/#{entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{entity}",
+       "bucket" => "#{bucket_name}-UUID",
+       "entity" => entity,
        "email" => "user@example.net",
        "role" => "WRITER",
        "etag" => "CAE="
@@ -117,8 +143,8 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
       Google::Apis::StorageV1::BucketAccessControls.from_json(random_bucket_acl_hash(bucket_name).to_json),
       [bucket_name, user_project: "test"]
     mock.expect :insert_bucket_access_control,
-      Google::Apis::StorageV1::BucketAccessControl.from_json(writer_acl.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: writer_entity, role: "WRITER"), user_project: "test"]
+      Google::Apis::StorageV1::BucketAccessControl.from_json(acl_hash.to_json),
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "WRITER"), user_project: "test"]
 
     storage.service.mocked_service = mock
 
@@ -128,11 +154,39 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     bucket.acl.writers.must_be :empty?
     bucket.acl.readers.wont_be :empty?
 
-    bucket.acl.add_writer writer_entity
+    bucket.acl.add_writer entity
     bucket.acl.owners.wont_be  :empty?
     bucket.acl.writers.wont_be :empty?
     bucket.acl.readers.wont_be :empty?
-    bucket.acl.writers.must_include writer_entity
+    bucket.acl.writers.must_include entity
+
+    mock.verify
+  end
+
+  it "adds an owner to the ACL with user_project set to true" do
+    entity = "user-user@example.net"
+    acl_hash = {
+       "kind" => "storage#bucketAccessControl",
+       "id" => "#{bucket_name}-UUID/#{entity}",
+       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket_name}-UUID/acl/#{entity}",
+       "bucket" => "#{bucket_name}-UUID",
+       "entity" => entity,
+       "email" => "user@example.net",
+       "role" => "OWNER",
+       "etag" => "CAE="
+      }
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :insert_bucket_access_control,
+      Google::Apis::StorageV1::BucketAccessControl.from_json(acl_hash.to_json),
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "OWNER"), user_project: "test"]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
+
+    bucket.acl.add_owner entity
 
     mock.verify
   end
@@ -197,6 +251,23 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     predefined_acl_update "authenticatedRead" do |acl|
       acl.authenticatedRead!
     end
+  end
+
+  it "sets the predefined ACL rule authenticatedRead with user_project set to true" do
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :patch_bucket,
+      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
+      [bucket_name, Google::Apis::StorageV1::Bucket.new(acl: []),
+       predefined_acl: "authenticatedRead", predefined_default_object_acl: nil, user_project: "test"]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, user_project: true
+    bucket.acl.authenticatedRead!
+
+    mock.verify
   end
 
   it "sets the predefined ACL rule auth" do

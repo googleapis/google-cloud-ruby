@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,8 @@
 
 require "google-cloud-pubsub"
 require "google/cloud/pubsub/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -28,11 +30,14 @@ module Google
     # Cloud Pub/Sub allows developers to communicate between independently
     # written applications.
     #
-    # The goal of google-cloud is to provide a API that is comfortable to
-    # Rubyists. Authentication is handled by {Google::Cloud#pubsub}. You can
-    # provide the project and credential information to connect to the Pub/Sub
-    # service, or if you are running on Google Compute Engine this configuration
-    # is taken care of for you.
+    # The goal of google-cloud is to provide an API that is comfortable to
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ```ruby
     # require "google/cloud/pubsub"
@@ -185,45 +190,10 @@ module Google
     # end
     # ```
     #
-    # ## Pulling Messages
+    # ## Receiving messages
     #
-    # Messages are pulled from a Subscription. (See
-    # {Google::Cloud::Pubsub::Subscription#pull})
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new
-    #
-    # sub = pubsub.subscription "my-topic-sub"
-    # msgs = sub.pull
-    # ```
-    #
-    # A maximum number of messages returned can also be specified:
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new
-    #
-    # sub = pubsub.subscription "my-topic-sub", max: 10
-    # msgs = sub.pull
-    # ```
-    #
-    # The request for messages can also block until messages are available.
-    # (See {Google::Cloud::Pubsub::Subscription#wait_for_messages})
-    #
-    # ```ruby
-    # require "google/cloud/pubsub"
-    #
-    # pubsub = Google::Cloud::Pubsub.new
-    #
-    # sub = pubsub.subscription "my-topic-sub"
-    # msgs = sub.wait_for_messages
-    # ```
-    #
-    # Messages can also be streamed from a subscription with a subscriber object
-    # that can be created using `listen`. (See
+    # Messages can be streamed from a subscription with a subscriber object
+    # that is created using `listen`. (See
     # {Google::Cloud::Pubsub::Subscription#listen} and
     # {Google::Cloud::Pubsub::Subscriber})
     #
@@ -234,15 +204,39 @@ module Google
     #
     # sub = pubsub.subscription "my-topic-sub"
     #
-    # subscriber = sub.listen do |msg|
-    #   # process msg
-    #   msg.ack!
+    # subscriber = sub.listen do |received_message|
+    #   # process message
+    #   received_message.acknowledge!
     # end
     #
+    # # Start background threads that will call the block passed to listen.
     # subscriber.start
     #
     # # Shut down the subscriber when ready to stop receiving messages.
     # subscriber.stop.wait!
+    # ```
+    #
+    # Messages also can be pulled directly in a one-time operation. (See
+    # {Google::Cloud::Pubsub::Subscription#pull})
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    #
+    # sub = pubsub.subscription "my-topic-sub"
+    # received_messages = sub.pull
+    # ```
+    #
+    # A maximum number of messages to pull can be specified:
+    #
+    # ```ruby
+    # require "google/cloud/pubsub"
+    #
+    # pubsub = Google::Cloud::Pubsub.new
+    #
+    # sub = pubsub.subscription "my-topic-sub"
+    # received_messages = sub.pull max: 10
     # ```
     #
     # ## Acknowledging a Message
@@ -260,7 +254,17 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # sub.pull.each { |msg| msg.acknowledge! }
+    #
+    # subscriber = sub.listen do |received_message|
+    #   # process message
+    #   received_message.acknowledge!
+    # end
+    #
+    # # Start background threads that will call the block passed to listen.
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
     # ```
     #
     # Or, multiple messages can be acknowledged in a single API call:
@@ -290,12 +294,18 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # received_message = sub.pull.first
-    # if received_message
+    # subscriber = sub.listen do |received_message|
     #   puts received_message.message.data
+    #
     #   # Delay for 2 minutes
     #   received_message.delay! 120
     # end
+    #
+    # # Start background threads that will call the block passed to listen.
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
     # ```
     #
     # The message can also be made available for immediate redelivery:
@@ -306,12 +316,18 @@ module Google
     # pubsub = Google::Cloud::Pubsub.new
     #
     # sub = pubsub.subscription "my-topic-sub"
-    # received_message = sub.pull.first
-    # if received_message
+    # subscriber = sub.listen do |received_message|
     #   puts received_message.message.data
-    #   # Mark for redelivery by setting the deadline to now
-    #   received_message.delay! 0
+    #
+    #   # Mark for redelivery
+    #   received_message.reject!
     # end
+    #
+    # # Start background threads that will call the block passed to listen.
+    # subscriber.start
+    #
+    # # Shut down the subscriber when ready to stop receiving messages.
+    # subscriber.stop.wait!
     # ```
     #
     # Multiple messages can be delayed or made available for immediate
@@ -349,8 +365,8 @@ module Google
     #
     # snapshot = sub.create_snapshot
     #
-    # messages = sub.pull
-    # sub.acknowledge messages
+    # received_messages = sub.pull
+    # sub.acknowledge received_messages
     #
     # sub.seek snapshot
     # ```
@@ -369,11 +385,12 @@ module Google
     #
     # sub = pubsub.subscription "my-topic-sub"
     #
-    # subscriber = sub.listen do |msg|
-    #   # process msg
-    #   msg.ack!
+    # subscriber = sub.listen do |received_message|
+    #   # process message
+    #   received_message.acknowledge!
     # end
     #
+    # # Start background threads that will call the block passed to listen.
     # subscriber.start
     #
     # # Shut down the subscriber when ready to stop receiving messages.
@@ -392,12 +409,13 @@ module Google
     #
     # sub = pubsub.subscription "my-topic-sub"
     #
-    # subscriber = sub.listen threads: { callback: 16 } do |msg|
+    # subscriber = sub.listen threads: { callback: 16 } do |received_message|
     #   # store the message somewhere before acknowledging
-    #   store_in_backend msg.data # takes a few seconds
-    #   msg.ack!
+    #   store_in_backend received_message.data # takes a few seconds
+    #   received_message.acknowledge!
     # end
     #
+    # # Start background threads that will call the block passed to listen.
     # subscriber.start
     # ```
     #
@@ -412,11 +430,11 @@ module Google
     # ```ruby
     # require "google/cloud/pubsub"
     #
-    # pubsub = Google::Cloud::Pubsub.new # my-project-id
+    # pubsub = Google::Cloud::Pubsub.new # my-project
     #
     # # Get a topic in the current project
     # my_topic = pubsub.topic "my-topic"
-    # my_topic.name #=> "projects/my-project-id/topics/my-topic"
+    # my_topic.name #=> "projects/my-project/topics/my-topic"
     # # Get a topic in another project
     # other_topic = pubsub.topic "other-topic", project: "other-project-id"
     # other_topic.name #=> "projects/other-project-id/topics/other-topic"
@@ -428,14 +446,14 @@ module Google
     # ```ruby
     # require "google/cloud/pubsub"
     #
-    # pubsub = Google::Cloud::Pubsub.new # my-project-id
+    # pubsub = Google::Cloud::Pubsub.new # my-project
     #
     # # Get a topic in another project
     # topic = pubsub.topic "other-topic", project: "other-project-id"
     # # Create a subscription in the current project that pulls from
     # # the topic in another project
     # sub = topic.subscribe "my-sub"
-    # sub.name #=> "projects/my-project-id/subscriptions/my-sub"
+    # sub.name #=> "projects/my-project/subscriptions/my-sub"
     # sub.topic.name #=> "projects/other-project-id/topics/other-topic"
     # ```
     #
@@ -476,10 +494,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Pub/Sub service you
-      #   are connecting to.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Project identifier for the Pub/Sub service
+      #   you are connecting to. If not present, the default project for the
+      #   credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Pubsub::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -492,7 +512,10 @@ module Google
       # @param [Hash] client_config A hash of values to override the default
       #   behavior of the API client. Optional.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
-      #   If the param is nil, ENV["PUBSUB_EMULATOR_HOST"] will be used.
+      #   If the param is nil, uses the value of the `emulator_host` config.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Pubsub::Project]
       #
@@ -504,37 +527,83 @@ module Google
       #   topic = pubsub.topic "my-topic"
       #   topic.publish "task completed"
       #
-      def self.new project: nil, keyfile: nil, scope: nil, timeout: nil,
-                   client_config: nil, emulator_host: nil
-        project ||= Google::Cloud::Pubsub::Project.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
+                   client_config: nil, emulator_host: nil, project: nil,
+                   keyfile: nil
+        project_id ||= (project || default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        emulator_host ||= ENV["PUBSUB_EMULATOR_HOST"]
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        emulator_host ||= configure.emulator_host
         if emulator_host
-          ps = Google::Cloud::Pubsub::Project.new(
-            Google::Cloud::Pubsub::Service.new(
-              project, :this_channel_is_insecure))
-          ps.service.host = emulator_host
-          return ps
+          return Pubsub::Project.new(
+            Pubsub::Service.new(
+              project_id, :this_channel_is_insecure,
+              host: emulator_host
+            )
+          )
         end
 
-        credentials = credentials_with_scope keyfile, scope
+        credentials ||= (keyfile || default_credentials(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Pubsub::Credentials.new credentials, scope: scope
+        end
 
-        Google::Cloud::Pubsub::Project.new(
-          Google::Cloud::Pubsub::Service.new(
-            project, credentials, timeout: timeout,
-                                  client_config: client_config))
+        Pubsub::Project.new(
+          Pubsub::Service.new(
+            project_id, credentials, timeout: timeout,
+                                     client_config: client_config
+          )
+        )
       end
 
       ##
-      # @private
-      def self.credentials_with_scope keyfile, scope
-        if keyfile.nil?
-          Google::Cloud::Pubsub::Credentials.default(scope: scope)
-        else
-          Google::Cloud::Pubsub::Credentials.new(keyfile, scope: scope)
-        end
+      # Configure the Google Cloud Pubsub library.
+      #
+      # The following Pubsub configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Pubsub project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Pubsub::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["PUBSUB_EMULATOR_HOST"]`
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Pubsub library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.pubsub if block_given?
+
+        Google::Cloud.configure.pubsub
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.pubsub.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.pubsub.credentials ||
+          Google::Cloud.configure.credentials ||
+          Pubsub::Credentials.default(scope: scope)
       end
     end
   end

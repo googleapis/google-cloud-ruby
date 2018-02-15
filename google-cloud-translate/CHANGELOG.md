@@ -1,5 +1,13 @@
 # Release History
 
+### 1.1.0 / 2017-11-14
+
+* Add `Google::Cloud::Translate::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Updated `faraday`, `googleauth` dependencies.
+
 ### 1.0.1 / 2017-07-11
 
 * Remove mention of discontinued Premium Edition billing from documentation.

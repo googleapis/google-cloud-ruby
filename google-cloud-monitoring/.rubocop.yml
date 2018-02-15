@@ -1,9 +1,7 @@
 AllCops:
   Exclude:
-    - "integration/**/*"
     - "google-cloud-monitoring.gemspec"
-    - "lib/google/monitoring/**/*"
-    - "lib/google/cloud/monitoring/**/*"
+    - "lib/google/**/*"
     - "Rakefile"
     - "test/**/*"
 
@@ -14,41 +12,6 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
-Style/NumericLiterals:
-  Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Style/EmptyLines:
-  Enabled: false
-Style/EmptyElse:
-  Enabled: false
-Style/HashSyntax:
+Naming/FileName:
   Exclude:
-    - "lib/google/cloud/monitoring/v3/**/*"
-Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/monitoring/v3/**/*"
-Metrics/CyclomaticComplexity:
-  Max: 10
-Metrics/PerceivedComplexity:
-  Max: 10
-Metrics/AbcSize:
-  Max: 25
-  Exclude:
-    - "lib/google/cloud/monitoring/v3/**/*"
-Metrics/MethodLength:
-  Max: 20
-  Exclude:
-    - "lib/google/cloud/monitoring/v3/**/*"
-Metrics/ParameterLists:
-  Enabled: false
-Style/RescueModifier:
-  Enabled: false
-Style/ClassVars:
-  Enabled: false
-Style/TrivialAccessors:
-  Enabled: false
-Style/FileName:
-  Enabled: false # for lib/google-cloud-monitoring.rb file
+    - "lib/google-cloud-monitoring.rb"

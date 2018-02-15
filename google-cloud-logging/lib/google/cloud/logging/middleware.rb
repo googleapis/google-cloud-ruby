@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,12 +22,13 @@ module Google
         ##
         # The default log name used to instantiate the default logger if one
         # isn't provided.
-        DEFAULT_LOG_NAME = "ruby_app_log"
+        DEFAULT_LOG_NAME = "ruby_app_log".freeze
 
         ##
         # A default value for the log_name_map argument. Directs health check
         # logs to a separate log name so they don't spam the main log.
-        DEFAULT_LOG_NAME_MAP = { "/_ah/health" => "ruby_health_check_log" }
+        DEFAULT_LOG_NAME_MAP =
+          { "/_ah/health" => "ruby_health_check_log" }.freeze
 
         ##
         # The Google::Cloud::Logging::Logger instance
@@ -59,11 +60,12 @@ module Google
             @logger = logger
           else
             log_name = configuration.log_name
-            logging = Logging.new project: configuration.project_id,
-                                  keyfile: configuration.keyfile
+            logging = Logging.new project_id: configuration.project_id,
+                                  credentials: configuration.credentials
             resource = Middleware.build_monitored_resource(
               configuration.monitored_resource.type,
-              configuration.monitored_resource.labels)
+              configuration.monitored_resource.labels
+            )
             @logger = logging.logger log_name, resource
           end
         end
@@ -225,7 +227,8 @@ module Google
             if Google::Cloud.env.app_engine?
               ["gae_app", {
                 module_id: Google::Cloud.env.app_engine_service_id,
-                version_id: Google::Cloud.env.app_engine_service_version }]
+                version_id: Google::Cloud.env.app_engine_service_version
+              }]
             elsif Google::Cloud.env.container_engine?
               ["container", {
                 cluster_name: Google::Cloud.env.container_engine_cluster_name,
@@ -235,7 +238,8 @@ module Google
             elsif Google::Cloud.env.compute_engine?
               ["gce_instance", {
                 instance_id: Google::Cloud.env.instance_name,
-                zone: Google::Cloud.env.instance_zone }]
+                zone: Google::Cloud.env.instance_zone
+              }]
             else
               ["global", {}]
             end
@@ -256,12 +260,14 @@ module Google
         # already.
         #
         def load_config **kwargs
-          configuration.project_id = kwargs[:project_id] ||
-                                     configuration.project_id
-          configuration.keyfile = kwargs[:keyfile] ||
-                                  configuration.keyfile
-          configuration.log_name_map ||= kwargs[:log_name_map] ||
-                                         configuration.log_name_map
+          project_id = kwargs[:project] || kwargs[:project_id]
+          configuration.project_id = project_id unless project_id.nil?
+
+          creds = kwargs[:credentials] || kwargs[:keyfile]
+          configuration.credentials = creds unless creds.nil?
+
+          log_name_map = kwargs[:log_name_map]
+          configuration.log_name_map = log_name_map unless log_name_map.nil?
 
           init_default_config
         end
@@ -269,9 +275,10 @@ module Google
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
-          configuration.project_id ||= Cloud.configure.project_id ||
-                                       Logging::Project.default_project
-          configuration.keyfile ||= Cloud.configure.keyfile
+          configuration.project_id ||= begin
+            (Cloud.configure.project_id || Logging.default_project_id)
+          end
+          configuration.credentials ||= Cloud.configure.credentials
           configuration.log_name ||= DEFAULT_LOG_NAME
           configuration.log_name_map ||= DEFAULT_LOG_NAME_MAP
         end

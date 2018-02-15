@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,7 +39,7 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
     project.must_be_kind_of Google::Cloud::ResourceManager::Project
     project.project_id.must_equal "new-project-456"
-    project.name.must_equal nil
+    project.name.must_be :nil?
     project.labels.must_be :empty?
   end
 

@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -80,7 +80,7 @@ module Google
           # Verify credentials and set use_debugger to false if
           # credentials are invalid
           unless valid_credentials? Debugger.configure.project_id,
-                                    Debugger.configure.keyfile
+                                    Debugger.configure.credentials
             Cloud.configure.use_debugger = false
             return
           end
@@ -89,6 +89,8 @@ module Google
           # the production environment
           Google::Cloud.configure.use_debugger ||= Rails.env.production?
         end
+
+        # rubocop:disable all
 
         ##
         # @private Merge Rails configuration into Debugger instrumentation
@@ -99,28 +101,44 @@ module Google
 
           Cloud.configure.use_debugger ||= gcp_config.use_debugger
           Debugger.configure do |config|
-            config.project_id ||= dbg_config.project_id || gcp_config.project_id
-            config.keyfile ||= dbg_config.keyfile || gcp_config.keyfile
-            config.service_name ||= dbg_config.service_name
-            config.service_version ||= dbg_config.service_version
+            config.project_id ||= begin
+              config.project || dbg_config.project_id || dbg_config.project
+                gcp_config.project_id || gcp_config.project
+            end
+            config.credentials ||= begin
+              config.keyfile || dbg_config.credentials || dbg_config.keyfile
+                gcp_config.credentials || gcp_config.keyfile
+            end
+            config.service_name ||= \
+              (dbg_config.service_name || gcp_config.service_name)
+            config.service_version ||= \
+              (dbg_config.service_version || gcp_config.service_version)
           end
         end
+
+        # rubocop:enable all
 
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
           config = Debugger.configure
-          config.project_id ||= Debugger::Project.default_project
-          config.service_name ||= Debugger::Project.default_service_name
-          config.service_version ||= Debugger::Project.default_service_version
+          config.project_id ||= Debugger.default_project_id
+          config.service_name ||= Debugger.default_service_name
+          config.service_version ||= Debugger.default_service_version
         end
 
         ##
         # @private Verify credentials
-        def self.valid_credentials? project_id, keyfile
+        def self.valid_credentials? project_id, credentials
           begin
-            Debugger::Credentials.credentials_with_scope keyfile
-          rescue => e
+            # if credentials is nil, get default
+            credentials ||= Debugger::Credentials.default
+            # only create a new Credentials object if the val isn't one already
+            unless credentials.is_a? Google::Auth::Credentials
+              # if credentials is not a Credentials object, create one
+              Debugger::Credentials.new credentials
+            end
+          rescue StandardError => e
             STDOUT.puts "Note: Google::Cloud::Debugger is disabled because " \
               "it failed to authorize with the service. (#{e.message})"
             return false

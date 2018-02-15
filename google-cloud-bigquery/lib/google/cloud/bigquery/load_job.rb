@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -276,7 +276,7 @@ module Google
         #
         def input_files
           Integer @gapi.statistics.load.input_files
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -287,7 +287,7 @@ module Google
         #
         def input_file_bytes
           Integer @gapi.statistics.load.input_file_bytes
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -299,7 +299,7 @@ module Google
         #
         def output_rows
           Integer @gapi.statistics.load.output_rows
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -311,7 +311,7 @@ module Google
         #
         def output_bytes
           Integer @gapi.statistics.load.output_bytes
-        rescue
+        rescue StandardError
           nil
         end
       end

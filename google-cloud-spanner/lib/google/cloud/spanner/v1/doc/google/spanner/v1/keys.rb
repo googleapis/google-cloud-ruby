@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,7 +22,7 @@ module Google
       #
       # Keys are represented by lists, where the ith value in the list
       # corresponds to the ith component of the table or index primary key.
-      # Individual values are encoded as described Here.
+      # Individual values are encoded as described {Google::Spanner::V1::TypeCode here}.
       #
       # For example, consider the following table definition:
       #
@@ -132,10 +132,10 @@ module Google
       #     A list of specific keys. Entries in +keys+ should have exactly as
       #     many elements as there are columns in the primary or index key
       #     with which this +KeySet+ is used.  Individual key values are
-      #     encoded as described Here.
+      #     encoded as described {Google::Spanner::V1::TypeCode here}.
       # @!attribute [rw] ranges
       #   @return [Array<Google::Spanner::V1::KeyRange>]
-      #     A list of key ranges. See KeyRange for more information about
+      #     A list of key ranges. See {Google::Spanner::V1::KeyRange KeyRange} for more information about
       #     key range specifications.
       # @!attribute [rw] all
       #   @return [true, false]

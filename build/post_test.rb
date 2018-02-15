@@ -2,7 +2,7 @@ require "pty"
 
 commands = [
   "rvm-exec 2.4.0 bundle exec rake circleci:post",
-  "rvm-exec 2.4.0 bundle exec rake test:coveralls"
+  "rvm-exec 2.3.1 bundle exec rake test:coveralls"
 ]
 
 node_index = Integer ENV["CIRCLE_NODE_INDEX"]

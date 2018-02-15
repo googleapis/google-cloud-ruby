@@ -18,17 +18,17 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.2.0"
 
-  gem.add_runtime_dependency "google-cloud-debugger", "~> 0.28.0"
-  gem.add_runtime_dependency "google-cloud-error_reporting", "~> 0.27.0"
-  gem.add_runtime_dependency "google-cloud-logging", "~> 1.2"
-  gem.add_runtime_dependency "google-cloud-trace", "~> 0.27.0"
+  gem.add_runtime_dependency "google-cloud-debugger", "~> 0.30.0"
+  gem.add_runtime_dependency "google-cloud-error_reporting", "~> 0.29.0"
+  gem.add_runtime_dependency "google-cloud-logging", "~> 1.4"
+  gem.add_runtime_dependency "google-cloud-trace", "~> 0.30.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
-  gem.add_development_dependency "rubocop", "<= 0.35.1"
+  gem.add_development_dependency "rubocop", "~> 0.50.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
   gem.add_development_dependency "yard-doctest", "~> 0.1.6"

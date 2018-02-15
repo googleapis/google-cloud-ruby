@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Google Cloud Video Intelligence API ([GA](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Google Cloud Video Intelligence API][Product Documentation]:
     # Google Cloud Video Intelligence API.
@@ -30,13 +30,9 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
-    #
-    # ### Installation
-    # ```
-    # $ gem install google-cloud-video_intelligence
-    # ```
+    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+    # 3. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
+    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Next Steps
     # - Read the [Google Cloud Video Intelligence API Product documentation][Product Documentation]
@@ -54,10 +50,10 @@ module Google
         ##
         # Service that implements Google Cloud Video Intelligence API.
         #
-        # @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+        # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
         #   Provides the means for authenticating requests made by the client. This parameter can
         #   be many types.
-        #   A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+        #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
         #   authenticating requests made by this client.
         #   A `String` will be treated as the path to the keyfile to be used for the construction of
         #   credentials for this client.
@@ -79,11 +75,6 @@ module Google
         # @param timeout [Numeric]
         #   The default timeout, in seconds, for calls made through this client.
         def self.new \
-            service_path: nil,
-            port: nil,
-            channel: nil,
-            chan_creds: nil,
-            updater_proc: nil,
             credentials: nil,
             scopes: nil,
             client_config: nil,
@@ -91,11 +82,6 @@ module Google
             lib_name: nil,
             lib_version: nil
           kwargs = {
-            service_path: service_path,
-            port: port,
-            channel: channel,
-            chan_creds: chan_creds,
-            updater_proc: updater_proc,
             credentials: credentials,
             scopes: scopes,
             client_config: client_config,

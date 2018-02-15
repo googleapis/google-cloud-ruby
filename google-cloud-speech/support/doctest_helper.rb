@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -68,6 +68,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
     module Storage
       def self.stub_new
@@ -86,7 +92,7 @@ end
 def mock_speech
   Google::Cloud::Speech.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    speech = Google::Cloud::Speech::Project.new(Google::Cloud::Speech::Service.new("my-project-id", credentials))
+    speech = Google::Cloud::Speech::Project.new(Google::Cloud::Speech::Service.new("my-project", credentials))
 
     speech.service.mocked_service = Minitest::Mock.new
     speech.service.mocked_ops = Minitest::Mock.new
@@ -100,7 +106,7 @@ end
 def mock_storage
   Google::Cloud::Storage.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-project-id", credentials))
+    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-project", credentials))
 
     storage.service.mocked_service = Minitest::Mock.new
     yield storage.service.mocked_service
@@ -123,6 +129,8 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Speech" do
     mock_speech
   end
+
+  doctest.skip "Google::Cloud::Speech::Credentials" # occasionally getting "This code example is not yet mocked"
 
 
   doctest.before "Google::Cloud::Speech::Project" do
@@ -277,7 +285,7 @@ end
 
 
 def default_headers
-  { "google-cloud-resource-prefix" => "projects/my-project-id" }
+  { "google-cloud-resource-prefix" => "projects/my-project" }
 end
 
 def default_options

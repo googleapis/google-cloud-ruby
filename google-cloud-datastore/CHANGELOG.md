@@ -1,5 +1,26 @@
 # Release History
 
+### 1.3.0 / 2017-12-19
+
+* Support Read-Only Transactions
+  * Add ReadOnlyTransaction class.
+  * Add Dataset#read_only_transaction.
+* Dataset#transaction now automatically retries on error,
+* Add Dataset#transaction previous_transaction and deadline arguments,
+* Update google-gax dependency to 1.0.
+
+### 1.2.1 / 2017-11-21
+
+* Remove warning when connecting to Datastore Emulator.
+
+### 1.2.0 / 2017-11-14
+
+* Add `Google::Cloud::Datastore::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 1.1.0 / 2017-07-11
 
 * Update GAPIC configuration to exclude `UNAVAILABLE` errors from automatic retry.

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -160,11 +160,13 @@ module Google
             if value.is_a? Google::Cloud::Datastore::Cursor
               @grpc.named_bindings[name.to_s] = \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  cursor: value.to_grpc)
+                  cursor: value.to_grpc
+                )
             else
               @grpc.named_bindings[name.to_s] = \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  value: Convert.to_value(value))
+                  value: Convert.to_value(value)
+                )
             end
           end
         end
@@ -209,11 +211,13 @@ module Google
             if value.is_a? Google::Cloud::Datastore::Cursor
               @grpc.positional_bindings << \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  cursor: value.to_grpc)
+                  cursor: value.to_grpc
+                )
             else
               @grpc.positional_bindings << \
                 Google::Datastore::V1::GqlQueryParameter.new(
-                  value: Convert.to_value(value))
+                  value: Convert.to_value(value)
+                )
             end
           end
         end

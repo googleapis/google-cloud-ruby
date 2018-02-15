@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,22 +22,29 @@ module Google
       ##
       # # Data
       #
-      # Represents {Table} Data as a list of name/value pairs (hashes.)
-      # Also contains metadata such as `etag` and `total`, and provides access
-      # to the schema of the table from which the data was read.
+      # Represents a page of results (rows) as an array of hashes. Because Data
+      # delegates to Array, methods such as `Array#count` represent the number
+      # of rows in the page. In addition, methods of this class include result
+      # set metadata such as `total` and provide access to the schema of the
+      # query or table. See {Project#query}, {Dataset#query} and {Table#data}.
       #
       # @example
       #   require "google/cloud/bigquery"
       #
       #   bigquery = Google::Cloud::Bigquery.new
-      #   dataset = bigquery.dataset "my_dataset"
-      #   table = dataset.table "my_table"
       #
-      #   data = table.data
-      #   puts "#{data.count} of #{data.total}"
-      #   if data.next?
-      #     next_data = data.next
+      #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+      #   job = bigquery.query_job sql
+      #
+      #   job.wait_until_done!
+      #   data = job.data
+      #
+      #   data.count # 100000
+      #   data.total # 164656
+      #   data.each do |row|
+      #     puts row[:word]
       #   end
+      #   data = data.next if data.next?
       #
       class Data < DelegateClass(::Array)
         ##
@@ -49,14 +56,14 @@ module Google
         attr_accessor :table_gapi
 
         ##
-        # @private The Google API Client object.
-        attr_accessor :gapi
+        # @private The Google API Client object in JSON Hash.
+        attr_accessor :gapi_json
 
         # @private
         def initialize arr = []
           @service = nil
           @table_gapi = nil
-          @gapi = nil
+          @gapi_json = nil
           super arr
         end
 
@@ -66,7 +73,7 @@ module Google
         # @return [String] The resource type.
         #
         def kind
-          @gapi.kind
+          @gapi_json[:kind]
         end
 
         ##
@@ -75,7 +82,7 @@ module Google
         # @return [String] The ETag hash.
         #
         def etag
-          @gapi.etag
+          @gapi_json[:etag]
         end
 
         ##
@@ -85,7 +92,7 @@ module Google
         # @return [String] The pagination token.
         #
         def token
-          @gapi.page_token
+          @gapi_json[:pageToken]
         end
 
         ##
@@ -97,18 +104,23 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
         #
-        #   data = table.data
-        #   puts "#{data.count} of #{data.total}"
-        #   if data.next?
-        #     next_data = data.next
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   data = job.data
+        #
+        #   data.count # 100000
+        #   data.total # 164656
+        #   data.each do |row|
+        #     puts row[:word]
         #   end
+        #   data = data.next if data.next?
         #
         def total
-          Integer @gapi.total_rows
-        rescue
+          Integer @gapi_json[:totalRows]
+        rescue StandardError
           nil
         end
 
@@ -192,13 +204,19 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
         #
-        #   data = table.data
-        #   if data.next?
-        #     next_data = data.next
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   data = job.data
+        #
+        #   data.count # 100000
+        #   data.total # 164656
+        #   data.each do |row|
+        #     puts row[:word]
         #   end
+        #   data = data.next if data.next?
         #
         def next?
           !token.nil?
@@ -213,22 +231,28 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
         #
-        #   data = table.data
-        #   if data.next?
-        #     next_data = data.next
+        #   sql = "SELECT word FROM publicdata.samples.shakespeare"
+        #   job = bigquery.query_job sql
+        #
+        #   job.wait_until_done!
+        #   data = job.data
+        #
+        #   data.count # 100000
+        #   data.total # 164656
+        #   data.each do |row|
+        #     puts row[:word]
         #   end
+        #   data = data.next if data.next?
         #
         def next
           return nil unless next?
           ensure_service!
-          data_gapi = service.list_tabledata \
+          data_json = service.list_tabledata \
             @table_gapi.table_reference.dataset_id,
             @table_gapi.table_reference.table_id,
             token: token
-          self.class.from_gapi data_gapi, @table_gapi, @service
+          self.class.from_gapi_json data_json, @table_gapi, @service
         end
 
         ##
@@ -272,6 +296,7 @@ module Google
         #     row[:word]
         #   end
         #
+        #
         # @example Limit the number of API calls made:
         #   require "google/cloud/bigquery"
         #
@@ -302,13 +327,13 @@ module Google
 
         ##
         # @private New Data from a response object.
-        def self.from_gapi gapi, table_gapi, service
-          formatted_rows = Convert.format_rows(gapi.rows,
+        def self.from_gapi_json gapi_json, table_gapi, service
+          formatted_rows = Convert.format_rows(gapi_json[:rows],
                                                table_gapi.schema.fields)
 
           data = new formatted_rows
           data.table_gapi = table_gapi
-          data.gapi = gapi
+          data.gapi_json = gapi_json
           data.service = service
           data
         end
@@ -318,7 +343,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

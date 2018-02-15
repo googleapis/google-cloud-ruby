@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -456,7 +456,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find can take a kind and id" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", 123).to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.find "ds-test", 123
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -464,7 +464,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find can take a kind and name" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.find "ds-test", "thingie"
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -472,7 +472,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find can take a key" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = dataset.find key
@@ -481,7 +481,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "find is aliased to get" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", 123).to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.get "ds-test", 123
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -490,7 +490,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "find can specify consistency" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", 123).to_grpc]
     read_options = Google::Datastore::V1::ReadOptions.new(read_consistency: :EVENTUAL)
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
 
     entity = dataset.find "ds-test", 123, consistency: :eventual
     entity.must_be_kind_of Google::Cloud::Datastore::Entity
@@ -506,7 +506,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "find_all takes several keys" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -522,7 +522,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "find_all is aliased to lookup" do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, nil, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -539,7 +539,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
             Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
     read_options = Google::Datastore::V1::ReadOptions.new(read_consistency: :EVENTUAL)
-    dataset.service.mocked_service.expect :lookup, lookup_res, [project, read_options, keys, options: default_options]
+    dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
 
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -585,7 +585,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     it "contains deferred entities" do
       keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
               Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-      dataset.service.mocked_service.expect :lookup, lookup_res_deferred, [project, nil, keys, options: default_options]
+      dataset.service.mocked_service.expect :lookup, lookup_res_deferred, [project, keys, read_options: nil, options: default_options]
 
       key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
       key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -604,7 +604,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     it "contains missing entities" do
       keys = [Google::Cloud::Datastore::Key.new("ds-test", "thingie1").to_grpc,
               Google::Cloud::Datastore::Key.new("ds-test", "thingie2").to_grpc]
-      dataset.service.mocked_service.expect :lookup, lookup_res_missing, [project, nil, keys, options: default_options]
+      dataset.service.mocked_service.expect :lookup, lookup_res_missing, [project, keys, read_options: nil, options: default_options]
 
       key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
       key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
@@ -733,7 +733,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run will fulfill a query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
     entities.count.must_equal 2
@@ -791,7 +791,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run_query will fulfill a query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run_query query
     entities.count.must_equal 2
@@ -821,7 +821,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run_query will fulfill a query with a namespace" do
     partition_id = Google::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, nil, query: query.to_grpc, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run_query query, namespace: "foobar"
     entities.count.must_equal 2
@@ -850,7 +850,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run will fulfill a gql query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql
@@ -882,7 +882,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run will fulfill a gql query with a namespace" do
     partition_id = Google::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql, namespace: "foobar"
@@ -913,7 +913,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run_query will fulfill a gql query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql
@@ -945,7 +945,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run_query will fulfill a gql query with a namespace" do
     partition_id = Google::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, nil, query: nil, gql_query: gql_query_grpc, options: default_options]
+    dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, options: default_options]
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql, namespace: "foobar"
@@ -1119,11 +1119,52 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "transaction will return a Transaction" do
     tx_id = "giterdone".encode("ASCII-8BIT")
     begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
 
     tx = dataset.transaction
     tx.must_be_kind_of Google::Cloud::Datastore::Transaction
     tx.id.must_equal "giterdone"
+  end
+
+  it "transaction will return a Transaction with previous_transaction" do
+    previous_transaction_id = "giterdone-previous".encode("ASCII-8BIT")
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    tx_options = Google::Datastore::V1::TransactionOptions.new
+    tx_options.read_write = Google::Datastore::V1::TransactionOptions::ReadWrite.new(
+        previous_transaction: previous_transaction_id
+      )
+    begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
+
+    tx = dataset.transaction previous_transaction: previous_transaction_id
+    tx.must_be_kind_of Google::Cloud::Datastore::Transaction
+    tx.id.must_equal "giterdone"
+  end
+
+  it "read_only_transaction will return a read-only Transaction" do
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    tx_options = Google::Datastore::V1::TransactionOptions.new(
+      read_write: nil,
+      read_only: Google::Datastore::V1::TransactionOptions::ReadOnly.new
+    )
+    begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
+
+    tx = dataset.read_only_transaction
+    tx.must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
+  end
+
+  it "snapshot will return a read-only Transaction" do
+    tx_id = "giterdone".encode("ASCII-8BIT")
+    tx_options = Google::Datastore::V1::TransactionOptions.new(
+      read_write: nil,
+      read_only: Google::Datastore::V1::TransactionOptions::ReadOnly.new
+    )
+    begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
+
+    tx = dataset.snapshot
+    tx.must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
   end
 
   it "transaction will commit with a block" do
@@ -1139,7 +1180,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
         e.key = Google::Cloud::Datastore::Key.new "ds-test"
         e["name"] = "thingamajig"
       end.to_grpc)
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     dataset.service.mocked_service.expect :commit, commit_res, [project, :TRANSACTIONAL, [mutation], transaction: tx_id, options: default_options]
 
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
@@ -1155,7 +1196,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     tx_id = "giterdone".encode("ASCII-8BIT")
     begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
     rollback_res = Google::Datastore::V1::RollbackResponse.new
-    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project]
+    dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
     dataset.service.mocked_service.expect :rollback, rollback_res, [project, tx_id, options: default_options]
 
     error = assert_raises Google::Cloud::Datastore::TransactionError do
@@ -1166,10 +1207,8 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
     error.wont_be :nil?
     error.message.must_equal "Transaction failed to commit."
-    if error.respond_to? :cause
-      error.cause.wont_be :nil?
-      error.cause.message.must_equal "This error should be wrapped by TransactionError."
-    end
+    error.cause.wont_be :nil?
+    error.cause.message.must_equal "This error should be wrapped by TransactionError."
   end
 
   it "transaction will wrap errors for both commit and rollback" do
@@ -1181,7 +1220,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
       stub = Object.new
       stub.instance_variable_set "@response", begin_tx_res
-      def stub.begin_transaction
+      def stub.begin_transaction read_only: nil, previous_transaction: nil
         @response
       end
       def stub.commit *args
@@ -1205,16 +1244,86 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       end
 
       error.wont_be :nil?
+      error.must_be_kind_of Google::Cloud::Datastore::TransactionError
       error.message.must_equal "Transaction failed to commit and rollback."
-      if error.respond_to? :cause # ruby 2.0 doesn't have cause
-        error.cause.wont_be :nil?
-        error.cause.message.must_equal "rollback error"
-        error.cause.cause.wont_be :nil?
+      error.cause.wont_be :nil?
+      error.cause.must_be_kind_of RuntimeError
+      error.cause.message.must_equal "rollback error"
+      if error.cause.respond_to? :cause # RuntimeError#cause not on Ruby 2.0
+        error.cause.cause.must_be_kind_of RuntimeError
         error.cause.cause.message.must_equal "commit error"
       end
     ensure
       # Reset mocked service so the call to verify works.
       dataset.service = mocked_service
+    end
+  end
+
+  describe "transaction retry" do
+    it "retries when an unavailable error is raised" do
+      tx_id = "giterdone".encode("ASCII-8BIT")
+      begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+      dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
+
+      retry_tx_id = "doitlive".encode("ASCII-8BIT")
+      retry_begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: retry_tx_id)
+      retry_tx_options = Google::Datastore::V1::TransactionOptions.new(
+        read_write: Google::Datastore::V1::TransactionOptions::ReadWrite.new(
+          previous_transaction: tx_id
+        )
+      )
+      dataset.service.mocked_service.expect :begin_transaction, retry_begin_tx_res, [project, transaction_options: retry_tx_options]
+
+      mocked_service = dataset.service.mocked_service
+      def mocked_service.commit *args
+        if @first_commit.nil?
+          @first_commit = true
+
+          gax_error = Google::Gax::GaxError.new "unavailable"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(14, "unavailable")
+          raise gax_error
+        end
+
+        Google::Datastore::V1::CommitResponse.new(mutation_results: [
+            Google::Datastore::V1::MutationResult.new(
+              key: Google::Cloud::Datastore::Key.new("ds-test", "thingie").to_grpc
+            )
+        ])
+      end
+
+      entity = Google::Cloud::Datastore::Entity.new.tap do |e|
+        e.key = Google::Cloud::Datastore::Key.new "ds-test"
+        e["name"] = "thingamajig"
+      end
+      dataset.transaction do |tx|
+        tx.save entity
+      end
+    end
+
+    it "does not retry when an unsupported error is raised" do
+      tx_id = "giterdone".encode("ASCII-8BIT")
+      begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
+      rollback_res = Google::Datastore::V1::RollbackResponse.new
+      dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
+      dataset.service.mocked_service.expect :rollback, rollback_res, [project, tx_id, options: default_options]
+
+      mocked_service = dataset.service.mocked_service
+      def mocked_service.commit *args
+        raise "unsupported"
+      end
+
+      entity = Google::Cloud::Datastore::Entity.new.tap do |e|
+        e.key = Google::Cloud::Datastore::Key.new "ds-test"
+        e["name"] = "thingamajig"
+      end
+      error = expect do
+        dataset.transaction do |tx|
+          tx.save entity
+        end
+      end.must_raise Google::Cloud::Datastore::TransactionError
+      error.message.must_equal "Transaction failed to commit."
+      error.cause.must_be_kind_of StandardError
+      error.cause.message.must_equal "unsupported"
     end
   end
 end

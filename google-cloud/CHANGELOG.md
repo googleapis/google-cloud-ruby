@@ -1,5 +1,65 @@
 # Release History
 
+### 0.49.0 / 2018-01-10
+
+* BigQuery 1.0.0 release
+  * Update authentication documentation
+    * Update Data documentation and code examples
+    * Remove reference to sync and async queries
+  * Allow use of URI objects for Dataset#load, Table#load, and Table#load_job
+* Firestore 0.20.0 release
+  * First release
+
+### 0.48.0 / 2017-12-26
+
+* Container 0.1.0 release.
+* Dataproc Login 0.1.0 release.
+* DLP 0.1.0 release.
+* OS Login 0.1.0 release.
+* Trace 0.30.0 release.
+
+### 0.47.0 / 2017-12-19
+
+* Datastore 1.3.0 release.
+* Debugger 0.30.0 release.
+* Error Reporting 0.29.0 release.
+* Natural Language 0.29.0 release.
+* Logging 1.4.0 release.
+* Monitoring 0.27.0 release.
+* Pub/Sub 0.29.0 release.
+* Spanner 1.2.0 release.
+* Speech 0.28.0 release.
+* Trace 0.29.0 release.
+* Video Intelligence 0.29.0 release.
+* Vision 0.27.0 release.
+
+### 0.46.0 / 2017-11-22
+
+* Video Intelligence 0.25.0 release.
+
+### 0.45.0 / 2017-11-14
+
+* BigQuery 0.30.0 release.
+* Datastore 1.2 release.
+* DNS 0.27.0 release.
+* Error Reporting 0.28.0 release.
+* Natural Language 0.28.0 release.
+* Logging 1.3 release.
+* Monitoring 0.26.0 release.
+* Pub/Sub 0.28.0 release.
+* Resource Manager 0.28.0 release.
+* Spanner 1.1 release.
+* Speech 0.27.0 release.
+* Storage 1.8 release.
+* Trace 0.28.0 release.
+* Translation 1.1 release.
+* Video Intelligence 0.24.0 release.
+* Vision 0.26.0 release.
+
+### 0.44.0 / 2017-10-09
+
+* BigQuery 0.29.0 release.
+
 ### 0.43.0 / 2017-09-29
 
 * Spanner 1.0 release.

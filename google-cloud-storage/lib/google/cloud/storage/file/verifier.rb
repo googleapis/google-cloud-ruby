@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,17 +30,15 @@ module Google
           def self.verify_md5! gcloud_file, local_file
             gcloud_digest = gcloud_file.md5
             local_digest = md5_for local_file
-            if gcloud_digest != local_digest
-              fail FileVerificationError.for_md5(gcloud_digest, local_digest)
-            end
+            return if gcloud_digest == local_digest
+            raise FileVerificationError.for_md5(gcloud_digest, local_digest)
           end
 
           def self.verify_crc32c! gcloud_file, local_file
             gcloud_digest = gcloud_file.crc32c
             local_digest = crc32c_for local_file
-            if gcloud_digest != local_digest
-              fail FileVerificationError.for_crc32c(gcloud_digest, local_digest)
-            end
+            return if gcloud_digest == local_digest
+            raise FileVerificationError.for_crc32c(gcloud_digest, local_digest)
           end
 
           def self.verify_md5 gcloud_file, local_file
@@ -58,7 +56,9 @@ module Google
               end
             else # StringIO
               local_file.rewind
-              ::Digest::MD5.base64digest local_file.read
+              md5 = ::Digest::MD5.base64digest local_file.read
+              local_file.rewind
+              md5
             end
           end
 
@@ -69,7 +69,9 @@ module Google
               end
             else # StringIO
               local_file.rewind
-              ::Digest::CRC32c.base64digest local_file.read
+              crc32c = ::Digest::CRC32c.base64digest local_file.read
+              local_file.rewind
+              crc32c
             end
           end
         end

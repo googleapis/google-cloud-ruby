@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -131,7 +131,7 @@ module Google
           # Verify credentials and set use_error_reporting to false if
           # credentials are invalid
           unless valid_credentials? Trace.configure.project_id,
-                                    Trace.configure.keyfile
+                                    Trace.configure.credentials
             Cloud.configure.use_trace = false
             return
           end
@@ -140,6 +140,8 @@ module Google
           Google::Cloud.configure.use_trace ||= Rails.env.production?
         end
 
+        # rubocop:disable all
+
         ##
         # @private Merge Rails configuration into Trace instrumentation
         # configuration.
@@ -147,30 +149,45 @@ module Google
           gcp_config = rails_config.google_cloud
           trace_config = gcp_config.trace
 
-          Cloud.configure.use_trace ||= gcp_config.use_trace
+          if Cloud.configure.use_trace.nil?
+            Cloud.configure.use_trace = gcp_config.use_trace
+          end
           Trace.configure do |config|
-            config.project_id ||= trace_config.project_id ||
-                                  gcp_config.project_id
-            config.keyfile ||= trace_config.keyfile || gcp_config.keyfile
+            config.project_id ||= (config.project ||
+              trace_config.project_id || trace_config.project ||
+              gcp_config.project_id || gcp_config.project)
+            config.credentials ||= (config.keyfile ||
+              trace_config.credentials || trace_config.keyfile ||
+              gcp_config.credentials || gcp_config.keyfile)
             config.notifications ||= trace_config.notifications
             config.max_data_length ||= trace_config.max_data_length
-            config.capture_stack ||= trace_config.capture_stack
+            if config.capture_stack.nil?
+              config.capture_stack = trace_config.capture_stack
+            end
             config.sampler ||= trace_config.sampler
             config.span_id_generator ||= trace_config.span_id_generator
           end
         end
 
+        # rubocop:enable all
+
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
-          Trace.configure.project_id ||= Trace::Project.default_project
+          Trace.configure.project_id ||= Trace.default_project_id
         end
 
         ##
         # @private Verify credentials
-        def self.valid_credentials? project_id, keyfile
+        def self.valid_credentials? project_id, credentials
           begin
-            Google::Cloud::Trace::Credentials.credentials_with_scope keyfile
+            # if credentials is nil, get default
+            credentials ||= Trace::Credentials.default
+            # only create a new Credentials object if the val isn't one already
+            unless credentials.is_a? Google::Auth::Credentials
+              # if credentials is not a Credentials object, create one
+              Trace::Credentials.new credentials
+            end
           rescue Exception => e
             STDOUT.puts "Note: Google::Cloud::Trace is disabled because " \
               "it failed to authorize with the service. (#{e.message})"

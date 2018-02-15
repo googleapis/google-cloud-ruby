@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -131,9 +131,9 @@ module Google
             project_id = configuration.project_id
 
             if project_id
-              keyfile = configuration.keyfile
-              tracer = Google::Cloud::Trace.new project: project_id,
-                                                keyfile: keyfile
+              credentials = configuration.credentials
+              tracer = Google::Cloud::Trace.new project_id: project_id,
+                                                credentials: credentials
               @service = Google::Cloud::Trace::AsyncReporter.new tracer.service
             end
           end
@@ -212,7 +212,7 @@ module Google
           if @service && trace.trace_context.sampled?
             begin
               @service.patch_traces trace
-            rescue => ex
+            rescue StandardError => ex
               msg = "Transmit to Stackdriver Trace failed: #{ex.inspect}"
               logger = env["rack.logger"]
               if logger
@@ -349,9 +349,9 @@ module Google
         def configure_result span, result
           if result.is_a?(::Array) && result.size == 3
             span.labels[Google::Cloud::Trace::LabelKey::HTTP_STATUS_CODE] =
-                result[0].to_s
+              result[0].to_s
             result[1]["X-Cloud-Trace-Context"] =
-                span.trace.trace_context.to_string
+              span.trace.trace_context.to_string
           end
           result
         end
@@ -364,12 +364,14 @@ module Google
         # already.
         #
         def load_config **kwargs
-          configuration.capture_stack = kwargs[:capture_stack] ||
-                                        configuration.capture_stack
-          configuration.sampler = kwargs[:sampler] ||
-                                  configuration.sampler
-          configuration.span_id_generator = kwargs[:span_id_generator] ||
-                                            configuration.span_id_generator
+          capture_stack = kwargs[:capture_stack]
+          configuration.capture_stack = capture_stack unless capture_stack.nil?
+
+          sampler = kwargs[:sampler]
+          configuration.sampler = sampler unless sampler.nil?
+
+          generator = kwargs[:span_id_generator]
+          configuration.span_id_generator = generator unless generator.nil?
 
           init_default_config
         end
@@ -377,9 +379,8 @@ module Google
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
-          configuration.project_id ||= Cloud.configure.project_id ||
-                                       Trace::Project.default_project
-          configuration.keyfile ||= Cloud.configure.keyfile
+          configuration.project_id ||= Trace.default_project_id
+          configuration.credentials ||= Cloud.configure.credentials
           configuration.capture_stack ||= false
         end
 

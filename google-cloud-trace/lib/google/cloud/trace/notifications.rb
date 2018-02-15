@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,7 @@ module Google
 
         ##
         # The default prefix for label keys
-        DEFAULT_LABEL_NAMESPACE = "/ruby/"
+        DEFAULT_LABEL_NAMESPACE = "/ruby/".freeze
 
         ##
         # Stack truncation method that removes the ActiveSupport::Notifications
@@ -61,7 +61,7 @@ module Google
         #
         #   Google::Cloud::Trace::Notifications.instrument "sql.activerecord"
         #
-        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project-id"
+        #   trace_record = Google::Cloud::Trace::TraceRecord.new "my-project"
         #   Google::Cloud::Trace.set trace_record
         #
         #   ActiveRecord::Base.connection.execute "SHOW TABLES"
@@ -104,7 +104,7 @@ module Google
           labels = {}
           event.payload.each do |k, v|
             if v.is_a? ::String
-              v = v[0, maxlen-3] + "..." if maxlen && v.size > maxlen
+              v = v[0, maxlen - 3] + "..." if maxlen && v.size > maxlen
               labels["#{label_namespace}#{k}"] = v
             end
           end

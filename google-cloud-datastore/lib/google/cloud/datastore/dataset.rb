@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/datastore/convert"
 require "google/cloud/datastore/credentials"
 require "google/cloud/datastore/service"
@@ -25,6 +24,8 @@ require "google/cloud/datastore/gql_query"
 require "google/cloud/datastore/cursor"
 require "google/cloud/datastore/dataset/lookup_results"
 require "google/cloud/datastore/dataset/query_results"
+require "google/cloud/datastore/transaction"
+require "google/cloud/datastore/read_only_transaction"
 
 module Google
   module Cloud
@@ -71,25 +72,16 @@ module Google
         #   require "google/cloud/datastore"
         #
         #   datastore = Google::Cloud::Datastore.new(
-        #     project: "my-todo-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-todo-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   datastore.project #=> "my-todo-project"
+        #   datastore.project_id #=> "my-todo-project"
         #
-        def project
+        def project_id
           service.project
         end
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["DATASTORE_DATASET"] ||
-            ENV["DATASTORE_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
+        alias project project_id
 
         ##
         # Generate IDs for a Key before creating an entity.
@@ -109,12 +101,11 @@ module Google
         #
         def allocate_ids incomplete_key, count = 1
           if incomplete_key.complete?
-            fail Google::Cloud::Datastore::KeyError,
-                 "An incomplete key must be provided."
+            raise Datastore::KeyError, "An incomplete key must be provided."
           end
 
           ensure_service!
-          incomplete_keys = count.times.map { incomplete_key.to_grpc }
+          incomplete_keys = Array.new(count) { incomplete_key.to_grpc }
           allocate_res = service.allocate_ids(*incomplete_keys)
           allocate_res.keys.map { |key| Key.from_grpc key }
         end
@@ -174,7 +165,7 @@ module Google
         def save *entities
           commit { |c| c.save(*entities) }
         end
-        alias_method :upsert, :save
+        alias upsert save
 
         ##
         # Insert one or more entities to the Datastore. An InvalidArgumentError
@@ -350,7 +341,7 @@ module Google
           end
           find_all(key, consistency: consistency).first
         end
-        alias_method :get, :find
+        alias get find
 
         ##
         # Retrieve the entities for the provided keys. The order of results is
@@ -384,7 +375,7 @@ module Google
                                       consistency: consistency)
           LookupResults.from_grpc lookup_res, service, consistency
         end
-        alias_method :lookup, :find_all
+        alias lookup find_all
 
         ##
         # Retrieve entities specified by a Query.
@@ -452,7 +443,7 @@ module Google
         def run query, namespace: nil, consistency: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
-            fail ArgumentError, "Cannot run a #{query.class} object."
+            raise ArgumentError, "Cannot run a #{query.class} object."
           end
           check_consistency! consistency
           query_res = service.run_query query.to_grpc, namespace,
@@ -460,10 +451,34 @@ module Google
           QueryResults.from_grpc query_res, service, namespace,
                                  query.to_grpc.dup
         end
-        alias_method :run_query, :run
+        alias run_query run
 
         ##
         # Creates a Datastore Transaction.
+        #
+        # Transactions using the block syntax are committed upon block
+        # completion and are automatically retried when known errors are raised
+        # during commit. All other errors will be passed on.
+        #
+        # All changes are accumulated in memory until the block completes.
+        # Transactions will be automatically retried when possible, until
+        # `deadline` is reached. This operation makes separate API requests to
+        # begin and commit the transaction.
+        #
+        # @see https://cloud.google.com/datastore/docs/concepts/transactions
+        #   Transactions
+        #
+        # @param [Numeric] deadline The total amount of time in seconds the
+        #   transaction has to succeed. The default is `60`.
+        # @param [String] previous_transaction The transaction identifier of a
+        #   transaction that is being retried. Read-write transactions may fail
+        #   due to contention. A read-write transaction can be retried by
+        #   specifying `previous_transaction` when creating the new transaction.
+        #
+        #   Specifying `previous_transaction` provides information that can be
+        #   used to improve throughput. In particular, if transactional
+        #   operations A and B conflict, specifying the `previous_transaction`
+        #   can help to prevent livelock. (See {Transaction#id})
         #
         # @yield [tx] a block yielding a new transaction
         # @yieldparam [Transaction] tx the transaction object
@@ -508,23 +523,96 @@ module Google
         #     tx.rollback
         #   end
         #
-        def transaction
-          tx = Transaction.new service
+        def transaction deadline: nil, previous_transaction: nil
+          deadline = validate_deadline deadline
+          backoff = 1.0
+          start_time = Time.now
+
+          tx = Transaction.new \
+            service, previous_transaction: previous_transaction
           return tx unless block_given?
 
           begin
             yield tx
             tx.commit
-          rescue
+          rescue Google::Cloud::UnavailableError => err
+            # Re-raise if deadline has passed
+            raise err if Time.now - start_time > deadline
+
+            # Sleep with incremental backoff
+            sleep(backoff *= 1.3)
+
+            # Create new transaction and retry the block
+            tx = Transaction.new service, previous_transaction: tx.id
+            retry
+          rescue StandardError
             begin
               tx.rollback
-            rescue
+            rescue StandardError
               raise TransactionError,
                     "Transaction failed to commit and rollback."
             end
             raise TransactionError, "Transaction failed to commit."
           end
         end
+
+        ##
+        # Creates a read-only transaction that provides a consistent snapshot of
+        # Cloud Datastore. This can be useful when multiple reads are needed to
+        # render a page or export data that must be consistent.
+        #
+        # A read-only transaction cannot modify entities; in return they do not
+        # contend with other read-write or read-only transactions. Using a
+        # read-only transaction for transactions that only read data will
+        # potentially improve throughput.
+        #
+        # Read-only single-group transactions never fail due to concurrent
+        # modifications, so you don't have to implement retries upon failure.
+        # However, multi-entity-group transactions can fail due to concurrent
+        # modifications, so these should have retries.
+        #
+        # @see https://cloud.google.com/datastore/docs/concepts/transactions
+        #   Transactions
+        #
+        # @yield [tx] a block yielding a new transaction
+        # @yieldparam [ReadOnlyTransaction] tx the transaction object
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   task_list_key = datastore.key "TaskList", "default"
+        #   query = datastore.query("Task").
+        #     ancestor(task_list_key)
+        #
+        #   tasks = nil
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     task_list = tx.find task_list_key
+        #     if task_list
+        #       tasks = tx.run query
+        #     end
+        #   end
+        #
+        def read_only_transaction
+          tx = ReadOnlyTransaction.new service
+          return tx unless block_given?
+
+          begin
+            yield tx
+            tx.commit
+          rescue StandardError
+            begin
+              tx.rollback
+            rescue StandardError
+              raise TransactionError,
+                    "Transaction failed to commit and rollback."
+            end
+            raise TransactionError, "Transaction failed to commit."
+          end
+        end
+        alias snapshot read_only_transaction
 
         ##
         # Create a new Query instance. This is a convenience method to make the
@@ -768,11 +856,11 @@ module Google
           entity = Entity.new
 
           # Set the key
-          if key_or_path.flatten.first.is_a? Google::Cloud::Datastore::Key
-            entity.key = key_or_path.flatten.first
-          else
-            entity.key = key key_or_path, project: project, namespace: namespace
-          end
+          entity.key = if key_or_path.flatten.first.is_a? Datastore::Key
+                         key_or_path.flatten.first
+                       else
+                         key key_or_path, project: project, namespace: namespace
+                       end
 
           yield entity if block_given?
 
@@ -785,14 +873,22 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
+        end
+
+        def validate_deadline deadline
+          return 60 unless deadline.is_a? Numeric
+          return 60 if deadline < 0
+          deadline
         end
 
         def check_consistency! consistency
-          fail(ArgumentError,
-               format("Consistency must be :eventual or :strong, not %s.",
-                      consistency.inspect)
-              ) unless [:eventual, :strong, nil].include? consistency
+          return if [:eventual, :strong, nil].include? consistency
+
+          error_msg = format("Consistency must be :eventual or :strong, " \
+                             "not %<bad_consistency>s.",
+                             bad_consistency: consistency.inspect)
+          raise ArgumentError, error_msg
         end
       end
     end

@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
-require "uri"
 require "google/cloud/storage/file/acl"
 require "google/cloud/storage/file/list"
 require "google/cloud/storage/file/verifier"
 require "google/cloud/storage/file/signer"
+require "zlib"
 
 module Google
   module Cloud
@@ -49,6 +49,18 @@ module Google
       #   file = bucket.file "path/to/my-file.ext"
       #   file.download "path/to/downloaded/file.ext"
       #
+      # @example Download a public file with an unauthenticated client:
+      #   require "google/cloud/storage"
+      #
+      #   storage = Google::Cloud::Storage.anonymous
+      #
+      #   bucket = storage.bucket "public-bucket", skip_lookup: true
+      #   file = bucket.file "path/to/public-file.ext", skip_lookup: true
+      #
+      #   downloaded = file.download
+      #   downloaded.rewind
+      #   downloaded.read #=> "Hello world!"
+      #
       class File
         ##
         # @private The Connection object.
@@ -60,7 +72,8 @@ module Google
         # {Project#project} for the ID of the current project.) If this
         # attribute is set to a project ID, and that project is authorized for
         # the currently authenticated service account, transit costs will be
-        # billed to the that project. The default is `nil`.
+        # billed to that project. This attribute is required with requester
+        # pays-enabled buckets. The default is `nil`.
         #
         # In general, this attribute should be set when first retrieving the
         # owning bucket by providing the `user_project` option to
@@ -425,6 +438,13 @@ module Google
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
+        # @param [Boolean] skip_decompress Optional. If `true`, the data for a
+        #   Storage object returning a `Content-Encoding: gzip` response header
+        #   will *not* be automatically decompressed by this client library. The
+        #   default is `nil`. Note that all requests by this client library send
+        #   the `Accept-Encoding: gzip` header, so decompressive transcoding is
+        #   not performed in the Storage service. (See [Transcoding of
+        #   gzip-compressed files](https://cloud.google.com/storage/docs/transcoding))
         #
         # @return [IO] Returns an IO object representing the file data. This
         #   will ordinarily be a `::File` object referencing the local file
@@ -484,17 +504,61 @@ module Google
         #   downloaded.rewind
         #   downloaded.read #=> "Hello world!"
         #
-        def download path = nil, verify: :md5, encryption_key: nil
+        # @example Download a public file with an unauthenticated client.
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.anonymous
+        #
+        #   bucket = storage.bucket "public-bucket", skip_lookup: true
+        #   file = bucket.file "path/to/public-file.ext", skip_lookup: true
+        #
+        #   downloaded = file.download
+        #   downloaded.rewind
+        #   downloaded.read #=> "Hello world!"
+        #
+        # @example Upload and download gzip-encoded file data.
+        #   require "zlib"
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   gz = StringIO.new ""
+        #   z = Zlib::GzipWriter.new gz
+        #   z.write "Hello world!"
+        #   z.close
+        #   data = StringIO.new gz.string
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.create_file data, "path/to/gzipped.txt",
+        #                      content_encoding: "gzip"
+        #
+        #   file = bucket.file "path/to/gzipped.txt"
+        #
+        #   # The downloaded data is decompressed by default.
+        #   file.download "path/to/downloaded/hello.txt"
+        #
+        #   # The downloaded data remains compressed with skip_decompress.
+        #   file.download "path/to/downloaded/gzipped.txt",
+        #                 skip_decompress: true
+        #
+        def download path = nil, verify: :md5, encryption_key: nil,
+                     skip_decompress: nil
           ensure_service!
           if path.nil?
             path = StringIO.new
             path.set_encoding "ASCII-8BIT"
           end
-          file = service.download_file \
+          file, resp = service.download_file \
             bucket, name, path, key: encryption_key, user_project: user_project
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new(path)
           verify_file! file, verify
+          if !skip_decompress &&
+             Array(resp.header["Content-Encoding"]).include?("gzip")
+            file = gzip_decompress file
+          end
+          file
         end
 
         ##
@@ -606,7 +670,7 @@ module Google
                                      copy_gapi,
                                      options.merge(token: resp.rewrite_token)
           end
-          File.from_gapi resp.resource, service
+          File.from_gapi resp.resource, service, user_project: user_project
         end
 
         ##
@@ -665,7 +729,7 @@ module Google
             options[:token] = gapi.rewrite_token
             gapi = service.rewrite_file bucket, name, bucket, name, nil, options
           end
-          File.from_gapi gapi.resource, service
+          File.from_gapi gapi.resource, service, user_project: user_project
         end
 
         ##
@@ -749,7 +813,7 @@ module Google
         def public_url protocol: :https
           "#{protocol}://storage.googleapis.com/#{bucket}/#{name}"
         end
-        alias_method :url, :public_url
+        alias url public_url
 
         ##
         # Access without authentication can be granted to a File for a specified
@@ -952,7 +1016,7 @@ module Google
           @lazy = nil
           self
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
 
         ##
         # Determines whether the file exists in the Storage service.
@@ -1012,7 +1076,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
 
         ##
@@ -1031,12 +1095,12 @@ module Google
 
           ensure_service!
 
-          if attributes.include? :storage_class
-            @gapi = rewrite_gapi bucket, name, update_gapi
-          else
-            @gapi = service.patch_file \
-              bucket, name, update_gapi, user_project: user_project
-          end
+          @gapi = if attributes.include? :storage_class
+                    rewrite_gapi bucket, name, update_gapi
+                  else
+                    service.patch_file \
+                      bucket, name, update_gapi, user_project: user_project
+                  end
         end
 
         def gapi_from_attrs *attributes
@@ -1080,6 +1144,26 @@ module Google
           Verifier.verify_md5! self, file    if verify_md5    && md5
           Verifier.verify_crc32c! self, file if verify_crc32c && crc32c
           file
+        end
+
+        # @return [IO] Returns an IO object representing the file data. This
+        #   will either be a `::File` object referencing the local file
+        #   system or a StringIO instance.
+        def gzip_decompress local_file
+          if local_file.respond_to? :path
+            gz = ::File.open(Pathname(local_file).to_path, "rb") do |f|
+              Zlib::GzipReader.new(StringIO.new(f.read))
+            end
+            uncompressed_string = gz.read
+            ::File.open(Pathname(local_file).to_path, "w") do |f|
+              f.write uncompressed_string
+              f
+            end
+          else # local_file is StringIO
+            local_file.rewind
+            gz = Zlib::GzipReader.new StringIO.new(local_file.read)
+            StringIO.new gz.read
+          end
         end
 
         def storage_class_for str

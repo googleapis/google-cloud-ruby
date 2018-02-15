@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,17 @@
 module Google
   module Cloud
     module Language
+      ##
+      # # Google Cloud Natural Language API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [LanguageServiceClient][] | Google Cloud Natural Language API provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, and text annotations. |
+      # | [Data Types][] | Data types for Google::Cloud::Language::V1beta2 |
+      #
+      # [LanguageServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1beta2/languageserviceclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1beta2/datatypes
+      #
       module V1beta2
         # ================================================================ #
         #
@@ -729,6 +740,24 @@ module Google
 
             # Dislocated relation (for fronted/topicalized elements)
             DISLOCATED = 76
+
+            # Aspect marker
+            ASP = 77
+
+            # Genitive modifier
+            GMOD = 78
+
+            # Genitive object
+            GOBJ = 79
+
+            # Infinitival modifier
+            INFMOD = 80
+
+            # Measure
+            MES = 81
+
+            # Nominal complement of a noun
+            NCOMP = 82
           end
         end
 

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 
 require "google/cloud/spanner/errors"
-require "google/cloud/env"
 require "google/cloud/spanner/service"
 require "google/cloud/spanner/client"
 require "google/cloud/spanner/instance"
@@ -83,25 +82,16 @@ module Google
         #   require "google/cloud"
         #
         #   spanner = Google::Cloud::Spanner.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   spanner.project #=> "my-project-id"
+        #   spanner.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
-        alias_method :project_id, :project
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["SPANNER_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
+        alias project project_id
 
         ##
         # Retrieves the list of Cloud Spanner instances for the project.
@@ -218,7 +208,12 @@ module Google
         #   job.done? #=> false
         #   job.reload! # API call
         #   job.done? #=> true
-        #   instance = job.instance
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     instance = job.instance
+        #   end
         #
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
                             labels: nil
@@ -396,7 +391,12 @@ module Google
         #   job.done? #=> false
         #   job.reload! # API call
         #   job.done? #=> true
-        #   database = job.database
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     database = job.database
+        #   end
         #
         def create_database instance_id, database_id, statements: []
           grpc = service.create_database instance_id, database_id,
@@ -463,16 +463,18 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         def database_path instance_id, database_id
           Admin::Database::V1::DatabaseAdminClient.database_path(
-            project, instance_id, database_id)
+            project, instance_id, database_id
+          )
         end
 
         def valid_session_pool_options opts = {}
-          { min: opts[:min], max: opts[:max], keepalive: opts[:keepalive],
+          {
+            min: opts[:min], max: opts[:max], keepalive: opts[:keepalive],
             write_ratio: opts[:write_ratio], fail: opts[:fail],
             threads: opts[:threads]
           }.delete_if { |_k, v| v.nil? }

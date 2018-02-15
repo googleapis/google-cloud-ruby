@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
@@ -62,24 +61,16 @@ module Google
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::Pubsub.new(
-        #     project: "my-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   pubsub.project #=> "my-project"
+        #   pubsub.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["PUBSUB_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
+        alias project project_id
 
         ##
         # Retrieves topic by name.
@@ -165,8 +156,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :get_topic, :topic
-        alias_method :find_topic, :topic
+        alias get_topic topic
+        alias find_topic topic
 
         ##
         # Creates a new topic.
@@ -205,7 +196,7 @@ module Google
           grpc = service.create_topic topic_name
           Topic.from_grpc grpc, service, async: async
         end
-        alias_method :new_topic, :create_topic
+        alias new_topic create_topic
 
         ##
         # Retrieves a list of topics for the given project.
@@ -244,8 +235,8 @@ module Google
           grpc = service.list_topics options
           Topic::List.from_grpc grpc, service, max
         end
-        alias_method :find_topics, :topics
-        alias_method :list_topics, :topics
+        alias find_topics topics
+        alias list_topics topics
 
         ##
         # Retrieves subscription by name.
@@ -290,8 +281,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :get_subscription, :subscription
-        alias_method :find_subscription, :subscription
+        alias get_subscription subscription
+        alias find_subscription subscription
 
         ##
         # Retrieves a list of subscriptions for the given project.
@@ -329,8 +320,8 @@ module Google
           grpc = service.list_subscriptions options
           Subscription::List.from_grpc grpc, service, max
         end
-        alias_method :find_subscriptions, :subscriptions
-        alias_method :list_subscriptions, :subscriptions
+        alias find_subscriptions subscriptions
+        alias list_subscriptions subscriptions
 
 
         ##
@@ -369,8 +360,8 @@ module Google
           grpc = service.list_snapshots options
           Snapshot::List.from_grpc grpc, service, max
         end
-        alias_method :find_snapshots, :snapshots
-        alias_method :list_snapshots, :snapshots
+        alias find_snapshots snapshots
+        alias list_snapshots snapshots
 
         protected
 
@@ -378,7 +369,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          fail "Must have active connection to service" unless service
+          raise "Must have active connection to service" unless service
         end
 
         ##

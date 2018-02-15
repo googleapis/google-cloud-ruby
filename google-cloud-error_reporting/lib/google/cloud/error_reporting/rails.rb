@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -90,7 +90,7 @@ module Google
           # Verify credentials and set use_error_reporting to false if
           # credentials are invalid
           unless valid_credentials? ErrorReporting.configure.project_id,
-                                    ErrorReporting.configure.keyfile
+                                    ErrorReporting.configure.credentials
             Cloud.configure.use_error_reporting = false
             return
           end
@@ -99,6 +99,8 @@ module Google
           # production
           Google::Cloud.configure.use_error_reporting ||= Rails.env.production?
         end
+
+        # rubocop:disable all
 
         ##
         # @private Merge Rails configuration into Error Reporting
@@ -109,19 +111,27 @@ module Google
 
           Cloud.configure.use_error_reporting ||= gcp_config.use_error_reporting
           ErrorReporting.configure do |config|
-            config.project_id ||= er_config.project_id || gcp_config.project_id
-            config.keyfile ||= er_config.keyfile || gcp_config.keyfile
-            config.service_name ||= er_config.service_name
-            config.service_version ||= er_config.service_version
+            config.project_id ||= config.project
+            config.project_id ||= er_config.project_id || er_config.project
+            config.project_id ||= gcp_config.project_id || gcp_config.project
+            config.credentials ||= config.keyfile
+            config.credentials ||= er_config.credentials || er_config.keyfile
+            config.credentials ||= gcp_config.credentials || gcp_config.keyfile
+            config.service_name ||= \
+              (er_config.service_name || gcp_config.service_name)
+            config.service_version ||= \
+              (er_config.service_version || gcp_config.service_version)
             config.ignore_classes ||= er_config.ignore_classes
           end
         end
+
+        # rubocop:enable all
 
         ##
         # Fallback to default config values if config parameters not provided.
         def self.init_default_config
           config = ErrorReporting.configure
-          config.project_id ||= ErrorReporting::Project.default_project
+          config.project_id ||= ErrorReporting::Project.default_project_id
           config.service_name ||= ErrorReporting::Project.default_service_name
           config.service_version ||=
             ErrorReporting::Project.default_service_version
@@ -129,10 +139,16 @@ module Google
 
         ##
         # @private Verify credentials
-        def self.valid_credentials? project_id, keyfile
+        def self.valid_credentials? project_id, credentials
           begin
-            ErrorReporting::Credentials.credentials_with_scope keyfile
-          rescue => e
+            # if credentials is nil, get default
+            credentials ||= ErrorReporting::Credentials.default
+            # only create a new Credentials object if the val isn't one already
+            unless credentials.is_a? Google::Auth::Credentials
+              # if credentials is not a Credentials object, create one
+              ErrorReporting::Credentials.new credentials
+            end
+          rescue StandardError => e
             STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because it failed to authorize with the service. (#{e.message})"
             return false

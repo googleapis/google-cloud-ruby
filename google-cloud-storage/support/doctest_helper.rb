@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -62,7 +62,7 @@ module Google
         end
       end
       class File
-        def download path = nil, verify: :md5, encryption_key: nil
+        def download path = nil, verify: :md5, encryption_key: nil, skip_decompress: nil
           # no-op stub, but ensures that calls match this copied signature
           return StringIO.new("Hello world!") if path.nil?
         end
@@ -88,6 +88,12 @@ module Google
       def self.new *args
         raise "This code example is not yet mocked"
       end
+      class Credentials
+        # Override the default constructor
+        def self.new *args
+          OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+        end
+      end
     end
   end
 end
@@ -111,7 +117,7 @@ end
 def mock_storage
   Google::Cloud::Storage.stub_new do |*args|
     credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
-    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-todo-project", credentials))
+    storage = Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new("my-project", credentials))
 
     storage.service.mocked_service = Minitest::Mock.new
 
@@ -142,7 +148,10 @@ YARD::Doctest.configure do |doctest|
 
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::Storage::Bucket#new_file"
+  doctest.skip "Google::Cloud::Storage::Bucket#upload_file"
   doctest.skip "Google::Cloud::Storage::Bucket#find_files"
+  doctest.skip "Google::Cloud::Storage::Bucket#combine"
+  doctest.skip "Google::Cloud::Storage::Bucket#compose_file"
   doctest.skip "Google::Cloud::Storage::Bucket#new_notification"
   doctest.skip "Google::Cloud::Storage::Bucket#find_notification"
   doctest.skip "Google::Cloud::Storage::Bucket#find_notifications"
@@ -176,6 +185,8 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.skip "Google::Cloud::Storage::Credentials" # occasionally getting "This code example is not yet mocked"
+
   # Bucket
 
   doctest.before "Google::Cloud::Storage::Bucket" do
@@ -189,6 +200,13 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
       mock.expect :patch_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#compose" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :compose_object, file_gapi, ["my-bucket", "path/to/new-file.ext", Google::Apis::StorageV1::ComposeRequest, Hash]
     end
   end
 
@@ -222,6 +240,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#create_file@Create a file with gzip-encoded data." do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
+      # Following expectation is only used in last example
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/gzipped.txt", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#create_notification" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :create_topic, topic_gapi, ["projects/my-project/topics/my-topic", Hash]
@@ -231,15 +258,6 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :insert_notification, notification_gapi, ["my-bucket", Google::Apis::StorageV1::Notification, Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Storage::Bucket#upload_file" do
-    mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
-      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
-      # Following expectation is only used in last example
-      mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
     end
   end
 
@@ -530,7 +548,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::Cors#add_rule" do
     mock_storage do |mock|
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -538,7 +556,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket::List" do
     mock_storage do |mock|
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-project", Hash]
     end
   end
 
@@ -638,6 +656,14 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#download@Upload and download gzip-encoded file data." do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/gzipped.txt", Hash]
     end
   end
 
@@ -825,7 +851,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Project#bucket@With `user_project` set to pay for a requester pays bucket:" do
+  doctest.before "Google::Cloud::Storage::Project#bucket@With `user_project` set to bill costs to the default project:" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
       mock.expect :list_objects, list_files_gapi, ["my-bucket", Hash]
@@ -843,7 +869,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-project", Hash]
     end
   end
 
@@ -851,7 +877,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
-      mock.expect :list_buckets, list_buckets_gapi, ["my-todo-project", Hash]
+      mock.expect :list_buckets, list_buckets_gapi, ["my-project", Hash]
     end
   end
 
@@ -859,7 +885,7 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
-      mock.expect :insert_bucket, bucket_gapi, ["my-todo-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 

@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,8 @@
 
 require "google-cloud-storage"
 require "google/cloud/storage/project"
+require "google/cloud/config"
+require "google/cloud/env"
 
 module Google
   module Cloud
@@ -27,18 +29,21 @@ module Google
     # networking infrastructure to perform data operations in a cost effective
     # manner.
     #
-    # The goal of google-cloud is to provide a API that is comfortable to
-    # Rubyists. Authentication is handled by {Google::Cloud#storage}. You can
-    # provide the project and credential information to connect to the Storage
-    # service, or if you are running on Google Compute Engine this configuration
-    # is taken care of for you.
+    # The goal of google-cloud is to provide an API that is comfortable to
+    # Rubyists. Your authentication credentials are detected automatically in
+    # Google Cloud Platform environments such as Google Compute Engine, Google
+    # App Engine and Google Kubernetes Engine. In other environments you can
+    # configure authentication easily, either directly in your code or via
+    # environment variables. Read more about the options for connecting in the
+    # [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
     #
     # ```ruby
     # require "google/cloud/storage"
     #
     # storage = Google::Cloud::Storage.new(
-    #   project: "my-todo-project",
-    #   keyfile: "/path/to/keyfile.json"
+    #   project_id: "my-project",
+    #   credentials: "/path/to/keyfile.json"
     # )
     #
     # bucket = storage.bucket "my-bucket"
@@ -317,6 +322,61 @@ module Google
     # downloaded.read #=> "Hello world!"
     # ```
     #
+    # Download a public file with an anonymous, unauthenticated client. Use
+    # `skip_lookup` to avoid errors retrieving non-public bucket and file
+    # metadata.
+    #
+    # ```ruby
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.anonymous
+    #
+    # bucket = storage.bucket "public-bucket", skip_lookup: true
+    # file = bucket.file "path/to/public-file.ext", skip_lookup: true
+    #
+    # downloaded = file.download
+    # downloaded.rewind
+    # downloaded.read #=> "Hello world!"
+    # ```
+    #
+    # ## Creating and downloading gzip-encoded files
+    #
+    # When uploading a gzip-compressed file, you should pass
+    # `content_encoding: "gzip"` if you want the file to be eligible for
+    # [decompressive transcoding](https://cloud.google.com/storage/docs/transcoding)
+    # when it is later downloaded. In addition, giving the gzip-compressed file
+    # a name containing the original file extension (for example, `.txt`) will
+    # ensure that the file's `Content-Type` metadata is set correctly. (You can
+    # also set the file's `Content-Type` metadata explicitly with the
+    # `content_type` option.)
+    #
+    # ```ruby
+    # require "zlib"
+    # require "google/cloud/storage"
+    #
+    # storage = Google::Cloud::Storage.new
+    #
+    # gz = StringIO.new ""
+    # z = Zlib::GzipWriter.new gz
+    # z.write "Hello world!"
+    # z.close
+    # data = StringIO.new gz.string
+    #
+    # bucket = storage.bucket "my-bucket"
+    #
+    # bucket.create_file data, "path/to/gzipped.txt",
+    #                    content_encoding: "gzip"
+    #
+    # file = bucket.file "path/to/gzipped.txt"
+    #
+    # # The downloaded data is decompressed by default.
+    # file.download "path/to/downloaded/hello.txt"
+    #
+    # # The downloaded data remains compressed with skip_decompress.
+    # file.download "path/to/downloaded/gzipped.txt",
+    #               skip_decompress: true
+    # ```
+    #
     # ## Using Signed URLs
     #
     # Access without authentication can be granted to a file for a specified
@@ -439,8 +499,7 @@ module Google
     #
     # The requester pays feature enables the owner of a bucket to indicate that
     # a client accessing the bucket or a file it contains must assume the
-    # transit costs related to the access. This feature is currently available
-    # only to whitelisted projects.
+    # transit costs related to the access.
     #
     # Assign transit costs for bucket and file operations to requesting clients
     # with the `requester_pays` flag:
@@ -552,10 +611,12 @@ module Google
       # [Authentication
       # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
       #
-      # @param [String] project Project identifier for the Storage service you
-      #   are connecting to.
-      # @param [String, Hash] keyfile Keyfile downloaded from Google Cloud. If
-      #   file path the file must be readable.
+      # @param [String] project_id Project identifier for the Storage service
+      #   you are connecting to. If not present, the default project for the
+      #   credentials is used.
+      # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Storage::Credentials})
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -567,6 +628,9 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [String] project Alias for the `project_id` argument. Deprecated.
+      # @param [String] keyfile Alias for the `credentials` argument.
+      #   Deprecated.
       #
       # @return [Google::Cloud::Storage::Project]
       #
@@ -574,29 +638,102 @@ module Google
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new(
-      #     project: "my-todo-project",
-      #     keyfile: "/path/to/keyfile.json"
+      #     project_id: "my-project",
+      #     credentials: "/path/to/keyfile.json"
       #   )
       #
       #   bucket = storage.bucket "my-bucket"
       #   file = bucket.file "path/to/my-file.ext"
       #
-      def self.new project: nil, keyfile: nil, scope: nil, retries: nil,
-                   timeout: nil
-        project ||= Google::Cloud::Storage::Project.default_project
-        project = project.to_s # Always cast to a string
-        fail ArgumentError, "project is missing" if project.empty?
+      def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
+                   timeout: nil, project: nil, keyfile: nil
+        project_id ||= (project || default_project_id)
+        project_id = project_id.to_s # Always cast to a string
+        raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        if keyfile.nil?
-          credentials = Google::Cloud::Storage::Credentials.default scope: scope
-        else
-          credentials = Google::Cloud::Storage::Credentials.new(
-            keyfile, scope: scope)
+        scope ||= configure.scope
+        retries ||= configure.retries
+        timeout ||= configure.timeout
+        credentials ||= (keyfile || default_credentials(scope: scope))
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Storage::Credentials.new credentials, scope: scope
         end
 
-        Google::Cloud::Storage::Project.new(
-          Google::Cloud::Storage::Service.new(
-            project, credentials, retries: retries, timeout: timeout))
+        Storage::Project.new(
+          Storage::Service.new(
+            project_id, credentials, retries: retries, timeout: timeout
+          )
+        )
+      end
+
+      ##
+      # Creates an unauthenticated, anonymous client for retrieving public data
+      # from the Storage service. Each call creates a new connection.
+      #
+      # @param [Integer] retries Number of times to retry requests on server
+      #   error. The default value is `3`. Optional.
+      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      #
+      # @return [Google::Cloud::Storage::Project]
+      #
+      # @example Use `skip_lookup` to avoid retrieving non-public metadata:
+      #   require "google/cloud/storage"
+      #
+      #   storage = Google::Cloud::Storage.anonymous
+      #
+      #   bucket = storage.bucket "public-bucket", skip_lookup: true
+      #   file = bucket.file "path/to/public-file.ext", skip_lookup: true
+      #
+      #   downloaded = file.download
+      #   downloaded.rewind
+      #   downloaded.read #=> "Hello world!"
+      #
+      def self.anonymous retries: nil, timeout: nil
+        Storage::Project.new(
+          Storage::Service.new(nil, nil, retries: retries, timeout: timeout)
+        )
+      end
+
+      ##
+      # Configure the Google Cloud Storage library.
+      #
+      # The following Storage configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Storage project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Storage::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `retries` - (Integer) Number of times to retry requests on server
+      #   error.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Storage library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.storage if block_given?
+
+        Google::Cloud.configure.storage
+      end
+
+      ##
+      # @private Default project.
+      def self.default_project_id
+        Google::Cloud.configure.storage.project_id ||
+          Google::Cloud.configure.project_id ||
+          Google::Cloud.env.project_id
+      end
+
+      ##
+      # @private Default credentials.
+      def self.default_credentials scope: nil
+        Google::Cloud.configure.storage.credentials ||
+          Google::Cloud.configure.credentials ||
+          Storage::Credentials.default(scope: scope)
       end
     end
   end

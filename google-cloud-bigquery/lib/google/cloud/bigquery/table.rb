@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,10 +15,10 @@
 
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
-require "google/cloud/bigquery/view"
 require "google/cloud/bigquery/data"
 require "google/cloud/bigquery/table/list"
 require "google/cloud/bigquery/schema"
+require "google/cloud/bigquery/encryption_configuration"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/insert_response"
 require "google/cloud/bigquery/table/async_inserter"
@@ -33,6 +33,15 @@ module Google
       # A named resource representing a BigQuery table that holds zero or more
       # records. Every table is defined by a schema that may contain nested and
       # repeated fields.
+      #
+      # The Table class can also represent a
+      # [view](https://cloud.google.com/bigquery/docs/views), which is a virtual
+      # table defined by a SQL query. BigQuery's views are logical views, not
+      # materialized views, which means that the query that defines the view is
+      # re-executed every time the view is queried. Queries are billed according
+      # to the total amount of data in all table fields referenced directly or
+      # indirectly by the top-level query. (See {#view?}, {#query}, {#query=},
+      # and {Dataset#create_view}.)
       #
       # @see https://cloud.google.com/bigquery/preparing-data-for-bigquery
       #   Preparing Data for BigQuery
@@ -66,6 +75,15 @@ module Google
       #   }
       #   table.insert row
       #
+      # @example Creating a BigQuery view:
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   view = dataset.create_view "my_view",
+      #            "SELECT name, age FROM `my_project.my_dataset.my_table`"
+      #   view.view? # true
+      #
       class Table
         ##
         # @private The Service object.
@@ -76,10 +94,15 @@ module Google
         attr_accessor :gapi
 
         ##
+        # @private A Google API Client Table Reference object.
+        attr_reader :reference
+
+        ##
         # @private Create an empty Table object.
         def initialize
           @service = nil
-          @gapi = Google::Apis::BigqueryV2::Table.new
+          @gapi = nil
+          @reference = nil
         end
 
         ##
@@ -91,6 +114,7 @@ module Google
         # @!group Attributes
         #
         def table_id
+          return reference.table_id if reference?
           @gapi.table_reference.table_id
         end
 
@@ -103,6 +127,7 @@ module Google
         # @!group Attributes
         #
         def dataset_id
+          return reference.dataset_id if reference?
           @gapi.table_reference.dataset_id
         end
 
@@ -114,28 +139,32 @@ module Google
         # @!group Attributes
         #
         def project_id
+          return reference.project_id if reference?
           @gapi.table_reference.project_id
         end
 
         ##
         # @private The gapi fragment containing the Project ID, Dataset ID, and
-        # Table ID as a camel-cased hash.
+        # Table ID.
+        #
+        # @return [Google::Apis::BigqueryV2::TableReference]
+        #
         def table_ref
-          table_ref = @gapi.table_reference
-          table_ref = table_ref.to_hash if table_ref.respond_to? :to_hash
-          table_ref
+          reference? ? reference : @gapi.table_reference
         end
 
         ###
         # Checks if the table is time-partitioned. See [Partitioned
         # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [Boolean] `true` when the table is time-partitioned, `false`
-        #   otherwise.
+        # @return [Boolean, nil] `true` when the table is time-partitioned, or
+        #   `false` otherwise, if the object is a resource (see {#resource?});
+        #   `nil` if the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def time_partitioning?
+          return nil if reference?
           !@gapi.time_partitioning.nil?
         end
 
@@ -144,11 +173,13 @@ module Google
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # @return [String, nil] The partition type. Currently the only supported
-        #   value is "DAY".
+        #   value is "DAY", or `nil` if the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
         def time_partitioning_type
+          return nil if reference?
           ensure_full_data!
           @gapi.time_partitioning.type if time_partitioning?
         end
@@ -160,6 +191,10 @@ module Google
         # You can only set partitioning when creating a table as in
         # the example below. BigQuery does not allow you to change partitioning
         # on an existing table.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [String] type The partition type. Currently the only
         #   supported value is "DAY".
@@ -176,23 +211,25 @@ module Google
         # @!group Attributes
         #
         def time_partitioning_type= type
-          @gapi.time_partitioning ||=
-              Google::Apis::BigqueryV2::TimePartitioning.new
+          reload! unless resource_full?
+          @gapi.time_partitioning ||= \
+            Google::Apis::BigqueryV2::TimePartitioning.new
           @gapi.time_partitioning.type = type
           patch_gapi! :time_partitioning
         end
-
 
         ###
         # The expiration for the table partitions, if any, in seconds. See
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # @return [Integer, nil] The expiration time, in seconds, for data in
-        #   partitions.
+        #   partitions, or `nil` if not present or the object is a reference
+        #   (see {#reference?}).
         #
         # @!group Attributes
         #
         def time_partitioning_expiration
+          return nil if reference?
           ensure_full_data!
           @gapi.time_partitioning.expiration_ms / 1_000 if
               time_partitioning? &&
@@ -205,6 +242,10 @@ module Google
         # The table must also be partitioned.
         #
         # See {Table#time_partitioning_type=}.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Integer] expiration An expiration time, in seconds,
         #   for data in partitions.
@@ -222,8 +263,9 @@ module Google
         # @!group Attributes
         #
         def time_partitioning_expiration= expiration
-          @gapi.time_partitioning ||=
-              Google::Apis::BigqueryV2::TimePartitioning.new
+          reload! unless resource_full?
+          @gapi.time_partitioning ||= \
+            Google::Apis::BigqueryV2::TimePartitioning.new
           @gapi.time_partitioning.expiration_ms = expiration * 1000
           patch_gapi! :time_partitioning
         end
@@ -235,11 +277,13 @@ module Google
         # `project_name:datasetId.tableId`. To use this value in queries see
         # {#query_id}.
         #
-        # @return [String] The combined ID.
+        # @return [String, nil] The combined ID, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def id
+          return nil if reference?
           @gapi.id
         end
 
@@ -274,7 +318,7 @@ module Google
         #
         def query_id standard_sql: nil, legacy_sql: nil
           if Convert.resolve_legacy_sql standard_sql, legacy_sql
-            "[#{id}]"
+            "[#{project_id}:#{dataset_id}.#{table_id}]"
           else
             "`#{project_id}.#{dataset_id}.#{table_id}`"
           end
@@ -283,22 +327,29 @@ module Google
         ##
         # The name of the table.
         #
-        # @return [String] The friendly name.
+        # @return [String, nil] The friendly name, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def name
+          return nil if reference?
           @gapi.friendly_name
         end
 
         ##
         # Updates the name of the table.
         #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [String] new_name The new friendly name.
         #
         # @!group Attributes
         #
         def name= new_name
+          reload! unless resource_full?
           @gapi.update! friendly_name: new_name
           patch_gapi! :friendly_name
         end
@@ -306,11 +357,13 @@ module Google
         ##
         # The ETag hash of the table.
         #
-        # @return [String] The ETag hash.
+        # @return [String, nil] The ETag hash, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def etag
+          return nil if reference?
           ensure_full_data!
           @gapi.etag
         end
@@ -318,11 +371,13 @@ module Google
         ##
         # A URL that can be used to access the table using the REST API.
         #
-        # @return [String] A REST URL for the resource.
+        # @return [String, nil] A REST URL for the resource, or `nil` if the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def api_url
+          return nil if reference?
           ensure_full_data!
           @gapi.self_link
         end
@@ -330,11 +385,13 @@ module Google
         ##
         # A user-friendly description of the table.
         #
-        # @return [String] The description.
+        # @return [String, nil] The description, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def description
+          return nil if reference?
           ensure_full_data!
           @gapi.description
         end
@@ -342,11 +399,16 @@ module Google
         ##
         # Updates the user-friendly description of the table.
         #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [String] new_description The new user-friendly description.
         #
         # @!group Attributes
         #
         def description= new_description
+          reload! unless resource_full?
           @gapi.update! description: new_description
           patch_gapi! :description
         end
@@ -354,15 +416,17 @@ module Google
         ##
         # The number of bytes in the table.
         #
-        # @return [Integer] The count of bytes in the table.
+        # @return [Integer, nil] The count of bytes in the table, or `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Data
         #
         def bytes_count
+          return nil if reference?
           ensure_full_data!
           begin
             Integer @gapi.num_bytes
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -370,15 +434,17 @@ module Google
         ##
         # The number of rows in the table.
         #
-        # @return [Integer] The count of rows in the table.
+        # @return [Integer, nil] The count of rows in the table, or `nil` if the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Data
         #
         def rows_count
+          return nil if reference?
           ensure_full_data!
           begin
             Integer @gapi.num_rows
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -386,15 +452,17 @@ module Google
         ##
         # The time when this table was created.
         #
-        # @return [Time, nil] The creation time.
+        # @return [Time, nil] The creation time, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def created_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.creation_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -404,15 +472,17 @@ module Google
         # If not present, the table will persist indefinitely.
         # Expired tables will be deleted and their storage reclaimed.
         #
-        # @return [Time, nil] The expiration time.
+        # @return [Time, nil] The expiration time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def expires_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.expiration_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -420,15 +490,17 @@ module Google
         ##
         # The date when this table was last modified.
         #
-        # @return [Time, nil] The last modified time.
+        # @return [Time, nil] The last modified time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def modified_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -436,34 +508,45 @@ module Google
         ##
         # Checks if the table's type is "TABLE".
         #
-        # @return [Boolean] `true` when the type is `TABLE`, `false` otherwise.
+        # @return [Boolean, nil] `true` when the type is `TABLE`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def table?
+          return nil if reference?
           @gapi.type == "TABLE"
         end
 
         ##
-        # Checks if the table's type is "VIEW".
+        # Checks if the table's type is "VIEW", indicating that the table
+        # represents a BigQuery view. See {Dataset#create_view}.
         #
-        # @return [Boolean] `true` when the type is `VIEW`, `false` otherwise.
+        # @return [Boolean, nil] `true` when the type is `VIEW`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def view?
+          return nil if reference?
           @gapi.type == "VIEW"
         end
 
         ##
-        # Checks if the table's type is "EXTERNAL".
+        # Checks if the table's type is "EXTERNAL", indicating that the table
+        # represents an External Data Source. See {#external?} and
+        # {External::DataSource}.
         #
-        # @return [Boolean] `true` when the type is `EXTERNAL`, `false`
-        #   otherwise.
+        # @return [Boolean, nil] `true` when the type is `EXTERNAL`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def external?
+          return nil if reference?
           @gapi.type == "EXTERNAL"
         end
 
@@ -471,11 +554,12 @@ module Google
         # The geographic location where the table should reside. Possible
         # values include `EU` and `US`. The default value is `US`.
         #
-        # @return [String] The location code.
+        # @return [String, nil] The location code.
         #
         # @!group Attributes
         #
         def location
+          return nil if reference?
           ensure_full_data!
           @gapi.location
         end
@@ -488,7 +572,7 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to replace the entire hash.
         #
-        # @return [Hash<String, String>] A hash containing key/value pairs.
+        # @return [Hash<String, String>, nil] A hash containing key/value pairs.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -503,6 +587,7 @@ module Google
         # @!group Attributes
         #
         def labels
+          return nil if reference?
           m = @gapi.labels
           m = m.to_h if m.respond_to? :to_h
           m.dup.freeze
@@ -512,6 +597,10 @@ module Google
         # Updates the hash of user-provided labels associated with this table.
         # Labels are used to organize and group tables. See [Using
         # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Hash<String, String>] labels A hash containing key/value
         #   pairs.
@@ -535,14 +624,18 @@ module Google
         # @!group Attributes
         #
         def labels= labels
+          reload! unless resource_full?
           @gapi.labels = labels
           patch_gapi! :labels
         end
 
         ##
-        # Returns the table's schema. This method can also be used to set,
-        # replace, or add to the schema by passing a block. See {Schema} for
-        # available methods.
+        # Returns the table's schema. If the table is not a view (See {#view?}),
+        # this method can also be used to set, replace, or add to the schema by
+        # passing a block. See {Schema} for available methods.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved.
         #
         # @param [Boolean] replace Whether to replace the existing schema with
         #   the new schema. If `true`, the fields will replace the existing
@@ -552,7 +645,7 @@ module Google
         # @yield [schema] a block for setting the schema
         # @yieldparam [Schema] schema the object accepting the schema
         #
-        # @return [Google::Cloud::Bigquery::Schema] A frozen schema object.
+        # @return [Google::Cloud::Bigquery::Schema, nil] A frozen schema object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -572,7 +665,8 @@ module Google
         # @!group Attributes
         #
         def schema replace: false
-          ensure_full_data!
+          return nil if reference? && !block_given?
+          reload! unless resource_full?
           schema_builder = Schema.from_gapi @gapi.schema
           if block_given?
             schema_builder = Schema.from_gapi if replace
@@ -588,7 +682,7 @@ module Google
         ##
         # The fields of the table, obtained from its schema.
         #
-        # @return [Array<Schema::Field>] An array of field objects.
+        # @return [Array<Schema::Field>, nil] An array of field objects.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -604,13 +698,14 @@ module Google
         # @!group Attributes
         #
         def fields
+          return nil if reference?
           schema.fields
         end
 
         ##
         # The names of the columns in the table, obtained from its schema.
         #
-        # @return [Array<Symbol>] An array of column names.
+        # @return [Array<Symbol>, nil] An array of column names.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -626,7 +721,56 @@ module Google
         # @!group Attributes
         #
         def headers
+          return nil if reference?
           schema.headers
+        end
+
+        ##
+        # The {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect the table. If not set, default
+        # encryption is used.
+        #
+        # Present only if the table is using custom encryption.
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration, nil] The encryption configuration.
+        #
+        #   @!group Attributes
+        #
+        def encryption_configuration
+          return nil if reference?
+          ensure_full_data!
+          return nil if @gapi.encryption_configuration.nil?
+          EncryptionConfiguration.from_gapi(@gapi.encryption_configuration)
+                                 .freeze
+        end
+
+        ##
+
+        # Set the {EncryptionConfiguration} object that represents the custom
+        # encryption method used to protect the table. If not set, default
+        # encryption is used.
+        #
+        # Present only if the table is using custom encryption.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        #
+        # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
+        #   Protecting Data with Cloud KMS Keys
+        #
+        # @return [EncryptionConfiguration] The encryption configuration.
+        #
+        # @!group Attributes
+        #
+        def encryption_configuration= encryption_configuration
+          reload! unless resource_full?
+          @gapi.encryption_configuration = encryption_configuration.to_gapi
+          patch_gapi! :encryption_configuration
         end
 
         ##
@@ -642,11 +786,13 @@ module Google
         # @see https://cloud.google.com/bigquery/external-data-sources
         #   Querying External Data Sources
         #
-        # @return [External::DataSource] The external data source.
+        # @return [External::DataSource, nil] The external data source.
         #
         #   @!group Attributes
         #
         def external
+          return nil if reference?
+          ensure_full_data!
           return nil if @gapi.external_data_configuration.nil?
           External.from_gapi(@gapi.external_data_configuration).freeze
         end
@@ -661,6 +807,10 @@ module Google
         # Use only if the table represents an External Data Source. See
         # {#external?} and {External::DataSource}.
         #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @see https://cloud.google.com/bigquery/external-data-sources
         #   Querying External Data Sources
         #
@@ -669,6 +819,7 @@ module Google
         # @!group Attributes
         #
         def external= external
+          reload! unless resource_full?
           @gapi.external_data_configuration = external.to_gapi
           patch_gapi! :external_data_configuration
         end
@@ -679,11 +830,14 @@ module Google
         # if the table is not being streamed to or if there is no data in the
         # streaming buffer.
         #
-        # @return [Integer] The estimated number of bytes in the buffer.
+        # @return [Integer, nil] The estimated number of bytes in the buffer, or
+        #   `nil` if not present or the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
         def buffer_bytes
+          return nil if reference?
           ensure_full_data!
           @gapi.streaming_buffer.estimated_bytes if @gapi.streaming_buffer
         end
@@ -694,11 +848,14 @@ module Google
         # if the table is not being streamed to or if there is no data in the
         # streaming buffer.
         #
-        # @return [Integer] The estimated number of rows in the buffer.
+        # @return [Integer, nil] The estimated number of rows in the buffer, or
+        #   `nil` if not present or the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
         def buffer_rows
+          return nil if reference?
           ensure_full_data!
           @gapi.streaming_buffer.estimated_rows if @gapi.streaming_buffer
         end
@@ -708,23 +865,158 @@ module Google
         # buffer, if one is present. This field will be absent if the table is
         # not being streamed to or if there is no data in the streaming buffer.
         #
-        # @return [Time, nil] The oldest entry time.
+        # @return [Time, nil] The oldest entry time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def buffer_oldest_at
+          return nil if reference?
           ensure_full_data!
           return nil unless @gapi.streaming_buffer
           oldest_entry_time = @gapi.streaming_buffer.oldest_entry_time
           begin
             ::Time.at(Integer(oldest_entry_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
 
         ##
+        # The query that executes each time the view is loaded.
+        #
+        # @return [String] The query that defines the view.
+        #
+        # @!group Attributes
+        #
+        def query
+          @gapi.view.query if @gapi.view
+        end
+
+        ##
+        # Updates the query that executes each time the view is loaded.
+        #
+        # This sets the query using standard SQL. To specify legacy SQL or to
+        # use user-defined function resources use (#set_query) instead.
+        #
+        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
+        #   Reference
+        #
+        # @param [String] new_query The query that defines the view.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.query = "SELECT first_name FROM " \
+        #                  "`my_project.my_dataset.my_table`"
+        #
+        # @!group Lifecycle
+        #
+        def query= new_query
+          set_query new_query
+        end
+
+        ##
+        # Updates the query that executes each time the view is loaded. Allows
+        # setting of standard vs. legacy SQL and user-defined function
+        # resources.
+        #
+        # @see https://cloud.google.com/bigquery/query-reference BigQuery Query
+        #   Reference
+        #
+        # @param [String] query The query that defines the view.
+        # @param [Boolean] standard_sql Specifies whether to use BigQuery's
+        #   [standard
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+        #   dialect. Optional. The default value is true.
+        # @param [Boolean] legacy_sql Specifies whether to use BigQuery's
+        #   [legacy
+        #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+        #   dialect. Optional. The default value is false.
+        # @param [Array<String>, String] udfs User-defined function resources
+        #   used in the query. May be either a code resource to load from a
+        #   Google Cloud Storage URI (`gs://bucket/path`), or an inline resource
+        #   that contains code for a user-defined function (UDF). Providing an
+        #   inline code resource is equivalent to providing a URI for a file
+        #   containing the same code. See [User-Defined
+        #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   view = dataset.table "my_view"
+        #
+        #   view.set_query "SELECT first_name FROM " \
+        #                    "`my_project.my_dataset.my_table`",
+        #                  standard_sql: true
+        #
+        # @!group Lifecycle
+        #
+        def set_query query, standard_sql: nil, legacy_sql: nil, udfs: nil
+          @gapi.view = Google::Apis::BigqueryV2::ViewDefinition.new \
+            query: query,
+            use_legacy_sql: Convert.resolve_legacy_sql(standard_sql,
+                                                       legacy_sql),
+            user_defined_function_resources: udfs_gapi(udfs)
+          patch_gapi! :view
+        end
+
+        ##
+        # Checks if the view's query is using legacy sql.
+        #
+        # @return [Boolean] `true` when legacy sql is used, `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def query_legacy_sql?
+          val = @gapi.view.use_legacy_sql
+          return true if val.nil?
+          val
+        end
+
+        ##
+        # Checks if the view's query is using standard sql.
+        #
+        # @return [Boolean] `true` when standard sql is used, `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def query_standard_sql?
+          !query_legacy_sql?
+        end
+
+        ##
+        # The user-defined function resources used in the view's query. May be
+        # either a code resource to load from a Google Cloud Storage URI
+        # (`gs://bucket/path`), or an inline resource that contains code for a
+        # user-defined function (UDF). Providing an inline code resource is
+        # equivalent to providing a URI for a file containing the same code. See
+        # [User-Defined
+        # Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        #
+        # @return [Array<String>] An array containing Google Cloud Storage URIs
+        #   and/or inline source code.
+        #
+        # @!group Attributes
+        #
+        def query_udfs
+          udfs_gapi = @gapi.view.user_defined_function_resources
+          return [] if udfs_gapi.nil?
+          Array(udfs_gapi).map { |udf| udf.inline_code || udf.resource_uri }
+        end
+
+        ##
         # Retrieves data from the table.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the data retrieval.
         #
         # @param [String] token Page token, returned by a previous call,
         #   identifying the result set.
@@ -765,9 +1057,11 @@ module Google
         #
         def data token: nil, max: nil, start: nil
           ensure_service!
+          reload! unless resource_full?
           options = { token: token, max: max, start: start }
-          data_gapi = service.list_tabledata dataset_id, table_id, options
-          Data.from_gapi data_gapi, gapi, service
+          data_json = service.list_tabledata \
+            dataset_id, table_id, options
+          Data.from_gapi_json data_json, gapi, service
         end
 
         ##
@@ -917,8 +1211,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1057,8 +1351,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1073,9 +1367,9 @@ module Google
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
-        # @param [File, Google::Cloud::Storage::File, String] file A file or the
-        #   URI of a Google Cloud Storage file containing data to load into the
-        #   table.
+        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
+        #   or the URI of a Google Cloud Storage file containing data to load
+        #   into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1240,7 +1534,7 @@ module Google
                       autodetect: autodetect, null_marker: null_marker }
           return load_storage(file, options) if storage_url? file
           return load_local(file, options) if local_file? file
-          fail Google::Cloud::Error, "Don't know how to load #{file}"
+          raise Google::Cloud::Error, "Don't know how to load #{file}"
         end
 
         ##
@@ -1249,9 +1543,9 @@ module Google
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
-        # @param [File, Google::Cloud::Storage::File, String] file A file or the
-        #   URI of a Google Cloud Storage file containing data to load into the
-        #   table.
+        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
+        #   or the URI of a Google Cloud Storage file containing data to load
+        #   into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1396,8 +1690,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1438,11 +1732,24 @@ module Google
         #   ]
         #   table.insert rows
         #
+        # @example Avoid retrieving the dataset and table with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   table.insert rows
+        #
         # @!group Data
         #
         def insert rows, skip_invalid: nil, ignore_unknown: nil
           rows = [rows] if rows.is_a? Hash
-          fail ArgumentError, "No rows provided" if rows.empty?
+          raise ArgumentError, "No rows provided" if rows.empty?
           ensure_service!
           options = { skip_invalid: skip_invalid,
                       ignore_unknown: ignore_unknown }
@@ -1451,7 +1758,7 @@ module Google
         end
 
         ##
-        # Create an asynchonous inserter object used to insert rows in batches.
+        # Create an asynchronous inserter object used to insert rows in batches.
         #
         # @param [Boolean] skip_invalid Insert all valid rows of a request, even
         #   if invalid rows exist. The default value is `false`, which causes
@@ -1469,8 +1776,8 @@ module Google
         # @attr_reader [Numeric] threads The number of threads used to insert
         #   batches of rows. Default is 4.
         # @yield [response] the callback for when a batch of rows is inserted
-        # @yieldparam [InsertResponse] response the result of the asynchonous
-        #   insert
+        # @yieldparam [Table::AsyncInserter::Result] result the result of the
+        #   asynchronous insert
         #
         # @return [Table::AsyncInserter] Returns inserter object.
         #
@@ -1480,9 +1787,13 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
-        #   inserter = table.insert_async do |response|
-        #     log_insert "inserted #{response.insert_count} rows " \
-        #       "with #{response.error_count} errors"
+        #   inserter = table.insert_async do |result|
+        #     if result.error?
+        #       log_error result.error
+        #     else
+        #       log_insert "inserted #{result.insert_count} rows " \
+        #         "with #{result.error_count} errors"
+        #     end
         #   end
         #
         #   rows = [
@@ -1529,6 +1840,19 @@ module Google
         ##
         # Reloads the table with current data from the BigQuery service.
         #
+        # @return [Google::Cloud::Bigquery::Table] Returns the reloaded
+        #   table.
+        #
+        # @example Skip retrieving the table from the service, then load it:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
+        #   table.reload!
+        #
         # @!group Lifecycle
         #
         def reload!
@@ -1536,15 +1860,151 @@ module Google
           gapi = service.get_table dataset_id, table_id
           @gapi = gapi
         end
-        alias_method :refresh!, :reload!
+        alias refresh! reload!
+
+        ##
+        # Determines whether the table exists in the BigQuery service. The
+        # result is cached locally.
+        #
+        # @return [Boolean] `true` when the table exists in the BigQuery
+        #   service, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #   table.exists? # true
+        #
+        def exists?
+          # Always true if we have a gapi object
+          return true unless reference?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_gapi!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # Whether the table was created without retrieving the resource
+        # representation from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the table is just a local reference
+        #   object, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
+        #   table.reference? # true
+        #   table.reload!
+        #   table.reference? # false
+        #
+        def reference?
+          @gapi.nil?
+        end
+
+        ##
+        # Whether the table was created with a resource representation from
+        # the BigQuery service.
+        #
+        # @return [Boolean] `true` when the table was created with a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
+        #   table.resource? # false
+        #   table.reload!
+        #   table.resource? # true
+        #
+        def resource?
+          !@gapi.nil?
+        end
+
+        ##
+        # Whether the table was created with a partial resource representation
+        # from the BigQuery service by retrieval through {Dataset#tables}.
+        # See [Tables: list
+        # response](https://cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#response)
+        # for the contents of the partial representation. Accessing any
+        # attribute outside of the partial representation will result in loading
+        # the full representation.
+        #
+        # @return [Boolean] `true` when the table was created with a partial
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.tables.first
+        #
+        #   table.resource_partial? # true
+        #   table.description # Loads the full resource.
+        #   table.resource_partial? # false
+        #
+        def resource_partial?
+          @gapi.is_a? Google::Apis::BigqueryV2::TableList::Table
+        end
+
+        ##
+        # Whether the table was created with a full resource representation
+        # from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the table was created with a full
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.resource_full? # true
+        #
+        def resource_full?
+          @gapi.is_a? Google::Apis::BigqueryV2::Table
+        end
 
         ##
         # @private New Table from a Google API Client object.
         def self.from_gapi gapi, conn
-          klass = class_for gapi
-          klass.new.tap do |f|
+          new.tap do |f|
             f.gapi = gapi
             f.service = conn
+          end
+        end
+
+        ##
+        # @private New lazy Table object without making an HTTP request.
+        def self.new_reference project_id, dataset_id, table_id, service
+          # TODO: raise if dataset_id or table_id is nil?
+          new.tap do |b|
+            reference_gapi = Google::Apis::BigqueryV2::TableReference.new(
+              project_id: project_id,
+              dataset_id: dataset_id,
+              table_id: table_id
+            )
+            b.service = service
+            b.instance_variable_set :@reference, reference_gapi
           end
         end
 
@@ -1553,7 +2013,16 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
+        end
+
+        ##
+        # Ensures the Google::Apis::BigqueryV2::Table object has been loaded
+        # from the service.
+        def ensure_gapi!
+          ensure_service!
+          return unless reference?
+          reload!
         end
 
         def patch_gapi! *attributes
@@ -1571,14 +2040,10 @@ module Google
           reload!
         end
 
-        def self.class_for gapi
-          return View if gapi.type == "VIEW"
-          self
-        end
-
         def load_storage url, options = {}
           # Convert to storage URL
           url = url.to_gs_url if url.respond_to? :to_gs_url
+          url = url.to_s if url.is_a? URI
 
           gapi = service.load_table_gs_url dataset_id, table_id, url, options
           Job.from_gapi gapi, service
@@ -1595,12 +2060,14 @@ module Google
         def storage_url? file
           file.respond_to?(:to_gs_url) ||
             (file.respond_to?(:to_str) &&
-            file.to_str.downcase.start_with?("gs://"))
+            file.to_str.downcase.start_with?("gs://")) ||
+            (file.is_a?(URI) &&
+            file.to_s.downcase.start_with?("gs://"))
         end
 
         def local_file? file
           ::File.file? file
-        rescue
+        rescue StandardError
           false
         end
 
@@ -1608,17 +2075,26 @@ module Google
         # Load the complete representation of the table if it has been
         # only partially loaded by a request to the API list method.
         def ensure_full_data!
-          reload_gapi! unless data_complete?
-        end
-
-        def reload_gapi!
-          ensure_service!
-          gapi = service.get_table dataset_id, table_id
-          @gapi = gapi
+          reload! unless data_complete?
         end
 
         def data_complete?
           @gapi.is_a? Google::Apis::BigqueryV2::Table
+        end
+
+        ##
+        # Supports views.
+        def udfs_gapi array_or_str
+          return [] if array_or_str.nil?
+          Array(array_or_str).map do |uri_or_code|
+            resource = Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+            if uri_or_code.start_with?("gs://")
+              resource.resource_uri = uri_or_code
+            else
+              resource.inline_code = uri_or_code
+            end
+            resource
+          end
         end
 
         private

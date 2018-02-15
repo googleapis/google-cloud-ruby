@@ -14,29 +14,34 @@ Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) ser
 
 This client supports the following Google Cloud Platform services at a [General Availability (GA)](#versioning) quality level:
 
+* [BigQuery](#bigquery-ga) (GA)
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Stackdriver Logging](#stackdriver-logging-ga) (GA)
 * [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
 * [Cloud Storage](#cloud-storage-ga) (GA)
 * [Cloud Translation API](#cloud-translation-api-ga) (GA)
+* [Cloud Video Intelligence API](#cloud-video-intelligence-api-ga) (GA)
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
-* [BigQuery](#bigquery-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
+* [Cloud Firestore](#cloud-firestore-beta) (Beta)
 * [Cloud Pub/Sub](#cloud-pubsub-beta) (Beta)
+* [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
 * [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
-* [Cloud Video Intelligence API](#cloud-video-intelligence-api-beta) (Beta)
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
+* [Container Engine](#container-engine-alpha) (Alpha)
+* [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
+* [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
+* [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
-* [Stackdriver Monitoring API](#stackdriver-monitoring-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
 
@@ -58,7 +63,7 @@ General instructions, environment variables, and configuration options are cover
 
 The preview examples below demonstrate how to provide the **Project ID** and **Credentials JSON file path** directly in code.
 
-### BigQuery (Beta)
+### BigQuery (GA)
 
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
 - [google-cloud-bigquery API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/latest)
@@ -77,8 +82,8 @@ $ gem install google-cloud-bigquery
 require "google/cloud/bigquery"
 
 bigquery = Google::Cloud::Bigquery.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Create a new table to archive todos
@@ -120,8 +125,8 @@ $ gem install google-cloud-datastore
 require "google/cloud/datastore"
 
 datastore = Google::Cloud::Datastore.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Create a new task to demo datastore
@@ -199,6 +204,94 @@ end
 
 ```
 
+### Container Engine (Alpha)
+
+- [google-cloud-container README](google-cloud-container/README.md)
+- [google-cloud-container API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-container/latest)
+- [google-cloud-container on RubyGems](https://rubygems.org/gems/google-cloud-container)
+- [Container Engine documentation](https://cloud.google.com/kubernetes-engine/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-container
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/container"
+
+cluster_manager_client = Google::Cloud::Container.new
+project_id_2 = project_id
+zone = "us-central1-a"
+response = cluster_manager_client.list_clusters(project_id_2, zone)
+```
+
+### Cloud Dataproc (Alpha)
+
+- [google-cloud-dataproc README](google-cloud-dataproc/README.md)
+- [google-cloud-dataproc API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest)
+- [google-cloud-dataproc on RubyGems](https://rubygems.org/gems/google-cloud-dataproc)
+- [Google Cloud Dataproc documentation](https://cloud.google.com/dataproc/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-dataproc
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/dataproc"
+
+cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new
+project_id_2 = project_id
+region = "global"
+
+# Iterate over all results.
+cluster_controller_client.list_clusters(project_id_2, region).each do |element|
+  # Process element.
+end
+
+# Or iterate over results one page at a time.
+cluster_controller_client.list_clusters(project_id_2, region).each_page do |page|
+  # Process each page at a time.
+  page.each do |element|
+    # Process element.
+  end
+end
+```
+
+### Data Loss Prevention (Alpha)
+
+- [google-cloud-dlp README](google-cloud-dlp/README.md)
+- [google-cloud-dlp API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest)
+- [google-cloud-dlp on RubyGems](https://rubygems.org/gems/google-cloud-dlp)
+- [Data Loss Prevention documentation](https://cloud.google.com/dlp/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-dlp
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/dlp"
+
+dlp_service_client = Google::Cloud::Dlp.new
+min_likelihood = :POSSIBLE
+inspect_config = { min_likelihood: min_likelihood }
+type = "text/plain"
+value = "my phone number is 215-512-1212"
+items_element = { type: type, value: value }
+items = [items_element]
+response = dlp_service_client.inspect_content(inspect_config, items)
+```
+
 ### Stackdriver Error Reporting (Beta)
 
 - [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
@@ -222,6 +315,42 @@ begin
   fail "Boom!"
 rescue => exception
   Google::Cloud::ErrorReporting.report exception
+end
+```
+
+### Cloud Firestore (Beta)
+
+- [google-cloud-firestore README](google-cloud-firestore/README.md)
+- [google-cloud-firestore API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest)
+- [google-cloud-firestore on RubyGems](https://rubygems.org/gems/[google-cloud-firestore)
+- [Google Cloud Firestore documentation](https://cloud.google.com/firestore/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-firestore
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/firestore"
+
+firestore = Google::Cloud::Firestore.new(
+  project_id: "my-project",
+  credentials: "/path/to/keyfile.json"
+)
+
+city = firestore.col("cities").doc("SF")
+city.set({ name: "San Francisco",
+           state: "CA",
+           country: "USA",
+           capital: false,
+           population: 860000 })
+
+firestore.transaction do |tx|
+  new_population = tx.get(city).data[:population] + 1
+  tx.update(city, { population: new_population })
 end
 ```
 
@@ -282,7 +411,10 @@ $ gem install google-cloud-language
 ```ruby
 require "google/cloud/language"
 
-language = Google::Cloud::Language.new
+language = Google::Cloud::Language.new(
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
+)
 
 content = "Star Wars is a great movie. The Death Star is fearsome."
 document = language.document content
@@ -293,6 +425,19 @@ annotation.sentiment.score #=> 0.10000000149011612
 annotation.sentiment.magnitude #=> 1.100000023841858
 annotation.sentences.count #=> 2
 annotation.tokens.count #=> 13
+```
+
+### Cloud OS Login (Alpha)
+
+- [google-cloud-os_login README](google-cloud-os_login/README.md)
+- [google-cloud-os_login API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest)
+- [google-cloud-os_login on RubyGems](https://rubygems.org/gems/google-cloud-os_login)
+- [Google Cloud DNS documentation](https://cloud.google.com/compute/docs/oslogin/rest/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-os_login
 ```
 
 ### Cloud Pub/Sub (Beta)
@@ -314,8 +459,8 @@ $ gem install google-cloud-pubsub
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::Pubsub.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 # Retrieve a topic
@@ -327,8 +472,17 @@ msg = topic.publish "new-message"
 # Retrieve a subscription
 sub = pubsub.subscription "my-topic-sub"
 
-# Pull available messages
-msgs = sub.pull
+# Create a subscriber to listen for available messages
+subscriber = sub.listen do |received_message|
+  # process message
+  received_message.acknowledge!
+end
+
+# Start background threads that will call the block passed to listen.
+subscriber.start
+
+# Shut down the subscriber when ready to stop receiving messages.
+subscriber.stop.wait!
 ```
 
 ### Cloud Resource Manager (Alpha)
@@ -471,8 +625,8 @@ $ gem install google-cloud-storage
 require "google/cloud/storage"
 
 storage = Google::Cloud::Storage.new(
-  project: "my-todo-project",
-  keyfile: "/path/to/keyfile.json"
+  project_id: "my-todo-project",
+  credentials: "/path/to/keyfile.json"
 )
 
 bucket = storage.bucket "task-attachments"
@@ -543,7 +697,7 @@ landmark = image.landmark
 landmark.description #=> "Mount Rushmore"
 ```
 
-### Stackdriver Monitoring API (Alpha)
+### Stackdriver Monitoring API (Beta)
 
 - [google-cloud-monitoring README](google-cloud-monitoring/README.md)
 - [google-cloud-monitoring API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest)
@@ -579,7 +733,7 @@ $ gem install google-cloud-monitoring
  end
 ```
 
-### Cloud Video Intelligence API (Beta)
+### Cloud Video Intelligence API (GA)
 
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
 - [google-cloud-video_intelligence API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest)

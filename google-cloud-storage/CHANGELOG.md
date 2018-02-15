@@ -1,5 +1,29 @@
 # Release History
 
+### 1.9.0 / 2017-11-20
+
+* Add `Google::Cloud::Storage.anonymous` to support public data access.
+
+### 1.8.0 / 2017-11-14
+
+* Add `Google::Cloud::Storage::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Updated `google-api-client`, `googleauth` dependencies.
+
+### 1.7.1 / 2017-10-24
+
+* Fix bug in Bucket#create_file, Bucket#compose, File#copy and File#rotate in
+  which user_project was not set on returned File object.
+* Fix bug in Bucket::Acl#add_reader and Bucket::Acl#add_owner in which
+  user_project was not passed in the API request.
+
+### 1.7.0 / 2017-10-18
+
+* Add `Bucket#compose`.
+* Update documentation.
+
 ### 1.6.0 / 2017-09-28
 
 * Add `user_project` option to `Project#buckets` and `Project#create_bucket`.

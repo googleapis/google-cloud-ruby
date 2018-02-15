@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -66,7 +66,13 @@ describe Google::Cloud do
   end
 
   describe ".logging" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -117,7 +123,13 @@ describe Google::Cloud do
   end
 
   describe "Logging.new" do
-    let(:default_credentials) { OpenStruct.new empty: true }
+    let(:default_credentials) do
+      creds = OpenStruct.new empty: true
+      def creds.is_a? target
+        target == Google::Auth::Credentials
+      end
+      creds
+    end
     let(:found_credentials) { "{}" }
 
     it "gets defaults for project_id and keyfile" do
@@ -135,7 +147,38 @@ describe Google::Cloud do
       end
     end
 
-    it "uses provided project_id and keyfile" do
+    it "uses provided project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be_nil
+        "logging-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "logging-credentials"
+        timeout.must_be_nil
+        client_config.must_be_nil
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Logging::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Logging::Service.stub :new, stubbed_service do
+                logging = Google::Cloud::Logging.new project_id: "project-id", credentials: "path/to/keyfile.json"
+                logging.must_be_kind_of Google::Cloud::Logging::Project
+                logging.project.must_equal "project-id"
+                logging.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         keyfile.must_equal "path/to/keyfile.json"
         scope.must_be_nil
@@ -167,13 +210,168 @@ describe Google::Cloud do
     end
   end
 
-  describe ".configure" do
-    it "has Google::Cloud.configure.logging initialized already" do
-      Google::Cloud.configure.option?(:logging).must_equal true
+  describe "Logging.configure" do
+    let(:found_credentials) { "{}" }
+    let :logging_client_config do
+      {"interfaces"=>
+        {"google.logging.v1.Logging"=>
+          {"retry_codes"=>{"idempotent"=>["DEADLINE_EXCEEDED", "UNAVAILABLE"]}}}}
     end
 
-    it "operates on the same Configuration object as Google::Cloud.configure.logging" do
-      Google::Cloud::Logging.configure.must_equal Google::Cloud.configure.logging
+    after do
+      Google::Cloud.configure.reset!
+    end
+
+    it "uses shared config for project and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "logging-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "logging-credentials"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Logging::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Logging::Service.stub :new, stubbed_service do
+                logging = Google::Cloud::Logging.new
+                logging.must_be_kind_of Google::Cloud::Logging::Project
+                logging.project.must_equal "project-id"
+                logging.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses shared config for project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "logging-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "logging-credentials"
+        timeout.must_be :nil?
+        client_config.must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Logging::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Logging::Service.stub :new, stubbed_service do
+                logging = Google::Cloud::Logging.new
+                logging.must_be_kind_of Google::Cloud::Logging::Project
+                logging.project.must_equal "project-id"
+                logging.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses logging config for project and keyfile" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "logging-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "logging-credentials"
+        timeout.must_equal 42
+        client_config.must_equal logging_client_config
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Logging.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+          config.timeout = 42
+          config.client_config = logging_client_config
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Logging::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Logging::Service.stub :new, stubbed_service do
+                logging = Google::Cloud::Logging.new
+                logging.must_be_kind_of Google::Cloud::Logging::Project
+                logging.project.must_equal "project-id"
+                logging.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses logging config for project_id and credentials" do
+      stubbed_credentials = ->(keyfile, scope: nil) {
+        keyfile.must_equal "path/to/keyfile.json"
+        scope.must_be :nil?
+        "logging-credentials"
+      }
+      stubbed_service = ->(project, credentials, timeout: nil, client_config: nil) {
+        project.must_equal "project-id"
+        credentials.must_equal "logging-credentials"
+        timeout.must_equal 42
+        client_config.must_equal logging_client_config
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Logging.configure do |config|
+          config.project_id = "project-id"
+          config.credentials = "path/to/keyfile.json"
+          config.timeout = 42
+          config.client_config = logging_client_config
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Logging::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Logging::Service.stub :new, stubbed_service do
+                logging = Google::Cloud::Logging.new
+                logging.must_be_kind_of Google::Cloud::Logging::Project
+                logging.project.must_equal "project-id"
+                logging.service.must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
     end
   end
 end

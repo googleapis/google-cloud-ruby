@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -59,8 +59,8 @@ describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
 
   before do
     dataset.service.mocked_service = Minitest::Mock.new
-    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, nil, nil, query: first_run_query, gql_query: nil, options: default_options]
-    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, nil, nil, query: next_run_query, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project, nil, read_options: nil, query: first_run_query, gql_query: nil, options: default_options]
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project, nil, read_options: nil, query: next_run_query, gql_query: nil, options: default_options]
   end
 
   after do

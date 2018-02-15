@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,11 +20,8 @@ require "minitest/rg"
 require "google/cloud/error_reporting"
 require "grpc"
 
-key_hash = JSON.parse ENV["ERROR_REPORTING_KEYFILE_JSON"]
-er_credentials = Google::Cloud::ErrorReporting::Credentials.credentials_with_scope key_hash
-er_channel_cred = GRPC::Core::ChannelCredentials.new.compose \
-  GRPC::Core::CallCredentials.new er_credentials.client.updater_proc
-$error_stats_vtk_client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.new chan_creds: er_channel_cred
+er_credentials = Google::Cloud::ErrorReporting::Credentials.default
+$error_stats_vtk_client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.new credentials: er_credentials
 
 module Acceptance
   class ErrorReportingTest < Minitest::Test
@@ -37,9 +34,9 @@ module Acceptance
                  "You do not have an active error stats vtk client to run the tests."
     end
 
-    def wait_until
+    def wait_until attempts=20
       delay = 2
-      while delay <= 11
+      while delay <= attempts
         sleep delay
         result = yield
         return result if result

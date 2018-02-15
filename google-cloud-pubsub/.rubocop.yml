@@ -19,13 +19,7 @@ Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
 Style/NumericLiterals:
   Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Style/EmptyLines:
-  Enabled: false
-Style/EmptyElse:
+Style/TrivialAccessors:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Max: 10
@@ -33,15 +27,16 @@ Metrics/PerceivedComplexity:
   Max: 10
 Metrics/AbcSize:
   Max: 25
+Metrics/ClassLength:
+  Enabled: false
 Metrics/MethodLength:
   Max: 20
+  Exclude:
+    - "lib/google/cloud/pubsub.rb"
 Metrics/ParameterLists:
   Enabled: false
-Style/RescueModifier:
+Layout/EmptyLines: # for the extra line between copyright and code
   Enabled: false
-Style/ClassVars:
-  Enabled: false
-Style/TrivialAccessors:
-  Enabled: false
-Style/FileName:
-  Enabled: false # for lib/google-cloud-pubsub.rb file
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-pubsub.rb"

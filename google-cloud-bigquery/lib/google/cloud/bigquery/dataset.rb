@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,10 +52,15 @@ module Google
         attr_accessor :gapi
 
         ##
+        # @private A Google API Client Dataset Reference object.
+        attr_reader :reference
+
+        ##
         # @private Create an empty Dataset object.
         def initialize
           @service = nil
-          @gapi = {}
+          @gapi = nil
+          @reference = nil
         end
 
         ##
@@ -67,6 +72,7 @@ module Google
         # @!group Attributes
         #
         def dataset_id
+          return reference.dataset_id if reference?
           @gapi.dataset_reference.dataset_id
         end
 
@@ -78,6 +84,7 @@ module Google
         # @!group Attributes
         #
         def project_id
+          return reference.project_id if reference?
           @gapi.dataset_reference.project_id
         end
 
@@ -86,7 +93,7 @@ module Google
         # The gapi fragment containing the Project ID and Dataset ID as a
         # camel-cased hash.
         def dataset_ref
-          dataset_ref = @gapi.dataset_reference
+          dataset_ref = reference? ? reference : @gapi.dataset_reference
           dataset_ref = dataset_ref.to_h if dataset_ref.respond_to? :to_h
           dataset_ref
         end
@@ -94,22 +101,30 @@ module Google
         ##
         # A descriptive name for the dataset.
         #
-        # @return [String] The friendly name.
+        # @return [String, nil] The friendly name, or `nil` if the object is
+        #   a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def name
+          return nil if reference?
           @gapi.friendly_name
         end
 
         ##
         # Updates the descriptive name for the dataset.
         #
-        # @param [String] new_name The new friendly name.
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @param [String] new_name The new friendly name, or `nil` if the object
+        #   is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def name= new_name
+          reload! unless resource_full?
           @gapi.update! friendly_name: new_name
           patch_gapi! :friendly_name
         end
@@ -117,11 +132,13 @@ module Google
         ##
         # The ETag hash of the dataset.
         #
-        # @return [String] The ETag hash.
+        # @return [String, nil] The ETag hash, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def etag
+          return nil if reference?
           ensure_full_data!
           @gapi.etag
         end
@@ -129,11 +146,13 @@ module Google
         ##
         # A URL that can be used to access the dataset using the REST API.
         #
-        # @return [String] A REST URL for the resource.
+        # @return [String, nil] A REST URL for the resource, or `nil` if the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def api_url
+          return nil if reference?
           ensure_full_data!
           @gapi.self_link
         end
@@ -141,11 +160,13 @@ module Google
         ##
         # A user-friendly description of the dataset.
         #
-        # @return [String] The description.
+        # @return [String, nil] The description, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def description
+          return nil if reference?
           ensure_full_data!
           @gapi.description
         end
@@ -153,11 +174,16 @@ module Google
         ##
         # Updates the user-friendly description of the dataset.
         #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [String] new_description The new description for the dataset.
         #
         # @!group Attributes
         #
         def description= new_description
+          reload! unless resource_full?
           @gapi.update! description: new_description
           patch_gapi! :description
         end
@@ -165,15 +191,18 @@ module Google
         ##
         # The default lifetime of all tables in the dataset, in milliseconds.
         #
-        # @return [Integer] The default table expiration in milliseconds.
+        # @return [Integer, nil] The default table expiration in milliseconds,
+        #   or `nil` if not present or the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
         def default_expiration
+          return nil if reference?
           ensure_full_data!
           begin
             Integer @gapi.default_table_expiration_ms
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -182,12 +211,17 @@ module Google
         # Updates the default lifetime of all tables in the dataset, in
         # milliseconds.
         #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
         # @param [Integer] new_default_expiration The new default table
         #   expiration in milliseconds.
         #
         # @!group Attributes
         #
         def default_expiration= new_default_expiration
+          reload! unless resource_full?
           @gapi.update! default_table_expiration_ms: new_default_expiration
           patch_gapi! :default_table_expiration_ms
         end
@@ -195,15 +229,17 @@ module Google
         ##
         # The time when this dataset was created.
         #
-        # @return [Time, nil] The creation time.
+        # @return [Time, nil] The creation time, or `nil` if not present or the
+        #   object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def created_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.creation_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -211,15 +247,17 @@ module Google
         ##
         # The date when this dataset or any of its tables was last modified.
         #
-        # @return [Time, nil] The last modified time.
+        # @return [Time, nil] The last modified time, or `nil` if not present or
+        #   the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def modified_at
+          return nil if reference?
           ensure_full_data!
           begin
             ::Time.at(Integer(@gapi.last_modified_time) / 1000.0)
-          rescue
+          rescue StandardError
             nil
           end
         end
@@ -228,11 +266,13 @@ module Google
         # The geographic location where the dataset should reside. Possible
         # values include `EU` and `US`. The default value is `US`.
         #
-        # @return [String] The location code.
+        # @return [String, nil] The location code, or `nil` if the object is a
+        #   reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def location
+          return nil if reference?
           ensure_full_data!
           @gapi.location
         end
@@ -245,7 +285,8 @@ module Google
         # The returned hash is frozen and changes are not allowed. Use
         # {#labels=} to replace the entire hash.
         #
-        # @return [Hash<String, String>] A hash containing key/value pairs.
+        # @return [Hash<String, String>, nil] A hash containing key/value pairs,
+        #   or `nil` if the object is a reference (see {#reference?}).
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -259,6 +300,7 @@ module Google
         # @!group Attributes
         #
         def labels
+          return nil if reference?
           m = @gapi.labels
           m = m.to_h if m.respond_to? :to_h
           m.dup.freeze
@@ -268,6 +310,10 @@ module Google
         # Updates the hash of user-provided labels associated with this dataset.
         # Labels are used to organize and group datasets. See [Using
         # Labels](https://cloud.google.com/bigquery/docs/labels).
+        #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Hash<String, String>] labels A hash containing key/value
         #   pairs.
@@ -290,6 +336,7 @@ module Google
         # @!group Attributes
         #
         def labels= labels
+          reload! unless resource_full?
           @gapi.labels = labels
           patch_gapi! :labels
         end
@@ -298,6 +345,10 @@ module Google
         # Retrieves the access rules for a Dataset. The rules can be updated
         # when passing a block, see {Dataset::Access} for all the methods
         # available.
+        #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
         #
         # @see https://cloud.google.com/bigquery/access-control BigQuery Access
         #   Control
@@ -332,6 +383,7 @@ module Google
         #
         def access
           ensure_full_data!
+          reload! unless resource_full?
           access_builder = Access.from_gapi @gapi
           if block_given?
             yield access_builder
@@ -442,7 +494,9 @@ module Google
           new_tb = Google::Apis::BigqueryV2::Table.new(
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
               project_id: project_id, dataset_id: dataset_id,
-              table_id: table_id))
+              table_id: table_id
+            )
+          )
           updater = Table::Updater.new(new_tb).tap do |tb|
             tb.name = name unless name.nil?
             tb.description = description unless description.nil?
@@ -455,7 +509,14 @@ module Google
         end
 
         ##
-        # Creates a new view table from the given query.
+        # Creates a new [view](https://cloud.google.com/bigquery/docs/views)
+        # table, which is a virtual table defined by the given SQL query.
+        #
+        # BigQuery's views are logical views, not materialized views, which
+        # means that the query that defines the view is re-executed every time
+        # the view is queried. Queries are billed according to the total amount
+        # of data in all table fields referenced directly or indirectly by the
+        # top-level query. (See {Table#view?} and {Table#query}.)
         #
         # @param [String] table_id The ID of the view table. The ID must contain
         #   only letters (a-z, A-Z), numbers (0-9), or underscores (_). The
@@ -480,7 +541,7 @@ module Google
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
         #
-        # @return [Google::Cloud::Bigquery::View] A new view object.
+        # @return [Google::Cloud::Bigquery::Table] A new table object.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -528,10 +589,13 @@ module Google
         # Retrieves an existing table by ID.
         #
         # @param [String] table_id The ID of a table.
+        # @param [Boolean] skip_lookup Optionally create just a local reference
+        #   object without verifying that the resource exists on the BigQuery
+        #   service. Calls made on this object will raise errors if the resource
+        #   does not exist. Default is `false`. Optional.
         #
-        # @return [Google::Cloud::Bigquery::Table,
-        #   Google::Cloud::Bigquery::View, nil] Returns `nil` if the table does
-        #   not exist
+        # @return [Google::Cloud::Bigquery::Table, nil] Returns `nil` if the
+        #   table does not exist.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -542,10 +606,22 @@ module Google
         #   table = dataset.table "my_table"
         #   puts table.name
         #
+        # @example Avoid retrieving the table resource with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.table "my_table", skip_lookup: true
+        #
         # @!group Table
         #
-        def table table_id
+        def table table_id, skip_lookup: nil
           ensure_service!
+          if skip_lookup
+            return Table.new_reference project_id, dataset_id, table_id, service
+          end
           gapi = service.get_table dataset_id, table_id
           Table.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
@@ -559,9 +635,8 @@ module Google
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of tables to return.
         #
-        # @return [Array<Google::Cloud::Bigquery::Table>,
-        #   Array<Google::Cloud::Bigquery::View>] An array of tables and/or
-        #   views(See {Google::Cloud::Bigquery::Table::List})
+        # @return [Array<Google::Cloud::Bigquery::Table>] An array of tables
+        #   (See {Google::Cloud::Bigquery::Table::List})
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -595,8 +670,8 @@ module Google
         end
 
         ##
-        # Queries data using the [asynchronous
-        # method](https://cloud.google.com/bigquery/querying-data).
+        # Queries data by creating a [query
+        # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
         #
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
@@ -835,10 +910,10 @@ module Google
         end
 
         ##
-        # Queries data using a synchronous method that blocks for a response. In
-        # this method, a {QueryJob} is created and its results are saved
-        # to a temporary table, then read from the table. Timeouts and transient
-        # errors are generally handled as needed to complete the query.
+        # Queries data and waits for the results. In this method, a {QueryJob}
+        # is created and its results are saved to a temporary table, then read
+        # from the table. Timeouts and transient errors are generally handled
+        # as needed to complete the query.
         #
         # Sets the current dataset as the default dataset in the query. Useful
         # for using unqualified table names.
@@ -997,8 +1072,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1073,9 +1148,9 @@ module Google
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # @param [String] table_id The destination table to load the data into.
-        # @param [File, Google::Cloud::Storage::File, String] file A file or the
-        #   URI of a Google Cloud Storage file containing data to load into the
-        #   table.
+        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
+        #   or the URI of a Google Cloud Storage file containing data to load
+        #   into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1290,7 +1365,7 @@ module Google
                       null_marker: null_marker }
           return load_storage(table_id, file, options) if storage_url? file
           return load_local(table_id, file, options) if local_file? file
-          fail Google::Cloud::Error, "Don't know how to load #{file}"
+          raise Google::Cloud::Error, "Don't know how to load #{file}"
         end
 
         ##
@@ -1305,9 +1380,9 @@ module Google
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
         # @param [String] table_id The destination table to load the data into.
-        # @param [File, Google::Cloud::Storage::File, String] file A file or the
-        #   URI of a Google Cloud Storage file containing data to load into the
-        #   table.
+        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
+        #   or the URI of a Google Cloud Storage file containing data to load
+        #   into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1497,8 +1572,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -1508,11 +1583,165 @@ module Google
         end
 
         ##
+        # Reloads the dataset with current data from the BigQuery service.
+        #
+        # @return [Google::Cloud::Bigquery::Dataset] Returns the reloaded
+        #   dataset.
+        #
+        # @example Skip retrieving the dataset from the service, then load it:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #   dataset.reload!
+        #
+        def reload!
+          ensure_service!
+          reloaded_gapi = service.get_dataset dataset_id
+          @reference = nil
+          @gapi = reloaded_gapi
+          self
+        end
+        alias refresh! reload!
+
+        ##
+        # Determines whether the dataset exists in the BigQuery service. The
+        # result is cached locally.
+        #
+        # @return [Boolean] `true` when the dataset exists in the BigQuery
+        #   service, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #   dataset.exists? # true
+        #
+        def exists?
+          # Always true if we have a gapi object
+          return true unless reference?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_gapi!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # Whether the dataset was created without retrieving the resource
+        # representation from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the dataset is just a local reference
+        #   object, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #
+        #   dataset.reference? # true
+        #   dataset.reload!
+        #   dataset.reference? # false
+        #
+        def reference?
+          @gapi.nil?
+        end
+
+        ##
+        # Whether the dataset was created with a resource representation from
+        # the BigQuery service.
+        #
+        # @return [Boolean] `true` when the dataset was created with a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #
+        #   dataset.resource? # false
+        #   dataset.reload!
+        #   dataset.resource? # true
+        #
+        def resource?
+          !@gapi.nil?
+        end
+
+        ##
+        # Whether the dataset was created with a partial resource representation
+        # from the BigQuery service by retrieval through {Project#datasets}.
+        # See [Datasets: list
+        # response](https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#response)
+        # for the contents of the partial representation. Accessing any
+        # attribute outside of the partial representation will result in loading
+        # the full representation.
+        #
+        # @return [Boolean] `true` when the dataset was created with a partial
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.datasets.first
+        #
+        #   dataset.resource_partial? # true
+        #   dataset.description # Loads the full resource.
+        #   dataset.resource_partial? # false
+        #
+        def resource_partial?
+          @gapi.is_a? Google::Apis::BigqueryV2::DatasetList::Dataset
+        end
+
+        ##
+        # Whether the dataset was created with a full resource representation
+        # from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the dataset was created with a full
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   dataset.resource_full? # true
+        #
+        def resource_full?
+          @gapi.is_a? Google::Apis::BigqueryV2::Dataset
+        end
+
+        ##
         # @private New Dataset from a Google API Client object.
         def self.from_gapi gapi, conn
           new.tap do |f|
             f.gapi = gapi
             f.service = conn
+          end
+        end
+
+        ##
+        # @private New lazy Dataset object without making an HTTP request.
+        def self.new_reference project_id, dataset_id, service
+          # TODO: raise if dataset_id is nil?
+          new.tap do |b|
+            reference_gapi = Google::Apis::BigqueryV2::DatasetReference.new(
+              project_id: project_id,
+              dataset_id: dataset_id
+            )
+            b.service = service
+            b.instance_variable_set :@reference, reference_gapi
           end
         end
 
@@ -1545,6 +1774,19 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   dataset.insert "my_table", rows
+        #
+        # @example Avoid retrieving the dataset with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
         #   rows = [
         #     { "first_name" => "Alice", "age" => 21 },
@@ -1598,7 +1840,7 @@ module Google
         end
 
         ##
-        # Create an asynchonous inserter object used to insert rows in batches.
+        # Create an asynchronous inserter object used to insert rows in batches.
         #
         # @param [String] table_id The ID of the table to insert rows into.
         # @param [Boolean] skip_invalid Insert all valid rows of a request, even
@@ -1617,8 +1859,8 @@ module Google
         # @attr_reader [Numeric] threads The number of threads used to insert
         #   batches of rows. Default is 4.
         # @yield [response] the callback for when a batch of rows is inserted
-        # @yieldparam [InsertResponse] response the result of the asynchonous
-        #   insert
+        # @yieldparam [Table::AsyncInserter::Result] result the result of the
+        #   asynchronous insert
         #
         # @return [Table::AsyncInserter] Returns an inserter object.
         #
@@ -1627,10 +1869,13 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table"
-        #   inserter = table.insert_async do |response|
-        #     log_insert "inserted #{response.insert_count} rows " \
-        #       "with #{response.error_count} errors"
+        #   inserter = dataset.insert_async "my_table" do |result|
+        #     if result.error?
+        #       log_error result.error
+        #     else
+        #       log_insert "inserted #{result.insert_count} rows " \
+        #         "with #{result.error_count} errors"
+        #     end
         #   end
         #
         #   rows = [
@@ -1660,7 +1905,7 @@ module Google
 
         def insert_data table_id, rows, skip_invalid: nil, ignore_unknown: nil
           rows = [rows] if rows.is_a? Hash
-          fail ArgumentError, "No rows provided" if rows.empty?
+          raise ArgumentError, "No rows provided" if rows.empty?
           ensure_service!
           options = { skip_invalid: skip_invalid,
                       ignore_unknown: ignore_unknown }
@@ -1671,7 +1916,16 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
+        end
+
+        ##
+        # Ensures the Google::Apis::BigqueryV2::Dataset object has been loaded
+        # from the service.
+        def ensure_gapi!
+          ensure_service!
+          return unless reference?
+          reload!
         end
 
         def patch_gapi! *attributes
@@ -1689,22 +1943,13 @@ module Google
         # Load the complete representation of the dataset if it has been
         # only partially loaded by a request to the API list method.
         def ensure_full_data!
-          reload_gapi! unless data_complete?
-        end
-
-        def reload_gapi!
-          ensure_service!
-          gapi = service.get_dataset dataset_id
-          @gapi = gapi
-        end
-
-        def data_complete?
-          @gapi.is_a? Google::Apis::BigqueryV2::Dataset
+          reload! if resource_partial?
         end
 
         def load_storage table_id, url, options = {}
           # Convert to storage URL
           url = url.to_gs_url if url.respond_to? :to_gs_url
+          url = url.to_s if url.is_a? URI
 
           gapi = service.load_table_gs_url dataset_id, table_id, url, options
           Job.from_gapi gapi, service
@@ -1721,12 +1966,14 @@ module Google
         def storage_url? file
           file.respond_to?(:to_gs_url) ||
             (file.respond_to?(:to_str) &&
-            file.to_str.downcase.start_with?("gs://"))
+            file.to_str.downcase.start_with?("gs://")) ||
+            (file.is_a?(URI) &&
+            file.to_s.downcase.start_with?("gs://"))
         end
 
         def local_file? file
           ::File.file? file
-        rescue
+        rescue StandardError
           false
         end
 

@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,29 +13,46 @@
 # limitations under the License.
 
 
-require "google/cloud/credentials"
+require "googleauth"
+require "google/cloud/logging/credentials"
 
 module Google
   module Cloud
     module Debugger
       ##
-      # @private Represents the OAuth 2.0 signing logic for Debugger.
-      class Credentials < Google::Cloud::Credentials
-        SCOPE = ["https://www.googleapis.com/auth/cloud_debugger"] +
-                Google::Cloud::Logging::Credentials::SCOPE
-        PATH_ENV_VARS = %w(DEBUGGER_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(DEBUGGER_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON)
-
-        ##
-        # @private Create credentials with given scope and/or keyfile
-        def self.credentials_with_scope keyfile, scope = nil
-          if keyfile.nil?
-            default(scope: scope)
-          else
-            new(keyfile, scope: scope)
-          end
-        end
+      # # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Stackdriver Debugger service.
+      #
+      # @example
+      #   require "google/cloud/debugger"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Debugger::Credentials.new keyfile
+      #
+      #   debugger = Google::Cloud::Debugger.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   debugger.project_id #=> "my-project"
+      #
+      class Credentials < Google::Auth::Credentials
+        SCOPE = (["https://www.googleapis.com/auth/cloud_debugger"] +
+                 Google::Cloud::Logging::Credentials::SCOPE).freeze
+        PATH_ENV_VARS = %w[DEBUGGER_CREDENTIALS
+                           GOOGLE_CLOUD_CREDENTIALS
+                           DEBUGGER_KEYFILE
+                           GOOGLE_CLOUD_KEYFILE
+                           GCLOUD_KEYFILE].freeze
+        JSON_ENV_VARS = %w[DEBUGGER_CREDENTIALS_JSON
+                           GOOGLE_CLOUD_CREDENTIALS_JSON
+                           DEBUGGER_KEYFILE_JSON
+                           GOOGLE_CLOUD_KEYFILE_JSON
+                           GCLOUD_KEYFILE_JSON].freeze
+        DEFAULT_PATHS = \
+          ["~/.config/gcloud/application_default_credentials.json"].freeze
       end
     end
   end

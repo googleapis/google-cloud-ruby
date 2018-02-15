@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/debugger/agent"
 require "google/cloud/debugger/credentials"
 require "google/cloud/debugger/middleware"
@@ -65,40 +64,16 @@ module Google
         #   require "google/cloud/debugger"
         #
         #   debugger = Google::Cloud::Debugger.new(
-        #     project: "my-project",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   debugger.project #=> "my-project"
+        #   debugger.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
-
-        ##
-        # @private Default project.
-        def self.default_project
-          ENV["DEBUGGER_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
-
-        ##
-        # @private Default service name identifier.
-        def self.default_service_name
-          ENV["DEBUGGER_SERVICE_NAME"] ||
-            Google::Cloud.env.app_engine_service_id ||
-            "ruby-app"
-        end
-
-        ##
-        # @private Default service version identifier.
-        def self.default_service_version
-          ENV["DEBUGGER_SERVICE_VERSION"] ||
-            Google::Cloud.env.app_engine_service_version ||
-            ""
-        end
+        alias project project_id
 
         ##
         # Start the Stackdriver Debugger Agent.
@@ -113,7 +88,7 @@ module Google
         def start
           agent.start
         end
-        alias_method :attach, :start
+        alias attach start
 
         ##
         # Stop the Stackdriver Debugger Agent.

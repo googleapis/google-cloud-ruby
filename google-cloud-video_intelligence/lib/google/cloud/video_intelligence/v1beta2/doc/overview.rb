@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Google Cloud Video Intelligence API ([GA](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Google Cloud Video Intelligence API][Product Documentation]:
     # Google Cloud Video Intelligence API.
@@ -28,50 +28,13 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+    # 3. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
+    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
     # ```
     # $ gem install google-cloud-video_intelligence
-    # ```
-    #
-    # ### Preview
-    # #### VideoIntelligenceServiceClient
-    # ```rb
-    # require "google/cloud/video_intelligence"
-    #
-    # video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
-    # input_uri = "gs://cloud-ml-sandbox/video/chicago.mp4"
-    # features_element = :LABEL_DETECTION
-    # features = [features_element]
-    #
-    # # Register a callback during the method call.
-    # operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
-    #   raise op.results.message if op.error?
-    #   op_results = op.results
-    #   # Process the results.
-    #
-    #   metadata = op.metadata
-    #   # Process the metadata.
-    # end
-    #
-    # # Or use the return value to register a callback.
-    # operation.on_done do |op|
-    #   raise op.results.message if op.error?
-    #   op_results = op.results
-    #   # Process the results.
-    #
-    #   metadata = op.metadata
-    #   # Process the metadata.
-    # end
-    #
-    # # Manually reload the operation.
-    # operation.reload!
-    #
-    # # Or block until the operation completes, triggering callbacks on
-    # # completion.
-    # operation.wait_until_done!
     # ```
     #
     # ### Next Steps

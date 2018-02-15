@@ -30,20 +30,25 @@ end
 desc "Run the logging acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
+  project ||= ENV["LOGGING_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
+  keyfile ||= ENV["LOGGING_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["LOGGING_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["LOGGING_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or LOGGING_TEST_PROJECT=test123 LOGGING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
+  # clear any env var already set
+  require "google/cloud/logging/credentials"
+  (Google::Cloud::Logging::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Logging::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["LOGGING_PROJECT"] = project
-  ENV["LOGGING_KEYFILE"] = nil
   ENV["LOGGING_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
@@ -65,20 +70,25 @@ namespace :acceptance do
   desc "Removes *ALL* Logging logs, sinks, and metrics. Use with caution."
   task :cleanup do |t, args|
     project = args[:project]
-    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["LOGGING_TEST_PROJECT"]
+    project ||= ENV["LOGGING_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["LOGGING_TEST_KEYFILE"]
+    keyfile ||= ENV["LOGGING_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
     if keyfile
       keyfile = File.read keyfile
     else
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["LOGGING_TEST_KEYFILE_JSON"]
+      keyfile ||= ENV["LOGGING_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
     end
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or LOGGING_TEST_PROJECT=test123 LOGGING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
+    # clear any env var already set
+    require "google/cloud/logging/credentials"
+    (Google::Cloud::Logging::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Logging::Credentials::JSON_ENV_VARS).each do |path|
+      ENV[path] = nil
+    end
     # always overwrite when running tests
     ENV["LOGGING_PROJECT"] = project
-    ENV["LOGGING_KEYFILE"] = nil
     ENV["LOGGING_KEYFILE_JSON"] = keyfile
 
     $LOAD_PATH.unshift "lib"

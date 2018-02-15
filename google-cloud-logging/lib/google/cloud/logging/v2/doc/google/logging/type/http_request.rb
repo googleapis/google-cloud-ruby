@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,7 +53,7 @@ module Google
       # @!attribute [rw] referer
       #   @return [String]
       #     The referer URL of the request, as defined in
-      #     {HTTP/1.1 Header Field Definitions}[http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html].
+      #     [HTTP/1.1 Header Field Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
       # @!attribute [rw] latency
       #   @return [Google::Protobuf::Duration]
       #     The request processing latency on the server, from the time the request was
@@ -74,6 +74,9 @@ module Google
       #   @return [Integer]
       #     The number of HTTP response bytes inserted into cache. Set only when a
       #     cache fill was attempted.
+      # @!attribute [rw] protocol
+      #   @return [String]
+      #     Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket"
       class HttpRequest; end
     end
   end

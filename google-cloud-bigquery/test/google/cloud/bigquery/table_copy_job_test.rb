@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -220,35 +220,5 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :mock_bigquery do
 
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     job.labels.must_equal labels
-  end
-
-  def copy_job_gapi source, target, job_id: "job_9876543210"
-    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id)
-  end
-
-  def copy_job_json source, target, job_id
-    {
-      "jobReference" => {
-        "projectId" => project,
-        "jobId" => job_id
-      },
-      "configuration" => {
-        "copy" => {
-          "sourceTable" => {
-            "projectId" => source.project_id,
-            "datasetId" => source.dataset_id,
-            "tableId" => source.table_id
-          },
-          "destinationTable" => {
-            "projectId" => target.project_id,
-            "datasetId" => target.dataset_id,
-            "tableId" => target.table_id
-          },
-          "createDisposition" => nil,
-          "writeDisposition" => nil
-        },
-        "dryRun" => nil
-      }
-    }.to_json
   end
 end

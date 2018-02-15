@@ -1,10 +1,10 @@
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2014 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -92,7 +92,7 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     entity_from_grpc.properties["name"].must_equal "User McNumber"
     entity_from_grpc.properties["email"].must_equal "number@example.net"
     entity_from_grpc.properties.exist?("avatar").must_equal true
-    entity_from_grpc.properties["avatar"].must_equal nil
+    entity_from_grpc.properties["avatar"].must_be :nil?
   end
 
   it "can store other entities as properties" do

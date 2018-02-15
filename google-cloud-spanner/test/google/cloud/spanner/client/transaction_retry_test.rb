@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -119,8 +119,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
   end
 
   it "retries aborted transactions with retry metadata seconds" do
-    skip "Can't get trailing metadata on Ruby 2.0" unless Exception.instance_methods.include? :cause
-
     mutations = [
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
@@ -175,8 +173,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
   end
 
   it "retries aborted transactions with retry metadata seconds and nanos" do
-    skip "Can't get trailing metadata on Ruby 2.0" unless Exception.instance_methods.include? :cause
-
     mutations = [
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
@@ -231,8 +227,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
   end
 
   it "retries multiple aborted transactions" do
-    skip "Can't get trailing metadata on Ruby 2.0" unless Exception.instance_methods.include? :cause
-
     mutations = [
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
@@ -297,8 +291,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
   end
 
   it "retries with incremental backoff until deadline has passed" do
-    skip "Can't get trailing metadata on Ruby 2.0" unless Exception.instance_methods.include? :cause
-
     mutations = [
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(

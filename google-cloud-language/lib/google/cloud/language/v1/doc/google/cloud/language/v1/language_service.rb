@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,6 +15,17 @@
 module Google
   module Cloud
     module Language
+      ##
+      # # Google Cloud Natural Language API Contents
+      #
+      # | Class | Description |
+      # | ----- | ----------- |
+      # | [LanguageServiceClient][] | Provides text analysis operations such as sentiment analysis and entity recognition. |
+      # | [Data Types][] | Data types for Google::Cloud::Language::V1 |
+      #
+      # [LanguageServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1/languageserviceclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1/datatypes
+      #
       module V1
         # ================================================================ #
         #
@@ -37,9 +48,8 @@ module Google
         #     The language of the document (if not specified, the language is
         #     automatically detected). Both ISO and BCP-47 language codes are
         #     accepted.<br>
-        #     **Current Language Restrictions:**
-        #
-        #      * Only English, Spanish, and Japanese textual content are supported.
+        #     [Language Support](https://cloud.google.com/natural-language/docs/languages)
+        #     lists currently supported languages for each API method.
         #     If the language (either specified by the caller or automatically detected)
         #     is not supported by the called API method, an +INVALID_ARGUMENT+ error
         #     is returned.
@@ -63,8 +73,8 @@ module Google
         #     The sentence text.
         # @!attribute [rw] sentiment
         #   @return [Google::Cloud::Language::V1::Sentiment]
-        #     For calls to AnalyzeSentiment or if
-        #     AnnotateTextRequest::Features#extract_document_sentiment is set to
+        #     For calls to {AnalyzeSentiment} or if
+        #     {Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest::Features#extract_document_sentiment} is set to
         #     true, this field will contain the sentiment for the sentence.
         class Sentence; end
 
@@ -95,6 +105,12 @@ module Google
         #   @return [Array<Google::Cloud::Language::V1::EntityMention>]
         #     The mentions of this entity in the input document. The API currently
         #     supports proper noun mentions.
+        # @!attribute [rw] sentiment
+        #   @return [Google::Cloud::Language::V1::Sentiment]
+        #     For calls to {AnalyzeEntitySentiment} or if
+        #     {Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest::Features#extract_entity_sentiment} is set to
+        #     true, this field will contain the aggregate sentiment expressed for this
+        #     entity in the provided document.
         class Entity
           # The type of the entity.
           module Type
@@ -136,7 +152,7 @@ module Google
         #     Dependency tree parse for this token.
         # @!attribute [rw] lemma
         #   @return [String]
-        #     {Lemma}[https://en.wikipedia.org/wiki/Lemma_%28morphology%29] of the token.
+        #     [Lemma](https://en.wikipedia.org/wiki/Lemma_%28morphology%29) of the token.
         class Token; end
 
         # Represents the feeling associated with the entire text or entities in
@@ -728,6 +744,24 @@ module Google
 
             # Dislocated relation (for fronted/topicalized elements)
             DISLOCATED = 76
+
+            # Aspect marker
+            ASP = 77
+
+            # Genitive modifier
+            GMOD = 78
+
+            # Genitive object
+            GOBJ = 79
+
+            # Infinitival modifier
+            INFMOD = 80
+
+            # Measure
+            MES = 81
+
+            # Nominal complement of a noun
+            NCOMP = 82
           end
         end
 
@@ -739,6 +773,12 @@ module Google
         # @!attribute [rw] type
         #   @return [Google::Cloud::Language::V1::EntityMention::Type]
         #     The type of the entity mention.
+        # @!attribute [rw] sentiment
+        #   @return [Google::Cloud::Language::V1::Sentiment]
+        #     For calls to {AnalyzeEntitySentiment} or if
+        #     {Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest::Features#extract_entity_sentiment} is set to
+        #     true, this field will contain the sentiment expressed for this mention of
+        #     the entity in the provided document.
         class EntityMention
           # The supported types of mentions.
           module Type
@@ -760,14 +800,23 @@ module Google
         # @!attribute [rw] begin_offset
         #   @return [Integer]
         #     The API calculates the beginning offset of the content in the original
-        #     document according to the EncodingType specified in the API request.
+        #     document according to the {Google::Cloud::Language::V1::EncodingType EncodingType} specified in the API request.
         class TextSpan; end
+
+        # Represents a category returned from the text classifier.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The name of the category representing the document.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     The classifier's confidence of the category. Number represents how certain
+        #     the classifier is that this category represents the given text.
+        class ClassificationCategory; end
 
         # The sentiment analysis request message.
         # @!attribute [rw] document
         #   @return [Google::Cloud::Language::V1::Document]
-        #     Input document. Currently, +analyzeSentiment+ only supports English text
-        #     (Document#language="EN").
+        #     Input document.
         # @!attribute [rw] encoding_type
         #   @return [Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate sentence offsets.
@@ -781,11 +830,31 @@ module Google
         #   @return [String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See +Document.language+ field for more details.
+        #     See {Google::Cloud::Language::V1::Document#language Document#language} field for more details.
         # @!attribute [rw] sentences
         #   @return [Array<Google::Cloud::Language::V1::Sentence>]
         #     The sentiment for all the sentences in the document.
         class AnalyzeSentimentResponse; end
+
+        # The entity-level sentiment analysis request message.
+        # @!attribute [rw] document
+        #   @return [Google::Cloud::Language::V1::Document]
+        #     Input document.
+        # @!attribute [rw] encoding_type
+        #   @return [Google::Cloud::Language::V1::EncodingType]
+        #     The encoding type used by the API to calculate offsets.
+        class AnalyzeEntitySentimentRequest; end
+
+        # The entity-level sentiment analysis response message.
+        # @!attribute [rw] entities
+        #   @return [Array<Google::Cloud::Language::V1::Entity>]
+        #     The recognized entities in the input document with associated sentiments.
+        # @!attribute [rw] language
+        #   @return [String]
+        #     The language of the text, which will be the same as the language specified
+        #     in the request or, if not specified, the automatically-detected language.
+        #     See {Google::Cloud::Language::V1::Document#language Document#language} field for more details.
+        class AnalyzeEntitySentimentResponse; end
 
         # The entity analysis request message.
         # @!attribute [rw] document
@@ -804,7 +873,7 @@ module Google
         #   @return [String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See +Document.language+ field for more details.
+        #     See {Google::Cloud::Language::V1::Document#language Document#language} field for more details.
         class AnalyzeEntitiesResponse; end
 
         # The syntax analysis request message.
@@ -827,8 +896,20 @@ module Google
         #   @return [String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See +Document.language+ field for more details.
+        #     See {Google::Cloud::Language::V1::Document#language Document#language} field for more details.
         class AnalyzeSyntaxResponse; end
+
+        # The document classification request message.
+        # @!attribute [rw] document
+        #   @return [Google::Cloud::Language::V1::Document]
+        #     Input document.
+        class ClassifyTextRequest; end
+
+        # The document classification response message.
+        # @!attribute [rw] categories
+        #   @return [Array<Google::Cloud::Language::V1::ClassificationCategory>]
+        #     Categories representing the input document.
+        class ClassifyTextResponse; end
 
         # The request message for the text annotation API, which can perform multiple
         # analysis types (sentiment, entities, and syntax) in one call.
@@ -853,6 +934,12 @@ module Google
           # @!attribute [rw] extract_document_sentiment
           #   @return [true, false]
           #     Extract document-level sentiment.
+          # @!attribute [rw] extract_entity_sentiment
+          #   @return [true, false]
+          #     Extract entities and their associated sentiment.
+          # @!attribute [rw] classify_text
+          #   @return [true, false]
+          #     Classify the full document into categories.
           class Features; end
         end
 
@@ -860,26 +947,29 @@ module Google
         # @!attribute [rw] sentences
         #   @return [Array<Google::Cloud::Language::V1::Sentence>]
         #     Sentences in the input document. Populated if the user enables
-        #     AnnotateTextRequest::Features#extract_syntax.
+        #     {Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_syntax AnnotateTextRequest::Features#extract_syntax}.
         # @!attribute [rw] tokens
         #   @return [Array<Google::Cloud::Language::V1::Token>]
         #     Tokens, along with their syntactic information, in the input document.
         #     Populated if the user enables
-        #     AnnotateTextRequest::Features#extract_syntax.
+        #     {Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_syntax AnnotateTextRequest::Features#extract_syntax}.
         # @!attribute [rw] entities
         #   @return [Array<Google::Cloud::Language::V1::Entity>]
         #     Entities, along with their semantic information, in the input document.
         #     Populated if the user enables
-        #     AnnotateTextRequest::Features#extract_entities.
+        #     {Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entities AnnotateTextRequest::Features#extract_entities}.
         # @!attribute [rw] document_sentiment
         #   @return [Google::Cloud::Language::V1::Sentiment]
         #     The overall sentiment for the document. Populated if the user enables
-        #     AnnotateTextRequest::Features#extract_document_sentiment.
+        #     {Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest::Features#extract_document_sentiment}.
         # @!attribute [rw] language
         #   @return [String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See +Document.language+ field for more details.
+        #     See {Google::Cloud::Language::V1::Document#language Document#language} field for more details.
+        # @!attribute [rw] categories
+        #   @return [Array<Google::Cloud::Language::V1::ClassificationCategory>]
+        #     Categories identified in the input document.
         class AnnotateTextResponse; end
 
         # Represents the text encoding that the caller uses to process the output.

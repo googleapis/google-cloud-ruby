@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,16 +49,14 @@ module Google
           # The unique identifier for the project.
           # @return [String]
           def project_id
-            Admin::Instance::V1::InstanceAdminClient
-              .match_project_from_instance_config_name @grpc.name
+            @grpc.name.split("/")[1]
           end
 
           ##
           # A unique identifier for the instance configuration.
           # @return [String]
           def instance_config_id
-            Admin::Instance::V1::InstanceAdminClient
-              .match_instance_config_from_instance_config_name @grpc.name
+            @grpc.name.split("/")[3]
           end
 
           ##
@@ -75,7 +73,7 @@ module Google
           def name
             @grpc.display_name
           end
-          alias_method :display_name, :name
+          alias display_name name
 
           ##
           # @private Creates a new Instance::Config instance from a
@@ -90,7 +88,7 @@ module Google
           # @private Raise an error unless an active connection to the service
           # is available.
           def ensure_service!
-            fail "Must have active connection to service" unless service
+            raise "Must have active connection to service" unless service
           end
         end
       end

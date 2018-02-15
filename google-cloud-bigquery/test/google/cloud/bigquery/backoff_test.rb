@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -133,7 +133,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       end
 
       err.message.must_equal "notfound"
-      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"},{\"reason\":\"other\"}]}}" if err.respond_to? :cause
+      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"},{\"reason\":\"other\"}]}}"
     end
 
     mock.verify
@@ -211,7 +211,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       end
 
       err.message.must_equal "invalid"
-      err.cause.body.must_be :nil? if err.respond_to? :cause
+      err.cause.body.must_be :nil?
     end
 
     mock.verify
@@ -241,7 +241,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       end
 
       err.message.must_equal "invalid"
-      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"}]}}" if err.respond_to? :cause
+      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"}]}}"
     end
 
     mock.verify

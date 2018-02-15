@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,11 +13,123 @@
 # limitations under the License.
 
 
+require "English"
+
 module Google
   module Cloud
     ##
     # Base google-cloud exception class.
     class Error < StandardError
+      ##
+      # Construct a new Google::Cloud::Error object, optionally passing in a
+      # message.
+      def initialize msg = nil
+        super
+        @cause = $ERROR_INFO
+      end
+
+      # Add Error#cause (introduced in 2.1) to Ruby 2.0.
+      unless respond_to?(:cause)
+        ##
+        # The previous exception at the time this exception was raised. This is
+        # useful for wrapping exceptions and retaining the original exception
+        # information.
+        define_method(:cause) do
+          @cause
+        end
+      end
+
+      ##
+      # Returns the value of `status_code` from the underlying cause error
+      # object, if both are present. Otherwise returns `nil`.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over HTTP/REST.
+      #
+      # @returns [Object, nil]
+      def status_code
+        return nil unless cause && cause.respond_to?(:status_code)
+        cause.status_code
+      end
+
+      ##
+      # Returns the value of `body` from the underlying cause error
+      # object, if both are present. Otherwise returns `nil`.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over HTTP/REST.
+      #
+      # @returns [Object, nil]
+      def body
+        return nil unless cause && cause.respond_to?(:body)
+        cause.body
+      end
+
+      ##
+      # Returns the value of `header` from the underlying cause error
+      # object, if both are present. Otherwise returns `nil`.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over HTTP/REST.
+      #
+      # @returns [Object, nil]
+      def header
+        return nil unless cause && cause.respond_to?(:header)
+        cause.header
+      end
+
+      ##
+      # Returns the value of `code` from the underlying cause error
+      # object, if both are present. Otherwise returns `nil`.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @returns [Object, nil]
+      def code
+        return nil unless cause && cause.respond_to?(:code)
+        cause.code
+      end
+
+      ##
+      # Returns the value of `details` from the underlying cause error
+      # object, if both are present. Otherwise returns `nil`.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @returns [Object, nil]
+      def details
+        return nil unless cause && cause.respond_to?(:details)
+        cause.details
+      end
+
+      ##
+      # Returns the value of `metadata` from the underlying cause error
+      # object, if both are present. Otherwise returns `nil`.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @returns [Object, nil]
+      def metadata
+        return nil unless cause && cause.respond_to?(:metadata)
+        cause.metadata
+      end
+
+      ##
+      # Returns the value of `status_details` from the underlying cause error
+      # object, if both are present. Otherwise returns `nil`.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @returns [Object, nil]
+      def status_details
+        return nil unless cause && cause.respond_to?(:status_details)
+        cause.status_details
+      end
+
       # @private Create a new error object from a client error
       def self.from_error error
         klass = if error.respond_to? :code
@@ -34,18 +146,21 @@ module Google
       def self.grpc_error_class_for grpc_error_code
         # The gRPC status code 0 is for a successful response.
         # So there is no error subclass for a 0 status code, use current class.
-        [self, CanceledError, UnknownError, InvalidArgumentError,
-         DeadlineExceededError, NotFoundError, AlreadyExistsError,
-         PermissionDeniedError, ResourceExhaustedError, FailedPreconditionError,
-         AbortedError, OutOfRangeError, UnimplementedError, InternalError,
-         UnavailableError, DataLossError, UnauthenticatedError
+        [
+          self, CanceledError, UnknownError, InvalidArgumentError,
+          DeadlineExceededError, NotFoundError, AlreadyExistsError,
+          PermissionDeniedError, ResourceExhaustedError,
+          FailedPreconditionError, AbortedError, OutOfRangeError,
+          UnimplementedError, InternalError, UnavailableError, DataLossError,
+          UnauthenticatedError
         ][grpc_error_code] || self
       end
 
       # @private Identify the subclass for a Google API Client error
       def self.gapi_error_class_for http_status_code
         # The http status codes mapped to their error classes.
-        { 400 => InvalidArgumentError, # FailedPreconditionError/OutOfRangeError
+        {
+          400 => InvalidArgumentError, # FailedPreconditionError/OutOfRangeError
           401 => UnauthenticatedError,
           403 => PermissionDeniedError,
           404 => NotFoundError,

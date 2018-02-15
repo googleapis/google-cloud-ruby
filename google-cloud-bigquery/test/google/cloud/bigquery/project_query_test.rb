@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a extract of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,8 +37,8 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query
     mock.verify
@@ -72,11 +72,11 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: "token1234567890", start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query
     # data.must_be_kind_of Google::Cloud::Bigquery::Data
@@ -101,8 +101,8 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: 42, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: 42, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query, max: 42
     data.class.must_equal Google::Cloud::Bigquery::Data
@@ -123,8 +123,8 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query, dataset: "some_random_dataset"
     data.class.must_equal Google::Cloud::Bigquery::Data
@@ -145,8 +145,8 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query query, dataset: "some_random_dataset",
                                  project: "some_random_project"
@@ -167,8 +167,8 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
                 query_data_gapi,
                 [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
-                table_data_gapi,
-                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil }]
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
 
     data = bigquery.query query, cache: false
@@ -186,20 +186,18 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
 
     err = expect { bigquery.query query }.must_raise Google::Cloud::PermissionDeniedError
     err.message.must_equal "string"
-    if err.respond_to? :cause
-      err.cause.body.must_equal({
+    err.cause.body.must_equal({
+      "debugInfo"=>"string",
+      "location"=>"string",
+      "message"=>"string",
+      "reason"=>"accessDenied",
+      "errors"=>[{
         "debugInfo"=>"string",
         "location"=>"string",
         "message"=>"string",
-        "reason"=>"accessDenied",
-        "errors"=>[{
-          "debugInfo"=>"string",
-          "location"=>"string",
-          "message"=>"string",
-          "reason"=>"accessDenied"
-        }]
-      })
-    end
+        "reason"=>"accessDenied"
+      }]
+    })
 
     mock.verify
   end
@@ -213,20 +211,18 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
 
     err = expect { bigquery.query query }.must_raise Google::Cloud::InternalError
     err.message.must_equal "string"
-    if err.respond_to? :cause
-      err.cause.body.must_equal({
+    err.cause.body.must_equal({
+      "debugInfo"=>"string",
+      "location"=>"string",
+      "message"=>"string",
+      "reason"=>"backendError",
+      "errors"=>[{
         "debugInfo"=>"string",
         "location"=>"string",
         "message"=>"string",
-        "reason"=>"backendError",
-        "errors"=>[{
-          "debugInfo"=>"string",
-          "location"=>"string",
-          "message"=>"string",
-          "reason"=>"backendError"
-        }]
-      })
-    end
+        "reason"=>"backendError"
+      }]
+    })
 
     mock.verify
   end

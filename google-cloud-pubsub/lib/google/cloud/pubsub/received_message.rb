@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,11 +30,16 @@ module Google
       #   pubsub = Google::Cloud::Pubsub.new
       #
       #   sub = pubsub.subscription "my-topic-sub"
-      #   received_message = sub.pull.first
-      #   if received_message
+      #   subscriber = sub.listen do |received_message|
       #     puts received_message.message.data
       #     received_message.acknowledge!
       #   end
+      #
+      #   # Start background threads that will call the block passed to listen.
+      #   subscriber.start
+      #
+      #   # Shut down the subscriber when ready to stop receiving messages.
+      #   subscriber.stop.wait!
       #
       class ReceivedMessage
         ##
@@ -63,7 +68,7 @@ module Google
         def message
           Message.from_grpc @grpc.message
         end
-        alias_method :msg, :message
+        alias msg message
 
         ##
         # The received message payload. This data is a list of bytes encoded as
@@ -84,14 +89,14 @@ module Google
         def message_id
           message.message_id
         end
-        alias_method :msg_id, :message_id
+        alias msg_id message_id
 
         ##
         # The time at which the message was published.
         def published_at
           message.published_at
         end
-        alias_method :publish_time, :published_at
+        alias publish_time published_at
 
         ##
         # Acknowledges receipt of the message.
@@ -102,17 +107,23 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_message = sub.pull.first
-        #   if received_message
+        #   subscriber = sub.listen do |received_message|
         #     puts received_message.message.data
+        #
         #     received_message.acknowledge!
         #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
         #
         def acknowledge!
           ensure_subscription!
           subscription.acknowledge ack_id
         end
-        alias_method :ack!, :acknowledge!
+        alias ack! acknowledge!
 
         ##
         # Modifies the acknowledge deadline for the message.
@@ -132,18 +143,24 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_message = sub.pull.first
-        #   if received_message
+        #   subscriber = sub.listen do |received_message|
         #     puts received_message.message.data
+        #
         #     # Delay for 2 minutes
         #     received_message.delay! 120
         #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
         #
         def delay! new_deadline
           ensure_subscription!
           subscription.delay new_deadline, ack_id
         end
-        alias_method :modify_ack_deadline!, :delay!
+        alias modify_ack_deadline! delay!
 
         ##
         # Resets the acknowledge deadline for the message without acknowledging
@@ -157,18 +174,24 @@ module Google
         #   pubsub = Google::Cloud::Pubsub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_message = sub.pull.first
-        #   if received_message
+        #   subscriber = sub.listen do |received_message|
         #     puts received_message.message.data
+        #
         #     # Release message back to the API.
         #     received_message.reject!
         #   end
         #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
+        #
         def reject!
           delay! 0
         end
-        alias_method :nack!, :reject!
-        alias_method :ignore!, :reject!
+        alias nack! reject!
+        alias ignore! reject!
 
         ##
         # @private New ReceivedMessage from a
@@ -185,7 +208,7 @@ module Google
         ##
         # Raise an error unless an active subscription is available.
         def ensure_subscription!
-          fail "Must have active subscription" unless subscription
+          raise "Must have active subscription" unless subscription
         end
       end
     end

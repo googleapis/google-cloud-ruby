@@ -1,12 +1,14 @@
 AllCops:
   Exclude:
-    - "acceptance/**/*"
-    - "support/**/*"
     - "google-cloud-vision.gemspec"
+    - "lib/google/cloud/vision.rb"    
+    - "lib/google/cloud/vision/*"
+    - "lib/google/cloud/vision/v1/*pb.rb"
+    - "lib/google/cloud/vision/v1/image_annotator_client.rb"
+    - "lib/google/cloud/vision/v1/doc/**/*"
     - "Rakefile"
-    - "lib/google/cloud/vision/v1.rb"
-    - "lib/google/cloud/vision/v1/**/*"
-    - "test/**/*"
+    - "test/**/*client_test.rb"
+    - "acceptance/**/*smoke_test.rb"
 
 Documentation:
   Enabled: false
@@ -15,16 +17,10 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
-Style/NumericLiterals:
-  Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Style/EmptyLines:
-  Enabled: false
-Style/EmptyElse:
-  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - "acceptance/google/cloud/vision/v1/image_annotator_feature_methods_test.rb"
+    - "test/**/*"
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/PerceivedComplexity:
@@ -32,14 +28,4 @@ Metrics/PerceivedComplexity:
 Metrics/AbcSize:
   Max: 25
 Metrics/MethodLength:
-  Max: 20
-Metrics/ParameterLists:
-  Enabled: false
-Style/RescueModifier:
-  Enabled: false
-Style/ClassVars:
-  Enabled: false
-Style/TrivialAccessors:
-  Enabled: false
-Style/FileName:
-  Enabled: false # for lib/google-cloud-vision.rb file
+  Max: 25

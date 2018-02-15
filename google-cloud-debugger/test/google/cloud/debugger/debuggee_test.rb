@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -61,6 +61,19 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
       grpc.description.wont_be_nil
       grpc.agent_version.wont_be_nil
       grpc.labels.to_a.wont_be_empty
+    end
+
+    it "uses numeric project ID if available" do
+      numeric_id = 1234567890
+      path_base = "#{Google::Cloud::Env::METADATA_PATH_BASE}/project"
+      metadata_cache = {
+        "#{path_base}/project-id" => project,
+        "#{path_base}/numeric-project-id" => numeric_id
+      }
+      mock_env = Google::Cloud::Env.new metadata_cache: metadata_cache
+      debuggee.instance_variable_set :@env, mock_env
+      grpc = debuggee.to_grpc
+      grpc.project.must_equal numeric_id.to_s
     end
   end
 

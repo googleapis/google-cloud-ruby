@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a link of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
                 {"name"=>"Sally", "age"=>nil, "score"=>nil, "active"=>nil}] }
   let(:insert_id) { "abc123" }
   let(:insert_rows) { rows.map do |row|
-                        Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-                          insert_id: insert_id,
+                        {
+                          insertId: insert_id,
                           json: row
-                        )
+                        }
                       end }
   let(:dataset_id) { "dataset" }
   let(:table_hash) { random_table_hash dataset_id }
@@ -36,10 +36,11 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
 
   it "can insert one row" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: [insert_rows.first], ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: [insert_rows.first], ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     result = nil
@@ -56,10 +57,11 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
 
   it "can insert multiple rows" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     result = nil
@@ -76,10 +78,11 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
 
   it "will indicate there was a problem with the data" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, failure_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     result = nil
@@ -133,10 +136,11 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
 
   it "can specify skipping invalid rows" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: nil, skip_invalid_rows: true)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: nil, skipInvalidRows: true
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     result = nil
@@ -153,10 +157,11 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
 
   it "can specify ignoring unknown values" do
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: insert_rows, ignore_unknown_values: true, skip_invalid_rows: nil)
+    insert_req = {
+      rows: insert_rows, ignoreUnknownValues: true, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     result = nil
@@ -195,15 +200,16 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       next_vacation: Date.parse("2666-06-06"),
       favorite_time: Time.parse("2001-12-19T23:59:59 UTC").utc.to_datetime
     }
-    inserted_row_gapi = Google::Apis::BigqueryV2::InsertAllTableDataRequest::Row.new(
-      insert_id: insert_id,
+    inserted_row_hash = {
+      insertId: insert_id,
       json: {"id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6, "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001], "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}], "icon"=>"eyJuYW1lIjoibWlrZSIsImJyZWVkIjoidGhlY2F0a2luZCIsImlkIjoxLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJjaHJpcyIsImJyZWVkIjoiZ29sZGVucmV0cmlldmVyPyIsImlkIjoyLCJkb2IiOjE0ODg0NzgzNjIuMjA5MDM0fQp7Im5hbWUiOiJqaiIsImJyZWVkIjoiaWRrYW55Y2F0YnJlZWRzIiwiaWQiOjMsImRvYiI6MTQ4ODQ3ODM2Mi4yMDkwMzR9Cg==", "last_used"=>"2015-10-31 23:59:56.000000+00:00"}], "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06", "favorite_time"=>"2001-12-19 23:59:59.000000"}
-    )
+    }
     mock = Minitest::Mock.new
-    insert_req = Google::Apis::BigqueryV2::InsertAllTableDataRequest.new(
-      rows: [inserted_row_gapi], ignore_unknown_values: nil, skip_invalid_rows: nil)
+    insert_req = {
+      rows: [inserted_row_hash], ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
     mock.expect :insert_all_table_data, success_table_insert_gapi,
-      [table.project_id, table.dataset_id, table.table_id, insert_req]
+      [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
     result = nil

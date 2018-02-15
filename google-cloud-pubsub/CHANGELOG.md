@@ -1,5 +1,34 @@
 # Release History
 
+### 0.29.0 / 2017-12-19
+
+* Update Subscriber's receipt of received messages.
+* Refactor Subscriber implementation to fix some threading bugs.
+* Update google-gax dependency to 1.0.
+
+### 0.28.1 / 2017-11-21
+
+* Remove warning when connecting to Pub/Sub Emulator.
+
+### 0.28.0 / 2017-11-14
+
+* Add `Google::Cloud::Pubsub::Credentials` class.
+* Rename constructor arguments to `project_id` and `credentials`.
+  (The previous arguments `project` and `keyfile` are still supported.)
+* Document `Google::Auth::Credentials` as `credentials` value.
+* Update generated low level GAPIC code.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
+### 0.27.2 / 2017-10-18
+
+* Update documentation
+
+### 0.27.1 / 2017-10-11
+
+* Add keepalive to gRPC connections.
+* Update Subscriber Streaming Messages error handling
+* Fix link in README
+
 ### 0.27.0 / 2017-08-10
 
 This is a major release that offers new functionality. It adds the ability to asynchronously publish batches of messages when a threshold is met (batch message count, total batch size, batch age). It also adds the ability to receive and acknowledge messages via multiple streams.

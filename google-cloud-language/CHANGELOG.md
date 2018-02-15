@@ -1,5 +1,25 @@
 # Release History
 
+### 0.29.0 / 2017-12-19
+
+* Documentation updates.
+* Update google-gax dependency to 1.0.
+
+### 0.28.1 / 2017-11-15
+
+* Fix Credentials environment variable names.
+
+### 0.28.0 / 2017-11-14
+
+#### BREAKING CHANGE
+
+This release introduces breaking changes relative to the previous release.
+For more details and instructions to migrate your code, please visit the
+[migration guide](https://cloud.google.com/natural-language/docs/ruby-client-migration).
+
+* Replace hand-written client with code generated client.
+* Updated `google-gax` (`grpc`, `google-protobuf`), `googleauth` dependencies.
+
 ### 0.27.1 / 2017-08-30
 
 * Update GAPIC V1Beta2 API.

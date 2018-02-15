@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 
 
 require "google/cloud/errors"
-require "google/cloud/env"
 require "google/cloud/error_reporting/service"
 require "google/cloud/error_reporting/credentials"
 require "google/cloud/error_reporting/error_event"
@@ -44,38 +43,42 @@ module Google
       #
       class Project
         ##
-        # Find default project_id from `ERROR_REPORTING_RPOJECT`,
-        # `GOOGLE_CLOUD_PROJECT`, `GCLOUD_PROJECT` environment varaibles, or
-        # query from GCE meta service.
+        # Find default project_id from the configuration, environment
+        # varaibles, or query from GCE meta service.
         #
         # @return [String] default valid GCP project_id
         #
-        def self.default_project
-          ENV["ERROR_REPORTING_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
+        def self.default_project_id
+          Google::Cloud.configure.error_reporting.project_id ||
+            Google::Cloud.configure.project_id ||
             Google::Cloud.env.project_id
+        end
+        class << self
+          alias default_project default_project_id
         end
 
         ##
-        # Find default service_name from `ERROR_REPORTING_SERVICE`,
-        # `GAE_SERVICE` environment Variables, or just "ruby".
+        # Find default service_name from the configuration, environment
+        # varaibles, or query from GCE meta service, or just "ruby".
         #
         # @return [String] default GCP service_name
         #
         def self.default_service_name
-          ENV["ERROR_REPORTING_SERVICE"] ||
+          Google::Cloud.configure.error_reporting.service_name ||
+            Google::Cloud.configure.service_name ||
             Google::Cloud.env.app_engine_service_id ||
             "ruby"
         end
 
         ##
-        # Find default service_version from `ERROR_REPORTING_VERSION` or
-        # `GAE_VERSION` environment varaibles.
+        # Find default service_version from the configuration, environment
+        # varaibles, or query from GCE meta service.
         #
         # @return [String] default GCP service_version
         #
         def self.default_service_version
-          ENV["ERROR_REPORTING_VERSION"] ||
+          Google::Cloud.configure.error_reporting.service_version ||
+            Google::Cloud.configure.service_version ||
             Google::Cloud.env.app_engine_service_version
         end
 
@@ -102,9 +105,10 @@ module Google
         #
         # @return [String] The current project_id
         #
-        def project
+        def project_id
           service.project
         end
+        alias project project_id
 
         ##
         # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to Stackdriver

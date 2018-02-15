@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -54,7 +54,7 @@ module Google
             error_reporting ||
             ErrorReporting::AsyncErrorReporter.new(
               ErrorReporting.new(project: configuration.project_id,
-                                 keyfile: configuration.keyfile)
+                                 credentials: configuration.credentials)
             )
 
           # Set module default client to reuse the same client. Update module
@@ -154,16 +154,20 @@ module Google
         # already.
         #
         def load_config **kwargs
-          configuration.project_id = kwargs[:project_id] ||
-                                     configuration.project_id
-          configuration.keyfile = kwargs[:keyfile] ||
-                                  configuration.keyfile
-          configuration.service_name = kwargs[:service_name] ||
-                                       configuration.service_name
-          configuration.service_version = kwargs[:service_version] ||
-                                          configuration.service_version
-          configuration.ignore_classes = kwargs[:ignore_classes] ||
-                                         configuration.ignore_classes
+          project_id = kwargs[:project] || kwargs[:project_id]
+          configuration.project_id = project_id unless project_id.nil?
+
+          creds = kwargs[:credentials] || kwargs[:keyfile]
+          configuration.credentials = creds unless creds.nil?
+
+          service_name = kwargs[:service_name]
+          configuration.service_name = service_name unless service_name.nil?
+
+          service_vers = kwargs[:service_version]
+          configuration.service_version = service_vers unless service_vers.nil?
+
+          ignores = kwargs[:ignore_classes]
+          configuration.ignore_classes = ignores unless ignores.nil?
 
           init_default_config
         end
@@ -171,12 +175,13 @@ module Google
         ##
         # Fallback to default configuration values if not defined already
         def init_default_config
-          configuration.project_id ||= Cloud.configure.project_id ||
-                                       ErrorReporting::Project.default_project
-          configuration.keyfile ||= Cloud.configure.keyfile
+          configuration.project_id ||= begin
+            (Cloud.configure.project_id ||
+             ErrorReporting::Project.default_project_id)
+          end
+          configuration.credentials ||= Cloud.configure.credentials
           configuration.service_name ||=
             ErrorReporting::Project.default_service_name
-
           configuration.service_version ||=
             ErrorReporting::Project.default_service_version
           configuration.ignore_classes = Array(configuration.ignore_classes)

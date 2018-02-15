@@ -1,10 +1,10 @@
-# Copyright 2017 Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,10 +31,15 @@ describe Google::Cloud::Debugger::Railtie do
     config
   end
 
-  after {
-    Google::Cloud::Debugger.configure.instance_variable_get(:@configs).clear
-    Google::Cloud.configure.delete :use_debugger
-  }
+  before do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    # Clear configuration values between each test
+    Google::Cloud.configure.reset!
+  end
 
   describe ".consolidate_rails_config" do
     it "merges configs from Rails configuration" do
@@ -43,7 +48,7 @@ describe Google::Cloud::Debugger::Railtie do
 
         Google::Cloud::Debugger.configure do |config|
           config.project_id.must_equal "test-project"
-          config.keyfile.must_equal "test/keyfile"
+          config.credentials.must_equal "test/keyfile"
           config.service_name.must_equal "test-module"
           config.service_version.must_equal "test-version"
         end

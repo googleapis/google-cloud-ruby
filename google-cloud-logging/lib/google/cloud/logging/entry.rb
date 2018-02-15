@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -51,6 +51,19 @@ module Google
       #   logging = Google::Cloud::Logging.new
       #
       #   entry = logging.entry payload: "Job started.", log_name: "my_app_log"
+      #   entry.resource.type = "gae_app"
+      #   entry.resource.labels[:module_id] = "1"
+      #   entry.resource.labels[:version_id] = "20150925t173233"
+      #
+      #   logging.write_entries entry
+      #
+      # @example Provide a hash to write a JSON payload to the log:
+      #   require "google/cloud/logging"
+      #
+      #   logging = Google::Cloud::Logging.new
+      #
+      #   payload = { "stats" => { "a" => 8, "b" => 12.5} }
+      #   entry = logging.entry payload: payload, log_name: "my_app_log"
       #   entry.resource.type = "gae_app"
       #   entry.resource.labels[:module_id] = "1"
       #   entry.resource.labels[:version_id] = "20150925t173233"

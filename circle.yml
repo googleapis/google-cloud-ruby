@@ -28,20 +28,6 @@ dependencies:
     - rvm-exec 2.2.5 gem update --system
     - rvm install 2.0.0-p648
     - rvm-exec 2.0.0-p648 gem update --system
-    # get the latest versions of bundler
-    - gem install bundler
-    - rvm-exec 2.4.0 gem install bundler
-    - rvm-exec 2.3.1 gem install bundler
-    - rvm-exec 2.2.5 gem install bundler
-    - rvm-exec 2.0.0-p648 gem install bundler
-
-  override:
-    # The following command installs dependencies for 2.1.9
-    - bundle update
-    - rvm-exec 2.4.0 bundle update
-    - rvm-exec 2.3.1 bundle update
-    - rvm-exec 2.2.5 bundle update
-    - rvm-exec 2.0.0-p648 bundle update
 
 test:
   override:

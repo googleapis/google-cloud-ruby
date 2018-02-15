@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -112,7 +112,7 @@ module Google
         #
         def created_at
           Time.parse @gapi.creation_time
-        rescue
+        rescue StandardError
           nil
         end
 
@@ -159,7 +159,7 @@ module Google
         #   zone.clear!
         #
         def clear!
-          non_essential = records.all.reject { |r| %w(SOA NS).include?(r.type) }
+          non_essential = records.all.reject { |r| %w[SOA NS].include?(r.type) }
           change = update [], non_essential
           change.wait_until_done! unless change.nil?
         end
@@ -189,8 +189,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias_method :find_change, :change
-        alias_method :get_change, :change
+        alias find_change change
+        alias get_change change
 
         ##
         # Retrieves the list of changes belonging to the zone.
@@ -245,7 +245,7 @@ module Google
                                           order: order, sort: sort
           Change::List.from_gapi gapi, self, max, order
         end
-        alias_method :find_changes, :changes
+        alias find_changes changes
 
         ##
         # Retrieves the list of records belonging to the zone. Records can be
@@ -302,7 +302,7 @@ module Google
           gapi = service.list_records id, name, type, token: token, max: max
           Record::List.from_gapi gapi, self, name, type, max
         end
-        alias_method :find_records, :records
+        alias find_records records
 
         ##
         # Creates a new, unsaved Record that can be added to a Zone. See
@@ -321,7 +321,7 @@ module Google
         def record name, type, ttl, data
           Google::Cloud::Dns::Record.new fqdn(name), type, ttl, data
         end
-        alias_method :new_record, :record
+        alias new_record record
 
         ##
         # Exports the zone to a local [DNS zone
@@ -396,7 +396,7 @@ module Google
         #
         def import path_or_io, only: nil, except: nil,
                    skip_soa: nil, soa_serial: nil
-          except = (Array(except).map(&:to_s).map(&:upcase) + %w(SOA NS)).uniq
+          except = (Array(except).map(&:to_s).map(&:upcase) + %w[SOA NS]).uniq
           importer = Google::Cloud::Dns::Importer.new self, path_or_io
           additions = importer.records only: only, except: except
           update additions, [], skip_soa: skip_soa, soa_serial: soa_serial
@@ -696,7 +696,7 @@ module Google
         ##
         # Raise an error unless an active connection is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
 
         def create_change additions, deletions

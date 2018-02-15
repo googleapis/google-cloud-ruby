@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
     d
   end
-  let(:labels) { { "foo" => "bar" } }
+  let(:labels) { { "prefix" => prefix } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
-  let(:filter) { "labels.foo:bar" }
+  let(:filter) { "labels.prefix:#{prefix}" }
   let(:dataset_2_id) { "#{prefix}_dataset_2" }
   let(:dataset_2) do
     d = bigquery.dataset dataset_2_id

@@ -1,10 +1,10 @@
-# Copyright 2016 Google Inc. All rights reserved.
+# Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
   let(:labels1) { { "env" => "production" } }
   let(:labels2) { { "env" => "staging" } }
   let(:write_res) { Google::Logging::V2::WriteLogEntriesResponse.new }
-  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging }
+  let(:async_writer) { Google::Cloud::Logging::AsyncWriter.new logging, Google::Cloud::Logging::AsyncWriter::DEFAULT_MAX_QUEUE_SIZE, true }
 
   def entries payload, labels = labels1
     Array(payload).map { |str|
@@ -52,7 +52,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, options: default_options]
+    [entries, log_name: full_log_name, resource: resource.to_grpc, labels: labels, partial_success: true, options: default_options]
   end
 
   it "writes a single entry" do

@@ -28,23 +28,32 @@ end
 desc "Run the bigquery acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
+  project ||= ENV["BIGQUERY_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
+  keyfile ||= ENV["BIGQUERY_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["BIGQUERY_TEST_KEYFILE_JSON"]
+    keyfile ||= ENV["BIGQUERY_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
+  # clear any env var already set
+  require "google/cloud/bigquery/credentials"
+  (Google::Cloud::Bigquery::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Bigquery::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  require "google/cloud/storage/credentials"
+  (Google::Cloud::Storage::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Storage::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
   # always overwrite when running tests
   ENV["BIGQUERY_PROJECT"] = project
-  ENV["BIGQUERY_KEYFILE"] = nil
   ENV["BIGQUERY_KEYFILE_JSON"] = keyfile
   ENV["STORAGE_PROJECT"] = project
-  ENV["STORAGE_KEYFILE"] = nil
   ENV["STORAGE_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
@@ -66,20 +75,25 @@ namespace :acceptance do
   desc "Removes *ALL* BigQuery datasets and tables. Use with caution."
   task :cleanup, :project, :keyfile do |t, args|
     project = args[:project]
-    project ||= ENV["GCLOUD_TEST_PROJECT"] || ENV["BIGQUERY_TEST_PROJECT"]
+    project ||= ENV["BIGQUERY_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["GCLOUD_TEST_KEYFILE"] || ENV["BIGQUERY_TEST_KEYFILE"]
+    keyfile ||= ENV["BIGQUERY_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
     if keyfile
       keyfile = File.read keyfile
     else
-      keyfile ||= ENV["GCLOUD_TEST_KEYFILE_JSON"] || ENV["BIGQUERY_TEST_KEYFILE_JSON"]
+      keyfile ||= ENV["BIGQUERY_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
     end
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake acceptance:cleanup[test123, /path/to/keyfile.json] or BIGQUERY_TEST_PROJECT=test123 BIGQUERY_TEST_KEYFILE=/path/to/keyfile.json rake acceptance:cleanup"
     end
+    # clear any env var already set
+    require "google/cloud/bigquery/credentials"
+    (Google::Cloud::Bigquery::Credentials::PATH_ENV_VARS +
+     Google::Cloud::Bigquery::Credentials::JSON_ENV_VARS).each do |path|
+      ENV[path] = nil
+    end
     # always overwrite when running tests
     ENV["BIGQUERY_PROJECT"] = project
-    ENV["BIGQUERY_KEYFILE"] = nil
     ENV["BIGQUERY_KEYFILE_JSON"] = keyfile
 
     $LOAD_PATH.unshift "lib"
@@ -98,6 +112,23 @@ namespace :acceptance do
   task :run do
     $LOAD_PATH.unshift "lib", "acceptance"
     Dir.glob("acceptance/bigquery/**/*_test.rb").each { |file| require_relative file }
+  end
+end
+
+namespace :benchmark do
+  desc "Run queries benchmark script."
+  task :queries, :query_file do |t, args|
+    query_file = args[:query_file]
+    query_file ||= "benchmark/queries.json"
+
+    sh "bundle exec ruby benchmark/benchmark.rb #{query_file}"
+  end
+
+  desc "Run inserts benchmark script."
+  task :inserts, :insert_count do |t, args|
+    insert_count = args[:insert_count]
+
+    sh "bundle exec ruby benchmark/inserts.rb #{insert_count}"
   end
 end
 

@@ -1,10 +1,10 @@
-# Copyright 2015 Google Inc. All rights reserved.
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/env"
 require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/credentials"
@@ -74,28 +73,20 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new(
-        #     project: "my-project-id",
-        #     keyfile: "/path/to/keyfile.json"
+        #     project_id: "my-project",
+        #     credentials: "/path/to/keyfile.json"
         #   )
         #
-        #   bigquery.project #=> "my-project-id"
+        #   bigquery.project_id #=> "my-project"
         #
-        def project
+        def project_id
           service.project
         end
+        alias project project_id
 
         ##
-        # @private Default project.
-        def self.default_project
-          ENV["BIGQUERY_PROJECT"] ||
-            ENV["GOOGLE_CLOUD_PROJECT"] ||
-            ENV["GCLOUD_PROJECT"] ||
-            Google::Cloud.env.project_id
-        end
-
-        ##
-        # Queries data using the [asynchronous
-        # method](https://cloud.google.com/bigquery/querying-data).
+        # Queries data by creating a [query
+        # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
         #
         # When using standard SQL and passing arguments using `params`, Ruby
         # types are mapped to BigQuery types as follows:
@@ -339,10 +330,10 @@ module Google
         end
 
         ##
-        # Queries data using a synchronous method that blocks for a response. In
-        # this method, a {QueryJob} is created and its results are saved
-        # to a temporary table, then read from the table. Timeouts and transient
-        # errors are generally handled as needed to complete the query.
+        # Queries data and waits for the results. In this method, a {QueryJob}
+        # is created and its results are saved to a temporary table, then read
+        # from the table. Timeouts and transient errors are generally handled
+        # as needed to complete the query.
         #
         # When using standard SQL and passing arguments using `params`, Ruby
         # types are mapped to BigQuery types as follows:
@@ -515,8 +506,8 @@ module Google
           if job.failed?
             begin
               # raise to activate ruby exception cause handling
-              fail job.gapi_error
-            rescue => e
+              raise job.gapi_error
+            rescue StandardError => e
               # wrap Google::Apis::Error with Google::Cloud::Error
               raise Google::Cloud::Error.from_error(e)
             end
@@ -580,6 +571,10 @@ module Google
         # Retrieves an existing dataset by ID.
         #
         # @param [String] dataset_id The ID of a dataset.
+        # @param [Boolean] skip_lookup Optionally create just a local reference
+        #   object without verifying that the resource exists on the BigQuery
+        #   service. Calls made on this object will raise errors if the resource
+        #   does not exist. Default is `false`. Optional.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
@@ -592,8 +587,18 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   puts dataset.name
         #
-        def dataset dataset_id
+        # @example Avoid retrieving the dataset resource with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #
+        def dataset dataset_id, skip_lookup: nil
           ensure_service!
+          if skip_lookup
+            return Dataset.new_reference project, dataset_id, service
+          end
           gapi = service.get_dataset dataset_id
           Dataset.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
@@ -652,7 +657,9 @@ module Google
 
           new_ds = Google::Apis::BigqueryV2::Dataset.new(
             dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
-              project_id: project, dataset_id: dataset_id))
+              project_id: project, dataset_id: dataset_id
+            )
+          )
 
           # Can set location only on creation, no Dataset#location method
           new_ds.update! location: location unless location.nil?
@@ -958,7 +965,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          fail "Must have active connection" unless service
+          raise "Must have active connection" unless service
         end
       end
     end

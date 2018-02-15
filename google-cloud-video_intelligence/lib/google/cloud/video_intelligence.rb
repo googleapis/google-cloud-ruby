@@ -1,10 +1,10 @@
-# Copyright 2017, Google Inc. All rights reserved.
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Video Intelligence API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Video Intelligence API ([GA](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
-    # [Google Cloud Video Intelligence API][Product Documentation]:
-    # Google Cloud Video Intelligence API.
+    # [Cloud Video Intelligence API][Product Documentation]:
+    # Cloud Video Intelligence API.
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -31,8 +31,9 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Google Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+    # 3. [Enable the Cloud Video Intelligence API.](https://console.cloud.google.com/apis/api/video-intelligence)
+    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Preview
     # #### VideoIntelligenceServiceClient
@@ -40,7 +41,7 @@ module Google
     # require "google/cloud/video_intelligence"
     #
     # video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
-    # input_uri = "gs://cloud-ml-sandbox/video/chicago.mp4"
+    # input_uri = "gs://demomaker/cat.mp4"
     # features_element = :LABEL_DETECTION
     # features = [features_element]
     #
@@ -73,7 +74,7 @@ module Google
     # ```
     #
     # ### Next Steps
-    # - Read the [Google Cloud Video Intelligence API Product documentation][Product Documentation]
+    # - Read the [Cloud Video Intelligence API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
     # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
@@ -96,13 +97,13 @@ module Google
       # Service that implements Google Cloud Video Intelligence API.
       #
       # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v1beta2
+      #   The major version of the service to be used. By default :v1
       #   is used.
-      # @overload
-      #   @param credentials [Google::Gax::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+      # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
+      #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
       #     Provides the means for authenticating requests made by the client. This parameter can
       #     be many types.
-      #     A `Google::Gax::Credentials` uses a the properties of its represented keyfile for
+      #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
       #     authenticating requests made by this client.
       #     A `String` will be treated as the path to the keyfile to be used for the construction of
       #     credentials for this client.
@@ -123,7 +124,7 @@ module Google
       #     or the specified config is missing data points.
       #   @param timeout [Numeric]
       #     The default timeout, in seconds, for calls made through this client.
-      def self.new(*args, version: :v1beta2, **kwargs)
+      def self.new(*args, version: :v1, **kwargs)
         unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
           raise "The version: #{version} is not available. The available versions " \
             "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
