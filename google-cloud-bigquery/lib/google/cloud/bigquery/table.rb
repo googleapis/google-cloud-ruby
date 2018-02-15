@@ -1430,6 +1430,8 @@ module Google
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
+        # @yield [load_job] a block for setting the load job
+        # @yieldparam [LoadJob] load_job the load job object to be updated
         #
         # @return [Google::Cloud::Bigquery::LoadJob]
         #
@@ -1474,18 +1476,26 @@ module Google
                      skip_leading: nil, dryrun: nil, job_id: nil, prefix: nil,
                      labels: nil, autodetect: nil, null_marker: nil
           ensure_service!
-          options = { format: format, create: create, write: write,
-                      projection_fields: projection_fields,
-                      jagged_rows: jagged_rows,
-                      quoted_newlines: quoted_newlines, encoding: encoding,
-                      delimiter: delimiter, ignore_unknown: ignore_unknown,
-                      max_bad_records: max_bad_records, quote: quote,
-                      skip_leading: skip_leading, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix, labels: labels,
-                      autodetect: autodetect, null_marker: null_marker }
-          return load_storage(file, options) if storage_url? file
-          return load_local(file, options) if local_file? file
-          raise Google::Cloud::Error, "Don't know how to load #{file}"
+
+          updater = load_job_updater format: format, create: create,
+                                     write: write,
+                                     projection_fields: projection_fields,
+                                     jagged_rows: jagged_rows,
+                                     quoted_newlines: quoted_newlines,
+                                     encoding: encoding,
+                                     delimiter: delimiter,
+                                     ignore_unknown: ignore_unknown,
+                                     max_bad_records: max_bad_records,
+                                     quote: quote, skip_leading: skip_leading,
+                                     dryrun: dryrun, schema: schema,
+                                     labels: labels, autodetect: autodetect,
+                                     null_marker: null_marker
+
+          yield updater if block_given?
+
+          job_gapi = updater.to_gapi
+          return load_local(job_id, prefix, file, job_gapi) if local_file? file
+          load_storage job_id, prefix, file, job_gapi
         end
 
         ##
@@ -1991,20 +2001,122 @@ module Google
           reload!
         end
 
-        def load_storage url, options = {}
+        def load_job_gapi table_id, dryrun
+          Google::Apis::BigqueryV2::Job.new(
+            configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+              load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+                destination_table: Google::Apis::BigqueryV2::TableReference.new(
+                  project_id: @service.project,
+                  dataset_id: dataset_id,
+                  table_id: table_id
+                )
+              ),
+              dry_run: dryrun
+            )
+          )
+        end
+
+        def load_job_csv_options! job, jagged_rows: nil,
+                                  quoted_newlines: nil,
+                                  delimiter: nil,
+                                  quote: nil, skip_leading: nil,
+                                  null_marker: nil
+          job.jagged_rows = jagged_rows unless jagged_rows.nil?
+          job.quoted_newlines = quoted_newlines unless quoted_newlines.nil?
+          job.delimiter = delimiter unless delimiter.nil?
+          job.null_marker = null_marker unless null_marker.nil?
+          job.quote = quote unless quote.nil?
+          job.skip_leading = skip_leading unless skip_leading.nil?
+        end
+
+        def load_job_file_options! job, format: nil,
+                                   projection_fields: nil,
+                                   jagged_rows: nil, quoted_newlines: nil,
+                                   encoding: nil, delimiter: nil,
+                                   ignore_unknown: nil, max_bad_records: nil,
+                                   quote: nil, skip_leading: nil,
+                                   null_marker: nil
+          job.format = format unless format.nil?
+          unless projection_fields.nil?
+            job.projection_fields = projection_fields
+          end
+          job.encoding = encoding unless encoding.nil?
+          job.ignore_unknown = ignore_unknown unless ignore_unknown.nil?
+          job.max_bad_records = max_bad_records unless max_bad_records.nil?
+          load_job_csv_options! job, jagged_rows: jagged_rows,
+                                     quoted_newlines: quoted_newlines,
+                                     delimiter: delimiter,
+                                     quote: quote,
+                                     skip_leading: skip_leading,
+                                     null_marker: null_marker
+        end
+
+        def load_job_updater format: nil, create: nil,
+                             write: nil, projection_fields: nil,
+                             jagged_rows: nil, quoted_newlines: nil,
+                             encoding: nil, delimiter: nil,
+                             ignore_unknown: nil, max_bad_records: nil,
+                             quote: nil, skip_leading: nil, dryrun: nil,
+                             schema: nil, labels: nil, autodetect: nil,
+                             null_marker: nil
+          new_job = load_job_gapi table_id, dryrun
+          LoadJob::Updater.new(new_job).tap do |job|
+            job.create = create unless create.nil?
+            job.write = write unless write.nil?
+            job.schema = schema unless schema.nil?
+            job.autodetect = autodetect unless autodetect.nil?
+            job.labels = labels unless labels.nil?
+            load_job_file_options! job, format: format,
+                                        projection_fields: projection_fields,
+                                        jagged_rows: jagged_rows,
+                                        quoted_newlines: quoted_newlines,
+                                        encoding: encoding,
+                                        delimiter: delimiter,
+                                        ignore_unknown: ignore_unknown,
+                                        max_bad_records: max_bad_records,
+                                        quote: quote,
+                                        skip_leading: skip_leading,
+                                        null_marker: null_marker
+          end
+        end
+
+        def derive_source_format path
+          return "CSV" if path.end_with? ".csv"
+          return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
+          return "AVRO" if path.end_with? ".avro"
+          return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
+          nil
+        end
+
+        def load_storage job_id, prefix, url, job_gapi
           # Convert to storage URL
           url = url.to_gs_url if url.respond_to? :to_gs_url
           url = url.to_s if url.is_a? URI
 
-          gapi = service.load_table_gs_url dataset_id, table_id, url, options
+          unless url.nil?
+            job_gapi.configuration.load.update! source_uris: Array(url)
+            if job_gapi.configuration.load.source_format.nil?
+              source_format = derive_source_format url
+              unless source_format.nil?
+                job_gapi.configuration.load.source_format = source_format
+              end
+            end
+          end
+
+          gapi = service.load_table_gs_url job_id, prefix, job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local file, options = {}
-          # Convert to storage URL
-          file = file.to_gs_url if file.respond_to? :to_gs_url
+        def load_local job_id, prefix, file, job_gapi
+          path = Pathname(file).to_path
+          if job_gapi.configuration.load.source_format.nil?
+            source_format = derive_source_format path
+            unless source_format.nil?
+              job_gapi.configuration.load.source_format = source_format
+            end
+          end
 
-          gapi = service.load_table_file dataset_id, table_id, file, options
+          gapi = service.load_table_file job_id, prefix, file, job_gapi
           Job.from_gapi gapi, service
         end
 
