@@ -294,6 +294,7 @@ namespace :jsondoc do
       "google-cloud-debugger",
       "google-cloud-dns",
       "google-cloud-error_reporting",
+      "google-cloud-firestore",
       "google-cloud-language",
       "google-cloud-logging",
       "google-cloud-monitoring",
