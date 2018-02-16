@@ -447,7 +447,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "imports data from a local file with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    job = table.load_job local_file, job_id: job_id, labels: labels
+    job = table.load_job local_file, job_id: job_id do |j|
+      j.labels = labels
+    end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.job_id.must_equal job_id
     job.labels.must_equal labels
