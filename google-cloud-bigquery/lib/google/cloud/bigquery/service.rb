@@ -303,22 +303,21 @@ module Google
           end
         end
 
-        def load_table_gs_url dataset_id, table_id, url, options = {}
+        def load_table_gs_url job_id, prefix, load_job_gapi
           # Jobs have generated id, so this operation is considered idempotent
+          load_job_gapi.job_reference = job_ref_from(job_id, prefix)
           execute backoff: true do
-            service.insert_job \
-              @project, load_table_url_config(dataset_id, table_id,
-                                              url, options)
+            service.insert_job @project, load_job_gapi
           end
         end
 
-        def load_table_file dataset_id, table_id, file, options = {}
+        def load_table_file job_id, prefix, file, load_job_gapi
           # Jobs have generated id, so this operation is considered idempotent
+          load_job_gapi.job_reference = job_ref_from(job_id, prefix)
           execute backoff: true do
             service.insert_job \
-              @project, load_table_file_config(
-                dataset_id, table_id, file, options
-              ),
+              @project,
+              load_job_gapi,
               upload_source: file, content_type: mime_type_for(file)
           end
         end
@@ -397,74 +396,6 @@ module Google
             project_id: @project,
             job_id: job_id
           )
-        end
-
-        def load_table_file_opts dataset_id, table_id, file, options = {}
-          path = Pathname(file).to_path
-          {
-            destination_table: Google::Apis::BigqueryV2::TableReference.new(
-              project_id: @project, dataset_id: dataset_id, table_id: table_id
-            ),
-            create_disposition: create_disposition(options[:create]),
-            write_disposition: write_disposition(options[:write]),
-            source_format: source_format(path, options[:format]),
-            projection_fields: projection_fields(options[:projection_fields]),
-            allow_jagged_rows: options[:jagged_rows],
-            allow_quoted_newlines: options[:quoted_newlines],
-            autodetect: options[:autodetect],
-            encoding: options[:encoding], field_delimiter: options[:delimiter],
-            ignore_unknown_values: options[:ignore_unknown],
-            max_bad_records: options[:max_bad_records],
-            null_marker: options[:null_marker], quote: options[:quote],
-            schema: options[:schema], skip_leading_rows: options[:skip_leading]
-          }.delete_if { |_, v| v.nil? }
-        end
-
-        def load_table_file_config dataset_id, table_id, file, options = {}
-          load_opts = load_table_file_opts dataset_id, table_id, file, options
-          req = API::Job.new(
-            job_reference: job_ref_from(options[:job_id], options[:prefix]),
-            configuration: API::JobConfiguration.new(
-              load: API::JobConfigurationLoad.new(load_opts),
-              dry_run: options[:dryrun]
-            )
-          )
-          req.configuration.labels = options[:labels] if options[:labels]
-          req
-        end
-
-        def load_table_url_opts dataset_id, table_id, url, options = {}
-          {
-            destination_table: Google::Apis::BigqueryV2::TableReference.new(
-              project_id: @project, dataset_id: dataset_id, table_id: table_id
-            ),
-            source_uris: Array(url),
-            create_disposition: create_disposition(options[:create]),
-            write_disposition: write_disposition(options[:write]),
-            source_format: source_format(url, options[:format]),
-            projection_fields: projection_fields(options[:projection_fields]),
-            allow_jagged_rows: options[:jagged_rows],
-            allow_quoted_newlines: options[:quoted_newlines],
-            autodetect: options[:autodetect],
-            encoding: options[:encoding], field_delimiter: options[:delimiter],
-            ignore_unknown_values: options[:ignore_unknown],
-            max_bad_records: options[:max_bad_records],
-            null_marker: options[:null_marker], quote: options[:quote],
-            schema: options[:schema], skip_leading_rows: options[:skip_leading]
-          }.delete_if { |_, v| v.nil? }
-        end
-
-        def load_table_url_config dataset_id, table_id, url, options = {}
-          load_opts = load_table_url_opts dataset_id, table_id, url, options
-          req = API::Job.new(
-            job_reference: job_ref_from(options[:job_id], options[:prefix]),
-            configuration: API::JobConfiguration.new(
-              load: API::JobConfigurationLoad.new(load_opts),
-              dry_run: options[:dryrun]
-            )
-          )
-          req.configuration.labels = options[:labels] if options[:labels]
-          req
         end
 
         # rubocop:disable all
@@ -654,10 +585,6 @@ module Google
           return "AVRO" if path.end_with? ".avro"
           return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
           nil
-        end
-
-        def projection_fields array_or_str
-          Array(array_or_str) unless array_or_str.nil?
         end
 
         def mime_type_for file
