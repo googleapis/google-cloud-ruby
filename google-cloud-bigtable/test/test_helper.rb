@@ -1,5 +1,8 @@
 require "minitest/autorun"
 require "minitest/spec"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/rg"
 
 require "google/cloud"
 require "google/cloud/bigtable"

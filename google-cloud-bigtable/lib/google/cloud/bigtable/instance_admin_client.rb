@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
 require "google/cloud/bigtable/admin/v2"
-require "google/bigtable/admin/v2/instance_pb"
 
 module Google
   module Cloud
     module Bigtable
-      # Protobuf aliases
-      Instance = Google::Bigtable::Admin::V2::Instance
-      Cluster = Google::Bigtable::Admin::V2::Cluster
-
       class InstanceAdminClient
         # Bigtable instance admin client for creating, configuring, and deleting
         # instances and clusters
@@ -30,10 +25,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   client.instance("my-instance-id")
 
@@ -52,10 +44,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   response = client.instances
         #   instances = response.instances
@@ -79,10 +68,10 @@ module Google
 
         # Create instance with clusters.
         #
-        # @param instance [Bigtable::Instance | Hash]
+        # @param instance [Google::Bigtable::Admin::V2::Instance | Hash]
         #   The instance to create. Fields are name, type and lables.
         #   Serve nodes cannot be specified for development instances
-        # @param clusters [Array<Bigtable::Cluster>]
+        # @param clusters [Array<Google::Bigtable::Admin::V2::Cluster>]
         #   The clusters to be created within the instance and
         #   Cluster name must be unique.
         #   One cluster must be specified.
@@ -90,12 +79,9 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
-        #   cluster = Bigtable::Cluster.new({
+        #   cluster = Google::Bigtable::Cluster.new({
         #     name: "app-cluster",
         #     location: "us-east1-b"
         #   })
@@ -137,16 +123,13 @@ module Google
         #   The descriptive name for this instance as it appears in UIs.
         #   Can be changed at any time, but should be kept globally unique
         #   to avoid confusion.
-        # @param type [Bigtable::Instance::Type]
+        # @param type [Google::Bigtable::Admin::V2::Instance::Type]
         #   The type of the instance. Defaults to +PRODUCTION+.
         # @param labels [Hash{String => String}]
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   client.update_instance("my-instance", {
         #     display_name: "APP Instance",
@@ -169,10 +152,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   client.delete_instance("my-instance")
 
@@ -193,12 +173,9 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
-        #   cluster = Bigtable::Cluster.new({
+        #   cluster = Google::Bigtable::Cluster.new({
         #     name: "cluster-1",
         #     location: "us-east-1a",
         #     serve_nodes: 3,
@@ -236,10 +213,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   client.cluster("instance-1", "cluster-1")
 
@@ -259,10 +233,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   response = client.clusters
         #   clusters = response.clusters
@@ -299,10 +270,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   serve_nodes = 6
         #   operation = client.update_cluster("instance-1", "cluster-1", serve_nodes)
@@ -331,10 +299,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     client_type: :instance
-        #   )
+        #   client = Google::Cloud::Bigtable.new(client_type: :instance)
         #
         #   client.delete_cluster("instance-id", "cluster-id")
 

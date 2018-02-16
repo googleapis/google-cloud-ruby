@@ -1,19 +1,10 @@
 # frozen_string_literal: true
 
 require "google/cloud/bigtable/admin/v2"
-require "google/bigtable/admin/v2/table_pb"
-require "google/bigtable/admin/v2/bigtable_table_admin_pb"
 
 module Google
   module Cloud
     module Bigtable
-      # Protobuf aliases
-      Table = Google::Bigtable::Admin::V2::Table
-      ColumnFamily = Google::Bigtable::Admin::V2::ColumnFamily
-      GcRule = Google::Bigtable::Admin::V2::GcRule
-      ColumnFamilyModification =
-        Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification
-
       class TableAdminClient
         # Client for table admin operations
 
@@ -29,24 +20,26 @@ module Google
         end
 
         # Create table
-        # @param table [Google::Cloud::Bigtable::Table | Hash]
+        #
+        # @param table [Google::Bigtable::Admin::V2::Table | Hash]
         #   The Table to create. Valid fields are name, timestamp granularity,
         #   column families
         # @param initial_splits [Array<String>]
+        #   List of row keys that will be used to initially split the
+        #   table into several tablets. (tablets are similar to HBase regions)
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     instance_id: "instance-id",
-        #     client_type: :table
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
         #   )
         #
-        #   column_family = Google::Cloud::Bigtable::ColumnFamily.new({
+        #   column_family = Google::Bigtable::Admin::V2::ColumnFamily.new({
         #     gc_rule: { max_num_versions: 1 }
         #   })
         #
-        #   table = Google::Cloud::Bigtable::Table.new({
+        #   table = Google::Bigtable::Admin::V2::Table({
         #     name: "table-1",
         #     column_families: { "cf1" => column_family }
         #   })
@@ -69,21 +62,20 @@ module Google
         # Get table information
         # @param table_id [String]
         #   Existing table id
-        # @param view [Bigtable::Table::View]
+        # @param view [Google::Bigtable::Admin::V2::Table::View]
         #   The view to be applied to the returned table's fields.
         #   Defaults to +SCHEMA_VIEW+ if unspecified.
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     instance_id: "instance-id",
-        #     client_type: :table
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
         #   )
         #
         #   client.table("table-1")
         #
-        #   # Or using view type
+        #   # Using view type
         #   client.table("table-1", view :SCHEMA_VIEW)
 
         def table table_id, view: nil
@@ -94,7 +86,8 @@ module Google
         end
 
         # List all tables information
-        # @param view [Bigtable::Table::View]
+        #
+        # @param view [Google::Bigtable::Admin::V2::Table::View]
         #   The view to be applied to the returned table's fields.
         #   Defaults to +SCHEMA_VIEW+ if unspecified.
         # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Table>]
@@ -105,16 +98,15 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     instance_id: "instance-id",
-        #     client_type: :table
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
         #   )
         #
         #   tables = client.tables
         #
         #   # Using view type
-        #   tables = client.tables(view :SCHEMA_VIEW)
+        #   tables = client.tables(view :FULL)
 
         def tables view: nil
           client.list_tables(
@@ -129,10 +121,9 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     instance_id: "instance-id",
-        #     client_type: :table
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
         #   )
         #
         #   client.delete_table("table-1")
@@ -144,9 +135,10 @@ module Google
         end
 
         # Modify column falmilies
+        #
         # @param table_id [String]
         #   Existing table id
-        # @param modifications [Array<Bigtable::ColumnFamilyModification | Hash>]
+        # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification | Hash>]
         #   Modifications to be atomically applied to the specified table's families
         #   Entries are applied in order, meaning that earlier modifications can be
         #   masked by later ones.
@@ -154,22 +146,24 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     instance_id: "instance-id",
-        #     client_type: :table
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
         #   )
         #
-        #   modifications = [
-        #     Bigtable::ColumnFamilyModification.new({
-        #       id: 'cf1',
-        #       create: Google::Cloud::Bigtable::ColumnFamily.new(gc_rule: { max_num_versions: 1 })
-        #     }),
-        #     Google::Cloud::Bigtable::ColumnFamilyModification.new({
-        #       id: 'cf2',
-        #       drop: true
-        #     })
-        #   ]
+        #   modifications = []
+        #
+        #   modifications << {
+        #     id: "cf1",
+        #     create: { gc_rule: { max_num_versions: 3 } }
+        #   }
+        #
+        #   modifications << { id: "cf2", drop: true }
+        #
+        #   modifications << {
+        #     id: "cf3",
+        #     update: { gc_rule: { max_age: { seconds: 3600 } } }
+        #   }
         #
         #   client.modify_column_families("table-1", modifications)
 
@@ -194,16 +188,15 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   client = Google::Cloud.bigtable(
-        #     project_id: "project-id",
-        #     instance_id: "instance-id",
-        #     client_type: :table
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
         #   )
         #
-        #   client.drop_row_range("table_1", row_key_prefix: "user")
+        #   client.drop_row_range("table-1", row_key_prefix: "user")
         #
         #   # Delete all data
-        #   client.drop_row_range("table_1", delete_all_data_from_table: true)
+        #   client.drop_row_range("table-1", delete_all_data_from_table: true)
 
         def drop_row_range \
             table_id,
@@ -220,6 +213,7 @@ module Google
 
         # Create table admin client or return existing client object
         # @return [Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient]
+
         def client
           @client ||= begin
             if options[:credentials].is_a?(String)

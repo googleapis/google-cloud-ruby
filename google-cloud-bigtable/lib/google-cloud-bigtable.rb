@@ -19,22 +19,27 @@
 # Google::Cloud#bigtable method can be available,
 # but the library and all dependencies won't be loaded until required and used.
 
+gem "google-cloud-core"
+
+require "googleauth"
+require "grpc"
+
 require "google/cloud"
-require "google/cloud/errors"
+require "google/cloud/config"
 
 module Google
   module Cloud
     # Create bigtable client instance for data, table admin and instance admin
     # operartions.
     #
-    # @param instance_id [String]
-    #   Bigtable instance identifier
     # @param client_type [Symbol]
     #   Client type are
     #   `:data` - data operartions(read rows, update cells etc)
     #   `:table` - table admin operartions(create, delete, update, list etc)
     #   `:instance` - instance admin operartions(create, delete, update, list etc)
     #   Default client type is `:data`.
+    # @param instance_id [String]
+    #   Bigtable instance identifier
     # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
     #   Provides the means for authenticating requests made by the client. This parameter can
     #   be many types.
@@ -59,48 +64,38 @@ module Google
     #   or the specified config is missing data points.
     # @param timeout [Integer]
     #   The default timeout, in seconds, for calls made through this client.
-    # @return [InstanceAdminClient | TableAdminClient | DataClient]
+    # @return [Google::Cloud::Bigtable::InstanceAdminClient | Google::Cloud::Bigtable::TableAdminClient | Google::Cloud::Bigtable::DataClient]
     #
     # @example Create instance admin client
     #   require "google/cloud"
     #
-    #   gcloud  = Google::Cloud.new("project-id")
-    #
-    #   # With keyfile
-    #   gcloud  = Google::Cloud.new("project-id", "keyfile.json")
-    #
+    #   gcloud  = Google::Cloud.new
     #   instance_admin_client = gcloud.bigtable(client_type: :instance)
     #
     # @example Create table admin client
     #   require "google/cloud"
     #
-    #   gcloud  = Google::Cloud.new("project-id")
-    #
-    #   # With keyfile
-    #   gcloud  = Google::Cloud.new("project-id", "keyfile.json")
+    #   gcloud  = Google::Cloud.new
     #
     #   table_admin_client = gcloud.bigtable(
-    #     instance_id: "instance-id",
-    #     client_type: :table
+    #     client_type: :table,
+    #     instance_id: "instance-id"
     #   )
     #
     # @example Create table data operations client
     #   require "google/cloud"
     #
-    #   gcloud  = Google::Cloud.new("project-id")
-    #
-    #   # With keyfile
-    #   gcloud  = Google::Cloud.new("project-id", "keyfile.json")
+    #   gcloud  = Google::Cloud.new
     #
     #   data_client = gcloud.bigtable(
-    #     instance_id: "instance-id",
-    #     client_type: :data
+    #     client_type: :data,
+    #     instance_id: "instance-id"
     #   )
 
     def bigtable \
+        client_type: :data,
         instance_id: nil,
         credentials: nil,
-        client_type: :data,
         scopes: nil,
         client_config: nil,
         timeout: nil
@@ -120,14 +115,14 @@ module Google
     #
     # @param project_id [String]
     #   Project identifier for bigtable
-    # @param instance_id [String]
-    #   Bigtable instance identifier
     # @param client_type [Symbol]
     #   Client type are
     #   `:data` - data operartions(read rows, update cells etc)
     #   `:table` - table admin operartions(create, delete, update, list etc)
     #   `:instance` - instance admin operartions(create, delete, update, list etc)
     #   Default client type is `:data`.
+    # @param instance_id [String]
+    #   Bigtable instance identifier
     # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
     #   Provides the means for authenticating requests made by the client. This parameter can
     #   be many types.
@@ -152,71 +147,74 @@ module Google
     #   or the specified config is missing data points.
     # @param timeout [Integer]
     #   The default timeout, in seconds, for calls made through this client.
-    # @return [InstanceAdminClient | TableAdminClient | DataClient]
-    # @example Create instance admin client
-    #   require "google/cloud/bigtable"
+    # @return [Google::Cloud::Bigtable::InstanceAdminClient | Google::Cloud::Bigtable::TableAdminClient | Google::Cloud::Bigtable::DataClient]
     #
-    #   client = Google::Cloud.bigtable(
-    #     project_id: "project-id",
-    #     client_type: :instance
-    #   )
+    # @example Create instance admin client
+    #   require "google/cloud"
+    #
+    #   instance_admin_client = Google::Cloud.bigtable(client_type: :instance)
     #
     # @example Create table admin client
-    #   require "google/cloud/bigtable"
+    #   require "google/cloud"
     #
-    #   client = Google::Cloud.bigtable(
-    #     project_id: "project-id",
-    #     instance_id: "instance_id"
-    #     client_type: :table
+    #   table_admin_client = Google::Cloud.bigtable(
+    #     client_type: :table,
+    #     instance_id: "instance-id"
     #   )
     #
     # @example Create table data operations client
-    #   require "google/cloud/bigtable"
+    #   require "google/cloud"
     #
-    #   client = Google::Cloud.bigtable(
-    #     project_id: "project-id",
-    #     instance_id: "instance_id",
-    #     client_type: :data
-    #   )
+    #   data_client = Google::Cloud.bigtable(instance_id: "instance-id")
 
     def self.bigtable \
         project_id: nil,
-        instance_id: nil,
         client_type: :data,
+        instance_id: nil,
         credentials: nil,
         scopes: nil,
         client_config: nil,
         timeout: nil
-      gem_spec = Gem.loaded_specs["google-cloud-bigtable"]
-      options = {
+      require "google/cloud/bigtable"
+      Google::Cloud::Bigtable.new(
+        project_id: project_id,
+        client_type: client_type,
+        instance_id: instance_id,
         credentials: credentials,
         scopes: scopes,
         client_config: client_config,
-        timeout: timeout,
-        lib_name: gem_spec.name,
-        lib_version: gem_spec.version.to_s
-      }
-
-      raise InvalidArgumentError, "project_id is required" unless project_id
-
-      if client_type == :instance
-        require "google/cloud/bigtable/instance_admin_client"
-        return Bigtable::InstanceAdminClient.new(project_id, options)
-      end
-
-      # Instance id is required for data and table clients
-      raise InvalidArgumentError, "instance_id is required" unless instance_id
-
-      if client_type == :table
-        require "google/cloud/bigtable/table_admin_client"
-        Bigtable::TableAdminClient.new(project_id, instance_id, options)
-      elsif client_type == :data
-        raise UnimplementedError, "Data client api wrapper not implemented yet.\
-Use underline apis from 'google/cloud/bigtable/v2/bigtable_client.rb'"
-      else
-        raise InvalidArgumentError, "invalid client type. Valid types are \
-:instance, :table, :data"
-      end
+        timeout: timeout
+      )
     end
   end
+end
+
+# Set the default BIGTABLE configuration
+Google::Cloud.configure.add_config! :bigtable do |config|
+  default_project = Google::Cloud::Config.deferred do
+    ENV["BIGTABLE_PROJECT"]
+  end
+  default_creds = Google::Cloud::Config.deferred do
+    Google::Cloud::Config.credentials_from_env(
+      "BIGTABLE_CREDENTIALS", "BIGTABLE_CREDENTIALS_JSON",
+      "BIGTABLE_KEYFILE", "BIGTABLE_KEYFILE_JSON"
+    )
+  end
+
+  config.add_field! :project_id, default_project, match: String, allow_nil: true
+  config.add_alias! :project, :project_id
+  config.add_field! :credentials, default_creds,
+                    match: [
+                      String,
+                      Hash,
+                      Google::Auth::Credentials,
+                      GRPC::Core::Channel,
+                      GRPC::Core::ChannelCredentials,
+                      Proc
+                    ],
+                    allow_nil: true
+  config.add_alias! :keyfile, :credentials
+  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :timeout, nil, match: Integer
+  config.add_field! :client_config, nil, match: Hash
 end

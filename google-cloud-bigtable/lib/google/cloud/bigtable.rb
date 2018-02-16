@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/gax"
-require "pathname"
+require "google-cloud-bigtable"
+require "google/cloud/env"
+require "google/cloud/config"
+require "google/cloud/errors"
 
 module Google
   module Cloud
@@ -48,58 +50,141 @@ module Google
     module Bigtable
       # rubocop:enable LineLength
 
-      FILE_DIR = File.realdirpath(Pathname.new(__FILE__).join("..").join("bigtable"))
-
-      AVAILABLE_VERSIONS = Dir["#{FILE_DIR}/*"]
-        .select { |file| File.directory?(file) }
-        .select { |dir| Google::Gax::VERSION_MATCHER.match(File.basename(dir)) }
-        .select { |dir| File.exist?(dir + ".rb") }
-        .map { |dir| File.basename(dir) }
-
-      ##
-      # Service for reading from and writing to existing Bigtable tables.
+      # Service for managing bigtable instance, tables and reading from and writing to existing Bigtable tables.
       #
-      # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v2
-      #   is used.
-      # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-      #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-      #     Provides the means for authenticating requests made by the client. This parameter can
-      #     be many types.
-      #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-      #     authenticating requests made by this client.
-      #     A `String` will be treated as the path to the keyfile to be used for the construction of
-      #     credentials for this client.
-      #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-      #     credentials for this client.
-      #     A `GRPC::Core::Channel` will be used to make calls through.
-      #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-      #     should already be composed with a `GRPC::Core::CallCredentials` object.
-      #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-      #     metadata for requests, generally, to give OAuth credentials.
-      #   @param scopes [Array<String>]
-      #     The OAuth scopes for this service. This parameter is ignored if
-      #     an updater_proc is supplied.
-      #   @param client_config [Hash]
-      #     A Hash for call options for each method. See
-      #     Google::Gax#construct_settings for the structure of
-      #     this data. Falls back to the default config if not specified
-      #     or the specified config is missing data points.
-      #   @param timeout [Numeric]
-      #     The default timeout, in seconds, for calls made through this client.
-      def self.new(*args, version: :v2, **kwargs)
-        unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-          raise "The version: #{version} is not available. The available versions " \
-            "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
+      # @param project_id [String]
+      #   Project identifier for bigtable
+      # @param client_type [Symbol]
+      #   Client type are
+      #   `:data` - data operartions(read rows, update cells etc)
+      #   `:table` - table admin operartions(create, delete, update, list etc)
+      #   `:instance` - instance admin operartions(create, delete, update, list etc)
+      #   Default client type is `:data`.
+      # @param instance_id [String]
+      #   Bigtable instance identifier
+      # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+      #   Provides the means for authenticating requests made by the client. This parameter can
+      #   be many types.
+      #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+      #   authenticating requests made by this client.
+      #   A `String` will be treated as the path to the keyfile to be used for the construction of
+      #   credentials for this client.
+      #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+      #   credentials for this client.
+      #   A `GRPC::Core::Channel` will be used to make calls through.
+      #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+      #   should already be composed with a `GRPC::Core::CallCredentials` object.
+      #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+      #   metadata for requests, generally, to give OAuth credentials.
+      # @param scopes [Array<String>]
+      #   The OAuth scopes for this service. This parameter is ignored if an
+      #   updater_proc is supplied.
+      # @param client_config [Hash]
+      #   A Hash for call options for each method.
+      #   See Google::Gax#construct_settings for the structure of
+      #   this data. Falls back to the default config if not specified
+      #   or the specified config is missing data points.
+      # @param timeout [Integer]
+      #   The default timeout, in seconds, for calls made through this client.
+      # @return [Google::Cloud::InstanceAdminClient | Google::Cloud::TableAdminClient | Google::Cloud::DataClient]
+      #
+      # @example Create instance admin client
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(client_type: :instance)
+      #
+      # @example Create table admin client
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(
+      #     client_type: :table
+      #     instance_id: "instance-id"
+      #   )
+      #
+      # @example Create table data operations client
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+
+      def self.new \
+          project_id: nil,
+          client_type: :data,
+          instance_id: nil,
+          credentials: nil,
+          scopes: nil,
+          client_config: nil,
+          timeout: nil
+        gem_spec = Gem.loaded_specs["google-cloud-bigtable"]
+        options = {
+          credentials: credentials,
+          scopes: scopes,
+          client_config: client_config,
+          timeout: timeout,
+          lib_name: gem_spec.name,
+          lib_version: gem_spec.version.to_s
+        }
+
+        raise InvalidArgumentError, "project_id is required" unless project_id
+
+        if client_type == :instance
+          require "google/cloud/bigtable/instance_admin_client"
+          return Bigtable::InstanceAdminClient.new(project_id, options)
         end
 
-        require "#{FILE_DIR}/#{version.to_s.downcase}"
-        version_module = Google::Cloud::Bigtable
-          .constants
-          .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-          .first
-        Google::Cloud::Bigtable.const_get(version_module).new(*args, **kwargs)
+        # Instance id is required for data and table clients
+        raise InvalidArgumentError, "instance_id is required" unless instance_id
+
+        if client_type == :table
+          require "google/cloud/bigtable/table_admin_client"
+          Bigtable::TableAdminClient.new(project_id, instance_id, options)
+        elsif client_type == :data
+          require "google/cloud/bigtable/v2/bigtable_client"
+          Bigtable::V2::BigtableClient.new(options)
+        else
+          raise InvalidArgumentError, "invalid client type. Valid types are \
+  :instance, :table, :data"
+        end
       end
+
+      # Configure the Google Cloud Bigtable library.
+      #
+      # The following Bigtable configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Bigtable project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials,
+      #    GRPC::Core::Channel, GRPC::Core::ChannelCredentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Bigtable::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Bigtable library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.bigtable if block_given?
+
+        Google::Cloud.configure.bigtable
+      end
+
+     # @private Default project.
+     def self.default_project_id
+       Google::Cloud.configure.bigtable.project_id ||
+         Google::Cloud.configure.project_id ||
+         Google::Cloud.env.project_id
+     end
+
+     # @private Default credentials.
+     def self.default_credentials scope: nil
+       Google::Cloud.configure.bigtable.credentials ||
+         Google::Cloud.configure.credentials ||
+         Bigtable::Credentials.default(scope: scope)
+     end
     end
   end
 end
