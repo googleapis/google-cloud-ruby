@@ -55,6 +55,7 @@ describe Google::Cloud::Spanner::Instance, :iam, :mock_spanner do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Spanner::Policy
+    policy.etag.must_equal "\b\x01"
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be_kind_of Array
@@ -72,9 +73,9 @@ describe Google::Cloud::Spanner::Instance, :iam, :mock_spanner do
     updated_policy_hash["bindings"].first["members"].shift
     updated_policy_hash["bindings"].first["members"] << "user:newowner@example.com"
 
-    policy = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
-    set_res = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
-    mock.expect :set_iam_policy, set_res, [instance.path, policy]
+    set_req = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
+    set_res = Google::Iam::V1::Policy.decode_json updated_policy_hash.merge(etag: "CBD=").to_json
+    mock.expect :set_iam_policy, set_res, [instance.path, set_req]
     instance.service.mocked_instances = mock
 
     policy = instance.policy
@@ -82,11 +83,12 @@ describe Google::Cloud::Spanner::Instance, :iam, :mock_spanner do
     policy.add "roles/owner", "user:newowner@example.com"
     policy.remove "roles/owner", "user:owner@example.com"
 
-    policy = instance.policy = policy
+    policy = instance.update_policy policy
 
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Spanner::Policy
+    policy.etag.must_equal "\b\x10"
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be :nil?
@@ -106,9 +108,9 @@ describe Google::Cloud::Spanner::Instance, :iam, :mock_spanner do
     updated_policy_hash["bindings"].first["members"].shift
     updated_policy_hash["bindings"].first["members"] << "user:newowner@example.com"
 
-    policy = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
-    set_res = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
-    mock.expect :set_iam_policy, set_res, [instance.path, policy]
+    set_req = Google::Iam::V1::Policy.decode_json updated_policy_hash.to_json
+    set_res = Google::Iam::V1::Policy.decode_json updated_policy_hash.merge(etag: "CBD=").to_json
+    mock.expect :set_iam_policy, set_res, [instance.path, set_req]
     instance.service.mocked_instances = mock
 
     policy = instance.policy do |p|
@@ -119,6 +121,7 @@ describe Google::Cloud::Spanner::Instance, :iam, :mock_spanner do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Spanner::Policy
+    policy.etag.must_equal "\b\x10"
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be :nil?

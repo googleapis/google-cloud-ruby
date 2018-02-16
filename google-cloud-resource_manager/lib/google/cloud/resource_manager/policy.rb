@@ -179,7 +179,7 @@ module Google
         # @private New Policy from a
         # Google::Apis::CloudresourcemanagerV1::Policy object.
         def self.from_gapi gapi
-          roles = gapi.bindings.each_with_object({}) do |binding, memo|
+          roles = Array(gapi.bindings).each_with_object({}) do |binding, memo|
             memo[binding.role] = binding.members.to_a
           end
           new gapi.etag, roles

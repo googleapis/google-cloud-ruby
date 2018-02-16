@@ -150,6 +150,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::Instance#update_policy" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
+    end
+  end
+
   doctest.before "Google::Cloud::Spanner::Instance#test_permissions" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
@@ -462,6 +470,14 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
       mock_databases.expect :update_database_ddl, nil, ["projects/my-project/instances/my-instance/databases/my-database", Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Database#update_policy" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/databases/my-database", Google::Iam::V1::Policy]
     end
   end
 

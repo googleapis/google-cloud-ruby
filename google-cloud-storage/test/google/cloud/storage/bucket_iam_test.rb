@@ -35,7 +35,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
       ]
     )
   }
-  let(:new_policy_gapi) {
+  let(:updated_policy_gapi) {
     Google::Apis::StorageV1::Policy.new(
       etag: "CAE=",
       bindings: [
@@ -49,7 +49,22 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
       ]
     )
   }
+  let(:new_policy_gapi) {
+    Google::Apis::StorageV1::Policy.new(
+      etag: "CAF=",
+      bindings: [
+        Google::Apis::StorageV1::Policy::Binding.new(
+          role: "roles/storage.objectViewer",
+          members: [
+            "user:viewer@example.com",
+            "serviceAccount:1234567890@developer.gserviceaccount.com"
+          ]
+        )
+      ]
+    )
+  }
   let(:old_policy) { Google::Cloud::Storage::Policy.from_gapi old_policy_gapi }
+  let(:updated_policy) { Google::Cloud::Storage::Policy.from_gapi updated_policy_gapi }
   let(:new_policy) { Google::Cloud::Storage::Policy.from_gapi new_policy_gapi }
 
   it "gets the policy" do
@@ -61,6 +76,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
+    policy.etag.must_equal "CAE="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
@@ -77,6 +93,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
+    policy.etag.must_equal "CAE="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
@@ -86,13 +103,14 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
   it "sets the policy" do
     mock = Minitest::Mock.new
-    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, new_policy_gapi, user_project: nil]
+    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: nil]
 
     storage.service.mocked_service = mock
-    policy = bucket.policy = new_policy
+    policy = bucket.update_policy updated_policy
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
+    policy.etag.must_equal "CAF="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
@@ -103,13 +121,14 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
 
   it "sets the policy with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, new_policy_gapi, user_project: "test"]
+    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: "test"]
 
     storage.service.mocked_service = mock
-    policy = bucket_user_project.policy = new_policy
+    policy = bucket_user_project.update_policy updated_policy
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
+    policy.etag.must_equal "CAF="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
@@ -122,7 +141,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, user_project: nil]
 
-    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, new_policy_gapi, user_project: nil]
+    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: nil]
 
     storage.service.mocked_service = mock
     policy = bucket.policy do |p|
@@ -131,6 +150,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
+    policy.etag.must_equal "CAF="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/storage.objectViewer"].must_be_kind_of Array
@@ -143,7 +163,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, user_project: "test"]
 
-    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, new_policy_gapi, user_project: "test"]
+    mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: "test"]
 
     storage.service.mocked_service = mock
     policy = bucket_user_project.policy do |p|
@@ -152,6 +172,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :mock_storage do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::Storage::Policy
+    policy.etag.must_equal "CAF="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/storage.objectViewer"].must_be_kind_of Array

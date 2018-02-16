@@ -32,7 +32,7 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
       ]
     )
   }
-  let(:new_policy_gapi) {
+  let(:updated_policy_gapi) {
     Google::Apis::CloudresourcemanagerV1::Policy.new(
       etag: "CAE=",
       bindings: [
@@ -46,7 +46,22 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
       ]
     )
   }
+  let(:new_policy_gapi) {
+    Google::Apis::CloudresourcemanagerV1::Policy.new(
+      etag: "CAF=",
+      bindings: [
+        Google::Apis::CloudresourcemanagerV1::Binding.new(
+          role: "roles/viewer",
+          members: [
+            "user:viewer@example.com",
+            "serviceAccount:1234567890@developer.gserviceaccount.com"
+          ]
+        )
+      ]
+    )
+  }
   let(:old_policy) { Google::Cloud::ResourceManager::Policy.from_gapi old_policy_gapi }
+  let(:updated_policy) { Google::Cloud::ResourceManager::Policy.from_gapi updated_policy_gapi }
   let(:new_policy) { Google::Cloud::ResourceManager::Policy.from_gapi new_policy_gapi }
 
   it "gets the policy" do
@@ -58,6 +73,7 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
+    policy.etag.must_equal "CAE="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be_kind_of Array
@@ -67,14 +83,15 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
 
   it "sets the policy" do
     mock = Minitest::Mock.new
-    update_policy_request = Google::Apis::CloudresourcemanagerV1::SetIamPolicyRequest.new policy: new_policy_gapi
+    update_policy_request = Google::Apis::CloudresourcemanagerV1::SetIamPolicyRequest.new policy: updated_policy_gapi
     mock.expect :set_project_iam_policy, new_policy_gapi, ["example-project-123", update_policy_request]
 
     resource_manager.service.mocked_service = mock
-    policy = project.policy = new_policy
+    policy = project.update_policy updated_policy
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
+    policy.etag.must_equal "CAF="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be_kind_of Array
@@ -87,7 +104,7 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
     mock = Minitest::Mock.new
     mock.expect :get_project_iam_policy, old_policy_gapi, ["example-project-123"]
 
-    update_policy_request = Google::Apis::CloudresourcemanagerV1::SetIamPolicyRequest.new policy: new_policy_gapi
+    update_policy_request = Google::Apis::CloudresourcemanagerV1::SetIamPolicyRequest.new policy: updated_policy_gapi
     mock.expect :set_project_iam_policy, new_policy_gapi, ["example-project-123", update_policy_request]
 
     resource_manager.service.mocked_service = mock
@@ -97,6 +114,7 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
     mock.verify
 
     policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
+    policy.etag.must_equal "CAF="
     policy.roles.must_be_kind_of Hash
     policy.roles.size.must_equal 1
     policy.roles["roles/viewer"].must_be_kind_of Array

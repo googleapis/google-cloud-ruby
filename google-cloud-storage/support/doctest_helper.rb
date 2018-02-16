@@ -324,13 +324,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Bucket#policy=" do
+  doctest.before "Google::Cloud::Storage::Bucket#update_policy" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
       mock.expect :get_bucket_iam_policy, policy_gapi, ["my-todo-app", Hash]
       mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
     end
   end
+  doctest.skip "Google::Cloud::Storage::Bucket#policy="
 
   doctest.before "Google::Cloud::Storage::Bucket#requester_pays" do
     mock_storage do |mock|

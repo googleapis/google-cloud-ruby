@@ -1,4 +1,4 @@
-# Copyright 2016 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
 
 require "helper"
 
-describe Google::Cloud::ResourceManager::Policy do
+describe Google::Cloud::Storage::Policy do
   let(:etag)       { "etag-1" }
   let(:roles) { { "roles/viewer" => ["allUsers"] } }
-  let(:policy)    { Google::Cloud::ResourceManager::Policy.new etag, roles }
+  let(:policy)    { Google::Cloud::Storage::Policy.new etag, roles }
 
   it "knows its etag" do
     policy.etag.must_equal etag
@@ -36,31 +36,31 @@ describe Google::Cloud::ResourceManager::Policy do
   end
 
   describe :from_gapi do
-    it "creates from a typical Google::Apis::CloudresourcemanagerV1::Policy object" do
-      gapi = Google::Apis::CloudresourcemanagerV1::Policy.new(
+    it "creates from a typical Google::Apis::StorageV1::Policy object" do
+      gapi = Google::Apis::StorageV1::Policy.new(
         etag: etag,
         bindings: roles.map do |key, val|
-          Google::Apis::CloudresourcemanagerV1::Binding.new(
+          Google::Apis::StorageV1::Policy::Binding.new(
             role: key,
             members: val
           )
         end
       )
 
-      policy = Google::Cloud::ResourceManager::Policy.from_gapi gapi
+      policy = Google::Cloud::Storage::Policy.from_gapi gapi
 
-      policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::Policy
       policy.etag.must_equal etag
       policy.roles.keys.sort.must_equal   roles.keys.sort
       policy.roles.values.sort.must_equal roles.values.sort
     end
 
-    it "creates from an empty Google::Apis::CloudresourcemanagerV1::Policy object" do
-      gapi = Google::Apis::CloudresourcemanagerV1::Policy.new
+    it "creates from an empty Google::Apis::StorageV1::Policy object" do
+      gapi = Google::Apis::StorageV1::Policy.new
 
-      policy = Google::Cloud::ResourceManager::Policy.from_gapi gapi
+      policy = Google::Cloud::Storage::Policy.from_gapi gapi
 
-      policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::Policy
       policy.etag.must_be :nil?
       policy.roles.must_be :empty?
     end
