@@ -239,7 +239,9 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "imports data from a local file and creates a new table without a schema with load" do
-    result = dataset.load table_with_schema.table_id, local_file, create: :never
+    result = dataset.load table_with_schema.table_id, local_file do |job|
+      job.create = :never
+    end
     result.must_equal true
   end
 
