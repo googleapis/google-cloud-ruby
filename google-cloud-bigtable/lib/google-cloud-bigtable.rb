@@ -213,8 +213,7 @@ Google::Cloud.configure.add_config! :bigtable do |config|
                       Proc
                     ],
                     allow_nil: true
-  config.add_alias! :keyfile, :credentials
-  config.add_field! :scope, nil, match: [String, Array]
+  config.add_field! :scopes, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
 end

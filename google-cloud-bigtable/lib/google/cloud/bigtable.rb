@@ -114,17 +114,19 @@ module Google
           scopes: nil,
           client_config: nil,
           timeout: nil
+        project_id = (project_id || project || default_project_id).to_s
+
+        raise InvalidArgumentError, "project_id is required" unless project_id
+
         gem_spec = Gem.loaded_specs["google-cloud-bigtable"]
         options = {
-          credentials: credentials,
-          scopes: scopes,
-          client_config: client_config,
-          timeout: timeout,
+          credentials: (credentials || default_credentials(scopes: scopes)),
+          scopes: (scopes || configure.scopes),
+          client_config: (client_config || configure.client_config),
+          timeout: (timeout || configure.timeout),
           lib_name: gem_spec.name,
           lib_version: gem_spec.version.to_s
         }
-
-        raise InvalidArgumentError, "project_id is required" unless project_id
 
         if client_type == :instance
           require "google/cloud/bigtable/instance_admin_client"
@@ -172,6 +174,32 @@ module Google
         Google::Cloud.configure.bigtable
       end
 
+      # Configure the Google Cloud Bigtable library.
+      #
+      # The following Bigtable configuration parameters are supported:
+      #
+      # * `project_id` - (String) Identifier for a Bigtable project. (The
+      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `credentials` - (String, Hash, Google::Auth::Credentials,
+      #    GRPC::Core::Channel, GRPC::Core::ChannelCredentials) The path to
+      #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+      #   Google::Auth::Credentials object. (See {Bigtable::Credentials}) (The
+      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
+      #   the set of resources and operations that the connection can access.
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `client_config` - (Hash) A hash of values to override the default
+      #   behavior of the API client.
+      #
+      # @return [Google::Cloud::Config] The configuration object the
+      #   Google::Cloud::Bigtable library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.bigtable if block_given?
+
+        Google::Cloud.configure.bigtable
+      end
+
      # @private Default project.
      def self.default_project_id
        Google::Cloud.configure.bigtable.project_id ||
@@ -180,10 +208,10 @@ module Google
      end
 
      # @private Default credentials.
-     def self.default_credentials scope: nil
+     def self.default_credentials scopes: nil
        Google::Cloud.configure.bigtable.credentials ||
          Google::Cloud.configure.credentials ||
-         Bigtable::Credentials.default(scope: scope)
+         Bigtable::Credentials.default(scopes: scopes)
      end
     end
   end
