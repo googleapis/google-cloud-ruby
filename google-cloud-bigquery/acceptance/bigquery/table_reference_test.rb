@@ -38,6 +38,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     dataset.table table_id, skip_lookup: true
   end
   let(:partitioned_table_id) { "weekly_kittens_reference" }
+  let(:partitioned_field_table_id) { "kittens_field_reference" }
   let(:seven_days) { 7 * 24 * 60 * 60 }
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
@@ -61,6 +62,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
     table.time_partitioning?.must_be_nil
     table.time_partitioning_type.must_be_nil
+    table.time_partitioning_field.must_be_nil
     table.time_partitioning_expiration.must_be_nil
     table.id.must_be_nil
     table.name.must_be_nil
@@ -117,6 +119,30 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     partitioned_table.reload!
     partitioned_table.table_id.must_equal partitioned_table_id
     partitioned_table.time_partitioning_type.must_equal "DAY"
+    partitioned_table.time_partitioning_field.must_be_nil
+    partitioned_table.time_partitioning_expiration.must_equal 1
+  end
+
+  it "gets and sets time partitioning by field" do
+    partitioned_table = dataset.table partitioned_field_table_id
+    if partitioned_table.nil?
+      partitioned_table = dataset.create_table partitioned_field_table_id do |updater|
+        updater.time_partitioning_type = "DAY"
+        updater.time_partitioning_field = "dob"
+        updater.time_partitioning_expiration = seven_days
+        updater.schema do |schema|
+          schema.timestamp "dob",   description: "dob description",   mode: :required
+        end
+      end
+    end
+
+    partitioned_table = dataset.table partitioned_field_table_id, skip_lookup: true
+    partitioned_table.time_partitioning_expiration = 1
+
+    partitioned_table.reload!
+    partitioned_table.table_id.must_equal partitioned_field_table_id
+    partitioned_table.time_partitioning_type.must_equal "DAY"
+    partitioned_table.time_partitioning_field.must_equal "dob"
     partitioned_table.time_partitioning_expiration.must_equal 1
   end
 

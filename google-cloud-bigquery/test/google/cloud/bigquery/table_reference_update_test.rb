@@ -86,6 +86,28 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     mock.verify
   end
 
+  it "updates time partitioning field" do
+    field = "dob"
+
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["timePartitioning"] = {
+        "field"  => field,
+    }
+    partitioning = Google::Apis::BigqueryV2::TimePartitioning.new field: field
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
+    mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
+    mock.expect :patch_table, return_table(table_hash),
+                [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
+    table.service.mocked_service = mock
+
+    table.time_partitioning_field = field
+
+    table.time_partitioning_field.must_equal field
+    mock.verify
+  end
+
   it "updates time partitioning expiration" do
     expiration = 86_400
     expiration_ms = expiration * 1_000
