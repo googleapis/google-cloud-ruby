@@ -218,6 +218,64 @@ module Google
         end
 
         ###
+        # The field on which the table is partitioned, if any. See
+        # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [String, nil] The partition field, if a field was configured.
+        #   `nil` if not partitioned, not set (partitioned by pseudo column
+        #   '_PARTITIONTIME') or the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_field
+          return nil if reference?
+          ensure_full_data!
+          @gapi.time_partitioning.field if time_partitioning?
+        end
+
+        ##
+        # Sets the field on which to partition the table. See [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        # The table must also be partitioned.
+        #
+        # See {Table#time_partitioning_type=}.
+        #
+        # You can only set the partitioning field while creating a table as in
+        # the example below. BigQuery does not allow you to change partitioning
+        # on an existing table.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @param [String] field The partition field. The field must be a
+        #   top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or
+        #   REQUIRED.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table" do |table|
+        #     table.time_partitioning_type  = "DAY"
+        #     table.time_partitioning_field = "dob"
+        #     table.schema do |schema|
+        #       schema.timestamp "dob", mode: :required
+        #     end
+        #   end
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_field= field
+          reload! unless resource_full?
+          @gapi.time_partitioning ||= \
+            Google::Apis::BigqueryV2::TimePartitioning.new
+          @gapi.time_partitioning.field = field
+          patch_gapi! :time_partitioning
+        end
+
+        ###
         # The expiration for the table partitions, if any, in seconds. See
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #

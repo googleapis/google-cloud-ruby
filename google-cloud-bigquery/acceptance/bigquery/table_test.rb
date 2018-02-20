@@ -43,7 +43,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     if t.nil?
       t = dataset.create_table time_partitioned_table_id do |updater|
         updater.time_partitioning_type = "DAY"
+        updater.time_partitioning_field = "dob"
         updater.time_partitioning_expiration = seven_days
+        updater.schema do |schema|
+          schema.timestamp "dob",   description: "dob description",   mode: :required
+        end
       end
     end
     t
@@ -85,6 +89,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.table?.must_equal true
     fresh.view?.must_equal false
     fresh.time_partitioning_type.must_be_nil
+    fresh.time_partitioning_field.must_be_nil
     fresh.time_partitioning_expiration.must_be_nil
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
 
@@ -170,6 +175,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     partitioned_table.reload!
     partitioned_table.table_id.must_equal "weekly_kittens"
     partitioned_table.time_partitioning_type.must_equal "DAY"
+    partitioned_table.time_partitioning_field.must_be_nil
     partitioned_table.time_partitioning_expiration.must_equal 1
   end
 
@@ -196,6 +202,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "allows tables to be created with time_partioning enabled" do
     table = time_partitioned_table
     table.time_partitioning_type.must_equal "DAY"
+    table.time_partitioning_field.must_equal "dob"
     table.time_partitioning_expiration.must_equal seven_days
   end
 
