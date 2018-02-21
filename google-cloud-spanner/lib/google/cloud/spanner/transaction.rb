@@ -504,6 +504,29 @@ module Google
         end
 
         ##
+        # Creates a column value object representing setting a field's value to
+        # the timestamp of the commit. (See {Client#commit_timestamp})
+        #
+        # @return [ColumnValue] The commit timestamp column value object.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     tx.insert "users", [
+        #       { id: 5, name: "Murphy", updated_at: tx.commit_timestamp }
+        #     ]
+        #   end
+        #
+        def commit_timestamp
+          ColumnValue.commit_timestamp
+        end
+
+        ##
         # @private
         # Keeps the transaction current by creating a new transaction.
         def keepalive!
