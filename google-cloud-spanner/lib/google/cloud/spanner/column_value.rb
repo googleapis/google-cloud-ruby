@@ -47,6 +47,7 @@ module Google
         end
 
         ##
+        # @private
         # The type of change to make to a row's column value.
         #
         # @return [Symbol] The type of the column value.
