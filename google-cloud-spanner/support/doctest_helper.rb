@@ -608,9 +608,9 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # FieldValue
+  # ColumnValue
 
-  doctest.before "Google::Cloud::Spanner::FieldValue" do
+  doctest.before "Google::Cloud::Spanner::ColumnValue" do
     mock_spanner do |mock, mock_instances, mock_databases|
       20.times do
         mock.expect :create_session, OpenStruct.new(name: "session-name"), ["projects/my-project/instances/my-instance/databases/my-database", Hash]

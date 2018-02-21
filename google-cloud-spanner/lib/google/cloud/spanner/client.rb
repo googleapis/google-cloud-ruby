@@ -21,7 +21,7 @@ require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
 require "google/cloud/spanner/range"
-require "google/cloud/spanner/field_value"
+require "google/cloud/spanner/column_value"
 require "google/cloud/spanner/convert"
 
 module Google
@@ -938,10 +938,10 @@ module Google
         end
 
         ##
-        # Creates a field value object representing setting a field's value to
+        # Creates a column value object representing setting a field's value to
         # the timestamp of the commit. (See {Client#commit_timestamp})
         #
-        # @return [FieldValue] The commit timestamp field value object.
+        # @return [ColumnValue] The commit timestamp column value object.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -950,7 +950,7 @@ module Google
         #
         #   db = spanner.client "my-instance", "my-database"
         #
-        #   # create field value object
+        #   # create column value object
         #   commit_timestamp = db.commit_timestamp
         #
         #   db.commit do |c|
@@ -960,7 +960,7 @@ module Google
         #   end
         #
         def commit_timestamp
-          FieldValue.commit_timestamp
+          ColumnValue.commit_timestamp
         end
 
         ##

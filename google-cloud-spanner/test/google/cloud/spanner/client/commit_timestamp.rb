@@ -28,10 +28,10 @@ describe Google::Cloud::Spanner::Client, :commit_timestamp, :mock_spanner do
     shutdown_client! client
   end
 
-  it "creates a commit_timestamp field value" do
-    field_value = client.commit_timestamp
+  it "creates a commit_timestamp column value" do
+    column_value = client.commit_timestamp
 
-    field_value.must_be_kind_of Google::Cloud::Spanner::FieldValue
-    field_value.type.must_equal :commit_timestamp
+    column_value.must_be_kind_of Google::Cloud::Spanner::ColumnValue
+    column_value.type.must_equal :commit_timestamp
   end
 end

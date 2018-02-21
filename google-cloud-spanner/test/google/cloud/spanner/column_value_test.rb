@@ -14,12 +14,12 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::FieldValue do
+describe Google::Cloud::Spanner::ColumnValue do
   it "creates an commit_timestamp" do
-    field_value = Google::Cloud::Spanner::FieldValue.commit_timestamp
+    column_value = Google::Cloud::Spanner::ColumnValue.commit_timestamp
 
-    field_value.must_be_kind_of Google::Cloud::Spanner::FieldValue
-    field_value.type.must_equal :commit_timestamp
-    field_value.to_field_value.must_equal "spanner.commit_timestamp()"
+    column_value.must_be_kind_of Google::Cloud::Spanner::ColumnValue
+    column_value.type.must_equal :commit_timestamp
+    column_value.to_column_value.must_equal "spanner.commit_timestamp()"
   end
 end
