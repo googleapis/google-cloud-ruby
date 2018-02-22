@@ -179,6 +179,28 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     partitioned_table.time_partitioning_expiration.must_equal 1
   end
 
+  it "gets and sets time partitioning by field" do
+    partitioned_table = dataset.table "kittens_field_reference"
+    if partitioned_table.nil?
+      partitioned_table = dataset.create_table "kittens_field_reference" do |updater|
+        updater.time_partitioning_type = "DAY"
+        updater.time_partitioning_field = "dob"
+        updater.time_partitioning_expiration = seven_days
+        updater.schema do |schema|
+          schema.timestamp "dob",   description: "dob description",   mode: :required
+        end
+      end
+    end
+
+    partitioned_table.time_partitioning_expiration = 1
+
+    partitioned_table.reload!
+    partitioned_table.table_id.must_equal "kittens_field_reference"
+    partitioned_table.time_partitioning_type.must_equal "DAY"
+    partitioned_table.time_partitioning_field.must_equal "dob"
+    partitioned_table.time_partitioning_expiration.must_equal 1
+  end
+
   it "updates its schema" do
     begin
       t = dataset.create_table "table_schema_test"

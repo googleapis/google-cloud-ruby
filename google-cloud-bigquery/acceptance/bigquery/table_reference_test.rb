@@ -107,7 +107,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   it "gets and sets time partitioning" do
     partitioned_table = dataset.table partitioned_table_id
     if partitioned_table.nil?
-      partitioned_table = dataset.create_table partitioned_table_id do |updater|
+      dataset.create_table partitioned_table_id do |updater|
         updater.time_partitioning_type = "DAY"
         updater.time_partitioning_expiration = seven_days
       end
@@ -126,7 +126,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   it "gets and sets time partitioning by field" do
     partitioned_table = dataset.table partitioned_field_table_id
     if partitioned_table.nil?
-      partitioned_table = dataset.create_table partitioned_field_table_id do |updater|
+      dataset.create_table partitioned_field_table_id do |updater|
         updater.time_partitioning_type = "DAY"
         updater.time_partitioning_field = "dob"
         updater.time_partitioning_expiration = seven_days
