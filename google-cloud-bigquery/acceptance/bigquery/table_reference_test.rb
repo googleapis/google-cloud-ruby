@@ -245,9 +245,42 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     job.output_rows.must_equal 3
   end
 
+  it "imports data from a file in your bucket with load_job" do
+    begin
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file = bucket.create_file local_file
+
+      job = table.load_job file
+      job.wait_until_done!
+      job.wont_be :failed?
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
   it "imports data from a local file with load" do
     result = table.load local_file
     result.must_equal true
+  end
+
+  it "imports data from a file in your bucket with load" do
+    begin
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file = bucket.create_file local_file
+
+      result = table.load file
+      result.must_equal true
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
   end
 
   it "copies itself to another table with copy_job" do
