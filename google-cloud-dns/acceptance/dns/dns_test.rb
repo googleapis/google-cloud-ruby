@@ -18,7 +18,7 @@ require "tempfile"
 # This test is a ruby version of gcloud-node's dns test.
 describe Google::Cloud::Dns, :dns do
   let(:dns) { $dns }
-  let(:zone_dns) { $dns_domain }
+  let(:zone_dns) { $dns_domain + "." }
   let(:zone_name) { $dns_prefix }
   let(:zone) { $dns_zone ||= (dns.zone(zone_name) || dns.create_zone(zone_name, zone_dns)) }
 
