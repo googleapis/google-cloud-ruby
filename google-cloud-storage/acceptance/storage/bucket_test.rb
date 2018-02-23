@@ -85,6 +85,11 @@ describe Google::Cloud::Storage::Bucket, :storage do
     bucket.requester_pays.must_be :nil?
     bucket.labels.must_be :empty?
 
+    bucket.retention_period.must_be :nil?
+    bucket.retention_effective_at.must_be :nil?
+    bucket.retention_locked?.must_equal false
+    bucket.default_event_based_hold?.must_equal false
+
     bucket.cors.each do |cors|
       cors.must_be_kind_of Google::Cloud::Storage::Bucket::Cors::Rule
       cors.frozen?.must_equal true
@@ -156,6 +161,42 @@ describe Google::Cloud::Storage::Bucket, :storage do
       roles = ["storage.buckets.delete", "storage.buckets.get"]
       permissions = bucket.test_permissions roles
       permissions.must_equal roles
+    end
+  end
+
+  describe "Retention Policy and Lock" do
+
+    it "creates and gets and updates and deletes a bucket" do
+      retention_bucket_name = "#{bucket_name}-rpol"
+
+      storage.bucket(retention_bucket_name).must_be :nil?
+
+      retention_bucket = storage.create_bucket retention_bucket_name do |b|
+        b.retention_period = 1
+        b.default_event_based_hold = true
+      end
+
+      retention_bucket_copy = storage.bucket retention_bucket_name
+      retention_bucket_copy.retention_period.must_equal 1
+      retention_bucket_copy.retention_effective_at.must_be_kind_of DateTime
+      retention_bucket_copy.retention_locked?.must_equal false
+      retention_bucket_copy.default_event_based_hold?.must_equal true
+
+      retention_bucket.update do |b|
+        b.retention_period = nil
+        b.default_event_based_hold = false
+      end
+
+      retention_bucket_copy = storage.bucket retention_bucket_name
+      retention_bucket_copy.retention_period.must_be :nil?
+      retention_bucket_copy.retention_effective_at.must_be :nil?
+      retention_bucket_copy.retention_locked?.must_equal false
+      retention_bucket_copy.default_event_based_hold?.must_equal false
+
+      retention_bucket.files.all &:delete
+      retention_bucket.delete
+
+      storage.bucket(retention_bucket_name).must_be :nil?
     end
   end
 

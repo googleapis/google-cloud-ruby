@@ -476,6 +476,106 @@ module Google
         end
 
         ##
+        # The period of time (in seconds) that files in the bucket must be
+        # retained, and cannot be deleted, overwritten, or archived.
+        # The value must be between 0 and 100 years (in seconds.)
+        #
+        # See also: {#retention_period=}, {#retention_effective_at}, and
+        # {#retention_locked?}.
+        #
+        # @return [Integer, nil] The retention period defined in seconds, if a
+        #   retention policy exists for the bucket.
+        #
+        def retention_period
+          @gapi.retention_policy && @gapi.retention_policy.retention_period
+        end
+
+        ##
+        # The period of time (in seconds) that files in the bucket must be
+        # retained, and cannot be deleted, overwritten, or archived.
+        #
+        # See also: {#retention_period}, {#retention_effective_at}, and
+        # {#retention_locked?}.
+        #
+        # @param [Integer, nil] new_retention_period The retention period
+        #   defined in seconds. The value must be between 0 and 100 years (in
+        #   seconds), or `nil`.
+        #
+        def retention_period= new_retention_period
+          @gapi.retention_policy ||= \
+            Google::Apis::StorageV1::Bucket::RetentionPolicy.new
+          @gapi.retention_policy.retention_period = new_retention_period
+
+          # Bucket-level retention policy is stored in bucket metadata, so if
+          # you send concurrent requests to both lock and remove a bucket's
+          # retention policy, it is possible that the final state of the bucket
+          # will be unlocked.  For these reason, we recommend including a bucket
+          # metageneration precondition with bucket updates (and such a
+          # precondition is required for the lock policy API call).
+          patch_gapi! :retention_policy
+        end
+
+        ##
+        # The time from which the retention policy was effective. Whenever a
+        # retention policy (locked or unlocked) is created or extended, GCS
+        # updates the effective date of the policy. The effective date signals
+        # the date starting from which objects were guaranteed to be retained
+        # for the full duration of the policy.
+        #
+        # This field is updated when the retention policy is created or
+        # modified, including extension of a locked policy.
+        #
+        # @return [DateTime, nil] The effective date of the bucket's retention
+        #   policy, if a policy exists.
+        #
+        def retention_effective_at
+          @gapi.retention_policy && @gapi.retention_policy.effective_time
+        end
+
+        ##
+        # Whether the bucket's file retention policy is locked and its retention
+        # period cannot be changed. See {#retention_period=}.
+        #
+        # This value can only be set to `true` by calling the LockPolicy API.
+        #
+        # @return [Boolean] Returns `false` if there is no retention policy or
+        #   if the retention policy is unlocked and the retention period can be
+        #   changed. Returns `true` if the retention policy is locked and the
+        #   retention period cannot be changed.
+        #
+        def retention_locked?
+          return false unless @gapi.retention_policy
+          !@gapi.retention_policy.is_locked.nil? &&
+            @gapi.retention_policy.is_locked
+        end
+
+        ##
+        # Whether the `event_based_hold` field for newly-created files in the
+        # bucket will be initially set to `true`. See
+        # {#default_event_based_hold=}.
+        #
+        # @return [Boolean] Returns `true` if the `event_based_hold` field for
+        #   newly-created files in the bucket will be initially set to `true`,
+        #   otherwise `false`.
+        #
+        def default_event_based_hold?
+          !@gapi.default_event_based_hold.nil? && @gapi.default_event_based_hold
+        end
+
+        ##
+        # Updates the default event-based hold field for the bucket. This field
+        # controls the initial state of the `event_based_hold` field for
+        # newly-created files in the bucket.
+        #
+        # @param [Boolean] new_default_event_based_hold The default event-based
+        #   hold field for the bucket.
+        #
+        def default_event_based_hold= new_default_event_based_hold
+          @gapi.default_event_based_hold = new_default_event_based_hold
+          patch_gapi! :default_event_based_hold
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
