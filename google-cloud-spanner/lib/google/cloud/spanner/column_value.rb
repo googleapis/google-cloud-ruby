@@ -19,7 +19,8 @@ module Google
       ##
       # # ColumnValue
       #
-      # Represents a change to be made to row's column value by the Spanner API.
+      # Represents a change to be made to a row's column value by the Spanner
+      # API.
       #
       # @example
       #   require "google/cloud/spanner"
@@ -30,7 +31,6 @@ module Google
       #
       #   # create column value object
       #   commit_timestamp = db.commit_timestamp
-      #   commit_timestamp.type #=> :commit_timestamp
       #
       #   db.commit do |c|
       #     c.insert "users", [
@@ -61,7 +61,6 @@ module Google
         #
         #   # create column value object
         #   commit_timestamp = db.commit_timestamp
-        #   commit_timestamp.type #=> :commit_timestamp
         #
         #   db.commit do |c|
         #     c.insert "users", [
@@ -75,7 +74,11 @@ module Google
 
         ##
         # Creates a column value object representing setting a field's value to
-        # the timestamp of the commit. (See {Client#commit_timestamp})
+        # the timestamp of the commit. (See {Client#commit_timestamp} and
+        # {Transaction#commit_timestamp})
+        #
+        # This placeholder value can only be used for timestamp columns that
+        # have set the option "(allow_commit_timestamp=true)" in the schema.
         #
         # @return [ColumnValue] The commit timestamp column value object.
         #

@@ -507,6 +507,9 @@ module Google
         # Creates a column value object representing setting a field's value to
         # the timestamp of the commit. (See {Client#commit_timestamp})
         #
+        # This placeholder value can only be used for timestamp columns that
+        # have set the option "(allow_commit_timestamp=true)" in the schema.
+        #
         # @return [ColumnValue] The commit timestamp column value object.
         #
         # @example
