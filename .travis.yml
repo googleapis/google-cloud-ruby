@@ -8,6 +8,9 @@ rvm:
 - 2.3.6
 - 2.2.9
 - 2.1.10
+matrix:
+  allow_failures:
+  - rvm: 2.5.0
 branches:
   except:
   - gh-pages
