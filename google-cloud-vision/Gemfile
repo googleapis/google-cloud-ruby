@@ -5,6 +5,9 @@ gemspec
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"
+gem "google-cloud-core", path: "../google-cloud-core"
+gem "google-cloud-env", path: "../google-cloud-env"
+gem "google-cloud-storage", path: "../google-cloud-storage"
 
 if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
   # WORKAROUND: builds are failing on Ruby 2.0.

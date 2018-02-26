@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ module Google
         # The hierarchy of an OCR extracted text structure is like this:
         #     TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
         # Each structural component, starting from Page, may further have their own
-        # properties. Properties describe detected languages, breaks etc.. Please refer
-        # to the {Google::Cloud::Vision::V1::TextAnnotation::TextProperty TextAnnotation::TextProperty} message definition below for more
-        # detail.
+        # properties. Properties describe detected languages, breaks etc.. Please
+        # refer to the {Google::Cloud::Vision::V1::TextAnnotation::TextProperty} message
+        # definition below for more detail.
         # @!attribute [rw] pages
         #   @return [Array<Google::Cloud::Vision::V1::Page>]
         #     List of pages detected by OCR.
@@ -44,7 +44,6 @@ module Google
           # Detected start or end of a structural component.
           # @!attribute [rw] type
           #   @return [Google::Cloud::Vision::V1::TextAnnotation::DetectedBreak::BreakType]
-          #     Detected break type.
           # @!attribute [rw] is_prefix
           #   @return [true, false]
           #     True if break prepends the element.
@@ -63,10 +62,11 @@ module Google
               # Line-wrapping break.
               EOL_SURE_SPACE = 3
 
-              # End-line hyphen that is not present in text; does not co-occur with
-              # +SPACE+, +LEADER_SPACE+, or +LINE_BREAK+.
+              # End-line hyphen that is not present in text; does
               HYPHEN = 4
 
+              # not co-occur with SPACE, LEADER_SPACE, or
+              # LINE_BREAK.
               # Line break that ends a paragraph.
               LINE_BREAK = 5
             end
@@ -95,9 +95,6 @@ module Google
         # @!attribute [rw] blocks
         #   @return [Array<Google::Cloud::Vision::V1::Block>]
         #     List of blocks of text, images etc on this page.
-        # @!attribute [rw] confidence
-        #   @return [Float]
-        #     Confidence of the OCR results on the page. Range [0, 1].
         class Page; end
 
         # Logical element on the page.
@@ -112,29 +109,21 @@ module Google
         #     is represented as around the top-left corner as defined when the text is
         #     read in the 'natural' orientation.
         #     For example:
-        #
         #     * when the text is horizontal it might look like:
-        #
         #       0----1
         #       |    |
         #       3----2
-        #
-        #     * when it's rotated 180 degrees around the top-left corner it becomes:
-        #
-        #       2----3
-        #       |    |
-        #       1----0
-        #
-        #       and the vertice order will still be (0, 1, 2, 3).
+        #       * when it's rotated 180 degrees around the top-left corner it becomes:
+        #         2----3
+        #         |    |
+        #         1----0
+        #         and the vertice order will still be (0, 1, 2, 3).
         # @!attribute [rw] paragraphs
         #   @return [Array<Google::Cloud::Vision::V1::Paragraph>]
         #     List of paragraphs in this block (if this blocks is of type text).
         # @!attribute [rw] block_type
         #   @return [Google::Cloud::Vision::V1::Block::BlockType]
         #     Detected block type (text, image etc) for this block.
-        # @!attribute [rw] confidence
-        #   @return [Float]
-        #     Confidence of the OCR results on the block. Range [0, 1].
         class Block
           # Type of a block (text, image etc) as identified by OCR.
           module BlockType
@@ -182,9 +171,6 @@ module Google
         # @!attribute [rw] words
         #   @return [Array<Google::Cloud::Vision::V1::Word>]
         #     List of words in this paragraph.
-        # @!attribute [rw] confidence
-        #   @return [Float]
-        #     Confidence of the OCR results for the paragraph. Range [0, 1].
         class Paragraph; end
 
         # A word representation.
@@ -212,9 +198,6 @@ module Google
         #   @return [Array<Google::Cloud::Vision::V1::Symbol>]
         #     List of symbols in the word.
         #     The order of the symbols follows the natural reading order.
-        # @!attribute [rw] confidence
-        #   @return [Float]
-        #     Confidence of the OCR results for the word. Range [0, 1].
         class Word; end
 
         # A single symbol representation.
@@ -241,9 +224,6 @@ module Google
         # @!attribute [rw] text
         #   @return [String]
         #     The actual UTF-8 representation of the symbol.
-        # @!attribute [rw] confidence
-        #   @return [Float]
-        #     Confidence of the OCR results for the symbol. Range [0, 1].
         class Symbol; end
       end
     end
