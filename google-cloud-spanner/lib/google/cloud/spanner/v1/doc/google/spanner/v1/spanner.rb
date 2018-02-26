@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [SpannerClient][] | Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. |
+    # | [SpannerClient][] | Cloud Spanner API |
     # | [Data Types][] | Data types for Google::Cloud::Spanner::V1 |
     #
     # [SpannerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/spannerclient
@@ -159,7 +159,8 @@ module Google
       # @!attribute [rw] query_mode
       #   @return [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
       #     Used to control the amount of debugging information returned in
-      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}.
+      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+      #     be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
       # @!attribute [rw] partition_token
       #   @return [String]
       #     If present, results will be restricted to the specified partition
@@ -195,8 +196,8 @@ module Google
       #     The desired maximum number of partitions to return.  For example, this may
       #     be set to the number of workers available.  The default for this option
       #     is currently 10,000. The maximum value is currently 200,000.  This is only
-      #     a hint.  The actual number of partitions returned may be smaller than
-      #     this maximum count request.
+      #     a hint.  The actual number of partitions returned may be smaller or larger
+      #     than this maximum count request.
       class PartitionOptions; end
 
       # The request for {Google::Spanner::V1::Spanner::PartitionQuery PartitionQuery}

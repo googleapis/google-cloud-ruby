@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -484,7 +481,8 @@ module Google
           #   request that yielded this token.
           # @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
           #   Used to control the amount of debugging information returned in
-          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}.
+          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+          #   be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
           # @param partition_token [String]
           #   If present, results will be restricted to the specified partition
           #   previously created using PartitionQuery().  There must be an exact
@@ -500,6 +498,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +sql+:
           #   sql = ''
           #   response = spanner_client.execute_sql(formatted_session, sql)
 
@@ -579,7 +579,8 @@ module Google
           #   request that yielded this token.
           # @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
           #   Used to control the amount of debugging information returned in
-          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}.
+          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+          #   be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
           # @param partition_token [String]
           #   If present, results will be restricted to the specified partition
           #   previously created using PartitionQuery().  There must be an exact
@@ -597,6 +598,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +sql+:
           #   sql = ''
           #   spanner_client.execute_streaming_sql(formatted_session, sql).each do |element|
           #     # Process element.
@@ -697,8 +700,14 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +table+:
           #   table = ''
+          #
+          #   # TODO: Initialize +columns+:
           #   columns = []
+          #
+          #   # TODO: Initialize +key_set+:
           #   key_set = {}
           #   response = spanner_client.read(formatted_session, table, columns, key_set)
 
@@ -793,8 +802,14 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +table+:
           #   table = ''
+          #
+          #   # TODO: Initialize +columns+:
           #   columns = []
+          #
+          #   # TODO: Initialize +key_set+:
           #   key_set = {}
           #   spanner_client.streaming_read(formatted_session, table, columns, key_set).each do |element|
           #     # Process element.
@@ -847,6 +862,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +options_+:
           #   options_ = {}
           #   response = spanner_client.begin_transaction(formatted_session, options_)
 
@@ -903,6 +920,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +mutations+:
           #   mutations = []
           #   response = spanner_client.commit(formatted_session, mutations)
 
@@ -944,6 +963,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +transaction_id+:
           #   transaction_id = ''
           #   spanner_client.rollback(formatted_session, transaction_id)
 
@@ -1025,6 +1046,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +sql+:
           #   sql = ''
           #   response = spanner_client.partition_query(formatted_session, sql)
 
@@ -1097,7 +1120,11 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +table+:
           #   table = ''
+          #
+          #   # TODO: Initialize +key_set+:
           #   key_set = {}
           #   response = spanner_client.partition_read(formatted_session, table, key_set)
 
