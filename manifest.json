@@ -111,8 +111,9 @@
       "name": "google-cloud-core",
       "defaultService": "google/cloud/error",
       "versions": [
-        "v1.1.0",
+        "v1.2.0",
         "master",
+        "v1.1.0",
         "v1.0.0",
         "v0.21.1",
         "v0.21.0",
