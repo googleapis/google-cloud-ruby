@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
-  gem.add_dependency "google-cloud-core", "~> 1.1"
+  gem.add_dependency "google-cloud-core", "~> 1.2"
   gem.add_dependency "faraday", "~> 0.13"
   gem.add_dependency "googleauth", "~> 0.6.2"
 

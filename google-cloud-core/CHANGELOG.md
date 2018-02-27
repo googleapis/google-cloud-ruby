@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.0 / 2018-02-27
+
+* Add Shared Configuration.
+
 ### 1.1.0 / 2017-11-14
 
 * Rename constructor arguments to `project_id` and `credentials`.
