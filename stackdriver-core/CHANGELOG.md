@@ -1,5 +1,9 @@
 # Release History
 
+### 1.3.0 / 2018-02-27
+
+* Use Google Cloud Shared Configuration.
+
 ### 1.2.0 / 2017-07-11
 
 * Introduce `Stackdriver::Core::AsyncActor` module, used by stackdriver gems to perform asynchronous jobs.
