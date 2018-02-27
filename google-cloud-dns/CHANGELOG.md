@@ -1,5 +1,10 @@
 # Release History
 
+### 0.28.0 / 2018-02-27
+
+* Add Shared Configuration.
+* Update Google API Client dependency.
+
 ### 0.27.0 / 2017-11-14
 
 * Add `Google::Cloud::Dns::Credentials` class.
