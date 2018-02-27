@@ -1,5 +1,13 @@
 # Release History
 
+### 1.3.0 / 2018-02-27
+
+* Add Batch Client
+  * Support partitioned reads and queries.
+* Support Shared Configuration.
+* Fix issue with IAM Policy not refreshing properly.
+* Fix issue when using Time objects as keys.
+
 ### 1.2.0 / 2017-12-19
 
 * Update Low Level API code
