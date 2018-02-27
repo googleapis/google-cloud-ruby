@@ -1,5 +1,9 @@
 # Release History
 
+### 1.4.0 / 2018-02-27
+
+* Support Shared Configuration.
+
 ### 1.3.0 / 2017-12-19
 
 * Support Read-Only Transactions
