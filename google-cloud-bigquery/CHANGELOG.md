@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 / 2018-02-27
+
+* Support table partitioning by field.
+* Support Shared Configuration.
+* Improve AsyncInserter performance.
+
 ### 1.0.0 / 2018-01-10
 
 * Release 1.0.0
