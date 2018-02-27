@@ -1,6 +1,6 @@
 # Release History
 
-### 1.3.0 / 2018-02-27
+### 1.3.1 / 2018-02-27
 
 * Add Batch Client
   * Support partitioned reads and queries.
