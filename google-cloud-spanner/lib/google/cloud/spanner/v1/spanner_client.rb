@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -65,8 +62,10 @@ module Google
           # this service.
           ALL_SCOPES = [
             "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/spanner.admin",
             "https://www.googleapis.com/auth/spanner.data"
           ].freeze
+
 
           DATABASE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/instances/{instance}/databases/{database}"
@@ -133,11 +132,6 @@ module Google
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
@@ -149,17 +143,6 @@ module Google
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
             require "google/spanner/v1/spanner_services_pb"
-
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
 
             credentials ||= Google::Cloud::Spanner::Credentials.default
 
@@ -179,9 +162,11 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-spanner'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
@@ -201,6 +186,10 @@ module Google
                 kwargs: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
             @spanner_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -254,6 +243,14 @@ module Google
             @rollback = Google::Gax.create_api_call(
               @spanner_stub.method(:rollback),
               defaults["rollback"]
+            )
+            @partition_query = Google::Gax.create_api_call(
+              @spanner_stub.method(:partition_query),
+              defaults["partition_query"]
+            )
+            @partition_read = Google::Gax.create_api_call(
+              @spanner_stub.method(:partition_read),
+              defaults["partition_read"]
             )
           end
 
@@ -484,7 +481,13 @@ module Google
           #   request that yielded this token.
           # @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
           #   Used to control the amount of debugging information returned in
-          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}.
+          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+          #   be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
+          # @param partition_token [String]
+          #   If present, results will be restricted to the specified partition
+          #   previously created using PartitionQuery().  There must be an exact
+          #   match for the values of fields common to this message and the
+          #   PartitionQueryRequest message used to create this partition_token.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -495,6 +498,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +sql+:
           #   sql = ''
           #   response = spanner_client.execute_sql(formatted_session, sql)
 
@@ -506,6 +511,7 @@ module Google
               param_types: nil,
               resume_token: nil,
               query_mode: nil,
+              partition_token: nil,
               options: nil
             req = {
               session: session,
@@ -514,7 +520,8 @@ module Google
               params: params,
               param_types: param_types,
               resume_token: resume_token,
-              query_mode: query_mode
+              query_mode: query_mode,
+              partition_token: partition_token
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Spanner::V1::ExecuteSqlRequest)
             @execute_sql.call(req, options)
@@ -572,7 +579,13 @@ module Google
           #   request that yielded this token.
           # @param query_mode [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
           #   Used to control the amount of debugging information returned in
-          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}.
+          #   {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+          #   be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
+          # @param partition_token [String]
+          #   If present, results will be restricted to the specified partition
+          #   previously created using PartitionQuery().  There must be an exact
+          #   match for the values of fields common to this message and the
+          #   PartitionQueryRequest message used to create this partition_token.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -585,6 +598,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +sql+:
           #   sql = ''
           #   spanner_client.execute_streaming_sql(formatted_session, sql).each do |element|
           #     # Process element.
@@ -598,6 +613,7 @@ module Google
               param_types: nil,
               resume_token: nil,
               query_mode: nil,
+              partition_token: nil,
               options: nil
             req = {
               session: session,
@@ -606,7 +622,8 @@ module Google
               params: params,
               param_types: param_types,
               resume_token: resume_token,
-              query_mode: query_mode
+              query_mode: query_mode,
+              partition_token: partition_token
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Spanner::V1::ExecuteSqlRequest)
             @execute_streaming_sql.call(req, options)
@@ -639,8 +656,10 @@ module Google
           #   is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
           #   index keys in {Google::Spanner::V1::ReadRequest#index index}.
           #
-          #   Rows are yielded in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty)
-          #   or index key order (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).
+          #   If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is empty, rows are yielded
+          #   in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty) or index key order
+          #   (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is not
+          #   empty, rows will be yielded in an unspecified order.
           #
           #   It is not an error for the +key_set+ to name rows that do not
           #   exist in the database. Read yields nothing for nonexistent rows.
@@ -657,7 +676,8 @@ module Google
           #   and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set key_set} for further information.
           # @param limit [Integer]
           #   If greater than zero, only the first +limit+ rows are yielded. If +limit+
-          #   is zero, the default is no limit.
+          #   is zero, the default is no limit. A limit cannot be specified if
+          #   +partition_token+ is set.
           # @param resume_token [String]
           #   If this request is resuming a previously interrupted read,
           #   +resume_token+ should be copied from the last
@@ -665,6 +685,11 @@ module Google
           #   enables the new read to resume where the last read left off. The
           #   rest of the request parameters must exactly match the request
           #   that yielded this token.
+          # @param partition_token [String]
+          #   If present, results will be restricted to the specified partition
+          #   previously created using PartitionRead().    There must be an exact
+          #   match for the values of fields common to this message and the
+          #   PartitionReadRequest message used to create this partition_token.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -675,8 +700,14 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +table+:
           #   table = ''
+          #
+          #   # TODO: Initialize +columns+:
           #   columns = []
+          #
+          #   # TODO: Initialize +key_set+:
           #   key_set = {}
           #   response = spanner_client.read(formatted_session, table, columns, key_set)
 
@@ -689,6 +720,7 @@ module Google
               index: nil,
               limit: nil,
               resume_token: nil,
+              partition_token: nil,
               options: nil
             req = {
               session: session,
@@ -698,7 +730,8 @@ module Google
               transaction: transaction,
               index: index,
               limit: limit,
-              resume_token: resume_token
+              resume_token: resume_token,
+              partition_token: partition_token
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Spanner::V1::ReadRequest)
             @read.call(req, options)
@@ -723,8 +756,10 @@ module Google
           #   is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
           #   index keys in {Google::Spanner::V1::ReadRequest#index index}.
           #
-          #   Rows are yielded in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty)
-          #   or index key order (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).
+          #   If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is empty, rows are yielded
+          #   in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty) or index key order
+          #   (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is not
+          #   empty, rows will be yielded in an unspecified order.
           #
           #   It is not an error for the +key_set+ to name rows that do not
           #   exist in the database. Read yields nothing for nonexistent rows.
@@ -741,7 +776,8 @@ module Google
           #   and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set key_set} for further information.
           # @param limit [Integer]
           #   If greater than zero, only the first +limit+ rows are yielded. If +limit+
-          #   is zero, the default is no limit.
+          #   is zero, the default is no limit. A limit cannot be specified if
+          #   +partition_token+ is set.
           # @param resume_token [String]
           #   If this request is resuming a previously interrupted read,
           #   +resume_token+ should be copied from the last
@@ -749,6 +785,11 @@ module Google
           #   enables the new read to resume where the last read left off. The
           #   rest of the request parameters must exactly match the request
           #   that yielded this token.
+          # @param partition_token [String]
+          #   If present, results will be restricted to the specified partition
+          #   previously created using PartitionRead().    There must be an exact
+          #   match for the values of fields common to this message and the
+          #   PartitionReadRequest message used to create this partition_token.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -761,8 +802,14 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +table+:
           #   table = ''
+          #
+          #   # TODO: Initialize +columns+:
           #   columns = []
+          #
+          #   # TODO: Initialize +key_set+:
           #   key_set = {}
           #   spanner_client.streaming_read(formatted_session, table, columns, key_set).each do |element|
           #     # Process element.
@@ -777,6 +824,7 @@ module Google
               index: nil,
               limit: nil,
               resume_token: nil,
+              partition_token: nil,
               options: nil
             req = {
               session: session,
@@ -786,7 +834,8 @@ module Google
               transaction: transaction,
               index: index,
               limit: limit,
-              resume_token: resume_token
+              resume_token: resume_token,
+              partition_token: partition_token
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Spanner::V1::ReadRequest)
             @streaming_read.call(req, options)
@@ -813,6 +862,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +options_+:
           #   options_ = {}
           #   response = spanner_client.begin_transaction(formatted_session, options_)
 
@@ -869,6 +920,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +mutations+:
           #   mutations = []
           #   response = spanner_client.commit(formatted_session, mutations)
 
@@ -910,6 +963,8 @@ module Google
           #
           #   spanner_client = Google::Cloud::Spanner::V1.new
           #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +transaction_id+:
           #   transaction_id = ''
           #   spanner_client.rollback(formatted_session, transaction_id)
 
@@ -924,6 +979,175 @@ module Google
             req = Google::Gax::to_proto(req, Google::Spanner::V1::RollbackRequest)
             @rollback.call(req, options)
             nil
+          end
+
+          # Creates a set of partition tokens that can be used to execute a query
+          # operation in parallel.  Each of the returned partition tokens can be used
+          # by {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql} to specify a subset
+          # of the query result to read.  The same session and read-only transaction
+          # must be used by the PartitionQueryRequest used to create the
+          # partition tokens and the ExecuteSqlRequests that use the partition tokens.
+          # Partition tokens become invalid when the session used to create them
+          # is deleted or begins a new transaction.
+          #
+          # @param session [String]
+          #   Required. The session used to create the partitions.
+          # @param sql [String]
+          #   The query request to generate partitions for. The request will fail if
+          #   the query is not root partitionable. The query plan of a root
+          #   partitionable query has a single distributed union operator. A distributed
+          #   union operator conceptually divides one or more tables into multiple
+          #   splits, remotely evaluates a subquery independently on each split, and
+          #   then unions all results.
+          # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
+          #   Read only snapshot transactions are supported, read/write and single use
+          #   transactions are not.
+          #   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
+          #   can also be provided.
+          # @param params [Google::Protobuf::Struct | Hash]
+          #   The SQL query string can contain parameter placeholders. A parameter
+          #   placeholder consists of +'@'+ followed by the parameter
+          #   name. Parameter names consist of any combination of letters,
+          #   numbers, and underscores.
+          #
+          #   Parameters can appear anywhere that a literal value is expected.  The same
+          #   parameter name can be used more than once, for example:
+          #     +"WHERE id > @msg_id AND id < @msg_id + 100"+
+          #
+          #   It is an error to execute an SQL query with unbound parameters.
+          #
+          #   Parameter values are specified using +params+, which is a JSON
+          #   object whose keys are parameter names, and whose values are the
+          #   corresponding parameter values.
+          #   A hash of the same form as `Google::Protobuf::Struct`
+          #   can also be provided.
+          # @param param_types [Hash{String => Google::Spanner::V1::Type | Hash}]
+          #   It is not always possible for Cloud Spanner to infer the right SQL type
+          #   from a JSON value.  For example, values of type +BYTES+ and values
+          #   of type +STRING+ both appear in {Google::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
+          #
+          #   In these cases, +param_types+ can be used to specify the exact
+          #   SQL type for some or all of the SQL query parameters. See the
+          #   definition of {Google::Spanner::V1::Type Type} for more information
+          #   about SQL types.
+          #   A hash of the same form as `Google::Spanner::V1::Type`
+          #   can also be provided.
+          # @param partition_options [Google::Spanner::V1::PartitionOptions | Hash]
+          #   Additional options that affect how many partitions are created.
+          #   A hash of the same form as `Google::Spanner::V1::PartitionOptions`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Spanner::V1::PartitionResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1"
+          #
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +sql+:
+          #   sql = ''
+          #   response = spanner_client.partition_query(formatted_session, sql)
+
+          def partition_query \
+              session,
+              sql,
+              transaction: nil,
+              params: nil,
+              param_types: nil,
+              partition_options: nil,
+              options: nil
+            req = {
+              session: session,
+              sql: sql,
+              transaction: transaction,
+              params: params,
+              param_types: param_types,
+              partition_options: partition_options
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::PartitionQueryRequest)
+            @partition_query.call(req, options)
+          end
+
+          # Creates a set of partition tokens that can be used to execute a read
+          # operation in parallel.  Each of the returned partition tokens can be used
+          # by {Google::Spanner::V1::Spanner::StreamingRead StreamingRead} to specify a subset of the read
+          # result to read.  The same session and read-only transaction must be used by
+          # the PartitionReadRequest used to create the partition tokens and the
+          # ReadRequests that use the partition tokens.
+          # Partition tokens become invalid when the session used to create them
+          # is deleted or begins a new transaction.
+          #
+          # @param session [String]
+          #   Required. The session used to create the partitions.
+          # @param table [String]
+          #   Required. The name of the table in the database to be read.
+          # @param key_set [Google::Spanner::V1::KeySet | Hash]
+          #   Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+          #   primary keys of the rows in {Google::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless {Google::Spanner::V1::PartitionReadRequest#index index}
+          #   is present. If {Google::Spanner::V1::PartitionReadRequest#index index} is present, then {Google::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
+          #   index keys in {Google::Spanner::V1::PartitionReadRequest#index index}.
+          #
+          #   It is not an error for the +key_set+ to name rows that do not
+          #   exist in the database. Read yields nothing for nonexistent rows.
+          #   A hash of the same form as `Google::Spanner::V1::KeySet`
+          #   can also be provided.
+          # @param transaction [Google::Spanner::V1::TransactionSelector | Hash]
+          #   Read only snapshot transactions are supported, read/write and single use
+          #   transactions are not.
+          #   A hash of the same form as `Google::Spanner::V1::TransactionSelector`
+          #   can also be provided.
+          # @param index [String]
+          #   If non-empty, the name of an index on {Google::Spanner::V1::PartitionReadRequest#table table}. This index is
+          #   used instead of the table primary key when interpreting {Google::Spanner::V1::PartitionReadRequest#key_set key_set}
+          #   and sorting result rows. See {Google::Spanner::V1::PartitionReadRequest#key_set key_set} for further information.
+          # @param columns [Array<String>]
+          #   The columns of {Google::Spanner::V1::PartitionReadRequest#table table} to be returned for each row matching
+          #   this request.
+          # @param partition_options [Google::Spanner::V1::PartitionOptions | Hash]
+          #   Additional options that affect how many partitions are created.
+          #   A hash of the same form as `Google::Spanner::V1::PartitionOptions`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Spanner::V1::PartitionResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/spanner/v1"
+          #
+          #   spanner_client = Google::Cloud::Spanner::V1.new
+          #   formatted_session = Google::Cloud::Spanner::V1::SpannerClient.session_path("[PROJECT]", "[INSTANCE]", "[DATABASE]", "[SESSION]")
+          #
+          #   # TODO: Initialize +table+:
+          #   table = ''
+          #
+          #   # TODO: Initialize +key_set+:
+          #   key_set = {}
+          #   response = spanner_client.partition_read(formatted_session, table, key_set)
+
+          def partition_read \
+              session,
+              table,
+              key_set,
+              transaction: nil,
+              index: nil,
+              columns: nil,
+              partition_options: nil,
+              options: nil
+            req = {
+              session: session,
+              table: table,
+              key_set: key_set,
+              transaction: transaction,
+              index: index,
+              columns: columns,
+              partition_options: partition_options
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Spanner::V1::PartitionReadRequest)
+            @partition_read.call(req, options)
           end
         end
       end

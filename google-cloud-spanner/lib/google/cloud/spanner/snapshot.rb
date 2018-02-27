@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+require "google/cloud/spanner/convert"
 require "google/cloud/spanner/results"
 
 module Google
@@ -150,6 +151,9 @@ module Google
         #
         def execute sql, params: nil, types: nil
           ensure_session!
+
+          params, types = Convert.to_input_params_and_types params, types
+
           session.execute sql, params: params, types: types,
                                transaction: tx_selector
         end
@@ -191,6 +195,10 @@ module Google
         #
         def read table, columns, keys: nil, index: nil, limit: nil
           ensure_session!
+
+          columns = Array(columns).map(&:to_s)
+          keys = Convert.to_key_set keys
+
           session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector
         end

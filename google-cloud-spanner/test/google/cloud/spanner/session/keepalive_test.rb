@@ -41,7 +41,7 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
 
   it "can call keepalive" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, options: default_options]
     session.service.mocked_service = mock
 
     session.keepalive!

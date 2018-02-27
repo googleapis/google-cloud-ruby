@@ -101,6 +101,11 @@ module Google
           end
 
           fields = @metadata.row_type.fields
+          if fields.count.zero?
+            @closed = true
+            return []
+          end
+
           values = []
           buffered_responses = []
           buffer_upper_bound = 10
@@ -204,9 +209,9 @@ module Google
 
         # @private
         def self.execute service, session_path, sql, params: nil, types: nil,
-                         transaction: nil
+                         transaction: nil, partition_token: nil
           execute_options = { transaction: transaction, params: params,
-                              types: types }
+                              types: types, partition_token: partition_token }
           enum = service.streaming_execute_sql session_path, sql,
                                                execute_options
           from_enum(enum, service).tap do |results|
@@ -218,9 +223,11 @@ module Google
 
         # @private
         def self.read service, session_path, table, columns, keys: nil,
-                      index: nil, limit: nil, transaction: nil
+                      index: nil, limit: nil, transaction: nil,
+                      partition_token: nil
           read_options = { keys: keys, index: index, limit: limit,
-                           transaction: transaction }
+                           transaction: transaction,
+                           partition_token: partition_token }
           enum = service.streaming_read_table \
             session_path, table, columns, read_options
           from_enum(enum, service).tap do |results|

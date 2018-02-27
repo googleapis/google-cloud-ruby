@@ -180,15 +180,17 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute sql, params: nil, types: nil, transaction: nil
+        def execute sql, params: nil, types: nil, transaction: nil,
+                    partition_token: nil
           ensure_service!
+
           results = Results.execute service, path, sql,
                                     params: params, types: types,
-                                    transaction: transaction
+                                    transaction: transaction,
+                                    partition_token: partition_token
           @last_updated_at = Time.now
           results
         end
-        alias query execute
 
         ##
         # Read rows from a database table, as a simple alternative to
@@ -227,12 +229,44 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 transaction: nil
+                 transaction: nil, partition_token: nil
           ensure_service!
+
           results = Results.read service, path, table, columns,
                                  keys: keys, index: index, limit: limit,
-                                 transaction: transaction
+                                 transaction: transaction,
+                                 partition_token: partition_token
           @last_updated_at = Time.now
+          results
+        end
+
+        def partition_query sql, transaction, params: nil, types: nil,
+                            partition_size_bytes: nil, max_partitions: nil
+          ensure_service!
+
+          results = service.partition_query \
+            path, sql, transaction, params: params, types: types,
+                                    partition_size_bytes: partition_size_bytes,
+                                    max_partitions: max_partitions
+
+          @last_updated_at = Time.now
+
+          results
+        end
+
+        def partition_read table, columns, transaction, keys: nil,
+                           index: nil, partition_size_bytes: nil,
+                           max_partitions: nil
+          ensure_service!
+
+          results = service.partition_read \
+            path, table, columns, transaction,
+            keys: keys, index: index,
+            partition_size_bytes: partition_size_bytes,
+            max_partitions: max_partitions
+
+          @last_updated_at = Time.now
+
           results
         end
 

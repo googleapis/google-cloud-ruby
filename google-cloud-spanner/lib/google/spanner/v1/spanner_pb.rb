@@ -47,11 +47,40 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :param_types, :string, :message, 5, "google.spanner.v1.Type"
     optional :resume_token, :bytes, 6
     optional :query_mode, :enum, 7, "google.spanner.v1.ExecuteSqlRequest.QueryMode"
+    optional :partition_token, :bytes, 8
   end
   add_enum "google.spanner.v1.ExecuteSqlRequest.QueryMode" do
     value :NORMAL, 0
     value :PLAN, 1
     value :PROFILE, 2
+  end
+  add_message "google.spanner.v1.PartitionOptions" do
+    optional :partition_size_bytes, :int64, 1
+    optional :max_partitions, :int64, 2
+  end
+  add_message "google.spanner.v1.PartitionQueryRequest" do
+    optional :session, :string, 1
+    optional :transaction, :message, 2, "google.spanner.v1.TransactionSelector"
+    optional :sql, :string, 3
+    optional :params, :message, 4, "google.protobuf.Struct"
+    map :param_types, :string, :message, 5, "google.spanner.v1.Type"
+    optional :partition_options, :message, 6, "google.spanner.v1.PartitionOptions"
+  end
+  add_message "google.spanner.v1.PartitionReadRequest" do
+    optional :session, :string, 1
+    optional :transaction, :message, 2, "google.spanner.v1.TransactionSelector"
+    optional :table, :string, 3
+    optional :index, :string, 4
+    repeated :columns, :string, 5
+    optional :key_set, :message, 6, "google.spanner.v1.KeySet"
+    optional :partition_options, :message, 9, "google.spanner.v1.PartitionOptions"
+  end
+  add_message "google.spanner.v1.Partition" do
+    optional :partition_token, :bytes, 1
+  end
+  add_message "google.spanner.v1.PartitionResponse" do
+    repeated :partitions, :message, 1, "google.spanner.v1.Partition"
+    optional :transaction, :message, 2, "google.spanner.v1.Transaction"
   end
   add_message "google.spanner.v1.ReadRequest" do
     optional :session, :string, 1
@@ -62,6 +91,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :key_set, :message, 6, "google.spanner.v1.KeySet"
     optional :limit, :int64, 8
     optional :resume_token, :bytes, 9
+    optional :partition_token, :bytes, 10
   end
   add_message "google.spanner.v1.BeginTransactionRequest" do
     optional :session, :string, 1
@@ -95,6 +125,11 @@ module Google
       DeleteSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.DeleteSessionRequest").msgclass
       ExecuteSqlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest").msgclass
       ExecuteSqlRequest::QueryMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryMode").enummodule
+      PartitionOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionOptions").msgclass
+      PartitionQueryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionQueryRequest").msgclass
+      PartitionReadRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionReadRequest").msgclass
+      Partition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.Partition").msgclass
+      PartitionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.PartitionResponse").msgclass
       ReadRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ReadRequest").msgclass
       BeginTransactionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BeginTransactionRequest").msgclass
       CommitRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitRequest").msgclass

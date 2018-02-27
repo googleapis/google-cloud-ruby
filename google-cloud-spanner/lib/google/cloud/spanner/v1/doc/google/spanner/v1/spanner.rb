@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [SpannerClient][] | Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. |
+    # | [SpannerClient][] | Cloud Spanner API |
     # | [Data Types][] | Data types for Google::Cloud::Spanner::V1 |
     #
     # [SpannerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/spannerclient
@@ -159,7 +159,14 @@ module Google
       # @!attribute [rw] query_mode
       #   @return [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
       #     Used to control the amount of debugging information returned in
-      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}.
+      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+      #     be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
+      # @!attribute [rw] partition_token
+      #   @return [String]
+      #     If present, results will be restricted to the specified partition
+      #     previously created using PartitionQuery().  There must be an exact
+      #     match for the values of fields common to this message and the
+      #     PartitionQueryRequest message used to create this partition_token.
       class ExecuteSqlRequest
         # Mode in which the query must be processed.
         module QueryMode
@@ -176,6 +183,122 @@ module Google
           PROFILE = 2
         end
       end
+
+      # Options for a PartitionQueryRequest and
+      # PartitionReadRequest.
+      # @!attribute [rw] partition_size_bytes
+      #   @return [Integer]
+      #     The desired data size for each partition generated.  The default for this
+      #     option is currently 1 GiB.  This is only a hint. The actual size of each
+      #     partition may be smaller or larger than this size request.
+      # @!attribute [rw] max_partitions
+      #   @return [Integer]
+      #     The desired maximum number of partitions to return.  For example, this may
+      #     be set to the number of workers available.  The default for this option
+      #     is currently 10,000. The maximum value is currently 200,000.  This is only
+      #     a hint.  The actual number of partitions returned may be smaller or larger
+      #     than this maximum count request.
+      class PartitionOptions; end
+
+      # The request for {Google::Spanner::V1::Spanner::PartitionQuery PartitionQuery}
+      # @!attribute [rw] session
+      #   @return [String]
+      #     Required. The session used to create the partitions.
+      # @!attribute [rw] transaction
+      #   @return [Google::Spanner::V1::TransactionSelector]
+      #     Read only snapshot transactions are supported, read/write and single use
+      #     transactions are not.
+      # @!attribute [rw] sql
+      #   @return [String]
+      #     The query request to generate partitions for. The request will fail if
+      #     the query is not root partitionable. The query plan of a root
+      #     partitionable query has a single distributed union operator. A distributed
+      #     union operator conceptually divides one or more tables into multiple
+      #     splits, remotely evaluates a subquery independently on each split, and
+      #     then unions all results.
+      # @!attribute [rw] params
+      #   @return [Google::Protobuf::Struct]
+      #     The SQL query string can contain parameter placeholders. A parameter
+      #     placeholder consists of +'@'+ followed by the parameter
+      #     name. Parameter names consist of any combination of letters,
+      #     numbers, and underscores.
+      #
+      #     Parameters can appear anywhere that a literal value is expected.  The same
+      #     parameter name can be used more than once, for example:
+      #       +"WHERE id > @msg_id AND id < @msg_id + 100"+
+      #
+      #     It is an error to execute an SQL query with unbound parameters.
+      #
+      #     Parameter values are specified using +params+, which is a JSON
+      #     object whose keys are parameter names, and whose values are the
+      #     corresponding parameter values.
+      # @!attribute [rw] param_types
+      #   @return [Hash{String => Google::Spanner::V1::Type}]
+      #     It is not always possible for Cloud Spanner to infer the right SQL type
+      #     from a JSON value.  For example, values of type +BYTES+ and values
+      #     of type +STRING+ both appear in {Google::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
+      #
+      #     In these cases, +param_types+ can be used to specify the exact
+      #     SQL type for some or all of the SQL query parameters. See the
+      #     definition of {Google::Spanner::V1::Type Type} for more information
+      #     about SQL types.
+      # @!attribute [rw] partition_options
+      #   @return [Google::Spanner::V1::PartitionOptions]
+      #     Additional options that affect how many partitions are created.
+      class PartitionQueryRequest; end
+
+      # The request for {Google::Spanner::V1::Spanner::PartitionRead PartitionRead}
+      # @!attribute [rw] session
+      #   @return [String]
+      #     Required. The session used to create the partitions.
+      # @!attribute [rw] transaction
+      #   @return [Google::Spanner::V1::TransactionSelector]
+      #     Read only snapshot transactions are supported, read/write and single use
+      #     transactions are not.
+      # @!attribute [rw] table
+      #   @return [String]
+      #     Required. The name of the table in the database to be read.
+      # @!attribute [rw] index
+      #   @return [String]
+      #     If non-empty, the name of an index on {Google::Spanner::V1::PartitionReadRequest#table table}. This index is
+      #     used instead of the table primary key when interpreting {Google::Spanner::V1::PartitionReadRequest#key_set key_set}
+      #     and sorting result rows. See {Google::Spanner::V1::PartitionReadRequest#key_set key_set} for further information.
+      # @!attribute [rw] columns
+      #   @return [Array<String>]
+      #     The columns of {Google::Spanner::V1::PartitionReadRequest#table table} to be returned for each row matching
+      #     this request.
+      # @!attribute [rw] key_set
+      #   @return [Google::Spanner::V1::KeySet]
+      #     Required. +key_set+ identifies the rows to be yielded. +key_set+ names the
+      #     primary keys of the rows in {Google::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless {Google::Spanner::V1::PartitionReadRequest#index index}
+      #     is present. If {Google::Spanner::V1::PartitionReadRequest#index index} is present, then {Google::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
+      #     index keys in {Google::Spanner::V1::PartitionReadRequest#index index}.
+      #
+      #     It is not an error for the +key_set+ to name rows that do not
+      #     exist in the database. Read yields nothing for nonexistent rows.
+      # @!attribute [rw] partition_options
+      #   @return [Google::Spanner::V1::PartitionOptions]
+      #     Additional options that affect how many partitions are created.
+      class PartitionReadRequest; end
+
+      # Information returned for each partition returned in a
+      # PartitionResponse.
+      # @!attribute [rw] partition_token
+      #   @return [String]
+      #     This token can be passed to Read, StreamingRead, ExecuteSql, or
+      #     ExecuteStreamingSql requests to restrict the results to those identified by
+      #     this partition token.
+      class Partition; end
+
+      # The response for {Google::Spanner::V1::Spanner::PartitionQuery PartitionQuery}
+      # or {Google::Spanner::V1::Spanner::PartitionRead PartitionRead}
+      # @!attribute [rw] partitions
+      #   @return [Array<Google::Spanner::V1::Partition>]
+      #     Partitions created by this request.
+      # @!attribute [rw] transaction
+      #   @return [Google::Spanner::V1::Transaction]
+      #     Transaction created by this request.
+      class PartitionResponse; end
 
       # The request for {Google::Spanner::V1::Spanner::Read Read} and
       # {Google::Spanner::V1::Spanner::StreamingRead StreamingRead}.
@@ -205,15 +328,18 @@ module Google
       #     is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
       #     index keys in {Google::Spanner::V1::ReadRequest#index index}.
       #
-      #     Rows are yielded in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty)
-      #     or index key order (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).
+      #     If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is empty, rows are yielded
+      #     in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty) or index key order
+      #     (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is not
+      #     empty, rows will be yielded in an unspecified order.
       #
       #     It is not an error for the +key_set+ to name rows that do not
       #     exist in the database. Read yields nothing for nonexistent rows.
       # @!attribute [rw] limit
       #   @return [Integer]
       #     If greater than zero, only the first +limit+ rows are yielded. If +limit+
-      #     is zero, the default is no limit.
+      #     is zero, the default is no limit. A limit cannot be specified if
+      #     +partition_token+ is set.
       # @!attribute [rw] resume_token
       #   @return [String]
       #     If this request is resuming a previously interrupted read,
@@ -222,6 +348,12 @@ module Google
       #     enables the new read to resume where the last read left off. The
       #     rest of the request parameters must exactly match the request
       #     that yielded this token.
+      # @!attribute [rw] partition_token
+      #   @return [String]
+      #     If present, results will be restricted to the specified partition
+      #     previously created using PartitionRead().    There must be an exact
+      #     match for the values of fields common to this message and the
+      #     PartitionReadRequest message used to create this partition_token.
       class ReadRequest; end
 
       # The request for {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction}.
