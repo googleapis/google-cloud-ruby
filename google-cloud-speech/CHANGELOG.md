@@ -1,5 +1,9 @@
 # Release History
 
+### 0.29.0 / 2018-02-27
+
+* Support Shared Configuration.
+
 ### 0.28.0 / 2017-12-19
 
 * Update Low Level API code
