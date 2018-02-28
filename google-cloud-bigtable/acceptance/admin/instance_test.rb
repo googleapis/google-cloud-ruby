@@ -105,6 +105,16 @@ describe "Bigtable Instance #save", :bigtable do
     assert_equal instance.display_name, "My Cool Instance"
   end
 
+  it "should allow changing the type" do
+    assert_equal @created_instance.type, :DEVELOPMENT
+
+    @created_instance.type = :PRODUCTION
+    @created_instance.save!
+
+    instance = bigtable.instances.find instance_id
+    assert_equal instance.type, :PRODUCTION
+  end
+
   after do
     @created_instance.delete!
   end
