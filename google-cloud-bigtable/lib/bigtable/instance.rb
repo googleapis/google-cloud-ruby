@@ -15,6 +15,7 @@
 module Bigtable
   class Instance
     attr_reader :name, :display_name, :type, :labels, :state
+    attr_writer :display_name
     def initialize name:, display_name:, type: :DEVELOPMENT, labels: {}
       @name = name
       @display_name = display_name
@@ -26,7 +27,7 @@ module Bigtable
       instance = Instance.new name: proto_ob.name,
                               display_name: proto_ob.display_name,
                               type: proto_ob.type,
-                              labels: proto_ob.labels
+                              labels: proto_ob.labels.to_h
       instance.send :client=, client
       instance.send :state=, proto_ob.state
       instance
@@ -38,6 +39,10 @@ module Bigtable
     #   retries, etc.
     def delete! **options
       @client.delete_instance name, options
+    end
+
+    def save! **options
+      @client.update_instance name, display_name, type, labels, options
     end
 
     private

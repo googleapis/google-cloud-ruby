@@ -82,3 +82,30 @@ describe "Bigtable Instance #create", :bigtable do
     @created_instances.each &:delete!
   end
 end
+
+describe "Bigtable Instance #save", :bigtable do
+  let(:instance_id) { "instance#{Time.now.to_i}" }
+  let(:cluster_id) { "cluster#{Time.now.to_i}" }
+  let(:zone) { config.location_path("us-central1-c") }
+  let(:cluster) { Bigtable::Cluster.new(cluster_id: cluster_id, location: zone) }
+
+  before do
+    @created_instance = bigtable.instances.create! instance_id: instance_id,
+                                                   display_name: "My Instance",
+                                                   clusters: [cluster]
+  end
+
+  it "should allow changing the display_name" do
+    assert_equal @created_instance.display_name, "My Instance"
+
+    @created_instance.display_name = "My Cool Instance"
+    @created_instance.save!
+
+    instance = bigtable.instances.find instance_id
+    assert_equal instance.display_name, "My Cool Instance"
+  end
+
+  after do
+    @created_instance.delete!
+  end
+end

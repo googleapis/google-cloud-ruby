@@ -36,4 +36,23 @@ describe Bigtable::Instance do
       mock_client.verify
     end
   end
+
+  describe "#save!" do
+    it 'should update the display name the given instance' do
+      options = {}
+      new_display_name = "New Name #{Time.now.to_i}"
+      instance = Bigtable::Instance.new name: instance_name, 
+                                        display_name: 'Name'
+
+      mock_client = Minitest::Mock.new
+      mock_client.expect :update_instance, nil, [instance_name, new_display_name, instance.type, instance.labels, options]
+
+      instance.send :client=, mock_client
+
+      instance.display_name = new_display_name
+      instance.save! options
+
+      mock_client.verify
+    end
+  end
 end
