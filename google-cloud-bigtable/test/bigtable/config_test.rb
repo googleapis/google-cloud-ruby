@@ -12,12 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'minitest/autorun'
-require 'minitest/spec'
-
-require 'bigtable'
-require 'bigtable/client'
-require 'bigtable/config'
+require 'helper'
 require 'bigtable/instance_set'
 
 describe Bigtable::Config do

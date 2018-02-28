@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2017 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,25 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'bigtable/instance_set'
+require 'minitest/autorun'
+require 'minitest/spec'
 
-module Bigtable
-  class Client
+require "grpc/errors"
+require "google/gax/errors"
 
-    # initializer for Bigtable::Client
-    # @param config [Bigtable::Config]
-    def initialize config
-      @config = config
-    end
-
-    # returns an instance of InstanceSet. This is the handle to perform
-    # any instance related operations.
-    # @return [Bigtable::InstanceSet]
-    # @example
-    #   client = Bigtable::Client.new 'project_id'
-    #   instances = client.instances
-    def instances
-      InstanceSet.new @config
-    end
-  end
-end
+require 'bigtable'
+require 'bigtable/client'
+require 'bigtable/config'
+require 'bigtable/instance'
+require 'bigtable/cluster'

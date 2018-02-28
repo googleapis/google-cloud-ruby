@@ -54,5 +54,15 @@ module Bigtable
       Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient
         .instance_path project_id, instance_id
     end
+
+    # Created formatted location path
+    # @param zone [String]
+    # @return [String]
+    #   Formatted instance path
+    #   +projects/<project>/locations/[a-z][a-z0-9\\-]+[a-z0-9]+.
+    def location_path zone
+      Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient
+        .location_path project_id, zone
+    end
   end
 end
