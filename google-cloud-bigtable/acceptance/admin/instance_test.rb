@@ -14,7 +14,7 @@
 
 require "bigtable_helper"
 
-describe "Bigtable Instance", :bigtable do
+describe "Bigtable Instance #find", :bigtable do
   let(:instance_id) { "instance#{Time.now.to_i}" }
   let(:cluster_id) { "cluster#{Time.now.to_i}" }
   let(:zone) { config.location_path("us-central1-c") }
@@ -32,9 +32,39 @@ describe "Bigtable Instance", :bigtable do
     assert_equal instance.name, @created_instance.name
   end
 
-  it "should appear the instance list" do
+  it "should appear in the instance list" do
     instance = bigtable.instances.select { |ob| ob.name.end_with? instance_id }.first
 
     assert !instance.nil?
+  end
+
+  after do
+    @created_instance.delete!
+  end
+end
+
+describe "Bigtable Instance #create", :bigtable do
+  let(:instance_id) { "instance#{Time.now.to_i}" }
+  let(:cluster_id) { "cluster#{Time.now.to_i}" }
+  let(:zone) { config.location_path("us-central1-c") }
+
+  before do 
+    @created_instances = []
+  end
+
+  it "should create a production instance with three nodes" do
+    cluster = Bigtable::Cluster.new cluster_id: cluster_id, 
+                                    location: zone,
+                                    serve_nodes: 3
+    instance = bigtable.instances.create! instance_id: instance_id,
+                                          display_name: "My Instance",
+                                          type: :PRODUCTION,
+                                          clusters: [cluster]
+
+    @created_instances << instance
+  end
+
+  after do
+    @created_instances.each &:delete!
   end
 end

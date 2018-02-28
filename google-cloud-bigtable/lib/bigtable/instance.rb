@@ -32,8 +32,16 @@ module Bigtable
       instance
     end
 
+    # Deletes the bigtable instance
+    # @param options [Google::Gax::CallOptions]
+    #   Overrides the default settings for this call, e.g, timeout,
+    #   retries, etc.
+    def delete! **options
+      @client.delete_instance name, options
+    end
+
     private
-    
+
     attr_writer :client, :state
   end
 end
