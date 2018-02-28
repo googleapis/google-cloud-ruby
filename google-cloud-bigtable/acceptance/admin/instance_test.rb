@@ -64,6 +64,20 @@ describe "Bigtable Instance #create", :bigtable do
     @created_instances << instance
   end
 
+  it "should create a instance with labels" do
+    key = "key#{Time.now.to_i}"
+    value = "value#{Time.now.to_i}"
+
+    cluster = Bigtable::Cluster.new cluster_id: cluster_id, 
+                                    location: zone
+    instance = bigtable.instances.create! instance_id: instance_id,
+                                          display_name: "My Instance",
+                                          labels: {key=>value},
+                                          clusters: [cluster]
+    assert_equal instance.labels[key], value
+    @created_instances << instance
+  end
+
   after do
     @created_instances.each &:delete!
   end

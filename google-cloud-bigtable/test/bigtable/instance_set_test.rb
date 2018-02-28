@@ -130,7 +130,7 @@ describe Bigtable::InstanceSet do
       
       mock_instance_client = Minitest::Mock.new
       mock_instance_client.expect :create_instance, mock_operation, 
-        [config.project_path, instance_id, {"display_name"=>"name", "type"=>:DEVELOPMENT}, 
+        [config.project_path, instance_id, {"display_name"=>"name", "type"=>:DEVELOPMENT, "labels"=>{}}, 
           {'cluster_name' => clusters.first.to_proto_ob}, {}]
 
       instance_set.stub(:client, mock_instance_client) do
