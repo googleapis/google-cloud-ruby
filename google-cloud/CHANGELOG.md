@@ -1,5 +1,9 @@
 # Release History
 
+### 0.50.0 / 2018-02-27
+
+* Support Shared Configuration.
+
 ### 0.49.0 / 2018-01-10
 
 * BigQuery 1.0.0 release
