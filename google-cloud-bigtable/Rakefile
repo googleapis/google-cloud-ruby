@@ -48,7 +48,8 @@ end
 
 namespace :acceptance do
   task :run do
-    puts "The google-cloud-bigtable gem does not have acceptance tests."
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
   end
 
   desc "Run acceptance tests with coverage."
