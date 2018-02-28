@@ -54,5 +54,21 @@ describe Bigtable::Instance do
 
       mock_client.verify
     end
+
+    it 'should update the type the given instance' do
+      options = {}
+      instance = Bigtable::Instance.new name: instance_name, 
+                                        display_name: 'Name'
+
+      mock_client = Minitest::Mock.new
+      mock_client.expect :update_instance, nil, [instance_name, 'Name', :PRODUCTION, instance.labels, options]
+
+      instance.send :client=, mock_client
+
+      instance.type = :PRODUCTION
+      instance.save! options
+
+      mock_client.verify
+    end
   end
 end
