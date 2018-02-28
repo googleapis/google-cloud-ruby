@@ -1,5 +1,10 @@
 # Release History
 
+### 0.30.0 / 2018-02-27
+
+* Support Shared Configuration.
+* Fix issue with IAM Policy not refreshing properly.
+
 ### 0.29.0 / 2017-12-19
 
 * Update Subscriber's receipt of received messages.
