@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.0 / 2018-02-27
+
+* Use Google Cloud Shared Configuration.
+
 ### 0.29.0 / 2017-12-19
 
 * Update google-gax dependency to 1.0.
