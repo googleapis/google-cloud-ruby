@@ -1,5 +1,10 @@
 # Release History
 
+### 0.31.0 / 2018-02-27
+
+* Use Google Cloud Shared Configuration.
+* Update authentication documentation.
+
 ### 0.30.0 / 2017-12-26
 
 * Add `Google::Cloud::Trace::V2::TraceServiceClient` class.
