@@ -1,5 +1,10 @@
 # Release History
 
+### 1.5.0 / 2018-02-27
+
+* Use Google Cloud Shared Configuration.
+* Deprecated Logging Sink attributes.
+
 ### 1.4.0 / 2017-12-19
 
 * Update google-gax dependency to 1.0.
