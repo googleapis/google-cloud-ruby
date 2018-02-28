@@ -1,5 +1,11 @@
 # Release History
 
+### 0.29.0 / 2018-02-27
+
+* Support Shared Configuration.
+* Fix issue with IAM Policy not refreshing properly.
+* Update Google API Client dependency.
+
 ### 0.28.0 / 2017-11-14
 
 * Add `Google::Cloud::ResourceManager::Credentials` class.
