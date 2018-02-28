@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.0 / 2017-12-19
+
+* Update generated files and documentation.
+
 ### 0.29.0 / 2017-12-19
 
 * Documentation updates.
