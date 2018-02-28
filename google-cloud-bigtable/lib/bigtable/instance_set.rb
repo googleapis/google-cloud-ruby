@@ -67,6 +67,9 @@ module Bigtable
     #   The type of cluster to create. :DEVELOPEMENT, :PRODUCTION.
     #   In case the type is set to :Development, you should not
     #   specify the serve_nodes param in cluster.
+    # @param options [Google::Gax::CallOptions]
+    #   Overrides the default settings for this call, e.g, timeout,
+    #   retries, etc.
     # @return [Bigtable::Instance]
     # The created instance object.
     #
