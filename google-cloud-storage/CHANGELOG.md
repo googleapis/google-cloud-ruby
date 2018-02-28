@@ -1,5 +1,15 @@
 # Release History
 
+### 1.10.0 / 2018-02-27
+
+* Support Shared Configuration.
+* Fix verification for gzipped files.
+  * Add skip_decompress to File#download
+  * Update documentation and examples for gzip-encoded files.
+* Fix issue with IAM Policy not refreshing properly.
+* Update Google API Client dependency.
+* Update authentication documentation
+
 ### 1.9.0 / 2017-11-20
 
 * Add `Google::Cloud::Storage.anonymous` to support public data access.
