@@ -1,5 +1,20 @@
 # Release History
 
+### 0.14.0 / 2018-02-27
+
+* Debugger 0.31.0
+  * Use Google Cloud Shared Configuration.
+  * Fix for mutation detection using Ruby 2.5.
+  * Support disabling mutation detection in debugger evaluation.
+* Error Reporting 0.30.0
+  * Use Google Cloud Shared Configuration.
+* Logging 1.5.0
+  * Use Google Cloud Shared Configuration.
+  * Deprecated Logging Sink attributes.
+* Trace 0.31.0
+  * Use Google Cloud Shared Configuration.
+  * Update authentication documentation.
+
 ### 0.13.0 / 2017-12-19
 
 * Trace 0.30.0 release.
