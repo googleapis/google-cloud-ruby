@@ -113,7 +113,8 @@ module Google
             "GCLOUD_KEYFILE", "GCLOUD_KEYFILE_JSON"
         end
 
-        config.add_field! :project_id, default_project, match: String, allow_nil: true
+        config.add_field! :project_id, default_project,
+                          match: String, allow_nil: true
         config.add_alias! :project, :project_id
         config.add_field! :credentials, default_creds, match: Object
         config.add_alias! :keyfile, :credentials
@@ -129,13 +130,13 @@ module Google
     # Minimum "supported" Ruby version (non-EOL)
     # @private
     #
-    SUPPORTED_VERSION_THRESHOLD = "2.0"
+    SUPPORTED_VERSION_THRESHOLD = "2.0".freeze
 
     ##
     # Minimum "recommended" Ruby version (normal maintenance)
     # @private
     #
-    RECOMMENDED_VERSION_THRESHOLD = "2.3"
+    RECOMMENDED_VERSION_THRESHOLD = "2.3".freeze
 
     ##
     # Check Ruby version and emit a warning if it is old
