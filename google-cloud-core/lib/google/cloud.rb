@@ -148,7 +148,7 @@ module Google
       cur_version = Gem::Version.new RUBY_VERSION
       if cur_version < Gem::Version.new(supported_version)
         warn "WARNING: You are running Ruby #{cur_version}, which has reached" \
-          " end-of-life and is no longer supported by Ruby-core."
+          " end-of-life and is no longer supported by Ruby Core."
         warn "It is strongly recommended that you upgrade to Ruby" \
           " #{recommended_version} or later."
         warn "See https://www.ruby-lang.org/en/downloads/branches/ for more" \

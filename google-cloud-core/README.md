@@ -8,11 +8,11 @@ This library contains shared types, such as error classes, for the google-cloud 
 
 This library is currently supported on Ruby 2.0+.
 
-However, Ruby 2.3 or later is strongly recommended, as earlier releases are
-or are nearing end-of-life. After June 1, 2018, Google will provide official
-support only for Ruby versions that are considered current and supported by
-Ruby-core (that is, Ruby versions that are either in normal maintenance or in
-security maintenance).
+However, Ruby 2.3 or later is strongly recommended, as earlier releases have
+reached or are nearing end-of-life. After June 1, 2018, Google will provide
+official support only for Ruby versions that are considered current and
+supported by Ruby Core (that is, Ruby versions that are either in normal
+maintenance or in security maintenance).
 See https://www.ruby-lang.org/en/downloads/branches/ for further details.
 
 ## Versioning
