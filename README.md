@@ -81,26 +81,27 @@ $ gem install google-cloud-bigquery
 ```ruby
 require "google/cloud/bigquery"
 
-bigquery = Google::Cloud::Bigquery.new(
-  project_id: "my-todo-project",
-  credentials: "/path/to/keyfile.json"
-)
+bigquery = Google::Cloud::Bigquery.new
+dataset = bigquery.create_dataset "my_dataset"
 
-# Create a new table to archive todos
-dataset = bigquery.dataset "my-todo-archive"
-table = dataset.create_table "todos",
-          name: "Todos Archive",
-          description: "Archive for completed TODO records"
+table = dataset.create_table "my_table" do |t|
+  t.name = "My Table",
+  t.description = "A description of my table."
+  t.schema do |s|
+    s.string "first_name", mode: :required
+    s.string "last_name", mode: :required
+    s.integer "age", mode: :required
+  end
+end
 
-# Load data into the table
-file = File.open "/archive/todos/completed-todos.csv"
-load_job = table.load file
+# Load data into the table from Google Cloud Storage
+table.load "gs://my-bucket/file-name.csv"
 
-# Run a query for the number of completed todos by owner
-count_sql = "SELECT owner, COUNT(*) AS complete_count FROM todos GROUP BY owner"
-data = bigquery.query count_sql
+# Run a query
+data = dataset.query "SELECT first_name FROM my_table"
+
 data.each do |row|
-  puts row[:name]
+  puts row[:first_name]
 end
 ```
 
