@@ -1643,7 +1643,7 @@ module Google
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
         #
-        # @return [Google::Cloud::Bigquery::LoadJob]
+        # @return [Boolean] Returns `true` if the load job was successful.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -1652,7 +1652,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
         #
-        #   load_job = table.load_job "gs://my-bucket/file-name.csv"
+        #   table.load "gs://my-bucket/file-name.csv"
         #
         # @example Pass a google-cloud-storage `File` instance:
         #   require "google/cloud/bigquery"
@@ -1665,7 +1665,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #   file = bucket.file "file-name.csv"
-        #   load_job = table.load_job file
+        #   table.load file
         #
         # @example Upload a file directly:
         #   require "google/cloud/bigquery"
@@ -1675,7 +1675,7 @@ module Google
         #   table = dataset.table "my_table"
         #
         #   file = File.open "my_data.csv"
-        #   load_job = table.load_job file
+        #   table.load file
         #
         # @!group Data
         #
