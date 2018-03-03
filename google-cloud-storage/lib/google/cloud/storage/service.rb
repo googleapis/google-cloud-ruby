@@ -283,13 +283,15 @@ module Google
                         content_encoding: nil, content_language: nil,
                         content_type: nil, crc32c: nil, md5: nil, metadata: nil,
                         storage_class: nil, key: nil, kms_key: nil,
+                        temporary_hold: nil, event_based_hold: nil,
                         user_project: nil
           file_obj = Google::Apis::StorageV1::Object.new(
             { cache_control: cache_control, content_type: content_type,
               content_disposition: content_disposition, md5_hash: md5,
               content_encoding: content_encoding, crc32c: crc32c,
               content_language: content_language, metadata: metadata,
-              storage_class: storage_class }.delete_if { |_k, v| v.nil? }
+              storage_class: storage_class, temporary_hold: temporary_hold,
+              event_based_hold: event_based_hold }.delete_if { |_k, v| v.nil? }
           )
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 

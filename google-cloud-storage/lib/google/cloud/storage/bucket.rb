@@ -502,9 +502,13 @@ module Google
         #   seconds), or `nil`.
         #
         def retention_period= new_retention_period
-          @gapi.retention_policy ||= \
-            Google::Apis::StorageV1::Bucket::RetentionPolicy.new
-          @gapi.retention_policy.retention_period = new_retention_period
+          if new_retention_period.nil?
+            @gapi.retention_policy = nil
+          else
+            @gapi.retention_policy ||= \
+              Google::Apis::StorageV1::Bucket::RetentionPolicy.new
+            @gapi.retention_policy.retention_period = new_retention_period
+          end
 
           # Bucket-level retention policy is stored in bucket metadata, so if
           # you send concurrent requests to both lock and remove a bucket's
@@ -552,7 +556,8 @@ module Google
         ##
         # Whether the `event_based_hold` field for newly-created files in the
         # bucket will be initially set to `true`. See
-        # {#default_event_based_hold=}.
+        # {#default_event_based_hold=}, {File#event_based_hold?} and
+        # {File#event_based_hold=}.
         #
         # @return [Boolean] Returns `true` if the `event_based_hold` field for
         #   newly-created files in the bucket will be initially set to `true`,
@@ -566,6 +571,8 @@ module Google
         # Updates the default event-based hold field for the bucket. This field
         # controls the initial state of the `event_based_hold` field for
         # newly-created files in the bucket.
+        #
+        # See {File#event_based_hold?} and {File#event_based_hold=}.
         #
         # @param [Boolean] new_default_event_based_hold The default event-based
         #   hold field for the bucket.
@@ -938,7 +945,8 @@ module Google
                         content_disposition: nil, content_encoding: nil,
                         content_language: nil, content_type: nil,
                         crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, encryption_key: nil, kms_key: nil
+                        storage_class: nil, encryption_key: nil, kms_key: nil,
+                        temporary_hold: nil, event_based_hold: nil
           ensure_service!
           options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
                       cache_control: cache_control, content_type: content_type,
@@ -947,6 +955,8 @@ module Google
                       content_language: content_language, key: encryption_key,
                       kms_key: kms_key,
                       storage_class: storage_class_for(storage_class),
+                      temporary_hold: temporary_hold,
+                      event_based_hold: event_based_hold,
                       user_project: user_project }
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path

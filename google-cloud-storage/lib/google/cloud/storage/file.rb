@@ -446,6 +446,138 @@ module Google
         end
 
         ##
+        # Controls temporary hold of the file. This enforces a temporary hold on
+        # the file as long as this field is `true`, even if the bucket-level
+        # retention policy would normally allow deletion. When the flag is
+        # removed, the normal bucket-level policy rules once again apply.
+        # The default value is `false`.
+        #
+        # @return [Boolean] Returns `true` if there is a temporary hold on the
+        #   file, otherwise `false`.
+        #
+        def temporary_hold?
+          !@gapi.temporary_hold.nil? && @gapi.temporary_hold
+        end
+
+        ##
+        # Controls temporary hold of the file. This enforces a temporary hold on
+        # the file as long as this field is `true`, even if the bucket-level
+        # retention policy would normally allow deletion. When the flag is
+        # removed, the normal bucket-level policy rules once again apply.
+        # The default value is `false`.
+        #
+        # @param [Boolean] new_temporary_hold Whether to enforce a temporary
+        #   hold on the file.
+        #
+        def temporary_hold= new_temporary_hold
+          @gapi.temporary_hold = new_temporary_hold
+          update_gapi! :temporary_hold
+        end
+
+        ##
+        # Controls event-based hold of the file. This enforces an event-based
+        # hold on the file as long as this field is `true`, even if the
+        # bucket-level retention policy would normally allow deletion. Changing
+        # from 'true' to 'false' extends the retention duration of the file to
+        # the current date plus the bucket-level policy duration. Unsetting the
+        # event-based hold retention flag represents that a retention-related
+        # event has occurred, and thus the retention clock ticks from the moment
+        # of the event as opposed to the creation date of the object. The
+        # default value is configured at the bucket-level (which defaults to
+        # `false`), and is assigned to newly-created objects.
+        #
+        # See {Bucket#default_event_based_hold?} and
+        # {Bucket#default_event_based_hold=}.
+        #
+        # If a bucket's retention policy duration is modified after the
+        # event-based hold flag is unset, the updated retention duration applies
+        # retroactively to objects that previously had event-based holds.  For
+        # example:
+        #
+        # * If the bucket's [unlocked] retention policy is removed, objects with
+        #   event-based holds may be deleted immediately after the hold is
+        #   removed (the duration of a nonexistent policy for the purpose of
+        #   event-based holds is considered to be zero).
+        # * If the bucket's [unlocked] policy is reduced, objects with
+        #   previously released event-based holds will be have their retention
+        #   expiration dates reduced accordingly.
+        # * If the bucket's policy is extended, objects with previously released
+        #   event-based holds will have their retention expiration dates
+        #   extended accordingly.  However, note that objects with event-based
+        #   holds released prior to the effective date of the new policy may
+        #   have already been deleted by the user.
+        #
+        # @return [Boolean] Returns `true` if there is an event-based hold on
+        #   the file, otherwise `false`.
+        #
+        def event_based_hold?
+          !@gapi.event_based_hold.nil? && @gapi.event_based_hold
+        end
+
+        ##
+        # Controls event-based hold of the file. This enforces an event-based
+        # hold on the file as long as this field is `true`, even if the
+        # bucket-level retention policy would normally allow deletion. Changing
+        # from 'true' to 'false' extends the retention duration of the file to
+        # the current date plus the bucket-level policy duration. Unsetting the
+        # event-based hold retention flag represents that a retention-related
+        # event has occurred, and thus the retention clock ticks from the moment
+        # of the event as opposed to the creation date of the object. The
+        # default value is configured at the bucket-level (which defaults to
+        # `false`), and is assigned to newly-created objects.
+        #
+        # See {Bucket#default_event_based_hold?} and
+        # {Bucket#default_event_based_hold=}.
+        #
+        # If a bucket's retention policy duration is modified after the
+        # event-based hold flag is unset, the updated retention duration applies
+        # retroactively to objects that previously had event-based holds.  For
+        # example:
+        #
+        # * If the bucket's [unlocked] retention policy is removed, objects with
+        #   event-based holds may be deleted immediately after the hold is
+        #   removed (the duration of a nonexistent policy for the purpose of
+        #   event-based holds is considered to be zero).
+        # * If the bucket's [unlocked] policy is reduced, objects with
+        #   previously released event-based holds will be have their retention
+        #   expiration dates reduced accordingly.
+        # * If the bucket's policy is extended, objects with previously released
+        #   event-based holds will have their retention expiration dates
+        #   extended accordingly.  However, note that objects with event-based
+        #   holds released prior to the effective date of the new policy may
+        #   have already been deleted by the user.
+        #
+        # @param [Boolean] new_event_based_hold Whether to enforce an
+        #   event-based hold on the file.
+        #
+        def event_based_hold= new_event_based_hold
+          @gapi.event_based_hold = new_event_based_hold
+          update_gapi! :event_based_hold
+        end
+
+        ##
+        # The retention expiration time of the file. This field is indirectly
+        # mutable when the retention policy applicable to the object changes.
+        # The date represents the earliest time that the object could be
+        # deleted, assuming no temporary hold is set. (See {#temporary_hold?}.)
+        # It is provided when both of the following are true:
+        #
+        # * There is a retention policy on the bucket.
+        # * The eventBasedHold flag is unset on the object.
+        #
+        # Note that it can be provided even when {#temporary_hold?} is `true`
+        # (so that the user can reason about policy without having to first
+        # unset the temporary hold).
+        #
+        # @return [DateTime, nil] A DateTime representing the earliest time at
+        #   which the object can be deleted, or `nil` if there are no
+        #   restrictions on deleting the object.
+        #
+        def retention_expires_at
+          @gapi.retention_expiration_time
+        end
+
+        ##
         # Retrieves a list of versioned files for the current object.
         #
         # Useful for listing archived versions of the file, restoring the live
@@ -1038,6 +1170,11 @@ module Google
 
         ##
         # Permanently deletes the file.
+        #
+        # Raises PermissionDeniedError if the object is subject to an active
+        # retention policy or hold. (See {#retention_expires_at},
+        # {Bucket#retention_period=}, {#temporary_hold?} and
+        # {#event_based_hold?}.)
         #
         # @param [Boolean, Integer] generation Specify a version of the file to
         #   delete. When `true`, it will delete the version returned by

@@ -79,6 +79,10 @@ describe Google::Cloud::Storage::File, :mock_storage do
     file.metadata.frozen?.must_equal true
     file.metadata["player"].must_equal "Alice"
     file.metadata["score"].must_equal "101"
+
+    file.temporary_hold?.must_equal true
+    file.event_based_hold?.must_equal true
+    file.retention_expires_at.must_be_within_delta Time.now.to_datetime
   end
 
   it "can delete itself" do
