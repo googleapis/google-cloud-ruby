@@ -14,7 +14,7 @@
 
 require "storage_helper"
 
-describe Google::Cloud::Storage::Bucket, :retention_policy, :storage do
+describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
   let(:bucket_name) { "#{$bucket_names.first}-rpol" }
   let :bucket do
     storage.bucket(bucket_name) ||
@@ -23,26 +23,20 @@ describe Google::Cloud::Storage::Bucket, :retention_policy, :storage do
   let(:file_path) { "acceptance/data/CloudPlatform_128px_Retina.png" }
 
   after do
-    bucket.update do |b|
-      b.retention_period = nil
-      b.default_event_based_hold = false
-    end
-    bucket.files.all.each do |b|
-      b.temporary_hold = false
-      b.event_based_hold = false
-      b.delete
+    if bucket
+      bucket.files.all &:delete
+      bucket.delete
     end
   end
 
-  focus
   it "manages a file with retention_period" do
     bucket.update do |b|
-      b.retention_period = 100
+      b.retention_period = 10
       b.default_event_based_hold = false
     end
 
     bucket.reload!
-    bucket.retention_period.must_equal 100
+    bucket.retention_period.must_equal 10
     bucket.retention_effective_at.must_be_kind_of DateTime
     bucket.retention_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
@@ -85,7 +79,7 @@ describe Google::Cloud::Storage::Bucket, :retention_policy, :storage do
 
     file.delete
   end
-  focus
+
   it "manages a file with default_event_based_hold" do
     bucket.update do |b|
       b.retention_period = nil
@@ -128,7 +122,7 @@ describe Google::Cloud::Storage::Bucket, :retention_policy, :storage do
 
     file.delete
   end
-  focus
+
   it "manages a file with temporary_hold" do
     bucket.retention_period.must_be :nil?
     bucket.retention_effective_at.must_be :nil?
@@ -154,5 +148,23 @@ describe Google::Cloud::Storage::Bucket, :retention_policy, :storage do
     file.retention_expires_at.must_be :nil?
 
     file.delete
+  end
+
+  it "locks its retention_period with lock_retention_policy!" do
+    bucket.update do |b|
+      b.retention_period = 10
+    end
+
+    bucket.reload!
+    bucket.retention_period.must_equal 10
+
+    bucket.lock_retention_policy!
+
+    err = expect do
+      bucket.update do |b|
+        b.retention_period = nil
+      end
+    end.must_raise Google::Cloud::PermissionDeniedError
+    err.message.must_match /has a locked Retention Policy which cannot be removed/
   end
 end

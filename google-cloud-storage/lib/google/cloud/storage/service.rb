@@ -128,6 +128,17 @@ module Google
         end
 
         ##
+        # Locks retention policy on a bucket.
+        def lock_bucket_retention_policy bucket_name, metageneration,
+                                         user_project: nil
+          execute do
+            service.lock_bucket_retention_policy \
+              bucket_name, metageneration,
+              user_project: user_project(user_project)
+          end
+        end
+
+        ##
         # Retrieves a list of ACLs for the given bucket.
         def list_bucket_acls bucket_name, user_project: nil
           execute do

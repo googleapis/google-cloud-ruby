@@ -130,6 +130,15 @@ module Google
         end
 
         ##
+        # The metadata generation of the bucket.
+        #
+        # @return [Fixnum] The metageneration.
+        #
+        def metageneration
+          @gapi.metageneration
+        end
+
+        ##
         # Returns the current CORS configuration for a static website served
         # from the bucket.
         #
@@ -492,10 +501,18 @@ module Google
 
         ##
         # The period of time (in seconds) that files in the bucket must be
-        # retained, and cannot be deleted, overwritten, or archived.
+        # retained, and cannot be deleted, overwritten, or archived. Passing a
+        # valid Integer value will add a new retention policy to the bucket
+        # if none exists. Passing `nil` will remove the retention policy from
+        # the bucket if it exists, unless the policy is locked.
         #
-        # See also: {#retention_period}, {#retention_effective_at}, and
-        # {#retention_locked?}.
+        # Locked policies can be extended in duration by using this method
+        # to set a higher value. Such an extension is permanent, and it cannot
+        # later be reduced.  The extended duration will apply retroactively to
+        # all files currently in the bucket.
+        #
+        # See also: {#lock_retention_policy!}, {#retention_period},
+        # {#retention_effective_at}, and {#retention_locked?}.
         #
         # @param [Integer, nil] new_retention_period The retention period
         #   defined in seconds. The value must be between 0 and 100 years (in
@@ -538,14 +555,15 @@ module Google
 
         ##
         # Whether the bucket's file retention policy is locked and its retention
-        # period cannot be changed. See {#retention_period=}.
+        # period cannot be reduced. See {#retention_period=} and
+        # {#lock_retention_policy!}.
         #
         # This value can only be set to `true` by calling the LockPolicy API.
         #
         # @return [Boolean] Returns `false` if there is no retention policy or
         #   if the retention policy is unlocked and the retention period can be
-        #   changed. Returns `true` if the retention policy is locked and the
-        #   retention period cannot be changed.
+        #   reduced. Returns `true` if the retention policy is locked and the
+        #   retention period cannot be reduced.
         #
         def retention_locked?
           return false unless @gapi.retention_policy
@@ -580,6 +598,30 @@ module Google
         def default_event_based_hold= new_default_event_based_hold
           @gapi.default_event_based_hold = new_default_event_based_hold
           patch_gapi! :default_event_based_hold
+        end
+
+        ##
+        # PERMANENTLY locks the retention policy (see {#retention_period=}) on
+        # the bucket if one exists. The policy is transitioned to a locked state
+        # in which its duration cannot be reduced.
+        #
+        # Locked policies can be extended in duration by setting
+        # {#retention_period=} to a higher value. Such an extension is
+        # permanent, and it cannot later be reduced.  The extended duration will
+        # apply retroactively to all files currently in the bucket.
+        #
+        # This method also [creates a
+        # lien](https://cloud.google.com/resource-manager/reference/rest/v1/liens/create)
+        # on the `resourcemanager.projects.delete` permission for the project
+        # containing the bucket.
+        #
+        # @return [Boolean] Returns `true` if the lock operation is successful.
+        #
+        def lock_retention_policy!
+          ensure_service!
+          service.lock_bucket_retention_policy name, metageneration,
+                                               user_project: user_project
+          true
         end
 
         ##
