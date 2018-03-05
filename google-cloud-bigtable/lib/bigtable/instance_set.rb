@@ -73,13 +73,13 @@ module Bigtable
     # @param labels [Hash{String => String}]
     #   Labels are a flexible and lightweight mechanism for organizing cloud
     #   resources into groups that reflect a customer's organizational needs and
-    #   deployment strategies. They can be used to filter resources and aggregate
-    #   metrics.
+    #   deployment strategies. They can be used to filter resources and
+    #   aggregate metrics.
     #
-    #   * Label keys must be between 1 and 63 characters long and must conform to
-    #     the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+.
-    #   * Label values must be between 0 and 63 characters long and must conform to
-    #     the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+.
+    #   * Label keys must be between 1 and 63 characters long and must conform
+    #     to the regular expression: +[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}+
+    #   * Label values must be between 0 and 63 characters long and must conform
+    #     to the regular expression: +[\p{Ll}\p{Lo}\p{N}_-]{0,63}+
     #   * No more than 64 labels can be associated with a given resource.
     #   * Keys and values must both be under 128 bytes.
     # @return [Bigtable::Instance]
@@ -103,23 +103,16 @@ module Bigtable
     #                                    display_name: "Instance Name",
     #                                    type: :PRODUCTION,
     #                                    clusters: [cluster]
-    def create! instance_id:,
-                display_name:,
-                clusters:,
+    def create! instance_id:, display_name:, clusters:,
                 type: :DEVELOPMENT, labels: {}, **options
       instance = {
-        "display_name" => display_name,
-        "type" => type,
-        "labels" => labels
+        "display_name" => display_name, "type" => type, "labels" => labels
       }
 
       cluster_hash = clusters.map { |c| [c.cluster_id, c.to_proto_ob] }.to_h
-
       operation = client.create_instance @config.project_path,
-                                         instance_id,
-                                         instance,
-                                         cluster_hash,
-                                         options
+                                         instance_id, instance,
+                                         cluster_hash, options
       operation.wait_until_done!
       Bigtable::Instance.from_proto_ob operation.response, client
     end

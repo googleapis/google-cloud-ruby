@@ -12,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'bigtable/instance_set'
+require "bigtable/instance_set"
 
 module Bigtable
   class Client
-
     # initializer for Bigtable::Client
     # @param config [Bigtable::Config]
     def initialize config

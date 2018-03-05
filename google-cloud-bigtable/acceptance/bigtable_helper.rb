@@ -15,10 +15,10 @@
 gem "minitest"
 require "minitest/autorun"
 
-require 'bigtable'
-require 'bigtable/client'
-require 'bigtable/config'
-require 'bigtable/cluster'
+require "bigtable"
+require "bigtable/client"
+require "bigtable/config"
+require "bigtable/cluster"
 
 $bigtable_config = Bigtable::Config.new ENV["BIGTABLE_PROJECT"]
 $bigtable = Bigtable::Client.new $bigtable_config
