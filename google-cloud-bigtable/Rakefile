@@ -33,8 +33,6 @@ namespace :test do
       command_name "google-cloud-bigtable"
       track_files "lib/**/*.rb"
       add_filter "test/"
-      add_filter "google/cloud/bigtable/v2"
-      add_filter "google/cloud/bigtable/admin/v2"
     end
 
     Rake::Task["test"].invoke
