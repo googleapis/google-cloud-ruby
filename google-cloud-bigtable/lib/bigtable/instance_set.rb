@@ -109,7 +109,7 @@ module Bigtable
         "display_name" => display_name, "type" => type, "labels" => labels
       }
 
-      cluster_hash = clusters.map { |c| [c.cluster_id, c.to_proto_ob] }.to_h
+      cluster_hash = Hash[clusters.map { |c| [c.cluster_id, c.to_proto_ob] }]
       operation = client.create_instance @config.project_path,
                                          instance_id, instance,
                                          cluster_hash, options
