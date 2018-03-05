@@ -45,4 +45,14 @@ describe Bigtable::Config do
       "projects/#{@project_id}/instances/#{instance_id}"
     end
   end
+
+  describe '#location_path' do
+    it 'should return location_path for current project and zone' do
+      zone = "instance_#{Time.now.to_i}"
+      config = Bigtable::Config.new @project_id
+
+      assert_equal config.location_path(zone), 
+      "projects/#{@project_id}/locations/#{zone}"
+    end
+  end
 end

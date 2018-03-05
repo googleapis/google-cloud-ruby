@@ -20,7 +20,7 @@ require 'bigtable/client'
 require 'bigtable/config'
 require 'bigtable/cluster'
 
-$bigtable_config = Bigtable::Config.new 'anuj-101-174707'
+$bigtable_config = Bigtable::Config.new ENV["BIGTABLE_PROJECT"]
 $bigtable = Bigtable::Client.new $bigtable_config
 
 ##
