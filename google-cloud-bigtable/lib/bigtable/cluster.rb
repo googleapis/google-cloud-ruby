@@ -16,9 +16,8 @@ module Bigtable
   class Cluster
     attr_reader :name, :location, :serve_nodes, :default_storage_type,
                 :cluster_id
-    def initialize cluster_id:, location:, serve_nodes: nil,
-                   name: nil,
-                   storage: :STORAGE_TYPE_UNSPECIFIED
+    def initialize cluster_id: nil, location: nil, serve_nodes: nil,
+                   name: nil, storage: :STORAGE_TYPE_UNSPECIFIED
       @name = name
       @cluster_id = cluster_id
       @location = location

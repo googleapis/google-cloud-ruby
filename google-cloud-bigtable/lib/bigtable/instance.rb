@@ -16,7 +16,8 @@ module Bigtable
   class Instance
     attr_reader :name, :display_name, :type, :labels, :state
     attr_writer :display_name, :type
-    def initialize name:, display_name:, type: :DEVELOPMENT, labels: {}
+
+    def initialize name: nil, display_name: nil, type: :DEVELOPMENT, labels: {}
       @name = name
       @display_name = display_name
       @type = type

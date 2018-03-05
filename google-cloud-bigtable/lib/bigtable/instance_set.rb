@@ -64,7 +64,7 @@ module Bigtable
     #   A list of Bigtable::Cluster objects to be created. The
     #   created object must contain cluster id.
     # @param type [Symbol]
-    #   The type of cluster to create. :DEVELOPEMENT, :PRODUCTION.
+    #   The type of cluster to create. :DEVELOPMENT, :PRODUCTION.
     #   In case the type is set to :Development, you should not
     #   specify the serve_nodes param in cluster.
     # @options options [Google::Gax::CallOptions]
@@ -103,7 +103,7 @@ module Bigtable
     #                                    display_name: "Instance Name",
     #                                    type: :PRODUCTION,
     #                                    clusters: [cluster]
-    def create! instance_id:, display_name:, clusters:,
+    def create! instance_id: nil, display_name: nil, clusters: nil,
                 type: :DEVELOPMENT, labels: {}, **options
       instance = {
         "display_name" => display_name, "type" => type, "labels" => labels
