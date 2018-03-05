@@ -34,7 +34,7 @@ module Bigtable
     end
 
     # Deletes the bigtable instance
-    # @param options [Google::Gax::CallOptions]
+    # @options [Google::Gax::CallOptions] options
     #   Overrides the default settings for this call, e.g, timeout,
     #   retries, etc.
     def delete! **options
