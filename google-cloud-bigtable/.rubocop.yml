@@ -4,7 +4,7 @@ AllCops:
     - "lib/google/**/*"
     - "Rakefile"
     - "test/**/*"
-    - "acceptance/**/*smoke_test.rb"
+    - "acceptance/**/*"
 
 Documentation:
   Enabled: false
@@ -13,3 +13,5 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
+Metrics/ParameterLists:
+  Enabled: false

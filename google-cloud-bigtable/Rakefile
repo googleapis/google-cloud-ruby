@@ -42,13 +42,16 @@ end
 # Acceptance tests
 desc "Run the google-cloud-bigtable acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
-
+  project = args[:project]
+  project ||= ENV["BIGTABLE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  ENV["BIGTABLE_PROJECT"] = project
   Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
-  task :run do
-    puts "The google-cloud-bigtable gem does not have acceptance tests."
+  task :run  do
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
   end
 
   desc "Run acceptance tests with coverage."
