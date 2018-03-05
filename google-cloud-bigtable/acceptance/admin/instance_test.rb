@@ -33,7 +33,9 @@ describe "Bigtable Instance #find", :bigtable do
   end
 
   it "should appear in the instance list" do
-    instance = bigtable.instances.select { |ob| ob.name.end_with? instance_id }.first
+    instance = bigtable.instances
+                       .select { |ob| ob.name.end_with? instance_id }
+                       .first
 
     assert !instance.nil?
   end
@@ -48,12 +50,12 @@ describe "Bigtable Instance #create", :bigtable do
   let(:cluster_id) { "cluster#{Time.now.to_i}" }
   let(:zone) { config.location_path("us-central1-c") }
 
-  before do 
+  before do
     @created_instances = []
   end
 
   it "should create a production instance with three nodes" do
-    cluster = Bigtable::Cluster.new cluster_id: cluster_id, 
+    cluster = Bigtable::Cluster.new cluster_id: cluster_id,
                                     location: zone,
                                     serve_nodes: 3
     instance = bigtable.instances.create! instance_id: instance_id,
@@ -68,18 +70,18 @@ describe "Bigtable Instance #create", :bigtable do
     key = "key#{Time.now.to_i}"
     value = "value#{Time.now.to_i}"
 
-    cluster = Bigtable::Cluster.new cluster_id: cluster_id, 
+    cluster = Bigtable::Cluster.new cluster_id: cluster_id,
                                     location: zone
     instance = bigtable.instances.create! instance_id: instance_id,
                                           display_name: "My Instance",
-                                          labels: {key=>value},
+                                          labels: { key => value },
                                           clusters: [cluster]
     assert_equal instance.labels[key], value
     @created_instances << instance
   end
 
   after do
-    @created_instances.each &:delete!
+    @created_instances.each(&:delete!)
   end
 end
 
