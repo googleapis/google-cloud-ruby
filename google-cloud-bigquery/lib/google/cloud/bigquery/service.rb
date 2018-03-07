@@ -460,43 +460,6 @@ module Google
           req
         end
 
-        def query_config query, options = {}
-          dataset_config = dataset_ref_from options[:dataset], options[:project]
-
-          req = API::QueryRequest.new(
-            query: query,
-            max_results: options[:max],
-            default_dataset: dataset_config,
-            timeout_ms: options[:timeout],
-            dry_run: options[:dryrun],
-            use_query_cache: options[:cache],
-            use_legacy_sql: Convert.resolve_legacy_sql(
-              options[:standard_sql], options[:legacy_sql])
-          )
-
-          if options[:params]
-            if Array === options[:params]
-              req.use_legacy_sql = false
-              req.parameter_mode = "POSITIONAL"
-              req.query_parameters = options[:params].map do |param|
-                Convert.to_query_param param
-              end
-            elsif Hash === options[:params]
-              req.use_legacy_sql = false
-              req.parameter_mode = "NAMED"
-              req.query_parameters = options[:params].map do |name, param|
-                Convert.to_query_param(param).tap do |named_param|
-                  named_param.name = String name
-                end
-              end
-            else
-              raise "Query parameters must be an Array or a Hash."
-            end
-          end
-
-          req
-        end
-
         # rubocop:enable all
 
         ##
