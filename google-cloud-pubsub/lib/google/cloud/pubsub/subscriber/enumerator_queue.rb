@@ -30,9 +30,11 @@ module Google
             @queue.push obj
           end
 
-          def dump_queue
+          def quit_and_dump_queue
             objs = []
             objs << @queue.pop until @queue.empty?
+            # Signal that the enumerator is ready to end
+            @queue.push @sentinel
             objs
           end
 
