@@ -266,10 +266,12 @@ module Google
           execute(backoff: true) { service.insert_job @project, job_object }
         end
 
-        def query_job query, options = {}
-          config = query_table_config(query, options)
+        def query_job job_id, prefix, query_job_gapi
           # Jobs have generated id, so this operation is considered idempotent
-          execute(backoff: true) { service.insert_job @project, config }
+          query_job_gapi.job_reference = job_ref_from(job_id, prefix)
+          execute backoff: true do
+            service.insert_job @project, query_job_gapi
+          end
         end
 
         ##
@@ -357,30 +359,6 @@ module Google
 
         protected
 
-        def table_ref_from tbl
-          return nil if tbl.nil?
-          API::TableReference.new(
-            project_id: tbl.project_id,
-            dataset_id: tbl.dataset_id,
-            table_id: tbl.table_id
-          )
-        end
-
-        def dataset_ref_from dts, pjt = nil
-          return nil if dts.nil?
-          if dts.respond_to? :dataset_id
-            API::DatasetReference.new(
-              project_id: (pjt || dts.project_id || @project),
-              dataset_id: dts.dataset_id
-            )
-          else
-            API::DatasetReference.new(
-              project_id: (pjt || @project),
-              dataset_id: dts
-            )
-          end
-        end
-
         # Generate a random string similar to the BigQuery service job IDs.
         def generate_id
           SecureRandom.urlsafe_base64(21)
@@ -397,70 +375,6 @@ module Google
             job_id: job_id
           )
         end
-
-        # rubocop:disable all
-
-        ##
-        # Job description for query job
-        def query_table_config query, options
-          dest_table = table_ref_from options[:table]
-          dataset_config = dataset_ref_from options[:dataset], options[:project]
-          req = API::Job.new(
-            job_reference: job_ref_from(options[:job_id], options[:prefix]),
-            configuration: API::JobConfiguration.new(
-              query: API::JobConfigurationQuery.new(
-                query: query,
-                # tableDefinitions: { ... },
-                priority: priority_value(options[:priority]),
-                use_query_cache: options[:cache],
-                destination_table: dest_table,
-                create_disposition: create_disposition(options[:create]),
-                write_disposition: write_disposition(options[:write]),
-                allow_large_results: options[:large_results],
-                flatten_results: options[:flatten],
-                default_dataset: dataset_config,
-                use_legacy_sql: Convert.resolve_legacy_sql(
-                  options[:standard_sql], options[:legacy_sql]),
-                maximum_billing_tier: options[:maximum_billing_tier],
-                maximum_bytes_billed: options[:maximum_bytes_billed],
-                user_defined_function_resources: udfs(options[:udfs])
-              )
-            )
-          )
-          req.configuration.labels = options[:labels] if options[:labels]
-
-          if options[:params]
-            if Array === options[:params]
-              req.configuration.query.use_legacy_sql = false
-              req.configuration.query.parameter_mode = "POSITIONAL"
-              req.configuration.query.query_parameters = options[:params].map do |param|
-                Convert.to_query_param param
-              end
-            elsif Hash === options[:params]
-              req.configuration.query.use_legacy_sql = false
-              req.configuration.query.parameter_mode = "NAMED"
-              req.configuration.query.query_parameters = options[:params].map do |name, param|
-                Convert.to_query_param(param).tap do |named_param|
-                  named_param.name = String name
-                end
-              end
-            else
-              raise "Query parameters must be an Array or a Hash."
-            end
-          end
-
-          if options[:external]
-            external_table_pairs = options[:external].map do |name, obj|
-              [String(name), obj.to_gapi]
-            end
-            external_table_hash = Hash[external_table_pairs]
-            req.configuration.query.table_definitions = external_table_hash
-          end
-
-          req
-        end
-
-        # rubocop:enable all
 
         ##
         # Job description for copy job
@@ -526,11 +440,6 @@ module Google
             "empty" => "WRITE_EMPTY" }[str.to_s.downcase]
         end
 
-        def priority_value str
-          { "batch" => "BATCH",
-            "interactive" => "INTERACTIVE" }[str.to_s.downcase]
-        end
-
         def source_format path, format
           val = {
             "csv" => "CSV",
@@ -556,18 +465,6 @@ module Google
           mime_type
         rescue StandardError
           nil
-        end
-
-        def udfs array_or_str
-          Array(array_or_str).map do |uri_or_code|
-            resource = API::UserDefinedFunctionResource.new
-            if uri_or_code.start_with?("gs://")
-              resource.resource_uri = uri_or_code
-            else
-              resource.inline_code = uri_or_code
-            end
-            resource
-          end
         end
 
         def execute backoff: nil

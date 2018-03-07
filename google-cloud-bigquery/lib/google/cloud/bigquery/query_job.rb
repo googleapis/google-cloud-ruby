@@ -15,6 +15,7 @@
 
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/data"
+require "google/apis/bigquery_v2"
 
 module Google
   module Cloud
@@ -312,6 +313,182 @@ module Google
           Data.from_gapi_json data_hash, destination_table_gapi, service
         end
         alias query_results data
+
+        ##
+        # Yielded to a block to accumulate changes for a patch request.
+        class Updater < QueryJob
+          class << self
+            # If no job_id or prefix is given, always generate a client-side
+            # job ID anyway, for idempotent retry in the google-api-client
+            # layer. See
+            # https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
+            def job_ref_from job_id, prefix
+              prefix ||= "job_"
+              job_id ||= "#{prefix}#{generate_id}"
+              API::JobReference.new(
+                project_id: @project,
+                job_id: job_id
+              )
+            end
+
+            def dataset_ref_from dts, pjt = nil
+              return nil if dts.nil?
+              if dts.respond_to? :dataset_id
+                Google::Apis::BigqueryV2::DatasetReference.new(
+                  project_id: (pjt || dts.project_id || @project),
+                  dataset_id: dts.dataset_id
+                )
+              else
+                Google::Apis::BigqueryV2::DatasetReference.new(
+                  project_id: (pjt || @project),
+                  dataset_id: dts
+                )
+              end
+            end
+
+            def table_ref_from tbl
+              return nil if tbl.nil?
+              Google::Apis::BigqueryV2::TableReference.new(
+                project_id: tbl.project_id,
+                dataset_id: tbl.dataset_id,
+                table_id: tbl.table_id
+              )
+            end
+
+            def priority_value str
+              { "batch" => "BATCH",
+                "interactive" => "INTERACTIVE" }[str.to_s.downcase]
+            end
+
+            def create_disposition str
+              { "create_if_needed" => "CREATE_IF_NEEDED",
+                "createifneeded" => "CREATE_IF_NEEDED",
+                "if_needed" => "CREATE_IF_NEEDED",
+                "needed" => "CREATE_IF_NEEDED",
+                "create_never" => "CREATE_NEVER",
+                "createnever" => "CREATE_NEVER",
+                "never" => "CREATE_NEVER" }[str.to_s.downcase]
+            end
+
+            def write_disposition str
+              { "write_truncate" => "WRITE_TRUNCATE",
+                "writetruncate" => "WRITE_TRUNCATE",
+                "truncate" => "WRITE_TRUNCATE",
+                "write_append" => "WRITE_APPEND",
+                "writeappend" => "WRITE_APPEND",
+                "append" => "WRITE_APPEND",
+                "write_empty" => "WRITE_EMPTY",
+                "writeempty" => "WRITE_EMPTY",
+                "empty" => "WRITE_EMPTY" }[str.to_s.downcase]
+            end
+
+            def udfs array_or_str
+              Array(array_or_str).map do |uri_or_code|
+                resource =
+                  Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+                if uri_or_code.start_with?("gs://")
+                  resource.resource_uri = uri_or_code
+                else
+                  resource.inline_code = uri_or_code
+                end
+                resource
+              end
+            end
+          end
+
+          ##
+          # Create an Updater object.
+          def initialize gapi
+            @gapi = gapi
+          end
+
+          # rubocop:disable all
+
+          ##
+          # Create an Updater from an options hash.
+          #
+          # @return [Google::Cloud::Bigquery::QueryJob::Updater] A job
+          #   configuration object for setting query options.
+          def self.from_options query, options
+            dest_table = table_ref_from options[:table]
+            dataset_config = dataset_ref_from options[:dataset], options[:project]
+            req = Google::Apis::BigqueryV2::Job.new(
+              configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+                query: Google::Apis::BigqueryV2::JobConfigurationQuery.new(
+                  query: query,
+                  # tableDefinitions: { ... },
+                  priority: priority_value(options[:priority]),
+                  use_query_cache: options[:cache],
+                  destination_table: dest_table,
+                  create_disposition: create_disposition(options[:create]),
+                  write_disposition: write_disposition(options[:write]),
+                  allow_large_results: options[:large_results],
+                  flatten_results: options[:flatten],
+                  default_dataset: dataset_config,
+                  use_legacy_sql: Convert.resolve_legacy_sql(
+                    options[:standard_sql], options[:legacy_sql]),
+                  maximum_billing_tier: options[:maximum_billing_tier],
+                  maximum_bytes_billed: options[:maximum_bytes_billed],
+                  user_defined_function_resources: udfs(options[:udfs])
+                )
+              )
+            )
+            req.configuration.labels = options[:labels] if options[:labels]
+
+            if options[:external]
+              external_table_pairs = options[:external].map do |name, obj|
+                [String(name), obj.to_gapi]
+              end
+              external_table_hash = Hash[external_table_pairs]
+              req.configuration.query.table_definitions = external_table_hash
+            end
+
+            QueryJob::Updater.new req
+          end
+
+          # rubocop:enable all
+
+          # Sets the query parameters. Standard SQL only.
+          #
+          # @param [Array, Hash] params Used to pass query arguments when the
+          #   `query` string contains either positional (`?`) or named
+          #   (`@myparam`) query parameters. If value passed is an array
+          #   `["foo"]`, the query must use positional query parameters. If
+          #   value passed is a hash `{ myparam: "foo" }`, the query must use
+          #   named query parameters. When set, `legacy_sql` will automatically
+          #   be set to false and `standard_sql` to true.
+          #
+          # @!group Attributes
+          def params= params
+            case params
+            when Array then
+              @gapi.configuration.query.use_legacy_sql = false
+              @gapi.configuration.query.parameter_mode = "POSITIONAL"
+              @gapi.configuration.query.query_parameters = params.map do |param|
+                Convert.to_query_param param
+              end
+            when Hash then
+              @gapi.configuration.query.use_legacy_sql = false
+              @gapi.configuration.query.parameter_mode = "NAMED"
+              @gapi.configuration.query.query_parameters =
+                params.map do |name, param|
+                  Convert.to_query_param(param).tap do |named_param|
+                    named_param.name = String name
+                  end
+                end
+            else
+              raise "Query parameters must be an Array or a Hash."
+            end
+          end
+
+          # Returns the Google API client library version of this query job.
+          #
+          # @return [<Google::Apis::BigqueryV2::Job>] (See
+          #   {Google::Apis::BigqueryV2::Job})
+          def to_gapi
+            @gapi
+          end
+        end
 
         ##
         # Represents a stage in the execution plan for the query.
