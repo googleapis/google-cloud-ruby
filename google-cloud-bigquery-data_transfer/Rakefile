@@ -1,0 +1,192 @@
+# Copyright 2018 Google LLC
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "bundler/setup"
+require "bundler/gem_tasks"
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
+
+desc "Run tests."
+task :test do
+  $LOAD_PATH.unshift "lib", "test"
+  Dir.glob("test/**/*test.rb")
+    .reject { |file| file.include? "smoke_test" }
+    .each { |file| require_relative file }
+end
+
+namespace :test do
+  desc "Runs tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-bigquery-data_transfer"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["test"].invoke
+  end
+end
+
+desc "Runs the smoke tests."
+task :smoke_test do
+
+  $LOAD_PATH.unshift "lib", "smoke_test"
+  Dir.glob("acceptance/**/*smoke_test.rb").each { |file| require_relative file }
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-bigquery-data_transfer"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["smoke_test"].invoke
+  end
+end
+
+# Acceptance tests
+desc "Run the google-cloud-bigquery-data_transfer acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||=
+    ENV["DATA_TRANSFER_TEST_PROJECT"] ||
+    ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||=
+    ENV["DATA_TRANSFER_TEST_KEYFILE"] ||
+    ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||=
+      ENV["DATA_TRANSFER_TEST_KEYFILE_JSON"] ||
+      ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATA_TRANSFER_TEST_PROJECT=test123 DATA_TRANSFER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  require "google/cloud/bigquery/data_transfer/credentials"
+  (Google::Cloud::Bigquery::DataTransfer::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Bigquery::DataTransfer::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  ENV["DATA_TRANSFER_PROJECT"] = project
+  ENV["DATA_TRANSFER_TEST_PROJECT"] = project
+  ENV["DATA_TRANSFER_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
+end
+
+namespace :acceptance do
+  task :run do
+    Rake::Task["smoke_test"].invoke
+  end
+
+  desc "Run acceptance tests with coverage."
+  task :coverage do
+  end
+
+  desc "Run acceptance cleanup."
+  task :cleanup do
+  end
+end
+
+require "yard"
+require "yard/rake/yardoc_task"
+YARD::Rake::YardocTask.new
+
+desc "Generates JSON output from google-cloud-bigquery-data_transfer .yardoc"
+task :jsondoc => :yard do
+  require "rubygems"
+  require "gcloud/jsondoc"
+
+  registry = YARD::Registry.load! ".yardoc"
+
+  toc_config = {
+    documents: [
+      {
+        type: "toc",
+        title: "Google::Cloud::Bigquery::Datatransfer::V1::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Bigquery::Datatransfer::V1",
+            include: ["google/cloud/bigquery/data_transfer/v1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
+          }
+        ]
+      }
+    ]
+  }
+
+  generator = Gcloud::Jsondoc::Generator.new registry,
+                                             "google-cloud-bigquery-data_transfer",
+                                             generate: toc_config
+  rm_rf "jsondoc", verbose: true
+  generator.write_to "jsondoc"
+  cp ["docs/toc.json"], "jsondoc", verbose: true
+end
+
+desc "Run yard-doctest example tests."
+task :doctest do
+  puts "The google-cloud-bigquery-data_transfer gem does not have doctest tests."
+end
+
+desc "Run the CI build"
+task :ci do
+  header "BUILDING google-cloud-bigquery-data_transfer"
+  header "google-cloud-bigquery-data_transfer rubocop", "*"
+  sh "bundle exec rake rubocop"
+  header "google-cloud-bigquery-data_transfer jsondoc", "*"
+  sh "bundle exec rake jsondoc"
+  header "google-cloud-bigquery-data_transfer doctest", "*"
+  sh "bundle exec rake doctest"
+  header "google-cloud-bigquery-data_transfer test", "*"
+  sh "bundle exec rake test"
+end
+
+namespace :ci do
+  desc "Run the CI build, with acceptance tests."
+  task :acceptance do
+    Rake::Task["ci"].invoke
+    header "google-cloud-bigquery-data_transfer acceptance", "*"
+    sh "bundle exec rake acceptance -v"
+  end
+  task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
+  end
+end
+
+task :default => :test
+
+def header str, token = "#"
+  line_length = str.length + 8
+  puts ""
+  puts token * line_length
+  puts "#{token * 3} #{str} #{token * 3}"
+  puts token * line_length
+  puts ""
+end
