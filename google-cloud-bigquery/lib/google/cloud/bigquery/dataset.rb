@@ -799,6 +799,9 @@ module Google
         #   inline code resource is equivalent to providing a URI for a file
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting additional options for the query.
         #
         # @return [Google::Cloud::Bigquery::QueryJob] A new query job object.
         #
@@ -895,6 +898,7 @@ module Google
                       legacy_sql: nil, large_results: nil, flatten: nil,
                       maximum_billing_tier: nil, maximum_bytes_billed: nil,
                       job_id: nil, prefix: nil, labels: nil, udfs: nil
+          ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
@@ -902,10 +906,15 @@ module Google
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
                       params: params, external: external, labels: labels,
-                      job_id: job_id, prefix: prefix, udfs: udfs }
+                      udfs: udfs }
           options[:dataset] ||= self
-          ensure_service!
-          gapi = service.query_job query, options
+
+          updater = QueryJob::Updater.from_options query, options
+          updater.params = params unless params.nil?
+
+          yield updater if block_given?
+
+          gapi = service.query_job job_id, prefix, updater.to_gapi
           Job.from_gapi gapi, service
         end
 
