@@ -256,7 +256,7 @@ module Google
 
             # signal to the previous queue to shut down
             old_queue = []
-            old_queue = @request_queue.dump_queue if @request_queue
+            old_queue = @request_queue.quit_and_dump_queue if @request_queue
 
             @request_queue = EnumeratorQueue.new self
             @request_queue.push initial_input_request
