@@ -741,7 +741,7 @@ module Google
           #
           def create= new_create
             @gapi.configuration.load.update! create_disposition:
-              create_disposition(new_create)
+              Convert.create_disposition(new_create)
           end
 
           # Sets the write disposition.
@@ -762,7 +762,7 @@ module Google
           #
           def write= new_write
             @gapi.configuration.load.update! write_disposition:
-              write_disposition(new_write)
+              Convert.write_disposition(new_write)
           end
 
           # Sets the projection fields.
@@ -1014,36 +1014,6 @@ module Google
             return val unless val.nil?
             format
           end
-        end
-
-        def create_disposition str
-          val = {
-            "create_if_needed" => "CREATE_IF_NEEDED",
-            "createifneeded" => "CREATE_IF_NEEDED",
-            "if_needed" => "CREATE_IF_NEEDED",
-            "needed" => "CREATE_IF_NEEDED",
-            "create_never" => "CREATE_NEVER",
-            "createnever" => "CREATE_NEVER",
-            "never" => "CREATE_NEVER"
-          }[str.to_s.downcase]
-          return val unless val.nil?
-          str
-        end
-
-        def write_disposition str
-          val = {
-            "write_truncate" => "WRITE_TRUNCATE",
-            "writetruncate" => "WRITE_TRUNCATE",
-            "truncate" => "WRITE_TRUNCATE",
-            "write_append" => "WRITE_APPEND",
-            "writeappend" => "WRITE_APPEND",
-            "append" => "WRITE_APPEND",
-            "write_empty" => "WRITE_EMPTY",
-            "writeempty" => "WRITE_EMPTY",
-            "empty" => "WRITE_EMPTY"
-          }[str.to_s.downcase]
-          return val unless val.nil?
-          str
         end
       end
     end
