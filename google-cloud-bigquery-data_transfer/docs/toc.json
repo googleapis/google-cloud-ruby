@@ -9,7 +9,7 @@
         {
           "title": "V1",
           "type": "google/cloud/bigquery/data_transfer/v1",
-          "patterns": ["\/bigquery\/data_transfer\/v3", "google\/api", "google\/protobuf"],
+          "patterns": ["\/bigquery\/data_transfer\/v1", "google\/api", "google\/protobuf"],
           "nav": [
             {
               "title": "DataTransferServiceClient",
