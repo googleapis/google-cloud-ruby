@@ -331,8 +331,9 @@
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
       "versions": [
-        "v0.30.0",
+        "v0.30.1",
         "master",
+        "v0.30.0",
         "v0.29.0",
         "v0.28.1",
         "v0.28.0",

@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.1 / 2018-03-08
+
+* Fix Subscriber thread leak
+
 ### 0.30.0 / 2018-02-27
 
 * Support Shared Configuration.
