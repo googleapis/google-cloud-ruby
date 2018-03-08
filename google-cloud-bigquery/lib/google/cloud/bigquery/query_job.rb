@@ -360,28 +360,6 @@ module Google
                 "interactive" => "INTERACTIVE" }[str.to_s.downcase]
             end
 
-            def create_disposition str
-              { "create_if_needed" => "CREATE_IF_NEEDED",
-                "createifneeded" => "CREATE_IF_NEEDED",
-                "if_needed" => "CREATE_IF_NEEDED",
-                "needed" => "CREATE_IF_NEEDED",
-                "create_never" => "CREATE_NEVER",
-                "createnever" => "CREATE_NEVER",
-                "never" => "CREATE_NEVER" }[str.to_s.downcase]
-            end
-
-            def write_disposition str
-              { "write_truncate" => "WRITE_TRUNCATE",
-                "writetruncate" => "WRITE_TRUNCATE",
-                "truncate" => "WRITE_TRUNCATE",
-                "write_append" => "WRITE_APPEND",
-                "writeappend" => "WRITE_APPEND",
-                "append" => "WRITE_APPEND",
-                "write_empty" => "WRITE_EMPTY",
-                "writeempty" => "WRITE_EMPTY",
-                "empty" => "WRITE_EMPTY" }[str.to_s.downcase]
-            end
-
             def udfs array_or_str
               Array(array_or_str).map do |uri_or_code|
                 resource =
@@ -420,8 +398,8 @@ module Google
                   priority: priority_value(options[:priority]),
                   use_query_cache: options[:cache],
                   destination_table: dest_table,
-                  create_disposition: create_disposition(options[:create]),
-                  write_disposition: write_disposition(options[:write]),
+                  create_disposition: Convert.create_disposition(options[:create]),
+                  write_disposition: Convert.write_disposition(options[:write]),
                   allow_large_results: options[:large_results],
                   flatten_results: options[:flatten],
                   default_dataset: dataset_config,
