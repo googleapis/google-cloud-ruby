@@ -455,6 +455,18 @@ module Google
         # @return [Boolean] Returns `true` if there is a temporary hold on the
         #   file, otherwise `false`.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.temporary_hold? #=> false
+        #   file.temporary_hold = true
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
         def temporary_hold?
           !@gapi.temporary_hold.nil? && @gapi.temporary_hold
         end
@@ -468,6 +480,18 @@ module Google
         #
         # @param [Boolean] new_temporary_hold Whether to enforce a temporary
         #   hold on the file.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.temporary_hold? #=> false
+        #   file.temporary_hold = true
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
         #
         def temporary_hold= new_temporary_hold
           @gapi.temporary_hold = new_temporary_hold
@@ -510,6 +534,22 @@ module Google
         # @return [Boolean] Returns `true` if there is an event-based hold on
         #   the file, otherwise `false`.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.event_based_hold? #=> false
+        #   file.event_based_hold = true
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.event_based_hold = false
+        #   file.retention_expires_at # current date + bucket retention_period
+        #
         def event_based_hold?
           !@gapi.event_based_hold.nil? && @gapi.event_based_hold
         end
@@ -549,6 +589,22 @@ module Google
         #
         # @param [Boolean] new_event_based_hold Whether to enforce an
         #   event-based hold on the file.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.event_based_hold? #=> false
+        #   file.event_based_hold = true
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.event_based_hold = false
+        #   file.retention_expires_at # current date + bucket retention_period
         #
         def event_based_hold= new_event_based_hold
           @gapi.event_based_hold = new_event_based_hold

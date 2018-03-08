@@ -132,7 +132,7 @@ module Google
         ##
         # The metadata generation of the bucket.
         #
-        # @return [Fixnum] The metageneration.
+        # @return [Integer] The metageneration.
         #
         def metageneration
           @gapi.metageneration
@@ -518,6 +518,24 @@ module Google
         #   defined in seconds. The value must be between 0 and 100 years (in
         #   seconds), or `nil`.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.update do |b|
+        #     b.retention_period = 2592000 # 30 days in seconds
+        #     b.default_event_based_hold = true
+        #   end
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.event_based_hold? # true
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.event_based_hold = false
+        #   file.retention_expires_at # current date + bucket retention_period
+        #
         def retention_period= new_retention_period
           if new_retention_period.nil?
             @gapi.retention_policy = nil
@@ -565,6 +583,20 @@ module Google
         #   reduced. Returns `true` if the retention policy is locked and the
         #   retention period cannot be reduced.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #   bucket.lock_retention_policy!
+        #   bucket.retention_locked? # true
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
         def retention_locked?
           return false unless @gapi.retention_policy
           !@gapi.retention_policy.is_locked.nil? &&
@@ -595,6 +627,24 @@ module Google
         # @param [Boolean] new_default_event_based_hold The default event-based
         #   hold field for the bucket.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.update do |b|
+        #     b.retention_period = 2592000 # 30 days in seconds
+        #     b.default_event_based_hold = true
+        #   end
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.event_based_hold? # true
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.event_based_hold = false
+        #   file.retention_expires_at # current date + bucket retention_period
+        #
         def default_event_based_hold= new_default_event_based_hold
           @gapi.default_event_based_hold = new_default_event_based_hold
           patch_gapi! :default_event_based_hold
@@ -617,10 +667,24 @@ module Google
         #
         # @return [Boolean] Returns `true` if the lock operation is successful.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #   bucket.lock_retention_policy!
+        #   bucket.retention_locked? # true
+        #
+        #   file = bucket.create_file "path/to/local.file.ext"
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
         def lock_retention_policy!
           ensure_service!
-          service.lock_bucket_retention_policy name, metageneration,
-                                               user_project: user_project
+          @gapi = service.lock_bucket_retention_policy \
+            name, metageneration, user_project: user_project
           true
         end
 

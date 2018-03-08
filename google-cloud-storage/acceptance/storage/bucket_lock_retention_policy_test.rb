@@ -157,8 +157,12 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
 
     bucket.reload!
     bucket.retention_period.must_equal 10
+    bucket.retention_locked?.must_equal false
 
     bucket.lock_retention_policy!
+
+    # Call to lock_retention_policy! should update bucket state
+    bucket.retention_locked?.must_equal true
 
     err = expect do
       bucket.update do |b|
