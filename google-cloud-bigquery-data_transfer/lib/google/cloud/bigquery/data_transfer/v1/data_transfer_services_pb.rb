@@ -17,12 +17,12 @@
 #
 
 require 'grpc'
-require 'google/cloud/bigquery/datatransfer/v1/datatransfer_pb'
+require 'google/cloud/bigquery/data_transfer/v1/data_transfer_pb'
 
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
+      module DataTransfer
         module V1
           module DataTransferService
             # The Google BigQuery Data Transfer Service API enables BigQuery users to

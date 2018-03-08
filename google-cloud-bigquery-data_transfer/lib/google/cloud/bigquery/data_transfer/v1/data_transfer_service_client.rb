@@ -24,7 +24,7 @@ require "pathname"
 
 require "google/gax"
 
-require "google/cloud/bigquery/datatransfer/v1/datatransfer_pb"
+require "google/cloud/bigquery/data_transfer/v1/data_transfer_pb"
 require "google/cloud/bigquery/data_transfer/credentials"
 
 module Google
@@ -38,7 +38,7 @@ module Google
           # frontend.
           #
           # @!attribute [r] data_transfer_service_stub
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub]
           class DataTransferServiceClient
             attr_reader :data_transfer_service_stub
 
@@ -181,7 +181,7 @@ module Google
               # the gRPC module only when it's required.
               # See https://github.com/googleapis/toolkit/issues/446
               require "google/gax/grpc"
-              require "google/cloud/bigquery/datatransfer/v1/datatransfer_services_pb"
+              require "google/cloud/bigquery/data_transfer/v1/data_transfer_services_pb"
 
               credentials ||= Google::Cloud::Bigquery::DataTransfer::Credentials.default
 
@@ -236,7 +236,7 @@ module Google
                 channel: channel,
                 updater_proc: updater_proc,
                 scopes: scopes,
-                &Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.method(:new)
+                &Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.method(:new)
               )
 
               @get_data_source = Google::Gax.create_api_call(
@@ -304,7 +304,7 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Cloud::Bigquery::Datatransfer::V1::DataSource]
+            # @return [Google::Cloud::Bigquery::DataTransfer::V1::DataSource]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigquery/data_transfer/v1"
@@ -319,7 +319,7 @@ module Google
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::GetDataSourceRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest)
               @get_data_source.call(req, options)
             end
 
@@ -338,8 +338,8 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::Datatransfer::V1::DataSource>]
-            #   An enumerable of Google::Cloud::Bigquery::Datatransfer::V1::DataSource instances.
+            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::DataTransfer::V1::DataSource>]
+            #   An enumerable of Google::Cloud::Bigquery::DataTransfer::V1::DataSource instances.
             #   See Google::Gax::PagedEnumerable documentation for other
             #   operations such as per-page iteration or access to the response
             #   object.
@@ -371,7 +371,7 @@ module Google
                 parent: parent,
                 page_size: page_size
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::ListDataSourcesRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest)
               @list_data_sources.call(req, options)
             end
 
@@ -382,9 +382,9 @@ module Google
             #   Must be in the format /projects/{project_id}/locations/{location_id}
             #   If specified location and location of the destination bigquery dataset
             #   do not match - the request will fail.
-            # @param transfer_config [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig | Hash]
+            # @param transfer_config [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig | Hash]
             #   Data transfer configuration to create.
-            #   A hash of the same form as `Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig`
+            #   A hash of the same form as `Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig`
             #   can also be provided.
             # @param authorization_code [String]
             #   Optional OAuth2 authorization code to use with this transfer configuration.
@@ -406,7 +406,7 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
+            # @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigquery/data_transfer/v1"
@@ -428,16 +428,16 @@ module Google
                 transfer_config: transfer_config,
                 authorization_code: authorization_code
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::CreateTransferConfigRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest)
               @create_transfer_config.call(req, options)
             end
 
             # Updates a data transfer configuration.
             # All fields must be set, even if they are not updated.
             #
-            # @param transfer_config [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig | Hash]
+            # @param transfer_config [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig | Hash]
             #   Data transfer configuration to create.
-            #   A hash of the same form as `Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig`
+            #   A hash of the same form as `Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig`
             #   can also be provided.
             # @param update_mask [Google::Protobuf::FieldMask | Hash]
             #   Required list of fields to be updated in this request.
@@ -463,7 +463,7 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
+            # @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigquery/data_transfer/v1"
@@ -487,7 +487,7 @@ module Google
                 update_mask: update_mask,
                 authorization_code: authorization_code
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::UpdateTransferConfigRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest)
               @update_transfer_config.call(req, options)
             end
 
@@ -514,7 +514,7 @@ module Google
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::DeleteTransferConfigRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest)
               @delete_transfer_config.call(req, options)
               nil
             end
@@ -527,7 +527,7 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
+            # @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigquery/data_transfer/v1"
@@ -542,7 +542,7 @@ module Google
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::GetTransferConfigRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest)
               @get_transfer_config.call(req, options)
             end
 
@@ -562,8 +562,8 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig>]
-            #   An enumerable of Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig instances.
+            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig>]
+            #   An enumerable of Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig instances.
             #   See Google::Gax::PagedEnumerable documentation for other
             #   operations such as per-page iteration or access to the response
             #   object.
@@ -597,7 +597,7 @@ module Google
                 data_source_ids: data_source_ids,
                 page_size: page_size
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::ListTransferConfigsRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest)
               @list_transfer_configs.call(req, options)
             end
 
@@ -622,7 +622,7 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Cloud::Bigquery::Datatransfer::V1::ScheduleTransferRunsResponse]
+            # @return [Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsResponse]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigquery/data_transfer/v1"
@@ -647,7 +647,7 @@ module Google
                 start_time: start_time,
                 end_time: end_time
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::ScheduleTransferRunsRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest)
               @schedule_transfer_runs.call(req, options)
             end
 
@@ -659,7 +659,7 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferRun]
+            # @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferRun]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigquery/data_transfer/v1"
@@ -674,7 +674,7 @@ module Google
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::GetTransferRunRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest)
               @get_transfer_run.call(req, options)
             end
 
@@ -700,7 +700,7 @@ module Google
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::DeleteTransferRunRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest)
               @delete_transfer_run.call(req, options)
               nil
             end
@@ -711,7 +711,7 @@ module Google
             #   Name of transfer configuration for which transfer runs should be retrieved.
             #   Format of transfer configuration resource name is:
             #   +projects/{project_id}/transferConfigs/{config_id}+.
-            # @param states [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferState>]
+            # @param states [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferState>]
             #   When specified, only transfer runs with requested states are returned.
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
@@ -719,13 +719,13 @@ module Google
             #   parameter does not affect the return value. If page streaming is
             #   performed per-page, this determines the maximum number of
             #   resources in a page.
-            # @param run_attempt [Google::Cloud::Bigquery::Datatransfer::V1::ListTransferRunsRequest::RunAttempt]
+            # @param run_attempt [Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest::RunAttempt]
             #   Indicates how run attempts are to be pulled.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::Datatransfer::V1::TransferRun>]
-            #   An enumerable of Google::Cloud::Bigquery::Datatransfer::V1::TransferRun instances.
+            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
+            #   An enumerable of Google::Cloud::Bigquery::DataTransfer::V1::TransferRun instances.
             #   See Google::Gax::PagedEnumerable documentation for other
             #   operations such as per-page iteration or access to the response
             #   object.
@@ -761,7 +761,7 @@ module Google
                 page_size: page_size,
                 run_attempt: run_attempt
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::ListTransferRunsRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest)
               @list_transfer_runs.call(req, options)
             end
 
@@ -776,14 +776,14 @@ module Google
             #   parameter does not affect the return value. If page streaming is
             #   performed per-page, this determines the maximum number of
             #   resources in a page.
-            # @param message_types [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferMessage::MessageSeverity>]
+            # @param message_types [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity>]
             #   Message types to return. If not populated - INFO, WARNING and ERROR
             #   messages are returned.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::Datatransfer::V1::TransferMessage>]
-            #   An enumerable of Google::Cloud::Bigquery::Datatransfer::V1::TransferMessage instances.
+            # @return [Google::Gax::PagedEnumerable<Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage>]
+            #   An enumerable of Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage instances.
             #   See Google::Gax::PagedEnumerable documentation for other
             #   operations such as per-page iteration or access to the response
             #   object.
@@ -817,7 +817,7 @@ module Google
                 page_size: page_size,
                 message_types: message_types
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::ListTransferLogsRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest)
               @list_transfer_logs.call(req, options)
             end
 
@@ -834,7 +834,7 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Cloud::Bigquery::Datatransfer::V1::CheckValidCredsResponse]
+            # @return [Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsResponse]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigquery/data_transfer/v1"
@@ -849,7 +849,7 @@ module Google
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::Datatransfer::V1::CheckValidCredsRequest)
+              req = Google::Gax::to_proto(req, Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest)
               @check_valid_creds.call(req, options)
             end
           end

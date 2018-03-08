@@ -122,10 +122,10 @@ task :jsondoc => :yard do
     documents: [
       {
         type: "toc",
-        title: "Google::Cloud::Bigquery::Datatransfer::V1::DataTypes",
+        title: "Google::Cloud::Bigquery::DataTransfer::V1::DataTypes",
         modules: [
           {
-            title: "Google::Cloud::Bigquery::Datatransfer::V1",
+            title: "Google::Cloud::Bigquery::DataTransfer::V1",
             include: ["google/cloud/bigquery/data_transfer/v1"]
           },
           {

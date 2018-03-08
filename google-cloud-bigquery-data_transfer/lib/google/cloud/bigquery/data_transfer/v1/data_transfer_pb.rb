@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
-require 'google/cloud/bigquery/datatransfer/v1/transfer_pb'
+require 'google/cloud/bigquery/data_transfer/v1/transfer_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
@@ -155,7 +155,7 @@ end
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
+      module DataTransfer
         module V1
           DataSourceParameter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSourceParameter").msgclass
           DataSourceParameter::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSourceParameter.Type").enummodule

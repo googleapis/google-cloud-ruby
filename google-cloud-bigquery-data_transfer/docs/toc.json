@@ -1,0 +1,27 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "Bigquery DataTransfer",
+      "type": "google/cloud/bigquery/data_transfer",
+      "patterns": ["\/data_transfer", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V1",
+          "type": "google/cloud/bigquery/data_transfer/v1",
+          "patterns": ["\/bigquery\/data_transfer\/v3", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "DataTransferServiceClient",
+              "type": "google/cloud/bigquery/data_transver/v1/datatransferserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/bigquery/data_transfer/v1/datatypes"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
