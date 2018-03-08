@@ -15,7 +15,7 @@
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
+      module DataTransfer
         module V1
           # Represents a data transfer configuration. A transfer configuration
           # contains all metadata needed to perform a data transfer. For example,
@@ -77,7 +77,7 @@ module Google
           #   @return [Google::Protobuf::Timestamp]
           #     Output only. Next time when data transfer will run.
           # @!attribute [rw] state
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferState]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
           #     Output only. State of the most recently updated transfer run.
           # @!attribute [rw] user_id
           #   @return [Integer]
@@ -130,7 +130,7 @@ module Google
           #   @return [String]
           #     Output only. Data source id.
           # @!attribute [rw] state
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferState]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
           #     Data transfer run state. Ignored for input requests.
           # @!attribute [rw] user_id
           #   @return [Integer]
@@ -153,7 +153,7 @@ module Google
           #   @return [Google::Protobuf::Timestamp]
           #     Time when message was logged.
           # @!attribute [rw] severity
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferMessage::MessageSeverity]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity]
           #     Message severity.
           # @!attribute [rw] message_text
           #   @return [String]
