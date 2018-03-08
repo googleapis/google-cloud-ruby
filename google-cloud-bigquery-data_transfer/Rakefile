@@ -126,7 +126,7 @@ task :jsondoc => :yard do
         modules: [
           {
             title: "Google::Cloud::Bigquery::DataTransfer::V1",
-            include: ["google/cloud/bigquery/data_transfer/v1"]
+            include: ["google/cloud/bigquery/datatransfer/v1"]
           },
           {
             title: "Google::Protobuf",
