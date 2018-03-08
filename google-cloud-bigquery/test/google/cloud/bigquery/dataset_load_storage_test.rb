@@ -200,6 +200,20 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock.verify
   end
 
+  it "can specify an Array of storage urls as strings or URIs" do
+    load_url2 = storage_file("more-kittens").to_gs_url
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_reference, [load_url, load_url2]
+    mock.expect :insert_job, load_job_resp_gapi([load_url, load_url2]),
+                [project, job_gapi]
+    dataset.service.mocked_service = mock
+
+    result = dataset.load table_id, [URI(load_url), load_url2]
+    result.must_equal true
+
+    mock.verify
+  end
+
   it "can load itself with create disposition" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url

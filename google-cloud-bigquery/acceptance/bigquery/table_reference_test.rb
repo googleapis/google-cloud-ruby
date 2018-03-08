@@ -262,6 +262,30 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     end
   end
 
+  it "imports data from a list of files in your bucket with load_job" do
+    begin
+      more_data = rows.map { |row| JSON.generate row }.join("\n")
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file1 = bucket.create_file local_file
+      file2 = bucket.create_file StringIO.new(more_data),
+                                 "more-kitten-test-data.json"
+      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+
+      # Test both by file object and URL as string
+      job = table.load_job [file1, gs_url]
+      job.wait_until_done!
+      job.wont_be :failed?
+      job.input_files.must_equal 2
+      job.output_rows.must_equal 6
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
   it "imports data from a local file with load" do
     result = table.load local_file
     result.must_equal true
@@ -273,6 +297,27 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       file = bucket.create_file local_file
 
       result = table.load file
+      result.must_equal true
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
+  it "imports data from a list of files in your bucket with load" do
+    begin
+      more_data = rows.map { |row| JSON.generate row }.join("\n")
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file1 = bucket.create_file local_file
+      file2 = bucket.create_file StringIO.new(more_data),
+                                 "more-kitten-test-data.json"
+      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+
+      # Test both by file object and URL as string
+      result = table.load [file1, gs_url]
       result.must_equal true
     ensure
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
