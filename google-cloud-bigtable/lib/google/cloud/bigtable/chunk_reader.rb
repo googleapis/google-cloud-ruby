@@ -39,7 +39,7 @@ module Google
 
           if chunk.commit_row
             raise_if(
-              chunk.value_size.positive?,
+              chunk.value_size > 0,
               "A row cant not have value_size and commit_row"
             )
           end
