@@ -13,7 +13,7 @@
           "nav": [
             {
               "title": "DataTransferServiceClient",
-              "type": "google/cloud/bigquery/data_transver/v1/datatransferserviceclient"
+              "type": "google/cloud/bigquery/data_transfer/v1/datatransferserviceclient"
             },
             {
               "title": "Data Types",
