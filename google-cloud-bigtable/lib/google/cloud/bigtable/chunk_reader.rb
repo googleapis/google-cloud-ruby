@@ -61,7 +61,7 @@ module Google
               chunk.family_name ||
               chunk.qualifier ||
               !chunk.value.empty? ||
-              chunk.timestamp_micros.positive?)
+              chunk.timestamp_micros > 0)
 
           raise_if value, "A reset should have no data"
         end

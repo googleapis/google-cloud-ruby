@@ -86,7 +86,7 @@ module Google
             options: nil,
             &block
           max_retries = DEFAULT_READ_RETRY_COUNT
-          if options && options[:max_retries].to_i.positive?
+          if options && options[:max_retries].to_i > 0
             max_retries = options[:max_retries]
           end
 
