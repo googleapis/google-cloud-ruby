@@ -98,6 +98,10 @@ module Google
         attr_accessor :gapi
 
         ##
+        # Encryption key to use for file access (currently only used by :storage_class=)
+        attr_accessor :encryption_key
+
+        ##
         # @private Create an empty File object.
         def initialize
           @service = nil
@@ -1095,12 +1099,12 @@ module Google
 
           ensure_service!
 
-          @gapi = if attributes.include? :storage_class
-                    rewrite_gapi bucket, name, update_gapi
-                  else
-                    service.patch_file \
-                      bucket, name, update_gapi, user_project: user_project
-                  end
+          if attributes.include? :storage_class
+            @gapi = rewrite_gapi bucket, name, update_gapi, encryption_key: @encryption_key
+          else
+            @gapi = service.patch_file \
+              bucket, name, update_gapi, user_project: user_project
+          end
         end
 
         def gapi_from_attrs *attributes
@@ -1112,14 +1116,16 @@ module Google
           Google::Apis::StorageV1::Object.new attr_params
         end
 
-        def rewrite_gapi bucket, name, update_gapi
+        def rewrite_gapi bucket, name, update_gapi, encryption_key: nil
           resp = service.rewrite_file \
-            bucket, name, bucket, name, update_gapi, user_project: user_project
+            bucket, name, bucket, name, update_gapi, user_project: user_project,
+            source_key: encryption_key, destination_key: encryption_key
           until resp.done
             sleep 1
             resp = service.rewrite_file \
               bucket, name, bucket, name, update_gapi,
-              token: resp.rewrite_token, user_project: user_project
+              token: resp.rewrite_token, user_project: user_project,
+              source_key: encryption_key, destination_key: encryption_key
           end
           resp.resource
         end
