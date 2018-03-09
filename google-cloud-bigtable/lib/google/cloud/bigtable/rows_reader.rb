@@ -60,7 +60,7 @@ module Google
         # @param rows_limit [Integer]
         #   The read will terminate after committing to N rows' worth of results.
         #   The default (zero) is to return all results.
-        # @param rows [Google::Bigtable::V2::RowSet]
+        # @param row_set [Google::Bigtable::V2::RowSet]
         #   The row keys and/or ranges to read.
         #   If not specified, reads from all rows.
         #   A hash of the same form as `Google::Bigtable::V2::RowSet`
