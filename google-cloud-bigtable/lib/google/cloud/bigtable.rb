@@ -16,6 +16,7 @@ require "google-cloud-bigtable"
 require "google/cloud/env"
 require "google/cloud/config"
 require "google/cloud/errors"
+require "google/cloud/bigtable/credentials"
 
 module Google
   module Cloud
@@ -140,8 +141,8 @@ module Google
           require "google/cloud/bigtable/table_admin_client"
           Bigtable::TableAdminClient.new(project_id, instance_id, options)
         elsif client_type == :data
-          require "google/cloud/bigtable/v2/bigtable_client"
-          Bigtable::V2::BigtableClient.new(options)
+          require "google/cloud/bigtable/data_client"
+          Bigtable::DataClient.new(project_id, instance_id, options)
         else
           raise InvalidArgumentError, "invalid client type. Valid types are \
   :instance, :table, :data"

@@ -7,6 +7,9 @@ require "minitest/rg"
 require "google/cloud"
 require "google/cloud/bigtable"
 require "google/cloud/bigtable/admin/credentials"
+require "google/cloud/bigtable/data_client"
+require "google/cloud/bigtable/table_data_operations"
+require "google/cloud/bigtable"
 
 class MockBigtableAdminCredentials < Google::Cloud::Bigtable::Admin::Credentials
   def initialize method_name
@@ -77,4 +80,9 @@ def build_longrunning_operation_with_error(name, klass)
   )
 
   return [operation, operation_error]
+end
+
+def load_test_json_data(file_name)
+  file = "#{File.dirname(__FILE__)}/../acceptance/data/#{file_name}.json"
+  JSON.parse(File.read(file))
 end
