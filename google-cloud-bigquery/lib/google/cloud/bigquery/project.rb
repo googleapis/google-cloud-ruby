@@ -322,12 +322,13 @@ module Google
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      dataset: dataset, project: project,
+                      dataset: dataset, project: project || self.project,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
                       external: external, labels: labels,
                       udfs: udfs }
+
           updater = QueryJob::Updater.from_options query, options
           updater.params = params unless params.nil?
 
@@ -417,6 +418,9 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting additional options for the query.
         #
         # @return [Google::Cloud::Bigquery::Data]
         #
@@ -504,11 +508,17 @@ module Google
         def query query, params: nil, external: nil, max: nil, cache: true,
                   dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil
           ensure_service!
-          options = { cache: cache, dataset: dataset, project: project,
+          options = { priority: "INTERACTIVE", cache: cache, dataset: dataset,
+                      project: project || self.project,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params, external: external }
+          updater = QueryJob::Updater.from_options query, options
+          updater.params = params unless params.nil?
 
-          job = query_job query, options
+          yield updater if block_given?
+
+          gapi = service.query_job nil, nil, updater.to_gapi
+          job = Job.from_gapi gapi, service
           job.wait_until_done!
 
           if job.failed?

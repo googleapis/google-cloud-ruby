@@ -385,7 +385,8 @@ module Google
               copy: API::JobConfigurationTableCopy.new(
                 source_table: source,
                 destination_table: target,
-                create_disposition: Convert.create_disposition(options[:create]),
+                create_disposition:
+                  Convert.create_disposition(options[:create]),
                 write_disposition: Convert.write_disposition(options[:write])
               ),
               dry_run: options[:dryrun]
