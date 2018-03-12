@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [SpeechClient][] | Google Cloud Speech API. |
+      # | [SpeechClient][] | Service that implements Google Cloud Speech API. |
       # | [Data Types][] | Data types for Google::Cloud::Speech::V1 |
       #
       # [SpeechClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest/google/cloud/speech/v1/speechclient
