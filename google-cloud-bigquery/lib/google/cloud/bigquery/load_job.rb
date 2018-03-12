@@ -323,7 +323,7 @@ module Google
           attr_reader :updates
 
           ##
-          # Create an Updater object.
+          # @private Create an Updater object.
           def initialize gapi
             @updates = []
             @gapi = gapi
@@ -977,7 +977,7 @@ module Google
             @gapi.configuration.update! labels: val
           end
 
-          # Returns the Google API client library version of this load job.
+          # @private Returns the Google API client library version of this job.
           #
           # @return [<Google::Apis::BigqueryV2::Job>] (See
           #   {Google::Apis::BigqueryV2::Job})

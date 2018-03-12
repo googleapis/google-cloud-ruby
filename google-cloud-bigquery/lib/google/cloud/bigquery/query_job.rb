@@ -318,9 +318,9 @@ module Google
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < QueryJob
           class << self
-            # If no job_id or prefix is given, always generate a client-side
-            # job ID anyway, for idempotent retry in the google-api-client
-            # layer. See
+            # @private If no job_id or prefix is given, always generate a
+            # client-side job ID anyway, for idempotent retry in the
+            # google-api-client layer. See
             # https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
             def job_ref_from job_id, prefix
               prefix ||= "job_"
@@ -331,6 +331,7 @@ module Google
               )
             end
 
+            # @private API object for dataset.
             def dataset_ref_from dts, pjt = nil
               return nil if dts.nil?
               if dts.respond_to? :dataset_id
@@ -348,7 +349,7 @@ module Google
           end
 
           ##
-          # Create an Updater object.
+          # @private Create an Updater object.
           def initialize gapi
             @gapi = gapi
           end
@@ -620,7 +621,7 @@ module Google
               udfs_gapi_from value
           end
 
-          # Returns the Google API client library version of this query job.
+          # @private Returns the Google API client library version of this job.
           #
           # @return [<Google::Apis::BigqueryV2::Job>] (See
           #   {Google::Apis::BigqueryV2::Job})
