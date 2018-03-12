@@ -178,11 +178,8 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
-        # @param [Integer] maximum_billing_tier Limits the billing tier for this
-        #   job. Queries that have resource usage beyond this tier will fail
-        #   (without incurring a charge). Optional. If unspecified, this will be
-        #   set to your project default. For more information, see [High-Compute
-        #   queries](https://cloud.google.com/bigquery/pricing#high-compute).
+        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
+        #   tier to allow high-compute queries.
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
@@ -245,9 +242,10 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "[my_project:my_dataset.my_table]",
-        #                            legacy_sql: true
+        #   job = bigquery.query_job(
+        #     "SELECT name FROM [my_project:my_dataset.my_table]") do |query|
+        #     query.legacy_sql = true
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -263,8 +261,9 @@ module Google
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_dataset.my_table`" \
-        #                            " WHERE id = ?",
-        #                            params: [1]
+        #                            " WHERE id = ?" do |query|
+        #     query.params = [1]
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -280,8 +279,9 @@ module Google
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_dataset.my_table`" \
-        #                            " WHERE id = @id",
-        #                            params: { id: 1 }
+        #                            " WHERE id = @id" do |query|
+        #     query.params = { id: 1 }
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -301,8 +301,9 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   job = bigquery.query_job "SELECT * FROM my_ext_table",
-        #                            external: { my_ext_table: csv_table }
+        #   job = bigquery.query_job "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -327,10 +328,9 @@ module Google
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
                       external: external, labels: labels,
-                      udfs: udfs }
+                      udfs: udfs, params: params }
 
           updater = QueryJob::Updater.from_options query, options
-          updater.params = params unless params.nil?
 
           yield updater if block_given?
 
@@ -442,7 +442,9 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   sql = "SELECT name FROM [my_project:my_dataset.my_table]"
-        #   data = bigquery.query sql, legacy_sql: true
+        #   data = bigquery.query sql do |query|
+        #     query.legacy_sql = true
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -466,8 +468,9 @@ module Google
         #
         #   data = bigquery.query "SELECT name " \
         #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE id = ?",
-        #                         params: [1]
+        #                         "WHERE id = ?" do |query|
+        #     query.params = [1]
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -480,8 +483,9 @@ module Google
         #
         #   data = bigquery.query "SELECT name " \
         #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE id = @id",
-        #                         params: { id: 1 }
+        #                         "WHERE id = @id" do |query|
+        #     query.params = { id: 1 }
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -498,8 +502,9 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   data = bigquery.query "SELECT * FROM my_ext_table",
-        #                         external: { my_ext_table: csv_table }
+        #   data = bigquery.query "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -513,7 +518,6 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params, external: external }
           updater = QueryJob::Updater.from_options query, options
-          updater.params = params unless params.nil?
 
           yield updater if block_given?
 

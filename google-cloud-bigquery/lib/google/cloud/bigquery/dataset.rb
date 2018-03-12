@@ -761,11 +761,8 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
-        # @param [Integer] maximum_billing_tier Limits the billing tier for this
-        #   job. Queries that have resource usage beyond this tier will fail
-        #   (without incurring a charge). Optional. If unspecified, this will be
-        #   set to your project default. For more information, see [High-Compute
-        #   queries](https://cloud.google.com/bigquery/pricing#high-compute).
+        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
+        #   tier to allow high-compute queries.
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
@@ -826,8 +823,9 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "SELECT name FROM my_table",
-        #                           legacy_sql: true
+        #   job = dataset.query_job "SELECT name FROM my_table" do |query|
+        #     query.legacy_sql = true
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -842,8 +840,10 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "SELECT name FROM my_table WHERE id = ?",
-        #                           params: [1]
+        #   job = dataset.query_job(
+        #     "SELECT name FROM my_table WHERE id = ?") do |query|
+        #     query.params = [1]
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -858,8 +858,10 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "SELECT name FROM my_table WHERE id = @id",
-        #                           params: { id: 1 }
+        #   job = dataset.query_job(
+        #     "SELECT name FROM my_table WHERE id = @id") do |query|
+        #     query.params = { id: 1 }
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -907,10 +909,9 @@ module Google
                       maximum_bytes_billed: maximum_bytes_billed,
                       params: params, external: external, labels: labels,
                       udfs: udfs }
-          options[:dataset] ||= self
 
           updater = QueryJob::Updater.from_options query, options
-          updater.params = params unless params.nil?
+          updater.dataset = self
 
           yield updater if block_given?
 
@@ -1018,8 +1019,9 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query "SELECT name FROM my_table",
-        #                        legacy_sql: true
+        #   data = dataset.query "SELECT name FROM my_table" do |query|
+        #     query.legacy_sql = true
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1031,8 +1033,10 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query "SELECT name FROM my_table WHERE id = ?",
-        #                        params: [1]
+        #   data = dataset.query(
+        #     "SELECT name FROM my_table WHERE id = ?") do |query|
+        #     query.params = [1]
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1044,8 +1048,10 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query "SELECT name FROM my_table WHERE id = @id",
-        #                        params: { id: 1 }
+        #   data = dataset.query(
+        #     "SELECT name FROM my_table WHERE id = @id") do |query|
+        #     query.params = { id: 1 }
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1063,8 +1069,9 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   data = dataset.query "SELECT * FROM my_ext_table",
-        #                        external: { my_ext_table: csv_table }
+        #   data = dataset.query "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1076,10 +1083,10 @@ module Google
                   standard_sql: nil, legacy_sql: nil
           ensure_service!
           options = { priority: "INTERACTIVE", external: external, cache: cache,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql }
+                      legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      params: params }
           options[:dataset] ||= self
           updater = QueryJob::Updater.from_options query, options
-          updater.params = params unless params.nil?
 
           yield updater if block_given?
 
