@@ -335,7 +335,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     bucket.retention_period.must_equal bucket_retention_period
     bucket.retention_effective_at.must_be_within_delta bucket_retention_effective_at
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
   end
 
@@ -355,7 +355,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     bucket.retention_period.must_be :nil?
     bucket.retention_effective_at.must_be :nil?
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal true
   end
 

@@ -42,7 +42,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
 
         b.retention_period.must_equal 10
         b.retention_effective_at.must_be_kind_of DateTime
-        b.retention_locked?.must_equal false
+        b.retention_policy_locked?.must_equal false
         b.default_event_based_hold?.must_equal true
       end
     end
@@ -58,7 +58,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     bucket.reload!
     bucket.retention_period.must_equal 10
     bucket.retention_effective_at.must_be_kind_of DateTime
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
 
     original = File.new file_path
@@ -89,7 +89,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     bucket.reload!
     bucket.retention_period.must_be :nil?
     bucket.retention_effective_at.must_be :nil?
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
 
     file.reload!
@@ -109,7 +109,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     bucket.reload!
     bucket.retention_period.must_be :nil?
     bucket.retention_effective_at.must_be :nil?
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal true
 
     original = File.new file_path
@@ -130,7 +130,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     bucket.reload!
     bucket.retention_period.must_be :nil?
     bucket.retention_effective_at.must_be :nil?
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
 
     file.event_based_hold = false
@@ -146,7 +146,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
   it "manages a file with temporary_hold" do
     bucket.retention_period.must_be :nil?
     bucket.retention_effective_at.must_be :nil?
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
 
     original = File.new file_path
@@ -177,7 +177,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
 
     bucket.reload!
     bucket.retention_period.must_equal 10
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
 
     bucket_ref = storage.bucket bucket.name, skip_lookup: true
 
@@ -192,12 +192,12 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
 
     bucket.reload!
     bucket.retention_period.must_equal 10
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
 
     bucket.lock_retention_policy!
 
     # Call to lock_retention_policy! should update bucket state
-    bucket.retention_locked?.must_equal true
+    bucket.retention_policy_locked?.must_equal true
 
     err = expect do
       bucket.update do |b|

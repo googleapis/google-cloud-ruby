@@ -87,7 +87,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     bucket.retention_period.must_be :nil?
     bucket.retention_effective_at.must_be :nil?
-    bucket.retention_locked?.must_equal false
+    bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
 
     bucket.cors.each do |cors|

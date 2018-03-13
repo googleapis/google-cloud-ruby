@@ -490,7 +490,7 @@ module Google
         # The value must be between 0 and 100 years (in seconds.)
         #
         # See also: {#retention_period=}, {#retention_effective_at}, and
-        # {#retention_locked?}.
+        # {#retention_policy_locked?}.
         #
         # @return [Integer, nil] The retention period defined in seconds, if a
         #   retention policy exists for the bucket.
@@ -512,7 +512,7 @@ module Google
         # all files currently in the bucket.
         #
         # See also: {#lock_retention_policy!}, {#retention_period},
-        # {#retention_effective_at}, and {#retention_locked?}.
+        # {#retention_effective_at}, and {#retention_policy_locked?}.
         #
         # @param [Integer, nil] new_retention_period The retention period
         #   defined in seconds. The value must be between 0 and 100 years (in
@@ -581,12 +581,12 @@ module Google
         #
         #   bucket.retention_period = 2592000 # 30 days in seconds
         #   bucket.lock_retention_policy!
-        #   bucket.retention_locked? # true
+        #   bucket.retention_policy_locked? # true
         #
         #   file = bucket.create_file "path/to/local.file.ext"
         #   file.delete # raises Google::Cloud::PermissionDeniedError
         #
-        def retention_locked?
+        def retention_policy_locked?
           return false unless @gapi.retention_policy
           !@gapi.retention_policy.is_locked.nil? &&
             @gapi.retention_policy.is_locked
@@ -672,7 +672,7 @@ module Google
         #
         #   bucket.retention_period = 2592000 # 30 days in seconds
         #   bucket.lock_retention_policy!
-        #   bucket.retention_locked? # true
+        #   bucket.retention_policy_locked? # true
         #
         #   file = bucket.create_file "path/to/local.file.ext"
         #   file.delete # raises Google::Cloud::PermissionDeniedError

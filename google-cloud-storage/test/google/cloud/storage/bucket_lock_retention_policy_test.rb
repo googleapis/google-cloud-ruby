@@ -43,7 +43,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
   it "knows its retention policy attributes" do
     bucket_with_retention_policy.retention_period.must_equal bucket_retention_period
     bucket_with_retention_policy.retention_effective_at.must_be_within_delta bucket_retention_effective_at
-    bucket_with_retention_policy.retention_locked?.must_equal true
+    bucket_with_retention_policy.retention_policy_locked?.must_equal true
     bucket_with_retention_policy.default_event_based_hold?.must_equal true
   end
 
