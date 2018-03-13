@@ -39,16 +39,65 @@ namespace :test do
   end
 end
 
+desc "Runs the smoke tests."
+task :smoke_test do
+  if ENV["DLP_TEST_PROJECT"].nil?
+    fail "The DLP_TEST_PROJECT environment variable must be set. "\
+      "e.g DLP_TEST_PROJECT=test123 rake smoke_test"
+  end
+
+  $LOAD_PATH.unshift "lib", "smoke_test"
+  Dir.glob("acceptance/**/*smoke_test.rb").each { |file| require_relative file }
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-dlp"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task["smoke_test"].invoke
+  end
+end
+
 # Acceptance tests
 desc "Run the google-cloud-dlp acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||= ENV["DLP_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["DLP_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||= ENV["DLP_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DLP_TEST_PROJECT=test123 DLP_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  # clear any env var already set
+  require "google/cloud/dlp/credentials"
+  (Google::Cloud::Dlp::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Dlp::Credentials::JSON_ENV_VARS).each do |path|
+    ENV[path] = nil
+  end
+  # always overwrite when running tests
+  ENV["DLP_PROJECT"] = project
+  ENV["DLP_KEYFILE_JSON"] = keyfile
+
+  # Required for smoke tests
+  ENV["DLP_TEST_PROJECT"] = project
 
   Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
   task :run do
-    puts "The google-cloud-dlp gem does not have acceptance tests."
+    Rake::Task["smoke_test"].invoke
   end
 
   desc "Run acceptance tests with coverage."
@@ -118,6 +167,15 @@ task :ci do
   sh "bundle exec rake doctest"
   header "google-cloud-dlp test", "*"
   sh "bundle exec rake test"
+end
+
+namespace :ci do
+  desc "Run the CI build, with smoke tests."
+  task :smoke_test do
+    Rake::Task["ci"].invoke
+    header "google-cloud-dlp smoke_test", "*"
+    sh "bundle exec rake smoke_test -v"
+  end
 end
 
 namespace :ci do
