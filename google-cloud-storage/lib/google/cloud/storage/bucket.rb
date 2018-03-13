@@ -525,16 +525,10 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.update do |b|
-        #     b.retention_period = 2592000 # 30 days in seconds
-        #     b.default_event_based_hold = true
-        #   end
+        #   bucket.retention_period = 2592000 # 30 days in seconds
         #
         #   file = bucket.create_file "path/to/local.file.ext"
-        #   file.event_based_hold? # true
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.event_based_hold = false
-        #   file.retention_expires_at # current date + bucket retention_period
         #
         def retention_period= new_retention_period
           if new_retention_period.nil?
@@ -545,21 +539,15 @@ module Google
             @gapi.retention_policy.retention_period = new_retention_period
           end
 
-          # Bucket-level retention policy is stored in bucket metadata, so if
-          # you send concurrent requests to both lock and remove a bucket's
-          # retention policy, it is possible that the final state of the bucket
-          # will be unlocked.  For these reason, we recommend including a bucket
-          # metageneration precondition with bucket updates (and such a
-          # precondition is required for the lock policy API call).
           patch_gapi! :retention_policy
         end
 
         ##
         # The time from which the retention policy was effective. Whenever a
-        # retention policy (locked or unlocked) is created or extended, GCS
-        # updates the effective date of the policy. The effective date signals
-        # the date starting from which objects were guaranteed to be retained
-        # for the full duration of the policy.
+        # retention policy is created or extended, GCS updates the effective
+        # date of the policy. The effective date signals the date starting from
+        # which objects were guaranteed to be retained for the full duration of
+        # the policy.
         #
         # This field is updated when the retention policy is created or
         # modified, including extension of a locked policy.
@@ -576,7 +564,8 @@ module Google
         # period cannot be reduced. See {#retention_period=} and
         # {#lock_retention_policy!}.
         #
-        # This value can only be set to `true` by calling the LockPolicy API.
+        # This value can only be set to `true` by calling
+        # {Bucket#lock_retention_policy!}.
         #
         # @return [Boolean] Returns `false` if there is no retention policy or
         #   if the retention policy is unlocked and the retention period can be
@@ -643,7 +632,10 @@ module Google
         #   file.event_based_hold? # true
         #   file.delete # raises Google::Cloud::PermissionDeniedError
         #   file.event_based_hold = false
-        #   file.retention_expires_at # current date + bucket retention_period
+        #
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
         #
         def default_event_based_hold= new_default_event_based_hold
           @gapi.default_event_based_hold = new_default_event_based_hold
@@ -665,6 +657,10 @@ module Google
         # on the `resourcemanager.projects.delete` permission for the project
         # containing the bucket.
         #
+        # The bucket's metageneration value is required for the lock policy API
+        # call. Attempting to call this method on a bucket that was loaded with
+        # the `skip_lookup: true` option will result in an error.
+        #
         # @return [Boolean] Returns `true` if the lock operation is successful.
         #
         # @example
@@ -680,6 +676,9 @@ module Google
         #
         #   file = bucket.create_file "path/to/local.file.ext"
         #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        #   # Locked policies can be extended in duration
+        #   bucket.retention_period = 7776000 # 90 days in seconds
         #
         def lock_retention_policy!
           ensure_service!

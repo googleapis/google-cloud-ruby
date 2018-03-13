@@ -392,6 +392,7 @@ YARD::Doctest.configure do |doctest|
       mock.expect :lock_bucket_retention_policy, bucket_gapi("my-bucket"), ["my-bucket", 1, Hash]
       mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
       mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 

@@ -446,11 +446,11 @@ module Google
         end
 
         ##
-        # Controls temporary hold of the file. This enforces a temporary hold on
-        # the file as long as this field is `true`, even if the bucket-level
-        # retention policy would normally allow deletion. When the flag is
-        # removed, the normal bucket-level policy rules once again apply.
-        # The default value is `false`.
+        # Whether there is a temporary hold on the file. A temporary hold will
+        # be enforced on the file as long as this field is `true`, even if the
+        # bucket-level retention policy would normally allow deletion. When the
+        # temporary hold is removed, the normal bucket-level policy rules once
+        # again apply. The default value is `false`.
         #
         # @return [Boolean] Returns `true` if there is a temporary hold on the
         #   file, otherwise `false`.
@@ -472,11 +472,11 @@ module Google
         end
 
         ##
-        # Controls temporary hold of the file. This enforces a temporary hold on
-        # the file as long as this field is `true`, even if the bucket-level
-        # retention policy would normally allow deletion. When the flag is
-        # removed, the normal bucket-level policy rules once again apply.
-        # The default value is `false`.
+        # Controls temporary hold of the file. This property is used to enforce
+        # a temporary hold on a file. While it is set to `true`, the file is
+        # protected against deletion and overwrites. Once removed, if a
+        # retention policy exists, the expiration date is not updated. The
+        # default value is `false`.
         #
         # @param [Boolean] new_temporary_hold Whether to enforce a temporary
         #   hold on the file.
@@ -510,7 +510,7 @@ module Google
         # default value is configured at the bucket-level (which defaults to
         # `false`), and is assigned to newly-created objects.
         #
-        # See {Bucket#default_event_based_hold?} and
+        # See {File#event_based_hold?}, {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
         #
         # If a bucket's retention policy duration is modified after the
@@ -566,7 +566,7 @@ module Google
         # default value is configured at the bucket-level (which defaults to
         # `false`), and is assigned to newly-created objects.
         #
-        # See {Bucket#default_event_based_hold?} and
+        # See {File#event_based_hold?}, {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
         #
         # If a bucket's retention policy duration is modified after the
@@ -1229,7 +1229,7 @@ module Google
         #
         # Raises PermissionDeniedError if the object is subject to an active
         # retention policy or hold. (See {#retention_expires_at},
-        # {Bucket#retention_period=}, {#temporary_hold?} and
+        # {Bucket#retention_period}, {#temporary_hold?} and
         # {#event_based_hold?}.)
         #
         # @param [Boolean, Integer] generation Specify a version of the file to
