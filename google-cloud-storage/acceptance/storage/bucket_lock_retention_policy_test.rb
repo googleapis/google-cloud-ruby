@@ -29,6 +29,26 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     end
   end
 
+  it "lists buckets with retention policies" do
+    bucket.update do |b|
+      b.retention_period = 10
+      b.default_event_based_hold = true
+    end
+    buckets = storage.buckets.all
+    found = false
+    buckets.each do |b|
+      if b.name == bucket_name
+        found = true
+
+        b.retention_period.must_equal 10
+        b.retention_effective_at.must_be_kind_of DateTime
+        b.retention_locked?.must_equal false
+        b.default_event_based_hold?.must_equal true
+      end
+    end
+    assert found
+  end
+
   it "manages a file with retention_period" do
     bucket.update do |b|
       b.retention_period = 10
@@ -148,6 +168,21 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     file.retention_expires_at.must_be :nil?
 
     file.delete
+  end
+
+  it "raises when loaded with skip_lookup: true and attempts to lock its retention_period with lock_retention_policy!" do
+    bucket.update do |b|
+      b.retention_period = 10
+    end
+
+    bucket.reload!
+    bucket.retention_period.must_equal 10
+    bucket.retention_locked?.must_equal false
+
+    bucket_ref = storage.bucket bucket.name, skip_lookup: true
+
+    err = expect { bucket_ref.lock_retention_policy! }.must_raise Google::Cloud::InvalidArgumentError
+    err.message.must_match /Required parameter: ifMetagenerationMatch/
   end
 
   it "locks its retention_period with lock_retention_policy!" do

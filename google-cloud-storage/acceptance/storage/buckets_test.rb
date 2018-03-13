@@ -55,19 +55,6 @@ describe "Storage", :buckets, :storage do
     end
   end
 
-  describe "Retention Policy and Lock" do
-
-    it "gets buckets with retention policies" do
-      first_buckets = storage.buckets max: 2
-      first_buckets.each do |b|
-        b.retention_period.must_be :nil?
-        b.retention_effective_at.must_be :nil?
-        b.retention_locked?.must_equal false
-        b.default_event_based_hold?.must_equal false
-      end
-    end
-  end
-
   describe "anonymous project" do
     it "raises when listing buckets without authentication" do
       anonymous_storage = Google::Cloud::Storage.anonymous
