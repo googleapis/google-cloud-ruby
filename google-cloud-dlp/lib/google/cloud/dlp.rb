@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ module Google
     # # Ruby Client for DLP API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [DLP API][Product Documentation]:
-    # The Google Data Loss Prevention API provides methods for detection of
-    # privacy-sensitive fragments in text, images, and Google Cloud Platform
-    # storage repositories.
+    #
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -36,21 +34,6 @@ module Google
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
     # 3. [Enable the DLP API.](https://console.cloud.google.com/apis/api/dlp)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
-    #
-    # ### Preview
-    # #### DlpServiceClient
-    # ```rb
-    # require "google/cloud/dlp"
-    #
-    # dlp_service_client = Google::Cloud::Dlp.new
-    # min_likelihood = :POSSIBLE
-    # inspect_config = { min_likelihood: min_likelihood }
-    # type = "text/plain"
-    # value = "my phone number is 215-512-1212"
-    # items_element = { type: type, value: value }
-    # items = [items_element]
-    # response = dlp_service_client.inspect_content(inspect_config, items)
-    # ```
     #
     # ### Next Steps
     # - Read the [DLP API Product documentation][Product Documentation]
@@ -81,7 +64,7 @@ module Google
       # scheduling of data scans on Google Cloud Platform based data sets.
       #
       # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v2beta1
+      #   The major version of the service to be used. By default :v2
       #   is used.
       # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
       #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -108,7 +91,7 @@ module Google
       #     or the specified config is missing data points.
       #   @param timeout [Numeric]
       #     The default timeout, in seconds, for calls made through this client.
-      def self.new(*args, version: :v2beta1, **kwargs)
+      def self.new(*args, version: :v2, **kwargs)
         unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
           raise "The version: #{version} is not available. The available versions " \
             "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
