@@ -216,7 +216,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     file.service.mocked_service = mock
 
     file.event_based_hold?.must_equal true
-    file.event_based_hold = false
+    file.remove_event_based_hold!
 
     mock.verify
   end

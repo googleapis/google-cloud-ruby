@@ -133,7 +133,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
 
-    file.event_based_hold = false
+    file.remove_event_based_hold!
 
     file.reload!
     file.temporary_hold?.must_equal false

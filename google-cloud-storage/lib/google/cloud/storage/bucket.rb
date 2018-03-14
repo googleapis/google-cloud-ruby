@@ -596,7 +596,7 @@ module Google
         # Whether the `event_based_hold` field for newly-created files in the
         # bucket will be initially set to `true`. See
         # {#default_event_based_hold=}, {File#event_based_hold?} and
-        # {File#event_based_hold=}.
+        # {File#set_event_based_hold!}.
         #
         # @return [Boolean] Returns `true` if the `event_based_hold` field for
         #   newly-created files in the bucket will be initially set to `true`,
@@ -611,7 +611,7 @@ module Google
         # controls the initial state of the `event_based_hold` field for
         # newly-created files in the bucket.
         #
-        # See {File#event_based_hold?} and {File#event_based_hold=}.
+        # See {File#event_based_hold?} and {File#set_event_based_hold!}.
         #
         # @param [Boolean] new_default_event_based_hold The default event-based
         #   hold field for the bucket.
@@ -631,7 +631,7 @@ module Google
         #   file = bucket.create_file "path/to/local.file.ext"
         #   file.event_based_hold? # true
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.event_based_hold = false
+        #   file.remove_event_based_hold!
         #
         #   # The end of the retention period is calculated from the time that
         #   # the event-based hold was released.

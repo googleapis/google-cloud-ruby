@@ -447,10 +447,10 @@ module Google
 
         ##
         # Whether there is a temporary hold on the file. A temporary hold will
-        # be enforced on the file as long as this field is `true`, even if the
-        # bucket-level retention policy would normally allow deletion. When the
-        # temporary hold is removed, the normal bucket-level policy rules once
-        # again apply. The default value is `false`.
+        # be enforced on the file as long as this property is `true`, even if
+        # the bucket-level retention policy would normally allow deletion. When
+        # the temporary hold is removed, the normal bucket-level policy rules
+        # once again apply. The default value is `false`.
         #
         # @return [Boolean] Returns `true` if there is a temporary hold on the
         #   file, otherwise `false`.
@@ -527,18 +527,19 @@ module Google
         end
 
         ##
-        # Controls event-based hold of the file. This enforces an event-based
-        # hold on the file as long as this field is `true`, even if the
-        # bucket-level retention policy would normally allow deletion. Changing
-        # from 'true' to 'false' extends the retention duration of the file to
-        # the current date plus the bucket-level policy duration. Unsetting the
-        # event-based hold retention flag represents that a retention-related
+        # Whether there is an event-based hold on the file. An event-based
+        # hold will be enforced on the file as long as this property is `true`,
+        # even if the bucket-level retention policy would normally allow
+        # deletion. Removing the event-based hold extends the retention duration
+        # of the file to the current date plus the bucket-level policy duration.
+        # Removing the event-based hold represents that a retention-related
         # event has occurred, and thus the retention clock ticks from the moment
         # of the event as opposed to the creation date of the object. The
-        # default value is configured at the bucket-level (which defaults to
+        # default value is configured at the bucket level (which defaults to
         # `false`), and is assigned to newly-created objects.
         #
-        # See {File#event_based_hold?}, {Bucket#default_event_based_hold?} and
+        # See {#set_event_based_hold!}, {#remove_event_based_hold!},
+        # {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
         #
         # If a bucket's retention policy duration is modified after the
@@ -573,32 +574,32 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #
         #   file.event_based_hold? #=> false
-        #   file.event_based_hold = true
+        #   file.set_event_based_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.event_based_hold = false
-        #   file.retention_expires_at # current date + bucket retention_period
+        #   file.remove_event_based_hold!
+        #
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
         #
         def event_based_hold?
           !@gapi.event_based_hold.nil? && @gapi.event_based_hold
         end
 
         ##
-        # Controls event-based hold of the file. This enforces an event-based
-        # hold on the file as long as this field is `true`, even if the
-        # bucket-level retention policy would normally allow deletion. Changing
-        # from 'true' to 'false' extends the retention duration of the file to
-        # the current date plus the bucket-level policy duration. Unsetting the
-        # event-based hold retention flag represents that a retention-related
-        # event has occurred, and thus the retention clock ticks from the moment
-        # of the event as opposed to the creation date of the object. The
-        # default value is configured at the bucket-level (which defaults to
-        # `false`), and is assigned to newly-created objects.
+        # Sets the event-based hold property of the file to `true`. This
+        # property enforces an event-based hold on the file as long as this
+        # property is `true`, even if the bucket-level retention policy would
+        # normally allow deletion. The default value is configured at the
+        # bucket level (which defaults to `false`), and is assigned to
+        # newly-created objects.
         #
-        # See {File#event_based_hold?}, {Bucket#default_event_based_hold?} and
+        # See {#event_based_hold?}, {#remove_event_based_hold!},
+        # {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
         #
         # If a bucket's retention policy duration is modified after the
-        # event-based hold flag is unset, the updated retention duration applies
+        # event-based hold is removed, the updated retention duration applies
         # retroactively to objects that previously had event-based holds.  For
         # example:
         #
@@ -615,8 +616,43 @@ module Google
         #   holds released prior to the effective date of the new policy may
         #   have already been deleted by the user.
         #
-        # @param [Boolean] new_event_based_hold Whether to enforce an
-        #   event-based hold on the file.
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.retention_period = 2592000 # 30 days in seconds
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.event_based_hold? #=> false
+        #   file.set_event_based_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #   file.remove_event_based_hold!
+        #
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
+        #
+        def set_event_based_hold!
+          @gapi.event_based_hold = true
+          update_gapi! :event_based_hold
+        end
+
+        ##
+        # Sets the event-based hold property of the file to `false`. Removing
+        # the event-based hold extends the retention duration of the file to the
+        # current date plus the bucket-level policy duration. Removing the
+        # event-based hold represents that a retention-related event has
+        # occurred, and thus the retention clock ticks from the moment of the
+        # event as opposed to the creation date of the object. The default value
+        # is configured at the bucket level (which defaults to `false`), and is
+        # assigned to newly-created objects.
+        #
+        # See {#event_based_hold?}, {#set_event_based_hold!},
+        # {Bucket#default_event_based_hold?} and
+        # {Bucket#default_event_based_hold=}.
         #
         # @example
         #   require "google/cloud/storage"
@@ -629,13 +665,16 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #
         #   file.event_based_hold? #=> false
-        #   file.event_based_hold = true
+        #   file.set_event_based_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.event_based_hold = false
-        #   file.retention_expires_at # current date + bucket retention_period
+        #   file.remove_event_based_hold!
         #
-        def event_based_hold= new_event_based_hold
-          @gapi.event_based_hold = new_event_based_hold
+        #   # The end of the retention period is calculated from the time that
+        #   # the event-based hold was released.
+        #   file.retention_expires_at
+        #
+        def remove_event_based_hold!
+          @gapi.event_based_hold = false
           update_gapi! :event_based_hold
         end
 
