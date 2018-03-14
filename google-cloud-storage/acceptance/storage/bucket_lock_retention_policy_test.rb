@@ -24,7 +24,12 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
 
   after do
     if bucket
-      bucket.files.all &:delete
+      bucket.retention_period = nil if bucket.retention_period
+      bucket.files.all do |file|
+        file.remove_temporary_hold! if file.temporary_hold?
+        file.remove_event_based_hold! if file.event_based_hold?
+        file.delete
+      end
       bucket.delete
     end
   end
