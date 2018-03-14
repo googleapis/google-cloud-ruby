@@ -464,7 +464,7 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #
         #   file.temporary_hold? #=> false
-        #   file.temporary_hold = true
+        #   file.set_temporary_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
         #
         def temporary_hold?
@@ -472,14 +472,13 @@ module Google
         end
 
         ##
-        # Controls temporary hold of the file. This property is used to enforce
-        # a temporary hold on a file. While it is set to `true`, the file is
-        # protected against deletion and overwrites. Once removed, if a
-        # retention policy exists, the expiration date is not updated. The
+        # Sets the temporary hold property of the file to `true`. This property
+        # is used to enforce a temporary hold on a file. While it is set to
+        # `true`, the file is protected against deletion and overwrites. Once
+        # removed, the file's `retention_expires_at` date is not changed. The
         # default value is `false`.
         #
-        # @param [Boolean] new_temporary_hold Whether to enforce a temporary
-        #   hold on the file.
+        # See {#retention_expires_at}.
         #
         # @example
         #   require "google/cloud/storage"
@@ -490,11 +489,40 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #
         #   file.temporary_hold? #=> false
-        #   file.temporary_hold = true
+        #   file.set_temporary_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
         #
-        def temporary_hold= new_temporary_hold
-          @gapi.temporary_hold = new_temporary_hold
+        def set_temporary_hold!
+          @gapi.temporary_hold = true
+          update_gapi! :temporary_hold
+        end
+
+        ##
+        # Sets the temporary hold property of the file to `false`. This property
+        # is used to enforce a temporary hold on a file. While it is set to
+        # `true`, the file is protected against deletion and overwrites. Once
+        # removed, the file's `retention_expires_at` date is not changed. The
+        # default value is `false`.
+        #
+        # See {#retention_expires_at}.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.temporary_hold? #=> false
+        #   file.set_temporary_hold!
+        #   file.delete # raises Google::Cloud::PermissionDeniedError
+        #
+        #   file.remove_temporary_hold!
+        #   file.delete
+        #
+        def remove_temporary_hold!
+          @gapi.temporary_hold = false
           update_gapi! :temporary_hold
         end
 

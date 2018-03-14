@@ -646,10 +646,30 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::File#temporary_hold" do
+  doctest.before "Google::Cloud::Storage::File#temporary_hold?" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
+      mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#set_temporary_hold!" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
+      mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#remove_temporary_hold!" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :patch_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
+      mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
       mock.expect :patch_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
       mock.expect :delete_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
     end

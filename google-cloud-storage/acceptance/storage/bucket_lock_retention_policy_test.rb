@@ -160,7 +160,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     err = expect { file.delete }.must_raise Google::Cloud::PermissionDeniedError
     err.message.must_match /is under active Temporary hold/
 
-    file.temporary_hold = false
+    file.remove_temporary_hold!
 
     file.reload!
     file.temporary_hold?.must_equal false
