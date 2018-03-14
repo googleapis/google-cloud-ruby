@@ -100,14 +100,6 @@
       ]
     },
     {
-      "id": "google-cloud-bigquery-data_transfer",
-      "name": "google-cloud-bigquery-data_transfer",
-      "defaultService": "google/cloud/bigquery/datatransfer",
-      "versions": [
-        "master"
-      ]
-    },
-    {
       "id": "google-cloud-container",
       "name": "google-cloud-container",
       "defaultService": "google/cloud/container",
