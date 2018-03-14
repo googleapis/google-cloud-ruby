@@ -17,7 +17,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/bigquery/datatransfer/v1/datatypes"
+              "type": "google/cloud/bigquery/datatransfer/v1/datatypes"
             }
           ]
         }
