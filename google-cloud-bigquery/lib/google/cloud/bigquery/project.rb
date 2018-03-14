@@ -242,10 +242,9 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job(
-        #     "SELECT name FROM [my_project:my_dataset.my_table]") do |query|
-        #     query.legacy_sql = true
-        #   end
+        #   job = bigquery.query_job "SELECT name FROM " \
+        #                            " [my_project:my_dataset.my_table]",
+        #                            legacy_sql: true
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -261,9 +260,8 @@ module Google
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_dataset.my_table`" \
-        #                            " WHERE id = ?" do |query|
-        #     query.params = [1]
-        #   end
+        #                            " WHERE id = ?",
+        #                            params: [1]
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -279,9 +277,8 @@ module Google
         #
         #   job = bigquery.query_job "SELECT name FROM " \
         #                            "`my_dataset.my_table`" \
-        #                            " WHERE id = @id" do |query|
-        #     query.params = { id: 1 }
-        #   end
+        #                            " WHERE id = @id",
+        #                            params: { id: 1 }
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -290,7 +287,7 @@ module Google
         #     end
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -303,6 +300,8 @@ module Google
         #
         #   job = bigquery.query_job "SELECT * FROM my_ext_table" do |query|
         #     query.external = { my_ext_table: csv_table }
+        #     dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #     query.table = dataset.table "my_table", skip_lookup: true
         #   end
         #
         #   job.wait_until_done!
@@ -442,9 +441,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   sql = "SELECT name FROM [my_project:my_dataset.my_table]"
-        #   data = bigquery.query sql do |query|
-        #     query.legacy_sql = true
-        #   end
+        #   data = bigquery.query sql, legacy_sql: true
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -468,9 +465,8 @@ module Google
         #
         #   data = bigquery.query "SELECT name " \
         #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE id = ?" do |query|
-        #     query.params = [1]
-        #   end
+        #                         "WHERE id = ?",
+        #                         params: [1]
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -483,15 +479,14 @@ module Google
         #
         #   data = bigquery.query "SELECT name " \
         #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE id = @id" do |query|
-        #     query.params = { id: 1 }
-        #   end
+        #                         "WHERE id = @id",
+        #                         params: { id: 1 }
         #
         #   data.each do |row|
         #     puts row[:name]
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -504,6 +499,8 @@ module Google
         #
         #   data = bigquery.query "SELECT * FROM my_ext_table" do |query|
         #     query.external = { my_ext_table: csv_table }
+        #     dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #     query.table = dataset.table "my_table", skip_lookup: true
         #   end
         #
         #   data.each do |row|
