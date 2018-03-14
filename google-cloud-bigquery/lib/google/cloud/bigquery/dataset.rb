@@ -823,9 +823,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "SELECT name FROM my_table" do |query|
-        #     query.legacy_sql = true
-        #   end
+        #   job = dataset.query_job "SELECT name FROM my_table",
+        #                           legacy_sql: true
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -840,10 +839,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job(
-        #     "SELECT name FROM my_table WHERE id = ?") do |query|
-        #     query.params = [1]
-        #   end
+        #   job = dataset.query_job "SELECT name FROM my_table WHERE id = ?",
+        #                           params: [1]
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -858,10 +855,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job(
-        #     "SELECT name FROM my_table WHERE id = @id") do |query|
-        #     query.params = { id: 1 }
-        #   end
+        #   job = dataset.query_job "SELECT name FROM my_table WHERE id = @id",
+        #                           params: { id: 1 }
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -870,7 +865,7 @@ module Google
         #     end
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -882,8 +877,10 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   job = dataset.query_job "SELECT * FROM my_ext_table",
-        #                           external: { my_ext_table: csv_table }
+        #   job = dataset.query_job "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -1019,9 +1016,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query "SELECT name FROM my_table" do |query|
-        #     query.legacy_sql = true
-        #   end
+        #   data = dataset.query "SELECT name FROM my_table",
+        #                        legacy_sql: true
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1033,10 +1029,8 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query(
-        #     "SELECT name FROM my_table WHERE id = ?") do |query|
-        #     query.params = [1]
-        #   end
+        #   data = dataset.query "SELECT name FROM my_table WHERE id = ?",
+        #                        params: [1]
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1048,16 +1042,14 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query(
-        #     "SELECT name FROM my_table WHERE id = @id") do |query|
-        #     query.params = { id: 1 }
-        #   end
+        #   data = dataset.query "SELECT name FROM my_table WHERE id = @id",
+        #                        params: { id: 1 }
         #
         #   data.each do |row|
         #     puts row[:name]
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1071,6 +1063,7 @@ module Google
         #
         #   data = dataset.query "SELECT * FROM my_ext_table" do |query|
         #     query.external = { my_ext_table: csv_table }
+        #     query.table = dataset.table "my_table", skip_lookup: true
         #   end
         #
         #   data.each do |row|
