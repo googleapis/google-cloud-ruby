@@ -17,12 +17,12 @@
 require "minitest/autorun"
 require "minitest/spec"
 
-require "google/cloud/dlp"
+require "google/cloud/dlp/v2beta1"
 
 describe "DlpServiceSmokeTest" do
   it "runs one smoke test with inspect_content" do
 
-    dlp_service_client = Google::Cloud::Dlp.new
+    dlp_service_client = Google::Cloud::Dlp::V2beta1::DlpServiceClient.new
     min_likelihood = :POSSIBLE
     inspect_config = { min_likelihood: min_likelihood }
     type = "text/plain"
