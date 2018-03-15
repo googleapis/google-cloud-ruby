@@ -289,6 +289,7 @@ namespace :jsondoc do
 
     google_cloud_gems = [
       "google-cloud-bigquery",
+      "google-cloud-bigquery-data_transfer",
       "google-cloud-core",
       "google-cloud-datastore",
       "google-cloud-debugger",
