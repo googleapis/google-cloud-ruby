@@ -761,11 +761,6 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
-        # @param [Integer] maximum_billing_tier Limits the billing tier for this
-        #   job. Queries that have resource usage beyond this tier will fail
-        #   (without incurring a charge). Optional. If unspecified, this will be
-        #   set to your project default. For more information, see [High-Compute
-        #   queries](https://cloud.google.com/bigquery/pricing#high-compute).
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
@@ -799,6 +794,11 @@ module Google
         #   inline code resource is equivalent to providing a URI for a file
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
+        #   tier to allow high-compute queries.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting additional options for the query.
         #
         # @return [Google::Cloud::Bigquery::QueryJob] A new query job object.
         #
@@ -865,7 +865,7 @@ module Google
         #     end
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -877,8 +877,10 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   job = dataset.query_job "SELECT * FROM my_ext_table",
-        #                           external: { my_ext_table: csv_table }
+        #   job = dataset.query_job "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -895,6 +897,7 @@ module Google
                       legacy_sql: nil, large_results: nil, flatten: nil,
                       maximum_billing_tier: nil, maximum_bytes_billed: nil,
                       job_id: nil, prefix: nil, labels: nil, udfs: nil
+          ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
@@ -902,10 +905,14 @@ module Google
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
                       params: params, external: external, labels: labels,
-                      job_id: job_id, prefix: prefix, udfs: udfs }
-          options[:dataset] ||= self
-          ensure_service!
-          gapi = service.query_job query, options
+                      udfs: udfs }
+
+          updater = QueryJob::Updater.from_options query, options
+          updater.dataset = self
+
+          yield updater if block_given?
+
+          gapi = service.query_job job_id, prefix, updater.to_gapi
           Job.from_gapi gapi, service
         end
 
@@ -985,6 +992,9 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting additional options for the query.
         #
         # @return [Google::Cloud::Bigquery::Data] A new data object.
         #
@@ -1039,7 +1049,7 @@ module Google
         #     puts row[:name]
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1051,8 +1061,10 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   data = dataset.query "SELECT * FROM my_ext_table",
-        #                        external: { my_ext_table: csv_table }
+        #   data = dataset.query "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1063,10 +1075,16 @@ module Google
         def query query, params: nil, external: nil, max: nil, cache: true,
                   standard_sql: nil, legacy_sql: nil
           ensure_service!
-          options = { params: params, external: external, cache: cache,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql }
+          options = { priority: "INTERACTIVE", external: external, cache: cache,
+                      legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      params: params }
+          options[:dataset] ||= self
+          updater = QueryJob::Updater.from_options query, options
 
-          job = query_job query, options
+          yield updater if block_given?
+
+          gapi = service.query_job nil, nil, updater.to_gapi
+          job = Job.from_gapi gapi, service
           job.wait_until_done!
           ensure_job_succeeded! job
 
