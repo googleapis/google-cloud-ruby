@@ -1,5 +1,9 @@
 # Release History
 
+### 0.51.0 / 2018-03-14
+
+* Add BigQuery DataTransfer
+
 ### 0.50.0 / 2018-02-27
 
 * Support Shared Configuration.

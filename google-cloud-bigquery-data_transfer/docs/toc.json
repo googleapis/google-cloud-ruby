@@ -2,7 +2,7 @@
   "guides": [],
   "services": [
     {
-      "title": "Bigquery DataTransfer",
+      "title": "BigQuery DataTransfer",
       "type": "google/cloud/bigquery/datatransfer",
       "patterns": ["\/datatransfer", "google\/api", "google\/protobuf"],
       "nav": [
