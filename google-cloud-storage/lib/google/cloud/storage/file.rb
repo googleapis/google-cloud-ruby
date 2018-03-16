@@ -538,7 +538,7 @@ module Google
         # default value is configured at the bucket level (which defaults to
         # `false`), and is assigned to newly-created objects.
         #
-        # See {#set_event_based_hold!}, {#remove_event_based_hold!},
+        # See {#set_event_based_hold!}, {#release_event_based_hold!},
         # {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
         #
@@ -576,7 +576,7 @@ module Google
         #   file.event_based_hold? #=> false
         #   file.set_event_based_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.remove_event_based_hold!
+        #   file.release_event_based_hold!
         #
         #   # The end of the retention period is calculated from the time that
         #   # the event-based hold was released.
@@ -594,7 +594,7 @@ module Google
         # bucket level (which defaults to `false`), and is assigned to
         # newly-created objects.
         #
-        # See {#event_based_hold?}, {#remove_event_based_hold!},
+        # See {#event_based_hold?}, {#release_event_based_hold!},
         # {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
         #
@@ -629,7 +629,7 @@ module Google
         #   file.event_based_hold? #=> false
         #   file.set_event_based_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.remove_event_based_hold!
+        #   file.release_event_based_hold!
         #
         #   # The end of the retention period is calculated from the time that
         #   # the event-based hold was released.
@@ -667,13 +667,13 @@ module Google
         #   file.event_based_hold? #=> false
         #   file.set_event_based_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.remove_event_based_hold!
+        #   file.release_event_based_hold!
         #
         #   # The end of the retention period is calculated from the time that
         #   # the event-based hold was released.
         #   file.retention_expires_at
         #
-        def remove_event_based_hold!
+        def release_event_based_hold!
           @gapi.event_based_hold = false
           update_gapi! :event_based_hold
         end

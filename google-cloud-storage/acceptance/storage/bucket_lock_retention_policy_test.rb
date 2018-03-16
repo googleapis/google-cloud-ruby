@@ -27,7 +27,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
       bucket.retention_period = nil if bucket.retention_period
       bucket.files.all do |file|
         file.release_temporary_hold! if file.temporary_hold?
-        file.remove_event_based_hold! if file.event_based_hold?
+        file.release_event_based_hold! if file.event_based_hold?
         file.delete
       end
       bucket.delete
@@ -138,7 +138,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     bucket.retention_policy_locked?.must_equal false
     bucket.default_event_based_hold?.must_equal false
 
-    file.remove_event_based_hold!
+    file.release_event_based_hold!
 
     file.reload!
     file.temporary_hold?.must_equal false

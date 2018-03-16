@@ -697,7 +697,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::File#remove_event_based_hold!" do
+  doctest.before "Google::Cloud::Storage::File#release_event_based_hold!" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]

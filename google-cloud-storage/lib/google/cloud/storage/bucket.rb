@@ -631,7 +631,7 @@ module Google
         #   file = bucket.create_file "path/to/local.file.ext"
         #   file.event_based_hold? # true
         #   file.delete # raises Google::Cloud::PermissionDeniedError
-        #   file.remove_event_based_hold!
+        #   file.release_event_based_hold!
         #
         #   # The end of the retention period is calculated from the time that
         #   # the event-based hold was released.
