@@ -202,7 +202,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     file.service.mocked_service = mock
 
     file.temporary_hold?.must_equal true
-    file.remove_temporary_hold!
+    file.release_temporary_hold!
 
     mock.verify
   end

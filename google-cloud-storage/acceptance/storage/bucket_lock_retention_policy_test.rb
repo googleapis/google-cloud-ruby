@@ -26,7 +26,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     if bucket
       bucket.retention_period = nil if bucket.retention_period
       bucket.files.all do |file|
-        file.remove_temporary_hold! if file.temporary_hold?
+        file.release_temporary_hold! if file.temporary_hold?
         file.remove_event_based_hold! if file.event_based_hold?
         file.delete
       end
@@ -165,7 +165,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :storage do
     err = expect { file.delete }.must_raise Google::Cloud::PermissionDeniedError
     err.message.must_match /is under active Temporary hold/
 
-    file.remove_temporary_hold!
+    file.release_temporary_hold!
 
     file.reload!
     file.temporary_hold?.must_equal false

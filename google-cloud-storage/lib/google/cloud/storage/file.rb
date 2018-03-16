@@ -518,10 +518,10 @@ module Google
         #   file.set_temporary_hold!
         #   file.delete # raises Google::Cloud::PermissionDeniedError
         #
-        #   file.remove_temporary_hold!
+        #   file.release_temporary_hold!
         #   file.delete
         #
-        def remove_temporary_hold!
+        def release_temporary_hold!
           @gapi.temporary_hold = false
           update_gapi! :temporary_hold
         end

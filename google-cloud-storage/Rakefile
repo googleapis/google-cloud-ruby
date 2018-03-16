@@ -103,7 +103,7 @@ namespace :acceptance do
       begin
         b.retention_period = nil if b.retention_period
         b.files(versions: true).all do |file|
-          file.remove_temporary_hold! if file.temporary_hold?
+          file.release_temporary_hold! if file.temporary_hold?
           file.remove_event_based_hold! if file.event_based_hold?
           file.delete generation: true
         end
