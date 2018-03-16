@@ -44,7 +44,7 @@ inspect_config = {
   min_likelihood: :POSSIBLE
 }
 item = { value: "my phone number is 215-512-1212" }
-parent = "projects/#{ENV["DLP_TEST_PROJECT"]}"
+parent = "projects/#{ENV["MY_PROJECT"]}"
 
 response = dlp.inspect_content parent, 
   inspect_config: inspect_config, 
