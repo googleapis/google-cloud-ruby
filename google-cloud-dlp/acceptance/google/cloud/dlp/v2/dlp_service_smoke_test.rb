@@ -21,14 +21,15 @@ require "google/cloud/dlp"
 
 describe "DlpServiceSmokeTest" do
   it "runs one smoke test with inspect_content" do
+    unless ENV["DLP_TEST_PROJECT"]
+      fail "Usage: DLP_TEST_PROJECT=<project_id> ruby #{$0}"
+    end
+    project_id = ENV["DLP_TEST_PROJECT"].freeze
 
-    dlp_service_client = Google::Cloud::Dlp.new version: :v2beta1
-    min_likelihood = :POSSIBLE
-    inspect_config = { min_likelihood: min_likelihood }
-    type = "text/plain"
-    value = "my phone number is 215-512-1212"
-    items_element = { type: type, value: value }
-    items = [items_element]
-    response = dlp_service_client.inspect_content(inspect_config, items)
+    dlp_service_client = Google::Cloud::Dlp.new version: :v2
+    type = { name: "PHONE_NUMBER" }
+    inspect_config = { info_types: [type], min_likelihood: :POSSIBLE }
+    item = { value: "my phone number is 215-512-1212" }
+    response = dlp_service_client.inspect_content("projects/#{project_id}", inspect_config: inspect_config, item: item)
   end
 end
