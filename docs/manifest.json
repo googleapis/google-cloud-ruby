@@ -188,7 +188,6 @@
       "name": "google-cloud-dlp",
       "defaultService": "google/cloud/dlp",
       "versions": [
-        "v0.2.0",
         "v0.1.0",
         "master"
       ]
