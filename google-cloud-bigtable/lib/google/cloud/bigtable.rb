@@ -115,7 +115,7 @@ module Google
           scopes: nil,
           client_config: nil,
           timeout: nil
-        project_id = (project_id || project || default_project_id).to_s
+        project_id = (project_id || default_project_id).to_s
 
         raise InvalidArgumentError, "project_id is required" unless project_id
 
