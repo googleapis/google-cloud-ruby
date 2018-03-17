@@ -293,6 +293,7 @@ namespace :jsondoc do
       "google-cloud-core",
       "google-cloud-datastore",
       "google-cloud-debugger",
+      "google-cloud-dlp",
       "google-cloud-dns",
       "google-cloud-error_reporting",
       "google-cloud-firestore",

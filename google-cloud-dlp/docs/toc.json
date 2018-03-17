@@ -17,7 +17,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/dlp/v2/datatypes"
+              "type": "google/privacy/dlp/v2/datatypes"
             }
           ]
         },
@@ -32,7 +32,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/dlp/v2beta1/datatypes"
+              "type": "google/privacy/dlp/v2beta1/datatypes"
             }
           ]
         }

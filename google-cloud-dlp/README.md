@@ -37,14 +37,18 @@ See https://www.ruby-lang.org/en/downloads/branches/ for further details.
 ```rb
 require "google/cloud/dlp"
 
-dlp_service_client = Google::Cloud::Dlp.new
-min_likelihood = :POSSIBLE
-inspect_config = { min_likelihood: min_likelihood }
-type = "text/plain"
-value = "my phone number is 215-512-1212"
-items_element = { type: type, value: value }
-items = [items_element]
-response = dlp_service_client.inspect_content(inspect_config, items)
+dlp = Google::Cloud::Dlp.new
+
+inspect_config = { 
+  info_types: [{ name: "PHONE_NUMBER" }], 
+  min_likelihood: :POSSIBLE
+}
+item = { value: "my phone number is 215-512-1212" }
+parent = "projects/#{ENV["MY_PROJECT"]}"
+
+response = dlp.inspect_content parent, 
+  inspect_config: inspect_config, 
+  item: item
 ```
 
 ### Next Steps
