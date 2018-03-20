@@ -288,8 +288,10 @@ namespace :jsondoc do
     rm_rf gh_pages + "json/google-cloud/#{version}/google", verbose: true
 
     google_cloud_gems = [
-      "google-cloud-bigquery",
+      # Place bigquery-data_transfer ahead of bigquery to avoid overwriting the
+      # google/cloud/bigquery.json "guide" with blank output. See issue #2007.
       "google-cloud-bigquery-data_transfer",
+      "google-cloud-bigquery",
       "google-cloud-core",
       "google-cloud-datastore",
       "google-cloud-debugger",
@@ -312,8 +314,7 @@ namespace :jsondoc do
     ]
     # Currently excluded: "gcloud", "google-cloud", "stackdriver", "stackdriver-core",
     #                     "google-cloud-spanner", "google-cloud-env"
-    gems.each do |gem|
-      next unless google_cloud_gems.include? gem
+    (google_cloud_gems & gems).each do |gem|
 
       ver = if version == "master"
               "master" # When building master, all content should be from master
