@@ -297,6 +297,52 @@ module Google
           return val unless val.nil?
           str
         end
+
+        ##
+        # @private
+        #
+        # Converts source format strings to API values.
+        #
+        # @return [String] API representation of source format.
+        def self.source_format format
+          val = {
+            "csv" => "CSV",
+            "json" => "NEWLINE_DELIMITED_JSON",
+            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
+            "avro" => "AVRO",
+            "datastore" => "DATASTORE_BACKUP",
+            "backup" => "DATASTORE_BACKUP",
+            "datastore_backup" => "DATASTORE_BACKUP"
+          }[format.to_s.downcase]
+          return val unless val.nil?
+          format
+        end
+
+        ##
+        # @private
+        #
+        # Converts file paths into source format by extension.
+        #
+        # @return [String] API representation of source format.
+        def self.derive_source_format_from_list paths
+          paths.map do |path|
+            derive_source_format path
+          end.compact.uniq.first
+        end
+
+        ##
+        # @private
+        #
+        # Converts file path into source format by extension.
+        #
+        # @return [String] API representation of source format.
+        def self.derive_source_format path
+          return "CSV" if path.end_with? ".csv"
+          return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
+          return "AVRO" if path.end_with? ".avro"
+          return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
+          nil
+        end
       end
 
       # rubocop:enable Metrics/ModuleLength

@@ -1320,7 +1320,9 @@ module Google
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
-        #
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
+        #   configuration object for setting additional options.
         #
         # @return [Google::Cloud::Bigquery::ExtractJob]
         #
@@ -1342,8 +1344,14 @@ module Google
           ensure_service!
           options = { format: format, compression: compression,
                       delimiter: delimiter, header: header, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix, labels: labels }
-          gapi = service.extract_table table_ref, extract_url, options
+                      labels: labels }
+          updater = ExtractJob::Updater.from_options table_ref, extract_url,
+                                                     options
+
+          yield updater if block_given?
+
+          job_gapi = updater.to_gapi
+          gapi = service.extract_table job_id, prefix, job_gapi
           Job.from_gapi gapi, service
         end
 
@@ -1374,11 +1382,13 @@ module Google
         #   exported data. Default is <code>,</code>.
         # @param [Boolean] header Whether to print out a header row in the
         #   results. Default is `true`.
-        #
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::ExtractJob::Updater] job a job
+        #   configuration object for setting additional options.
         #
         # @return [Boolean] Returns `true` if the extract operation succeeded.
         #
-        # @example
+        # @example Extract to a JSON file:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1387,13 +1397,32 @@ module Google
         #
         #   table.extract "gs://my-bucket/file-name.json", format: "json"
         #
+        # @example Extract to a CSV file, attaching labels to the job:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.extract "gs://my-bucket/file-name.csv" do |extract|
+        #     extract.labels = { "custom-label" => "custom-value" }
+        #   end
+        #
         # @!group Data
         #
         def extract extract_url, format: nil, compression: nil, delimiter: nil,
                     header: nil
-          job = extract_job extract_url, format: format,
-                                         compression: compression,
-                                         delimiter: delimiter, header: header
+          ensure_service!
+          options = { format: format, compression: compression,
+                      delimiter: delimiter, header: header }
+          updater = ExtractJob::Updater.from_options table_ref, extract_url,
+                                                     options
+
+          yield updater if block_given?
+
+          job_gapi = updater.to_gapi
+          gapi = service.extract_table nil, nil, job_gapi
+          job = Job.from_gapi gapi, service
           job.wait_until_done!
           ensure_job_succeeded! job
           true
@@ -2216,20 +2245,6 @@ module Google
           end
         end
 
-        def derive_source_format_from_list paths
-          paths.map do |path|
-            derive_source_format path
-          end.compact.uniq.first
-        end
-
-        def derive_source_format path
-          return "CSV" if path.end_with? ".csv"
-          return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
-          return "AVRO" if path.end_with? ".avro"
-          return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
-          nil
-        end
-
         def load_storage job_id, prefix, urls, job_gapi
           # Convert to storage URL
           urls = [urls].flatten.map do |url|
@@ -2245,7 +2260,7 @@ module Google
           unless urls.nil?
             job_gapi.configuration.load.update! source_uris: urls
             if job_gapi.configuration.load.source_format.nil?
-              source_format = derive_source_format_from_list urls
+              source_format = Convert.derive_source_format_from_list urls
               unless source_format.nil?
                 job_gapi.configuration.load.source_format = source_format
               end
@@ -2259,7 +2274,7 @@ module Google
         def load_local job_id, prefix, file, job_gapi
           path = Pathname(file).to_path
           if job_gapi.configuration.load.source_format.nil?
-            source_format = derive_source_format path
+            source_format = Convert.derive_source_format path
             unless source_format.nil?
               job_gapi.configuration.load.source_format = source_format
             end

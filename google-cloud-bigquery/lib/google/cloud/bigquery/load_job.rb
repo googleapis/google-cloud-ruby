@@ -721,7 +721,7 @@ module Google
           #
           def format= new_format
             @gapi.configuration.load.update! source_format:
-              source_format(new_format)
+              Convert.source_format(new_format)
           end
 
           # Sets the create disposition.
@@ -999,20 +999,6 @@ module Google
           def patch_gapi! attribute
             @updates << attribute
             @updates.uniq!
-          end
-
-          def source_format format
-            val = {
-              "csv" => "CSV",
-              "json" => "NEWLINE_DELIMITED_JSON",
-              "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
-              "avro" => "AVRO",
-              "datastore" => "DATASTORE_BACKUP",
-              "backup" => "DATASTORE_BACKUP",
-              "datastore_backup" => "DATASTORE_BACKUP"
-            }[format.to_s.downcase]
-            return val unless val.nil?
-            format
           end
         end
       end

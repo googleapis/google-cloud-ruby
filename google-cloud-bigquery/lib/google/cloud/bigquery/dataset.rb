@@ -2082,20 +2082,6 @@ module Google
           end
         end
 
-        def derive_source_format_from_list paths
-          paths.map do |path|
-            derive_source_format path
-          end.compact.uniq.first
-        end
-
-        def derive_source_format path
-          return "CSV" if path.end_with? ".csv"
-          return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
-          return "AVRO" if path.end_with? ".avro"
-          return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
-          nil
-        end
-
         def load_storage job_id, prefix, urls, job_gapi
           # Convert to storage URL
           urls = [urls].flatten.map do |url|
@@ -2111,7 +2097,7 @@ module Google
           unless urls.nil?
             job_gapi.configuration.load.update! source_uris: urls
             if job_gapi.configuration.load.source_format.nil?
-              source_format = derive_source_format_from_list urls
+              source_format = Convert.derive_source_format_from_list urls
               unless source_format.nil?
                 job_gapi.configuration.load.source_format = source_format
               end
@@ -2125,7 +2111,7 @@ module Google
         def load_local job_id, prefix, file, job_gapi
           path = Pathname(file).to_path
           if job_gapi.configuration.load.source_format.nil?
-            source_format = derive_source_format path
+            source_format = Convert.derive_source_format path
             unless source_format.nil?
               job_gapi.configuration.load.source_format = source_format
             end
