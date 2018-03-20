@@ -78,6 +78,28 @@
       ]
     },
     {
+      "title": "Container",
+      "type": "google/cloud/container",
+      "patterns": ["\/container", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V1",
+          "type": "google/cloud/container/v1",
+          "patterns": ["\/container\/v1", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "ClusterManagerClient",
+              "type": "google/cloud/container/v1/clustermanagerclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/container/v1/datatypes"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Core",
       "type": "google/cloud/error",
       "patterns": ["google\/cloud\/\\w*error$"],
@@ -141,6 +163,32 @@
         {
           "title": "UnknownError",
           "type": "google/cloud/unknownerror"
+        }
+      ]
+    },
+    {
+      "title": "Dataproc",
+      "type": "google/cloud/dataproc",
+      "patterns": ["\/dataproc", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V1",
+          "type": "google/cloud/dataproc/v1",
+          "patterns": ["\/dataproc\/v1", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "ClusterControllerClient",
+              "type": "google/cloud/dataproc/v1/clustercontrollerclient"
+            },
+            {
+              "title": "JobControllerClient",
+              "type": "google/cloud/dataproc/v1/jobcontrollerclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/dataproc/v1/datatypes"
+            }
+          ]
         }
       ]
     },
@@ -426,6 +474,28 @@
             {
               "title": "Data Types",
               "type": "google/monitoring/v3/datatypes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "OS Login",
+      "type": "google/cloud/oslogin",
+      "patterns": ["\/oslogin", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V1Beta",
+          "type": "google/cloud/oslogin/v1beta",
+          "patterns": ["\/oslogin\/v1beta", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "OsLoginServiceClient",
+              "type": "google/cloud/oslogin/v1beta/os_login_service_client"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/oslogin/v1beta/datatypes"
             }
           ]
         }
