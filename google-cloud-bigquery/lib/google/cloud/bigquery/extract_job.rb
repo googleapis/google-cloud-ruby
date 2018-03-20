@@ -155,6 +155,122 @@ module Google
         def destinations_counts
           Hash[destinations.zip destinations_file_counts]
         end
+
+        ##
+        # Yielded to a block to accumulate changes for an API request.
+        class Updater < ExtractJob
+          ##
+          # @private Create an Updater object.
+          def initialize gapi
+            @gapi = gapi
+          end
+
+          ##
+          # @private Create an Updater from an options hash.
+          #
+          # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
+          #   configuration object for setting query options.
+          def self.from_options table, storage_files, options = {}
+            storage_urls = Array(storage_files).map do |url|
+              url.respond_to?(:to_gs_url) ? url.to_gs_url : url
+            end
+            dest_format = options[:format]
+            if dest_format.nil?
+              dest_format = Convert.derive_source_format storage_urls.first
+            end
+            req = Google::Apis::BigqueryV2::Job.new(
+              configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+                extract: Google::Apis::BigqueryV2::JobConfigurationExtract.new(
+                  destination_uris: Array(storage_urls),
+                  source_table: table
+                ),
+                dry_run: options[:dryrun]
+              )
+            )
+
+            updater = ExtractJob::Updater.new req
+            updater.compression = options[:compression]
+            updater.delimiter = options[:delimiter]
+            updater.format = dest_format
+            updater.header = options[:header]
+            updater.labels = options[:labels] if options[:labels]
+            updater
+          end
+
+          # Sets the compression type.
+          #
+          # @param [String] value The compression type to use for exported
+          #   files. Possible values include `GZIP` and `NONE`. The default
+          #   value is `NONE`.
+          #
+          # @!group Attributes
+          def compression= value
+            @gapi.configuration.extract.compression = value
+          end
+
+          # Sets the field delimiter.
+          #
+          # @param [String] value Delimiter to use between fields in the
+          #   exported data. Default is <code>,</code>.
+          #
+          # @!group Attributes
+          def delimiter= value
+            @gapi.configuration.extract.field_delimiter = value
+          end
+
+          ##
+          # Sets the destination file format. The default value is `csv`.
+          #
+          # The following values are supported:
+          #
+          # * `csv` - CSV
+          # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+          # * `avro` - [Avro](http://avro.apache.org/)
+          #
+          # @param [String] new_format The new source format.
+          #
+          # @!group Attributes
+          #
+          def format= new_format
+            @gapi.configuration.extract.update! destination_format:
+              Convert.source_format(new_format)
+          end
+
+          # Print a header row in the exported file.
+          #
+          # @param [Boolean] value Whether to print out a header row in the
+          #   results. Default is `true`.
+          #
+          # @!group Attributes
+          def header= value
+            @gapi.configuration.extract.print_header = value
+          end
+
+          # Sets the labels to use for the job.
+          #
+          # @param [Hash] value A hash of user-provided labels associated with
+          #   the job. You can use these to organize and group your jobs. Label
+          #   keys and values can be no longer than 63 characters, can only
+          #   contain lowercase letters, numeric characters, underscores and
+          #   dashes. International characters are allowed. Label values are
+          #   optional. Label keys must start with a letter and each label in
+          #   the list must have a different key.
+          #
+          # @!group Attributes
+          #
+          def labels= value
+            @gapi.configuration.update! labels: value
+          end
+
+          ##
+          # @private Returns the Google API client library version of this job.
+          #
+          # @return [<Google::Apis::BigqueryV2::Job>] (See
+          #   {Google::Apis::BigqueryV2::Job})
+          def to_gapi
+            @gapi
+          end
+        end
       end
     end
   end

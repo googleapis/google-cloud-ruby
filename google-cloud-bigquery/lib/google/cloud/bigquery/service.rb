@@ -297,11 +297,11 @@ module Google
           end
         end
 
-        def extract_table table, storage_files, options = {}
+        def extract_table job_id, prefix, extract_job_gapi
           # Jobs have generated id, so this operation is considered idempotent
+          extract_job_gapi.job_reference = job_ref_from(job_id, prefix)
           execute backoff: true do
-            service.insert_job \
-              @project, extract_table_config(table, storage_files, options)
+            service.insert_job @project, extract_job_gapi
           end
         end
 
@@ -394,48 +394,6 @@ module Google
           )
           req.configuration.labels = options[:labels] if options[:labels]
           req
-        end
-
-        def extract_table_config table, storage_files, options = {}
-          storage_urls = Array(storage_files).map do |url|
-            url.respond_to?(:to_gs_url) ? url.to_gs_url : url
-          end
-          dest_format = source_format storage_urls.first, options[:format]
-          req = API::Job.new(
-            job_reference: job_ref_from(options[:job_id], options[:prefix]),
-            configuration: API::JobConfiguration.new(
-              extract: API::JobConfigurationExtract.new(
-                destination_uris: Array(storage_urls),
-                source_table: table,
-                destination_format: dest_format,
-                compression: options[:compression],
-                field_delimiter: options[:delimiter],
-                print_header: options[:header]
-              ),
-              dry_run: options[:dryrun]
-            )
-          )
-          req.configuration.labels = options[:labels] if options[:labels]
-          req
-        end
-
-        def source_format path, format
-          val = {
-            "csv" => "CSV",
-            "json" => "NEWLINE_DELIMITED_JSON",
-            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
-            "avro" => "AVRO",
-            "datastore" => "DATASTORE_BACKUP",
-            "backup" => "DATASTORE_BACKUP",
-            "datastore_backup" => "DATASTORE_BACKUP"
-          }[format.to_s.downcase]
-          return val unless val.nil?
-          return nil if path.nil?
-          return "CSV" if path.end_with? ".csv"
-          return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
-          return "AVRO" if path.end_with? ".avro"
-          return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
-          nil
         end
 
         def mime_type_for file
