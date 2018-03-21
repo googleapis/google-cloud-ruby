@@ -288,12 +288,11 @@ module Google
           end
         end
 
-        def copy_table source, target, options = {}
+        def copy_table job_id, prefix, copy_job_gapi
           # Jobs have generated id, so this operation is considered idempotent
+          copy_job_gapi.job_reference = job_ref_from(job_id, prefix)
           execute backoff: true do
-            service.insert_job @project, copy_table_config(
-              source, target, options
-            )
+            service.insert_job @project, copy_job_gapi
           end
         end
 
@@ -374,26 +373,6 @@ module Google
             project_id: @project,
             job_id: job_id
           )
-        end
-
-        ##
-        # Job description for copy job
-        def copy_table_config source, target, options = {}
-          req = API::Job.new(
-            job_reference: job_ref_from(options[:job_id], options[:prefix]),
-            configuration: API::JobConfiguration.new(
-              copy: API::JobConfigurationTableCopy.new(
-                source_table: source,
-                destination_table: target,
-                create_disposition:
-                  Convert.create_disposition(options[:create]),
-                write_disposition: Convert.write_disposition(options[:write])
-              ),
-              dry_run: options[:dryrun]
-            )
-          )
-          req.configuration.labels = options[:labels] if options[:labels]
-          req
         end
 
         def extract_table_config table, storage_files, options = {}
