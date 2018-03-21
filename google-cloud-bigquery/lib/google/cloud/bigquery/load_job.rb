@@ -304,6 +304,19 @@ module Google
         end
 
         ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.load.destination_encryption_configuration
+          )
+        end
+
+        ##
         # The number of bytes that have been loaded into the table. While an
         # import job is in the running state, this value may change.
         #
@@ -959,6 +972,30 @@ module Google
           #
           def skip_leading= val
             @gapi.configuration.load.update! skip_leading_rows: val
+          end
+
+          # Sets the encryption configuration of the destination table.
+          #
+          # @param [Google::Cloud::BigQuery::EncryptionConfiguration] val
+          #   Custom encryption configuration (e.g., Cloud KMS keys).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encrypt_config = bigquery.encryption kms_key: key_name
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |job|
+          #     job.encryption = encrypt_config
+          #   end
+          #
+          # @!group Attributes
+          def encryption= val
+            @gapi.configuration.load.update!(
+              destination_encryption_configuration: val.to_gapi
+            )
           end
 
           # Sets the labels to use for the load job.

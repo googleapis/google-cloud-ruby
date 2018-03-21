@@ -32,10 +32,10 @@ module Google
       #
       #   bigquery = Google::Cloud::Bigquery.new
       #   dataset = bigquery.dataset "my_dataset"
-      #   encrypt_config = Google::Cloud::Bigquery::EncryptionConfiguration.new
-      #   encrypt_config.kms_key_name = "my_key_name"
+      #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+      #   encrypt_config = bigquery.encryption kms_key: key_name
       #   table = dataset.create_table "my_table" do |updater|
-      #     updater.encryption_configuration = encrypt_config
+      #     updater.encryption = encrypt_config
       #   end
       #
       class EncryptionConfiguration
@@ -61,9 +61,9 @@ module Google
         #
         #   config = Google::Cloud::Bigquery::EncryptionConfiguration.new
         #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-        #   config.kms_key_name = key_name
+        #   config.kms_key = key_name
         #
-        def kms_key_name
+        def kms_key
           @gapi.kms_key_name
         end
 
@@ -79,9 +79,9 @@ module Google
         #
         #   config = Google::Cloud::Bigquery::EncryptionConfiguration.new
         #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-        #   config.kms_key_name = key_name
+        #   config.kms_key = key_name
         #
-        def kms_key_name= new_kms_key_name
+        def kms_key= new_kms_key_name
           frozen_check!
           @gapi.kms_key_name = new_kms_key_name
         end

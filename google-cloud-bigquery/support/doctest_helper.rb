@@ -530,6 +530,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Project#encryption" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_table, table_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
+    end
+  end
+
   # Google::Cloud::Bigquery::Project::List#all@Iterating each result by passing a block:
   # Google::Cloud::Bigquery::Project::List#all@Limit the number of API calls made:
   # Google::Cloud::Bigquery::Project::List#all@Using the enumerator by not passing a block:

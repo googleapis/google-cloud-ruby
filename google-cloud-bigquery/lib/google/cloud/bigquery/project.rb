@@ -961,6 +961,34 @@ module Google
         end
 
         ##
+        # Creates a new encryption configuration instance.
+        #
+        # @param [String] kms_key Name of the Cloud KMS encryption key that
+        #   will be used to protect destination BigQuery table. The BigQuery
+        #   Service Account associated with your project requires access to this
+        #   encryption key.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #
+        #   table = dataset.create_table "my_table" do |updater|
+        #     updater.encryption = encrypt_config
+        #   end
+        #
+        # @return [Google::Cloud::Bigquery::EncryptionConfiguration]
+        def encryption kms_key: nil
+          encrypt_config = Bigquery::EncryptionConfiguration.new
+          encrypt_config.kms_key = kms_key unless kms_key.nil?
+          encrypt_config
+        end
+
+        ##
         # @private New Project from a Google API Client object, using the
         # same Credentials as this project.
         def self.from_gapi gapi, service

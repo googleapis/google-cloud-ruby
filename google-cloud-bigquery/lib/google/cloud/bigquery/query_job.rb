@@ -246,6 +246,19 @@ module Google
         end
 
         ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.query.destination_encryption_configuration
+          )
+        end
+
+        ##
         # Refreshes the job until the job is `DONE`.
         # The delay between refreshes will incrementally increase.
         #
@@ -619,6 +632,31 @@ module Google
           def udfs= value
             @gapi.configuration.query.user_defined_function_resources =
               udfs_gapi_from value
+          end
+
+          # Sets the encryption configuration of the destination table.
+          #
+          # @param [Google::Cloud::BigQuery::EncryptionConfiguration] val
+          #   Custom encryption configuration (e.g., Cloud KMS keys).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encrypt_config = bigquery.encryption kms_key: key_name
+          #   job = bigquery.query_job "SELECT 1;" do |query|
+          #     query.table = dataset.table "my_table", skip_lookup: true
+          #     query.encryption = encrypt_config
+          #   end
+          #
+          # @!group Attributes
+          def encryption= val
+            @gapi.configuration.query.update!(
+              destination_encryption_configuration: val.to_gapi
+            )
           end
 
           # @private Returns the Google API client library version of this job.
