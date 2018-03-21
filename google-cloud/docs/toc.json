@@ -491,11 +491,11 @@
           "nav": [
             {
               "title": "OsLoginServiceClient",
-              "type": "google/cloud/oslogin/v1beta/os_login_service_client"
+              "type": "google/cloud/oslogin/v1beta/osloginserviceclient"
             },
             {
               "title": "Data Types",
-              "type": "google/oslogin/v1beta/datatypes"
+              "type": "google/cloud/oslogin/v1beta/datatypes"
             }
           ]
         }
