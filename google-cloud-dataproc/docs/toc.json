@@ -21,7 +21,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/dataproc/v1/datatypes"
+              "type": "google/cloud/dataproc/v1/datatypes"
             }
           ]
         }
