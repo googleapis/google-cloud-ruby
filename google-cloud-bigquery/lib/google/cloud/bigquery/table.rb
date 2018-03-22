@@ -1435,18 +1435,13 @@ module Google
         # @!group Data
         #
         def extract extract_url, format: nil, compression: nil, delimiter: nil,
-                    header: nil
-          ensure_service!
-          options = { format: format, compression: compression,
-                      delimiter: delimiter, header: header }
-          updater = ExtractJob::Updater.from_options table_ref, extract_url,
-                                                     options
-
-          yield updater if block_given?
-
-          job_gapi = updater.to_gapi
-          gapi = service.extract_table nil, nil, job_gapi
-          job = Job.from_gapi gapi, service
+                    header: nil, &block
+          job = extract_job extract_url,
+                            format: format,
+                            compression: compression,
+                            delimiter: delimiter,
+                            header: header,
+                            &block
           job.wait_until_done!
           ensure_job_succeeded! job
           true
