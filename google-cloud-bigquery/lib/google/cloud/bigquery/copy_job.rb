@@ -131,6 +131,19 @@ module Google
         end
 
         ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.copy.destination_encryption_configuration
+          )
+        end
+
+        ##
         # Yielded to a block to accumulate changes for an API request.
         class Updater < CopyJob
           ##
