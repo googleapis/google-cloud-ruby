@@ -197,6 +197,7 @@ module Google
             updater
           end
 
+          ##
           # Sets the compression type.
           #
           # @param [String] value The compression type to use for exported
@@ -208,6 +209,7 @@ module Google
             @gapi.configuration.extract.compression = value
           end
 
+          ##
           # Sets the field delimiter.
           #
           # @param [String] value Delimiter to use between fields in the
@@ -236,6 +238,7 @@ module Google
               Convert.source_format(new_format)
           end
 
+          ##
           # Print a header row in the exported file.
           #
           # @param [Boolean] value Whether to print out a header row in the
@@ -246,6 +249,7 @@ module Google
             @gapi.configuration.extract.print_header = value
           end
 
+          ##
           # Sets the labels to use for the job.
           #
           # @param [Hash] value A hash of user-provided labels associated with
