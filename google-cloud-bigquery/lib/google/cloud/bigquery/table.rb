@@ -1275,20 +1275,8 @@ module Google
         #
         # @!group Data
         #
-        def copy destination_table, create: nil, write: nil
-          ensure_service!
-          options = { create: create, write: write }
-          updater = CopyJob::Updater.from_options(
-            table_ref,
-            get_table_ref(destination_table),
-            options
-          )
-
-          yield updater if block_given?
-
-          job_gapi = updater.to_gapi
-          gapi = service.copy_table nil, nil, job_gapi
-          job = Job.from_gapi gapi, service
+        def copy destination_table, create: nil, write: nil, &block
+          job = copy_job destination_table, create: create, write: write, &block
           job.wait_until_done!
           ensure_job_succeeded! job
           true
