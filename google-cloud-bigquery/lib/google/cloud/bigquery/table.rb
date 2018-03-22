@@ -1174,6 +1174,9 @@ module Google
         #   dashes. International characters are allowed. Label values are
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
+        #   configuration object for setting additional options.
         #
         # @return [Google::Cloud::Bigquery::CopyJob]
         #
@@ -1202,10 +1205,17 @@ module Google
                      job_id: nil, prefix: nil, labels: nil
           ensure_service!
           options = { create: create, write: write, dryrun: dryrun,
-                      job_id: job_id, prefix: prefix, labels: labels }
-          gapi = service.copy_table table_ref,
-                                    get_table_ref(destination_table),
-                                    options
+                      labels: labels }
+          updater = CopyJob::Updater.from_options(
+            table_ref,
+            get_table_ref(destination_table),
+            options
+          )
+
+          yield updater if block_given?
+
+          job_gapi = updater.to_gapi
+          gapi = service.copy_table job_id, prefix, job_gapi
           Job.from_gapi gapi, service
         end
 
@@ -1238,6 +1248,9 @@ module Google
         #   * `append` - BigQuery appends the data to the table.
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
+        #   configuration object for setting additional options.
         #
         # @return [Boolean] Returns `true` if the copy operation succeeded.
         #
@@ -1262,8 +1275,8 @@ module Google
         #
         # @!group Data
         #
-        def copy destination_table, create: nil, write: nil
-          job = copy_job destination_table, create: create, write: write
+        def copy destination_table, create: nil, write: nil, &block
+          job = copy_job destination_table, create: create, write: write, &block
           job.wait_until_done!
           ensure_job_succeeded! job
           true
