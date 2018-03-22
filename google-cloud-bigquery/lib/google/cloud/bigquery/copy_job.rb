@@ -162,6 +162,7 @@ module Google
             updater
           end
 
+          ##
           # Sets the create disposition.
           #
           # This specifies whether the job is allowed to create new tables. The
@@ -176,12 +177,12 @@ module Google
           # @param [String] new_create The new create disposition.
           #
           # @!group Attributes
-          #
           def create= new_create
             @gapi.configuration.copy.update! create_disposition:
               Convert.create_disposition(new_create)
           end
 
+          ##
           # Sets the write disposition.
           #
           # This specifies how to handle data already present in the table. The
@@ -197,12 +198,12 @@ module Google
           # @param [String] new_write The new write disposition.
           #
           # @!group Attributes
-          #
           def write= new_write
             @gapi.configuration.copy.update! write_disposition:
               Convert.write_disposition(new_write)
           end
 
+          ##
           # Sets the labels to use for the job.
           #
           # @param [Hash] value A hash of user-provided labels associated with
@@ -214,7 +215,6 @@ module Google
           #   the list must have a different key.
           #
           # @!group Attributes
-          #
           def labels= value
             @gapi.configuration.update! labels: value
           end
