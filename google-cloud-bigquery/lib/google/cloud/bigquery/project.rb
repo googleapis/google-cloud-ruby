@@ -961,14 +961,19 @@ module Google
         end
 
         ##
-        # Creates a new encryption configuration instance.
+        # Creates a new Bigquery::EncryptionConfiguration instance.
+        #
+        # This method does not execute an API call. Use the encryption
+        # configuration to encrypt a table when creating one via
+        # Bigquery::Dataset#create_table, Bigquery::Dataset#load,
+        # Bigquery::Table#copy, or Bigquery::Project#query.
         #
         # @param [String] kms_key Name of the Cloud KMS encryption key that
-        #   will be used to protect destination BigQuery table. The BigQuery
+        #   will be used to protect the destination BigQuery table. The BigQuery
         #   Service Account associated with your project requires access to this
         #   encryption key.
         #
-        # @example
+        # @example Encrypt a new table
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -979,6 +984,44 @@ module Google
         #
         #   table = dataset.create_table "my_table" do |updater|
         #     updater.encryption = encrypt_config
+        #   end
+        #
+        # @example Encrypt a load destination table
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #   job = dataset.load_job "my_table", "gs://abc/file" do |job|
+        #     job.encryption = encrypt_config
+        #   end
+        #
+        # @example Encrypt a copy destination table
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #   job = table.copy_job "my_dataset.new_table" do |job|
+        #     job.encryption = encrypt_config
+        #   end
+        #
+        # @example Encrypt a query destination table
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #   job = bigquery.query_job "SELECT 1;" do |query|
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #     query.encryption = encrypt_config
         #   end
         #
         # @return [Google::Cloud::Bigquery::EncryptionConfiguration]
