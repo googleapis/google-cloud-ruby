@@ -25,6 +25,13 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
                           json: row
                         }
                       end }
+  let(:insert_ids) { ["a1", "b2", "c3"] }
+  let(:rows_with_user_insert_ids) { rows.each_with_index.map do |row, i|
+                                      {
+                                          insertId: insert_ids[i],
+                                          json: row
+                                      }
+                                    end }
   let(:dataset_id) { "dataset" }
   let(:table_hash) { random_table_hash dataset_id }
   let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json table_hash.to_json }
@@ -222,6 +229,30 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     result.must_be :success?
     result.insert_count.must_equal 1
     result.error_count.must_equal 0
+  end
+
+  it "can specify insert_ids" do
+    mock = Minitest::Mock.new
+    insert_req = {
+        rows: rows_with_user_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+                [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
+    table.service.mocked_service = mock
+
+    result = table.insert rows, insert_ids: insert_ids
+
+    mock.verify
+
+    result.must_be :success?
+    result.insert_count.must_equal 3
+    result.error_count.must_equal 0
+  end
+
+  it "raises if the insert_ids option is provided but size does not match rows" do
+    insert_ids.pop # Remove one of the insert_ids to cause error.
+
+    expect { table.insert rows, insert_ids: insert_ids }.must_raise ArgumentError
   end
 
   def success_table_insert_gapi

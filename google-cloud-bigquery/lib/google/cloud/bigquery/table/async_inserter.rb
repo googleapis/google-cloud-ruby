@@ -16,6 +16,7 @@
 require "google/cloud/bigquery/convert"
 require "monitor"
 require "concurrent"
+require "securerandom"
 
 module Google
   module Cloud
@@ -100,24 +101,30 @@ module Google
           #
           # @param [Hash, Array<Hash>] rows A hash object or array of hash
           #   objects containing the data.
+          # @param [Array<String>] insert_ids A unique ID for each row. BigQuery
+          #   uses this property to detect duplicate insertion requests on a
+          #   best-effort basis. For more information, see [data
+          #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency).
+          #   Optional. If not provided, the client library will assign a UUID
+          #   to each row before the request is sent.
           #
-          def insert rows
+          def insert rows, insert_ids: nil
             return nil if rows.nil?
             return nil if rows.is_a?(Array) && rows.empty?
-            rows = [rows] if rows.is_a? Hash
+            rows, insert_ids = validate_insert_args rows, insert_ids
 
             synchronize do
-              rows.each do |row|
+              rows.zip(Array(insert_ids)).each do |row, insert_id|
                 if @batch.nil?
                   @batch = Batch.new max_bytes: @max_bytes, max_rows: @max_rows
-                  @batch.insert row
+                  @batch.insert row, insert_id
                 else
-                  unless @batch.try_insert row
+                  unless @batch.try_insert row, insert_id
                     push_batch_request!
 
                     @batch = Batch.new max_bytes: @max_bytes,
                                        max_rows: @max_rows
-                    @batch.insert row
+                    @batch.insert row, insert_id
                   end
                 end
 
@@ -204,6 +211,15 @@ module Google
 
           protected
 
+          def validate_insert_args rows, insert_ids
+            rows = [rows] if rows.is_a? Hash
+            insert_ids = Array insert_ids
+            if insert_ids.count > 0 && insert_ids.count != rows.count
+              raise ArgumentError, "insert_ids must be the same size as rows"
+            end
+            [rows, insert_ids]
+          end
+
           def run_background
             synchronize do
               until @stopped
@@ -230,11 +246,13 @@ module Google
 
             orig_rows = @batch.rows
             json_rows = @batch.json_rows
+            insert_ids = @batch.insert_ids
             Concurrent::Future.new(executor: @thread_pool) do
               begin
                 raise ArgumentError, "No rows provided" if json_rows.empty?
                 options = { skip_invalid: @skip_invalid,
-                            ignore_unknown: @ignore_unknown }
+                            ignore_unknown: @ignore_unknown,
+                            insert_ids: insert_ids }
                 insert_resp = @table.service.insert_tabledata_json_rows(
                   @table.dataset_id, @table.table_id, json_rows, options
                 )
@@ -255,30 +273,37 @@ module Google
           ##
           # @private
           class Batch
-            attr_reader :max_bytes, :max_rows, :rows, :json_rows
+            attr_reader :max_bytes, :max_rows, :rows, :json_rows, :insert_ids
 
             def initialize max_bytes: 10000000, max_rows: 500
               @max_bytes = max_bytes
               @max_rows = max_rows
               @rows = []
               @json_rows = []
-              @current_bytes = 0
+              @insert_ids = []
+              # The default request byte size overhead is 63.
+              # "{\"rows\":[],\"ignoreUnknownValues\":false,
+              # \"skipInvalidRows\":false}".bytesize #=> 63
+              @current_bytes = 63
             end
 
-            def insert row
+            def insert row, insert_id
+              insert_id ||= SecureRandom.uuid
               json_row = to_json_row row
 
-              insert_rows_bytes row, json_row, addl_bytes_for_json_row(json_row)
+              insert_rows_bytes \
+                row, json_row, insert_id, addl_bytes_for(json_row, insert_id)
             end
 
-            def try_insert row
+            def try_insert row, insert_id
+              insert_id ||= SecureRandom.uuid
               json_row = to_json_row row
-              addl_bytes = addl_bytes_for_json_row json_row
+              addl_bytes = addl_bytes_for json_row, insert_id
 
               return false if @current_bytes + addl_bytes >= @max_bytes
               return false if @rows.count + 1 >= @max_rows
 
-              insert_rows_bytes row, json_row, addl_bytes
+              insert_rows_bytes row, json_row, insert_id, addl_bytes
               true
             end
 
@@ -288,9 +313,10 @@ module Google
 
             private
 
-            def insert_rows_bytes row, json_row, addl_bytes
+            def insert_rows_bytes row, json_row, insert_id, addl_bytes
               @rows << row
               @json_rows << json_row
+              @insert_ids << insert_id if insert_id
               @current_bytes += addl_bytes
             end
 
@@ -298,12 +324,9 @@ module Google
               Convert.to_json_row row
             end
 
-            def addl_bytes_for row
-              addl_bytes_for_json_row Convert.to_json_row(row)
-            end
-
-            def addl_bytes_for_json_row json_row
-              json_row.to_json.bytesize + 1
+            def addl_bytes_for json_row, insert_id
+              # "{\"insertId\":\"\",\"json\":},".bytesize #=> 24
+              24 + json_row.to_json.bytesize + insert_id.bytesize
             end
           end
 

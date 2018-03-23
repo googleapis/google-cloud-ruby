@@ -36,6 +36,13 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
                           json: row
                         }
                       end }
+  let(:insert_ids) { ["a1", "b2", "c3"] }
+  let(:rows_with_user_insert_ids) { rows.each_with_index.map do |row, i|
+                                      {
+                                          insertId: insert_ids[i],
+                                          json: row
+                                      }
+                                    end }
   let(:success_table_insert_gapi) { Google::Apis::BigqueryV2::InsertAllTableDataResponse.new insert_errors: [] }
 
   it "inserts one row" do
@@ -303,6 +310,95 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
       inserter.batch.must_be :nil?
     end
+
+    mock.verify
+  end
+
+  it "inserts three rows at the same time with the insert_ids option" do
+    mock = Minitest::Mock.new
+    insert_req = {
+        rows: rows_with_user_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+                [project, dataset_id, table_id, insert_req, options: { skip_serialization: true }]
+    dataset.service.mocked_service = mock
+
+    inserter = dataset.insert_async table_id
+
+    inserter.insert rows, insert_ids: insert_ids
+
+    inserter.batch.rows.must_equal rows
+
+    inserter.must_be :started?
+    inserter.wont_be :stopped?
+
+    # force the queued rows to be inserted
+    inserter.flush
+    inserter.stop.wait!
+
+    inserter.wont_be :started?
+    inserter.must_be :stopped?
+
+    inserter.batch.must_be :nil?
+
+    mock.verify
+  end
+
+  it "inserts three rows one at a time with the insert_ids option" do
+    mock = Minitest::Mock.new
+    insert_req = {
+        rows: rows_with_user_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+                [project, dataset_id, table_id, insert_req, options: { skip_serialization: true }]
+    dataset.service.mocked_service = mock
+
+    inserter = dataset.insert_async table_id
+
+    rows.zip(insert_ids).each do |row, insert_id|
+      inserter.insert row, insert_ids: insert_id
+    end
+
+    inserter.batch.rows.must_equal rows
+
+    inserter.must_be :started?
+    inserter.wont_be :stopped?
+
+    # force the queued rows to be inserted
+    inserter.flush
+    inserter.stop.wait!
+
+    inserter.wont_be :started?
+    inserter.must_be :stopped?
+
+    inserter.batch.must_be :nil?
+
+    mock.verify
+  end
+
+  it "raises if the insert_ids option is provided but size does not match rows" do
+    insert_ids.pop # Remove one of the insert_ids to cause error.
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    dataset.service.mocked_service = mock
+
+    inserter = dataset.insert_async table_id
+
+    expect { inserter.insert rows, insert_ids: insert_ids }.must_raise ArgumentError
+
+    inserter.batch.must_be :nil?
+
+    inserter.must_be :started?
+    inserter.wont_be :stopped?
+
+    # force the queued rows to be inserted
+    inserter.flush
+    inserter.stop.wait!
+
+    inserter.wont_be :started?
+    inserter.must_be :stopped?
 
     mock.verify
   end

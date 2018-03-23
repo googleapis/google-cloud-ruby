@@ -27,7 +27,7 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
-  Max: 25
+  Max: 30
 Metrics/ParameterLists:
   Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code

@@ -67,6 +67,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
     ]
   end
+  let(:insert_ids) { Array.new(3) {SecureRandom.uuid} }
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
   let(:target_table_2_id) { "kittens_copy_2" }
@@ -373,6 +374,27 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     insert_response.index_for(invalid_rows[1]).must_equal 1
   end
 
+  it "inserts rows with insert_ids option" do
+    insert_response = table.insert rows, insert_ids: insert_ids
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+  end
+
   it "inserts rows asynchonously and gets its data" do
     # data = table.data
     insert_result = nil
@@ -474,6 +496,37 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       row.must_be_kind_of Hash
     end
     data.next.must_be :nil?
+  end
+
+  it "inserts rows asynchonously with insert_ids option" do
+    insert_result = nil
+
+    inserter = table.insert_async do |result|
+      insert_result = result
+    end
+    inserter.insert rows, insert_ids: insert_ids
+
+    inserter.flush
+    inserter.stop.wait!
+
+    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    insert_result.must_be :success?
+    insert_result.insert_count.must_equal 3
+    insert_result.insert_errors.must_be :empty?
+    insert_result.error_rows.must_be :empty?
+
+    data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
   end
 
   it "imports data from a local file with load_job block updater" do
