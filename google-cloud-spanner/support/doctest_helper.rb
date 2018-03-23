@@ -608,6 +608,20 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # ColumnValue
+
+  doctest.before "Google::Cloud::Spanner::ColumnValue" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      20.times do
+        mock.expect :create_session, OpenStruct.new(name: "session-name"), ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      end
+      5.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
+      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+    end
+  end
+
   # Range
 
   doctest.before "Google::Cloud::Spanner::Range" do

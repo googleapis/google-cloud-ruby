@@ -21,6 +21,7 @@ require "google/cloud/spanner/session"
 require "google/cloud/spanner/transaction"
 require "google/cloud/spanner/snapshot"
 require "google/cloud/spanner/range"
+require "google/cloud/spanner/column_value"
 require "google/cloud/spanner/convert"
 
 module Google
@@ -934,6 +935,35 @@ module Google
           Range.new beginning, ending,
                     exclude_begin: exclude_begin,
                     exclude_end: exclude_end
+        end
+
+        ##
+        # Creates a column value object representing setting a field's value to
+        # the timestamp of the commit. (See {ColumnValue.commit_timestamp})
+        #
+        # This placeholder value can only be used for timestamp columns that
+        # have set the option "(allow_commit_timestamp=true)" in the schema.
+        #
+        # @return [ColumnValue] The commit timestamp column value object.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   # create column value object
+        #   commit_timestamp = db.commit_timestamp
+        #
+        #   db.commit do |c|
+        #     c.insert "users", [
+        #       { id: 5, name: "Murphy", updated_at: commit_timestamp }
+        #     ]
+        #   end
+        #
+        def commit_timestamp
+          ColumnValue.commit_timestamp
         end
 
         ##

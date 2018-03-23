@@ -94,7 +94,7 @@ module Acceptance
             string STRING(MAX),
             byte BYTES(MAX),
             date DATE,
-            timestamp TIMESTAMP,
+            timestamp TIMESTAMP OPTIONS (allow_commit_timestamp=true),
             ints ARRAY<INT64>,
             floats ARRAY<FLOAT64>,
             bools ARRAY<BOOL>,
@@ -108,6 +108,12 @@ module Acceptance
 
       def stuffs_index_statement
         "CREATE INDEX IsStuffsIdPrime ON stuffs(bool, id)"
+      end
+
+      def commit_timestamp_test_ddl_statement
+        <<-TEST
+          CREATE TABLE commit_timestamp_test(committs TIMESTAMP OPTIONS (allow_commit_timestamp=true)) PRIMARY KEY (committs)
+        TEST
       end
 
       def accounts_ddl_statement
@@ -157,7 +163,8 @@ module Acceptance
           stuffs_index_statement,
           accounts_ddl_statement,
           lists_ddl_statement,
-          items_ddl_statement
+          items_ddl_statement,
+          commit_timestamp_test_ddl_statement
         ]
       end
 

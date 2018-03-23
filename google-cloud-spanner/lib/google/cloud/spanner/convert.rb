@@ -37,6 +37,7 @@ module Google
           end
 
           def raw_to_value_and_type obj, type = nil
+            obj = obj.to_column_value if obj.respond_to? :to_column_value
             if NilClass === obj
               if type
                 if type.is_a?(Array) && type.count == 1
@@ -115,6 +116,8 @@ module Google
           end
 
           def raw_to_value obj
+            obj = obj.to_column_value if obj.respond_to? :to_column_value
+
             if NilClass === obj
               Google::Protobuf::Value.new null_value: :NULL_VALUE
             elsif String === obj
