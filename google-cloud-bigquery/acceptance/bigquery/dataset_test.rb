@@ -63,6 +63,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
         { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
     ]
   end
+  let(:insert_ids) { Array.new(3) {SecureRandom.uuid} }
   let(:view_id) { "dataset_view" }
   let(:view) do
     t = dataset.table view_id
@@ -352,6 +353,27 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     table.wont_be_nil
 
     data = table.data max: 1
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    data.kind.wont_be :nil?
+    data.etag.wont_be :nil?
+    [nil, 0].must_include data.total
+    data.count.wont_be :nil?
+    data.all(request_limit: 2).each do |row|
+      row.must_be_kind_of Hash
+      [:id, :breed, :name, :dob].each { |k| row.keys.must_include k }
+    end
+    more_data = data.next
+    more_data.wont_be :nil?
+  end
+
+  it "inserts rows with insert_ids option" do
+    insert_response = dataset.insert table_with_schema.table_id, rows, insert_ids: insert_ids
+    insert_response.must_be :success?
+    insert_response.insert_count.must_equal 3
+    insert_response.insert_errors.must_be :empty?
+    insert_response.error_rows.must_be :empty?
+
+    data = table_with_schema.data max: 1
     data.class.must_equal Google::Cloud::Bigquery::Data
     data.kind.wont_be :nil?
     data.etag.wont_be :nil?

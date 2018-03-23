@@ -202,15 +202,17 @@ module Google
 
         def insert_tabledata dataset_id, table_id, rows, options = {}
           json_rows = Array(rows).map { |row| Convert.to_json_row row }
-
           insert_tabledata_json_rows dataset_id, table_id, json_rows, options
         end
 
         def insert_tabledata_json_rows dataset_id, table_id, json_rows,
                                        options = {}
-          insert_rows = Array(json_rows).map do |json_row|
+
+          rows_and_ids = Array(json_rows).zip Array(options[:insert_ids])
+          insert_rows = rows_and_ids.map do |json_row, insert_id|
+            insert_id ||= SecureRandom.uuid
             {
-              insertId: SecureRandom.uuid,
+              insertId: insert_id,
               json: json_row
             }
           end
