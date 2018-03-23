@@ -15,6 +15,7 @@
 
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/data"
+require "google/cloud/bigquery/encryption_configuration"
 require "google/apis/bigquery_v2"
 
 module Google
@@ -246,6 +247,19 @@ module Google
         end
 
         ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.query.destination_encryption_configuration
+          )
+        end
+
+        ##
         # Refreshes the job until the job is `DONE`.
         # The delay between refreshes will incrementally increase.
         #
@@ -403,6 +417,7 @@ module Google
             @gapi.configuration.query.priority = priority_value value
           end
 
+          ##
           # Specifies to look in the query cache for results.
           #
           # @param [Boolean] value Whether to look for the result in the query
@@ -416,6 +431,7 @@ module Google
             @gapi.configuration.query.use_query_cache = value
           end
 
+          ##
           # Allow large results for a legacy SQL query.
           #
           # @param [Boolean] value This option is specific to Legacy SQL.
@@ -428,6 +444,7 @@ module Google
             @gapi.configuration.query.allow_large_results = value
           end
 
+          ##
           # Flatten nested and repeated fields in legacy SQL queries.
           #
           # @param [Boolean] value This option is specific to Legacy SQL.
@@ -440,6 +457,7 @@ module Google
             @gapi.configuration.query.flatten_results = value
           end
 
+          ##
           # Sets the default dataset of tables referenced in the query.
           #
           # @param [Dataset] value The default dataset to use for unqualified
@@ -451,6 +469,7 @@ module Google
               Updater.dataset_ref_from value
           end
 
+          ##
           # Sets the query parameters. Standard SQL only.
           #
           # @param [Array, Hash] params Used to pass query arguments when the
@@ -484,6 +503,7 @@ module Google
             end
           end
 
+          ##
           # Sets the create disposition for creating the query results table.
           #
           # @param [String] value Specifies whether the job is allowed to
@@ -501,6 +521,7 @@ module Google
               Convert.create_disposition value
           end
 
+          ##
           # Sets the write disposition for when the query results table exists.
           #
           # @param [String] value Specifies the action that occurs if the
@@ -519,6 +540,7 @@ module Google
               Convert.write_disposition value
           end
 
+          ##
           # Sets the destination for the query results table.
           #
           # @param [Table] value The destination table where the query results
@@ -530,6 +552,7 @@ module Google
             @gapi.configuration.query.destination_table = table_ref_from value
           end
 
+          ##
           # Sets the maximum bytes billed for the query.
           #
           # @param [Integer] value Limits the bytes billed for this job.
@@ -542,6 +565,7 @@ module Google
             @gapi.configuration.query.maximum_bytes_billed = value
           end
 
+          ##
           # Sets the labels to use for the job.
           #
           # @param [Hash] value A hash of user-provided labels associated with
@@ -558,6 +582,7 @@ module Google
             @gapi.configuration.update! labels: value
           end
 
+          ##
           # Sets the query syntax to legacy SQL.
           #
           # @param [Boolean] value Specifies whether to use BigQuery's [legacy
@@ -573,6 +598,7 @@ module Google
             @gapi.configuration.query.use_legacy_sql = value
           end
 
+          ##
           # Sets the query syntax to standard SQL.
           #
           # @param [Boolean] value Specifies whether to use BigQuery's [standard
@@ -588,6 +614,7 @@ module Google
             @gapi.configuration.query.use_legacy_sql = !value
           end
 
+          ##
           # Sets definitions for external tables used in the query.
           #
           # @param [Hash<String|Symbol, External::DataSource>] value A Hash
@@ -605,6 +632,7 @@ module Google
             @gapi.configuration.query.table_definitions = external_table_hash
           end
 
+          ##
           # Sets user defined functions for the query.
           #
           # @param [Array<String>, String] value User-defined function resources
@@ -621,6 +649,33 @@ module Google
               udfs_gapi_from value
           end
 
+          ##
+          # Sets the encryption configuration of the destination table.
+          #
+          # @param [Google::Cloud::BigQuery::EncryptionConfiguration] val
+          #   Custom encryption configuration (e.g., Cloud KMS keys).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encrypt_config = bigquery.encryption kms_key: key_name
+          #   job = bigquery.query_job "SELECT 1;" do |query|
+          #     query.table = dataset.table "my_table", skip_lookup: true
+          #     query.encryption = encrypt_config
+          #   end
+          #
+          # @!group Attributes
+          def encryption= val
+            @gapi.configuration.query.update!(
+              destination_encryption_configuration: val.to_gapi
+            )
+          end
+
+          ##
           # @private Returns the Google API client library version of this job.
           #
           # @return [<Google::Apis::BigqueryV2::Job>] (See

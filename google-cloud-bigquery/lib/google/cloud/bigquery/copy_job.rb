@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/bigquery/encryption_configuration"
 
 module Google
   module Cloud
@@ -131,6 +132,19 @@ module Google
         end
 
         ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.copy.destination_encryption_configuration
+          )
+        end
+
+        ##
         # Yielded to a block to accumulate changes for an API request.
         class Updater < CopyJob
           ##
@@ -201,6 +215,32 @@ module Google
           def write= new_write
             @gapi.configuration.copy.update! write_disposition:
               Convert.write_disposition(new_write)
+          end
+
+          ##
+          # Sets the encryption configuration of the destination table.
+          #
+          # @param [Google::Cloud::BigQuery::EncryptionConfiguration] val
+          #   Custom encryption configuration (e.g., Cloud KMS keys).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encrypt_config = bigquery.encryption kms_key: key_name
+          #   job = table.copy_job "my_dataset.new_table" do |job|
+          #     job.encryption = encrypt_config
+          #   end
+          #
+          # @!group Attributes
+          def encryption= val
+            @gapi.configuration.copy.update!(
+              destination_encryption_configuration: val.to_gapi
+            )
           end
 
           ##

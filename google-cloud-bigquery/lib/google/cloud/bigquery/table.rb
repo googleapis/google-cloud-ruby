@@ -797,7 +797,7 @@ module Google
         #
         #   @!group Attributes
         #
-        def encryption_configuration
+        def encryption
           return nil if reference?
           ensure_full_data!
           return nil if @gapi.encryption_configuration.nil?
@@ -806,7 +806,6 @@ module Google
         end
 
         ##
-
         # Set the {EncryptionConfiguration} object that represents the custom
         # encryption method used to protect the table. If not set, default
         # encryption is used.
@@ -821,13 +820,13 @@ module Google
         # @see https://cloud.google.com/bigquery/docs/customer-managed-encryption
         #   Protecting Data with Cloud KMS Keys
         #
-        # @return [EncryptionConfiguration] The encryption configuration.
+        # @param [EncryptionConfiguration] value The new encryption config.
         #
         # @!group Attributes
         #
-        def encryption_configuration= encryption_configuration
+        def encryption= value
           reload! unless resource_full?
-          @gapi.encryption_configuration = encryption_configuration.to_gapi
+          @gapi.encryption_configuration = value.to_gapi
           patch_gapi! :encryption_configuration
         end
 

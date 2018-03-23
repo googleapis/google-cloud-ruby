@@ -45,6 +45,9 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
     t
   end
+  let(:table_avro_id) { "dataset_table_avro" }
+  let(:table_avro) { dataset.table table_avro_id }
+
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
     [
@@ -174,7 +177,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   it "imports data from a local file and creates a new table with specified schema as an option with load_job" do
     schema = bigquery.schema do |s|
-      s.integer  "id",     description: "id description",    mode: :required
+      s.integer   "id",    description: "id description",    mode: :required
       s.string    "breed", description: "breed description", mode: :required
       s.string    "name",  description: "name description",  mode: :required
       s.timestamp "dob",   description: "dob description",   mode: :required
@@ -264,6 +267,28 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
         post_bucket.delete
       end
     end
+  end
+
+  it "imports data from gcs avro file and creates a new table with load" do
+    result = dataset.load(
+      table_avro_id,
+      "gs://cloud-samples-data/bigquery/us-states/us-states.avro")
+    result.must_equal true
+  end
+
+  it "imports data from gcs avro file and creates a new table with encryption with load" do
+    encrypt_config = bigquery.encryption(
+      kms_key: "projects/cloud-samples-tests/locations/us-central1" +
+                "/keyRings/test/cryptoKeys/test")
+    result = dataset.load(
+      table_avro_id,
+      "gs://cloud-samples-data/bigquery/us-states/us-states.avro") do |load|
+      load.write = :truncate
+      load.encryption = encrypt_config
+    end
+    result.must_equal true
+    table_avro.reload!
+    table_avro.encryption.must_equal encrypt_config
   end
 
   it "inserts rows directly and gets its data" do

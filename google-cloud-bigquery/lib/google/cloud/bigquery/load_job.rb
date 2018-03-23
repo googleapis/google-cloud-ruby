@@ -14,6 +14,7 @@
 
 
 require "google/cloud/bigquery/service"
+require "google/cloud/bigquery/encryption_configuration"
 
 module Google
   module Cloud
@@ -301,6 +302,19 @@ module Google
           Integer @gapi.statistics.load.output_rows
         rescue StandardError
           nil
+        end
+
+        ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.load.destination_encryption_configuration
+          )
         end
 
         ##
@@ -724,6 +738,7 @@ module Google
               Convert.source_format(new_format)
           end
 
+          ##
           # Sets the create disposition.
           #
           # This specifies whether the job is allowed to create new tables. The
@@ -744,6 +759,7 @@ module Google
               Convert.create_disposition(new_create)
           end
 
+          ##
           # Sets the write disposition.
           #
           # This specifies how to handle data already present in the table. The
@@ -765,6 +781,7 @@ module Google
               Convert.write_disposition(new_write)
           end
 
+          ##
           # Sets the projection fields.
           #
           # If the `format` option is set to `datastore_backup`, indicates
@@ -787,6 +804,7 @@ module Google
             end
           end
 
+          ##
           # Sets the source URIs to load.
           #
           # The fully-qualified URIs that point to your data in Google Cloud.
@@ -812,6 +830,7 @@ module Google
             end
           end
 
+          ##
           # Sets flag for allowing jagged rows.
           #
           # Accept rows that are missing trailing optional columns. The missing
@@ -830,6 +849,7 @@ module Google
             @gapi.configuration.load.update! allow_jagged_rows: val
           end
 
+          ##
           # Allows quoted data sections to contain newline characters in CSV.
           #
           # @param [Boolean] val Indicates if BigQuery should allow quoted data
@@ -842,6 +862,7 @@ module Google
             @gapi.configuration.load.update! allow_quoted_newlines: val
           end
 
+          ##
           # Allows BigQuery to autodetect the schema.
           #
           # @param [Boolean] val Indicates if BigQuery should automatically
@@ -854,6 +875,7 @@ module Google
             @gapi.configuration.load.update! autodetect: val
           end
 
+          ##
           # Sets the character encoding of the data.
           #
           # @param [String] val The character encoding of the data. The
@@ -866,6 +888,7 @@ module Google
             @gapi.configuration.load.update! encoding: val
           end
 
+          ##
           # Sets the separator for fields in a CSV file.
           #
           # @param [String] val Specifices the separator for fields in a CSV
@@ -879,6 +902,7 @@ module Google
             @gapi.configuration.load.update! field_delimiter: val
           end
 
+          ##
           # Allows unknown columns to be ignored.
           #
           # @param [Boolean] val Indicates if BigQuery should allow extra
@@ -900,6 +924,7 @@ module Google
             @gapi.configuration.load.update! ignore_unknown_values: val
           end
 
+          ##
           # Sets the maximum number of bad records that can be ignored.
           #
           # @param [Integer] val The maximum number of bad records that
@@ -914,6 +939,7 @@ module Google
             @gapi.configuration.load.update! max_bad_records: val
           end
 
+          ##
           # Sets the string that represents a null value in a CSV file.
           #
           # @param [String] val Specifies a string that represents a null value
@@ -931,6 +957,7 @@ module Google
             @gapi.configuration.load.update! null_marker: val
           end
 
+          ##
           # Sets the character to use to quote string values in CSVs.
           #
           # @param [String] val The value that is used to quote data sections
@@ -948,6 +975,7 @@ module Google
             @gapi.configuration.load.update! quote: val
           end
 
+          ##
           # Sets the number of leading rows to skip in the file.
           #
           # @param [Integer] val The number of rows at the top of a CSV file
@@ -961,6 +989,32 @@ module Google
             @gapi.configuration.load.update! skip_leading_rows: val
           end
 
+          ##
+          # Sets the encryption configuration of the destination table.
+          #
+          # @param [Google::Cloud::BigQuery::EncryptionConfiguration] val
+          #   Custom encryption configuration (e.g., Cloud KMS keys).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encrypt_config = bigquery.encryption kms_key: key_name
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |job|
+          #     job.encryption = encrypt_config
+          #   end
+          #
+          # @!group Attributes
+          def encryption= val
+            @gapi.configuration.load.update!(
+              destination_encryption_configuration: val.to_gapi
+            )
+          end
+
+          ##
           # Sets the labels to use for the load job.
           #
           # @param [Hash] val A hash of user-provided labels associated with
@@ -977,6 +1031,7 @@ module Google
             @gapi.configuration.update! labels: val
           end
 
+          ##
           # @private Returns the Google API client library version of this job.
           #
           # @return [<Google::Apis::BigqueryV2::Job>] (See
