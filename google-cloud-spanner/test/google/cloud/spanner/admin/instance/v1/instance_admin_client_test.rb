@@ -86,7 +86,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_instance_configs, mock_method)
 
@@ -157,7 +157,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::Admin::Instance::V1::GetInstanceConfigRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_instance_config, mock_method)
 
@@ -226,7 +226,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::Admin::Instance::V1::ListInstancesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
 
@@ -304,7 +304,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::Admin::Instance::V1::GetInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
 
@@ -390,7 +390,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
@@ -436,7 +436,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
@@ -533,7 +533,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
         assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
         assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
@@ -573,7 +573,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_instance_of(Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest, request)
         assert_equal(Google::Gax::to_proto(instance, Google::Spanner::Admin::Instance::V1::Instance), request.instance)
         assert_equal(Google::Gax::to_proto(field_mask, Google::Protobuf::FieldMask), request.field_mask)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
@@ -638,7 +638,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Spanner::Admin::Instance::V1::DeleteInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
 
@@ -708,7 +708,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
         assert_equal(formatted_resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
 
@@ -778,7 +778,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
         assert_equal(formatted_resource, request.resource)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
 
@@ -846,7 +846,7 @@ describe Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient do
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
         assert_equal(formatted_resource, request.resource)
         assert_equal(permissions, request.permissions)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
 

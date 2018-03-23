@@ -85,7 +85,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::ListMonitoredResourceDescriptorsRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_monitored_resource_descriptors, mock_method)
 
@@ -163,7 +163,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::GetMonitoredResourceDescriptorRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_monitored_resource_descriptor, mock_method)
 
@@ -232,7 +232,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::ListMetricDescriptorsRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_metric_descriptors, mock_method)
 
@@ -312,7 +312,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::GetMetricDescriptorRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_metric_descriptor, mock_method)
 
@@ -391,7 +391,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_instance_of(Google::Monitoring::V3::CreateMetricDescriptorRequest, request)
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(metric_descriptor, Google::Api::MetricDescriptor), request.metric_descriptor)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_metric_descriptor, mock_method)
 
@@ -455,7 +455,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::DeleteMetricDescriptorRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_metric_descriptor, mock_method)
 
@@ -530,7 +530,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(filter, request.filter)
         assert_equal(Google::Gax::to_proto(interval, Google::Monitoring::V3::TimeInterval), request.interval)
         assert_equal(view, request.view)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_time_series, mock_method)
 
@@ -616,7 +616,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
           Google::Gax::to_proto(req, Google::Monitoring::V3::TimeSeries)
         end
         assert_equal(time_series, request.time_series)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:create_time_series, mock_method)
 

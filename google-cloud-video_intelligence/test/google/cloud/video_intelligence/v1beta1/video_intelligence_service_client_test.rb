@@ -93,7 +93,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
         assert_instance_of(Google::Cloud::Videointelligence::V1beta1::AnnotateVideoRequest, request)
         assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
@@ -134,7 +134,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
         assert_instance_of(Google::Cloud::Videointelligence::V1beta1::AnnotateVideoRequest, request)
         assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 

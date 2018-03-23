@@ -95,7 +95,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
           location: cluster_location_path
         )
         assert_equal({ cluster.name => expected_cluster }, request.clusters)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       stub_instance_admin_grpc(:create_instance, mock_method) do
@@ -125,7 +125,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
           display_name: instance_attrs[:display_name]
         )
         assert_equal(clusters, request.clusters)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       stub_instance_admin_grpc(:create_instance, mock_method) do
@@ -146,7 +146,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::GetInstanceRequest, request)
         assert_equal(instance_path, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_instance_admin_grpc(:get_instance, mock_method) do
@@ -184,7 +184,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::ListInstancesRequest, request)
         assert_equal(project_path, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_instance_admin_grpc(:list_instances, mock_method) do
@@ -233,7 +233,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
         assert_equal(display_name, request.display_name)
         assert_equal(type, request.type)
         assert_equal(labels, request.labels)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_instance_admin_grpc(:update_instance, mock_method) do
@@ -286,7 +286,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::DeleteInstanceRequest, request)
         assert_equal(instance_path, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
 
       stub_instance_admin_grpc(:delete_instance, mock_method) do
@@ -335,7 +335,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
         }
 
         assert_equal(Google::Gax::to_proto(req_cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       stub_instance_admin_grpc(:create_cluster, mock_method) do
@@ -365,7 +365,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
           serve_nodes: cluster_attrs[:serve_nodes]
         }
         assert_equal(Google::Gax::to_proto(req_cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       stub_instance_admin_grpc(:create_cluster, mock_method) do
@@ -424,7 +424,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::GetClusterRequest, request)
         assert_equal(cluster_path, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_instance_admin_grpc(:get_cluster, mock_method) do
@@ -465,7 +465,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::ListClustersRequest, request)
         assert_equal(instance_path, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_instance_admin_grpc(:list_clusters, mock_method) do
@@ -514,7 +514,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
         assert_equal(cluster_path, request.name)
         assert_equal('', request.location)
         assert_equal(serve_nodes, request.serve_nodes)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       stub_instance_admin_grpc(:update_cluster, mock_method) do
@@ -543,7 +543,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
         assert_equal(cluster_path, request.name)
         assert_equal('', request.location)
         assert_equal(serve_nodes, request.serve_nodes)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       # Mock auth layer
@@ -593,7 +593,7 @@ describe Google::Cloud::Bigtable::InstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::DeleteClusterRequest, request)
         assert_equal(cluster_path, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
 
       stub_instance_admin_grpc(:delete_cluster, mock_method) do

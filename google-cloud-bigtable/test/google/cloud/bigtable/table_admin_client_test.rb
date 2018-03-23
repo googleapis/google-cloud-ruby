@@ -63,7 +63,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
         assert_equal(instance_path , request.parent)
         assert_equal(table_id, request.table_id)
         assert_equal(Google::Gax::to_proto(table, Google::Bigtable::Admin::V2::Table), request.table)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_admin_grpc(:create_table, mock_method) do
@@ -109,7 +109,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::ListTablesRequest, request)
         assert_equal(instance_path , request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_admin_grpc(:list_tables, mock_method) do
@@ -149,7 +149,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::GetTableRequest, request)
         assert_equal(table_path , request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_admin_grpc(:get_table, mock_method) do
@@ -182,7 +182,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::DeleteTableRequest, request)
         assert_equal(table_path , request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
 
       stub_table_admin_grpc(:delete_table, mock_method) do
@@ -229,7 +229,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
           Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification)
         end
         assert_equal(modifications, request.modifications)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_admin_grpc(:modify_column_families, mock_method) do
@@ -270,7 +270,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
         assert_instance_of(Google::Bigtable::Admin::V2::DropRowRangeRequest, request)
         assert_equal(table_path , request.name)
         assert_equal(row_key_prefix, request.row_key_prefix)
-        nil
+        OpenStruct.new(execute: nil)
       end
 
       stub_table_admin_grpc(:drop_row_range, mock_method) do

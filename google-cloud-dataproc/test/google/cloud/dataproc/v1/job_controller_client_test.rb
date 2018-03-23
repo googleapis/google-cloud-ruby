@@ -88,7 +88,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(Google::Gax::to_proto(job, Google::Cloud::Dataproc::V1::Job), request.job)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:submit_job, mock_method)
 
@@ -172,7 +172,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(job_id, request.job_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_job, mock_method)
 
@@ -255,7 +255,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_instance_of(Google::Cloud::Dataproc::V1::ListJobsRequest, request)
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_jobs, mock_method)
 
@@ -336,7 +336,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(job_id, request.job_id)
         assert_equal(Google::Gax::to_proto(job, Google::Cloud::Dataproc::V1::Job), request.job)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_job, mock_method)
 
@@ -428,7 +428,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(job_id, request.job_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:cancel_job, mock_method)
 
@@ -506,7 +506,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(job_id, request.job_id)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_job, mock_method)
 

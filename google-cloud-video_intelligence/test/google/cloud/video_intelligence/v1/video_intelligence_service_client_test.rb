@@ -85,7 +85,7 @@ describe Google::Cloud::VideoIntelligence::V1::VideoIntelligenceServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
@@ -118,7 +118,7 @@ describe Google::Cloud::VideoIntelligence::V1::VideoIntelligenceServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
 
