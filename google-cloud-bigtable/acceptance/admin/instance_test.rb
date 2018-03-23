@@ -18,7 +18,7 @@ describe "Bigtable Instance #find", :bigtable do
   let(:instance_id) { "instance#{Time.now.to_i}" }
   let(:cluster_id) { "cluster#{Time.now.to_i}" }
   let(:zone) { config.location_path("us-central1-c") }
-  let(:cluster) { Bigtable::Cluster.new(cluster_id: cluster_id, location: zone) }
+  let(:cluster) { Google::Cloud::Bigtable::Cluster.new(cluster_id: cluster_id, location: zone) }
 
   before do
     @created_instance = bigtable.instances.create! instance_id: instance_id,
@@ -55,7 +55,7 @@ describe "Bigtable Instance #create", :bigtable do
   end
 
   it "should create a production instance with three nodes" do
-    cluster = Bigtable::Cluster.new cluster_id: cluster_id,
+    cluster = Google::Cloud::Bigtable::Cluster.new cluster_id: cluster_id,
                                     location: zone,
                                     serve_nodes: 3
     instance = bigtable.instances.create! instance_id: instance_id,
@@ -70,7 +70,7 @@ describe "Bigtable Instance #create", :bigtable do
     key = "key#{Time.now.to_i}"
     value = "value#{Time.now.to_i}"
 
-    cluster = Bigtable::Cluster.new cluster_id: cluster_id,
+    cluster = Google::Cloud::Bigtable::Cluster.new cluster_id: cluster_id,
                                     location: zone
     instance = bigtable.instances.create! instance_id: instance_id,
                                           display_name: "My Instance",
@@ -89,7 +89,7 @@ describe "Bigtable Instance #save", :bigtable do
   let(:instance_id) { "instance#{Time.now.to_i}" }
   let(:cluster_id) { "cluster#{Time.now.to_i}" }
   let(:zone) { config.location_path("us-central1-c") }
-  let(:cluster) { Bigtable::Cluster.new(cluster_id: cluster_id, location: zone) }
+  let(:cluster) { Google::Cloud::Bigtable::Cluster.new(cluster_id: cluster_id, location: zone) }
 
   before do
     @created_instance = bigtable.instances.create! instance_id: instance_id,

@@ -13,17 +13,17 @@
 # limitations under the License.
 
 require 'helper'
-require 'bigtable/instance_set'
+require 'google/cloud/bigtable/instance_set'
 
-describe Bigtable::InstanceSet do
+describe Google::Cloud::Bigtable::InstanceSet do
   let(:project_id) {"project_#{Time.now.to_i}"}
-  let(:config) {Bigtable::Config.new project_id}
-  let(:instance_set) {Bigtable::InstanceSet.new config}
+  let(:config) {Google::Cloud::Bigtable::Config.new project_id}
+  let(:instance_set) {Google::Cloud::Bigtable::InstanceSet.new config}
   let(:instance_id) {"instance_id_#{Time.now.to_i}"}
 
   describe '#initialize' do
     it 'should be Enumerable' do
-      assert_includes Bigtable::InstanceSet.included_modules, Enumerable
+      assert_includes Google::Cloud::Bigtable::InstanceSet.included_modules, Enumerable
     end
   end
 
@@ -123,7 +123,7 @@ describe Bigtable::InstanceSet do
     let(:instance_id) {"instance_id_#{Time.now.to_i}"}
 
     it 'should create an instance with the given instance id/name' do
-      clusters = [Bigtable::Cluster.new(cluster_id: 'cluster_name', location: 'zone')]
+      clusters = [Google::Cloud::Bigtable::Cluster.new(cluster_id: 'cluster_name', location: 'zone')]
       mock_operation = Minitest::Mock.new
       mock_operation.expect :wait_until_done!, nil
       mock_operation.expect :response, OpenStruct.new(name: instance_id)
@@ -138,7 +138,7 @@ describe Bigtable::InstanceSet do
                                         display_name: "name",
                                         clusters: clusters
         assert_equal instance.name, instance_id
-        assert_instance_of Bigtable::Instance, instance
+        assert_instance_of Google::Cloud::Bigtable::Instance, instance
       end
 
       mock_instance_client.verify

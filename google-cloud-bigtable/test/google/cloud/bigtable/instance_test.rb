@@ -13,9 +13,9 @@
 # limitations under the License.
 
 require 'helper'
-require 'bigtable/instance'
+require 'google/cloud/bigtable/instance'
 
-describe Bigtable::Instance do
+describe Google::Cloud::Bigtable::Instance do
   let(:project_id) {"project_#{Time.now.to_i}"}
   let(:instance_id) {"instance_#{Time.now.to_i}"}
   let(:instance_name) {"projects/#{project_id}/instances/#{instance_id}"}
@@ -27,7 +27,7 @@ describe Bigtable::Instance do
       mock_client = Minitest::Mock.new
       mock_client.expect :delete_instance, nil, [instance_name, options]
 
-      instance = Bigtable::Instance.new name: instance_name, 
+      instance = Google::Cloud::Bigtable::Instance.new name: instance_name, 
                                         display_name: 'Name'
       instance.send :client=, mock_client
 
@@ -41,7 +41,7 @@ describe Bigtable::Instance do
     it 'should update the display name the given instance' do
       options = {}
       new_display_name = "New Name #{Time.now.to_i}"
-      instance = Bigtable::Instance.new name: instance_name, 
+      instance = Google::Cloud::Bigtable::Instance.new name: instance_name, 
                                         display_name: 'Name'
 
       mock_client = Minitest::Mock.new
@@ -57,7 +57,7 @@ describe Bigtable::Instance do
 
     it 'should update the type the given instance' do
       options = {}
-      instance = Bigtable::Instance.new name: instance_name, 
+      instance = Google::Cloud::Bigtable::Instance.new name: instance_name, 
                                         display_name: 'Name'
 
       mock_client = Minitest::Mock.new

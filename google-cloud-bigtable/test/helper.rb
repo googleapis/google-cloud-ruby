@@ -18,8 +18,8 @@ require 'minitest/spec'
 require "grpc/errors"
 require "google/gax/errors"
 
-require 'bigtable'
-require 'bigtable/client'
-require 'bigtable/config'
-require 'bigtable/instance'
-require 'bigtable/cluster'
+require 'google/cloud/bigtable'
+require 'google/cloud/bigtable/client'
+require 'google/cloud/bigtable/config'
+require 'google/cloud/bigtable/instance'
+require 'google/cloud/bigtable/cluster'

@@ -15,13 +15,13 @@
 gem "minitest"
 require "minitest/autorun"
 
-require "bigtable"
-require "bigtable/client"
-require "bigtable/config"
-require "bigtable/cluster"
+require "google/cloud/bigtable"
+require "google/cloud/bigtable/client"
+require "google/cloud/bigtable/config"
+require "google/cloud/bigtable/cluster"
 
-$bigtable_config = Bigtable::Config.new ENV["BIGTABLE_PROJECT"]
-$bigtable = Bigtable::Client.new $bigtable_config
+$bigtable_config = Google::Cloud::Bigtable::Config.new ENV["BIGTABLE_PROJECT"]
+$bigtable = Google::Cloud::Bigtable::Client.new $bigtable_config
 
 ##
 # Test class to run Bigtable tests.

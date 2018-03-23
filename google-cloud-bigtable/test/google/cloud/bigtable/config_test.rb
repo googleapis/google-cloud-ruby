@@ -13,16 +13,16 @@
 # limitations under the License.
 
 require 'helper'
-require 'bigtable/instance_set'
+require 'google/cloud/bigtable/instance_set'
 
-describe Bigtable::Config do
+describe Google::Cloud::Bigtable::Config do
   before do
     @project_id = "project_#{Time.now.to_i}"
   end
 
   describe '#project_id' do
     it 'should return project_id' do
-      config = Bigtable::Config.new @project_id
+      config = Google::Cloud::Bigtable::Config.new @project_id
 
       assert_equal config.project_id, @project_id
     end
@@ -30,7 +30,7 @@ describe Bigtable::Config do
 
   describe '#project_path' do
     it 'should return project_path for current project' do
-      config = Bigtable::Config.new @project_id
+      config = Google::Cloud::Bigtable::Config.new @project_id
 
       assert_equal config.project_path, "projects/#{@project_id}"
     end
@@ -39,7 +39,7 @@ describe Bigtable::Config do
   describe '#instance_path' do
     it 'should return instance_path for current project and instance id' do
       instance_id = "instance_#{Time.now.to_i}"
-      config = Bigtable::Config.new @project_id
+      config = Google::Cloud::Bigtable::Config.new @project_id
 
       assert_equal config.instance_path(instance_id), 
       "projects/#{@project_id}/instances/#{instance_id}"
@@ -49,7 +49,7 @@ describe Bigtable::Config do
   describe '#location_path' do
     it 'should return location_path for current project and zone' do
       zone = "instance_#{Time.now.to_i}"
-      config = Bigtable::Config.new @project_id
+      config = Google::Cloud::Bigtable::Config.new @project_id
 
       assert_equal config.location_path(zone), 
       "projects/#{@project_id}/locations/#{zone}"

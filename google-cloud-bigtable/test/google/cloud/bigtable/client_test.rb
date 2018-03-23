@@ -12,24 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "bigtable/instance_set"
+require 'helper'
+require 'google/cloud/bigtable/instance_set'
 
-module Bigtable
-  class Client
-    # initializer for Bigtable::Client
-    # @param config [Bigtable::Config]
-    def initialize config
-      @config = config
-    end
+describe Google::Cloud::Bigtable::Client do
+  before do
+    project_id = "project_#{Time.now.to_i}"
+    @config = Google::Cloud::Bigtable::Config.new project_id
+  end
 
-    # returns an instance of InstanceSet. This is the handle to perform
-    # any instance related operations.
-    # @return [Bigtable::InstanceSet]
-    # @example
-    #   client = Bigtable::Client.new 'project_id'
-    #   instances = client.instances
-    def instances
-      InstanceSet.new @config
+  describe '#instances' do
+    it 'should return object of InstanceSet' do
+      client = Google::Cloud::Bigtable::Client.new @config
+      assert_instance_of Google::Cloud::Bigtable::InstanceSet, client.instances
     end
   end
 end
