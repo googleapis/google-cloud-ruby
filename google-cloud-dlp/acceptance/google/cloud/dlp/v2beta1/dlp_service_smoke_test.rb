@@ -22,7 +22,7 @@ require "google/cloud/dlp"
 describe "DlpServiceSmokeTest" do
   it "runs one smoke test with inspect_content" do
 
-    dlp_service_client = Google::Cloud::Dlp.new
+    dlp_service_client = Google::Cloud::Dlp.new version: :v2beta1
     min_likelihood = :POSSIBLE
     inspect_config = { min_likelihood: min_likelihood }
     type = "text/plain"

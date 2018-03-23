@@ -675,13 +675,13 @@ class MockBigquery < Minitest::Spec
     )
   end
 
-  def load_job_url_gapi table_reference, url, job_id: "job_9876543210"
+  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210"
     Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
         load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
           destination_table: table_reference,
-          source_uris: [url],
+          source_uris: [urls].flatten,
         ),
         dry_run: nil
       )

@@ -1376,9 +1376,10 @@ module Google
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
-        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
-        #   or the URI of a Google Cloud Storage file containing data to load
-        #   into the table.
+        # @param [File, Google::Cloud::Storage::File, String, URI,
+        #   Array<Google::Cloud::Storage::File, String, URI>] files
+        #   A file or the URI of a Google Cloud Storage file, or an Array of
+        #   those, containing data to load into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1513,6 +1514,19 @@ module Google
         #   file = bucket.file "file-name.csv"
         #   load_job = table.load_job file
         #
+        # @example Pass a list of google-cloud-storage files:
+        #   require "google/cloud/bigquery"
+        #   require "google/cloud/storage"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "file-name.csv"
+        #   load_job = table.load_job [file, "gs://my-bucket/file-name2.csv"]
+        #
         # @example Upload a file directly:
         #   require "google/cloud/bigquery"
         #
@@ -1525,7 +1539,7 @@ module Google
         #
         # @!group Data
         #
-        def load_job file, format: nil, create: nil, write: nil,
+        def load_job files, format: nil, create: nil, write: nil,
                      projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil,
                      ignore_unknown: nil, max_bad_records: nil, quote: nil,
@@ -1541,9 +1555,9 @@ module Google
                       skip_leading: skip_leading, dryrun: dryrun,
                       job_id: job_id, prefix: prefix, labels: labels,
                       autodetect: autodetect, null_marker: null_marker }
-          return load_storage(file, options) if storage_url? file
-          return load_local(file, options) if local_file? file
-          raise Google::Cloud::Error, "Don't know how to load #{file}"
+          return load_storage(files, options) if storage_url? files
+          return load_local(files, options) if local_file? files
+          raise Google::Cloud::Error, "Don't know how to load #{files}"
         end
 
         ##
@@ -1552,9 +1566,10 @@ module Google
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
         #
-        # @param [File, Google::Cloud::Storage::File, String, URI] file A file
-        #   or the URI of a Google Cloud Storage file containing data to load
-        #   into the table.
+        # @param [File, Google::Cloud::Storage::File, String, URI,
+        #   Array<Google::Cloud::Storage::File, String, URI>] files
+        #   A file or the URI of a Google Cloud Storage file, or an Array of
+        #   those, containing data to load into the table.
         # @param [String] format The exported file format. The default value is
         #   `csv`.
         #
@@ -1667,6 +1682,19 @@ module Google
         #   file = bucket.file "file-name.csv"
         #   table.load file
         #
+        # @example Pass a list of google-cloud-storage files:
+        #   require "google/cloud/bigquery"
+        #   require "google/cloud/storage"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "file-name.csv"
+        #   table.load [file, "gs://my-bucket/file-name2.csv"]
+        #
         # @example Upload a file directly:
         #   require "google/cloud/bigquery"
         #
@@ -1679,20 +1707,25 @@ module Google
         #
         # @!group Data
         #
-        def load file, format: nil, create: nil, write: nil,
+        def load files, format: nil, create: nil, write: nil,
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
                  autodetect: nil, null_marker: nil
-          job = load_job file, format: format, create: create, write: write,
-                               projection_fields: projection_fields,
-                               jagged_rows: jagged_rows,
-                               quoted_newlines: quoted_newlines,
-                               encoding: encoding, delimiter: delimiter,
-                               ignore_unknown: ignore_unknown,
-                               max_bad_records: max_bad_records, quote: quote,
-                               skip_leading: skip_leading,
-                               autodetect: autodetect, null_marker: null_marker
+          job = load_job files, format:            format,
+                                create:            create,
+                                write:             write,
+                                projection_fields: projection_fields,
+                                jagged_rows:       jagged_rows,
+                                quoted_newlines:   quoted_newlines,
+                                encoding:          encoding,
+                                delimiter:         delimiter,
+                                ignore_unknown:    ignore_unknown,
+                                max_bad_records:   max_bad_records,
+                                quote:             quote,
+                                skip_leading:      skip_leading,
+                                autodetect:        autodetect,
+                                null_marker:       null_marker
 
           job.wait_until_done!
 
@@ -2049,12 +2082,19 @@ module Google
           reload!
         end
 
-        def load_storage url, options = {}
+        def load_storage urls, options = {}
           # Convert to storage URL
-          url = url.to_gs_url if url.respond_to? :to_gs_url
-          url = url.to_s if url.is_a? URI
+          urls = [urls].flatten.map do |url|
+            if url.respond_to? :to_gs_url
+              url.to_gs_url
+            elsif url.is_a? URI
+              url.to_s
+            else
+              url
+            end
+          end
 
-          gapi = service.load_table_gs_url dataset_id, table_id, url, options
+          gapi = service.load_table_gs_url dataset_id, table_id, urls, options
           Job.from_gapi gapi, service
         end
 
@@ -2066,12 +2106,14 @@ module Google
           Job.from_gapi gapi, service
         end
 
-        def storage_url? file
-          file.respond_to?(:to_gs_url) ||
-            (file.respond_to?(:to_str) &&
-            file.to_str.downcase.start_with?("gs://")) ||
-            (file.is_a?(URI) &&
-            file.to_s.downcase.start_with?("gs://"))
+        def storage_url? files
+          [files].flatten.all? do |file|
+            file.respond_to?(:to_gs_url) ||
+              (file.respond_to?(:to_str) &&
+              file.to_str.downcase.start_with?("gs://")) ||
+              (file.is_a?(URI) &&
+              file.to_s.downcase.start_with?("gs://"))
+          end
         end
 
         def local_file? file

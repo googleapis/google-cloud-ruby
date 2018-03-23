@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -81,7 +81,7 @@ module Google
       # scheduling of data scans on Google Cloud Platform based data sets.
       #
       # @param version [Symbol, String]
-      #   The major version of the service to be used. By default :v2beta1
+      #   The major version of the service to be used. By default :v2
       #   is used.
       # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
       #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -108,7 +108,7 @@ module Google
       #     or the specified config is missing data points.
       #   @param timeout [Numeric]
       #     The default timeout, in seconds, for calls made through this client.
-      def self.new(*args, version: :v2beta1, **kwargs)
+      def self.new(*args, version: :v2, **kwargs)
         unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
           raise "The version: #{version} is not available. The available versions " \
             "are: [#{AVAILABLE_VERSIONS.join(", ")}]"

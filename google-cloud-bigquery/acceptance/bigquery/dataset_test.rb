@@ -192,6 +192,30 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     job.output_rows.must_equal 3
   end
 
+  it "imports data from a list of files in your bucket with load_job" do
+    begin
+      more_data = rows.map { |row| JSON.generate row }.join("\n")
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file1 = bucket.create_file local_file
+      file2 = bucket.create_file StringIO.new(more_data),
+                                 "more-kitten-test-data.json"
+      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+
+      # Test both by file object and URL as string
+      job = dataset.load_job table_with_schema.table_id, [file1, gs_url]
+      job.wait_until_done!
+      job.wont_be :failed?
+      job.input_files.must_equal 2
+      job.output_rows.must_equal 6
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
+  end
+
   it "imports data from a local file and creates a new table with specified schema in a block with load" do
     result = dataset.load "local_file_table", local_file do |schema|
       schema.integer   "id",    description: "id description",    mode: :required
@@ -217,6 +241,27 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   it "imports data from a local file and creates a new table without a schema with load" do
     result = dataset.load table_with_schema.table_id, local_file, create: :never
     result.must_equal true
+  end
+
+  it "imports data from a list of files in your bucket with load" do
+    begin
+      more_data = rows.map { |row| JSON.generate row }.join("\n")
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      file1 = bucket.create_file local_file
+      file2 = bucket.create_file StringIO.new(more_data),
+                                 "more-kitten-test-data.json"
+      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+
+      # Test both by file object and URL as string
+      result = dataset.load table_with_schema.table_id, [file1, gs_url]
+      result.must_equal true
+    ensure
+      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      if post_bucket
+        post_bucket.files.map &:delete
+        post_bucket.delete
+      end
+    end
   end
 
   it "inserts rows directly and gets its data" do

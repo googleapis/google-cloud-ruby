@@ -15,6 +15,6 @@
 
 module Google
   module Cloud
-    VERSION = "0.50.0".freeze
+    VERSION = "0.51.1".freeze
   end
 end

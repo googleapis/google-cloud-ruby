@@ -303,12 +303,12 @@ module Google
           end
         end
 
-        def load_table_gs_url dataset_id, table_id, url, options = {}
+        def load_table_gs_url dataset_id, table_id, urls, options = {}
           # Jobs have generated id, so this operation is considered idempotent
           execute backoff: true do
             service.insert_job \
               @project, load_table_url_config(dataset_id, table_id,
-                                              url, options)
+                                              urls, options)
           end
         end
 
@@ -433,15 +433,18 @@ module Google
           req
         end
 
-        def load_table_url_opts dataset_id, table_id, url, options = {}
+        def load_table_url_opts dataset_id, table_id, urls, options = {}
+          sources = [urls].flatten
+          source_format = source_format_from_list(sources, options[:format])
+
           {
             destination_table: Google::Apis::BigqueryV2::TableReference.new(
               project_id: @project, dataset_id: dataset_id, table_id: table_id
             ),
-            source_uris: Array(url),
+            source_uris: sources,
             create_disposition: create_disposition(options[:create]),
             write_disposition: write_disposition(options[:write]),
-            source_format: source_format(url, options[:format]),
+            source_format: source_format,
             projection_fields: projection_fields(options[:projection_fields]),
             allow_jagged_rows: options[:jagged_rows],
             allow_quoted_newlines: options[:quoted_newlines],
@@ -454,8 +457,8 @@ module Google
           }.delete_if { |_, v| v.nil? }
         end
 
-        def load_table_url_config dataset_id, table_id, url, options = {}
-          load_opts = load_table_url_opts dataset_id, table_id, url, options
+        def load_table_url_config dataset_id, table_id, urls, options = {}
+          load_opts = load_table_url_opts dataset_id, table_id, urls, options
           req = API::Job.new(
             job_reference: job_ref_from(options[:job_id], options[:prefix]),
             configuration: API::JobConfiguration.new(
@@ -635,6 +638,12 @@ module Google
         def priority_value str
           { "batch" => "BATCH",
             "interactive" => "INTERACTIVE" }[str.to_s.downcase]
+        end
+
+        def source_format_from_list paths, format
+          paths.map do |path|
+            source_format path, format
+          end.compact.uniq.first
         end
 
         def source_format path, format

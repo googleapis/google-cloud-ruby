@@ -181,6 +181,20 @@ describe Google::Cloud::Bigquery::Table, :load_job, :storage, :mock_bigquery do
     mock.verify
   end
 
+  it "can specify an Array of storage urls as strings or URIs" do
+    load_url2 = storage_file("more-kittens").to_gs_url
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, [load_url, load_url2]
+    mock.expect :insert_job, load_job_resp_gapi(table, [load_url, load_url2]),
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job [URI(load_url), load_url2]
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
   it "can load itself as a dryrun" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_gapi.table_reference, load_url

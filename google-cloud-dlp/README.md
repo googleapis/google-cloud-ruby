@@ -21,19 +21,34 @@ steps:
 $ gem install google-cloud-dlp
 ```
 
+### Supported Ruby Versions
+
+This library is supported on Ruby 2.0+.
+
+However, Ruby 2.3 or later is strongly recommended, as earlier releases have
+reached or are nearing end-of-life. After June 1, 2018, Google will provide
+official support only for Ruby versions that are considered current and
+supported by Ruby Core (that is, Ruby versions that are either in normal
+maintenance or in security maintenance).
+See https://www.ruby-lang.org/en/downloads/branches/ for further details.
+
 ### Preview
 #### DlpServiceClient
 ```rb
 require "google/cloud/dlp"
 
-dlp_service_client = Google::Cloud::Dlp.new
-min_likelihood = :POSSIBLE
-inspect_config = { min_likelihood: min_likelihood }
-type = "text/plain"
-value = "my phone number is 215-512-1212"
-items_element = { type: type, value: value }
-items = [items_element]
-response = dlp_service_client.inspect_content(inspect_config, items)
+dlp = Google::Cloud::Dlp.new
+
+inspect_config = { 
+  info_types: [{ name: "PHONE_NUMBER" }], 
+  min_likelihood: :POSSIBLE
+}
+item = { value: "my phone number is 215-512-1212" }
+parent = "projects/#{ENV["MY_PROJECT"]}"
+
+response = dlp.inspect_content parent, 
+  inspect_config: inspect_config, 
+  item: item
 ```
 
 ### Next Steps
@@ -44,5 +59,5 @@ response = dlp_service_client.inspect_content(inspect_config, items)
 - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest/google/privacy/dlp/v2beta1
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest/google/privacy/dlp/v2
 [Product Documentation]: https://cloud.google.com/dlp

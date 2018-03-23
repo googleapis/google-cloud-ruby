@@ -40,8 +40,10 @@
       "name": "google-cloud",
       "defaultService": "google/cloud",
       "versions": [
-        "v0.50.0",
+        "v0.51.1",
         "master",
+        "v0.51.0",
+        "v0.50.0",
         "v0.49.0",
         "v0.48.0",
         "v0.47.0",
@@ -97,6 +99,15 @@
         "v0.20.2",
         "v0.20.1",
         "v0.20.0"
+      ]
+    },
+    {
+      "id": "google-cloud-bigquery-data_transfer",
+      "name": "google-cloud-bigquery-data_transfer",
+      "defaultService": "google/cloud/bigquery/datatransfer",
+      "versions": [
+        "v0.1.0",
+        "master"
       ]
     },
     {
@@ -178,8 +189,9 @@
       "name": "google-cloud-dlp",
       "defaultService": "google/cloud/dlp",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
@@ -331,8 +343,9 @@
       "name": "google-cloud-pubsub",
       "defaultService": "google/cloud/pubsub",
       "versions": [
-        "v0.30.0",
+        "v0.30.1",
         "master",
+        "v0.30.0",
         "v0.29.0",
         "v0.28.1",
         "v0.28.0",
