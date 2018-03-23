@@ -94,7 +94,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
           Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::ContentItem)
         end
         assert_equal(items, request.items)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
 
@@ -182,7 +182,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
           Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::ContentItem)
         end
         assert_equal(items, request.items)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:redact_content, mock_method)
 
@@ -266,7 +266,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
           Google::Gax::to_proto(req, Google::Privacy::Dlp::V2beta1::ContentItem)
         end
         assert_equal(items, request.items)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:deidentify_content, mock_method)
 
@@ -356,7 +356,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
         assert_instance_of(Google::Privacy::Dlp::V2beta1::AnalyzeDataSourceRiskRequest, request)
         assert_equal(Google::Gax::to_proto(privacy_metric, Google::Privacy::Dlp::V2beta1::PrivacyMetric), request.privacy_metric)
         assert_equal(Google::Gax::to_proto(source_table, Google::Privacy::Dlp::V2beta1::BigQueryTable), request.source_table)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:analyze_data_source_risk, mock_method)
 
@@ -396,7 +396,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
         assert_instance_of(Google::Privacy::Dlp::V2beta1::AnalyzeDataSourceRiskRequest, request)
         assert_equal(Google::Gax::to_proto(privacy_metric, Google::Privacy::Dlp::V2beta1::PrivacyMetric), request.privacy_metric)
         assert_equal(Google::Gax::to_proto(source_table, Google::Privacy::Dlp::V2beta1::BigQueryTable), request.source_table)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:analyze_data_source_risk, mock_method)
 
@@ -483,7 +483,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
         assert_equal(Google::Gax::to_proto(inspect_config, Google::Privacy::Dlp::V2beta1::InspectConfig), request.inspect_config)
         assert_equal(Google::Gax::to_proto(storage_config, Google::Privacy::Dlp::V2beta1::StorageConfig), request.storage_config)
         assert_equal(Google::Gax::to_proto(output_config, Google::Privacy::Dlp::V2beta1::OutputStorageConfig), request.output_config)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
@@ -535,7 +535,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
         assert_equal(Google::Gax::to_proto(inspect_config, Google::Privacy::Dlp::V2beta1::InspectConfig), request.inspect_config)
         assert_equal(Google::Gax::to_proto(storage_config, Google::Privacy::Dlp::V2beta1::StorageConfig), request.storage_config)
         assert_equal(Google::Gax::to_proto(output_config, Google::Privacy::Dlp::V2beta1::OutputStorageConfig), request.output_config)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_inspect_operation, mock_method)
 
@@ -621,7 +621,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2beta1::ListInspectFindingsRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_inspect_findings, mock_method)
 
@@ -689,7 +689,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
         assert_instance_of(Google::Privacy::Dlp::V2beta1::ListInfoTypesRequest, request)
         assert_equal(category, request.category)
         assert_equal(language_code, request.language_code)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
 
@@ -757,7 +757,7 @@ describe Google::Cloud::Dlp::V2beta1::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2beta1::ListRootCategoriesRequest, request)
         assert_equal(language_code, request.language_code)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_root_categories, mock_method)
 

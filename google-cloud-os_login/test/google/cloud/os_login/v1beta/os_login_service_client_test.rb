@@ -78,7 +78,7 @@ describe Google::Cloud::OsLogin::V1beta::OsLoginServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Oslogin::V1beta::DeletePosixAccountRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_posix_account, mock_method)
 
@@ -140,7 +140,7 @@ describe Google::Cloud::OsLogin::V1beta::OsLoginServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Oslogin::V1beta::DeleteSshPublicKeyRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_ssh_public_key, mock_method)
 
@@ -208,7 +208,7 @@ describe Google::Cloud::OsLogin::V1beta::OsLoginServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Oslogin::V1beta::GetLoginProfileRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_login_profile, mock_method)
 
@@ -281,7 +281,7 @@ describe Google::Cloud::OsLogin::V1beta::OsLoginServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Oslogin::V1beta::GetSshPublicKeyRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_ssh_public_key, mock_method)
 
@@ -349,7 +349,7 @@ describe Google::Cloud::OsLogin::V1beta::OsLoginServiceClient do
         assert_instance_of(Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(ssh_public_key, Google::Cloud::Oslogin::Common::SshPublicKey), request.ssh_public_key)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:import_ssh_public_key, mock_method)
 
@@ -426,7 +426,7 @@ describe Google::Cloud::OsLogin::V1beta::OsLoginServiceClient do
         assert_instance_of(Google::Cloud::Oslogin::V1beta::UpdateSshPublicKeyRequest, request)
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(ssh_public_key, Google::Cloud::Oslogin::Common::SshPublicKey), request.ssh_public_key)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_ssh_public_key, mock_method)
 

@@ -83,7 +83,7 @@ describe Google::Cloud::Language::V1::LanguageServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Language::V1::AnalyzeSentimentRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Cloud::Language::V1::Document), request.document)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:analyze_sentiment, mock_method)
 
@@ -150,7 +150,7 @@ describe Google::Cloud::Language::V1::LanguageServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Language::V1::AnalyzeEntitiesRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Cloud::Language::V1::Document), request.document)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:analyze_entities, mock_method)
 
@@ -217,7 +217,7 @@ describe Google::Cloud::Language::V1::LanguageServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Cloud::Language::V1::Document), request.document)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:analyze_entity_sentiment, mock_method)
 
@@ -284,7 +284,7 @@ describe Google::Cloud::Language::V1::LanguageServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Language::V1::AnalyzeSyntaxRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Cloud::Language::V1::Document), request.document)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:analyze_syntax, mock_method)
 
@@ -350,7 +350,7 @@ describe Google::Cloud::Language::V1::LanguageServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Language::V1::ClassifyTextRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Cloud::Language::V1::Document), request.document)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:classify_text, mock_method)
 
@@ -419,7 +419,7 @@ describe Google::Cloud::Language::V1::LanguageServiceClient do
         assert_instance_of(Google::Cloud::Language::V1::AnnotateTextRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Cloud::Language::V1::Document), request.document)
         assert_equal(Google::Gax::to_proto(features, Google::Cloud::Language::V1::AnnotateTextRequest::Features), request.features)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:annotate_text, mock_method)
 

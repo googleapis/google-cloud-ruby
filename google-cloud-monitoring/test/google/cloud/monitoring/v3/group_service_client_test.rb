@@ -85,7 +85,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::ListGroupsRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_groups, mock_method)
 
@@ -165,7 +165,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::GetGroupRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_group, mock_method)
 
@@ -244,7 +244,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_instance_of(Google::Monitoring::V3::CreateGroupRequest, request)
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(group, Google::Monitoring::V3::Group), request.group)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_group, mock_method)
 
@@ -323,7 +323,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::UpdateGroupRequest, request)
         assert_equal(Google::Gax::to_proto(group, Google::Monitoring::V3::Group), request.group)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_group, mock_method)
 
@@ -385,7 +385,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::DeleteGroupRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_group, mock_method)
 
@@ -459,7 +459,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Monitoring::V3::ListGroupMembersRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_group_members, mock_method)
 

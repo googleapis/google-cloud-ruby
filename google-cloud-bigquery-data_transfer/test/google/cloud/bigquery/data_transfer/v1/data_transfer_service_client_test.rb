@@ -107,7 +107,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_data_source, mock_method)
 
@@ -176,7 +176,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_data_sources, mock_method)
 
@@ -266,7 +266,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_transfer_config, mock_method)
 
@@ -355,7 +355,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest, request)
         assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_transfer_config, mock_method)
 
@@ -419,7 +419,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_transfer_config, mock_method)
 
@@ -504,7 +504,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_transfer_config, mock_method)
 
@@ -573,7 +573,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_transfer_configs, mock_method)
 
@@ -646,7 +646,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(start_time, Google::Protobuf::Timestamp), request.start_time)
         assert_equal(Google::Gax::to_proto(end_time, Google::Protobuf::Timestamp), request.end_time)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:schedule_transfer_runs, mock_method)
 
@@ -735,7 +735,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_transfer_run, mock_method)
 
@@ -797,7 +797,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_transfer_run, mock_method)
 
@@ -866,7 +866,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_transfer_runs, mock_method)
 
@@ -938,7 +938,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_transfer_logs, mock_method)
 
@@ -1008,7 +1008,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:check_valid_creds, mock_method)
 

@@ -101,7 +101,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(Google::Gax::to_proto(cluster, Google::Cloud::Dataproc::V1::Cluster), request.cluster)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
 
@@ -147,7 +147,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(Google::Gax::to_proto(cluster, Google::Cloud::Dataproc::V1::Cluster), request.cluster)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
 
@@ -248,7 +248,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         assert_equal(Google::Gax::to_proto(cluster, Google::Cloud::Dataproc::V1::Cluster), request.cluster)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
 
@@ -300,7 +300,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         assert_equal(Google::Gax::to_proto(cluster, Google::Cloud::Dataproc::V1::Cluster), request.cluster)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
 
@@ -398,7 +398,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(cluster_name, request.cluster_name)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
 
@@ -444,7 +444,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(cluster_name, request.cluster_name)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
 
@@ -534,7 +534,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(cluster_name, request.cluster_name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
 
@@ -617,7 +617,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_instance_of(Google::Cloud::Dataproc::V1::ListClustersRequest, request)
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
 
@@ -699,7 +699,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(cluster_name, request.cluster_name)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:diagnose_cluster, mock_method)
 
@@ -745,7 +745,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(region, request.region)
         assert_equal(cluster_name, request.cluster_name)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:diagnose_cluster, mock_method)
 

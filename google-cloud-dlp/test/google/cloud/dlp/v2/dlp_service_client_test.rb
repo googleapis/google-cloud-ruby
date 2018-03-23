@@ -82,7 +82,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::InspectContentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
 
@@ -150,7 +150,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::RedactImageRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:redact_image, mock_method)
 
@@ -216,7 +216,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::DeidentifyContentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:deidentify_content, mock_method)
 
@@ -282,7 +282,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::ReidentifyContentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:reidentify_content, mock_method)
 
@@ -343,7 +343,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
 
@@ -411,7 +411,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::CreateInspectTemplateRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_inspect_template, mock_method)
 
@@ -484,7 +484,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::UpdateInspectTemplateRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_inspect_template, mock_method)
 
@@ -552,7 +552,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_inspect_template, mock_method)
 
@@ -616,7 +616,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::ListInspectTemplatesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_inspect_templates, mock_method)
 
@@ -681,7 +681,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::DeleteInspectTemplateRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_inspect_template, mock_method)
 
@@ -754,7 +754,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::CreateDeidentifyTemplateRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_deidentify_template, mock_method)
 
@@ -827,7 +827,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::UpdateDeidentifyTemplateRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_deidentify_template, mock_method)
 
@@ -900,7 +900,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::GetDeidentifyTemplateRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_deidentify_template, mock_method)
 
@@ -969,7 +969,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::ListDeidentifyTemplatesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_deidentify_templates, mock_method)
 
@@ -1034,7 +1034,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::DeleteDeidentifyTemplateRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_deidentify_template, mock_method)
 
@@ -1102,7 +1102,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::CreateDlpJobRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_dlp_job, mock_method)
 
@@ -1171,7 +1171,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::ListDlpJobsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_dlp_jobs, mock_method)
 
@@ -1242,7 +1242,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::GetDlpJobRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_dlp_job, mock_method)
 
@@ -1304,7 +1304,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::DeleteDlpJobRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_dlp_job, mock_method)
 
@@ -1366,7 +1366,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::CancelDlpJobRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:cancel_dlp_job, mock_method)
 
@@ -1435,7 +1435,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::ListJobTriggersRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_job_triggers, mock_method)
 
@@ -1511,7 +1511,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::GetJobTriggerRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_job_trigger, mock_method)
 
@@ -1573,7 +1573,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::DeleteJobTriggerRequest, request)
         assert_equal(name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_job_trigger, mock_method)
 
@@ -1646,7 +1646,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::UpdateJobTriggerRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_job_trigger, mock_method)
 
@@ -1719,7 +1719,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Privacy::Dlp::V2::CreateJobTriggerRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_job_trigger, mock_method)
 

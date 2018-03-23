@@ -83,7 +83,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1beta1::GetDocumentRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_document, mock_method)
 
@@ -154,7 +154,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_instance_of(Google::Firestore::V1beta1::ListDocumentsRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(collection_id, request.collection_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_documents, mock_method)
 
@@ -232,7 +232,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(collection_id, request.collection_id)
         assert_equal(document_id, request.document_id)
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1beta1::Document), request.document)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_document, mock_method)
 
@@ -317,7 +317,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_instance_of(Google::Firestore::V1beta1::UpdateDocumentRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1beta1::Document), request.document)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Firestore::V1beta1::DocumentMask), request.update_mask)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_document, mock_method)
 
@@ -381,7 +381,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1beta1::DeleteDocumentRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_document, mock_method)
 
@@ -451,7 +451,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_instance_of(Google::Firestore::V1beta1::BatchGetDocumentsRequest, request)
         assert_equal(formatted_database, request.database)
         assert_equal(documents, request.documents)
-        [expected_response]
+        OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub.new(:batch_get_documents, mock_method)
 
@@ -521,7 +521,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1beta1::BeginTransactionRequest, request)
         assert_equal(formatted_database, request.database)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:begin_transaction, mock_method)
 
@@ -592,7 +592,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
           Google::Gax::to_proto(req, Google::Firestore::V1beta1::Write)
         end
         assert_equal(writes, request.writes)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:commit, mock_method)
 
@@ -661,7 +661,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_instance_of(Google::Firestore::V1beta1::RollbackRequest, request)
         assert_equal(formatted_database, request.database)
         assert_equal(transaction, request.transaction)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:rollback, mock_method)
 
@@ -731,7 +731,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1beta1::RunQueryRequest, request)
         assert_equal(formatted_parent, request.parent)
-        [expected_response]
+        OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub.new(:run_query, mock_method)
 
@@ -802,7 +802,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         request = requests.first
         assert_instance_of(Google::Firestore::V1beta1::WriteRequest, request)
         assert_equal(formatted_database, request.database)
-        [expected_response]
+        OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub.new(:write, mock_method)
 
@@ -873,7 +873,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         request = requests.first
         assert_instance_of(Google::Firestore::V1beta1::ListenRequest, request)
         assert_equal(formatted_database, request.database)
-        [expected_response]
+        OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub.new(:listen, mock_method)
 
@@ -945,7 +945,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1beta1::ListCollectionIdsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_collection_ids, mock_method)
 

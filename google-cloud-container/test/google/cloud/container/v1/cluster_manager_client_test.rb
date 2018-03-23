@@ -84,7 +84,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_instance_of(Google::Container::V1::ListClustersRequest, request)
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
 
@@ -201,7 +201,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
 
@@ -300,7 +300,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(Google::Gax::to_proto(cluster, Google::Container::V1::Cluster), request.cluster)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
 
@@ -401,7 +401,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(Google::Gax::to_proto(update, Google::Container::V1::ClusterUpdate), request.update)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
 
@@ -510,7 +510,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_pool_id, request.node_pool_id)
         assert_equal(node_version, request.node_version)
         assert_equal(image_type, request.image_type)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_node_pool, mock_method)
 
@@ -625,7 +625,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(node_pool_id, request.node_pool_id)
         assert_equal(Google::Gax::to_proto(autoscaling, Google::Container::V1::NodePoolAutoscaling), request.autoscaling)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_node_pool_autoscaling, mock_method)
 
@@ -734,7 +734,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(logging_service, request.logging_service)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_logging_service, mock_method)
 
@@ -839,7 +839,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(monitoring_service, request.monitoring_service)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_monitoring_service, mock_method)
 
@@ -944,7 +944,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(Google::Gax::to_proto(addons_config, Google::Container::V1::AddonsConfig), request.addons_config)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_addons_config, mock_method)
 
@@ -1049,7 +1049,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(locations, request.locations)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_locations, mock_method)
 
@@ -1154,7 +1154,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(master_version, request.master_version)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_master, mock_method)
 
@@ -1261,7 +1261,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(action, request.action)
         assert_equal(Google::Gax::to_proto(update, Google::Container::V1::MasterAuth), request.update)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_master_auth, mock_method)
 
@@ -1368,7 +1368,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
 
@@ -1448,7 +1448,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_instance_of(Google::Container::V1::ListOperationsRequest, request)
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_operations, mock_method)
 
@@ -1537,7 +1537,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(operation_id, request.operation_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_operation, mock_method)
 
@@ -1615,7 +1615,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(operation_id, request.operation_id)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:cancel_operation, mock_method)
 
@@ -1697,7 +1697,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_instance_of(Google::Container::V1::GetServerConfigRequest, request)
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_server_config, mock_method)
 
@@ -1769,7 +1769,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_node_pools, mock_method)
 
@@ -1864,7 +1864,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(node_pool_id, request.node_pool_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_node_pool, mock_method)
 
@@ -1969,7 +1969,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(Google::Gax::to_proto(node_pool, Google::Container::V1::NodePool), request.node_pool)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_node_pool, mock_method)
 
@@ -2074,7 +2074,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(node_pool_id, request.node_pool_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:delete_node_pool, mock_method)
 
@@ -2179,7 +2179,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(node_pool_id, request.node_pool_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:rollback_node_pool_upgrade, mock_method)
 
@@ -2286,7 +2286,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(node_pool_id, request.node_pool_id)
         assert_equal(Google::Gax::to_proto(management, Google::Container::V1::NodeManagement), request.management)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_node_pool_management, mock_method)
 
@@ -2397,7 +2397,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         # assert_equal(Google::Gax::to_proto(resource_labels, Google::Container::V1::SetLabelsRequest::ResourceLabelsEntry), request.resource_labels)
         assert_equal(label_fingerprint, request.label_fingerprint)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_labels, mock_method)
 
@@ -2506,7 +2506,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(enabled, request.enabled)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_legacy_abac, mock_method)
 
@@ -2609,7 +2609,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:start_ip_rotation, mock_method)
 
@@ -2708,7 +2708,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:complete_ip_rotation, mock_method)
 
@@ -2811,7 +2811,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(node_pool_id, request.node_pool_id)
         assert_equal(node_count, request.node_count)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_node_pool_size, mock_method)
 
@@ -2920,7 +2920,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(Google::Gax::to_proto(network_policy, Google::Container::V1::NetworkPolicy), request.network_policy)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_network_policy, mock_method)
 
@@ -3025,7 +3025,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
         assert_equal(Google::Gax::to_proto(maintenance_policy, Google::Container::V1::MaintenancePolicy), request.maintenance_policy)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_maintenance_policy, mock_method)
 
