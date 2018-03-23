@@ -15,6 +15,7 @@
 
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/data"
+require "google/cloud/bigquery/encryption_configuration"
 require "google/apis/bigquery_v2"
 
 module Google
