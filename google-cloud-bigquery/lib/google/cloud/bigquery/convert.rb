@@ -22,7 +22,7 @@ require "date"
 module Google
   module Cloud
     module Bigquery
-      # rubocop:disable all
+      # rubocop:disable Metrics/ModuleLength
 
       ##
       # @private
@@ -42,7 +42,6 @@ module Google
       # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
       # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
       # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
-
       module Convert
         ##
         # @private
@@ -61,6 +60,8 @@ module Google
           end
           Hash[row_pairs]
         end
+
+        # rubocop:disable all
 
         def self.format_value value, field
           if value.nil?
@@ -214,16 +215,6 @@ module Google
 
         ##
         # @private
-        def self.to_json_rows rows
-          rows.map { |row| to_json_row row }
-        end
-        ##
-        # @private
-        def self.to_json_row row
-          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
-        end
-        ##
-        # @private
         def self.to_json_value value
           if DateTime === value
             value.strftime "%Y-%m-%d %H:%M:%S.%6N"
@@ -245,14 +236,116 @@ module Google
           end
         end
 
+        # rubocop:enable all
+
+        ##
+        # @private
+        def self.to_json_rows rows
+          rows.map { |row| to_json_row row }
+        end
+
+        ##
+        # @private
+        def self.to_json_row row
+          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
+        end
+
         def self.resolve_legacy_sql standard_sql, legacy_sql
           return !standard_sql unless standard_sql.nil?
           return legacy_sql unless legacy_sql.nil?
           false
         end
 
-        # rubocop:enable all
+        ##
+        # @private
+        #
+        # Converts create disposition strings to API values.
+        #
+        # @return [String] API representation of create disposition.
+        def self.create_disposition str
+          val = {
+            "create_if_needed" => "CREATE_IF_NEEDED",
+            "createifneeded" => "CREATE_IF_NEEDED",
+            "if_needed" => "CREATE_IF_NEEDED",
+            "needed" => "CREATE_IF_NEEDED",
+            "create_never" => "CREATE_NEVER",
+            "createnever" => "CREATE_NEVER",
+            "never" => "CREATE_NEVER"
+          }[str.to_s.downcase]
+          return val unless val.nil?
+          str
+        end
+
+        ##
+        # @private
+        #
+        # Converts write disposition strings to API values.
+        #
+        # @return [String] API representation of write disposition.
+        def self.write_disposition str
+          val = {
+            "write_truncate" => "WRITE_TRUNCATE",
+            "writetruncate" => "WRITE_TRUNCATE",
+            "truncate" => "WRITE_TRUNCATE",
+            "write_append" => "WRITE_APPEND",
+            "writeappend" => "WRITE_APPEND",
+            "append" => "WRITE_APPEND",
+            "write_empty" => "WRITE_EMPTY",
+            "writeempty" => "WRITE_EMPTY",
+            "empty" => "WRITE_EMPTY"
+          }[str.to_s.downcase]
+          return val unless val.nil?
+          str
+        end
+
+        ##
+        # @private
+        #
+        # Converts source format strings to API values.
+        #
+        # @return [String] API representation of source format.
+        def self.source_format format
+          val = {
+            "csv" => "CSV",
+            "json" => "NEWLINE_DELIMITED_JSON",
+            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
+            "avro" => "AVRO",
+            "datastore" => "DATASTORE_BACKUP",
+            "backup" => "DATASTORE_BACKUP",
+            "datastore_backup" => "DATASTORE_BACKUP"
+          }[format.to_s.downcase]
+          return val unless val.nil?
+          format
+        end
+
+        ##
+        # @private
+        #
+        # Converts file paths into source format by extension.
+        #
+        # @return [String] API representation of source format.
+        def self.derive_source_format_from_list paths
+          paths.map do |path|
+            derive_source_format path
+          end.compact.uniq.first
+        end
+
+        ##
+        # @private
+        #
+        # Converts file path into source format by extension.
+        #
+        # @return [String] API representation of source format.
+        def self.derive_source_format path
+          return "CSV" if path.end_with? ".csv"
+          return "NEWLINE_DELIMITED_JSON" if path.end_with? ".json"
+          return "AVRO" if path.end_with? ".avro"
+          return "DATASTORE_BACKUP" if path.end_with? ".backup_info"
+          nil
+        end
       end
+
+      # rubocop:enable Metrics/ModuleLength
     end
   end
 end

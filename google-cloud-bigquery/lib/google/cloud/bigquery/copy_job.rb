@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/bigquery/encryption_configuration"
 
 module Google
   module Cloud
@@ -128,6 +129,144 @@ module Google
         def write_empty?
           disp = @gapi.configuration.copy.write_disposition
           disp == "WRITE_EMPTY"
+        end
+
+        ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.copy.destination_encryption_configuration
+          )
+        end
+
+        ##
+        # Yielded to a block to accumulate changes for an API request.
+        class Updater < CopyJob
+          ##
+          # @private Create an Updater object.
+          def initialize gapi
+            @gapi = gapi
+          end
+
+          ##
+          # @private Create an Updater from an options hash.
+          #
+          # @return [Google::Cloud::Bigquery::CopyJob::Updater] A job
+          #   configuration object for setting copy options.
+          def self.from_options source, target, options = {}
+            req = Google::Apis::BigqueryV2::Job.new(
+              configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+                copy: Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
+                  source_table: source,
+                  destination_table: target
+                ),
+                dry_run: options[:dryrun]
+              )
+            )
+
+            updater = CopyJob::Updater.new req
+            updater.create = options[:create]
+            updater.write = options[:write]
+            updater.labels = options[:labels] if options[:labels]
+            updater
+          end
+
+          ##
+          # Sets the create disposition.
+          #
+          # This specifies whether the job is allowed to create new tables. The
+          # default value is `needed`.
+          #
+          # The following values are supported:
+          #
+          # * `needed` - Create the table if it does not exist.
+          # * `never` - The table must already exist. A 'notFound' error is
+          #             raised if the table does not exist.
+          #
+          # @param [String] new_create The new create disposition.
+          #
+          # @!group Attributes
+          def create= new_create
+            @gapi.configuration.copy.update! create_disposition:
+              Convert.create_disposition(new_create)
+          end
+
+          ##
+          # Sets the write disposition.
+          #
+          # This specifies how to handle data already present in the table. The
+          # default value is `append`.
+          #
+          # The following values are supported:
+          #
+          # * `truncate` - BigQuery overwrites the table data.
+          # * `append` - BigQuery appends the data to the table.
+          # * `empty` - An error will be returned if the table already contains
+          #   data.
+          #
+          # @param [String] new_write The new write disposition.
+          #
+          # @!group Attributes
+          def write= new_write
+            @gapi.configuration.copy.update! write_disposition:
+              Convert.write_disposition(new_write)
+          end
+
+          ##
+          # Sets the encryption configuration of the destination table.
+          #
+          # @param [Google::Cloud::BigQuery::EncryptionConfiguration] val
+          #   Custom encryption configuration (e.g., Cloud KMS keys).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encrypt_config = bigquery.encryption kms_key: key_name
+          #   job = table.copy_job "my_dataset.new_table" do |job|
+          #     job.encryption = encrypt_config
+          #   end
+          #
+          # @!group Attributes
+          def encryption= val
+            @gapi.configuration.copy.update!(
+              destination_encryption_configuration: val.to_gapi
+            )
+          end
+
+          ##
+          # Sets the labels to use for the job.
+          #
+          # @param [Hash] value A hash of user-provided labels associated with
+          #   the job. You can use these to organize and group your jobs. Label
+          #   keys and values can be no longer than 63 characters, can only
+          #   contain lowercase letters, numeric characters, underscores and
+          #   dashes. International characters are allowed. Label values are
+          #   optional. Label keys must start with a letter and each label in
+          #   the list must have a different key.
+          #
+          # @!group Attributes
+          def labels= value
+            @gapi.configuration.update! labels: value
+          end
+
+          ##
+          # @private Returns the Google API client library version of this job.
+          #
+          # @return [<Google::Apis::BigqueryV2::Job>] (See
+          #   {Google::Apis::BigqueryV2::Job})
+          def to_gapi
+            @gapi
+          end
         end
       end
     end

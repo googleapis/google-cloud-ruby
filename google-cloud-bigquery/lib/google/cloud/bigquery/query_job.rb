@@ -15,6 +15,8 @@
 
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/data"
+require "google/cloud/bigquery/encryption_configuration"
+require "google/apis/bigquery_v2"
 
 module Google
   module Cloud
@@ -245,6 +247,19 @@ module Google
         end
 
         ##
+        # The encryption configuration of the destination table.
+        #
+        # @return [Google::Cloud::BigQuery::EncryptionConfiguration] Custom
+        #   encryption configuration (e.g., Cloud KMS keys).
+        #
+        # @!group Attributes
+        def encryption
+          EncryptionConfiguration.from_gapi(
+            @gapi.configuration.query.destination_encryption_configuration
+          )
+        end
+
+        ##
         # Refreshes the job until the job is `DONE`.
         # The delay between refreshes will incrementally increase.
         #
@@ -312,6 +327,393 @@ module Google
           Data.from_gapi_json data_hash, destination_table_gapi, service
         end
         alias query_results data
+
+        ##
+        # Yielded to a block to accumulate changes for a patch request.
+        class Updater < QueryJob
+          class << self
+            # @private If no job_id or prefix is given, always generate a
+            # client-side job ID anyway, for idempotent retry in the
+            # google-api-client layer. See
+            # https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
+            def job_ref_from job_id, prefix
+              prefix ||= "job_"
+              job_id ||= "#{prefix}#{generate_id}"
+              API::JobReference.new(
+                project_id: @project,
+                job_id: job_id
+              )
+            end
+
+            # @private API object for dataset.
+            def dataset_ref_from dts, pjt = nil
+              return nil if dts.nil?
+              if dts.respond_to? :dataset_id
+                Google::Apis::BigqueryV2::DatasetReference.new(
+                  project_id: (pjt || dts.project_id || @project),
+                  dataset_id: dts.dataset_id
+                )
+              else
+                Google::Apis::BigqueryV2::DatasetReference.new(
+                  project_id: (pjt || @project),
+                  dataset_id: dts
+                )
+              end
+            end
+          end
+
+          ##
+          # @private Create an Updater object.
+          def initialize gapi
+            @gapi = gapi
+          end
+
+          # rubocop:disable all
+
+          ##
+          # @private Create an Updater from an options hash.
+          #
+          # @return [Google::Cloud::Bigquery::QueryJob::Updater] A job
+          #   configuration object for setting query options.
+          def self.from_options query, options
+            dataset_config = dataset_ref_from options[:dataset], options[:project]
+            req = Google::Apis::BigqueryV2::Job.new(
+              configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+                query: Google::Apis::BigqueryV2::JobConfigurationQuery.new(
+                  query: query,
+                  default_dataset: dataset_config,
+                  maximum_billing_tier: options[:maximum_billing_tier]
+                )
+              )
+            )
+
+            updater = QueryJob::Updater.new req
+            updater.params = options[:params] if options[:params]
+            updater.create = options[:create]
+            updater.write = options[:write]
+            updater.table = options[:table]
+            updater.maximum_bytes_billed = options[:maximum_bytes_billed]
+            updater.labels = options[:labels] if options[:labels]
+            updater.legacy_sql = Convert.resolve_legacy_sql(
+              options[:standard_sql], options[:legacy_sql])
+            updater.external = options[:external] if options[:external]
+            updater.priority = options[:priority]
+            updater.cache = options[:cache]
+            updater.large_results = options[:large_results]
+            updater.flatten = options[:flatten]
+            updater.udfs = options[:udfs]
+            updater
+          end
+
+          # rubocop:enable all
+
+          # Sets the priority of the query.
+          #
+          # @param [String] value Specifies a priority for the query. Possible
+          #   values include `INTERACTIVE` and `BATCH`.
+          #
+          # @!group Attributes
+          def priority= value
+            @gapi.configuration.query.priority = priority_value value
+          end
+
+          ##
+          # Specifies to look in the query cache for results.
+          #
+          # @param [Boolean] value Whether to look for the result in the query
+          #   cache. The query cache is a best-effort cache that will be flushed
+          #   whenever tables in the query are modified. The default value is
+          #   true. For more information, see [query
+          #   caching](https://developers.google.com/bigquery/querying-data).
+          #
+          # @!group Attributes
+          def cache= value
+            @gapi.configuration.query.use_query_cache = value
+          end
+
+          ##
+          # Allow large results for a legacy SQL query.
+          #
+          # @param [Boolean] value This option is specific to Legacy SQL.
+          #   If `true`, allows the query to produce arbitrarily large result
+          #   tables at a slight cost in performance. Requires `table` parameter
+          #   to be set.
+          #
+          # @!group Attributes
+          def large_results= value
+            @gapi.configuration.query.allow_large_results = value
+          end
+
+          ##
+          # Flatten nested and repeated fields in legacy SQL queries.
+          #
+          # @param [Boolean] value This option is specific to Legacy SQL.
+          #   Flattens all nested and repeated fields in the query results. The
+          #   default value is `true`. `large_results` parameter must be `true`
+          #   if this is set to `false`.
+          #
+          # @!group Attributes
+          def flatten= value
+            @gapi.configuration.query.flatten_results = value
+          end
+
+          ##
+          # Sets the default dataset of tables referenced in the query.
+          #
+          # @param [Dataset] value The default dataset to use for unqualified
+          #   table names in the query.
+          #
+          # @!group Attributes
+          def dataset= value
+            @gapi.configuration.query.default_dataset =
+              Updater.dataset_ref_from value
+          end
+
+          ##
+          # Sets the query parameters. Standard SQL only.
+          #
+          # @param [Array, Hash] params Used to pass query arguments when the
+          #   `query` string contains either positional (`?`) or named
+          #   (`@myparam`) query parameters. If value passed is an array
+          #   `["foo"]`, the query must use positional query parameters. If
+          #   value passed is a hash `{ myparam: "foo" }`, the query must use
+          #   named query parameters. When set, `legacy_sql` will automatically
+          #   be set to false and `standard_sql` to true.
+          #
+          # @!group Attributes
+          def params= params
+            case params
+            when Array then
+              @gapi.configuration.query.use_legacy_sql = false
+              @gapi.configuration.query.parameter_mode = "POSITIONAL"
+              @gapi.configuration.query.query_parameters = params.map do |param|
+                Convert.to_query_param param
+              end
+            when Hash then
+              @gapi.configuration.query.use_legacy_sql = false
+              @gapi.configuration.query.parameter_mode = "NAMED"
+              @gapi.configuration.query.query_parameters =
+                params.map do |name, param|
+                  Convert.to_query_param(param).tap do |named_param|
+                    named_param.name = String name
+                  end
+                end
+            else
+              raise "Query parameters must be an Array or a Hash."
+            end
+          end
+
+          ##
+          # Sets the create disposition for creating the query results table.
+          #
+          # @param [String] value Specifies whether the job is allowed to
+          # create new tables. The default value is `needed`.
+          #
+          #   The following values are supported:
+          #
+          #   * `needed` - Create the table if it does not exist.
+          #   * `never` - The table must already exist. A 'notFound' error is
+          #     raised if the table does not exist.
+          #
+          # @!group Attributes
+          def create= value
+            @gapi.configuration.query.create_disposition =
+              Convert.create_disposition value
+          end
+
+          ##
+          # Sets the write disposition for when the query results table exists.
+          #
+          # @param [String] value Specifies the action that occurs if the
+          #   destination table already exists. The default value is `empty`.
+          #
+          #   The following values are supported:
+          #
+          #   * `truncate` - BigQuery overwrites the table data.
+          #   * `append` - BigQuery appends the data to the table.
+          #   * `empty` - A 'duplicate' error is returned in the job result if
+          #     the table exists and contains data.
+          #
+          # @!group Attributes
+          def write= value
+            @gapi.configuration.query.write_disposition =
+              Convert.write_disposition value
+          end
+
+          ##
+          # Sets the destination for the query results table.
+          #
+          # @param [Table] value The destination table where the query results
+          #   should be stored. If not present, a new table will be created
+          #   according to the create disposition to store the results.
+          #
+          # @!group Attributes
+          def table= value
+            @gapi.configuration.query.destination_table = table_ref_from value
+          end
+
+          ##
+          # Sets the maximum bytes billed for the query.
+          #
+          # @param [Integer] value Limits the bytes billed for this job.
+          #   Queries that will have bytes billed beyond this limit will fail
+          #   (without incurring a charge). Optional. If unspecified, this will
+          #   be set to your project default.
+          #
+          # @!group Attributes
+          def maximum_bytes_billed= value
+            @gapi.configuration.query.maximum_bytes_billed = value
+          end
+
+          ##
+          # Sets the labels to use for the job.
+          #
+          # @param [Hash] value A hash of user-provided labels associated with
+          #   the job. You can use these to organize and group your jobs. Label
+          #   keys and values can be no longer than 63 characters, can only
+          #   contain lowercase letters, numeric characters, underscores and
+          #   dashes. International characters are allowed. Label values are
+          #   optional. Label keys must start with a letter and each label in
+          #   the list must have a different key.
+          #
+          # @!group Attributes
+          #
+          def labels= value
+            @gapi.configuration.update! labels: value
+          end
+
+          ##
+          # Sets the query syntax to legacy SQL.
+          #
+          # @param [Boolean] value Specifies whether to use BigQuery's [legacy
+          #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+          #   dialect for this query. If set to false, the query will use
+          #   BigQuery's [standard
+          #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+          #   dialect. Optional. The default value is false.
+          #
+          # @!group Attributes
+          #
+          def legacy_sql= value
+            @gapi.configuration.query.use_legacy_sql = value
+          end
+
+          ##
+          # Sets the query syntax to standard SQL.
+          #
+          # @param [Boolean] value Specifies whether to use BigQuery's [standard
+          #   SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/)
+          #   dialect for this query. If set to true, the query will use
+          #   standard SQL rather than the [legacy
+          #   SQL](https://cloud.google.com/bigquery/docs/reference/legacy-sql)
+          #   dialect. Optional. The default value is true.
+          #
+          # @!group Attributes
+          #
+          def standard_sql= value
+            @gapi.configuration.query.use_legacy_sql = !value
+          end
+
+          ##
+          # Sets definitions for external tables used in the query.
+          #
+          # @param [Hash<String|Symbol, External::DataSource>] value A Hash
+          #   that represents the mapping of the external tables to the table
+          #   names used in the SQL query. The hash keys are the table names,
+          #   and the hash values are the external table objects.
+          #
+          # @!group Attributes
+          #
+          def external= value
+            external_table_pairs = value.map do |name, obj|
+              [String(name), obj.to_gapi]
+            end
+            external_table_hash = Hash[external_table_pairs]
+            @gapi.configuration.query.table_definitions = external_table_hash
+          end
+
+          ##
+          # Sets user defined functions for the query.
+          #
+          # @param [Array<String>, String] value User-defined function resources
+          #   used in the query. May be either a code resource to load from a
+          #   Google Cloud Storage URI (`gs://bucket/path`), or an inline
+          #   resource that contains code for a user-defined function (UDF).
+          #   Providing an inline code resource is equivalent to providing a URI
+          #   for a file containing the same code. See [User-Defined
+          #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+          #
+          # @!group Attributes
+          def udfs= value
+            @gapi.configuration.query.user_defined_function_resources =
+              udfs_gapi_from value
+          end
+
+          ##
+          # Sets the encryption configuration of the destination table.
+          #
+          # @param [Google::Cloud::BigQuery::EncryptionConfiguration] val
+          #   Custom encryption configuration (e.g., Cloud KMS keys).
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encrypt_config = bigquery.encryption kms_key: key_name
+          #   job = bigquery.query_job "SELECT 1;" do |query|
+          #     query.table = dataset.table "my_table", skip_lookup: true
+          #     query.encryption = encrypt_config
+          #   end
+          #
+          # @!group Attributes
+          def encryption= val
+            @gapi.configuration.query.update!(
+              destination_encryption_configuration: val.to_gapi
+            )
+          end
+
+          ##
+          # @private Returns the Google API client library version of this job.
+          #
+          # @return [<Google::Apis::BigqueryV2::Job>] (See
+          #   {Google::Apis::BigqueryV2::Job})
+          def to_gapi
+            @gapi
+          end
+
+          protected
+
+          # Creates a table reference from a table object.
+          def table_ref_from tbl
+            return nil if tbl.nil?
+            Google::Apis::BigqueryV2::TableReference.new(
+              project_id: tbl.project_id,
+              dataset_id: tbl.dataset_id,
+              table_id: tbl.table_id
+            )
+          end
+
+          def priority_value str
+            { "batch" => "BATCH",
+              "interactive" => "INTERACTIVE" }[str.to_s.downcase]
+          end
+
+          def udfs_gapi_from array_or_str
+            Array(array_or_str).map do |uri_or_code|
+              resource =
+                Google::Apis::BigqueryV2::UserDefinedFunctionResource.new
+              if uri_or_code.start_with?("gs://")
+                resource.resource_uri = uri_or_code
+              else
+                resource.inline_code = uri_or_code
+              end
+              resource
+            end
+          end
+        end
 
         ##
         # Represents a stage in the execution plan for the query.

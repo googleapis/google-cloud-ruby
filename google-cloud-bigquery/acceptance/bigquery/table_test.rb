@@ -146,7 +146,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     err.message.must_equal "conditionNotMet: Precondition Failed"
   end
 
-  it "create dataset returns valid etag equal to get dataset" do
+  it "create table returns valid etag equal to get table" do
     fresh_table_id = "#{rand 100}_kittens"
     fresh = dataset.create_table fresh_table_id do |schema|
       schema.integer   "id",    description: "id description",    mode: :required
@@ -159,6 +159,33 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     stale = dataset.table fresh_table_id
     stale.etag.wont_be :nil?
     stale.etag.must_equal fresh.etag
+  end
+
+  it "create table with cmek sets encryption" do
+    begin
+      encrypt_config = bigquery.encryption(
+        kms_key: "projects/cloud-samples-tests/locations/us-central1" +
+                 "/keyRings/test/cryptoKeys/test")
+      cmek_table = dataset.create_table "cmek_kittens" do |updater|
+        updater.encryption = encrypt_config
+      end
+
+      cmek_table.reload!
+      cmek_table.table_id.must_equal "cmek_kittens"
+      cmek_table.encryption.must_equal encrypt_config
+
+      new_encrypt_config = bigquery.encryption(
+        kms_key: "projects/cloud-samples-tests/locations/us-central1" +
+                 "/keyRings/test/cryptoKeys/otherkey")
+      cmek_table.encryption = new_encrypt_config
+
+      cmek_table.reload!
+      cmek_table.encryption.must_equal new_encrypt_config
+
+    ensure
+      t2 = dataset.table "cmek_kittens"
+      t2.delete if t2
+    end
   end
 
   it "gets and sets time partitioning" do
@@ -449,7 +476,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "imports data from a local file with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    job = table.load_job local_file, job_id: job_id, labels: labels
+    job = table.load_job local_file, job_id: job_id do |j|
+      j.labels = labels
+    end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.job_id.must_equal job_id
     job.labels.must_equal labels
@@ -564,6 +593,21 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   it "copies itself to another table with copy" do
     result = table.copy target_table_2_id, create: :needed, write: :empty
     result.must_equal true
+  end
+
+  it "copies itself to another table with copy with encryption" do
+    encrypt_config = bigquery.encryption(
+      kms_key: "projects/cloud-samples-tests/locations/us-central1" +
+                "/keyRings/test/cryptoKeys/test")
+
+    result = table.copy target_table_2_id, create: :needed,
+                                           write: :truncate do |copy|
+      copy.encryption = encrypt_config
+    end
+    result.must_equal true
+
+    cmek_table = dataset.table target_table_2_id
+    cmek_table.encryption.must_equal encrypt_config
   end
 
   it "creates and cancels jobs" do

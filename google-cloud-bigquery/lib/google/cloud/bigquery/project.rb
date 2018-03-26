@@ -178,11 +178,6 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
-        # @param [Integer] maximum_billing_tier Limits the billing tier for this
-        #   job. Queries that have resource usage beyond this tier will fail
-        #   (without incurring a charge). Optional. If unspecified, this will be
-        #   set to your project default. For more information, see [High-Compute
-        #   queries](https://cloud.google.com/bigquery/pricing#high-compute).
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
@@ -219,6 +214,11 @@ module Google
         #   inline code resource is equivalent to providing a URI for a file
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
+        #   tier to allow high-compute queries.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting query options.
         #
         # @return [Google::Cloud::Bigquery::QueryJob]
         #
@@ -243,7 +243,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "[my_project:my_dataset.my_table]",
+        #                            " [my_project:my_dataset.my_table]",
         #                            legacy_sql: true
         #
         #   job.wait_until_done!
@@ -287,7 +287,7 @@ module Google
         #     end
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -298,8 +298,11 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   job = bigquery.query_job "SELECT * FROM my_ext_table",
-        #                            external: { my_ext_table: csv_table }
+        #   job = bigquery.query_job "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #     dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -319,13 +322,18 @@ module Google
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      dataset: dataset, project: project,
+                      dataset: dataset, project: project || self.project,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params, external: external, labels: labels,
-                      job_id: job_id, prefix: prefix, udfs: udfs }
-          gapi = service.query_job query, options
+                      external: external, labels: labels,
+                      udfs: udfs, params: params }
+
+          updater = QueryJob::Updater.from_options query, options
+
+          yield updater if block_given?
+
+          gapi = service.query_job job_id, prefix, updater.to_gapi
           Job.from_gapi gapi, service
         end
 
@@ -409,6 +417,9 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting additional options for the query.
         #
         # @return [Google::Cloud::Bigquery::Data]
         #
@@ -475,7 +486,7 @@ module Google
         #     puts row[:name]
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -486,8 +497,11 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   data = bigquery.query "SELECT * FROM my_ext_table",
-        #                         external: { my_ext_table: csv_table }
+        #   data = bigquery.query "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #     dataset = bigquery.dataset "my_dataset", skip_lookup: true
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -496,11 +510,16 @@ module Google
         def query query, params: nil, external: nil, max: nil, cache: true,
                   dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil
           ensure_service!
-          options = { cache: cache, dataset: dataset, project: project,
+          options = { priority: "INTERACTIVE", cache: cache, dataset: dataset,
+                      project: project || self.project,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params, external: external }
+          updater = QueryJob::Updater.from_options query, options
 
-          job = query_job query, options
+          yield updater if block_given?
+
+          gapi = service.query_job nil, nil, updater.to_gapi
+          job = Job.from_gapi gapi, service
           job.wait_until_done!
 
           if job.failed?
@@ -939,6 +958,77 @@ module Google
           s = Schema.from_gapi
           yield s if block_given?
           s
+        end
+
+        ##
+        # Creates a new Bigquery::EncryptionConfiguration instance.
+        #
+        # This method does not execute an API call. Use the encryption
+        # configuration to encrypt a table when creating one via
+        # Bigquery::Dataset#create_table, Bigquery::Dataset#load,
+        # Bigquery::Table#copy, or Bigquery::Project#query.
+        #
+        # @param [String] kms_key Name of the Cloud KMS encryption key that
+        #   will be used to protect the destination BigQuery table. The BigQuery
+        #   Service Account associated with your project requires access to this
+        #   encryption key.
+        #
+        # @example Encrypt a new table
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #
+        #   table = dataset.create_table "my_table" do |updater|
+        #     updater.encryption = encrypt_config
+        #   end
+        #
+        # @example Encrypt a load destination table
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #   job = dataset.load_job "my_table", "gs://abc/file" do |job|
+        #     job.encryption = encrypt_config
+        #   end
+        #
+        # @example Encrypt a copy destination table
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #   job = table.copy_job "my_dataset.new_table" do |job|
+        #     job.encryption = encrypt_config
+        #   end
+        #
+        # @example Encrypt a query destination table
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encrypt_config = bigquery.encryption kms_key: key_name
+        #   job = bigquery.query_job "SELECT 1;" do |query|
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #     query.encryption = encrypt_config
+        #   end
+        #
+        # @return [Google::Cloud::Bigquery::EncryptionConfiguration]
+        def encryption kms_key: nil
+          encrypt_config = Bigquery::EncryptionConfiguration.new
+          encrypt_config.kms_key = kms_key unless kms_key.nil?
+          encrypt_config
         end
 
         ##

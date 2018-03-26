@@ -761,11 +761,6 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
-        # @param [Integer] maximum_billing_tier Limits the billing tier for this
-        #   job. Queries that have resource usage beyond this tier will fail
-        #   (without incurring a charge). Optional. If unspecified, this will be
-        #   set to your project default. For more information, see [High-Compute
-        #   queries](https://cloud.google.com/bigquery/pricing#high-compute).
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
@@ -799,6 +794,11 @@ module Google
         #   inline code resource is equivalent to providing a URI for a file
         #   containing the same code. See [User-Defined
         #   Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
+        #   tier to allow high-compute queries.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting additional options for the query.
         #
         # @return [Google::Cloud::Bigquery::QueryJob] A new query job object.
         #
@@ -865,7 +865,7 @@ module Google
         #     end
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -877,8 +877,10 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   job = dataset.query_job "SELECT * FROM my_ext_table",
-        #                           external: { my_ext_table: csv_table }
+        #   job = dataset.query_job "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #   end
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -895,6 +897,7 @@ module Google
                       legacy_sql: nil, large_results: nil, flatten: nil,
                       maximum_billing_tier: nil, maximum_bytes_billed: nil,
                       job_id: nil, prefix: nil, labels: nil, udfs: nil
+          ensure_service!
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
@@ -902,10 +905,14 @@ module Google
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
                       params: params, external: external, labels: labels,
-                      job_id: job_id, prefix: prefix, udfs: udfs }
-          options[:dataset] ||= self
-          ensure_service!
-          gapi = service.query_job query, options
+                      udfs: udfs }
+
+          updater = QueryJob::Updater.from_options query, options
+          updater.dataset = self
+
+          yield updater if block_given?
+
+          gapi = service.query_job job_id, prefix, updater.to_gapi
           Job.from_gapi gapi, service
         end
 
@@ -985,6 +992,9 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @yield [job] a job configuration object
+        # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
+        #   configuration object for setting additional options for the query.
         #
         # @return [Google::Cloud::Bigquery::Data] A new data object.
         #
@@ -1039,7 +1049,7 @@ module Google
         #     puts row[:name]
         #   end
         #
-        # @example Query using external data source:
+        # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
@@ -1051,8 +1061,10 @@ module Google
         #     csv.skip_leading_rows = 1
         #   end
         #
-        #   data = dataset.query "SELECT * FROM my_ext_table",
-        #                        external: { my_ext_table: csv_table }
+        #   data = dataset.query "SELECT * FROM my_ext_table" do |query|
+        #     query.external = { my_ext_table: csv_table }
+        #     query.table = dataset.table "my_table", skip_lookup: true
+        #   end
         #
         #   data.each do |row|
         #     puts row[:name]
@@ -1063,21 +1075,18 @@ module Google
         def query query, params: nil, external: nil, max: nil, cache: true,
                   standard_sql: nil, legacy_sql: nil
           ensure_service!
-          options = { params: params, external: external, cache: cache,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql }
+          options = { priority: "INTERACTIVE", external: external, cache: cache,
+                      legacy_sql: legacy_sql, standard_sql: standard_sql,
+                      params: params }
+          options[:dataset] ||= self
+          updater = QueryJob::Updater.from_options query, options
 
-          job = query_job query, options
+          yield updater if block_given?
+
+          gapi = service.query_job nil, nil, updater.to_gapi
+          job = Job.from_gapi gapi, service
           job.wait_until_done!
-
-          if job.failed?
-            begin
-              # raise to activate ruby exception cause handling
-              raise job.gapi_error
-            rescue StandardError => e
-              # wrap Google::Apis::Error with Google::Cloud::Error
-              raise Google::Cloud::Error.from_error(e)
-            end
-          end
+          ensure_job_succeeded! job
 
           job.data max: max
         end
@@ -1270,13 +1279,12 @@ module Google
         #   optional. Label keys must start with a letter and each label in the
         #   list must have a different key.
         #
-        # @yield [schema] A block for setting the schema for the destination
-        #   table. The schema can be omitted if the destination table already
-        #   exists, or if you're loading data from a Google Cloud Datastore
-        #   backup.
-        # @yieldparam [Google::Cloud::Bigquery::Schema] schema The schema
-        #   instance provided using the `schema` option, or a new, empty schema
-        #   instance
+        # @yield [updater] A block for setting the schema and other
+        #   options for the destination table. The schema can be omitted if the
+        #   destination table already exists, or if you're loading data from a
+        #   Google Cloud Datastore backup.
+        # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
+        #   updater to modify the load job and its schema.
         #
         # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
         #
@@ -1353,9 +1361,11 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   load_job = dataset.load_job "my_new_table",
-        #                           "gs://my-bucket/xxxx.kind_name.backup_info",
-        #                           format: "datastore_backup"
+        #   load_job = dataset.load_job(
+        #                "my_new_table",
+        #                "gs://my-bucket/xxxx.kind_name.backup_info") do |j|
+        #     j.format = "datastore_backup"
+        #   end
         #
         # @!group Data
         #
@@ -1367,25 +1377,24 @@ module Google
                      prefix: nil, labels: nil, autodetect: nil, null_marker: nil
           ensure_service!
 
-          if block_given?
-            schema ||= Schema.from_gapi
-            yield schema
-          end
-          schema_gapi = schema.to_gapi if schema
+          updater = load_job_updater table_id,
+                                     format: format, create: create,
+                                     write: write,
+                                     projection_fields: projection_fields,
+                                     jagged_rows: jagged_rows,
+                                     quoted_newlines: quoted_newlines,
+                                     encoding: encoding,
+                                     delimiter: delimiter,
+                                     ignore_unknown: ignore_unknown,
+                                     max_bad_records: max_bad_records,
+                                     quote: quote, skip_leading: skip_leading,
+                                     dryrun: dryrun, schema: schema,
+                                     labels: labels, autodetect: autodetect,
+                                     null_marker: null_marker
 
-          options = { format: format, create: create, write: write,
-                      projection_fields: projection_fields,
-                      jagged_rows: jagged_rows,
-                      quoted_newlines: quoted_newlines, encoding: encoding,
-                      delimiter: delimiter, ignore_unknown: ignore_unknown,
-                      max_bad_records: max_bad_records, quote: quote,
-                      skip_leading: skip_leading, dryrun: dryrun,
-                      schema: schema_gapi, job_id: job_id, prefix: prefix,
-                      labels: labels, autodetect: autodetect,
-                      null_marker: null_marker }
-          return load_storage(table_id, files, options) if storage_url? files
-          return load_local(table_id, files, options) if local_file? files
-          raise Google::Cloud::Error, "Don't know how to load #{files}"
+          yield updater if block_given?
+
+          load_local_or_uri job_id, prefix, files, updater
         end
 
         ##
@@ -1500,13 +1509,12 @@ module Google
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
         #
-        # @yield [schema] A block for setting the schema for the destination
-        #   table. The schema can be omitted if the destination table already
-        #   exists, or if you're loading data from a Google Cloud Datastore
-        #   backup.
-        # @yieldparam [Google::Cloud::Bigquery::Schema] schema The schema
-        #   instance provided using the `schema` option, or a new, empty schema
-        #   instance
+        # @yield [updater] A block for setting the schema of the destination
+        #   table and other options for the load job. The schema can be omitted
+        #   if the destination table already exists, or if you're loading data
+        #   from a Google Cloud Datastore backup.
+        # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
+        #   updater to modify the load job and its schema.
         #
         # @return [Boolean] Returns `true` if the load job was successful.
         #
@@ -1584,8 +1592,9 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   dataset.load "my_new_table",
-        #                "gs://my-bucket/xxxx.kind_name.backup_info",
-        #                format: "datastore_backup"
+        #                "gs://my-bucket/xxxx.kind_name.backup_info" do |j|
+        #     j.format = "datastore_backup"
+        #   end
         #
         # @!group Data
         #
@@ -1594,31 +1603,28 @@ module Google
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
                  schema: nil, autodetect: nil, null_marker: nil
+          ensure_service!
 
-          yield (schema ||= Schema.from_gapi) if block_given?
+          updater = load_job_updater table_id,
+                                     format: format, create: create,
+                                     write: write,
+                                     projection_fields: projection_fields,
+                                     jagged_rows: jagged_rows,
+                                     quoted_newlines: quoted_newlines,
+                                     encoding: encoding,
+                                     delimiter: delimiter,
+                                     ignore_unknown: ignore_unknown,
+                                     max_bad_records: max_bad_records,
+                                     quote: quote, skip_leading: skip_leading,
+                                     schema: schema,
+                                     autodetect: autodetect,
+                                     null_marker: null_marker
 
-          options = { format: format, create: create, write: write,
-                      projection_fields: projection_fields,
-                      jagged_rows: jagged_rows,
-                      quoted_newlines: quoted_newlines, encoding: encoding,
-                      delimiter: delimiter, ignore_unknown: ignore_unknown,
-                      max_bad_records: max_bad_records, quote: quote,
-                      skip_leading: skip_leading, schema: schema,
-                      autodetect: autodetect, null_marker: null_marker }
-          job = load_job table_id, files, options
+          yield updater if block_given?
 
+          job = load_local_or_uri nil, nil, files, updater
           job.wait_until_done!
-
-          if job.failed?
-            begin
-              # raise to activate ruby exception cause handling
-              raise job.gapi_error
-            rescue StandardError => e
-              # wrap Google::Apis::Error with Google::Cloud::Error
-              raise Google::Cloud::Error.from_error(e)
-            end
-          end
-
+          ensure_job_succeeded! job
           true
         end
 
@@ -1986,7 +1992,97 @@ module Google
           reload! if resource_partial?
         end
 
-        def load_storage table_id, urls, options = {}
+        def ensure_job_succeeded! job
+          return unless job.failed?
+          begin
+            # raise to activate ruby exception cause handling
+            raise job.gapi_error
+          rescue StandardError => e
+            # wrap Google::Apis::Error with Google::Cloud::Error
+            raise Google::Cloud::Error.from_error(e)
+          end
+        end
+
+        def load_job_gapi table_id, dryrun
+          Google::Apis::BigqueryV2::Job.new(
+            configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
+              load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+                destination_table: Google::Apis::BigqueryV2::TableReference.new(
+                  project_id: @service.project,
+                  dataset_id: dataset_id,
+                  table_id: table_id
+                )
+              ),
+              dry_run: dryrun
+            )
+          )
+        end
+
+        def load_job_csv_options! job, jagged_rows: nil,
+                                  quoted_newlines: nil,
+                                  delimiter: nil,
+                                  quote: nil, skip_leading: nil,
+                                  null_marker: nil
+          job.jagged_rows = jagged_rows unless jagged_rows.nil?
+          job.quoted_newlines = quoted_newlines unless quoted_newlines.nil?
+          job.delimiter = delimiter unless delimiter.nil?
+          job.null_marker = null_marker unless null_marker.nil?
+          job.quote = quote unless quote.nil?
+          job.skip_leading = skip_leading unless skip_leading.nil?
+        end
+
+        def load_job_file_options! job, format: nil,
+                                   projection_fields: nil,
+                                   jagged_rows: nil, quoted_newlines: nil,
+                                   encoding: nil, delimiter: nil,
+                                   ignore_unknown: nil, max_bad_records: nil,
+                                   quote: nil, skip_leading: nil,
+                                   null_marker: nil
+          job.format = format unless format.nil?
+          unless projection_fields.nil?
+            job.projection_fields = projection_fields
+          end
+          job.encoding = encoding unless encoding.nil?
+          job.ignore_unknown = ignore_unknown unless ignore_unknown.nil?
+          job.max_bad_records = max_bad_records unless max_bad_records.nil?
+          load_job_csv_options! job, jagged_rows: jagged_rows,
+                                     quoted_newlines: quoted_newlines,
+                                     delimiter: delimiter,
+                                     quote: quote,
+                                     skip_leading: skip_leading,
+                                     null_marker: null_marker
+        end
+
+        def load_job_updater table_id, format: nil, create: nil,
+                             write: nil, projection_fields: nil,
+                             jagged_rows: nil, quoted_newlines: nil,
+                             encoding: nil, delimiter: nil,
+                             ignore_unknown: nil, max_bad_records: nil,
+                             quote: nil, skip_leading: nil, dryrun: nil,
+                             schema: nil, labels: nil, autodetect: nil,
+                             null_marker: nil
+          new_job = load_job_gapi table_id, dryrun
+          LoadJob::Updater.new(new_job).tap do |job|
+            job.create = create unless create.nil?
+            job.write = write unless write.nil?
+            job.schema = schema unless schema.nil?
+            job.autodetect = autodetect unless autodetect.nil?
+            job.labels = labels unless labels.nil?
+            load_job_file_options! job, format: format,
+                                        projection_fields: projection_fields,
+                                        jagged_rows: jagged_rows,
+                                        quoted_newlines: quoted_newlines,
+                                        encoding: encoding,
+                                        delimiter: delimiter,
+                                        ignore_unknown: ignore_unknown,
+                                        max_bad_records: max_bad_records,
+                                        quote: quote,
+                                        skip_leading: skip_leading,
+                                        null_marker: null_marker
+          end
+        end
+
+        def load_storage job_id, prefix, urls, job_gapi
           # Convert to storage URL
           urls = [urls].flatten.map do |url|
             if url.respond_to? :to_gs_url
@@ -1998,25 +2094,50 @@ module Google
             end
           end
 
-          gapi = service.load_table_gs_url dataset_id, table_id, urls, options
+          unless urls.nil?
+            job_gapi.configuration.load.update! source_uris: urls
+            if job_gapi.configuration.load.source_format.nil?
+              source_format = Convert.derive_source_format_from_list urls
+              unless source_format.nil?
+                job_gapi.configuration.load.source_format = source_format
+              end
+            end
+          end
+
+          gapi = service.load_table_gs_url job_id, prefix, job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local table_id, file, options = {}
-          # Convert to storage URL
-          file = file.to_gs_url if file.respond_to? :to_gs_url
+        def load_local job_id, prefix, file, job_gapi
+          path = Pathname(file).to_path
+          if job_gapi.configuration.load.source_format.nil?
+            source_format = Convert.derive_source_format path
+            unless source_format.nil?
+              job_gapi.configuration.load.source_format = source_format
+            end
+          end
 
-          gapi = service.load_table_file dataset_id, table_id, file, options
+          gapi = service.load_table_file job_id, prefix, file, job_gapi
           Job.from_gapi gapi, service
+        end
+
+        def load_local_or_uri job_id, prefix, file, updater
+          job_gapi = updater.to_gapi
+          job = if local_file? file
+                  load_local job_id, prefix, file, job_gapi
+                else
+                  load_storage job_id, prefix, file, job_gapi
+                end
+          job
         end
 
         def storage_url? files
           [files].flatten.all? do |file|
             file.respond_to?(:to_gs_url) ||
               (file.respond_to?(:to_str) &&
-              file.to_str.downcase.start_with?("gs://")) ||
+                  file.to_str.downcase.start_with?("gs://")) ||
               (file.is_a?(URI) &&
-              file.to_s.downcase.start_with?("gs://"))
+                  file.to_s.downcase.start_with?("gs://"))
           end
         end
 
