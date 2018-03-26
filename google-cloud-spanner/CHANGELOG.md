@@ -1,5 +1,9 @@
 # Release History
 
+### 1.4.0 / 2018-03-26
+
+* Add support for commit_timestamp.
+
 ### 1.3.1 / 2018-02-27
 
 * Add Batch Client
