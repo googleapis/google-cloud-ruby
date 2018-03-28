@@ -322,18 +322,18 @@ module Google
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      dataset: dataset, project: project || self.project,
+                      dataset: dataset, project: (project || self.project),
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      external: external, labels: labels,
-                      udfs: udfs, params: params }
+                      external: external, job_id: job_id, prefix: prefix,
+                      labels: labels, udfs: udfs, params: params }
 
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
 
           yield updater if block_given?
 
-          gapi = service.query_job job_id, prefix, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           Job.from_gapi gapi, service
         end
 
@@ -514,11 +514,11 @@ module Google
                       project: project || self.project,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params, external: external }
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
 
           yield updater if block_given?
 
-          gapi = service.query_job nil, nil, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           job = Job.from_gapi gapi, service
           job.wait_until_done!
 

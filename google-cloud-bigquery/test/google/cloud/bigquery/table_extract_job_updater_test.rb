@@ -37,6 +37,26 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
 
+  it "sets a provided job_id prefix in the updater" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract_job extract_url, prefix: prefix do |j|
+      j.job_id.must_equal job_id
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.job_id.must_equal job_id
+  end
+
   it "can extract itself and specify the csv format and options" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

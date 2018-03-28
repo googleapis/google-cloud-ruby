@@ -904,15 +904,15 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params, external: external, labels: labels,
-                      udfs: udfs }
+                      job_id: job_id, prefix: prefix, params: params,
+                      external: external, labels: labels, udfs: udfs }
 
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
           updater.dataset = self
 
           yield updater if block_given?
 
-          gapi = service.query_job job_id, prefix, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           Job.from_gapi gapi, service
         end
 
@@ -1079,11 +1079,11 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params }
           options[:dataset] ||= self
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
 
           yield updater if block_given?
 
-          gapi = service.query_job nil, nil, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           job = Job.from_gapi gapi, service
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -1389,12 +1389,13 @@ module Google
                                      max_bad_records: max_bad_records,
                                      quote: quote, skip_leading: skip_leading,
                                      dryrun: dryrun, schema: schema,
+                                     job_id: job_id, prefix: prefix,
                                      labels: labels, autodetect: autodetect,
                                      null_marker: null_marker
 
           yield updater if block_given?
 
-          load_local_or_uri job_id, prefix, files, updater
+          load_local_or_uri files, updater
         end
 
         ##
@@ -1622,7 +1623,7 @@ module Google
 
           yield updater if block_given?
 
-          job = load_local_or_uri nil, nil, files, updater
+          job = load_local_or_uri files, updater
           job.wait_until_done!
           ensure_job_succeeded! job
           true
@@ -2003,8 +2004,10 @@ module Google
           end
         end
 
-        def load_job_gapi table_id, dryrun
+        def load_job_gapi table_id, dryrun, job_id: nil, prefix: nil
+          job_ref = service.job_ref_from job_id, prefix
           Google::Apis::BigqueryV2::Job.new(
+            job_reference: job_ref,
             configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
               load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
                 destination_table: Google::Apis::BigqueryV2::TableReference.new(
@@ -2059,9 +2062,10 @@ module Google
                              encoding: nil, delimiter: nil,
                              ignore_unknown: nil, max_bad_records: nil,
                              quote: nil, skip_leading: nil, dryrun: nil,
-                             schema: nil, labels: nil, autodetect: nil,
-                             null_marker: nil
-          new_job = load_job_gapi table_id, dryrun
+                             schema: nil, job_id: nil, prefix: nil, labels: nil,
+                             autodetect: nil, null_marker: nil
+          new_job = load_job_gapi table_id, dryrun, job_id: job_id,
+                                                    prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
             job.create = create unless create.nil?
             job.write = write unless write.nil?
@@ -2082,7 +2086,7 @@ module Google
           end
         end
 
-        def load_storage job_id, prefix, urls, job_gapi
+        def load_storage urls, job_gapi
           # Convert to storage URL
           urls = [urls].flatten.map do |url|
             if url.respond_to? :to_gs_url
@@ -2104,11 +2108,11 @@ module Google
             end
           end
 
-          gapi = service.load_table_gs_url job_id, prefix, job_gapi
+          gapi = service.load_table_gs_url job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local job_id, prefix, file, job_gapi
+        def load_local file, job_gapi
           path = Pathname(file).to_path
           if job_gapi.configuration.load.source_format.nil?
             source_format = Convert.derive_source_format path
@@ -2117,16 +2121,16 @@ module Google
             end
           end
 
-          gapi = service.load_table_file job_id, prefix, file, job_gapi
+          gapi = service.load_table_file file, job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local_or_uri job_id, prefix, file, updater
+        def load_local_or_uri file, updater
           job_gapi = updater.to_gapi
           job = if local_file? file
-                  load_local job_id, prefix, file, job_gapi
+                  load_local file, job_gapi
                 else
-                  load_storage job_id, prefix, file, job_gapi
+                  load_storage file, job_gapi
                 end
           job
         end

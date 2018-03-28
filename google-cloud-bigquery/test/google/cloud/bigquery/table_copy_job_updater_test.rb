@@ -45,6 +45,27 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "path/to/encryption_key_name" }
 
+  it "sets a provided job_id prefix in the updater" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = copy_job_gapi(source_table, target_table, job_id: job_id)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table, prefix: prefix do |j|
+      j.job_id.must_equal job_id
+    end
+
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.job_id.must_equal job_id
+  end
+
   it "can copy itself with create disposition" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

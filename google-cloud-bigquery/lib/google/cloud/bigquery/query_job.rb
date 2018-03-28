@@ -375,9 +375,11 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::QueryJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_options query, options
+          def self.from_options service, query, options
+            job_ref = service.job_ref_from options[:job_id], options[:prefix]
             dataset_config = dataset_ref_from options[:dataset], options[:project]
             req = Google::Apis::BigqueryV2::Job.new(
+              job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
                 query: Google::Apis::BigqueryV2::JobConfigurationQuery.new(
                   query: query,

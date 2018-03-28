@@ -37,6 +37,28 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     Google::Cloud::Storage::File.from_gapi gapi, storage.service
   end
 
+  it "sets a provided job_id prefix in the updater" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+    special_file = storage_file "data.json"
+    special_url = special_file.to_gs_url
+
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url, job_id: job_id
+    job_gapi.configuration.load.source_format = "NEWLINE_DELIMITED_JSON"
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url, job_id: job_id),
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job special_file, job_id: job_id do |j|
+      j.job_id.must_equal job_id
+    end
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
+  end
+
   it "can specify a storage file with format" do
     special_file = storage_file "data.json"
     special_url = special_file.to_gs_url
