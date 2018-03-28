@@ -725,4 +725,8 @@ class MockBigquery < Minitest::Spec
       yield tmpfile
     end
   end
+
+  def encryption_gapi key_name
+    Google::Apis::BigqueryV2::EncryptionConfiguration.new kms_key_name: key_name
+  end
 end

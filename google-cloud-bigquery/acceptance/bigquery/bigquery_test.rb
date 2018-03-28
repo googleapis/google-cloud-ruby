@@ -135,6 +135,16 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.udfs.must_equal udfs
   end
 
+  it "should run a query job with job labels and user defined function resources in a block updater" do
+    job = bigquery.query_job publicdata_query do |j|
+      j.labels = labels
+      j.udfs = udfs
+    end
+    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.labels.must_equal labels
+    job.udfs.must_equal udfs
+  end
+
   it "should get a list of jobs" do
     jobs = bigquery.jobs.all request_limit: 3
     jobs.each { |job| job.must_be_kind_of Google::Cloud::Bigquery::Job }

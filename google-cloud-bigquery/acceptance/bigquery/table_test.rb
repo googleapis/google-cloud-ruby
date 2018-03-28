@@ -70,6 +70,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_copy" }
   let(:target_table_2_id) { "kittens_copy_2" }
+  let(:target_table_3_id) { "kittens_copy_3" }
+  let(:target_table_4_id) { "kittens_copy_4" }
   let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
@@ -474,7 +476,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     data.next.must_be :nil?
   end
 
-  it "imports data from a local file with load_job" do
+  it "imports data from a local file with load_job block updater" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = table.load_job local_file, job_id: job_id do |j|
       j.labels = labels
@@ -590,8 +592,31 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     copy_job.write_empty?.must_equal true
   end
 
+  it "copies itself to another table with copy_job block updater" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    copy_job = table.copy_job target_table_2_id, job_id: job_id do |j|
+      j.create = :needed
+      j.write = :empty
+      j.labels = labels
+    end
+
+    copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    copy_job.job_id.must_equal job_id
+    copy_job.labels.must_equal labels
+    copy_job.wait_until_done!
+
+    copy_job.wont_be :failed?
+    copy_job.source.table_id.must_equal table.table_id
+    copy_job.destination.table_id.must_equal target_table_2_id
+    copy_job.create_if_needed?.must_equal true
+    copy_job.create_never?.must_equal false
+    copy_job.write_truncate?.must_equal false
+    copy_job.write_append?.must_equal false
+    copy_job.write_empty?.must_equal true
+  end
+
   it "copies itself to another table with copy" do
-    result = table.copy target_table_2_id, create: :needed, write: :empty
+    result = table.copy target_table_3_id, create: :needed, write: :empty
     result.must_equal true
   end
 
@@ -600,13 +625,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       kms_key: "projects/cloud-samples-tests/locations/us-central1" +
                 "/keyRings/test/cryptoKeys/test")
 
-    result = table.copy target_table_2_id, create: :needed,
+    result = table.copy target_table_4_id, create: :needed,
                                            write: :truncate do |copy|
       copy.encryption = encrypt_config
     end
     result.must_equal true
 
-    cmek_table = dataset.table target_table_2_id
+    cmek_table = dataset.table target_table_4_id
     cmek_table.encryption.must_equal encrypt_config
   end
 
@@ -656,7 +681,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       Tempfile.open "empty_extract_file.json" do |tmp|
         bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
         extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-        extract_job = table.extract_job extract_url, labels: labels
+        extract_job = table.extract_job extract_url do |j|
+          j.labels = labels
+        end
 
         extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
         extract_job.labels.must_equal labels
