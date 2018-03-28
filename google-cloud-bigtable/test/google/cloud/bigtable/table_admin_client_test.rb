@@ -42,7 +42,9 @@ describe Google::Cloud::Bigtable::TableAdminClient do
 
   let(:project_id) { "test-project-id" }
   let(:instance_id) { "test-instance-id" }
+  let(:cluster_id) { "test-cluster-id"}
   let(:table_id) { "test-table" }
+  let(:snapshot_id) { "test-snapshot-id"}
   let(:instance_path) {
     Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path(
       project_id,
@@ -54,6 +56,21 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       project_id,
       instance_id,
       table_id
+    )
+  }
+  let(:cluster_path){
+    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path(
+      project_id,
+      instance_id,
+      cluster_id
+    )
+  }
+  let(:snapshot_path){
+    Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path(
+      project_id,
+      instance_id,
+      cluster_id,
+      snapshot_id
     )
   }
   let(:client) {
@@ -306,6 +323,283 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       stub_table_admin_grpc(:drop_row_range, mock_method) do
         err = assert_raises Google::Gax::GaxError do
           client .drop_row_range(table_id , delete_all_data_from_table: true)
+        end
+
+        assert_match(custom_error.message, err.message)
+      end
+    end
+  end
+
+  describe 'create_snapshot' do
+
+    it 'invokes create_snapshot without error' do
+      description = "Create snapshot test"
+      ttl = 1800
+
+      expected_response = { name: snapshot_id, done: true }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::SnapshotTableRequest, request)
+        assert_equal(table_path, request.name)
+        assert_equal(cluster_path, request.cluster)
+        assert_equal(snapshot_id, request.snapshot_id)
+        assert_equal(description, request.description)
+        assert_equal(Google::Protobuf::Duration.new(seconds: ttl), request.ttl)
+        expected_response
+      end
+
+      stub_table_admin_grpc(:snapshot_table, mock_method) do
+        response = client.create_snapshot(
+          table_id,
+          cluster_id,
+          snapshot_id,
+          description,
+          ttl: ttl
+        )
+        assert_equal(expected_response, response)
+      end
+    end
+
+    it 'invokes snapshot_table with error' do
+      custom_error = TableAdminTestError.new "snapshot_table"
+      description = "Create snapshot test"
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::SnapshotTableRequest, request)
+        assert_equal(table_path, request.name)
+        assert_equal(cluster_path, request.cluster)
+        assert_equal(snapshot_id, request.snapshot_id)
+        assert_equal(description, request.description)
+        assert_nil(request.ttl)
+        raise custom_error
+      end
+
+      stub_table_admin_grpc(:snapshot_table, mock_method) do
+        err = assert_raises Google::Gax::GaxError do
+          client.create_snapshot(
+            table_id,
+            cluster_id,
+            snapshot_id,
+            description
+          )
+        end
+        assert_match(custom_error.message, err.message)
+      end
+    end
+  end
+
+  describe 'get snapshot' do
+    it 'invokes get snapshot without error' do
+      expected_response = {
+        name: snapshot_id,
+        data_size_bytes: 1000000,
+        description: "snapshot description"
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Snapshot)
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::GetSnapshotRequest, request)
+        assert_equal(snapshot_path, request.name)
+        expected_response
+      end
+
+      stub_table_admin_grpc(:get_snapshot, mock_method) do
+        response = client.snapshot(snapshot_id, cluster_id)
+        assert_equal(expected_response, response)
+      end
+    end
+
+    it 'invokes get snapshot with error' do
+      custom_error = TableAdminTestError.new "get_snapshot"
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::GetSnapshotRequest, request)
+        assert_equal(snapshot_path, request.name)
+        raise custom_error
+      end
+
+      stub_table_admin_grpc(:get_snapshot, mock_method) do
+        err = assert_raises Google::Gax::GaxError do
+          client.snapshot(snapshot_id, cluster_id)
+        end
+
+        assert_match(custom_error.message, err.message)
+      end
+    end
+  end
+
+  describe 'list snapshots' do
+    it 'invokes list snapshots without error' do
+      next_page_token = ""
+      snapshots_element = Google::Bigtable::Admin::V2::Snapshot.new(
+        name: snapshot_id,
+        data_size_bytes: 1000000,
+        description: "snapshot description"
+      )
+      snapshots = [snapshots_element]
+      expected_response = { next_page_token: next_page_token, snapshots: snapshots }
+      expected_response = Google::Gax::to_proto(
+        expected_response,
+        Google::Bigtable::Admin::V2::ListSnapshotsResponse
+      )
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::ListSnapshotsRequest, request)
+        assert_equal(cluster_path, request.parent)
+        expected_response
+      end
+
+      stub_table_admin_grpc(:list_snapshots, mock_method) do
+        response = client.snapshots(cluster_id)
+
+        assert(response.instance_of?(Google::Gax::PagedEnumerable))
+        assert_equal(expected_response, response.page.response)
+        assert_nil(response.next_page)
+        assert_equal(expected_response.snapshots.to_a, response.to_a)
+      end
+    end
+
+    it 'invokes list snapshots with error' do
+      custom_error = TableAdminTestError.new "list_snapshots"
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::ListSnapshotsRequest, request)
+        assert_equal(cluster_path, request.parent)
+        raise custom_error
+      end
+
+      stub_table_admin_grpc(:list_snapshots, mock_method) do
+        err = assert_raises Google::Gax::GaxError do
+          client.snapshots(cluster_id)
+        end
+
+        assert_match(custom_error.message, err.message)
+      end
+    end
+  end
+
+  describe 'delete_snapshot' do
+    it 'invokes delete_snapshot without error' do
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::DeleteSnapshotRequest, request)
+        assert_equal(snapshot_path, request.name)
+        true
+      end
+
+      stub_table_admin_grpc(:delete_snapshot, mock_method) do
+        response = client.delete_snapshot(
+          cluster_id,
+          snapshot_id
+        )
+        assert_equal(true, response)
+      end
+    end
+
+    it 'invokes delete_snapshot with error' do
+      custom_error = TableAdminTestError.new("delete_snapshot")
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::DeleteSnapshotRequest, request)
+        assert_equal(snapshot_path, request.name)
+        raise custom_error
+      end
+
+      stub_table_admin_grpc(:delete_snapshot, mock_method) do
+        err = assert_raises Google::Gax::GaxError do
+          client.delete_snapshot(cluster_id, snapshot_id)
+        end
+
+        assert_match(custom_error.message, err.message)
+      end
+    end
+  end
+
+  describe 'create_table_from_snapshot' do
+    it 'invokes create_table_from_snapshot without error' do
+      new_table_id = table_id
+      source_snapshot = snapshot_id
+
+      expected_response = { name: new_table_id }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Table)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_table_from_snapshot_test',
+        done: true,
+        response: result
+      )
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest, request)
+        assert_equal(instance_path, request.parent)
+        assert_equal(new_table_id, request.table_id)
+        assert_equal(snapshot_path, request.source_snapshot)
+        operation
+      end
+
+      stub_table_admin_grpc(:create_table_from_snapshot, mock_method) do
+        response = client.create_table_from_snapshot(
+          new_table_id,
+          cluster_id,
+          source_snapshot
+        )
+
+        assert_equal(expected_response, response.response)
+      end
+    end
+
+    it 'invokes create_table_from_snapshot and returns an operation error.' do
+      new_table_id = table_id
+      source_snapshot = snapshot_id
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#create_table_from_snapshot.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_table_from_snapshot_test',
+        done: true,
+        error: operation_error
+      )
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest, request)
+        assert_equal(instance_path, request.parent)
+        assert_equal(new_table_id, request.table_id)
+        assert_equal(snapshot_path, request.source_snapshot)
+        operation
+      end
+
+      stub_table_admin_grpc(:create_table_from_snapshot, mock_method) do
+        response = client.create_table_from_snapshot(
+          new_table_id,
+          cluster_id,
+          source_snapshot
+        )
+        assert(response.error?)
+        assert_equal(operation_error, response.error)
+      end
+    end
+
+    it 'invokes create_table_from_snapshot with error' do
+      custom_error = TableAdminTestError.new "create_table_from_snapshot"
+      new_table_id = table_id
+      source_snapshot = snapshot_id
+
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest, request)
+        assert_equal(instance_path, request.parent)
+        assert_equal(new_table_id, request.table_id)
+        assert_equal(snapshot_path, request.source_snapshot)
+        raise custom_error
+      end
+
+      stub_table_admin_grpc(:create_table_from_snapshot, mock_method) do
+        err = assert_raises Google::Gax::GaxError do
+          client.create_table_from_snapshot(
+            new_table_id,
+            cluster_id,
+            source_snapshot
+          )
         end
 
         assert_match(custom_error.message, err.message)

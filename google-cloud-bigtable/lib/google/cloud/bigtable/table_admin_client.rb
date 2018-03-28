@@ -227,6 +227,279 @@ module Google
           )
         end
 
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Creates a new snapshot in the specified cluster from the specified
+        # source table. The cluster and the table must be in the same instance.
+        #
+        # @param table_id [String]
+        #   The unique name of the table to have the snapshot taken.
+        # @param cluster_id [String]
+        #   The name of the cluster where the snapshot will be created in.
+        # @param snapshot_id [String]
+        #   The ID by which the new snapshot should be referred to within the parent
+        #   cluster, e.g., +mysnapshot+ of the form: +[_a-zA-Z0-9][-_.a-zA-Z0-9]*+
+        # @param description [String]
+        #   Description of the snapshot.
+        # @param ttl [Integer]
+        #   The amount of time in seconds that the new snapshot can stay active
+        #   after it is created. Once 'ttl' expires, the snapshot will get
+        #   deleted. The maximum amount of time a snapshot can stay active is
+        #   7 days. If 'ttl' is not specified, the default value of 24 hours
+        #   will be used.
+        # @param options [Google::Gax::CallOptions]
+        #   Overrides the default settings for this call, e.g, timeout,
+        #   retries, etc.
+        # @return [Google::Longrunning::Operation]
+        # @raise [Google::Gax::GaxError] if the RPC is aborted.
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
+        #   )
+        #
+        #   response = client.create_snapshot(
+        #     "table-1",
+        #     "cluster-1",
+        #     "mysnapshot",
+        #     "table-1 snapshot on cluster-1 with 1 day ttl",
+        #     ttl: 1800 # 30 minutes
+        #   )
+
+        def create_snapshot \
+            table_id,
+            cluster_id,
+            snapshot_id,
+            description,
+            ttl: nil,
+            options: nil
+          ttl = Google::Protobuf::Duration.new(seconds: ttl) if ttl
+          client.snapshot_table(
+            table_path(table_id),
+            cluster_path(cluster_id),
+            snapshot_id,
+            description,
+            ttl: ttl,
+            options: options
+          )
+        end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Creates a new table from the specified snapshot. The target table must
+        # not exist. The snapshot and the table must be in the same instance.
+        #
+        # @param table_id [String]
+        #   The name by which the new table should be referred to within the
+        #   instance, e.g., +foobar+.
+        # @param cluster_id [String]
+        #   Cluster id in which snapshot exists. e.g., +cluster-users+
+        # @param source_snapshot_id [String]
+        #   The unique name of the snapshot from which to restore the table. The
+        #   snapshot and the table must be in the same instance.
+        # @param options [Google::Gax::CallOptions]
+        #   Overrides the default settings for this call, e.g, timeout,
+        #   retries, etc.
+        # @return [Google::Gax::Operation]
+        # @raise [Google::Gax::GaxError] if the RPC is aborted.
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
+        #   )
+        #
+        #   # Register a callback during the method call.
+        #   operation = client.create_table_from_snapshot(
+        #     "new-table",
+        #     "cluster-1",
+        #     "users-snapshot"
+        #   ) do |op|
+        #     raise op.results.message if op.error?
+        #     op_results = op.results
+        #     # Process the results.
+        #
+        #     metadata = op.metadata
+        #     # Process the metadata.
+        #   end
+        #
+        #   # Or use the return value to register a callback.
+        #   operation.on_done do |op|
+        #     raise op.results.message if op.error?
+        #     op_results = op.results
+        #     # Process the results.
+        #
+        #     metadata = op.metadata
+        #     # Process the metadata.
+        #   end
+        #
+        #   # Manually reload the operation.
+        #   operation.reload!
+        #
+        #   # Or block until the operation completes, triggering callbacks on
+        #   # completion.
+        #   operation.wait_until_done!
+
+        def create_table_from_snapshot \
+            table_id,
+            cluster_id,
+            source_snapshot_id,
+            options: nil
+          client.create_table_from_snapshot(
+            instance_path,
+            table_id,
+            snapshot_path(cluster_id, source_snapshot_id),
+            options: options
+          )
+        end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Gets metadata information about the specified snapshot.
+        #
+        # @param snapshot_id [String]
+        #   The unique name of the requested snapshot.
+        # @param cluster_id [String]
+        #   Cluster id in which snapshot exists. e.g., +cluster-users+
+        # @param options [Google::Gax::CallOptions]
+        #   Overrides the default settings for this call, e.g, timeout,
+        #   retries, etc.
+        # @return [Google::Bigtable::Admin::V2::Snapshot]
+        # @raise [Google::Gax::GaxError] if the RPC is aborted.
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
+        #   )
+        #
+        #   snapshot = client.snapshot("users-snapshot")
+
+        def snapshot \
+            snapshot_id,
+            cluster_id,
+            options: nil
+          client.get_snapshot(
+            snapshot_path(cluster_id, snapshot_id),
+            options: options
+          )
+        end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Lists all snapshots associated with the specified cluster.
+        #
+        # @param cluster_id [String]
+        #   The unique name of the cluster for which snapshots should be listed.
+        #   Default value is +'-'+ which list snapshots for all clusters in
+        #   an instance
+        # @param page_size [Integer]
+        #   The maximum number of resources contained in the underlying API
+        #   response. If page streaming is performed per-resource, this
+        #   parameter does not affect the return value. If page streaming is
+        #   performed per-page, this determines the maximum number of
+        #   resources in a page.
+        # @param options [Google::Gax::CallOptions]
+        #   Overrides the default settings for this call, e.g, timeout,
+        #   retries, etc.
+        # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Snapshot>]
+        #   An enumerable of Google::Bigtable::Admin::V2::Snapshot instances.
+        #   See Google::Gax::PagedEnumerable documentation for other
+        #   operations such as per-page iteration or access to the response
+        #   object.
+        # @raise [Google::Gax::GaxError] if the RPC is aborted.
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
+        #   )
+        #
+        #   client.snapshots(cluster_id: "cluster-1").each do |snapshot|
+        #     # Process snapshot
+        #     p snapshot
+        #   end
+        #
+        #   # Or iterate over results one page at a time.
+        #   client.snapshots(cluster_id: "cluster-1").each_page do |page|
+        #     # Process each page at a time.
+        #     page.each do |snapshot|
+        #       # Process snapshot.
+        #       p snapshot
+        #     end
+        #   end
+        #
+        #   # List all snapshots from all clusters
+        #   client.snapshots.each do |snapshot|
+        #     # Process snapshot
+        #     p snapshot
+        #   end
+
+        def snapshots \
+            cluster_id = "-",
+            page_size: nil,
+            options: nil
+          client.list_snapshots(
+            cluster_path(cluster_id),
+            page_size: page_size,
+            options: options
+          )
+        end
+
+        # This is a private alpha release of Cloud Bigtable snapshots. This feature
+        # is not currently available to most Cloud Bigtable customers. This feature
+        # might be changed in backward-incompatible ways and is not recommended for
+        # production use. It is not subject to any SLA or deprecation policy.
+        #
+        # Permanently deletes the specified snapshot.
+        #
+        # @param cluster_id [String]
+        #   Cluster id in which snapshot exists.
+        # @param snapshot_id [String]
+        #   The unique name of the snapshot to be deleted from cluster.
+        # @param options [Google::Gax::CallOptions]
+        #   Overrides the default settings for this call, e.g, timeout,
+        #   retries, etc.
+        # @return [Boolean]
+        # @raise [Google::Gax::GaxError] if the RPC is aborted.
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   client = Google::Cloud::Bigtable.new(
+        #     client_type: :table,
+        #     instance_id: "instance-id"
+        #   )
+        #
+        #   client.delete_snapshot("cluster-1", "users-snapshot")
+
+
+        def delete_snapshot \
+            cluster_id,
+            snapshot_id,
+            options: nil
+          client.delete_snapshot(
+            snapshot_path(cluster_id, snapshot_id)
+          )
+          true
+        end
+
         private
 
         # Create table admin client or return existing client object
@@ -271,6 +544,38 @@ module Google
               project_id,
               instance_id,
               table_id
+            )
+        end
+
+        # Created formatted cluster path
+        # @param cluster_id [String]
+        # @return [String]
+        #   Formatted cluster path
+        #   +projects/<project>/instances/<instance>/clusters/<cluster>+.
+
+        def cluster_path cluster_id
+          Admin::V2::BigtableTableAdminClient
+            .cluster_path(
+              project_id,
+              instance_id,
+              cluster_id
+            )
+        end
+
+        # Created formatted snapshot path
+        # @param cluster_id [String]
+        # @param snapshot_id [String]
+        # @return [String]
+        #   Formatted snapshot path
+        #   +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot+.
+
+        def snapshot_path cluster_id, snapshot_id
+          Admin::V2::BigtableTableAdminClient
+            .snapshot_path(
+              project_id,
+              instance_id,
+              cluster_id,
+              snapshot_id
             )
         end
       end
