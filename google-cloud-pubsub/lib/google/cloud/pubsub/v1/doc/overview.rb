@@ -17,7 +17,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Pub/Sub API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Google Cloud Pub/Sub API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Google Cloud Pub/Sub API][Product Documentation]:
     # Provides reliable, many-to-many, asynchronous messaging between applications.
