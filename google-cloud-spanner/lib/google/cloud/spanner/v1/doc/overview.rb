@@ -17,7 +17,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Cloud Spanner API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Spanner API ([GA](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Cloud Spanner API][Product Documentation]:
     # Cloud Spanner is a managed, mission-critical, globally consistent and
