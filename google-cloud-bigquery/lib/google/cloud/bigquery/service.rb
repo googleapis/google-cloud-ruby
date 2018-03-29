@@ -354,6 +354,22 @@ module Google
           )
         end
 
+        # API object for dataset.
+        def dataset_ref_from dts, pjt = nil
+          return nil if dts.nil?
+          if dts.respond_to? :dataset_id
+            Google::Apis::BigqueryV2::DatasetReference.new(
+                project_id: (pjt || dts.project_id || @project),
+                dataset_id: dts.dataset_id
+            )
+          else
+            Google::Apis::BigqueryV2::DatasetReference.new(
+                project_id: (pjt || @project),
+                dataset_id: dts
+            )
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end

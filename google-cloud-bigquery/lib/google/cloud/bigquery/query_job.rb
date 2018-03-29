@@ -331,40 +331,10 @@ module Google
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < QueryJob
-          class << self
-            # @private If no job_id or prefix is given, always generate a
-            # client-side job ID anyway, for idempotent retry in the
-            # google-api-client layer. See
-            # https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
-            def job_ref_from job_id, prefix
-              prefix ||= "job_"
-              job_id ||= "#{prefix}#{generate_id}"
-              API::JobReference.new(
-                project_id: @project,
-                job_id: job_id
-              )
-            end
-
-            # @private API object for dataset.
-            def dataset_ref_from dts, pjt = nil
-              return nil if dts.nil?
-              if dts.respond_to? :dataset_id
-                Google::Apis::BigqueryV2::DatasetReference.new(
-                  project_id: (pjt || dts.project_id || @project),
-                  dataset_id: dts.dataset_id
-                )
-              else
-                Google::Apis::BigqueryV2::DatasetReference.new(
-                  project_id: (pjt || @project),
-                  dataset_id: dts
-                )
-              end
-            end
-          end
-
           ##
           # @private Create an Updater object.
-          def initialize gapi
+          def initialize service, gapi
+            @service = service
             @gapi = gapi
           end
 
@@ -377,7 +347,8 @@ module Google
           #   configuration object for setting query options.
           def self.from_options service, query, options
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
-            dataset_config = dataset_ref_from options[:dataset], options[:project]
+            dataset_config = service.dataset_ref_from options[:dataset],
+                                                      options[:project]
             req = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -389,7 +360,7 @@ module Google
               )
             )
 
-            updater = QueryJob::Updater.new req
+            updater = QueryJob::Updater.new service, req
             updater.params = options[:params] if options[:params]
             updater.create = options[:create]
             updater.write = options[:write]
@@ -468,7 +439,7 @@ module Google
           # @!group Attributes
           def dataset= value
             @gapi.configuration.query.default_dataset =
-              Updater.dataset_ref_from value
+              @service.dataset_ref_from value
           end
 
           ##

@@ -112,7 +112,6 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
   end
 
   it "queries the data with dataset option" do
-    skip "currently fails due to #2027"
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
