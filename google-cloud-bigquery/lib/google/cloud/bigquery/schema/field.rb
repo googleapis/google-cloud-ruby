@@ -542,6 +542,18 @@ module Google
             to_gapi.to_h == other.to_gapi.to_h
           end
 
+          # @private
+          def to_json(*args)
+            h = {
+                "name" => name,
+                "type" => type,
+                "mode" => mode
+            }
+            h["description"] = description if description
+            h["fields"] = fields.to_json if record?
+            h.to_json(*args)
+          end
+
           protected
 
           def frozen_check!

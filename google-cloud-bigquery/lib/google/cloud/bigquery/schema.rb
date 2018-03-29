@@ -124,6 +124,86 @@ module Google
         end
 
         ##
+        # Loads the schema from a JSON file.
+        #
+        # The JSON schema file is the same as for the [`bq`
+        # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file)
+        # consisting of an array of JSON objects containing the following:
+        # - `name`: The column's [data
+        #   type](https://cloud.google.com/bigquery/docs/schemas#standard_sql_data_types)
+        # - `type`: The column [name](https://cloud.google.com/bigquery/docs/schemas#column_names)
+        # - `description`: (Optional) The column's [description](https://cloud.google.com/bigquery/docs/schemas#column_descriptions)
+        # - `mode`: (Optional) The column's [mode](https://cloud.google.com/bigquery/docs/schemas#modes)
+        #   (if unspecified, mode defaults to `NULLABLE`)
+        # - `fields`: If `type` is `RECORD`, an array of objects defining child
+        #   fields with these properties
+        #
+        # @param [IO, String, Array<Hash>] source An `IO` containing the JSON
+        #   schema, a `String` containing the JSON schema, or an `Array` of
+        #   `Hash`es containing the schema details.
+        #
+        # @return [Schema] The schema so that commands are chainable.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table" do |table|
+        #     table.schema.load "path/to/schema.json"
+        #   end
+        #
+        def load source
+          if source.respond_to?(:rewind) && source.respond_to?(:read)
+            source.rewind
+            source = source.read
+            source = String source
+            source_fields = JSON.parse source
+          elsif source.is_a? Array
+            source_fields = source
+          else
+            source = String source
+            source_fields = JSON.parse source
+          end
+
+          raise ArgumentError unless fields.is_a? Array
+
+          add_fields_to_schema(self, source_fields)
+
+          self
+        end
+
+        ##
+        # Write the schema as JSON to a file.
+        #
+        # The JSON schema file is the same as for the [`bq`
+        # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file).
+        #
+        # @param [IO, String] destination An `IO` to which to write the schema,
+        #   or a `String` containing the filename to write to.
+        #
+        # @return [Schema] The schema so that commands are chainable.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #   table.schema.dump "path/to/schema.json"
+        #
+        def dump destination
+          if destination.respond_to?(:rewind) && destination.respond_to?(:write)
+            destination.rewind
+            destination.write fields.to_json
+          else
+            File.write String(destination), fields.to_json
+          end
+
+          self
+        end
+
+        ##
         # Adds a string field to the schema.
         #
         # @param [String] name The field name. The name must contain only
@@ -383,6 +463,24 @@ module Google
             raise ArgumentError "Unable to determine mode for '#{mode}'"
           end
           mode
+        end
+
+        private
+
+        def add_fields_to_schema schema, fields
+          fields.each do |field|
+            column = schema.send(
+              :add_field,
+              field["name"],
+              field["type"],
+              mode:        field["mode"],
+              description: field["description"]
+            )
+
+            next unless field["type"] == "RECORD"
+
+            add_fields_to_schema column, field["fields"]
+          end
         end
       end
     end

@@ -191,6 +191,159 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
+  it "creates a table, loading the schema from a file" do
+    begin
+      table = dataset.create_table "schema_kittens" do |table|
+        table.schema.load File.open("acceptance/data/schema.json")
+      end
+
+      table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+      table.schema.wont_be :empty?
+      [:id, :breed, :name, :dob, :features].each do |k|
+        table.headers.must_include k
+      end
+
+      fields = table.schema.fields
+      fields.each do |f|
+        f.name.wont_be :nil?
+        f.type.wont_be :nil?
+        f.description.wont_be :nil?
+        f.mode.wont_be :nil?
+
+        if f.name == "features"
+          f.fields.wont_be :empty?
+          f.fields.each do |c|
+            f.name.wont_be :nil?
+            f.type.wont_be :nil?
+            f.description.wont_be :nil?
+            f.mode.wont_be :nil?
+          end
+        end
+      end
+    ensure
+      t2 = dataset.table "schema_kittens"
+      t2.delete if t2
+    end
+  end
+
+  it "creates a table, loading the schema from a JSON string" do
+    begin
+      table = dataset.create_table "schema_kittens" do |table|
+        json = File.read("acceptance/data/schema.json")
+        table.schema.load json
+      end
+
+      table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+      table.schema.wont_be :empty?
+      [:id, :breed, :name, :dob, :features].each do |k|
+        table.headers.must_include k
+      end
+
+      fields = table.schema.fields
+      fields.each do |f|
+        f.name.wont_be :nil?
+        f.type.wont_be :nil?
+        f.description.wont_be :nil?
+        f.mode.wont_be :nil?
+
+        if f.name == "features"
+          f.fields.wont_be :empty?
+          f.fields.each do |c|
+            f.name.wont_be :nil?
+            f.type.wont_be :nil?
+            f.description.wont_be :nil?
+            f.mode.wont_be :nil?
+          end
+        end
+      end
+    ensure
+      t2 = dataset.table "schema_kittens"
+      t2.delete if t2
+    end
+  end
+
+  it "creates a table, loading the schema from an Array of Hashes" do
+    begin
+      table = dataset.create_table "schema_kittens" do |table|
+        json = JSON.parse(File.read("acceptance/data/schema.json"))
+        table.schema.load json
+      end
+
+      table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+      table.schema.wont_be :empty?
+      [:id, :breed, :name, :dob, :features].each do |k|
+        table.headers.must_include k
+      end
+
+      fields = table.schema.fields
+      fields.each do |f|
+        f.name.wont_be :nil?
+        f.type.wont_be :nil?
+        f.description.wont_be :nil?
+        f.mode.wont_be :nil?
+
+        if f.name == "features"
+          f.fields.wont_be :empty?
+          f.fields.each do |c|
+            f.name.wont_be :nil?
+            f.type.wont_be :nil?
+            f.description.wont_be :nil?
+            f.mode.wont_be :nil?
+          end
+        end
+      end
+    ensure
+      t2 = dataset.table "schema_kittens"
+      t2.delete if t2
+    end
+  end
+
+  it "writes the schema of a table to a File" do
+    begin
+      file = Tempfile.new("schema-test")
+      table.schema.dump file
+      file.close
+
+      json = JSON.parse(File.read(file.path))
+      json.length.must_equal 4
+
+      json.each do |f|
+        f["name"].wont_be :nil?
+        f["type"].wont_be :nil?
+        f["description"].wont_be :nil?
+        f["mode"].wont_be :nil?
+      end
+    ensure
+      if file
+        file.close
+        file.delete
+      end
+    end
+  end
+
+  it "writes the schema of a table to a filename" do
+    begin
+      file = Tempfile.new("schema-test")
+      file.close
+      table.schema.dump file.path
+
+      json = JSON.parse(File.read(file.path))
+      json.length.must_equal 4
+
+      json.each do |f|
+        f["name"].wont_be :nil?
+        f["type"].wont_be :nil?
+        f["description"].wont_be :nil?
+        f["mode"].wont_be :nil?
+      end
+    ensure
+      if file
+        file.close
+        file.delete
+      end
+    end
+  end
+
   it "gets and sets time partitioning" do
     partitioned_table = dataset.table "weekly_kittens"
     if partitioned_table.nil?
