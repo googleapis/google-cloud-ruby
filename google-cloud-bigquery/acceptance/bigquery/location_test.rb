@@ -69,20 +69,19 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     query_job = dataset.query_job query, job_id: job_id do |j|
       j.location = region
     end
+
     query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     query_job.job_id.must_equal job_id
     query_job.location.must_equal region
     query_job.wait_until_done!
-
-    # Job methods
-    query_job.done?.must_equal true
-    query_job.errors.must_be :empty?
     query_job.location.must_equal region
+    query_job.wont_be :failed?
     query_job.rerun!
     query_job.location.must_equal region
     query_job.wait_until_done!
-
     query_job.location.must_equal region
+    query_job.wont_be :failed?
+
     query_job.data.class.must_equal Google::Cloud::Bigquery::Data
     query_job.data.total.wont_be :nil?
 
@@ -114,13 +113,17 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
   end
 
   it "imports data from a file in your bucket with load_job" do
-    skip "TODO: add location"
     begin
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region
       file = bucket.create_file local_file
 
-      job = table.load_job file
+      job = table.load_job file do |j|
+        j.location = region
+      end
+
+      job.location.must_equal region
       job.wait_until_done!
+      job.location.must_equal region
       job.wont_be :failed?
     ensure
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"

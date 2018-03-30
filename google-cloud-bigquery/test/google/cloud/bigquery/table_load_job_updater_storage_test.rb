@@ -31,6 +31,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "path/to/encryption_key_name" }
+  let(:region) { "asia-northeast1" }
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
@@ -226,6 +227,23 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
     job.encryption.kms_key.must_equal kms_key
+  end
+
+  it "can load a storage file with the location option" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    job_gapi.job_reference.location = region
+    mock.expect :insert_job, job_gapi,
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job load_file do |j|
+      j.location = region
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.location.must_equal region
   end
 
   def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
