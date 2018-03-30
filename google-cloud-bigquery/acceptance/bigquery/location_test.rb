@@ -45,18 +45,9 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
     ]
   end
-  let(:invalid_rows) do
-    [
-        { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
-        { name: nil,       breed: "golden retriever?", id: 5, dob: Time.now.utc },
-        { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
-    ]
-  end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:target_table_id) { "kittens_location_copy" }
   let(:target_table_2_id) { "kittens_location_copy_2" }
-  let(:target_table_3_id) { "kittens_location_copy_3" }
-  let(:target_table_4_id) { "kittens_location_copy_4" }
 
   it "inserts rows directly and gets its data" do
     insert_response = table.insert rows
@@ -135,20 +126,20 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
   end
 
   it "copies itself to another table with copy_job block updater" do
-    skip "TODO: add location"
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     copy_job = table.copy_job target_table_2_id, job_id: job_id do |j|
       j.create = :needed
       j.write = :empty
-      j.labels = labels
+      j.location = region
     end
 
     copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     copy_job.job_id.must_equal job_id
-    copy_job.labels.must_equal labels
+    copy_job.location.must_equal region
     copy_job.wait_until_done!
 
     copy_job.wont_be :failed?
+    copy_job.location.must_equal region
     copy_job.source.table_id.must_equal table.table_id
     copy_job.destination.table_id.must_equal target_table_2_id
     copy_job.create_if_needed?.must_equal true

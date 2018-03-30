@@ -397,7 +397,7 @@ module Google
           #
           #   job = bigquery.query_job "SELECT 1;" do |query|
           #     query.table = dataset.table "my_table", skip_lookup: true
-          #     query.location = "asia-northeast1"
+          #     query.location = "EU"
           #   end
           #
           # @!group Attributes

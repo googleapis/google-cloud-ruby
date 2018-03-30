@@ -179,6 +179,34 @@ module Google
           end
 
           ##
+          # Sets the geographic location where the job should run. Required
+          # except for US and EU.
+          #
+          # @param [String] value A case-insensitive BigQuery geographic
+          #   region code, such as "US", "EU" or "asia-northeast1". Required
+          #   except for US and EU.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #   destination_table = dataset.table "my_destination_table"
+          #
+          #   copy_job = table.copy_job destination_table do |j|
+          #     j.location = "EU"
+          #   end
+          #
+          #   copy_job.wait_until_done!
+          #   copy_job.done? #=> true
+          #
+          # @!group Attributes
+          def location= value
+            @gapi.job_reference.location = value
+          end
+
+          ##
           # Sets the create disposition.
           #
           # This specifies whether the job is allowed to create new tables. The

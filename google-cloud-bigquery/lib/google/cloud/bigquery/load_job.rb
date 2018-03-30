@@ -740,7 +740,7 @@ module Google
           #         r.integer "number_of_years", mode: :required
           #       end
           #     end
-          #     j.location = "asia-northeast1"
+          #     j.location = "EU"
           #   end
           #
           # @!group Attributes

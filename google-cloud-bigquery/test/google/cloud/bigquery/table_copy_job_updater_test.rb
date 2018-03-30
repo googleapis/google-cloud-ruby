@@ -44,6 +44,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
                                                          bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "path/to/encryption_key_name" }
+  let(:region) { "asia-northeast1" }
 
   it "sets a provided job_id prefix in the updater" do
     generated_id = "9876543210"
@@ -165,5 +166,22 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
     job.encryption.kms_key.must_equal kms_key
+  end
+
+  it "can copy itself with the location option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.job_reference.location = region
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table do |j|
+      j.location = region
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.location.must_equal region
   end
 end
