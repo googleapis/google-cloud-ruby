@@ -753,6 +753,9 @@ module Google
         # Retrieves an existing job by ID.
         #
         # @param [String] job_id The ID of a job.
+        # @param [String] location A case-insensitive BigQuery geographic
+        #   region code, such as "US", "EU" or "asia-northeast1". Required
+        #   except for US and EU.
         #
         # @return [Google::Cloud::Bigquery::Job, nil] Returns `nil` if the job
         #   does not exist.
@@ -764,9 +767,9 @@ module Google
         #
         #   job = bigquery.job "my_job"
         #
-        def job job_id
+        def job job_id, location: nil
           ensure_service!
-          gapi = service.get_job job_id
+          gapi = service.get_job job_id, location: location
           Job.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
           nil

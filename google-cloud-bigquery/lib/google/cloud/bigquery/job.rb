@@ -305,7 +305,7 @@ module Google
         #
         def cancel
           ensure_service!
-          resp = service.cancel_job job_id
+          resp = service.cancel_job job_id, location: location
           @gapi = resp.job
           true
         end

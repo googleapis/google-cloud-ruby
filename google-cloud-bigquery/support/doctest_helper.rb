@@ -426,7 +426,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Job#cancel" do
     mock_bigquery do |mock|
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
-      mock.expect :cancel_job, OpenStruct.new(job: query_job_gapi), ["my-project", "1234567890"]
+      mock.expect :cancel_job, OpenStruct.new(job: query_job_gapi), ["my-project", "1234567890", Hash]
     end
   end
 

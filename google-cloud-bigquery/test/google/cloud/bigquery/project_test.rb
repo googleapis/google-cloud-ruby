@@ -750,6 +750,23 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     job.job_id.must_equal job_id
   end
 
+  it "finds a job with location" do
+    job_id = "9876543210"
+    region = "EU"
+    mock = Minitest::Mock.new
+    mock.expect :get_job, find_job_gapi(job_id, location: region),
+                [project, job_id, {location: region}]
+    bigquery.service.mocked_service = mock
+
+    job = bigquery.job job_id, location: region
+
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::Job
+    job.job_id.must_equal job_id
+    job.location.must_equal region
+  end
+
   it "lists projects" do
     mock = Minitest::Mock.new
     mock.expect :list_projects, list_projects_gapi(3),

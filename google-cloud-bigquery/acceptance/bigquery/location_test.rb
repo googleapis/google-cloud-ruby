@@ -20,6 +20,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
   let(:dataset) do
     d = bigquery.dataset dataset_id
     if d.nil?
+      # Create a temporary dataset (& table) in the EU.
       d = bigquery.create_dataset dataset_id, location: region
     end
     d
@@ -49,7 +50,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
   let(:target_table_id) { "kittens_location_copy" }
   let(:target_table_2_id) { "kittens_location_copy_2" }
 
-  it "inserts rows directly and gets its data" do
+  it "creates a query job with location" do
     insert_response = table.insert rows
     insert_response.must_be :success?
     insert_response.insert_count.must_equal 3
@@ -103,11 +104,12 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     data.next.must_be :nil?
   end
 
-  it "imports data from a file in your bucket with load_job" do
+  it "creates a load job with location" do
     begin
       bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region
       file = bucket.create_file local_file
 
+      # Load the file to an EU dataset with an EU load job.
       job = table.load_job file do |j|
         j.location = region
       end
@@ -125,7 +127,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     end
   end
 
-  it "copies itself to another table with copy_job block updater" do
+  it "creates a copy job with location" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     copy_job = table.copy_job target_table_2_id, job_id: job_id do |j|
       j.create = :needed
@@ -149,19 +151,31 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     copy_job.write_empty?.must_equal true
   end
 
-  it "creates and cancels jobs" do
-    skip "TODO: add location"
-    load_job = table.load_job local_file
+  it "creates, cancels and gets a job with location" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = table.load_job local_file, job_id: job_id do |j|
+      j.location = region
+    end
 
-    load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    load_job.wont_be :done?
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.location.must_equal region
+    job.wont_be :done?
 
-    load_job.cancel
-    load_job.wait_until_done!
+    # Can cancel the job from the EU.
+    job.cancel
+    job.location.must_equal region
 
-    load_job.must_be :done?
+    # Cannot get the job from the US.
+    job = bigquery.job job_id, location: "US"
+    job.must_be :nil?
 
-    load_job.wont_be :failed?
+    # Can get the job from the EU.
+    job = bigquery.job job_id, location: region
+    job.wont_be :nil?
+    job.wait_until_done!
+
+    job.must_be :done?
+    job.wont_be :failed?
   end
 
   it "extracts data to a file in your bucket with extract_job" do
