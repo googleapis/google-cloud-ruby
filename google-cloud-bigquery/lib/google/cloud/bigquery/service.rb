@@ -259,9 +259,9 @@ module Google
           end
         end
 
-        def insert_job config
+        def insert_job config, location: nil
           job_object = API::Job.new(
-            job_reference: job_ref_from(nil, nil),
+            job_reference: job_ref_from(nil, nil, location: location),
             configuration: config
           )
           # Jobs have generated id, so this operation is considered idempotent
@@ -348,13 +348,15 @@ module Google
         # If no job_id or prefix is given, always generate a client-side job ID
         # anyway, for idempotent retry in the google-api-client layer.
         # See https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
-        def job_ref_from job_id, prefix
+        def job_ref_from job_id, prefix, location: nil
           prefix ||= "job_"
           job_id ||= "#{prefix}#{generate_id}"
-          API::JobReference.new(
+          job_ref = API::JobReference.new(
             project_id: @project,
             job_id: job_id
           )
+          job_ref.location = location if location
+          job_ref
         end
 
         # API object for dataset.

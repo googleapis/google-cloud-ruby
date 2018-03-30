@@ -328,7 +328,7 @@ module Google
         #
         def rerun!
           ensure_service!
-          gapi = service.insert_job @gapi.configuration
+          gapi = service.insert_job @gapi.configuration, location: location
           Job.from_gapi gapi, service
         end
 

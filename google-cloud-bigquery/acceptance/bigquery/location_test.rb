@@ -59,7 +59,6 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
   let(:target_table_4_id) { "kittens_location_copy_4" }
 
   it "inserts rows directly and gets its data" do
-    # data = table.data
     insert_response = table.insert rows
     insert_response.must_be :success?
     insert_response.insert_count.must_equal 3
@@ -72,30 +71,18 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     end
     query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     query_job.job_id.must_equal job_id
+    query_job.location.must_equal region
     query_job.wait_until_done!
 
     # Job methods
     query_job.done?.must_equal true
-    query_job.running?.must_equal false
-    query_job.pending?.must_equal false
-    query_job.created_at.must_be_kind_of Time
-    query_job.started_at.must_be_kind_of Time
-    query_job.ended_at.must_be_kind_of Time
-    query_job.configuration.wont_be :nil?
-    query_job.statistics.wont_be :nil?
-    query_job.status.wont_be :nil?
     query_job.errors.must_be :empty?
+    query_job.location.must_equal region
     query_job.rerun!
+    query_job.location.must_equal region
     query_job.wait_until_done!
 
-    query_job.batch?.must_equal false
-    query_job.interactive?.must_equal true
-    query_job.large_results?.must_equal false
-    query_job.cache?.must_equal true
-    query_job.flatten?.must_equal true
-    query_job.cache_hit?.must_equal false
-    query_job.bytes_processed.wont_be :nil?
-    query_job.destination.wont_be :nil?
+    query_job.location.must_equal region
     query_job.data.class.must_equal Google::Cloud::Bigquery::Data
     query_job.data.total.wont_be :nil?
 
@@ -112,7 +99,9 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     more_data = data.next
     more_data.wont_be :nil?
 
-    data = dataset.query query
+    data = dataset.query query do |j|
+      j.location = region
+    end
     data.class.must_equal Google::Cloud::Bigquery::Data
     data.total.wont_be(:nil?)
     data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
