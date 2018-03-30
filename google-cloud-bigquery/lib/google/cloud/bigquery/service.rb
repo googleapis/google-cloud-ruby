@@ -353,12 +353,11 @@ module Google
         def job_ref_from job_id, prefix, location: nil
           prefix ||= "job_"
           job_id ||= "#{prefix}#{generate_id}"
-          job_ref = API::JobReference.new(
+          API::JobReference.new(
             project_id: @project,
-            job_id: job_id
+            job_id: job_id,
+            location: location
           )
-          job_ref.location = location if location
-          job_ref
         end
 
         # API object for dataset.

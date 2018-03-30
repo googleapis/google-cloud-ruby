@@ -36,6 +36,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
+  let(:region) { "asia-northeast1" }
 
   it "sets a provided job_id prefix in the updater" do
     generated_id = "9876543210"
@@ -126,6 +127,23 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
     job.labels.must_equal labels
+  end
+
+  it "can extract itself with the location option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.job_reference.location = region
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract_job extract_file do |j|
+      j.location = region
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.location.must_equal region
   end
 
   # Borrowed from MockStorage, extract to a common module?

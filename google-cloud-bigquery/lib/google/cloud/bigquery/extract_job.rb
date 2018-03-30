@@ -200,6 +200,33 @@ module Google
           end
 
           ##
+          # Sets the geographic location where the job should run. Required
+          # except for US and EU.
+          #
+          # @param [String] value A geographic location code, such as "US", "EU"
+          #   or "asia-northeast1". Required except for US and EU.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   destination = "gs://my-bucket/file-name.csv"
+          #   extract_job = table.extract_job destination do |j|
+          #     j.location = "EU"
+          #   end
+          #
+          #   extract_job.wait_until_done!
+          #   extract_job.done? #=> true
+          #
+          # @!group Attributes
+          def location= value
+            @gapi.job_reference.location = value
+          end
+
+          ##
           # Sets the compression type.
           #
           # @param [String] value The compression type to use for exported

@@ -91,11 +91,10 @@ module Google
         end
 
         ##
-        # The geographic location where the job should run. Required except for
-        # US and EU.
+        # The geographic location where the job resides.
         #
-        # @return [String] A case-insensitive BigQuery geographic region code,
-        #   such as "US", "EU" or "asia-northeast1".
+        # @return [String]  A geographic location code, such as "US", "EU"
+        #   or "asia-northeast1".
         #
         # @!group Attributes
         def location

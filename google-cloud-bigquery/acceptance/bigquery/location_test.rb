@@ -15,7 +15,7 @@
 require "bigquery_helper"
 
 describe Google::Cloud::Bigquery, :location, :bigquery do
-  let(:region) { "EU" }
+  let(:region) { "asia-northeast1" }  # Tokyo
   let(:dataset_id) { "#{prefix}_dataset_location" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -109,7 +109,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region
       file = bucket.create_file local_file
 
-      # Load the file to an EU dataset with an EU load job.
+      # Load the file to a dataset in the region with an load job in the region.
       job = table.load_job file do |j|
         j.location = region
       end
@@ -161,15 +161,19 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     job.location.must_equal region
     job.wont_be :done?
 
-    # Can cancel the job from the EU.
+    # Can cancel the job from the region.
     job.cancel
     job.location.must_equal region
+
+    # Cannot get the job without specifying location
+    job = bigquery.job job_id
+    job.must_be :nil?
 
     # Cannot get the job from the US.
     job = bigquery.job job_id, location: "US"
     job.must_be :nil?
 
-    # Can get the job from the EU.
+    # Can get the job from the region.
     job = bigquery.job job_id, location: region
     job.wont_be :nil?
     job.wait_until_done!
@@ -178,22 +182,31 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     job.wont_be :failed?
   end
 
-  it "extracts data to a file in your bucket with extract_job" do
-    skip "TODO: add location"
+  it "creates an extract job with location" do
     begin
       # Make sure there is data to extract...
-      load_job = table.load_job local_file
+      load_job = table.load_job local_file do |j|
+        j.location = region
+      end
+      load_job.location.must_equal region
       load_job.wait_until_done!
+      load_job.wont_be :failed?
+      load_job.location.must_equal region
+
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
-        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-        extract_job = table.extract_job extract_file, job_id: job_id
+        extract_job = table.extract_job extract_file, job_id: job_id do |j|
+          j.location = region
+        end
+
         extract_job.job_id.must_equal job_id
         extract_job.wait_until_done!
         extract_job.wont_be :failed?
+        extract_job.location.must_equal region
         # Refresh to get the latest file data
         extract_file = bucket.file "kitten-test-data-backup.json"
         downloaded_file = extract_file.download tmp.path

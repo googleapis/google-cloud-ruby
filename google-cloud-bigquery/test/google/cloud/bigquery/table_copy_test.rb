@@ -167,7 +167,8 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     {
       "jobReference" => {
         "projectId" => project,
-        "jobId" => job_id
+        "jobId" => job_id,
+        "location" => nil
       },
       "configuration" => {
         "copy" => {
