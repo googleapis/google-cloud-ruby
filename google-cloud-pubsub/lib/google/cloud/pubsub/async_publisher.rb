@@ -285,16 +285,20 @@ module Google
             @publisher = publisher
             @messages = []
             @callbacks = []
+            @total_message_bytes = publisher.topic_name.bytesize + 2
           end
 
           def add msg, callback
             @messages << msg
             @callbacks << callback
+            @total_message_bytes += msg.to_proto.bytesize + 2
           end
 
           def try_add msg, callback
-            if total_message_count + 1 > @publisher.max_messages ||
-               total_message_bytes + msg.to_proto.size >= @publisher.max_bytes
+            new_message_count = total_message_count + 1
+            new_message_bytes = total_message_bytes + msg.to_proto.bytesize + 2
+            if new_message_count > @publisher.max_messages ||
+               new_message_bytes >= @publisher.max_bytes
               return false
             end
             add msg, callback
@@ -311,7 +315,7 @@ module Google
           end
 
           def total_message_bytes
-            @messages.map(&:to_proto).map(&:size).inject(0, :+)
+            @total_message_bytes
           end
 
           def items

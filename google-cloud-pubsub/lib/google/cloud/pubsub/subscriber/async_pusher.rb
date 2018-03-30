@@ -162,31 +162,49 @@ module Google
             def initialize max_bytes: 10000000
               @max_bytes = max_bytes
               @request = Google::Pubsub::V1::StreamingPullRequest.new
+              @total_message_bytes = 0
             end
 
             def ack ack_id
               @request.ack_ids << ack_id
+              @total_message_bytes += addl_ack_bytes ack_id
             end
 
             def try_ack ack_id
-              addl_bytes = ack_id.size
+              addl_bytes = addl_ack_bytes ack_id
               return false if total_message_bytes + addl_bytes >= @max_bytes
 
               ack ack_id
               true
             end
 
+            def addl_ack_bytes ack_id
+              ack_id.bytesize + 2
+            end
+
             def delay deadline, ack_id
               @request.modify_deadline_seconds << deadline
               @request.modify_deadline_ack_ids << ack_id
+              @total_message_bytes += addl_delay_bytes deadline, ack_id
             end
 
             def try_delay deadline, ack_id
-              addl_bytes = deadline.to_s.size + ack_id.size
+              addl_bytes = addl_delay_bytes deadline, ack_id
               return false if total_message_bytes + addl_bytes >= @max_bytes
 
               delay deadline, ack_id
               true
+            end
+
+            def addl_delay_bytes deadline, ack_id
+              bytes_for_int(deadline) + ack_id.bytesize + 4
+            end
+
+            def bytes_for_int num
+              # Ruby 2.0 does not have Integer#bit_length
+              return [num].pack("s").bytesize unless num.respond_to? :bit_length
+
+              (num.bit_length / 8.0).ceil
             end
 
             def ready?
@@ -194,7 +212,7 @@ module Google
             end
 
             def total_message_bytes
-              request.to_proto.size
+              @total_message_bytes
             end
           end
         end

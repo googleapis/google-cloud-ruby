@@ -268,7 +268,7 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
     pubsub.service.mocked_publisher = mock
 
     # 190 is bigger than 10 messages, but less than 11.
-    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 190, interval: 10
+    publisher = Google::Cloud::Pubsub::AsyncPublisher.new topic_name, pubsub.service, max_bytes: 250, interval: 10
 
     callbacks = 0
 
