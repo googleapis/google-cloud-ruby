@@ -15,6 +15,8 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/errors"
+
 module Google
   module Cloud
     module Bigtable

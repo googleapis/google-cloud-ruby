@@ -17,7 +17,6 @@ require "google-cloud-bigtable"
 require "google/cloud/env"
 require "google/cloud/config"
 require "google/cloud/errors"
-require "google/cloud/bigtable/errors"
 require "google/cloud/bigtable/credentials"
 require 'google/cloud/bigtable/admin/credentials'
 
@@ -207,7 +206,7 @@ module Google
 
      # @private
      # Default project.
-     
+
      def self.default_project_id
        Google::Cloud.configure.bigtable.project_id ||
          Google::Cloud.configure.project_id ||

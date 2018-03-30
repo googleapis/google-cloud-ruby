@@ -49,8 +49,8 @@ module Google
             Time.at(@timestamp_micros / 100_0000) if @timestamp_micros
           end
 
+          # @private
           # Cell object comparator
-          #
           # @return [Boolean]
 
           def == other
@@ -80,6 +80,7 @@ module Google
           @cells.keys
         end
 
+        # @private
         # FlatRow object comparator
         # @return [Boolean]
 
