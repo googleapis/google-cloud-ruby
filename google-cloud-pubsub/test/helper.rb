@@ -49,7 +49,9 @@ class StreamingPullStub
   attr_reader :request_enum, :responses
 
   def initialize responses
-    @responses = responses
+    # EnumeratorQueue will return an enum that blocks
+    @responses = Google::Cloud::Pubsub::Subscriber::EnumeratorQueue.new
+    responses.each { |response| @responses.push response }
   end
 
   def streaming_pull request_enum, options: nil
