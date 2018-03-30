@@ -197,7 +197,14 @@ module Google
             end
 
             def addl_delay_bytes deadline, ack_id
-              (deadline.bit_length / 8.0).ceil + ack_id.bytesize + 4
+              bytes_for_int(deadline) + ack_id.bytesize + 4
+            end
+
+            def bytes_for_int num
+              # Ruby 2.0 does not have Integer#bit_length
+              return [num].pack("s").bytesize unless num.respond_to? :bit_length
+
+              (num.bit_length / 8.0).ceil
             end
 
             def ready?
