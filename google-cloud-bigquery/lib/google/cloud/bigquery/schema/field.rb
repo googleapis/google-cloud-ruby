@@ -40,8 +40,8 @@ module Google
           MODES = %w[NULLABLE REQUIRED REPEATED].freeze
 
           # @private
-          TYPES = %w[STRING INTEGER FLOAT BOOLEAN BYTES TIMESTAMP TIME DATETIME
-                     DATE RECORD].freeze
+          TYPES = %w[STRING INTEGER INT64 FLOAT FLOAT64 BOOLEAN BOOL BYTES
+                     TIMESTAMP TIME DATETIME DATE RECORD STRUCT].freeze
 
           ##
           # The name of the field.
@@ -164,93 +164,93 @@ module Google
           end
 
           ##
-          # Checks if the mode of the field is `STRING`.
+          # Checks if the type of the field is `STRING`.
           #
           # @return [Boolean] `true` when `STRING`, `false` otherwise.
           #
           def string?
-            mode == "STRING"
+            type == "STRING"
           end
 
           ##
-          # Checks if the mode of the field is `INTEGER`.
+          # Checks if the type of the field is `INTEGER`.
           #
           # @return [Boolean] `true` when `INTEGER`, `false` otherwise.
           #
           def integer?
-            mode == "INTEGER"
+            type == "INTEGER" || type == "INT64"
           end
 
           ##
-          # Checks if the mode of the field is `FLOAT`.
+          # Checks if the type of the field is `FLOAT`.
           #
           # @return [Boolean] `true` when `FLOAT`, `false` otherwise.
           #
           def float?
-            mode == "FLOAT"
+            type == "FLOAT" || type == "FLOAT64"
           end
 
           ##
-          # Checks if the mode of the field is `BOOLEAN`.
+          # Checks if the type of the field is `BOOLEAN`.
           #
           # @return [Boolean] `true` when `BOOLEAN`, `false` otherwise.
           #
           def boolean?
-            mode == "BOOLEAN"
+            type == "BOOLEAN" || type == "BOOL"
           end
 
           ##
-          # Checks if the mode of the field is `BYTES`.
+          # Checks if the type of the field is `BYTES`.
           #
           # @return [Boolean] `true` when `BYTES`, `false` otherwise.
           #
           def bytes?
-            mode == "BYTES"
+            type == "BYTES"
           end
 
           ##
-          # Checks if the mode of the field is `TIMESTAMP`.
+          # Checks if the type of the field is `TIMESTAMP`.
           #
           # @return [Boolean] `true` when `TIMESTAMP`, `false` otherwise.
           #
           def timestamp?
-            mode == "TIMESTAMP"
+            type == "TIMESTAMP"
           end
 
           ##
-          # Checks if the mode of the field is `TIME`.
+          # Checks if the type of the field is `TIME`.
           #
           # @return [Boolean] `true` when `TIME`, `false` otherwise.
           #
           def time?
-            mode == "TIME"
+            type == "TIME"
           end
 
           ##
-          # Checks if the mode of the field is `DATETIME`.
+          # Checks if the type of the field is `DATETIME`.
           #
           # @return [Boolean] `true` when `DATETIME`, `false` otherwise.
           #
           def datetime?
-            mode == "DATETIME"
+            type == "DATETIME"
           end
 
           ##
-          # Checks if the mode of the field is `DATE`.
+          # Checks if the type of the field is `DATE`.
           #
           # @return [Boolean] `true` when `DATE`, `false` otherwise.
           #
           def date?
-            mode == "DATE"
+            type == "DATE"
           end
 
           ##
-          # Checks if the mode of the field is `RECORD`.
+          # Checks if the type of the field is `RECORD`.
           #
           # @return [Boolean] `true` when `RECORD`, `false` otherwise.
           #
           def record?
-            mode == "RECORD"
+            type == "RECORD" || type == "STRUCT"
           end
 
           ##
