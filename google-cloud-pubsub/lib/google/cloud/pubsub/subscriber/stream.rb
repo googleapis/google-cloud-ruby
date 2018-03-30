@@ -230,6 +230,9 @@ module Google
                 break
               end
             end
+            # Has the loop broken but we aren't stopped?
+            # Could be GRPC has thrown an internal error, so restart.
+            synchronize { raise "restart thread" unless @stopped }
           rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
                  GRPC::ResourceExhausted, GRPC::Internal
             # The GAPIC layer will raise DeadlineExceeded when stream is opened
@@ -239,7 +242,13 @@ module Google
             # ResourceExhausted, and Internal.
             synchronize { start_streaming! }
           rescue StandardError => e
-            raise Google::Cloud::Error.from_error(e)
+            synchronize do
+              if @stopped
+                raise Google::Cloud::Error.from_error(e)
+              else
+                start_streaming!
+              end
+            end
           end
 
           # rubocop:enable all
