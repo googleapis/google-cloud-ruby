@@ -234,12 +234,14 @@ module Google
             # Could be GRPC has thrown an internal error, so restart.
             synchronize { raise "restart thread" unless @stopped }
           rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
-                 GRPC::ResourceExhausted, GRPC::Internal
+                 GRPC::ResourceExhausted, GRPC::Internal, GRPC::Core::CallError
             # The GAPIC layer will raise DeadlineExceeded when stream is opened
             # longer than the timeout value it is configured for. When this
             # happends, restart the stream stealthly.
             # Also stealthly restart the stream on Unavailable, Cancelled,
             # ResourceExhausted, and Internal.
+            # Also, also stealthly restart the stream when GRPC raises the
+            # internal CallError.
             synchronize { start_streaming! }
           rescue StandardError => e
             synchronize do
