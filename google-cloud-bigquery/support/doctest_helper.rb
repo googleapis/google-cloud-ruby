@@ -217,7 +217,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
-      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890"]
+      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890", Hash]
       mock.expect :get_job_query_results, query_data_gapi, ["my-project", "1234567890", Hash]
       mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
     end
@@ -440,7 +440,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Job#reload!" do
     mock_bigquery do |mock|
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
-      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890"]
+      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890", Hash]
     end
   end
 
@@ -479,7 +479,7 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
-      mock.expect :get_job, query_job_gapi, ["my-project", "my_job"]
+      mock.expect :get_job, query_job_gapi, ["my-project", "my_job", Hash]
     end
   end
 
@@ -542,7 +542,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Project#query_job" do
     mock_bigquery do |mock|
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
-      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890"]
+      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890", Hash]
       mock.expect :get_job_query_results, query_data_gapi, ["my-project", "1234567890", Hash]
       mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
     end

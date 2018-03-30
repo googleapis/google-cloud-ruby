@@ -379,8 +379,8 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_job_hash id = "job_9876543210", state = "running"
-    {
+  def random_job_hash id = "job_9876543210", state = "running", location: nil
+    hash = {
       "kind" => "bigquery#job",
       "etag" => "etag",
       "id" => "#{project}:#{id}",
@@ -403,6 +403,8 @@ class MockBigquery < Minitest::Spec
       },
       "user_email" => "user@example.com"
     }
+    hash["jobReference"]["location"] = location if location
+    hash
   end
 
   def random_project_hash numeric_id = 1234567890, name = "project-name",
@@ -423,8 +425,8 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def find_job_gapi job_id
-    Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id).to_json
+  def find_job_gapi job_id, location: nil
+    Google::Apis::BigqueryV2::Job.from_json random_job_hash(job_id, location: location).to_json
   end
 
   def job_resp_gapi job_gapi, job_id: "job_9876543210"
@@ -445,7 +447,7 @@ class MockBigquery < Minitest::Spec
   end
 
   def query_job_resp_json query, job_id: "job_9876543210"
-    hash = random_job_hash(job_id, "done")
+    hash = random_job_hash(job_id, "done", location: "US")
     hash["configuration"]["query"] = {
       "query" => query,
       "destinationTable" => {

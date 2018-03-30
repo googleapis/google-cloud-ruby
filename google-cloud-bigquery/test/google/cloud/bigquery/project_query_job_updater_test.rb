@@ -27,6 +27,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
   let(:labels) { { "foo" => "bar" } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
   let(:kms_key) { "path/to/encryption_key_name" }
+  let(:region) { "asia-northeast1" }
 
   it "queries the data with job_id option" do
     mock = Minitest::Mock.new
@@ -203,6 +204,27 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
     job.encryption.kms_key.must_equal kms_key
+  end
+
+  it "queries the data with the location option" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query
+    job_gapi.job_reference.location = region
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project,
+        dataset_id: dataset_id
+    )
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = dataset.query_job query do |j|
+      j.location = region
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.location.must_equal region
   end
 end
 

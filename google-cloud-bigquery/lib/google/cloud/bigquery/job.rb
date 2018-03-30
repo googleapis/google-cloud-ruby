@@ -91,6 +91,18 @@ module Google
         end
 
         ##
+        # The geographic location where the job should run. Required except for
+        # US and EU.
+        #
+        # @return [String] A case-insensitive BigQuery geographic region code,
+        #   such as "US", "EU" or "asia-northeast1".
+        #
+        # @!group Attributes
+        def location
+          @gapi.job_reference.location
+        end
+
+        ##
         # The email address of the user who ran the job.
         #
         # @return [String] The email address.
@@ -339,7 +351,7 @@ module Google
         #
         def reload!
           ensure_service!
-          gapi = service.get_job job_id
+          gapi = service.get_job job_id, location: location
           @gapi = gapi
         end
         alias refresh! reload!

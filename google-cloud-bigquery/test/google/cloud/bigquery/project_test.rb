@@ -737,10 +737,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
   it "finds a job" do
     job_id = "9876543210"
-
     mock = Minitest::Mock.new
     mock.expect :get_job, find_job_gapi(job_id),
-      [project, job_id]
+      [project, job_id, {location: nil}]
     bigquery.service.mocked_service = mock
 
     job = bigquery.job job_id

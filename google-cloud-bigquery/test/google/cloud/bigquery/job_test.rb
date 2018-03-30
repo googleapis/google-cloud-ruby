@@ -18,10 +18,11 @@ require "uri"
 
 describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   # Create a job object with the project's mocked connection object
+  let(:region) { "US" }
   let(:labels) { { "foo" => "bar" } }
   let(:job_hash) { random_job_hash }
   let(:job_gapi) do
-    job_gapi = Google::Apis::BigqueryV2::Job.from_json random_job_hash.to_json
+    job_gapi = Google::Apis::BigqueryV2::Job.from_json random_job_hash(location: region).to_json
     job_gapi.configuration.labels = labels
     job_gapi
   end
@@ -30,7 +31,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   let(:job_id) { job.job_id }
 
   let(:failed_job_hash) do
-    hash = random_job_hash "1234567890", "DONE"
+    hash = random_job_hash "1234567890", "DONE", location: region
     hash["status"]["errorResult"] = {
       "reason"    => "r34s0n",
       "location"  => "l0c4t10n",
@@ -53,6 +54,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   it "knows its attributes" do
     job.job_id.wont_be :nil?
     job.job_id.must_equal job_gapi.job_reference.job_id
+    job.location.must_equal region
     job.labels.must_equal labels
     job.labels.must_be :frozen?
     job.user_email.must_equal "user@example.com"
@@ -170,7 +172,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job,
                 Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "done").to_json),
-                [project, job_id]
+                [project, job_id, {location: "US"}]
 
     job.must_be :running?
     job.reload!
@@ -182,20 +184,20 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     mock.expect :get_job,
-                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "pending").to_json),
-                [project, job_id]
+                get_job_resp("pending"),
+                [project, job_id, {location: "US"}]
     mock.expect :get_job,
-                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "pending").to_json),
-                [project, job_id]
+                get_job_resp("pending"),
+                [project, job_id, {location: "US"}]
     mock.expect :get_job,
-                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "running").to_json),
-                [project, job_id]
+                get_job_resp("running"),
+                [project, job_id, {location: "US"}]
     mock.expect :get_job,
-                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "running").to_json),
-                [project, job_id]
+                get_job_resp("running"),
+                [project, job_id, {location: "US"}]
     mock.expect :get_job,
-                Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "done").to_json),
-                [project, job_id]
+                get_job_resp("done"),
+                [project, job_id, {location: "US"}]
 
 
     # mock out the sleep method so the test doesn't actually block
@@ -216,5 +218,9 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
 
     job.cancel
     mock.verify
+  end
+
+  def get_job_resp state
+    Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, state, location: region).to_json)
   end
 end

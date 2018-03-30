@@ -252,9 +252,11 @@ module Google
 
         ##
         # Returns the job specified by jobID.
-        def get_job job_id
+        def get_job job_id, location: nil
           # The get operation is considered idempotent
-          execute(backoff: true) { service.get_job @project, job_id }
+          execute(backoff: true) do
+            service.get_job @project, job_id, location: location
+          end
         end
 
         def insert_job config
@@ -279,6 +281,7 @@ module Google
           execute backoff: true do
             service.get_job_query_results @project,
                                           job_id,
+                                          location: options.delete(:location),
                                           max_results: options.delete(:max),
                                           page_token: options.delete(:token),
                                           start_index: options.delete(:start),
@@ -359,13 +362,13 @@ module Google
           return nil if dts.nil?
           if dts.respond_to? :dataset_id
             Google::Apis::BigqueryV2::DatasetReference.new(
-                project_id: (pjt || dts.project_id || @project),
-                dataset_id: dts.dataset_id
+              project_id: (pjt || dts.project_id || @project),
+              dataset_id: dts.dataset_id
             )
           else
             Google::Apis::BigqueryV2::DatasetReference.new(
-                project_id: (pjt || @project),
-                dataset_id: dts
+              project_id: (pjt || @project),
+              dataset_id: dts
             )
           end
         end
