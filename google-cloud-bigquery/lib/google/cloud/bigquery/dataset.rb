@@ -266,8 +266,8 @@ module Google
         # The geographic location where the dataset should reside. Possible
         # values include `EU` and `US`. The default value is `US`.
         #
-        # @return [String, nil] The location code, or `nil` if the object is a
-        #   reference (see {#reference?}).
+        # @return [String, nil] The geographic location, or `nil` if the object
+        #   is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -696,6 +696,12 @@ module Google
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
         #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
+        #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
@@ -904,15 +910,16 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      params: params, external: external, labels: labels,
-                      udfs: udfs }
+                      job_id: job_id, prefix: prefix, params: params,
+                      external: external, labels: labels, udfs: udfs }
 
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
           updater.dataset = self
+          updater.location = location if location # may be dataset reference
 
           yield updater if block_given?
 
-          gapi = service.query_job job_id, prefix, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           Job.from_gapi gapi, service
         end
 
@@ -944,6 +951,12 @@ module Google
         #
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
         #
         # @see https://cloud.google.com/bigquery/querying-data Querying Data
         #
@@ -1079,11 +1092,12 @@ module Google
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params }
           options[:dataset] ||= self
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
+          updater.location = location if location # may be dataset reference
 
           yield updater if block_given?
 
-          gapi = service.query_job nil, nil, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           job = Job.from_gapi gapi, service
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -1155,6 +1169,12 @@ module Google
         # path or a google-cloud-storage `File` instance. Or, you can upload a
         # file directly. See [Loading Data with a POST
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
         #
         # @param [String] table_id The destination table to load the data into.
         # @param [File, Google::Cloud::Storage::File, String, URI,
@@ -1389,12 +1409,13 @@ module Google
                                      max_bad_records: max_bad_records,
                                      quote: quote, skip_leading: skip_leading,
                                      dryrun: dryrun, schema: schema,
+                                     job_id: job_id, prefix: prefix,
                                      labels: labels, autodetect: autodetect,
                                      null_marker: null_marker
 
           yield updater if block_given?
 
-          load_local_or_uri job_id, prefix, files, updater
+          load_local_or_uri files, updater
         end
 
         ##
@@ -1407,6 +1428,12 @@ module Google
         # path or a google-cloud-storage `File` instance. Or, you can upload a
         # file directly. See [Loading Data with a POST
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
         #
         # @param [String] table_id The destination table to load the data into.
         # @param [File, Google::Cloud::Storage::File, String, URI,
@@ -1622,7 +1649,7 @@ module Google
 
           yield updater if block_given?
 
-          job = load_local_or_uri nil, nil, files, updater
+          job = load_local_or_uri files, updater
           job.wait_until_done!
           ensure_job_succeeded! job
           true
@@ -2003,8 +2030,10 @@ module Google
           end
         end
 
-        def load_job_gapi table_id, dryrun
+        def load_job_gapi table_id, dryrun, job_id: nil, prefix: nil
+          job_ref = service.job_ref_from job_id, prefix
           Google::Apis::BigqueryV2::Job.new(
+            job_reference: job_ref,
             configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
               load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
                 destination_table: Google::Apis::BigqueryV2::TableReference.new(
@@ -2059,10 +2088,12 @@ module Google
                              encoding: nil, delimiter: nil,
                              ignore_unknown: nil, max_bad_records: nil,
                              quote: nil, skip_leading: nil, dryrun: nil,
-                             schema: nil, labels: nil, autodetect: nil,
-                             null_marker: nil
-          new_job = load_job_gapi table_id, dryrun
+                             schema: nil, job_id: nil, prefix: nil, labels: nil,
+                             autodetect: nil, null_marker: nil
+          new_job = load_job_gapi table_id, dryrun, job_id: job_id,
+                                                    prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
+            job.location = location if location # may be dataset reference
             job.create = create unless create.nil?
             job.write = write unless write.nil?
             job.schema = schema unless schema.nil?
@@ -2082,7 +2113,7 @@ module Google
           end
         end
 
-        def load_storage job_id, prefix, urls, job_gapi
+        def load_storage urls, job_gapi
           # Convert to storage URL
           urls = [urls].flatten.map do |url|
             if url.respond_to? :to_gs_url
@@ -2104,11 +2135,11 @@ module Google
             end
           end
 
-          gapi = service.load_table_gs_url job_id, prefix, job_gapi
+          gapi = service.load_table_gs_url job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local job_id, prefix, file, job_gapi
+        def load_local file, job_gapi
           path = Pathname(file).to_path
           if job_gapi.configuration.load.source_format.nil?
             source_format = Convert.derive_source_format path
@@ -2117,16 +2148,16 @@ module Google
             end
           end
 
-          gapi = service.load_table_file job_id, prefix, file, job_gapi
+          gapi = service.load_table_file file, job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local_or_uri job_id, prefix, file, updater
+        def load_local_or_uri file, updater
           job_gapi = updater.to_gapi
           job = if local_file? file
-                  load_local job_id, prefix, file, job_gapi
+                  load_local file, job_gapi
                 else
-                  load_storage job_id, prefix, file, job_gapi
+                  load_storage file, job_gapi
                 end
           job
         end

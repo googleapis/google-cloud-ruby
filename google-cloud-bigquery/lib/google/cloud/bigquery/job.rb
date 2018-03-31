@@ -91,6 +91,17 @@ module Google
         end
 
         ##
+        # The geographic location where the job runs.
+        #
+        # @return [String]  A geographic location, such as "US", "EU" or
+        #   "asia-northeast1".
+        #
+        # @!group Attributes
+        def location
+          @gapi.job_reference.location
+        end
+
+        ##
         # The email address of the user who ran the job.
         #
         # @return [String] The email address.
@@ -293,7 +304,7 @@ module Google
         #
         def cancel
           ensure_service!
-          resp = service.cancel_job job_id
+          resp = service.cancel_job job_id, location: location
           @gapi = resp.job
           true
         end
@@ -316,7 +327,7 @@ module Google
         #
         def rerun!
           ensure_service!
-          gapi = service.insert_job @gapi.configuration
+          gapi = service.insert_job @gapi.configuration, location: location
           Job.from_gapi gapi, service
         end
 
@@ -339,7 +350,7 @@ module Google
         #
         def reload!
           ensure_service!
-          gapi = service.get_job job_id
+          gapi = service.get_job job_id, location: location
           @gapi = gapi
         end
         alias refresh! reload!

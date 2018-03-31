@@ -158,8 +158,10 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::CopyJob::Updater] A job
           #   configuration object for setting copy options.
-          def self.from_options source, target, options = {}
+          def self.from_options service, source, target, options = {}
+            job_ref = service.job_ref_from options[:job_id], options[:prefix]
             req = Google::Apis::BigqueryV2::Job.new(
+              job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
                 copy: Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
                   source_table: source,
@@ -174,6 +176,33 @@ module Google
             updater.write = options[:write]
             updater.labels = options[:labels] if options[:labels]
             updater
+          end
+
+          ##
+          # Sets the geographic location where the job should run. Required
+          # except for US and EU.
+          #
+          # @param [String] value A geographic location, such as "US", "EU" or
+          #   "asia-northeast1". Required except for US and EU.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #   destination_table = dataset.table "my_destination_table"
+          #
+          #   copy_job = table.copy_job destination_table do |j|
+          #     j.location = "EU"
+          #   end
+          #
+          #   copy_job.wait_until_done!
+          #   copy_job.done? #=> true
+          #
+          # @!group Attributes
+          def location= value
+            @gapi.job_reference.location = value
           end
 
           ##

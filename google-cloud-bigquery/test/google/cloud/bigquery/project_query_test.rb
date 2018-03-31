@@ -31,11 +31,11 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
@@ -66,11 +66,11 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
@@ -95,11 +95,11 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
                 [project, "target_dataset_id", "target_table_id", {  max_results: 42, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
@@ -113,7 +113,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "queries the data with dataset option" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: "some_random_dataset", project_id: project
     )
@@ -121,7 +121,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   it "queries the data with dataset and project options" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: "some_random_dataset", project_id: "some_random_project"
     )
@@ -143,7 +143,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
@@ -159,13 +159,13 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.use_query_cache = false
 
     mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job_id, {max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
@@ -181,7 +181,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     mock.expect :insert_job, failed_query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
 
     err = expect { bigquery.query query }.must_raise Google::Cloud::PermissionDeniedError
@@ -206,7 +206,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     mock.expect :insert_job, failed_query_job_resp_gapi(query, job_id: job_id, reason: "backendError"), [project, job_gapi]
 
     err = expect { bigquery.query query }.must_raise Google::Cloud::InternalError

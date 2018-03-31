@@ -720,6 +720,34 @@ module Google
           end
 
           ##
+          # Sets the geographic location where the job should run. Required
+          # except for US and EU.
+          #
+          # @param [String] value  A geographic location, such as "US", "EU" or
+          #   "asia-northeast1". Required except for US and EU.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |j|
+          #     j.schema do |s|
+          #       s.string "first_name", mode: :required
+          #       s.record "cities_lived", mode: :repeated do |r|
+          #         r.string "place", mode: :required
+          #         r.integer "number_of_years", mode: :required
+          #       end
+          #     end
+          #     j.location = "EU"
+          #   end
+          #
+          # @!group Attributes
+          def location= value
+            @gapi.job_reference.location = value
+          end
+
+          ##
           # Sets the source file format. The default value is `csv`.
           #
           # The following values are supported:

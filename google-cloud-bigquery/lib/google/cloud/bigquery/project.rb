@@ -108,6 +108,9 @@ module Google
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
         #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method.
+        #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
@@ -322,18 +325,18 @@ module Google
           options = { priority: priority, cache: cache, table: table,
                       create: create, write: write,
                       large_results: large_results, flatten: flatten,
-                      dataset: dataset, project: project || self.project,
+                      dataset: dataset, project: (project || self.project),
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       maximum_billing_tier: maximum_billing_tier,
                       maximum_bytes_billed: maximum_bytes_billed,
-                      external: external, labels: labels,
-                      udfs: udfs, params: params }
+                      external: external, job_id: job_id, prefix: prefix,
+                      labels: labels, udfs: udfs, params: params }
 
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
 
           yield updater if block_given?
 
-          gapi = service.query_job job_id, prefix, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           Job.from_gapi gapi, service
         end
 
@@ -362,6 +365,9 @@ module Google
         #
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method.
         #
         # @see https://cloud.google.com/bigquery/querying-data Querying Data
         #
@@ -514,11 +520,11 @@ module Google
                       project: project || self.project,
                       legacy_sql: legacy_sql, standard_sql: standard_sql,
                       params: params, external: external }
-          updater = QueryJob::Updater.from_options query, options
+          updater = QueryJob::Updater.from_options service, query, options
 
           yield updater if block_given?
 
-          gapi = service.query_job nil, nil, updater.to_gapi
+          gapi = service.query_job updater.to_gapi
           job = Job.from_gapi gapi, service
           job.wait_until_done!
 
@@ -753,6 +759,8 @@ module Google
         # Retrieves an existing job by ID.
         #
         # @param [String] job_id The ID of a job.
+        # @param [String] location The geographic location where the job was
+        #   created. Required except for US and EU.
         #
         # @return [Google::Cloud::Bigquery::Job, nil] Returns `nil` if the job
         #   does not exist.
@@ -764,9 +772,9 @@ module Google
         #
         #   job = bigquery.job "my_job"
         #
-        def job job_id
+        def job job_id, location: nil
           ensure_service!
-          gapi = service.get_job job_id
+          gapi = service.get_job job_id, location: location
           Job.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
           nil

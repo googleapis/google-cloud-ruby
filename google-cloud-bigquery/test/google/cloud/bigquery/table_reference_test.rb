@@ -214,7 +214,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
   it "can copy itself with copy_job" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = copy_job_gapi(table, target_table)
+    job_gapi = copy_job_gapi(table, target_table, location: nil)
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.copy_job target_table
@@ -226,7 +226,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
   it "can copy itself with copy" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = copy_job_gapi(table, target_table)
+    job_gapi = copy_job_gapi(table, target_table, location: nil)
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
@@ -240,7 +240,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
   it "can extract itself with extract_job" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, storage_file)
+    job_gapi = extract_job_gapi(table, storage_file, location: nil)
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
@@ -253,7 +253,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
   it "can extract itself with extract" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, storage_file)
+    job_gapi = extract_job_gapi(table, storage_file, location: nil)
     job_resp_gapi = job_gapi.dup
     job_resp_gapi.status = status "done"
 
@@ -267,7 +267,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
   it "can load data from a storage file with load_job" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url, location: nil
     mock.expect :insert_job, load_job_resp_gapi(table, load_url),
       [project, job_gapi]
     table.service.mocked_service = mock
@@ -286,7 +286,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
       job_resp_gapi = load_job_resp_gapi(table, "some/file/path.csv")
       job_resp_gapi.status = status "done"
       mock.expect :insert_job, job_resp_gapi,
-        [project, load_job_gapi(table_gapi.table_reference, "CSV"), upload_source: file, content_type: "text/comma-separated-values"]
+        [project, load_job_gapi(table_gapi.table_reference, "CSV", location: nil), upload_source: file, content_type: "text/comma-separated-values"]
 
       result = table.load file, format: :csv
       result.must_equal true

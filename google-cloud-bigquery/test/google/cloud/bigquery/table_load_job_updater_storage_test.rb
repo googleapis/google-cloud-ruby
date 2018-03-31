@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,10 +31,33 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "path/to/encryption_key_name" }
+  let(:region) { "asia-northeast1" }
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
     Google::Cloud::Storage::File.from_gapi gapi, storage.service
+  end
+
+  it "sets a provided job_id prefix in the updater" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+    special_file = storage_file "data.json"
+    special_url = special_file.to_gs_url
+
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url, job_id: job_id
+    job_gapi.configuration.load.source_format = "NEWLINE_DELIMITED_JSON"
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url, job_id: job_id),
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job special_file, job_id: job_id do |j|
+      j.job_id.must_equal job_id
+    end
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+
+    mock.verify
   end
 
   it "can specify a storage file with format" do
@@ -204,6 +227,23 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
     job.encryption.kms_key.must_equal kms_key
+  end
+
+  it "can load a storage file with the location option" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    job_gapi.job_reference.location = region
+    mock.expect :insert_job, job_gapi,
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job load_file do |j|
+      j.location = region
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.location.must_equal region
   end
 
   def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil

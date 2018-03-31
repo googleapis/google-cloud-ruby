@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
+describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM `some_project.some_dataset.users`" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
@@ -26,96 +26,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
-
-  it "queries the data" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = query_job_gapi(query, location: nil)
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = bigquery.query_job query
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-  end
-
-  it "queries the data with options set" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = query_job_gapi(query, location: nil)
-    job_gapi.configuration.query.priority = "BATCH"
-    job_gapi.configuration.query.use_query_cache = false
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = bigquery.query_job query, priority: :batch, cache: false
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-  end
-
-  it "queries the data with table options" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = query_job_gapi(query, location: nil)
-    job_gapi.configuration.query.destination_table = Google::Apis::BigqueryV2::TableReference.new(
-      project_id: table.project_id,
-      dataset_id: table.dataset_id,
-      table_id:   table.table_id
-    )
-    job_gapi.configuration.query.create_disposition = "CREATE_NEVER"
-    job_gapi.configuration.query.write_disposition = "WRITE_TRUNCATE"
-    job_gapi.configuration.query.allow_large_results = true
-    job_gapi.configuration.query.flatten_results = false
-    job_gapi.configuration.query.maximum_billing_tier = 2
-    job_gapi.configuration.query.maximum_bytes_billed = 12345678901234
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = bigquery.query_job query, table: table,
-                                create: :never, write: :truncate,
-                                large_results: true, flatten: false,
-                                maximum_billing_tier: 2,
-                                maximum_bytes_billed: 12345678901234
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-  end
-
-  it "queries the data with dataset option as a Dataset" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = query_job_gapi(query, location: nil)
-    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
-      project_id: dataset.project_id,
-      dataset_id: dataset.dataset_id
-    )
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = bigquery.query_job query, dataset: dataset
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-  end
-
-  it "queries the data with dataset and project options" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = query_job_gapi(query, location: nil)
-    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
-      project_id: "some_random_project",
-      dataset_id: "some_random_dataset"
-    )
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
-
-    job = bigquery.query_job query, dataset: "some_random_dataset", project: "some_random_project"
-    mock.verify
-
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-  end
+  let(:kms_key) { "path/to/encryption_key_name" }
+  let(:region) { "asia-northeast1" }
 
   it "queries the data with job_id option" do
     mock = Minitest::Mock.new
@@ -152,20 +64,71 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job.job_id.must_equal job_id
   end
 
-  it "queries the data with job_id option if both job_id and prefix options are provided" do
+  it "queries the data with options set" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_id = "my_test_job_id"
-    job_gapi = query_job_gapi query, job_id: job_id, location: nil
-
+    job_gapi = query_job_gapi query, location: nil
+    job_gapi.configuration.query.priority = "BATCH"
+    job_gapi.configuration.query.use_query_cache = false
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = bigquery.query_job query, job_id: job_id, prefix: "IGNORED"
+    job = bigquery.query_job query do |j|
+      j.priority = :batch
+      j.cache = false
+    end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+  end
+
+  it "queries the data with table options" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil
+    job_gapi.configuration.query.destination_table = Google::Apis::BigqueryV2::TableReference.new(
+      project_id: table.project_id,
+      dataset_id: table.dataset_id,
+      table_id:   table.table_id
+    )
+    job_gapi.configuration.query.create_disposition = "CREATE_NEVER"
+    job_gapi.configuration.query.write_disposition = "WRITE_TRUNCATE"
+    job_gapi.configuration.query.allow_large_results = true
+    job_gapi.configuration.query.flatten_results = false
+    job_gapi.configuration.query.maximum_bytes_billed = 12345678901234
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query do |j|
+      j.table = table
+      j.create = :never
+      j.write = :truncate
+      j.large_results = true
+      j.flatten = false
+      j.maximum_bytes_billed = 12345678901234
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with dataset option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      project_id: project,
+      dataset_id: "some_random_dataset"
+    )
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query do |j|
+      j.dataset = "some_random_dataset"
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with the job labels option" do
@@ -176,7 +139,9 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job_gapi.configuration.labels = labels
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = bigquery.query_job query, labels: labels
+    job = bigquery.query_job query do |j|
+      j.labels = labels
+    end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
@@ -191,7 +156,9 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job_gapi.configuration.query.user_defined_function_resources = udfs_gapi_array
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = bigquery.query_job query, udfs: udfs
+    job = bigquery.query_job query do |j|
+      j.udfs = udfs
+    end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
@@ -206,10 +173,49 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job_gapi.configuration.query.user_defined_function_resources = [udfs_gapi_uri]
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = bigquery.query_job query, udfs: "gs://my-bucket/my-lib.js"
+    job = bigquery.query_job query do |j|
+      j.udfs = "gs://my-bucket/my-lib.js"
+    end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.udfs.must_equal ["gs://my-bucket/my-lib.js"]
+  end
+
+  it "queries the data with the encryption option" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil
+    job_gapi.configuration.query.destination_encryption_configuration = encryption_gapi(kms_key)
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    encrypt_config = bigquery.encryption kms_key: kms_key
+
+    job = bigquery.query_job query do |j|
+      j.encryption = encrypt_config
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    job.encryption.kms_key.must_equal kms_key
+  end
+
+  it "queries the data with the location option" do
+    mock = Minitest::Mock.new
+    dataset.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil
+    job_gapi.job_reference.location = region
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query do |j|
+      j.location = region
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.location.must_equal region
   end
 end

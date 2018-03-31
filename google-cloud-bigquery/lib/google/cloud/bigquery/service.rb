@@ -245,30 +245,32 @@ module Google
 
         ##
         # Cancel the job specified by jobId.
-        def cancel_job job_id
+        def cancel_job job_id, location: nil
           # The BigQuery team has told us cancelling is considered idempotent
-          execute(backoff: true) { service.cancel_job @project, job_id }
+          execute(backoff: true) do
+            service.cancel_job @project, job_id, location: location
+          end
         end
 
         ##
         # Returns the job specified by jobID.
-        def get_job job_id
+        def get_job job_id, location: nil
           # The get operation is considered idempotent
-          execute(backoff: true) { service.get_job @project, job_id }
+          execute(backoff: true) do
+            service.get_job @project, job_id, location: location
+          end
         end
 
-        def insert_job config
+        def insert_job config, location: nil
           job_object = API::Job.new(
-            job_reference: job_ref_from(nil, nil),
+            job_reference: job_ref_from(nil, nil, location: location),
             configuration: config
           )
           # Jobs have generated id, so this operation is considered idempotent
           execute(backoff: true) { service.insert_job @project, job_object }
         end
 
-        def query_job job_id, prefix, query_job_gapi
-          # Jobs have generated id, so this operation is considered idempotent
-          query_job_gapi.job_reference = job_ref_from(job_id, prefix)
+        def query_job query_job_gapi
           execute backoff: true do
             service.insert_job @project, query_job_gapi
           end
@@ -281,6 +283,7 @@ module Google
           execute backoff: true do
             service.get_job_query_results @project,
                                           job_id,
+                                          location: options.delete(:location),
                                           max_results: options.delete(:max),
                                           page_token: options.delete(:token),
                                           start_index: options.delete(:start),
@@ -288,33 +291,25 @@ module Google
           end
         end
 
-        def copy_table job_id, prefix, copy_job_gapi
-          # Jobs have generated id, so this operation is considered idempotent
-          copy_job_gapi.job_reference = job_ref_from(job_id, prefix)
+        def copy_table copy_job_gapi
           execute backoff: true do
             service.insert_job @project, copy_job_gapi
           end
         end
 
-        def extract_table job_id, prefix, extract_job_gapi
-          # Jobs have generated id, so this operation is considered idempotent
-          extract_job_gapi.job_reference = job_ref_from(job_id, prefix)
+        def extract_table extract_job_gapi
           execute backoff: true do
             service.insert_job @project, extract_job_gapi
           end
         end
 
-        def load_table_gs_url job_id, prefix, load_job_gapi
-          # Jobs have generated id, so this operation is considered idempotent
-          load_job_gapi.job_reference = job_ref_from(job_id, prefix)
+        def load_table_gs_url load_job_gapi
           execute backoff: true do
             service.insert_job @project, load_job_gapi
           end
         end
 
-        def load_table_file job_id, prefix, file, load_job_gapi
-          # Jobs have generated id, so this operation is considered idempotent
-          load_job_gapi.job_reference = job_ref_from(job_id, prefix)
+        def load_table_file file, load_job_gapi
           execute backoff: true do
             service.insert_job \
               @project,
@@ -352,6 +347,37 @@ module Google
           end
         end
 
+        # If no job_id or prefix is given, always generate a client-side job ID
+        # anyway, for idempotent retry in the google-api-client layer.
+        # See https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
+        def job_ref_from job_id, prefix, location: nil
+          prefix ||= "job_"
+          job_id ||= "#{prefix}#{generate_id}"
+          job_ref = API::JobReference.new(
+            project_id: @project,
+            job_id: job_id
+          )
+          # BigQuery does not allow nil location, but missing is ok.
+          job_ref.location = location if location
+          job_ref
+        end
+
+        # API object for dataset.
+        def dataset_ref_from dts, pjt = nil
+          return nil if dts.nil?
+          if dts.respond_to? :dataset_id
+            Google::Apis::BigqueryV2::DatasetReference.new(
+              project_id: (pjt || dts.project_id || @project),
+              dataset_id: dts.dataset_id
+            )
+          else
+            Google::Apis::BigqueryV2::DatasetReference.new(
+              project_id: (pjt || @project),
+              dataset_id: dts
+            )
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end
@@ -361,18 +387,6 @@ module Google
         # Generate a random string similar to the BigQuery service job IDs.
         def generate_id
           SecureRandom.urlsafe_base64(21)
-        end
-
-        # If no job_id or prefix is given, always generate a client-side job ID
-        # anyway, for idempotent retry in the google-api-client layer.
-        # See https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
-        def job_ref_from job_id, prefix
-          prefix ||= "job_"
-          job_id ||= "#{prefix}#{generate_id}"
-          API::JobReference.new(
-            project_id: @project,
-            job_id: job_id
-          )
         end
 
         def mime_type_for file

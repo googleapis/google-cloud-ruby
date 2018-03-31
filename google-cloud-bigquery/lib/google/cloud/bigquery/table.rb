@@ -1128,6 +1128,12 @@ module Google
         # {Job#done?} to detect when the job is done, or simply block until the
         # job is done by calling #{Job#wait_until_done!}. See also {#copy}.
         #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
+        #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
         #   the [Query
@@ -1204,17 +1210,19 @@ module Google
                      job_id: nil, prefix: nil, labels: nil
           ensure_service!
           options = { create: create, write: write, dryrun: dryrun,
-                      labels: labels }
+                      labels: labels, job_id: job_id, prefix: prefix }
           updater = CopyJob::Updater.from_options(
+            service,
             table_ref,
             get_table_ref(destination_table),
             options
           )
+          updater.location = location if location # may be table reference
 
           yield updater if block_given?
 
           job_gapi = updater.to_gapi
-          gapi = service.copy_table job_id, prefix, job_gapi
+          gapi = service.copy_table job_gapi
           Job.from_gapi gapi, service
         end
 
@@ -1223,6 +1231,12 @@ module Google
         # method that blocks for a response. Timeouts and transient errors are
         # generally handled as needed to complete the job. See also
         # {#copy_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
@@ -1288,6 +1302,12 @@ module Google
         # {Job#reload!} and {Job#done?} to detect when the job is done, or
         # simply block until the job is done by calling #{Job#wait_until_done!}.
         # See also {#extract}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method. If
+        # the table is a full resource representation (see {#resource_full?}),
+        # the location of the job will be automatically set to the location of
+        # the table.
         #
         # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
         #   Exporting Data From BigQuery
@@ -1356,14 +1376,15 @@ module Google
           ensure_service!
           options = { format: format, compression: compression,
                       delimiter: delimiter, header: header, dryrun: dryrun,
-                      labels: labels }
-          updater = ExtractJob::Updater.from_options table_ref, extract_url,
-                                                     options
+                      job_id: job_id, prefix: prefix, labels: labels }
+          updater = ExtractJob::Updater.from_options service, table_ref,
+                                                     extract_url, options
+          updater.location = location if location # may be table reference
 
           yield updater if block_given?
 
           job_gapi = updater.to_gapi
-          gapi = service.extract_table job_id, prefix, job_gapi
+          gapi = service.extract_table job_gapi
           Job.from_gapi gapi, service
         end
 
@@ -1372,6 +1393,12 @@ module Google
         # a synchronous method that blocks for a response. Timeouts and
         # transient errors are generally handled as needed to complete the job.
         # See also {#extract_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method. If
+        # the table is a full resource representation (see {#resource_full?}),
+        # the location of the job will be automatically set to the location of
+        # the table.
         #
         # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
         #   Exporting Data From BigQuery
@@ -1440,6 +1467,12 @@ module Google
         # path or a google-cloud storage file instance. Or, you can upload a
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
         #
         # @param [File, Google::Cloud::Storage::File, String, URI,
         #   Array<Google::Cloud::Storage::File, String, URI>] files
@@ -1624,17 +1657,17 @@ module Google
                                      ignore_unknown: ignore_unknown,
                                      max_bad_records: max_bad_records,
                                      quote: quote, skip_leading: skip_leading,
-                                     dryrun: dryrun, schema: schema,
+                                     dryrun: dryrun, job_id: job_id,
+                                     prefix: prefix, schema: schema,
                                      labels: labels, autodetect: autodetect,
                                      null_marker: null_marker
 
           yield updater if block_given?
 
           job_gapi = updater.to_gapi
-          if local_file? files
-            return load_local(job_id, prefix, files, job_gapi)
-          end
-          load_storage job_id, prefix, files, job_gapi
+
+          return load_local(files, job_gapi) if local_file? files
+          load_storage files, job_gapi
         end
 
         ##
@@ -1642,6 +1675,12 @@ module Google
         # path or a google-cloud storage file instance. Or, you can upload a
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
         #
         # @param [File, Google::Cloud::Storage::File, String, URI,
         #   Array<Google::Cloud::Storage::File, String, URI>] files
@@ -1816,7 +1855,7 @@ module Google
 
           yield updater if block_given?
 
-          job = load_local_or_uri nil, nil, files, updater
+          job = load_local_or_uri files, updater
           job.wait_until_done!
           ensure_job_succeeded! job
           true
@@ -2173,8 +2212,10 @@ module Google
           end
         end
 
-        def load_job_gapi table_id, dryrun
+        def load_job_gapi table_id, dryrun, job_id: nil, prefix: nil
+          job_ref = service.job_ref_from job_id, prefix
           Google::Apis::BigqueryV2::Job.new(
+            job_reference: job_ref,
             configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
               load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
                 destination_table: Google::Apis::BigqueryV2::TableReference.new(
@@ -2229,10 +2270,12 @@ module Google
                              encoding: nil, delimiter: nil,
                              ignore_unknown: nil, max_bad_records: nil,
                              quote: nil, skip_leading: nil, dryrun: nil,
-                             schema: nil, labels: nil, autodetect: nil,
-                             null_marker: nil
-          new_job = load_job_gapi table_id, dryrun
+                             schema: nil, job_id: nil, prefix: nil, labels: nil,
+                             autodetect: nil, null_marker: nil
+          new_job = load_job_gapi table_id, dryrun, job_id: job_id,
+                                                    prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
+            job.location = location if location # may be table reference
             job.create = create unless create.nil?
             job.write = write unless write.nil?
             job.schema = schema unless schema.nil?
@@ -2252,7 +2295,7 @@ module Google
           end
         end
 
-        def load_storage job_id, prefix, urls, job_gapi
+        def load_storage urls, job_gapi
           # Convert to storage URL
           urls = [urls].flatten.map do |url|
             if url.respond_to? :to_gs_url
@@ -2274,11 +2317,11 @@ module Google
             end
           end
 
-          gapi = service.load_table_gs_url job_id, prefix, job_gapi
+          gapi = service.load_table_gs_url job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local job_id, prefix, file, job_gapi
+        def load_local file, job_gapi
           path = Pathname(file).to_path
           if job_gapi.configuration.load.source_format.nil?
             source_format = Convert.derive_source_format path
@@ -2287,16 +2330,16 @@ module Google
             end
           end
 
-          gapi = service.load_table_file job_id, prefix, file, job_gapi
+          gapi = service.load_table_file file, job_gapi
           Job.from_gapi gapi, service
         end
 
-        def load_local_or_uri job_id, prefix, file, updater
+        def load_local_or_uri file, updater
           job_gapi = updater.to_gapi
           job = if local_file? file
-                  load_local job_id, prefix, file, job_gapi
+                  load_local file, job_gapi
                 else
-                  load_storage job_id, prefix, file, job_gapi
+                  load_storage file, job_gapi
                 end
           job
         end

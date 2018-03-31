@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,6 +36,27 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
+  let(:region) { "asia-northeast1" }
+
+  it "sets a provided job_id prefix in the updater" do
+    generated_id = "9876543210"
+    prefix = "my_test_job_prefix_"
+    job_id = prefix + generated_id
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi table, extract_file, job_id: job_id
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract_job extract_url, prefix: prefix do |j|
+      j.job_id.must_equal job_id
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.job_id.must_equal job_id
+  end
 
   it "can extract itself and specify the csv format and options" do
     mock = Minitest::Mock.new
@@ -106,6 +127,23 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
     job.labels.must_equal labels
+  end
+
+  it "can extract itself with the location option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    job_gapi = extract_job_gapi(table, extract_file)
+    job_gapi.job_reference.location = region
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = table.extract_job extract_file do |j|
+      j.location = region
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.location.must_equal region
   end
 
   # Borrowed from MockStorage, extract to a common module?

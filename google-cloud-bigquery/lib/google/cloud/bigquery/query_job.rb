@@ -279,7 +279,8 @@ module Google
 
           ensure_service!
           loop do
-            query_results_gapi = service.job_query_results job_id, max: 0
+            query_results_gapi = service.job_query_results \
+              job_id, location: location, max: 0
             if query_results_gapi.job_complete
               @destination_schema_gapi = query_results_gapi.schema
               break
@@ -331,40 +332,10 @@ module Google
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < QueryJob
-          class << self
-            # @private If no job_id or prefix is given, always generate a
-            # client-side job ID anyway, for idempotent retry in the
-            # google-api-client layer. See
-            # https://cloud.google.com/bigquery/docs/managing-jobs#generate-jobid
-            def job_ref_from job_id, prefix
-              prefix ||= "job_"
-              job_id ||= "#{prefix}#{generate_id}"
-              API::JobReference.new(
-                project_id: @project,
-                job_id: job_id
-              )
-            end
-
-            # @private API object for dataset.
-            def dataset_ref_from dts, pjt = nil
-              return nil if dts.nil?
-              if dts.respond_to? :dataset_id
-                Google::Apis::BigqueryV2::DatasetReference.new(
-                  project_id: (pjt || dts.project_id || @project),
-                  dataset_id: dts.dataset_id
-                )
-              else
-                Google::Apis::BigqueryV2::DatasetReference.new(
-                  project_id: (pjt || @project),
-                  dataset_id: dts
-                )
-              end
-            end
-          end
-
           ##
           # @private Create an Updater object.
-          def initialize gapi
+          def initialize service, gapi
+            @service = service
             @gapi = gapi
           end
 
@@ -375,9 +346,12 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::QueryJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_options query, options
-            dataset_config = dataset_ref_from options[:dataset], options[:project]
+          def self.from_options service, query, options
+            job_ref = service.job_ref_from options[:job_id], options[:prefix]
+            dataset_config = service.dataset_ref_from options[:dataset],
+                                                      options[:project]
             req = Google::Apis::BigqueryV2::Job.new(
+              job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
                 query: Google::Apis::BigqueryV2::JobConfigurationQuery.new(
                   query: query,
@@ -387,7 +361,7 @@ module Google
               )
             )
 
-            updater = QueryJob::Updater.new req
+            updater = QueryJob::Updater.new service, req
             updater.params = options[:params] if options[:params]
             updater.create = options[:create]
             updater.write = options[:write]
@@ -407,6 +381,30 @@ module Google
 
           # rubocop:enable all
 
+          ##
+          # Sets the geographic location where the job should run. Required
+          # except for US and EU.
+          #
+          # @param [String] value  A geographic location, such as "US", "EU" or
+          #   "asia-northeast1". Required except for US and EU.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   job = bigquery.query_job "SELECT 1;" do |query|
+          #     query.table = dataset.table "my_table", skip_lookup: true
+          #     query.location = "EU"
+          #   end
+          #
+          # @!group Attributes
+          def location= value
+            @gapi.job_reference.location = value
+          end
+
+          ##
           # Sets the priority of the query.
           #
           # @param [String] value Specifies a priority for the query. Possible
@@ -466,7 +464,7 @@ module Google
           # @!group Attributes
           def dataset= value
             @gapi.configuration.query.default_dataset =
-              Updater.dataset_ref_from value
+              @service.dataset_ref_from value
           end
 
           ##
@@ -854,7 +852,8 @@ module Google
         def ensure_schema!
           return unless destination_schema.nil?
 
-          query_results_gapi = service.job_query_results job_id, max: 0
+          query_results_gapi = service.job_query_results \
+            job_id, location: location, max: 0
           # raise "unable to retrieve schema" if query_results_gapi.schema.nil?
           @destination_schema_gapi = query_results_gapi.schema
         end
