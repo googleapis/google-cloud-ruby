@@ -132,18 +132,41 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
   it "can extract itself with the location option" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = extract_job_gapi(table, extract_file)
-    job_gapi.job_reference.location = region
+    insert_job_gapi = extract_job_gapi(table, extract_file)
+    return_job_gapi = extract_job_gapi(table, extract_file)
+    insert_job_gapi.job_reference.location = region
+    return_job_gapi.job_reference.location = region
 
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    mock.expect :insert_job, return_job_gapi, [project, insert_job_gapi]
 
     job = table.extract_job extract_file do |j|
+      j.location.must_equal "US"
       j.location = region
     end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
     job.location.must_equal region
+  end
+
+  it "can extract itself and unset the location" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    insert_job_gapi = extract_job_gapi(table, extract_file)
+    return_job_gapi = extract_job_gapi(table, extract_file)
+    insert_job_gapi.job_reference.remove_instance_variable :@location
+    return_job_gapi.job_reference.location = "US"
+
+    mock.expect :insert_job, return_job_gapi, [project, insert_job_gapi]
+
+    job = table.extract_job extract_file do |j|
+      j.location.must_equal "US"
+      j.location = nil
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    job.location.must_equal "US"
   end
 
   # Borrowed from MockStorage, extract to a common module?

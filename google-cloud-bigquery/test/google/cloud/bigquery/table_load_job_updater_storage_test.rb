@@ -231,19 +231,42 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
 
   it "can load a storage file with the location option" do
     mock = Minitest::Mock.new
-    job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
-    job_gapi.job_reference.location = region
-    mock.expect :insert_job, job_gapi,
-                [project, job_gapi]
+    insert_job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    return_job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    insert_job_gapi.job_reference.location = region
+    return_job_gapi.job_reference.location = region
+    mock.expect :insert_job, return_job_gapi,
+                [project, insert_job_gapi]
     table.service.mocked_service = mock
 
     job = table.load_job load_file do |j|
+      j.location.must_equal "US"
       j.location = region
     end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.location.must_equal region
+  end
+
+  it "can load a storage file and unset location" do
+    mock = Minitest::Mock.new
+    insert_job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    return_job_gapi = load_job_url_gapi table_gapi.table_reference, load_url
+    insert_job_gapi.job_reference.remove_instance_variable :@location
+    return_job_gapi.job_reference.location = "US"
+    mock.expect :insert_job, return_job_gapi,
+                [project, insert_job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job load_file do |j|
+      j.location.must_equal "US"
+      j.location = nil
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.location.must_equal "US"
   end
 
   def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
