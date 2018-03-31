@@ -171,17 +171,36 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
   it "can copy itself with the location option" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi = copy_job_gapi(source_table, target_table, location: "US")
     job_gapi.job_reference.location = region
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy_job target_table do |j|
+      j.location.must_equal "US" # default
       j.location = region
     end
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
     job.location.must_equal region
+  end
+
+  it "can copy itself with unsetting the location option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    # Setting location: nil is the same as unsetting it in the gapic object
+    job_gapi = copy_job_gapi(source_table, target_table, location: nil)
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = source_table.copy_job target_table do |j|
+      j.location.must_equal "US" # default
+      j.location = nil
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    job.location.must_be :nil?
   end
 end

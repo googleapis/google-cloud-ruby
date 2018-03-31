@@ -224,6 +224,11 @@ module Google
           # @!group Attributes
           def location= value
             @gapi.job_reference.location = value
+            return unless value.nil?
+
+            # Treat assigning value of nil the same as unsetting the value.
+            unset = @gapi.job_reference.instance_variables.include? :@location
+            @gapi.job_reference.remove_instance_variable :@location if unset
           end
 
           ##
