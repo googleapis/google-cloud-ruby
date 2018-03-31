@@ -1128,6 +1128,12 @@ module Google
         # {Job#done?} to detect when the job is done, or simply block until the
         # job is done by calling #{Job#wait_until_done!}. See also {#copy}.
         #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
+        #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
         #   the [Query
@@ -1211,6 +1217,7 @@ module Google
             get_table_ref(destination_table),
             options
           )
+          updater.location = location if location # may be table reference
 
           yield updater if block_given?
 
@@ -1224,6 +1231,12 @@ module Google
         # method that blocks for a response. Timeouts and transient errors are
         # generally handled as needed to complete the job. See also
         # {#copy_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {CopyJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
         #
         # @param [Table, String] destination_table The destination for the
         #   copied data. This can also be a string identifier as specified by
@@ -1289,6 +1302,12 @@ module Google
         # {Job#reload!} and {Job#done?} to detect when the job is done, or
         # simply block until the job is done by calling #{Job#wait_until_done!}.
         # See also {#extract}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method. If
+        # the table is a full resource representation (see {#resource_full?}),
+        # the location of the job will be automatically set to the location of
+        # the table.
         #
         # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
         #   Exporting Data From BigQuery
@@ -1360,6 +1379,7 @@ module Google
                       job_id: job_id, prefix: prefix, labels: labels }
           updater = ExtractJob::Updater.from_options service, table_ref,
                                                      extract_url, options
+          updater.location = location if location # may be table reference
 
           yield updater if block_given?
 
@@ -1373,6 +1393,12 @@ module Google
         # a synchronous method that blocks for a response. Timeouts and
         # transient errors are generally handled as needed to complete the job.
         # See also {#extract_job}.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {ExtractJob::Updater#location=} in a block passed to this method. If
+        # the table is a full resource representation (see {#resource_full?}),
+        # the location of the job will be automatically set to the location of
+        # the table.
         #
         # @see https://cloud.google.com/bigquery/exporting-data-from-bigquery
         #   Exporting Data From BigQuery
@@ -1441,6 +1467,12 @@ module Google
         # path or a google-cloud storage file instance. Or, you can upload a
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
         #
         # @param [File, Google::Cloud::Storage::File, String, URI,
         #   Array<Google::Cloud::Storage::File, String, URI>] files
@@ -1643,6 +1675,12 @@ module Google
         # path or a google-cloud storage file instance. Or, you can upload a
         # file directly. See [Loading Data with a POST Request](
         # https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # table is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # table.
         #
         # @param [File, Google::Cloud::Storage::File, String, URI,
         #   Array<Google::Cloud::Storage::File, String, URI>] files
@@ -2237,6 +2275,7 @@ module Google
           new_job = load_job_gapi table_id, dryrun, job_id: job_id,
                                                     prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
+            job.location = location if location # may be table reference
             job.create = create unless create.nil?
             job.write = write unless write.nil?
             job.schema = schema unless schema.nil?

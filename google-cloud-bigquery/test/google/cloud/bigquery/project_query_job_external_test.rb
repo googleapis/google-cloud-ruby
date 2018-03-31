@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :external, :mock_bigquery
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
 
   it "queries with external data" do
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.table_definitions = {
       "my_csv" => Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
         source_uris: ["gs://my-bucket/path/to/file.csv"],

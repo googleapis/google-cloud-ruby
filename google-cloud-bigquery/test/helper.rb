@@ -299,16 +299,15 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def copy_job_gapi source, target, job_id: "job_9876543210"
-    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id)
+  def copy_job_gapi source, target, job_id: "job_9876543210", location: "US"
+    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id, location: location)
   end
 
-  def copy_job_json source, target, job_id
-    {
+  def copy_job_json source, target, job_id, location: "US"
+    hash = {
       "jobReference" => {
         "projectId" => project,
-        "jobId" => job_id,
-        "location" => nil
+        "jobId" => job_id
       },
       "configuration" => {
         "copy" => {
@@ -327,7 +326,9 @@ class MockBigquery < Minitest::Spec
         },
         "dryRun" => nil
       }
-    }.to_json
+    }
+    hash["jobReference"]["location"] = location if location
+    hash.to_json
   end
 
   def random_view_gapi dataset, id = nil, name = nil, description = nil
@@ -380,8 +381,8 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_job_hash id = "job_9876543210", state = "running", location: nil
-    {
+  def random_job_hash id = "job_9876543210", state = "running", location: "US"
+    hash = {
       "kind" => "bigquery#job",
       "etag" => "etag",
       "id" => "#{project}:#{id}",
@@ -405,6 +406,8 @@ class MockBigquery < Minitest::Spec
       },
       "user_email" => "user@example.com"
     }
+    hash["jobReference"]["location"] = location if location
+    hash
   end
 
   def random_project_hash numeric_id = 1234567890, name = "project-name",
@@ -435,12 +438,13 @@ class MockBigquery < Minitest::Spec
     job_gapi
   end
 
-  def job_reference_gapi project, job_id, location: nil
-    Google::Apis::BigqueryV2::JobReference.new(
+  def job_reference_gapi project, job_id, location: "US"
+    job_ref = Google::Apis::BigqueryV2::JobReference.new(
       project_id: project,
-      job_id: job_id,
-      location: location
+      job_id: job_id
     )
+    job_ref.location = location if location
+    job_ref
   end
 
   def query_job_resp_gapi query, job_id: nil
@@ -501,8 +505,8 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210"
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json query, job_id: job_id
+  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210", location: "US"
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id, location: location)
     gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
     gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: dataset, project_id: project
@@ -510,12 +514,11 @@ class MockBigquery < Minitest::Spec
     gapi
   end
 
-  def query_job_json query, job_id: "job_9876543210"
-    {
+  def query_job_json query, job_id: "job_9876543210", location: "US"
+    hash = {
       "jobReference" => {
         "projectId" => project,
-        "jobId" => job_id,
-        "location" => nil
+        "jobId" => job_id
       },
       "configuration" => {
         "query" => {
@@ -534,19 +537,20 @@ class MockBigquery < Minitest::Spec
           "userDefinedFunctionResources" => []
         }
       }
-    }.to_json
+    }
+    hash["jobReference"]["location"] = location if location
+    hash.to_json
   end
 
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210"
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id)
+  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US"
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location)
   end
 
-  def extract_job_json table, extract_file, job_id
-    {
+  def extract_job_json table, extract_file, job_id, location: "US"
+    hash = {
       "jobReference" => {
         "projectId" => project,
-        "jobId" => job_id,
-        "location" => nil
+        "jobId" => job_id
       },
       "configuration" => {
         "extract" => {
@@ -563,7 +567,9 @@ class MockBigquery < Minitest::Spec
         },
         "dryRun" => nil
       }
-    }.to_json
+    }
+    hash["jobReference"]["location"] = location if location
+    hash.to_json
   end
 
   def udfs_gapi_inline
@@ -603,14 +609,14 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::QueryResponse.from_json query_data_hash(token: token).to_json
   end
 
-  def query_data_hash token: "token1234567890"
+  def query_data_hash token: "token1234567890", location: "US"
     {
       "kind" => "bigquery#getQueryResultsResponse",
       "etag" => "etag1234567890",
       "jobReference" => {
         "projectId" => project,
         "jobId" => "job_9876543210",
-        "location" => nil
+        "location" => location
       },
       "schema" => random_schema_hash,
       "rows" => random_data_rows,
@@ -646,9 +652,9 @@ class MockBigquery < Minitest::Spec
     h.to_json
   end
 
-  def load_job_gapi table_reference, source_format = "NEWLINE_DELIMITED_JSON", job_id: "job_9876543210"
+  def load_job_gapi table_reference, source_format = "NEWLINE_DELIMITED_JSON", job_id: "job_9876543210", location: "US"
     Google::Apis::BigqueryV2::Job.new(
-      job_reference: job_reference_gapi(project, job_id),
+      job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
         load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
           destination_table: table_reference,
@@ -682,9 +688,9 @@ class MockBigquery < Minitest::Spec
     )
   end
 
-  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210"
+  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210", location: "US"
     Google::Apis::BigqueryV2::Job.new(
-      job_reference: job_reference_gapi(project, job_id),
+      job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
         load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
           destination_table: table_reference,

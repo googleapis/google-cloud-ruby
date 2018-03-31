@@ -34,7 +34,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     bigquery.service.mocked_service = mock
 
     job_id = "my_test_job_id"
-    job_gapi = query_job_gapi query, job_id: job_id
+    job_gapi = query_job_gapi query, job_id: job_id, location: nil
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query, job_id: job_id
+    job_gapi = query_job_gapi query, job_id: job_id, location: nil
 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi(query)
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.priority = "BATCH"
     job_gapi.configuration.query.use_query_cache = false
     mock.expect :insert_job, job_gapi, [project, job_gapi]
@@ -86,7 +86,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi(query)
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.destination_table = Google::Apis::BigqueryV2::TableReference.new(
       project_id: table.project_id,
       dataset_id: table.dataset_id,
@@ -116,7 +116,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi(query)
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       project_id: project,
       dataset_id: "some_random_dataset"
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.labels = labels
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
@@ -152,7 +152,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.user_defined_function_resources = udfs_gapi_array
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
@@ -169,7 +169,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.user_defined_function_resources = [udfs_gapi_uri]
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
@@ -186,17 +186,13 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     dataset.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.configuration.query.destination_encryption_configuration = encryption_gapi(kms_key)
-    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project,
-        dataset_id: dataset_id
-    )
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     encrypt_config = bigquery.encryption kms_key: kms_key
 
-    job = dataset.query_job query do |j|
+    job = bigquery.query_job query do |j|
       j.encryption = encrypt_config
     end
     mock.verify
@@ -210,15 +206,11 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock = Minitest::Mock.new
     dataset.service.mocked_service = mock
 
-    job_gapi = query_job_gapi query
+    job_gapi = query_job_gapi query, location: nil
     job_gapi.job_reference.location = region
-    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
-        project_id: project,
-        dataset_id: dataset_id
-    )
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
-    job = dataset.query_job query do |j|
+    job = bigquery.query_job query do |j|
       j.location = region
     end
     mock.verify

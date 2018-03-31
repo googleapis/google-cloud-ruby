@@ -696,6 +696,12 @@ module Google
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
         #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
+        #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
@@ -909,6 +915,7 @@ module Google
 
           updater = QueryJob::Updater.from_options service, query, options
           updater.dataset = self
+          updater.location = location if location # may be dataset reference
 
           yield updater if block_given?
 
@@ -944,6 +951,12 @@ module Google
         #
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
         #
         # @see https://cloud.google.com/bigquery/querying-data Querying Data
         #
@@ -1080,6 +1093,7 @@ module Google
                       params: params }
           options[:dataset] ||= self
           updater = QueryJob::Updater.from_options service, query, options
+          updater.location = location if location # may be dataset reference
 
           yield updater if block_given?
 
@@ -1155,6 +1169,12 @@ module Google
         # path or a google-cloud-storage `File` instance. Or, you can upload a
         # file directly. See [Loading Data with a POST
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
         #
         # @param [String] table_id The destination table to load the data into.
         # @param [File, Google::Cloud::Storage::File, String, URI,
@@ -1408,6 +1428,12 @@ module Google
         # path or a google-cloud-storage `File` instance. Or, you can upload a
         # file directly. See [Loading Data with a POST
         # Request](https://cloud.google.com/bigquery/loading-data-post-request#multipart).
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {LoadJob::Updater#location=} in a block passed to this method. If the
+        # dataset is a full resource representation (see {#resource_full?}), the
+        # location of the job will be automatically set to the location of the
+        # dataset.
         #
         # @param [String] table_id The destination table to load the data into.
         # @param [File, Google::Cloud::Storage::File, String, URI,
@@ -2067,6 +2093,7 @@ module Google
           new_job = load_job_gapi table_id, dryrun, job_id: job_id,
                                                     prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
+            job.location = location if location # may be dataset reference
             job.create = create unless create.nil?
             job.write = write unless write.nil?
             job.schema = schema unless schema.nil?

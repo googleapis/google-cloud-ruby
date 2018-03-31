@@ -56,7 +56,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
 
     it "can specify a storage file" do
       mock = Minitest::Mock.new
-      job_gapi = load_job_url_gapi(table_reference, load_url)
+      job_gapi = load_job_url_gapi(table_reference, load_url, location: nil)
       mock.expect :insert_job, load_job_resp_gapi(load_url),
         [project, job_gapi]
       dataset.service.mocked_service = mock

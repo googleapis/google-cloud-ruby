@@ -108,6 +108,9 @@ module Google
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
         #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method.
+        #
         # @param [String] query A query string, following the BigQuery [query
         #   syntax](https://cloud.google.com/bigquery/query-reference), of the
         #   query to execute. Example: "SELECT count(f1) FROM
@@ -362,6 +365,9 @@ module Google
         #
         # See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
         # for an overview of each BigQuery data type, including allowed values.
+        #
+        # The geographic location for the job ("US", "EU", etc.) can be set via
+        # {QueryJob::Updater#location=} in a block passed to this method.
         #
         # @see https://cloud.google.com/bigquery/querying-data Querying Data
         #

@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
       mock = Minitest::Mock.new
       bigquery.service.mocked_service = mock
 
-      job_gapi = query_job_gapi(query)
+      job_gapi = query_job_gapi(query, location: nil)
       job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
         project_id: project,
         dataset_id: dataset_id

@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   let(:table_gapi) { random_table_gapi dataset_id, table_id }
 
   it "queries the data with a string parameter" do
-    job_gapi = query_job_gapi "#{query} WHERE name = @name", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE name = @name", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "name",
@@ -59,7 +59,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   end
 
   it "queries the data with an integer parameter" do
-    job_gapi = query_job_gapi "#{query} WHERE age > @age", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE age > @age", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "age",
@@ -91,7 +91,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   end
 
   it "queries the data with a float parameter" do
-    job_gapi = query_job_gapi "#{query} WHERE score > @score", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE score > @score", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "score",
@@ -123,7 +123,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   end
 
   it "queries the data with a true parameter" do
-    job_gapi = query_job_gapi "#{query} WHERE active = @active", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE active = @active", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "active",
@@ -155,7 +155,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   end
 
   it "queries the data with a false parameter" do
-    job_gapi = query_job_gapi "#{query} WHERE active = @active", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE active = @active", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "active",
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   it "queries the data with a date parameter" do
     today = Date.today
 
-    job_gapi = query_job_gapi "#{query} WHERE create_date = @day", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE create_date = @day", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "day",
@@ -223,7 +223,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   it "queries the data with a datetime parameter" do
     now = DateTime.now
 
-    job_gapi = query_job_gapi "#{query} WHERE update_datetime < @when", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE update_datetime < @when", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "when",
@@ -257,7 +257,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   it "queries the data with a timestamp parameter" do
     now = ::Time.now
 
-    job_gapi = query_job_gapi "#{query} WHERE update_timestamp < @when", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE update_timestamp < @when", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "when",
@@ -291,7 +291,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   it "queries the data with a time parameter" do
     timeofday = bigquery.time 16, 0, 0
 
-    job_gapi = query_job_gapi "#{query} WHERE create_time = @time", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE create_time = @time", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "time",
@@ -325,7 +325,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   it "queries the data with a File parameter" do
     file = File.open "acceptance/data/logo.jpg", "rb"
 
-    job_gapi = query_job_gapi "#{query} WHERE avatar = @file", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE avatar = @file", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "file",
@@ -359,7 +359,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   it "queries the data with a StringIO parameter" do
     file = StringIO.new File.read("acceptance/data/logo.jpg", mode: "rb")
 
-    job_gapi = query_job_gapi "#{query} WHERE avatar = @file", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE avatar = @file", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "file",
@@ -399,7 +399,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
                                        " AND score > @score" +
                                        " AND active = @active" +
                                        " AND create_date = @date" +
-                                       " AND update_timestamp < @time", parameter_mode: "NAMED"
+                                       " AND update_timestamp < @time", parameter_mode: "NAMED", location: nil
 
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -490,7 +490,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   end
 
   it "queries the data with an array parameter" do
-    job_gapi = query_job_gapi "#{query} WHERE name IN @names", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE name IN @names", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "names",
@@ -529,7 +529,7 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
   end
 
   it "queries the data with a struct parameter" do
-    job_gapi = query_job_gapi "#{query} WHERE meta = @meta", parameter_mode: "NAMED"
+    job_gapi = query_job_gapi "#{query} WHERE meta = @meta", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
         name: "meta",

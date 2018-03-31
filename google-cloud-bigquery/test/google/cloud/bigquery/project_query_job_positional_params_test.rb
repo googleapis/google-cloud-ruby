@@ -24,7 +24,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :positional_params, :mock
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   let(:query_job_gapi) do
-    Google::Apis::BigqueryV2::Job.from_json(query_job_json("SELECT * FROM tbl")).tap do |r|
+    Google::Apis::BigqueryV2::Job.from_json(query_job_json("SELECT * FROM tbl", location: nil)).tap do |r|
       r.configuration.query.use_legacy_sql = false
       r.configuration.query.parameter_mode = "POSITIONAL"
     end

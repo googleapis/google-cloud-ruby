@@ -353,11 +353,13 @@ module Google
         def job_ref_from job_id, prefix, location: nil
           prefix ||= "job_"
           job_id ||= "#{prefix}#{generate_id}"
-          API::JobReference.new(
+          job_ref = API::JobReference.new(
             project_id: @project,
-            job_id: job_id,
-            location: location
+            job_id: job_id
           )
+          # BigQuery does not allow nil location, but missing is ok.
+          job_ref.location = location if location
+          job_ref
         end
 
         # API object for dataset.

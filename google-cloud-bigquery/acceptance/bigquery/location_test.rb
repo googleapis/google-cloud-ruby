@@ -58,9 +58,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     insert_response.error_rows.must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    query_job = dataset.query_job query, job_id: job_id do |j|
-      j.location = region
-    end
+    query_job = dataset.query_job query, job_id: job_id
 
     query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     query_job.job_id.must_equal job_id
@@ -90,9 +88,8 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     more_data = data.next
     more_data.wont_be :nil?
 
-    data = dataset.query query do |j|
-      j.location = region
-    end
+    data = dataset.query query
+
     data.class.must_equal Google::Cloud::Bigquery::Data
     data.total.wont_be(:nil?)
     data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
@@ -110,9 +107,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       file = bucket.create_file local_file
 
       # Load the file to a dataset in the region with an load job in the region.
-      job = table.load_job file do |j|
-        j.location = region
-      end
+      job = table.load_job file
 
       job.location.must_equal region
       job.wait_until_done!
@@ -132,7 +127,6 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
     copy_job = table.copy_job target_table_2_id, job_id: job_id do |j|
       j.create = :needed
       j.write = :empty
-      j.location = region
     end
 
     copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
@@ -153,9 +147,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
 
   it "creates, cancels and gets a job with location" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    job = table.load_job local_file, job_id: job_id do |j|
-      j.location = region
-    end
+    job = table.load_job local_file, job_id: job_id
 
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.location.must_equal region
@@ -185,9 +177,8 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
   it "creates an extract job with location" do
     begin
       # Make sure there is data to extract...
-      load_job = table.load_job local_file do |j|
-        j.location = region
-      end
+      load_job = table.load_job local_file
+
       load_job.location.must_equal region
       load_job.wait_until_done!
       load_job.wont_be :failed?
@@ -199,9 +190,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-        extract_job = table.extract_job extract_file, job_id: job_id do |j|
-          j.location = region
-        end
+        extract_job = table.extract_job extract_file, job_id: job_id
 
         extract_job.job_id.must_equal job_id
         extract_job.wait_until_done!

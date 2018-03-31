@@ -50,7 +50,7 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
       mock = Minitest::Mock.new
       bigquery.service.mocked_service = mock
 
-      job_gapi = query_job_gapi query, dataset: dataset_id
+      job_gapi = query_job_gapi query, dataset: dataset_id, location: nil
 
       mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
       mock.expect :get_job_query_results,

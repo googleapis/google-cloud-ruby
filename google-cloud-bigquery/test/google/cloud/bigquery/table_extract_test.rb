@@ -184,16 +184,16 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result.must_equal true
   end
 
-  def extract_job_gapi table, extract_file, job_id: "job_9876543210"
-    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id)
+  def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US"
+    Google::Apis::BigqueryV2::Job.from_json extract_job_json(table, extract_file, job_id, location: location)
   end
 
-  def extract_job_json table, extract_file, job_id
+  def extract_job_json table, extract_file, job_id, location: "US"
     {
       "jobReference" => {
         "projectId" => project,
         "jobId" => job_id,
-        "location" => nil
+        "location" => location
       },
       "configuration" => {
         "extract" => {
