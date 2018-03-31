@@ -1,5 +1,15 @@
 # Release History
 
+### 1.2.0 / 2018-03-31
+
+* Add geo-regionalization (location) support to Jobs.
+* Add Project#encryption support to Jobs.
+* Rename Encryption to EncryptionConfiguration.
+* Add blocks for setting Job properties to all Job creation methods.
+* Add support for lists of URLs to #load and #load_job. (jeremywadsack)
+* Fix Schema::Field type helpers.
+* Fix Table#load example in README.
+
 ### 1.1.0 / 2018-02-27
 
 * Support table partitioning by field.
