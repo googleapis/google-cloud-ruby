@@ -20,7 +20,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
   let(:dataset) do
     d = bigquery.dataset dataset_id
     if d.nil?
-      # Create a temporary dataset (& table) in the EU.
+      # Create a temporary dataset (& table) in the region.
       d = bigquery.create_dataset dataset_id, location: region
     end
     d

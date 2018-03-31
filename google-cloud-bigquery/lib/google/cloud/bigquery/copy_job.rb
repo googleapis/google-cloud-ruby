@@ -182,8 +182,8 @@ module Google
           # Sets the geographic location where the job should run. Required
           # except for US and EU.
           #
-          # @param [String] value A geographic location code, such as "US", "EU"
-          #   or "asia-northeast1". Required except for US and EU.
+          # @param [String] value A geographic location, such as "US", "EU" or
+          #   "asia-northeast1". Required except for US and EU.
           #
           # @example
           #   require "google/cloud/bigquery"

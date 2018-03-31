@@ -91,10 +91,10 @@ module Google
         end
 
         ##
-        # The geographic location where the job resides.
+        # The geographic location where the job runs.
         #
-        # @return [String]  A geographic location code, such as "US", "EU"
-        #   or "asia-northeast1".
+        # @return [String]  A geographic location, such as "US", "EU" or
+        #   "asia-northeast1".
         #
         # @!group Attributes
         def location

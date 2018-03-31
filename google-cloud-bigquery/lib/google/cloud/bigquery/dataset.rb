@@ -266,8 +266,8 @@ module Google
         # The geographic location where the dataset should reside. Possible
         # values include `EU` and `US`. The default value is `US`.
         #
-        # @return [String, nil] The location code, or `nil` if the object is a
-        #   reference (see {#reference?}).
+        # @return [String, nil] The geographic location, or `nil` if the object
+        #   is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
