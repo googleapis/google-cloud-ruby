@@ -69,6 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2.CloudStorageOptions" do
     optional :file_set, :message, 1, "google.privacy.dlp.v2.CloudStorageOptions.FileSet"
     optional :bytes_limit_per_file, :int64, 4
+    repeated :file_types, :enum, 5, "google.privacy.dlp.v2.FileType"
   end
   add_message "google.privacy.dlp.v2.CloudStorageOptions.FileSet" do
     optional :url, :string, 1
@@ -128,6 +129,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :LIKELY, 4
     value :VERY_LIKELY, 5
   end
+  add_enum "google.privacy.dlp.v2.FileType" do
+    value :FILE_TYPE_UNSPECIFIED, 0
+    value :BINARY_FILE, 1
+    value :TEXT_FILE, 2
+  end
 end
 
 module Google
@@ -160,6 +166,7 @@ module Google
         RecordKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RecordKey").msgclass
         BigQueryTable = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.BigQueryTable").msgclass
         Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Likelihood").enummodule
+        FileType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.FileType").enummodule
       end
     end
   end

@@ -16,11 +16,11 @@ module Google
   module Privacy
     module Dlp
       ##
-      # # DLP API Contents
+      # # Cloud Data Loss Prevention (DLP) API Contents
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [DlpServiceClient][] | The DLP API is a service that allows clients to detect the presence of Personally Identifiable Information (PII) and other privacy-sensitive data in user-supplied, unstructured data streams, like text blocks or images. |
+      # | [DlpServiceClient][] | The Cloud Data Loss Prevention (DLP) API is a service that allows clients to detect the presence of Personally Identifiable Information (PII) and other privacy-sensitive data in user-supplied, unstructured data streams, like text blocks or images. |
       # | [Data Types][] | Data types for Google::Cloud::Dlp::V2 |
       #
       # [DlpServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest/google/privacy/dlp/v2/dlpserviceclient
@@ -34,7 +34,6 @@ module Google
         #   @return [Array<Google::Privacy::Dlp::V2::InfoType>]
         #     Restricts what info_types to look for. The values must correspond to
         #     InfoType values returned by ListInfoTypes or found in documentation.
-        #     Empty info_types runs all enabled detectors.
         # @!attribute [rw] min_likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
         #     Only returns findings equal or above this threshold. The default is
@@ -59,9 +58,14 @@ module Google
           # @!attribute [rw] max_findings_per_item
           #   @return [Integer]
           #     Max number of findings that will be returned for each item scanned.
+          #     When set within +InspectDataSourceRequest+,
+          #     the maximum returned is 1000 regardless if this is set higher.
+          #     When set within +InspectContentRequest+, this field is ignored.
           # @!attribute [rw] max_findings_per_request
           #   @return [Integer]
-          #     Max total number of findings that will be returned per request/job.
+          #     Max number of findings that will be returned per request/job.
+          #     When set within +InspectContentRequest+, the maximum returned is 1000
+          #     regardless if this is set higher.
           # @!attribute [rw] max_findings_per_info_type
           #   @return [Array<Google::Privacy::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit>]
           #     Configuration of findings limit given for specified infoTypes.
@@ -91,6 +95,8 @@ module Google
         class ByteContentItem
           module BytesType
             BYTES_TYPE_UNSPECIFIED = 0
+
+            IMAGE = 6
 
             IMAGE_JPEG = 1
 
@@ -164,7 +170,9 @@ module Google
         #     Timestamp when finding was detected.
         # @!attribute [rw] quote_info
         #   @return [Google::Privacy::Dlp::V2::QuoteInfo]
-        #     InfoType-dependent details parsed from quote.
+        #     Contains data parsed from quotes. Only populated if include_quote was set
+        #     to true and a supported infoType was requested. Currently supported
+        #     infoTypes: DATE, DATE_OF_BIRTH and TIME.
         class Finding; end
 
         # Specifies the location of the finding.
@@ -735,6 +743,9 @@ module Google
             #   @return [Array<Google::Privacy::Dlp::V2::ValueFrequency>]
             #     Sample of value frequencies in this bucket. The total number of
             #     values returned per bucket is capped at 20.
+            # @!attribute [rw] bucket_value_count
+            #   @return [Integer]
+            #     Total number of distinct values in this bucket.
             class CategoricalStatsHistogramBucket; end
           end
 
@@ -768,6 +779,9 @@ module Google
             #   @return [Array<Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult::KAnonymityEquivalenceClass>]
             #     Sample of equivalence classes in this bucket. The total number of
             #     classes returned per bucket is capped at 20.
+            # @!attribute [rw] bucket_value_count
+            #   @return [Integer]
+            #     Total number of distinct equivalence classes in this bucket.
             class KAnonymityHistogramBucket; end
           end
 
@@ -807,6 +821,9 @@ module Google
             #   @return [Array<Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult::LDiversityEquivalenceClass>]
             #     Sample of equivalence classes in this bucket. The total number of
             #     classes returned per bucket is capped at 20.
+            # @!attribute [rw] bucket_value_count
+            #   @return [Integer]
+            #     Total number of distinct equivalence classes in this bucket.
             class LDiversityHistogramBucket; end
           end
 
@@ -853,6 +870,9 @@ module Google
             #   @return [Array<Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult::KMapEstimationQuasiIdValues>]
             #     Sample of quasi-identifier tuple values in this bucket. The total
             #     number of classes returned per bucket is capped at 20.
+            # @!attribute [rw] bucket_value_count
+            #   @return [Integer]
+            #     Total number of distinct quasi-identifier tuple values in this bucket.
             class KMapEstimationHistogramBucket; end
           end
         end
@@ -1128,6 +1148,7 @@ module Google
         # replaced with the same surrogate.
         # Identifiers must be at least two characters long.
         # In the case that the identifier is the empty string, it will be skipped.
+        # See [Pseudonymization](https://cloud.google.com/dlp/docs/pseudonymization) for example usage.
         # @!attribute [rw] crypto_key
         #   @return [Google::Privacy::Dlp::V2::CryptoKey]
         #     The key used by the encryption algorithm. [required]

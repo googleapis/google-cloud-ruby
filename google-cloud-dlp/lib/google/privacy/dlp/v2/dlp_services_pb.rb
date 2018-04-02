@@ -24,7 +24,7 @@ module Google
     module Dlp
       module V2
         module DlpService
-          # The DLP API is a service that allows clients
+          # The Cloud Data Loss Prevention (DLP) API is a service that allows clients
           # to detect the presence of Personally Identifiable Information (PII) and other
           # privacy-sensitive data in user-supplied, unstructured data streams, like text
           # blocks or images.
@@ -51,9 +51,11 @@ module Google
             # This method has limits on input size and output size.
             # [How-to guide](/dlp/docs/deidentify-sensitive-data)
             rpc :DeidentifyContent, DeidentifyContentRequest, DeidentifyContentResponse
-            # Re-identify content that has been de-identified.
+            # Re-identifies content that has been de-identified.
             rpc :ReidentifyContent, ReidentifyContentRequest, ReidentifyContentResponse
-            # Returns sensitive information types DLP supports.
+            # Returns a list of the sensitive information types that the DLP API
+            # supports. For more information, see [Listing supported predefined
+            # infoTypes](/dlp/docs/listing-infotypes).
             rpc :ListInfoTypes, ListInfoTypesRequest, ListInfoTypesResponse
             # Creates an inspect template for re-using frequently used configuration
             # for inspecting content, images, and storage.
@@ -64,21 +66,21 @@ module Google
             rpc :GetInspectTemplate, GetInspectTemplateRequest, InspectTemplate
             # Lists inspect templates.
             rpc :ListInspectTemplates, ListInspectTemplatesRequest, ListInspectTemplatesResponse
-            # Deletes inspect templates.
+            # Deletes an inspect template.
             rpc :DeleteInspectTemplate, DeleteInspectTemplateRequest, Google::Protobuf::Empty
-            # Creates an Deidentify template for re-using frequently used configuration
+            # Creates a de-identify template for re-using frequently used configuration
             # for Deidentifying content, images, and storage.
             rpc :CreateDeidentifyTemplate, CreateDeidentifyTemplateRequest, DeidentifyTemplate
-            # Updates the inspect template.
+            # Updates the de-identify template.
             rpc :UpdateDeidentifyTemplate, UpdateDeidentifyTemplateRequest, DeidentifyTemplate
-            # Gets an inspect template.
+            # Gets a de-identify template.
             rpc :GetDeidentifyTemplate, GetDeidentifyTemplateRequest, DeidentifyTemplate
-            # Lists inspect templates.
+            # Lists de-identify templates.
             rpc :ListDeidentifyTemplates, ListDeidentifyTemplatesRequest, ListDeidentifyTemplatesResponse
-            # Deletes inspect templates.
+            # Deletes a de-identify template.
             rpc :DeleteDeidentifyTemplate, DeleteDeidentifyTemplateRequest, Google::Protobuf::Empty
-            # Creates a job to run DLP actions such as scanning storage for sensitive
-            # information on a set schedule.
+            # Creates a job trigger to run DLP actions such as scanning storage for
+            # sensitive information on a set schedule.
             rpc :CreateJobTrigger, CreateJobTriggerRequest, JobTrigger
             # Updates a job trigger.
             rpc :UpdateJobTrigger, UpdateJobTriggerRequest, JobTrigger
@@ -88,7 +90,7 @@ module Google
             rpc :ListJobTriggers, ListJobTriggersRequest, ListJobTriggersResponse
             # Deletes a job trigger.
             rpc :DeleteJobTrigger, DeleteJobTriggerRequest, Google::Protobuf::Empty
-            # Create a new job to inspect storage or calculate risk metrics [How-to
+            # Creates a new job to inspect storage or calculate risk metrics [How-to
             # guide](/dlp/docs/compute-risk-analysis).
             rpc :CreateDlpJob, CreateDlpJobRequest, DlpJob
             # Lists DlpJobs that match the specified filter in the request.
@@ -99,7 +101,7 @@ module Google
             # no longer interested in the DlpJob result. The job will be cancelled if
             # possible.
             rpc :DeleteDlpJob, DeleteDlpJobRequest, Google::Protobuf::Empty
-            # Starts asynchronous cancellation on a long-running DlpJob.  The server
+            # Starts asynchronous cancellation on a long-running DlpJob. The server
             # makes a best effort to cancel the DlpJob, but success is not
             # guaranteed.
             rpc :CancelDlpJob, CancelDlpJobRequest, Google::Protobuf::Empty

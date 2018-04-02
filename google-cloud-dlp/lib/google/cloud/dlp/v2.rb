@@ -19,10 +19,11 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for DLP API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Data Loss Prevention (DLP) API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
-    # [DLP API][Product Documentation]:
-    #
+    # [Cloud Data Loss Prevention (DLP) API][Product Documentation]:
+    # Provides methods for detection of privacy-sensitive fragments in text,
+    # images, and Google Cloud Platform storage repositories.
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -31,11 +32,11 @@ module Google
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the DLP API.](https://console.cloud.google.com/apis/api/dlp)
+    # 3. [Enable the Cloud Data Loss Prevention (DLP) API.](https://console.cloud.google.com/apis/api/dlp)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Next Steps
-    # - Read the [DLP API Product documentation][Product Documentation]
+    # - Read the [Cloud Data Loss Prevention (DLP) API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
     # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
@@ -48,7 +49,7 @@ module Google
         # rubocop:enable LineLength
 
         ##
-        # The DLP API is a service that allows clients
+        # The Cloud Data Loss Prevention (DLP) API is a service that allows clients
         # to detect the presence of Personally Identifiable Information (PII) and other
         # privacy-sensitive data in user-supplied, unstructured data streams, like text
         # blocks or images.

@@ -38,6 +38,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_enum "google.privacy.dlp.v2.ByteContentItem.BytesType" do
     value :BYTES_TYPE_UNSPECIFIED, 0
+    value :IMAGE, 6
     value :IMAGE_JPEG, 1
     value :IMAGE_BMP, 2
     value :IMAGE_PNG, 3
@@ -280,6 +281,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :value_frequency_upper_bound, :int64, 2
     optional :bucket_size, :int64, 3
     repeated :bucket_values, :message, 4, "google.privacy.dlp.v2.ValueFrequency"
+    optional :bucket_value_count, :int64, 5
   end
   add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult" do
     repeated :equivalence_class_histogram_buckets, :message, 5, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.KAnonymityHistogramBucket"
@@ -293,6 +295,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :equivalence_class_size_upper_bound, :int64, 2
     optional :bucket_size, :int64, 3
     repeated :bucket_values, :message, 4, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.KAnonymityEquivalenceClass"
+    optional :bucket_value_count, :int64, 5
   end
   add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult" do
     repeated :sensitive_value_frequency_histogram_buckets, :message, 5, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.LDiversityHistogramBucket"
@@ -308,6 +311,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :sensitive_value_frequency_upper_bound, :int64, 2
     optional :bucket_size, :int64, 3
     repeated :bucket_values, :message, 4, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.LDiversityEquivalenceClass"
+    optional :bucket_value_count, :int64, 5
   end
   add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult" do
     repeated :k_map_estimation_histogram, :message, 1, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationHistogramBucket"
@@ -321,6 +325,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :max_anonymity, :int64, 2
     optional :bucket_size, :int64, 5
     repeated :bucket_values, :message, 6, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationQuasiIdValues"
+    optional :bucket_value_count, :int64, 7
   end
   add_message "google.privacy.dlp.v2.ValueFrequency" do
     optional :value, :message, 1, "google.privacy.dlp.v2.Value"

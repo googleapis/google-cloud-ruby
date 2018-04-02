@@ -1,9 +1,8 @@
-# Ruby Client for DLP API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Data Loss Prevention (DLP) API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
 
-[DLP API][Product Documentation]:
-The Google Data Loss Prevention API provides methods for detection of
-privacy-sensitive fragments in text, images, and Google Cloud Platform
-storage repositories.
+[Cloud Data Loss Prevention (DLP) API][Product Documentation]:
+Provides methods for detection of privacy-sensitive fragments in text,
+images, and Google Cloud Platform storage repositories.
 - [Client Library Documentation][]
 - [Product Documentation][]
 
@@ -13,7 +12,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the DLP API.](https://console.cloud.google.com/apis/api/dlp)
+3. [Enable the Cloud Data Loss Prevention (DLP) API.](https://console.cloud.google.com/apis/api/dlp)
 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
@@ -52,9 +51,9 @@ response = dlp.inspect_content parent,
 ```
 
 ### Next Steps
-- Read the [Client Library Documentation][] for DLP API
+- Read the [Client Library Documentation][] for Cloud Data Loss Prevention (DLP) API
   to see other available methods on the client.
-- Read the [DLP API Product documentation][Product Documentation]
+- Read the [Cloud Data Loss Prevention (DLP) API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
 - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
