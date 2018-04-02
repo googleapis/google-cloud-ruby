@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Pubsub
-      VERSION = "0.30.1".freeze
+      VERSION = "0.30.2".freeze
     end
   end
 end

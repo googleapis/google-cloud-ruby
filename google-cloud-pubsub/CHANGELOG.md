@@ -1,8 +1,13 @@
 # Release History
 
+### 0.30.2 / 2018-04-02
+
+* Subscriber stability enhancements.
+* Subscriber performance enhancements.
+
 ### 0.30.1 / 2018-03-08
 
-* Fix Subscriber thread leak
+* Fix Subscriber thread leak.
 
 ### 0.30.0 / 2018-02-27
 
