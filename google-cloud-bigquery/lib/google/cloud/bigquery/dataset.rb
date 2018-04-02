@@ -1086,19 +1086,10 @@ module Google
         # @!group Data
         #
         def query query, params: nil, external: nil, max: nil, cache: true,
-                  standard_sql: nil, legacy_sql: nil
-          ensure_service!
-          options = { priority: "INTERACTIVE", external: external, cache: cache,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      params: params }
-          options[:dataset] ||= self
-          updater = QueryJob::Updater.from_options service, query, options
-          updater.location = location if location # may be dataset reference
-
-          yield updater if block_given?
-
-          gapi = service.query_job updater.to_gapi
-          job = Job.from_gapi gapi, service
+                  standard_sql: nil, legacy_sql: nil, &block
+          job = query_job query, params: params, external: external,
+                                 cache: cache, standard_sql: standard_sql,
+                                 legacy_sql: legacy_sql, &block
           job.wait_until_done!
           ensure_job_succeeded! job
 
@@ -1629,27 +1620,19 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 schema: nil, autodetect: nil, null_marker: nil
-          ensure_service!
+                 schema: nil, autodetect: nil, null_marker: nil, &block
+          job = load_job table_id, files,
+                         format: format, create: create, write: write,
+                         projection_fields: projection_fields,
+                         jagged_rows: jagged_rows,
+                         quoted_newlines: quoted_newlines,
+                         encoding: encoding, delimiter: delimiter,
+                         ignore_unknown: ignore_unknown,
+                         max_bad_records: max_bad_records,
+                         quote: quote, skip_leading: skip_leading,
+                         schema: schema, autodetect: autodetect,
+                         null_marker: null_marker, &block
 
-          updater = load_job_updater table_id,
-                                     format: format, create: create,
-                                     write: write,
-                                     projection_fields: projection_fields,
-                                     jagged_rows: jagged_rows,
-                                     quoted_newlines: quoted_newlines,
-                                     encoding: encoding,
-                                     delimiter: delimiter,
-                                     ignore_unknown: ignore_unknown,
-                                     max_bad_records: max_bad_records,
-                                     quote: quote, skip_leading: skip_leading,
-                                     schema: schema,
-                                     autodetect: autodetect,
-                                     null_marker: null_marker
-
-          yield updater if block_given?
-
-          job = load_local_or_uri files, updater
           job.wait_until_done!
           ensure_job_succeeded! job
           true
