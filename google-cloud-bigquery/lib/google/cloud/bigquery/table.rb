@@ -1836,26 +1836,18 @@ module Google
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                  encoding: nil, delimiter: nil, ignore_unknown: nil,
                  max_bad_records: nil, quote: nil, skip_leading: nil,
-                 autodetect: nil, null_marker: nil
-          ensure_service!
+                 autodetect: nil, null_marker: nil, &block
+          job = load_job files, format: format, create: create, write: write,
+                                projection_fields: projection_fields,
+                                jagged_rows: jagged_rows,
+                                quoted_newlines: quoted_newlines,
+                                encoding: encoding, delimiter: delimiter,
+                                ignore_unknown: ignore_unknown,
+                                max_bad_records: max_bad_records,
+                                quote: quote, skip_leading: skip_leading,
+                                autodetect: autodetect,
+                                null_marker: null_marker, &block
 
-          updater = load_job_updater format: format, create: create,
-                                     write: write,
-                                     projection_fields: projection_fields,
-                                     jagged_rows: jagged_rows,
-                                     quoted_newlines: quoted_newlines,
-                                     encoding: encoding,
-                                     delimiter: delimiter,
-                                     ignore_unknown: ignore_unknown,
-                                     max_bad_records: max_bad_records,
-                                     quote: quote, skip_leading: skip_leading,
-                                     schema: schema,
-                                     autodetect: autodetect,
-                                     null_marker: null_marker
-
-          yield updater if block_given?
-
-          job = load_local_or_uri files, updater
           job.wait_until_done!
           ensure_job_succeeded! job
           true

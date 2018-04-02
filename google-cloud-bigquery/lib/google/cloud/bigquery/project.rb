@@ -514,18 +514,12 @@ module Google
         #   end
         #
         def query query, params: nil, external: nil, max: nil, cache: true,
-                  dataset: nil, project: nil, standard_sql: nil, legacy_sql: nil
-          ensure_service!
-          options = { priority: "INTERACTIVE", cache: cache, dataset: dataset,
-                      project: project || self.project,
-                      legacy_sql: legacy_sql, standard_sql: standard_sql,
-                      params: params, external: external }
-          updater = QueryJob::Updater.from_options service, query, options
-
-          yield updater if block_given?
-
-          gapi = service.query_job updater.to_gapi
-          job = Job.from_gapi gapi, service
+                  dataset: nil, project: nil, standard_sql: nil,
+                  legacy_sql: nil, &block
+          job = query_job query, params: params, external: external,
+                                 cache: cache, dataset: dataset,
+                                 project: project, standard_sql: standard_sql,
+                                 legacy_sql: legacy_sql, &block
           job.wait_until_done!
 
           if job.failed?
