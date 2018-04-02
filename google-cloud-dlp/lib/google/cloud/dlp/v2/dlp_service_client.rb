@@ -31,7 +31,7 @@ module Google
   module Cloud
     module Dlp
       module V2
-        # The DLP API is a service that allows clients
+        # The Cloud Data Loss Prevention (DLP) API is a service that allows clients
         # to detect the presence of Personally Identifiable Information (PII) and other
         # privacy-sensitive data in user-supplied, unstructured data streams, like text
         # blocks or images.
@@ -570,7 +570,7 @@ module Google
             @deidentify_content.call(req, options)
           end
 
-          # Re-identify content that has been de-identified.
+          # Re-identifies content that has been de-identified.
           #
           # @param parent [String]
           #   The parent resource name.
@@ -639,7 +639,9 @@ module Google
             @reidentify_content.call(req, options)
           end
 
-          # Returns sensitive information types DLP supports.
+          # Returns a list of the sensitive information types that the DLP API
+          # supports. For more information, see [Listing supported predefined
+          # infoTypes](/dlp/docs/listing-infotypes).
           #
           # @param language_code [String]
           #   Optional BCP-47 language code for localized infoType friendly
@@ -830,7 +832,7 @@ module Google
             @list_inspect_templates.call(req, options)
           end
 
-          # Deletes inspect templates.
+          # Deletes an inspect template.
           #
           # @param name [String]
           #   Resource name of the organization and inspectTemplate to be deleted, for
@@ -858,7 +860,7 @@ module Google
             nil
           end
 
-          # Creates an Deidentify template for re-using frequently used configuration
+          # Creates a de-identify template for re-using frequently used configuration
           # for Deidentifying content, images, and storage.
           #
           # @param parent [String]
@@ -899,7 +901,7 @@ module Google
             @create_deidentify_template.call(req, options)
           end
 
-          # Updates the inspect template.
+          # Updates the de-identify template.
           #
           # @param name [String]
           #   Resource name of organization and deidentify template to be updated, for
@@ -939,7 +941,7 @@ module Google
             @update_deidentify_template.call(req, options)
           end
 
-          # Gets an inspect template.
+          # Gets a de-identify template.
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be read, for
@@ -967,7 +969,7 @@ module Google
             @get_deidentify_template.call(req, options)
           end
 
-          # Lists inspect templates.
+          # Lists de-identify templates.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -1018,7 +1020,7 @@ module Google
             @list_deidentify_templates.call(req, options)
           end
 
-          # Deletes inspect templates.
+          # Deletes a de-identify template.
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be deleted,
@@ -1046,7 +1048,7 @@ module Google
             nil
           end
 
-          # Create a new job to inspect storage or calculate risk metrics [How-to
+          # Creates a new job to inspect storage or calculate risk metrics [How-to
           # guide](/dlp/docs/compute-risk-analysis).
           #
           # @param parent [String]
@@ -1224,7 +1226,7 @@ module Google
             nil
           end
 
-          # Starts asynchronous cancellation on a long-running DlpJob.  The server
+          # Starts asynchronous cancellation on a long-running DlpJob. The server
           # makes a best effort to cancel the DlpJob, but success is not
           # guaranteed.
           #
@@ -1413,8 +1415,8 @@ module Google
             @update_job_trigger.call(req, options)
           end
 
-          # Creates a job to run DLP actions such as scanning storage for sensitive
-          # information on a set schedule.
+          # Creates a job trigger to run DLP actions such as scanning storage for
+          # sensitive information on a set schedule.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.

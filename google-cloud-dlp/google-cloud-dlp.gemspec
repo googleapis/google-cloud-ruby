@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-dlp is the official library for DLP API."
-  gem.summary       = "API Client library for DLP API"
+  gem.description   = "google-cloud-dlp is the official library for Cloud Data Loss Prevention (DLP) API."
+  gem.summary       = "API Client library for Cloud Data Loss Prevention (DLP) API"
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
 
