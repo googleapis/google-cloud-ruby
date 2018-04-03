@@ -1206,7 +1206,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     end
 
     error.wont_be :nil?
-    error.message.must_equal "Transaction failed to commit."
+    error.message.must_equal "Transaction failed to commit: This error should be wrapped by TransactionError."
     error.cause.wont_be :nil?
     error.cause.message.must_equal "This error should be wrapped by TransactionError."
   end
@@ -1245,7 +1245,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
       error.wont_be :nil?
       error.must_be_kind_of Google::Cloud::Datastore::TransactionError
-      error.message.must_equal "Transaction failed to commit and rollback."
+      error.message.must_equal "Transaction failed to commit and rollback: rollback error"
       error.cause.wont_be :nil?
       error.cause.must_be_kind_of RuntimeError
       error.cause.message.must_equal "rollback error"
@@ -1321,7 +1321,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
           tx.save entity
         end
       end.must_raise Google::Cloud::Datastore::TransactionError
-      error.message.must_equal "Transaction failed to commit."
+      error.message.must_equal "Transaction failed to commit: unsupported"
       error.cause.must_be_kind_of StandardError
       error.cause.message.must_equal "unsupported"
     end

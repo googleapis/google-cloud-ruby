@@ -545,14 +545,14 @@ module Google
             # Create new transaction and retry the block
             tx = Transaction.new service, previous_transaction: tx.id
             retry
-          rescue StandardError
+          rescue StandardError => e
             begin
               tx.rollback
-            rescue StandardError
+            rescue StandardError => e
               raise TransactionError,
-                    "Transaction failed to commit and rollback."
+                    "Transaction failed to commit and rollback: #{e}"
             end
-            raise TransactionError, "Transaction failed to commit."
+            raise TransactionError, "Transaction failed to commit: #{e}"
           end
         end
 
@@ -602,14 +602,14 @@ module Google
           begin
             yield tx
             tx.commit
-          rescue StandardError
+          rescue StandardError => e
             begin
               tx.rollback
-            rescue StandardError
+            rescue StandardError => e
               raise TransactionError,
-                    "Transaction failed to commit and rollback."
+                    "Transaction failed to commit and rollback: #{e}"
             end
-            raise TransactionError, "Transaction failed to commit."
+            raise TransactionError, "Transaction failed to commit: #{e}"
           end
         end
         alias snapshot read_only_transaction
