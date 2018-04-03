@@ -433,7 +433,9 @@ module Google
         # @param [String] name A descriptive name for the table.
         # @param [String] description A user-friendly description of the table.
         # @yield [table] a block for setting the table
-        # @yieldparam [Table] table the table object to be updated
+        # @yieldparam [Google::Cloud::Bigquery::Table::Updater] table An updater
+        #   to set additional properties on the table in the API request to
+        #   create it.
         #
         # @return [Google::Cloud::Bigquery::Table] A new table object.
         #
