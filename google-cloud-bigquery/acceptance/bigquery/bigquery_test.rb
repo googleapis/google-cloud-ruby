@@ -61,6 +61,14 @@ describe Google::Cloud::Bigquery, :bigquery do
     view
   end
 
+  it "should get its project service account email" do
+    email = bigquery.service_account_email
+    email.wont_be :nil?
+    email.must_be_kind_of String
+    # https://stackoverflow.com/questions/22993545/ruby-email-validation-with-regex
+    email.must_match /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  end
+
   it "should get a list of datasets" do
     datasets = bigquery.datasets max: 1
     # The code in before ensures we have at least one dataset

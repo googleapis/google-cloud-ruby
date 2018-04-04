@@ -16,8 +16,21 @@ require "helper"
 require "json"
 
 describe Google::Cloud::Bigquery::Project, :mock_bigquery do
+  let(:email) { "my_service_account@bigquery-encryption.iam.gserviceaccount.com" }
+  let(:service_account_resp) { OpenStruct.new email: email }
   let(:dataset_id) { "my_dataset" }
   let(:filter) { "labels.foo:bar" }
+
+  it "gets and memoizes its service_account_email" do
+    mock = Minitest::Mock.new
+    mock.expect :get_project_service_account, service_account_resp, [project]
+    bigquery.service.mocked_service = mock
+
+    bigquery.service_account_email.must_equal email
+    bigquery.service_account_email.must_equal email # memoized, no request
+
+    mock.verify
+  end
 
   it "creates an empty dataset" do
     mock = Minitest::Mock.new

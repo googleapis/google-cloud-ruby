@@ -70,6 +70,10 @@ module Google
         end
         attr_accessor :mocked_service
 
+        def project_service_account
+          service.get_project_service_account project
+        end
+
         ##
         # Lists all datasets in the specified project to which you have
         # been granted the READER dataset role.

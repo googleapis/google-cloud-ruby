@@ -85,6 +85,17 @@ module Google
         alias project project_id
 
         ##
+        # The email address of the service account for the project used to
+        # connect to BigQuery. (See also {#project_id}.)
+        #
+        # @return [String] The service account email address.
+        #
+        def service_account_email
+          @service_account_email ||= \
+            service.project_service_account.email
+        end
+
+        ##
         # Queries data by creating a [query
         # job](https://cloud.google.com/bigquery/docs/query-overview#query_jobs).
         #
