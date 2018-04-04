@@ -37,7 +37,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.must_be :text?
+      annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :crop_hints?
@@ -52,7 +52,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.must_be :text?
+      annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
@@ -65,7 +65,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.must_be :text?
+      annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
@@ -79,7 +79,7 @@ describe "Vision", :vision do
       annotation.wont_be :landmark?
       annotation.wont_be :logo?
       annotation.must_be :label?
-      annotation.must_be :text?
+      annotation.wont_be :text?
       annotation.must_be :safe_search?
       annotation.must_be :properties?
       annotation.must_be :web?
@@ -578,7 +578,7 @@ describe "Vision", :vision do
 
       annotations.count.must_equal 3
       annotations[0].text.wont_be :nil?
-      annotations[1].text.wont_be :nil?
+      annotations[1].text.must_be :nil?
       annotations[2].text.wont_be :nil?
     end
 
