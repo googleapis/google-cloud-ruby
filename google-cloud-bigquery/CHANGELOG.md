@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 / 2018-04-05
+
+* Add insert_ids option to #insert in Dataset, Table, and AsyncInserter.
+* Add BigQuery Project#service_account_email.
+* Add support for setting Job location to nil in blocks for Job properties.
+
 ### 1.2.0 / 2018-03-31
 
 * Add geo-regionalization (location) support to Jobs.
