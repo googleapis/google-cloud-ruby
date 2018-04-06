@@ -98,7 +98,7 @@ module Google
         attr_accessor :gapi
 
         ##
-        # Encryption key to use for file access (currently only used by :storage_class=)
+        # Encryption key for file access (currently only used by storage_class=)
         attr_accessor :encryption_key
 
         ##
@@ -1099,12 +1099,13 @@ module Google
 
           ensure_service!
 
-          if attributes.include? :storage_class
-            @gapi = rewrite_gapi bucket, name, update_gapi, encryption_key: @encryption_key
-          else
-            @gapi = service.patch_file \
-              bucket, name, update_gapi, user_project: user_project
-          end
+          @gapi = if attributes.include? :storage_class
+                    rewrite_gapi bucket, name, update_gapi,
+                                 encryption_key: @encryption_key
+                  else
+                    service.patch_file bucket, name, update_gapi,
+                                       user_project: user_project
+                  end
         end
 
         def gapi_from_attrs *attributes
@@ -1117,9 +1118,10 @@ module Google
         end
 
         def rewrite_gapi bucket, name, update_gapi, encryption_key: nil
-          resp = service.rewrite_file \
-            bucket, name, bucket, name, update_gapi, user_project: user_project,
-            source_key: encryption_key, destination_key: encryption_key
+          resp = service.rewrite_file bucket, name, bucket, name, update_gapi,
+                                      user_project: user_project,
+                                      source_key: encryption_key,
+                                      destination_key: encryption_key
           until resp.done
             sleep 1
             resp = service.rewrite_file \
