@@ -19,6 +19,18 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
   let(:file_name) { "file.ext" }
   let(:file) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service }
   let(:file_user_project) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service, user_project: true }
+  let(:encryption_key) { "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI\xF8ftA|[z\x1A\xFBE\xDE\x97&\xBC\xC7" }
+  let(:encryption_key_sha256) { "5\x04_\xDF\x1D\x8A_d\xFEK\e6p[XZz\x13s]E\xF6\xBB\x10aQH\xF6o\x14f\xF9" }
+  let(:copy_key_headers) do {
+      "x-goog-copy-source-encryption-algorithm"  => "AES256",
+      "x-goog-copy-source-encryption-key"        => Base64.strict_encode64(encryption_key),
+      "x-goog-copy-source-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256),
+      "x-goog-encryption-algorithm"  => "AES256",
+      "x-goog-encryption-key"        => Base64.strict_encode64(encryption_key),
+      "x-goog-encryption-key-sha256" => Base64.strict_encode64(encryption_key_sha256)
+  }
+  end
+  let(:copy_key_options) { { header: copy_key_headers } }
 
   it "updates its cache control" do
     mock = Minitest::Mock.new
@@ -116,6 +128,39 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.storage_class.must_be :nil?
     file.storage_class = :dra
+    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+
+    mock.verify
+  end
+
+  it "updates its storage_class using set_storage_class" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
+    patched_file_gapi = Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json)
+    patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+                [bucket_name, file_name, bucket_name, file_name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+    file.service.mocked_service = mock
+
+    file.storage_class.must_be :nil?
+    file.set_storage_class :dra
+    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+
+    mock.verify
+  end
+
+  it "updates its storage_class using set_storage_class with encryption_key" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
+    patched_file_gapi = Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json)
+    patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+                [bucket_name, file_name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
+    file.service.mocked_service = mock
+
+    file.storage_class.must_be :nil?
+    file.set_storage_class :dra, encryption_key: encryption_key
     file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
@@ -277,6 +322,74 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.update do |f|
       f.storage_class = :nearline
+    end
+
+    mock.verify
+  end
+
+  it "update accepts set_storage_class" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "NEARLINE"
+    patched_file_gapi = Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json)
+    patched_file_gapi.storage_class = "NEARLINE"
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+                [bucket_name, file_name, bucket_name, file_name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+    file.service.mocked_service = mock
+
+    file.update do |f|
+      f.set_storage_class :nearline
+    end
+
+    mock.verify
+  end
+
+  it "update accepts set_storage_class" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "NEARLINE"
+    patched_file_gapi = Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json)
+    patched_file_gapi.storage_class = "NEARLINE"
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+                [bucket_name, file_name, bucket_name, file_name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+    file.service.mocked_service = mock
+
+    file.update do |f|
+      f.set_storage_class :nearline
+    end
+
+    mock.verify
+  end
+
+  it "update accepts set_storage_class with encryption_key" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "NEARLINE"
+    patched_file_gapi = Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json)
+    patched_file_gapi.storage_class = "NEARLINE"
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+                [bucket_name, file_name, bucket_name, file_name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
+
+    file.service.mocked_service = mock
+
+    file.update encryption_key: encryption_key do |f|
+      f.set_storage_class :nearline
+    end
+
+    mock.verify
+  end
+
+  it "update accepts set_storage_class with set_storage_class encryption_key" do
+    mock = Minitest::Mock.new
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "NEARLINE"
+    patched_file_gapi = Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json)
+    patched_file_gapi.storage_class = "NEARLINE"
+    mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
+                [bucket_name, file_name, bucket_name, file_name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
+
+    file.service.mocked_service = mock
+
+    file.update do |f|
+      f.set_storage_class :nearline, encryption_key: encryption_key
     end
 
     mock.verify

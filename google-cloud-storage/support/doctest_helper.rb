@@ -589,6 +589,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::File#set_storage_class" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/my-file.ext",  Google::Apis::StorageV1::Object, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::File#generations" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
@@ -602,6 +610,14 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
       mock.expect :patch_object, object_access_control_gapi, ["my-bucket", "path/to/my-file.ext", Google::Apis::StorageV1::Object, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#update@Rewriting with `set_storage_class` and encryption key:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "my-bucket", "path/to/my-file.ext",  Google::Apis::StorageV1::Object, Hash]
     end
   end
 
