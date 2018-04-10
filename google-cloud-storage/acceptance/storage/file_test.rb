@@ -439,6 +439,30 @@ describe Google::Cloud::Storage::File, :storage do
     retrieved1.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
   end
 
+  it "should create and update storage_class with set_storage_class" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo-storage_class-2.png", storage_class: :nearline
+
+    uploaded.storage_class.must_equal "NEARLINE"
+    uploaded.set_storage_class :multi_regional
+    uploaded.storage_class.must_equal "MULTI_REGIONAL"
+
+    retrieved1 = bucket.file "CloudLogo-storage_class-2.png"
+
+    retrieved1.storage_class.must_equal "MULTI_REGIONAL"
+  end
+
+  it "should create and update storage_class with customer-supplied encryption key" do
+    uploaded = bucket.create_file files[:logo][:path], "CloudLogo-storage_class-3.png", storage_class: :nearline, encryption_key: encryption_key
+
+    uploaded.storage_class.must_equal "NEARLINE"
+    uploaded.set_storage_class :multi_regional, encryption_key: encryption_key
+    uploaded.storage_class.must_equal "MULTI_REGIONAL"
+
+    retrieved1 = bucket.file "CloudLogo-storage_class-3.png"
+
+    retrieved1.storage_class.must_equal "MULTI_REGIONAL"
+  end
+
   it "should copy an existing file" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo"
     copied = try_with_backoff "copying existing file" do
@@ -497,7 +521,7 @@ describe Google::Cloud::Storage::File, :storage do
     copied.delete
   end
 
-  it "should copy an existing file with customer-supplied encryption key" do
+  it "should update the storage class of an existing file with customer-supplied encryption key" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png", encryption_key: encryption_key
     copied = try_with_backoff "copying existing file with encryption key" do
       uploaded.copy "CloudLogoCopy.png", encryption_key: encryption_key

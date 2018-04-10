@@ -685,6 +685,36 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     mock.verify
   end
 
+  it "can copy itself and use set_storage_class" do
+    mock = Minitest::Mock.new
+    update_file_gapi = Google::Apis::StorageV1::Object.new(
+        cache_control: "private, max-age=0, no-cache",
+        content_disposition: "inline; filename=filename.ext",
+        content_encoding: "deflate",
+        content_language: "de",
+        content_type: "application/json",
+        metadata: { "player" => "Bob", "score" => "10" },
+        storage_class: "NEARLINE"
+    )
+    mock.expect :rewrite_object, rewrite_response,
+                [bucket_name, file_name, bucket_name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+    file.service.mocked_service = mock
+
+    file.copy "new-file.ext" do |f|
+      f.cache_control = "private, max-age=0, no-cache"
+      f.content_disposition = "inline; filename=filename.ext"
+      f.content_encoding = "deflate"
+      f.content_language = "de"
+      f.content_type = "application/json"
+      f.metadata["player"] = "Bob"
+      f.metadata["score"] = "10"
+      f.storage_class = :nearline
+    end
+
+    mock.verify
+  end
+
   it "can copy itself while updating its attributes with user_project set to true" do
     mock = Minitest::Mock.new
     update_file_gapi = Google::Apis::StorageV1::Object.new(
@@ -709,7 +739,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       f.content_type = "application/json"
       f.metadata["player"] = "Bob"
       f.metadata["score"] = "10"
-      f.storage_class = :nearline
+      f.set_storage_class :nearline
     end
     copied.user_project.must_equal true
 

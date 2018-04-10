@@ -332,8 +332,54 @@ module Google
         # {Bucket#storage_class}.
         # @param [Symbol, String] storage_class Storage class of the file.
         def storage_class= storage_class
+          set_storage_class storage_class
+        end
+
+        ##
+        # Updates how the file is stored and determines the SLA and the cost of
+        # storage. Accepted values include `:multi_regional`, `:regional`,
+        # `:nearline`, and `:coldline`, as well as the equivalent strings
+        # returned by {File#storage_class} or {Bucket#storage_class}. For more
+        # information, see [Storage
+        # Classes](https://cloud.google.com/storage/docs/storage-classes) and
+        # [Per-Object Storage
+        # Class](https://cloud.google.com/storage/docs/per-object-storage-class).
+        # The  default value is the default storage class for the bucket. See
+        # {Bucket#storage_class}.
+        #
+        # @param [Symbol, String] storage_class Storage class of the file.
+        # @param [String, nil] encryption_key Optional. The last
+        #   customer-supplied, AES-256 encryption key used to encrypt the file,
+        #   if one was used.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.set_storage_class :nearline
+        #
+        # @example With a customer-supplied encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # Customer-supplied key was stored securely for later use.
+        #   key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
+        #
+        #   file = bucket.file "path/to/my-file.ext", encryption_key: key
+        #
+        #   file.set_storage_class :nearline, encryption_key: key
+        #
+        def set_storage_class storage_class, encryption_key: nil
           @gapi.storage_class = storage_class_for(storage_class)
-          update_gapi! :storage_class
+          update_gapi! :storage_class, encryption_key: encryption_key
         end
 
         ##
@@ -382,6 +428,12 @@ module Google
         # {#content_type=}, and {#metadata=}. The {#metadata} hash accessible in
         # the block is completely mutable and will be included in the request.
         #
+        # @param [String] encryption_key Optional. The customer-supplied,
+        #   AES-256 encryption key used to encrypt the file, if one was provided
+        #   to {Bucket#create_file}. Only needed if the file's `storage_class`
+        #   is updated (see {#set_storage_class}), because changing the storage
+        #   class requires a `rewrite` operation.
+        #
         # @yield [file] a block yielding a delegate object for updating the file
         #
         # @example
@@ -403,11 +455,30 @@ module Google
         #     f.metadata["score"] = "10"
         #   end
         #
-        def update
+        # @example Rewriting with `set_storage_class` and encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # Customer-supplied key was stored securely for later use.
+        #   key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
+        #
+        #   file = bucket.file "path/to/my-file.ext", encryption_key: key
+        #
+        #   file.update encryption_key: key do |f|
+        #     f.cache_control = "private, max-age=0, no-cache"
+        #     f.set_storage_class :nearline
+        #   end
+        #
+        def update encryption_key: nil
           updater = Updater.new gapi
           yield updater
           updater.check_for_changed_metadata!
-          update_gapi! updater.updates unless updater.updates.empty?
+          return false if updater.updates.empty?
+          encryption_key ||= updater.encryption_key
+          update_gapi! updater.updates, encryption_key: encryption_key
         end
 
         ##
@@ -706,7 +777,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #
-        #   # Old key was stored securely for later use.
+        #   # Customer-supplied key was stored securely for later use.
         #   old_key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
         #
         #   file = bucket.file "path/to/my-file.ext", encryption_key: old_key
@@ -1087,7 +1158,7 @@ module Google
           reload! generation: true
         end
 
-        def update_gapi! *attributes
+        def update_gapi! *attributes, encryption_key: nil
           attributes.flatten!
           return if attributes.empty?
           update_gapi = gapi_from_attrs attributes
@@ -1096,10 +1167,11 @@ module Google
           ensure_service!
 
           @gapi = if attributes.include? :storage_class
-                    rewrite_gapi bucket, name, update_gapi
+                    rewrite_gapi bucket, name, update_gapi,
+                                 encryption_key: encryption_key
                   else
-                    service.patch_file \
-                      bucket, name, update_gapi, user_project: user_project
+                    service.patch_file bucket, name, update_gapi,
+                                       user_project: user_project
                   end
         end
 
@@ -1112,14 +1184,17 @@ module Google
           Google::Apis::StorageV1::Object.new attr_params
         end
 
-        def rewrite_gapi bucket, name, update_gapi
-          resp = service.rewrite_file \
-            bucket, name, bucket, name, update_gapi, user_project: user_project
+        def rewrite_gapi bucket, name, update_gapi, encryption_key: nil
+          resp = service.rewrite_file bucket, name, bucket, name, update_gapi,
+                                      user_project: user_project,
+                                      source_key: encryption_key,
+                                      destination_key: encryption_key
           until resp.done
             sleep 1
             resp = service.rewrite_file \
               bucket, name, bucket, name, update_gapi,
-              token: resp.rewrite_token, user_project: user_project
+              token: resp.rewrite_token, user_project: user_project,
+              source_key: encryption_key, destination_key: encryption_key
           end
           resp.resource
         end
@@ -1182,12 +1257,13 @@ module Google
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < File
           # @private
-          attr_reader :updates
+          attr_reader :updates, :encryption_key
 
           ##
           # @private Create an Updater object.
           def initialize gapi
             @updates = []
+            @encryption_key = nil
             @gapi = gapi
             @metadata ||= @gapi.metadata.to_h.dup
           end
@@ -1222,8 +1298,9 @@ module Google
 
           ##
           # Queue up all the updates instead of making them.
-          def update_gapi! attribute
+          def update_gapi! attribute, encryption_key: nil
             @updates << attribute
+            @encryption_key = encryption_key if encryption_key
             @updates.uniq!
           end
         end

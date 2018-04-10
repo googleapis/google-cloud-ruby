@@ -183,6 +183,40 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     mock.verify
   end
 
+  it "can compose a new file and use set_storage_class" do
+    mock = Minitest::Mock.new
+    update_file_gapi = Google::Apis::StorageV1::Object.new(
+        cache_control: "private, max-age=0, no-cache",
+        content_disposition: "inline; filename=filename.ext",
+        content_encoding: "deflate",
+        content_language: "de",
+        content_type: "application/json",
+        metadata: { "player" => "Bob", "score" => "10" },
+        storage_class: "NEARLINE"
+    )
+    compose_req = compose_request([file_gapi, file_2_gapi], update_file_gapi)
+    mock.expect :compose_object, file_3_gapi,
+                [bucket.name, file_3_name, compose_req, destination_predefined_acl: nil, user_project: nil, options: {}]
+
+    bucket.service.mocked_service = mock
+
+    new_file = bucket.compose [file, file_2], file_3_name do |f|
+      f.cache_control = "private, max-age=0, no-cache"
+      f.content_disposition = "inline; filename=filename.ext"
+      f.content_encoding = "deflate"
+      f.content_language = "de"
+      f.content_type = "application/json"
+      f.metadata["player"] = "Bob"
+      f.metadata["score"] = "10"
+      f.set_storage_class :nearline
+    end
+
+    new_file.must_be_kind_of Google::Cloud::Storage::File
+    new_file.name.must_equal file_3_name
+
+    mock.verify
+  end
+
   it "can compose a new file and set file attributes with user_project set to true" do
     mock = Minitest::Mock.new
     update_file_gapi = Google::Apis::StorageV1::Object.new(
