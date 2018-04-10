@@ -560,357 +560,605 @@ describe Google::Cloud::Storage::File, :mock_storage do
     end
   end
 
-  it "can copy itself in the same bucket" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+  describe "File#copy" do
+    it "can copy itself in the same bucket" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
 
-    file.service.mocked_service = mock
+      file.service.mocked_service = mock
 
-    file.copy "new-file.ext"
+      file.copy "new-file.ext"
 
-    mock.verify
-  end
-
-  it "can copy itself in the same bucket with generation" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-file.ext", generation: 123
-
-    mock.verify
-  end
-
-  it "can copy itself in the same bucket with predefined ACL" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-file.ext", acl: "private"
-
-    mock.verify
-  end
-
-  it "can copy itself in the same bucket with ACL alias" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-file.ext", acl: :public
-
-    mock.verify
-  end
-
-  it "can copy itself with customer-supplied encryption key" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-file.ext", encryption_key: encryption_key
-
-    mock.verify
-  end
-
-  it "can copy itself with user_project set to true" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
-
-    file_user_project.service.mocked_service = mock
-
-    copied = file_user_project.copy "new-file.ext"
-    copied.user_project.must_equal true
-
-    mock.verify
-  end
-
-  it "can copy itself to a different bucket" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-bucket", "new-file.ext"
-
-    mock.verify
-  end
-
-  it "can copy itself to a different bucket with generation" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-bucket", "new-file.ext", generation: 123
-
-    mock.verify
-  end
-
-  it "can copy itself to a different bucket with predefined ACL" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-bucket", "new-file.ext", acl: "private"
-
-    mock.verify
-  end
-
-  it "can copy itself to a different bucket with ACL alias" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-bucket", "new-file.ext", acl: :public
-
-    mock.verify
-  end
-
-  it "can copy itself to a different bucket with customer-supplied encryption key" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
-
-    file.service.mocked_service = mock
-
-    file.copy "new-bucket", "new-file.ext", encryption_key: encryption_key
-
-    mock.verify
-  end
-
-  it "can copy itself calling rewrite multiple times" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
-    mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: nil, options: {}]
-    mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: nil, options: {}]
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: nil, options: {}]
-
-    file.service.mocked_service = mock
-
-    # mock out sleep to make the test run faster
-    def file.sleep *args
+      mock.verify
     end
 
-    file.copy "new-file.ext"
+    it "can copy itself in the same bucket with generation" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
 
-    mock.verify
-  end
+      file.service.mocked_service = mock
 
-  it "can copy itself calling rewrite multiple times with user_project set to true" do
-    mock = Minitest::Mock.new
-    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
-    mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
-    mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
+      file.copy "new-file.ext", generation: 123
 
-    file_user_project.service.mocked_service = mock
-
-    # mock out sleep to make the test run faster
-    def file_user_project.sleep *args
+      mock.verify
     end
 
-    copied = file_user_project.copy "new-file.ext"
-    copied.user_project.must_equal true
+    it "can copy itself in the same bucket with predefined ACL" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
 
-    mock.verify
-  end
+      file.service.mocked_service = mock
 
-  it "can copy itself while updating its attributes" do
-    mock = Minitest::Mock.new
-    update_file_gapi = Google::Apis::StorageV1::Object.new(
-      cache_control: "private, max-age=0, no-cache",
-      content_disposition: "inline; filename=filename.ext",
-      content_encoding: "deflate",
-      content_language: "de",
-      content_type: "application/json",
-      metadata: { "player" => "Bob", "score" => "10" },
-      storage_class: "NEARLINE"
-    )
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      file.copy "new-file.ext", acl: "private"
 
-    file.service.mocked_service = mock
-
-    file.copy "new-file.ext" do |f|
-      f.cache_control = "private, max-age=0, no-cache"
-      f.content_disposition = "inline; filename=filename.ext"
-      f.content_encoding = "deflate"
-      f.content_language = "de"
-      f.content_type = "application/json"
-      f.metadata["player"] = "Bob"
-      f.metadata["score"] = "10"
-      f.storage_class = :nearline
+      mock.verify
     end
 
-    mock.verify
-  end
+    it "can copy itself in the same bucket with ACL alias" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
 
-  it "can copy itself while updating its attributes with user_project set to true" do
-    mock = Minitest::Mock.new
-    update_file_gapi = Google::Apis::StorageV1::Object.new(
-      cache_control: "private, max-age=0, no-cache",
-      content_disposition: "inline; filename=filename.ext",
-      content_encoding: "deflate",
-      content_language: "de",
-      content_type: "application/json",
-      metadata: { "player" => "Bob", "score" => "10" },
-      storage_class: "NEARLINE"
-    )
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      file.service.mocked_service = mock
 
-    file_user_project.service.mocked_service = mock
+      file.copy "new-file.ext", acl: :public
 
-    copied = file_user_project.copy "new-file.ext" do |f|
-      f.cache_control = "private, max-age=0, no-cache"
-      f.content_disposition = "inline; filename=filename.ext"
-      f.content_encoding = "deflate"
-      f.content_language = "de"
-      f.content_type = "application/json"
-      f.metadata["player"] = "Bob"
-      f.metadata["score"] = "10"
-      f.storage_class = :nearline
-    end
-    copied.user_project.must_equal true
-
-    mock.verify
-  end
-
-  it "can rotate its customer-supplied encryption keys" do
-    mock = Minitest::Mock.new
-    options = { header: source_key_headers.merge(key_headers) }
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file.name, bucket.name, file.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
-
-    file.service.mocked_service = mock
-
-    updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file.name
-
-    mock.verify
-  end
-
-  it "can rotate its customer-supplied encryption keys with user_project set to true" do
-    mock = Minitest::Mock.new
-    options = { header: source_key_headers.merge(key_headers) }
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: "test", options: options ]
-
-    file_user_project.service.mocked_service = mock
-
-    updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file_user_project.name
-    updated.user_project.must_equal true
-
-    mock.verify
-  end
-
-  it "can rotate to a customer-supplied encryption key if previously unencrypted with customer key" do
-    mock = Minitest::Mock.new
-    options = { header: key_headers }
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file.name, bucket.name, file.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
-
-    file.service.mocked_service = mock
-
-    updated = file.rotate new_encryption_key: encryption_key
-    updated.name.must_equal file.name
-
-    mock.verify
-  end
-
-  it "can rotate from a customer-supplied encryption key to default service encryption" do
-    mock = Minitest::Mock.new
-    options = { header: source_key_headers }
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file.name, bucket.name, file.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
-
-    file.service.mocked_service = mock
-
-    updated = file.rotate encryption_key: source_encryption_key
-    updated.name.must_equal file.name
-
-    mock.verify
-  end
-
-  it "can rotate its customer-supplied encryption keys with multiple requests for large objects" do
-    mock = Minitest::Mock.new
-    options = { header: source_key_headers.merge(key_headers) }
-    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-                [bucket.name, file.name, bucket.name, file.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file.name, bucket.name, file.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: "notyetcomplete", user_project: nil, options: options ]
-
-    file.service.mocked_service = mock
-
-    # mock out sleep to make the test run faster
-    def file.sleep *args
+      mock.verify
     end
 
-    updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file.name
+    it "can copy itself with customer-supplied encryption key" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
 
-    mock.verify
-  end
+      file.service.mocked_service = mock
 
-  it "can rotate its customer-supplied encryption keys with multiple requests for large objects with user_project set to true" do
-    mock = Minitest::Mock.new
-    options = { header: source_key_headers.merge(key_headers) }
-    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: "test", options: options ]
-    mock.expect :rewrite_object, done_rewrite(file_gapi),
-                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
-                 destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: "notyetcomplete", user_project: "test", options: options ]
+      file.copy "new-file.ext", encryption_key: encryption_key
 
-    file_user_project.service.mocked_service = mock
-
-    # mock out sleep to make the test run faster
-    def file_user_project.sleep *args
+      mock.verify
     end
 
-    updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file_user_project.name
-    updated.user_project.must_equal true
+    it "can copy itself with user_project set to true" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
 
-    mock.verify
+      file_user_project.service.mocked_service = mock
+
+      copied = file_user_project.copy "new-file.ext"
+      copied.user_project.must_equal true
+
+      mock.verify
+    end
+
+    it "can copy itself to a different bucket" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.copy "new-bucket", "new-file.ext"
+
+      mock.verify
+    end
+
+    it "can copy itself to a different bucket with generation" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.copy "new-bucket", "new-file.ext", generation: 123
+
+      mock.verify
+    end
+
+    it "can copy itself to a different bucket with predefined ACL" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.copy "new-bucket", "new-file.ext", acl: "private"
+
+      mock.verify
+    end
+
+    it "can copy itself to a different bucket with ACL alias" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.copy "new-bucket", "new-file.ext", acl: :public
+
+      mock.verify
+    end
+
+    it "can copy itself to a different bucket with customer-supplied encryption key" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
+
+      file.service.mocked_service = mock
+
+      file.copy "new-bucket", "new-file.ext", encryption_key: encryption_key
+
+      mock.verify
+    end
+
+    it "can copy itself calling rewrite multiple times" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      mock.expect :rewrite_object, undone_rewrite("keeptrying"),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: nil, options: {}]
+      mock.expect :rewrite_object, undone_rewrite("almostthere"),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: nil, options: {}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      # mock out sleep to make the test run faster
+      def file.sleep *args
+      end
+
+      file.copy "new-file.ext"
+
+      mock.verify
+    end
+
+    it "can copy itself calling rewrite multiple times with user_project set to true" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      mock.expect :rewrite_object, undone_rewrite("keeptrying"),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
+      mock.expect :rewrite_object, undone_rewrite("almostthere"),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
+
+      file_user_project.service.mocked_service = mock
+
+      # mock out sleep to make the test run faster
+      def file_user_project.sleep *args
+      end
+
+      copied = file_user_project.copy "new-file.ext"
+      copied.user_project.must_equal true
+
+      mock.verify
+    end
+
+    it "can copy itself while updating its attributes" do
+      mock = Minitest::Mock.new
+      update_file_gapi = Google::Apis::StorageV1::Object.new(
+        cache_control: "private, max-age=0, no-cache",
+        content_disposition: "inline; filename=filename.ext",
+        content_encoding: "deflate",
+        content_language: "de",
+        content_type: "application/json",
+        metadata: { "player" => "Bob", "score" => "10" },
+        storage_class: "NEARLINE"
+      )
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.copy "new-file.ext" do |f|
+        f.cache_control = "private, max-age=0, no-cache"
+        f.content_disposition = "inline; filename=filename.ext"
+        f.content_encoding = "deflate"
+        f.content_language = "de"
+        f.content_type = "application/json"
+        f.metadata["player"] = "Bob"
+        f.metadata["score"] = "10"
+        f.storage_class = :nearline
+      end
+
+      mock.verify
+    end
+
+    it "can copy itself while updating its attributes with user_project set to true" do
+      mock = Minitest::Mock.new
+      update_file_gapi = Google::Apis::StorageV1::Object.new(
+        cache_control: "private, max-age=0, no-cache",
+        content_disposition: "inline; filename=filename.ext",
+        content_encoding: "deflate",
+        content_language: "de",
+        content_type: "application/json",
+        metadata: { "player" => "Bob", "score" => "10" },
+        storage_class: "NEARLINE"
+      )
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+
+      file_user_project.service.mocked_service = mock
+
+      copied = file_user_project.copy "new-file.ext" do |f|
+        f.cache_control = "private, max-age=0, no-cache"
+        f.content_disposition = "inline; filename=filename.ext"
+        f.content_encoding = "deflate"
+        f.content_language = "de"
+        f.content_type = "application/json"
+        f.metadata["player"] = "Bob"
+        f.metadata["score"] = "10"
+        f.storage_class = :nearline
+      end
+      copied.user_project.must_equal true
+
+      mock.verify
+    end
+  end
+
+  describe "File#rewrite" do
+    it "can rewrite itself in the same bucket" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-file.ext"
+
+      mock.verify
+    end
+
+    it "can rewrite itself in the same bucket with generation" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-file.ext", generation: 123
+
+      mock.verify
+    end
+
+    it "can rewrite itself in the same bucket with predefined ACL" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-file.ext", acl: "private"
+
+      mock.verify
+    end
+
+    it "can rewrite itself in the same bucket with ACL alias" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-file.ext", acl: :public
+
+      mock.verify
+    end
+
+    it "can rewrite itself with customer-supplied encryption key" do
+      options = { header: source_key_headers.merge(key_headers) }
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: options]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-file.ext", encryption_key: source_encryption_key, new_encryption_key: encryption_key
+
+      mock.verify
+    end
+
+    it "can rewrite itself with user_project set to true" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+
+      file_user_project.service.mocked_service = mock
+
+      copied = file_user_project.copy "new-file.ext"
+      copied.user_project.must_equal true
+
+      mock.verify
+    end
+
+    it "can rewrite itself to a different bucket" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-bucket", "new-file.ext"
+
+      mock.verify
+    end
+
+    it "can rewrite itself to a different bucket with generation" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-bucket", "new-file.ext", generation: 123
+
+      mock.verify
+    end
+
+    it "can rewrite itself to a different bucket with predefined ACL" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-bucket", "new-file.ext", acl: "private"
+
+      mock.verify
+    end
+
+    it "can rewrite itself to a different bucket with ACL alias" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-bucket", "new-file.ext", acl: :public
+
+      mock.verify
+    end
+
+    it "can rewrite itself to a different bucket with customer-supplied encryption key" do
+      options = { header: source_key_headers.merge(key_headers) }
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, "new-bucket", "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: options]
+
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-bucket", "new-file.ext", encryption_key: source_encryption_key, new_encryption_key: encryption_key
+
+      mock.verify
+    end
+
+    it "can rewrite itself calling rewrite multiple times" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      mock.expect :rewrite_object, undone_rewrite("keeptrying"),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: nil, options: {}]
+      mock.expect :rewrite_object, undone_rewrite("almostthere"),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: nil, options: {}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      # mock out sleep to make the test run faster
+      def file.sleep *args
+      end
+
+      file.rewrite "new-file.ext"
+
+      mock.verify
+    end
+
+    it "can rewrite itself calling rewrite multiple times with user_project set to true" do
+      mock = Minitest::Mock.new
+      mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      mock.expect :rewrite_object, undone_rewrite("keeptrying"),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
+      mock.expect :rewrite_object, undone_rewrite("almostthere"),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
+
+      file_user_project.service.mocked_service = mock
+
+      # mock out sleep to make the test run faster
+      def file_user_project.sleep *args
+      end
+
+      copied = file_user_project.copy "new-file.ext"
+      copied.user_project.must_equal true
+
+      mock.verify
+    end
+
+    it "can rewrite itself while updating its attributes" do
+      mock = Minitest::Mock.new
+      update_file_gapi = Google::Apis::StorageV1::Object.new(
+        cache_control: "private, max-age=0, no-cache",
+        content_disposition: "inline; filename=filename.ext",
+        content_encoding: "deflate",
+        content_language: "de",
+        content_type: "application/json",
+        metadata: { "player" => "Bob", "score" => "10" },
+        storage_class: "NEARLINE"
+      )
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+
+      file.service.mocked_service = mock
+
+      file.rewrite "new-file.ext" do |f|
+        f.cache_control = "private, max-age=0, no-cache"
+        f.content_disposition = "inline; filename=filename.ext"
+        f.content_encoding = "deflate"
+        f.content_language = "de"
+        f.content_type = "application/json"
+        f.metadata["player"] = "Bob"
+        f.metadata["score"] = "10"
+        f.storage_class = :nearline
+      end
+
+      mock.verify
+    end
+
+    it "can rewrite itself while updating its attributes with user_project set to true" do
+      mock = Minitest::Mock.new
+      update_file_gapi = Google::Apis::StorageV1::Object.new(
+        cache_control: "private, max-age=0, no-cache",
+        content_disposition: "inline; filename=filename.ext",
+        content_encoding: "deflate",
+        content_language: "de",
+        content_type: "application/json",
+        metadata: { "player" => "Bob", "score" => "10" },
+        storage_class: "NEARLINE"
+      )
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+        [bucket.name, file_user_project.name, bucket.name, "new-file.ext", update_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+
+      file_user_project.service.mocked_service = mock
+
+      copied = file_user_project.copy "new-file.ext" do |f|
+        f.cache_control = "private, max-age=0, no-cache"
+        f.content_disposition = "inline; filename=filename.ext"
+        f.content_encoding = "deflate"
+        f.content_language = "de"
+        f.content_type = "application/json"
+        f.metadata["player"] = "Bob"
+        f.metadata["score"] = "10"
+        f.storage_class = :nearline
+      end
+      copied.user_project.must_equal true
+
+      mock.verify
+    end
+  end
+
+  describe "File#rotate" do
+    it "can rotate its customer-supplied encryption keys" do
+      mock = Minitest::Mock.new
+      options = { header: source_key_headers.merge(key_headers) }
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file.name, bucket.name, file.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: nil, user_project: nil, options: options ]
+
+      file.service.mocked_service = mock
+
+      updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+      updated.name.must_equal file.name
+
+      mock.verify
+    end
+
+    it "can rotate its customer-supplied encryption keys with user_project set to true" do
+      mock = Minitest::Mock.new
+      options = { header: source_key_headers.merge(key_headers) }
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: nil, user_project: "test", options: options ]
+
+      file_user_project.service.mocked_service = mock
+
+      updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+      updated.name.must_equal file_user_project.name
+      updated.user_project.must_equal true
+
+      mock.verify
+    end
+
+    it "can rotate to a customer-supplied encryption key if previously unencrypted with customer key" do
+      mock = Minitest::Mock.new
+      options = { header: key_headers }
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file.name, bucket.name, file.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: nil, user_project: nil, options: options ]
+
+      file.service.mocked_service = mock
+
+      updated = file.rotate new_encryption_key: encryption_key
+      updated.name.must_equal file.name
+
+      mock.verify
+    end
+
+    it "can rotate from a customer-supplied encryption key to default service encryption" do
+      mock = Minitest::Mock.new
+      options = { header: source_key_headers }
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file.name, bucket.name, file.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: nil, user_project: nil, options: options ]
+
+      file.service.mocked_service = mock
+
+      updated = file.rotate encryption_key: source_encryption_key
+      updated.name.must_equal file.name
+
+      mock.verify
+    end
+
+    it "can rotate its customer-supplied encryption keys with multiple requests for large objects" do
+      mock = Minitest::Mock.new
+      options = { header: source_key_headers.merge(key_headers) }
+      mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
+                  [bucket.name, file.name, bucket.name, file.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: nil, user_project: nil, options: options ]
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file.name, bucket.name, file.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: "notyetcomplete", user_project: nil, options: options ]
+
+      file.service.mocked_service = mock
+
+      # mock out sleep to make the test run faster
+      def file.sleep *args
+      end
+
+      updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+      updated.name.must_equal file.name
+
+      mock.verify
+    end
+
+    it "can rotate its customer-supplied encryption keys with multiple requests for large objects with user_project set to true" do
+      mock = Minitest::Mock.new
+      options = { header: source_key_headers.merge(key_headers) }
+      mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
+                  [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: nil, user_project: "test", options: options ]
+      mock.expect :rewrite_object, done_rewrite(file_gapi),
+                  [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
+                   destination_predefined_acl: nil, source_generation: nil,
+                   rewrite_token: "notyetcomplete", user_project: "test", options: options ]
+
+      file_user_project.service.mocked_service = mock
+
+      # mock out sleep to make the test run faster
+      def file_user_project.sleep *args
+      end
+
+      updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
+      updated.name.must_equal file_user_project.name
+      updated.user_project.must_equal true
+
+      mock.verify
+    end
   end
 
   it "can reload itself" do

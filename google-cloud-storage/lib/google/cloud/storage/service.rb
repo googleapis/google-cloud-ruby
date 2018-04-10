@@ -311,26 +311,6 @@ module Google
           end
         end
 
-        ## Copy a file from source bucket/object to a
-        # destination bucket/object.
-        def copy_file source_bucket_name, source_file_path,
-                      destination_bucket_name, destination_file_path,
-                      file_gapi = nil, key: nil, acl: nil, generation: nil,
-                      token: nil, user_project: nil
-          key_options = rewrite_key_options key, key
-          execute do
-            service.rewrite_object \
-              source_bucket_name, source_file_path,
-              destination_bucket_name, destination_file_path,
-              file_gapi,
-              destination_predefined_acl: acl,
-              source_generation: generation,
-              rewrite_token: token,
-              user_project: user_project(user_project),
-              options: key_options
-          end
-        end
-
         ## Rewrite a file from source bucket/object to a
         # destination bucket/object.
         def rewrite_file source_bucket_name, source_file_path,

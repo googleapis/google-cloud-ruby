@@ -646,31 +646,155 @@ module Google
         #     f.metadata["copied_from"] = "#{file.bucket}/#{file.name}"
         #   end
         #
-        def copy dest_bucket_or_path, dest_path = nil, acl: nil,
-                 generation: nil, encryption_key: nil
-          ensure_service!
-          options = { acl: acl, generation: generation, key: encryption_key,
-                      user_project: user_project }
-          dest_bucket, dest_path, options = fix_copy_args dest_bucket_or_path,
-                                                          dest_path, options
+        def copy dest_bucket_or_path, dest_path = nil,
+                 acl: nil, generation: nil, encryption_key: nil
+          rewrite dest_bucket_or_path, dest_path,
+                  acl: acl, generation: generation,
+                  encryption_key: encryption_key,
+                  new_encryption_key: encryption_key do |updater|
+            yield updater if block_given?
+          end
+        end
 
-          copy_gapi = nil
+        ##
+        # [Rewrites](https://cloud.google.com/storage/docs/json_api/v1/objects/rewrite)
+        # the file to a new location. Or the same location can be provided to
+        # rewrite the file in place.
+        #
+        # If a [customer-supplied encryption
+        # key](https://cloud.google.com/storage/docs/encryption#customer-supplied)
+        # was used with {Bucket#create_file}, the `encryption_key` option must
+        # be provided. Unlike {#copy}, separate encryption keys are used to read
+        # (encryption_key) and to write (new_encryption_key) file contents.
+        #
+        # @param [String] dest_bucket_or_path Either the bucket to rewrite the
+        #   file to, or the path to rewrite the file to in the current bucket.
+        # @param [String] dest_path If a bucket was provided in the first
+        #   parameter, this contains the path to rewrite the file to in the
+        #   given bucket.
+        # @param [String] acl A predefined set of access controls to apply to
+        #   new file.
+        #
+        #   Acceptable values are:
+        #
+        #   * `auth`, `auth_read`, `authenticated`, `authenticated_read`,
+        #     `authenticatedRead` - File owner gets OWNER access, and
+        #     allAuthenticatedUsers get READER access.
+        #   * `owner_full`, `bucketOwnerFullControl` - File owner gets OWNER
+        #     access, and project team owners get OWNER access.
+        #   * `owner_read`, `bucketOwnerRead` - File owner gets OWNER access,
+        #     and project team owners get READER access.
+        #   * `private` - File owner gets OWNER access.
+        #   * `project_private`, `projectPrivate` - File owner gets OWNER
+        #     access, and project team members get access according to their
+        #     roles.
+        #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
+        #     access, and allUsers get READER access.
+        # @param [Integer] generation Select a specific revision of the file to
+        #   rewrite. The default is the latest version.
+        # @param [String] encryption_key Optional. The customer-supplied,
+        #   AES-256 encryption key used to decrypt the file, if the existing
+        #   file is encrypted.
+        # @param [String] new_encryption_key Optional. The customer-supplied,
+        #   AES-256 encryption key used to encrypt the file, if the rewritten
+        #   file is intended to be encrypted.
+        # @yield [file] a block yielding a delegate object for updating
+        #
+        # @return [Google::Cloud::Storage::File]
+        #
+        # @example The file can be rewritten to a new path in the bucket:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.rewrite "path/to/destination/file.ext"
+        #
+        # @example The file can also be rewritten to a different bucket:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.rewrite "new-destination-bucket",
+        #                "path/to/destination/file.ext"
+        #
+        # @example The file can also be rewritten by specifying a generation:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.rewrite "copy/of/previous/generation/file.ext",
+        #                generation: 123456
+        #
+        # @example The file can be modified during rewriting:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.rewrite "new-destination-bucket",
+        #                "path/to/destination/file.ext" do |f|
+        #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
+        #   end
+        #
+        # @example The file can be rewritten with a new encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # Old key was stored securely for later use.
+        #   old_key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
+        #
+        #   # Key generation shown for example purposes only. Write your own.
+        #   cipher = OpenSSL::Cipher.new "aes-256-cfb"
+        #   cipher.encrypt
+        #   new_key = cipher.random_key
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.rewrite "new-destination-bucket",
+        #                "path/to/destination/file.ext",
+        #                encryption_key: old_key,
+        #                new_encryption_key: new_key do |f|
+        #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
+        #   end
+        #
+        def rewrite dest_bucket_or_path, dest_path = nil,
+                    acl: nil, generation: nil,
+                    encryption_key: nil, new_encryption_key: nil
+          ensure_service!
+          dest_bucket, dest_path = fix_rewrite_args dest_bucket_or_path,
+                                                    dest_path
+
+          update_gapi = nil
           if block_given?
             updater = Updater.new gapi
             yield updater
             updater.check_for_changed_metadata!
-            copy_gapi = gapi_from_attrs(updater.updates) if updater.updates.any?
+            if updater.updates.any?
+              update_gapi = gapi_from_attrs updater.updates
+            end
           end
 
-          resp = service.copy_file bucket, name, dest_bucket, dest_path,
-                                   copy_gapi, options
-          until resp.done
-            sleep 1
-            resp = service.copy_file bucket, name, dest_bucket, dest_path,
-                                     copy_gapi,
-                                     options.merge(token: resp.rewrite_token)
-          end
-          File.from_gapi resp.resource, service, user_project: user_project
+          new_gapi = rewrite_gapi bucket, name, update_gapi,
+                                  new_bucket: dest_bucket, new_name: dest_path,
+                                  acl: acl, generation: generation,
+                                  encryption_key: encryption_key,
+                                  new_encryption_key: new_encryption_key,
+                                  user_project: user_project
+
+          File.from_gapi new_gapi, service, user_project: user_project
         end
 
         ##
@@ -719,17 +843,8 @@ module Google
         #   file.rotate encryption_key: old_key, new_encryption_key: new_key
         #
         def rotate encryption_key: nil, new_encryption_key: nil
-          ensure_service!
-          options = { source_key: encryption_key,
-                      destination_key: new_encryption_key,
-                      user_project: user_project }
-          gapi = service.rewrite_file bucket, name, bucket, name, nil, options
-          until gapi.done
-            sleep 1
-            options[:token] = gapi.rewrite_token
-            gapi = service.rewrite_file bucket, name, bucket, name, nil, options
-          end
-          File.from_gapi gapi.resource, service, user_project: user_project
+          rewrite bucket, name, encryption_key: encryption_key,
+                                new_encryption_key: new_encryption_key
         end
 
         ##
@@ -1096,7 +1211,8 @@ module Google
           ensure_service!
 
           @gapi = if attributes.include? :storage_class
-                    rewrite_gapi bucket, name, update_gapi
+                    rewrite_gapi \
+                      bucket, name, update_gapi, user_project: user_project
                   else
                     service.patch_file \
                       bucket, name, update_gapi, user_project: user_project
@@ -1112,30 +1228,36 @@ module Google
           Google::Apis::StorageV1::Object.new attr_params
         end
 
-        def rewrite_gapi bucket, name, update_gapi
+        def rewrite_gapi bucket, name, updated_gapi,
+                         new_bucket: nil, new_name: nil, acl: nil,
+                         generation: nil, encryption_key: nil,
+                         new_encryption_key: nil, user_project: nil
+          new_bucket ||= bucket
+          new_name ||= name
+          options = { acl: File::Acl.predefined_rule_for(acl),
+                      generation: generation, source_key: encryption_key,
+                      destination_key: new_encryption_key,
+                      user_project: user_project }.delete_if { |_k, v| v.nil? }
+
           resp = service.rewrite_file \
-            bucket, name, bucket, name, update_gapi, user_project: user_project
+            bucket, name, new_bucket, new_name, updated_gapi, options
           until resp.done
             sleep 1
+            retry_options = options.merge token: resp.rewrite_token
             resp = service.rewrite_file \
-              bucket, name, bucket, name, update_gapi,
-              token: resp.rewrite_token, user_project: user_project
+              bucket, name, new_bucket, new_name, updated_gapi, retry_options
           end
           resp.resource
         end
 
-        def fix_copy_args dest_bucket, dest_path, options = {}
-          if dest_path.respond_to?(:to_hash) && options.empty?
-            options = dest_path
-            dest_path = nil
-          end
+        def fix_rewrite_args dest_bucket, dest_path
           if dest_path.nil?
             dest_path = dest_bucket
             dest_bucket = bucket
           end
           dest_bucket = dest_bucket.name if dest_bucket.respond_to? :name
-          options[:acl] = File::Acl.predefined_rule_for options[:acl]
-          [dest_bucket, dest_path, options]
+          dest_path = dest_path.name if dest_path.respond_to? :name
+          [dest_bucket, dest_path]
         end
 
         def verify_file! file, verify = :md5
