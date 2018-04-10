@@ -411,7 +411,7 @@ module Google
         end
 
         ##
-        # Download the file's contents to a local file or an IO instance.
+        # Download the file's contents to a local file or an File-like object.
         #
         # By default, the download is verified by calculating the MD5 digest.
         #
@@ -420,11 +420,12 @@ module Google
         # was used with {Bucket#create_file}, the `encryption_key` option must
         # be provided.
         #
-        # @param [String, IO] path The path on the local file system to write
-        #   the data to. The path provided must be writable. Can also be an IO
-        #   object, or IO-ish object like StringIO. If an IO object, the object
-        #   will be written to, not the filesystem. If omitted, a new StringIO
-        #   instance will be written to and returned. Optional.
+        # @param [String, ::File] path The path on the local file system to
+        #   write the data to. The path provided must be writable. Can also be
+        #   an File object, or File-like object such as StringIO. If an file
+        #   object, the object will be written to, not the filesystem. If
+        #   omitted, a new StringIO instance will be written to and returned.
+        #   Optional.
         # @param [Symbol] verify The verification algorithm used to ensure the
         #   downloaded file contents are correct. Default is `:md5`.
         #
@@ -446,11 +447,11 @@ module Google
         #   not performed in the Storage service. (See [Transcoding of
         #   gzip-compressed files](https://cloud.google.com/storage/docs/transcoding))
         #
-        # @return [IO] Returns an IO object representing the file data. This
-        #   will ordinarily be a `::File` object referencing the local file
-        #   system. However, if the argument to `path` is `nil`, a StringIO
-        #   instance will be returned. If the argument to `path` is an IO
-        #   object, then that object will be returned.
+        # @return [::File, StringIO] Returns a file object representing the file
+        #   data. This will ordinarily be a `::File` object referencing the
+        #   local file system. However, if the argument to `path` is `nil`, a
+        #   StringIO instance will be returned. If the argument to `path` is an
+        #   File-like object, then that object will be returned.
         #
         # @example
         #   require "google/cloud/storage"
