@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-container", "~> 0.1"
   gem.add_dependency "google-cloud-dataproc", "~> 0.1"
   gem.add_dependency "google-cloud-datastore", "~> 1.4"
-  gem.add_dependency "google-cloud-dlp", "~> 0.1"
+  gem.add_dependency "google-cloud-dlp", "~> 0.3"
   gem.add_dependency "google-cloud-dns", "~> 0.28"
   gem.add_dependency "google-cloud-error_reporting", "~> 0.30"
   gem.add_dependency "google-cloud-firestore", "~> 0.21"

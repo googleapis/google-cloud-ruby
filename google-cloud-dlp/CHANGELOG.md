@@ -1,5 +1,10 @@
 # Release History
 
+### 0.3.0 / 2018-4-11
+
+* Documentation updates
+* New IMAGE type
+
 ### 0.2.0 / 2018-3-16
 
 * Refreshed alpha release for V2 API compatibility
