@@ -1,13 +1,40 @@
-# frozen_string_literal: true
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 module Google
   module Cloud
     module Bigtable
-      class RowsReader # :nodoc:
-        # It merge rows chunks and create flat rows and build options
-        # for retry read rows
-
+      # @private
+      #
+      # RowsReader
+      #
+      # Merge data chunks and build flat rows with cells and do smart retry on
+      # exceptions
+      class RowsReader
         attr_reader :rows_count, :chunk_reader
+
+        # @private
+        #
+        # Create row reader object
+        #
+        # @param client [Google::Cloud::Bigtable::V2]
+        # @param table_path [String]
+        # @param app_profile_id [String]
+        # @param options [Google::Gax::CallOptions]
+        #   Overrides the default settings for this call, e.g, timeout,
+        #   retries, etc.
 
         def initialize client, table_path, app_profile_id, options
           @client = client
@@ -18,6 +45,24 @@ module Google
           @rows_count = 0
           @result = []
         end
+
+        # Read rows
+        #
+        # @param rows [Google::Bigtable::V2::RowSet]
+        #   The row keys and/or ranges to read.
+        #   If not specified, reads from all rows.
+        #   A hash of the same form as `Google::Bigtable::V2::RowSet`
+        #   can also be provided.
+        # @param filter [Google::Bigtable::V2::RowFilter | Hash]
+        #   The filter to apply to the contents of the specified row(s). If unset,
+        #   reads the entirety of each row.
+        #   A hash of the same form as `Google::Bigtable::V2::RowFilter`
+        #   can also be provided.
+        # @param rows_limit [Integer]
+        #   The read will terminate after committing to N rows' worth of results.
+        #   The default (zero) is to return all results.
+        # @return [Array<Google::Cloud::Bigtable::FlatRow> | :yields: row]
+        #   Array of row or yield block for each processed row.
 
         def read \
             rows: nil,
@@ -50,6 +95,10 @@ module Google
           @chunk_reader.validate_last_row_complete
           @result unless block_given?
         end
+
+        # Last read row key
+        #
+        # @return [String]
 
         def last_key
           @chunk_reader.last_key
@@ -103,6 +152,11 @@ module Google
 
         private
 
+        # Check start key already read for range
+        #
+        # @param range [Google::Bigtable::V2::RowRange]
+        # @return [Boolean]
+
         def start_key_read? range
           start_key = if !range.start_key_closed.empty?
                         range.start_key_closed
@@ -112,6 +166,11 @@ module Google
 
           start_key.empty? || last_key >= start_key
         end
+
+        # Check end key already read for range
+        #
+        # @param range [Google::Bigtable::V2::RowRange]
+        # @return [Boolean]
 
         def end_key_read? range
           end_key = if !range.end_key_closed.empty?

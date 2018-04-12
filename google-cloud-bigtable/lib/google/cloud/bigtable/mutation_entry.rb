@@ -1,12 +1,48 @@
-# frozen_string_literal: true
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 module Google
   module Cloud
     module Bigtable
+      # MutationEntry
+      #
+      # MutationEntry is a chainable structure, which hold data for diffrent
+      # type of mutations. It is used in murate rows, and check and mutate row
+      # using predicate.
+      #
+      # @example
+      #   entry = Google::Cloud::Bigtable::MutationEntry.new(row_key: "user-1")
+      #   entry.set_cell({
+      #     family_name: "cf1",
+      #     column_qualifier: "field01",
+      #     timestamp_micros: Time.now.to_i * 1000,
+      #     value: "XYZ"
+      #   }).delete_from_column({
+      #     family_name: "cf2",
+      #     column_qualifier: "fiel01",
+      #     time_range: {
+      #       start_timestamp_micros: (Time.now - 1.day).to_i * 1000,
+      #       end_timestamp_micros: Time.now.to_i * 1000
+      #     }
+      #   }).delete_from_family("cf3").delete_from_row
       class MutationEntry
-        # Chainable mutation entry data holder
         attr_accessor :row_key, :mutations
 
+        # Create instance of mutation entry
+        #
+        # @param row_key [String]
         def initialize row_key: nil
           @row_key = row_key
           @mutations = []

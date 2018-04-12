@@ -12,11 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google-cloud-bigtable"
 require "google/cloud/env"
 require "google/cloud/config"
 require "google/cloud/errors"
+require "google/cloud/bigtable/errors"
 require "google/cloud/bigtable/credentials"
+require 'google/cloud/bigtable/admin/credentials'
 
 module Google
   module Cloud
@@ -121,7 +124,8 @@ module Google
 
         gem_spec = Gem.loaded_specs["google-cloud-bigtable"]
         options = {
-          credentials: (credentials || default_credentials(scopes: scopes)),
+          credentials: (credentials ||
+            default_credentials(scopes: scopes, client_type: client_type)),
           scopes: (scopes || configure.scopes),
           client_config: (client_config || configure.client_config),
           timeout: (timeout || configure.timeout),
@@ -168,7 +172,7 @@ module Google
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
-      #
+
       def self.configure
         yield Google::Cloud.configure.bigtable if block_given?
 
@@ -194,25 +198,36 @@ module Google
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
-      #
+
       def self.configure
         yield Google::Cloud.configure.bigtable if block_given?
 
         Google::Cloud.configure.bigtable
       end
 
-     # @private Default project.
+     # @private
+     # Default project.
+     
      def self.default_project_id
        Google::Cloud.configure.bigtable.project_id ||
          Google::Cloud.configure.project_id ||
          Google::Cloud.env.project_id
      end
 
-     # @private Default credentials.
-     def self.default_credentials scopes: nil
-       Google::Cloud.configure.bigtable.credentials ||
-         Google::Cloud.configure.credentials ||
+     # @private
+     # Default credentials.
+
+     def self.default_credentials scopes: nil, client_type: nil
+       credentials = Google::Cloud.configure.bigtable.credentials ||
+          Google::Cloud.configure.credentials
+
+       return credentials if credentials
+
+       if client_type == :data
          Bigtable::Credentials.default(scopes: scopes)
+       else
+         Bigtable::Admin::Credentials.default(scopes: scopes)
+       end
      end
     end
   end

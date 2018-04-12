@@ -1,21 +1,27 @@
 # frozen_string_literal: true
 
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 module Google
   module Cloud
     module Bigtable
-      # Invalid row state error
-      class InvalidRowStateError < Google::Cloud::Error
-        attr_reader :data
-
-        def initialize message, data = nil
-          super(message)
-          @data = data if data
-        end
-      end
-
-      class ChunkReader # :nodoc:
-        # Row and cells chunk merger based on states
-
+      # @private
+      #
+      # Read chunk and merge based on states and build rows and cells
+      class ChunkReader
         # Row states
         NEW_ROW = 1
         ROW_IN_PROGRESS = 2
@@ -27,12 +33,19 @@ module Google
         # Current cached row data
         attr_accessor :chunk, :row
 
-        # current cell values
+        # Current cell values
         attr_accessor :cur_family, :cur_qaul, :cur_ts, :cur_val, :cur_labels
+
+        # @private
+        # Create chunk reader object and set row state to new
 
         def initialize
           reset_to_new_row
         end
+
+        # Process chunk and build full row with cells
+        #
+        # @param chunk [Google::Bigtable::V2::ReadRowsResponse::CellChunk]
 
         def process chunk
           self.chunk = chunk
@@ -54,6 +67,10 @@ module Google
         end
 
         # Validate row status commit or reset
+        #
+        # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
+        #   if chunk has data on reset row state
+        # @return [Google::Gax::Operation]
         def validate_reset_row
           return unless chunk.reset_row
 
@@ -66,6 +83,12 @@ module Google
           raise_if value, "A reset should have no data"
         end
 
+        # Validate chunk has new row state
+        #
+        # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
+        #   If row has already set key, chunk has emoty row key, chunk state is
+        #   reset, new row key same as last read key, family name or column
+        #   qualifier is empty
         def validate_new_row
           raise_if(row.key, "A new row cannot have existing state")
           raise_if(chunk.row_key.empty?, "A row key must be set")
@@ -78,6 +101,10 @@ module Google
           raise_if(chunk.qualifier.nil?, "A column qualifier must be set")
         end
 
+        # Validate chunk merge is in progress to build new row
+        #
+        # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
+        #   If row and chunk row key are not same or chunk row key is empty.
         def validate_row_in_progress
           raise_if(
             !chunk.row_key.empty? && chunk.row_key != row.key,
@@ -92,6 +119,9 @@ module Google
           validate_reset_row
         end
 
+        # Process new row by setting valus from current chunk.
+        #
+        # @return [Google::Cloud::Bigtable::FlatRow]
         def process_new_row
           validate_new_row
 
@@ -106,6 +136,9 @@ module Google
           next_state!
         end
 
+        # Process chunk if row state is in progress
+        #
+        # @return [Google::Cloud::Bigtable::FlatRow]
         def process_row_in_progress
           validate_row_in_progress
 
@@ -118,6 +151,9 @@ module Google
           next_state!
         end
 
+        # Process chunk if row cell state is in progress
+        #
+        # @return [Google::Cloud::Bigtable::FlatRow]
         def process_cell_in_progress
           validate_reset_row
 
@@ -126,6 +162,9 @@ module Google
           next_state!
         end
 
+        # Set next state of row.
+        #
+        # @return [Google::Cloud::Bigtable::FlatRow]
         def next_state!
           if cur_val
             self.cur_val += chunk.value
@@ -148,6 +187,7 @@ module Google
           completed_row
         end
 
+        # Build cell and append to row.
         def persist_cell
           cell = FlatRow::Cell.new(
             cur_family,
@@ -175,6 +215,10 @@ module Google
           self.cur_labels = nil
         end
 
+        # Validate last row is completed
+        #
+        # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
+        #   If read rows response end without last row completed
         def validate_last_row_complete
           return if row.key.nil?
 
@@ -186,6 +230,9 @@ module Google
 
         private
 
+        # Raise error on condition failure
+        #
+        # @raise [Google::Cloud::Bigtable::InvalidRowStateError]
         def raise_if condition, message
           raise InvalidRowStateError.new(message, chunk.to_hash) if condition
         end

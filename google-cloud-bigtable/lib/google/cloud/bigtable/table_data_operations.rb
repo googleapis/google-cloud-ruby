@@ -1,4 +1,17 @@
-# frozen_string_literal: true
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 require "google/gax"
 require "google/cloud/bigtable/v2"
@@ -10,17 +23,131 @@ require "google/cloud/bigtable/rows_reader"
 module Google
   module Cloud
     module Bigtable
-      GRPC_RETRYABLE_ERRORS = [
-        GRPC::DeadlineExceeded,
-        GRPC::Aborted,
-        GRPC::Unavailable,
-        GRPC::Core::CallError
-      ].freeze
-
-      DEFAULT_READ_RETRY_COUNT = 3
-
+      # TableDataOperations
+      #
+      # Collection of table data operations - read rows, mutate rows,
+      # get sample row keys, read and modify row, mutate row based
+      # on predicate result.
+      #
+      # @example Read Row
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   table = client.table("table-name")
+      #   table.read_rows(rows_limit: 10) do |row|
+      #     # Process row
+      #   end
+      #
+      # @example Read single row using row key
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   table = client.table("table-name")
+      #   table.read_row("row-key")
+      #
+      # @example Read sample row row keys
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   table = client.table("table-name")
+      #   row_keys = table.sample_row_keys
+      #
+      # @example Mutate row
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   table = client.table("table-name")
+      #   entry = Google::Cloud::Bigtable::MutationEntry.new(row_key: "user01")
+      #   entry.set_cell({
+      #     family_name: "cf1",
+      #     column_qualifier: "field01",
+      #     timestamp_micros: Time.now.to_i * 1000,
+      #     value: "XYZ"
+      #   }).delete_from_family("cf3")
+      #
+      #   table.mutate_row(entry])
+      #
+      # @example Mutate rows
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   table = client.table("table-name")
+      #   entry1 = Google::Cloud::Bigtable::MutationEntry.new(row_key: "user01")
+      #   entry1.set_cell({
+      #     family_name: "cf1",
+      #     column_qualifier: "field01",
+      #     timestamp_micros: Time.now.to_i * 1000,
+      #     value: "XYZ"
+      #   })
+      #   entry2 = Google::Cloud::Bigtable::MutationEntry.new(row_key: "user02")
+      #   entry2.delete_from_row
+      #
+      #   table.mutate_row([entry1, entry2]).each do |entry_result|
+      #     # Process entry result
+      #   end
+      #
+      # @example Read row, modify and write_row
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   table = client.table("table-name")
+      #   rule1 = Google::Bigtable::V2::ReadModifyWriteRule.new({
+      #     family_name: "cf1",
+      #     column_qualifier: "c_qual",
+      #     increment_amount: 1
+      #   })
+      #   rule2 = Google::Bigtable::V2::ReadModifyWriteRule.new({
+      #     family_name: "cf2",
+      #     column_qualifier: "c_qual",
+      #     append_value: "Extra Data"
+      #   })
+      #   row = table.read_modify_write_row("user01", [rule1, rule2])
+      #
+      # @example Check and mutate row
+      #   require "google/cloud/bigtable"
+      #
+      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   table = client.table("table-name")
+      #   predicate_filter = Google::Bigtable::V2::RowFilter.new(sink: true)
+      #   true_mutations = Google::Cloud::Bigtable::MutationEntry.new
+      #   entry.set_cell({
+      #     family_name: "cf1",
+      #     column_qualifier: "field01",
+      #     timestamp_micros: Time.now.to_i * 1000,
+      #     value: "XYZ"
+      #   })
+      #
+      #   false_mutations = Google::Cloud::Bigtable::MutationEntry.new
+      #   false_mutations.delete_from_family("cf3")
+      #
+      #   response = table.check_and_mutate_row(
+      #     "user01",
+      #     predicate_filter: predicate_filter,
+      #     true_mutations: true_mutations,
+      #     false_mutations: false_mutations
+      #   )
+      #
+      #   p "All predicates matched" if response
       class TableDataOperations
-        attr_reader :client, :table_path, :app_profile_id
+        # @private
+        # Retryable error list for smart read rows and muations retry
+        GRPC_RETRYABLE_ERRORS = [
+          GRPC::DeadlineExceeded,
+          GRPC::Aborted,
+          GRPC::Unavailable,
+          GRPC::Core::CallError
+        ].freeze
+
+        # @private
+        DEFAULT_READ_RETRY_COUNT = 3
+
+        # @private
+        #
+        # Create table data operations instance
+        #
+        # @param client [Google::Cloud::DataClient]
+        # @param table_path [String]
+        # @param app_profile_id [String]
 
         def initialize client, table_path, app_profile_id = nil
           @client = client
@@ -94,9 +221,9 @@ module Google
           req_row_set = build_row_set(rows)
           req_rows_limit = rows_limit
           rows_reader = RowsReader.new(
-            client,
-            table_path,
-            app_profile_id,
+            @client,
+            @table_path,
+            @app_profile_id,
             options
           )
 
@@ -166,16 +293,16 @@ module Google
         # @return [Enumerable<Google::Bigtable::V2::SampleRowKeysResponse>]
         # @raise [Google::Gax::GaxError] if the RPC is aborted.
         # @example
-        #   client = Google::Cloud.bigtable(instance_id: "instance_id")
+        #   client = Google::Cloud.bigtable(instance_id: "instance-id")
         #
         #   table = client.table("table-name")
         #
         #   table.sample_row_keys
 
         def sample_row_keys options: nil
-          client.sample_row_keys(
-            table_path,
-            app_profile_id: app_profile_id,
+          @client.sample_row_keys(
+            @table_path,
+            app_profile_id: @app_profile_id,
             options: options
           )
         end
@@ -194,7 +321,7 @@ module Google
         # @return [Google::Bigtable::V2::MutateRowResponse]
         # @raise [Google::Gax::GaxError] if the RPC is aborted.
         # @example
-        #   client = Google::Cloud.bigtable(instance_id: "instance_id")
+        #   client = Google::Cloud.bigtable(instance_id: "instance-id")
         #
         #   table = client.table("table-name")
         #
@@ -218,11 +345,11 @@ module Google
         def mutate_row \
             entry,
             options: nil
-          client.mutate_row(
-            table_path,
+          @client.mutate_row(
+            @table_path,
             entry.row_key,
             entry.mutations,
-            app_profile_id: app_profile_id,
+            app_profile_id: @app_profile_id,
             options: options
           )
         end
@@ -244,7 +371,7 @@ module Google
         #   An enumerable of Google::Bigtable::V2::MutateRowsResponse instances.
         # @raise [Google::Gax::GaxError] if the RPC is aborted.
         # @example
-        #   client = Google::Cloud.bigtable(instance_id: "instance_id")
+        #   client = Google::Cloud.bigtable(instance_id: "instance-id")
         #
         #   table = client.table("table-name")
         #
@@ -280,10 +407,10 @@ module Google
             )
           end
 
-          client.mutate_rows(
-            table_path,
+          @client.mutate_rows(
+            @table_path,
             req_entries,
-            app_profile_id: app_profile_id,
+            app_profile_id: @app_profile_id,
             options: options
           )
         end
@@ -323,7 +450,7 @@ module Google
         #   Predicate match or not status
         # @raise [Google::Gax::GaxError] if the RPC is aborted.
         # @example
-        #   client = Google::Cloud.bigtable(instance_id: "instance_id")
+        #   client = Google::Cloud.bigtable(instance_id: "instance-id")
         #
         #   table = client.table("table-id")
         #
@@ -356,7 +483,6 @@ module Google
         #   if response
         #     puts "All predicates matched"
         #   end
-        #
 
         def check_and_mutate_row \
             row_key,
@@ -367,10 +493,10 @@ module Google
           req_true_mutations = true_mutations.mutations if true_mutations
           req_false_mutations = false_mutations.mutations if false_mutations
 
-          response = client.check_and_mutate_row(
-            table_path,
+          response = @client.check_and_mutate_row(
+            @table_path,
             row_key,
-            app_profile_id: app_profile_id,
+            app_profile_id: @app_profile_id,
             predicate_filter: predicate_filter,
             true_mutations: req_true_mutations,
             false_mutations: req_false_mutations,
@@ -402,7 +528,7 @@ module Google
         # @return [Google::Cloud::Bigtable::FlatRow]
         # @raise [Google::Gax::GaxError] if the RPC is aborted.
         # @example
-        #   client = Google::Cloud.bigtable(instance_id: "instance_id")
+        #   client = Google::Cloud.bigtable(instance_id: "instance-id")
         #
         #   table = client.table("table-name")
         #
@@ -427,11 +553,11 @@ module Google
             row_key,
             rules,
             options: nil
-          response = client.read_modify_write_row(
-            table_path,
+          response = @client.read_modify_write_row(
+            @table_path,
             row_key,
             rules,
-            app_profile_id: app_profile_id,
+            app_profile_id: @app_profile_id,
             options: options
           )
 

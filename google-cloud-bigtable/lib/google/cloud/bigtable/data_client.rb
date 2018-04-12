@@ -1,4 +1,17 @@
-# frozen_string_literal: true
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 require "google/cloud/bigtable"
 require "google/cloud/bigtable/v2"
@@ -7,11 +20,20 @@ require "google/cloud/bigtable/table_data_operations"
 module Google
   module Cloud
     module Bigtable
+      # DataClient
+      #
+      # A Bigtable client for data oprations.
+      #
+      # Read, wirite, update and delete of table data
       class DataClient
-        # Bigtable client for data oprations.
+        attr_reader :project_id, :instance_id
 
-        attr_reader :options, :project_id, :instance_id
+        # @private
+        attr_reader :options
 
+        # @private
+        #
+        # Create data client object to perform operations on tables data.
         # @param project_id [String]
         # @param instance_id [String]
         # @param options [Hash]
@@ -22,14 +44,20 @@ module Google
           @options = options
         end
 
-        # Get table data operations client
+        # Get table data operations client for read, write and delete rows
         #
+        # See {Google::Cloud::Bigtable::TableDataOperations} for list of
+        # operations
         # @example
         #   require "google/cloud/bigtable"
         #
         #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
         #
-        #   client.table("table-name")
+        #   table = client.table("table-name")
+        #
+        #   table.read_rows(rows_limit: 10) do |row|
+        #     p row
+        #   end
         #
         # @param table_id [String]
         #   Existing table id.
