@@ -16,6 +16,7 @@
 require "google/cloud/storage/bucket/acl"
 require "google/cloud/storage/bucket/list"
 require "google/cloud/storage/bucket/cors"
+require "google/cloud/storage/bucket/encryption"
 require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "google/cloud/storage/file"
@@ -376,6 +377,36 @@ module Google
           @gapi.billing ||= Google::Apis::StorageV1::Bucket::Billing.new
           @gapi.billing.requester_pays = new_requester_pays
           patch_gapi! :billing
+        end
+
+        ##
+        # The {Storage::Bucket::Encryption} object that represents the custom
+        # encryption method used to protect files in the bucket.
+        #
+        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
+        #   Documentation
+        #
+        # @return [Storage::Bucket::Encryption, nil] The encryption
+        #   configuration.
+        #
+        def encryption
+          return nil if @gapi.encryption.nil?
+          Encryption.from_gapi(@gapi.encryption).freeze
+        end
+
+        ##
+        # Set the {Storage::Bucket::Encryption} object that represents the
+        # custom encryption method used to protect files in the bucket.
+        #
+        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
+        #   Documentation
+        #
+        # @param [Storage::Bucket::Encryption, nil] value The new encryption
+        #   config, or `nil` to clear an existing config.
+        #
+        def encryption= value
+          @gapi.encryption = value ? value.to_gapi : nil
+          patch_gapi! :encryption
         end
 
         ##

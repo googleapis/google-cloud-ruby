@@ -52,6 +52,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       "x-goog-copy-source-encryption-key-sha256" => Base64.strict_encode64(source_encryption_key_sha256)
     }
   end
+  let(:kms_key) { "path/to/encryption_key_name" }
 
   it "knows its attributes" do
     file.id.must_equal file_hash["id"]
@@ -1292,6 +1293,10 @@ describe Google::Cloud::Storage::File, :mock_storage do
     generations.map(&:generation).must_equal [1234567894, 1234567893, 1234567892, 1234567891]
 
     mock.verify
+  end
+
+  it "knows its KMS encryption key" do
+    file.kms_key.must_equal kms_key
   end
 
   def gzip_data data

@@ -554,6 +554,17 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # Bucket::Encryption
+
+  doctest.before "Google::Cloud::Storage::Bucket::Encryption" do
+    mock_storage do |mock|
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
+      # Following expectation is only used in last example
+      mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
+    end
+  end
+
   # Bucket::List
 
   doctest.before "Google::Cloud::Storage::Bucket::List" do
@@ -931,6 +942,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Project#encryption" do
+    mock_storage do |mock|
+      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
+      # Following expectation is only used in last example
+      mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
+    end
+  end
+
   # PostObject
 
   doctest.before "Google::Cloud::Storage::Bucket#post_object" do
@@ -959,9 +979,14 @@ YARD::Doctest.configure do |doctest|
 
 end
 
+# stubbed methods for use in examples
+
+def key_name
+  "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+end
+
+
 # Fixture helpers
-
-
 
 def bucket_gapi name = "my-bucket"
   Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name).to_json
@@ -1048,7 +1073,8 @@ def random_file_hash bucket, name, generation="1234567890"
     "metadata" => { "player" => "Alice", "score" => "101" },
     "owner" => { "entity" => "user-1234567890", "entityId" => "abc123" },
     "crc32c" => "Lm1F3g==",
-    "etag" => "CKih16GjycICEAE=" }
+    "etag" => "CKih16GjycICEAE=",
+    "kmsKeyName" => key_name }
 end
 
 def random_bucket_acl_hash bucket_name

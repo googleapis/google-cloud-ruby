@@ -85,7 +85,7 @@ class MockStorage < Minitest::Spec
     { "requesterPays" => requester_pays} unless requester_pays.nil?
   end
 
-  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890"
+  def random_file_hash bucket=random_bucket_name, name=random_file_path, generation="1234567890", kms_key_name="path/to/encryption_key_name"
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
@@ -107,7 +107,8 @@ class MockStorage < Minitest::Spec
       "metadata" => { "player" => "Alice", "score" => "101" },
       "owner" => { "entity" => "user-1234567890", "entityId" => "abc123" },
       "crc32c" => "Lm1F3g==",
-      "etag" => "CKih16GjycICEAE=" }
+      "etag" => "CKih16GjycICEAE=",
+      "kmsKeyName" => kms_key_name }
   end
 
   def random_bucket_name
@@ -145,5 +146,9 @@ class MockStorage < Minitest::Spec
     headers = {}
     headers["Content-Encoding"] = ["gzip"] if gzip
     OpenStruct.new(header: headers)
+  end
+
+  def encryption_gapi key_name
+    Google::Apis::StorageV1::Bucket::Encryption.new default_kms_key_name: key_name
   end
 end

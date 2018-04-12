@@ -309,6 +309,23 @@ module Google
         end
 
         ##
+        # The Cloud KMS encryption key that was used to protect the file, or
+        #   `nil` if none has been configured.
+        #
+        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
+        #   Documentation
+        #
+        # @return [String, nil] A Cloud KMS encryption key, or `nil` if none has
+        #   been configured.
+        #
+        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
+        #   Documentation
+        #
+        def kms_key
+          @gapi.kms_key_name
+        end
+
+        ##
         # The file's storage class. This defines how the file is stored and
         # determines the SLA and the cost of storage. For more information, see
         # [Storage
@@ -320,11 +337,16 @@ module Google
         end
 
         ##
-        # Updates how the file is stored and determines the SLA and the cost of
-        # storage. Accepted values include `:multi_regional`, `:regional`,
-        # `:nearline`, and `:coldline`, as well as the equivalent strings
-        # returned by {File#storage_class} or {Bucket#storage_class}. For more
-        # information, see [Storage
+        # Rewrites the file with a new storage class, which determines the SLA
+        # and the cost of storage. Accepted values include:
+        #
+        # * `:multi_regional`
+        # * `:regional`
+        # * `:nearline`
+        # * `:coldline`
+        #
+        # as well as the equivalent strings returned by {File#storage_class} or
+        # {Bucket#storage_class}. For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/storage-classes) and
         # [Per-Object Storage
         # Class](https://cloud.google.com/storage/docs/per-object-storage-class).
@@ -1233,7 +1255,8 @@ module Google
 
           ensure_service!
 
-          @gapi = if attributes.include? :storage_class
+          rewrite_attrs = %i[storage_class kms_key_name]
+          @gapi = if attributes.any? { |a| rewrite_attrs.include? a }
                     rewrite_gapi \
                       bucket, name, update_gapi, user_project: user_project
                   else

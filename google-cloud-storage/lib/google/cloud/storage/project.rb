@@ -471,6 +471,47 @@ module Google
                             query: query
         end
 
+        ##
+        # Creates a new Storage::Bucket::Encryption instance.
+        #
+        # This method does not execute an API call. Use the returned encryption
+        # configuration when creating or updating a bucket with {#create_bucket}
+        # and {Bucket#encryption=}.
+        #
+        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
+        #   Documentation
+        #
+        # @param [String] default_kms_key Name of the Cloud KMS encryption key
+        #   that will be used to protect files. The Service Account associated
+        #   with your project requires access to this encryption key.
+        #
+        # @return [Google::Cloud::Storage::Bucket::Encryption]
+        #
+        # @example Encrypt a new file with a default KMS key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encryption = storage.encryption default_kms_key: key_name
+        #
+        #   bucket = storage.create_bucket "my-bucket" do |b|
+        #     b.encryption = encryption
+        #   end
+        #
+        #   bucket.create_file "path/to/local.file.ext",
+        #                      "destination/path/file.ext"
+        #
+        #   file = bucket.file "destination/path/file.ext"
+        #   file.kms_key #=> key_name
+        #
+        def encryption default_kms_key: nil
+          encrypt_config = Storage::Bucket::Encryption.new
+          return encrypt_config if default_kms_key.nil?
+          encrypt_config.default_kms_key = default_kms_key
+          encrypt_config
+        end
+
         protected
 
         def acl_rule option_name
