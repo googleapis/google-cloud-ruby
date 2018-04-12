@@ -1,15 +1,33 @@
-# frozen_string_literal: true
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 require "google/cloud/bigtable/admin/v2"
 
 module Google
   module Cloud
     module Bigtable
+      # TableAdminClient
+      #
+      # Table admin operation client for create,delete table, list tables,
+      # drop row range and add/update/delete column families.
       class TableAdminClient
-        # Client for table admin operations
-
+        # @private
         attr_reader :options, :project_id, :instance_id
 
+        # @private
+        #
         # @param project_id [String]
         # @param instance_id [String]
         # @param options [Hash]

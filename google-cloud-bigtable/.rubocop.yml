@@ -1,13 +1,20 @@
 AllCops:
   Exclude:
     - "google-cloud-bigtable.gemspec"
-    - "lib/google/**/*"
+    - "lib/google-cloud-bigtable.rb"
+    - "lib/google/bigtable/**/*"
+    - "lib/google/cloud/bigtable.rb"
+    - "lib/google/cloud/bigtable/credentials.rb"
+    - "lib/google/cloud/bigtable/admin.rb"
+    - "lib/google/cloud/bigtable/admin/**/*"
+    - "lib/google/cloud/bigtable/v2.rb"
+    - "lib/google/cloud/bigtable/v2/**/*"
     - "Rakefile"
     - "test/**/*"
     - "acceptance/**/*"
 
 Documentation:
-  Enabled: false
+  Enabled: true
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -29,7 +36,7 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
-  Max: 25
+  Max: 30
 Metrics/ParameterLists:
   Enabled: false
 Layout/EmptyLines: # for the extra line between copyright and code

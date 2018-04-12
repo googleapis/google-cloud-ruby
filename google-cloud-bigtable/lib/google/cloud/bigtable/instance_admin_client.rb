@@ -1,16 +1,33 @@
-# frozen_string_literal: true
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 require "google/cloud/bigtable/admin/v2"
 
 module Google
   module Cloud
     module Bigtable
+      # InstanceAdminClient
+      #
+      # Bigtable instance admin client for creating, configuring, and deleting
+      # instances and clusters
       class InstanceAdminClient
-        # Bigtable instance admin client for creating, configuring, and deleting
-        # instances and clusters
-
+        # @private
         attr_reader :project_id, :options
 
+        # @private
+        #
         # @param project_id [String]
         # @param options [Hash]
         def initialize project_id, options = {}
@@ -136,7 +153,11 @@ module Google
         #     type: :PRODUCTION
         #   })
 
-        def update_instance instance_id, display_name: nil, type: nil, labels: {}
+        def update_instance \
+            instance_id,
+            display_name: nil,
+            type: nil,
+            labels: {}
           client.update_instance(
             instance_path(instance_id),
             display_name,
@@ -370,6 +391,7 @@ module Google
             )
         end
 
+        # Create formatted location path
         # @param location [String]
         #   zone name i.e us-east1-b
         # @return [String]

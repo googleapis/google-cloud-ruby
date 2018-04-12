@@ -12,10 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google-cloud-bigtable"
 require "google/cloud/env"
 require "google/cloud/config"
 require "google/cloud/errors"
+require "google/cloud/bigtable/credentials"
+require 'google/cloud/bigtable/admin/credentials'
 
 module Google
   module Cloud
@@ -114,13 +117,14 @@ module Google
           scopes: nil,
           client_config: nil,
           timeout: nil
-        project_id = (project_id || project || default_project_id).to_s
+        project_id = (project_id || default_project_id).to_s
 
         raise InvalidArgumentError, "project_id is required" unless project_id
 
         gem_spec = Gem.loaded_specs["google-cloud-bigtable"]
         options = {
-          credentials: (credentials || default_credentials(scopes: scopes)),
+          credentials: (credentials ||
+            default_credentials(scopes: scopes, client_type: client_type)),
           scopes: (scopes || configure.scopes),
           client_config: (client_config || configure.client_config),
           timeout: (timeout || configure.timeout),
@@ -140,8 +144,8 @@ module Google
           require "google/cloud/bigtable/table_admin_client"
           Bigtable::TableAdminClient.new(project_id, instance_id, options)
         elsif client_type == :data
-          require "google/cloud/bigtable/v2/bigtable_client"
-          Bigtable::V2::BigtableClient.new(options)
+          require "google/cloud/bigtable/data_client"
+          Bigtable::DataClient.new(project_id, instance_id, options)
         else
           raise InvalidArgumentError, "invalid client type. Valid types are \
   :instance, :table, :data"
@@ -167,7 +171,7 @@ module Google
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
-      #
+
       def self.configure
         yield Google::Cloud.configure.bigtable if block_given?
 
@@ -193,25 +197,36 @@ module Google
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Bigtable library uses.
-      #
+
       def self.configure
         yield Google::Cloud.configure.bigtable if block_given?
 
         Google::Cloud.configure.bigtable
       end
 
-     # @private Default project.
+     # @private
+     # Default project.
+
      def self.default_project_id
        Google::Cloud.configure.bigtable.project_id ||
          Google::Cloud.configure.project_id ||
          Google::Cloud.env.project_id
      end
 
-     # @private Default credentials.
-     def self.default_credentials scopes: nil
-       Google::Cloud.configure.bigtable.credentials ||
-         Google::Cloud.configure.credentials ||
+     # @private
+     # Default credentials.
+
+     def self.default_credentials scopes: nil, client_type: nil
+       credentials = Google::Cloud.configure.bigtable.credentials ||
+          Google::Cloud.configure.credentials
+
+       return credentials if credentials
+
+       if client_type == :data
          Bigtable::Credentials.default(scopes: scopes)
+       else
+         Bigtable::Admin::Credentials.default(scopes: scopes)
+       end
      end
     end
   end

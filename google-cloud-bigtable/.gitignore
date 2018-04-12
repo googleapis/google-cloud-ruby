@@ -15,3 +15,4 @@ jsondoc/*
 # Dev and tmp files
 *keyfile.json
 tmp/*
+.byebug_history
