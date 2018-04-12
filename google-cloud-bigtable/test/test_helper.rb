@@ -40,7 +40,7 @@ class MockBigtableAdminCredentials < Google::Cloud::Bigtable::Admin::Credentials
 end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockBigtablGrpcClientStub
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.

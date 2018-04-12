@@ -18,7 +18,7 @@ require "test_helper"
 describe Google::Cloud::Bigtable::DataClient do
   it "returns table opration object" do
     mock_method = proc {}
-    mock_stub = MockGrpcClientStub.new("read_rows", mock_method)
+    mock_stub = MockBigtablGrpcClientStub.new("read_rows", mock_method)
     mock_credentials = MockBigtableCredentials.new("read_rows")
 
     Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do

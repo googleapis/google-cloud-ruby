@@ -23,7 +23,7 @@ class InstanceAdminTestError < StandardError
 end
 
 def stub_instance_admin_grpc service_name, mock_method
-  mock_stub = MockGrpcClientStub.new(service_name, mock_method)
+  mock_stub = MockBigtablGrpcClientStub.new(service_name, mock_method)
 
   # Mock auth layer
   mock_credentials = MockBigtableAdminCredentials.new(service_name.to_s)

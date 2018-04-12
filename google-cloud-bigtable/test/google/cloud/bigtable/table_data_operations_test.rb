@@ -22,7 +22,7 @@ class DataClientTestError < StandardError
 end
 
 def stub_table_data_ops_grpc service_name, mock_method
-  mock_stub = MockGrpcClientStub.new(service_name, mock_method)
+  mock_stub = MockBigtablGrpcClientStub.new(service_name, mock_method)
 
   # Mock auth layer
   mock_credentials = MockBigtableCredentials.new(service_name.to_s)
@@ -88,7 +88,7 @@ describe Google::Cloud::Bigtable::TableDataOperations do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::V2::ReadRowsRequest, request)
         assert_equal(table_path, request.table_name)
-        response_chunks
+        OpenStruct.new(execute: response_chunks)
       end
 
       stub_table_data_ops_grpc(:read_rows, mock_method) do
@@ -136,7 +136,7 @@ describe Google::Cloud::Bigtable::TableDataOperations do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::V2::SampleRowKeysRequest, request)
         assert_equal(table_path, request.table_name)
-        [expected_response]
+        OpenStruct.new(execute: [expected_response])
       end
 
       stub_table_data_ops_grpc(:sample_row_keys, mock_method) do
@@ -197,7 +197,7 @@ describe Google::Cloud::Bigtable::TableDataOperations do
           Google::Gax::to_proto(req, Google::Bigtable::V2::Mutation)
         end
         assert_equal(mutations, request.mutations)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_data_ops_grpc(:mutate_row, mock_method) do
@@ -272,7 +272,7 @@ describe Google::Cloud::Bigtable::TableDataOperations do
           Google::Gax::to_proto(e, Google::Bigtable::V2::MutateRowsRequest::Entry)
         end
         assert_equal(entries, request.entries)
-        [expected_response]
+        OpenStruct.new(execute: [expected_response])
       end
 
       stub_table_data_ops_grpc(:mutate_rows, mock_method) do
@@ -336,7 +336,7 @@ describe Google::Cloud::Bigtable::TableDataOperations do
         assert_instance_of(Google::Bigtable::V2::CheckAndMutateRowRequest, request)
         assert_equal(table_path, request.table_name)
         assert_equal(row_key, request.row_key)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_data_ops_grpc(:check_and_mutate_row, mock_method) do
@@ -425,7 +425,7 @@ describe Google::Cloud::Bigtable::TableDataOperations do
           Google::Gax::to_proto(req, Google::Bigtable::V2::ReadModifyWriteRule)
         end
         assert_equal(rules, request.rules)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_data_ops_grpc(:read_modify_write_row, mock_method) do

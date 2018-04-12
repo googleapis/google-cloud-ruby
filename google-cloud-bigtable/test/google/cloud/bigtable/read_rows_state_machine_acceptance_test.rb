@@ -64,7 +64,7 @@ describe "Read rows state machine acceptance tests" do
   end
 
   def stub_client_grpc service_name, mock_method
-    mock_stub = MockGrpcClientStub.new(service_name, mock_method)
+    mock_stub = MockBigtablGrpcClientStub.new(service_name, mock_method)
     mock_credentials = MockBigtableCredentials.new(service_name.to_s)
 
     Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
@@ -111,7 +111,8 @@ describe "Read rows state machine acceptance tests" do
   read_rows_acceptance_test_data[:with_errors].each do |test_data|
     it test_data["name"] do
       mock_method = proc do |_request|
-        chunk_data_to_read_res(test_data["chunks_base64"])
+        response = chunk_data_to_read_res(test_data["chunks_base64"])
+        OpenStruct.new(execute: response)
       end
 
       assert_raises Google::Cloud::Bigtable::InvalidRowStateError do
@@ -123,7 +124,8 @@ describe "Read rows state machine acceptance tests" do
   read_rows_acceptance_test_data[:without_errors].each do |test_data|
     it test_data["name"] do
       mock_method = proc do |_request|
-        chunk_data_to_read_res(test_data["chunks_base64"])
+        response = chunk_data_to_read_res(test_data["chunks_base64"])
+        OpenStruct.new(execute: response)
       end
 
       expected_result = TestResult.build(test_data["results"])
