@@ -1,0 +1,8 @@
+--no-private
+--title=Dialogflow API
+--exclude _pb\.rb$
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
