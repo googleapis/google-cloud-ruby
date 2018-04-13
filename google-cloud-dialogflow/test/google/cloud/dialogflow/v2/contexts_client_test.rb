@@ -85,7 +85,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ListContextsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_contexts, mock_method)
 
@@ -156,7 +156,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::GetContextRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_context, mock_method)
 
@@ -226,7 +226,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::CreateContextRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(context, Google::Cloud::Dialogflow::V2::Context), request.context)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_context, mock_method)
 
@@ -296,7 +296,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::UpdateContextRequest, request)
         assert_equal(Google::Gax::to_proto(context, Google::Cloud::Dialogflow::V2::Context), request.context)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_context, mock_method)
 
@@ -358,7 +358,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::DeleteContextRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_context, mock_method)
 
@@ -420,7 +420,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_all_contexts, mock_method)
 

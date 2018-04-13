@@ -100,7 +100,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::GetAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_agent, mock_method)
 
@@ -169,7 +169,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::SearchAgentsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:search_agents, mock_method)
 
@@ -245,7 +245,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::TrainAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:train_agent, mock_method)
 
@@ -283,7 +283,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::TrainAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:train_agent, mock_method)
 
@@ -358,7 +358,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ExportAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:export_agent, mock_method)
 
@@ -396,7 +396,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ExportAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:export_agent, mock_method)
 
@@ -470,7 +470,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ImportAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:import_agent, mock_method)
 
@@ -508,7 +508,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ImportAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:import_agent, mock_method)
 
@@ -582,7 +582,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::RestoreAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:restore_agent, mock_method)
 
@@ -620,7 +620,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::RestoreAgentRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:restore_agent, mock_method)
 

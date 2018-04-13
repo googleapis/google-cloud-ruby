@@ -85,7 +85,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::DetectIntentRequest, request)
         assert_equal(formatted_session, request.session)
         assert_equal(Google::Gax::to_proto(query_input, Google::Cloud::Dialogflow::V2::QueryInput), request.query_input)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:detect_intent, mock_method)
 
@@ -158,7 +158,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest, request)
         assert_equal(session, request.session)
         assert_equal(Google::Gax::to_proto(query_input, Google::Cloud::Dialogflow::V2::QueryInput), request.query_input)
-        [expected_response]
+        OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub.new(:streaming_detect_intent, mock_method)
 

@@ -86,7 +86,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ListIntentsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_intents, mock_method)
 
@@ -174,7 +174,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::GetIntentRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_intent, mock_method)
 
@@ -261,7 +261,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::CreateIntentRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(intent, Google::Cloud::Dialogflow::V2::Intent), request.intent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_intent, mock_method)
 
@@ -350,7 +350,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::UpdateIntentRequest, request)
         assert_equal(Google::Gax::to_proto(intent, Google::Cloud::Dialogflow::V2::Intent), request.intent)
         assert_equal(language_code, request.language_code)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_intent, mock_method)
 
@@ -414,7 +414,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::DeleteIntentRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_intent, mock_method)
 
@@ -489,7 +489,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(language_code, request.language_code)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_update_intents, mock_method)
 
@@ -529,7 +529,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(language_code, request.language_code)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_update_intents, mock_method)
 
@@ -610,7 +610,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::Intent)
         end
         assert_equal(intents, request.intents)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_delete_intents, mock_method)
 
@@ -653,7 +653,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::Intent)
         end
         assert_equal(intents, request.intents)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_delete_intents, mock_method)
 

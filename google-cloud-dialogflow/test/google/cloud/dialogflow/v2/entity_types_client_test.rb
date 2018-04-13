@@ -86,7 +86,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ListEntityTypesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_entity_types, mock_method)
 
@@ -157,7 +157,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::GetEntityTypeRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_entity_type, mock_method)
 
@@ -227,7 +227,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(entity_type, Google::Cloud::Dialogflow::V2::EntityType), request.entity_type)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_entity_type, mock_method)
 
@@ -297,7 +297,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest, request)
         assert_equal(Google::Gax::to_proto(entity_type, Google::Cloud::Dialogflow::V2::EntityType), request.entity_type)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_entity_type, mock_method)
 
@@ -359,7 +359,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_entity_type, mock_method)
 
@@ -432,7 +432,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_update_entity_types, mock_method)
 
@@ -470,7 +470,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_update_entity_types, mock_method)
 
@@ -546,7 +546,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(entity_type_names, request.entity_type_names)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_delete_entity_types, mock_method)
 
@@ -586,7 +586,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(entity_type_names, request.entity_type_names)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_delete_entity_types, mock_method)
 
@@ -667,7 +667,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::EntityType::Entity)
         end
         assert_equal(entities, request.entities)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_create_entities, mock_method)
 
@@ -710,7 +710,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::EntityType::Entity)
         end
         assert_equal(entities, request.entities)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_create_entities, mock_method)
 
@@ -794,7 +794,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::EntityType::Entity)
         end
         assert_equal(entities, request.entities)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_update_entities, mock_method)
 
@@ -837,7 +837,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
           Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::EntityType::Entity)
         end
         assert_equal(entities, request.entities)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_update_entities, mock_method)
 
@@ -918,7 +918,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(entity_values, request.entity_values)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_delete_entities, mock_method)
 
@@ -958,7 +958,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(entity_values, request.entity_values)
-        operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:batch_delete_entities, mock_method)
 

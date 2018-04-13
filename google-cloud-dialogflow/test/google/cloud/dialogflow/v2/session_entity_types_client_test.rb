@@ -85,7 +85,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_session_entity_types, mock_method)
 
@@ -155,7 +155,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_session_entity_type, mock_method)
 
@@ -224,7 +224,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_instance_of(Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(session_entity_type, Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_session_entity_type, mock_method)
 
@@ -293,7 +293,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, request)
         assert_equal(Google::Gax::to_proto(session_entity_type, Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_session_entity_type, mock_method)
 
@@ -355,7 +355,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_session_entity_type, mock_method)
 
