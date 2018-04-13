@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.name          = "google-cloud-monitoring"
   gem.version       = "0.27.0"
 
-  gem.authors       = ["Google Inc"]
+  gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-monitoring is the official library for Stackdriver Monitoring API."
   gem.summary       = "API Client library for Stackdriver Monitoring API"

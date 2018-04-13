@@ -14,7 +14,7 @@
 #
 # EDITING INSTRUCTIONS
 # This file was generated from the file
-# https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto,
+# https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto,
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
@@ -24,30 +24,26 @@ require "pathname"
 
 require "google/gax"
 
-require "google/monitoring/v3/group_service_pb"
+require "google/monitoring/v3/uptime_service_pb"
 require "google/cloud/monitoring/credentials"
 
 module Google
   module Cloud
     module Monitoring
       module V3
-        # The Group API lets you inspect and manage your
-        # [groups](https://cloud.google.comgoogle.monitoring.v3.Group).
+        # The UptimeCheckService API is used to manage (list, create, delete, edit)
+        # uptime check configurations in the Stackdriver Monitoring product. An uptime
+        # check is a piece of configuration that determines which resources and
+        # services to monitor for availability. These configurations can also be
+        # configured interactively by navigating to the [Cloud Console]
+        # (http://console.cloud.google.com), selecting the appropriate project,
+        # clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
+        # and then clicking on "Uptime".
         #
-        # A group is a named filter that is used to identify
-        # a collection of monitored resources. Groups are typically used to
-        # mirror the physical and/or logical topology of the environment.
-        # Because group membership is computed dynamically, monitored
-        # resources that are started in the future are automatically placed
-        # in matching groups. By using a group to name monitored resources in,
-        # for example, an alert policy, the target of that alert policy is
-        # updated automatically as monitored resources are added and removed
-        # from the infrastructure.
-        #
-        # @!attribute [r] group_service_stub
-        #   @return [Google::Monitoring::V3::GroupService::Stub]
-        class GroupServiceClient
-          attr_reader :group_service_stub
+        # @!attribute [r] uptime_check_service_stub
+        #   @return [Google::Monitoring::V3::UptimeCheckService::Stub]
+        class UptimeCheckServiceClient
+          attr_reader :uptime_check_service_stub
 
           # The default address of the service.
           SERVICE_ADDRESS = "monitoring.googleapis.com".freeze
@@ -58,14 +54,14 @@ module Google
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
-            "list_groups" => Google::Gax::PageDescriptor.new(
+            "list_uptime_check_configs" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "group"),
-            "list_group_members" => Google::Gax::PageDescriptor.new(
+              "uptime_check_configs"),
+            "list_uptime_check_ips" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "members")
+              "uptime_check_ips")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -86,11 +82,11 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
-          GROUP_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/groups/{group}"
+          UPTIME_CHECK_CONFIG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/uptimeCheckConfigs/{uptime_check_config}"
           )
 
-          private_constant :GROUP_PATH_TEMPLATE
+          private_constant :UPTIME_CHECK_CONFIG_PATH_TEMPLATE
 
           # Returns a fully-qualified project resource name string.
           # @param project [String]
@@ -101,14 +97,14 @@ module Google
             )
           end
 
-          # Returns a fully-qualified group resource name string.
+          # Returns a fully-qualified uptime_check_config resource name string.
           # @param project [String]
-          # @param group [String]
+          # @param uptime_check_config [String]
           # @return [String]
-          def self.group_path project, group
-            GROUP_PATH_TEMPLATE.render(
+          def self.uptime_check_config_path project, uptime_check_config
+            UPTIME_CHECK_CONFIG_PATH_TEMPLATE.render(
               :"project" => project,
-              :"group" => group
+              :"uptime_check_config" => uptime_check_config
             )
           end
 
@@ -147,7 +143,7 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/monitoring/v3/group_service_services_pb"
+            require "google/monitoring/v3/uptime_service_services_pb"
 
             credentials ||= Google::Cloud::Monitoring::Credentials.default
 
@@ -177,11 +173,11 @@ module Google
 
             headers = { :"x-goog-api-client" => google_api_client }
             client_config_file = Pathname.new(__dir__).join(
-              "group_service_client_config.json"
+              "uptime_check_service_client_config.json"
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.monitoring.v3.GroupService",
+                "google.monitoring.v3.UptimeCheckService",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
@@ -195,64 +191,51 @@ module Google
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
-            @group_service_stub = Google::Gax::Grpc.create_stub(
+            @uptime_check_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
               chan_creds: chan_creds,
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
-              &Google::Monitoring::V3::GroupService::Stub.method(:new)
+              &Google::Monitoring::V3::UptimeCheckService::Stub.method(:new)
             )
 
-            @list_groups = Google::Gax.create_api_call(
-              @group_service_stub.method(:list_groups),
-              defaults["list_groups"]
+            @list_uptime_check_configs = Google::Gax.create_api_call(
+              @uptime_check_service_stub.method(:list_uptime_check_configs),
+              defaults["list_uptime_check_configs"]
             )
-            @get_group = Google::Gax.create_api_call(
-              @group_service_stub.method(:get_group),
-              defaults["get_group"]
+            @get_uptime_check_config = Google::Gax.create_api_call(
+              @uptime_check_service_stub.method(:get_uptime_check_config),
+              defaults["get_uptime_check_config"]
             )
-            @create_group = Google::Gax.create_api_call(
-              @group_service_stub.method(:create_group),
-              defaults["create_group"]
+            @create_uptime_check_config = Google::Gax.create_api_call(
+              @uptime_check_service_stub.method(:create_uptime_check_config),
+              defaults["create_uptime_check_config"]
             )
-            @update_group = Google::Gax.create_api_call(
-              @group_service_stub.method(:update_group),
-              defaults["update_group"]
+            @update_uptime_check_config = Google::Gax.create_api_call(
+              @uptime_check_service_stub.method(:update_uptime_check_config),
+              defaults["update_uptime_check_config"]
             )
-            @delete_group = Google::Gax.create_api_call(
-              @group_service_stub.method(:delete_group),
-              defaults["delete_group"]
+            @delete_uptime_check_config = Google::Gax.create_api_call(
+              @uptime_check_service_stub.method(:delete_uptime_check_config),
+              defaults["delete_uptime_check_config"]
             )
-            @list_group_members = Google::Gax.create_api_call(
-              @group_service_stub.method(:list_group_members),
-              defaults["list_group_members"]
+            @list_uptime_check_ips = Google::Gax.create_api_call(
+              @uptime_check_service_stub.method(:list_uptime_check_ips),
+              defaults["list_uptime_check_ips"]
             )
           end
 
           # Service calls
 
-          # Lists the existing groups.
+          # Lists the existing valid uptime check configurations for the project,
+          # leaving out any invalid configurations.
           #
-          # @param name [String]
-          #   The project whose groups are to be listed. The format is
-          #   +"projects/{project_id_or_number}"+.
-          # @param children_of_group [String]
-          #   A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
-          #   Returns groups whose +parentName+ field contains the group
-          #   name.  If no groups have this parent, the results are empty.
-          # @param ancestors_of_group [String]
-          #   A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
-          #   Returns groups that are ancestors of the specified group.
-          #   The groups are returned in order, starting with the immediate parent and
-          #   ending with the most distant ancestor.  If the specified group has no
-          #   immediate parent, the results are empty.
-          # @param descendants_of_group [String]
-          #   A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
-          #   Returns the descendants of the specified group.  This is a superset of
-          #   the results returned by the +childrenOfGroup+ filter, and includes
-          #   children-of-children, and so forth.
+          # @param parent [String]
+          #   The project whose uptime check configurations are listed. The format is
+          #
+          #     +projects/[PROJECT_ID]+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -262,8 +245,8 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::Group>]
-          #   An enumerable of Google::Monitoring::V3::Group instances.
+          # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::UptimeCheckConfig>]
+          #   An enumerable of Google::Monitoring::V3::UptimeCheckConfig instances.
           #   See Google::Gax::PagedEnumerable documentation for other
           #   operations such as per-page iteration or access to the response
           #   object.
@@ -271,149 +254,155 @@ module Google
           # @example
           #   require "google/cloud/monitoring/v3"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
-          #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.project_path("[PROJECT]")
+          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   formatted_parent = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
-          #   group_service_client.list_groups(formatted_name).each do |element|
+          #   uptime_check_service_client.list_uptime_check_configs(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   group_service_client.list_groups(formatted_name).each_page do |page|
+          #   uptime_check_service_client.list_uptime_check_configs(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
           #     end
           #   end
 
-          def list_groups \
-              name,
-              children_of_group: nil,
-              ancestors_of_group: nil,
-              descendants_of_group: nil,
+          def list_uptime_check_configs \
+              parent,
               page_size: nil,
               options: nil
             req = {
-              name: name,
-              children_of_group: children_of_group,
-              ancestors_of_group: ancestors_of_group,
-              descendants_of_group: descendants_of_group,
+              parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListGroupsRequest)
-            @list_groups.call(req, options)
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListUptimeCheckConfigsRequest)
+            @list_uptime_check_configs.call(req, options)
           end
 
-          # Gets a single group.
+          # Gets a single uptime check configuration.
           #
           # @param name [String]
-          #   The group to retrieve. The format is
-          #   +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   The uptime check configuration to retrieve. The format is
+          #
+          #     +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Monitoring::V3::Group]
+          # @return [Google::Monitoring::V3::UptimeCheckConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/monitoring/v3"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
-          #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
-          #   response = group_service_client.get_group(formatted_name)
+          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.uptime_check_config_path("[PROJECT]", "[UPTIME_CHECK_CONFIG]")
+          #   response = uptime_check_service_client.get_uptime_check_config(formatted_name)
 
-          def get_group \
+          def get_uptime_check_config \
               name,
               options: nil
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetGroupRequest)
-            @get_group.call(req, options)
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetUptimeCheckConfigRequest)
+            @get_uptime_check_config.call(req, options)
           end
 
-          # Creates a new group.
+          # Creates a new uptime check configuration.
           #
-          # @param name [String]
-          #   The project in which to create the group. The format is
-          #   +"projects/{project_id_or_number}"+.
-          # @param group [Google::Monitoring::V3::Group | Hash]
-          #   A group definition. It is an error to define the +name+ field because
-          #   the system assigns the name.
-          #   A hash of the same form as `Google::Monitoring::V3::Group`
+          # @param parent [String]
+          #   The project in which to create the uptime check. The format is:
+          #
+          #     +projects/[PROJECT_ID]+.
+          # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
+          #   The new uptime check configuration.
+          #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
           #   can also be provided.
-          # @param validate_only [true, false]
-          #   If true, validate this request but do not create the group.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Monitoring::V3::Group]
+          # @return [Google::Monitoring::V3::UptimeCheckConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/monitoring/v3"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
-          #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.project_path("[PROJECT]")
+          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   formatted_parent = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize +group+:
-          #   group = {}
-          #   response = group_service_client.create_group(formatted_name, group)
+          #   # TODO: Initialize +uptime_check_config+:
+          #   uptime_check_config = {}
+          #   response = uptime_check_service_client.create_uptime_check_config(formatted_parent, uptime_check_config)
 
-          def create_group \
-              name,
-              group,
-              validate_only: nil,
+          def create_uptime_check_config \
+              parent,
+              uptime_check_config,
               options: nil
             req = {
-              name: name,
-              group: group,
-              validate_only: validate_only
+              parent: parent,
+              uptime_check_config: uptime_check_config
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateGroupRequest)
-            @create_group.call(req, options)
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateUptimeCheckConfigRequest)
+            @create_uptime_check_config.call(req, options)
           end
 
-          # Updates an existing group.
-          # You can change any group attributes except +name+.
+          # Updates an uptime check configuration. You can either replace the entire
+          # configuration with a new one or replace only certain fields in the current
+          # configuration by specifying the fields to be updated via +"updateMask"+.
+          # Returns the updated configuration.
           #
-          # @param group [Google::Monitoring::V3::Group | Hash]
-          #   The new definition of the group.  All fields of the existing group,
-          #   excepting +name+, are replaced with the corresponding fields of this group.
-          #   A hash of the same form as `Google::Monitoring::V3::Group`
+          # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
+          #   Required. If an +"updateMask"+ has been specified, this field gives
+          #   the values for the set of fields mentioned in the +"updateMask"+. If an
+          #   +"updateMask"+ has not been given, this uptime check configuration replaces
+          #   the current configuration. If a field is mentioned in +"updateMask+" but
+          #   the corresonding field is omitted in this partial uptime check
+          #   configuration, it has the effect of deleting/clearing the field from the
+          #   configuration on the server.
+          #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
           #   can also be provided.
-          # @param validate_only [true, false]
-          #   If true, validate this request but do not update the existing group.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Optional. If present, only the listed fields in the current uptime check
+          #   configuration are updated with values from the new configuration. If this
+          #   field is empty, then the current configuration is completely replaced with
+          #   the new configuration.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Monitoring::V3::Group]
+          # @return [Google::Monitoring::V3::UptimeCheckConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/monitoring/v3"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
+          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
           #
-          #   # TODO: Initialize +group+:
-          #   group = {}
-          #   response = group_service_client.update_group(group)
+          #   # TODO: Initialize +uptime_check_config+:
+          #   uptime_check_config = {}
+          #   response = uptime_check_service_client.update_uptime_check_config(uptime_check_config)
 
-          def update_group \
-              group,
-              validate_only: nil,
+          def update_uptime_check_config \
+              uptime_check_config,
+              update_mask: nil,
               options: nil
             req = {
-              group: group,
-              validate_only: validate_only
+              uptime_check_config: uptime_check_config,
+              update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Monitoring::V3::UpdateGroupRequest)
-            @update_group.call(req, options)
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::UpdateUptimeCheckConfigRequest)
+            @update_uptime_check_config.call(req, options)
           end
 
-          # Deletes an existing group.
+          # Deletes an uptime check configuration. Note that this method will fail
+          # if the uptime check configuration is referenced by an alert policy or
+          # other dependent configs that would be rendered invalid by the deletion.
           #
           # @param name [String]
-          #   The group to delete. The format is
-          #   +"projects/{project_id_or_number}/groups/{group_id}"+.
+          #   The uptime check configuration to delete. The format is
+          #
+          #     +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -421,52 +410,34 @@ module Google
           # @example
           #   require "google/cloud/monitoring/v3"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
-          #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
-          #   group_service_client.delete_group(formatted_name)
+          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   formatted_name = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.uptime_check_config_path("[PROJECT]", "[UPTIME_CHECK_CONFIG]")
+          #   uptime_check_service_client.delete_uptime_check_config(formatted_name)
 
-          def delete_group \
+          def delete_uptime_check_config \
               name,
               options: nil
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteGroupRequest)
-            @delete_group.call(req, options)
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteUptimeCheckConfigRequest)
+            @delete_uptime_check_config.call(req, options)
             nil
           end
 
-          # Lists the monitored resources that are members of a group.
+          # Returns the list of IPs that checkers run from
           #
-          # @param name [String]
-          #   The group whose members are listed. The format is
-          #   +"projects/{project_id_or_number}/groups/{group_id}"+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
           #   parameter does not affect the return value. If page streaming is
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
-          # @param filter [String]
-          #   An optional [list filter](https://cloud.google.com/monitoring/api/learn_more#filtering) describing
-          #   the members to be returned.  The filter may reference the type, labels, and
-          #   metadata of monitored resources that comprise the group.
-          #   For example, to return only resources representing Compute Engine VM
-          #   instances, use this filter:
-          #
-          #       resource.type = "gce_instance"
-          # @param interval [Google::Monitoring::V3::TimeInterval | Hash]
-          #   An optional time interval for which results should be returned. Only
-          #   members that were part of the group during the specified interval are
-          #   included in the response.  If no interval is provided then the group
-          #   membership over the last minute is returned.
-          #   A hash of the same form as `Google::Monitoring::V3::TimeInterval`
-          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Gax::PagedEnumerable<Google::Api::MonitoredResource>]
-          #   An enumerable of Google::Api::MonitoredResource instances.
+          # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::UptimeCheckIp>]
+          #   An enumerable of Google::Monitoring::V3::UptimeCheckIp instances.
           #   See Google::Gax::PagedEnumerable documentation for other
           #   operations such as per-page iteration or access to the response
           #   object.
@@ -474,36 +445,29 @@ module Google
           # @example
           #   require "google/cloud/monitoring/v3"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
-          #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
+          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
           #
           #   # Iterate over all results.
-          #   group_service_client.list_group_members(formatted_name).each do |element|
+          #   uptime_check_service_client.list_uptime_check_ips.each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   group_service_client.list_group_members(formatted_name).each_page do |page|
+          #   uptime_check_service_client.list_uptime_check_ips.each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
           #     end
           #   end
 
-          def list_group_members \
-              name,
+          def list_uptime_check_ips \
               page_size: nil,
-              filter: nil,
-              interval: nil,
               options: nil
             req = {
-              name: name,
-              page_size: page_size,
-              filter: filter,
-              interval: interval
+              page_size: page_size
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListGroupMembersRequest)
-            @list_group_members.call(req, options)
+            req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListUptimeCheckIpsRequest)
+            @list_uptime_check_ips.call(req, options)
           end
         end
       end

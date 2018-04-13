@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,8 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/monitoring/v3/alert_policy_service_client"
 require "google/cloud/monitoring/v3/group_service_client"
 require "google/cloud/monitoring/v3/metric_service_client"
+require "google/cloud/monitoring/v3/notification_channel_service_client"
+require "google/cloud/monitoring/v3/uptime_check_service_client"
 
 module Google
   module Cloud
@@ -23,9 +26,9 @@ module Google
     # # Ruby Client for Stackdriver Monitoring API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Stackdriver Monitoring API][Product Documentation]:
-    # Manages your Stackdriver Monitoring data and configurations. Most projects must
-    # be associated with a Stackdriver account, with a few exceptions as noted on the
-    # individual method pages.
+    # Manages your Stackdriver Monitoring data and configurations. Most projects
+    # must be associated with a Stackdriver account, with a few exceptions as
+    # noted on the individual method pages.
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -33,8 +36,9 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Stackdriver Monitoring API.](https://console.cloud.google.com/apis/api/monitoring)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+    # 3. [Enable the Stackdriver Monitoring API.](https://console.cloud.google.com/apis/api/monitoring)
+    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Preview
     # #### MetricServiceClient
@@ -70,6 +74,61 @@ module Google
     module Monitoring
       module V3
         # rubocop:enable LineLength
+
+        module AlertPolicy
+          ##
+          # The AlertPolicyService API is used to manage (list, create, delete,
+          # edit) alert policies in Stackdriver Monitoring. An alerting policy is
+          # a description of the conditions under which some aspect of your
+          # system is considered to be "unhealthy" and the ways to notify
+          # people or services about this state. In addition to using this API, alert
+          # policies can also be managed through
+          # [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs/),
+          # which can be reached by clicking the "Monitoring" tab in
+          # [Cloud Console](https://console.cloud.google.com/).
+          #
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
+          #   A Hash for call options for each method. See
+          #   Google::Gax#construct_settings for the structure of
+          #   this data. Falls back to the default config if not specified
+          #   or the specified config is missing data points.
+          # @param timeout [Numeric]
+          #   The default timeout, in seconds, for calls made through this client.
+          def self.new \
+              credentials: nil,
+              scopes: nil,
+              client_config: nil,
+              timeout: nil,
+              lib_name: nil,
+              lib_version: nil
+            kwargs = {
+              credentials: credentials,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              lib_name: lib_name,
+              lib_version: lib_version
+            }.select { |_, v| v != nil }
+            Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.new(**kwargs)
+          end
+        end
 
         module Group
           ##
@@ -111,11 +170,6 @@ module Google
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
           def self.new \
-              service_path: nil,
-              port: nil,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: nil,
               client_config: nil,
@@ -123,11 +177,6 @@ module Google
               lib_name: nil,
               lib_version: nil
             kwargs = {
-              service_path: service_path,
-              port: port,
-              channel: channel,
-              chan_creds: chan_creds,
-              updater_proc: updater_proc,
               credentials: credentials,
               scopes: scopes,
               client_config: client_config,
@@ -169,11 +218,6 @@ module Google
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
           def self.new \
-              service_path: nil,
-              port: nil,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: nil,
               client_config: nil,
@@ -181,11 +225,6 @@ module Google
               lib_name: nil,
               lib_version: nil
             kwargs = {
-              service_path: service_path,
-              port: port,
-              channel: channel,
-              chan_creds: chan_creds,
-              updater_proc: updater_proc,
               credentials: credentials,
               scopes: scopes,
               client_config: client_config,
@@ -194,6 +233,108 @@ module Google
               lib_version: lib_version
             }.select { |_, v| v != nil }
             Google::Cloud::Monitoring::V3::MetricServiceClient.new(**kwargs)
+          end
+        end
+
+        module NotificationChannel
+          ##
+          # The Notification Channel API provides access to configuration that
+          # controls how messages related to incidents are sent.
+          #
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
+          #   A Hash for call options for each method. See
+          #   Google::Gax#construct_settings for the structure of
+          #   this data. Falls back to the default config if not specified
+          #   or the specified config is missing data points.
+          # @param timeout [Numeric]
+          #   The default timeout, in seconds, for calls made through this client.
+          def self.new \
+              credentials: nil,
+              scopes: nil,
+              client_config: nil,
+              timeout: nil,
+              lib_name: nil,
+              lib_version: nil
+            kwargs = {
+              credentials: credentials,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              lib_name: lib_name,
+              lib_version: lib_version
+            }.select { |_, v| v != nil }
+            Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.new(**kwargs)
+          end
+        end
+
+        module UptimeCheck
+          ##
+          # The UptimeCheckService API is used to manage (list, create, delete, edit)
+          # uptime check configurations in the Stackdriver Monitoring product. An uptime
+          # check is a piece of configuration that determines which resources and
+          # services to monitor for availability. These configurations can also be
+          # configured interactively by navigating to the [Cloud Console]
+          # (http://console.cloud.google.com), selecting the appropriate project,
+          # clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
+          # and then clicking on "Uptime".
+          #
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
+          #   A Hash for call options for each method. See
+          #   Google::Gax#construct_settings for the structure of
+          #   this data. Falls back to the default config if not specified
+          #   or the specified config is missing data points.
+          # @param timeout [Numeric]
+          #   The default timeout, in seconds, for calls made through this client.
+          def self.new \
+              credentials: nil,
+              scopes: nil,
+              client_config: nil,
+              timeout: nil,
+              lib_name: nil,
+              lib_version: nil
+            kwargs = {
+              credentials: credentials,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              lib_name: lib_name,
+              lib_version: lib_version
+            }.select { |_, v| v != nil }
+            Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.new(**kwargs)
           end
         end
       end

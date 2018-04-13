@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/api/distribution_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
@@ -39,11 +40,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :ALIGN_SUM, 14
     value :ALIGN_STDDEV, 15
     value :ALIGN_COUNT_TRUE, 16
+    value :ALIGN_COUNT_FALSE, 24
     value :ALIGN_FRACTION_TRUE, 17
     value :ALIGN_PERCENTILE_99, 18
     value :ALIGN_PERCENTILE_95, 19
     value :ALIGN_PERCENTILE_50, 20
     value :ALIGN_PERCENTILE_05, 21
+    value :ALIGN_PERCENT_CHANGE, 23
   end
   add_enum "google.monitoring.v3.Aggregation.Reducer" do
     value :REDUCE_NONE, 0
@@ -54,11 +57,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :REDUCE_STDDEV, 5
     value :REDUCE_COUNT, 6
     value :REDUCE_COUNT_TRUE, 7
+    value :REDUCE_COUNT_FALSE, 15
     value :REDUCE_FRACTION_TRUE, 8
     value :REDUCE_PERCENTILE_99, 9
     value :REDUCE_PERCENTILE_95, 10
     value :REDUCE_PERCENTILE_50, 11
     value :REDUCE_PERCENTILE_05, 12
+  end
+  add_enum "google.monitoring.v3.ComparisonType" do
+    value :COMPARISON_UNSPECIFIED, 0
+    value :COMPARISON_GT, 1
+    value :COMPARISON_GE, 2
+    value :COMPARISON_LT, 3
+    value :COMPARISON_LE, 4
+    value :COMPARISON_EQ, 5
+    value :COMPARISON_NE, 6
+  end
+  add_enum "google.monitoring.v3.ServiceTier" do
+    value :SERVICE_TIER_UNSPECIFIED, 0
+    value :SERVICE_TIER_BASIC, 1
+    value :SERVICE_TIER_PREMIUM, 2
   end
 end
 
@@ -70,6 +88,8 @@ module Google
       Aggregation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation").msgclass
       Aggregation::Aligner = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Aligner").enummodule
       Aggregation::Reducer = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Reducer").enummodule
+      ComparisonType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ComparisonType").enummodule
+      ServiceTier = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceTier").enummodule
     end
   end
 end
