@@ -21,7 +21,7 @@ $ gem install google-cloud-dialogflow
 ```
 
 ### Next Steps
-- Read the [Client Library Documentation][] for Dialogflow API
+- Read the [Client Library Documentation][https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow] for Dialogflow API
   to see other available methods on the client.
 - Read the [Dialogflow API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.

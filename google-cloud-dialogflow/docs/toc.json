@@ -1,0 +1,47 @@
+{
+  "guides": [],
+  "services": [
+    {
+      "title": "Dialogflow",
+      "type": "google/cloud/dialogflow",
+      "patterns": ["\/dialogflow", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V2",
+          "type": "google/cloud/dialogflow/v2",
+          "patterns": ["\/dialogflow\/v2", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "AgentsClient",
+              "type": "google/cloud/dialogflow/v2/agentsclient"
+            },
+            {
+              "title": "ContextsClient",
+              "type": "google/cloud/dialogflow/v2/contextsclient"
+            },
+            {
+              "title": "EntityTypesClient",
+              "type": "google/cloud/dialogflow/v2/entitytypesclient"
+            },
+            {
+              "title": "IntentsClient",
+              "type": "google/cloud/dialogflow/v2/intentsclient"
+            },
+            {
+              "title": "SessionEntityTypesClient",
+              "type": "google/cloud/dialogflow/v2/sessionentitytypesclient"
+            },
+            {
+              "title": "SessionsClient",
+              "type": "google/cloud/dialogflow/v2/sessionsclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/dialogflow/v2/datatypes"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
