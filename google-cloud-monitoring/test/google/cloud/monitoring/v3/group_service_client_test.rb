@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -445,7 +445,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
 
       # Create expected grpc response
       next_page_token = ""
-      total_size = -705419236
+      total_size = 705419236
       members_element = {}
       members = [members_element]
       expected_response = {
