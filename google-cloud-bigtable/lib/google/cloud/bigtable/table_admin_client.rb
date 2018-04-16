@@ -495,7 +495,8 @@ module Google
             snapshot_id,
             options: nil
           client.delete_snapshot(
-            snapshot_path(cluster_id, snapshot_id)
+            snapshot_path(cluster_id, snapshot_id),
+            options: options
           )
           true
         end

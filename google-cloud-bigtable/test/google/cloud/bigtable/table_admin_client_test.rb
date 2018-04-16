@@ -346,7 +346,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
         assert_equal(snapshot_id, request.snapshot_id)
         assert_equal(description, request.description)
         assert_equal(Google::Protobuf::Duration.new(seconds: ttl), request.ttl)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_admin_grpc(:snapshot_table, mock_method) do
@@ -402,7 +402,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::GetSnapshotRequest, request)
         assert_equal(snapshot_path, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_admin_grpc(:get_snapshot, mock_method) do
@@ -447,7 +447,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::ListSnapshotsRequest, request)
         assert_equal(cluster_path, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
 
       stub_table_admin_grpc(:list_snapshots, mock_method) do
@@ -484,7 +484,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::DeleteSnapshotRequest, request)
         assert_equal(snapshot_path, request.name)
-        true
+        OpenStruct.new(execute: true)
       end
 
       stub_table_admin_grpc(:delete_snapshot, mock_method) do
@@ -535,7 +535,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
         assert_equal(instance_path, request.parent)
         assert_equal(new_table_id, request.table_id)
         assert_equal(snapshot_path, request.source_snapshot)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       stub_table_admin_grpc(:create_table_from_snapshot, mock_method) do
@@ -566,7 +566,7 @@ describe Google::Cloud::Bigtable::TableAdminClient do
         assert_equal(instance_path, request.parent)
         assert_equal(new_table_id, request.table_id)
         assert_equal(snapshot_path, request.source_snapshot)
-        operation
+        OpenStruct.new(execute: operation)
       end
 
       stub_table_admin_grpc(:create_table_from_snapshot, mock_method) do
