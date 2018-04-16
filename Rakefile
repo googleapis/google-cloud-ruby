@@ -296,6 +296,7 @@ namespace :jsondoc do
       "google-cloud-core",
       "google-cloud-dataproc",
       "google-cloud-datastore",
+      "google-cloud-dialogflow",
       "google-cloud-dlp",
       "google-cloud-dns",
       "google-cloud-error_reporting",

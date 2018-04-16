@@ -36,6 +36,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Container Engine](#container-engine-alpha) (Alpha)
 * [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
 * [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
+* [Dialogflow API](#dialogflow-api-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
@@ -291,6 +292,19 @@ value = "my phone number is 215-512-1212"
 items_element = { type: type, value: value }
 items = [items_element]
 response = dlp_service_client.inspect_content(inspect_config, items)
+```
+
+### Dialogflow API (Alpha)
+
+- [google-cloud-dialogflow README](google-cloud-dialogflow/README.md)
+- [google-cloud-dialogflow API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest)
+- [google-cloud-dialogflow on RubyGems](https://rubygems.org/gems/google-cloud-dialogflow)
+- [Dialogflow API documentation](https://cloud.google.com/dialogflow-enterprise/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-dialogflow
 ```
 
 ### Stackdriver Error Reporting (Beta)
