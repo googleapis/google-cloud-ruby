@@ -42,6 +42,9 @@ module Google
         # Creates a field path object representing a nested field for
         # document data.
         #
+        # @param [String, Symbol] fields One or more strings representing the
+        #   path of the data to select. Each field must be provided separately.
+        #
         # @return [FieldPath] The field path object.
         #
         # @example
