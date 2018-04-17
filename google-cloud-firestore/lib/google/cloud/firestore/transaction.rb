@@ -117,7 +117,7 @@ module Google
           results.each do |result|
             extract_transaction_from_result! result
             next if result.result.nil?
-            yield DocumentSnapshot.from_batch_result(result, self)
+            yield DocumentSnapshot.from_batch_result(result, client)
           end
         end
         alias get_docs get_all
@@ -230,7 +230,7 @@ module Google
           results.each do |result|
             extract_transaction_from_result! result
             next if result.document.nil?
-            yield DocumentSnapshot.from_query_result(result, self)
+            yield DocumentSnapshot.from_query_result(result, client)
           end
         end
         alias run get
