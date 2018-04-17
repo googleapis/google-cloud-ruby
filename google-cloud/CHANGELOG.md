@@ -1,5 +1,10 @@
 # Release History
 
+### 0.52.0 / 2018-04-16
+
+* Add Dialogflow API.
+* DLP 0.3.0 release.
+
 ### 0.51.1 / 2018-03-21
 
 * Update documentation site.
