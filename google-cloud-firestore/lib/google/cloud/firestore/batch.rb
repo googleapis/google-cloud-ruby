@@ -257,9 +257,7 @@ module Google
         #
         #   firestore = Google::Cloud::Firestore.new
         #
-        #   nested_field_path = Google::Cloud::Firestore::FieldPath.new(
-        #     :favorites, :food
-        #   )
+        #   nested_field_path = firestore.field_path :favorites, :food
         #
         #   firestore.batch do |b|
         #     b.update("users/frank", { nested_field_path => "Pasta" })
