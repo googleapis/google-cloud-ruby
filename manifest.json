@@ -187,6 +187,15 @@
       ]
     },
     {
+      "id": "google-cloud-dialogflow",
+      "name": "google-cloud-dialogflow",
+      "defaultService": "google/cloud/dialogflow",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-dlp",
       "name": "google-cloud-dlp",
       "defaultService": "google/cloud/dlp",
