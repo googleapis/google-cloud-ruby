@@ -432,7 +432,7 @@ module Google
         #   )
         #
         #   firestore.transaction do |tx|
-        #     tx.update("users/frank", { nested_field_path: "Pasta" })
+        #     tx.update("users/frank", { nested_field_path => "Pasta" })
         #   end
         #
         # @example Update a document using a document reference:

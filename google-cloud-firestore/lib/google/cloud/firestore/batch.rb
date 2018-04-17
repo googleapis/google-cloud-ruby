@@ -262,7 +262,7 @@ module Google
         #   )
         #
         #   firestore.batch do |b|
-        #     b.update("users/frank", { nested_field_path: "Pasta" })
+        #     b.update("users/frank", { nested_field_path => "Pasta" })
         #   end
         #
         # @example Update a document using a document reference:

@@ -358,7 +358,7 @@ module Google
     # nested_field_path = Google::Cloud::Firestore::FieldPath.new(
     #   :favorites, :food
     # )
-    # user_ref.update({ nested_field_path: "Pasta" })
+    # user_ref.update({ nested_field_path => "Pasta" })
     # ```
     #
     # ## Using transactions and batched writes
