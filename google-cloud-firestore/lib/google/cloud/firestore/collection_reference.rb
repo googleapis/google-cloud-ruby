@@ -132,7 +132,7 @@ module Google
         # database object. If the collection is nested under a document, it
         # will return the document reference object.
         #
-        # @return [Database, DocumentReference] parent object.
+        # @return [Client, DocumentReference] parent object.
         #
         # @example Returns database object for root collections:
         #   require "google/cloud/firestore"
