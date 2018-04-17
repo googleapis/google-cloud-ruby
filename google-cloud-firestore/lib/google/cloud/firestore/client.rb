@@ -238,10 +238,10 @@ module Google
         end
 
         ##
-        # Creates a field path object representing the nested fields for
+        # Creates a field path object representing a nested field for
         # document data.
         #
-        # @return [Array<String>] The fields.
+        # @return [FieldPath] The field path object.
         #
         # @example
         #   require "google/cloud/firestore"
