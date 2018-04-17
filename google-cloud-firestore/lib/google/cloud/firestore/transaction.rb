@@ -138,10 +138,10 @@ module Google
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentReference] document A document snapshot.
         #
-        # @return [DocumentReference, Enumerator<DocumentReference>] A
-        #   single document snapshot when passed a document path a document
-        #   reference, or a list of document snapshots when passed other valid
-        #   values.
+        # @return [DocumentSnapshot, Enumerator<DocumentSnapshot>] A
+        #   single document snapshot when passed a document path or a document
+        #   reference object, or a list of document snapshots when passed other
+        #   valid values.
         #
         # @example Get a document snapshot given a document path:
         #   require "google/cloud/firestore"
