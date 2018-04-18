@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-language is the official library for Google Cloud Natural Language API."
   gem.summary       = "API Client library for Google Cloud Natural Language API"
-  gem.homepage      = "https://github.com/googleapis/googleapis"
+  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-language"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY
