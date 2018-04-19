@@ -128,13 +128,13 @@ module Google
 
         ##
         # The document reference or database the collection reference belongs
-        # to. If the collection is a root collection, it will return the
-        # database object. If the collection is nested under a document, it
-        # will return the document reference object.
+        # to. If the collection is a root collection, it will return the client
+        # object. If the collection is nested under a document, it will return
+        # the document reference object.
         #
         # @return [Client, DocumentReference] parent object.
         #
-        # @example Returns database object for root collections:
+        # @example Returns client object for root collections:
         #   require "google/cloud/firestore"
         #
         #   firestore = Google::Cloud::Firestore.new
