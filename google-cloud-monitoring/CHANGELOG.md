@@ -1,5 +1,9 @@
 # Release History
 
+### 0.28.0 / 2018-04-19
+
+* Refresh generated client and documentation for updated V3 Monitoring API.
+
 ### 0.27.0 / 2017-12-19
 
 * Update google-gax dependency to 1.0.

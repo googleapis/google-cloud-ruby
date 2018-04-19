@@ -30,7 +30,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-firestore", "~> 0.21"
   gem.add_dependency "google-cloud-language", "~> 0.30"
   gem.add_dependency "google-cloud-logging", "~> 1.5"
-  gem.add_dependency "google-cloud-monitoring", "~> 0.27"
+  gem.add_dependency "google-cloud-monitoring", "~> 0.28"
   gem.add_dependency "google-cloud-os_login", "~> 0.1"
   gem.add_dependency "google-cloud-pubsub", "~> 0.30"
   gem.add_dependency "google-cloud-resource_manager", "~> 0.29"
