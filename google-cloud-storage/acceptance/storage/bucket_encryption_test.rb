@@ -20,10 +20,9 @@ describe Google::Cloud::Storage::Bucket::Encryption, :storage do
   let(:kms_key_2) { "projects/helical-zone-771/locations/us-central1/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
   let(:encryption) { storage.encryption default_kms_key: kms_key }
   let :bucket do
-    storage.bucket(bucket_name) ||
-        storage.create_bucket(bucket_name) do |b|
-          b.encryption = encryption
-        end
+    b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name)
+    b.encryption = encryption
+    b
   end
 
   let(:files) do
@@ -31,61 +30,38 @@ describe Google::Cloud::Storage::Bucket::Encryption, :storage do
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
 
-  it "knows its encryption configuration" do
-    bucket.encryption.wont_be :nil?
-    bucket.encryption.default_kms_key.wont_be :nil?
-    bucket.reload!
-    bucket.encryption.wont_be :nil?
-    bucket.encryption.default_kms_key.wont_be :nil?
-  end
-
-  it "can update its default customer-managed encryption key to another key" do
-    bucket.encryption.default_kms_key.wont_be :nil?
-    bucket.encryption = storage.encryption(default_kms_key: kms_key_2)
-    bucket.encryption.default_kms_key.must_equal kms_key_2
-    bucket.reload!
-    bucket.encryption.default_kms_key.must_equal kms_key_2
-
-    bucket.encryption = storage.encryption(default_kms_key: kms_key)
-  end
-
-  it "can remove its default customer-managed encryption key by setting encryption to nil" do
-    bucket.encryption.default_kms_key.must_equal kms_key
-    bucket.encryption = nil
-    bucket.encryption.must_be :nil?
-    bucket.reload!
-    bucket.encryption.must_be :nil?
-
-    bucket.encryption = storage.encryption(default_kms_key: kms_key)
-  end
-
-  it "can remove its default customer-managed encryption key by setting encryption default_kms_key to nil" do
-    skip "Fails with Expected 'projects/helical-zone-771/locations/us-central1/keyRings/ruby-test/cryptoKeys/ruby-test-key-1' to be nil?."
-    bucket.encryption.default_kms_key.must_equal kms_key
-    bucket.encryption = storage.encryption(default_kms_key: nil)
-    bucket.encryption.default_kms_key.must_be :nil?
-    bucket.reload!
-    bucket.encryption.default_kms_key.must_be :nil?
-
-    bucket.encryption = storage.encryption(default_kms_key: kms_key)
-  end
-
-  it "should upload and download a file with default customer-managed encryption key" do
-    original = File.new files[:logo][:path], "rb"
-
-    uploaded = bucket.create_file original, "CloudLogo.png"
-    uploaded.kms_key.wont_be :nil?
-
-    uploaded_copy = bucket.file "CloudLogo.png"
-    uploaded_copy.kms_key.wont_be :nil?
-
-    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
-      downloaded = uploaded_copy.download tmpfile.path
-
-      downloaded.size.must_equal original.size
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+  describe "KMS customer-managed encryption key (CMEK)" do
+    it "knows its encryption configuration" do
+      bucket.encryption.wont_be :nil?
+      bucket.encryption.default_kms_key.must_equal kms_key
+      bucket.reload!
+      bucket.encryption.wont_be :nil?
+      bucket.encryption.default_kms_key.must_equal kms_key
     end
 
-    uploaded_copy.delete
+    it "can update its default kms key to another key" do
+      bucket.encryption.default_kms_key.must_equal kms_key
+      bucket.encryption = storage.encryption default_kms_key: kms_key_2
+      bucket.encryption.default_kms_key.must_equal kms_key_2
+      bucket.reload!
+      bucket.encryption.default_kms_key.must_equal kms_key_2
+    end
+
+    it "can remove its default kms key by setting encryption to nil" do
+      bucket.encryption.default_kms_key.must_equal kms_key
+      bucket.encryption = nil
+      bucket.encryption.must_be :nil?
+      bucket.reload!
+      bucket.encryption.must_be :nil?
+    end
+
+    it "can remove its default kms key by setting encryption default_kms_key to nil" do
+      skip "Fails with Expected 'projects/helical-zone-771/locations/us-central1/keyRings/ruby-test/cryptoKeys/ruby-test-key-1' to be nil?."
+      bucket.encryption.default_kms_key.must_equal kms_key
+      bucket.encryption = storage.encryption default_kms_key: nil
+      bucket.encryption.default_kms_key.must_be :nil?
+      bucket.reload!
+      bucket.encryption.default_kms_key.must_be :nil?
+    end
   end
 end

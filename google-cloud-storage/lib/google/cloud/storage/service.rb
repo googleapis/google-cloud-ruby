@@ -278,7 +278,8 @@ module Google
                         cache_control: nil, content_disposition: nil,
                         content_encoding: nil, content_language: nil,
                         content_type: nil, crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, key: nil, user_project: nil
+                        storage_class: nil, key: nil, kms_key: nil,
+                        user_project: nil
           file_obj = Google::Apis::StorageV1::Object.new(
             { cache_control: cache_control, content_type: content_type,
               content_disposition: content_disposition, md5_hash: md5,
@@ -293,7 +294,7 @@ module Google
               bucket_name, file_obj,
               name: path, predefined_acl: acl, upload_source: source,
               content_encoding: content_encoding, content_type: content_type,
-              user_project: user_project(user_project),
+              kms_key_name: kms_key, user_project: user_project(user_project),
               options: key_options(key)
           end
         end

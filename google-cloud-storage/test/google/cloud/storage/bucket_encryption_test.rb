@@ -40,7 +40,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
         mock = Minitest::Mock.new
         mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-                    [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", user_project: nil, options: key_options]
+                    [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: nil, user_project: nil, options: key_options]
 
         bucket.service.mocked_service = mock
 
@@ -102,6 +102,25 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
       bucket_with_key.encryption = nil
       bucket_with_key.encryption.must_be :nil?
+    end
+
+    it "creates a file with the kms_key option" do
+      new_file_name = random_file_path
+
+      Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+        tmpfile.write "Hello world"
+        tmpfile.rewind
+
+        mock = Minitest::Mock.new
+        mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+                    [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: kms_key, user_project: nil, options: {}]
+
+        bucket.service.mocked_service = mock
+
+        bucket.create_file tmpfile, new_file_name, kms_key: kms_key
+
+        mock.verify
+      end
     end
   end
 
