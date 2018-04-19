@@ -136,7 +136,7 @@ module Google
         #   to run.
         #
         # @yield [documents] The block for accessing the document snapshots.
-        # @yieldparam [DocumentReference] document A document snapshot.
+        # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
         # @return [DocumentSnapshot, Enumerator<DocumentSnapshot>] A
         #   single document snapshot when passed a document path or a document

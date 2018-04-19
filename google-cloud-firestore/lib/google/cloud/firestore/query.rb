@@ -526,7 +526,7 @@ module Google
         # Retrieves document snapshots for the query.
         #
         # @yield [documents] The block for accessing the document snapshots.
-        # @yieldparam [DocumentReference] document A document snapshot.
+        # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
         # @return [Enumerator<DocumentSnapshot>] A list of document snapshots.
         #
