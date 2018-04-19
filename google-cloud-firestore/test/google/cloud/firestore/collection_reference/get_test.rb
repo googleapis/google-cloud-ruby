@@ -72,10 +72,14 @@ describe Google::Cloud::Firestore::CollectionReference, :get, :mock_firestore do
     docs.each do |doc|
       doc.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
+      doc.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      doc.ref.client.must_equal firestore
+
       doc.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      doc.parent.collection_id.must_equal collection.collection_id
-      doc.parent.collection_path.must_equal collection.collection_path
-      doc.parent.path.must_equal collection.path
+      doc.parent.collection_id.must_equal "messages"
+      doc.parent.collection_path.must_equal "users/mike/messages"
+      doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+      doc.parent.client.must_equal firestore
     end
 
     docs.first.data.must_be_kind_of Hash

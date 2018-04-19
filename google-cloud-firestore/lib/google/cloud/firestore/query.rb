@@ -553,7 +553,7 @@ module Google
           results = service.run_query parent_path, @query
           results.each do |result|
             next if result.document.nil?
-            yield DocumentSnapshot.from_query_result(result, self)
+            yield DocumentSnapshot.from_query_result(result, client)
           end
         end
         alias run get

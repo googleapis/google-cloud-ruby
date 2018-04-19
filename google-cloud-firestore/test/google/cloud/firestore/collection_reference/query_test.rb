@@ -315,10 +315,14 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
       results.each do |result|
         result.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
+        result.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+        result.ref.client.must_equal firestore
+
         result.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-        result.parent.collection_id.must_equal collection.collection_id
-        result.parent.collection_path.must_equal collection.collection_path
-        result.parent.path.must_equal collection.path
+        result.parent.collection_id.must_equal "messages"
+        result.parent.collection_path.must_equal "users/mike/messages"
+        result.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+        result.parent.client.must_equal firestore
       end
 
       results.first.data.must_be_kind_of Hash
@@ -344,9 +348,14 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
     results.each do |result|
       result.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
+      result.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      result.ref.client.must_equal firestore
+
       result.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
       result.parent.collection_id.must_equal "users"
       result.parent.collection_path.must_equal "users"
+      result.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+      result.parent.client.must_equal firestore
     end
 
     results.first.data.must_be_kind_of Hash

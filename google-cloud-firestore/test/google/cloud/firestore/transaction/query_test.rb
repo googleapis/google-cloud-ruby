@@ -89,10 +89,14 @@ describe Google::Cloud::Firestore::Transaction, :query, :mock_firestore do
     results.each do |result|
       result.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
+      result.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      result.ref.client.must_equal firestore
+
       result.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
       result.parent.collection_id.must_equal "users"
       result.parent.collection_path.must_equal "users"
       result.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+      result.parent.client.must_equal firestore
     end
 
     results.first.data.must_be_kind_of Hash

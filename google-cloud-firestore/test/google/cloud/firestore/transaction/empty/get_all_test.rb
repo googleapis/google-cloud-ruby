@@ -142,10 +142,14 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :empty, :mock_firestor
     docs.each do |doc|
       doc.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
+      doc.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      doc.ref.client.must_equal firestore
+
       doc.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
       doc.parent.collection_id.must_equal "users"
       doc.parent.collection_path.must_equal "users"
       doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+      doc.parent.client.must_equal firestore
     end
 
     docs[0].must_be :exists?
