@@ -81,9 +81,9 @@ module Google
         ##
         # Retrieves a list of document snapshots.
         #
-        # @param [String, DocumentReference] docs One or more strings
-        #   representing the path of the document, or document reference
-        #   objects.
+        # @param [String, DocumentReference, Array<String|DocumentReference>]
+        #   docs One or more strings representing the path of the document, or
+        #   document reference objects.
         #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.

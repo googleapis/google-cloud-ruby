@@ -170,9 +170,9 @@ module Google
         ##
         # Retrieves a list of document snapshots.
         #
-        # @param [String, DocumentReference] docs One or more strings
-        #   representing the path of the document, or document reference
-        #   objects.
+        # @param [String, DocumentReference, Array<String|DocumentReference>]
+        #   docs One or more strings representing the path of the document, or
+        #   document reference objects.
         #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
@@ -241,8 +241,9 @@ module Google
         # Creates a field path object representing a nested field for
         # document data.
         #
-        # @param [String, Symbol] fields One or more strings representing the
-        #   path of the data to select. Each field must be provided separately.
+        # @param [String, Symbol, Array<String|Symbol>] fields One or more
+        #   strings representing the path of the data to select. Each field must
+        #   be provided separately.
         #
         # @return [FieldPath] The field path object.
         #
