@@ -12,12 +12,24 @@
           "patterns": ["\/monitoring\/v3", "google\/api", "google\/protobuf"],
           "nav": [
             {
+              "title": "AlertPolicyServiceClient",
+              "type": "google/cloud/monitoring/v3/alertpolicyserviceclient"
+            },
+            {
               "title": "GroupServiceClient",
               "type": "google/cloud/monitoring/v3/groupserviceclient"
             },
             {
               "title": "MetricServiceClient",
               "type": "google/cloud/monitoring/v3/metricserviceclient"
+            },
+            {
+              "title": "NotificationServiceClient",
+              "type": "google/cloud/monitoring/v3/notificationserviceclient"
+            },
+            {
+              "title": "UptimeCheckServiceClient",
+              "type": "google/cloud/monitoring/v3/uptimecheckserviceclient"
             },
             {
               "title": "Data Types",
