@@ -22,7 +22,8 @@ module Google
         # # Encryption Configuration
         #
         # A builder for Google Cloud Storage encryption configurations, passed
-        # to block arguments to {Project#create_bucket} and {Bucket#encryption}.
+        # to {Bucket#encryption=} in block arguments to {Project#create_bucket}
+        # and {Bucket#update}. See {Project#encryption} for creating instances.
         #
         # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
         #   Documentation
@@ -32,8 +33,8 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-        #   encryption = storage.encryption default_kms_key: key_name
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encryption = storage.encryption default_kms_key: kms_key_name
         #
         #   bucket = storage.create_bucket "my-bucket" do |b|
         #     b.encryption = encryption
@@ -43,7 +44,7 @@ module Google
         #                      "destination/path/file.ext"
         #
         #   file = bucket.file "destination/path/file.ext"
-        #   file.kms_key #=> key_name
+        #   file.kms_key #=> kms_key_name
         #
         class Encryption
           ##
@@ -66,9 +67,12 @@ module Google
           # @example
           #   require "google/cloud/storage"
           #
-          #   encryption = Google::Cloud::Storage::Bucket::Encryption.new
-          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-          #   encryption.default_kms_key = key_name
+          #   storage = Google::Cloud::Storage.new
+          #
+          #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encryption = storage.encryption default_kms_key: kms_key_name
+          #
+          #   encryption.default_kms_key #=> kms_key_name
           #
           def default_kms_key
             @gapi.default_kms_key_name
@@ -83,9 +87,12 @@ module Google
           # @example
           #   require "google/cloud/storage"
           #
-          #   encryption = Google::Cloud::Storage::Bucket::Encryption.new
-          #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-          #   encryption.default_kms_key = key_name
+          #   storage = Google::Cloud::Storage.new
+          #
+          #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+          #   encryption = storage.encryption
+          #
+          #   encryption.default_kms_key = kms_key_name
           #
           def default_kms_key= new_default_kms_key_name
             frozen_check!

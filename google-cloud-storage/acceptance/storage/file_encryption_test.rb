@@ -26,6 +26,15 @@ describe Google::Cloud::Storage::File, :storage do
   end
   let(:file_path) { "CloudLogo.png" }
 
+  let(:cipher) do
+    cipher = OpenSSL::Cipher.new "aes-256-cfb"
+    cipher.encrypt
+    cipher
+  end
+
+  let(:encryption_key) { cipher.random_key }
+  let(:encryption_key_2) { cipher.random_key }
+
   before do
     # always create the bucket
     bucket
@@ -39,15 +48,6 @@ describe Google::Cloud::Storage::File, :storage do
     let :bucket do
       storage.bucket(bucket_name) || storage.create_bucket(bucket_name)
     end
-
-    let(:cipher) do
-      cipher = OpenSSL::Cipher.new "aes-256-cfb"
-      cipher.encrypt
-      cipher
-    end
-
-    let(:encryption_key) { cipher.random_key }
-    let(:encryption_key_2) { cipher.random_key }
 
     it "should upload and download a file with customer-supplied encryption key" do
       original = File.new files[:logo][:path], "rb"
@@ -122,18 +122,18 @@ describe Google::Cloud::Storage::File, :storage do
         downloaded.size.must_equal uploaded.size
       end
 
-      rewritten3 = try_with_backoff "remove encryption key" do
+      rewritten4 = try_with_backoff "remove encryption key" do
         uploaded.rotate encryption_key: encryption_key_2
       end
-      rewritten3.name.must_equal uploaded.name
-      rewritten3.size.must_equal uploaded.size
+      rewritten4.name.must_equal uploaded.name
+      rewritten4.size.must_equal uploaded.size
 
       Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
         downloaded = uploaded.download tmpfile.path
         downloaded.size.must_equal uploaded.size
       end
 
-      rewritten3.delete
+      rewritten4.delete
     end
 
     it "should compose existing files with customer-supplied encryption key into a new file with customer-supplied encryption key" do
@@ -233,6 +233,59 @@ describe Google::Cloud::Storage::File, :storage do
       uploaded_copy.kms_key.must_be :nil?
 
       uploaded_copy.delete
+    end
+
+    it "should rotate a customer-supplied encryption key (CSEK) to a kms key (CMEK), to no key and back to CSEK" do
+      bucket.encryption = nil
+
+      uploaded = bucket.create_file files[:logo][:path], file_path, encryption_key: encryption_key
+      uploaded.kms_key.must_be :nil?
+
+      rewritten = try_with_backoff "rotate from CSEK to CMEK" do
+        uploaded.rotate encryption_key: encryption_key, new_kms_key: kms_key
+      end
+      rewritten.kms_key.must_equal versioned(kms_key)
+      rewritten.size.must_equal uploaded.size
+
+      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+        downloaded = rewritten.download tmpfile.path
+        downloaded.size.must_equal uploaded.size
+      end
+
+      rewritten2 = try_with_backoff "rotate from CMEK to default encryption" do
+        uploaded.rotate
+      end
+      rewritten2.kms_key.must_be :nil?
+      rewritten2.size.must_equal uploaded.size
+
+      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+        downloaded = rewritten2.download tmpfile.path
+        downloaded.size.must_equal uploaded.size
+      end
+
+      rewritten3 = try_with_backoff "rotate from default encryption to CMEK" do
+        uploaded.rotate  new_kms_key: kms_key_2
+      end
+      rewritten3.kms_key.must_equal versioned(kms_key_2)
+      rewritten3.size.must_equal uploaded.size
+
+      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+        downloaded = rewritten3.download tmpfile.path
+        downloaded.size.must_equal uploaded.size
+      end
+
+      rewritten4 = try_with_backoff "rotate from CMEK to CSEK" do
+        uploaded.rotate  new_encryption_key: encryption_key_2
+      end
+      rewritten4.kms_key.must_be :nil?
+      rewritten4.size.must_equal uploaded.size
+
+      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+        downloaded = rewritten4.download tmpfile.path, encryption_key: encryption_key_2
+        downloaded.size.must_equal uploaded.size
+      end
+
+      rewritten4.delete
     end
 
     def versioned kms_key

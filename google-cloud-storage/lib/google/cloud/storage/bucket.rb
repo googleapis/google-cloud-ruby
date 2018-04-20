@@ -395,14 +395,15 @@ module Google
         end
 
         ##
-        # Set the {Storage::Bucket::Encryption} object that represents the
-        # custom encryption method used to protect files in the bucket.
+        # Set the Encryption object that represents the custom encryption method
+        # used to protect files in the bucket. See {Project#encryption}.
         #
         # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
         #   Documentation
         #
         # @param [Storage::Bucket::Encryption, nil] value The new encryption
-        #   config, or `nil` to clear an existing config.
+        #   config, or `nil` to clear an existing config. See
+        #   {Project#encryption}.
         #
         def encryption= value
           @gapi.encryption = value ? value.to_gapi : nil
@@ -678,8 +679,10 @@ module Google
         # @param [String] encryption_key Optional. A customer-supplied, AES-256
         #   encryption key that will be used to encrypt the file. Do not provide
         #   if `kms_key` is used.
-        # @param [String] kms_key Optional. Name of the Cloud KMS encryption key
-        #   that will be used to protect the file. The Service Account
+        # @param [String] kms_key Optional. Resource name of the Cloud KMS
+        #   key, of the form
+        #   `projects/my-prj/locations/global/keyRings/my-kr/cryptoKeys/my-key`,
+        #   that will be used to encrypt the file. The Service Account
         #   associated with your project requires access to this encryption key.
         #   Do not provide if `encryption_key` is used.
         #
@@ -722,6 +725,21 @@ module Google
         #   # Store your key and hash securely for later use.
         #   file = bucket.file "destination/path/file.ext",
         #                      encryption_key: key
+        #
+        # @example Providing a customer-managed Cloud KMS encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #
+        #   bucket.create_file "path/to/local.file.ext",
+        #                      "destination/path/file.ext",
+        #                      kms_key: kms_key_name
+        #
+        #   file = bucket.file "destination/path/file.ext"
+        #   file.kms_key #=> kms_key_name
         #
         # @example Create a file with gzip-encoded data.
         #   require "zlib"

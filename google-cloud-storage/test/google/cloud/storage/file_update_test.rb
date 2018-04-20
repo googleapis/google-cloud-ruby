@@ -111,7 +111,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
 
     file.service.mocked_service = mock
 
@@ -128,7 +128,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      [bucket_name, file.name, bucket_name, file_user_project.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
 
     file_user_project.service.mocked_service = mock
 
@@ -145,13 +145,13 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: nil, options: {}]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: nil, options: {}]
     mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: nil, options: {}]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: nil, options: {}]
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: nil, options: {}]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: nil, options: {}]
 
     file.service.mocked_service = mock
 
@@ -172,13 +172,13 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
     mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
+      [bucket_name, file_user_project.name, bucket_name, file_user_project.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
 
     file_user_project.service.mocked_service = mock
 
@@ -272,7 +272,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     patched_file_gapi = file_gapi.dup
     patched_file_gapi.storage_class = "NEARLINE"
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
-      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
 
     file.service.mocked_service = mock
 

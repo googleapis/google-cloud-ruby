@@ -681,7 +681,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::File#rewrite@The file can be rewritten with a new encryption key:" do
+  doctest.before "Google::Cloud::Storage::File#rewrite@Rewriting with a customer-supplied encryption key:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", Google::Apis::StorageV1::Object, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#rewrite@Rewriting with a customer-managed Cloud KMS encryption key:" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
@@ -981,7 +989,7 @@ end
 
 # stubbed methods for use in examples
 
-def key_name
+def kms_key_name
   "projects/a/locations/b/keyRings/c/cryptoKeys/d"
 end
 
@@ -1074,7 +1082,7 @@ def random_file_hash bucket, name, generation="1234567890"
     "owner" => { "entity" => "user-1234567890", "entityId" => "abc123" },
     "crc32c" => "Lm1F3g==",
     "etag" => "CKih16GjycICEAE=",
-    "kmsKeyName" => key_name }
+    "kmsKeyName" => kms_key_name }
 end
 
 def random_bucket_acl_hash bucket_name

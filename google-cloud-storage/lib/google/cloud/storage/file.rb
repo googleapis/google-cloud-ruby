@@ -740,9 +740,17 @@ module Google
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to decrypt the file, if the existing
         #   file is encrypted.
-        # @param [String] new_encryption_key Optional. The customer-supplied,
-        #   AES-256 encryption key used to encrypt the file, if the rewritten
-        #   file is intended to be encrypted.
+        # @param [String, nil] new_encryption_key Optional. The new
+        #   customer-supplied, AES-256 encryption key with which to encrypt the
+        #   file. If not provided, the rewritten file will be encrypted using
+        #   the default server-side encryption, or the `new_kms_key` if one is
+        #   provided. Do not provide if `new_kms_key` is used.
+        # @param [String] new_kms_key Optional. Resource name of the Cloud KMS
+        #   key, of the form
+        #   `projects/my-prj/locations/global/keyRings/my-kr/cryptoKeys/my-key`,
+        #   that will be used to encrypt the file. The Service Account
+        #   associated with your project requires access to this encryption key.
+        #   Do not provide if `new_encryption_key` is used.
         # @yield [file] a block yielding a delegate object for updating
         #
         # @return [Google::Cloud::Storage::File]
@@ -792,7 +800,7 @@ module Google
         #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
         #   end
         #
-        # @example The file can be rewritten with a new encryption key:
+        # @example Rewriting with a customer-supplied encryption key:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
@@ -815,9 +823,30 @@ module Google
         #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
         #   end
         #
+        # @example Rewriting with a customer-managed Cloud KMS encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #
+        #   # Old customer-supplied key was stored securely for later use.
+        #   old_key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #   file.rewrite "new-destination-bucket",
+        #                "path/to/destination/file.ext",
+        #                encryption_key: old_key,
+        #                new_kms_key: kms_key_name do |f|
+        #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
+        #   end
+        #
         def rewrite dest_bucket_or_path, dest_path = nil,
                     acl: nil, generation: nil,
-                    encryption_key: nil, new_encryption_key: nil
+                    encryption_key: nil, new_encryption_key: nil,
+                    new_kms_key: nil
           ensure_service!
           dest_bucket, dest_path = fix_rewrite_args dest_bucket_or_path,
                                                     dest_path
@@ -837,6 +866,7 @@ module Google
                                   acl: acl, generation: generation,
                                   encryption_key: encryption_key,
                                   new_encryption_key: new_encryption_key,
+                                  new_kms_key: new_kms_key,
                                   user_project: user_project
 
           File.from_gapi new_gapi, service, user_project: user_project
@@ -863,13 +893,19 @@ module Google
         #   if one was used.
         # @param [String, nil] new_encryption_key Optional. The new
         #   customer-supplied, AES-256 encryption key with which to encrypt the
-        #   file. If `nil`, the rewritten file will be encrypted using the
-        #   default server-side encryption, not customer-supplied encryption
-        #   keys.
+        #   file. If not provided, the rewritten file will be encrypted using
+        #   the default server-side encryption, or the `new_kms_key` if one is
+        #   provided. Do not provide if `new_kms_key` is used.
+        # @param [String] new_kms_key Optional. Resource name of the Cloud KMS
+        #   key, of the form
+        #   `projects/my-prj/locations/global/keyRings/my-kr/cryptoKeys/my-key`,
+        #   that will be used to encrypt the file. The Service Account
+        #   associated with your project requires access to this encryption key.
+        #   Do not provide if `new_encryption_key` is used.
         #
         # @return [Google::Cloud::Storage::File]
         #
-        # @example The file will be rewritten with a new encryption key:
+        # @example Rotating to a new customer-supplied encryption key:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
@@ -887,9 +923,26 @@ module Google
         #
         #   file.rotate encryption_key: old_key, new_encryption_key: new_key
         #
-        def rotate encryption_key: nil, new_encryption_key: nil
+        # @example Rotating to a customer-managed Cloud KMS encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #
+        #   # Old key was stored securely for later use.
+        #   old_key = "y\x03\"\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI..."
+        #
+        #   file = bucket.file "path/to/my-file.ext", encryption_key: old_key
+        #
+        #   file.rotate encryption_key: old_key, new_kms_key: kms_key_name
+        #
+        def rotate encryption_key: nil, new_encryption_key: nil,
+                   new_kms_key: nil
           rewrite bucket, name, encryption_key: encryption_key,
-                                new_encryption_key: new_encryption_key
+                                new_encryption_key: new_encryption_key,
+                                new_kms_key: new_kms_key
         end
 
         ##
@@ -1277,12 +1330,14 @@ module Google
         def rewrite_gapi bucket, name, updated_gapi,
                          new_bucket: nil, new_name: nil, acl: nil,
                          generation: nil, encryption_key: nil,
-                         new_encryption_key: nil, user_project: nil
+                         new_encryption_key: nil, new_kms_key: nil,
+                         user_project: nil
           new_bucket ||= bucket
           new_name ||= name
           options = { acl: File::Acl.predefined_rule_for(acl),
                       generation: generation, source_key: encryption_key,
                       destination_key: new_encryption_key,
+                      destination_kms_key: new_kms_key,
                       user_project: user_project }.delete_if { |_k, v| v.nil? }
 
           resp = service.rewrite_file \

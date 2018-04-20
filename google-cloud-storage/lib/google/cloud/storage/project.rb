@@ -481,9 +481,11 @@ module Google
         # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
         #   Documentation
         #
-        # @param [String] default_kms_key Name of the Cloud KMS encryption key
-        #   that will be used to protect files. The Service Account associated
-        #   with your project requires access to this encryption key.
+        # @param [String] default_kms_key Resource name of the Cloud KMS
+        #   key, of the form
+        #   `projects/my-prj/locations/global/keyRings/my-kr/cryptoKeys/my-key`,
+        #   that will be used to encrypt files. The Service Account
+        #   associated with your project requires access to this encryption key.
         #
         # @return [Google::Cloud::Storage::Bucket::Encryption]
         #
@@ -492,8 +494,8 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
-        #   encryption = storage.encryption default_kms_key: key_name
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   encryption = storage.encryption default_kms_key: kms_key_name
         #
         #   bucket = storage.create_bucket "my-bucket" do |b|
         #     b.encryption = encryption
@@ -503,7 +505,7 @@ module Google
         #                      "destination/path/file.ext"
         #
         #   file = bucket.file "destination/path/file.ext"
-        #   file.kms_key #=> key_name
+        #   file.kms_key #=> kms_key_name
         #
         def encryption default_kms_key: nil
           encrypt_config = Storage::Bucket::Encryption.new

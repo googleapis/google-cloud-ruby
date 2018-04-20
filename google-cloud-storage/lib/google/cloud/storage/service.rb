@@ -317,14 +317,15 @@ module Google
         def rewrite_file source_bucket_name, source_file_path,
                          destination_bucket_name, destination_file_path,
                          file_gapi = nil, source_key: nil, destination_key: nil,
-                         acl: nil, generation: nil, token: nil,
-                         user_project: nil
+                         destination_kms_key: nil, acl: nil, generation: nil,
+                         token: nil, user_project: nil
           key_options = rewrite_key_options source_key, destination_key
           execute do
             service.rewrite_object \
               source_bucket_name, source_file_path,
               destination_bucket_name, destination_file_path,
               file_gapi,
+              destination_kms_key_name: destination_kms_key,
               destination_predefined_acl: acl,
               source_generation: generation,
               rewrite_token: token,
