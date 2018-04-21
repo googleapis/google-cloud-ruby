@@ -543,11 +543,11 @@ module Google
           end
 
           # @private
-          def to_json(*args)
+          def to_json *args
             h = {
-                "name" => name,
-                "type" => type,
-                "mode" => mode
+              "name" => name,
+              "type" => type,
+              "mode" => mode
             }
             h["description"] = description if description
             h["fields"] = fields.to_json if record?
