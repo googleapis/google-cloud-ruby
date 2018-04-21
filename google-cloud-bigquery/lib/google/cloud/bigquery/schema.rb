@@ -124,7 +124,7 @@ module Google
         end
 
         ##
-        # Loads the schema from a JSON file.
+        # Load the schema from a JSON file.
         #
         # The JSON schema file is the same as for the [`bq`
         # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file)

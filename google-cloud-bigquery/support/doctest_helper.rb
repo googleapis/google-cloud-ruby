@@ -603,6 +603,10 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Schema#dump" do
+    # TODO: How do I stub File.write for the doctest?
+  end
+
   doctest.before "Google::Cloud::Bigquery::Schema::Field" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
