@@ -156,19 +156,19 @@ module Google
         def load source
           if source.respond_to?(:rewind) && source.respond_to?(:read)
             source.rewind
-            source = source.read
-            source = String source
-            source_fields = JSON.parse source
+            schema_json = String source.read
           elsif source.is_a? Array
-            source_fields = source
+            schema_json = source.to_json
           else
-            source = String source
-            source_fields = JSON.parse source
+            schema_json = String source
           end
 
-          raise ArgumentError unless fields.is_a? Array
+          schema_json = migrate_json schema_json
 
-          add_fields_to_schema(self, source_fields)
+          raise ArgumentError unless schema_json
+
+          @original_json = schema_json
+          @gapi, = Google::Apis::BigqueryV2::TableSchema.from_json(schema_json)
 
           self
         end
@@ -467,20 +467,13 @@ module Google
 
         private
 
-        def add_fields_to_schema schema, fields
-          fields.each do |field|
-            column = schema.send(
-              :add_field,
-              field["name"],
-              field["type"],
-              mode:        field["mode"],
-              description: field["description"]
-            )
-
-            next unless field["type"] == "RECORD"
-
-            add_fields_to_schema column, field["fields"]
-          end
+        def migrate_json source_json
+          fields = JSON.parse source_json
+          {
+              "fields" => fields
+          }.to_json
+        rescue JSON::ParserError
+          nil
         end
       end
     end

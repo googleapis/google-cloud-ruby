@@ -191,7 +191,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "creates a table, loading the schema from a file" do
+  it "creates a table, loading the schema from a File" do
     begin
       table = dataset.create_table "schema_kittens" do |table|
         table.schema.load File.open("acceptance/data/schema.json")
