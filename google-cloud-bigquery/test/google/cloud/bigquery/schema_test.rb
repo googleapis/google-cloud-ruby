@@ -309,4 +309,121 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     schema.field("alts").field("alt").field("name").mode.must_be :nil?
     schema.field("alts").field("alt").field("name").must_be :string?
   end
+
+  it "can load the schema from a File" do
+    schema.load File.open("acceptance/data/schema.json")
+
+    schema.wont_be :empty?
+    schema.fields.map(&:name).must_equal %w[id breed name dob features]
+
+    fields = schema.fields
+    fields.each do |f|
+      f.name.wont_be :nil?
+      f.type.wont_be :nil?
+      f.description.wont_be :nil?
+      f.mode.wont_be :nil?
+
+      next unless f.name == "features"
+      f.fields.wont_be :empty?
+      f.fields.each do |c|
+        c.name.wont_be :nil?
+        c.type.wont_be :nil?
+        c.description.wont_be :nil?
+        c.mode.wont_be :nil?
+      end
+    end
+  end
+
+  it "can load the schema from a JSON string" do
+    schema.load File.read("acceptance/data/schema.json")
+
+    schema.wont_be :empty?
+    schema.fields.map(&:name).must_equal %w[id breed name dob features]
+
+    fields = schema.fields
+    fields.each do |f|
+      f.name.wont_be :nil?
+      f.type.wont_be :nil?
+      f.description.wont_be :nil?
+      f.mode.wont_be :nil?
+
+      next unless f.name == "features"
+      f.fields.wont_be :empty?
+      f.fields.each do |c|
+        c.name.wont_be :nil?
+        c.type.wont_be :nil?
+        c.description.wont_be :nil?
+        c.mode.wont_be :nil?
+      end
+    end
+  end
+
+  it "can load the schema from an Array of Hashes" do
+    json = JSON.parse(File.read("acceptance/data/schema.json"))
+    schema.load json
+
+    schema.wont_be :empty?
+    schema.fields.map(&:name).must_equal %w[id breed name dob features]
+
+    fields = schema.fields
+    fields.each do |f|
+      f.name.wont_be :nil?
+      f.type.wont_be :nil?
+      f.description.wont_be :nil?
+      f.mode.wont_be :nil?
+
+      next unless f.name == "features"
+      f.fields.wont_be :empty?
+      f.fields.each do |c|
+        c.name.wont_be :nil?
+        c.type.wont_be :nil?
+        c.description.wont_be :nil?
+        c.mode.wont_be :nil?
+      end
+    end
+  end
+
+  it "can dump the schema as JSON to a File" do
+    begin
+      file = Tempfile.new("schema-test")
+      schema.dump file
+      file.close
+
+      json = JSON.parse(File.read(file.path))
+      json.length.must_equal 10
+
+      json.each do |f|
+        f["name"].wont_be :nil?
+        f["type"].wont_be :nil?
+        f["mode"].wont_be :nil?
+      end
+    ensure
+      if file
+        file.close
+        file.delete
+      end
+    end
+  end
+
+  it "can dump the schema as JSON to a filename" do
+    begin
+      file = Tempfile.new("schema-test")
+      file.close
+      schema.dump file.path
+
+      json = JSON.parse(File.read(file.path))
+      json.length.must_equal 10
+
+      json.each do |f|
+        f["name"].wont_be :nil?
+        f["type"].wont_be :nil?
+        f["mode"].wont_be :nil?
+      end
+    ensure
+      if file
+        file.close
+        file.delete
+      end
+    end
+  end
 end
