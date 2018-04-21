@@ -1,0 +1,8 @@
+[
+  {"name":"id","type":"INTEGER","mode":"REQUIRED","description":"id description"},
+  {"name":"breed","type":"STRING","mode":"REQUIRED","description":"breed description"},
+  {"name":"name","type":"STRING","mode":"REQUIRED","description":"name description"},
+  {"name":"dob","type":"TIMESTAMP","mode":"REQUIRED","description":"dob description"},
+  {"name":"features","type":"RECORD","mode":"REPEATED","description":"features description",
+    "fields":[{"name":"feature","type":"STRING","mode":"REQUIRED","description":"feature description"}]}
+]
