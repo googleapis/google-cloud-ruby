@@ -193,13 +193,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from a File" do
     begin
-      table = dataset.create_table "schema_kittens" do |table|
-        table.schema.load File.open("acceptance/data/schema.json")
+      table = dataset.create_table "schema_kittens" do |t|
+        t.schema.load File.open("acceptance/data/schema.json")
       end
 
       table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
       table.schema.wont_be :empty?
-      [:id, :breed, :name, :dob, :features].each do |k|
+      %i[id breed name dob features].each do |k|
         table.headers.must_include k
       end
 
@@ -210,14 +210,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         f.description.wont_be :nil?
         f.mode.wont_be :nil?
 
-        if f.name == "features"
-          f.fields.wont_be :empty?
-          f.fields.each do |c|
-            f.name.wont_be :nil?
-            f.type.wont_be :nil?
-            f.description.wont_be :nil?
-            f.mode.wont_be :nil?
-          end
+        next unless f.name == "features"
+        f.fields.wont_be :empty?
+        f.fields.each do |c|
+          c.name.wont_be :nil?
+          c.type.wont_be :nil?
+          c.description.wont_be :nil?
+          c.mode.wont_be :nil?
         end
       end
     ensure
@@ -228,14 +227,14 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from a JSON string" do
     begin
-      table = dataset.create_table "schema_kittens" do |table|
+      table = dataset.create_table "schema_kittens" do |t|
         json = File.read("acceptance/data/schema.json")
-        table.schema.load json
+        t.schema.load json
       end
 
       table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
       table.schema.wont_be :empty?
-      [:id, :breed, :name, :dob, :features].each do |k|
+      %i[id breed name dob features].each do |k|
         table.headers.must_include k
       end
 
@@ -246,14 +245,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         f.description.wont_be :nil?
         f.mode.wont_be :nil?
 
-        if f.name == "features"
-          f.fields.wont_be :empty?
-          f.fields.each do |c|
-            f.name.wont_be :nil?
-            f.type.wont_be :nil?
-            f.description.wont_be :nil?
-            f.mode.wont_be :nil?
-          end
+        next unless f.name == "features"
+        f.fields.wont_be :empty?
+        f.fields.each do |c|
+          c.name.wont_be :nil?
+          c.type.wont_be :nil?
+          c.description.wont_be :nil?
+          c.mode.wont_be :nil?
         end
       end
     ensure
@@ -264,14 +262,14 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from an Array of Hashes" do
     begin
-      table = dataset.create_table "schema_kittens" do |table|
+      table = dataset.create_table "schema_kittens" do |t|
         json = JSON.parse(File.read("acceptance/data/schema.json"))
-        table.schema.load json
+        t.schema.load json
       end
 
       table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
       table.schema.wont_be :empty?
-      [:id, :breed, :name, :dob, :features].each do |k|
+      %i[id breed name dob features].each do |k|
         table.headers.must_include k
       end
 
@@ -282,14 +280,13 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         f.description.wont_be :nil?
         f.mode.wont_be :nil?
 
-        if f.name == "features"
-          f.fields.wont_be :empty?
-          f.fields.each do |c|
-            f.name.wont_be :nil?
-            f.type.wont_be :nil?
-            f.description.wont_be :nil?
-            f.mode.wont_be :nil?
-          end
+        next unless f.name == "features"
+        f.fields.wont_be :empty?
+        f.fields.each do |c|
+          c.name.wont_be :nil?
+          c.type.wont_be :nil?
+          c.description.wont_be :nil?
+          c.mode.wont_be :nil?
         end
       end
     ensure
