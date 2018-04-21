@@ -15,6 +15,12 @@
 require "google/cloud/bigquery"
 require "google/cloud/storage"
 
+class File
+  def self.write _f, _d
+    true
+  end
+end
+
 module Google
   module Cloud
     module Bigquery
@@ -601,10 +607,6 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
     end
-  end
-
-  doctest.before "Google::Cloud::Bigquery::Schema#dump" do
-    # TODO: How do I stub File.write for the doctest?
   end
 
   doctest.before "Google::Cloud::Bigquery::Schema::Field" do
