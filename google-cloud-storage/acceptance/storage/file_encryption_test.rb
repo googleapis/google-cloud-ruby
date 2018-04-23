@@ -18,13 +18,10 @@ require "uri"
 require "zlib"
 
 describe Google::Cloud::Storage::File, :storage do
-  let(:bucket_name) { $bucket_names.first }
+  let(:bucket_name) { $bucket_names[1] }
 
-  let(:files) do
-    { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
-      big:  { path: "acceptance/data/three-mb-file.tif" } }
-  end
-  let(:file_path) { "CloudLogo.png" }
+  let(:file_path) { "acceptance/data/abc.txt" }
+  let(:file_name) { "abc.txt" }
 
   let(:cipher) do
     cipher = OpenSSL::Cipher.new "aes-256-cfb"
@@ -50,17 +47,17 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should upload and download a file with customer-supplied encryption key" do
-      original = File.new files[:logo][:path], "rb"
-      uploaded = bucket.create_file original, file_path, encryption_key: encryption_key
+      original = File.new file_path
+      uploaded = bucket.create_file original, file_name, encryption_key: encryption_key
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = uploaded.download tmpfile.path, encryption_key: encryption_key
 
         downloaded.size.must_equal original.size
         downloaded.size.must_equal uploaded.size
         downloaded.size.must_equal original.size # Same file
 
-        File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+        File.read(downloaded.path).must_equal "abc"
       end
 
       uploaded.delete
@@ -80,21 +77,21 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should copy an existing file with customer-supplied encryption key" do
-      uploaded = bucket.create_file files[:logo][:path], file_path, encryption_key: encryption_key
+      uploaded = bucket.create_file file_path, file_name, encryption_key: encryption_key
       copied = try_with_backoff "copying existing file with encryption key" do
         uploaded.copy "CloudLogoCopy.png", encryption_key: encryption_key
       end
-      uploaded.name.must_equal file_path
+      uploaded.name.must_equal file_name
       copied.name.must_equal "CloudLogoCopy.png"
       copied.size.must_equal uploaded.size
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
-        Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
+      Tempfile.open ["abc", ".txt"] do |tmpfile1|
+        Tempfile.open ["abc-copy", ".txt"] do |tmpfile2|
           downloaded1 = uploaded.download tmpfile1.path, encryption_key: encryption_key
           downloaded2 = copied.download tmpfile2.path, encryption_key: encryption_key
           downloaded1.size.must_equal downloaded2.size
 
-          File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+          File.read(downloaded1.path).must_equal "abc"
         end
       end
 
@@ -103,7 +100,7 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should add, rotate, and remove customer-supplied encryption keys for an existing file" do
-      uploaded = bucket.create_file files[:logo][:path], file_path
+      uploaded = bucket.create_file file_path, file_name
 
       rewritten = try_with_backoff "add encryption key" do
         uploaded.rotate new_encryption_key: encryption_key
@@ -117,7 +114,7 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten2.name.must_equal uploaded.name
       rewritten2.size.must_equal uploaded.size
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = uploaded.download tmpfile.path, encryption_key: encryption_key_2
         downloaded.size.must_equal uploaded.size
       end
@@ -128,7 +125,7 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten4.name.must_equal uploaded.name
       rewritten4.size.must_equal uploaded.size
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = uploaded.download tmpfile.path
         downloaded.size.must_equal uploaded.size
       end
@@ -170,23 +167,23 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should upload and download a file with default_kms_key" do
-      original = File.new files[:logo][:path], "rb"
+      original = File.new file_path
 
-      uploaded = bucket.create_file original, file_path
+      uploaded = bucket.create_file original, file_name
       uploaded.kms_key.must_equal versioned(kms_key)
 
-      uploaded_copy = bucket.file file_path
+      uploaded_copy = bucket.file file_name
       uploaded_copy.kms_key.must_equal versioned(kms_key)
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = uploaded_copy.download tmpfile.path
 
         downloaded.size.must_equal original.size
-        File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+        File.read(downloaded.path).must_equal "abc"
       end
 
       # Ensure kms_key is visible in file listings.
-      uploaded_from_list = bucket.files.find { |f| f.name == file_path }
+      uploaded_from_list = bucket.files.find { |f| f.name == file_name }
       uploaded_from_list.wont_be :nil?
       uploaded_from_list.kms_key.must_equal versioned(kms_key)
 
@@ -195,25 +192,25 @@ describe Google::Cloud::Storage::File, :storage do
 
     it "should upload and download a file with kms_key option" do
       bucket.encryption = nil
-      original = File.new files[:logo][:path], "rb"
+      original = File.new file_path
 
       bucket.encryption.must_be :nil?
 
-      uploaded = bucket.create_file original, file_path, kms_key: kms_key_2
+      uploaded = bucket.create_file original, file_name, kms_key: kms_key_2
       uploaded.kms_key.must_equal versioned(kms_key_2)
 
-      uploaded_copy = bucket.file file_path
+      uploaded_copy = bucket.file file_name
       uploaded_copy.kms_key.must_equal versioned(kms_key_2)
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = uploaded_copy.download tmpfile.path
 
         downloaded.size.must_equal original.size
-        File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+        File.read(downloaded.path).must_equal "abc"
       end
 
       # Ensure kms_key is visible in file listings.
-      uploaded_from_list = bucket.files.find { |f| f.name == file_path }
+      uploaded_from_list = bucket.files.find { |f| f.name == file_name }
       uploaded_from_list.wont_be :nil?
       uploaded_from_list.kms_key.must_equal versioned(kms_key_2)
 
@@ -222,14 +219,14 @@ describe Google::Cloud::Storage::File, :storage do
 
     it "should upload a file with no kms key" do
       bucket.encryption = nil
-      original = File.new files[:logo][:path], "rb"
+      original = File.new file_path
 
       bucket.encryption.must_be :nil?
 
-      uploaded = bucket.create_file original, file_path
+      uploaded = bucket.create_file original, file_name
       uploaded.kms_key.must_be :nil?
 
-      uploaded_copy = bucket.file file_path
+      uploaded_copy = bucket.file file_name
       uploaded_copy.kms_key.must_be :nil?
 
       uploaded_copy.delete
@@ -238,7 +235,7 @@ describe Google::Cloud::Storage::File, :storage do
     it "should rotate a customer-supplied encryption key (CSEK) to a kms key (CMEK), to no key and back to CSEK" do
       bucket.encryption = nil
 
-      uploaded = bucket.create_file files[:logo][:path], file_path, encryption_key: encryption_key
+      uploaded = bucket.create_file file_path, file_name, encryption_key: encryption_key
       uploaded.kms_key.must_be :nil?
 
       rewritten = try_with_backoff "rotate from CSEK to CMEK" do
@@ -247,9 +244,10 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten.kms_key.must_equal versioned(kms_key)
       rewritten.size.must_equal uploaded.size
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = rewritten.download tmpfile.path
         downloaded.size.must_equal uploaded.size
+        File.read(downloaded.path).must_equal "abc"
       end
 
       rewritten2 = try_with_backoff "rotate from CMEK to default encryption" do
@@ -258,9 +256,10 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten2.kms_key.must_be :nil?
       rewritten2.size.must_equal uploaded.size
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = rewritten2.download tmpfile.path
         downloaded.size.must_equal uploaded.size
+        File.read(downloaded.path).must_equal "abc"
       end
 
       rewritten3 = try_with_backoff "rotate from default encryption to CMEK" do
@@ -269,9 +268,10 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten3.kms_key.must_equal versioned(kms_key_2)
       rewritten3.size.must_equal uploaded.size
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = rewritten3.download tmpfile.path
         downloaded.size.must_equal uploaded.size
+        File.read(downloaded.path).must_equal "abc"
       end
 
       rewritten4 = try_with_backoff "rotate from CMEK to CSEK" do
@@ -280,9 +280,10 @@ describe Google::Cloud::Storage::File, :storage do
       rewritten4.kms_key.must_be :nil?
       rewritten4.size.must_equal uploaded.size
 
-      Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      Tempfile.open ["abc", ".txt"] do |tmpfile|
         downloaded = rewritten4.download tmpfile.path, encryption_key: encryption_key_2
         downloaded.size.must_equal uploaded.size
+        File.read(downloaded.path).must_equal "abc"
       end
 
       rewritten4.delete
