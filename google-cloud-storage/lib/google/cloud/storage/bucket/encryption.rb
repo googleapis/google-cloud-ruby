@@ -33,6 +33,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
+        #   # KMS key ring should use the same location as the bucket.
         #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
         #   encryption = storage.encryption default_kms_key: kms_key_name
         #
@@ -69,6 +70,7 @@ module Google
           #
           #   storage = Google::Cloud::Storage.new
           #
+          #   # KMS key ring should use the same location as the bucket.
           #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
           #   encryption = storage.encryption default_kms_key: kms_key_name
           #
@@ -89,6 +91,7 @@ module Google
           #
           #   storage = Google::Cloud::Storage.new
           #
+          #   # KMS key ring should use the same location as the bucket.
           #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
           #   encryption = storage.encryption
           #

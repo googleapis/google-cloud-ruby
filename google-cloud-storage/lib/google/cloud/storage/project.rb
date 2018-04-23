@@ -483,7 +483,7 @@ module Google
         #
         # @param [String] default_kms_key Resource name of the Cloud KMS
         #   key, of the form
-        #   `projects/my-prj/locations/global/keyRings/my-kr/cryptoKeys/my-key`,
+        #   `projects/my-prj/locations/kr-loc/keyRings/my-kr/cryptoKeys/my-key`,
         #   that will be used to encrypt files. The Service Account
         #   associated with your project requires access to this encryption key.
         #
@@ -494,6 +494,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
+        #   # KMS key ring should use the same location as the bucket.
         #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
         #   encryption = storage.encryption default_kms_key: kms_key_name
         #
