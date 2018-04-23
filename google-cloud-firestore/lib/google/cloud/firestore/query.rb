@@ -57,9 +57,9 @@ module Google
         # Restricts documents matching the query to return only data for the
         # provided fields.
         #
-        # @param [FieldPath, String, Symbol] fields A field path to
-        #   filter results with and return only the specified fields. One or
-        #   more field paths can be specified.
+        # @param [FieldPath, String, Symbol, Array<FieldPath|String|Symbol>]
+        #   fields A field path to filter results with and return only the
+        #   specified fields. One or more field paths can be specified.
         #
         #   If a {FieldPath} object is not provided then the field will be
         #   treated as a dotted string, meaning the string represents individual
@@ -365,7 +365,8 @@ module Google
         # Values provided to `start_at` without an associated field path
         # provided to `order` will result in an error.
         #
-        # @param [Object] values The field value to start the query at.
+        # @param [Object, Array<Object>] values The field value to start the
+        #   query at.
         #
         # @return [Query] New query with `start_at` called on it.
         #
@@ -407,7 +408,8 @@ module Google
         # Values provided to `start_after` without an associated field path
         # provided to `order` will result in an error.
         #
-        # @param [Object] values The field value to start the query after.
+        # @param [Object, Array<Object>] values The field value to start the
+        #   query after.
         #
         # @return [Query] New query with `start_after` called on it.
         #
@@ -449,7 +451,8 @@ module Google
         # Values provided to `end_before` without an associated field path
         # provided to `order` will result in an error.
         #
-        # @param [Object] values The field value to end the query before.
+        # @param [Object, Array<Object>] values The field value to end the query
+        #   before.
         #
         # @return [Query] New query with `end_before` called on it.
         #
@@ -491,7 +494,8 @@ module Google
         # Values provided to `end_at` without an associated field path provided
         # to `order` will result in an error.
         #
-        # @param [Object] values The field value to end the query at.
+        # @param [Object, Array<Object>] values The field value to end the query
+        #   at.
         #
         # @return [Query] New query with `end_at` called on it.
         #
@@ -526,9 +530,9 @@ module Google
         # Retrieves document snapshots for the query.
         #
         # @yield [documents] The block for accessing the document snapshots.
-        # @yieldparam [DocumentReference] document A document snapshot.
+        # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
-        # @return [Enumerator<DocumentReference>] A list of document snapshots.
+        # @return [Enumerator<DocumentSnapshot>] A list of document snapshots.
         #
         # @example
         #   require "google/cloud/firestore"

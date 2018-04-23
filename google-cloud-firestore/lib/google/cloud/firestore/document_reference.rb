@@ -323,10 +323,8 @@ module Google
         #
         #   user_ref = firestore.doc "users/frank"
         #
-        #   nested_field_path = Google::Cloud::Firestore::FieldPath.new(
-        #     :favorites, :food
-        #   )
-        #   user_ref.update({ nested_field_path: "Pasta" })
+        #   nested_field_path = firestore.field_path :favorites, :food
+        #   user_ref.update({ nested_field_path => "Pasta" })
         #
         # @example Update a document using the `update_time` precondition:
         #   require "google/cloud/firestore"

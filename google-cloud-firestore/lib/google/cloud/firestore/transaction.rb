@@ -81,9 +81,9 @@ module Google
         ##
         # Retrieves a list of document snapshots.
         #
-        # @param [String, DocumentReference] docs One or more strings
-        #   representing the path of the document, or document reference
-        #   objects.
+        # @param [String, DocumentReference, Array<String|DocumentReference>]
+        #   docs One or more strings representing the path of the document, or
+        #   document reference objects.
         #
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
@@ -136,12 +136,12 @@ module Google
         #   to run.
         #
         # @yield [documents] The block for accessing the document snapshots.
-        # @yieldparam [DocumentReference] document A document snapshot.
+        # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
-        # @return [DocumentReference, Enumerator<DocumentReference>] A
-        #   single document snapshot when passed a document path a document
-        #   reference, or a list of document snapshots when passed other valid
-        #   values.
+        # @return [DocumentSnapshot, Enumerator<DocumentSnapshot>] A
+        #   single document snapshot when passed a document path or a document
+        #   reference object, or a list of document snapshots when passed other
+        #   valid values.
         #
         # @example Get a document snapshot given a document path:
         #   require "google/cloud/firestore"
@@ -427,12 +427,10 @@ module Google
         #
         #   firestore = Google::Cloud::Firestore.new
         #
-        #   nested_field_path = Google::Cloud::Firestore::FieldPath.new(
-        #     :favorites, :food
-        #   )
+        #   nested_field_path = firestore.field_path :favorites, :food
         #
         #   firestore.transaction do |tx|
-        #     tx.update("users/frank", { nested_field_path: "Pasta" })
+        #     tx.update("users/frank", { nested_field_path => "Pasta" })
         #   end
         #
         # @example Update a document using a document reference:
