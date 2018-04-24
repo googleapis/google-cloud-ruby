@@ -229,7 +229,7 @@ module Google
           raise ArgumentError, "Invalid JSON" unless schema_json
 
           @original_json = schema_json
-          @gapi = Google::Apis::BigqueryV2::TableSchema.from_json(schema_json)
+          @gapi = Google::Apis::BigqueryV2::TableSchema.from_json schema_json
 
           self
         end
