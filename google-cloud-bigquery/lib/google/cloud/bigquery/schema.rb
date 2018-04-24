@@ -470,7 +470,7 @@ module Google
         def migrate_json source_json
           fields = JSON.parse source_json
           {
-            "fields" => fields
+            fields: fields
           }.to_json
         rescue JSON::ParserError
           nil
