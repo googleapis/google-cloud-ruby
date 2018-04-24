@@ -159,10 +159,9 @@ describe Google::Cloud::Storage::File, :storage do
   describe "KMS customer-managed encryption key (CMEK)" do
     let(:kms_key) { "projects/helical-zone-771/locations/us-central1/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
     let(:kms_key_2) { "projects/helical-zone-771/locations/us-central1/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
-    let(:encryption) { storage.encryption default_kms_key: kms_key }
     let :bucket do
       b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name)
-      b.encryption = encryption
+      b.default_kms_key = kms_key
       b
     end
 
@@ -191,10 +190,10 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should upload and download a file with kms_key option" do
-      bucket.encryption = nil
+      bucket.default_kms_key = nil
       original = File.new file_path
 
-      bucket.encryption.must_be :nil?
+      bucket.default_kms_key.must_be :nil?
 
       uploaded = bucket.create_file original, file_name, kms_key: kms_key_2
       uploaded.kms_key.must_equal versioned(kms_key_2)
@@ -218,10 +217,10 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should upload a file with no kms key" do
-      bucket.encryption = nil
+      bucket.default_kms_key = nil
       original = File.new file_path
 
-      bucket.encryption.must_be :nil?
+      bucket.default_kms_key.must_be :nil?
 
       uploaded = bucket.create_file original, file_name
       uploaded.kms_key.must_be :nil?
@@ -233,7 +232,7 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should rotate a customer-supplied encryption key (CSEK) to a kms key (CMEK), to no key and back to CSEK" do
-      bucket.encryption = nil
+      bucket.default_kms_key = nil
 
       uploaded = bucket.create_file file_path, file_name, encryption_key: encryption_key
       uploaded.kms_key.must_be :nil?

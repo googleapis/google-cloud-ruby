@@ -16,7 +16,6 @@
 require "google/cloud/storage/bucket/acl"
 require "google/cloud/storage/bucket/list"
 require "google/cloud/storage/bucket/cors"
-require "google/cloud/storage/bucket/encryption"
 require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "google/cloud/storage/file"
@@ -380,33 +379,50 @@ module Google
         end
 
         ##
-        # The {Storage::Bucket::Encryption} object that represents the custom
-        # encryption method used to protect files in the bucket.
+        # The Cloud KMS encryption key that will be used to protect files.
+        # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
         #
-        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
-        #   Documentation
+        # @return [String, nil] A Cloud KMS encryption key, or `nil` if none
+        #   has been configured.
         #
-        # @return [Storage::Bucket::Encryption, nil] The encryption
-        #   configuration.
+        # @example
+        #   require "google/cloud/storage"
         #
-        def encryption
-          return nil if @gapi.encryption.nil?
-          Encryption.from_gapi(@gapi.encryption).freeze
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # KMS key ring should use the same location as the bucket.
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   bucket.default_kms_key = kms_key_name
+        #
+        #   bucket.default_kms_key #=> kms_key_name
+        #
+        def default_kms_key
+          @gapi.encryption && @gapi.encryption.default_kms_key_name
         end
 
         ##
-        # Set the Encryption object that represents the custom encryption method
-        # used to protect files in the bucket. See {Project#encryption}.
+        # Set the Cloud KMS encryption key that will be used to protect files.
+        # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
         #
-        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
-        #   Documentation
+        # @param [String] new_default_kms_key New Cloud KMS key name
         #
-        # @param [Storage::Bucket::Encryption, nil] value The new encryption
-        #   config, or `nil` to clear an existing config. See
-        #   {Project#encryption}.
+        # @example
+        #   require "google/cloud/storage"
         #
-        def encryption= value
-          @gapi.encryption = value ? value.to_gapi : nil
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # KMS key ring should use the same location as the bucket.
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #
+        #   bucket.default_kms_key = kms_key_name
+        #
+        def default_kms_key= new_default_kms_key
+          @gapi.encryption = Google::Apis::StorageV1::Bucket::Encryption.new \
+            default_kms_key_name: new_default_kms_key
           patch_gapi! :encryption
         end
 

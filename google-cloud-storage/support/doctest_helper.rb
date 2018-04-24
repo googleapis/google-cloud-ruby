@@ -341,6 +341,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#default_kms_key" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#user_project" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
@@ -551,17 +558,6 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Storage::Bucket::Cors#add_rule" do
     mock_storage do |mock|
       mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
-    end
-  end
-
-  # Bucket::Encryption
-
-  doctest.before "Google::Cloud::Storage::Bucket::Encryption" do
-    mock_storage do |mock|
-      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
-      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
-      # Following expectation is only used in last example
-      mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
     end
   end
 
@@ -950,15 +946,6 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Project#encryption" do
-    mock_storage do |mock|
-      mock.expect :insert_bucket, bucket_gapi, ["my-project", Google::Apis::StorageV1::Bucket, Hash]
-      mock.expect :insert_object, file_gapi, ["my-bucket", Google::Apis::StorageV1::Object, Hash]
-      # Following expectation is only used in last example
-      mock.expect :get_object, file_gapi, ["my-bucket", "destination/path/file.ext", Hash]
-    end
-  end
-
   # PostObject
 
   doctest.before "Google::Cloud::Storage::Bucket#post_object" do
@@ -1044,6 +1031,7 @@ def random_bucket_hash(name = "my-bucket",
     "storageClass" => storage_class,
     "versioning" => versioning_config,
     "website" => website_hash(website_main, website_404),
+    "encryption" => { "defaultKmsKeyName" => kms_key_name },
     "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
 end
 

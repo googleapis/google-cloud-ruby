@@ -80,28 +80,28 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
       bucket.service.mocked_service = mock
 
-      bucket.encryption.must_be :nil?
-      bucket.encryption = storage.encryption default_kms_key: kms_key
-      bucket.encryption.wont_be :nil?
-      bucket.encryption.must_be_kind_of Google::Cloud::Storage::Bucket::Encryption
-      bucket.encryption.default_kms_key.must_equal kms_key
+      bucket.default_kms_key.must_be :nil?
+      bucket.default_kms_key = kms_key
+      bucket.default_kms_key.wont_be :nil?
+      bucket.default_kms_key.must_be_kind_of String
+      bucket.default_kms_key.must_equal kms_key
     end
 
     it "sets its encryption config to nil" do
       bucket_gapi_with_key = bucket_gapi.dup
       bucket_gapi_with_key.encryption = encryption_gapi(kms_key)
       bucket_with_key = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi_with_key, storage.service
-      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: nil
+      patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(nil)
       mock = Minitest::Mock.new
       mock.expect :patch_bucket, bucket_gapi,
                   [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
 
       bucket_with_key.service.mocked_service = mock
 
-      bucket_with_key.encryption.wont_be :nil?
+      bucket_with_key.default_kms_key.wont_be :nil?
 
-      bucket_with_key.encryption = nil
-      bucket_with_key.encryption.must_be :nil?
+      bucket_with_key.default_kms_key = nil
+      bucket_with_key.default_kms_key.must_be :nil?
     end
 
     it "creates a file with the kms_key option" do

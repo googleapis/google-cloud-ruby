@@ -228,15 +228,15 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.create_bucket bucket_name do |b|
-      b.encryption = storage.encryption(default_kms_key: kms_key)
+      b.default_kms_key = kms_key
     end
 
     mock.verify
 
     bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.encryption.wont_be :nil?
-    bucket.encryption.must_be_kind_of Google::Cloud::Storage::Bucket::Encryption
-    bucket.encryption.default_kms_key.must_equal kms_key
+    bucket.default_kms_key.wont_be :nil?
+    bucket.default_kms_key.must_be_kind_of String
+    bucket.default_kms_key.must_equal kms_key
   end
 
   it "creates a bucket with predefined acl" do
