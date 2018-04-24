@@ -401,6 +401,32 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
+  it "updates its schema, loading from a File" do
+    begin
+      t = dataset.create_table "table_schema_test"
+      t.schema do |s|
+        s.integer "id", description: "id description", mode: :required
+        s.string "breed", description: "breed description", mode: :required
+        s.string "name", description: "name description", mode: :required
+        s.record "features", description: "features description", mode: :repeated do |s2|
+          s2.string "feature", description: "feature description", mode: :required
+        end
+      end
+      t.headers.must_equal %i[id breed name features]
+
+      t.schema replace: true do |s|
+        s.load File.open("acceptance/data/schema.json")
+      end
+
+      t.schema.wont_be :empty?
+      t.headers.must_equal %i[id breed name features dob]
+    ensure
+      t2 = dataset.table "table_schema_test"
+      t2.delete if t2
+    end
+  end
+
+
   it "allows tables to be created with time_partioning enabled" do
     table = time_partitioned_table
     table.time_partitioning_type.must_equal "DAY"
