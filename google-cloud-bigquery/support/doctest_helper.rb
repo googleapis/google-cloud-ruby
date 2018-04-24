@@ -19,6 +19,10 @@ class File
   def self.write _f, _d
     true
   end
+
+  def self.read _f
+    "{}"
+  end
 end
 
 module Google

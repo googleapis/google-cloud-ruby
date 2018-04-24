@@ -44,6 +44,67 @@ module Google
       #   end
       #
       class Schema
+        class << self
+          ##
+          # Load a schema from a JSON file.
+          #
+          # The JSON schema file is the same as for the [`bq`
+          # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file)
+          # consisting of an array of JSON objects containing the following:
+          # - `name`: The column's [data
+          #   type](https://cloud.google.com/bigquery/docs/schemas#standard_sql_data_types)
+          # - `type`: The column [name](https://cloud.google.com/bigquery/docs/schemas#column_names)
+          # - `description`: (Optional) The column's [description](https://cloud.google.com/bigquery/docs/schemas#column_descriptions)
+          # - `mode`: (Optional) The column's [mode](https://cloud.google.com/bigquery/docs/schemas#modes)
+          #   (if unspecified, mode defaults to `NULLABLE`)
+          # - `fields`: If `type` is `RECORD`, an array of objects defining
+          #   child fields with these properties
+          #
+          # @param [IO, String, Array<Hash>] source An `IO` containing the JSON
+          #   schema, a `String` containing the JSON schema, or an `Array` of
+          #   `Hash`es containing the schema details.
+          #
+          # @return [Schema] A schema.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   schema = Google::Cloud::Bigquery::Schema.load(
+          #     File.read("path/to/schema.json")
+          #   )
+          #
+          def load source
+            new.load source
+          end
+
+          ##
+          # Write a schema as JSON to a file.
+          #
+          # The JSON schema file is the same as for the [`bq`
+          # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file).
+          #
+          # @param [IO, String] schema An `Google::Cloud::Bigquery::Schema`.
+          #
+          # @param [IO, String] destination An `IO` to which to write the
+          #   schema, or a `String` containing the filename to write to.
+          #
+          # @return [Schema] The schema so that commands are chainable.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #   schema = Google::Cloud::Bigquery::Schema.dump(
+          #     table.schema,
+          #     "path/to/schema.json"
+          #   )
+          #
+          def dump schema, destination
+            schema.dump destination
+          end
+        end
         ##
         # The fields of the table schema.
         #
@@ -150,7 +211,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table" do |table|
-        #     table.schema.load "path/to/schema.json"
+        #     table.schema.load File.read("path/to/schema.json")
         #   end
         #
         def load source

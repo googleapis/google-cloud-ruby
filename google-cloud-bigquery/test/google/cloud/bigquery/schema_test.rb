@@ -633,4 +633,31 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     name["type"].must_equal "STRING"
     name["mode"].must_be :nil?
   end
+
+  it "can write load a schema with the class method" do
+    schema = Google::Cloud::Bigquery::Schema.load File.open("acceptance/data/schema.json")
+
+    schema.wont_be :empty?
+    schema.fields.map(&:name).must_equal %w[id breed name dob features]
+  end
+
+  it "can write write a schema with the class method" do
+    begin
+      file = Tempfile.new("schema-test")
+      Google::Cloud::Bigquery::Schema.dump schema, file
+      file.close
+
+      json = JSON.parse(File.read(file.path))
+    ensure
+      if file
+        file.close
+        file.delete
+      end
+    end
+    json.length.must_equal 10
+
+    fields = json.map { |record| record["name"] }
+    fields.wont_be :empty?
+    fields.must_equal %w[name age score active avatar started_at duration target_end birthday alts]
+  end
 end
