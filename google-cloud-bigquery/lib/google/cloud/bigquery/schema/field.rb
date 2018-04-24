@@ -544,14 +544,19 @@ module Google
 
           # @private
           def to_json *args
+            json_hash.to_json(*args)
+          end
+
+          # @private
+          def json_hash
             h = {
-              "name" => name,
-              "type" => type,
-              "mode" => mode
+                "name" => name,
+                "type" => type,
+                "mode" => mode
             }
             h["description"] = description if description
-            h["fields"] = fields.to_json if record?
-            h.to_json(*args)
+            h["fields"] = fields.map(&:json_hash) if record?
+            h
           end
 
           protected
