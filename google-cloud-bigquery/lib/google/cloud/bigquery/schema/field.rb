@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "json"
 
 module Google
   module Cloud
@@ -543,19 +544,19 @@ module Google
           end
 
           # @private
-          def to_json *args
-            json_hash.to_json(*args)
+          def to_json *_args
+            JSON.dump to_hash
           end
 
           # @private
-          def json_hash
+          def to_hash
             h = {
-              "name" => name,
-              "type" => type,
-              "mode" => mode
+              name: name,
+              type: type,
+              mode: mode
             }
-            h["description"] = description if description
-            h["fields"] = fields.map(&:json_hash) if record?
+            h[:description] = description if description
+            h[:fields] = fields.map(&:to_hash) if record?
             h
           end
 
