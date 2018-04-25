@@ -19,6 +19,7 @@ require "zlib"
 
 describe Google::Cloud::Storage::File, :storage do
   let(:bucket_name) { $bucket_names[1] }
+  let(:bucket_location) { "us-central1" }
 
   let(:file_path) { "acceptance/data/abc.txt" }
   let(:file_name) { "abc.txt" }
@@ -43,7 +44,9 @@ describe Google::Cloud::Storage::File, :storage do
 
   describe "customer-supplied encryption key (CSEK)" do
     let :bucket do
-      storage.bucket(bucket_name) || storage.create_bucket(bucket_name)
+      b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location)
+      b.default_kms_key = nil
+      b
     end
 
     it "should upload and download a file with customer-supplied encryption key" do
@@ -64,13 +67,13 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should upload and partially download a file with customer-supplied encryption key" do
-      original = File.new files[:logo][:path], "rb"
-      uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key
+      original = File.new file_path
+      uploaded = bucket.create_file original, file_name, encryption_key: encryption_key
 
       Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
-        downloaded = uploaded.download tmpfile.path, range: 3..1024, encryption_key: encryption_key
-        downloaded.size.must_equal 1022
-        File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")[3..1024]
+        downloaded = uploaded.download tmpfile.path, range: 1..2, encryption_key: encryption_key
+        downloaded.size.must_equal 2
+        File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")[1..2]
       end
 
       uploaded.delete
@@ -157,10 +160,10 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   describe "KMS customer-managed encryption key (CMEK)" do
-    let(:kms_key) { "projects/helical-zone-771/locations/us-central1/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
-    let(:kms_key_2) { "projects/helical-zone-771/locations/us-central1/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
+    let(:kms_key) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
+    let(:kms_key_2) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
     let :bucket do
-      b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name)
+      b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location)
       b.default_kms_key = kms_key
       b
     end
