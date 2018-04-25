@@ -550,12 +550,12 @@ module Google
           # @private
           def json_hash
             h = {
-              name: name,
-              type: type,
-              mode: mode
+              "name" => name,
+              "type" => type,
+              "mode" => mode
             }
-            h[:description] = description if description
-            h[:fields] = fields.map(&:json_hash) if record?
+            h["description"] = description if description
+            h["fields"] = fields.map(&:json_hash) if record?
             h
           end
 
