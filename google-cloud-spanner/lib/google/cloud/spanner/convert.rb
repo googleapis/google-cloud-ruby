@@ -36,82 +36,64 @@ module Google
             Hash[formatted_params]
           end
 
-          def raw_to_value_and_type obj, type = nil
+          def raw_to_value_and_type obj, field = nil
             obj = obj.to_column_value if obj.respond_to? :to_column_value
+            field ||= field_for_raw obj
+
+            [raw_to_value(obj), type_for_field(field)]
+          end
+
+          def field_for_raw obj
             if NilClass === obj
-              if type
-                if type.is_a?(Array) && type.count == 1
-                  [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                   Google::Spanner::V1::Type.new(
-                     code: :ARRAY, array_element_type:
-                      Google::Spanner::V1::Type.new(code: type.first))]
-                # elsif type.is_a? Fields
-                else
-                  [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
-                   Google::Spanner::V1::Type.new(code: type)]
-                end
-              else
-                raise ArgumentError, "Must provide type for nil values."
-              end
-            elsif String === obj
-              [raw_to_value(obj), Google::Spanner::V1::Type.new(code: :STRING)]
-            elsif Symbol === obj
-              [raw_to_value(obj.to_s),
-               Google::Spanner::V1::Type.new(code: :STRING)]
-            elsif TrueClass === obj
-              [raw_to_value(obj), Google::Spanner::V1::Type.new(code: :BOOL)]
-            elsif FalseClass === obj
-              [raw_to_value(obj), Google::Spanner::V1::Type.new(code: :BOOL)]
+              raise ArgumentError, "Cannot determine type for nil values."
+            elsif String === obj || Symbol === obj
+              :STRING
+            elsif TrueClass === obj || FalseClass === obj
+              :BOOL
             elsif Integer === obj
-              [raw_to_value(obj.to_s),
-               Google::Spanner::V1::Type.new(code: :INT64)]
+              :INT64
             elsif Numeric === obj # Any number not an integer gets to be a float
-              [raw_to_value(obj),
-               Google::Spanner::V1::Type.new(code: :FLOAT64)]
+              :FLOAT64
             elsif Time === obj || DateTime === obj
-              [raw_to_value(obj),
-               Google::Spanner::V1::Type.new(code: :TIMESTAMP)]
+              :TIMESTAMP
             elsif Date === obj
-              [raw_to_value(obj.to_s),
-               Google::Spanner::V1::Type.new(code: :DATE)]
+              :DATE
             elsif Array === obj
-              if type && !type.is_a?(Array)
-                raise ArgumentError, "Array values must have an Array type."
+              if obj.empty?
+                raise ArgumentError,
+                      "Cannot determine type for empty array values."
               end
-              type ||= begin
-                # Find the param type for the first non-nil item the list
-                nested_param_value = obj.detect { |x| !x.nil? }
-                if nested_param_value.nil?
-                  raise ArgumentError, "Array values must have an Array type."
-                end
-                [raw_to_value_and_type(nested_param_value).last.code]
+              non_nil_fields = obj.compact.map { |e| field_for_raw e }.compact
+              if non_nil_fields.empty?
+                raise ArgumentError,
+                      "Cannot determine type for array of nil values."
               end
-              [raw_to_value(obj),
-               Google::Spanner::V1::Type.new(
-                code: :ARRAY, array_element_type:
-                  Google::Spanner::V1::Type.new(code: type.first))]
-            elsif Hash === obj
-              field_pairs = obj.map do |key, value|
-                [key, raw_to_value_and_type(value).last]
+              if non_nil_fields.uniq.count > 1
+                raise ArgumentError,
+                      "Cannot determine type for array of different values."
               end
-              formatted_fields = field_pairs.map do |name, param_type|
-                Google::Spanner::V1::StructType::Field.new(
-                  name: String(name), type: param_type
-                )
-              end
-              [raw_to_value(obj),
-               Google::Spanner::V1::Type.new(
-                code: :STRUCT,
-                struct_type: Google::Spanner::V1::StructType.new(
-                  fields: formatted_fields
-                ))]
+              [non_nil_fields.first]
+            # elsif Hash === obj
+            #   raw_type_pairs = obj.map do |key, value|
+            #     [key, field_for_raw(value)]
+            #   end
+            #   Fields.new Hash[raw_type_pairs]
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
-              obj.rewind
-              [raw_to_value(obj),
-               Google::Spanner::V1::Type.new(code: :BYTES)]
+              :BYTES
             else
               raise ArgumentError,
-                    "A parameter of type #{obj.class} is not supported."
+                    "Cannot determine type for #{obj.class} values."
+            end
+          end
+
+          def type_for_field field
+            if Array === field
+              Google::Spanner::V1::Type.new(
+                code: :ARRAY,
+                array_element_type: type_for_field(field.first)
+              )
+            else
+              Google::Spanner::V1::Type.new(code: field)
             end
           end
 
@@ -120,9 +102,7 @@ module Google
 
             if NilClass === obj
               Google::Protobuf::Value.new null_value: :NULL_VALUE
-            elsif String === obj
-              Google::Protobuf::Value.new string_value: obj
-            elsif Symbol === obj
+            elsif String === obj || Symbol === obj
               Google::Protobuf::Value.new string_value: obj.to_s
             elsif TrueClass === obj
               Google::Protobuf::Value.new bool_value: true
@@ -149,10 +129,10 @@ module Google
               Google::Protobuf::Value.new list_value:
                 Google::Protobuf::ListValue.new(values:
                   obj.map { |o| raw_to_value(o) })
-            elsif Hash === obj
-              Google::Protobuf::Value.new struct_value:
-                Google::Protobuf::Struct.new(fields:
-                  Hash[obj.map { |k, v| [String(k), raw_to_value(v)] }])
+            # elsif Hash === obj
+            #   Google::Protobuf::Value.new struct_value:
+            #     Google::Protobuf::Struct.new(fields:
+            #       Hash[obj.map { |k, v| [String(k), raw_to_value(v)] }])
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               obj.rewind
               content = obj.read.force_encoding("ASCII-8BIT")
