@@ -748,7 +748,7 @@ module Google
         # @param [String] new_kms_key Optional. Resource name of the Cloud KMS
         #   key, of the form
         #   `projects/my-prj/locations/kr-loc/keyRings/my-kr/cryptoKeys/my-key`,
-        #   that will be used to encrypt the file. The KMS key ring should use
+        #   that will be used to encrypt the file. The KMS key ring must use
         #   the same location as the bucket.The Service Account associated with
         #   your project requires access to this encryption key. Do not provide
         #   if `new_encryption_key` is used.
@@ -831,7 +831,7 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   # KMS key ring should use the same location as the bucket.
+        #   # KMS key ring must use the same location as the bucket.
         #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
         #
         #   # Old customer-supplied key was stored securely for later use.
@@ -901,7 +901,7 @@ module Google
         # @param [String] new_kms_key Optional. Resource name of the Cloud KMS
         #   key, of the form
         #   `projects/my-prj/locations/kr-loc/keyRings/my-kr/cryptoKeys/my-key`,
-        #   that will be used to encrypt the file. The KMS key ring should use
+        #   that will be used to encrypt the file. The KMS key ring must use
         #   the same location as the bucket.The Service Account associated with
         #   your project requires access to this encryption key. Do not provide
         #   if `new_encryption_key` is used.
@@ -932,7 +932,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-bucket"
         #
-        #   # KMS key ring should use the same location as the bucket.
+        #   # KMS key ring must use the same location as the bucket.
         #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
         #
         #   # Old key was stored securely for later use.
