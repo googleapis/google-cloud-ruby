@@ -16,7 +16,7 @@ require "spanner_helper"
 
 describe "Spanner Batch Client", :execute_partition, :spanner do
   let(:db) { spanner_client }
-  let(:batch_client) { $spanner.batch_client $spanner_instance_id, $spanner_prefix }
+  let(:batch_client) { $spanner.batch_client $spanner_instance_id, $spanner_database_id }
   let(:table_name) { "stuffs" }
   let(:table_index) { "IsStuffsIdPrime" }
   let(:batch_snapshot) { batch_client.batch_snapshot }
