@@ -246,9 +246,9 @@ end
 # Create buckets to be shared with all the tests
 require "date"
 require "securerandom"
-# prefix is already 22 characters, can only add 7 additional characters
-$spanner_prefix = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(4)}"
 $spanner_instance_id = "google-cloud-ruby-tests"
+# $spanner_database_id is already 22 characters, can only add 7 additional characters
+$spanner_database_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(4)}"
 
 # Setup main instance and database for the tests
 fixture = Object.new
@@ -262,16 +262,16 @@ instance ||= begin
   inst_job.instance
 end
 
-db_job = instance.create_database $spanner_prefix, statements: fixture.schema_ddl_statements
+db_job = instance.create_database $spanner_database_id, statements: fixture.schema_ddl_statements
 db_job.wait_until_done!
 fail GRPC::BadStatus.new(db_job.error.code, db_job.error.message) if db_job.error?
 
 # Create one client for all tests, to minimize resource usage
-$spanner_client = $spanner.client $spanner_instance_id, $spanner_prefix
+$spanner_client = $spanner.client $spanner_instance_id, $spanner_database_id
 
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
-  $spanner.instance($spanner_instance_id).database($spanner_prefix).drop
+  $spanner.instance($spanner_instance_id).database($spanner_database_id).drop
   puts "Closing the Spanner Client."
   $spanner_client.close
 rescue => e
