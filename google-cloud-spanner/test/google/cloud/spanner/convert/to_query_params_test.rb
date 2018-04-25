@@ -205,18 +205,21 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
   end
 
   it "converts a simple Hash value" do
+    skip "Hash query parameters are not yet supported"
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: { foo: :bar }
     combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"foo"=>Google::Protobuf::Value.new(string_value: "bar")})),
                                                 Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))]))] })
   end
 
   it "converts a complex Hash value" do
+    skip "Hash query parameters are not yet supported"
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: { env: "production", score: 0.9, project_ids: [1,2,3] }
     combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: { "score"=>Google::Protobuf::Value.new(number_value: 0.9), "env"=>Google::Protobuf::Value.new(string_value: "production"), "project_ids"=>Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) })),
                                                 Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64))) ] ))] })
   end
 
   it "converts an emtpy Hash value" do
+    skip "Hash query parameters are not yet supported"
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: {}
     combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {})),
                                                 Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: []))] })
