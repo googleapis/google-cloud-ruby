@@ -414,7 +414,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       end
       t.headers.must_equal %i[id breed name features]
 
-      t.schema replace: true do |s|
+      t.schema do |s|
         s.load File.open("acceptance/data/schema.json")
       end
 
