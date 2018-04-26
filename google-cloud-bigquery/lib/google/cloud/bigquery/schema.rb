@@ -14,6 +14,7 @@
 
 
 require "google/cloud/bigquery/schema/field"
+require "json"
 
 module Google
   module Cloud
