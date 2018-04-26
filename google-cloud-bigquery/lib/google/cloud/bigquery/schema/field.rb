@@ -544,11 +544,6 @@ module Google
           end
 
           # @private
-          def to_json *_args
-            JSON.dump to_hash
-          end
-
-          # @private
           def to_hash
             h = {
               name: name,

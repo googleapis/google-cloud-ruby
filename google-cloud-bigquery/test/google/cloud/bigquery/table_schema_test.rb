@@ -302,35 +302,4 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     mock.verify
   end
-
-  focus
-  it "sets a schema loaded from a file" do
-    s = StringIO.new
-    table.schema.dump s
-    puts s.string
-    next
-    mock = Minitest::Mock.new
-    end_date_timestamp_gapi = field_timestamp_gapi.dup
-    end_date_timestamp_gapi.name = "end_date"
-    new_schema_gapi = table_gapi.schema.dup
-    new_schema_gapi.fields = table_gapi.schema.fields.dup
-    new_schema_gapi.fields << end_date_timestamp_gapi
-    returned_table_gapi = table_gapi.dup
-    returned_table_gapi.schema = new_schema_gapi
-    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
-
-    mock.expect :patch_table, returned_table_gapi,
-                [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
-    table.service.mocked_service = mock
-
-    table.schema do |schema|
-      schema.load File.open("acceptance/data/schema.json")
-    end
-
-    mock.verify
-
-    table.headers.must_equal %i[id breed name dob features]
-  end
 end

@@ -219,13 +219,12 @@ module Google
             source.rewind
             schema_json = String source.read
           elsif source.is_a? Array
-            schema_json = source.to_json
+            schema_json = JSON.dump source
           else
             schema_json = String source
           end
 
-          schema_json = migrate_json schema_json
-
+          schema_json = %({"fields":#{schema_json}})
           raise ArgumentError, "Invalid JSON" unless schema_json
 
           @gapi = Google::Apis::BigqueryV2::TableSchema.from_json schema_json
@@ -255,9 +254,9 @@ module Google
         def dump destination
           if destination.respond_to?(:rewind) && destination.respond_to?(:write)
             destination.rewind
-            destination.write fields.to_json
+            destination.write JSON.dump(fields.map(&:to_hash))
           else
-            File.write String(destination), fields.to_json
+            File.write String(destination), JSON.dump(fields.map(&:to_hash))
           end
 
           self
@@ -523,17 +522,6 @@ module Google
             raise ArgumentError "Unable to determine mode for '#{mode}'"
           end
           mode
-        end
-
-        private
-
-        def migrate_json source_json
-          fields = JSON.parse source_json
-          {
-            fields: fields
-          }.to_json
-        rescue JSON::ParserError
-          nil
         end
       end
     end

@@ -426,7 +426,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-
   it "allows tables to be created with time_partioning enabled" do
     table = time_partitioned_table
     table.time_partitioning_type.must_equal "DAY"
