@@ -24,8 +24,8 @@
               "type": "google/cloud/monitoring/v3/metricserviceclient"
             },
             {
-              "title": "NotificationServiceClient",
-              "type": "google/cloud/monitoring/v3/notificationserviceclient"
+              "title": "NotificationChannelServiceClient",
+              "type": "google/cloud/monitoring/v3/notificationchannelserviceclient"
             },
             {
               "title": "UptimeCheckServiceClient",
