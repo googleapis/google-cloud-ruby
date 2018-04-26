@@ -498,13 +498,17 @@
     {
       "title": "Monitoring",
       "type": "google/cloud/monitoring",
-      "patterns": ["\/monitoring"],
+      "patterns": ["\/monitoring", "google\/protobuf", "google\/rpc"],
       "nav": [
         {
           "title": "V3",
           "type": "google/cloud/monitoring/v3",
-          "patterns": ["\/monitoring\/v3"],
+          "patterns": ["\/monitoring\/v3", "google\/protobuf", "google\/rpc"],
           "nav": [
+            {
+              "title": "AlertPolicyServiceClient",
+              "type": "google/cloud/monitoring/v3/alertpolicyserviceclient"
+            },
             {
               "title": "GroupServiceClient",
               "type": "google/cloud/monitoring/v3/groupserviceclient"
@@ -512,6 +516,14 @@
             {
               "title": "MetricServiceClient",
               "type": "google/cloud/monitoring/v3/metricserviceclient"
+            },
+            {
+              "title": "NotificationChannelServiceClient",
+              "type": "google/cloud/monitoring/v3/notificationchannelserviceclient"
+            },
+            {
+              "title": "UptimeCheckServiceClient",
+              "type": "google/cloud/monitoring/v3/uptimecheckserviceclient"
             },
             {
               "title": "Data Types",
