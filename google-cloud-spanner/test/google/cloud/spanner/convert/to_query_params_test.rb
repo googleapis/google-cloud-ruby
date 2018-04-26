@@ -205,23 +205,910 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
   end
 
   it "converts a simple Hash value" do
-    skip "Hash query parameters are not yet supported"
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: { foo: :bar }
-    combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"foo"=>Google::Protobuf::Value.new(string_value: "bar")})),
+    combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "bar")])),
                                                 Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))]))] })
   end
 
   it "converts a complex Hash value" do
-    skip "Hash query parameters are not yet supported"
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: { env: "production", score: 0.9, project_ids: [1,2,3] }
-    combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: { "score"=>Google::Protobuf::Value.new(number_value: 0.9), "env"=>Google::Protobuf::Value.new(string_value: "production"), "project_ids"=>Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) })),
+    combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [ Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) ])),
                                                 Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64))) ] ))] })
   end
 
   it "converts an emtpy Hash value" do
-    skip "Hash query parameters are not yet supported"
     combined_params = Google::Cloud::Spanner::Convert.to_query_params settings: {}
-    combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {})),
+    combined_params.must_equal({ "settings" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])),
                                                 Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: []))] })
+  end
+
+  it "converts an empty Array of Data values" do
+    combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: []}, list: [fields(foo: :STRING)])
+    combined_params.must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])),
+                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))])))] })
+  end
+
+  it "converts a nil Array of Data values" do
+    combined_params = Google::Cloud::Spanner::Convert.to_query_params({list: nil}, list: [fields(foo: :STRING)])
+    combined_params.must_equal({ "list" => [Google::Protobuf::Value.new(null_value: :NULL_VALUE),
+                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))])))] })
+  end
+
+  it "converts an Array of simple Data values" do
+    combined_params = Google::Cloud::Spanner::Convert.to_query_params list: [{ foo: :bar }]
+    combined_params.must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "bar")]))])),
+                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT,struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))]))) ]})
+  end
+
+  it "converts an Array complex Data values" do
+    combined_params = Google::Cloud::Spanner::Convert.to_query_params list: [{ env: "production", score: 0.9, project_ids: [1,2,3] }]
+    combined_params.must_equal({ "list" => [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")]))]))])),
+                                            Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))]))) ]})
+  end
+
+  describe "Struct Parameters Query Examples" do
+    # Simple field access.
+    # [parameters=STRUCT<threadf INT64, userf STRING>(1,"bob") AS struct_param, 10 as p4]
+    # SELECT @struct_param.userf, @p4;
+    describe "Simple field access" do
+      it "with Hash" do
+        params = { struct_param: { threadf: 1, userf: "bob" }, p4: 10 }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "1"),
+                  Google::Protobuf::Value.new(string_value: "bob")
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "threadf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "userf",
+                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                  )
+                ]
+              )
+            )
+          ],
+          "p4" => [
+            Google::Protobuf::Value.new(string_value: "10"),
+            Google::Spanner::V1::Type.new(code: :INT64)
+          ]
+        })
+      end
+
+      it "with Hash and type" do
+        fields = Google::Cloud::Spanner::Fields.new threadf: :INT64, userf: :STRING
+        params = { struct_param: { threadf: 1, userf: "bob" }, p4: 10 }
+        types = { struct_param: fields, p4: :INT64 }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "1"),
+                  Google::Protobuf::Value.new(string_value: "bob")
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "threadf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "userf",
+                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                  )
+                ]
+              )
+            )
+          ],
+          "p4" => [
+            Google::Protobuf::Value.new(string_value: "10"),
+            Google::Spanner::V1::Type.new(code: :INT64)
+          ]
+        })
+      end
+
+      it "with Data" do
+        fields = Google::Cloud::Spanner::Fields.new threadf: :INT64, userf: :STRING
+        data = fields.struct threadf: 1, userf: "bob"
+        params = { struct_param: data, p4: 10 }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "1"),
+                  Google::Protobuf::Value.new(string_value: "bob")
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "threadf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "userf",
+                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                  )
+                ]
+              )
+            )
+          ],
+          "p4" => [
+            Google::Protobuf::Value.new(string_value: "10"),
+            Google::Spanner::V1::Type.new(code: :INT64)
+          ]
+        })
+      end
+    end
+
+    # # Simple field access on NULL struct value.
+    # [parameters=CAST(NULL AS STRUCT<threadf INT64, userf STRING>) AS struct_param]
+    # SELECT @struct_param.userf;
+    describe "Simple field access on NULL struct value" do
+      it "with nil and type" do
+        fields = Google::Cloud::Spanner::Fields.new threadf: :INT64, userf: :STRING
+        params = { struct_param: nil }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(null_value: :NULL_VALUE),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "threadf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "userf",
+                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Nested struct field access.
+    # [parameters=STRUCT<structf STRUCT<nestedf STRING>> (STRUCT<nestedf STRING>("bob")) AS struct_param]
+    # SELECT @struct_param.structf.nestedf;
+    describe "Nested struct field access" do
+      it "with Hash" do
+        params = { struct_param: { structf: { nestedf: "bob" } } }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(
+                    list_value: Google::Protobuf::ListValue.new(
+                      values: [
+                        Google::Protobuf::Value.new(string_value: "bob")
+                      ]
+                    )
+                  )
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "structf",
+                    type: Google::Spanner::V1::Type.new(
+                      code: :STRUCT,
+                      struct_type: Google::Spanner::V1::StructType.new(
+                        fields: [
+                          Google::Spanner::V1::StructType::Field.new(
+                            name: "nestedf",
+                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                          )
+                        ]
+                      )
+                    )
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Hash and type" do
+        fields = Google::Cloud::Spanner::Fields.new structf: Google::Cloud::Spanner::Fields.new(nestedf: :STRING)
+        params = { struct_param: { structf: { nestedf: "bob" } } }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(
+                    list_value: Google::Protobuf::ListValue.new(
+                      values: [
+                        Google::Protobuf::Value.new(string_value: "bob")
+                      ]
+                    )
+                  )
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "structf",
+                    type: Google::Spanner::V1::Type.new(
+                      code: :STRUCT,
+                      struct_type: Google::Spanner::V1::StructType.new(
+                        fields: [
+                          Google::Spanner::V1::StructType::Field.new(
+                            name: "nestedf",
+                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                          )
+                        ]
+                      )
+                    )
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Data" do
+        fields = Google::Cloud::Spanner::Fields.new structf: Google::Cloud::Spanner::Fields.new(nestedf: :STRING)
+        data = fields.struct structf: { nestedf: "bob" }
+        params = { struct_param: data }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(
+                    list_value: Google::Protobuf::ListValue.new(
+                      values: [
+                        Google::Protobuf::Value.new(string_value: "bob")
+                      ]
+                    )
+                  )
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "structf",
+                    type: Google::Spanner::V1::Type.new(
+                      code: :STRUCT,
+                      struct_type: Google::Spanner::V1::StructType.new(
+                        fields: [
+                          Google::Spanner::V1::StructType::Field.new(
+                            name: "nestedf",
+                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                          )
+                        ]
+                      )
+                    )
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Nested struct field access on NULL struct value.
+    # [parameters=CAST(STRUCT(null) AS STRUCT<structf STRUCT<nestedf STRING>>) AS  struct_param]
+    # SELECT @struct_param.structf.nestedf;
+    describe "Nested struct field access on NULL struct value" do
+      it "with nil and type" do
+        fields = Google::Cloud::Spanner::Fields.new structf: Google::Cloud::Spanner::Fields.new(nestedf: :STRING)
+        params = { struct_param: nil }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(null_value: :NULL_VALUE),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "structf",
+                    type: Google::Spanner::V1::Type.new(
+                      code: :STRUCT,
+                      struct_type: Google::Spanner::V1::StructType.new(
+                        fields: [
+                          Google::Spanner::V1::StructType::Field.new(
+                            name: "nestedf",
+                            type: Google::Spanner::V1::Type.new(code: :STRING)
+                          )
+                        ]
+                      )
+                    )
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Non-NULL struct with no fields (empty struct).
+    # [parameters=CAST(STRUCT() AS STRUCT<>) AS struct_param]
+    # SELECT @struct_param IS NULL;
+    describe "Non-NULL struct with no fields (empty struct)" do
+      it "with Hash" do
+        params = { struct_param: {} }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: []
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: []
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Hash and type" do
+        fields = Google::Cloud::Spanner::Fields.new({})
+        params = { struct_param: {} }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: []
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: []
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Data" do
+        fields = Google::Cloud::Spanner::Fields.new({})
+        data = fields.struct({})
+        params = { struct_param: data }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: []
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: []
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # NULL struct with no fields.
+    # [parameters=CAST(NULL AS STRUCT<>) AS struct_param]
+    # SELECT @struct_param IS NULL
+    describe "NULL struct with no fields" do
+      it "with nil and type" do
+        fields = Google::Cloud::Spanner::Fields.new({})
+        params = { struct_param: nil }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(null_value: :NULL_VALUE),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: []
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Struct with single NULL field.
+    # [parameters=STRUCT<f1 INT64>(NULL) AS struct_param]
+    # SELECT @struct_param.f1;
+    describe "Struct with single NULL field" do
+      it "with Hash and type" do
+        fields = Google::Cloud::Spanner::Fields.new f1: :INT64
+        params = { struct_param: { f1: nil } }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(null_value: :NULL_VALUE)
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "f1",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Data" do
+        fields = Google::Cloud::Spanner::Fields.new f1: :INT64
+        data = fields.struct f1: nil
+        params = { struct_param: data }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(null_value: :NULL_VALUE)
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "f1",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Equality check.
+    # [parameters=STRUCT<threadf INT64, userf STRING>(1,"bob") AS struct_param]
+    # SELECT @struct_param=STRUCT<threadf INT64, userf STRING>(1,"bob");
+    describe "Equality check" do
+      it "with Hash" do
+        params = { struct_param: { threadf: 1, userf: "bob" } }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "1"),
+                  Google::Protobuf::Value.new(string_value: "bob")
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "threadf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "userf",
+                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Hash and type" do
+        fields = Google::Cloud::Spanner::Fields.new threadf: :INT64, userf: :STRING
+        params = { struct_param: { threadf: 1, userf: "bob" } }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "1"),
+                  Google::Protobuf::Value.new(string_value: "bob")
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "threadf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "userf",
+                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Data" do
+        fields = Google::Cloud::Spanner::Fields.new threadf: :INT64, userf: :STRING
+        data = fields.struct threadf: 1, userf: "bob"
+        params = { struct_param: data }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "1"),
+                  Google::Protobuf::Value.new(string_value: "bob")
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "threadf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "userf",
+                    type: Google::Spanner::V1::Type.new(code: :STRING)
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Nullness check.
+    # [parameters=ARRAY<STRUCT<threadf INT64, userf STRING>> [(1,"bob")] AS struct_arr_param]
+    # SELECT @struct_arr_param IS NULL;
+    describe "Nullness check" do
+      it "with Array of Hash" do
+        params = { struct_arr_param: [{ threadf: 1, userf: "bob" }] }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_arr_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(
+                    list_value: Google::Protobuf::ListValue.new(
+                      values: [
+                        Google::Protobuf::Value.new(string_value: "1"),
+                        Google::Protobuf::Value.new(string_value: "bob")
+                      ]
+                    )
+                  )
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :ARRAY,
+              array_element_type: Google::Spanner::V1::Type.new(
+                code: :STRUCT,
+                struct_type: Google::Spanner::V1::StructType.new(
+                  fields: [
+                    Google::Spanner::V1::StructType::Field.new(
+                      name: "threadf",
+                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                    ),
+                    Google::Spanner::V1::StructType::Field.new(
+                      name: "userf",
+                      type: Google::Spanner::V1::Type.new(code: :STRING)
+                    )
+                  ]
+                )
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Array of Hash and type" do
+        fields = Google::Cloud::Spanner::Fields.new threadf: :INT64, userf: :STRING
+        params = { struct_arr_param: [{ threadf: 1, userf: "bob" }] }
+        types = { struct_arr_param: [fields] }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_arr_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(
+                    list_value: Google::Protobuf::ListValue.new(
+                      values: [
+                        Google::Protobuf::Value.new(string_value: "1"),
+                        Google::Protobuf::Value.new(string_value: "bob")
+                      ]
+                    )
+                  )
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :ARRAY,
+              array_element_type: Google::Spanner::V1::Type.new(
+                code: :STRUCT,
+                struct_type: Google::Spanner::V1::StructType.new(
+                  fields: [
+                    Google::Spanner::V1::StructType::Field.new(
+                      name: "threadf",
+                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                    ),
+                    Google::Spanner::V1::StructType::Field.new(
+                      name: "userf",
+                      type: Google::Spanner::V1::Type.new(code: :STRING)
+                    )
+                  ]
+                )
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Array of Data" do
+        fields = Google::Cloud::Spanner::Fields.new threadf: :INT64, userf: :STRING
+        data = fields.struct threadf: 1, userf: "bob"
+        params = { struct_arr_param: [data] }
+        types = nil
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_arr_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(
+                    list_value: Google::Protobuf::ListValue.new(
+                      values: [
+                        Google::Protobuf::Value.new(string_value: "1"),
+                        Google::Protobuf::Value.new(string_value: "bob")
+                      ]
+                    )
+                  )
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :ARRAY,
+              array_element_type: Google::Spanner::V1::Type.new(
+                code: :STRUCT,
+                struct_type: Google::Spanner::V1::StructType.new(
+                  fields: [
+                    Google::Spanner::V1::StructType::Field.new(
+                      name: "threadf",
+                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                    ),
+                    Google::Spanner::V1::StructType::Field.new(
+                      name: "userf",
+                      type: Google::Spanner::V1::Type.new(code: :STRING)
+                    )
+                  ]
+                )
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Null array of struct field.
+    # [parameters=STRUCT<intf INT64, arraysf ARRAY<STRUCT<threadid INT64>>> (10,CAST(NULL AS ARRAY<STRUCT<threadid INT64>>)) AS struct_param]
+    # SELECT a.threadid FROM UNNEST(@struct_param.arraysf) a;
+    describe "Null array of struct field" do
+      it "with Hash and type" do
+        fields = Google::Cloud::Spanner::Fields.new intf: :INT64, arraysf: [Google::Cloud::Spanner::Fields.new(threadid: :INT64)]
+        data = fields.struct intf: 10, arraysf: nil
+        params = { struct_param: { intf: 10, arraysf: nil } }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "10"),
+                  Google::Protobuf::Value.new(null_value: :NULL_VALUE)
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "intf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "arraysf",
+                    type: Google::Spanner::V1::Type.new(
+                      code: :ARRAY,
+                      array_element_type: Google::Spanner::V1::Type.new(
+                        code: :STRUCT,
+                        struct_type: Google::Spanner::V1::StructType.new(
+                          fields: [
+                            Google::Spanner::V1::StructType::Field.new(
+                              name: "threadid",
+                              type: Google::Spanner::V1::Type.new(code: :INT64)
+                            )
+                          ]
+                        )
+                      )
+                    )
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+
+      it "with Data" do
+        fields = Google::Cloud::Spanner::Fields.new intf: :INT64, arraysf: [Google::Cloud::Spanner::Fields.new(threadid: :INT64)]
+        data = fields.struct intf: 10, arraysf: nil
+        params = { struct_param: data }
+        types = { struct_param: fields }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_param" => [
+            Google::Protobuf::Value.new(
+              list_value: Google::Protobuf::ListValue.new(
+                values: [
+                  Google::Protobuf::Value.new(string_value: "10"),
+                  Google::Protobuf::Value.new(null_value: :NULL_VALUE)
+                ]
+              )
+            ),
+            Google::Spanner::V1::Type.new(
+              code: :STRUCT,
+              struct_type: Google::Spanner::V1::StructType.new(
+                fields: [
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "intf",
+                    type: Google::Spanner::V1::Type.new(code: :INT64)
+                  ),
+                  Google::Spanner::V1::StructType::Field.new(
+                    name: "arraysf",
+                    type: Google::Spanner::V1::Type.new(
+                      code: :ARRAY,
+                      array_element_type: Google::Spanner::V1::Type.new(
+                        code: :STRUCT,
+                        struct_type: Google::Spanner::V1::StructType.new(
+                          fields: [
+                            Google::Spanner::V1::StructType::Field.new(
+                              name: "threadid",
+                              type: Google::Spanner::V1::Type.new(code: :INT64)
+                            )
+                          ]
+                        )
+                      )
+                    )
+                  )
+                ]
+              )
+            )
+          ]
+        })
+      end
+    end
+
+    # # Null array of struct.
+    # [parameters=CAST(NULL AS ARRAY<STRUCT<threadid INT64>>) as struct_arr_param]
+    # SELECT a.threadid FROM UNNEST(@struct_arr_param) a;
+    describe "Null array of struct" do
+      it "with nil and type" do
+        fields = Google::Cloud::Spanner::Fields.new threadid: :INT64
+        params = { struct_arr_param: nil }
+        types = { struct_arr_param: [fields] }
+        combined_params = Google::Cloud::Spanner::Convert.to_query_params params, types
+        combined_params.must_equal({
+          "struct_arr_param" => [
+            Google::Protobuf::Value.new(null_value: :NULL_VALUE),
+            Google::Spanner::V1::Type.new(
+              code: :ARRAY,
+              array_element_type: Google::Spanner::V1::Type.new(
+                code: :STRUCT,
+                struct_type: Google::Spanner::V1::StructType.new(
+                  fields: [
+                    Google::Spanner::V1::StructType::Field.new(
+                      name: "threadid",
+                      type: Google::Spanner::V1::Type.new(code: :INT64)
+                    )
+                  ]
+                )
+              )
+            )
+          ]
+        })
+      end
+    end
+  end
+
+  def fields *args
+    Google::Cloud::Spanner::Fields.new *args
   end
 end

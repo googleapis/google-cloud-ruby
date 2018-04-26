@@ -45,12 +45,8 @@ describe Google::Cloud::Spanner::Results, :duplicate_struct, :mock_spanner do
     results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
     results.fields.keys.must_equal [0]
     results.fields.pairs.must_equal [[0, [Google::Cloud::Spanner::Fields.new([[:num, :INT64], [:num, :INT64]])]]]
-    assert_raises Google::Cloud::Spanner::DuplicateNameError do
-      results.fields.to_a
-    end
-    assert_raises Google::Cloud::Spanner::DuplicateNameError do
-      results.fields.to_h
-    end
+    results.fields.to_a.must_equal [[Google::Cloud::Spanner::Fields.new([[:num, :INT64], [:num, :INT64]])]]
+    results.fields.to_h
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1

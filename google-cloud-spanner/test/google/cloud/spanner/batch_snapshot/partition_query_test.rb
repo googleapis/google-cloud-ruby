@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Spanner::BatchSnapshot, :execute, :mock_spanner do
+describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
   let(:session_id) { "session123" }
@@ -242,11 +242,9 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute, :mock_spanner do
   end
 
   it "can execute a query with a simple Hash param" do
-    skip "Spanner does not accept STRUCT values in query parameters"
-
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE settings = @dict"
-    params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"env"=>Google::Protobuf::Value.new(string_value: "production")})) })
+    params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production")])) })
     param_types = { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING))])) }
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     batch_snapshot.session.service.mocked_service = mock
@@ -265,11 +263,9 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute, :mock_spanner do
   end
 
   it "can execute a query with a complex Hash param" do
-    skip "Spanner does not accept STRUCT values in query parameters"
-
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE settings = @dict"
-    params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9), "env" => Google::Protobuf::Value.new(string_value: "production"), "project_ids" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) })) })
+    params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) ])) })
     param_types = { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))] )) }
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     batch_snapshot.session.service.mocked_service = mock
@@ -288,11 +284,9 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute, :mock_spanner do
   end
 
   it "can execute a query with an empty Hash param" do
-    skip "Spanner does not accept STRUCT values in query parameters"
-
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE settings = @dict"
-    params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {})) })
+    params = Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) })
     param_types = { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [])) }
     mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
     batch_snapshot.session.service.mocked_service = mock

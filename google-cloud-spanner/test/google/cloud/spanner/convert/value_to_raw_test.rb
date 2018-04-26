@@ -106,29 +106,23 @@ describe Google::Cloud::Spanner::Convert, :value_to_raw, :mock_spanner do
   end
 
   it "converts a simple STRUCT value" do
-    skip "Spanner does return STRUCT values in a column value"
-
-    value = Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {"foo"=>Google::Protobuf::Value.new(string_value: "bar")}))
+    value = Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "bar")]))
     type = Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "foo", type: Google::Spanner::V1::Type.new(code: :STRING))]))
     raw = Google::Cloud::Spanner::Convert.value_to_raw value, type
-    raw.must_equal({ foo: :bar })
+    raw.must_equal Google::Cloud::Spanner::Fields.new(foo: :STRING).struct(foo: "bar")
   end
 
   it "converts a complex STRUCT value" do
-    skip "Spanner does return STRUCT values in a column value"
-
-    value = Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: { "score"=>Google::Protobuf::Value.new(number_value: 0.9), "env"=>Google::Protobuf::Value.new(string_value: "production"), "project_ids"=>Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) }))
+    value = Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [ Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) ]))
     type = Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64))) ] ))
     raw = Google::Cloud::Spanner::Convert.value_to_raw value, type
-    raw.must_equal({ env: "production", score: 0.9, project_ids: [1,2,3] })
+    raw.must_equal Google::Cloud::Spanner::Fields.new(env: :STRING, score: :FLOAT64, project_ids: [:INT64]).struct({env: "production", score: 0.9, project_ids: [1,2,3]})
   end
 
   it "converts an emtpy STRUCT value" do
-    skip "Spanner does return STRUCT values in a column value"
-
-    value = Google::Protobuf::Value.new(struct_value: Google::Protobuf::Struct.new(fields: {}))
+    value = Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: []))
     type = Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: []))
     raw = Google::Cloud::Spanner::Convert.value_to_raw value, type
-    raw.must_equal({})
+    raw.must_equal(Google::Cloud::Spanner::Fields.new([]).struct([]))
   end
 end
