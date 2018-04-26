@@ -226,7 +226,6 @@ module Google
           end
 
           schema_json = %({"fields":#{schema_json}})
-          raise ArgumentError, "Invalid JSON" unless schema_json
 
           @gapi = Google::Apis::BigqueryV2::TableSchema.from_json schema_json
 
