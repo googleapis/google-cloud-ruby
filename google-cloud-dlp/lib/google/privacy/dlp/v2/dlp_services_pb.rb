@@ -57,27 +57,27 @@ module Google
             # supports. For more information, see [Listing supported predefined
             # infoTypes](/dlp/docs/listing-infotypes).
             rpc :ListInfoTypes, ListInfoTypesRequest, ListInfoTypesResponse
-            # Creates an inspect template for re-using frequently used configuration
+            # Creates an InspectTemplate for re-using frequently used configuration
             # for inspecting content, images, and storage.
             rpc :CreateInspectTemplate, CreateInspectTemplateRequest, InspectTemplate
-            # Updates the inspect template.
+            # Updates the InspectTemplate.
             rpc :UpdateInspectTemplate, UpdateInspectTemplateRequest, InspectTemplate
-            # Gets an inspect template.
+            # Gets an InspectTemplate.
             rpc :GetInspectTemplate, GetInspectTemplateRequest, InspectTemplate
-            # Lists inspect templates.
+            # Lists InspectTemplates.
             rpc :ListInspectTemplates, ListInspectTemplatesRequest, ListInspectTemplatesResponse
-            # Deletes an inspect template.
+            # Deletes an InspectTemplate.
             rpc :DeleteInspectTemplate, DeleteInspectTemplateRequest, Google::Protobuf::Empty
-            # Creates a de-identify template for re-using frequently used configuration
-            # for Deidentifying content, images, and storage.
+            # Creates a DeidentifyTemplate for re-using frequently used configuration
+            # for de-identifying content, images, and storage.
             rpc :CreateDeidentifyTemplate, CreateDeidentifyTemplateRequest, DeidentifyTemplate
-            # Updates the de-identify template.
+            # Updates the DeidentifyTemplate.
             rpc :UpdateDeidentifyTemplate, UpdateDeidentifyTemplateRequest, DeidentifyTemplate
-            # Gets a de-identify template.
+            # Gets a DeidentifyTemplate.
             rpc :GetDeidentifyTemplate, GetDeidentifyTemplateRequest, DeidentifyTemplate
-            # Lists de-identify templates.
+            # Lists DeidentifyTemplates.
             rpc :ListDeidentifyTemplates, ListDeidentifyTemplatesRequest, ListDeidentifyTemplatesResponse
-            # Deletes a de-identify template.
+            # Deletes a DeidentifyTemplate.
             rpc :DeleteDeidentifyTemplate, DeleteDeidentifyTemplateRequest, Google::Protobuf::Empty
             # Creates a job trigger to run DLP actions such as scanning storage for
             # sensitive information on a set schedule.
@@ -90,8 +90,8 @@ module Google
             rpc :ListJobTriggers, ListJobTriggersRequest, ListJobTriggersResponse
             # Deletes a job trigger.
             rpc :DeleteJobTrigger, DeleteJobTriggerRequest, Google::Protobuf::Empty
-            # Creates a new job to inspect storage or calculate risk metrics [How-to
-            # guide](/dlp/docs/compute-risk-analysis).
+            # Creates a new job to inspect storage or calculate risk metrics.
+            # [How-to guide](/dlp/docs/compute-risk-analysis).
             rpc :CreateDlpJob, CreateDlpJobRequest, DlpJob
             # Lists DlpJobs that match the specified filter in the request.
             rpc :ListDlpJobs, ListDlpJobsRequest, ListDlpJobsResponse

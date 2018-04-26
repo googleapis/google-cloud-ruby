@@ -673,7 +673,7 @@ module Google
             @list_info_types.call(req, options)
           end
 
-          # Creates an inspect template for re-using frequently used configuration
+          # Creates an InspectTemplate for re-using frequently used configuration
           # for inspecting content, images, and storage.
           #
           # @param parent [String]
@@ -714,7 +714,7 @@ module Google
             @create_inspect_template.call(req, options)
           end
 
-          # Updates the inspect template.
+          # Updates the InspectTemplate.
           #
           # @param name [String]
           #   Resource name of organization and inspectTemplate to be updated, for
@@ -754,7 +754,7 @@ module Google
             @update_inspect_template.call(req, options)
           end
 
-          # Gets an inspect template.
+          # Gets an InspectTemplate.
           #
           # @param name [String]
           #   Resource name of the organization and inspectTemplate to be read, for
@@ -781,7 +781,7 @@ module Google
             @get_inspect_template.call(req, options)
           end
 
-          # Lists inspect templates.
+          # Lists InspectTemplates.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -832,7 +832,7 @@ module Google
             @list_inspect_templates.call(req, options)
           end
 
-          # Deletes an inspect template.
+          # Deletes an InspectTemplate.
           #
           # @param name [String]
           #   Resource name of the organization and inspectTemplate to be deleted, for
@@ -860,8 +860,8 @@ module Google
             nil
           end
 
-          # Creates a de-identify template for re-using frequently used configuration
-          # for Deidentifying content, images, and storage.
+          # Creates a DeidentifyTemplate for re-using frequently used configuration
+          # for de-identifying content, images, and storage.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -901,7 +901,7 @@ module Google
             @create_deidentify_template.call(req, options)
           end
 
-          # Updates the de-identify template.
+          # Updates the DeidentifyTemplate.
           #
           # @param name [String]
           #   Resource name of organization and deidentify template to be updated, for
@@ -941,7 +941,7 @@ module Google
             @update_deidentify_template.call(req, options)
           end
 
-          # Gets a de-identify template.
+          # Gets a DeidentifyTemplate.
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be read, for
@@ -969,7 +969,7 @@ module Google
             @get_deidentify_template.call(req, options)
           end
 
-          # Lists de-identify templates.
+          # Lists DeidentifyTemplates.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -1020,7 +1020,7 @@ module Google
             @list_deidentify_templates.call(req, options)
           end
 
-          # Deletes a de-identify template.
+          # Deletes a DeidentifyTemplate.
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be deleted,
@@ -1048,8 +1048,8 @@ module Google
             nil
           end
 
-          # Creates a new job to inspect storage or calculate risk metrics [How-to
-          # guide](/dlp/docs/compute-risk-analysis).
+          # Creates a new job to inspect storage or calculate risk metrics.
+          # [How-to guide](https://cloud.google.com/dlp/docs/compute-risk-analysis).
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
