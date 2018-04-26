@@ -185,12 +185,43 @@ module Google
         end
 
         ##
+        # @private
+        def to_grpc_value
+          if @grpc_values.nil?
+            return Google::Protobuf::Value.new null_value: :NULL_VALUE
+          end
+
+          Google::Protobuf::Value.new(
+            list_value: Google::Protobuf::ListValue.new(
+              values: @grpc_values
+            )
+          )
+        end
+
+        ##
+        # @private
+        def to_grpc_type
+          Google::Spanner::V1::Type.new(
+            code: :STRUCT,
+            struct_type: Google::Spanner::V1::StructType.new(
+              fields: @grpc_fields
+            )
+          )
+        end
+
+        ##
+        # @private
+        def to_grpc_value_and_type
+          [to_grpc_value, to_grpc_type]
+        end
+
+        ##
         # @private Creates a new Data instance from
         # Spanner values and fields.
         def self.from_grpc grpc_values, grpc_fields
           new.tap do |d|
-            d.instance_variable_set :@grpc_values, grpc_values
-            d.instance_variable_set :@grpc_fields, grpc_fields
+            d.instance_variable_set :@grpc_values, Array(grpc_values)
+            d.instance_variable_set :@grpc_fields, Array(grpc_fields)
           end
         end
       end

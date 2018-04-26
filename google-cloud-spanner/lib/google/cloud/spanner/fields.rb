@@ -43,18 +43,20 @@ module Google
         ##
         # @private
         def initialize types
-          @fields = []
-          if types.is_a? Array
-            types.each do |type|
-              @fields << field(type)
-            end
-          elsif types.is_a? Hash
-            types.each do |type|
-              @fields << field(type)
-            end
-          else
+          types = types.to_a if types.is_a? Hash
+
+          unless types.is_a? Array
             raise ArgumentError, "can only accept Array or Hash"
           end
+
+          # Verify positional arguments are in order
+          types.each_with_index do |type, index|
+            if type.is_a?(Array) && type.first.is_a?(Integer)
+              raise "types must be in order" if type.first != index
+            end
+          end
+
+          @grpc_fields = types.map { |type| to_grpc_field type }
         end
 
         ##
@@ -66,7 +68,7 @@ module Google
         # @return [Array<Symbol>] An array containing the types of the data.
         #
         def types
-          @fields.map(&:type).map do |type|
+          @grpc_fields.map(&:type).map do |type|
             if type.code == :ARRAY
               if type.array_element_type.code == :STRUCT
                 [Fields.from_grpc(type.array_element_type.struct_type.fields)]
@@ -90,7 +92,7 @@ module Google
         #   data.
         #
         def keys
-          @fields.each_with_index.map do |field, index|
+          @grpc_fields.map.with_index do |field, index|
             if field.name.empty?
               index
             else
@@ -134,63 +136,94 @@ module Google
         #
         def [] key
           return types[key] if key.is_a? Integer
-          name_count = @fields.find_all { |f| f.name == String(key) }.count
+          name_count = @grpc_fields.find_all { |f| f.name == String(key) }.count
           return nil if name_count.zero?
           raise DuplicateNameError if name_count > 1
-          index = @fields.find_index { |f| f.name == String(key) }
+          index = @grpc_fields.find_index { |f| f.name == String(key) }
           types[index]
         end
+
+        # rubocop:disable all
+
+        ##
+        # Creates a new Data object given the data values matching the fields.
+        # Can be provided as either an Array of values, or a Hash where the hash
+        # keys match the field name or match the index position of the field.
+        #
+        # @return [Data] A new Data object.
+        #
+        def struct data
+          # create local copy of types so they are parsed just once.
+          cached_types = types
+          if data.nil?
+            return Data.from_grpc nil, @grpc_fields
+          elsif data.is_a? Array
+            # Convert data in the order it was recieved
+            values = data.map.with_index do |datum, index|
+              Convert.raw_to_value_and_type(datum, cached_types[index]).first
+            end
+            return Data.from_grpc values, @grpc_fields
+          elsif data.is_a? Hash
+            # Pull values from hash in order of the fields,
+            # we can't always trust the Hash to be in order.
+            values = @grpc_fields.map.with_index do |field, index|
+              if data.key? index
+                Convert.raw_to_value_and_type(data[index],
+                                              cached_types[index]).first
+              elsif !field.name.to_s.empty?
+                if data.key? field.name.to_s
+                  Convert.raw_to_value_and_type(data[field.name.to_s],
+                                                cached_types[index]).first
+                elsif data.key? field.name.to_s.to_sym
+                  Convert.raw_to_value_and_type(data[field.name.to_s.to_sym],
+                                                cached_types[index]).first
+                else
+                  raise "data value for field #{field.name} missing"
+                end
+              else
+                raise "data value for field #{index} missing"
+              end
+            end
+            return Data.from_grpc values, @grpc_fields
+          end
+          raise ArgumentError, "can only accept Array or Hash"
+        end
+        alias data struct
+        alias new struct
+
+        # rubocop:enable all
 
         ##
         # Returns the type codes as an array. Do not use this method if the data
         # has more than one member with the same name. (See {#duplicate_names?})
         #
-        # @raise [Google::Cloud::Spanner::DuplicateNameError] if the data
-        #   contains duplicate names.
-        #
-        # @return [Array<Symbol>] An array containing the type codes.
+        # @return [Array<Symbol|Array<Symbol>|Fields|Array<Fields>>] An array
+        #   containing the type codes.
         #
         def to_a
-          Array.new(keys.count) do |i|
-            field = self[i]
-            if field.is_a? Fields
-              field.to_h
-            elsif field.is_a? Array
-              field.map { |f| f.is_a?(Fields) ? f.to_h : f }
-            else
-              field
-            end
-          end
+          types
         end
 
         ##
         # Returns the names or indexes and corresponding type codes as a hash.
         #
-        # @return [Hash<(String,Integer)=>Symbol>] A hash containing the names
-        #   or indexes and corresponding types.
+        # @raise [Google::Cloud::Spanner::DuplicateNameError] if the data
+        #   contains duplicate names.
+        #
+        # @return [Hash<(Symbol|Integer) =>
+        #   (Symbol|Array<Symbol>|Fields|Array<Fields>)] A hash containing the
+        #   names or indexes and corresponding types.
         #
         def to_h
           raise DuplicateNameError if duplicate_names?
-          hashified_pairs = pairs.map do |key, value|
-            if value.is_a? Fields
-              [key, value.to_h]
-            elsif value.is_a? Array
-              [key, value.map { |v| v.is_a?(Fields) ? v.to_h : v }]
-            else
-              [key, value]
-            end
-          end
-          Hash[hashified_pairs]
+          Hash[pairs]
         end
 
         # @private
-        def data data
-          # TODO: match order of types
-          data = data.values if data.is_a?(Hash)
-          values = data.map { |datum| Convert.raw_to_value datum }
-          Data.from_grpc values, @fields
+        def count
+          @grpc_fields.count
         end
-        alias new data
+        alias size count
 
         # @private
         def == other
@@ -216,39 +249,62 @@ module Google
         end
 
         ##
+        # @private
+        def to_grpc_type
+          Google::Spanner::V1::Type.new(
+            code: :STRUCT,
+            struct_type: Google::Spanner::V1::StructType.new(
+              fields: @grpc_fields
+            )
+          )
+        end
+
+        ##
         # @private Creates a new Fields instance from a
         # Google::Spanner::V1::Metadata::Row_type::Fields.
         def self.from_grpc fields
           new([]).tap do |f|
-            f.instance_variable_set :@fields, fields
+            f.instance_variable_set :@grpc_fields, Array(fields)
           end
         end
 
         protected
 
-        def field pair
+        # rubocop:disable all
+
+        def to_grpc_field pair
           if pair.is_a?(Array)
-            unless pair.count == 2
-              raise ArgumentError, "can only accept pairs of name and type"
-            end
-            if pair.first.nil? || pair.first.is_a?(Integer)
-              Google::Spanner::V1::StructType::Field.new(
-                type: Google::Spanner::V1::Type.new(code: pair.last)
-              )
+            if pair.count == 2
+              if pair.first.is_a?(Integer)
+                Google::Spanner::V1::StructType::Field.new(
+                  type: Convert.type_for_field(pair.last)
+                )
+              else
+                Google::Spanner::V1::StructType::Field.new(
+                  name: String(pair.first),
+                  type: Convert.type_for_field(pair.last)
+                )
+              end
             else
               Google::Spanner::V1::StructType::Field.new(
-                name: String(pair.first),
-                type: Google::Spanner::V1::Type.new(code: pair.last)
+                type: Google::Spanner::V1::Type.new(
+                  code: :ARRAY,
+                  array_element_type: Convert.type_for_field(pair.last)
+                )
               )
             end
           else
+            # TODO: Handle Fields object
+            # TODO: Handle Hash by creating Fields object
             unless pair.is_a?(Symbol)
               raise ArgumentError, "type must be a symbol"
             end
             Google::Spanner::V1::StructType::Field.new(
-              type: Google::Spanner::V1::Type.new(code: pair)
+              type: Convert.type_for_field(pair)
             )
           end
+
+          # rubocop:enable all
         end
       end
     end

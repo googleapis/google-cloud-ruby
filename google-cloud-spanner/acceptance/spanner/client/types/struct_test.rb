@@ -24,7 +24,7 @@ describe "Spanner Client", :types, :struct, :spanner do
     results = db.execute nested_sql
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ 0 => [{ C1: :STRING, C2: :INT64 }] })
+    results.fields.to_h.must_equal({ 0 => [db.fields(C1: :STRING, C2: :INT64)] })
     results.rows.first.to_h.must_equal({ 0 => [{ C1: "a", C2: 1 }, { C1: "b", C2: 2 }] })
   end
 
@@ -33,7 +33,7 @@ describe "Spanner Client", :types, :struct, :spanner do
     results = db.execute empty_sql
 
     results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ 0 => [{ 0 => :STRING, 1 => :INT64 }] })
+    results.fields.to_h.must_equal({ 0 => [db.fields(0 => :STRING, 1 => :INT64)] })
     results.rows.first.to_h.must_equal({ 0 => [] })
   end
 end

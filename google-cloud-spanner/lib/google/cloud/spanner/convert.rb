@@ -38,9 +38,69 @@ module Google
 
           def raw_to_value_and_type obj, field = nil
             obj = obj.to_column_value if obj.respond_to? :to_column_value
-            field ||= field_for_raw obj
 
-            [raw_to_value(obj), type_for_field(field)]
+            if obj.respond_to? :to_grpc_value_and_type
+              return obj.to_grpc_value_and_type
+            end
+
+            field ||= field_for_raw obj
+            [raw_to_value(obj, field), type_for_field(field)]
+          end
+
+          def raw_to_value obj, field = nil
+            obj = obj.to_column_value if obj.respond_to? :to_column_value
+
+            if obj.respond_to? :to_grpc_value_and_type
+              return obj.to_grpc_value_and_type.first
+            end
+
+            if NilClass === obj
+              Google::Protobuf::Value.new null_value: :NULL_VALUE
+            elsif String === obj || Symbol === obj
+              Google::Protobuf::Value.new string_value: obj.to_s
+            elsif TrueClass === obj
+              Google::Protobuf::Value.new bool_value: true
+            elsif FalseClass === obj
+              Google::Protobuf::Value.new bool_value: false
+            elsif Integer === obj
+              Google::Protobuf::Value.new string_value: obj.to_s
+            elsif Numeric === obj # Any number not an integer gets to be a float
+              if obj == Float::INFINITY
+                Google::Protobuf::Value.new string_value: "Infinity"
+              elsif obj == -Float::INFINITY
+                Google::Protobuf::Value.new string_value: "-Infinity"
+              elsif obj.respond_to?(:nan?) && obj.nan?
+                Google::Protobuf::Value.new string_value: "NaN"
+              else
+                Google::Protobuf::Value.new number_value: obj.to_f
+              end
+            elsif Time === obj || DateTime === obj
+              Google::Protobuf::Value.new(string_value:
+                obj.to_time.utc.strftime("%FT%T.%NZ"))
+            elsif Date === obj
+              Google::Protobuf::Value.new string_value: obj.to_s
+            elsif Array === obj
+              arr_field = nil
+              arr_field = field.first if Array === field
+              Google::Protobuf::Value.new list_value:
+                Google::Protobuf::ListValue.new(values:
+                  obj.map { |o| raw_to_value(o, arr_field) })
+            elsif Hash === obj
+              if Fields === field
+                field.struct(obj).to_grpc_value
+              else
+                raise ArgumentError,
+                      "A hash value cannot be set to type #{field}."
+              end
+            elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
+              obj.rewind
+              content = obj.read.force_encoding("ASCII-8BIT")
+              encoded_content = Base64.strict_encode64(content)
+              Google::Protobuf::Value.new(string_value: encoded_content)
+            else
+              raise ArgumentError,
+                    "A value of type #{obj.class} is not supported."
+            end
           end
 
           def field_for_raw obj
@@ -73,11 +133,13 @@ module Google
                       "Cannot determine type for array of different values."
               end
               [non_nil_fields.first]
-            # elsif Hash === obj
-            #   raw_type_pairs = obj.map do |key, value|
-            #     [key, field_for_raw(value)]
-            #   end
-            #   Fields.new Hash[raw_type_pairs]
+            elsif Hash === obj
+              raw_type_pairs = obj.map do |key, value|
+                [key, field_for_raw(value)]
+              end
+              Fields.new Hash[raw_type_pairs]
+            elsif Data === obj
+              obj.fields
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               :BYTES
             else
@@ -87,6 +149,8 @@ module Google
           end
 
           def type_for_field field
+            return field.to_grpc_type if field.respond_to? :to_grpc_type
+
             if Array === field
               Google::Spanner::V1::Type.new(
                 code: :ARRAY,
@@ -94,53 +158,6 @@ module Google
               )
             else
               Google::Spanner::V1::Type.new(code: field)
-            end
-          end
-
-          def raw_to_value obj
-            obj = obj.to_column_value if obj.respond_to? :to_column_value
-
-            if NilClass === obj
-              Google::Protobuf::Value.new null_value: :NULL_VALUE
-            elsif String === obj || Symbol === obj
-              Google::Protobuf::Value.new string_value: obj.to_s
-            elsif TrueClass === obj
-              Google::Protobuf::Value.new bool_value: true
-            elsif FalseClass === obj
-              Google::Protobuf::Value.new bool_value: false
-            elsif Integer === obj
-              Google::Protobuf::Value.new string_value: obj.to_s
-            elsif Numeric === obj # Any number not an integer gets to be a float
-              if obj == Float::INFINITY
-                Google::Protobuf::Value.new string_value: "Infinity"
-              elsif obj == -Float::INFINITY
-                Google::Protobuf::Value.new string_value: "-Infinity"
-              elsif obj.respond_to?(:nan?) && obj.nan?
-                Google::Protobuf::Value.new string_value: "NaN"
-              else
-                Google::Protobuf::Value.new number_value: obj.to_f
-              end
-            elsif Time === obj || DateTime === obj
-              Google::Protobuf::Value.new(string_value:
-                obj.to_time.utc.strftime("%FT%T.%NZ"))
-            elsif Date === obj
-              Google::Protobuf::Value.new string_value: obj.to_s
-            elsif Array === obj
-              Google::Protobuf::Value.new list_value:
-                Google::Protobuf::ListValue.new(values:
-                  obj.map { |o| raw_to_value(o) })
-            # elsif Hash === obj
-            #   Google::Protobuf::Value.new struct_value:
-            #     Google::Protobuf::Struct.new(fields:
-            #       Hash[obj.map { |k, v| [String(k), raw_to_value(v)] }])
-            elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
-              obj.rewind
-              content = obj.read.force_encoding("ASCII-8BIT")
-              encoded_content = Base64.strict_encode64(content)
-              Google::Protobuf::Value.new(string_value: encoded_content)
-            else
-              raise ArgumentError,
-                    "A value of type #{obj.class} is not supported."
             end
           end
 
@@ -156,6 +173,7 @@ module Google
 
           def value_to_raw value, type
             return nil if value.kind == :null_value
+
             case type.code
             when :BOOL
               value.bool_value

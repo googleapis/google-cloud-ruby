@@ -183,8 +183,8 @@ describe Google::Cloud::Spanner::Results, :deeply_nested_list, :mock_spanner do
     results.fields.wont_be :nil?
     results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
     results.fields.keys.must_equal [0]
-    results.fields.to_a.must_equal [[{ name: :STRING, numbers: [:INT64], strings: [:STRING] }]]
-    results.fields.to_h.must_equal({ 0 => [{ name: :STRING, numbers: [:INT64], strings: [:STRING] }] })
+    results.fields.to_a.must_equal [[Google::Cloud::Spanner::Fields.new({ name: :STRING, numbers: [:INT64], strings: [:STRING] })]]
+    results.fields.to_h.must_equal({ 0 => [Google::Cloud::Spanner::Fields.new({ name: :STRING, numbers: [:INT64], strings: [:STRING] })] })
 
     rows = results.rows.to_a # grab them all from the enumerator
     rows.count.must_equal 1
