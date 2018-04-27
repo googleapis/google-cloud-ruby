@@ -273,6 +273,80 @@ module Google
         end
 
         ##
+        # Creates a configuration object ({Fields}) that may be provided to
+        # queries or used to create STRUCT objects. (The STRUCT will be
+        # represented by the {Data} class.) See {Client#execute} and/or
+        # {Fields#struct}.
+        #
+        # For more information, see [Data Types - Constructing a
+        # STRUCT](https://cloud.google.com/spanner/docs/data-types#constructing-a-struct).
+        #
+        # @param [Array, Hash] types Accepts an array or hash types.
+        #
+        #   Arrays can contain just the type value, or a sub-array of the
+        #   field's name and type value. Hash keys must contain the field name
+        #   as a `Symbol` or `String`, or the field position as an `Integer`.
+        #   Hash values must contain the type value. If a Hash is used the
+        #   fields will be created using the same order as the Hash keys.
+        #
+        #   Supported type values incude:
+        #
+        #   * `:BOOL`
+        #   * `:BYTES`
+        #   * `:DATE`
+        #   * `:FLOAT64`
+        #   * `:INT64`
+        #   * `:STRING`
+        #   * `:TIMESTAMP`
+        #   * `Array` - Lists are specified by providing the type code in an
+        #     array. For example, an array of integers are specified as
+        #     `[:INT64]`.
+        #   * {Fields} - Nested Structs are specified by providing a Fields
+        #     object.
+        #
+        # @return [Fields] The fields of the given types.
+        #
+        # @example Create a STRUCT value with named fields using Fields object:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   named_type = batch_client.fields(
+        #     { id: :INT64, name: :STRING, active: :BOOL }
+        #   )
+        #   named_data = named_type.struct(
+        #     { id: 42, name: nil, active: false }
+        #   )
+        #
+        # @example Create a STRUCT value with anonymous field names:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   anon_type = batch_client.fields [:INT64, :STRING, :BOOL]
+        #   anon_data = anon_type.struct [42, nil, false]
+        #
+        # @example Create a STRUCT value with duplicate field names:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   dup_type = batch_client.fields(
+        #     [[:x, :INT64], [:x, :STRING], [:x, :BOOL]]
+        #   )
+        #   dup_data = dup_type.struct [42, nil, false]
+        #
+        def fields types
+          Fields.new types
+        end
+
+        ##
         # Creates a Spanner Range. This can be used in place of a Ruby Range
         # when needing to exclude the beginning value.
         #

@@ -41,7 +41,65 @@ module Google
       #
       class Fields
         ##
-        # @private
+        # Creates {Fields} object from types. See {Client#fields}.
+        #
+        # This object can be used to create {Data} objects by providing values
+        # that match the field types. See {Fields#struct}.
+        #
+        # See [Data Types - Constructing a
+        # STRUCT](https://cloud.google.com/spanner/docs/data-types#constructing-a-struct).
+        #
+        # @param [Array, Hash] types Accepts an array or hash types.
+        #
+        #   Arrays can contain just the type value, or a sub-array of the
+        #   field's name and type value. Hash keys must contain the field name
+        #   as a `Symbol` or `String`, or the field position as an `Integer`.
+        #   Hash values must contain the type value. If a Hash is used the
+        #   fields will be created using the same order as the Hash keys.
+        #
+        #   Supported type values incude:
+        #
+        #   * `:BOOL`
+        #   * `:BYTES`
+        #   * `:DATE`
+        #   * `:FLOAT64`
+        #   * `:INT64`
+        #   * `:STRING`
+        #   * `:TIMESTAMP`
+        #   * `Array` - Lists are specified by providing the type code in an
+        #     array. For example, an array of integers are specified as
+        #     `[:INT64]`.
+        #   * {Fields} - Nested Structs are specified by providing a Fields
+        #     object.
+        #
+        # @return [Fields] The fields of the given types.
+        #
+        # @example Create a STRUCT value with named fields using Fields object:
+        #   require "google/cloud/spanner"
+        #
+        #   named_type = Google::Cloud::Spanner::Fields.new(
+        #     { id: :INT64, name: :STRING, active: :BOOL }
+        #   )
+        #   named_data = named_type.struct(
+        #     { id: 42, name: nil, active: false }
+        #   )
+        #
+        # @example Create a STRUCT value with anonymous field names:
+        #   require "google/cloud/spanner"
+        #
+        #   anon_type = Google::Cloud::Spanner::Fields.new(
+        #     [:INT64, :STRING, :BOOL]
+        #   )
+        #   anon_data = anon_type.struct [42, nil, false]
+        #
+        # @example Create a STRUCT value with duplicate field names:
+        #   require "google/cloud/spanner"
+        #
+        #   dup_type = Google::Cloud::Spanner::Fields.new(
+        #     [[:x, :INT64], [:x, :STRING], [:x, :BOOL]]
+        #   )
+        #   dup_data = dup_type.struct [42, nil, false]
+        #
         def initialize types
           types = types.to_a if types.is_a? Hash
 
@@ -146,11 +204,60 @@ module Google
         # rubocop:disable all
 
         ##
-        # Creates a new Data object given the data values matching the fields.
+        # Creates a new {Data} object given the data values matching the fields.
         # Can be provided as either an Array of values, or a Hash where the hash
         # keys match the field name or match the index position of the field.
         #
+        # For more information, see [Data Types - Constructing a
+        # STRUCT](https://cloud.google.com/spanner/docs/data-types#constructing-a-struct).
+        #
+        # @param [Array, Hash] data Accepts an array or hash data values.
+        #
+        #   Arrays can contain just the data value, nested arrays will be
+        #   treated as lists of values. Values must be provided in the same
+        #   order as the fields, and there is no way to associate values to the
+        #   field names.
+        #
+        #   Hash keys must contain the field name as a `Symbol` or `String`, or
+        #   the field position as an `Integer`. Hash values must contain the
+        #   data value. Hash values will be matched to the fields, so they don't
+        #   need to match the same order as the fields.
+        #
         # @return [Data] A new Data object.
+        #
+        # @example Create a STRUCT value with named fields using Fields object:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   named_type = db.fields(
+        #     { id: :INT64, name: :STRING, active: :BOOL }
+        #   )
+        #   named_data = named_type.struct(
+        #     { id: 42, name: nil, active: false }
+        #   )
+        #
+        # @example Create a STRUCT value with anonymous field names:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   anon_type = db.fields [:INT64, :STRING, :BOOL]
+        #   anon_data = anon_type.struct [42, nil, false]
+        #
+        # @example Create a STRUCT value with duplicate field names:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   dup_type = db.fields [[:x, :INT64], [:x, :STRING], [:x, :BOOL]]
+        #   dup_data = dup_type.struct [42, nil, false]
         #
         def struct data
           # create local copy of types so they are parsed just once.

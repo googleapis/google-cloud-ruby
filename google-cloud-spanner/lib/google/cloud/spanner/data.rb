@@ -42,7 +42,8 @@ module Google
       #
       class Data
         ##
-        # Returns the names and values of the data as an array of field objects.
+        # Returns the configuration object ({Fields}) of the names and types of
+        # the data.
         #
         # @return [Array<Array>] An array containing name and value pairs.
         #
