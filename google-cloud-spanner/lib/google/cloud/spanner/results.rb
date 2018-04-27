@@ -51,7 +51,8 @@ module Google
         end
 
         ##
-        # Returns the field names and types for the rows in the returned data.
+        # Returns the configuration object ({Fields}) of the names and types of
+        # the rows in the returned data.
         #
         # @return [Fields] The fields of the returned data.
         #

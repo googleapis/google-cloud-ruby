@@ -93,23 +93,6 @@ module Google
         ##
         # Executes a SQL query.
         #
-        # Arguments can be passed using `params`, Ruby types are mapped to
-        # Spanner types as follows:
-        #
-        # | Spanner     | Ruby           | Notes  |
-        # |-------------|----------------|---|
-        # | `BOOL`      | `true`/`false` | |
-        # | `INT64`     | `Integer`      | |
-        # | `FLOAT64`   | `Float`        | |
-        # | `STRING`    | `String`       | |
-        # | `DATE`      | `Date`         | |
-        # | `TIMESTAMP` | `Time`, `DateTime` | |
-        # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
-        # | `ARRAY`     | `Array` | Nested arrays are not supported. |
-        #
-        # See [Data
-        # types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
-        #
         # @param [String] sql The SQL query string. See [Query
         #   syntax](https://cloud.google.com/spanner/docs/query-syntax).
         #
@@ -122,11 +105,30 @@ module Google
         #   the literal values are the hash values. If the query string contains
         #   something like "WHERE id > @msg_id", then the params must contain
         #   something like `:msg_id => 1`.
+        #
+        #   Ruby types are mapped to Spanner types as follows:
+        #
+        #   | Spanner     | Ruby           | Notes  |
+        #   |-------------|----------------|---|
+        #   | `BOOL`      | `true`/`false` | |
+        #   | `INT64`     | `Integer`      | |
+        #   | `FLOAT64`   | `Float`        | |
+        #   | `STRING`    | `String`       | |
+        #   | `DATE`      | `Date`         | |
+        #   | `TIMESTAMP` | `Time`, `DateTime` | |
+        #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
+        #   | `ARRAY`     | `Array` | Nested arrays are not supported. |
+        #   | `STRUCT`    | `Hash`, {Data} | |
+        #
+        #   See [Data
+        #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
+        #
+        #   See [Data Types - Constructing a
+        #   STRUCT](https://cloud.google.com/spanner/docs/data-types#constructing-a-struct).
         # @param [Hash] types Types of the SQL parameters in `params`. It is not
         #   always possible for Cloud Spanner to infer the right SQL type from a
-        #   value in `params`. In these cases, the `types` hash can be used to
-        #   specify the exact SQL type for some or all of the SQL query
-        #   parameters.
+        #   value in `params`. In these cases, the `types` hash must be used to
+        #   specify the SQL type for these values.
         #
         #   The keys of the hash should be query string parameter placeholders,
         #   minus the "@". The values of the hash should be Cloud Spanner type
@@ -139,11 +141,11 @@ module Google
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
-        #
-        #   Arrays are specified by providing the type code in an array. For
-        #   example, an array of integers are specified as `[:INT64]`.
-        #
-        #   Structs are not yet supported in query parameters.
+        #   * `Array` - Lists are specified by providing the type code in an
+        #     array. For example, an array of integers are specified as
+        #     `[:INT64]`.
+        #   * {Fields} - Types for STRUCT values (`Hash`/{Data} objects) are
+        #     specified using a {Fields} object.
         #
         #   Types are optional.
         # @param [Google::Spanner::V1::TransactionSelector] transaction The
@@ -175,6 +177,66 @@ module Google
         #
         #   results = db.execute "SELECT * FROM users WHERE active = @active",
         #                        params: { active: true }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Query with a SQL STRUCT query parameter as a Hash:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   user_hash = { id: 1, name: "Charlie", active: false }
+        #
+        #   results = db.execute "SELECT * FROM users WHERE " \
+        #                        "ID = @user_struct.id " \
+        #                        "AND name = @user_struct.name " \
+        #                        "AND active = @user_struct.active",
+        #                        params: { user_struct: user_hash }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Specify the SQL STRUCT type using Fields object:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   user_type = db.fields id: :INT64, name: :STRING, active: :BOOL
+        #   user_hash = { id: 1, name: nil, active: false }
+        #
+        #   results = db.execute "SELECT * FROM users WHERE " \
+        #                        "ID = @user_struct.id " \
+        #                        "AND name = @user_struct.name " \
+        #                        "AND active = @user_struct.active",
+        #                        params: { user_struct: user_hash },
+        #                        types: { user_struct: user_type }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Or, query with a SQL STRUCT as a typed Data object:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   user_type = db.fields id: :INT64, name: :STRING, active: :BOOL
+        #   user_data = user_type.struct id: 1, name: nil, active: false
+        #
+        #   results = db.execute "SELECT * FROM users WHERE " \
+        #                        "ID = @user_struct.id " \
+        #                        "AND name = @user_struct.name " \
+        #                        "AND active = @user_struct.active",
+        #                        params: { user_struct: user_struct }
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
