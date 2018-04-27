@@ -508,7 +508,7 @@ module Google
         class InspectDataSourceDetails
           # @!attribute [rw] snapshot_inspect_template
           #   @return [Google::Privacy::Dlp::V2::InspectTemplate]
-          #     If run with an inspect template, a snapshot of it's state at the time of
+          #     If run with an InspectTemplate, a snapshot of its state at the time of
           #     this run.
           # @!attribute [rw] job_config
           #   @return [Google::Privacy::Dlp::V2::InspectJobConfig]
@@ -608,6 +608,18 @@ module Google
           #     repeated data types are not supported; however, nested fields are
           #     supported so long as they are not structs themselves or nested within
           #     a repeated field.
+          # @!attribute [rw] entity_id
+          #   @return [Google::Privacy::Dlp::V2::EntityId]
+          #     Optional message indicating that multiple rows might be associated to a
+          #     single individual. If the same entity_id is associated to multiple
+          #     quasi-identifier tuples over distict rows, we consider the entire
+          #     collection of tuples as the composite quasi-identifier. This collection
+          #     is a multiset: the order in which the different tuples appear in the
+          #     dataset is ignored, but their frequency is taken into account.
+          #
+          #     Important note: a maximum of 1000 rows can be associated to a single
+          #     entity ID. If more rows are associated with the same entity ID, some
+          #     might be ignored.
           class KAnonymityConfig; end
 
           # l-diversity metric, used for analysis of reidentification risk.
@@ -1627,15 +1639,20 @@ module Google
         # @!attribute [rw] pub_sub
         #   @return [Google::Privacy::Dlp::V2::Action::PublishToPubSub]
         #     Publish a notification to a pubsub topic.
+        # @!attribute [rw] publish_summary_to_cscc
+        #   @return [Google::Privacy::Dlp::V2::Action::PublishSummaryToCscc]
+        #     Publish summary to Cloud Security Command Center (Alpha).
         class Action
           # If set, the detailed findings will be persisted to the specified
-          # OutputStorageConfig. Compatible with: Inspect
+          # OutputStorageConfig. Only a single instance of this action can be
+          # specified.
+          # Compatible with: Inspect
           # @!attribute [rw] output_config
           #   @return [Google::Privacy::Dlp::V2::OutputStorageConfig]
           class SaveFindings; end
 
           # Publish the results of a DlpJob to a pub sub channel.
-          # Compatible with: Inpect, Risk
+          # Compatible with: Inspect, Risk
           # @!attribute [rw] topic
           #   @return [String]
           #     Cloud Pub/Sub topic to send notifications to. The topic must have given
@@ -1643,6 +1660,18 @@ module Google
           #     the long running DlpJob sending the notifications.
           #     Format is projects/{project}/topics/{topic}.
           class PublishToPubSub; end
+
+          # Publish the result summary of a DlpJob to the Cloud Security
+          # Command Center (CSCC Alpha).
+          # This action is only available for projects which are parts of
+          # an organization and whitelisted for the alpha Cloud Security Command
+          # Center.
+          # The action will publish count of finding instances and their info types.
+          # The summary of findings will be persisted in CSCC and are governed by CSCC
+          # service-specific policy, see https://cloud.google.com/terms/service-terms
+          # Only a single instance of this action can be specified.
+          # Compatible with: Inspect
+          class PublishSummaryToCscc; end
         end
 
         # Request message for CreateInspectTemplate.
