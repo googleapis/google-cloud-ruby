@@ -760,6 +760,7 @@ module Google
           # * `csv` - CSV
           # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
+          # * `parquet` - [Parquet](https://parquet.apache.org/)
           # * `datastore_backup` - Cloud Datastore backup
           #
           # @param [String] new_format The new source format.

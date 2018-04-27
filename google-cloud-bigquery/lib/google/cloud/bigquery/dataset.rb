@@ -1182,6 +1182,7 @@ module Google
         #   * `csv` - CSV
         #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `parquet` - [Parquet](https://parquet.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.
@@ -1441,6 +1442,7 @@ module Google
         #   * `csv` - CSV
         #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
+        #   * `parquet` - [Parquet](https://parquet.apache.org/)
         #   * `datastore_backup` - Cloud Datastore backup
         # @param [String] create Specifies whether the job is allowed to create
         #   new tables. The default value is `needed`.

@@ -301,8 +301,9 @@ module Google
     # the [Google Developers Console](https://console.developers.google.com).
     #
     # In addition to CSV, data can be imported from files that are formatted as
-    # [Newline-delimited JSON](http://jsonlines.org/) or
-    # [Avro](http://avro.apache.org/), or from a Google Cloud Datastore backup.
+    # [Newline-delimited JSON](http://jsonlines.org/),
+    # [Avro](http://avro.apache.org/), [Parquet](https://parquet.apache.org/)
+    # or from a Google Cloud Datastore backup.
     # It can also be "streamed" into BigQuery.
     #
     # ### Streaming records
