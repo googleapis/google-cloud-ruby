@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.0 / 2018-4-26
+
+* Documentation updates
+* row_limit, cscc action
+* Dictionaries via GCS
+* Entity id in risk stats
+
 ### 0.3.0 / 2018-4-11
 
 * Documentation updates
