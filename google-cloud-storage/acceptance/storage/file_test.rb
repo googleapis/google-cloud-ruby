@@ -371,7 +371,7 @@ describe Google::Cloud::Storage::File, :storage do
     inmemory = StringIO.new "Hello world!"
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
 
-    downloaded = uploaded.download range: "bytes=3-6"
+    downloaded = uploaded.download range: 3..6
     downloaded.must_be_kind_of StringIO
 
     downloaded.rewind
