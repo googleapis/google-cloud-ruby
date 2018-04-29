@@ -439,6 +439,16 @@ module Google
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
+        #
+        # @param [String] range Optional. The value to use in the Range header
+        #   of the download request. Provide this to perform a partial download.
+        #   When a range is provided, no verification is performed regardless of
+        #   the `verify` parameter's value.
+        #
+        #   Infinite range values are not supported. The provided range must
+        #   have a finite beginning and end. For example, "bytes=3-6" is
+        #   acceptable, while "bytes=3-" is not.
+        #
         # @param [Boolean] skip_decompress Optional. If `true`, the data for a
         #   Storage object returning a `Content-Encoding: gzip` response header
         #   will *not* be automatically decompressed by this client library. The
@@ -543,17 +553,32 @@ module Google
         #   file.download "path/to/downloaded/gzipped.txt",
         #                 skip_decompress: true
         #
-        def download path = nil, verify: :md5, encryption_key: nil,
+        # @example Partially download.
+        #
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   downloaded = file.download range: "bytes=3-6"
+        #   downloaded.rewind
+        #   downloaded.read #=> "lo w"
+        #
+        def download path = nil, verify: :md5, encryption_key: nil, range: nil,
                      skip_decompress: nil
           ensure_service!
           if path.nil?
             path = StringIO.new
             path.set_encoding "ASCII-8BIT"
           end
-          file, resp = service.download_file \
-            bucket, name, path, key: encryption_key, user_project: user_project
+          file, resp =
+            service.download_file bucket, name, path,
+                                  key: encryption_key, range: range,
+                                  user_project: user_project
           # FIX: downloading with encryption key will return nil
           file ||= ::File.new(path)
+          verify = :none if range
           verify_file! file, verify
           if !skip_decompress &&
              Array(resp.header["Content-Encoding"]).include?("gzip")

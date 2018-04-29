@@ -367,6 +367,20 @@ describe Google::Cloud::Storage::File, :storage do
     end
   end
 
+  it "should upload and partially download text" do
+    inmemory = StringIO.new "Hello world!"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
+
+    downloaded = uploaded.download range: "bytes=3-6"
+    downloaded.must_be_kind_of StringIO
+
+    downloaded.rewind
+    downloaded.read.must_equal "lo w"
+    downloaded.read.encoding.must_equal inmemory.read.encoding
+
+    uploaded.delete
+  end
+
   it "should upload and download a file with customer-supplied encryption key" do
     original = File.new files[:logo][:path], "rb"
     uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key

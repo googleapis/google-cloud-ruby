@@ -361,8 +361,14 @@ module Google
         #     Apis::StorageV1::StorageService and Apis::Core::DownloadCommand at
         #     the end of this file.
         def download_file bucket_name, file_path, target_path, generation: nil,
-                          key: nil, user_project: nil
+                          key: nil, range: nil, user_project: nil
           options = key_options key
+
+          if range
+            options[:header] ||= {}
+            options[:header]["Range"] = range
+          end
+
           execute do
             service.get_object_with_response \
               bucket_name, file_path,

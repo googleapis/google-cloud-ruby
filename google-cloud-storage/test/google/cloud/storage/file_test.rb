@@ -374,6 +374,21 @@ describe Google::Cloud::Storage::File, :mock_storage do
     end
   end
 
+  it "can partially download itself" do
+    Tempfile.open "google-cloud" do |tmpfile|
+      mock = Minitest::Mock.new
+      mock.expect :get_object, tmpfile,
+        [bucket.name, file.name, download_dest: tmpfile, generation: nil, user_project: nil, options: { header: { 'Range' => 'bytes=3-6' }}]
+
+      bucket.service.mocked_service = mock
+
+      downloaded = file.download tmpfile, range: 'bytes=3-6'
+      downloaded.path.must_equal tmpfile.path
+
+      mock.verify
+    end
+  end
+
   describe "verified downloads" do
     it "verifies m5d by default" do
       # Stub these values
