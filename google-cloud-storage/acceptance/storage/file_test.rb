@@ -376,7 +376,6 @@ describe Google::Cloud::Storage::File, :storage do
 
     downloaded.rewind
     downloaded.read.must_equal "lo w"
-    downloaded.read.encoding.must_equal inmemory.read.encoding
 
     uploaded.delete
   end
@@ -393,6 +392,19 @@ describe Google::Cloud::Storage::File, :storage do
       downloaded.size.must_equal original.size # Same file
 
       File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+    end
+
+    uploaded.delete
+  end
+
+  it "should upload and partially download a file with customer-supplied encryption key" do
+    original = File.new files[:logo][:path], "rb"
+    uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key
+
+    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
+      downloaded = uploaded.download tmpfile.path, range: 3..1024, encryption_key: encryption_key
+      downloaded.size.must_equal 1022
+      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")[3..1024]
     end
 
     uploaded.delete
