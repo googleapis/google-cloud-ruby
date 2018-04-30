@@ -561,9 +561,9 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   file = bucket.file "path/to/my-file.ext"
         #
-        #   downloaded = file.download range: 3..6
+        #   downloaded = file.download range: 6..10
         #   downloaded.rewind
-        #   downloaded.read #=> "Hello world!"
+        #   downloaded.read #=> "world"
         #
         def download path = nil, verify: :md5, encryption_key: nil, range: nil,
                      skip_decompress: nil
