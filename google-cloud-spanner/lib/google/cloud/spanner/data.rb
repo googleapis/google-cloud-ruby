@@ -110,14 +110,15 @@ module Google
         #
         def [] key
           if key.is_a? Integer
-            return Convert.value_to_raw(@grpc_values[key],
-                                        @grpc_fields[key].type)
+            return Convert.grpc_value_to_object(@grpc_values[key],
+                                                @grpc_fields[key].type)
           end
           name_count = @grpc_fields.find_all { |f| f.name == String(key) }.count
           return nil if name_count.zero?
           raise DuplicateNameError if name_count > 1
           index = @grpc_fields.find_index { |f| f.name == String(key) }
-          Convert.value_to_raw(@grpc_values[index], @grpc_fields[index].type)
+          Convert.grpc_value_to_object(@grpc_values[index],
+                                       @grpc_fields[index].type)
         end
 
         ##

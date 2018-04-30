@@ -267,7 +267,7 @@ module Google
           elsif data.is_a? Array
             # Convert data in the order it was recieved
             values = data.map.with_index do |datum, index|
-              Convert.raw_to_value_and_type(datum, cached_types[index]).first
+              Convert.object_to_grpc_value_and_type(datum, cached_types[index]).first
             end
             return Data.from_grpc values, @grpc_fields
           elsif data.is_a? Hash
@@ -275,14 +275,14 @@ module Google
             # we can't always trust the Hash to be in order.
             values = @grpc_fields.map.with_index do |field, index|
               if data.key? index
-                Convert.raw_to_value_and_type(data[index],
+                Convert.object_to_grpc_value_and_type(data[index],
                                               cached_types[index]).first
               elsif !field.name.to_s.empty?
                 if data.key? field.name.to_s
-                  Convert.raw_to_value_and_type(data[field.name.to_s],
+                  Convert.object_to_grpc_value_and_type(data[field.name.to_s],
                                                 cached_types[index]).first
                 elsif data.key? field.name.to_s.to_sym
-                  Convert.raw_to_value_and_type(data[field.name.to_s.to_sym],
+                  Convert.object_to_grpc_value_and_type(data[field.name.to_s.to_sym],
                                                 cached_types[index]).first
                 else
                   raise "data value for field #{field.name} missing"
@@ -384,19 +384,19 @@ module Google
             if pair.count == 2
               if pair.first.is_a?(Integer)
                 Google::Spanner::V1::StructType::Field.new(
-                  type: Convert.type_for_field(pair.last)
+                  type: Convert.grpc_type_for_field(pair.last)
                 )
               else
                 Google::Spanner::V1::StructType::Field.new(
                   name: String(pair.first),
-                  type: Convert.type_for_field(pair.last)
+                  type: Convert.grpc_type_for_field(pair.last)
                 )
               end
             else
               Google::Spanner::V1::StructType::Field.new(
                 type: Google::Spanner::V1::Type.new(
                   code: :ARRAY,
-                  array_element_type: Convert.type_for_field(pair.last)
+                  array_element_type: Convert.grpc_type_for_field(pair.last)
                 )
               )
             end
@@ -407,7 +407,7 @@ module Google
               raise ArgumentError, "type must be a symbol"
             end
             Google::Spanner::V1::StructType::Field.new(
-              type: Convert.type_for_field(pair)
+              type: Convert.grpc_type_for_field(pair)
             )
           end
 

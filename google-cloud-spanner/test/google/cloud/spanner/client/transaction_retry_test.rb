@@ -69,7 +69,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
-          values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", false]).list_value]
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
         )
       )
     ]
@@ -123,7 +123,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
-          values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", false]).list_value]
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
         )
       )
     ]
@@ -177,7 +177,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
-          values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", false]).list_value]
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
         )
       )
     ]
@@ -231,7 +231,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
-          values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", false]).list_value]
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
         )
       )
     ]
@@ -295,7 +295,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::Mutation.new(
         update: Google::Spanner::V1::Mutation::Write.new(
           table: "users", columns: %w(id name active),
-          values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", false]).list_value]
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false]).list_value]
         )
       )
     ]
