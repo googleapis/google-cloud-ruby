@@ -107,14 +107,22 @@ module Google
             raise ArgumentError, "can only accept Array or Hash"
           end
 
-          # Verify positional arguments are in order
-          types.each_with_index do |type, index|
-            if type.is_a?(Array) && type.first.is_a?(Integer)
-              raise "types must be in order" if type.first != index
-            end
+          sorted_types, unsorted_types = types.partition do |type|
+            type.is_a?(Array) && type.count == 2 && type.first.is_a?(Integer)
           end
 
-          @grpc_fields = types.map { |type| to_grpc_field type }
+          if sorted_types.count != sorted_types.map(&:first).uniq.count
+            raise ArgumentError, "cannot specify position more than once"
+          end
+
+          @grpc_fields = Array.new(types.count) do |index|
+            sorted_type = sorted_types.assoc index
+            if sorted_type
+              to_grpc_field sorted_type.last
+            else
+              to_grpc_field unsorted_types.shift
+            end
+          end
         end
 
         ##

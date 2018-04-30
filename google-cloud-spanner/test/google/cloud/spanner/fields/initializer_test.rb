@@ -46,13 +46,12 @@ describe Google::Cloud::Spanner::Fields, :initializer do
   end
 
   it "creates with an unsorted mixed array of fields" do
-    skip "Not yet implemented"
     fields = Google::Cloud::Spanner::Fields.new [[:name, :STRING], :BOOL, [0, :INT64]]
 
     fields.types.must_equal [:INT64, :STRING, :BOOL]
     fields.keys.must_equal [0, :name, 2]
     fields.pairs.must_equal [[0, :INT64], [:name, :STRING], [2, :BOOL]]
-    fields.to_a.must_equal [:INT64, [:name, :STRING], :BOOL]
+    fields.to_a.must_equal [:INT64, :STRING, :BOOL]
     fields.to_h.must_equal({ 0=>:INT64, name: :STRING, 2=>:BOOL })
   end
 
@@ -87,13 +86,12 @@ describe Google::Cloud::Spanner::Fields, :initializer do
   end
 
   it "creates with an unsorted mixed hash of fields" do
-    skip "Not yet implemented"
     fields = Google::Cloud::Spanner::Fields.new name: :STRING, 2=>:BOOL, 0=>:INT64
 
     fields.types.must_equal [:INT64, :STRING, :BOOL]
     fields.keys.must_equal [0, :name, 2]
     fields.pairs.must_equal [[0, :INT64], [:name, :STRING], [2, :BOOL]]
-    fields.to_a.must_equal [:INT64, [:name, :STRING], :BOOL]
+    fields.to_a.must_equal [:INT64, :STRING, :BOOL]
     fields.to_h.must_equal({ 0=>:INT64, name: :STRING, 2=>:BOOL })
   end
 end
