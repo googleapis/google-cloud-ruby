@@ -31,23 +31,23 @@ module Google
           def to_query_params params, types = nil
             types ||= {}
             formatted_params = params.map do |key, obj|
-              [String(key), raw_to_value_and_type(obj, types[key])]
+              [String(key), object_to_grpc_value_and_type(obj, types[key])]
             end
             Hash[formatted_params]
           end
 
-          def raw_to_value_and_type obj, field = nil
+          def object_to_grpc_value_and_type obj, field = nil
             obj = obj.to_column_value if obj.respond_to? :to_column_value
 
             if obj.respond_to? :to_grpc_value_and_type
               return obj.to_grpc_value_and_type
             end
 
-            field ||= field_for_raw obj
-            [raw_to_value(obj, field), type_for_field(field)]
+            field ||= field_for_object obj
+            [object_to_grpc_value(obj, field), grpc_type_for_field(field)]
           end
 
-          def raw_to_value obj, field = nil
+          def object_to_grpc_value obj, field = nil
             obj = obj.to_column_value if obj.respond_to? :to_column_value
 
             if obj.respond_to? :to_grpc_value_and_type
@@ -84,7 +84,7 @@ module Google
               arr_field = field.first if Array === field
               Google::Protobuf::Value.new list_value:
                 Google::Protobuf::ListValue.new(values:
-                  obj.map { |o| raw_to_value(o, arr_field) })
+                  obj.map { |o| object_to_grpc_value(o, arr_field) })
             elsif Hash === obj
               if Fields === field
                 field.struct(obj).to_grpc_value
@@ -103,7 +103,7 @@ module Google
             end
           end
 
-          def field_for_raw obj
+          def field_for_object obj
             if NilClass === obj
               raise ArgumentError, "Cannot determine type for nil values."
             elsif String === obj || Symbol === obj
@@ -123,7 +123,7 @@ module Google
                 raise ArgumentError,
                       "Cannot determine type for empty array values."
               end
-              non_nil_fields = obj.compact.map { |e| field_for_raw e }.compact
+              non_nil_fields = obj.compact.map { |e| field_for_object e }.compact
               if non_nil_fields.empty?
                 raise ArgumentError,
                       "Cannot determine type for array of nil values."
@@ -135,7 +135,7 @@ module Google
               [non_nil_fields.first]
             elsif Hash === obj
               raw_type_pairs = obj.map do |key, value|
-                [key, field_for_raw(value)]
+                [key, field_for_object(value)]
               end
               Fields.new Hash[raw_type_pairs]
             elsif Data === obj
@@ -148,30 +148,20 @@ module Google
             end
           end
 
-          def type_for_field field
+          def grpc_type_for_field field
             return field.to_grpc_type if field.respond_to? :to_grpc_type
 
             if Array === field
               Google::Spanner::V1::Type.new(
                 code: :ARRAY,
-                array_element_type: type_for_field(field.first)
+                array_element_type: grpc_type_for_field(field.first)
               )
             else
               Google::Spanner::V1::Type.new(code: field)
             end
           end
 
-          def row_to_pairs row_types, row
-            row_types.zip(row).map do |field, value|
-              [field.name.to_sym, value_to_raw(value, field.type)]
-            end
-          end
-
-          def row_to_raw row_types, row
-            Hash[row_to_pairs(row_types, row)]
-          end
-
-          def value_to_raw value, type
+          def grpc_value_to_object value, type
             return nil if value.kind == :null_value
 
             case type.code
@@ -203,11 +193,21 @@ module Google
               StringIO.new Base64.decode64 value.string_value
             when :ARRAY
               value.list_value.values.map do |v|
-                value_to_raw v, type.array_element_type
+                grpc_value_to_object v, type.array_element_type
               end
             when :STRUCT
               Data.from_grpc value.list_value.values, type.struct_type.fields
             end
+          end
+
+          def row_to_pairs row_types, row
+            row_types.zip(row).map do |field, value|
+              [field.name.to_sym, grpc_value_to_object(value, field.type)]
+            end
+          end
+
+          def row_to_object row_types, row
+            Hash[row_to_pairs(row_types, row)]
           end
 
           def number_to_duration number
@@ -245,8 +245,8 @@ module Google
 
           def to_key_range range
             range_opts = {
-              start_closed: raw_to_value(Array(range.begin)).list_value,
-              end_closed: raw_to_value(Array(range.end)).list_value }
+              start_closed: object_to_grpc_value(Array(range.begin)).list_value,
+              end_closed: object_to_grpc_value(Array(range.end)).list_value }
 
             if range.respond_to?(:exclude_begin?) && range.exclude_begin?
               range_opts[:start_open] = range_opts[:start_closed]
@@ -272,7 +272,7 @@ module Google
 
             key_list = keys.map do |key|
               key = [key] unless key.is_a? Array
-              raw_to_value(key).list_value
+              object_to_grpc_value(key).list_value
             end
             Google::Spanner::V1::KeySet.new keys: key_list
           end

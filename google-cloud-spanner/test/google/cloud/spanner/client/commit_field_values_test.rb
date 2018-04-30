@@ -32,25 +32,25 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
         Google::Spanner::V1::Mutation.new(
           update: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", "spanner.commit_timestamp()"]).list_value]
           )
         ),
         Google::Spanner::V1::Mutation.new(
           insert: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([2, "Harvey", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([2, "Harvey", "spanner.commit_timestamp()"]).list_value]
           )
         ),
         Google::Spanner::V1::Mutation.new(
           insert_or_update: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([3, "Marley", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", "spanner.commit_timestamp()"]).list_value]
           )
         ),
         Google::Spanner::V1::Mutation.new(
           replace: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([4, "Henry", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([4, "Henry", "spanner.commit_timestamp()"]).list_value]
           )
         )
       ]
@@ -78,7 +78,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
         Google::Spanner::V1::Mutation.new(
           update: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([1, "Charlie", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", "spanner.commit_timestamp()"]).list_value]
           )
         )
       ]
@@ -101,7 +101,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
         Google::Spanner::V1::Mutation.new(
           insert: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([2, "Harvey", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([2, "Harvey", "spanner.commit_timestamp()"]).list_value]
           )
         )
       ]
@@ -124,7 +124,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
         Google::Spanner::V1::Mutation.new(
           insert_or_update: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([3, "Marley", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", "spanner.commit_timestamp()"]).list_value]
           )
         )
       ]
@@ -147,7 +147,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
         Google::Spanner::V1::Mutation.new(
           insert_or_update: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([3, "Marley", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", "spanner.commit_timestamp()"]).list_value]
           )
         )
       ]
@@ -170,7 +170,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
         Google::Spanner::V1::Mutation.new(
           replace: Google::Spanner::V1::Mutation::Write.new(
             table: "users", columns: %w(id name updated_at),
-            values: [Google::Cloud::Spanner::Convert.raw_to_value([4, "Henry", "spanner.commit_timestamp()"]).list_value]
+            values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([4, "Henry", "spanner.commit_timestamp()"]).list_value]
           )
         )
       ]

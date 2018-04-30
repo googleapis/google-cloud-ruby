@@ -99,7 +99,7 @@ module Google
             Google::Spanner::V1::Mutation.new(
               insert_or_update: Google::Spanner::V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
-                values: [Convert.raw_to_value(row.values).list_value]
+                values: [Convert.object_to_grpc_value(row.values).list_value]
               )
             )
           end
@@ -157,7 +157,7 @@ module Google
             Google::Spanner::V1::Mutation.new(
               insert: Google::Spanner::V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
-                values: [Convert.raw_to_value(row.values).list_value]
+                values: [Convert.object_to_grpc_value(row.values).list_value]
               )
             )
           end
@@ -214,7 +214,7 @@ module Google
             Google::Spanner::V1::Mutation.new(
               update: Google::Spanner::V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
-                values: [Convert.raw_to_value(row.values).list_value]
+                values: [Convert.object_to_grpc_value(row.values).list_value]
               )
             )
           end
@@ -273,7 +273,7 @@ module Google
             Google::Spanner::V1::Mutation.new(
               replace: Google::Spanner::V1::Mutation::Write.new(
                 table: table, columns: row.keys.map(&:to_s),
-                values: [Convert.raw_to_value(row.values).list_value]
+                values: [Convert.object_to_grpc_value(row.values).list_value]
               )
             )
           end
@@ -334,7 +334,7 @@ module Google
           end
           key_list = keys.map do |key|
             key = [key] unless key.is_a? Array
-            Convert.raw_to_value(key).list_value
+            Convert.object_to_grpc_value(key).list_value
           end
           Google::Spanner::V1::KeySet.new keys: key_list
         end

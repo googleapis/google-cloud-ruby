@@ -52,7 +52,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
   it "can read rows by id" do
 
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3]).list_value])
+    key_set = Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3]).list_value])
     mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: nil, columns: columns_arg, partition_options: nil, options: default_options}]
     batch_snapshot.session.service.mocked_service = mock
 
@@ -72,7 +72,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
   it "can read rows with index" do
 
     mock = Minitest::Mock.new
-    key_set = Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.raw_to_value([1,1]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([2,2]).list_value, Google::Cloud::Spanner::Convert.raw_to_value([3,3]).list_value])
+    key_set = Google::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1,1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2,2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3,3]).list_value])
     mock.expect :partition_read, partitions_resp, [session.path, "my-table", key_set, {transaction: tx_selector, index: "MyTableCompositeKey", columns: columns_arg, partition_options: nil, options: default_options}]
     batch_snapshot.session.service.mocked_service = mock
 
