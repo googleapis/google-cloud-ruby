@@ -54,17 +54,20 @@ module Google
               return obj.to_grpc_value_and_type.first
             end
 
-            if NilClass === obj
+            case obj
+            when NilClass
               Google::Protobuf::Value.new null_value: :NULL_VALUE
-            elsif String === obj || Symbol === obj
+            when String
               Google::Protobuf::Value.new string_value: obj.to_s
-            elsif TrueClass === obj
+            when Symbol
+              Google::Protobuf::Value.new string_value: obj.to_s
+            when TrueClass
               Google::Protobuf::Value.new bool_value: true
-            elsif FalseClass === obj
+            when FalseClass
               Google::Protobuf::Value.new bool_value: false
-            elsif Integer === obj
+            when Integer
               Google::Protobuf::Value.new string_value: obj.to_s
-            elsif Numeric === obj # Any number not an integer gets to be a float
+            when Numeric
               if obj == Float::INFINITY
                 Google::Protobuf::Value.new string_value: "Infinity"
               elsif obj == -Float::INFINITY
@@ -74,51 +77,63 @@ module Google
               else
                 Google::Protobuf::Value.new number_value: obj.to_f
               end
-            elsif Time === obj || DateTime === obj
+            when Time
               Google::Protobuf::Value.new(string_value:
                 obj.to_time.utc.strftime("%FT%T.%NZ"))
-            elsif Date === obj
+            when DateTime
+              Google::Protobuf::Value.new(string_value:
+                obj.to_time.utc.strftime("%FT%T.%NZ"))
+            when Date
               Google::Protobuf::Value.new string_value: obj.to_s
-            elsif Array === obj
+            when Array
               arr_field = nil
               arr_field = field.first if Array === field
               Google::Protobuf::Value.new list_value:
                 Google::Protobuf::ListValue.new(values:
                   obj.map { |o| object_to_grpc_value(o, arr_field) })
-            elsif Hash === obj
-              if Fields === field
+            when Hash
+              if field.is_a? Fields
                 field.struct(obj).to_grpc_value
               else
                 raise ArgumentError,
                       "A hash value cannot be set to type #{field}."
               end
-            elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
-              obj.rewind
-              content = obj.read.force_encoding("ASCII-8BIT")
-              encoded_content = Base64.strict_encode64(content)
-              Google::Protobuf::Value.new(string_value: encoded_content)
             else
-              raise ArgumentError,
-                    "A value of type #{obj.class} is not supported."
+              if obj.respond_to?(:read) && obj.respond_to?(:rewind)
+                obj.rewind
+                content = obj.read.force_encoding("ASCII-8BIT")
+                encoded_content = Base64.strict_encode64(content)
+                Google::Protobuf::Value.new(string_value: encoded_content)
+              else
+                raise ArgumentError,
+                      "A value of type #{obj.class} is not supported."
+              end
             end
           end
 
           def field_for_object obj
-            if NilClass === obj
+            case obj
+            when NilClass
               raise ArgumentError, "Cannot determine type for nil values."
-            elsif String === obj || Symbol === obj
+            when String
               :STRING
-            elsif TrueClass === obj || FalseClass === obj
+            when Symbol
+              :STRING
+            when TrueClass
               :BOOL
-            elsif Integer === obj
+            when FalseClass
+              :BOOL
+            when Integer
               :INT64
-            elsif Numeric === obj # Any number not an integer gets to be a float
+            when Numeric
               :FLOAT64
-            elsif Time === obj || DateTime === obj
+            when Time
               :TIMESTAMP
-            elsif Date === obj
+            when DateTime
+              :TIMESTAMP
+            when Date
               :DATE
-            elsif Array === obj
+            when Array
               if obj.empty?
                 raise ArgumentError,
                       "Cannot determine type for empty array values."
@@ -133,18 +148,20 @@ module Google
                       "Cannot determine type for array of different values."
               end
               [non_nil_fields.first]
-            elsif Hash === obj
+            when Hash
               raw_type_pairs = obj.map do |key, value|
                 [key, field_for_object(value)]
               end
               Fields.new Hash[raw_type_pairs]
-            elsif Data === obj
+            when Data
               obj.fields
-            elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
-              :BYTES
             else
-              raise ArgumentError,
-                    "Cannot determine type for #{obj.class} values."
+              if obj.respond_to?(:read) && obj.respond_to?(:rewind)
+                :BYTES
+              else
+                raise ArgumentError,
+                      "Cannot determine type for #{obj.class} values."
+              end
             end
           end
 
