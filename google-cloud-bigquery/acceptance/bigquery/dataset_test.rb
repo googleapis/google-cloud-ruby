@@ -50,7 +50,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   let(:table_parquet_id) { "dataset_table_parquet" }
   let(:table_parquet) { dataset.table table_parquet_id }
-  let(:local_parquet_file) { "acceptance/data/userdata1.parquet" }
+  let(:local_parquet_file) { "acceptance/data/us-states.parquet" }
 
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
@@ -302,7 +302,10 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "imports data from GCS Parquet file and creates a new table with load" do
-    skip "A GCS Parquet file is required to implement this test."
+    result = dataset.load(
+        table_parquet_id,
+        "gs://cloud-samples-data/bigquery/us-states/us-states.parquet")
+    result.must_equal true
   end
 
   it "inserts rows directly and gets its data" do
