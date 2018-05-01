@@ -79,3 +79,5 @@ def wait_until_true timeout = 5
 
   :completed
 end
+
+class StringChild < ::String; end;

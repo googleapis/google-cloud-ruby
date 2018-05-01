@@ -105,7 +105,7 @@ module Google
           event.payload.each do |k, v|
             if v.is_a? ::String
               v = v[0, maxlen - 3] + "..." if maxlen && v.size > maxlen
-              labels["#{label_namespace}#{k}"] = v
+              labels["#{label_namespace}#{k}"] = v.to_s
             end
           end
           labels

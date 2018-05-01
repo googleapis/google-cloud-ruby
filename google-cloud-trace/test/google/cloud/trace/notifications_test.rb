@@ -35,7 +35,9 @@ describe Google::Cloud::Trace::Notifications, :mock_trace do
         Kernel.stub :caller_locations, frames do
           ActiveSupport::Notifications.instrument event_type,
                                                   foo: "barrr",
-                                                  whoops: "x" * 2000 do
+                                                  whoops: "x" * 2000,
+                                                  bar: StringChild.new("Y"),
+                                                  not_string: Object.new do
             # yada yada yada
           end
           ActiveSupport::Notifications.instrument "othertype", bar: "foooo" do
@@ -49,6 +51,7 @@ describe Google::Cloud::Trace::Notifications, :mock_trace do
       expected_labels = {
         "/ruby/foo" => "barrr",
         "/ruby/whoops" => "x" * 1021 + "...",
+        "/ruby/bar" => "Y",
         "/stacktrace" => '{"stack_frame":[' \
           '{"file_name":"/path/to/app/myapp.rb",' \
           '"line_number":78,"method_name":"app_method1"},' \
@@ -59,6 +62,10 @@ describe Google::Cloud::Trace::Notifications, :mock_trace do
           ']}'
       }
       span.labels.must_equal expected_labels
+      # Protobuf expects labels to always be instance_of?(::String)
+      (span.labels.keys + span.labels.values).all? do |k|
+        k.instance_of?(::String)
+      end.must_equal true
     end
   end
 end
