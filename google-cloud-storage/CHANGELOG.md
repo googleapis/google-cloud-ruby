@@ -1,5 +1,13 @@
 # Release History
 
+### 1.11.0 / 2018-05-01
+
+* Support partial Storage::File downloads. (georgeclaghorn)
+* Add File#rewrite.
+  * Similar to File#copy, except for being able to specify both source and destination encryption keys.
+  * Refactor both File#copy and File#rotate to call File#rewrite.
+* Update documentation for File-like IO parameters. The underlying libraries call #size on the argument, which is not present on IO, but is present on File and StringIO.
+
 ### 1.10.0 / 2018-02-27
 
 * Support Shared Configuration.
