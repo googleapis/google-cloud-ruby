@@ -62,10 +62,11 @@ module Google
         end
       end
       class File
-        def download path = nil, verify: :md5, encryption_key: nil, skip_decompress: nil
-          # no-op stub, but ensures that calls match this copied signature
-          return StringIO.new("Hello world!") if path.nil?
+        def download path = nil, verify: :md5, encryption_key: nil,
+                     range: 0..-1, skip_decompress: nil
+          StringIO.new("Hello world!"[range]) if path.nil?
         end
+
         def signed_url method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil

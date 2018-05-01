@@ -361,8 +361,10 @@ module Google
         #     Apis::StorageV1::StorageService and Apis::Core::DownloadCommand at
         #     the end of this file.
         def download_file bucket_name, file_path, target_path, generation: nil,
-                          key: nil, user_project: nil
+                          key: nil, range: nil, user_project: nil
           options = key_options key
+          options = range_header options, range
+
           execute do
             service.get_object_with_response \
               bucket_name, file_path,
@@ -478,6 +480,19 @@ module Google
           headers["x-goog-#{source}encryption-key"] = Base64.strict_encode64 key
           headers["x-goog-#{source}encryption-key-sha256"] = \
             Base64.strict_encode64 key_sha256
+          options
+        end
+
+        def range_header options, range
+          case range
+          when Range
+            options[:header] ||= {}
+            options[:header]["Range"] = "bytes=#{range.min}-#{range.max}"
+          when String
+            options[:header] ||= {}
+            options[:header]["Range"] = range
+          end
+
           options
         end
 
