@@ -119,6 +119,23 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     mock.verify
   end
 
+  it "can specify a storage file and derive Parquet format" do
+    special_file = storage_file "data.parquet"
+    special_url = special_file.to_gs_url
+
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_gapi.table_reference, special_url
+    job_gapi.configuration.load.source_format = "PARQUET"
+    mock.expect :insert_job, load_job_resp_gapi(table, special_url),
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    result = table.load special_file
+    result.must_equal true
+
+    mock.verify
+  end
+
   it "can specify a storage file and derive Datastore backup format" do
     special_file = storage_file "data.backup_info"
     special_url = special_file.to_gs_url

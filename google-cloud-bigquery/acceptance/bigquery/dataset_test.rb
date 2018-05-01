@@ -48,6 +48,10 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   let(:table_avro_id) { "dataset_table_avro" }
   let(:table_avro) { dataset.table table_avro_id }
 
+  let(:table_parquet_id) { "dataset_table_parquet" }
+  let(:table_parquet) { dataset.table table_parquet_id }
+  let(:local_parquet_file) { "acceptance/data/us-states.parquet" }
+
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
     [
@@ -270,14 +274,14 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
   end
 
-  it "imports data from gcs avro file and creates a new table with load" do
+  it "imports data from GCS Avro file and creates a new table with load" do
     result = dataset.load(
       table_avro_id,
       "gs://cloud-samples-data/bigquery/us-states/us-states.avro")
     result.must_equal true
   end
 
-  it "imports data from gcs avro file and creates a new table with encryption with load" do
+  it "imports data from GCS Avro file and creates a new table with encryption with load" do
     encrypt_config = bigquery.encryption(
       kms_key: "projects/cloud-samples-tests/locations/us-central1" +
                 "/keyRings/test/cryptoKeys/test")
@@ -290,6 +294,18 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     result.must_equal true
     table_avro.reload!
     table_avro.encryption.must_equal encrypt_config
+  end
+
+  it "imports data from a local Parquet file and creates a new table without a schema with load" do
+    result = dataset.load table_parquet_id, local_parquet_file
+    result.must_equal true
+  end
+
+  it "imports data from GCS Parquet file and creates a new table with load" do
+    result = dataset.load(
+        table_parquet_id,
+        "gs://cloud-samples-data/bigquery/us-states/us-states.parquet")
+    result.must_equal true
   end
 
   it "inserts rows directly and gets its data" do
