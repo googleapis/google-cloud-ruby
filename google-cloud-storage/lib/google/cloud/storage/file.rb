@@ -440,14 +440,11 @@ module Google
         #   AES-256 encryption key used to encrypt the file, if one was provided
         #   to {Bucket#create_file}.
         #
-        # @param [Range] range Optional. The byte range of the file's contents
-        #   to download. Provide this to perform a partial download. When a
-        #   range is provided, no verification is performed regardless of the
-        #   `verify` parameter's value.
-        #
-        #   Infinite range values are not supported. The provided range must
-        #   have a finite beginning and end. For example, `3..6` is acceptable,
-        #   while `3..` and `..6` are not.
+        # @param [Range, String] range Optional. The byte range of the file's
+        #   contents to download or a string header value. Provide this to
+        #   perform a partial download. When a range is provided, no
+        #   verification is performed regardless of the `verify` parameter's
+        #   value.
         #
         # @param [Boolean] skip_decompress Optional. If `true`, the data for a
         #   Storage object returning a `Content-Encoding: gzip` response header

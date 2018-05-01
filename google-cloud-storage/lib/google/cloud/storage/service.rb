@@ -484,9 +484,13 @@ module Google
         end
 
         def range_header options, range
-          if range
+          case range
+          when Range
             options[:header] ||= {}
             options[:header]["Range"] = "bytes=#{range.min}-#{range.max}"
+          when String
+            options[:header] ||= {}
+            options[:header]["Range"] = range
           end
 
           options
