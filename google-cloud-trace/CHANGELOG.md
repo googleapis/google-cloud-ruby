@@ -1,6 +1,6 @@
 # Release History
 
-### 0.32.0 / 2018-05-01
+### 0.33.0 / 2018-05-01
 
 * Fix labels in Trace. (tareksamni)
 
