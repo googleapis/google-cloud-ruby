@@ -1,5 +1,9 @@
 # Release History
 
+### 0.32.0 / 2018-05-01
+
+* Fix labels in Trace. (tareksamni)
+
 ### 0.31.0 / 2018-02-27
 
 * Use Google Cloud Shared Configuration.
