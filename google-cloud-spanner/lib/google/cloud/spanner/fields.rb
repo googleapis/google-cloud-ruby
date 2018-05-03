@@ -111,9 +111,7 @@ module Google
             type.is_a?(Array) && type.count == 2 && type.first.is_a?(Integer)
           end
 
-          if sorted_types.count != sorted_types.map(&:first).uniq.count
-            raise ArgumentError, "cannot specify position more than once"
-          end
+          verify_sorted_types! sorted_types, types.count
 
           @grpc_fields = Array.new(types.count) do |index|
             sorted_type = sorted_types.assoc index
@@ -386,6 +384,21 @@ module Google
         protected
 
         # rubocop:disable all
+
+        def verify_sorted_types! sorted_types, total_count
+          sorted_unique_positions = sorted_types.map(&:first).uniq.sort
+          return if sorted_unique_positions.empty?
+
+          if sorted_unique_positions.first < 0
+            raise ArgumentError, "cannot specify position less than 0"
+          end
+          if sorted_unique_positions.last >= total_count
+            raise ArgumentError, "cannot specify position more than field count"
+          end
+          if sorted_types.count != sorted_unique_positions.count
+            raise ArgumentError, "cannot specify position more than once"
+          end
+        end
 
         def to_grpc_field pair
           if pair.is_a?(Array)
