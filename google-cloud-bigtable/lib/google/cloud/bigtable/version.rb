@@ -13,21 +13,10 @@
 # limitations under the License.
 
 
-require "google/cloud/errors"
-
 module Google
   module Cloud
     module Bigtable
-      # Invalid read row state error
-      class InvalidRowStateError < Google::Cloud::Error
-        # Invalid row chunk data
-        attr_reader :data
-
-        def initialize message, data = nil
-          super(message)
-          @data = data if data
-        end
-      end
+      VERSION = "0.6.8".freeze
     end
   end
 end

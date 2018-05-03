@@ -17,6 +17,24 @@ require "googleauth"
 module Google
   module Cloud
     module Bigtable
+			# # Credentials
+      #
+      # Represents the authentication and authorization used to connect to the
+      # Bigtable API.
+      #
+      # @example
+      #   require "google/cloud/bigtable"
+      #
+      #   keyfile = "/path/to/keyfile.json"
+      #   creds = Google::Cloud::Bigtable::Credentials.new keyfile
+      #
+      #   bigtable = Google::Cloud::Bigtable.new(
+      #     project_id: "my-project",
+      #     credentials: creds
+      #   )
+      #
+      #   bigtable.project_id #=> "my-project"
+
       class Credentials < Google::Auth::Credentials
         SCOPE = [
           "https://www.googleapis.com/auth/bigtable.data",
