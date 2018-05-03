@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "google/cloud/redis/v1beta1/cloud_redis_client"
-require "google/cloud/redis/v1beta1/google/cloud/redis/v1beta1/cloud_redis_pb"
+require "google/cloud/redis/v1beta1/cloud_redis_pb"
 
 module Google
   module Cloud
