@@ -74,7 +74,6 @@ describe "Spanner Client", :params, :struct, :spanner do
     # [parameters=CAST(STRUCT() AS STRUCT<>) AS struct_param]
     # SELECT @struct_param IS NULL;
     it "Non-NULL struct with no fields (empty struct)" do
-      struct_type = db.fields({})
       results = db.execute "SELECT @struct_param IS NULL",
                            params: { struct_param: {} }
 
