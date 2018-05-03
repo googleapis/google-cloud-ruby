@@ -94,4 +94,25 @@ describe Google::Cloud::Spanner::Fields, :initializer do
     fields.to_a.must_equal [:INT64, :STRING, :BOOL]
     fields.to_h.must_equal({ 0=>:INT64, name: :STRING, 2=>:BOOL })
   end
+
+  it "raises when creating duplicate positions" do
+    err = expect do
+      fields = Google::Cloud::Spanner::Fields.new [[-1, :INT64], [:name, :STRING], [2, :BOOL]]
+    end.must_raise ArgumentError
+    err.message.must_equal "cannot specify position less than 0"
+  end
+
+  it "raises when creating duplicate positions" do
+    err = expect do
+      fields = Google::Cloud::Spanner::Fields.new [[0, :INT64], [:name, :STRING], [3, :BOOL]]
+    end.must_raise ArgumentError
+    err.message.must_equal "cannot specify position more than field count"
+  end
+
+  it "raises when creating duplicate positions" do
+    err = expect do
+      fields = Google::Cloud::Spanner::Fields.new [[0, :INT64], [:name, :STRING], [0, :BOOL]]
+    end.must_raise ArgumentError
+    err.message.must_equal "cannot specify position more than once"
+  end
 end
