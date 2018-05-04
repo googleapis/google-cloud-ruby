@@ -47,6 +47,22 @@ data.each do |row|
 end
 ```
 
+## Enabling Ruby Logging
+
+To enable standard Ruby logging for this library, simply configure the desired logging output level for the [google-api-ruby-client](https://github.com/google/google-api-ruby-client/blob/master/README.md#logging) library:
+
+```ruby
+require "logger"
+
+my_logger = Logger.new $stderr
+my_logger.level = Logger::WARN
+
+# Set the Google API Client logger
+Google::Apis.logger = my_logger
+```
+
+Per the google-api-ruby-client documentation, when running in a Rails environment, the client will default to using `::Rails.logger`.
+
 ## Supported Ruby Versions
 
 This library is supported on Ruby 2.0+.

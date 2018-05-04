@@ -44,6 +44,26 @@ module Google
     # run these first examples without the need to set up billing or to load
     # data (although we'll show you how to do that too.)
     #
+    # ## Enabling Ruby Logging
+    #
+    # To enable standard Ruby logging for this library, simply configure the
+    # desired logging output level for the
+    # [google-api-ruby-client](https://github.com/google/google-api-ruby-client/blob/master/README.md#logging)
+    # library:
+    #
+    # ```ruby
+    # require "logger"
+    #
+    # my_logger = Logger.new $stderr
+    # my_logger.level = Logger::WARN
+    #
+    # # Set the Google API Client logger
+    # Google::Apis.logger = my_logger
+    # ```
+    #
+    # Per the google-api-ruby-client documentation, when running in a Rails
+    # environment, the client will default to using `::Rails.logger`.
+    #
     # ## Listing Datasets and Tables
     #
     # A BigQuery project contains datasets, which in turn contain tables.
