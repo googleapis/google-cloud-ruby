@@ -25,7 +25,7 @@ module Google
     # This library provides access to information about the application's
     # hosting environment if it is running on Google Cloud Platform. You may
     # use this library to determine which Google Cloud product is hosting your
-    # application (e.g. app engine, container engine), information about the
+    # application (e.g. App Engine, Kubernetes Engine), information about the
     # Google Cloud project hosting the application, information about the
     # virtual machine instance, authentication information, and so forth.
     #
@@ -87,13 +87,15 @@ module Google
       end
 
       ##
-      # Determine whether the application is running on Google Container Engine.
+      # Determine whether the application is running on Google Kubernetes
+      # Engine (GKE).
       #
       # @return [Boolean]
       #
-      def container_engine?
-        container_engine_cluster_name ? true : false
+      def kubernetes_engine?
+        kubernetes_engine_cluster_name ? true : false
       end
+      alias container_engine? kubernetes_engine?
 
       ##
       # Determine whether the application is running on Google Cloud Shell.
@@ -107,7 +109,7 @@ module Google
       ##
       # Determine whether the application is running on Google Compute Engine.
       #
-      # Note that most other products (e.g. App Engine, Container Engine,
+      # Note that most other products (e.g. App Engine, Kubernetes Engine,
       # Cloud Shell) themselves use Compute Engine under the hood, so this
       # method will return true for all the above products. If you want to
       # determine whether the application is running on a "raw" Compute Engine
@@ -123,12 +125,12 @@ module Google
       ##
       # Determine whether the application is running on "raw" Google Compute
       # Engine without using a higher level hosting product such as App
-      # Engine or Container Engine.
+      # Engine or Kubernetes Engine.
       #
       # @return [Boolean]
       #
       def raw_compute_engine?
-        !app_engine? && !cloud_shell? && metadata? && !container_engine?
+        !app_engine? && !cloud_shell? && metadata? && !kubernetes_engine?
       end
 
       ##
@@ -273,26 +275,36 @@ module Google
       end
 
       ##
-      # Returns the name of the Container Engine cluster hosting the
+      # Returns the name of the Kubernetes Engine cluster hosting the
       # application, or `nil` if the current code is not running in
-      # Container Engine.
+      # Kubernetes Engine.
       #
       # @return [String,nil]
       #
-      def container_engine_cluster_name
+      def kubernetes_engine_cluster_name
         instance_attribute "cluster-name"
       end
+      alias container_engine_cluster_name kubernetes_engine_cluster_name
 
       ##
-      # Returns the name of the Container Engine namespace hosting the
+      # Returns the name of the Kubernetes Engine namespace hosting the
       # application, or `nil` if the current code is not running in
-      # Container Engine.
+      # Kubernetes Engine.
       #
       # @return [String,nil]
       #
-      def container_engine_namespace_id
-        env["GKE_NAMESPACE_ID"]
+      def kubernetes_engine_namespace_id
+        # The Kubernetes namespace is difficult to obtain without help from
+        # the application using the Downward API. The environment variable
+        # below is set in some older versions of GKE, and the file below is
+        # present in Kubernetes as of version 1.9, but it is possible that
+        # alternatives will need to be found in the future.
+        env["GKE_NAMESPACE_ID"] ||
+          ::IO.read("/var/run/secrets/kubernetes.io/serviceaccount/namespace")
+      rescue SystemCallError
+        nil
       end
+      alias container_engine_namespace_id kubernetes_engine_namespace_id
 
       ##
       # Determine whether the Google Compute Engine Metadata Service is running.
