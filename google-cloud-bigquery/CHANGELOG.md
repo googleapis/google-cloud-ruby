@@ -1,5 +1,9 @@
 # Release History
 
+### 1.4.0 / 2018-05-07
+
+* Add Parquet support to #load and #load_job.
+
 ### 1.3.0 / 2018-04-05
 
 * Add insert_ids option to #insert in Dataset, Table, and AsyncInserter.
