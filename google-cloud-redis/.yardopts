@@ -1,0 +1,8 @@
+--no-private
+--title=Google Cloud Memorystore for Redis API
+--exclude _pb\.rb$
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
