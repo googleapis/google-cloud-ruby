@@ -34,6 +34,11 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
           "mode" => "NULLABLE"
         },
         {
+          "name" => "pi",
+          "type" => "NUMERIC",
+          "mode" => "NULLABLE"
+        },
+        {
           "name" => "active",
           "type" => "BOOLEAN",
           "mode" => "NULLABLE"
@@ -103,7 +108,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   it "has basic values" do
     schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     schema.fields.wont_be :empty?
-    schema.fields.map(&:name).must_equal ["name", "age", "score", "active", "avatar", "started_at", "duration", "target_end", "birthday", "alts"]
+    schema.fields.map(&:name).must_equal ["name", "age", "score", "pi", "active", "avatar", "started_at", "duration", "target_end", "birthday", "alts"]
   end
 
   it "can access fields with a symbol" do
@@ -127,6 +132,13 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     schema.field(:score).mode.must_equal "NULLABLE"
     schema.field(:score).must_be :float?
     schema.field(:score).must_be :nullable?
+
+    schema.field(:pi).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
+    schema.field(:pi).name.must_equal "pi"
+    schema.field(:pi).type.must_equal "NUMERIC"
+    schema.field(:pi).mode.must_equal "NULLABLE"
+    schema.field(:pi).must_be :numeric?
+    schema.field(:pi).must_be :nullable?
 
     schema.field(:active).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
     schema.field(:active).name.must_equal "active"
@@ -229,6 +241,13 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     schema.field("score").mode.must_equal "NULLABLE"
     schema.field("score").must_be :float?
     schema.field("score").must_be :nullable?
+
+    schema.field("pi").must_be_kind_of Google::Cloud::Bigquery::Schema::Field
+    schema.field("pi").name.must_equal "pi"
+    schema.field("pi").type.must_equal "NUMERIC"
+    schema.field("pi").mode.must_equal "NULLABLE"
+    schema.field("pi").must_be :numeric?
+    schema.field("pi").must_be :nullable?
 
     schema.field("active").must_be_kind_of Google::Cloud::Bigquery::Schema::Field
     schema.field("active").name.must_equal "active"

@@ -16,6 +16,7 @@
 require "google/apis/bigquery_v2"
 require "stringio"
 require "base64"
+require "bigdecimal"
 require "time"
 require "date"
 
@@ -34,7 +35,8 @@ module Google
       # | `BOOL`      | `true`/`false` | |
       # | `INT64`     | `Integer`      | |
       # | `FLOAT64`   | `Float`        | |
-      # | `STRING`    | `STRING`       | |
+      # | `NUMERIC`   | `BigDecimal`   | Will be rounded to 9 decimal places |
+      # | `STRING`    | `String`       | |
       # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
       # | `DATE`      | `Date`         | |
       # | `TIMESTAMP` | `Time`         | |
@@ -84,6 +86,8 @@ module Google
             Integer value[:v]
           elsif field.type == "FLOAT"
             Float value[:v]
+          elsif field.type == "NUMERIC"
+            BigDecimal value[:v]
           elsif field.type == "BOOLEAN"
             (value[:v] == "true" ? true : (value[:v] == "false" ? false : nil))
           elsif field.type == "BYTES"
@@ -131,6 +135,15 @@ module Google
                 type: "FLOAT64"),
               parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
                 value: value)
+            )
+          elsif BigDecimal === value
+            # Round to precision of 9
+            value_str = value.finite? ? value.round(9).to_s("F") : value.to_s
+            return Google::Apis::BigqueryV2::QueryParameter.new(
+              parameter_type:  Google::Apis::BigqueryV2::QueryParameterType.new(
+                type: "NUMERIC"),
+              parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+                value: value_str)
             )
           elsif String === value
             return Google::Apis::BigqueryV2::QueryParameter.new(

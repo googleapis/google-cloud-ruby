@@ -194,6 +194,7 @@ describe Google::Cloud::Bigquery::External::CsvSource do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "pi",            type: "NUMERIC", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "started_at",    type: "TIMESTAMP", description: nil, fields: []),
@@ -211,6 +212,7 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       s.string "name", mode: :required
       s.integer "age"
       s.float "score", description: "A score from 0.0 to 10.0"
+      s.numeric "pi"
       s.boolean "active"
       s.bytes "avatar"
       s.timestamp "started_at"
@@ -222,7 +224,7 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     table.schema.wont_be :empty?
     table.fields.must_equal table.schema.fields
     table.headers.must_equal table.schema.headers
-    table.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
 
     table.to_gapi.to_h.must_equal table_gapi.to_h
   end
@@ -239,6 +241,7 @@ describe Google::Cloud::Bigquery::External::CsvSource do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "pi",            type: "NUMERIC", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "started_at",    type: "TIMESTAMP", description: nil, fields: []),
@@ -257,6 +260,7 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     schema.string "name", mode: :required
     schema.integer "age"
     schema.float "score", description: "A score from 0.0 to 10.0"
+    schema.numeric "pi"
     schema.boolean "active"
     schema.bytes "avatar"
     schema.timestamp "started_at"
@@ -269,7 +273,7 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     table.schema.wont_be :empty?
     table.fields.must_equal table.schema.fields
     table.headers.must_equal table.schema.headers
-    table.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
 
     table.to_gapi.to_h.must_equal table_gapi.to_h
   end

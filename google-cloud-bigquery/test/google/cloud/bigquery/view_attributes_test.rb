@@ -79,7 +79,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
     view.schema.must_be :frozen?
     view.schema.fields.wont_be :empty?
     view.fields.wont_be :empty?
-    view.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    view.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
 
     mock.verify
 
