@@ -39,6 +39,14 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     rows.first[:value].must_equal 12.0
   end
 
+  it "queries the data with a numeric parameter" do
+    rows = bigquery.query "SELECT @value AS value", params: { value: BigDecimal("123456789.123456789") }
+
+    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.count.must_equal 1
+    rows.first[:value].must_equal BigDecimal("123456789.123456789")
+  end
+
   it "queries the data with a boolean parameter" do
     rows = bigquery.query "SELECT @value AS value", params: { value: false }
 

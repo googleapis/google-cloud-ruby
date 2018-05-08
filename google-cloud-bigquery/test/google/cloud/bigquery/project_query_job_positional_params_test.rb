@@ -101,6 +101,29 @@ describe Google::Cloud::Bigquery::Project, :query_job, :positional_params, :mock
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
+  it "queries the data with a numeric parameter" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE pi = ?"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "NUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "3.141592654"
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = bigquery.query_job "#{query} WHERE pi = ?", params: [BigDecimal("3.141592654")]
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
   it "queries the data with a true parameter" do
     query_job_gapi.configuration.query.query = "#{query} WHERE active = ?"
     query_job_gapi.configuration.query.query_parameters = [

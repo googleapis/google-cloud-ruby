@@ -172,6 +172,24 @@ module Google
         end
 
         ##
+        # Adds a numeric number field to the schema. Numeric is a
+        # fixed-precision numeric type with 38 decimal digits, 9 that follow the
+        # decimal point.
+        #
+        # @param [String] name The field name. The name must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+        #   start with a letter or underscore. The maximum length is 128
+        #   characters.
+        # @param [String] description A description of the field.
+        # @param [Symbol] mode The field's mode. The possible values are
+        #   `:nullable`, `:required`, and `:repeated`. The default value is
+        #   `:nullable`.
+        #
+        def numeric name, description: nil, mode: :nullable
+          add_field name, :numeric, description: description, mode: mode
+        end
+
+        ##
         # Adds a boolean field to the schema.
         #
         # @param [String] name The field name. The name must contain only

@@ -40,8 +40,8 @@ module Google
           MODES = %w[NULLABLE REQUIRED REPEATED].freeze
 
           # @private
-          TYPES = %w[STRING INTEGER INT64 FLOAT FLOAT64 BOOLEAN BOOL BYTES
-                     TIMESTAMP TIME DATETIME DATE RECORD STRUCT].freeze
+          TYPES = %w[STRING INTEGER INT64 FLOAT FLOAT64 NUMERIC BOOLEAN BOOL
+                     BYTES TIMESTAMP TIME DATETIME DATE RECORD STRUCT].freeze
 
           ##
           # The name of the field.
@@ -72,10 +72,10 @@ module Google
           #
           # @return [String] The field data type. Possible values include
           #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `BOOLEAN`, `BOOL` (same as
-          #   `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`, `RECORD`
-          #   (where `RECORD` indicates that the field contains a nested schema)
-          #   or `STRUCT` (same as `RECORD`).
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BOOLEAN`, `BOOL`
+          #   (same as `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`,
+          #   `RECORD` (where `RECORD` indicates that the field contains a
+          #   nested schema) or `STRUCT` (same as `RECORD`).
           #
           def type
             @gapi.type
@@ -86,10 +86,10 @@ module Google
           #
           # @param [String] new_type The data type. Possible values include
           #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `BOOLEAN`, `BOOL` (same as
-          #   `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`, `RECORD`
-          #   (where `RECORD` indicates that the field contains a nested schema)
-          #   or `STRUCT` (same as `RECORD`).
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BOOLEAN`, `BOOL`
+          #   (same as `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`,
+          #   `RECORD` (where `RECORD` indicates that the field contains a
+          #   nested schema) or `STRUCT` (same as `RECORD`).
           #
           def type= new_type
             @gapi.update! type: verify_type(new_type)
@@ -188,6 +188,15 @@ module Google
           #
           def float?
             type == "FLOAT" || type == "FLOAT64"
+          end
+
+          ##
+          # Checks if the type of the field is `NUMERIC`.
+          #
+          # @return [Boolean] `true` when `NUMERIC`, `false` otherwise.
+          #
+          def numeric?
+            type == "NUMERIC"
           end
 
           ##
@@ -351,6 +360,28 @@ module Google
             record_check!
 
             add_field name, :float, description: description, mode: mode
+          end
+
+          ##
+          # Adds a numeric number field to the schema. Numeric is a
+          # fixed-precision numeric type with 38 decimal digits, 9 that follow
+          # the decimal point.
+          #
+          # This can only be called on fields that are of type `RECORD`.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          #
+          def numeric name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :numeric, description: description, mode: mode
           end
 
           ##

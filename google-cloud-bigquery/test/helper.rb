@@ -131,6 +131,11 @@ class MockBigquery < Minitest::Spec
           "mode" => "NULLABLE"
         },
         {
+          "name" => "pi",
+          "type" => "NUMERIC",
+          "mode" => "NULLABLE"
+        },
+        {
           "name" => "active",
           "type" => "BOOLEAN",
           "mode" => "NULLABLE"
@@ -171,6 +176,7 @@ class MockBigquery < Minitest::Spec
           { "v" => "Heidi" },
           { "v" => "36" },
           { "v" => "7.65" },
+          { "v" => "3.141592654" },
           { "v" => "true" },
           { "v" => "aW1hZ2UgZGF0YQ==" },
           { "v" => "1482670800.0" },
@@ -184,6 +190,7 @@ class MockBigquery < Minitest::Spec
           { "v" => "Aaron" },
           { "v" => "42" },
           { "v" => "8.15" },
+          { "v" => nil },
           { "v" => "false" },
           { "v" => nil },
           { "v" => nil },
@@ -195,6 +202,7 @@ class MockBigquery < Minitest::Spec
       {
         "f" => [
           { "v" => "Sally" },
+          { "v" => nil },
           { "v" => nil },
           { "v" => nil },
           { "v" => nil },

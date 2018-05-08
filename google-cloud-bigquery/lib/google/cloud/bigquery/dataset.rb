@@ -686,7 +686,8 @@ module Google
         # | `BOOL`      | `true`/`false` | |
         # | `INT64`     | `Integer`      | |
         # | `FLOAT64`   | `Float`        | |
-        # | `STRING`    | `STRING`       | |
+        # | `NUMERIC`   | `BigDecimal`   | Will be rounded to 9 decimal places |
+        # | `STRING`    | `String`       | |
         # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
         # | `DATE`      | `Date`         | |
         # | `TIMESTAMP` | `Time`         | |
@@ -942,7 +943,8 @@ module Google
         # | `BOOL`      | `true`/`false` | |
         # | `INT64`     | `Integer`      | |
         # | `FLOAT64`   | `Float`        | |
-        # | `STRING`    | `STRING`       | |
+        # | `NUMERIC`   | `BigDecimal`   | Will be rounded to 9 decimal places |
+        # | `STRING`    | `String`       | |
         # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
         # | `DATE`      | `Date`         | |
         # | `TIMESTAMP` | `Time`         | |

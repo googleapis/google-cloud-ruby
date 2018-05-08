@@ -37,6 +37,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] }
   let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
   let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_numeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "pi", type: "NUMERIC", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", description: nil, fields: [] }
@@ -57,7 +58,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   it "gets the schema, fields, and headers" do
     table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     table.schema.must_be :frozen?
-    table.schema.fields.count.must_equal 9
+    table.schema.fields.count.must_equal 10
 
     table.schema.fields[0].name.must_equal "name"
     table.schema.fields[0].type.must_equal "STRING"
@@ -74,39 +75,44 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.schema.fields[2].description.must_be :nil?
     table.schema.fields[2].mode.must_equal "NULLABLE"
 
-    table.schema.fields[3].name.must_equal "active"
-    table.schema.fields[3].type.must_equal "BOOLEAN"
+    table.schema.fields[3].name.must_equal "pi"
+    table.schema.fields[3].type.must_equal "NUMERIC"
     table.schema.fields[3].description.must_be :nil?
     table.schema.fields[3].mode.must_equal "NULLABLE"
 
-    table.schema.fields[4].name.must_equal "avatar"
-    table.schema.fields[4].type.must_equal "BYTES"
+    table.schema.fields[4].name.must_equal "active"
+    table.schema.fields[4].type.must_equal "BOOLEAN"
     table.schema.fields[4].description.must_be :nil?
     table.schema.fields[4].mode.must_equal "NULLABLE"
 
-    table.schema.fields[5].name.must_equal "started_at"
-    table.schema.fields[5].type.must_equal "TIMESTAMP"
+    table.schema.fields[5].name.must_equal "avatar"
+    table.schema.fields[5].type.must_equal "BYTES"
     table.schema.fields[5].description.must_be :nil?
     table.schema.fields[5].mode.must_equal "NULLABLE"
 
-    table.schema.fields[6].name.must_equal "duration"
-    table.schema.fields[6].type.must_equal "TIME"
+    table.schema.fields[6].name.must_equal "started_at"
+    table.schema.fields[6].type.must_equal "TIMESTAMP"
     table.schema.fields[6].description.must_be :nil?
     table.schema.fields[6].mode.must_equal "NULLABLE"
 
-    table.schema.fields[7].name.must_equal "target_end"
-    table.schema.fields[7].type.must_equal "DATETIME"
+    table.schema.fields[7].name.must_equal "duration"
+    table.schema.fields[7].type.must_equal "TIME"
     table.schema.fields[7].description.must_be :nil?
     table.schema.fields[7].mode.must_equal "NULLABLE"
 
-    table.schema.fields[8].name.must_equal "birthday"
-    table.schema.fields[8].type.must_equal "DATE"
+    table.schema.fields[8].name.must_equal "target_end"
+    table.schema.fields[8].type.must_equal "DATETIME"
     table.schema.fields[8].description.must_be :nil?
     table.schema.fields[8].mode.must_equal "NULLABLE"
 
-    table.fields.count.must_equal 9
+    table.schema.fields[9].name.must_equal "birthday"
+    table.schema.fields[9].type.must_equal "DATE"
+    table.schema.fields[9].description.must_be :nil?
+    table.schema.fields[9].mode.must_equal "NULLABLE"
+
+    table.fields.count.must_equal 10
     table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
-    table.headers.must_equal [:name, :age, :score, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
   end
 
   it "sets a flat schema via a block with replace option true" do
@@ -114,6 +120,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       fields: [field_string_required_gapi,
                field_integer_gapi,
                field_float_gapi,
+               field_numeric_gapi,
                field_boolean_gapi,
                field_bytes_gapi,
                field_timestamp_gapi,
@@ -134,6 +141,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.string "first_name", mode: :required
       schema.integer "rank", description: "An integer value from 1 to 100"
       schema.float "accuracy"
+      schema.numeric "pi"
       schema.boolean "approved"
       schema.bytes "avatar"
       schema.timestamp "started_at"

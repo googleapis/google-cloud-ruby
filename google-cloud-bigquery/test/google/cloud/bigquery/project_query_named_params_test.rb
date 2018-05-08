@@ -122,6 +122,38 @@ describe Google::Cloud::Bigquery::Project, :query, :named_params, :mock_bigquery
     assert_valid_data data
   end
 
+  it "queries the data with a numeric parameter" do
+    job_gapi = query_job_gapi "#{query} WHERE pi = @pi", parameter_mode: "NAMED", location: nil
+    job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "pi",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "NUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "3.141592654"
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+    data = bigquery.query "#{query} WHERE pi = @pi", params: { pi: BigDecimal("3.141592654") }
+    mock.verify
+
+    data.class.must_equal Google::Cloud::Bigquery::Data
+    assert_valid_data data
+  end
+
   it "queries the data with a true parameter" do
     job_gapi = query_job_gapi "#{query} WHERE active = @active", parameter_mode: "NAMED", location: nil
     job_gapi.configuration.query.query_parameters = [
