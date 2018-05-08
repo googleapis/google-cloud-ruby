@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0.0"
 
-  gem.add_dependency "google-gax", "~> 1.0.1"
+  gem.add_dependency "google-gax", "~> 1.0"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "rubocop", "~> 0.50.0"

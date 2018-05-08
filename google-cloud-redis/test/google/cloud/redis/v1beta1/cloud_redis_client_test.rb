@@ -16,6 +16,7 @@ require "minitest/autorun"
 require "minitest/spec"
 
 require "google/gax"
+require "ostruct"
 
 require "google/cloud/redis"
 require "google/cloud/redis/v1beta1/cloud_redis_client"
@@ -86,7 +87,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::ListInstancesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new execute: expected_response
       end
       mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
 
@@ -180,7 +181,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::GetInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new execute: expected_response
       end
       mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
 
@@ -284,7 +285,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
@@ -332,7 +333,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
@@ -452,7 +453,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_instance_of(Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, request)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
@@ -497,7 +498,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_instance_of(Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, request)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
@@ -578,7 +579,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
 
@@ -616,7 +617,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
 
