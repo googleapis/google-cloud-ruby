@@ -379,6 +379,54 @@ module Google
         end
 
         ##
+        # The Cloud KMS encryption key that will be used to protect files.
+        # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
+        #
+        # @return [String, nil] A Cloud KMS encryption key, or `nil` if none
+        #   has been configured.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # KMS key ring must use the same location as the bucket.
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #   bucket.default_kms_key = kms_key_name
+        #
+        #   bucket.default_kms_key #=> kms_key_name
+        #
+        def default_kms_key
+          @gapi.encryption && @gapi.encryption.default_kms_key_name
+        end
+
+        ##
+        # Set the Cloud KMS encryption key that will be used to protect files.
+        # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
+        #
+        # @param [String] new_default_kms_key New Cloud KMS key name
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # KMS key ring must use the same location as the bucket.
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #
+        #   bucket.default_kms_key = kms_key_name
+        #
+        def default_kms_key= new_default_kms_key
+          @gapi.encryption = Google::Apis::StorageV1::Bucket::Encryption.new \
+            default_kms_key_name: new_default_kms_key
+          patch_gapi! :encryption
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
@@ -645,7 +693,15 @@ module Google
         #   Class](https://cloud.google.com/storage/docs/per-object-storage-class).
         #   The default value is the default storage class for the bucket.
         # @param [String] encryption_key Optional. A customer-supplied, AES-256
-        #   encryption key that will be used to encrypt the file.
+        #   encryption key that will be used to encrypt the file. Do not provide
+        #   if `kms_key` is used.
+        # @param [String] kms_key Optional. Resource name of the Cloud KMS
+        #   key, of the form
+        #   `projects/my-prj/locations/kr-loc/keyRings/my-kr/cryptoKeys/my-key`,
+        #   that will be used to encrypt the file. The KMS key ring must use
+        #   the same location as the bucket.The Service Account associated with
+        #   your project requires access to this encryption key. Do not provide
+        #   if `encryption_key` is used.
         #
         # @return [Google::Cloud::Storage::File]
         #
@@ -687,6 +743,22 @@ module Google
         #   file = bucket.file "destination/path/file.ext",
         #                      encryption_key: key
         #
+        # @example Providing a customer-managed Cloud KMS encryption key:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   # KMS key ring must use the same location as the bucket.
+        #   kms_key_name = "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+        #
+        #   bucket.create_file "path/to/local.file.ext",
+        #                      "destination/path/file.ext",
+        #                      kms_key: kms_key_name
+        #
+        #   file = bucket.file "destination/path/file.ext"
+        #   file.kms_key #=> kms_key_name
+        #
         # @example Create a file with gzip-encoded data.
         #   require "zlib"
         #   require "google/cloud/storage"
@@ -717,13 +789,14 @@ module Google
                         content_disposition: nil, content_encoding: nil,
                         content_language: nil, content_type: nil,
                         crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, encryption_key: nil
+                        storage_class: nil, encryption_key: nil, kms_key: nil
           ensure_service!
           options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
                       cache_control: cache_control, content_type: content_type,
                       content_disposition: content_disposition, crc32c: crc32c,
                       content_encoding: content_encoding, metadata: metadata,
                       content_language: content_language, key: encryption_key,
+                      kms_key: kms_key,
                       storage_class: storage_class_for(storage_class),
                       user_project: user_project }
           ensure_io_or_file_exists! file

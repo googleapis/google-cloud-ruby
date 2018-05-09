@@ -29,20 +29,6 @@ describe Google::Cloud::Storage::File, :storage do
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
 
-  let(:cipher) do
-    cipher = OpenSSL::Cipher.new "aes-256-cfb"
-    cipher.encrypt
-    cipher
-  end
-
-  let(:encryption_key) do
-    cipher.random_key
-  end
-
-  let(:encryption_key_2) do
-    cipher.random_key
-  end
-
   let(:bucket_public_test_name) { "storage-library-test-bucket" }
   let(:file_public_test_gzip_name) { "gzipped-text.txt" }  # content is "hello world"
 
@@ -380,36 +366,6 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
-  it "should upload and download a file with customer-supplied encryption key" do
-    original = File.new files[:logo][:path], "rb"
-    uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key
-
-    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
-      downloaded = uploaded.download tmpfile.path, encryption_key: encryption_key
-
-      downloaded.size.must_equal original.size
-      downloaded.size.must_equal uploaded.size
-      downloaded.size.must_equal original.size # Same file
-
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
-    end
-
-    uploaded.delete
-  end
-
-  it "should upload and partially download a file with customer-supplied encryption key" do
-    original = File.new files[:logo][:path], "rb"
-    uploaded = bucket.create_file original, "CloudLogo.png", encryption_key: encryption_key
-
-    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
-      downloaded = uploaded.download tmpfile.path, range: 3..1024, encryption_key: encryption_key
-      downloaded.size.must_equal 1022
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")[3..1024]
-    end
-
-    uploaded.delete
-  end
-
   it "should download a file while skipping lookups" do
     original = File.new files[:logo][:path]
     uploaded = bucket.create_file original, "CloudLogo.png"
@@ -521,63 +477,6 @@ describe Google::Cloud::Storage::File, :storage do
 
     uploaded.delete
     copied.delete
-  end
-
-  it "should copy an existing file with customer-supplied encryption key" do
-    uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png", encryption_key: encryption_key
-    copied = try_with_backoff "copying existing file with encryption key" do
-      uploaded.copy "CloudLogoCopy.png", encryption_key: encryption_key
-    end
-    uploaded.name.must_equal "CloudLogo.png"
-    copied.name.must_equal "CloudLogoCopy.png"
-    copied.size.must_equal uploaded.size
-
-    Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
-      Tempfile.open ["CloudLogoCopy", ".png"] do |tmpfile2|
-        downloaded1 = uploaded.download tmpfile1.path, encryption_key: encryption_key
-        downloaded2 = copied.download tmpfile2.path, encryption_key: encryption_key
-        downloaded1.size.must_equal downloaded2.size
-
-        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
-      end
-    end
-
-    uploaded.delete
-    copied.delete
-  end
-
-  it "should add, rotate, and remove customer-supplied encryption keys for an existing file" do
-    uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png"
-
-    rewritten = try_with_backoff "add encryption key" do
-      uploaded.rotate new_encryption_key: encryption_key
-    end
-    rewritten.name.must_equal uploaded.name
-    rewritten.size.must_equal uploaded.size
-
-    rewritten2 = try_with_backoff "rotate encryption keys" do
-      uploaded.rotate encryption_key: encryption_key, new_encryption_key: encryption_key_2
-    end
-    rewritten2.name.must_equal uploaded.name
-    rewritten2.size.must_equal uploaded.size
-
-    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
-      downloaded = uploaded.download tmpfile.path, encryption_key: encryption_key_2
-      downloaded.size.must_equal uploaded.size
-    end
-
-    rewritten3 = try_with_backoff "remove encryption key" do
-      uploaded.rotate encryption_key: encryption_key_2
-    end
-    rewritten3.name.must_equal uploaded.name
-    rewritten3.size.must_equal uploaded.size
-
-    Tempfile.open ["CloudLogo", ".png"] do |tmpfile|
-      downloaded = uploaded.download tmpfile.path
-      downloaded.size.must_equal uploaded.size
-    end
-
-    rewritten3.delete
   end
 
   it "does not error when getting a file that does not exist" do
@@ -729,28 +628,6 @@ describe Google::Cloud::Storage::File, :storage do
 
     Tempfile.open ["ab", ".txt"] do |tmpfile|
       downloaded = composed.download tmpfile
-
-      File.read(downloaded.path).must_equal "ab"
-    end
-
-    uploaded_a.delete
-    uploaded_b.delete
-    composed.delete
-  end
-
-  it "should compose existing files with customer-supplied encryption key into a new file with customer-supplied encryption key" do
-    uploaded_a = bucket.create_file StringIO.new("a"), "a.txt", encryption_key: encryption_key
-    uploaded_b = bucket.create_file StringIO.new("b"), "b.txt", encryption_key: encryption_key
-
-    composed = try_with_backoff "copying existing file" do
-      bucket.compose [uploaded_a, uploaded_b], "ab.txt", encryption_key: encryption_key
-    end
-
-    composed.name.must_equal "ab.txt"
-    composed.size.must_equal uploaded_a.size + uploaded_b.size
-
-    Tempfile.open ["ab", ".txt"] do |tmpfile|
-      downloaded = composed.download tmpfile, encryption_key: encryption_key
 
       File.read(downloaded.path).must_equal "ab"
     end

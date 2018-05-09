@@ -31,6 +31,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
                          http_method: ["*"],
                          response_header: ["X-My-Custom-Header"] }] }
   let(:bucket_cors_gapi) { bucket_cors.map { |c| Google::Apis::StorageV1::Bucket::CorsConfiguration.new c } }
+  let(:kms_key) { "path/to/encryption_key_name" }
 
   it "creates a bucket" do
     mock = Minitest::Mock.new
@@ -216,6 +217,26 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket.must_be_kind_of Google::Cloud::Storage::Bucket
     bucket.name.must_equal bucket_name
     bucket.cors.class.must_equal Google::Cloud::Storage::Bucket::Cors
+  end
+
+  it "creates a bucket with block encryption" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name
+    created_bucket.encryption = encryption_gapi(kms_key)
+    mock.expect :insert_bucket, created_bucket, [project, created_bucket, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.default_kms_key = kms_key
+    end
+
+    mock.verify
+
+    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
+    bucket.default_kms_key.wont_be :nil?
+    bucket.default_kms_key.must_be_kind_of String
+    bucket.default_kms_key.must_equal kms_key
   end
 
   it "creates a bucket with predefined acl" do

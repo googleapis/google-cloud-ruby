@@ -341,6 +341,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#default_kms_key" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi, ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#user_project" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["other-project-bucket", Hash]
@@ -670,7 +677,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::File#rewrite@The file can be rewritten with a new encryption key:" do
+  doctest.before "Google::Cloud::Storage::File#rewrite@Rewriting with a customer-supplied encryption key:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
+      mock.expect :rewrite_object, done_rewrite(file_gapi), ["my-bucket", "path/to/my-file.ext", "new-destination-bucket", "path/to/destination/file.ext", Google::Apis::StorageV1::Object, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::File#rewrite@Rewriting with a customer-managed Cloud KMS encryption key:" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :get_object, file_gapi, ["my-bucket", "path/to/my-file.ext", Hash]
@@ -959,9 +974,14 @@ YARD::Doctest.configure do |doctest|
 
 end
 
+# stubbed methods for use in examples
+
+def kms_key_name
+  "projects/a/locations/b/keyRings/c/cryptoKeys/d"
+end
+
+
 # Fixture helpers
-
-
 
 def bucket_gapi name = "my-bucket"
   Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name).to_json
@@ -1011,6 +1031,7 @@ def random_bucket_hash(name = "my-bucket",
     "storageClass" => storage_class,
     "versioning" => versioning_config,
     "website" => website_hash(website_main, website_404),
+    "encryption" => { "defaultKmsKeyName" => kms_key_name },
     "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
 end
 
@@ -1048,7 +1069,8 @@ def random_file_hash bucket, name, generation="1234567890"
     "metadata" => { "player" => "Alice", "score" => "101" },
     "owner" => { "entity" => "user-1234567890", "entityId" => "abc123" },
     "crc32c" => "Lm1F3g==",
-    "etag" => "CKih16GjycICEAE=" }
+    "etag" => "CKih16GjycICEAE=",
+    "kmsKeyName" => kms_key_name }
 end
 
 def random_bucket_acl_hash bucket_name
