@@ -40,6 +40,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
+* [Cloud Redis[(#cloud-redis-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
@@ -499,6 +500,19 @@ subscriber.start
 # Shut down the subscriber when ready to stop receiving messages.
 subscriber.stop.wait!
 ```
+### Redis API (Alpha)
+
+- [google-cloud-redis README](google-cloud-redis/README.md)
++- [google-cloud-redis API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest)
+- [google-cloud-redis on RubyGems](https://rubygems.org/gems/google-cloud-redis)
+- [Redis API documentation](https://cloud.google.com/redis/docs/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-redis
+```
+
 
 ### Cloud Resource Manager (Alpha)
 

@@ -382,6 +382,15 @@
       ]
     },
     {
+      "id": "google-cloud-redis",
+      "name": "google-cloud-redis",
+      "defaultService": "google/cloud/redis",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-resource_manager",
       "name": "google-cloud-resource_manager",
       "defaultService": "google/cloud/resourcemanager",
