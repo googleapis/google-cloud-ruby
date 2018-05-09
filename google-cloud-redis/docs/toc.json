@@ -35,11 +35,7 @@
       "patterns": ["\/redis", "google\/iam", "google\/protobuf", "google\/rpc"],
       "nav": [
         {
-          "title": "Client",
-          "type": "google/cloud/redis/client"
-        },
-        {
-          "title": "v1beta1",
+          "title": "V1beta1",
           "type": "google/cloud/redis/v1beta1",
           "patterns": ["\/redis\/v1beta1", "google\/iam", "google\/protobuf", "google\/rpc"],
           "nav": [
@@ -49,7 +45,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/redis/v1beta1/datatypes"
+              "type": "google/cloud/redis/v1beta1/datatypes"
             }
           ]
         }
