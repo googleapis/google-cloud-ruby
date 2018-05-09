@@ -382,7 +382,7 @@
       ]
     },
     {
-      "id": "google-cloud-redisw",
+      "id": "google-cloud-redis",
       "name": "google-cloud-redis",
       "defaultService": "google/cloud/redis",
       "versions": [
