@@ -1,5 +1,9 @@
 # Release History
 
+### 0.53.0 / 2018-05-10
+
+* Add Google Cloud Memorystore for Redis.
+
 ### 0.52.0 / 2018-04-16
 
 * Add Dialogflow API.
