@@ -457,8 +457,9 @@
       "name": "google-cloud-storage",
       "defaultService": "google/cloud/storage",
       "versions": [
-        "v1.11.0",
+        "v1.12.0",
         "master",
+        "v1.11.0",
         "v1.10.0",
         "v1.9.0",
         "v1.8.0",

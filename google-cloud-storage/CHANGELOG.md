@@ -1,5 +1,9 @@
 # Release History
 
+### 1.12.0 / 2018-05-09
+
+* Support Cloud KMS keys / Customer-managed encryption keys (CMEK).
+
 ### 1.11.0 / 2018-05-01
 
 * Support partial Storage::File downloads. (georgeclaghorn)
