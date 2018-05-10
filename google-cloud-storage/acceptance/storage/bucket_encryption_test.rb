@@ -20,9 +20,19 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
   let(:kms_key) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
   let(:kms_key_2) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
   let :bucket do
-    b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location)
+    b = storage.create_bucket(bucket_name, location: bucket_location)
     b.default_kms_key = kms_key
     b
+  end
+
+  before do
+    # always create the bucket
+    bucket
+  end
+
+  after do
+    bucket.files.all &:delete
+    bucket.delete
   end
 
   let(:files) do

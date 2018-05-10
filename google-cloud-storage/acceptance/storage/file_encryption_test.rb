@@ -39,12 +39,13 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   after do
-    bucket.files(versions: true).all { |f| f.delete generation: true rescue nil }
+    bucket.files.all &:delete
+    bucket.delete
   end
 
   describe "customer-supplied encryption key (CSEK)" do
     let :bucket do
-      b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location)
+      b = storage.create_bucket(bucket_name, location: bucket_location)
       b.default_kms_key = nil
       b
     end
@@ -163,7 +164,7 @@ describe Google::Cloud::Storage::File, :storage do
     let(:kms_key) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
     let(:kms_key_2) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
     let :bucket do
-      b = storage.bucket(bucket_name) || storage.create_bucket(bucket_name, location: bucket_location)
+      b = storage.create_bucket(bucket_name, location: bucket_location)
       b.default_kms_key = kms_key
       b
     end
