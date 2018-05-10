@@ -15,7 +15,7 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage::Bucket, :encryption, :storage do
-  let(:bucket_name) { $bucket_names[1] }
+  let(:bucket_name) { "#{$bucket_names[1]}-encryption" }
   let(:bucket_location) { "us-central1" }
   let(:kms_key) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
   let(:kms_key_2) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
@@ -39,8 +39,8 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
     { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
-
   describe "KMS customer-managed encryption key (CMEK)" do
+
     it "knows its encryption configuration" do
       bucket.default_kms_key.wont_be :nil?
       bucket.default_kms_key.must_equal kms_key

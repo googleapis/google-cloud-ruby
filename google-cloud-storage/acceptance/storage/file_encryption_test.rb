@@ -18,8 +18,12 @@ require "uri"
 require "zlib"
 
 describe Google::Cloud::Storage::File, :storage do
-  let(:bucket_name) { $bucket_names[1] }
+  let(:bucket_name) { "#{$bucket_names[1]}-encryption" }
   let(:bucket_location) { "us-central1" }
+
+  let :bucket do
+    storage.create_bucket bucket_name, location: bucket_location
+  end
 
   let(:file_path) { "acceptance/data/abc.txt" }
   let(:file_name) { "abc.txt" }
@@ -44,12 +48,6 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   describe "customer-supplied encryption key (CSEK)" do
-    let :bucket do
-      b = storage.create_bucket(bucket_name, location: bucket_location)
-      b.default_kms_key = nil
-      b
-    end
-
     it "should upload and download a file with customer-supplied encryption key" do
       original = File.new file_path
       uploaded = bucket.create_file original, file_name, encryption_key: encryption_key
@@ -163,13 +161,9 @@ describe Google::Cloud::Storage::File, :storage do
   describe "KMS customer-managed encryption key (CMEK)" do
     let(:kms_key) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-1" }
     let(:kms_key_2) { "projects/helical-zone-771/locations/#{bucket_location}/keyRings/ruby-test/cryptoKeys/ruby-test-key-2" }
-    let :bucket do
-      b = storage.create_bucket(bucket_name, location: bucket_location)
-      b.default_kms_key = kms_key
-      b
-    end
 
     it "should upload and download a file with default_kms_key" do
+      bucket.default_kms_key = kms_key
       original = File.new file_path
 
       uploaded = bucket.create_file original, file_name
@@ -194,7 +188,6 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should upload and download a file with kms_key option" do
-      bucket.default_kms_key = nil
       original = File.new file_path
 
       bucket.default_kms_key.must_be :nil?
@@ -221,7 +214,6 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should upload a file with no kms key" do
-      bucket.default_kms_key = nil
       original = File.new file_path
 
       bucket.default_kms_key.must_be :nil?
@@ -236,8 +228,6 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     it "should rotate a customer-supplied encryption key (CSEK) to a kms key (CMEK), to no key and back to CSEK" do
-      bucket.default_kms_key = nil
-
       uploaded = bucket.create_file file_path, file_name, encryption_key: encryption_key
       uploaded.kms_key.must_be :nil?
 
