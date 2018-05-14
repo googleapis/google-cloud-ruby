@@ -24,6 +24,7 @@ This client supports the following Google Cloud Platform services at a [General 
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
+* [BigQuery Data Transfer](#bigquery-data-transfer-api-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Firestore](#cloud-firestore-beta) (Beta)
@@ -104,6 +105,41 @@ data = dataset.query "SELECT first_name FROM my_table"
 
 data.each do |row|
   puts row[:first_name]
+end
+```
+
+### BigQuery Data Transfer API (Beta)
+
+- [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
+- [google-bigquery-data_transfer API documentation](http://http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest)
+- [google-bigquery-data_transfer on RubyGems](https://rubygems.org/gems/google-cloud-bigquery-data_transfer/)
+- [Google BigQuery Data Transfer documentation](https://cloud.google.com/bigquery/transfer/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-bigquery-data_transfer
+```
+
+#### Preview
+
+```rb
+require "google/cloud/bigquery/data_transfer"
+
+data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new
+formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(project_id)
+
+# Iterate over all results.
+data_transfer_service_client.list_data_sources(formatted_parent).each do |element|
+  # Process element.
+end
+
+# Or iterate over results one page at a time.
+data_transfer_service_client.list_data_sources(formatted_parent).each_page do |page|
+  # Process each page at a time.
+  page.each do |element|
+    # Process element.
+  end
 end
 ```
 
