@@ -225,7 +225,7 @@ describe "Streaming Recognition", :speech do
       end
       # send 5 seconds of silence to kick off the utterance callback
       silent_frame = Array(0).pack("s<").encode("ASCII-8BIT")
-      silent_second = silent_frame * 1600
+      silent_second = silent_frame * 16000
       5.times do
         stream.send silent_second
         sleep 1
