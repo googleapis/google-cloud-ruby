@@ -247,7 +247,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
   it "imports data from a file in your bucket with load_job" do
     begin
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
       file = bucket.create_file local_file
 
       job = table.load_job file
@@ -257,7 +257,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
@@ -265,7 +265,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   it "imports data from a list of files in your bucket with load_job" do
     begin
       more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
       file1 = bucket.create_file local_file
       file2 = bucket.create_file StringIO.new(more_data),
                                  "more-kitten-test-data.json"
@@ -281,7 +281,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
@@ -293,7 +293,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
   it "imports data from a file in your bucket with load" do
     begin
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
       file = bucket.create_file local_file
 
       result = table.load file
@@ -302,7 +302,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
@@ -310,7 +310,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   it "imports data from a list of files in your bucket with load" do
     begin
       more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
       file1 = bucket.create_file local_file
       file2 = bucket.create_file StringIO.new(more_data),
                                  "more-kitten-test-data.json"
@@ -323,7 +323,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
@@ -359,7 +359,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       load_job.wait_until_done!
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
-        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
@@ -376,7 +376,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
@@ -388,7 +388,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       result.must_equal true
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
-        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
 
         result = table.extract extract_file
@@ -402,7 +402,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
