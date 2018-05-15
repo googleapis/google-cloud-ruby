@@ -133,6 +133,21 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
         end
       end
     end
+
+    it "also reports env['rack.exception'] if exists" do
+      stub_call = ->(env) {
+        env['rack.exception'] = app_exception
+      }
+      stub_report_exception = ->(_, exception) {
+        exception.message.must_equal app_exception_msg
+      }
+
+      rack_app.stub :call, stub_call do
+        middleware.stub :report_exception, stub_report_exception do
+          middleware.call rack_env
+        end
+      end
+    end
   end
 
   describe "#report_exception" do
