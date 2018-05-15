@@ -162,7 +162,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   it "imports data from a list of files in your bucket with load_job" do
     begin
       more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
       file1 = bucket.create_file local_file
       file2 = bucket.create_file StringIO.new(more_data),
                                  "more-kitten-test-data.json"
@@ -178,7 +178,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
@@ -186,7 +186,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   it "imports data from a list of files in your bucket with load" do
     begin
       more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket"
+      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
       file1 = bucket.create_file local_file
       file2 = bucket.create_file StringIO.new(more_data),
                                  "more-kitten-test-data.json"
@@ -199,7 +199,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
