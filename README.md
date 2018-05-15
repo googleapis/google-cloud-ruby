@@ -541,7 +541,7 @@ subscriber.stop.wait!
 - [google-cloud-redis README](google-cloud-redis/README.md)
 - [google-cloud-redis API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest)
 - [google-cloud-redis on RubyGems](https://rubygems.org/gems/google-cloud-redis)
-- [Redis API documentation](https://cloud.google.com/memorystore/docs/redis/)
+- [Cloud Redis API documentation](https://cloud.google.com/memorystore/docs/redis/)
 
 #### Quick Start
 
