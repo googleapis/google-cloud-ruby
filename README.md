@@ -24,6 +24,7 @@ This client supports the following Google Cloud Platform services at a [General 
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
+* [BigQuery Data Transfer](#bigquery-data-transfer-api-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Cloud Firestore](#cloud-firestore-beta) (Beta)
@@ -40,7 +41,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
-* [Cloud Redis[(#cloud-redis-alpha) (Alpha)
+* [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
@@ -104,6 +105,41 @@ data = dataset.query "SELECT first_name FROM my_table"
 
 data.each do |row|
   puts row[:first_name]
+end
+```
+
+### BigQuery Data Transfer API (Beta)
+
+- [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
+- [google-bigquery-data_transfer API documentation](http://http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest)
+- [google-bigquery-data_transfer on RubyGems](https://rubygems.org/gems/google-cloud-bigquery-data_transfer/)
+- [Google BigQuery Data Transfer documentation](https://cloud.google.com/bigquery/transfer/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-bigquery-data_transfer
+```
+
+#### Preview
+
+```rb
+require "google/cloud/bigquery/data_transfer"
+
+data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new
+formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(project_id)
+
+# Iterate over all results.
+data_transfer_service_client.list_data_sources(formatted_parent).each do |element|
+  # Process element.
+end
+
+# Or iterate over results one page at a time.
+data_transfer_service_client.list_data_sources(formatted_parent).each_page do |page|
+  # Process each page at a time.
+  page.each do |element|
+    # Process element.
+  end
 end
 ```
 
@@ -500,12 +536,12 @@ subscriber.start
 # Shut down the subscriber when ready to stop receiving messages.
 subscriber.stop.wait!
 ```
-### Redis API (Alpha)
+### Cloud Redis API (Alpha)
 
 - [google-cloud-redis README](google-cloud-redis/README.md)
-+- [google-cloud-redis API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest)
+- [google-cloud-redis API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest)
 - [google-cloud-redis on RubyGems](https://rubygems.org/gems/google-cloud-redis)
-- [Redis API documentation](https://cloud.google.com/redis/docs/)
+- [Cloud Redis API documentation](https://cloud.google.com/memorystore/docs/redis/)
 
 #### Quick Start
 
