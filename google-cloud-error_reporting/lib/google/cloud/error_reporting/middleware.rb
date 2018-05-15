@@ -24,6 +24,8 @@ module Google
       # to Stackdriver Error Reporting.
       #
       class Middleware
+        EXCEPTION_KEYS = ["sinatra.error", "rack.exception"].freeze
+
         # A Google::Cloud::ErrorReporting::Project client used to report
         # error events.
         attr_reader :error_reporting
@@ -76,8 +78,13 @@ module Google
 
           # sinatra doesn't always raise the Exception, but it saves it in
           # env['sinatra.error']
-          if env["sinatra.error"].is_a? Exception
-            report_exception env, env["sinatra.error"]
+          #
+          # some frameworks (i.e. hanami) will save a rendering exception in
+          # env['rack.exception']
+          EXCEPTION_KEYS.each do |exception_key|
+            next unless env[exception_key].is_a? Exception
+
+            report_exception env, env[exception_key]
           end
 
           response
