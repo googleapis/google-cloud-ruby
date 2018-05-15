@@ -86,6 +86,20 @@ module Acceptance
   end
 end
 
+def safe_gcs_execute retries: 20, delay: 2
+  current_retries = 0
+  loop do
+    begin
+      return yield
+    rescue Google::Cloud::ResourceExhaustedError
+      raise unless current_retries >= retries
+
+      sleep delay
+      current_retries += 1
+    end
+  end
+end
+
 # Create buckets to be shared with all the tests
 require "time"
 require "securerandom"
@@ -96,7 +110,7 @@ def clean_up_vision_storage_objects
   puts "Cleaning up storage buckets after vision tests."
   if b = $storage.bucket($vision_prefix)
     b.files.all(&:delete)
-    b.delete
+    safe_gcs_execute { b.delete }
   end
 rescue => e
   puts "Error while cleaning up storage buckets after vision tests.\n\n#{e}"

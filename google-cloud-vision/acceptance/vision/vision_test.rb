@@ -25,7 +25,7 @@ describe "Vision", :vision do
 
   let(:https_url)  { "https://raw.githubusercontent.com/GoogleCloudPlatform/google-cloud-ruby/master/acceptance/data/face.jpg" }
 
-  let(:bucket)   { storage.bucket($vision_prefix) || storage.create_bucket($vision_prefix) }
+  let(:bucket)   { storage.bucket($vision_prefix) || safe_gcs_execute { storage.create_bucket($vision_prefix) } }
   let(:gcs_file) { bucket.file(face_image) || bucket.create_file(face_image) }
   let(:gcs_url)  { gcs_file.to_gs_url }
 
