@@ -28,8 +28,10 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
   # The original bucket belongs to a second project, with requester pays enabled.
   let :storage_2_bucket do
     storage_2.bucket(bucket_name) ||
-      storage_2.create_bucket(bucket_name) do |b|
-        b.requester_pays = true
+      safe_gcs_execute do
+        storage_2.create_bucket(bucket_name) do |b|
+          b.requester_pays = true
+        end
       end
   end
   # The bucket used in tests is retrieved by the main project, with user_project set to bill to the main project.

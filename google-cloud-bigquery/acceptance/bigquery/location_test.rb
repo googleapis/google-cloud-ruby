@@ -103,7 +103,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
 
   it "creates a load job with location" do
     begin
-      bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region
+      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region }
       file = bucket.create_file local_file
 
       # Load the file to a dataset in the region with an load job in the region.
@@ -117,7 +117,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end
@@ -186,7 +186,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
 
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
-        bucket = Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region
+        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region }
         extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
       if post_bucket
         post_bucket.files.map &:delete
-        post_bucket.delete
+        safe_gcs_execute { post_bucket.delete }
       end
     end
   end

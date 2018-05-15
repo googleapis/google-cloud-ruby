@@ -17,7 +17,7 @@ require "speech_helper"
 describe "Synchonous Recognition", :speech do
   let(:filepath) { "acceptance/data/audio.raw" }
 
-  let(:bucket)   { storage.bucket($speech_prefix) || storage.create_bucket($speech_prefix) }
+  let(:bucket)   { storage.bucket($speech_prefix) || safe_gcs_execute { storage.create_bucket($speech_prefix) } }
   let(:gcs_file) { bucket.file("audio.raw") || bucket.create_file(filepath, "audio.raw") }
   let(:gcs_url)  { gcs_file.to_gs_url }
 

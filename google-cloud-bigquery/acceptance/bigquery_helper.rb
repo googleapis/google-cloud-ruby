@@ -78,6 +78,20 @@ module Acceptance
   end
 end
 
+def safe_gcs_execute retries: 20, delay: 2
+  current_retries = 0
+  loop do
+    begin
+      return yield
+    rescue Google::Cloud::ResourceExhaustedError
+      raise unless current_retries >= retries
+
+      sleep delay
+      current_retries += 1
+    end
+  end
+end
+
 def clean_up_bigquery_datasets
   puts "Cleaning up bigquery datasets after tests."
   $bigquery.datasets.all do |dataset|

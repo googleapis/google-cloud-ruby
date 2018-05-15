@@ -18,7 +18,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||
-    storage.create_bucket(bucket_name)
+    safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
   let(:user_val) { "user-blowmage@gmail.com" }
 
