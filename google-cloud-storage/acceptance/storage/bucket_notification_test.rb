@@ -19,7 +19,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :storage do
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||
-    storage.create_bucket(bucket_name)
+    safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
   let(:topic_name) { "#{prefix}_bucket_notification_topic" }
   let(:topic_name_full_path) { "//pubsub.googleapis.com/projects/#{storage.project}/topics/#{topic_name}" }

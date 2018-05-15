@@ -18,7 +18,7 @@ describe "Storage", :buckets, :storage do
   let(:buckets) do
     bucket_names.map do |b|
       storage.bucket(b) ||
-      storage.create_bucket(b)
+      safe_gcs_execute { storage.create_bucket(b) }
     end
   end
   let(:bucket_names) { $bucket_names }

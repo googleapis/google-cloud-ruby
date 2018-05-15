@@ -18,7 +18,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||
-    storage.create_bucket(bucket_name)
+    safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
 
   before do
@@ -31,7 +31,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     storage.bucket(one_off_bucket_name).must_be :nil?
 
-    one_off_bucket = storage.create_bucket one_off_bucket_name, user_project: true
+    one_off_bucket = safe_gcs_execute { storage.create_bucket one_off_bucket_name, user_project: true }
 
     storage.bucket(one_off_bucket_name).wont_be :nil?
 
@@ -65,7 +65,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     one_off_bucket_copy.user_project.must_equal true
 
     one_off_bucket.files.all &:delete
-    one_off_bucket.delete
+    safe_gcs_execute { one_off_bucket.delete }
 
     storage.bucket(one_off_bucket_name).must_be :nil?
   end

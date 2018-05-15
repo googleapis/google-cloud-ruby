@@ -17,7 +17,7 @@ require "storage_helper"
 describe "Storage", :files, :storage do
   let :bucket do
     storage.bucket(bucket_name) ||
-    storage.create_bucket(bucket_name)
+    safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
   let(:bucket_name) { $bucket_names.first }
 
