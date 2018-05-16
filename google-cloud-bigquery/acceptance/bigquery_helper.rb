@@ -20,13 +20,32 @@ require "google/cloud/bigquery"
 require "google/cloud/storage"
 
 # Create shared bigquery object so we don't create new for each test
-$bigquery = Google::Cloud.new.bigquery retries: 10
+$bigquery = Google::Cloud::Bigquery.new retries: 10
+
+# Create shared storage object so we don't create new for each test
+$storage = Google::Cloud::Storage.new
 
 # create prefix for names of datasets and tables
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "_"
 $prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
+
+def safe_gcs_execute retries: 20, delay: 2
+  current_retries = 0
+  loop do
+    begin
+      return yield
+    rescue Google::Cloud::ResourceExhaustedError
+      raise unless current_retries >= retries
+
+      sleep delay
+      current_retries += 1
+    end
+  end
+end
+
+$bucket = safe_gcs_execute { $storage.create_bucket "#{$prefix}_bucket" }
 
 module Acceptance
   ##
@@ -44,17 +63,27 @@ module Acceptance
   class BigqueryTest < Minitest::Test
     attr_accessor :bigquery
     attr_accessor :prefix
+    attr_accessor :storage
+    attr_accessor :bucket
 
     ##
     # Setup project based on available ENV variables
     def setup
       @bigquery = $bigquery
       @prefix = $prefix
+      @storage = $storage
+      @bucket = $bucket
 
       refute_nil @bigquery, "You do not have an active bigquery to run the tests."
       refute_nil @prefix, "You do not have an bigquery prefix to name the datasets and tables with."
+      refute_nil @storage, "You do not have an active storage to run the tests."
+      refute_nil @bucket, "You do not have a storage bucket to run the tests."
 
       super
+    end
+
+    def random_file_destination_name
+      "kitten-test-data-#{SecureRandom.hex}.json"
     end
 
     # Add spec DSL
@@ -78,20 +107,6 @@ module Acceptance
   end
 end
 
-def safe_gcs_execute retries: 20, delay: 2
-  current_retries = 0
-  loop do
-    begin
-      return yield
-    rescue Google::Cloud::ResourceExhaustedError
-      raise unless current_retries >= retries
-
-      sleep delay
-      current_retries += 1
-    end
-  end
-end
-
 def clean_up_bigquery_datasets
   puts "Cleaning up bigquery datasets after tests."
   $bigquery.datasets.all do |dataset|
@@ -104,6 +119,15 @@ rescue => e
   puts "Error while cleaning up bigquery datasets after tests.\n\n#{e}"
 end
 
+def clean_up_storage_bucket
+  puts "Cleaning up bigquery bucket after tests."
+  $bucket.files.all &:delete
+  safe_gcs_execute { $bucket.delete }
+rescue => e
+  puts "Error while cleaning up bigquery bucket after tests.\n\n#{e}"
+end
+
 Minitest.after_run do
   clean_up_bigquery_datasets
+  clean_up_storage_bucket
 end

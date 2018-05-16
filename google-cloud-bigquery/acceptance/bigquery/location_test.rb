@@ -103,20 +103,20 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
 
   it "creates a load job with location" do
     begin
-      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region }
-      file = bucket.create_file local_file
+      load_bucket = safe_gcs_execute { storage.create_bucket "#{prefix}_load_loc", location: region }
+      load_file = load_bucket.create_file local_file, random_file_destination_name
 
       # Load the file to a dataset in the region with an load job in the region.
-      job = table.load_job file
+      job = table.load_job load_file
 
       job.location.must_equal region
       job.wait_until_done!
       job.location.must_equal region
       job.wont_be :failed?
     ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      post_bucket = storage.bucket "#{prefix}_load_loc"
       if post_bucket
-        post_bucket.files.map &:delete
+        post_bucket.files.all &:delete
         safe_gcs_execute { post_bucket.delete }
       end
     end
@@ -186,8 +186,8 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
 
       Tempfile.open "empty_extract_file.json" do |tmp|
         tmp.size.must_equal 0
-        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket", location: region }
-        extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
+        extract_bucket = safe_gcs_execute { storage.create_bucket "#{prefix}_ext_loc", location: region }
+        extract_file = extract_bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
         extract_job = table.extract_job extract_file, job_id: job_id
@@ -197,14 +197,14 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
         extract_job.wont_be :failed?
         extract_job.location.must_equal region
         # Refresh to get the latest file data
-        extract_file = bucket.file "kitten-test-data-backup.json"
+        extract_file = extract_bucket.file "kitten-test-data-backup.json"
         downloaded_file = extract_file.download tmp.path
         downloaded_file.size.must_be :>, 0
       end
     ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
+      post_bucket = storage.bucket "#{prefix}_ext_loc"
       if post_bucket
-        post_bucket.files.map &:delete
+        post_bucket.files.all &:delete
         safe_gcs_execute { post_bucket.delete }
       end
     end
