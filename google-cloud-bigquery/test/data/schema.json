@@ -1,0 +1,5 @@
+[
+  {"name":"first_name","type":"STRING","mode":"REQUIRED"},
+  {"name":"rank","type":"INTEGER","mode":"NULLABLE", "description":"An integer value from 1 to 100"},
+  {"name":"accuracy","type":"FLOAT","mode":"NULLABLE"}
+]
