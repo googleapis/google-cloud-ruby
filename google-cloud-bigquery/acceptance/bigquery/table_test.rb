@@ -426,6 +426,48 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
+  it "migrates the schema without dropping data when loading an updated schema from a file" do
+    begin
+      t = dataset.create_table "table_schema_test"
+      t.schema do |s|
+        s.integer "id", description: "id description", mode: :required
+        s.string "breed", description: "breed description", mode: :required
+        s.string "name", description: "name description", mode: :required
+        s.record "features", description: "features description", mode: :repeated do |s2|
+          s2.string "feature", description: "feature description", mode: :required
+        end
+      end
+
+      row = {
+          "id" => 1,
+          "breed" => "thecatkind",
+          "name" => "mike",
+          "features" => [
+              {
+                  "feature" => "Long Hair",
+              }
+          ]
+      }
+      t.insert row
+
+      t.schema do |s|
+        s.load File.open("acceptance/data/schema.json")
+      end
+
+      data = t.data
+      data.count.must_equal 1
+      data.first[:id].must_equal 1
+      data.first[:breed].must_equal "thecatkind"
+      data.first[:name].must_equal "mike"
+      data.first[:dob].must_be_nil
+      data.first[:features].count.must_equal 1
+      data.first[:features].first[:feature].must_equal "Long Hair"
+    ensure
+      t2 = dataset.table "table_schema_test"
+      t2.delete if t2
+    end
+  end
+
   it "allows tables to be created with time_partioning enabled" do
     table = time_partitioned_table
     table.time_partitioning_type.must_equal "DAY"
