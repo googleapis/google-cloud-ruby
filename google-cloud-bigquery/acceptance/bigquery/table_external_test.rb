@@ -35,13 +35,7 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
   let(:data_csv) { CSV.generate { |csv| data.each { |row| csv << row } } }
   let(:data_io) { StringIO.new data_csv }
   let(:storage) { Google::Cloud.storage }
-  let(:bucket) { Google::Cloud.storage.bucket("#{prefix}_external") || safe_gcs_execute { Google::Cloud.storage.create_bucket("#{prefix}_external") } }
   let(:file) { bucket.file("pets.csv") || bucket.create_file(data_io, "pets.csv") }
-
-  after do
-    bucket.files.all.map(&:delete)
-    safe_gcs_execute { bucket.delete }
-  end
 
   it "creates a table pointing to external data (with autodetect)" do
     csv_table = dataset.external file.to_gs_url do |csv|

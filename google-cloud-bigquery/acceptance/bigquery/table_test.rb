@@ -544,44 +544,25 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "imports data from a file in your bucket with load_job" do
-    begin
-      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-      file = bucket.create_file local_file
+    file = bucket.create_file local_file, random_file_destination_name
 
-      job = table.load_job file
-      job.wait_until_done!
-      job.wont_be :failed?
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
-    end
+    job = table.load_job file
+    job.wait_until_done!
+    job.wont_be :failed?
   end
 
   it "imports data from a list of files in your bucket with load_job" do
-    begin
-      more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-      file1 = bucket.create_file local_file
-      file2 = bucket.create_file StringIO.new(more_data),
-                                 "more-kitten-test-data.json"
-      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+    more_data = rows.map { |row| JSON.generate row }.join("\n")
+    file1 = bucket.create_file local_file, random_file_destination_name
+    file2 = bucket.create_file StringIO.new(more_data), random_file_destination_name
+    gs_url = "gs://#{file2.bucket}/#{file2.name}"
 
-      # Test both by file object and URL as string
-      job = table.load_job [file1, gs_url]
-      job.wait_until_done!
-      job.wont_be :failed?
-      job.input_files.must_equal 2
-      job.output_rows.must_equal 6
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
-    end
+    # Test both by file object and URL as string
+    job = table.load_job [file1, gs_url]
+    job.wait_until_done!
+    job.wont_be :failed?
+    job.input_files.must_equal 2
+    job.output_rows.must_equal 6
   end
 
   it "imports data from a local file with load" do
@@ -590,40 +571,21 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "imports data from a file in your bucket with load" do
-    begin
-      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-      file = bucket.create_file local_file
+    file = bucket.create_file local_file, random_file_destination_name
 
-      result = table.load file
-      result.must_equal true
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
-    end
+    result = table.load file
+    result.must_equal true
   end
 
   it "imports data from a list of files in your bucket with load" do
-    begin
-      more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-      file1 = bucket.create_file local_file
-      file2 = bucket.create_file StringIO.new(more_data),
-                                 "more-kitten-test-data.json"
-      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+    more_data = rows.map { |row| JSON.generate row }.join("\n")
+    file1 = bucket.create_file local_file, random_file_destination_name
+    file2 = bucket.create_file StringIO.new(more_data), random_file_destination_name
+    gs_url = "gs://#{file2.bucket}/#{file2.name}"
 
-      # Test both by file object and URL as string
-      result = table.load [file1, gs_url]
-      result.must_equal true
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
-    end
+    # Test both by file object and URL as string
+    result = table.load [file1, gs_url]
+    result.must_equal true
   end
 
   it "copies itself to another table with copy_job" do
@@ -703,145 +665,113 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "extracts data to a url in your bucket with extract_job" do
-    begin
-      # Make sure there is data to extract...
-      load_job = table.load_job local_file
+    # Make sure there is data to extract...
+    load_job = table.load_job local_file
 
-      load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      load_job.wait_until_done!
+    load_job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    load_job.wait_until_done!
 
-      load_job.wont_be :failed?
-      load_job.destination.table_id.must_equal table.table_id
-      load_job.delimiter.must_equal ","
-      load_job.skip_leading_rows.must_equal 0
-      load_job.utf8?.must_equal true
-      load_job.iso8859_1?.must_equal false
-      load_job.quote.must_equal "\""
-      load_job.max_bad_records.must_equal 0
-      load_job.quoted_newlines?.must_equal false
-      load_job.json?.must_equal true
-      load_job.csv?.must_equal false
-      load_job.backup?.must_equal false
-      load_job.allow_jagged_rows?.must_equal false
-      load_job.ignore_unknown_values?.must_equal false
-      load_job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-      load_job.schema.wont_be :empty?
-      load_job.input_files.must_equal 1
-      load_job.input_file_bytes.must_be :>, 0
-      load_job.output_rows.must_be :>, 0
-      load_job.output_bytes.must_be :>, 0
+    load_job.wont_be :failed?
+    load_job.destination.table_id.must_equal table.table_id
+    load_job.delimiter.must_equal ","
+    load_job.skip_leading_rows.must_equal 0
+    load_job.utf8?.must_equal true
+    load_job.iso8859_1?.must_equal false
+    load_job.quote.must_equal "\""
+    load_job.max_bad_records.must_equal 0
+    load_job.quoted_newlines?.must_equal false
+    load_job.json?.must_equal true
+    load_job.csv?.must_equal false
+    load_job.backup?.must_equal false
+    load_job.allow_jagged_rows?.must_equal false
+    load_job.ignore_unknown_values?.must_equal false
+    load_job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+    load_job.schema.wont_be :empty?
+    load_job.input_files.must_equal 1
+    load_job.input_file_bytes.must_be :>, 0
+    load_job.output_rows.must_be :>, 0
+    load_job.output_bytes.must_be :>, 0
 
-      Tempfile.open "empty_extract_file.json" do |tmp|
-        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-        extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-        extract_job = table.extract_job extract_url do |j|
-          j.labels = labels
-        end
-
-        extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-        extract_job.labels.must_equal labels
-        extract_job.wait_until_done!
-
-        extract_job.wont_be :failed?
-        extract_job.source.table_id.must_equal table.table_id
-        extract_job.compression?.must_equal false
-        extract_job.json?.must_equal true
-        extract_job.csv?.must_equal false
-        extract_job.delimiter.must_equal ","
-        extract_job.print_header?.must_equal true
-        extract_job.destinations_file_counts.wont_be :empty?
-        extract_job.destinations_counts.wont_be :empty?
-
-        extract_file = bucket.file "kitten-test-data-backup.json"
-        downloaded_file = extract_file.download tmp.path
-        downloaded_file.size.must_be :>, 0
+    Tempfile.open "empty_extract_file.json" do |tmp|
+      dest_file_name = random_file_destination_name
+      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
+      extract_job = table.extract_job extract_url do |j|
+        j.labels = labels
       end
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
+
+      extract_job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+      extract_job.labels.must_equal labels
+      extract_job.wait_until_done!
+
+      extract_job.wont_be :failed?
+      extract_job.source.table_id.must_equal table.table_id
+      extract_job.compression?.must_equal false
+      extract_job.json?.must_equal true
+      extract_job.csv?.must_equal false
+      extract_job.delimiter.must_equal ","
+      extract_job.print_header?.must_equal true
+      extract_job.destinations_file_counts.wont_be :empty?
+      extract_job.destinations_counts.wont_be :empty?
+
+      extract_file = bucket.file dest_file_name
+      downloaded_file = extract_file.download tmp.path
+      downloaded_file.size.must_be :>, 0
     end
   end
 
   it "extracts data to a file in your bucket with extract_job" do
-    begin
-      # Make sure there is data to extract...
-      load_job = table.load_job local_file
-      load_job.wait_until_done!
-      Tempfile.open "empty_extract_file.json" do |tmp|
-        tmp.size.must_equal 0
-        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-        extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
-        job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    # Make sure there is data to extract...
+    load_job = table.load_job local_file
+    load_job.wait_until_done!
+    Tempfile.open "empty_extract_file.json" do |tmp|
+      tmp.size.must_equal 0
+      dest_file_name = random_file_destination_name
+      extract_file = bucket.create_file tmp, dest_file_name
+      job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-        extract_job = table.extract_job extract_file, job_id: job_id
-        extract_job.job_id.must_equal job_id
-        extract_job.wait_until_done!
-        extract_job.wont_be :failed?
-        # Refresh to get the latest file data
-        extract_file = bucket.file "kitten-test-data-backup.json"
-        downloaded_file = extract_file.download tmp.path
-        downloaded_file.size.must_be :>, 0
-      end
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
+      extract_job = table.extract_job extract_file, job_id: job_id
+      extract_job.job_id.must_equal job_id
+      extract_job.wait_until_done!
+      extract_job.wont_be :failed?
+      # Refresh to get the latest file data
+      extract_file = bucket.file dest_file_name
+      downloaded_file = extract_file.download tmp.path
+      downloaded_file.size.must_be :>, 0
     end
   end
 
   it "extracts data to a url in your bucket with extract" do
-    begin
-      # Make sure there is data to extract...
-      result = table.load local_file
+    # Make sure there is data to extract...
+    result = table.load local_file
+    result.must_equal true
+
+    Tempfile.open "empty_extract_file.json" do |tmp|
+      dest_file_name = random_file_destination_name
+      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
+      result = table.extract extract_url
       result.must_equal true
 
-      Tempfile.open "empty_extract_file.json" do |tmp|
-        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-        extract_url = "gs://#{bucket.name}/kitten-test-data-backup.json"
-        result = table.extract extract_url
-        result.must_equal true
-
-        extract_file = bucket.file "kitten-test-data-backup.json"
-        downloaded_file = extract_file.download tmp.path
-        downloaded_file.size.must_be :>, 0
-      end
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
+      extract_file = bucket.file dest_file_name
+      downloaded_file = extract_file.download tmp.path
+      downloaded_file.size.must_be :>, 0
     end
   end
 
   it "extracts data to a file in your bucket with extract" do
-    begin
-      # Make sure there is data to extract...
-      result = table.load local_file
-      result.must_equal true
-      Tempfile.open "empty_extract_file.json" do |tmp|
-        tmp.size.must_equal 0
-        bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-        extract_file = bucket.create_file tmp, "kitten-test-data-backup.json"
+    # Make sure there is data to extract...
+    result = table.load local_file
+    result.must_equal true
+    Tempfile.open "empty_extract_file.json" do |tmp|
+      tmp.size.must_equal 0
+      dest_file_name = random_file_destination_name
+      extract_file = bucket.create_file tmp, dest_file_name
 
-        result = table.extract extract_file
-        result.must_equal true
-        # Refresh to get the latest file data
-        extract_file = bucket.file "kitten-test-data-backup.json"
-        downloaded_file = extract_file.download tmp.path
-        downloaded_file.size.must_be :>, 0
-      end
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
+      result = table.extract extract_file
+      result.must_equal true
+      # Refresh to get the latest file data
+      extract_file = bucket.file dest_file_name
+      downloaded_file = extract_file.download tmp.path
+      downloaded_file.size.must_be :>, 0
     end
   end
 end

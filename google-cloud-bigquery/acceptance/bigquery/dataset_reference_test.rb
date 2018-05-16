@@ -160,48 +160,28 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
 
   it "imports data from a list of files in your bucket with load_job" do
-    begin
-      more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-      file1 = bucket.create_file local_file
-      file2 = bucket.create_file StringIO.new(more_data),
-                                 "more-kitten-test-data.json"
-      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+    more_data = rows.map { |row| JSON.generate row }.join("\n")
+    file1 = bucket.create_file local_file, random_file_destination_name
+    file2 = bucket.create_file StringIO.new(more_data), random_file_destination_name
+    gs_url = "gs://#{file2.bucket}/#{file2.name}"
 
-      # Test both by file object and URL as string
-      job = dataset.load_job table_id, [file1, gs_url]
-      job.wait_until_done!
-      job.wont_be :failed?
-      job.input_files.must_equal 2
-      job.output_rows.must_equal 6
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
-    end
+    # Test both by file object and URL as string
+    job = dataset.load_job table_id, [file1, gs_url]
+    job.wait_until_done!
+    job.wont_be :failed?
+    job.input_files.must_equal 2
+    job.output_rows.must_equal 6
   end
 
   it "imports data from a list of files in your bucket with load" do
-    begin
-      more_data = rows.map { |row| JSON.generate row }.join("\n")
-      bucket = safe_gcs_execute { Google::Cloud.storage.create_bucket "#{prefix}_bucket" }
-      file1 = bucket.create_file local_file
-      file2 = bucket.create_file StringIO.new(more_data),
-                                 "more-kitten-test-data.json"
-      gs_url = "gs://#{file2.bucket}/#{file2.name}"
+    more_data = rows.map { |row| JSON.generate row }.join("\n")
+    file1 = bucket.create_file local_file, random_file_destination_name
+    file2 = bucket.create_file StringIO.new(more_data), random_file_destination_name
+    gs_url = "gs://#{file2.bucket}/#{file2.name}"
 
-      # Test both by file object and URL as string
-      result = dataset.load table_id, [file1, gs_url]
-      result.must_equal true
-    ensure
-      post_bucket = Google::Cloud.storage.bucket "#{prefix}_bucket"
-      if post_bucket
-        post_bucket.files.map &:delete
-        safe_gcs_execute { post_bucket.delete }
-      end
-    end
+    # Test both by file object and URL as string
+    result = dataset.load table_id, [file1, gs_url]
+    result.must_equal true
   end
 
   it "adds an access entry with specifying user scope" do
