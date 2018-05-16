@@ -15,12 +15,6 @@
 require "google/cloud/bigquery"
 require "google/cloud/storage"
 
-class File
-  def self.write _f, _d
-    true
-  end
-end
-
 module Google
   module Cloud
     module Bigquery
@@ -603,7 +597,27 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Bigquery::Schema.load" do
-    skip "This reads a File object, which is difficult to mock with doctest."
+    File.write "schema.json", '[{"name":"name","type":"STRING","mode":"REQUIRED"}]'
+  end
+
+  doctest.after "Google::Cloud::Bigquery::Schema.load" do
+    File.delete "schema.json"
+  end
+
+  doctest.after "Google::Cloud::Bigquery::Schema.dump" do
+    File.delete "schema.json"
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Schema#load" do
+    File.write "schema.json", '[{"name":"name","type":"STRING","mode":"REQUIRED"}]'
+  end
+
+  doctest.after "Google::Cloud::Bigquery::Schema#load" do
+    File.delete "schema.json"
+  end
+
+  doctest.after "Google::Cloud::Bigquery::Schema#dump" do
+    File.delete "schema.json"
   end
 
   doctest.before "Google::Cloud::Bigquery::Schema#field" do
@@ -813,6 +827,12 @@ YARD::Doctest.configure do |doctest|
       mock.expect :patch_table, table_full_gapi, ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::Table, Hash]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
     end
+
+    File.write "schema.json", '[{"name":"name","type":"STRING","mode":"REQUIRED"}]'
+  end
+
+  doctest.after "Google::Cloud::Bigquery::Table#schema" do
+    File.delete "schema.json"
   end
 
   doctest.before "Google::Cloud::Bigquery::Table#reference?" do
@@ -875,6 +895,14 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
     end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table::Updater#schema" do
+    File.write "schema.json", '[{"name":"name","type":"STRING","mode":"REQUIRED"}]'
+  end
+
+  doctest.after "Google::Cloud::Bigquery::Table::Updater#schema" do
+    File.delete "schema.json"
   end
 
   # Google::Cloud::Bigquery::Time

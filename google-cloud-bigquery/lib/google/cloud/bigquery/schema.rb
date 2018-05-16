@@ -52,9 +52,9 @@ module Google
           # The JSON schema file is the same as for the [`bq`
           # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file)
           # consisting of an array of JSON objects containing the following:
-          # - `name`: The column's [data
+          # - `name`: The column [name](https://cloud.google.com/bigquery/docs/schemas#column_names)
+          # - `type`: The column's [data
           #   type](https://cloud.google.com/bigquery/docs/schemas#standard_sql_data_types)
-          # - `type`: The column [name](https://cloud.google.com/bigquery/docs/schemas#column_names)
           # - `description`: (Optional) The column's [description](https://cloud.google.com/bigquery/docs/schemas#column_descriptions)
           # - `mode`: (Optional) The column's [mode](https://cloud.google.com/bigquery/docs/schemas#modes)
           #   (if unspecified, mode defaults to `NULLABLE`)
@@ -71,7 +71,7 @@ module Google
           #   require "google/cloud/bigquery"
           #
           #   schema = Google::Cloud::Bigquery::Schema.load(
-          #     File.read("path/to/schema.json")
+          #     File.read("schema.json")
           #   )
           #
           def load source
@@ -99,7 +99,7 @@ module Google
           #   table = dataset.table "my_table"
           #   schema = Google::Cloud::Bigquery::Schema.dump(
           #     table.schema,
-          #     "path/to/schema.json"
+          #     "schema.json"
           #   )
           #
           def dump schema, destination
@@ -191,9 +191,9 @@ module Google
         # The JSON schema file is the same as for the [`bq`
         # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file)
         # consisting of an array of JSON objects containing the following:
-        # - `name`: The column's [data
+        # - `name`: The column [name](https://cloud.google.com/bigquery/docs/schemas#column_names)
+        # - `type`: The column's [data
         #   type](https://cloud.google.com/bigquery/docs/schemas#standard_sql_data_types)
-        # - `type`: The column [name](https://cloud.google.com/bigquery/docs/schemas#column_names)
         # - `description`: (Optional) The column's [description](https://cloud.google.com/bigquery/docs/schemas#column_descriptions)
         # - `mode`: (Optional) The column's [mode](https://cloud.google.com/bigquery/docs/schemas#modes)
         #   (if unspecified, mode defaults to `NULLABLE`)
@@ -249,7 +249,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #   table = dataset.table "my_table"
-        #   table.schema.dump "path/to/schema.json"
+        #   table.schema.dump "schema.json"
         #
         def dump destination
           if destination.respond_to?(:rewind) && destination.respond_to?(:write)
