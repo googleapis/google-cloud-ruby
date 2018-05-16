@@ -44,12 +44,23 @@ module Google
     # run these first examples without the need to set up billing or to load
     # data (although we'll show you how to do that too.)
     #
-    # ## Enabling Ruby Logging
+    # ## Enabling Logging
     #
-    # To enable standard Ruby logging for this library, simply configure the
-    # desired logging output level for the
-    # [google-api-ruby-client](https://github.com/google/google-api-ruby-client/blob/master/README.md#logging)
-    # library:
+    # To enable logging for this library, set the logger for the underlying
+    # [Google API Client](https://github.com/google/google-api-ruby-client/blob/master/README.md#logging)
+    # library. The logger that you set may be a Ruby stdlib
+    # [`Logger`](https://ruby-doc.org/stdlib-2.4.0/libdoc/logger/rdoc/Logger.html)
+    # as shown below, or a
+    # [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+    # that will write logs to [Stackdriver
+    # Logging](https://cloud.google.com/logging/).
+    #
+    # If you do not set the logger explicitly and your application is running in
+    # a Rails environment, it will default to `Rails.logger`. Otherwise, if you
+    # do not set the logger and you are not using Rails, logging is disabled by
+    # default.
+    #
+    # Configuring a Ruby stdlib logger:
     #
     # ```ruby
     # require "logger"
@@ -60,9 +71,6 @@ module Google
     # # Set the Google API Client logger
     # Google::Apis.logger = my_logger
     # ```
-    #
-    # Per the google-api-ruby-client documentation, when running in a Rails
-    # environment, the client will default to using `::Rails.logger`.
     #
     # ## Listing Datasets and Tables
     #
