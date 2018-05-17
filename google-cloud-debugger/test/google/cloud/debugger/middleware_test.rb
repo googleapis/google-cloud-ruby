@@ -35,8 +35,28 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
   after do
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
-
+    Google::Cloud::Debugger::Middleware.reset_deferred_start
     debugger.stop
+  end
+
+  describe ".start_agents" do
+    it "starts pending agents" do
+      Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
+        middleware
+        debugger.agent.async_running?.must_equal false
+        Google::Cloud::Debugger::Middleware.start_agents
+        debugger.agent.async_running?.must_equal true
+      end
+    end
+
+    it "causes later agents to start automatically" do
+      Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
+        Google::Cloud::Debugger::Middleware.start_agents
+        debugger.agent.async_running?.must_equal false
+        middleware
+        debugger.agent.async_running?.must_equal true
+      end
+    end
   end
 
   describe "#call" do
@@ -48,6 +68,7 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
 
         # Construct middleware
         middleware
+        Google::Cloud::Debugger::Middleware.start_agents
 
         debugger.agent.stub :tracer, mocked_tracer do
           middleware.call({})

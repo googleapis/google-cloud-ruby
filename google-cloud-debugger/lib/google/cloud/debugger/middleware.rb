@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "set"
+
 require "google/cloud/logging/logger"
 require "google/cloud/debugger/request_quota_manager"
 
@@ -25,6 +27,56 @@ module Google
       # one isn't given already. It helps optimize Debugger Agent Tracer
       # performance by suspend and resume tracer between each request.
       class Middleware
+        ##
+        # Reset deferred start mechanism.
+        # @private
+        #
+        def self.reset_deferred_start
+          @debuggers_to_start = Set.new
+        end
+
+        reset_deferred_start
+
+        ##
+        # Start the debugger. Either adds it to the deferred list, or, if the
+        # deferred list has already been started, starts immediately.
+        #
+        # @param [Google::Cloud::Debugger::Project] debugger
+        #
+        # @private
+        #
+        def self.deferred_start(debugger)
+          if @debuggers_to_start
+            @debuggers_to_start << debugger
+          else
+            debugger.start
+          end
+        end
+
+        ##
+        # Immediately start all deferred debugger agents.
+        #
+        # This should be called when the application determines that it is safe
+        # to start agent background threads and open gRPC connections.
+        #
+        # Generally, this matters if the application forks worker processes;
+        # this method should be called only after workers are forked, since
+        # threads and network connections interact badly with fork. For
+        # example, when running Puma in clustered mode, this method should be
+        # called in an `on_worker_boot` block.
+        #
+        # If the application does no forking, this is generally safe to call
+        # any time early in the application initialization process.
+        #
+        # If this is never called, the debugger agent will be started when the
+        # first request is received. This should be safe, but it will probably
+        # mean breakpoints will not be recognized in that first request.
+        #
+        def self.start_agents
+          @debuggers_to_start.each { |d| d.start }
+          @debuggers_to_start = nil
+        end
+
         ##
         # Create a new Debugger Middleware.
         #
@@ -58,8 +110,7 @@ module Google
               Google::Cloud::Debugger::RequestQuotaManager.new
           end
 
-          # Immediately start the debugger agent
-          @debugger.start
+          Middleware.deferred_start(@debugger)
         end
 
         ##
@@ -73,6 +124,9 @@ module Google
         # @return [Rack::Response] The response from downstream Rack app
         #
         def call env
+          # Ensure the agent is running. (Note the start method is idempotent.)
+          @debugger.start
+
           # Enable/resume breakpoints tracing
           @debugger.agent.tracer.start
 
