@@ -55,7 +55,7 @@ module Google
         #
         # @private
         #
-        def self.deferred_start(debugger)
+        def self.deferred_start debugger
           if @debuggers_to_start
             @debuggers_to_start << debugger
           else
@@ -85,7 +85,8 @@ module Google
         # method at the appropriate time.
         #
         def self.start_agents
-          @debuggers_to_start.each { |d| d.start }
+          return unless @debuggers_to_start
+          @debuggers_to_start.each(&:start)
           @debuggers_to_start = nil
         end
 

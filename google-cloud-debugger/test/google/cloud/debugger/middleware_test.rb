@@ -57,6 +57,15 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
         debugger.agent.async_running?.must_equal true
       end
     end
+
+    it "is idempotent" do
+      Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
+        middleware
+        Google::Cloud::Debugger::Middleware.start_agents
+        Google::Cloud::Debugger::Middleware.start_agents
+        debugger.agent.async_running?.must_equal true
+      end
+    end
   end
 
   describe "#call" do
