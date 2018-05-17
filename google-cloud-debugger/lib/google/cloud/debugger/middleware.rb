@@ -25,7 +25,17 @@ module Google
       # Rack Middleware implementation that supports Stackdriver Debugger Agent
       # in Rack-based Ruby frameworks. It instantiates a new debugger agent if
       # one isn't given already. It helps optimize Debugger Agent Tracer
-      # performance by suspend and resume tracer between each request.
+      # performance by suspending and resuming the tracer between each request.
+      #
+      # To use this middleware, simply install it in your Rack configuration.
+      # The middleware will take care of registering itself with the
+      # Stackdriver Debugger and activating the debugger agent. The location
+      # of the middleware in the middleware stack matters: breakpoints will be
+      # detected in middleware appearing after but not before this middleware.
+      #
+      # For best results, you should also call {Middleware.start_agents}
+      # during application initialization. See its documentation for details.
+      #
       class Middleware
         ##
         # Reset deferred start mechanism.
@@ -54,23 +64,25 @@ module Google
         end
 
         ##
-        # Immediately start all deferred debugger agents.
-        #
-        # This should be called when the application determines that it is safe
-        # to start agent background threads and open gRPC connections.
+        # This should be called once the application determines that it is safe
+        # to start background threads and open gRPC connections. It informs
+        # the middleware system that it can start debugger agents.
         #
         # Generally, this matters if the application forks worker processes;
         # this method should be called only after workers are forked, since
         # threads and network connections interact badly with fork. For
-        # example, when running Puma in clustered mode, this method should be
-        # called in an `on_worker_boot` block.
+        # example, when running Puma in
+        # [clustered mode](https://github.com/puma/puma#clustered-mode), this
+        # method should be called in an `on_worker_boot` block.
         #
-        # If the application does no forking, this is generally safe to call
-        # any time early in the application initialization process.
+        # If the application does no forking, this method can be called any
+        # time early in the application initialization process.
         #
-        # If this is never called, the debugger agent will be started when the
-        # first request is received. This should be safe, but it will probably
-        # mean breakpoints will not be recognized in that first request.
+        # If {Middleware.start_agents} is never called, the debugger agent will
+        # be started when the first request is received. This should be safe,
+        # but it will probably mean breakpoints will not be recognized during
+        # that first request. For best results, an application should call this
+        # method at the appropriate time.
         #
         def self.start_agents
           @debuggers_to_start.each { |d| d.start }

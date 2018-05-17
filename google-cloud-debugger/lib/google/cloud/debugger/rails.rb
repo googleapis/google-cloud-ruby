@@ -38,8 +38,9 @@ module Google
       #
       class Railtie < ::Rails::Railtie
         ##
-        # Immediately start the debugger agent.
+        # Inform the Railtie that it is safe to start debugger agents.
         # This simply calls {Google::Cloud::Debugger::Middleware.start_agents}.
+        # See its documentation for more information.
         #
         def self.start_agents
           Google::Cloud::Debugger::Middleware.start_agents
