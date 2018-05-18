@@ -25,4 +25,30 @@ describe "Spanner Instances", :spanner do
     first_instance = spanner.instance all_instances.first.instance_id
     first_instance.must_be_kind_of Google::Cloud::Spanner::Instance
   end
+
+  describe "IAM Policies and Permissions" do
+    let(:service_account) { spanner.service.credentials.client.issuer }
+
+    it "allows policy to be updated on an instance" do
+      all_instances = spanner.instances.all.to_a
+      instance = spanner.instance all_instances.first.instance_id
+      # Check permissions first
+      roles = ["spanner.instances.getIamPolicy", "spanner.instances.setIamPolicy"]
+      permissions = instance.test_permissions roles
+      skip "Don't have permissions to get/set topic's policy" unless permissions == roles
+
+      instance.policy.must_be_kind_of Google::Cloud::Spanner::Policy
+
+      # We need a valid service account in order to update the policy
+      service_account.wont_be :nil?
+      role = "roles/viewer"
+      member = "serviceAccount:#{service_account}"
+      instance.policy do |p|
+        p.add role, member
+        p.add role, member # duplicate member will not be added to request
+      end
+
+      instance.policy.role(role).must_equal [member]
+    end
+  end
 end
