@@ -100,6 +100,19 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   let(:schema) { Google::Cloud::Bigquery::Schema.from_gapi schema_gapi }
   let(:empty_schema) { Google::Cloud::Bigquery::Schema.from_gapi }
 
+  let(:kittens_schema_json) do
+    <<-JSON
+    [
+        {"name":"id","type":"INTEGER","mode":"REQUIRED","description":"id description"},
+        {"name":"breed","type":"STRING","mode":"REQUIRED","description":"breed description"},
+        {"name":"name","type":"STRING","mode":"REQUIRED","description":"name description"},
+        {"name":"dob","type":"TIMESTAMP","mode":"NULLABLE","description":"dob description"},
+        {"name":"features","type":"RECORD","mode":"REPEATED","description":"features description",
+         "fields":[{"name":"feature","type":"STRING","mode":"REQUIRED","description":"feature description"}]}
+    ]
+    JSON
+  end
+
   it "has basic values" do
     schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     schema.fields.wont_be :empty?
@@ -311,7 +324,8 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   end
 
   it "can load the schema from a File" do
-    schema.load File.open("acceptance/data/schema.json")
+    io = StringIO.new(kittens_schema_json)
+    schema.load io
 
     schema.wont_be :empty?
     schema.fields.map(&:name).must_equal %w[id breed name dob features]
@@ -368,7 +382,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   end
 
   it "can load the schema from a JSON string" do
-    schema.load File.read("acceptance/data/schema.json")
+    schema.load kittens_schema_json
 
     schema.wont_be :empty?
     schema.fields.map(&:name).must_equal %w[id breed name dob features]
@@ -425,7 +439,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   end
 
   it "can load the schema from an Array of Hashes" do
-    json = JSON.parse(File.read("acceptance/data/schema.json"))
+    json = JSON.parse(kittens_schema_json)
     schema.load json
 
     schema.wont_be :empty?
@@ -634,14 +648,15 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     name["mode"].must_be :nil?
   end
 
-  it "can write load a schema with the class method" do
-    schema = Google::Cloud::Bigquery::Schema.load File.open("acceptance/data/schema.json")
+  it "can load a schema with the class method" do
+    io = StringIO.new(kittens_schema_json)
+    schema = Google::Cloud::Bigquery::Schema.load io
 
     schema.wont_be :empty?
     schema.fields.map(&:name).must_equal %w[id breed name dob features]
   end
 
-  it "can write write a schema with the class method" do
+  it "can dump a schema with the class method" do
     begin
       file = Tempfile.new("schema-test")
       Google::Cloud::Bigquery::Schema.dump schema, file

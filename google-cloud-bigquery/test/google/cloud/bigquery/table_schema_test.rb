@@ -58,6 +58,16 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
   let(:etag) { "etag123456789" }
 
+  let(:rank_schema_json) do
+    <<-JSON
+      [
+        {"name":"first_name","type":"STRING","mode":"REQUIRED"},
+        {"name":"rank","type":"INTEGER","mode":"NULLABLE", "description":"An integer value from 1 to 100"},
+        {"name":"accuracy","type":"FLOAT","mode":"NULLABLE"}
+      ]
+    JSON
+  end
+
   it "gets the schema, fields, and headers" do
     table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     table.schema.must_be :frozen?
@@ -207,9 +217,10 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
                 [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
     mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
     table.service.mocked_service = mock
+    io = StringIO.new(rank_schema_json)
 
     table.schema do |schema|
-      schema.load File.open("test/data/schema.json")
+      schema.load io
     end
 
     mock.verify
