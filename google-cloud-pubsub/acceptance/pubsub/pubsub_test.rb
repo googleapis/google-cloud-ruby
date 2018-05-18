@@ -297,9 +297,10 @@ describe Google::Cloud::Pubsub, :pubsub do
       member = "serviceAccount:#{service_account}"
       topic.policy do |p|
         p.add role, member
+        p.add role, member # duplicate member will not be added to request
       end
 
-      topic.policy.role(role).must_include member
+      topic.policy.role(role).must_equal [member]
     end
 
     it "allows policy to be updated on a subscription" do
