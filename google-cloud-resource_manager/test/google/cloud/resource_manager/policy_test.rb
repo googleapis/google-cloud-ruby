@@ -35,6 +35,22 @@ describe Google::Cloud::ResourceManager::Policy do
     role.frozen?.must_equal false
   end
 
+  describe :to_gapi do
+    it "creates a Google::Apis::CloudresourcemanagerV1::Policy object with the equivalent de-duped roles" do
+      # Add a duplicate entry.
+      existing_role, existing_members = policy.roles.first
+      policy.add(existing_role, existing_members.first)
+
+      gapi_policy = policy.to_gapi
+
+      gapi_policy.class.must_equal  Google::Apis::CloudresourcemanagerV1::Policy
+      gapi_policy.bindings.size.must_equal policy.roles.size
+      gapi_policy.bindings.each do |binding|
+        binding.members.sort.must_equal policy.roles[binding.role].uniq.sort
+      end
+    end
+  end
+
   describe :from_gapi do
     it "creates from a typical Google::Apis::CloudresourcemanagerV1::Policy object" do
       gapi = Google::Apis::CloudresourcemanagerV1::Policy.new(

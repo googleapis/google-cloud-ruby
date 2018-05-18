@@ -36,7 +36,7 @@ describe Google::Cloud::Storage::Policy do
   end
 
   describe :to_gapi do
-    it "creates a Google::Apis::StorageV1::Policy object with the equivalent deduped roles" do
+    it "creates a Google::Apis::StorageV1::Policy object with the equivalent de-duped roles" do
       # Add a duplicate entry.
       existing_role, existing_members = policy.roles.first
       policy.add(existing_role, existing_members.first)

@@ -169,7 +169,7 @@ module Google
               next if roles[role_name].empty?
               API::Binding.new(
                 role: role_name,
-                members: roles[role_name]
+                members: roles[role_name].uniq
               )
             end
           )
