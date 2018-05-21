@@ -15,6 +15,12 @@
 require "google/cloud/bigquery"
 require "google/cloud/storage"
 
+class File
+  def self.write _f, _d
+    true
+  end
+end
+
 module Google
   module Cloud
     module Bigquery
@@ -255,7 +261,7 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Bigquery::Dataset#load_job@Upload a file directly:" do
-    skip "This creates a File object, which is difficult to mock with doctest."
+    skip "This reads a File object, which is difficult to mock with doctest."
   end
 
   doctest.before "Google::Cloud::Bigquery::Dataset#load_job@Pass a google-cloud-storage `File` instance:" do
@@ -284,7 +290,7 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Bigquery::Dataset#load@Upload a file directly:" do
-    skip "This creates a File object, which is difficult to mock with doctest."
+    skip "This reads a File object, which is difficult to mock with doctest."
   end
 
   doctest.before "Google::Cloud::Bigquery::Dataset#load@Pass a google-cloud-storage `File` instance:" do
@@ -596,6 +602,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Schema.load" do
+    skip "This reads a File object, which is difficult to mock with doctest."
+  end
+
+
+  doctest.before "Google::Cloud::Bigquery::Schema#load" do
+    skip "This reads a File object, which is difficult to mock with doctest."
+  end
+
   doctest.before "Google::Cloud::Bigquery::Schema#field" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
@@ -711,7 +726,7 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Bigquery::Table#load_job@Upload a file directly:" do
-    skip "This creates a File object, which is difficult to mock with doctest."
+    skip "This reads a File object, which is difficult to mock with doctest."
   end
 
   doctest.before "Google::Cloud::Bigquery::Table#load_job@Pass a google-cloud-storage `File` instance:" do
@@ -740,7 +755,7 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Bigquery::Table#load@Upload a file directly:" do
-    skip "This creates a File object, which is difficult to mock with doctest."
+    skip "This reads a File object, which is difficult to mock with doctest."
   end
 
   doctest.before "Google::Cloud::Bigquery::Table#load@Pass a google-cloud-storage `File` instance:" do
@@ -805,6 +820,10 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Table#schema@Load the schema from a file" do
+    skip "This reads a File object, which is difficult to mock with doctest."
+  end
+
   doctest.before "Google::Cloud::Bigquery::Table#reference?" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
@@ -865,6 +884,10 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :insert_table, table_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
     end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Table::Updater#schema" do
+    skip "This reads a File object, which is difficult to mock with doctest."
   end
 
   # Google::Cloud::Bigquery::Time

@@ -46,6 +46,10 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi ] }
 
+  let(:short_field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED" }
+  let(:short_field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE" }
+  let(:short_field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE" }
+
   let(:field_string_required) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_string_required_gapi }
   let(:field_integer) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_integer_gapi }
   let(:field_float) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_float_gapi }
@@ -54,6 +58,16 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_record_repeated) { Google::Cloud::Bigquery::Schema::Field.from_gapi field_record_repeated_gapi }
 
   let(:etag) { "etag123456789" }
+
+  let(:rank_schema_json) do
+    <<-JSON
+      [
+        {"name":"first_name","type":"STRING","mode":"REQUIRED"},
+        {"name":"rank","type":"INTEGER","mode":"NULLABLE", "description":"An integer value from 1 to 100"},
+        {"name":"accuracy","type":"FLOAT","mode":"NULLABLE"}
+      ]
+    JSON
+  end
 
   it "gets the schema, fields, and headers" do
     table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
@@ -196,6 +210,28 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     mock.verify
 
     table.schema.fields.must_include field_timestamp
+  end
+
+  it "replaces the schema when loaded from a file" do
+    mock = Minitest::Mock.new
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+        fields: [short_field_string_required_gapi,
+                 short_field_integer_gapi,
+                 short_field_float_gapi])
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
+    mock.expect :patch_table, returned_table_gapi,
+                [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+    table.service.mocked_service = mock
+    io = StringIO.new(rank_schema_json)
+
+    table.schema do |schema|
+      schema.load io
+    end
+
+    mock.verify
   end
 
   it "sets a nested repeated schema field via a nested block" do

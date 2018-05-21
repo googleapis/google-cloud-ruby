@@ -573,6 +573,18 @@ module Google
             to_gapi.to_h == other.to_gapi.to_h
           end
 
+          # @private
+          def to_hash
+            h = {
+              name: name,
+              type: type,
+              mode: mode
+            }
+            h[:description] = description if description
+            h[:fields] = fields.map(&:to_hash) if record?
+            h
+          end
+
           protected
 
           def frozen_check!

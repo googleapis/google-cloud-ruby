@@ -191,6 +191,156 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
+  it "creates a table, loading the schema from a File" do
+    begin
+      table = dataset.create_table "schema_kittens" do |t|
+        t.schema.load File.open("acceptance/data/schema.json")
+      end
+
+      table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+      table.schema.wont_be :empty?
+      %i[id breed name dob features].each do |k|
+        table.headers.must_include k
+      end
+
+      fields = table.schema.fields
+      fields.each do |f|
+        f.name.wont_be :nil?
+        f.type.wont_be :nil?
+        f.description.wont_be :nil?
+        f.mode.wont_be :nil?
+
+        next unless f.name == "features"
+        f.fields.wont_be :empty?
+        f.fields.each do |c|
+          c.name.wont_be :nil?
+          c.type.wont_be :nil?
+          c.description.wont_be :nil?
+          c.mode.wont_be :nil?
+        end
+      end
+    ensure
+      t2 = dataset.table "schema_kittens"
+      t2.delete if t2
+    end
+  end
+
+  it "creates a table, loading the schema from a JSON string" do
+    begin
+      table = dataset.create_table "schema_kittens" do |t|
+        json = File.read("acceptance/data/schema.json")
+        t.schema.load json
+      end
+
+      table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+      table.schema.wont_be :empty?
+      %i[id breed name dob features].each do |k|
+        table.headers.must_include k
+      end
+
+      fields = table.schema.fields
+      fields.each do |f|
+        f.name.wont_be :nil?
+        f.type.wont_be :nil?
+        f.description.wont_be :nil?
+        f.mode.wont_be :nil?
+
+        next unless f.name == "features"
+        f.fields.wont_be :empty?
+        f.fields.each do |c|
+          c.name.wont_be :nil?
+          c.type.wont_be :nil?
+          c.description.wont_be :nil?
+          c.mode.wont_be :nil?
+        end
+      end
+    ensure
+      t2 = dataset.table "schema_kittens"
+      t2.delete if t2
+    end
+  end
+
+  it "creates a table, loading the schema from an Array of Hashes" do
+    begin
+      table = dataset.create_table "schema_kittens" do |t|
+        json = JSON.parse(File.read("acceptance/data/schema.json"))
+        t.schema.load json
+      end
+
+      table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
+      table.schema.wont_be :empty?
+      %i[id breed name dob features].each do |k|
+        table.headers.must_include k
+      end
+
+      fields = table.schema.fields
+      fields.each do |f|
+        f.name.wont_be :nil?
+        f.type.wont_be :nil?
+        f.description.wont_be :nil?
+        f.mode.wont_be :nil?
+
+        next unless f.name == "features"
+        f.fields.wont_be :empty?
+        f.fields.each do |c|
+          c.name.wont_be :nil?
+          c.type.wont_be :nil?
+          c.description.wont_be :nil?
+          c.mode.wont_be :nil?
+        end
+      end
+    ensure
+      t2 = dataset.table "schema_kittens"
+      t2.delete if t2
+    end
+  end
+
+  it "writes the schema of a table to a File" do
+    begin
+      file = Tempfile.new("schema-test")
+      table.schema.dump file
+      file.close
+
+      json = JSON.parse(File.read(file.path))
+      json.length.must_equal 4
+
+      json.each do |f|
+        f["name"].wont_be :nil?
+        f["type"].wont_be :nil?
+        f["description"].wont_be :nil?
+        f["mode"].wont_be :nil?
+      end
+    ensure
+      if file
+        file.close
+        file.delete
+      end
+    end
+  end
+
+  it "writes the schema of a table to a filename" do
+    begin
+      file = Tempfile.new("schema-test")
+      file.close
+      table.schema.dump file.path
+
+      json = JSON.parse(File.read(file.path))
+      json.length.must_equal 4
+
+      json.each do |f|
+        f["name"].wont_be :nil?
+        f["type"].wont_be :nil?
+        f["description"].wont_be :nil?
+        f["mode"].wont_be :nil?
+      end
+    ensure
+      if file
+        file.close
+        file.delete
+      end
+    end
+  end
+
   it "gets and sets time partitioning" do
     partitioned_table = dataset.table "weekly_kittens"
     if partitioned_table.nil?
@@ -245,6 +395,73 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
         end
       end
       t.headers.must_equal [:available, :countries_lived]
+    ensure
+      t2 = dataset.table "table_schema_test"
+      t2.delete if t2
+    end
+  end
+
+  it "updates its schema, loading from a File" do
+    begin
+      t = dataset.create_table "table_schema_test"
+      t.schema do |s|
+        s.integer "id", description: "id description", mode: :required
+        s.string "breed", description: "breed description", mode: :required
+        s.string "name", description: "name description", mode: :required
+        s.record "features", description: "features description", mode: :repeated do |s2|
+          s2.string "feature", description: "feature description", mode: :required
+        end
+      end
+      t.headers.must_equal %i[id breed name features]
+
+      t.schema do |s|
+        s.load File.open("acceptance/data/schema.json")
+      end
+
+      t.schema.wont_be :empty?
+      t.headers.must_equal %i[id breed name features dob]
+    ensure
+      t2 = dataset.table "table_schema_test"
+      t2.delete if t2
+    end
+  end
+
+  it "migrates the schema without dropping data when loading an updated schema from a file" do
+    begin
+      t = dataset.create_table "table_schema_test"
+      t.schema do |s|
+        s.integer "id", description: "id description", mode: :required
+        s.string "breed", description: "breed description", mode: :required
+        s.string "name", description: "name description", mode: :required
+        s.record "features", description: "features description", mode: :repeated do |s2|
+          s2.string "feature", description: "feature description", mode: :required
+        end
+      end
+
+      row = {
+          "id" => 1,
+          "breed" => "thecatkind",
+          "name" => "mike",
+          "features" => [
+              {
+                  "feature" => "Long Hair",
+              }
+          ]
+      }
+      t.insert row
+
+      t.schema do |s|
+        s.load File.open("acceptance/data/schema.json")
+      end
+
+      data = t.data
+      data.count.must_equal 1
+      data.first[:id].must_equal 1
+      data.first[:breed].must_equal "thecatkind"
+      data.first[:name].must_equal "mike"
+      data.first[:dob].must_be_nil
+      data.first[:features].count.must_equal 1
+      data.first[:features].first[:feature].must_equal "Long Hair"
     ensure
       t2 = dataset.table "table_schema_test"
       t2.delete if t2

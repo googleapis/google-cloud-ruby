@@ -700,6 +700,11 @@ module Google
         #   schema. If `false`, the fields will be added to the existing schema.
         #   When a table already contains data, schema changes must be additive.
         #   Thus, the default value is `false`.
+        #   When loading from a file this will always replace the schema, no
+        #   matter what `replace` is set to. You can update the schema (for
+        #   example, for a table that already contains data) by providing a
+        #   schema file that includes the existing schema plus any new
+        #   fields.
         # @yield [schema] a block for setting the schema
         # @yieldparam [Schema] schema the object accepting the schema
         #
@@ -718,6 +723,16 @@ module Google
         #       nested_schema.string "place", mode: :required
         #       nested_schema.integer "number_of_years", mode: :required
         #     end
+        #   end
+        #
+        # @example Load the schema from a file
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.create_table "my_table"
+        #   table.schema do |schema|
+        #     schema.load File.open("schema.json")
         #   end
         #
         # @!group Attributes
@@ -2427,6 +2442,11 @@ module Google
           #   schema. If `false`, the fields will be added to the existing
           #   schema. When a table already contains data, schema changes must be
           #   additive. Thus, the default value is `false`.
+          #   When loading from a file this will always replace the schema, no
+          #   matter what `replace` is set to. You can update the schema (for
+          #   example, for a table that already contains data) by providing a
+          #   schema file that includes the existing schema plus any new
+          #   fields.
           # @yield [schema] a block for setting the schema
           # @yieldparam [Schema] schema the object accepting the schema
           #
@@ -2446,6 +2466,19 @@ module Google
           #         r.string "place", mode: :required
           #         r.integer "number_of_years", mode: :required
           #       end
+          #     end
+          #   end
+          #
+          # @example Load the schema from a file
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table" do |t|
+          #     t.name = "My Table",
+          #     t.description = "A description of my table."
+          #     t.schema do |s|
+          #       s.load File.open("schema.json")
           #     end
           #   end
           #
