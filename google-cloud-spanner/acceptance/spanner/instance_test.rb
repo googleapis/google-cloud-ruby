@@ -48,7 +48,8 @@ describe "Spanner Instances", :spanner do
         p.add role, member # duplicate member will not be added to request
       end
 
-      instance.policy.role(role).must_equal [member]
+      role_member = instance.policy.role(role).select { |x| x == member }
+      role_member.size.must_equal 1
     end
   end
 end

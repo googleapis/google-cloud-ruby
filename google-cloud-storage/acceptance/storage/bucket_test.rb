@@ -148,7 +148,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
         p.add role, member # duplicate member will not be added to request
       end
 
-      bucket.policy.role(role).must_equal [member]
+      role_member = bucket.policy.role(role).select { |x| x == member }
+      role_member.size.must_equal 1
     end
 
     it "allows permissions to be tested on a bucket" do
