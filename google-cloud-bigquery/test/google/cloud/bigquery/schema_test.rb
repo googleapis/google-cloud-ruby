@@ -528,7 +528,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    json.length.must_equal 10
+    json.length.must_equal 11
 
     name = json.find { |record| record["name"] == "name" }
     name["type"].must_equal "STRING"
@@ -540,6 +540,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
 
     score = json.find { |record| record["name"] == "score" }
     score["type"].must_equal "FLOAT"
+    score["mode"].must_equal "NULLABLE"
+
+    score = json.find { |record| record["name"] == "pi" }
+    score["type"].must_equal "NUMERIC"
     score["mode"].must_equal "NULLABLE"
 
     active = json.find { |record| record["name"] == "active" }
@@ -604,7 +608,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    json.length.must_equal 10
+    json.length.must_equal 11
 
     name = json.find { |record| record["name"] == "name" }
     name["type"].must_equal "STRING"
@@ -616,6 +620,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
 
     score = json.find { |record| record["name"] == "score" }
     score["type"].must_equal "FLOAT"
+    score["mode"].must_equal "NULLABLE"
+
+    score = json.find { |record| record["name"] == "pi" }
+    score["type"].must_equal "NUMERIC"
     score["mode"].must_equal "NULLABLE"
 
     active = json.find { |record| record["name"] == "active" }
@@ -688,10 +696,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    json.length.must_equal 10
+    json.length.must_equal 11
 
     fields = json.map { |record| record["name"] }
     fields.wont_be :empty?
-    fields.must_equal %w[name age score active avatar started_at duration target_end birthday alts]
+    fields.must_equal %w[name age score pi active avatar started_at duration target_end birthday alts]
   end
 end
