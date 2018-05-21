@@ -85,7 +85,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::ListQueuesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_queues, mock_method)
 
@@ -155,7 +155,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::GetQueueRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_queue, mock_method)
 
@@ -224,7 +224,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_instance_of(Google::Cloud::Tasks::V2beta2::CreateQueueRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_queue, mock_method)
 
@@ -293,7 +293,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::UpdateQueueRequest, request)
         assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:update_queue, mock_method)
 
@@ -355,7 +355,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::DeleteQueueRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_queue, mock_method)
 
@@ -422,7 +422,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::PurgeQueueRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:purge_queue, mock_method)
 
@@ -489,7 +489,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::PauseQueueRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:pause_queue, mock_method)
 
@@ -556,7 +556,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::ResumeQueueRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:resume_queue, mock_method)
 
@@ -624,7 +624,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
         assert_equal(formatted_resource, request.resource)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
 
@@ -694,7 +694,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
         assert_equal(formatted_resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
 
@@ -764,7 +764,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
         assert_equal(formatted_resource, request.resource)
         assert_equal(permissions, request.permissions)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
 
@@ -835,7 +835,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::ListTasksRequest, request)
         assert_equal(formatted_parent, request.parent)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_tasks, mock_method)
 
@@ -905,7 +905,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::GetTaskRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_task, mock_method)
 
@@ -974,7 +974,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_instance_of(Google::Cloud::Tasks::V2beta2::CreateTaskRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(task, Google::Cloud::Tasks::V2beta2::Task), request.task)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_task, mock_method)
 
@@ -1038,7 +1038,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::DeleteTaskRequest, request)
         assert_equal(formatted_name, request.name)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:delete_task, mock_method)
 
@@ -1106,7 +1106,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_instance_of(Google::Cloud::Tasks::V2beta2::LeaseTasksRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:lease_tasks, mock_method)
 
@@ -1172,7 +1172,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_instance_of(Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest, request)
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
-        nil
+        OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub.new(:acknowledge_task, mock_method)
 
@@ -1245,7 +1245,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
         assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:renew_lease, mock_method)
 
@@ -1326,7 +1326,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_instance_of(Google::Cloud::Tasks::V2beta2::CancelLeaseRequest, request)
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:cancel_lease, mock_method)
 
@@ -1395,7 +1395,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Tasks::V2beta2::RunTaskRequest, request)
         assert_equal(formatted_name, request.name)
-        expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:run_task, mock_method)
 
