@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 / 2018-05-21
+
+* Add Schema.load and Schema.dump to read/write a table schema from/to a JSON file or other IO source. The JSON file schema is the same as for the bq CLI.
+* Add support for the NUMERIC data type.
+* Add documentation for enabling logging.
+
 ### 1.4.0 / 2018-05-07
 
 * Add Parquet support to #load and #load_job.
