@@ -10,3 +10,10 @@ gem "gcloud-jsondoc",
 # pin to the last known good version
 gem "public_suffix", "~> 2.0"
 gem "rake", "~> 11.0"
+
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
+  # WORKAROUND: builds are failing on Ruby 2.0.
+  # We think this is because of a bug in Bundler 1.6.
+  # Specify a viable version to allow the build to succeed.
+  gem "jwt", "~> 1.5"
+end
