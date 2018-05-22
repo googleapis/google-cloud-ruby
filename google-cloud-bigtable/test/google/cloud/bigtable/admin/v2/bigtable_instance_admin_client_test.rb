@@ -450,16 +450,23 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
       # Create expected grpc response
       name = "name3373707"
-      done = true
-      expected_response = { name: name, done: done }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+      display_name = "displayName1615086568"
+      expected_response = { name: name, display_name: display_name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Instance)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/partial_update_instance_test',
+        done: true,
+        response: result
+      )
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::PartialUpdateInstanceRequest, request)
         assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
-        OpenStruct.new(execute: expected_response)
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:partial_update_instance, mock_method)
 
@@ -474,7 +481,48 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           response = client.partial_update_instance(instance, update_mask)
 
           # Verify the response
-          assert_equal(expected_response, response)
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes partial_update_instance and returns an operation error.' do
+      # Create request parameters
+      instance = {}
+      update_mask = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#partial_update_instance.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/partial_update_instance_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::PartialUpdateInstanceRequest, request)
+        assert_equal(Google::Gax::to_proto(instance, Google::Bigtable::Admin::V2::Instance), request.instance)
+        assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub.new(:partial_update_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableInstanceAdminCredentials.new("partial_update_instance")
+
+      Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
+
+          # Call method
+          response = client.partial_update_instance(instance, update_mask)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
         end
       end
     end
@@ -1306,16 +1354,28 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
       # Create expected grpc response
       name = "name3373707"
-      done = true
-      expected_response = { name: name, done: done }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+      etag = "etag3123477"
+      description = "description-1724546052"
+      expected_response = {
+        name: name,
+        etag: etag,
+        description: description
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::AppProfile)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/update_app_profile_test',
+        done: true,
+        response: result
+      )
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::UpdateAppProfileRequest, request)
         assert_equal(Google::Gax::to_proto(app_profile, Google::Bigtable::Admin::V2::AppProfile), request.app_profile)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
-        OpenStruct.new(execute: expected_response)
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:update_app_profile, mock_method)
 
@@ -1330,7 +1390,48 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
           response = client.update_app_profile(app_profile, update_mask)
 
           # Verify the response
-          assert_equal(expected_response, response)
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes update_app_profile and returns an operation error.' do
+      # Create request parameters
+      app_profile = {}
+      update_mask = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#update_app_profile.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/update_app_profile_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::UpdateAppProfileRequest, request)
+        assert_equal(Google::Gax::to_proto(app_profile, Google::Bigtable::Admin::V2::AppProfile), request.app_profile)
+        assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub.new(:update_app_profile, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_app_profile")
+
+      Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
+
+          # Call method
+          response = client.update_app_profile(app_profile, update_mask)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
         end
       end
     end

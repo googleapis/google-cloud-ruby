@@ -264,55 +264,94 @@ module Google
 
               @create_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:create_table),
-                defaults["create_table"]
+                defaults["create_table"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @create_table_from_snapshot = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:create_table_from_snapshot),
-                defaults["create_table_from_snapshot"]
+                defaults["create_table_from_snapshot"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @list_tables = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:list_tables),
-                defaults["list_tables"]
+                defaults["list_tables"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @get_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:get_table),
-                defaults["get_table"]
+                defaults["get_table"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @delete_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:delete_table),
-                defaults["delete_table"]
+                defaults["delete_table"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @modify_column_families = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:modify_column_families),
-                defaults["modify_column_families"]
+                defaults["modify_column_families"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @drop_row_range = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:drop_row_range),
-                defaults["drop_row_range"]
+                defaults["drop_row_range"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @generate_consistency_token = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:generate_consistency_token),
-                defaults["generate_consistency_token"]
+                defaults["generate_consistency_token"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @check_consistency = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:check_consistency),
-                defaults["check_consistency"]
+                defaults["check_consistency"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @snapshot_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:snapshot_table),
-                defaults["snapshot_table"]
+                defaults["snapshot_table"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @get_snapshot = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:get_snapshot),
-                defaults["get_snapshot"]
+                defaults["get_snapshot"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @list_snapshots = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:list_snapshots),
-                defaults["list_snapshots"]
+                defaults["list_snapshots"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @delete_snapshot = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:delete_snapshot),
-                defaults["delete_snapshot"]
+                defaults["delete_snapshot"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
             end
 
@@ -361,7 +400,11 @@ module Google
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize +table_id+:
             #   table_id = ''
+            #
+            #   # TODO: Initialize +table+:
             #   table = {}
             #   response = bigtable_table_admin_client.create_table(formatted_parent, table_id, table)
 
@@ -410,7 +453,11 @@ module Google
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize +table_id+:
             #   table_id = ''
+            #
+            #   # TODO: Initialize +source_snapshot+:
             #   source_snapshot = ''
             #
             #   # Register a callback during the method call.
@@ -597,6 +644,8 @@ module Google
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #
+            #   # TODO: Initialize +modifications+:
             #   modifications = []
             #   response = bigtable_table_admin_client.modify_column_families(formatted_name, modifications)
 
@@ -712,6 +761,8 @@ module Google
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #
+            #   # TODO: Initialize +consistency_token+:
             #   consistency_token = ''
             #   response = bigtable_table_admin_client.check_consistency(formatted_name, consistency_token)
 
@@ -760,17 +811,49 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Longrunning::Operation]
+            # @return [Google::Gax::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigtable/admin/v2"
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #
+            #   # TODO: Initialize +cluster+:
             #   cluster = ''
+            #
+            #   # TODO: Initialize +snapshot_id+:
             #   snapshot_id = ''
+            #
+            #   # TODO: Initialize +description+:
             #   description = ''
-            #   response = bigtable_table_admin_client.snapshot_table(formatted_name, cluster, snapshot_id, description)
+            #
+            #   # Register a callback during the method call.
+            #   operation = bigtable_table_admin_client.snapshot_table(formatted_name, cluster, snapshot_id, description) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
 
             def snapshot_table \
                 name,
@@ -787,7 +870,15 @@ module Google
                 ttl: ttl
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::SnapshotTableRequest)
-              @snapshot_table.call(req, options)
+              operation = Google::Gax::Operation.new(
+                @snapshot_table.call(req, options),
+                @operations_client,
+                Google::Bigtable::Admin::V2::Snapshot,
+                Google::Bigtable::Admin::V2::SnapshotTableMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
             end
 
             # This is a private alpha release of Cloud Bigtable snapshots. This feature

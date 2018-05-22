@@ -778,9 +778,21 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      done = true
-      expected_response = { name: name_2, done: done }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+      data_size_bytes = 2110122398
+      description_2 = "description2568623279"
+      expected_response = {
+        name: name_2,
+        data_size_bytes: data_size_bytes,
+        description: description_2
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Snapshot)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/snapshot_table_test',
+        done: true,
+        response: result
+      )
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -789,7 +801,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(cluster, request.cluster)
         assert_equal(snapshot_id, request.snapshot_id)
         assert_equal(description, request.description)
-        OpenStruct.new(execute: expected_response)
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:snapshot_table, mock_method)
 
@@ -809,7 +821,57 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           )
 
           # Verify the response
-          assert_equal(expected_response, response)
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes snapshot_table and returns an operation error.' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      cluster = ''
+      snapshot_id = ''
+      description = ''
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#snapshot_table.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/snapshot_table_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::SnapshotTableRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(cluster, request.cluster)
+        assert_equal(snapshot_id, request.snapshot_id)
+        assert_equal(description, request.description)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub.new(:snapshot_table, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials.new("snapshot_table")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.snapshot_table(
+            formatted_name,
+            cluster,
+            snapshot_id,
+            description
+          )
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
         end
       end
     end

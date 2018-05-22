@@ -269,79 +269,136 @@ module Google
 
               @create_instance = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:create_instance),
-                defaults["create_instance"]
+                defaults["create_instance"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @get_instance = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:get_instance),
-                defaults["get_instance"]
+                defaults["get_instance"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @list_instances = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:list_instances),
-                defaults["list_instances"]
+                defaults["list_instances"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @update_instance = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:update_instance),
-                defaults["update_instance"]
+                defaults["update_instance"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @partial_update_instance = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:partial_update_instance),
-                defaults["partial_update_instance"]
+                defaults["partial_update_instance"],
+                params_extractor: proc do |request|
+                  {'instance.name' => request.instance.name}
+                end
               )
               @delete_instance = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:delete_instance),
-                defaults["delete_instance"]
+                defaults["delete_instance"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @create_cluster = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:create_cluster),
-                defaults["create_cluster"]
+                defaults["create_cluster"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @get_cluster = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:get_cluster),
-                defaults["get_cluster"]
+                defaults["get_cluster"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @list_clusters = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:list_clusters),
-                defaults["list_clusters"]
+                defaults["list_clusters"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @update_cluster = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:update_cluster),
-                defaults["update_cluster"]
+                defaults["update_cluster"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @delete_cluster = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:delete_cluster),
-                defaults["delete_cluster"]
+                defaults["delete_cluster"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @create_app_profile = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:create_app_profile),
-                defaults["create_app_profile"]
+                defaults["create_app_profile"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @get_app_profile = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:get_app_profile),
-                defaults["get_app_profile"]
+                defaults["get_app_profile"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @list_app_profiles = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:list_app_profiles),
-                defaults["list_app_profiles"]
+                defaults["list_app_profiles"],
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
               )
               @update_app_profile = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:update_app_profile),
-                defaults["update_app_profile"]
+                defaults["update_app_profile"],
+                params_extractor: proc do |request|
+                  {'app_profile.name' => request.app_profile.name}
+                end
               )
               @delete_app_profile = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:delete_app_profile),
-                defaults["delete_app_profile"]
+                defaults["delete_app_profile"],
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
               )
               @get_iam_policy = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:get_iam_policy),
-                defaults["get_iam_policy"]
+                defaults["get_iam_policy"],
+                params_extractor: proc do |request|
+                  {'resource' => request.resource}
+                end
               )
               @set_iam_policy = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:set_iam_policy),
-                defaults["set_iam_policy"]
+                defaults["set_iam_policy"],
+                params_extractor: proc do |request|
+                  {'resource' => request.resource}
+                end
               )
               @test_iam_permissions = Google::Gax.create_api_call(
                 @bigtable_instance_admin_stub.method(:test_iam_permissions),
-                defaults["test_iam_permissions"]
+                defaults["test_iam_permissions"],
+                params_extractor: proc do |request|
+                  {'resource' => request.resource}
+                end
               )
             end
 
@@ -379,8 +436,14 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.project_path("[PROJECT]")
+            #
+            #   # TODO: Initialize +instance_id+:
             #   instance_id = ''
+            #
+            #   # TODO: Initialize +instance+:
             #   instance = {}
+            #
+            #   # TODO: Initialize +clusters+:
             #   clusters = {}
             #
             #   # Register a callback during the method call.
@@ -529,8 +592,14 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize +display_name+:
             #   display_name = ''
+            #
+            #   # TODO: Initialize +type+:
             #   type = :TYPE_UNSPECIFIED
+            #
+            #   # TODO: Initialize +labels+:
             #   labels = {}
             #   response = bigtable_instance_admin_client.update_instance(formatted_name, display_name, type, labels)
 
@@ -566,15 +635,45 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Longrunning::Operation]
+            # @return [Google::Gax::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigtable/admin/v2"
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #
+            #   # TODO: Initialize +instance+:
             #   instance = {}
+            #
+            #   # TODO: Initialize +update_mask+:
             #   update_mask = {}
-            #   response = bigtable_instance_admin_client.partial_update_instance(instance, update_mask)
+            #
+            #   # Register a callback during the method call.
+            #   operation = bigtable_instance_admin_client.partial_update_instance(instance, update_mask) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
 
             def partial_update_instance \
                 instance,
@@ -585,7 +684,15 @@ module Google
                 update_mask: update_mask
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::PartialUpdateInstanceRequest)
-              @partial_update_instance.call(req, options)
+              operation = Google::Gax::Operation.new(
+                @partial_update_instance.call(req, options),
+                @operations_client,
+                Google::Bigtable::Admin::V2::Instance,
+                Google::Bigtable::Admin::V2::UpdateInstanceMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
             end
 
             # Delete an instance from a project.
@@ -640,7 +747,11 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize +cluster_id+:
             #   cluster_id = ''
+            #
+            #   # TODO: Initialize +cluster+:
             #   cluster = {}
             #
             #   # Register a callback during the method call.
@@ -784,7 +895,11 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+            #
+            #   # TODO: Initialize +location+:
             #   location = ''
+            #
+            #   # TODO: Initialize +serve_nodes+:
             #   serve_nodes = 0
             #
             #   # Register a callback during the method call.
@@ -899,7 +1014,11 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize +app_profile_id+:
             #   app_profile_id = ''
+            #
+            #   # TODO: Initialize +app_profile+:
             #   app_profile = {}
             #   response = bigtable_instance_admin_client.create_app_profile(formatted_parent, app_profile_id, app_profile)
 
@@ -1021,15 +1140,45 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @return [Google::Longrunning::Operation]
+            # @return [Google::Gax::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/bigtable/admin/v2"
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
+            #
+            #   # TODO: Initialize +app_profile+:
             #   app_profile = {}
+            #
+            #   # TODO: Initialize +update_mask+:
             #   update_mask = {}
-            #   response = bigtable_instance_admin_client.update_app_profile(app_profile, update_mask)
+            #
+            #   # Register a callback during the method call.
+            #   operation = bigtable_instance_admin_client.update_app_profile(app_profile, update_mask) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
 
             def update_app_profile \
                 app_profile,
@@ -1042,7 +1191,15 @@ module Google
                 ignore_warnings: ignore_warnings
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::UpdateAppProfileRequest)
-              @update_app_profile.call(req, options)
+              operation = Google::Gax::Operation.new(
+                @update_app_profile.call(req, options),
+                @operations_client,
+                Google::Bigtable::Admin::V2::AppProfile,
+                Google::Bigtable::Admin::V2::UpdateAppProfileMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
             end
 
             # This is a private alpha release of Cloud Bigtable replication. This feature
@@ -1066,6 +1223,8 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path("[PROJECT]", "[INSTANCE]", "[APP_PROFILE]")
+            #
+            #   # TODO: Initialize +ignore_warnings+:
             #   ignore_warnings = false
             #   bigtable_instance_admin_client.delete_app_profile(formatted_name, ignore_warnings)
 
@@ -1147,6 +1306,8 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize +policy+:
             #   policy = {}
             #   response = bigtable_instance_admin_client.set_iam_policy(formatted_resource, policy)
 
@@ -1189,6 +1350,8 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin.new
             #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize +permissions+:
             #   permissions = []
             #   response = bigtable_instance_admin_client.test_iam_permissions(formatted_resource, permissions)
 

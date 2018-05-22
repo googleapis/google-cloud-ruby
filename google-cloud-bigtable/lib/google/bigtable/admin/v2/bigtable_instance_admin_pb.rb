@@ -103,6 +103,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :name, :string, 1
     optional :ignore_warnings, :bool, 2
   end
+  add_message "google.bigtable.admin.v2.UpdateAppProfileMetadata" do
+  end
 end
 
 module Google
@@ -130,6 +132,7 @@ module Google
         ListAppProfilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesResponse").msgclass
         UpdateAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileRequest").msgclass
         DeleteAppProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteAppProfileRequest").msgclass
+        UpdateAppProfileMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileMetadata").msgclass
       end
     end
   end
