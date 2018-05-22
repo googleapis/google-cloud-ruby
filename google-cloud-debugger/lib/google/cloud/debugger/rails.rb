@@ -37,6 +37,15 @@ module Google
       # on how to configure the Railtie and Middleware.
       #
       class Railtie < ::Rails::Railtie
+        ##
+        # Inform the Railtie that it is safe to start debugger agents.
+        # This simply calls {Google::Cloud::Debugger::Middleware.start_agents}.
+        # See its documentation for more information.
+        #
+        def self.start_agents
+          Google::Cloud::Debugger::Middleware.start_agents
+        end
+
         config.google_cloud = ::ActiveSupport::OrderedOptions.new unless
           config.respond_to? :google_cloud
         config.google_cloud[:debugger] = ::ActiveSupport::OrderedOptions.new
@@ -87,7 +96,7 @@ module Google
 
           # Otherwise set use_debugger to true if Rails is running in
           # the production environment
-          Google::Cloud.configure.use_debugger ||= Rails.env.production?
+          Google::Cloud.configure.use_debugger ||= ::Rails.env.production?
         end
 
         # rubocop:disable all
