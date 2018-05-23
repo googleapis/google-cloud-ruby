@@ -102,11 +102,6 @@ module Google
           end
 
           fields = @metadata.row_type.fields
-          if fields.count.zero?
-            @closed = true
-            return []
-          end
-
           values = []
           buffered_responses = []
           buffer_upper_bound = 10
@@ -130,16 +125,18 @@ module Google
                 # This can set the resume_token to nil
                 resume_token = grpc.resume_token
 
-                buffered_responses.each do |resp|
-                  if chunked_value
-                    resp.values.unshift merge(chunked_value, resp.values.shift)
-                    chunked_value = nil
-                  end
-                  to_iterate = values + Array(resp.values)
-                  chunked_value = to_iterate.pop if resp.chunked_value
-                  values = to_iterate.pop(to_iterate.count % fields.count)
-                  to_iterate.each_slice(fields.count) do |slice|
-                    yield Data.from_grpc(slice, fields)
+                if fields.count > 0
+                  buffered_responses.each do |resp|
+                    if chunked_value
+                      resp.values.unshift merge(chunked_value, resp.values.shift)
+                      chunked_value = nil
+                    end
+                    to_iterate = values + Array(resp.values)
+                    chunked_value = to_iterate.pop if resp.chunked_value
+                    values = to_iterate.pop(to_iterate.count % fields.count)
+                    to_iterate.each_slice(fields.count) do |slice|
+                      yield Data.from_grpc(slice, fields)
+                    end
                   end
                 end
 
@@ -174,20 +171,22 @@ module Google
           end
 
           # clear out any remaining values left over
-          buffered_responses.each do |resp|
-            if chunked_value
-              resp.values.unshift merge(chunked_value, resp.values.shift)
-              chunked_value = nil
+          if fields.count > 0
+            buffered_responses.each do |resp|
+              if chunked_value
+                resp.values.unshift merge(chunked_value, resp.values.shift)
+                chunked_value = nil
+              end
+              to_iterate = values + Array(resp.values)
+              chunked_value = to_iterate.pop if resp.chunked_value
+              values = to_iterate.pop(to_iterate.count % fields.count)
+              to_iterate.each_slice(fields.count) do |slice|
+                yield Data.from_grpc(slice, fields)
+              end
             end
-            to_iterate = values + Array(resp.values)
-            chunked_value = to_iterate.pop if resp.chunked_value
-            values = to_iterate.pop(to_iterate.count % fields.count)
-            to_iterate.each_slice(fields.count) do |slice|
+            values.each_slice(fields.count) do |slice|
               yield Data.from_grpc(slice, fields)
             end
-          end
-          values.each_slice(fields.count) do |slice|
-            yield Data.from_grpc(slice, fields)
           end
 
           # If we get this far then we can release the session
@@ -196,6 +195,33 @@ module Google
         end
 
         # rubocop:enable all
+
+        ##
+        # @private
+        # Get row count from stats. This will be the exact row count for DML
+        # statements, and the lower bound row count for PDML statements.
+        def row_count
+          return @stats.row_count_lower_bound if row_count_lower_bound?
+          return @stats.row_count_exact       if row_count_exact?
+          nil
+        end
+
+        ##
+        # @private
+        # Whether the row count is the lower bound row count for PDML
+        # statements.
+        def row_count_lower_bound?
+          return nil if @stats.nil?
+          @stats.row_count == :row_count_lower_bound
+        end
+
+        ##
+        # @private
+        # Whether the row count is the exact row count for DML statements.
+        def row_count_exact?
+          return nil if @stats.nil?
+          @stats.row_count == :row_count_exact
+        end
 
         # @private
         def self.from_enum enum, service
