@@ -1,5 +1,11 @@
 # Release History
 
+### 0.32.0 / 2018-05-24
+
+* Delay starting the debugger agent until the first request to ensure it
+  happens after workers are forked. Should prevent grpc from malfunctioning in
+  this case.
+
 ### 0.31.0 / 2018-02-27
 
 * Use Google Cloud Shared Configuration.
