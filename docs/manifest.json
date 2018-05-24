@@ -268,8 +268,9 @@
       "name": "google-cloud-firestore",
       "defaultService": "google/cloud/firestore",
       "versions": [
-        "v0.21.0",
+        "v0.21.1",
         "master",
+        "v0.21.0",
         "v0.20.0"
       ]
     },
