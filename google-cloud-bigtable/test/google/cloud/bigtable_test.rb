@@ -14,6 +14,9 @@
 
 
 require "test_helper"
+require "google/cloud/bigtable/instance_admin_client"
+require "google/cloud/bigtable/table_admin_client"
+require "google/cloud/bigtable/data_client"
 
 describe Google::Cloud do
   describe "#bigtable" do
