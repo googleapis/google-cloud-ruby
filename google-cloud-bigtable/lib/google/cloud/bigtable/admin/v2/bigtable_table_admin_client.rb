@@ -424,13 +424,14 @@ module Google
               @create_table.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable snapshots. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Creates a new table from the specified snapshot. The target table must
             # not exist. The snapshot and the table must be in the same instance.
+            #
+            # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+            # feature is not currently available to most Cloud Bigtable customers. This
+            # feature might be changed in backward-incompatible ways and is not
+            # recommended for production use. It is not subject to any SLA or deprecation
+            # policy.
             #
             # @param parent [String]
             #   The unique name of the instance in which to create the table.
@@ -700,11 +701,6 @@ module Google
               nil
             end
 
-            # This is a private alpha release of Cloud Bigtable replication. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Generates a consistency token for a Table, which can be used in
             # CheckConsistency to check whether mutations to the table that finished
             # before this call started have been replicated. The tokens will be available
@@ -736,11 +732,6 @@ module Google
               @generate_consistency_token.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable replication. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Checks replication consistency based on a consistency token, that is, if
             # replication has caught up based on the conditions specified in the token
             # and the check request.
@@ -778,13 +769,14 @@ module Google
               @check_consistency.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable snapshots. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Creates a new snapshot in the specified cluster from the specified
             # source table. The cluster and the table must be in the same instance.
+            #
+            # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+            # feature is not currently available to most Cloud Bigtable customers. This
+            # feature might be changed in backward-incompatible ways and is not
+            # recommended for production use. It is not subject to any SLA or deprecation
+            # policy.
             #
             # @param name [String]
             #   The unique name of the table to have the snapshot taken.
@@ -881,12 +873,13 @@ module Google
               operation
             end
 
-            # This is a private alpha release of Cloud Bigtable snapshots. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Gets metadata information about the specified snapshot.
+            #
+            # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+            # feature is not currently available to most Cloud Bigtable customers. This
+            # feature might be changed in backward-incompatible ways and is not
+            # recommended for production use. It is not subject to any SLA or deprecation
+            # policy.
             #
             # @param name [String]
             #   The unique name of the requested snapshot.
@@ -914,12 +907,13 @@ module Google
               @get_snapshot.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable snapshots. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Lists all snapshots associated with the specified cluster.
+            #
+            # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+            # feature is not currently available to most Cloud Bigtable customers. This
+            # feature might be changed in backward-incompatible ways and is not
+            # recommended for production use. It is not subject to any SLA or deprecation
+            # policy.
             #
             # @param parent [String]
             #   The unique name of the cluster for which snapshots should be listed.
@@ -973,12 +967,13 @@ module Google
               @list_snapshots.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable snapshots. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Permanently deletes the specified snapshot.
+            #
+            # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+            # feature is not currently available to most Cloud Bigtable customers. This
+            # feature might be changed in backward-incompatible ways and is not
+            # recommended for production use. It is not subject to any SLA or deprecation
+            # policy.
             #
             # @param name [String]
             #   The unique name of the snapshot to be deleted.

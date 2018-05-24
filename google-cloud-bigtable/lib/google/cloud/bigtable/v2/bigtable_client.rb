@@ -226,11 +226,6 @@ module Google
           #   Values are of the form
           #   +projects/<project>/instances/<instance>/tables/<table>+.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param rows [Google::Bigtable::V2::RowSet | Hash]
@@ -289,11 +284,6 @@ module Google
           #   Values are of the form
           #   +projects/<project>/instances/<instance>/tables/<table>+.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
@@ -340,11 +330,6 @@ module Google
           #   A hash of the same form as `Google::Bigtable::V2::Mutation`
           #   can also be provided.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
@@ -396,11 +381,6 @@ module Google
           #   A hash of the same form as `Google::Bigtable::V2::MutateRowsRequest::Entry`
           #   can also be provided.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
@@ -446,11 +426,6 @@ module Google
           # @param row_key [String]
           #   The key of the row to which the conditional mutation should be applied.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param predicate_filter [Google::Bigtable::V2::RowFilter | Hash]
@@ -531,11 +506,6 @@ module Google
           #   A hash of the same form as `Google::Bigtable::V2::ReadModifyWriteRule`
           #   can also be provided.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]

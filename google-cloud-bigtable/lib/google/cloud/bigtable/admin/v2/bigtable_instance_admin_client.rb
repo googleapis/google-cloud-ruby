@@ -982,11 +982,6 @@ module Google
               nil
             end
 
-            # This is a private alpha release of Cloud Bigtable replication. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Creates an app profile within an instance.
             #
             # @param parent [String]
@@ -1038,11 +1033,6 @@ module Google
               @create_app_profile.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable replication. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Gets information about an app profile.
             #
             # @param name [String]
@@ -1070,11 +1060,6 @@ module Google
               @get_app_profile.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable replication. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Lists information about app profiles in an instance.
             #
             # @param parent [String]
@@ -1119,11 +1104,6 @@ module Google
               @list_app_profiles.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable replication. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Updates an app profile within an instance.
             #
             # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
@@ -1202,11 +1182,6 @@ module Google
               operation
             end
 
-            # This is a private alpha release of Cloud Bigtable replication. This feature
-            # is not currently available to most Cloud Bigtable customers. This feature
-            # might be changed in backward-incompatible ways and is not recommended for
-            # production use. It is not subject to any SLA or deprecation policy.
-            #
             # Deletes an app profile from an instance.
             #
             # @param name [String]
@@ -1241,12 +1216,6 @@ module Google
               nil
             end
 
-            # This is a private alpha release of Cloud Bigtable instance level
-            # permissions. This feature is not currently available to most Cloud Bigtable
-            # customers. This feature might be changed in backward-incompatible ways and
-            # is not recommended for production use. It is not subject to any SLA or
-            # deprecation policy.
-            #
             # Gets the access control policy for an instance resource. Returns an empty
             # policy if an instance exists but does not have a policy set.
             #
@@ -1276,12 +1245,6 @@ module Google
               @get_iam_policy.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable instance level
-            # permissions. This feature is not currently available to most Cloud Bigtable
-            # customers. This feature might be changed in backward-incompatible ways and
-            # is not recommended for production use. It is not subject to any SLA or
-            # deprecation policy.
-            #
             # Sets the access control policy on an instance resource. Replaces any
             # existing policy.
             #
@@ -1323,12 +1286,6 @@ module Google
               @set_iam_policy.call(req, options)
             end
 
-            # This is a private alpha release of Cloud Bigtable instance level
-            # permissions. This feature is not currently available to most Cloud Bigtable
-            # customers. This feature might be changed in backward-incompatible ways and
-            # is not recommended for production use. It is not subject to any SLA or
-            # deprecation policy.
-            #
             # Returns permissions that the caller has on the specified instance resource.
             #
             # @param resource [String]
