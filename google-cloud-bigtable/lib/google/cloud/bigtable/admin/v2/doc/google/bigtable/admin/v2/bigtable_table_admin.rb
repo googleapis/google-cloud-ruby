@@ -66,13 +66,13 @@ module Google
           class Split; end
         end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CreateTableFromSnapshot}
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] parent
         #   @return [String]
         #     The unique name of the instance in which to create the table.
@@ -187,11 +187,6 @@ module Google
           class Modification; end
         end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GenerateConsistencyToken}
         # @!attribute [rw] name
@@ -201,11 +196,6 @@ module Google
         #     +projects/<project>/instances/<instance>/tables/<table>+.
         class GenerateConsistencyTokenRequest; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Response message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GenerateConsistencyToken}
         # @!attribute [rw] consistency_token
@@ -213,11 +203,6 @@ module Google
         #     The generated consistency token.
         class GenerateConsistencyTokenResponse; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CheckConsistency}
         # @!attribute [rw] name
@@ -230,11 +215,6 @@ module Google
         #     The token created using GenerateConsistencyToken for the Table.
         class CheckConsistencyRequest; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Response message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CheckConsistency}
         # @!attribute [rw] consistent
@@ -243,13 +223,13 @@ module Google
         #     has caught up with the restrictions specified in the request.
         class CheckConsistencyResponse; end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::SnapshotTable}
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] name
         #   @return [String]
         #     The unique name of the table to have the snapshot taken.
@@ -277,13 +257,13 @@ module Google
         #     Description of the snapshot.
         class SnapshotTableRequest; end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GetSnapshot}
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] name
         #   @return [String]
         #     The unique name of the requested snapshot.
@@ -291,13 +271,13 @@ module Google
         #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
         class GetSnapshotRequest; end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListSnapshots}
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] parent
         #   @return [String]
         #     The unique name of the cluster for which snapshots should be listed.
@@ -313,13 +293,13 @@ module Google
         #     The value of +next_page_token+ returned by a previous call.
         class ListSnapshotsRequest; end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Response message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListSnapshots}
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] snapshots
         #   @return [Array<Google::Bigtable::Admin::V2::Snapshot>]
         #     The snapshots present in the requested cluster.
@@ -330,13 +310,13 @@ module Google
         #     page of results.
         class ListSnapshotsResponse; end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::DeleteSnapshot}
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] name
         #   @return [String]
         #     The unique name of the snapshot to be deleted.
@@ -344,12 +324,12 @@ module Google
         #     +projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>+.
         class DeleteSnapshotRequest; end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # The metadata for the Operation returned by SnapshotTable.
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] original_request
         #   @return [Google::Bigtable::Admin::V2::SnapshotTableRequest]
         #     The request that prompted the initiation of this SnapshotTable operation.
@@ -361,12 +341,12 @@ module Google
         #     The time at which the operation failed or was completed successfully.
         class SnapshotTableMetadata; end
 
-        # This is a private alpha release of Cloud Bigtable snapshots. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # The metadata for the Operation returned by CreateTableFromSnapshot.
+        #
+        # Note: This is a private alpha release of Cloud Bigtable snapshots. This
+        # feature is not currently available to most Cloud Bigtable customers. This
+        # feature might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] original_request
         #   @return [Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest]
         #     The request that prompted the initiation of this CreateTableFromSnapshot

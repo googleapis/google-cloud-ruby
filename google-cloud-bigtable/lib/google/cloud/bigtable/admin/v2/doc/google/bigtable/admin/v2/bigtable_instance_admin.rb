@@ -210,11 +210,6 @@ module Google
         #     The time at which the operation failed or was completed successfully.
         class UpdateClusterMetadata; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for BigtableInstanceAdmin.CreateAppProfile.
         # @!attribute [rw] parent
         #   @return [String]
@@ -235,11 +230,6 @@ module Google
         #     If true, ignore safety checks when creating the app profile.
         class CreateAppProfileRequest; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for BigtableInstanceAdmin.GetAppProfile.
         # @!attribute [rw] name
         #   @return [String]
@@ -247,11 +237,6 @@ module Google
         #     +projects/<project>/instances/<instance>/appProfiles/<app_profile>+.
         class GetAppProfileRequest; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for BigtableInstanceAdmin.ListAppProfiles.
         # @!attribute [rw] parent
         #   @return [String]
@@ -263,11 +248,6 @@ module Google
         #     The value of +next_page_token+ returned by a previous call.
         class ListAppProfilesRequest; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Response message for BigtableInstanceAdmin.ListAppProfiles.
         # @!attribute [rw] app_profiles
         #   @return [Array<Google::Bigtable::Admin::V2::AppProfile>]
@@ -279,11 +259,6 @@ module Google
         #     page of results.
         class ListAppProfilesResponse; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for BigtableInstanceAdmin.UpdateAppProfile.
         # @!attribute [rw] app_profile
         #   @return [Google::Bigtable::Admin::V2::AppProfile]
@@ -297,11 +272,6 @@ module Google
         #     If true, ignore safety checks when updating the app profile.
         class UpdateAppProfileRequest; end
 
-        # This is a private alpha release of Cloud Bigtable replication. This feature
-        # is not currently available to most Cloud Bigtable customers. This feature
-        # might be changed in backward-incompatible ways and is not recommended for
-        # production use. It is not subject to any SLA or deprecation policy.
-        #
         # Request message for BigtableInstanceAdmin.DeleteAppProfile.
         # @!attribute [rw] name
         #   @return [String]
@@ -311,6 +281,9 @@ module Google
         #   @return [true, false]
         #     If true, ignore safety checks when deleting the app profile.
         class DeleteAppProfileRequest; end
+
+        # The metadata for the Operation returned by UpdateAppProfile.
+        class UpdateAppProfileMetadata; end
       end
     end
   end

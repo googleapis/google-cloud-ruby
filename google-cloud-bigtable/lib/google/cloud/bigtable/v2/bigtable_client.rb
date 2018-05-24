@@ -171,27 +171,45 @@ module Google
 
             @read_rows = Google::Gax.create_api_call(
               @bigtable_stub.method(:read_rows),
-              defaults["read_rows"]
+              defaults["read_rows"],
+              params_extractor: proc do |request|
+                {'table_name' => request.table_name}
+              end
             )
             @sample_row_keys = Google::Gax.create_api_call(
               @bigtable_stub.method(:sample_row_keys),
-              defaults["sample_row_keys"]
+              defaults["sample_row_keys"],
+              params_extractor: proc do |request|
+                {'table_name' => request.table_name}
+              end
             )
             @mutate_row = Google::Gax.create_api_call(
               @bigtable_stub.method(:mutate_row),
-              defaults["mutate_row"]
+              defaults["mutate_row"],
+              params_extractor: proc do |request|
+                {'table_name' => request.table_name}
+              end
             )
             @mutate_rows = Google::Gax.create_api_call(
               @bigtable_stub.method(:mutate_rows),
-              defaults["mutate_rows"]
+              defaults["mutate_rows"],
+              params_extractor: proc do |request|
+                {'table_name' => request.table_name}
+              end
             )
             @check_and_mutate_row = Google::Gax.create_api_call(
               @bigtable_stub.method(:check_and_mutate_row),
-              defaults["check_and_mutate_row"]
+              defaults["check_and_mutate_row"],
+              params_extractor: proc do |request|
+                {'table_name' => request.table_name}
+              end
             )
             @read_modify_write_row = Google::Gax.create_api_call(
               @bigtable_stub.method(:read_modify_write_row),
-              defaults["read_modify_write_row"]
+              defaults["read_modify_write_row"],
+              params_extractor: proc do |request|
+                {'table_name' => request.table_name}
+              end
             )
           end
 
@@ -208,11 +226,6 @@ module Google
           #   Values are of the form
           #   +projects/<project>/instances/<instance>/tables/<table>+.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param rows [Google::Bigtable::V2::RowSet | Hash]
@@ -271,11 +284,6 @@ module Google
           #   Values are of the form
           #   +projects/<project>/instances/<instance>/tables/<table>+.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
@@ -322,11 +330,6 @@ module Google
           #   A hash of the same form as `Google::Bigtable::V2::Mutation`
           #   can also be provided.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
@@ -339,7 +342,11 @@ module Google
           #
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+          #
+          #   # TODO: Initialize +row_key+:
           #   row_key = ''
+          #
+          #   # TODO: Initialize +mutations+:
           #   mutations = []
           #   response = bigtable_client.mutate_row(formatted_table_name, row_key, mutations)
 
@@ -374,11 +381,6 @@ module Google
           #   A hash of the same form as `Google::Bigtable::V2::MutateRowsRequest::Entry`
           #   can also be provided.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
@@ -393,6 +395,8 @@ module Google
           #
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+          #
+          #   # TODO: Initialize +entries+:
           #   entries = []
           #   bigtable_client.mutate_rows(formatted_table_name, entries).each do |element|
           #     # Process element.
@@ -422,11 +426,6 @@ module Google
           # @param row_key [String]
           #   The key of the row to which the conditional mutation should be applied.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param predicate_filter [Google::Bigtable::V2::RowFilter | Hash]
@@ -462,6 +461,8 @@ module Google
           #
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+          #
+          #   # TODO: Initialize +row_key+:
           #   row_key = ''
           #   response = bigtable_client.check_and_mutate_row(formatted_table_name, row_key)
 
@@ -505,11 +506,6 @@ module Google
           #   A hash of the same form as `Google::Bigtable::V2::ReadModifyWriteRule`
           #   can also be provided.
           # @param app_profile_id [String]
-          #   This is a private alpha release of Cloud Bigtable replication. This feature
-          #   is not currently available to most Cloud Bigtable customers. This feature
-          #   might be changed in backward-incompatible ways and is not recommended for
-          #   production use. It is not subject to any SLA or deprecation policy.
-          #
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
           # @param options [Google::Gax::CallOptions]
@@ -522,7 +518,11 @@ module Google
           #
           #   bigtable_client = Google::Cloud::Bigtable::V2.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+          #
+          #   # TODO: Initialize +row_key+:
           #   row_key = ''
+          #
+          #   # TODO: Initialize +rules+:
           #   rules = []
           #   response = bigtable_client.read_modify_write_row(formatted_table_name, row_key, rules)
 
