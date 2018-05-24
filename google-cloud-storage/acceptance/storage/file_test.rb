@@ -360,8 +360,19 @@ describe Google::Cloud::Storage::File, :storage do
     downloaded = uploaded.download range: 3..6
     downloaded.must_be_kind_of StringIO
 
+    partial_download_custom_error_msg = lambda do
+      download_io = StringIO.new
+      uploaded.download download_io
+      download_io.rewind
+      puts "*"*42
+      puts "The full downloaded file contents are: #{download_io.read.inspect}"
+      puts "*"*42
+
+      "Another partial download failure"
+    end
+
     downloaded.rewind
-    downloaded.read.must_equal "lo w"
+    assert_equal "lo w", downloaded.read, partial_download_custom_error_msg
 
     uploaded.delete
   end
