@@ -35,6 +35,12 @@ module Google
     # 3. [Enable the Google Cloud OS Login API.](https://console.cloud.google.com/apis/api/oslogin)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
+    # ### Next Steps
+    # - Read the [Google Cloud OS Login API Product documentation][Product Documentation]
+    #   to learn more about the product and see How-to Guides.
+    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+    #   to see the full list of Cloud APIs that we cover.
+    #
     # ## Enabling Logging
     #
     # To enable logging for this library, set the logger for the underlying
@@ -67,12 +73,6 @@ module Google
     #   extend MyLogger
     # end
     # ```
-    #
-    # ### Next Steps
-    # - Read the [Google Cloud OS Login API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
     #
     # [Product Documentation]: https://cloud.google.com/compute/docs/oslogin/rest/
     #

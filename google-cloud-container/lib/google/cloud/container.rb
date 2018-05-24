@@ -47,6 +47,12 @@ module Google
     # response = cluster_manager_client.list_clusters(project_id_2, zone)
     # ```
     #
+    # ### Next Steps
+    # - Read the [Google Container Engine API Product documentation][Product Documentation]
+    #   to learn more about the product and see How-to Guides.
+    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+    #   to see the full list of Cloud APIs that we cover.
+    #
     # ## Enabling Logging
     #
     # To enable logging for this library, set the logger for the underlying
@@ -79,12 +85,6 @@ module Google
     #   extend MyLogger
     # end
     # ```
-    #
-    # ### Next Steps
-    # - Read the [Google Container Engine API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
     #
     # [Product Documentation]: https://cloud.google.com/container
     #
