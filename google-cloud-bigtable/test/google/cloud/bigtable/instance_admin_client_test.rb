@@ -14,7 +14,6 @@
 
 
 require "test_helper"
-require "google/cloud/bigtable/instance_admin_client"
 
 class InstanceAdminTestError < StandardError
   def initialize(operation_name)
