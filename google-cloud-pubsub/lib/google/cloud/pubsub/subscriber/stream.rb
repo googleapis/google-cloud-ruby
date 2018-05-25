@@ -53,6 +53,15 @@ module Google
             @push_thread_pool = Concurrent::FixedThreadPool.new \
               subscriber.push_threads
 
+            @stream_keepalive_task = Concurrent::TimerTask.new(
+              execution_interval: 30
+            ) do
+              # push empty request every 30 seconds to keep stream alive
+              unless inventory.empty?
+                push Google::Pubsub::V1::StreamingPullRequest.new
+              end
+            end.execute
+
             super() # to init MonitorMixin
           end
 
