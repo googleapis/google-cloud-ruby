@@ -106,7 +106,7 @@ send data.
 
 See the gem documentation for each individual gem for more information.
 
-## Compatibility
+## Supported Ruby Versions
 
 This library is supported on Ruby 2.2+.
 
