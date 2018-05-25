@@ -244,7 +244,7 @@ module GRPC
 end
 ```
 
-## Compatibility
+## Supported Ruby Versions
 
 This library is supported on Ruby 2.2 or later.
 

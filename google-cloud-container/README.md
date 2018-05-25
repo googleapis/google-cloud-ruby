@@ -31,17 +31,6 @@ zone = "us-central1-a"
 response = cluster_manager_client.list_clusters(project_id_2, zone)
 ```
 
-### Supported Ruby Versions
-
-This library is supported on Ruby 2.0+.
-
-However, Ruby 2.3 or later is strongly recommended, as earlier releases have
-reached or are nearing end-of-life. After June 1, 2018, Google will provide
-official support only for Ruby versions that are considered current and
-supported by Ruby Core (that is, Ruby versions that are either in normal
-maintenance or in security maintenance).
-See https://www.ruby-lang.org/en/downloads/branches/ for further details.
-
 ### Next Steps
 - Read the [Client Library Documentation][] for Google Container Engine API
   to see other available methods on the client.
@@ -71,6 +60,17 @@ module GRPC
   extend MyLogger
 end
 ```
+
+## Supported Ruby Versions
+
+This library is supported on Ruby 2.0+.
+
+However, Ruby 2.3 or later is strongly recommended, as earlier releases have
+reached or are nearing end-of-life. After June 1, 2018, Google will provide
+official support only for Ruby versions that are considered current and
+supported by Ruby Core (that is, Ruby versions that are either in normal
+maintenance or in security maintenance).
+See https://www.ruby-lang.org/en/downloads/branches/ for further details.
 
 [Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-container/latest/google/container/v1
 [Product Documentation]: https://cloud.google.com/container-engine
