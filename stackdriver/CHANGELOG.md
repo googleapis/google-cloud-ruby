@@ -1,5 +1,10 @@
 # Release History
 
+### 0.15.0 / 2018-05-24
+
+* Debugger 0.32.0
+* Trace 0.33.0
+
 ### 0.14.0 / 2018-02-27
 
 * Debugger 0.31.0
