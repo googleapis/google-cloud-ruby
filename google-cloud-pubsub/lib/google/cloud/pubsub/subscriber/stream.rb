@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "google/cloud/pubsub/subscriber/async_pusher"
+require "google/cloud/pubsub/subscriber/async_unary_pusher"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "google/cloud/pubsub/service"
 require "google/cloud/errors"
@@ -98,14 +98,7 @@ module Google
 
               # Once all the callbacks are complete, we can stop the publisher
               # and send the final request to the steeam.
-              if @async_pusher
-                request = @async_pusher.stop
-                if request
-                  Concurrent::Future.new(executor: @push_thread_pool) do
-                    @request_queue.push request
-                  end.execute
-                end
-              end
+              @async_pusher.stop if @async_pusher # will push current batch
 
               # Close the push thread pool now that the pusher is closed.
               @push_thread_pool.shutdown
@@ -125,7 +118,7 @@ module Google
             return true if ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new self
               @async_pusher.acknowledge ack_ids
               @inventory.remove ack_ids
               unpause_streaming!
@@ -141,7 +134,7 @@ module Google
             return true if mod_ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new self
               @async_pusher.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
@@ -168,7 +161,7 @@ module Google
             synchronize do
               return true if @inventory.empty?
 
-              @async_pusher ||= AsyncPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new self
               @async_pusher.delay subscriber.deadline, @inventory.ack_ids
             end
 
@@ -211,7 +204,7 @@ module Google
 
                 synchronize do
                   # Create receipt of received messages reception
-                  @async_pusher ||= AsyncPusher.new self
+                  @async_pusher ||= AsyncUnaryPusher.new self
                   @async_pusher.delay subscriber.deadline, received_ack_ids
 
                   # Add received messages to inventory

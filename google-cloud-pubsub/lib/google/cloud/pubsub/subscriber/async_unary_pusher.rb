@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ module Google
       class Subscriber
         ##
         # @private
-        # # AsyncPusher
+        # # AsyncUnaryPusher
         #
-        class AsyncPusher
+        class AsyncUnaryPusher
           include MonitorMixin
 
           attr_reader :batch
@@ -108,9 +108,7 @@ module Google
               @background_thread.kill if @background_thread
             end
 
-            return nil if @batch.nil?
-
-            @batch.request
+            push_batch_request!
           end
 
           def started?
@@ -147,10 +145,22 @@ module Google
           def push_batch_request!
             return unless @batch
 
-            request = @batch.request
-            Concurrent::Future.new(executor: @stream.push_thread_pool) do
-              @stream.push request
-            end.execute
+            service = @stream.subscriber.service
+            name = @stream.subscriber.subscription_name
+
+            if @batch.ack?
+              ack_ids = @batch.ack_ids
+              Concurrent::Future.new(executor: @stream.push_thread_pool) do
+                service.acknowledge name, *ack_ids
+              end.execute
+            end
+            if @batch.delay?
+              @batch.modify_deadline_hash.each do |delay_seconds, delay_ack_ids|
+                Concurrent::Future.new(executor: @stream.push_thread_pool) do
+                  service.modify_ack_deadline name, delay_ack_ids, delay_seconds
+                end.execute
+              end
+            end
 
             @batch = nil
             @batch_created_at = nil
@@ -209,6 +219,24 @@ module Google
 
             def ready?
               total_message_bytes >= @max_bytes
+            end
+
+            def ack?
+              @request.ack_ids.any?
+            end
+
+            def delay?
+              @request.modify_deadline_ack_ids.any?
+            end
+
+            def ack_ids
+              @request.ack_ids
+            end
+
+            def modify_deadline_hash
+              @request.modify_deadline_ack_ids.zip(
+                @request.modify_deadline_seconds
+              ).group_by { |_ack_id, seconds| seconds }
             end
 
             def total_message_bytes
