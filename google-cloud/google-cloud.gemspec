@@ -37,6 +37,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-spanner", "~> 1.3"
   gem.add_dependency "google-cloud-speech", "~> 0.29"
   gem.add_dependency "google-cloud-storage", "~> 1.10"
+  gem.add_dependency "google-cloud", "~> 0.1.0"
   gem.add_dependency "google-cloud-trace", "~> 0.31"
   gem.add_dependency "google-cloud-translate", "~> 1.2"
   gem.add_dependency "google-cloud-video_intelligence", "~> 1.0"

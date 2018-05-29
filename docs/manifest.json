@@ -489,6 +489,15 @@
       ]
     },
     {
+      "id": "google-cloud-tasks",
+      "name": "google-cloud-tasks",
+      "defaultService": "google/cloud/tasks",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-trace",
       "name": "google-cloud-trace",
       "defaultService": "google/cloud/trace",

@@ -798,6 +798,36 @@ $ gem install google-cloud-monitoring
  end
 ```
 
+### Cloud Tasks API (Alpha)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-tasks
+```
+
+#### Preview
+
+```rb
+ require "google/cloud/tasks/v2beta2"
+
+ cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+ formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
+
+ # Iterate over all results.
+ cloud_tasks_client.list_queues(formatted_parent).each do |element|
+   # Process element.
+ end
+
+ # Or iterate over results one page at a time.
+ cloud_tasks_client.list_queues(formatted_parent).each_page do |page|
+   # Process each page at a time.
+   page.each do |element|
+     # Process element.
+   end
+ end
+```
+
 ### Cloud Video Intelligence API (GA)
 
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
