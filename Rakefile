@@ -310,6 +310,7 @@ namespace :jsondoc do
       "google-cloud-spanner",
       "google-cloud-speech",
       "google-cloud-storage",
+      "google-cloud-tasks",
       "google-cloud-trace",
       "google-cloud-translate",
       "google-cloud-video_intelligence",
