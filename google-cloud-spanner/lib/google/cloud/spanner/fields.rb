@@ -343,6 +343,14 @@ module Google
           return false unless other.is_a? Fields
           pairs == other.pairs
         end
+        alias eql? ==
+
+        # @private
+        def hash
+          # The Protobuf object looks to maintain consistent hash values
+          # for objects with the same configuration.
+          to_grpc_type.hash
+        end
 
         # @private
         def to_s
