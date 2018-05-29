@@ -36,7 +36,7 @@ module Google
       #   results = db.execute "SELECT * FROM users"
       #
       #   results.fields.pairs.each do |name, type|
-      #     puts "Column #{name} is type {type}"
+      #     puts "Column #{name} is type #{type}"
       #   end
       #
       class Fields
