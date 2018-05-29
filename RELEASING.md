@@ -96,7 +96,7 @@ Follow the steps in [Adding a new gem to meta-packages](#adding-a-new-gem-to-met
 
 1. If you updated `google-cloud/google-cloud.gemspec` for a version change to any gem, repeat steps 1 through 21 for the `google-cloud` gem.
 
-1. If you updated `stackdriver/stackdriver.gemspec` for a version change to any gem, repeat steps 1 through 21 for the `stackdriver` gem. If any gem is new, first follow the steps in [Adding a new gem to meta-packages](#adding-a-new-gem-to-meta-packages), below.
+1. If you updated `stackdriver/stackdriver.gemspec` for a version change to any gem, repeat steps 1 through 21 for the `stackdriver` gem.
 
 1. Wait until the last tag build job has successfully completed on Circle CI. Then push your commits to the master branch. This will trigger another [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) build on master branch.
 
