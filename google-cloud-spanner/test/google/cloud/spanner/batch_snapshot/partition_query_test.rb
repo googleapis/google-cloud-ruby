@@ -283,6 +283,50 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     assert_partitions deserialized_partitions, sql, params: { dict: { env: "production", score: 0.9, project_ids: [1,2,3] } }
   end
 
+  it "can execute a query with an Array of Hashes" do
+    mock = Minitest::Mock.new
+    sql = "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)"
+    params = Google::Protobuf::Struct.new(fields: { "data" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "mike"), Google::Protobuf::Value.new(string_value: "mike@example.net")] )), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "chris"), Google::Protobuf::Value.new(string_value: "chris@example.net")] ))] )) } )
+    param_types = { "data" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "name", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "email", type: Google::Spanner::V1::Type.new(code: :STRING))] ))) }
+    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
+
+    struct_fields = Google::Cloud::Spanner::Fields.new name: :STRING, email: :STRING
+    partitions = batch_snapshot.partition_query "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)", params: { data: [{ name: "mike", email: "mike@example.net" }, { name: "chris", email: "chris@example.net" }] }
+
+    mock.verify
+
+    assert_partitions partitions, sql, params: { data: [{ name: "mike", email: "mike@example.net" }, { name: "chris", email: "chris@example.net" }] }
+
+    serialized_partitions = partitions.map(&:dump)
+    deserialized_partitions = serialized_partitions.map do |sp|
+      Google::Cloud::Spanner::Partition.load sp
+    end
+    assert_partitions deserialized_partitions, sql, params: { data: [{ name: "mike", email: "mike@example.net" }, { name: "chris", email: "chris@example.net" }] }
+  end
+
+  it "can execute a query with an Array of STRUCTs" do
+    mock = Minitest::Mock.new
+    sql = "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)"
+    params = Google::Protobuf::Struct.new(fields: { "data" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "mike"), Google::Protobuf::Value.new(string_value: "mike@example.net")] )), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "chris"), Google::Protobuf::Value.new(string_value: "chris@example.net")] ))] )) } )
+    param_types = { "data" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "name", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "email", type: Google::Spanner::V1::Type.new(code: :STRING))] ))) }
+    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: params, param_types: param_types, partition_options: nil, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
+
+    struct_fields = Google::Cloud::Spanner::Fields.new name: :STRING, email: :STRING
+    partitions = batch_snapshot.partition_query "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)", params: { data: [struct_fields.data(["mike", "mike@example.net"]), struct_fields.data(["chris","chris@example.net"])] }
+
+    mock.verify
+
+    assert_partitions partitions, sql, params: { data: [struct_fields.data(["mike", "mike@example.net"]), struct_fields.data(["chris","chris@example.net"])] }
+
+    serialized_partitions = partitions.map(&:dump)
+    deserialized_partitions = serialized_partitions.map do |sp|
+      Google::Cloud::Spanner::Partition.load sp
+    end
+    assert_partitions deserialized_partitions, sql, params: { data: [struct_fields.data(["mike", "mike@example.net"]), struct_fields.data(["chris","chris@example.net"])] }
+  end
+
   it "can execute a query with an empty Hash param" do
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users WHERE settings = @dict"
