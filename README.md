@@ -44,6 +44,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
+* [Cloud Tasks API](#cloud-tasks-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
@@ -706,6 +707,36 @@ backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
+### Cloud Tasks API (Alpha)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-tasks
+```
+
+#### Preview
+
+```rb
+ require "google/cloud/tasks/v2beta2"
+
+ cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+ formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
+
+ # Iterate over all results.
+ cloud_tasks_client.list_queues(formatted_parent).each do |element|
+   # Process element.
+ end
+
+ # Or iterate over results one page at a time.
+ cloud_tasks_client.list_queues(formatted_parent).each_page do |page|
+   # Process each page at a time.
+   page.each do |element|
+     # Process element.
+   end
+ end
+```
+
 ### Cloud Translation API (GA)
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
@@ -791,36 +822,6 @@ $ gem install google-cloud-monitoring
 
  # Or iterate over results one page at a time.
  metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
-   # Process each page at a time.
-   page.each do |element|
-     # Process element.
-   end
- end
-```
-
-### Cloud Tasks API (Alpha)
-
-#### Quick Start
-
-```sh
-$ gem install google-cloud-tasks
-```
-
-#### Preview
-
-```rb
- require "google/cloud/tasks/v2beta2"
-
- cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
- formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-
- # Iterate over all results.
- cloud_tasks_client.list_queues(formatted_parent).each do |element|
-   # Process element.
- end
-
- # Or iterate over results one page at a time.
- cloud_tasks_client.list_queues(formatted_parent).each_page do |page|
    # Process each page at a time.
    page.each do |element|
      # Process element.
