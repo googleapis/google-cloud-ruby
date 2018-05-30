@@ -44,7 +44,7 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Edit the gem's `CHANGELOG.md`. Using your notes from the previous step, write bullet-point lists of the major and minor changes. You can also add examples, fixes, thank yous, and anything else helpful or relevant. See google-cloud-node [v0.18.0](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/tag/v0.18.0) for an example with all the bells and whistles.
 
-1. Edit the gem's `version.rb` file, if present, or the `version` setting in its `.gemspec` file, changing the value to your new version number. Note: the `.gemspec` file may reference the `version.rb` file. For instance, `google-cloud`'s `.gemspec` references a `version.rb` file at `../lib/google/cloud/version`
+1. Edit the gem's `version.rb` file, if present, or the `version` setting in its `.gemspec` file, changing the value to your new version number. Note: The `.gemspec` file may reference the `version.rb` file. For instance, `google-cloud`'s `.gemspec` references a `version.rb` file at `../lib/google/cloud/version`.
 
 1. Edit (or add if new) the gem's entry in `docs/manifest.json`, adding your new version number to the head of the list, and moving `"master"` to be just below it.
 
