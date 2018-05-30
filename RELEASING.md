@@ -48,9 +48,10 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Edit (or add if new) the gem's entry in `docs/manifest.json`, adding your new version number to the head of the list, and moving `"master"` to be just below it.
 
-1. If the [semver](http://semver.org/) version change for your package requires an increase in the requirement for your package in `google-cloud/google-cloud.gemspec` and/or `stackdriver/stackdriver.gemspec`, replace the old version requirement with your new requirement. Note that because of the use of the [pessimistic operator (`~>`)](https://robots.thoughtbot.com/rubys-pessimistic-operator), only certain version changes will require updating the requirement. Note also that the dependency requirements in the `google-cloud` and `stackdriver` gems must remain compatible so the two can co-exist in the same bundle.
-
 1. If your package is new, ensure that it has been added to the [top-level `Gemfile`](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/Gemfile).
+Follow the steps in [Adding a new gem to meta-packages](#adding-a-new-gem-to-meta-packages), below.
+
+1. If the [semver](http://semver.org/) version change for your package requires an increase in the requirement for your package in `google-cloud/google-cloud.gemspec` and/or `stackdriver/stackdriver.gemspec`, replace the old version requirement with your new requirement. Note that because of the use of the [pessimistic operator (`~>`)](https://robots.thoughtbot.com/rubys-pessimistic-operator), only certain version changes will require updating the requirement. Note also that the dependency requirements in the `google-cloud` and `stackdriver` gems must remain compatible so the two can co-exist in the same bundle.
 
 1. If your package is new, ensure that a nav link and a main entry including code example have been added to the [top-level README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/google-cloud/v0.52.0/README.md).
 
@@ -93,9 +94,9 @@ After all [pull requests](https://github.com/GoogleCloudPlatform/google-cloud-ru
 
 1. Repeat steps 1 through 21 if you are releasing multiple gems.
 
-1. If you updated `google-cloud/google-cloud.gemspec` for a version change to any gem, repeat steps 1 through 21 for the `google-cloud` gem. If any gem is new, first follow the steps in [Adding a new gem to meta-packages](#adding-a-new-gem-to-meta-packages), below.
+1. If you updated `google-cloud/google-cloud.gemspec` for a version change to any gem, repeat steps 1 through 21 for the `google-cloud` gem.
 
-1. If you updated `stackdriver/stackdriver.gemspec` for a version change to any gem, repeat steps 1 through 21 for the `stackdriver` gem. If any gem is new, first follow the steps in [Adding a new gem to meta-packages](#adding-a-new-gem-to-meta-packages), below.
+1. If you updated `stackdriver/stackdriver.gemspec` for a version change to any gem, repeat steps 1 through 21 for the `stackdriver` gem.
 
 1. Wait until the last tag build job has successfully completed on Circle CI. Then push your commits to the master branch. This will trigger another [Circle CI](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-ruby) build on master branch.
 
