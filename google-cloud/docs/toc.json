@@ -713,6 +713,28 @@
       ]
     },
     {
+      "title": "Tasks",
+      "type": "google/cloud/tasks",
+      "patterns": ["\/tasks", "google\/api", "google\/protobuf"],
+      "nav": [
+        {
+          "title": "V2beta2",
+          "type": "google/cloud/tasks/v2beta2",
+          "patterns": ["\/tasks\/v2beta2", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "CloudTasksClient",
+              "type": "google/cloud/tasks/v2beta2/cloudtasksclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/tasks/v2beta2/datatypes"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Trace",
       "type": "google/cloud/trace",
       "patterns": ["\/trace", "\/cloudtrace"],

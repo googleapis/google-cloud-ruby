@@ -28,6 +28,7 @@ gem "google-cloud-resource_manager", path: "../google-cloud-resource_manager"
 gem "google-cloud-spanner", path: "../google-cloud-spanner"
 gem "google-cloud-speech", path: "../google-cloud-speech"
 gem "google-cloud-storage", path: "../google-cloud-storage"
+gem "google-cloud-tasks", path: "../google-cloud-tasks"
 gem "google-cloud-trace", path: "../google-cloud-trace"
 gem "google-cloud-translate", path: "../google-cloud-translate"
 gem "google-cloud-video_intelligence",
