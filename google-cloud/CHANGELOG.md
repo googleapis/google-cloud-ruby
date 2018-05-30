@@ -1,5 +1,9 @@
 # Release History
 
+### 0.54.0 / 2018-05-30
+
+* Add Google Cloud Tasks
+
 ### 0.53.0 / 2018-05-10
 
 * Add Google Cloud Memorystore for Redis.
