@@ -728,7 +728,7 @@
             },
             {
               "title": "Data Types",
-              "type": "google/tasks/v2beta2/datatypes"
+              "type": "google/cloud/tasks/v2beta2/datatypes"
             }
           ]
         }
