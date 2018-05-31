@@ -709,7 +709,9 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   app_profile = bigtable.app_profile("my-app-profile")
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   app_profile = instance.app_profile("my-app-profile")
         #
         #   if app_profile
         #     puts app_profile.name
