@@ -1,0 +1,1 @@
+{"id":"google/cloud/spanner/clientclosederror","name":"ClientClosedError","title":["Google","Cloud","Spanner","ClientClosedError"],"description":"<h1 id=\"clientclosederror\">ClientClosedError</h1>\n\n<p>The client is closed and can no longer be used.</p>","source":"google-cloud-spanner/lib/google/cloud/spanner/errors.rb#L69","resources":[],"examples":[],"methods":[]}
