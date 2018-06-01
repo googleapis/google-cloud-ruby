@@ -33,10 +33,10 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
   }
   let(:job_data) {
     {
-      "name": ops_name,
-      "metadata": {
-        "type_url": "type.googleapis.com/google.bigtable.admin.v2.CreateInstanceMetadata",
-        "value": ""
+      name: ops_name,
+      metadata: {
+        type_url: "type.googleapis.com/google.bigtable.admin.v2.CreateInstanceMetadata",
+        value: ""
       }
     }
   }

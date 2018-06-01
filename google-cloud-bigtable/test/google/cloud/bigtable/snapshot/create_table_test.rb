@@ -48,10 +48,10 @@ describe Google::Cloud::Bigtable::Snapshot, :create_table, :mock_bigtable do
   }
   let(:job_data) {
     {
-      "name": ops_name,
-      "metadata": {
-        "type_url": "type.googleapis.com/google.bigtable.admin.v2.CreateTableFromSnapshotMetadata",
-        "value": ""
+      name: ops_name,
+      metadata: {
+        type_url: "type.googleapis.com/google.bigtable.admin.v2.CreateTableFromSnapshotMetadata",
+        value: ""
       }
     }
   }

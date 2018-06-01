@@ -35,10 +35,10 @@ describe Google::Cloud::Bigtable::Instance, :create_cluster, :mock_bigtable do
   }
   let(:job_data) {
     {
-      "name": ops_name,
-      "metadata": {
-        "type_url": "type.googleapis.com/google.bigtable.admin.v2.CreateClusterMetadata",
-        "value": ""
+      name: ops_name,
+      metadata: {
+        type_url: "type.googleapis.com/google.bigtable.admin.v2.CreateClusterMetadata",
+        value: ""
       }
     }
   }

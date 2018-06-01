@@ -36,10 +36,10 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
   let(:instance) { Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service) }
   let(:job_data) {
     {
-      "name": ops_name,
-      "metadata": {
-        "type_url": "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata",
-        "value": ""
+      name: ops_name,
+      metadata: {
+        type_url: "type.googleapis.com/google.bigtable.admin.v2.UpdateInstanceMetadata",
+        value: ""
       }
     }
   }
