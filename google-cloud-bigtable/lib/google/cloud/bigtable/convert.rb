@@ -45,7 +45,7 @@ module Google
         # @return [Float, Integer, nil] Seconds with nano seconds
         def duration_to_number duration
           return unless duration
-          return duration.seconds if duration.nanos == 0
+          return duration.seconds if duration.nanos.zero?
 
           duration.seconds + (duration.nanos / 1000000000.0)
         end
