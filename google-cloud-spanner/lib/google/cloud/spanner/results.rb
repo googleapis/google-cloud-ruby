@@ -212,9 +212,10 @@ module Google
 
         # @private
         def self.execute service, session_path, sql, params: nil, types: nil,
-                         transaction: nil, partition_token: nil
+                         transaction: nil, partition_token: nil, seqno: nil
           execute_options = { transaction: transaction, params: params,
-                              types: types, partition_token: partition_token }
+                              types: types, partition_token: partition_token,
+                              seqno: seqno }
           enum = service.streaming_execute_sql session_path, sql,
                                                execute_options
           from_enum(enum, service).tap do |results|

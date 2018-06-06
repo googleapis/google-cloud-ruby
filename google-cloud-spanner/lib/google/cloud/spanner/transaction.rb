@@ -79,6 +79,7 @@ module Google
 
         def initialize
           @commit = Commit.new
+          @seqno = 0
         end
 
         ##
@@ -245,10 +246,12 @@ module Google
         def execute sql, params: nil, types: nil
           ensure_session!
 
+          @seqno += 1
+
           params, types = Convert.to_input_params_and_types params, types
 
           session.execute sql, params: params, types: types,
-                               transaction: tx_selector
+                               transaction: tx_selector, seqno: @seqno
         end
         alias query execute
 

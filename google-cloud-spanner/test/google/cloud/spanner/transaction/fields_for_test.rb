@@ -51,7 +51,7 @@ describe Google::Cloud::Spanner::Transaction, :fields_for, :mock_spanner do
 
   it "can get a table's fields" do
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE 1 = 0", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, options: default_options]
+    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE 1 = 0", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
     session.service.mocked_service = mock
 
     fields = transaction.fields_for "users"
