@@ -112,7 +112,7 @@ end
 ### BigQuery Data Transfer API (Beta)
 
 - [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
-- [google-bigquery-data_transfer API documentation](http://http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest)
+- [google-bigquery-data_transfer API documentation](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest)
 - [google-bigquery-data_transfer on RubyGems](https://rubygems.org/gems/google-cloud-bigquery-data_transfer/)
 - [Google BigQuery Data Transfer documentation](https://cloud.google.com/bigquery/transfer/)
 
