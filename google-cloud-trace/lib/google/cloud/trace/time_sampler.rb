@@ -30,7 +30,8 @@ module Google
       #
       # 1.  It allows you to blacklist certain URI paths that should never be
       #     traced. For example, the Google App Engine health check request
-      #     path `/_ah/health` is blacklisted by default.
+      #     path `/_ah/health` is blacklisted by default. Kubernetes default
+      #     health check `/healthz` is also ignored.
       # 2.  It spaces samples out by delaying a minimum time between each
       #     sample. This enforces a maximum QPS for this Ruby process.
       #
@@ -38,7 +39,7 @@ module Google
         ##
         # Default list of paths for which to disable traces. Currently includes
         # App Engine Flex health checks.
-        DEFAULT_PATH_BLACKLIST = ["/_ah/health"].freeze
+        DEFAULT_PATH_BLACKLIST = ["/_ah/health", "/healthz"].freeze
 
         ##
         # Create a TimeSampler for the given QPS.
