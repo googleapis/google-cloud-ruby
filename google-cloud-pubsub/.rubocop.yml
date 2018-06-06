@@ -40,3 +40,6 @@ Layout/EmptyLines: # for the extra line between copyright and code
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-pubsub.rb"
+FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
