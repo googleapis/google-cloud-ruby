@@ -22,9 +22,9 @@ describe Google::Cloud::Pubsub::AsyncPublisher, :mock_pubsub do
   let(:message1) { "new-message-here" }
   let(:message2) { "second-new-message" }
   let(:message3) { "third-new-message" }
-  let(:msg_encoded1) { message1.encode("ASCII-8BIT") }
-  let(:msg_encoded2) { message2.encode("ASCII-8BIT") }
-  let(:msg_encoded3) { message3.encode("ASCII-8BIT") }
+  let(:msg_encoded1) { message1.encode(Encoding::ASCII_8BIT) }
+  let(:msg_encoded2) { message2.encode(Encoding::ASCII_8BIT) }
+  let(:msg_encoded3) { message3.encode(Encoding::ASCII_8BIT) }
 
   it "publishes a message" do
     messages = [

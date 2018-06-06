@@ -65,7 +65,7 @@ module Google
           attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
 
           @grpc = Google::Pubsub::V1::PubsubMessage.new(
-            data: String(data).encode("ASCII-8BIT"),
+            data: String(data).dup.force_encoding(Encoding::ASCII_8BIT),
             attributes: attributes
           )
         end

@@ -447,7 +447,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
   it "can publish a message" do
     message = "new-message-here"
-    encoded_msg = message.encode("ASCII-8BIT")
+    encoded_msg = message.encode(Encoding::ASCII_8BIT)
     messages = [
       Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg)
     ]
@@ -466,7 +466,7 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
 
   it "can publish a message with attributes" do
     message = "new-message-here"
-    encoded_msg = message.encode("ASCII-8BIT")
+    encoded_msg = message.encode(Encoding::ASCII_8BIT)
     messages = [
       Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg, attributes: { "format" => "text" })
     ]
@@ -487,8 +487,8 @@ describe Google::Cloud::Pubsub::Topic, :mock_pubsub do
   it "can publish multiple messages with a block" do
     message1 = "first-new-message"
     message2 = "second-new-message"
-    encoded_msg1 = message1.encode("ASCII-8BIT")
-    encoded_msg2 = message2.encode("ASCII-8BIT")
+    encoded_msg1 = message1.encode(Encoding::ASCII_8BIT)
+    encoded_msg2 = message2.encode(Encoding::ASCII_8BIT)
     messages = [
       Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg1),
       Google::Pubsub::V1::PubsubMessage.new(data: encoded_msg2, attributes: { "format" => "none" })

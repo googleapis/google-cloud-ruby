@@ -21,7 +21,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode("ASCII-8BIT"))
+      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
@@ -54,7 +54,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message with a callback" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode("ASCII-8BIT"))
+      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
@@ -97,7 +97,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message with multibyte characters" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
+      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
@@ -112,7 +112,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
       assert_kind_of Google::Cloud::Pubsub::PublishResult, result
       assert result.succeeded?
       assert_equal "msg1", result.msg_id
-      assert_equal "\xE3\x81\x82".force_encoding("ASCII-8BIT"), result.data
+      assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
       callback_called = true
     end
 
@@ -141,7 +141,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message using an IO-ish object" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
+      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
@@ -161,7 +161,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
         assert_kind_of Google::Cloud::Pubsub::PublishResult, result
         assert result.succeeded?
         assert_equal "msg1", result.msg_id
-        assert_equal "\xE3\x81\x82".force_encoding("ASCII-8BIT"), result.data
+        assert_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT), result.data
         callback_called = true
       end
     end
@@ -191,7 +191,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
   it "publishes a message with attributes" do
     messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode("ASCII-8BIT"), attributes: {"format" => "text"})
+      Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: {"format" => "text"})
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
@@ -206,7 +206,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
       assert_kind_of Google::Cloud::Pubsub::PublishResult, result
       assert result.succeeded?
       assert_equal "msg1", result.msg_id
-      assert_equal "async-message".force_encoding("ASCII-8BIT"), result.data
+      assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
       assert_equal "text", result.attributes["format"]
       callback_called = true
     end
@@ -241,7 +241,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
     it "publishes a message" do
       messages = [
-        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode("ASCII-8BIT"))
+        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
       ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
@@ -274,7 +274,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
     it "publishes a message with attributes" do
       messages = [
-        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode("ASCII-8BIT"), attributes: { "format" => "text" })
+        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT), attributes: { "format" => "text" })
       ]
       publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
       mock = Minitest::Mock.new
@@ -289,7 +289,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
         assert_kind_of Google::Cloud::Pubsub::PublishResult, result
         assert result.succeeded?
         assert_equal "msg1", result.msg_id
-        assert_equal "async-message".force_encoding("ASCII-8BIT"), result.data
+        assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
         assert_equal "text", result.attributes["format"]
         callback_called = true
       end
@@ -330,7 +330,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
 
     it "publishes a message" do
       messages = [
-        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode("ASCII-8BIT"))
+        Google::Pubsub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
       ]
 
       stub = Object.new
@@ -350,7 +350,7 @@ describe Google::Cloud::Pubsub::Topic, :publish_async, :mock_pubsub do
         assert_kind_of Google::Cloud::Pubsub::PublishResult, result
         refute result.succeeded?
         assert result.failed?
-        assert_equal "async-message".force_encoding("ASCII-8BIT"), result.data
+        assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
         assert_kind_of Google::Cloud::NotFoundError, result.error
         callback_called = true
       end
