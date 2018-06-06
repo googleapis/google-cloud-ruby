@@ -21,9 +21,9 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
   let(:message1) { "new-message-here" }
   let(:message2) { "second-new-message" }
   let(:message3) { "third-new-message" }
-  let(:msg_encoded1) { message1.encode("ASCII-8BIT") }
-  let(:msg_encoded2) { message2.encode("ASCII-8BIT") }
-  let(:msg_encoded3) { message3.encode("ASCII-8BIT") }
+  let(:msg_encoded1) { message1.encode(Encoding::ASCII_8BIT) }
+  let(:msg_encoded2) { message2.encode(Encoding::ASCII_8BIT) }
+  let(:msg_encoded3) { message3.encode(Encoding::ASCII_8BIT) }
 
   it "publishes a message" do
    messages = [
@@ -44,7 +44,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
 
   it "publishes a message with multibyte characters" do
    messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
+      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
@@ -56,13 +56,13 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     mock.verify
 
     msg.must_be_kind_of Google::Cloud::Pubsub::Message
-    msg.data.must_equal "\xE3\x81\x82".force_encoding("ASCII-8BIT")
+    msg.data.must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
     msg.message_id.must_equal "msg1"
   end
 
   it "publishes a message using an IO-ish object" do
    messages = [
-      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding("ASCII-8BIT"))
+      Google::Pubsub::V1::PubsubMessage.new(data: "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT))
     ]
     publish_res = Google::Pubsub::V1::PublishResponse.decode_json({ message_ids: ["msg1"] }.to_json)
     mock = Minitest::Mock.new
@@ -80,7 +80,7 @@ describe Google::Cloud::Pubsub::Topic, :publish, :mock_pubsub do
     mock.verify
 
     msg.must_be_kind_of Google::Cloud::Pubsub::Message
-    msg.data.must_equal "\xE3\x81\x82".force_encoding("ASCII-8BIT")
+    msg.data.must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
     msg.message_id.must_equal "msg1"
   end
 
