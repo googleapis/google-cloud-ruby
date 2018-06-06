@@ -370,6 +370,17 @@ module Google
           end
         end
 
+        def create_pdml session_name
+          tx_opts = Google::Spanner::V1::TransactionOptions.new(
+            partitioned_dml: \
+              Google::Spanner::V1::TransactionOptions::PartitionedDml.new
+          )
+          opts = default_options_from_session session_name
+          execute do
+            service.begin_transaction session_name, tx_opts, options: opts
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end
