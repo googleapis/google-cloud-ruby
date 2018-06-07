@@ -155,7 +155,7 @@ module Google
               Subscription.from_grpc grpc, service
             end)
             token = grpc_list.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             subs.instance_variable_set :@token,   token
             subs.instance_variable_set :@service, service
             subs.instance_variable_set :@max,     max
@@ -170,7 +170,7 @@ module Google
               Subscription.new_lazy grpc, service
             end)
             token = grpc_list.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             subs.instance_variable_set :@token,   token
             subs.instance_variable_set :@service, service
             subs.instance_variable_set :@topic,   topic
