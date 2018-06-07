@@ -40,6 +40,7 @@ if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
   # We think this is because of a bug in Bundler 1.6.
   # Specify a viable version to allow the build to succeed.
   gem "jwt", "~> 1.5"
+  gem "kramdown", "< 1.17.0" # Error in yard with 1.17.0
 end
 
 # WORKAROUND: builds are having problems since the release of 3.0.0
