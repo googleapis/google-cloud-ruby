@@ -128,6 +128,32 @@ namespace :acceptance do
   end
 end
 
+desc "Run conformance tests."
+task :conformance do
+  $LOAD_PATH.unshift "lib", "conformance"
+  Dir.glob("conformance/**/*test.rb")
+      .each { |file| require_relative file }
+end
+
+namespace :conformance do
+  desc "Run conformance tests with coverage."
+  task :coverage, :project, :keyfile do |t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-firestore"
+      track_files "lib/**/*.rb"
+      add_filter "conformance/"
+    end
+
+    Rake::Task["conformance"].invoke
+  end
+
+  task :run do
+    $LOAD_PATH.unshift "lib", "conformance"
+    Dir.glob("conformance/**/*_test.rb").each { |file| require_relative file }
+  end
+end
+
 desc "Start an interactive shell."
 task :console do
   require "irb"
@@ -201,6 +227,8 @@ task :ci do
   sh "bundle exec rake doctest"
   header "google-cloud-firestore test", "*"
   sh "bundle exec rake test"
+  header "google-cloud-firestore conformance", "*"
+  sh "bundle exec rake conformance"
 end
 
 
