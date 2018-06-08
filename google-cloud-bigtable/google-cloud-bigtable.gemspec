@@ -1,9 +1,10 @@
 # -*- ruby -*-
 # encoding: utf-8
+require File.expand_path("../lib/google/cloud/bigtable/version", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-bigtable"
-  gem.version       = "0.6.8"
+  gem.version       = Google::Cloud::Bigtable::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
