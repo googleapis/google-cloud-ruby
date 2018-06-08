@@ -14,7 +14,6 @@
 
 
 require "test_helper"
-require "google/cloud/bigtable/table_admin_client"
 
 class TableAdminTestError < StandardError
   def initialize(operation_name)
