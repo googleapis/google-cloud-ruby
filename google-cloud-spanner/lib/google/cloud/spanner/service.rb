@@ -241,10 +241,12 @@ module Google
           end
         end
 
-        def create_session database_name
+        def create_session database_name, labels: nil
           opts = default_options_from_session database_name
+          session = Google::Spanner::V1::Session.new(labels: labels) if labels
           execute do
-            service.create_session database_name, options: opts
+            service.create_session database_name, session: session,
+                                                  options: opts
           end
         end
 

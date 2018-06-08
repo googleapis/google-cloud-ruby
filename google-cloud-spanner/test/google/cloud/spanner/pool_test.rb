@@ -56,7 +56,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
   it "creates new sessions when needed" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     spanner.service.mocked_service = mock
 
     pool.all_sessions.size.must_equal 1
@@ -81,9 +81,9 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
   it "raises when checking out more than MAX sessions" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     spanner.service.mocked_service = mock
 
     pool.all_sessions.size.must_equal 1
@@ -185,7 +185,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
   it "creates new transaction when needed" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     # created when checking out
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
@@ -216,7 +216,7 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
   it "creates new transaction when needed using with_transaction" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     # created when checking out
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
@@ -248,9 +248,9 @@ describe Google::Cloud::Spanner::Pool, :mock_spanner do
 
   it "raises when checking out more than MAX transaction" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     # created when checking out
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-001-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]
     mock.expect :begin_transaction, Google::Spanner::V1::Transaction.new(id: "tx-002-01"), [session_path(instance_id, database_id, session_id), tx_opts, options: default_options]

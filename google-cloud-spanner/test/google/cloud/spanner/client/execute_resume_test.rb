@@ -105,7 +105,7 @@ describe Google::Cloud::Spanner::Client, :execute, :resume, :mock_spanner do
 
   it "resumes broken response streams" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, RaiseableEnumerator.new(results_enum1), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, options: default_options]
     mock.expect :execute_streaming_sql, RaiseableEnumerator.new(results_enum2), [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: "abc123", partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock

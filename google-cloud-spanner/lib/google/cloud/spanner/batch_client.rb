@@ -65,10 +65,11 @@ module Google
       class BatchClient
         ##
         # @private Creates a new Spanner BatchClient instance.
-        def initialize project, instance_id, database_id
+        def initialize project, instance_id, database_id, session_labels: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
+          @session_labels = session_labels
         end
 
         # The unique identifier for the project.
@@ -406,7 +407,8 @@ module Google
           grpc = @project.service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id
-            )
+            ),
+            labels: @session_labels
           Session.from_grpc(grpc, @project.service)
         end
 

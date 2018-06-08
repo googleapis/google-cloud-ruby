@@ -206,6 +206,8 @@ module Google
             results.instance_variable_set :@enum,     enum
             results.instance_variable_set :@service,  service
           end
+        rescue GRPC::BadStatus => e
+          raise Google::Cloud::Error.from_error(e)
         end
 
         # @private

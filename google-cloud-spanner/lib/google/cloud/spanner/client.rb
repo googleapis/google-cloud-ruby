@@ -52,11 +52,13 @@ module Google
       class Client
         ##
         # @private Creates a new Spanner Client instance.
-        def initialize project, instance_id, database_id, opts = {}
+        def initialize project, instance_id, database_id, session_labels: nil,
+                       pool_opts: {}
           @project = project
           @instance_id = instance_id
           @database_id = database_id
-          @pool = Pool.new self, opts
+          @session_labels = session_labels
+          @pool = Pool.new self, pool_opts
         end
 
         # The unique identifier for the project.
@@ -1091,7 +1093,8 @@ module Google
           grpc = @project.service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id
-            )
+            ),
+            labels: @session_labels
           Session.from_grpc(grpc, @project.service)
         end
 
