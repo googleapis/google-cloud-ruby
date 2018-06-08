@@ -129,14 +129,14 @@ module Google
                   next
                 end
 
-                time_since_first_publish = Time.now - @batch_created_at
-                if time_since_first_publish > @interval
+                time_since_batch_creation = Time.now - @batch_created_at
+                if time_since_batch_creation > @interval
                   # interval met, publish the batch...
                   push_batch_request!
                   @cond.wait
                 else
                   # still waiting for the interval to publish the batch...
-                  @cond.wait(@interval - time_since_first_publish)
+                  @cond.wait(@interval - time_since_batch_creation)
                 end
               end
             end
