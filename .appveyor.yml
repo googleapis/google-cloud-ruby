@@ -2,12 +2,6 @@ environment:
   matrix:
     - RUBY_VERSION: 23-x64
       DEVKIT: C:\Ruby23-x64\DevKit
-    - RUBY_VERSION: 22-x64
-      DEVKIT: C:\Ruby23-x64\DevKit
-    - RUBY_VERSION: 21-x64
-      DEVKIT: C:\Ruby23-x64\DevKit
-    - RUBY_VERSION: 200-x64
-      DEVKIT: C:\Ruby23-x64\DevKit
 
 install:
   - set PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
