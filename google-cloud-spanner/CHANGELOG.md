@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 / 2018-06-12
+
+* Support STRUCT values in query parameters.
+  * Add `Fields#struct` to create a `Data` object.
+* Documentation updates.
+
 ### 1.4.0 / 2018-03-26
 
 * Add support for commit_timestamp.
