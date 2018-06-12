@@ -93,7 +93,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
         assert_instance_of(Google::Cloud::Speech::V1::RecognizeRequest, request)
         assert_equal(Google::Gax::to_proto(config, Google::Cloud::Speech::V1::RecognitionConfig), request.config)
         assert_equal(Google::Gax::to_proto(audio, Google::Cloud::Speech::V1::RecognitionAudio), request.audio)
-        expected_response
+        OpenStruct.new execute: expected_response
       end
       mock_stub = MockGrpcClientStub.new(:recognize, mock_method)
 
@@ -186,7 +186,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
         assert_instance_of(Google::Cloud::Speech::V1::LongRunningRecognizeRequest, request)
         assert_equal(Google::Gax::to_proto(config, Google::Cloud::Speech::V1::RecognitionConfig), request.config)
         assert_equal(Google::Gax::to_proto(audio, Google::Cloud::Speech::V1::RecognitionAudio), request.audio)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:long_running_recognize, mock_method)
 
@@ -234,7 +234,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
         assert_instance_of(Google::Cloud::Speech::V1::LongRunningRecognizeRequest, request)
         assert_equal(Google::Gax::to_proto(config, Google::Cloud::Speech::V1::RecognitionConfig), request.config)
         assert_equal(Google::Gax::to_proto(audio, Google::Cloud::Speech::V1::RecognitionAudio), request.audio)
-        operation
+        OpenStruct.new execute: operation
       end
       mock_stub = MockGrpcClientStub.new(:long_running_recognize, mock_method)
 
@@ -301,7 +301,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
 
     it 'invokes streaming_recognize without error' do
       skip("Manual helper code changes streaming behavior, so autogen tests do not function properly.")
-      
+
       # Create request parameters
       request = {}
 

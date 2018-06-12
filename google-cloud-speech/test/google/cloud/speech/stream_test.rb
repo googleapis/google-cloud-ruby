@@ -71,7 +71,7 @@ describe Google::Cloud::Speech::Stream do
   # Mock Grpc layer. Send back an interim/final result or raise an exception
   # depending on the request.
   mock_method = proc do |requests|
-    Enumerator.new do |y|
+    mock_enum = Enumerator.new do |y|
       requests.each do |request|
         unless request.is_a?(
           Google::Cloud::Speech::V1::StreamingRecognizeRequest
@@ -99,6 +99,7 @@ describe Google::Cloud::Speech::Stream do
         end
       end
     end
+    OpenStruct.new execute: mock_enum
   end
   mock_stub = MockGrpcClientStub.new(:streaming_recognize, mock_method)
 
