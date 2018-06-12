@@ -1,5 +1,11 @@
 # Release History
 
+### 0.31.0 / 2018-06-12
+
+* Switch Subscriber to use unary RPC calls for ack/modack.
+* Reduce number of String objects that are garbage collected.
+* Documentation updates.
+
 ### 0.30.2 / 2018-04-02
 
 * Subscriber stability enhancements.
