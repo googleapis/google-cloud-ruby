@@ -24,6 +24,7 @@ gem "google-cloud-bigtable", path: "google-cloud-bigtable"
 gem "google-cloud-container", path: "google-cloud-container"
 gem "google-cloud-dataproc", path: "google-cloud-dataproc"
 gem "google-cloud-datastore", path: "google-cloud-datastore"
+gem "google-cloud-debugger", path: "google-cloud-debugger"
 gem "google-cloud-dialogflow", path: "google-cloud-dialogflow"
 gem "google-cloud-dlp", path: "google-cloud-dlp"
 gem "google-cloud-dns", path: "google-cloud-dns"
@@ -49,19 +50,7 @@ gem "google-cloud-vision", path: "google-cloud-vision"
 gem "google-cloud", path: "google-cloud"
 gem "gcloud", path: "gcloud"
 gem "stackdriver-core", path: "stackdriver-core"
-
-if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.2.0")
-  gem "stackdriver", path: "stackdriver"
-  gem "google-cloud-debugger", path: "google-cloud-debugger"
-end
-
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
-  # WORKAROUND: builds are failing on Ruby 2.0.
-  # We think this is because of a bug in Bundler 1.6.
-  # Specify a viable version to allow the build to succeed.
-  gem "jwt", "~> 1.5"
-  gem "kramdown", "< 1.17.0" # Error in yard with 1.17.0
-end
+gem "stackdriver", path: "stackdriver"
 
 # WORKAROUND: builds are having problems since the release of 3.0.0
 # pin to the last known good version

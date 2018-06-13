@@ -8,14 +8,6 @@ gem "gcloud-jsondoc",
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.1")
-  # WORKAROUND: builds are failing on Ruby 2.0.
-  # We think this is because of a bug in Bundler 1.6.
-  # Specify a viable version to allow the build to succeed.
-  gem "jwt", "~> 1.5"
-  gem "kramdown", "< 1.17.0" # Error in yard with 1.17.0
-end
-
 # WORKAROUND: builds are having problems since the release of 3.0.0
 # pin to the last known good version
 gem "public_suffix", "~> 2.0"
