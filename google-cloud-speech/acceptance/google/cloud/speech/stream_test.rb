@@ -12,15 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "speech_helper"
-
 describe "Streaming Recognition", :speech do
   let(:filepath) { "acceptance/data/audio.raw" }
-
+  let(:speech) { Google::Cloud::Speech.new }
+  
   it "default params" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
-    stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US"
+    stream = speech.streaming_recognize(
+      config: { encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000 }
+    )
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
@@ -39,9 +40,9 @@ describe "Streaming Recognition", :speech do
     results = stream.results
 
     results.count.must_equal 1
-    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-    results.first.confidence.must_be_close_to 0.9, 0.1
-    results.first.alternatives.must_be :empty?
+    results.first.alternatives.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.alternatives.first.confidence.must_be_close_to 0.9, 0.1
+    results.first.alternatives.count.must_equal 1
 
     counters[:interim].must_be :zero?
     counters[:result].must_equal 1
@@ -52,7 +53,9 @@ describe "Streaming Recognition", :speech do
   it "sends multiple times" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
-    stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US"
+    stream = speech.streaming_recognize(
+      config: { encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000 }
+    )
 
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
@@ -80,9 +83,9 @@ describe "Streaming Recognition", :speech do
     results = stream.results
 
     results.count.must_equal 1
-    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-    results.first.confidence.must_be_close_to 0.9, 0.1
-    results.first.alternatives.must_be :empty?
+    results.first.alternatives.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.alternatives.first.confidence.must_be_close_to 0.9, 0.1
+    results.first.alternatives.count.must_equal 1
 
     counters[:interim].must_be :zero?
     counters[:result].must_equal 1
@@ -94,7 +97,10 @@ describe "Streaming Recognition", :speech do
     it "default params" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", interim: true
+      stream = speech.streaming_recognize(
+        config: { encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000 },
+        interim_results: true
+      )
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
@@ -113,9 +119,9 @@ describe "Streaming Recognition", :speech do
       results = stream.results
 
       results.count.must_equal 1
-      results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-      results.first.confidence.must_be_close_to 0.9, 0.1
-      results.first.alternatives.must_be :empty?
+      results.first.alternatives.first.transcript.must_equal "how old is the Brooklyn Bridge"
+      results.first.alternatives.first.confidence.must_be_close_to 0.9, 0.1
+      results.first.alternatives.count.must_equal 1
 
       counters[:interim].must_be :>, 0
       counters[:result].must_equal 1
@@ -126,7 +132,10 @@ describe "Streaming Recognition", :speech do
     it "sends multiple times" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", interim: true
+      stream = speech.streaming_recognize(
+        config: { encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000 },
+        interim_results: true
+      )
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
@@ -151,9 +160,9 @@ describe "Streaming Recognition", :speech do
       results = stream.results
 
       results.count.must_equal 1
-      results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-      results.first.confidence.must_be_close_to 0.9, 0.1
-      results.first.alternatives.must_be :empty?
+      results.first.alternatives.first.transcript.must_equal "how old is the Brooklyn Bridge"
+      results.first.alternatives.first.confidence.must_be_close_to 0.9, 0.1
+      results.first.alternatives.count.must_equal 1
 
       counters[:interim].must_be :>, 0
       counters[:result].must_equal 1
@@ -166,7 +175,9 @@ describe "Streaming Recognition", :speech do
     it "default params" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", utterance: true
+      stream = speech.streaming_recognize(
+        config: { encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000 }
+      )
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
@@ -193,9 +204,9 @@ describe "Streaming Recognition", :speech do
       results = stream.results
 
       results.count.must_equal 1
-      results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-      results.first.confidence.must_be_close_to 0.9, 0.1
-      results.first.alternatives.must_be :empty?
+      results.first.alternatives.first.transcript.must_equal "how old is the Brooklyn Bridge"
+      results.first.alternatives.first.confidence.must_be_close_to 0.9, 0.1
+      results.first.alternatives.count.must_equal 1
 
       counters[:interim].must_equal 0
       counters[:result].must_equal 1
@@ -206,7 +217,9 @@ describe "Streaming Recognition", :speech do
     it "sends multiple times" do
       counters = Hash.new { |h, k| h[k] = 0 }
 
-      stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", utterance: true
+      stream = speech.streaming_recognize(
+        config: { encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000 }
+      )
 
       stream.on_interim      { counters[:interim] += 1 }
       stream.on_result       { counters[:result] += 1 }
@@ -238,9 +251,9 @@ describe "Streaming Recognition", :speech do
       results = stream.results
 
       results.count.must_equal 1
-      results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-      results.first.confidence.must_be_close_to 0.9, 0.1
-      results.first.alternatives.must_be :empty?
+      results.first.alternatives.first.transcript.must_equal "how old is the Brooklyn Bridge"
+      results.first.alternatives.first.confidence.must_be_close_to 0.9, 0.1
+      results.first.alternatives.count.must_equal 1
 
       counters[:interim].must_equal 0
       counters[:result].must_equal 1
@@ -252,8 +265,12 @@ describe "Streaming Recognition", :speech do
   it "uses words" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
-    stream = speech.stream encoding: :linear16, sample_rate: 16000, language: "en-US", words: true
-
+    stream = speech.streaming_recognize(
+        config: { encoding: :LINEAR16, language_code: "en-US", sample_rate_hertz: 16000,
+                  enable_word_time_offsets: true
+                }
+    )
+    
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
@@ -271,11 +288,11 @@ describe "Streaming Recognition", :speech do
     results = stream.results
 
     results.count.must_equal 1
-    results.first.transcript.must_equal "how old is the Brooklyn Bridge"
-    results.first.confidence.must_be_close_to 0.9, 0.1
-    results.first.words.wont_be :empty?
-    results.first.words.map(&:word).must_equal %w{how old is the Brooklyn Bridge}
-    results.first.alternatives.must_be :empty?
+    results.first.alternatives.first.transcript.must_equal "how old is the Brooklyn Bridge"
+    results.first.alternatives.first.confidence.must_be_close_to 0.9, 0.1
+    results.first.alternatives.first.words.wont_be :empty?
+    results.first.alternatives.first.words.map(&:word).must_equal %w{how old is the Brooklyn Bridge}
+    results.first.alternatives.count.must_equal 1
 
     counters[:interim].must_be :zero?
     counters[:result].must_equal 1

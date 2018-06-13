@@ -14,7 +14,6 @@
 
 
 require "google/cloud/speech/v1"
-require "google/cloud/speech/result"
 require "monitor"
 require "forwardable"
 
@@ -29,11 +28,15 @@ module Google
       # @example
       #   require "google/cloud/speech"
       #
-      #   speech = Google::Cloud::Speech.new
-      #
-      #   stream = speech.stream encoding: :linear16,
-      #                          language: "en-US",
-      #                          sample_rate: 16000
+      #   speech_client = Google::Cloud::Speech.new
+      #   streaming_config = {
+      #     config: {
+      #       encoding: :linear16,
+      #       language_code: "en-US",
+      #       sample_rate_hertz: 16000
+      #     }
+      #   }
+      #   stream = speech_client.streaming_recognize(streaming_config)
       #
       #   # Stream 5 seconds of audio from the microphone
       #   # Actual implementation of microphone input varies by platform
@@ -45,7 +48,7 @@ module Google
       #   stream.wait_until_complete!
       #
       #   results = stream.results
-      #   result = results.first
+      #   result = results.first.alternatives.first
       #   result.transcript #=> "how old is the Brooklyn Bridge"
       #   result.confidence #=> 0.9826789498329163
       #
@@ -55,9 +58,11 @@ module Google
         # @private Creates a new Speech Stream instance.
         # This must always be private, since it may change as the implementation
         # changes over time.
-        def initialize service, streaming_recognize_request
-          @service = service
-          @streaming_recognize_request = streaming_recognize_request
+        def initialize streaming_config, streaming_call
+          @streaming_call = streaming_call
+          @streaming_recognize_request = {
+            streaming_config: streaming_config
+          }
           @results = []
           @callbacks = Hash.new { |h, k| h[k] = [] }
           super() # to init MonitorMixin
@@ -92,13 +97,15 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   audio = speech.audio "path/to/audio.raw"
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     }
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -110,7 +117,7 @@ module Google
         #   stream.wait_until_complete!
         #
         #   results = stream.results
-        #   result = results.first
+        #   result = results.first.alternatives.first
         #   result.transcript #=> "how old is the Brooklyn Bridge"
         #   result.confidence #=> 0.9826789498329163
         #
@@ -154,11 +161,15 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     }
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -170,8 +181,10 @@ module Google
         #
         #   results = stream.results
         #   results.each do |result|
-        #     puts result.transcript
-        #     puts result.confidence
+        #     result.alternatives.each do |alternative|
+        #       puts alternative.transcript
+        #       puts alternative.confidence
+        #     end
         #   end
         #
         def results
@@ -188,11 +201,15 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     }
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -207,8 +224,10 @@ module Google
         #
         #   results = stream.results
         #   results.each do |result|
-        #     puts result.transcript
-        #     puts result.confidence
+        #     result.alternatives.each do |alternative|
+        #       puts alternative.transcript
+        #       puts alternative.confidence
+        #     end
         #   end
         #
         def complete?
@@ -223,11 +242,15 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     }
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -242,8 +265,10 @@ module Google
         #
         #   results = stream.results
         #   results.each do |result|
-        #     puts result.transcript
-        #     puts result.confidence
+        #     result.alternatives.each do |alternative|
+        #       puts alternative.transcript
+        #       puts alternative.confidence
+        #     end
         #   end
         #
         def wait_until_complete!
@@ -265,17 +290,23 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     },
+        #     interim_results: true
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # register callback for when an interim result is returned
         #   stream.on_interim do |final_results, interim_results|
         #     interim_result = interim_results.first
-        #     puts interim_result.transcript # "how old is the Brooklyn Bridge"
-        #     puts interim_result.confidence # 0.9826789498329163
+        #     interim_alternative = interim_result.alternatives.first
+        #     puts interim_alternative.transcript # "how old is the Brooklyn Bridge"
+        #     puts interim_alternative.confidence # 0.9826789498329163
         #     puts interim_result.stability # 0.8999
         #   end
         #
@@ -311,11 +342,22 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     }
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   # register callback for when a final result has been received
+        #   stream.on_result do |results|
+        #     results.each do |result|
+        #       puts result.alternatives.first.transcript
+        #     end
+        #   end
         #
         #   # Stream 5 seconds of audio from the microphone
         #   # Actual implementation of microphone input varies by platform
@@ -327,7 +369,7 @@ module Google
         #   stream.wait_until_complete!
         #
         #   results = stream.results
-        #   result = results.first
+        #   result = results.first.alternatives.first
         #   result.transcript #=> "how old is the Brooklyn Bridge"
         #   result.confidence #=> 0.9826789498329163
         #
@@ -341,7 +383,7 @@ module Google
         # @private add a result object, and call the callbacks
         def pass_result! result_grpc
           synchronize do
-            @results << Result.from_grpc(result_grpc)
+            @results << result_grpc
             @callbacks[:result].each { |c| c.call @results }
           end
         end
@@ -356,11 +398,15 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     }
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # register callback for when stream has ended.
         #   stream.on_complete do
@@ -403,12 +449,16 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000,
-        #                          utterance: true
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     },
+        #     single_utterance: true
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # register callback for when utterance has occurred.
         #   stream.on_utterance do
@@ -448,11 +498,15 @@ module Google
         # @example
         #   require "google/cloud/speech"
         #
-        #   speech = Google::Cloud::Speech.new
-        #
-        #   stream = speech.stream encoding: :linear16,
-        #                          language: "en-US",
-        #                          sample_rate: 16000
+        #   speech_client = Google::Cloud::Speech.new
+        #   streaming_config = {
+        #     config: {
+        #       encoding: :linear16,
+        #       language_code: "en-US",
+        #       sample_rate_hertz: 16000
+        #     }
+        #   }
+        #   stream = speech_client.streaming_recognize(streaming_config)
         #
         #   # register callback for when an error is returned
         #   stream.on_error do |error|
@@ -484,18 +538,18 @@ module Google
         protected
 
         def background_run
-          response_enum = @service.recognize_stream @request_queue.each_item
+          response_enum = @streaming_call.call(@request_queue.each_item)
           response_enum.each do |response|
             begin
               background_results response
               background_event_type response.speech_event_type
               background_error response.error
             rescue StandardError => e
-              error! Google::Cloud::Error.from_error(e)
+              error! e
             end
           end
         rescue StandardError => e
-          error! Google::Cloud::Error.from_error(e)
+          error! e
         ensure
           pass_complete!
           Thread.pass
@@ -505,20 +559,14 @@ module Google
           # Handle the results (StreamingRecognitionResult)
           return unless response.results && response.results.any?
 
-          final_grpc, interim_grpcs = *response.results
-          unless final_grpc && final_grpc.is_final
-            # all results are interim
-            final_grpc = nil
-            interim_grpcs = response.results
-          end
+          final_grpc = response.results.select { |res| res.is_final }
+          # Only one final result
+          final_grpc = if final_grpc.any? then final_grpc.first else nil end
 
-          # convert to Speech object from GRPC object
-          interim_results = Array(interim_grpcs).map do |grpc|
-            InterimResult.from_grpc grpc
-          end
+          interim_grpc = response.results.select { |res| !res.is_final }
 
           # callback for interim results received
-          pass_interim! interim_results if interim_results.any?
+          pass_interim! interim_grpc if interim_grpc.any?
           # callback for final results received, if any
           pass_result! final_grpc if final_grpc
         end

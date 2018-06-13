@@ -661,26 +661,12 @@
     {
       "title": "Speech",
       "type": "google/cloud/speech",
+      "patterns": ["\/speech", "google\/protobuf", "google\/rpc"],
       "nav": [
-        {
-          "title": "Project",
-          "type": "google/cloud/speech/project"
-        },
-        {
-          "title": "Audio",
-          "type": "google/cloud/speech/audio"
-        },
-        {
-          "title": "Operation",
-          "type": "google/cloud/speech/operation"
-        },
-        {
-          "title": "Result",
-          "type": "google/cloud/speech/result"
-        },
         {
           "title": "V1",
           "type": "google/cloud/speech/v1",
+          "patterns": ["\/speech\/v1\/", "google\/protobuf", "google\/rpc"],
           "nav": [
             {
               "title": "SpeechClient",
