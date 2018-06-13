@@ -13,4 +13,4 @@ gem "google-cloud-logging", path: "../google-cloud-logging"
 gem "google-cloud-trace", path: "../google-cloud-trace"
 gem "stackdriver-core", path: "../stackdriver-core"
 
-gem "rake", "~> 11.0"
+gem "rake"

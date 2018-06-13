@@ -6,4 +6,4 @@ gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"
 
-gem "rake", "~> 11.0"
+gem "rake"

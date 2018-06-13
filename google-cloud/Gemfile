@@ -38,4 +38,4 @@ gem "google-cloud-video_intelligence",
 gem "google-cloud-vision", path: "../google-cloud-vision"
 gem "stackdriver-core", path: "../stackdriver-core"
 
-gem "rake", "~> 11.0"
+gem "rake"

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rake", "~> 11.0"
+gem "rake", "~> 12.0"
 gem "minitest", "~> 5.10"
 gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.1"
@@ -51,11 +51,3 @@ gem "google-cloud", path: "google-cloud"
 gem "gcloud", path: "gcloud"
 gem "stackdriver-core", path: "stackdriver-core"
 gem "stackdriver", path: "stackdriver"
-
-# WORKAROUND: builds are having problems since the release of 3.0.0
-# pin to the last known good version
-gem "public_suffix", "~> 2.0"
-
-# TEMP: nokogiri (a dependency of rails) 1.7 requires Ruby 2.1 or later.
-# Since we're still testing on Ruby 2.0, pin nokogiri to 1.6 for now.
-gem "nokogiri", "~> 1.6.8"

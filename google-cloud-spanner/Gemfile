@@ -8,4 +8,4 @@ gem "gcloud-jsondoc",
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 
-gem "rake", "~> 11.0"
+gem "rake"
