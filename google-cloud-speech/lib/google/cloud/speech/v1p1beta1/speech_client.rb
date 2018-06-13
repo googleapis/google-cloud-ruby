@@ -14,7 +14,7 @@
 #
 # EDITING INSTRUCTIONS
 # This file was generated from the file
-# https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto,
+# https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1p1beta1/cloud_speech.proto,
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
@@ -26,17 +26,17 @@ require "google/gax"
 require "google/gax/operation"
 require "google/longrunning/operations_client"
 
-require "google/cloud/speech/v1/cloud_speech_pb"
+require "google/cloud/speech/v1p1beta1/cloud_speech_pb"
 require "google/cloud/speech/credentials"
 
 module Google
   module Cloud
     module Speech
-      module V1
+      module V1p1beta1
         # Service that implements Google Cloud Speech API.
         #
         # @!attribute [r] speech_stub
-        #   @return [Google::Cloud::Speech::V1::Speech::Stub]
+        #   @return [Google::Cloud::Speech::V1p1beta1::Speech::Stub]
         class SpeechClient
           attr_reader :speech_stub
 
@@ -100,7 +100,7 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/cloud/speech/v1/cloud_speech_services_pb"
+            require "google/cloud/speech/v1p1beta1/cloud_speech_services_pb"
 
             credentials ||= Google::Cloud::Speech::Credentials.default
 
@@ -144,7 +144,7 @@ module Google
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.cloud.speech.v1.Speech",
+                "google.cloud.speech.v1p1beta1.Speech",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
@@ -164,7 +164,7 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
-              &Google::Cloud::Speech::V1::Speech::Stub.method(:new)
+              &Google::Cloud::Speech::V1p1beta1::Speech::Stub.method(:new)
             )
 
             @recognize = Google::Gax.create_api_call(
@@ -189,27 +189,27 @@ module Google
           # Performs synchronous speech recognition: receive results after all audio
           # has been sent and processed.
           #
-          # @param config [Google::Cloud::Speech::V1::RecognitionConfig | Hash]
+          # @param config [Google::Cloud::Speech::V1p1beta1::RecognitionConfig | Hash]
           #   *Required* Provides information to the recognizer that specifies how to
           #   process the request.
-          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionConfig`
+          #   A hash of the same form as `Google::Cloud::Speech::V1p1beta1::RecognitionConfig`
           #   can also be provided.
-          # @param audio [Google::Cloud::Speech::V1::RecognitionAudio | Hash]
+          # @param audio [Google::Cloud::Speech::V1p1beta1::RecognitionAudio | Hash]
           #   *Required* The audio data to be recognized.
-          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionAudio`
+          #   A hash of the same form as `Google::Cloud::Speech::V1p1beta1::RecognitionAudio`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Speech::V1::RecognizeResponse]
+          # @yieldparam result [Google::Cloud::Speech::V1p1beta1::RecognizeResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Speech::V1::RecognizeResponse]
+          # @return [Google::Cloud::Speech::V1p1beta1::RecognizeResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1"
+          #   require "google/cloud/speech/v1p1beta1"
           #
-          #   speech_client = Google::Cloud::Speech::V1.new
+          #   speech_client = Google::Cloud::Speech::V1p1beta1.new
           #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
@@ -231,7 +231,7 @@ module Google
               config: config,
               audio: audio
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Speech::V1::RecognizeRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Speech::V1p1beta1::RecognizeRequest)
             @recognize.call(req, options, &block)
           end
 
@@ -240,14 +240,14 @@ module Google
           # +Operation.error+ or an +Operation.response+ which contains
           # a +LongRunningRecognizeResponse+ message.
           #
-          # @param config [Google::Cloud::Speech::V1::RecognitionConfig | Hash]
+          # @param config [Google::Cloud::Speech::V1p1beta1::RecognitionConfig | Hash]
           #   *Required* Provides information to the recognizer that specifies how to
           #   process the request.
-          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionConfig`
+          #   A hash of the same form as `Google::Cloud::Speech::V1p1beta1::RecognitionConfig`
           #   can also be provided.
-          # @param audio [Google::Cloud::Speech::V1::RecognitionAudio | Hash]
+          # @param audio [Google::Cloud::Speech::V1p1beta1::RecognitionAudio | Hash]
           #   *Required* The audio data to be recognized.
-          #   A hash of the same form as `Google::Cloud::Speech::V1::RecognitionAudio`
+          #   A hash of the same form as `Google::Cloud::Speech::V1p1beta1::RecognitionAudio`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -255,9 +255,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1"
+          #   require "google/cloud/speech/v1p1beta1"
           #
-          #   speech_client = Google::Cloud::Speech::V1.new
+          #   speech_client = Google::Cloud::Speech::V1p1beta1.new
           #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
@@ -304,12 +304,12 @@ module Google
               config: config,
               audio: audio
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Speech::V1::LongRunningRecognizeRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeRequest)
             operation = Google::Gax::Operation.new(
               @long_running_recognize.call(req, options),
               @operations_client,
-              Google::Cloud::Speech::V1::LongRunningRecognizeResponse,
-              Google::Cloud::Speech::V1::LongRunningRecognizeMetadata,
+              Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeResponse,
+              Google::Cloud::Speech::V1p1beta1::LongRunningRecognizeMetadata,
               call_options: options
             )
             operation.on_done { |operation| yield(operation) } if block_given?
@@ -319,13 +319,13 @@ module Google
           # Performs bidirectional streaming speech recognition: receive results while
           # sending audio. This method is only available via the gRPC API (not REST).
           #
-          # @param reqs [Enumerable<Google::Cloud::Speech::V1::StreamingRecognizeRequest>]
+          # @param reqs [Enumerable<Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest>]
           #   The input requests.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Enumerable<Google::Cloud::Speech::V1::StreamingRecognizeResponse>]
-          #   An enumerable of Google::Cloud::Speech::V1::StreamingRecognizeResponse instances.
+          # @return [Enumerable<Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse>]
+          #   An enumerable of Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse instances.
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           #
@@ -335,9 +335,9 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/speech/v1"
+          #   require "google/cloud/speech/v1p1beta1"
           #
-          #   speech_client = Google::Cloud::Speech::V1.new
+          #   speech_client = Google::Cloud::Speech::V1p1beta1.new
           #   request = {}
           #   requests = [request]
           #   speech_client.streaming_recognize(requests).each do |element|
@@ -346,7 +346,7 @@ module Google
 
           def streaming_recognize reqs, options: nil
             request_protos = reqs.lazy.map do |req|
-              Google::Gax::to_proto(req, Google::Cloud::Speech::V1::StreamingRecognizeRequest)
+              Google::Gax::to_proto(req, Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest)
             end
             @streaming_recognize.call(request_protos, options)
           end

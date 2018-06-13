@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/speech/v1/speech_client"
+require "google/cloud/speech/v1p1beta1/speech_client"
 
 module Google
   module Cloud
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Speech API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Speech API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
-    # [Google Cloud Speech API][Product Documentation]:
-    # Google Cloud Speech API.
+    # [Cloud Speech API][Product Documentation]:
+    # Converts audio to text by applying powerful neural network models.
     # - [Product Documentation][]
     #
     # ## Quick Start
@@ -31,15 +31,15 @@ module Google
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Google Cloud Speech API.](https://console.cloud.google.com/apis/api/speech)
+    # 3. [Enable the Cloud Speech API.](https://console.cloud.google.com/apis/api/speech)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Preview
     # #### SpeechClient
     # ```rb
-    # require "google/cloud/speech/v1"
+    # require "google/cloud/speech/v1p1beta1"
     #
-    # speech_client = Google::Cloud::Speech::V1.new
+    # speech_client = Google::Cloud::Speech::V1p1beta1.new
     # language_code = "en-US"
     # sample_rate_hertz = 44100
     # encoding = :FLAC
@@ -54,7 +54,7 @@ module Google
     # ```
     #
     # ### Next Steps
-    # - Read the [Google Cloud Speech API Product documentation][Product Documentation]
+    # - Read the [Cloud Speech API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
     # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
@@ -63,7 +63,7 @@ module Google
     #
     #
     module Speech
-      module V1
+      module V1p1beta1
         # rubocop:enable LineLength
 
         ##
@@ -117,7 +117,7 @@ module Google
             lib_name: lib_name,
             lib_version: lib_version
           }.select { |_, v| v != nil }
-          Google::Cloud::Speech::V1::SpeechClient.new(**kwargs)
+          Google::Cloud::Speech::V1p1beta1::SpeechClient.new(**kwargs)
         end
       end
     end
