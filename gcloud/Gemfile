@@ -37,9 +37,6 @@ gem "google-cloud-translate", path: "../google-cloud-translate"
 gem "google-cloud-video_intelligence",
     path: "../google-cloud-video_intelligence"
 gem "google-cloud-vision", path: "../google-cloud-vision"
-
-# WORKAROUND: builds are having problems since the release of 3.0.0
-# pin to the last known good version
-gem "public_suffix", "~> 2.0"
-gem "rake", "~> 11.0"
 gem "stackdriver-core", path: "../stackdriver-core"
+
+gem "rake", "~> 11.0"
