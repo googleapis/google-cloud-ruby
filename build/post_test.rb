@@ -1,6 +1,9 @@
 require "pty"
 
 commands = [
+  # These jobs are run on separate versions just so they run on different
+  # servers and don't block each other. They don't actually have a version
+  # dependency.
   "rvm-exec 2.5.1 bundle update; rvm-exec 2.5.1 bundle exec rake circleci:post",
   "rvm-exec 2.4.4 bundle update; rvm-exec 2.4.4 bundle exec rake test:coveralls"
 ]
