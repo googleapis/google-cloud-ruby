@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "google/cloud/speech/v1/speech_client"
+require "google/cloud/speech/v1/helpers"
 
 module Google
   module Cloud

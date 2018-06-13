@@ -19,7 +19,7 @@ require "minitest/spec"
 
 require "google/cloud/speech"
 
-describe "SpeechSmokeTest" do
+describe "SpeechSmokeTest V1" do
   it "runs one smoke test with recognize" do
 
     speech_client = Google::Cloud::Speech.new
