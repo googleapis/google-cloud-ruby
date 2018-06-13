@@ -32,7 +32,7 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   let(:batch_client) { spanner.batch_client instance_id, database_id }
 
   let(:labels) { { "env" => "production" } }
-  let(:batch_client_labels) { spanner.batch_client instance_id, database_id, session_labels: labels }
+  let(:batch_client_labels) { spanner.batch_client instance_id, database_id, labels: labels }
 
   it "knows its project_id" do
     batch_client.project_id.must_equal project

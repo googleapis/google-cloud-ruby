@@ -71,7 +71,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
 
   let(:labels) { { "env" => "production" } }
-  let(:client_labels) { spanner.client instance_id, database_id, pool: { min: 0 }, session_labels: labels }
+  let(:client_labels) { spanner.client instance_id, database_id, pool: { min: 0 }, labels: labels }
 
   it "can read all rows" do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]

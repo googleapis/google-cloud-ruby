@@ -437,7 +437,7 @@ module Google
         #     becomes available. The default is `true`.
         #   * `:threads` (Integer) The number of threads in the thread pool. The
         #     default is twice the number of available CPUs.
-        # @param [Hash] session_labels The labels to be applied to all sessions
+        # @param [Hash] labels The labels to be applied to all sessions
         #   created by the client. Cloud Labels are a flexible and lightweight
         #   mechanism for organizing cloud resources into groups that reflect a
         #   customer's organizational needs and deployment strategies. Cloud
@@ -470,14 +470,11 @@ module Google
         #     end
         #   end
         #
-        def client instance_id, database_id, pool: {}, session_labels: nil
-          if session_labels
-            # Convert from possible Google::Protobuf::Map
-            session_labels = \
-              Hash[session_labels.map { |k, v| [String(k), String(v)] }]
-          end
+        def client instance_id, database_id, pool: {}, labels: nil
+          # Convert from possible Google::Protobuf::Map
+          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           Client.new self, instance_id, database_id,
-                     session_labels: session_labels,
+                     session_labels: labels,
                      pool_opts: valid_session_pool_options(pool)
         end
 
@@ -489,7 +486,7 @@ module Google
         #   Required.
         # @param [String] database_id The unique identifier for the database.
         #   Required.
-        # @param [Hash] session_labels The labels to be applied to all sessions
+        # @param [Hash] labels The labels to be applied to all sessions
         #   created by the batch client. Labels are a flexible and lightweight
         #   mechanism for organizing cloud resources into groups that reflect a
         #   customer's organizational needs and deployment strategies. Cloud
@@ -532,14 +529,10 @@ module Google
         #   results = new_batch_snapshot.execute_partition \
         #     new_partition
         #
-        def batch_client instance_id, database_id, session_labels: nil
-          if session_labels
-            # Convert from possible Google::Protobuf::Map
-            session_labels = \
-              Hash[session_labels.map { |k, v| [String(k), String(v)] }]
-          end
-          BatchClient.new self, instance_id, database_id,
-                          session_labels: session_labels
+        def batch_client instance_id, database_id, labels: nil
+          # Convert from possible Google::Protobuf::Map
+          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          BatchClient.new self, instance_id, database_id, session_labels: labels
         end
 
         protected
