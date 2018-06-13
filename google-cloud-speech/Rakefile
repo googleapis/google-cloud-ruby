@@ -123,11 +123,11 @@ task :jsondoc => :yard do
     documents: [
       {
         type: "toc",
-        title: "Google::Cloud::Speech::V1p1beta1::DataTypes",
+        title: "Google::Cloud::Speech::V1::DataTypes",
         modules: [
           {
-            title: "Google::Cloud::Speech::V1p1beta1",
-            include: ["google/cloud/speech/v1p1beta1"]
+            title: "Google::Cloud::Speech::V1",
+            include: ["google/cloud/speech/v1"]
           },
           {
             title: "Google::Protobuf",
@@ -141,11 +141,11 @@ task :jsondoc => :yard do
       },
       {
         type: "toc",
-        title: "Google::Cloud::Speech::V1::DataTypes",
+        title: "Google::Cloud::Speech::V1p1beta1::DataTypes",
         modules: [
           {
-            title: "Google::Cloud::Speech::V1",
-            include: ["google/cloud/speech/v1"]
+            title: "Google::Cloud::Speech::V1p1beta1",
+            include: ["google/cloud/speech/v1p1beta1"]
           },
           {
             title: "Google::Protobuf",
