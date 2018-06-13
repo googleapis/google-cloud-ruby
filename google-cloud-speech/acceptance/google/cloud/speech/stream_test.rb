@@ -12,10 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "minitest/autorun"
+require "google/cloud/speech"
+
 describe "Streaming Recognition", :speech do
   let(:filepath) { "acceptance/data/audio.raw" }
   let(:speech) { Google::Cloud::Speech.new }
-  
+
   it "default params" do
     counters = Hash.new { |h, k| h[k] = 0 }
 
@@ -270,7 +273,7 @@ describe "Streaming Recognition", :speech do
                   enable_word_time_offsets: true
                 }
     )
-    
+
     stream.on_interim      { counters[:interim] += 1 }
     stream.on_result       { counters[:result] += 1 }
     stream.on_complete     { counters[:complete] += 1 }
