@@ -84,7 +84,7 @@ module Google
           # The JSON schema file is the same as for the [`bq`
           # CLI](https://cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file).
           #
-          # @param [IO, String] schema An `Google::Cloud::Bigquery::Schema`.
+          # @param [Schema] schema A `Google::Cloud::Bigquery::Schema`.
           #
           # @param [IO, String] destination An `IO` to which to write the
           #   schema, or a `String` containing the filename to write to.
