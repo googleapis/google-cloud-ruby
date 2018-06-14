@@ -114,7 +114,6 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  sh "bundle exec yard config -a autoload_plugins yard-doctest"
   sh "bundle exec yard doctest"
 end
 
