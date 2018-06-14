@@ -16,3 +16,4 @@ jsondoc/*
 *keyfile.json
 tmp/*
 .byebug_history
+.DS_Store

@@ -32,6 +32,8 @@ namespace :test do
     SimpleCov.start do
       command_name "google-cloud-bigtable"
       track_files "lib/**/*.rb"
+      add_filter "lib/google/cloud/bigtable/admin/v2/doc"
+      add_filter "lib/google/cloud/bigtable/v2/doc"
       add_filter "test/"
     end
 
