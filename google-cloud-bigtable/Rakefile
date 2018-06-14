@@ -43,22 +43,102 @@ end
 
 # Acceptance tests
 desc "Run the google-cloud-bigtable acceptance tests."
-task :acceptance, :project, :keyfile do |t, args|
+task :acceptance, :project, :keyfile do |_t, args|
+  project = args[:project]
+  project ||= ENV["BIGTABLE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||= ENV["BIGTABLE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+
+  unless keyfile
+    keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+
+  if project.nil? || keyfile.nil?
+    raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+
+  # clear any env var already set
+  require "google/cloud/bigtable/credentials"
+  require "google/cloud/bigtable/admin/credentials"
+  (
+    Google::Cloud::Bigtable::Credentials::PATH_ENV_VARS +
+    Google::Cloud::Bigtable::Credentials::JSON_ENV_VARS +
+    Google::Cloud::Bigtable::Admin::Credentials::PATH_ENV_VARS +
+    Google::Cloud::Bigtable::Admin::Credentials::JSON_ENV_VARS
+  ).each do |path|
+    ENV[path] = nil
+  end
+
+  # always overwrite when running tests
+  ENV["BIGTABLE_PROJECT"] = project
+  ENV["BIGTABLE_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
   task :run do
-    puts "The google-cloud-bigtable gem does not have acceptance tests."
+    $LOAD_PATH.unshift "lib", "acceptance"
+    Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
   end
 
   desc "Run acceptance tests with coverage."
-  task :coverage do
+  task :coverage, :project, :keyfile do |_t, args|
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-bigtable"
+      track_files "lib/**/*.rb"
+      add_filter "lib/google/cloud/bigtable/admin/v2/doc"
+      add_filter "lib/google/cloud/bigtable/v2/doc"
+      add_filter "acceptance/"
+    end
+
+    Rake::Task["acceptance"].invoke(args[:project], args[:keyfile])
   end
 
   desc "Run acceptance cleanup."
   task :cleanup do
+    project = args[:project]
+    project ||= ENV["BIGTABLE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+
+    keyfile = args[:keyfile]
+    keyfile ||= ENV["BIGTABLE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+
+    unless keyfile
+      keyfile ||= ENV["BIGTABLE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    end
+
+    if project.nil? || keyfile.nil?
+      raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGTABLE_TEST_PROJECT=test123 BIGTABLE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    end
+
+    # clear any env var already set
+    (
+      Google::Cloud::Bigtable::Credentials::PATH_ENV_VARS +
+      Google::Cloud::Bigtable::Credentials::JSON_ENV_VARS +
+      Google::Cloud::Bigtable::Admin::Credentials::PATH_ENV_VARS +
+      Google::Cloud::Bigtable::Admin::Credentials::JSON_ENV_VARS
+    ).each do |path|
+      ENV[path] = nil
+    end
+
+    # always overwrite when running tests
+    ENV["BIGTABLE_PROJECT"] = project
+    ENV["BIGTABLE_KEYFILE_JSON"] = keyfile
+
+    $LOAD_PATH.unshift "lib"
+    require "google/cloud/bigtable"
+    puts "Cleaning up Bigtable instances and databases."
+
+    gcloud = Google::Cloud.new
+    bigtable = gcloud.bigtable
+    bigtable.instances.each do |instance|
+      begin
+        instance.delete
+      rescue StandardError => e
+        puts "Error while cleaning up #{instance.instance_id} instance.\n\n#{e}"
+      end
+    end
   end
 end
 
