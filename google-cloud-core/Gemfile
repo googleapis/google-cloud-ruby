@@ -5,7 +5,7 @@ gemspec
 gem "gcloud-jsondoc",
     git: "https://github.com/GoogleCloudPlatform/google-cloud-ruby.git",
     branch: "gcloud-jsondoc"
-gem "google-api-client", "~> 0.17.0"
+gem "google-api-client", "~> 0.23"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-gax", "~> 1.0"
 
