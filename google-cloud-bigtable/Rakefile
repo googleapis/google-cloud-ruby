@@ -32,6 +32,8 @@ namespace :test do
     SimpleCov.start do
       command_name "google-cloud-bigtable"
       track_files "lib/**/*.rb"
+      add_filter "lib/google/cloud/bigtable/admin/v2/doc"
+      add_filter "lib/google/cloud/bigtable/v2/doc"
       add_filter "test/"
     end
 
@@ -131,6 +133,24 @@ namespace :ci do
     # This is a handy shortcut to save typing
     Rake::Task["ci:acceptance"].invoke
   end
+end
+
+desc "Start an interactive shell."
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "pp"
+
+  $LOAD_PATH.unshift "lib"
+
+  require "google-cloud-bigtable"
+  require "google/cloud/bigtable"
+  def gcloud
+    @gcloud ||= Google::Cloud.new
+  end
+
+  ARGV.clear
+  IRB.start
 end
 
 task :default => :test

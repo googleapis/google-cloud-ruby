@@ -13,21 +13,11 @@
 # limitations under the License.
 
 
-require "google/cloud/errors"
+require "helper"
 
-module Google
-  module Cloud
-    module Bigtable
-      # Invalid read row state error
-      class InvalidRowStateError < Google::Cloud::Error
-        # Invalid row chunk data
-        attr_reader :data
-
-        def initialize message, data = nil
-          super(message)
-          @data = data if data
-        end
-      end
-    end
+describe Google::Cloud::Bigtable::Project, :mock_bigtable do
+  it "knows the project identifier" do
+    bigtable.must_be_kind_of Google::Cloud::Bigtable::Project
+    bigtable.project_id.must_equal project_id
   end
 end
