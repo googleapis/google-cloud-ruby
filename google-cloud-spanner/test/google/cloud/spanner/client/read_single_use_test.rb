@@ -72,7 +72,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -95,7 +95,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -118,7 +118,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -141,7 +141,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -164,7 +164,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -187,7 +187,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -210,7 +210,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -233,7 +233,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -256,7 +256,7 @@ describe Google::Cloud::Spanner::Client, :read, :single_use, :mock_spanner do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, results_enum, [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: transaction, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 

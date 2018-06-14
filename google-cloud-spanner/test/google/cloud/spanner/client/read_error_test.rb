@@ -100,7 +100,7 @@ describe Google::Cloud::Spanner::Client, :read, :error, :mock_spanner do
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :streaming_read, RaiseableEnumerator.new(results_enum1), [session_grpc.name, "my-table", ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"], Google::Spanner::V1::KeySet.new(all: true), transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 

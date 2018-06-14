@@ -26,13 +26,13 @@ describe "Spanner Client", :edge, :spanner do
   end
 
   it "reads with invalid table fails" do
-    assert_raises GRPC::NotFound do
+    assert_raises Google::Cloud::NotFoundError do
       db.read "invalid_table", [:id, :int]
     end
   end
 
   it "reads with invalid column fails" do
-    assert_raises GRPC::NotFound do
+    assert_raises Google::Cloud::NotFoundError do
       db.read table_name, [:id, :invalid]
     end
   end
@@ -59,19 +59,19 @@ describe "Spanner Client", :edge, :spanner do
   end
 
   it "queries to a non-existing table fails" do
-    assert_raises GRPC::InvalidArgument do
+    assert_raises Google::Cloud::InvalidArgumentError do
       db.execute "SELECT id, name FROM invalid_table"
     end
   end
 
   it "queries to a non-existing column fails" do
-    assert_raises GRPC::InvalidArgument do
+    assert_raises Google::Cloud::InvalidArgumentError do
       db.execute "SELECT id, name FROM #{table_name}"
     end
   end
 
   it "queries with bad SQL fails" do
-    assert_raises GRPC::InvalidArgument do
+    assert_raises Google::Cloud::InvalidArgumentError do
       db.execute "SELECT Apples AND Oranges"
     end
   end

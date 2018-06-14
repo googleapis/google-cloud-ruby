@@ -39,6 +39,10 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
   let(:results_grpc) { Google::Spanner::V1::PartialResultSet.decode_json results_json }
   let(:results_enum) { Array(results_grpc).to_enum }
 
+  let(:labels) { { "env" => "production" } }
+  let(:session_grpc_labels) { Google::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id), labels: labels }
+  let(:session_labels) { Google::Cloud::Spanner::Session.from_grpc session_grpc_labels, spanner.service }
+
   it "can call keepalive" do
     mock = Minitest::Mock.new
     mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, options: default_options]
@@ -46,6 +50,34 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
 
     session.keepalive!
 
+    mock.verify
+  end
+
+  it "can recreate itself if error is raised on keepalive" do
+    mock = Minitest::Mock.new
+    def results_enum.peek
+      raise GRPC::NotFound.new 5, "not found"
+    end
+    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    session.service.mocked_service = mock
+
+    result = session.keepalive!
+    result.must_equal false
+    mock.verify
+  end
+
+  it "can recreate itself with labels if error is raised on keepalive" do
+    mock = Minitest::Mock.new
+    def results_enum.peek
+      raise GRPC::NotFound.new 5, "not found"
+    end
+    mock.expect :execute_streaming_sql, results_enum, [session_labels.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, options: default_options]
+    mock.expect :create_session, session_grpc_labels, [database_path(instance_id, database_id), session: Google::Spanner::V1::Session.new(labels: labels), options: default_options]
+    session_labels.service.mocked_service = mock
+
+    result = session_labels.keepalive!
+    result.must_equal false
     mock.verify
   end
 end

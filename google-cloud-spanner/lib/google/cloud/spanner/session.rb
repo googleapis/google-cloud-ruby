@@ -597,10 +597,12 @@ module Google
           @last_updated_at = Time.now
           return self
         rescue Google::Cloud::NotFoundError
+          labels = @grpc.labels.to_h unless @grpc.labels.to_h.empty?
           @grpc = service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id
-            )
+            ),
+            labels: labels
           @last_updated_at = Time.now
           return self
         end
@@ -613,10 +615,12 @@ module Google
           execute "SELECT 1"
           return true
         rescue Google::Cloud::NotFoundError
+          labels = @grpc.labels.to_h unless @grpc.labels.to_h.empty?
           @grpc = service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id
-            )
+            ),
+            labels: labels
           return false
         end
 

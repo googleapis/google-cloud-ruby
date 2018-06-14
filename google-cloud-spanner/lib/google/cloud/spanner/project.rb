@@ -219,6 +219,8 @@ module Google
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
                             labels: nil
           config = config.path if config.respond_to? :path
+          # Convert from possible Google::Protobuf::Map
+          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           grpc = service.create_instance \
             instance_id, name: name, config: config, nodes: nodes,
                          labels: labels
@@ -435,6 +437,21 @@ module Google
         #     becomes available. The default is `true`.
         #   * `:threads` (Integer) The number of threads in the thread pool. The
         #     default is twice the number of available CPUs.
+        # @param [Hash] labels The labels to be applied to all sessions
+        #   created by the client. Cloud Labels are a flexible and lightweight
+        #   mechanism for organizing cloud resources into groups that reflect a
+        #   customer's organizational needs and deployment strategies. Cloud
+        #   Labels can be used to filter collections of resources. They can be
+        #   used to control how resource metrics are aggregated. And they can be
+        #   used as arguments to policy management rules (e.g. route, firewall,
+        #   load balancing, etc.). Optional. The default is `nil`.
+        #
+        #   * Label keys must be between 1 and 63 characters long and must
+        #     conform to the following regular expression:
+        #     `[a-z]([-a-z0-9]*[a-z0-9])?`.
+        #   * Label values must be between 0 and 63 characters long and must
+        #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
+        #   * No more than 64 labels can be associated with a given resource.
         #
         # @return [Client] The newly created client.
         #
@@ -453,9 +470,12 @@ module Google
         #     end
         #   end
         #
-        def client instance_id, database_id, pool: {}
+        def client instance_id, database_id, pool: {}, labels: nil
+          # Convert from possible Google::Protobuf::Map
+          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           Client.new self, instance_id, database_id,
-                     valid_session_pool_options(pool)
+                     session_labels: labels,
+                     pool_opts: valid_session_pool_options(pool)
         end
 
         ##
@@ -466,6 +486,21 @@ module Google
         #   Required.
         # @param [String] database_id The unique identifier for the database.
         #   Required.
+        # @param [Hash] labels The labels to be applied to all sessions
+        #   created by the batch client. Labels are a flexible and lightweight
+        #   mechanism for organizing cloud resources into groups that reflect a
+        #   customer's organizational needs and deployment strategies. Cloud
+        #   Labels can be used to filter collections of resources. They can be
+        #   used to control how resource metrics are aggregated. And they can be
+        #   used as arguments to policy management rules (e.g. route, firewall,
+        #   load balancing, etc.). Optional. The default is `nil`.
+        #
+        #   * Label keys must be between 1 and 63 characters long and must
+        #     conform to the following regular expression:
+        #     `[a-z]([-a-z0-9]*[a-z0-9])?`.
+        #   * Label values must be between 0 and 63 characters long and must
+        #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
+        #   * No more than 64 labels can be associated with a given resource.
         #
         # @return [Client] The newly created client.
         #
@@ -494,8 +529,10 @@ module Google
         #   results = new_batch_snapshot.execute_partition \
         #     new_partition
         #
-        def batch_client instance_id, database_id
-          BatchClient.new self, instance_id, database_id
+        def batch_client instance_id, database_id, labels: nil
+          # Convert from possible Google::Protobuf::Map
+          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          BatchClient.new self, instance_id, database_id, session_labels: labels
         end
 
         protected

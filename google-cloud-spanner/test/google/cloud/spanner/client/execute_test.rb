@@ -60,7 +60,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a simple query" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with bool param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE active = @active", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "active" => Google::Protobuf::Value.new(bool_value: true) }), param_types: { "active" => Google::Spanner::V1::Type.new(code: :BOOL) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -90,7 +90,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with int param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE age = @age", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "age" => Google::Protobuf::Value.new(string_value: "29") }), param_types: { "age" => Google::Spanner::V1::Type.new(code: :INT64) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -105,7 +105,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with float param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE score = @score", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "score" => Google::Protobuf::Value.new(number_value: 0.9) }), param_types: { "score" => Google::Spanner::V1::Type.new(code: :FLOAT64) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -122,7 +122,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     timestamp = Time.parse "2017-01-01 20:04:05.06 -0700"
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE updated_at = @updated_at", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "updated_at" => Google::Protobuf::Value.new(string_value: "2017-01-02T03:04:05.060000000Z") }), param_types: { "updated_at" => Google::Spanner::V1::Type.new(code: :TIMESTAMP) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -139,7 +139,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     date = Date.parse "2017-01-02"
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE birthday = @birthday", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "birthday" => Google::Protobuf::Value.new(string_value: "2017-01-02") }), param_types: { "birthday" => Google::Spanner::V1::Type.new(code: :DATE) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -154,7 +154,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with String param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE name = @name", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "name" => Google::Protobuf::Value.new(string_value: "Charlie") }), param_types: { "name" => Google::Spanner::V1::Type.new(code: :STRING) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -171,7 +171,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
     file = StringIO.new "contents"
 
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE avatar = @avatar", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")) }), param_types: { "avatar" => Google::Spanner::V1::Type.new(code: :BYTES) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -186,7 +186,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with an Array param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE project_ids = @list", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -201,7 +201,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with an empty Array param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE project_ids = @list", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) }), param_types: { "list" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -216,7 +216,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with a simple Hash param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id),  session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE settings = @dict", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production")])) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING))])) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -231,7 +231,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with a complex Hash param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id),  session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE settings = @dict", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production"), Google::Protobuf::Value.new(number_value: 0.9), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")] )) ])) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [Google::Spanner::V1::StructType::Field.new(name: "env", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "score", type: Google::Spanner::V1::Type.new(code: :FLOAT64)), Google::Spanner::V1::StructType::Field.new(name: "project_ids", type: Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :INT64)))] )) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -246,7 +246,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with an Array of Hashes" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "data" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "mike"), Google::Protobuf::Value.new(string_value: "mike@example.net")] )), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "chris"), Google::Protobuf::Value.new(string_value: "chris@example.net")] ))] )) } ), param_types: { "data" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "name", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "email", type: Google::Spanner::V1::Type.new(code: :STRING))] ))) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -259,7 +259,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with an Array of STRUCTs" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE STRUCT<name STRING, email STRING>(name, email) IN UNNEST(@data)", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "data" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "mike"), Google::Protobuf::Value.new(string_value: "mike@example.net")] )), Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "chris"), Google::Protobuf::Value.new(string_value: "chris@example.net")] ))] )) } ), param_types: { "data" => Google::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [ Google::Spanner::V1::StructType::Field.new(name: "name", type: Google::Spanner::V1::Type.new(code: :STRING)), Google::Spanner::V1::StructType::Field.new(name: "email", type: Google::Spanner::V1::Type.new(code: :STRING))] ))) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
@@ -273,7 +273,7 @@ describe Google::Cloud::Spanner::Client, :execute, :mock_spanner do
 
   it "can execute a query with an empty Hash param" do
     mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), options: default_options]
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users WHERE settings = @dict", transaction: nil, params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [])) }), param_types: { "dict" => Google::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Spanner::V1::StructType.new(fields: [])) }, resume_token: nil, partition_token: nil, options: default_options]
     spanner.service.mocked_service = mock
 
