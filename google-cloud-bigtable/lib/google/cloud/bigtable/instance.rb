@@ -213,8 +213,7 @@ module Google
         # @param labels [Hash{String=>String}] The Cloud Labels.
 
         def labels= labels
-          return @grpc.labels.clear unless labels
-
+          labels ||= {}
           @grpc.labels = Google::Protobuf::Map.new(
             :string, :string,
             Hash[labels.map { |k, v| [String(k), String(v)] }]
