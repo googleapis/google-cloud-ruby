@@ -95,7 +95,7 @@ module Google
           # Done if Google::Cloud.configure.use_logging is explicitly false
           return if Google::Cloud.configure.use_logging == false
 
-          # Verify credentials and set use_error_reporting to false if
+          # Verify credentials and set use_logging to false if
           # credentials are invalid
           unless valid_credentials? Logging.configure.project_id,
                                     Logging.configure.keyfile

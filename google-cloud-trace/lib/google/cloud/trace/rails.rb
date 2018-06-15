@@ -128,7 +128,7 @@ module Google
           # Done if Google::Cloud.configure.use_trace is explicitly false
           return if Google::Cloud.configure.use_trace == false
 
-          # Verify credentials and set use_error_reporting to false if
+          # Verify credentials and set use_trace to false if
           # credentials are invalid
           unless valid_credentials? Trace.configure.project_id,
                                     Trace.configure.credentials
