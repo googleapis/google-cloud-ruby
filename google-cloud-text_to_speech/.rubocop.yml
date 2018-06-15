@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - "google-cloud-text_to_speech.gemspec"
+    - "lib/google/**/*"
+    - "Rakefile"
+    - "test/**/*"
+    - "acceptance/**/*smoke_test.rb"
+
+Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
