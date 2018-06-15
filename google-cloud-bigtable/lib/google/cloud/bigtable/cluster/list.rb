@@ -66,9 +66,9 @@ module Google
             !token.nil?
           end
 
-          # Retrieve the next page of instances.
+          # Retrieve the next page of clusters.
           #
-          # @return [Cluster::List] The list of instances.
+          # @return [Cluster::List] The list of clusters.
           #
           # @example
           #   require "google/cloud/bigtable"
@@ -105,7 +105,7 @@ module Google
           # over the results returned by a single API call.) Use with caution.
           #
           # @yield [cluster] The block for accessing each cluster.
-          # @yieldparam [Cluster] instance The cluster object.
+          # @yieldparam [Cluster] cluster The cluster object.
           #
           # @return [Enumerator]
           #
