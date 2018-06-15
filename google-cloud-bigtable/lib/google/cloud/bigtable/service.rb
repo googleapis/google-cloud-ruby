@@ -338,7 +338,7 @@ module Google
           )
         end
 
-        # Create formatted location
+        # Create formatted location path
         #
         # @param location [String]
         #   zone name i.e us-east1-b
@@ -400,6 +400,13 @@ module Google
             instance_id,
             app_profile_id
           )
+        end
+
+        # Inspect service object
+        # @return [String]
+
+        def inspect
+          "#{self.class}(#{@project_id})"
         end
       end
     end

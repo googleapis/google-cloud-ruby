@@ -68,7 +68,7 @@ module Google
 
           # Retrieve the next page of instances.
           #
-          # @return [Instance::List] The list of instances.
+          # @return [Cluster::List] The list of instances.
           #
           # @example
           #   require "google/cloud/bigtable"
@@ -104,12 +104,12 @@ module Google
           # are retrieved. (Unlike `#each`, for example, which merely iterates
           # over the results returned by a single API call.) Use with caution.
           #
-          # @yield [cluster] The block for accessing each instance.
-          # @yieldparam [Cluster] instance The instance object.
+          # @yield [cluster] The block for accessing each cluster.
+          # @yieldparam [Cluster] instance The cluster object.
           #
           # @return [Enumerator]
           #
-          # @example Iterating each instance by passing a block:
+          # @example Iterating each cluster by passing a block:
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new

@@ -81,7 +81,7 @@ module Google
     # [Product Documentation]: https://cloud.google.com/bigtable
     #
     module Bigtable
-      # Service for managing bigtable instance, tables and reading from and
+      # Service for managing Bigtable instance, tables and reading from and
       # writing to existing Bigtable tables.
       #
       # @param project_id [String]

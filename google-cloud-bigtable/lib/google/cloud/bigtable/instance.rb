@@ -48,7 +48,7 @@ module Google
       #   job.done? #=> false
       #
       #   # To block until the operation completes.
-      #   job.wait_until_done
+      #   job.wait_until_done!
       #   job.done? #=> true
       #
       #   if job.error?
@@ -208,11 +208,15 @@ module Google
           @grpc.labels
         end
 
-        # Updates the Cloud Labels.
+        # Set the Cloud Labels.
         #
         # @param labels [Hash{String=>String}] The Cloud Labels.
 
         def labels= labels
+          unless labels.is_a?(Hash)
+            raise InvalidArgumentError, "lables must be Hash{String=>String}"
+          end
+
           @grpc.labels = Google::Protobuf::Map.new(
             :string, :string,
             Hash[labels.map { |k, v| [String(k), String(v)] }]
@@ -243,7 +247,7 @@ module Google
         #   job.done? #=> false
         #
         #   # Reload job until completion.
-        #   job.wait_until_done
+        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?
@@ -381,7 +385,7 @@ module Google
         #   job.done? #=> false
         #
         #   # To block until the operation completes.
-        #   job.wait_until_done
+        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?

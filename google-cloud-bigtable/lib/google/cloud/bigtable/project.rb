@@ -37,13 +37,13 @@ module Google
       #
       # See {Google::Cloud::Bigtable.new} and {Google::Cloud#bigtable}.
       #
-      # @example Obtaining an instance and a clusters from a project.
+      # @example Obtaining an instance and the clusters from a project.
       #   require "google/cloud"
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
       #   instance = bigtable.instance("my-instance")
-      #   clusters = bigtable.clusters # All cluster in project
+      #   clusters = bigtable.clusters # All clusters in the project
       #
       class Project
         # @private
@@ -126,6 +126,8 @@ module Google
         end
 
         # Create a Bigtable instance.
+        #
+        # @see https://cloud.google.com/compute/docs/regions-zones for cluster zone locations
         #
         # @param instance_id [String] The unique identifier for the instance,
         #   which cannot be changed after the instance is created. Values are of

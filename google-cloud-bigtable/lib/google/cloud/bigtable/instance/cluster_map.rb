@@ -19,7 +19,7 @@ module Google
   module Cloud
     module Bigtable
       class Instance
-        # Instance::ClusterMap is a Hash with cluster name and grpc object.
+        # Instance::ClusterMap is a Hash with cluster name and gRPC object.
         # It is used to create instance.
         # @example Create
         #

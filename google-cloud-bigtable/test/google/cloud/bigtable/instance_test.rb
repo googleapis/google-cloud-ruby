@@ -42,4 +42,34 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
     instance.must_be :production?
     instance.wont_be :development?
   end
+
+  describe "#labels=" do
+    let(:instance){
+      Google::Cloud::Bigtable::Instance.from_grpc(
+        Google::Bigtable::Admin::V2::Instance.new(name: instance_id),
+        bigtable.service
+      )
+    }
+
+    it "set lables using hash" do
+      instance.labels = { "env": "test1" }
+      instance.labels.must_equal({"env" => "test1"})
+
+      instance.labels = { env: "test2" }
+      instance.labels.must_equal({"env" => "test2"})
+
+      instance.labels = { data: "users", appprofile: 12345 }
+      instance.labels.must_equal({ "data" => "users", "appprofile" => "12345" })
+    end
+
+    it "lables can not be nil or other types then hash" do
+      proc {
+        instance.labels = nil
+      }.must_raise Google::Cloud::InvalidArgumentError
+
+      proc {
+        instance.labels = 1
+      }.must_raise Google::Cloud::InvalidArgumentError
+    end
+  end
 end

@@ -21,7 +21,7 @@ require "google/cloud/bigtable/cluster/job"
 module Google
   module Cloud
     module Bigtable
-      # # AppProfile
+      # # Cluster
       #
       # A configuration object describing how Cloud Bigtable should treat traffic
       # from a particular end user application.
@@ -75,7 +75,7 @@ module Google
           @grpc.name.split("/")[5]
         end
 
-        # The unique name of the cluster. Values are of the form
+        # The unique name of the cluster. Value in the form
         # `projects/<project_id>/instances/<instance_id>/clusters/<cluster_id>`.
         #
         # @return [String]
@@ -83,8 +83,9 @@ module Google
           @grpc.name
         end
 
-        # The current instance state. Possible values are `:CREATING`,
-        # `:READY`, `:STATE_NOT_KNOWN`, `:RESIZING`, `:DISABLED`.
+        # The current instance state.
+        # Possible values are
+        # `:CREATING`, `:READY`, `:STATE_NOT_KNOWN`, `:RESIZING`, `:DISABLED`.
         #
         # @return [Symbol]
         def state
@@ -135,7 +136,7 @@ module Google
         # The number of nodes allocated to this cluster. More nodes enable higher
         # throughput and more consistent performance.
         #
-        # @param serve_nodes [Integer] No of nodes
+        # @param serve_nodes [Integer] Number of nodes
         def nodes= serve_nodes
           @grpc.serve_nodes = serve_nodes
         end
@@ -150,7 +151,8 @@ module Google
           @grpc.default_storage_type
         end
 
-        # Cluster location. i.e "us-east-1b"
+        # Cluster location.
+        # i.e "us-east-1b"
         #
         # @return [String]
         def location
@@ -169,7 +171,7 @@ module Google
         #
         # Updatable fields are no of nodes.
         #
-        # @return [Google::Cloud::Bigtable::Table::Job]
+        # @return [Google::Cloud::Bigtable::Cluster::Job]
         #   The job representing the long-running, asynchronous processing of
         #   an update cluster operation.
         #
@@ -186,7 +188,7 @@ module Google
         #   job.done? #=> false
         #
         #   # To block until the operation completes.
-        #   job.wait_until_done
+        #   job.wait_until_done!
         #   job.done? #=> true
         #
         #   if job.error?
@@ -206,6 +208,15 @@ module Google
           Cluster::Job.from_grpc(grpc, service)
         end
         alias update save
+
+        # Reload cluster information.
+        #
+        # @return [Google::Cloud::Bigtable::Cluster]
+
+        def reload!
+          @grpc = service.get_cluster(instance_id, cluster_id)
+          self
+        end
 
         # Permanently deletes the cluster
         #
