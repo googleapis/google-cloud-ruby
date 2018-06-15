@@ -51,7 +51,7 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
       )
     }
 
-    it "set lables using hash" do
+    it "set labels using hash" do
       instance.labels = { "env" => "test1" }
       instance.labels.must_equal({"env" => "test1"})
 
@@ -62,14 +62,10 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
       instance.labels.must_equal({ "data" => "users", "appprofile" => "12345" })
     end
 
-    it "lables can not be nil or other types then hash" do
-      proc {
-        instance.labels = nil
-      }.must_raise Google::Cloud::InvalidArgumentError
-
-      proc {
-        instance.labels = 1
-      }.must_raise Google::Cloud::InvalidArgumentError
+    it "clear lables if labels value is nil" do
+      instance.labels = { "env" => "test" }
+      instance.labels = nil
+      instance.labels.length.must_equal 0
     end
   end
 end

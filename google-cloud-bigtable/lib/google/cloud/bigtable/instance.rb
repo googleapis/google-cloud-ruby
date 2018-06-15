@@ -213,9 +213,7 @@ module Google
         # @param labels [Hash{String=>String}] The Cloud Labels.
 
         def labels= labels
-          unless labels.is_a?(Hash)
-            raise InvalidArgumentError, "lables must be Hash{String=>String}"
-          end
+          return @grpc.labels.clear unless labels
 
           @grpc.labels = Google::Protobuf::Map.new(
             :string, :string,
