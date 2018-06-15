@@ -114,7 +114,9 @@ module Google
           gcp_config = rails_config.google_cloud
           log_config = gcp_config.logging
 
-          Cloud.configure.use_logging ||= gcp_config.use_logging
+          if Cloud.configure.use_logging.nil?
+            Cloud.configure.use_logging = gcp_config.use_logging
+          end
           Logging.configure do |config|
             config.project_id ||= config.project
             config.project_id ||= log_config.project_id || log_config.project
