@@ -195,6 +195,16 @@ describe Google::Cloud::Trace::Railtie do
       end
     end
 
+    it "Set use_trace to false if explicitly disabled in production" do
+      Google::Cloud::Trace::Railtie.stub :valid_credentials?, true do
+        Rails.env.stub :production?, true do
+          Google::Cloud.configure.use_trace = false
+          Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
+          Google::Cloud.configure.use_trace.must_equal false
+        end
+      end
+    end
+
     it "returns true if use_trace is explicitly true even Rails is not in production" do
       rails_config.google_cloud.use_trace = true
 
