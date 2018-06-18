@@ -28,3 +28,8 @@ s.replace(
     "lib/google/cloud/vision/v1/image_annotator_client.rb",
     "google/cloud/vision/credentials",
     "google/cloud/vision/v1/credentials")
+
+s.replace(
+    "Rakefile",
+    "google/cloud/vision/credentials",
+    "google/cloud/vision/v1/credentials")
