@@ -10,13 +10,10 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
-# tasks has two product names, and a poorly named artman yaml
 v1_library = gapic.ruby_library(
     'vision', 'v1', artman_output_name='google-cloud-ruby/google-cloud-vision'
 )
 
-# Copy all files except for 'README.md'
-# s.copy(v1_library, os.getcwd())
 s.copy(v1_library)
 
 s.replace(
