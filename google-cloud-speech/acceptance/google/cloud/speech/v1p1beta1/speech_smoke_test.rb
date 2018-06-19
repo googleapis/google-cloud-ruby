@@ -22,7 +22,7 @@ require "google/cloud/speech"
 describe "SpeechSmokeTest V1p1beta1" do
   it "runs one smoke test with recognize" do
 
-    speech_client = Google::Cloud::Speech::V1p1beta1.new
+    speech_client = Google::Cloud::Speech.new version: :v1p1beta1
     language_code = "en-US"
     sample_rate_hertz = 44100
     encoding = :FLAC

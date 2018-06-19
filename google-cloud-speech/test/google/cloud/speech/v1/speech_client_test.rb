@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockSpeechCredentials < Google::Cloud::Speech::Credentials
+class MockSpeechCredentials < Google::Cloud::Speech::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -101,7 +101,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
       mock_credentials = MockSpeechCredentials.new("recognize")
 
       Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
@@ -146,7 +146,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
       mock_credentials = MockSpeechCredentials.new("recognize")
 
       Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
@@ -201,7 +201,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
       mock_credentials = MockSpeechCredentials.new("long_running_recognize")
 
       Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
@@ -249,7 +249,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
       mock_credentials = MockSpeechCredentials.new("long_running_recognize")
 
       Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
@@ -288,7 +288,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
       mock_credentials = MockSpeechCredentials.new("long_running_recognize")
 
       Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
@@ -326,7 +326,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
       mock_credentials = MockSpeechCredentials.new("streaming_recognize")
 
       Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method
@@ -354,7 +354,7 @@ describe Google::Cloud::Speech::V1::SpeechClient do
       mock_credentials = MockSpeechCredentials.new("streaming_recognize")
 
       Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Speech.new(version: :v1)
 
           # Call method

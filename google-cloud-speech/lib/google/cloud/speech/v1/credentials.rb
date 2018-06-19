@@ -12,12 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/speech/v1/credentials"
+require "googleauth"
 
 module Google
   module Cloud
     module Speech
-      Credentials = Google::Cloud::Speech::V1::Credentials
+      module V1
+        class Credentials < Google::Auth::Credentials
+          SCOPE = [
+            "https://www.googleapis.com/auth/cloud-platform"
+          ].freeze
+          PATH_ENV_VARS = %w(SPEECH_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+          JSON_ENV_VARS = %w(SPEECH_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
+          DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+        end
+      end
     end
   end
 end

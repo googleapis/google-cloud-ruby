@@ -27,7 +27,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/speech/v1p1beta1/cloud_speech_pb"
-require "google/cloud/speech/credentials"
+require "google/cloud/speech/v1p1beta1/credentials"
 
 module Google
   module Cloud
@@ -102,7 +102,7 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/speech/v1p1beta1/cloud_speech_services_pb"
 
-            credentials ||= Google::Cloud::Speech::Credentials.default
+            credentials ||= Google::Cloud::Speech::V1p1beta1::Credentials.default
 
             @operations_client = OperationsClient.new(
               credentials: credentials,
@@ -114,7 +114,7 @@ module Google
             )
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Speech::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Speech::V1p1beta1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
