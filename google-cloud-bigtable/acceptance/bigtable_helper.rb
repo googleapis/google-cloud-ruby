@@ -124,10 +124,13 @@ def clean_up_bigtable_objects instance_id
   end
 end
 
+require "date"
+require "securerandom"
+
 # Test instance
-$bigtable_instance_id = "google-cloud-ruby-tests"
+$bigtable_instance_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 $bigtable_cluster_location = "us-east1-b"
-$bigtable_cluster_id = "test-cluster"
+$bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
 
 create_test_instance(
   $bigtable_instance_id,
