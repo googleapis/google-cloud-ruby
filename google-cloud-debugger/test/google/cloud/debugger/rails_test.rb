@@ -94,6 +94,16 @@ describe Google::Cloud::Debugger::Railtie do
       end
     end
 
+    it "Set use_debugger to false if explicitly disabled in production" do
+      Google::Cloud::Debugger::Railtie.stub :valid_credentials?, true do
+        Rails.env.stub :production?, true do
+          Google::Cloud.configure.use_debugger = false
+          Google::Cloud::Debugger::Railtie.send :consolidate_rails_config, rails_config
+          Google::Cloud.configure.use_debugger.must_equal false
+        end
+      end
+    end
+
     it "returns true if use_debugger is explicitly true even Rails is not in production" do
       rails_config.google_cloud.use_debugger = true
 

@@ -108,7 +108,9 @@ module Google
           gcp_config = rails_config.google_cloud
           dbg_config = gcp_config.debugger
 
-          Cloud.configure.use_debugger ||= gcp_config.use_debugger
+          if Cloud.configure.use_debugger.nil?
+            Cloud.configure.use_debugger = gcp_config.use_debugger
+          end
           Debugger.configure do |config|
             config.project_id ||= begin
               config.project || dbg_config.project_id || dbg_config.project

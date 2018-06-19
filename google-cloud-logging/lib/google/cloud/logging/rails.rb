@@ -95,7 +95,7 @@ module Google
           # Done if Google::Cloud.configure.use_logging is explicitly false
           return if Google::Cloud.configure.use_logging == false
 
-          # Verify credentials and set use_error_reporting to false if
+          # Verify credentials and set use_logging to false if
           # credentials are invalid
           unless valid_credentials? Logging.configure.project_id,
                                     Logging.configure.keyfile
@@ -114,7 +114,9 @@ module Google
           gcp_config = rails_config.google_cloud
           log_config = gcp_config.logging
 
-          Cloud.configure.use_logging ||= gcp_config.use_logging
+          if Cloud.configure.use_logging.nil?
+            Cloud.configure.use_logging = gcp_config.use_logging
+          end
           Logging.configure do |config|
             config.project_id ||= config.project
             config.project_id ||= log_config.project_id || log_config.project

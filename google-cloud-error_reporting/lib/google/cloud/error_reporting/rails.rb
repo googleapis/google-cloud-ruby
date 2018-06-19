@@ -109,7 +109,9 @@ module Google
           gcp_config = rails_config.google_cloud
           er_config = gcp_config.error_reporting
 
-          Cloud.configure.use_error_reporting ||= gcp_config.use_error_reporting
+          if Cloud.configure.use_error_reporting.nil?
+            Cloud.configure.use_error_reporting = gcp_config.use_error_reporting
+          end
           ErrorReporting.configure do |config|
             config.project_id ||= config.project
             config.project_id ||= er_config.project_id || er_config.project

@@ -100,6 +100,16 @@ describe Google::Cloud::ErrorReporting::Railtie do
       end
     end
 
+    it "Set use_error_reporting to false if explicitly disabled in production" do
+      Google::Cloud::ErrorReporting::Railtie.stub :valid_credentials?, true do
+        Rails.env.stub :production?, true do
+          Google::Cloud.configure.use_error_reporting = false
+          Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
+          Google::Cloud.configure.use_error_reporting.must_equal false
+        end
+      end
+    end
+
     it "returns true if use_error_reporting is explicitly true even Rails is not in production" do
       rails_config.google_cloud.use_error_reporting = true
 
