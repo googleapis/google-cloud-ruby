@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,23 +21,24 @@ gem "google-cloud-core"
 
 require "googleauth"
 require "grpc"
-
 require "google/cloud"
 require "google/cloud/config"
 
 module Google
   module Cloud
-    # Create bigtable client instance for data, table admin and instance admin
-    # operartions.
+    # Creates a new object for connecting to the Bigtable service.
     #
-    # @param client_type [Symbol]
-    #   Client type are
-    #   `:data` - data operartions(read rows, update cells etc)
-    #   `:table` - table admin operartions(create, delete, update, list etc)
-    #   `:instance` - instance admin operartions(create, delete, update, list etc)
-    #   Default client type is `:data`.
-    # @param instance_id [String]
-    #   Bigtable instance identifier
+    # For more information on connecting to Google Cloud see the [Authentication
+    # Guide](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication).
+    #
+    # @param scope [Array<String>]
+    #   The OAuth 2.0 scopes controlling the set of resources and operations
+    #   that the connection can access. See [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+    #   The OAuth scopes for this service. This parameter is ignored if an
+    #   updater_proc is supplied.
+    # @param timeout [Integer]
+    #   The default timeout, in seconds, for calls made through this client.
     # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
     #   Provides the means for authenticating requests made by the client. This parameter can
     #   be many types.
@@ -54,59 +53,28 @@ module Google
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
     #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
-    # @param scopes [Array<String>]
-    #   The OAuth scopes for this service. This parameter is ignored if an
-    #   updater_proc is supplied.
     # @param client_config [Hash]
     #   A Hash for call options for each method.
     #   See Google::Gax#construct_settings for the structure of
     #   this data. Falls back to the default config if not specified
     #   or the specified config is missing data points.
-    # @param timeout [Integer]
-    #   The default timeout, in seconds, for calls made through this client.
-    # @return [Google::Cloud::Bigtable::InstanceAdminClient | Google::Cloud::Bigtable::TableAdminClient | Google::Cloud::Bigtable::DataClient]
+    # @return [Google::Cloud::Bigtable::Project]
     #
-    # @example Create instance admin client
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #   instance_admin_client = gcloud.bigtable(client_type: :instance)
-    #
-    # @example Create table admin client
+    # @example
     #   require "google/cloud"
     #
     #   gcloud  = Google::Cloud.new
     #
-    #   table_admin_client = gcloud.bigtable(
-    #     client_type: :table,
-    #     instance_id: "instance-id"
-    #   )
+    #   bigtable = gcloud.bigtable
     #
-    # @example Create table data operations client
-    #   require "google/cloud"
-    #
-    #   gcloud  = Google::Cloud.new
-    #
-    #   data_client = gcloud.bigtable(
-    #     client_type: :data,
-    #     instance_id: "instance-id"
-    #   )
 
-    def bigtable \
-        client_type: :data,
-        instance_id: nil,
-        credentials: nil,
-        scopes: nil,
-        client_config: nil,
-        timeout: nil
+    def bigtable scope: nil, timeout: nil, credentials: nil, client_config: nil
       Google::Cloud.bigtable(
         project_id: @project,
-        instance_id: instance_id,
-        client_type: client_type,
         credentials: (credentials || @keyfile),
-        scopes: scopes,
-        client_config: client_config,
-        timeout: (timeout || @timeout)
+        scope: scope,
+        timeout: (timeout || @timeout),
+        client_config: client_config
       )
     end
 
@@ -114,15 +82,9 @@ module Google
     # operartions.
     #
     # @param project_id [String]
-    #   Project identifier for bigtable
-    # @param client_type [Symbol]
-    #   Client type are
-    #   `:data` - data operartions(read rows, update cells etc)
-    #   `:table` - table admin operartions(create, delete, update, list etc)
-    #   `:instance` - instance admin operartions(create, delete, update, list etc)
-    #   Default client type is `:data`.
-    # @param instance_id [String]
-    #   Bigtable instance identifier
+    #   Project identifier for the Bigtable service you
+    #   are connecting to. If not present, the default project for the
+    #   credentials is used.
     # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
     #   Provides the means for authenticating requests made by the client. This parameter can
     #   be many types.
@@ -137,53 +99,39 @@ module Google
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
     #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
-    # @param scopes [Array<String>]
+    # @param scope [Array<String>]
+    #   The OAuth 2.0 scopes controlling the set of resources and operations
+    #   that the connection can access. See [Using OAuth 2.0 to Access Google
+    #   APIs](https://developers.google.com/identity/protocols/OAuth2).
     #   The OAuth scopes for this service. This parameter is ignored if an
     #   updater_proc is supplied.
+    # @param timeout [Integer]
+    #   The default timeout, in seconds, for calls made through this client.
     # @param client_config [Hash]
     #   A Hash for call options for each method.
     #   See Google::Gax#construct_settings for the structure of
     #   this data. Falls back to the default config if not specified
-    #   or the specified config is missing data points.
-    # @param timeout [Integer]
-    #   The default timeout, in seconds, for calls made through this client.
-    # @return [Google::Cloud::Bigtable::InstanceAdminClient | Google::Cloud::Bigtable::TableAdminClient | Google::Cloud::Bigtable::DataClient]
+    #   or the specified config is missing data points. Optional.
+    # @return [Google::Cloud::Bigtable::Project]
     #
-    # @example Create instance admin client
+    # @example
     #   require "google/cloud"
     #
-    #   instance_admin_client = Google::Cloud.bigtable(client_type: :instance)
-    #
-    # @example Create table admin client
-    #   require "google/cloud"
-    #
-    #   table_admin_client = Google::Cloud.bigtable(
-    #     client_type: :table,
-    #     instance_id: "instance-id"
-    #   )
-    #
-    # @example Create table data operations client
-    #   require "google/cloud"
-    #
-    #   data_client = Google::Cloud.bigtable(instance_id: "instance-id")
+    #   bigtable = Google::Cloud.bigtable
 
     def self.bigtable \
         project_id: nil,
-        client_type: :data,
-        instance_id: nil,
         credentials: nil,
-        scopes: nil,
-        client_config: nil,
-        timeout: nil
+        scope: nil,
+        timeout: nil,
+        client_config: nil
       require "google/cloud/bigtable"
       Google::Cloud::Bigtable.new(
         project_id: project_id,
-        client_type: client_type,
-        instance_id: instance_id,
         credentials: credentials,
-        scopes: scopes,
-        client_config: client_config,
-        timeout: timeout
+        scope: scope,
+        timeout: timeout,
+        client_config: client_config
       )
     end
   end
@@ -213,7 +161,7 @@ Google::Cloud.configure.add_config! :bigtable do |config|
                       Proc
                     ],
                     allow_nil: true
-  config.add_field! :scopes, nil, match: [String, Array]
+  config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
   config.add_field! :client_config, nil, match: Hash
 end

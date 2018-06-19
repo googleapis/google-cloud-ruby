@@ -15,17 +15,15 @@
 
 require "google-cloud-bigtable"
 require "google/cloud/env"
-require "google/cloud/config"
 require "google/cloud/errors"
 require "google/cloud/bigtable/credentials"
-require 'google/cloud/bigtable/admin/credentials'
+require "google/cloud/bigtable/project"
 
 module Google
   module Cloud
-    # rubocop:disable LineLength
-
-    ##
-    # # Ruby Client for Cloud Bigtable API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # Cloud Bigtable
+    #
+    # Ruby Client for Cloud Bigtable API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Cloud Bigtable API][Product Documentation]:
     # API for reading and writing the contents of Bigtables associated with a
@@ -82,22 +80,13 @@ module Google
     #
     # [Product Documentation]: https://cloud.google.com/bigtable
     #
-    #
     module Bigtable
-      # rubocop:enable LineLength
-
-      # Service for managing bigtable instance, tables and reading from and writing to existing Bigtable tables.
+      # Service for managing Bigtable instance, tables and reading from and
+      # writing to existing Bigtable tables.
       #
       # @param project_id [String]
-      #   Project identifier for bigtable
-      # @param client_type [Symbol]
-      #   Client type are
-      #   `:data` - data operartions(read rows, update cells etc)
-      #   `:table` - table admin operartions(create, delete, update, list etc)
-      #   `:instance` - instance admin operartions(create, delete, update, list etc)
-      #   Default client type is `:data`.
-      # @param instance_id [String]
-      #   Bigtable instance identifier
+      #   Project identifier for the Bigtable service you are connecting to.
+      #   If not present, the default project for the credentials is used.
       # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
       #   Provides the means for authenticating requests made by the client. This parameter can
       #   be many types.
@@ -112,7 +101,10 @@ module Google
       #   should already be composed with a `GRPC::Core::CallCredentials` object.
       #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
       #   metadata for requests, generally, to give OAuth credentials.
-      # @param scopes [Array<String>]
+      # @param scope [Array<String>]
+      #   The OAuth 2.0 scopes controlling the set of resources and operations
+      #   that the connection can access. See [Using OAuth 2.0 to Access Google
+      #   APIs](https://developers.google.com/identity/protocols/OAuth2).
       #   The OAuth scopes for this service. This parameter is ignored if an
       #   updater_proc is supplied.
       # @param client_config [Hash]
@@ -121,68 +113,40 @@ module Google
       #   this data. Falls back to the default config if not specified
       #   or the specified config is missing data points.
       # @param timeout [Integer]
-      #   The default timeout, in seconds, for calls made through this client.
-      # @return [Google::Cloud::InstanceAdminClient | Google::Cloud::TableAdminClient | Google::Cloud::DataClient]
+      #   The default timeout, in seconds, for calls made through this client. Optional.
+      # @return [Google::Cloud::Bigtable::Project]
       #
-      # @example Create instance admin client
+      # @example
       #   require "google/cloud/bigtable"
       #
-      #   client = Google::Cloud::Bigtable.new(client_type: :instance)
-      #
-      # @example Create table admin client
-      #   require "google/cloud/bigtable"
-      #
-      #   client = Google::Cloud::Bigtable.new(
-      #     client_type: :table
-      #     instance_id: "instance-id"
-      #   )
-      #
-      # @example Create table data operations client
-      #   require "google/cloud/bigtable"
-      #
-      #   client = Google::Cloud::Bigtable.new(instance_id: "instance-id")
+      #   client = Google::Cloud::Bigtable.new
 
       def self.new \
           project_id: nil,
-          client_type: :data,
-          instance_id: nil,
           credentials: nil,
-          scopes: nil,
+          scope: nil,
           client_config: nil,
           timeout: nil
         project_id = (project_id || default_project_id).to_s
 
         raise InvalidArgumentError, "project_id is required" unless project_id
 
-        gem_spec = Gem.loaded_specs["google-cloud-bigtable"]
-        options = {
-          credentials: (credentials ||
-            default_credentials(scopes: scopes, client_type: client_type)),
-          scopes: (scopes || configure.scopes),
-          client_config: (client_config || configure.client_config),
-          timeout: (timeout || configure.timeout),
-          lib_name: gem_spec.name,
-          lib_version: gem_spec.version.to_s
-        }
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        client_config ||= configure.client_config
+        credentials ||= default_credentials(scope: scope)
 
-        if client_type == :instance
-          require "google/cloud/bigtable/instance_admin_client"
-          return Bigtable::InstanceAdminClient.new(project_id, options)
+        unless credentials.is_a? Google::Auth::Credentials
+          credentials = Bigtable::Credentials.new credentials, scope: scope
         end
 
-        # Instance id is required for data and table clients
-        raise InvalidArgumentError, "instance_id is required" unless instance_id
-
-        if client_type == :table
-          require "google/cloud/bigtable/table_admin_client"
-          Bigtable::TableAdminClient.new(project_id, instance_id, options)
-        elsif client_type == :data
-          require "google/cloud/bigtable/data_client"
-          Bigtable::DataClient.new(project_id, instance_id, options)
-        else
-          raise InvalidArgumentError, "invalid client type. Valid types are \
-  :instance, :table, :data"
-        end
+        service = Bigtable::Service.new(
+          project_id,
+          credentials,
+          timeout: timeout,
+          client_config: client_config
+        )
+        Bigtable::Project.new(service)
       end
 
       # Configure the Google Cloud Bigtable library.
@@ -249,17 +213,10 @@ module Google
      # @private
      # Default credentials.
 
-     def self.default_credentials scopes: nil, client_type: nil
-       credentials = Google::Cloud.configure.bigtable.credentials ||
-          Google::Cloud.configure.credentials
-
-       return credentials if credentials
-
-       if client_type == :data
-         Bigtable::Credentials.default(scopes: scopes)
-       else
-         Bigtable::Admin::Credentials.default(scopes: scopes)
-       end
+     def self.default_credentials scope: nil
+       Google::Cloud.configure.bigtable.credentials ||
+         Google::Cloud.configure.credentials ||
+         Bigtable::Credentials.default(scope: scope)
      end
     end
   end
