@@ -97,7 +97,7 @@ namespace :acceptance do
   end
 
   desc "Run acceptance cleanup."
-  task :cleanup do
+  task :cleanup do |_t, args|
     project = args[:project]
     project ||= ENV["BIGTABLE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
 
@@ -113,6 +113,8 @@ namespace :acceptance do
     end
 
     # clear any env var already set
+    require "google/cloud/bigtable/credentials"
+    require "google/cloud/bigtable/admin/credentials"
     (
       Google::Cloud::Bigtable::Credentials::PATH_ENV_VARS +
       Google::Cloud::Bigtable::Credentials::JSON_ENV_VARS +
