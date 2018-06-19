@@ -87,7 +87,7 @@ def create_test_instance instance_id, cluster_id, cluster_location
   job = $bigtable.create_instance(
    instance_id,
    display_name: "Ruby Acceptance Test",
-   labels: { "env": "test"},
+   labels: { env: "test" },
   ) do |clusters|
     clusters.add(cluster_id, cluster_location, nodes: 3)
   end
