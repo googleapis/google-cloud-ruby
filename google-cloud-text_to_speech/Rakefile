@@ -79,15 +79,7 @@ task :jsondoc => :yard do
         modules: [
           {
             title: "Google::Cloud::Texttospeech::V1",
-            include: ["google/cloud/text_to_speech/v1"]
-          },
-          {
-            title: "Google::Protobuf",
-            include: ["google/protobuf"]
-          },
-          {
-            title: "Google::Rpc",
-            include: ["google/rpc"]
+            include: ["google/cloud/texttospeech/v1"]
           }
         ]
       }
