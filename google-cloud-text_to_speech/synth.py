@@ -28,7 +28,10 @@ v1_library = gapic._generate_code(
     config_path='artman_texttospeech_v1.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-texttospeech')
 
-s.copy(v1_library)
+s.copy(v1_library / "lib/google/cloud/text_to_speech/v1")
+s.copy(v1_library / "lib/google/cloud/text_to_speech/v1.rb")
+s.copy(v1_library / "lib/google/cloud/texttospeech/v1")
+s.copy(v1_library / "test/google/cloud/text_to_speech/v1")
 
 # Temporary until https://github.com/googleapis/gapic-generator/pull/2079
 # shows up in a build.
