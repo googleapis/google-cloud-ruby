@@ -15,7 +15,6 @@
 require "google/cloud/env"
 require "google/cloud/trace"
 
-
 module Google
   module Cloud
     module Trace
@@ -150,7 +149,7 @@ module Google
           trace_config = gcp_config.trace
 
           if Cloud.configure.use_trace.nil?
-            Cloud.configure.use_trace = gcp_config.use_trace
+            Cloud.configure.use_trace = trace_config.use_trace
           end
           Trace.configure do |config|
             config.project_id ||= (config.project ||
