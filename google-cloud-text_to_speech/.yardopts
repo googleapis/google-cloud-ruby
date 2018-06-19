@@ -1,0 +1,8 @@
+--no-private
+--title=Cloud Text-to-Speech API
+--exclude _pb\.rb$
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
