@@ -1,4 +1,4 @@
-# Copyright 2016 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
 require "minitest/autorun"
 require "google/cloud/speech"
 
-describe "Streaming Recognition", :speech do
+describe "Streaming Recognition V1p1beta1", :speech do
   let(:filepath) { "acceptance/data/audio.raw" }
-  let(:speech) { Google::Cloud::Speech.new }
+  let(:speech) { Google::Cloud::Speech.new version: :v1p1beta1 }
 
   it "default params" do
     counters = Hash.new { |h, k| h[k] = 0 }

@@ -1,4 +1,4 @@
-# Copyright 2016 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,9 @@
 # limitations under the License.
 
 require "minitest/autorun"
-require "minitest/spec"
 
-require "google/cloud/speech"
+require "google/cloud/speech/v1"
 require "google/cloud/speech/v1/cloud_speech_services_pb"
-require "google/cloud/speech/stream"
 
 # Mock for the GRPC::ClientStub class.
 class MockGrpcClientStub
@@ -47,7 +45,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockSpeechCredentials < Google::Cloud::Speech::Credentials
+class MockSpeechCredentials < Google::Cloud::Speech::V1::Credentials
   def initialize method_name
     @method_name = method_name
   end
@@ -60,7 +58,7 @@ class MockSpeechCredentials < Google::Cloud::Speech::Credentials
   end
 end
 
-describe Google::Cloud::Speech::Stream do
+describe Google::Cloud::Speech::V1::Stream do
   # Tokens to control mock streaming_recognize behavior
   FINAL = "final".freeze
   INTERIM = "interim".freeze
@@ -108,13 +106,13 @@ describe Google::Cloud::Speech::Stream do
 
   it "wraps basic streaming functionality" do
     Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-      Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Speech.new(version: :v1)
         stream = client.streaming_recognize({})
         stream.on_error { |err| "Stream failed unexpectedly with error #{err}" }
 
         # Check that stream is not started or stopped
-        assert_kind_of(Google::Cloud::Speech::Stream, stream)
+        assert_kind_of(Google::Cloud::Speech::V1::Stream, stream)
         refute(stream.started?)
         refute(stream.stopped?)
 
@@ -153,7 +151,7 @@ describe Google::Cloud::Speech::Stream do
 
   it "runs on_error callback" do
     Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-      Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Speech.new(version: :v1)
         stream = client.streaming_recognize({})
         counters = Hash.new { |h, k| h[k] = 0 }
@@ -180,7 +178,7 @@ describe Google::Cloud::Speech::Stream do
 
   it "runs on_interim callback" do
     Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-      Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Speech.new(version: :v1)
         stream = client.streaming_recognize({})
         counters = Hash.new { |h, k| h[k] = 0 }
@@ -207,7 +205,7 @@ describe Google::Cloud::Speech::Stream do
 
   it "runs on_result callback" do
     Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-      Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Speech.new(version: :v1)
         stream = client.streaming_recognize({})
         counters = Hash.new { |h, k| h[k] = 0 }
@@ -234,7 +232,7 @@ describe Google::Cloud::Speech::Stream do
 
   it "runs on_utterance callback" do
     Google::Cloud::Speech::V1::Speech::Stub.stub(:new, mock_stub) do
-      Google::Cloud::Speech::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Speech::V1::Credentials.stub(:default, mock_credentials) do
         client = Google::Cloud::Speech.new(version: :v1)
         stream = client.streaming_recognize({})
         counters = Hash.new { |h, k| h[k] = 0 }
@@ -246,15 +244,15 @@ describe Google::Cloud::Speech::Stream do
         stream.on_complete { counters[:complete] += 1 }
         stream.on_utterance { counters[:utterance] += 1 }
 
-        stream.send(FINAL)
+        stream.send(UTTERANCE)
         stream.stop
         stream.wait_until_complete!
 
         errors.size.must_be :zero?
         counters[:interim].must_be :zero?
-        counters[:result].must_equal 1
+        counters[:result].must_be :zero?
         counters[:complete].must_equal 1
-        counters[:utterance].must_be :zero?
+        counters[:utterance].must_equal 1
       end
     end
   end

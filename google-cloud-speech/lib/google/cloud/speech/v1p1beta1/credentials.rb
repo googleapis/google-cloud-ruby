@@ -17,13 +17,15 @@ require "googleauth"
 module Google
   module Cloud
     module Speech
-      class Credentials < Google::Auth::Credentials
-        SCOPE = [
-          "https://www.googleapis.com/auth/cloud-platform"
-        ].freeze
-        PATH_ENV_VARS = %w(SPEECH_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(SPEECH_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
-        DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+      module V1p1beta1
+        class Credentials < Google::Auth::Credentials
+          SCOPE = [
+            "https://www.googleapis.com/auth/cloud-platform"
+          ].freeze
+          PATH_ENV_VARS = %w(SPEECH_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+          JSON_ENV_VARS = %w(SPEECH_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
+          DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+        end
       end
     end
   end

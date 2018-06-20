@@ -3,12 +3,9 @@ AllCops:
     - "acceptance/**/*"
     - "google-cloud-speech.gemspec"
     - "lib/google/cloud/speech.rb"
-    - "lib/google/cloud/speech/*"
-    - "lib/google/cloud/speech/v1/*pb.rb"
-    - "lib/google/cloud/speech/v1/speech_client.rb"
-    - "lib/google/cloud/speech/v1/doc/**/*"
+    - "lib/google/cloud/speech/**/*"
     - "Rakefile"
-    - "test/google/cloud/speech/v1/**/*"
+    - "test/google/cloud/speech/**/*"
 
 Documentation:
   Enabled: false

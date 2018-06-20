@@ -81,9 +81,9 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SPEECH_TEST_PROJECT=test123 SPEECH_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/speech/credentials"
-  (Google::Cloud::Speech::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Speech::Credentials::JSON_ENV_VARS).each do |path|
+  require "google/cloud/speech/v1/credentials"
+  (Google::Cloud::Speech::V1::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Speech::V1::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
   ENV["SPEECH_PROJECT"] = project
@@ -128,6 +128,24 @@ task :jsondoc => :yard do
           {
             title: "Google::Cloud::Speech::V1",
             include: ["google/cloud/speech/v1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
+          }
+        ]
+      },
+      {
+        type: "toc",
+        title: "Google::Cloud::Speech::V1p1beta1::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Speech::V1p1beta1",
+            include: ["google/cloud/speech/v1p1beta1"]
           },
           {
             title: "Google::Protobuf",

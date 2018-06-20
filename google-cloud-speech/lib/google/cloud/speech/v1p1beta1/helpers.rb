@@ -12,29 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/speech/v1/speech_client"
-require "google/cloud/speech/v1/stream"
+require "google/cloud/speech/v1p1beta1/speech_client"
+require "google/cloud/speech/v1p1beta1/stream"
 
 module Google
   module Cloud
     module Speech
-      module V1
+      module V1p1beta1
         class SpeechClient
           # Performs bidirectional streaming speech recognition: receive results
           # while sending audio. This method is only available via the gRPC API
           # (not REST).
           #
-          # @param [Google::Cloud::Speech::V1::StreamingRecognitionConfig,
+          # @param [Google::Cloud::Speech::V1p1beta1::StreamingRecognitionConfig,
           #     Hash] streaming_config
           #   Provides information to the recognizer that specifies how to
           #   process the request.
           #   A hash of the same form as
-          #   +Google::Cloud::Speech::V1::StreamingRecognitionConfig+
+          #   +Google::Cloud::Speech::V1p1beta1::StreamingRecognitionConfig+
           #   can also be provided.
           # @param [Google::Gax::CallOptions] options
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
-          # @return [Google::Cloud::Speech::V1::Stream]
+          # @return [Google::Cloud::Speech::V1p1beta1::Stream]
           #   An object that streams the requests and responses.
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
@@ -42,7 +42,7 @@ module Google
           # @example
           #   require "google/cloud/speech"
           #
-          #   speech_client = Google::Cloud::Speech.new
+          #   speech_client = Google::Cloud::Speech.new version: :v1p1beta1
           #   streaming_config = {
           #     config: {
           #       encoding: :linear16,
@@ -73,13 +73,13 @@ module Google
               streaming_config[:config][:encoding] =
                 streaming_config[:config][:encoding].upcase
             end
-            V1::Stream.new(
+            V1p1beta1::Stream.new(
               streaming_config,
               proc do |reqs|
                 request_protos = reqs.lazy.map do |req|
                   Google::Gax.to_proto(
                     req,
-                    Google::Cloud::Speech::V1::StreamingRecognizeRequest
+                    Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest
                   )
                 end
                 @streaming_recognize.call(request_protos, options)

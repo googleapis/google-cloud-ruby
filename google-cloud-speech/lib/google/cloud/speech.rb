@@ -105,6 +105,11 @@ module Google
       #     or the specified config is missing data points.
       #   @param timeout [Numeric]
       #     The default timeout, in seconds, for calls made through this client.
+      #   @param metadata [Hash]
+      #     Default metadata to be sent with each request. This can be overridden on a per call basis.
+      #   @param exception_transformer [Proc]
+      #     An optional proc that intercepts any exceptions raised during an API call to inject
+      #     custom error handling.
       def self.new(*args, version: :v1, **kwargs)
         unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
           raise "The version: #{version} is not available. The available versions " \
@@ -112,7 +117,6 @@ module Google
         end
 
         require "#{FILE_DIR}/#{version.to_s.downcase}"
-        require "#{FILE_DIR}/#{version.to_s.downcase}/helpers.rb"
         version_module = Google::Cloud::Speech
           .constants
           .select {|sym| sym.to_s.downcase == version.to_s.downcase}
