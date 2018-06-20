@@ -12,6 +12,12 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
 
+  gem.post_install_message =
+    "The 0.30.0 release introduced breaking changes relative to the "\
+    "previous release, 0.29.0. For more details and instructions to migrate "\
+    "your code, please visit the migration guide: "\
+    "https://cloud.google.com/speech-to-text/docs/ruby-client-migration."
+
   gem.platform      = Gem::Platform::RUBY
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +

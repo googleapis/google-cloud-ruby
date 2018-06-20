@@ -35,6 +35,13 @@ module Google
     # 3. [Enable the Google Cloud Speech API.](https://console.cloud.google.com/apis/api/speech)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
+    # ### Migration Guide
+    #
+    # The 0.30.0 release introduced breaking changes relative to the previous
+    # release, 0.29.0. For more details and instructions to migrate your code,
+    # please visit the [migration
+    # guide](https://cloud.google.com/speech-to-text/docs/ruby-client-migration).
+    #
     # ### Preview
     # #### SpeechClient
     # ```rb
