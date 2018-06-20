@@ -315,41 +315,6 @@ module Google
             operation.on_done { |operation| yield(operation) } if block_given?
             operation
           end
-
-          # Performs bidirectional streaming speech recognition: receive results while
-          # sending audio. This method is only available via the gRPC API (not REST).
-          #
-          # @param reqs [Enumerable<Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest>]
-          #   The input requests.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Enumerable<Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse>]
-          #   An enumerable of Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse instances.
-          #
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          #
-          # @note
-          #   EXPERIMENTAL:
-          #     Streaming requests are still undergoing review.
-          #     This method interface might change in the future.
-          #
-          # @example
-          #   require "google/cloud/speech/v1p1beta1"
-          #
-          #   speech_client = Google::Cloud::Speech::V1p1beta1.new
-          #   request = {}
-          #   requests = [request]
-          #   speech_client.streaming_recognize(requests).each do |element|
-          #     # Process element.
-          #   end
-
-          def streaming_recognize reqs, options: nil
-            request_protos = reqs.lazy.map do |req|
-              Google::Gax::to_proto(req, Google::Cloud::Speech::V1p1beta1::StreamingRecognizeRequest)
-            end
-            @streaming_recognize.call(request_protos, options)
-          end
         end
       end
     end
