@@ -21,9 +21,9 @@ $ gem install google-cloud-speech
 
 ### Migration Guide
 
-This release, 0.30.0, introduces breaking changes relative to the previous
-release, 0.29.0. For more details and instructions to migrate your code, please
-visit the [migration
+The 0.30.0 release introduced breaking changes relative to the previous release,
+0.29.0. For more details and instructions to migrate your code, please visit the
+[migration
 guide](https://cloud.google.com/speech-to-text/docs/ruby-client-migration).
 
 ### Preview
