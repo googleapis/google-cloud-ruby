@@ -286,6 +286,142 @@ module Google
           end
         end
 
+        # Creates a new table in the specified instance.
+        # The table can be created with a full set of initial column families,
+        # specified in the request.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which to create the table.
+        # @param table_id [String]
+        #   The name by which the new table should be referred to within the parent
+        #   instance, e.g., +foobar+
+        # @param table [Google::Bigtable::Admin::V2::Table | Hash]
+        #   The Table to create.
+        #   A hash of the same form as `Google::Bigtable::Admin::V2::Table`
+        #   can also be provided.
+        # @param initial_splits [Array<Google::Bigtable::Admin::V2::CreateTableRequest::Split | Hash>]
+        #   The optional list of row keys that will be used to initially split the
+        #   table into several tablets (tablets are similar to HBase regions).
+        #   Given two split keys, +s1+ and +s2+, three tablets will be created,
+        #   spanning the key ranges: +[, s1), [s1, s2), [s2, )+.
+        #
+        #   Example:
+        #
+        #   * Row keys := +["a", "apple", "custom", "customer_1", "customer_2",+
+        #     +"other", "zz"]+
+        #   * initial_split_keys := +["apple", "customer_1", "customer_2", "other"]+
+        #   * Key assignment:
+        #     * Tablet 1 +[, apple)                => {"a"}.+
+        #       * Tablet 2 +[apple, customer_1)      => {"apple", "custom"}.+
+        #       * Tablet 3 +[customer_1, customer_2) => {"customer_1"}.+
+        #       * Tablet 4 +[customer_2, other)      => {"customer_2"}.+
+        #       * Tablet 5 +[other, )                => {"other", "zz"}.+
+        #   A hash of the same form as `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
+        #   can also be provided.
+        # @return [Google::Bigtable::Admin::V2::Table]
+
+        def create_table \
+            instance_id,
+            table_id,
+            table,
+            initial_splits: nil
+          if initial_splits
+            initial_splits = initial_splits.map { |key| { key: key } }
+          end
+
+          execute do
+            tables.create_table(
+              instance_path(instance_id),
+              table_id,
+              table,
+              initial_splits: initial_splits
+            )
+          end
+        end
+
+        # Lists all tables served from a specified instance.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance for which tables should be listed.
+        # @param view [Google::Bigtable::Admin::V2::Table::View]
+        #   The view to be applied to the returned tables' fields.
+        #   Defaults to +NAME_ONLY+ if unspecified; no others are currently supported.
+        # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Table>]
+        #   An enumerable of Google::Bigtable::Admin::V2::Table instances.
+        #   See Google::Gax::PagedEnumerable documentation for other
+        #   operations such as per-page iteration or access to the response
+
+        def list_tables instance_id, view: nil
+          execute do
+            tables.list_tables(
+              instance_path(instance_id),
+              view: view
+            )
+          end
+        end
+
+        # Gets metadata information about the specified table.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the requested table.
+        # @param view [Google::Bigtable::Admin::V2::Table::View]
+        #   The view to be applied to the returned table's fields.
+        #   Defaults to +SCHEMA_VIEW+ if unspecified.
+        # @return [Google::Bigtable::Admin::V2::Table]
+
+        def get_table instance_id, table_id, view: nil
+          execute do
+            tables.get_table(
+              table_path(instance_id, table_id),
+              view: view
+            )
+          end
+        end
+
+        # Permanently deletes a specified table and all of its data.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the table to be deleted.
+
+        def delete_table instance_id, table_id
+          execute do
+            tables.delete_table(
+              table_path(instance_id, table_id)
+            )
+          end
+        end
+
+        # Performs a series of column family modifications on the specified table.
+        # Either all or none of the modifications will occur before this method
+        # returns, but data requests received prior to that point may see a table
+        # where only some modifications have taken effect.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the table whose families should be modified.
+        # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification | Hash>]
+        #   Modifications to be atomically applied to the specified table's families.
+        #   Entries are applied in order, meaning that earlier modifications can be
+        #   masked by later ones (in the case of repeated updates to the same family,
+        #   for example).
+        #   A hash of the same form as `Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification`
+        #   can also be provided.
+        # @return [Google::Bigtable::Admin::V2::Table]
+
+        def modify_column_families instance_id, table_id, modifications
+          execute do
+            tables.modify_column_families(
+              table_path(instance_id, table_id),
+              modifications
+            )
+          end
+        end
+
         # Execute api call and wrap errors to {Google::Cloud::Error}
         #
         # @raise [Google::Cloud::Error]

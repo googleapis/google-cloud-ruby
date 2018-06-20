@@ -1,0 +1,363 @@
+# frozen_string_literal: true
+
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+require "google/cloud/bigtable/table/list"
+require "google/cloud/bigtable/table/cluster_state"
+require "google/cloud/bigtable/column_family"
+require "google/cloud/bigtable/table/column_family_map"
+require "google/cloud/bigtable/gc_rule"
+
+module Google
+  module Cloud
+    module Bigtable
+      # # Table
+      #
+      # A collection of user data indexed by row, column, and timestamp.
+      # Each table is served using the resources of its parent cluster.
+      #
+      # @example
+      #   require "google/cloud/bigtable"
+      #
+      #   bigtable = Google::Cloud::Bigtable.new
+      #
+      #   instance = bigtable.instance("my-instance")
+      #   table = instance.table("my-table")
+      #
+      #   table.column_families.each do |cf|
+      #     p cf.name
+      #     p cf.gc_rule
+      #   end
+      #
+      #   # Get column family by name
+      #   cf1 = table.column_families.find_by_name("cf1")
+      #
+      #   # Create column family
+      #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
+      #   cf2 = table.column_families.create("cf2", gc_rule)
+      #
+      #   # Delete table
+      #   table.delete
+      #
+      class Table
+        # @private
+        # The gRPC Service object.
+        attr_accessor :service
+
+        # @private
+        #
+        # Creates a new Table instance.
+        def initialize grpc, service, view: nil
+          @grpc = grpc
+          @service = service
+          @view = view || :SCHEMA_VIEW
+        end
+
+        # The unique identifier for the project.
+        #
+        # @return [String]
+        def project_id
+          @grpc.name.split("/")[1]
+        end
+
+        # The unique identifier for the instance.
+        #
+        # @return [String]
+        def instance_id
+          @grpc.name.split("/")[3]
+        end
+
+        # The unique identifier for the table.
+        #
+        # @return [String]
+        def name
+          @grpc.name.split("/")[5]
+        end
+        alias table_id name
+
+        # The full path for the instance resource. Values are of the form
+        # `projects/<project_id>/instances/<instance_id>`.
+        #
+        # @return [String]
+        def path
+          @grpc.name
+        end
+
+        # Reload table information.
+        #
+        # @param view [Symbol] Table view type.
+        #   Default view type is `:SCHEMA_VIEW`
+        #   Valid view types are.
+        #   * `:NAME_ONLY` - Only populates `name`
+        #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
+        #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
+        #   * `:FULL` - Populates all fields
+        #
+        # @return [Google::Cloud::Bigtable::Table]
+
+        def reload! view: nil
+          @view = view || :SCHEMA_VIEW
+          @grpc = service.get_table(instance_id, name, view: view)
+          self
+        end
+
+        # Map from cluster ID to per-cluster table state.
+        # If it could not be determined whether or not the table has data in a
+        # particular cluster (for example, if its zone is unavailable), then
+        # there will be an entry for the cluster with UNKNOWN `replication_status`.
+        # Views: `FULL`
+        #
+        # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
+        def cluster_states
+          reload!(view: :REPLICATION_VIEW) if @grpc.cluster_states.none?
+          @grpc.cluster_states.map do |name, state_grpc|
+            ClusterState.from_grpc(state_grpc, name)
+          end
+        end
+
+        # The column families configured for this table, mapped by column family ID.
+        # Available column families data only in table view types: `SCHEMA_VIEW`, `FULL`
+        #
+        #
+        # @return [Array<Google::Bigtable::ColumnFamily>]
+        #
+        def column_families
+          reload!(view: :SCHEMA_VIEW) if @grpc.column_families.none?
+
+          @grpc.column_families.map do |cf_name, cf_grpc|
+            ColumnFamily.from_grpc(
+              cf_grpc,
+              service,
+              name: cf_name,
+              instance_id: instance_id,
+              table_id: table_id
+            )
+          end
+        end
+
+        # The granularity (e.g. `MILLIS`, `MICROS`) at which timestamps are stored in
+        # this table. Timestamps not matching the granularity will be rejected.
+        # If unspecified at creation time, the value will be set to `MILLIS`.
+        # Views: `SCHEMA_VIEW`, `FULL`
+        #
+        # @return [Symbol]
+        #
+        def granularity
+          if @grpc.granularity == :TIMESTAMP_GRANULARITY_UNSPECIFIED
+            reload!(view: :SCHEMA_VIEW)
+          end
+          @grpc.granularity
+        end
+
+        # The table keeps data versioned at a granularity of 1ms.
+        #
+        # @return [Boolean]
+        #
+        def granularity_millis?
+          granularity == :MILLIS
+        end
+
+        # Permanently deletes the table from a instance.
+        #
+        # @return [Boolean] Returns `true` if the table was deleted.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   table = instance.table("my-table")
+        #   table.delete
+        #
+        def delete
+          ensure_service!
+          service.delete_table(instance_id, name)
+          true
+        end
+
+        # Create column family object to perform create,update or delete operation.
+        #
+        # @param name [String] Name of the column family
+        # @param gc_rule [Google::Cloud::Bigtable::GcRule] Optional.
+        #   GC Rule only required for create and update.
+        #
+        # @example Create column family
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", my-table)
+        #
+        #   # OR get table from Instance object.
+        #   instance = bigtable.instance("my-instance")
+        #   table = instance.table("my-table")
+        #
+        #   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(5)
+        #   column_family = table.column_family("cf1", gc_rule)
+        #   column_family.create
+        #
+        # @example Update column family
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", my-table)
+        #
+        #   gc_rule = Google::Cloud::Bigtable::GcRule.max_age(1800)
+        #   column_family = table.column_family("cf2", gc_rule)
+        #   column_family.save
+        #   # OR Using alias method update.
+        #   column_family.update
+        #
+        # @example Delete column family
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", my-table)
+        #
+        #   column_family = table.column_family("cf3")
+        #   column_family.delete
+        #
+        def column_family name, gc_rule = nil
+          cf_grpc = Google::Bigtable::Admin::V2::ColumnFamily.new
+          cf_grpc.gc_rule = gc_rule.to_grpc if gc_rule
+
+          ColumnFamily.from_grpc(
+            cf_grpc,
+            service,
+            name: name,
+            instance_id: instance_id,
+            table_id: table_id
+          )
+        end
+
+        # Apply multitple column modifications
+        # Performs a series of column family modifications on the specified table.
+        # Either all or none of the modifications will occur before this method
+        # returns, but data requests received prior to that point may see a table
+        # where only some modifications have taken effect.
+        #
+        # @param modifications [Array<Google::Cloud::Bigtable::ColumnFamilyModification>]
+        #   Modifications to be atomically applied to the specified table's families.
+        #   Entries are applied in order, meaning that earlier modifications can be
+        #   masked by later ones (in the case of repeated updates to the same family,
+        #   for example).
+        # @return [Google::Cloud::Bigtable::Table] Table with updated column families.
+        #
+        # @example Apply multiple modificationss
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   table = instance.table("my-table")
+        #
+        #   modifications = []
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   )
+        #
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
+        #     "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
+        #   )
+        #
+        #   gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #   gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
+        #     "cf3", Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
+        #   )
+        #
+        #   max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
+        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_version_gc_rule)
+        #   )
+        #
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf5")
+        #
+        #   table = bigtable.modify_column_families(modifications)
+        #
+        #   p table.column_families
+
+        def modify_column_families modifications
+          ensure_service!
+          self.class.modify_column_families(
+            service,
+            instance_id,
+            table_id,
+            modifications
+          )
+        end
+
+        # @private
+        #
+        # Performs a series of column family modifications on the specified table.
+        # Either all or none of the modifications will occur before this method
+        # returns, but data requests received prior to that point may see a table
+        # where only some modifications have taken effect.
+        #
+        # @param service [Google::Cloud::Bigtable::Service]
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the table whose families should be modified.
+        # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification> | Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
+        #   Modifications to be atomically applied to the specified table's families.
+        #   Entries are applied in order, meaning that earlier modifications can be
+        #   masked by later ones (in the case of repeated updates to the same family,
+        #   for example).
+        # @return [Google::Cloud::Bigtable::Table] Table with updated column families.
+        #
+        def self.modify_column_families \
+            service,
+            instance_id,
+            table_id,
+            modifications
+          modifications = [modifications] unless modifications.is_a?(Array)
+          grpc = service.modify_column_families(
+            instance_id,
+            table_id,
+            modifications
+          )
+          from_grpc(grpc, service)
+        end
+
+        # @private
+        # Creates a new Table instance from a Google::Bigtable::Admin::V2::Table.
+        #
+        # @param grpc [Google::Bigtable::Admin::V2::Table]
+        # @param service [Google::Cloud::Bigtable::Service]
+        # @param view [Symbol] View type.
+        # @return [Google::Cloud::Bigtable::Table]
+        #
+        def self.from_grpc grpc, service, view: nil
+          new(grpc, service, view: view)
+        end
+
+        protected
+
+        # @private
+        # Raise an error unless an active connection to the service is
+        # available.
+        #
+        def ensure_service!
+          raise "Must have active connection to service" unless service
+        end
+      end
+    end
+  end
+end

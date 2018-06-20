@@ -18,6 +18,7 @@
 require "google/cloud/bigtable/instance/job"
 require "google/cloud/bigtable/instance/list"
 require "google/cloud/bigtable/instance/cluster_map"
+require "google/cloud/bigtable/table"
 
 module Google
   module Cloud
@@ -402,6 +403,181 @@ module Google
           cluster = Google::Bigtable::Admin::V2::Cluster.new(attrs)
           grpc = service.create_cluster(instance_id, cluster_id, cluster)
           Cluster::Job.from_grpc(grpc, service)
+        end
+
+        # List all tables.
+        #
+        #  See to delete table {Google::Cloud::Bigtable::Table#delete} and update
+        #  table {Google::Cloud::Bigtable::Table#save}.
+        #
+        # @param view [Symbol]
+        #   The view to be applied to the returned tables' fields
+        #   Defaults to `NAME_ONLY` if unspecified.
+        #   Valid view types are.
+        #   * `:NAME_ONLY` - Only populates `name`
+        #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
+        #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
+        #   * `:FULL` - Populates all fields
+        # @return [Array<Google::Cloud::Bigtable::Table>]
+        #   (See {Google::Cloud::Bigtable::Table::List})
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   # Default name only view
+        #   instance.tables.all do |table|
+        #     puts table.name
+        #   end
+        #
+        #   # Full view
+        #   instance.tables(view: :FULL).all do |table|
+        #     puts table.name
+        #     puts table.column_families
+        #   end
+        #
+        def tables view: nil
+          ensure_service!
+          grpc = service.list_tables(instance_id, view: view)
+          Table::List.from_grpc(grpc, service)
+        end
+
+        # Get metadata information of table.
+        #
+        # @param view [Symbol]
+        #   The view to be applied to the returned tables' fields
+        #   Defaults to `SCHEMA_VIEW` if unspecified.
+        #   Valid view types are.
+        #   * `:NAME_ONLY` - Only populates `name`
+        #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
+        #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
+        #   * `:FULL` - Populates all fields
+        # @return [Google::Cloud::Bigtable::Table]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   # Default view is full view
+        #   table = instance.table("my-table")
+        #   puts table.name
+        #   puts table.column_families
+        #
+        #   # Name only view
+        #   table = instance.table("my-table", view: :NAME_ONLY)
+        #   puts table.name
+        #
+        #
+        def table table_id, view: nil
+          ensure_service!
+          grpc = service.get_table(instance_id, table_id, view: view)
+          Table.from_grpc(grpc, service, view: view)
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        # Create table
+        #
+        # The table can be created with a full set of initial column families,
+        # specified in the request.
+        #
+        # @param name [String]
+        #   The name by which the new table should be referred to within the parent
+        #   instance, e.g., +foobar+
+        # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})
+        #   If passed as an empty use code block to add column families.
+        # @param granularity [Symbol]
+        #   The granularity at which timestamps are stored in this table.
+        #   Timestamps not matching the granularity will be rejected.
+        #   Valid values are `:MILLIS`.
+        #   If unspecified, the value will be set to `:MILLIS`
+        # @param initial_splits [Array<String>]
+        #   The optional list of row keys that will be used to initially split the
+        #   table into several tablets (tablets are similar to HBase regions).
+        #   Given two split keys, +s1+ and +s2+, three tablets will be created,
+        #   spanning the key ranges: +[, s1), [s1, s2), [s2, )+.
+        #
+        #   Example:
+        #
+        #   * Row keys := +["a", "apple", "custom", "customer_1", "customer_2",+
+        #     +"other", "zz"]+
+        #   * initial_split_keys := +["apple", "customer_1", "customer_2", "other"]+
+        #   * Key assignment:
+        #     * Tablet 1 : +[, apple)                => {"a"}.+
+        #     * Tablet 2 : +[apple, customer_1)      => {"apple", "custom"}.+
+        #     * Tablet 3 : +[customer_1, customer_2) => {"customer_1"}.+
+        #     * Tablet 4 : +[customer_2, other)      => {"customer_2"}.+
+        #     * Tablet 5 : +[other, )                => {"other", "zz"}.+
+        #   A hash of the same form as `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
+        #   can also be provided.
+        # @yield [column_families] A block for adding column_families.
+        # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        #   Cluster map of cluster name and cluster object.
+        #   (See {Google::Cloud::Bigtable::Instance::ClusterMap})
+        #   GC Rules for column family see {Google::Cloud::Bigtable::GcRule})
+        #
+        # @return [Google::Cloud::Bigtable::Table]
+        #
+        # @example Create table without column families.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   table = instance.create_table("my-table")
+        #   puts table.name
+        #
+        # @example Create table with column families and initial splits.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   table = instance.create_table(my-table") do |column_families|
+        #     column_families.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(3))
+        #     column_families.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(100))
+        #
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.new
+        #     gc_rule.union = [
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3),
+        #        Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #     ]
+        #     column_families.add('cf3', gc_rule)
+        #   end
+        #
+        #   puts table
+
+        def create_table \
+            name,
+            column_families: nil,
+            granularity: nil,
+            initial_splits: nil
+          ensure_service!
+          column_families ||= Table::ColumnFamilyMap.new
+          yield column_families if block_given?
+
+          table_attrs = {
+            column_families: column_families.to_h,
+            granularity: granularity
+          }.delete_if { |_, v| v.nil? }
+          table = Google::Bigtable::Admin::V2::Table.new(table_attrs)
+
+          grpc = service.create_table(
+            instance_id,
+            name,
+            table,
+            initial_splits: initial_splits
+          )
+          Table.from_grpc(grpc, service)
         end
 
         # @private

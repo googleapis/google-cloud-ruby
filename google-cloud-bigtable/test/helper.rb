@@ -26,10 +26,14 @@ require "google/cloud/bigtable"
 require "google/cloud/bigtable/project"
 
 class BigtableServiceWithMock < Google::Cloud::Bigtable::Service
-  attr_accessor :mocked_instances
+  attr_accessor :mocked_instances, :mocked_tables
 
   def instances
     mocked_instances || super
+  end
+
+  def tables
+    mocked_tables || super
   end
 end
 
@@ -90,6 +94,74 @@ class MockBigtable < Minitest::Spec
     end
 
     { clusters: clusters }
+  end
+
+  def column_family_hash(max_versions: nil, max_age: nil, intersection: nil, union: nil)
+    gc_rule = {
+      max_num_versions: max_versions,
+      max_age: max_age ? { seconds: max_age} : nil,
+      intersection: intersection ?  { rules: intersection } : nil,
+      union: union ? { rules: union } : nil
+    }.delete_if { |_, v| v.nil? }
+
+    { gc_rule: gc_rule }
+  end
+
+  def column_families_hash num: 3, start_id: 1
+    num.times.each_with_object({}) do |i, r|
+      r["cf#{i + start_id}"] = column_family_hash(max_versions: 3)
+    end
+  end
+
+  def column_families_grpc num: 3, start_id: 1
+    column_families_hash(num: num, start_id: start_id)
+      .each_with_object({}) do |(k,v), r|
+        r[k] = Google::Bigtable::Admin::V2::ColumnFamily.new(v)
+      end
+  end
+
+  def cluster_state_hash state = nil
+    { replication_state: state }
+  end
+
+  def cluster_state_grpc state = nil
+     Google::Bigtable::Admin::V2::Table::ClusterState.new(
+       cluster_state_hash(state)
+     )
+  end
+
+  def clusters_state_grpc num: 3, start_id: 1
+    num.times.each_with_object({}) do |i, r|
+      r["cluster-#{i + start_id }"] = cluster_state_grpc(:READY)
+    end
+  end
+
+  def table_hash name: nil, cluster_states: nil, column_families: nil, granularity: nil
+    {
+      name: name,
+      cluster_states: cluster_states,
+      column_families: column_families,
+      granularity: granularity
+    }.delete_if { |_, v| v.nil? }
+  end
+
+  def tables_hash instance_id, num: 3, start_id: 1
+    tables = num.times.map do |i|
+      table_hash(
+        name: table_path(instance_id, "table-#{start_id + i}"),
+        cluster_states: clusters_state_grpc,
+        column_families: column_families_grpc,
+        granularity: :MILLIS
+      )
+    end
+
+    { tables: tables }
+  end
+
+  def tables_grpc instance_id, num: 3, start_id: 1
+   tables_hash(instance_id, num: num, start_id: start_id)[:tables].map do |t|
+     Google::Bigtable::Admin::V2::Table.new(t)
+   end
   end
 
   def project_path

@@ -16,6 +16,8 @@
 
 
 require "google/cloud/bigtable/errors"
+require "google/cloud/bigtable/longrunning_job"
+require "google/cloud/bigtable/convert"
 require "google/cloud/bigtable/service"
 require "google/cloud/bigtable/instance"
 require "google/cloud/bigtable/cluster"
@@ -172,7 +174,7 @@ module Google
         #
         #   job = bigtable.create_instance(
         #     "my-instance",
-        #     "Instance for user data",
+        #     display_name: "Instance for user data",
         #     type: :DEVELOPMENT,
         #     labels: { "env" => "dev"}
         #   ) do |clusters|
@@ -198,7 +200,7 @@ module Google
         #
         #   job = bigtable.create_instance(
         #     "my-instance",
-        #     "Instance for user data",
+        #     display_name: "Instance for user data",
         #     labels: { "env" => "dev"}
         #   ) do |clusters|
         #     clusters.add("test-cluster", "us-east1-b", nodes: 3, storage_type: :SSD)
@@ -268,6 +270,243 @@ module Google
           ensure_service!
           grpc = service.list_clusters("-", token: token)
           Cluster::List.from_grpc(grpc, service, instance_id: "-")
+        end
+
+        # List all tables for given instance.
+        #
+        # @param instance_id [String] Existing instance Id.
+        # @return [Array<Google::Cloud::Bigtable::Table>]
+        #   (See {Google::Cloud::Bigtable::Table::List})
+        #
+        # @example Get tables
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   bigtable.tables("my-instance").all do |table|
+        #     puts table.name
+        #     puts table.column_families
+        #   end
+
+        def tables instance_id
+          ensure_service!
+          grpc = service.list_tables(instance_id)
+          Table::List.from_grpc(grpc, service)
+        end
+
+        # Get table information.
+        #
+        # @param instance_id [String] Existing instance Id.
+        # @param table_id [String] Existing table Id.
+        # @param view [Symbol] Optional. Table view type. Default `:SCHEMA_VIEW`
+        #   Valid view types are.
+        #   * `:NAME_ONLY` - Only populates `name`
+        #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
+        #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
+        #   * `:FULL` - Populates all fields
+        # @return [Google::Cloud::Bigtable::Table, nil]
+        #
+        # @example Get table with schema only view
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table")
+        #   if table
+        #     p table.name
+        #     p table.column_families
+        #   end
+        #
+        # @example Get table with all fields. Clusters states, column families
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", view: :FULL)
+        #   if table
+        #     puts table.name
+        #     p table.column_families
+        #     p table.cluster_states
+        #   end
+
+        def table instance_id, table_id, view: nil
+          ensure_service!
+          grpc = service.get_table(instance_id, table_id, view: view)
+          Table.from_grpc(grpc, service, view: view)
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        # Creates a new table in the specified instance.
+        # The table can be created with a full set of initial column families,
+        # specified in the request.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which to create the table.
+        # @param table_id [String]
+        #   The name by which the new table should be referred to within the parent
+        #   instance, e.g., +foobar+
+        # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        #   (See {Google::Cloud::Bigtable::Table::ColumnFamilyMap})
+        #   If passed as an empty use code block to add column families.
+        # @param granularity [Symbol]
+        #   The granularity at which timestamps are stored in this table.
+        #   Timestamps not matching the granularity will be rejected.
+        #   Valid values are `:MILLIS`.
+        #   If unspecified, the value will be set to `:MILLIS`
+        # @param initial_splits [Array<String>]
+        #   The optional list of row keys that will be used to initially split the
+        #   table into several tablets (tablets are similar to HBase regions).
+        #   Given two split keys, +s1+ and +s2+, three tablets will be created,
+        #   spanning the key ranges: +[, s1), [s1, s2), [s2, )+.
+        #
+        #   Example:
+        #
+        #   * Row keys := ["a", "apple", "custom", "customer_1", "customer_2",+
+        #     +"other", "zz"]
+        #   * initial_split_keys := +["apple", "customer_1", "customer_2", "other"]+
+        #   * Key assignment:
+        #     * Tablet 1 : +[, apple)                => {"a"}.+
+        #     * Tablet 2 : +[apple, customer_1)      => {"apple", "custom"}.+
+        #     * Tablet 3 : +[customer_1, customer_2) => {"customer_1"}.+
+        #     * Tablet 4 : +[customer_2, other)      => {"customer_2"}.+
+        #     * Tablet 5 : +[other, )                => {"other", "zz"}.+
+        #   A hash of the same form as `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
+        #   can also be provided.
+        # @yield [column_families] A block for adding column_families.
+        # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        #   Cluster map of cluster name and cluster object.
+        #   (See {Google::Cloud::Bigtable::Instance::ClusterMap})
+        #   GC Rules for column family see {Google::Cloud::Bigtable::GcRule})
+        #
+        # @return [Google::Cloud::Bigtable::Table]
+        #
+        # @example Create table without column family
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.create_table("my-instance", "my-table")
+        #   puts table.name
+        #
+        # @example Create table with column families and initial splits.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   initial_splits = ["user-00001", "user-100000", "others"]
+        #   table = bigtable.create_table("my-instance", "my-table", initial_splits: initial_splits) do |column_families|
+        #     column_families.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #     column_families.add('cf2', Google::Cloud::Bigtable::GcRule.max_age(600))
+        #
+        #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
+        #       Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #       Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #     )
+        #     column_families.add('cf3', gc_rule)
+        #   end
+        #
+        #   p table
+
+        def create_table \
+            instance_id,
+            table_id,
+            column_families: nil,
+            granularity: nil,
+            initial_splits: nil
+          ensure_service!
+          column_families ||= Table::ColumnFamilyMap.new
+          yield column_families if block_given?
+
+          table = Google::Bigtable::Admin::V2::Table.new({
+            column_families: column_families.to_h,
+            granularity: granularity
+          }.delete_if { |_, v| v.nil? })
+
+          grpc = service.create_table(
+            instance_id,
+            table_id,
+            table,
+            initial_splits: initial_splits
+          )
+          Table.from_grpc(grpc, service)
+        end
+
+        # Permanently deletes a specified table and all of its data.
+        #
+        # @param instance_id [String]
+        #  The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique name of the table to be deleted.
+        #   e.g., +foobar+
+        #
+        # @example Create table with column families and initial splits.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   bigtable.delete_table("my-instance", "my-table")
+        #
+        def delete_table instance_id, table_id
+          service.delete_table(instance_id, table_id)
+          true
+        end
+
+        # Performs a series of column family modifications on the specified table.
+        # Either all or none of the modifications will occur before this method
+        # returns, but data requests received prior to that point may see a table
+        # where only some modifications have taken effect.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the table whose families should be modified.
+        # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification> | Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
+        #   Modifications to be atomically applied to the specified table's families.
+        #   Entries are applied in order, meaning that earlier modifications can be
+        #   masked by later ones (in the case of repeated updates to the same family,
+        #   for example).
+        # @return [Google::Cloud::Bigtable::Table] Table with updated column families.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   modifications = []
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.create_modification(
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   )
+        #
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
+        #     "cf2", Google::Cloud::Bigtable::GcRule.max_versions(5)
+        #   )
+        #
+        #   gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
+        #   gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
+        #     "cf3", Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
+        #   )
+        #
+        #   max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(300)
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.update_modification(
+        #     "cf4", Google::Cloud::Bigtable::GcRule.union(max_version_gc_rule)
+        #   )
+        #
+        #   modifications << Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf5")
+        #
+        #   table = bigtable.modify_column_families("my-instance", "my-table", modifications)
+        #
+        #   p table.column_families
+
+        def modify_column_families instance_id, table_id, modifications
+          ensure_service!
+          Table.modify_column_families(
+            service,
+            instance_id,
+            table_id,
+            modifications
+          )
         end
 
         protected
