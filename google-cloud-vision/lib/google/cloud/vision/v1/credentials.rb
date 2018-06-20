@@ -1,4 +1,4 @@
-# Copyright 2016 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "googleauth"
 
 module Google
   module Cloud
     module Vision
-      VERSION = "0.28.0".freeze
+      module V1
+        class Credentials < Google::Auth::Credentials
+          SCOPE = [
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/cloud-vision"
+          ].freeze
+          PATH_ENV_VARS = %w(VISION_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+          JSON_ENV_VARS = %w(VISION_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
+          DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+        end
+      end
     end
   end
 end
