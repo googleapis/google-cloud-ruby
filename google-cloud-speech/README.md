@@ -86,5 +86,5 @@ supported by Ruby Core (that is, Ruby versions that are either in normal
 maintenance or in security maintenance).
 See https://www.ruby-lang.org/en/downloads/branches/ for further details.
 
-[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest/google/cloud/speech/v1p1beta1
+[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest/google/cloud/speech
 [Product Documentation]: https://cloud.google.com/speech
