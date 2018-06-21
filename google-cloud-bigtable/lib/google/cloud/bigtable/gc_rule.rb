@@ -20,7 +20,7 @@ module Google
     module Bigtable
       # # GcRule
       #
-      # Rule for determining which cells to delete during garbage collection
+      # Rule for determining which cells to delete during garbage collection.
       # Garbage collection executes opportunistically in the background, and
       # so it's possible for reads to return a cell even if it matches the active
       # GC expression for its family.
@@ -34,34 +34,34 @@ module Google
       #   * `intersection` - Delete cells that would be deleted by any nested rule.
       #       It can have mutiple chainable GC Rules.
       #
-      # @example Create gc rule instance with max version.
+      # @example Create GC rule instance with max version.
       #
       #  gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
       #
       #  # Change max verions
       #  gc_rule.max_versions = 5
       #
-      # @example Create gc rule instance with max age.
+      # @example Create GC rule instance with max age.
       #
       #  gc_rule = Google::Cloud::Bigtable::GcRule.max_age(3)
       #
       #  # Change max age
       #  gc_rule.max_age = 600 # 10 minutes
       #
-      # @example Create gc rule instance with union.
+      # @example Create GC rule instance with union.
       #
       #  max_age_gc_rule = Google::Cloud::Bigtable::GcRule.max_age(180)
       #  union_gc_rule = Google::Cloud::Bigtable::GcRule.union(max_age_gc_rule)
       #
-      #  # Change union gc rule
+      #  # Change union GC rule
       #  gc_rule.union = Google::Cloud::Bigtable::GcRule.max_age(600)
       #
-      # @example Create gc rule instance with intersection.
+      # @example Create GC rule instance with intersection.
       #
       #  max_versions_gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
       #  gc_rule = Google::Cloud::Bigtable::GcRule.intersection(max_versions_gc_rule)
       #
-      #  # Change intersection gc rule
+      #  # Change intersection GC rule
       #  gc_rule.intersection = Google::Cloud::Bigtable::GcRule.max_age(600)
       #
       class GcRule
@@ -120,7 +120,7 @@ module Google
             )
         end
 
-        # Get intersection gc rules
+        # Get intersection GC rules
         #
         # @return [Google::Bigtable::Admin::V2::GcRule::Intersection, nil]
         #
@@ -139,7 +139,7 @@ module Google
           )
         end
 
-        # Get union gc rules
+        # Get union GC rules
         #
         # @return [Google::Bigtable::Admin::V2::GcRule::Union, nil]
         #
@@ -147,7 +147,7 @@ module Google
           @grpc.union
         end
 
-        # Create GCRule instance with max number of versions.
+        # Create GcRule instance with max number of versions.
         #
         # @param versions [Integer] Max number of versions
         # @return [Google::Bigtable::Admin::V2::GcRule]
@@ -158,7 +158,7 @@ module Google
           end
         end
 
-        # Create GCRule instance with max age.
+        # Create GcRule instance with max age.
         #
         # @param age [Integer] Max age in seconds.
         # @return [Google::Bigtable::Admin::V2::GcRule]
@@ -169,7 +169,7 @@ module Google
           end
         end
 
-        # Create union GCRule instance.
+        # Create union GcRule instance.
         #
         # @param rules [Google::Cloud::Bigtable::GcRule, Array<Google::Cloud::Bigtable::GcRule>]
         #   List of GcRule with nested rules.

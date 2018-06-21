@@ -80,7 +80,7 @@ module Google
           @grpc.gc_rule = rule.to_grpc
         end
 
-        # Get gc rule
+        # Get GC rule
         #
         # @return [Google::Cloud::Bigtable::GcRule]
         #
