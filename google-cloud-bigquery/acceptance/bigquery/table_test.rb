@@ -904,6 +904,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     load_job.ignore_unknown_values?.must_equal false
     load_job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
     load_job.schema.wont_be :empty?
+    load_job.schema_update_options.must_be_kind_of Array
+    load_job.schema_update_options.must_be :empty?
     load_job.input_files.must_equal 1
     load_job.input_file_bytes.must_be :>, 0
     load_job.output_rows.must_be :>, 0

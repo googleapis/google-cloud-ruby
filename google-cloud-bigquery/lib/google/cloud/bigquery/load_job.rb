@@ -271,6 +271,26 @@ module Google
         end
 
         ##
+        # Allows the schema of the destination table to be updated as a side
+        # effect of the load job if a schema is autodetected or supplied in the
+        # job configuration. Schema update options are supported in two cases:
+        # when write disposition is `WRITE_APPEND`; when write disposition is
+        # `WRITE_TRUNCATE` and the destination table is a partition of a table,
+        # specified by partition decorators. For normal tables, `WRITE_TRUNCATE`
+        # will always overwrite the schema. One or more of the following values
+        # are specified:
+        #
+        # * `ALLOW_FIELD_ADDITION`: allow adding a nullable field to the schema.
+        # * `ALLOW_FIELD_RELAXATION`: allow relaxing a required field in the
+        #   original schema to nullable.
+        #
+        # @return [Array<String>] An array of strings.
+        #
+        def schema_update_options
+          Array @gapi.configuration.load.schema_update_options
+        end
+
+        ##
         # The number of source data files in the load job.
         #
         # @return [Integer] The number of source files.
@@ -1007,6 +1027,35 @@ module Google
           #
           def quote= val
             @gapi.configuration.load.update! quote: val
+          end
+
+          ##
+          # Sets the schema update options, which allow the schema of the
+          # destination table to be updated as a side effect of the load job if
+          # a schema is autodetected or supplied in the job configuration.
+          # Schema update options are supported in two cases: when write
+          # disposition is `WRITE_APPEND`; when write disposition is
+          # `WRITE_TRUNCATE` and the destination table is a partition of a
+          # table, specified by partition decorators. For normal tables,
+          # `WRITE_TRUNCATE` will always overwrite the schema. One or more of
+          # the following values are specified:
+          #
+          # * `ALLOW_FIELD_ADDITION`: allow adding a nullable field to the
+          #   schema.
+          # * `ALLOW_FIELD_RELAXATION`: allow relaxing a required field in the
+          #   original schema to nullable.
+          #
+          # @param [Array<String>] new_options The new schema update options.
+          #
+          # @!group Attributes
+          #
+          def schema_update_options= new_options
+            if new_options.nil?
+              @gapi.configuration.load.update! schema_update_options: nil
+            else
+              @gapi.configuration.load.update! \
+                schema_update_options: Array(new_options)
+            end
           end
 
           ##

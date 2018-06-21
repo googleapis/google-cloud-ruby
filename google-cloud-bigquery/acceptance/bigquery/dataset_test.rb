@@ -78,6 +78,8 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
 
+  let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
+
   before do
     table
     view
@@ -173,11 +175,13 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       schema.string    "breed", description: "breed description", mode: :required
       schema.string    "name",  description: "name description",  mode: :required
       schema.timestamp "dob",   description: "dob description",   mode: :required
+      schema.schema_update_options = schema_update_options
     end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.job_id.must_equal job_id
     job.wait_until_done!
     job.output_rows.must_equal 3
+    job.schema_update_options.must_equal schema_update_options
   end
 
   it "imports data from a local file and creates a new table with specified schema as an option with load_job" do

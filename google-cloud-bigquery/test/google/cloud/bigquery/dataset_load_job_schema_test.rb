@@ -54,6 +54,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     gapi
   end
 
+  let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
+
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
     Google::Cloud::Storage::File.from_gapi gapi, storage.service
@@ -64,8 +66,11 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
-      [project, job_gapi]
+    job_gapi.configuration.load.schema_update_options = schema_update_options
+
+    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi.configuration.load.schema_update_options = schema_update_options
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_file, create: :needed do |schema|
@@ -74,8 +79,10 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.boolean "active"
       schema.bytes "avatar"
+      schema.schema_update_options = schema_update_options
     end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.schema_update_options.must_equal schema_update_options
 
     mock.verify
   end
@@ -98,6 +105,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
 
     job = dataset.load_job table_id, load_file, create: :needed, schema: schema
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.schema_update_options.must_be_kind_of Array
+    job.schema_update_options.must_be :empty?
 
     mock.verify
   end
@@ -107,8 +116,11 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
-      [project, job_gapi]
+    job_gapi.configuration.load.schema_update_options = schema_update_options
+
+    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi.configuration.load.schema_update_options = schema_update_options
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
     dataset.service.mocked_service = mock
 
     schema = bigquery.schema
@@ -119,8 +131,10 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.boolean "active"
       schema.bytes "avatar"
+      schema.schema_update_options = schema_update_options
     end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.schema_update_options.must_equal schema_update_options
 
     mock.verify
   end
