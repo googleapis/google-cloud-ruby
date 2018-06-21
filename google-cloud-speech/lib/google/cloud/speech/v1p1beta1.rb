@@ -40,7 +40,7 @@ module Google
     # ```rb
     # require "google/cloud/speech/v1p1beta1"
     #
-    # speech_client = Google::Cloud::Speech::V1p1beta1.new
+    # speech_client = Google::Cloud::Speech(version: :v1p1beta1)
     # language_code = "en-US"
     # sample_rate_hertz = 44100
     # encoding = :FLAC
@@ -49,7 +49,7 @@ module Google
     #   sample_rate_hertz: sample_rate_hertz,
     #   encoding: encoding
     # }
-    # uri = "gs://gapic-toolkit/hello.flac"
+    # uri = "gs://bucket-name/hello.flac"
     # audio = { uri: uri }
     # response = speech_client.recognize(config, audio)
     # ```
