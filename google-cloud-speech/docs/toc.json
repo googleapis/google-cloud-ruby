@@ -37,7 +37,11 @@
         {
           "title": "V1",
           "type": "google/cloud/speech/v1",
-          "patterns": ["\/speech\/v1\/", "google\/protobuf", "google\/rpc"],
+          "patterns": [
+            "/speech/v1",
+            "google/protobuf",
+            "google/rpc"
+          ],
           "nav": [
             {
               "title": "SpeechClient",
@@ -46,6 +50,25 @@
             {
               "title": "Data Types",
               "type": "google/cloud/speech/v1/datatypes"
+            }
+          ]
+        },
+        {
+          "title": "V1p1beta1",
+          "type": "google/cloud/speech/v1p1beta1",
+          "patterns": [
+            "/speech/v1p1beta1",
+            "google/protobuf",
+            "google/rpc"
+          ],
+          "nav": [
+            {
+              "title": "SpeechClient",
+              "type": "google/cloud/speech/v1p1beta1/speechclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/speech/v1p1beta1/datatypes"
             }
           ]
         }
