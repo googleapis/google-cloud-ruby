@@ -17,22 +17,16 @@ v1_library = gapic.ruby_library(
 s.copy(v1_library / 'lib/google/cloud/vision/v1')
 s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
 
+
+# https://github.com/googleapis/gapic-generator/issues/2080
 s.replace(
     "test/google/cloud/vision/v1/image_annotator_client_test.rb",
     "assert_not_nil",
     "refute_nil")
 
+# Temporary until https://github.com/googleapis/gapic-generator/pull/2079
+# shows up in an artman release.
 s.replace(
     "lib/google/cloud/vision/v1/image_annotator_client.rb",
     "google/cloud/vision/credentials",
     "google/cloud/vision/v1/credentials")
-
-s.replace(
-    "Rakefile",
-    "google/cloud/vision/credentials",
-    "google/cloud/vision/v1/credentials")
-
-s.replace(
-    "Rakefile",
-    "Google::Cloud::Vision::Credentials::",
-    "Google::Cloud::Vision::V1::Credentials::")
