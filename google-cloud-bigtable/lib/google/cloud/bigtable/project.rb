@@ -375,8 +375,8 @@ module Google
         #   can also be provided.
         # @yield [column_families] A block for adding column_families.
         # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
-        #   Cluster map of cluster name and cluster object.
-        #   (See {Google::Cloud::Bigtable::Instance::ClusterMap})
+        #    Map of family name and column family object.
+        #   (See {Google::Cloud::Bigtable::Instance::ColumnFamilyMap})
         #   GC Rules for column family see {Google::Cloud::Bigtable::GcRule})
         #
         # @return [Google::Cloud::Bigtable::Table]
@@ -413,23 +413,18 @@ module Google
             table_id,
             column_families: nil,
             granularity: nil,
-            initial_splits: nil
+            initial_splits: nil,
+            &block
           ensure_service!
-          column_families ||= Table::ColumnFamilyMap.new
-          yield column_families if block_given?
-
-          table = Google::Bigtable::Admin::V2::Table.new({
-            column_families: column_families.to_h,
-            granularity: granularity
-          }.delete_if { |_, v| v.nil? })
-
-          grpc = service.create_table(
+          Table.create(
+            service,
             instance_id,
             table_id,
-            table,
-            initial_splits: initial_splits
+            column_families: column_families,
+            granularity: granularity,
+            initial_splits: initial_splits,
+            &block
           )
-          Table.from_grpc(grpc, service)
         end
 
         # Permanently deletes a specified table and all of its data.

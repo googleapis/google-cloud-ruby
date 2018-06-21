@@ -560,24 +560,18 @@ module Google
             name,
             column_families: nil,
             granularity: nil,
-            initial_splits: nil
+            initial_splits: nil,
+            &block
           ensure_service!
-          column_families ||= Table::ColumnFamilyMap.new
-          yield column_families if block_given?
-
-          table_attrs = {
-            column_families: column_families.to_h,
-            granularity: granularity
-          }.delete_if { |_, v| v.nil? }
-          table = Google::Bigtable::Admin::V2::Table.new(table_attrs)
-
-          grpc = service.create_table(
+          Table.create(
+            service,
             instance_id,
             name,
-            table,
-            initial_splits: initial_splits
+            column_families: column_families,
+            granularity: granularity,
+            initial_splits: initial_splits,
+            &block
           )
-          Table.from_grpc(grpc, service)
         end
 
         # @private

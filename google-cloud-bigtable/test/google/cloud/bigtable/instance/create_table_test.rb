@@ -26,7 +26,32 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
   let(:table_id) { "new-table" }
   let(:initial_splits) { [ "category-1", "category-2" ] }
 
-  it "creates a table" do
+  it "creates a table without column family" do
+    mock = Minitest::Mock.new
+
+    req_table = Google::Bigtable::Admin::V2::Table.new
+    create_res = Google::Bigtable::Admin::V2::Table.new(
+      name: table_path(instance_id, table_id)
+    )
+
+    mock.expect :create_table, create_res, [
+      instance_path(instance_id),
+      table_id,
+      req_table,
+      initial_splits: nil
+    ]
+    bigtable.service.mocked_tables = mock
+
+    table = instance.create_table(table_id)
+    mock.verify
+
+    table.project_id.must_equal project_id
+    table.instance_id.must_equal instance_id
+    table.name.must_equal table_id
+    table.path.must_equal table_path(instance_id, table_id)
+  end
+
+  it "creates a table with column families" do
     mock = Minitest::Mock.new
     cluster_states = clusters_state_grpc(num: 1)
     column_families = Google::Cloud::Bigtable::Table::ColumnFamilyMap.new.tap do |cfs|

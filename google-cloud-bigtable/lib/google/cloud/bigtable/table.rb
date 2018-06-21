@@ -337,6 +337,43 @@ module Google
         end
 
         # @private
+        # Creates a table.
+        #
+        # @param service [Google::Cloud::Bigtable::Service]
+        # @param instance_id [String]
+        # @param table_id [String]
+        # @param column_families [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        # @param granularity [Symbol]
+        # @param initial_splits [Array<String>]
+        # @yield [column_families] A block for adding column_families.
+        # @yieldparam [Hash{String => Google::Cloud::Bigtable::ColumnFamily}]
+        #
+        # @return [Google::Cloud::Bigtable::Table]
+        def self.create \
+            service,
+            instance_id,
+            table_id,
+            column_families: nil,
+            granularity: nil,
+            initial_splits: nil
+          column_families ||= Table::ColumnFamilyMap.new
+          yield column_families if block_given?
+
+          table = Google::Bigtable::Admin::V2::Table.new({
+            column_families: column_families.to_h,
+            granularity: granularity
+          }.delete_if { |_, v| v.nil? })
+
+          grpc = service.create_table(
+            instance_id,
+            table_id,
+            table,
+            initial_splits: initial_splits
+          )
+          from_grpc(grpc, service)
+        end
+
+        # @private
         # Creates a new Table instance from a Google::Bigtable::Admin::V2::Table.
         #
         # @param grpc [Google::Bigtable::Admin::V2::Table]
