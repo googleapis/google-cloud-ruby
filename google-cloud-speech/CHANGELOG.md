@@ -1,5 +1,14 @@
 # Release History
 
+### 0.30.0 / 2018-06-21
+
+* The 0.30.0 release introduced breaking changes relative to the previous
+  release, 0.29.0. For more details and instructions to migrate your code,
+  please visit the migration guide:
+
+  https://cloud.google.com/speech-to-text/docs/ruby-client-migration
+* Add V1pbeta1 API
+
 ### 0.29.0 / 2018-02-27
 
 * Support Shared Configuration.
