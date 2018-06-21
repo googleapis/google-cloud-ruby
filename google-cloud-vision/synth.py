@@ -15,6 +15,7 @@ v1_library = gapic.ruby_library(
 )
 
 s.copy(v1_library / 'lib/google/cloud/vision/v1')
+s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
 
 s.replace(
     "test/google/cloud/vision/v1/image_annotator_client_test.rb",
