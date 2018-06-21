@@ -8,8 +8,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :x, :int32, 1
     optional :y, :int32, 2
   end
+  add_message "google.cloud.vision.v1.NormalizedVertex" do
+    optional :x, :float, 1
+    optional :y, :float, 2
+  end
   add_message "google.cloud.vision.v1.BoundingPoly" do
     repeated :vertices, :message, 1, "google.cloud.vision.v1.Vertex"
+    repeated :normalized_vertices, :message, 2, "google.cloud.vision.v1.NormalizedVertex"
   end
   add_message "google.cloud.vision.v1.Position" do
     optional :x, :float, 1
@@ -23,6 +28,7 @@ module Google
     module Vision
       module V1
         Vertex = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.Vertex").msgclass
+        NormalizedVertex = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.NormalizedVertex").msgclass
         BoundingPoly = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BoundingPoly").msgclass
         Position = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.Position").msgclass
       end

@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,10 +26,24 @@ module Google
         #     Y coordinate.
         class Vertex; end
 
+        # A vertex represents a 2D point in the image.
+        # NOTE: the normalized vertex coordinates are relative to the original image
+        # and range from 0 to 1.
+        # @!attribute [rw] x
+        #   @return [Float]
+        #     X coordinate.
+        # @!attribute [rw] y
+        #   @return [Float]
+        #     Y coordinate.
+        class NormalizedVertex; end
+
         # A bounding polygon for the detected image annotation.
         # @!attribute [rw] vertices
         #   @return [Array<Google::Cloud::Vision::V1::Vertex>]
         #     The bounding polygon vertices.
+        # @!attribute [rw] normalized_vertices
+        #   @return [Array<Google::Cloud::Vision::V1::NormalizedVertex>]
+        #     The bounding polygon normalized vertices.
         class BoundingPoly; end
 
         # A 3D position in the image, used primarily for Face detection landmarks.

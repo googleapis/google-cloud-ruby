@@ -7,6 +7,8 @@ require 'google/api/annotations_pb'
 require 'google/cloud/vision/v1/geometry_pb'
 require 'google/cloud/vision/v1/text_annotation_pb'
 require 'google/cloud/vision/v1/web_detection_pb'
+require 'google/longrunning/operations_pb'
+require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 require 'google/type/color_pb'
 require 'google/type/latlng_pb'
@@ -14,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.Feature" do
     optional :type, :enum, 1, "google.cloud.vision.v1.Feature.Type"
     optional :max_results, :int32, 2
+    optional :model, :string, 3
   end
   add_enum "google.cloud.vision.v1.Feature.Type" do
     value :TYPE_UNSPECIFIED, 0
@@ -100,6 +103,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.Property" do
     optional :name, :string, 1
     optional :value, :string, 2
+    optional :uint64_value, :uint64, 3
   end
   add_message "google.cloud.vision.v1.EntityAnnotation" do
     optional :mid, :string, 1
@@ -117,6 +121,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :spoof, :enum, 2, "google.cloud.vision.v1.Likelihood"
     optional :medical, :enum, 3, "google.cloud.vision.v1.Likelihood"
     optional :violence, :enum, 4, "google.cloud.vision.v1.Likelihood"
+    optional :racy, :enum, 9, "google.cloud.vision.v1.Likelihood"
   end
   add_message "google.cloud.vision.v1.LatLongRect" do
     optional :min_lat_lng, :message, 1, "google.type.LatLng"
@@ -144,15 +149,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.vision.v1.CropHintsParams" do
     repeated :aspect_ratios, :float, 1
   end
+  add_message "google.cloud.vision.v1.WebDetectionParams" do
+    optional :include_geo_results, :bool, 2
+  end
   add_message "google.cloud.vision.v1.ImageContext" do
     optional :lat_long_rect, :message, 1, "google.cloud.vision.v1.LatLongRect"
     repeated :language_hints, :string, 2
     optional :crop_hints_params, :message, 4, "google.cloud.vision.v1.CropHintsParams"
+    optional :web_detection_params, :message, 6, "google.cloud.vision.v1.WebDetectionParams"
   end
   add_message "google.cloud.vision.v1.AnnotateImageRequest" do
     optional :image, :message, 1, "google.cloud.vision.v1.Image"
     repeated :features, :message, 2, "google.cloud.vision.v1.Feature"
     optional :image_context, :message, 3, "google.cloud.vision.v1.ImageContext"
+  end
+  add_message "google.cloud.vision.v1.ImageAnnotationContext" do
+    optional :uri, :string, 1
+    optional :page_number, :int32, 2
   end
   add_message "google.cloud.vision.v1.AnnotateImageResponse" do
     repeated :face_annotations, :message, 1, "google.cloud.vision.v1.FaceAnnotation"
@@ -166,12 +179,58 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :crop_hints_annotation, :message, 11, "google.cloud.vision.v1.CropHintsAnnotation"
     optional :web_detection, :message, 13, "google.cloud.vision.v1.WebDetection"
     optional :error, :message, 9, "google.rpc.Status"
+    optional :context, :message, 21, "google.cloud.vision.v1.ImageAnnotationContext"
+  end
+  add_message "google.cloud.vision.v1.AnnotateFileResponse" do
+    optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
+    repeated :responses, :message, 2, "google.cloud.vision.v1.AnnotateImageResponse"
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesRequest" do
     repeated :requests, :message, 1, "google.cloud.vision.v1.AnnotateImageRequest"
   end
   add_message "google.cloud.vision.v1.BatchAnnotateImagesResponse" do
     repeated :responses, :message, 1, "google.cloud.vision.v1.AnnotateImageResponse"
+  end
+  add_message "google.cloud.vision.v1.AsyncAnnotateFileRequest" do
+    optional :input_config, :message, 1, "google.cloud.vision.v1.InputConfig"
+    repeated :features, :message, 2, "google.cloud.vision.v1.Feature"
+    optional :image_context, :message, 3, "google.cloud.vision.v1.ImageContext"
+    optional :output_config, :message, 4, "google.cloud.vision.v1.OutputConfig"
+  end
+  add_message "google.cloud.vision.v1.AsyncAnnotateFileResponse" do
+    optional :output_config, :message, 1, "google.cloud.vision.v1.OutputConfig"
+  end
+  add_message "google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest" do
+    repeated :requests, :message, 1, "google.cloud.vision.v1.AsyncAnnotateFileRequest"
+  end
+  add_message "google.cloud.vision.v1.AsyncBatchAnnotateFilesResponse" do
+    repeated :responses, :message, 1, "google.cloud.vision.v1.AsyncAnnotateFileResponse"
+  end
+  add_message "google.cloud.vision.v1.InputConfig" do
+    optional :gcs_source, :message, 1, "google.cloud.vision.v1.GcsSource"
+    optional :mime_type, :string, 2
+  end
+  add_message "google.cloud.vision.v1.OutputConfig" do
+    optional :gcs_destination, :message, 1, "google.cloud.vision.v1.GcsDestination"
+    optional :batch_size, :int32, 2
+  end
+  add_message "google.cloud.vision.v1.GcsSource" do
+    optional :uri, :string, 1
+  end
+  add_message "google.cloud.vision.v1.GcsDestination" do
+    optional :uri, :string, 1
+  end
+  add_message "google.cloud.vision.v1.OperationMetadata" do
+    optional :state, :enum, 1, "google.cloud.vision.v1.OperationMetadata.State"
+    optional :create_time, :message, 5, "google.protobuf.Timestamp"
+    optional :update_time, :message, 6, "google.protobuf.Timestamp"
+  end
+  add_enum "google.cloud.vision.v1.OperationMetadata.State" do
+    value :STATE_UNSPECIFIED, 0
+    value :CREATED, 1
+    value :RUNNING, 2
+    value :DONE, 3
+    value :CANCELLED, 4
   end
   add_enum "google.cloud.vision.v1.Likelihood" do
     value :UNKNOWN, 0
@@ -205,11 +264,24 @@ module Google
         CropHint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHint").msgclass
         CropHintsAnnotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHintsAnnotation").msgclass
         CropHintsParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.CropHintsParams").msgclass
+        WebDetectionParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.WebDetectionParams").msgclass
         ImageContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ImageContext").msgclass
         AnnotateImageRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageRequest").msgclass
+        ImageAnnotationContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.ImageAnnotationContext").msgclass
         AnnotateImageResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateImageResponse").msgclass
+        AnnotateFileResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AnnotateFileResponse").msgclass
         BatchAnnotateImagesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateImagesRequest").msgclass
         BatchAnnotateImagesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.BatchAnnotateImagesResponse").msgclass
+        AsyncAnnotateFileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncAnnotateFileRequest").msgclass
+        AsyncAnnotateFileResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncAnnotateFileResponse").msgclass
+        AsyncBatchAnnotateFilesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest").msgclass
+        AsyncBatchAnnotateFilesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.AsyncBatchAnnotateFilesResponse").msgclass
+        InputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.InputConfig").msgclass
+        OutputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.OutputConfig").msgclass
+        GcsSource = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.GcsSource").msgclass
+        GcsDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.GcsDestination").msgclass
+        OperationMetadata = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.OperationMetadata").msgclass
+        OperationMetadata::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.OperationMetadata.State").enummodule
         Likelihood = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1.Likelihood").enummodule
       end
     end
