@@ -38,7 +38,7 @@ module Google
     # ### Preview
     # #### SpeechClient
     # ```rb
-    # require "google/cloud/speech/v1p1beta1"
+    # require "google/cloud/speech"
     #
     # speech_client = Google::Cloud::Speech(version: :v1p1beta1)
     # language_code = "en-US"
