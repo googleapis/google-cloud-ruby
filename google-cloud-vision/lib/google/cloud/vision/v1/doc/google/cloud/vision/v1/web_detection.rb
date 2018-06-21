@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@ module Google
         # @!attribute [rw] full_matching_images
         #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebImage>]
         #     Fully matching images from the Internet.
-        #     They're definite neardups and most often a copy of the query image with
-        #     merely a size change.
+        #     Can include resized copies of the query image.
         # @!attribute [rw] partial_matching_images
         #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebImage>]
         #     Partial matching images from the Internet.
@@ -33,6 +32,12 @@ module Google
         # @!attribute [rw] pages_with_matching_images
         #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebPage>]
         #     Web pages containing the matching images from the Internet.
+        # @!attribute [rw] visually_similar_images
+        #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebImage>]
+        #     The visually similar image results.
+        # @!attribute [rw] best_guess_labels
+        #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebLabel>]
+        #     Best guess text labels for the request image.
         class WebDetection
           # Entity deduced from similar images on the Internet.
           # @!attribute [rw] entity_id
@@ -53,8 +58,7 @@ module Google
           #     The result image URL.
           # @!attribute [rw] score
           #   @return [Float]
-          #     Overall relevancy score for the image.
-          #     Not normalized and not comparable across different image queries.
+          #     (Deprecated) Overall relevancy score for the image.
           class WebImage; end
 
           # Metadata for web pages.
@@ -63,9 +67,32 @@ module Google
           #     The result web page URL.
           # @!attribute [rw] score
           #   @return [Float]
-          #     Overall relevancy score for the web page.
-          #     Not normalized and not comparable across different image queries.
+          #     (Deprecated) Overall relevancy score for the web page.
+          # @!attribute [rw] page_title
+          #   @return [String]
+          #     Title for the web page, may contain HTML markups.
+          # @!attribute [rw] full_matching_images
+          #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebImage>]
+          #     Fully matching images on the page.
+          #     Can include resized copies of the query image.
+          # @!attribute [rw] partial_matching_images
+          #   @return [Array<Google::Cloud::Vision::V1::WebDetection::WebImage>]
+          #     Partial matching images on the page.
+          #     Those images are similar enough to share some key-point features. For
+          #     example an original image will likely have partial matching for its
+          #     crops.
           class WebPage; end
+
+          # Label to provide extra metadata for the web detection.
+          # @!attribute [rw] label
+          #   @return [String]
+          #     Label for extra metadata.
+          # @!attribute [rw] language_code
+          #   @return [String]
+          #     The BCP-47 language code for +label+, such as "en-US" or "sr-Latn".
+          #     For more information, see
+          #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          class WebLabel; end
         end
       end
     end

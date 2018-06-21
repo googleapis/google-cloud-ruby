@@ -41,9 +41,9 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or VISION_TEST_PROJECT=test123 VISION_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # clear any env var already set
-  require "google/cloud/vision/credentials"
-  (Google::Cloud::Vision::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Vision::Credentials::JSON_ENV_VARS).each do |path|
+  require "google/cloud/vision/v1/credentials"
+  (Google::Cloud::Vision::V1::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Vision::V1::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
   require "google/cloud/storage/credentials"
