@@ -40,7 +40,7 @@ module Google
     # ```rb
     # require "google/cloud/speech"
     #
-    # speech_client = Google::Cloud::Speech(version: :v1)
+    # speech_client = Google::Cloud::Speech.new(version: :v1)
     # language_code = "en-US"
     # sample_rate_hertz = 44100
     # encoding = :FLAC
