@@ -1,5 +1,10 @@
 # Release History
 
+### 1.6.0 / 2018-06-22
+
+* Documentation updates.
+* Updated dependencies.
+
 ### 1.5.0 / 2018-05-21
 
 * Add Schema.load and Schema.dump to read/write a table schema from/to a JSON file or other IO source. The JSON file schema is the same as for the bq CLI.
