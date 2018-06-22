@@ -1,5 +1,10 @@
 # Release History
 
+### 0.30.0 / 2018-06-22
+
+* Update Policy, protect from role duplication.
+* Updated dependencies.
+
 ### 0.29.0 / 2018-02-27
 
 * Support Shared Configuration.
