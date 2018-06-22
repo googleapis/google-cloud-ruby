@@ -82,6 +82,13 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
       error_event.message.must_equal exception_message
     end
 
+    it "includes exception message when backtrace is an empty array" do
+      exception.set_backtrace([])
+      error_event =
+        Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
+      error_event.message.must_equal exception_message
+    end
+
     it "includes exception message and backtrace if backtrace is available" do
       backtrace = "test/test_more.rb:123:`<testee_sub>'"
       exception.set_backtrace([backtrace])

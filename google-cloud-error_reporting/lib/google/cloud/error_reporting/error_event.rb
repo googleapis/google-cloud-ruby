@@ -215,7 +215,7 @@ module Google
           backtrace = exception.backtrace
           message = exception.message
 
-          unless backtrace.nil?
+          if !backtrace.nil? && !backtrace.first.nil?
             error_location = backtrace.first
 
             message = "#{error_location}: #{message} (#{exception.class})\n\t" +
