@@ -572,6 +572,7 @@
       "name": "google-cloud-vision",
       "defaultService": "google/cloud/vision",
       "versions": [
+        "v0.29.0",
         "v0.28.0",
         "master",
         "v0.27.0",
