@@ -170,18 +170,26 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   it "imports data from a local file and creates a new table with specified schema in a block with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    job = dataset.load_job "local_file_table", local_file, job_id: job_id do |schema|
-      schema.integer   "id",    description: "id description",    mode: :required
-      schema.string    "breed", description: "breed description", mode: :required
-      schema.string    "name",  description: "name description",  mode: :required
-      schema.timestamp "dob",   description: "dob description",   mode: :required
-      schema.schema_update_options = schema_update_options
+    job = dataset.load_job "local_file_table", local_file, job_id: job_id do |job|
+      job.schema.integer   "id",    description: "id description",    mode: :required
+      job.schema.string    "breed", description: "breed description", mode: :required
+      job.schema.string    "name",  description: "name description",  mode: :required
+      job.schema.timestamp "dob",   description: "dob description",   mode: :required
+      job.schema_update_options = schema_update_options
+      job.time_partitioning_type = "DAY"
+      job.time_partitioning_field = "dob"
+      job.time_partitioning_expiration = 86_400
+      job.time_partitioning_require_filter = true
     end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.job_id.must_equal job_id
     job.wait_until_done!
     job.output_rows.must_equal 3
     job.schema_update_options.must_equal schema_update_options
+    job.time_partitioning_type.must_equal "DAY"
+    job.time_partitioning_field.must_equal "dob"
+    job.time_partitioning_expiration.must_equal 86_400
+    job.time_partitioning_require_filter?.must_equal true
   end
 
   it "imports data from a local file and creates a new table with specified schema as an option with load_job" do
@@ -219,7 +227,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "imports data from a local file and creates a new table with specified schema in a block with load" do
-    result = dataset.load "local_file_table", local_file do |schema|
+    result = dataset.load "local_file_table_3", local_file do |schema|
       schema.integer   "id",    description: "id description",    mode: :required
       schema.string    "breed", description: "breed description", mode: :required
       schema.string    "name",  description: "name description",  mode: :required
@@ -236,7 +244,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       s.timestamp "dob",   description: "dob description",   mode: :required
     end
 
-    result = dataset.load "local_file_table_2", local_file, schema: schema
+    result = dataset.load "local_file_table_4", local_file, schema: schema
     result.must_equal true
   end
 
