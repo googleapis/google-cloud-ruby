@@ -1,5 +1,10 @@
 # Release History
 
+### 1.13.0 / 2018-06-22
+
+* Update Policy, protect from role duplication.
+* Updated dependencies.
+
 ### 1.12.0 / 2018-05-09
 
 * Support Cloud KMS keys / Customer-managed encryption keys (CMEK).
