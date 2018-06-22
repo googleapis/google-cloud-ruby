@@ -1,5 +1,9 @@
 # Release History
 
+### 0.29.0 / 2018-06-22
+
+* Add V1 API.
+
 ### 0.28.0 / 2018-02-27
 
 * Add Shared Configuration.
