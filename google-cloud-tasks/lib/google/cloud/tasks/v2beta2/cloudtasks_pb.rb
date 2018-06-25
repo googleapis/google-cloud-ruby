@@ -12,6 +12,7 @@ require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/code_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.tasks.v2beta2.ListQueuesRequest" do
     optional :parent, :string, 1

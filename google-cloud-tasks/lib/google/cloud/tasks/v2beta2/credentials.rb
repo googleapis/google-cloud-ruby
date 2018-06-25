@@ -22,8 +22,8 @@ module Google
           SCOPE = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
-          PATH_ENV_VARS = %w(CLOUDTASKS_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-          JSON_ENV_VARS = %w(CLOUDTASKS_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
+          PATH_ENV_VARS = %w(TASKS_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+          JSON_ENV_VARS = %w(TASKS_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
           DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
         end
       end
