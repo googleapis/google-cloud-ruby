@@ -317,7 +317,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-                  [bucket.name, empty_file_gapi(temporary_hold: true), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", user_project: nil, options: {}]
+                  [bucket.name, empty_file_gapi(temporary_hold: true), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: nil, user_project: nil, options: {}]
 
       bucket.service.mocked_service = mock
 
@@ -336,7 +336,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-                  [bucket.name, empty_file_gapi(event_based_hold: true), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", user_project: nil, options: {}]
+                  [bucket.name, empty_file_gapi(event_based_hold: true), name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: nil, user_project: nil, options: {}]
 
       bucket.service.mocked_service = mock
 

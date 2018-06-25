@@ -108,7 +108,7 @@ class MockStorage < Minitest::Spec
       "owner" => { "entity" => "user-1234567890", "entityId" => "abc123" },
       "crc32c" => "Lm1F3g==",
       "etag" => "CKih16GjycICEAE=",
-      "kmsKeyName" => kms_key_name }
+      "kmsKeyName" => kms_key_name,
       "temporaryHold" => true,
       "eventBasedHold" => true,
       "retentionExpirationTime" => Time.now }
