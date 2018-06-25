@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rake", "~> 12.0"
+gem "rake", "~> 12.3"
 gem "minitest", "~> 5.10"
 gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.1"

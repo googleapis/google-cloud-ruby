@@ -9,4 +9,4 @@ gem "google-api-client", "~> 0.23"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-gax", "~> 1.0"
 
-gem "rake"
+gem "rake", "~> 12.3"
