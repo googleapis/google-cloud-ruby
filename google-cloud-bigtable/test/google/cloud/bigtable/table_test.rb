@@ -30,7 +30,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
         granularity: :MILLIS
       )
     )
-    table = Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+    table = Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :FULL)
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     table.project_id.must_equal project_id

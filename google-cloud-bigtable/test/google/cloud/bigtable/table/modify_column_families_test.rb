@@ -73,11 +73,6 @@ describe Google::Cloud::Bigtable::Table, :modify_column_families, :mock_bigtable
     updated_table.name.must_equal table_id
     updated_table.path.must_equal table_path(instance_id, table_id)
     updated_table.granularity.must_equal :MILLIS
-    updated_table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
-    updated_table.cluster_states.each do |cs|
-      cs.replication_state.must_equal :READY
-    end
-
     updated_table.column_families.map(&:name).sort.must_equal column_families.keys
     updated_table.column_families.each do |cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule

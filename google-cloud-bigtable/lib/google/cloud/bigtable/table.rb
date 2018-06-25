@@ -122,7 +122,7 @@ module Google
         #
         # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
         def cluster_states
-          reload!(view: :REPLICATION_VIEW) if @grpc.cluster_states.none?
+          check_view_and_load(:REPLICATION_VIEW)
           @grpc.cluster_states.map do |name, state_grpc|
             ClusterState.from_grpc(state_grpc, name)
           end
@@ -135,8 +135,7 @@ module Google
         # @return [Array<Google::Bigtable::ColumnFamily>]
         #
         def column_families
-          reload!(view: :SCHEMA_VIEW) if @grpc.column_families.none?
-
+          check_view_and_load(:SCHEMA_VIEW)
           @grpc.column_families.map do |cf_name, cf_grpc|
             ColumnFamily.from_grpc(
               cf_grpc,
@@ -156,9 +155,7 @@ module Google
         # @return [Symbol]
         #
         def granularity
-          if @grpc.granularity == :TIMESTAMP_GRANULARITY_UNSPECIFIED
-            reload!(view: :SCHEMA_VIEW)
-          end
+          check_view_and_load(:SCHEMA_VIEW)
           @grpc.granularity
         end
 
@@ -393,6 +390,38 @@ module Google
         #
         def ensure_service!
           raise "Must have active connection to service" unless service
+        end
+
+        FIELDS_BY_VIEW = {
+          SCHEMA_VIEW: %w[granularity column_families],
+          REPLICATION_VIEW: ["cluster_states"],
+          FULL: %w[granularity column_families cluster_states]
+        }.freeze
+
+        # @private
+        #
+        # Check and reload table with expected view and set fields
+        # @param view [Symbol] Expected view type.
+        #
+        def check_view_and_load view
+          @loaded_views ||= Set.new([@view])
+
+          if @loaded_views.include?(view) || @loaded_views.include?(:FULL)
+            return
+          end
+
+          grpc = service.get_table(instance_id, table_id, view: view)
+          @loaded_views << view
+
+          FIELDS_BY_VIEW[view].each do |field|
+            case grpc[field]
+            when Google::Protobuf::Map
+              @grpc[field].clear
+              grpc[field].each { |k, v| @grpc[field][k] = v }
+            else
+              @grpc[field] = grpc[field]
+            end
+          end
         end
       end
     end

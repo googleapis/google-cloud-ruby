@@ -165,9 +165,6 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
       table_path(instance_id, table_id),
       modifications
     ]
-    mock.expect :get_table, get_res, [
-      table_path(instance_id, table_id), view: :SCHEMA_VIEW
-    ]
     bigtable.service.mocked_tables = mock
 
     column_family.gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)

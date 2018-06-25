@@ -47,6 +47,10 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       req_table,
       initial_splits: nil
     ]
+    mock.expect :get_table, create_res.dup, [
+      table_path(instance_id, table_id),
+      view: :REPLICATION_VIEW
+    ]
     bigtable.service.mocked_tables = mock
 
     table = bigtable.create_table(
@@ -57,22 +61,21 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
-    mock.verify
-
     table.project_id.must_equal project_id
     table.instance_id.must_equal instance_id
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
+    table.column_families.map(&:name).sort.must_equal column_families.keys
+    table.column_families.each do |cf|
+      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+    end
     table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
     table.cluster_states.each do |cs|
       cs.replication_state.must_equal :READY
     end
 
-    table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families.each do |cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
-    end
+    mock.verify
   end
 
   it "creates a table with initial split keys" do
@@ -102,6 +105,10 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       req_table,
       initial_splits: initial_splits.map { |key| { key: key } }
     ]
+    mock.expect :get_table, create_res.dup, [
+      table_path(instance_id, table_id),
+      view: :REPLICATION_VIEW
+    ]
     bigtable.service.mocked_tables = mock
 
     table = bigtable.create_table(
@@ -113,21 +120,20 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
-    mock.verify
-
     table.project_id.must_equal project_id
     table.instance_id.must_equal instance_id
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
+    table.column_families.map(&:name).sort.must_equal column_families.keys
+    table.column_families.each do |cf|
+      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+    end
     table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
     table.cluster_states.each do |cs|
       cs.replication_state.must_equal :READY
     end
 
-    table.column_families.map(&:name).sort.must_equal column_families.keys
-    table.column_families.each do |cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
-    end
+    mock.verify
   end
 end

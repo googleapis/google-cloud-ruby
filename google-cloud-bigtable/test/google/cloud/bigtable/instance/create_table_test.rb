@@ -72,11 +72,15 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       granularity: :MILLIS
     )
 
-    mock.expect :create_table, create_res, [
+    mock.expect :create_table, create_res.dup, [
       instance_path(instance_id),
       table_id,
       req_table,
       initial_splits: nil
+    ]
+    mock.expect :get_table, create_res.dup, [
+      table_path(instance_id, table_id),
+      view: :REPLICATION_VIEW
     ]
     bigtable.service.mocked_tables = mock
 
@@ -84,22 +88,18 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
-    mock.verify
-
     table.project_id.must_equal project_id
     table.instance_id.must_equal instance_id
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-    table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
-    table.cluster_states.each do |cs|
-      cs.replication_state.must_equal :READY
-    end
-
     table.column_families.map(&:name).sort.must_equal column_families.keys
     table.column_families.each do |cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
+    table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
+
+    mock.verify
   end
 
   it "creates a table with initial split keys" do
@@ -112,7 +112,6 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     create_res = Google::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),
-        cluster_states: cluster_states,
         column_families: column_families.to_h,
         granularity: :MILLIS
       )
@@ -123,7 +122,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       granularity: :MILLIS
     )
 
-    mock.expect :create_table, create_res, [
+    mock.expect :create_table, create_res.dup, [
       instance_path(instance_id),
       table_id,
       req_table,
@@ -139,21 +138,16 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
-    mock.verify
-
     table.project_id.must_equal project_id
     table.instance_id.must_equal instance_id
     table.name.must_equal table_id
     table.path.must_equal table_path(instance_id, table_id)
     table.granularity.must_equal :MILLIS
-    table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
-    table.cluster_states.each do |cs|
-      cs.replication_state.must_equal :READY
-    end
-
     table.column_families.map(&:name).sort.must_equal column_families.keys
     table.column_families.each do |cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
     end
+
+    mock.verify
   end
 end

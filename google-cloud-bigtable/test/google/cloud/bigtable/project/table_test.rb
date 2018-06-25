@@ -34,9 +34,9 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: nil]
+    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :FULL]
     bigtable.service.mocked_tables = mock
-    table = bigtable.table(instance_id, table_id)
+    table = bigtable.table(instance_id, table_id, view: :FULL)
 
     mock.verify
 
@@ -70,5 +70,33 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
 
     table = bigtable.table(instance_id, not_found_table_id)
     table.must_be :nil?
+  end
+
+  it "load schema view on access schema fields" do
+    table_id = "test-table"
+    get_res = Google::Bigtable::Admin::V2::Table.new(
+      name: table_path(instance_id, table_id),
+      cluster_states: clusters_state_grpc,
+      column_families: column_families_grpc,
+      granularity: :MILLIS
+    )
+
+    mock = Minitest::Mock.new
+    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+    bigtable.service.mocked_tables = mock
+
+    table = Google::Cloud::Bigtable::Table.from_grpc(
+      Google::Bigtable::Admin::V2::Table.new(name: table_path(instance_id, table_id)),
+      bigtable.service,
+      view: :NAME_ONLY
+    )
+
+    2.times do
+      table.column_families.wont_be :empty?
+      table.granularity.must_equal :MILLIS
+      table.cluster_states.wont_be :empty?
+    end
+    mock.verify
   end
 end

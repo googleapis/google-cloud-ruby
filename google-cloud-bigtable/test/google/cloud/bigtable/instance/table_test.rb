@@ -40,9 +40,9 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: nil]
+    mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :FULL]
     bigtable.service.mocked_tables = mock
-    table = instance.table(table_id)
+    table = instance.table(table_id, view: :FULL)
 
     mock.verify
 
