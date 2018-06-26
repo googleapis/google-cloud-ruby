@@ -70,6 +70,12 @@ module Acceptance
       SecureRandom.hex(4)
     end
 
+    def create_test_table table_id
+      bigtable_instance.create_table(table_id) do |cfs|
+        cfs.add('cf', Google::Cloud::Bigtable::GcRule.max_versions(1))
+      end
+    end
+
     # Add spec DSL
     extend Minitest::Spec::DSL
 
