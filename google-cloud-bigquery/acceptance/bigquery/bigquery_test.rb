@@ -126,6 +126,13 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::Job
     job.job_id.must_equal job_id
     job.user_email.wont_be_nil
+
+    job.time_partitioning?.must_equal false
+    job.time_partitioning_type.must_be :nil?
+    job.time_partitioning_field.must_be :nil?
+    job.time_partitioning_expiration.must_be :nil?
+    job.time_partitioning_require_filter?.must_equal false
+
     job.wait_until_done!
     rows = job.data
     rows.total.must_equal 100
