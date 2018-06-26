@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [TraceServiceClient][] | Send and retrieve trace data from Stackdriver Trace. Data is generated and available by default for all App Engine applications. Data from other applications can be written to Stackdriver Trace for display, reporting, and analysis. |
+      # | [TraceServiceClient][] | This file describes an API for collecting and viewing traces and spans within a trace. |
       # | [Data Types][] | Data types for Google::Cloud::Trace::V1 |
       #
       # [TraceServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace/latest/google/devtools/cloudtrace/v1/traceserviceclient
@@ -106,9 +106,11 @@ module Google
         #     * +/http/client_region+
         #     * +/http/host+
         #     * +/http/method+
+        #     * +/http/path+
         #     * +/http/redirected_url+
         #     * +/http/request/size+
         #     * +/http/response/size+
+        #     * +/http/route+
         #     * +/http/status_code+
         #     * +/http/url+
         #     * +/http/user_agent+

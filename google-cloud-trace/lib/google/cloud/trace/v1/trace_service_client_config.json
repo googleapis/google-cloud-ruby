@@ -17,32 +17,23 @@
           "rpc_timeout_multiplier": 1.5,
           "max_rpc_timeout_millis": 30000,
           "total_timeout_millis": 45000
-        },
-        "write_sink": {
-          "initial_retry_delay_millis": 100,
-          "retry_delay_multiplier": 1.2,
-          "max_retry_delay_millis": 1000,
-          "initial_rpc_timeout_millis": 30000,
-          "rpc_timeout_multiplier": 1.5,
-          "max_rpc_timeout_millis": 60000,
-          "total_timeout_millis": 120000
         }
       },
       "methods": {
-        "ListTraces": {
-          "timeout_millis": 60000,
+        "PatchTraces": {
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetTrace": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "PatchTraces": {
+        "ListTraces": {
           "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "write_sink"
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
         }
       }
     }

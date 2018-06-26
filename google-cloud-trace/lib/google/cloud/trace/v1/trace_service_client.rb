@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/devtools/cloudtrace/v1/trace_pb"
-require "google/cloud/trace/credentials"
+require "google/cloud/trace/v1/credentials"
 
 module Google
   module Cloud
@@ -51,6 +48,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -69,6 +69,7 @@ module Google
             "https://www.googleapis.com/auth/trace.append",
             "https://www.googleapis.com/auth/trace.readonly"
           ].freeze
+
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -94,16 +95,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -112,21 +115,10 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/cloudtrace/v1/trace_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Trace::Credentials.default
+            credentials ||= Google::Cloud::Trace::V1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Trace::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Trace::V1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -141,13 +133,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-trace'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "trace_service_client_config.json"
             )
@@ -160,9 +155,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @trace_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -170,24 +170,112 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Devtools::Cloudtrace::V1::TraceService::Stub.method(:new)
             )
 
-            @list_traces = Google::Gax.create_api_call(
-              @trace_service_stub.method(:list_traces),
-              defaults["list_traces"]
+            @patch_traces = Google::Gax.create_api_call(
+              @trace_service_stub.method(:patch_traces),
+              defaults["patch_traces"],
+              exception_transformer: exception_transformer
             )
             @get_trace = Google::Gax.create_api_call(
               @trace_service_stub.method(:get_trace),
-              defaults["get_trace"]
+              defaults["get_trace"],
+              exception_transformer: exception_transformer
             )
-            @patch_traces = Google::Gax.create_api_call(
-              @trace_service_stub.method(:patch_traces),
-              defaults["patch_traces"]
+            @list_traces = Google::Gax.create_api_call(
+              @trace_service_stub.method(:list_traces),
+              defaults["list_traces"],
+              exception_transformer: exception_transformer
             )
           end
 
           # Service calls
+
+          # Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+          # of a trace that you send matches that of an existing trace, any fields
+          # in the existing trace and its spans are overwritten by the provided values,
+          # and any new fields provided are merged with the existing trace data. If the
+          # ID does not match, a new trace is created.
+          #
+          # @param project_id [String]
+          #   ID of the Cloud project where the trace data is stored.
+          # @param traces [Google::Devtools::Cloudtrace::V1::Traces | Hash]
+          #   The body of the message.
+          #   A hash of the same form as `Google::Devtools::Cloudtrace::V1::Traces`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/trace/v1"
+          #
+          #   trace_service_client = Google::Cloud::Trace::V1.new
+          #
+          #   # TODO: Initialize +project_id+:
+          #   project_id = ''
+          #
+          #   # TODO: Initialize +traces+:
+          #   traces = {}
+          #   trace_service_client.patch_traces(project_id, traces)
+
+          def patch_traces \
+              project_id,
+              traces,
+              options: nil,
+              &block
+            req = {
+              project_id: project_id,
+              traces: traces
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V1::PatchTracesRequest)
+            @patch_traces.call(req, options, &block)
+            nil
+          end
+
+          # Gets a single trace by its ID.
+          #
+          # @param project_id [String]
+          #   ID of the Cloud project where the trace data is stored.
+          # @param trace_id [String]
+          #   ID of the trace to return.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Cloudtrace::V1::Trace]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Devtools::Cloudtrace::V1::Trace]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/trace/v1"
+          #
+          #   trace_service_client = Google::Cloud::Trace::V1.new
+          #
+          #   # TODO: Initialize +project_id+:
+          #   project_id = ''
+          #
+          #   # TODO: Initialize +trace_id+:
+          #   trace_id = ''
+          #   response = trace_service_client.get_trace(project_id, trace_id)
+
+          def get_trace \
+              project_id,
+              trace_id,
+              options: nil,
+              &block
+            req = {
+              project_id: project_id,
+              trace_id: trace_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V1::GetTraceRequest)
+            @get_trace.call(req, options, &block)
+          end
 
           # Returns of a list of traces that match the specified filter conditions.
           #
@@ -197,11 +285,9 @@ module Google
           #   Type of data returned for traces in the list. Optional. Default is
           #   +MINIMAL+.
           # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
+          #   Maximum number of traces to return. If not specified or <= 0, the
+          #   implementation selects a reasonable value.  The implementation may
+          #   return fewer traces than the requested page size. Optional.
           # @param start_time [Google::Protobuf::Timestamp | Hash]
           #   Start of the time interval (inclusive) during which the trace data was
           #   collected from the application.
@@ -260,6 +346,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Devtools::Cloudtrace::V1::Trace>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Devtools::Cloudtrace::V1::Trace>]
           #   An enumerable of Google::Devtools::Cloudtrace::V1::Trace instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -270,6 +359,8 @@ module Google
           #   require "google/cloud/trace/v1"
           #
           #   trace_service_client = Google::Cloud::Trace::V1.new
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
           #
           #   # Iterate over all results.
@@ -293,7 +384,8 @@ module Google
               end_time: nil,
               filter: nil,
               order_by: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               view: view,
@@ -304,75 +396,7 @@ module Google
               order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V1::ListTracesRequest)
-            @list_traces.call(req, options)
-          end
-
-          # Gets a single trace by its ID.
-          #
-          # @param project_id [String]
-          #   ID of the Cloud project where the trace data is stored.
-          # @param trace_id [String]
-          #   ID of the trace to return.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Google::Devtools::Cloudtrace::V1::Trace]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/trace/v1"
-          #
-          #   trace_service_client = Google::Cloud::Trace::V1.new
-          #   project_id = ''
-          #   trace_id = ''
-          #   response = trace_service_client.get_trace(project_id, trace_id)
-
-          def get_trace \
-              project_id,
-              trace_id,
-              options: nil
-            req = {
-              project_id: project_id,
-              trace_id: trace_id
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V1::GetTraceRequest)
-            @get_trace.call(req, options)
-          end
-
-          # Sends new traces to Stackdriver Trace or updates existing traces. If the ID
-          # of a trace that you send matches that of an existing trace, any fields
-          # in the existing trace and its spans are overwritten by the provided values,
-          # and any new fields provided are merged with the existing trace data. If the
-          # ID does not match, a new trace is created.
-          #
-          # @param project_id [String]
-          #   ID of the Cloud project where the trace data is stored.
-          # @param traces [Google::Devtools::Cloudtrace::V1::Traces | Hash]
-          #   The body of the message.
-          #   A hash of the same form as `Google::Devtools::Cloudtrace::V1::Traces`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/trace/v1"
-          #
-          #   trace_service_client = Google::Cloud::Trace::V1.new
-          #   project_id = ''
-          #   traces = {}
-          #   trace_service_client.patch_traces(project_id, traces)
-
-          def patch_traces \
-              project_id,
-              traces,
-              options: nil
-            req = {
-              project_id: project_id,
-              traces: traces
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V1::PatchTracesRequest)
-            @patch_traces.call(req, options)
-            nil
+            @list_traces.call(req, options, &block)
           end
         end
       end
