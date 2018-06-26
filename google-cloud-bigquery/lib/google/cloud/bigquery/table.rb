@@ -219,7 +219,9 @@ module Google
         end
 
         ###
-        # The field on which the table is partitioned, if any. See
+        # The field on which the table is partitioned, if any. If not
+        # set, the destination table is partitioned by pseudo column
+        # `_PARTITIONTIME`; if set, the table is partitioned by this field. See
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # @return [String, nil] The partition field, if a field was configured.
@@ -235,8 +237,10 @@ module Google
         end
 
         ##
-        # Sets the field on which to partition the table. See [Partitioned
-        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        # Sets the field on which to partition the table. If not
+        # set, the destination table is partitioned by pseudo column
+        # `_PARTITIONTIME`; if set, the table is partitioned by this field. See
+        # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         # The table must also be partitioned.
         #
         # See {Table#time_partitioning_type=}.

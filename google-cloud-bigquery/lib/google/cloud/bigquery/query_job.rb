@@ -259,6 +259,81 @@ module Google
           )
         end
 
+        ###
+        # Checks if the destination table will be time-partitioned. See
+        # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [Boolean, nil] `true` when the table will be time-partitioned,
+        #   or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def time_partitioning?
+          !@gapi.configuration.query.time_partitioning.nil?
+        end
+
+        ###
+        # The period for which the destination table will be partitioned, if
+        # any. See [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [String, nil] The partition type. Currently the only supported
+        #   value is "DAY", or `nil` if not present.
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_type
+          @gapi.configuration.query.time_partitioning.type if time_partitioning?
+        end
+
+        ###
+        # The field on which the destination table will be partitioned, if any.
+        # If not set, the destination table will be partitioned by pseudo column
+        # `_PARTITIONTIME`; if set, the table will be partitioned by this field.
+        # See [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [String, nil] The partition field, if a field was configured.
+        #   `nil` if not partitioned or not set (partitioned by pseudo column
+        #   '_PARTITIONTIME').
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_field
+          return nil unless time_partitioning?
+          @gapi.configuration.query.time_partitioning.field
+        end
+
+        ###
+        # The expiration for the destination table partitions, if any, in
+        # seconds. See [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [Integer, nil] The expiration time, in seconds, for data in
+        #   partitions, or `nil` if not present.
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_expiration
+          tp = @gapi.configuration.query.time_partitioning
+          tp.expiration_ms / 1_000 if tp && !tp.expiration_ms.nil?
+        end
+
+        ###
+        # If set to true, queries over the destination table will require a
+        # partition filter that can be used for partition elimination to be
+        # specified. See [Partitioned
+        # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+        #
+        # @return [Boolean] `true` when a partition filter will be required,
+        #   or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def time_partitioning_require_filter?
+          tp = @gapi.configuration.query.time_partitioning
+          return false if tp.nil? || tp.require_partition_filter.nil?
+          tp.require_partition_filter
+        end
+
         ##
         # Refreshes the job until the job is `DONE`.
         # The delay between refreshes will incrementally increase.
@@ -676,6 +751,142 @@ module Google
             @gapi.configuration.query.update!(
               destination_encryption_configuration: val.to_gapi
             )
+          end
+
+          ##
+          # Sets the partitioning for the destination table. See [Partitioned
+          # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+          #
+          # You can only set the partitioning field while creating a table.
+          # BigQuery does not allow you to change partitioning on an existing
+          # table.
+          #
+          # @param [String] type The partition type. Currently the only
+          #   supported value is "DAY".
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   job = dataset.query_job "SELECT * FROM UNNEST(" \
+          #                           "GENERATE_TIMESTAMP_ARRAY(" \
+          #                           "'2018-10-01 00:00:00', " \
+          #                           "'2018-10-10 00:00:00', " \
+          #                           "INTERVAL 1 DAY)) AS dob" do |job|
+          #     job.time_partitioning_type = "DAY"
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def time_partitioning_type= type
+            @gapi.configuration.query.time_partitioning ||= \
+              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning.update! type: type
+          end
+
+          ##
+          # Sets the field on which to partition the destination table. If not
+          # set, the destination table is partitioned by pseudo column
+          # `_PARTITIONTIME`; if set, the table is partitioned by this field.
+          # See [Partitioned
+          # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+          #
+          # The destination table must also be partitioned. See
+          # {#time_partitioning_type=}.
+          #
+          # You can only set the partitioning field while creating a table.
+          # BigQuery does not allow you to change partitioning on an existing
+          # table.
+          #
+          # @param [String] field The partition field. The field must be a
+          #   top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or
+          #   REQUIRED.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   job = dataset.query_job "SELECT * FROM UNNEST(" \
+          #                           "GENERATE_TIMESTAMP_ARRAY(" \
+          #                           "'2018-10-01 00:00:00', " \
+          #                           "'2018-10-10 00:00:00', " \
+          #                           "INTERVAL 1 DAY)) AS dob" do |job|
+          #     job.time_partitioning_type  = "DAY"
+          #     job.time_partitioning_field = "dob"
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def time_partitioning_field= field
+            @gapi.configuration.query.time_partitioning ||= \
+              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning.update! field: field
+          end
+
+          ##
+          # Sets the partition expiration for the destination table. See
+          # [Partitioned
+          # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+          #
+          # The destination table must also be partitioned. See
+          # {#time_partitioning_type=}.
+          #
+          # @param [Integer] expiration An expiration time, in seconds,
+          #   for data in partitions.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   job = dataset.query_job "SELECT * FROM UNNEST(" \
+          #                           "GENERATE_TIMESTAMP_ARRAY(" \
+          #                           "'2018-10-01 00:00:00', " \
+          #                           "'2018-10-10 00:00:00', " \
+          #                           "INTERVAL 1 DAY)) AS dob" do |job|
+          #     job.time_partitioning_type = "DAY"
+          #     job.time_partitioning_expiration = 86_400
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def time_partitioning_expiration= expiration
+            @gapi.configuration.query.time_partitioning ||= \
+              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning.update! \
+              expiration_ms: expiration * 1000
+          end
+
+          ##
+          # If set to true, queries over the destination table will require a
+          # partition filter that can be used for partition elimination to be
+          # specified. See [Partitioned
+          # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
+          #
+          # @param [Boolean] val Indicates if queries over the destination table
+          #   will require a partition filter. The default value is `false`.
+          #
+          # @!group Attributes
+          #
+          def time_partitioning_require_filter= val
+            @gapi.configuration.query.time_partitioning ||= \
+              Google::Apis::BigqueryV2::TimePartitioning.new
+            @gapi.configuration.query.time_partitioning.update! \
+              require_partition_filter: val
           end
 
           ##

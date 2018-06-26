@@ -26,6 +26,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
+  let(:time_partitioning) { Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true }
 
   it "queries the data with default dataset option set" do
     mock = Minitest::Mock.new
@@ -95,6 +96,45 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.time_partitioning?.must_equal false
+    job.time_partitioning_type.must_be :nil?
+    job.time_partitioning_field.must_be :nil?
+    job.time_partitioning_expiration.must_be :nil?
+    job.time_partitioning_require_filter?.must_equal false
+  end
+
+  it "queries the data with time_partitioning options" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project,
+        dataset_id: dataset_id
+    )
+    job_gapi.configuration.query.destination_table = Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project,
+        dataset_id: dataset_id,
+        table_id:   table_id
+    )
+    job_gapi.configuration.query.time_partitioning = time_partitioning
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = dataset.query_job query, table: table do |job|
+      job.time_partitioning_type = "DAY"
+      job.time_partitioning_field = "dob"
+      job.time_partitioning_expiration = 86_400
+      job.time_partitioning_require_filter = true
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.time_partitioning?.must_equal true
+    job.time_partitioning_type.must_equal "DAY"
+    job.time_partitioning_field.must_equal "dob"
+    job.time_partitioning_expiration.must_equal 86_400
+    job.time_partitioning_require_filter?.must_equal true
   end
 
   it "queries the data with job_id option" do

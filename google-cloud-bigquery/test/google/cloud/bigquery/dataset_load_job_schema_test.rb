@@ -42,7 +42,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
         { mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [] },
         { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [] },
         { mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] }
+        { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] },
+        { mode: "REQUIRED", name: "dob", type: "TIMESTAMP", description: nil, fields: [] }
       ]
     }
   }
@@ -54,6 +55,9 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     gapi
   end
 
+  let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
+  let(:time_partitioning) { Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true }
+
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
     Google::Cloud::Storage::File.from_gapi gapi, storage.service
@@ -64,18 +68,37 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
-      [project, job_gapi]
+    job_gapi.configuration.load.schema_update_options = schema_update_options
+    job_gapi.configuration.load.time_partitioning = time_partitioning
+
+    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi.configuration.load.schema_update_options = schema_update_options
+    job_resp_gapi.configuration.load.time_partitioning = time_partitioning
+
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
     dataset.service.mocked_service = mock
 
-    job = dataset.load_job table_id, load_file, create: :needed do |schema|
-      schema.string "name", mode: :required
-      schema.integer "age"
-      schema.float "score", description: "A score from 0.0 to 10.0"
-      schema.boolean "active"
-      schema.bytes "avatar"
+    job = dataset.load_job table_id, load_file, create: :needed do |job|
+      job.schema.string "name", mode: :required
+      job.schema.integer "age"
+      job.schema.float "score", description: "A score from 0.0 to 10.0"
+      job.schema.boolean "active"
+      job.schema.bytes "avatar"
+      job.schema.timestamp "dob", mode: :required
+      job.schema_update_options = schema_update_options
+      job.time_partitioning_type = "DAY"
+      job.time_partitioning_field = "dob"
+      job.time_partitioning_expiration = 86_400
+      job.time_partitioning_require_filter = true
     end
+
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.schema_update_options.must_equal schema_update_options
+    job.time_partitioning?.must_equal true
+    job.time_partitioning_type.must_equal "DAY"
+    job.time_partitioning_field.must_equal "dob"
+    job.time_partitioning_expiration.must_equal 86_400
+    job.time_partitioning_require_filter?.must_equal true
 
     mock.verify
   end
@@ -95,9 +118,17 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     schema.float "score", description: "A score from 0.0 to 10.0"
     schema.boolean "active"
     schema.bytes "avatar"
+    schema.timestamp "dob", mode: :required
 
     job = dataset.load_job table_id, load_file, create: :needed, schema: schema
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.schema_update_options.must_be_kind_of Array
+    job.schema_update_options.must_be :empty?
+    job.time_partitioning?.must_equal false
+    job.time_partitioning_type.must_be :nil?
+    job.time_partitioning_field.must_be :nil?
+    job.time_partitioning_expiration.must_be :nil?
+    job.time_partitioning_require_filter?.must_equal false
 
     mock.verify
   end
@@ -107,8 +138,11 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
-      [project, job_gapi]
+    job_gapi.configuration.load.schema_update_options = schema_update_options
+
+    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi.configuration.load.schema_update_options = schema_update_options
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
     dataset.service.mocked_service = mock
 
     schema = bigquery.schema
@@ -119,8 +153,11 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.boolean "active"
       schema.bytes "avatar"
+      schema.timestamp "dob", mode: :required
+      schema.schema_update_options = schema_update_options
     end
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.schema_update_options.must_equal schema_update_options
 
     mock.verify
   end
