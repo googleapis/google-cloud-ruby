@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,15 +17,15 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/video_intelligence"
+require "google/cloud/video_intelligence/v1beta1"
 require "google/cloud/video_intelligence/v1beta1/video_intelligence_service_client"
 require "google/cloud/videointelligence/v1beta1/video_intelligence_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1beta1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1beta1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockVideoIntelligenceServiceCredentials < Google::Cloud::VideoIntelligence::Credentials
+class MockVideoIntelligenceServiceCredentials_v1beta1 < Google::Cloud::VideoIntelligence::V1beta1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient do
 
   describe 'annotate_video' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient#annotate_video."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClient#annotate_video."
 
     it 'invokes annotate_video without error' do
       # Create request parameters
@@ -95,14 +95,14 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
         assert_equal(features, request.features)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:annotate_video, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockVideoIntelligenceServiceCredentials.new("annotate_video")
+      mock_credentials = MockVideoIntelligenceServiceCredentials_v1beta1.new("annotate_video")
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
+        Google::Cloud::VideoIntelligence::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::VideoIntelligence::V1beta1.new
 
           # Call method
           response = client.annotate_video(input_uri, features)
@@ -136,14 +136,14 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
         assert_equal(features, request.features)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:annotate_video, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockVideoIntelligenceServiceCredentials.new("annotate_video")
+      mock_credentials = MockVideoIntelligenceServiceCredentials_v1beta1.new("annotate_video")
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
+        Google::Cloud::VideoIntelligence::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::VideoIntelligence::V1beta1.new
 
           # Call method
           response = client.annotate_video(input_uri, features)
@@ -168,14 +168,14 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
         assert_equal(features, request.features)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:annotate_video, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:annotate_video, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockVideoIntelligenceServiceCredentials.new("annotate_video")
+      mock_credentials = MockVideoIntelligenceServiceCredentials_v1beta1.new("annotate_video")
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::VideoIntelligence::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
+        Google::Cloud::VideoIntelligence::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::VideoIntelligence::V1beta1.new
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
