@@ -196,6 +196,12 @@ Google::Cloud.init_configuration
 Google::Cloud.warn_on_old_ruby_version
 
 # Auto-load all Google Cloud service gems.
-Gem.find_files("google-cloud-*.rb").each do |google_cloud_service|
+auto_load_files = if Gem.respond_to? :find_latest_files
+                    Gem.find_latest_files "google-cloud-*.rb"
+                  else
+                    # Ruby 2.0 does not have Gem.find_latest_files
+                    Gem.find_files "google-cloud-*.rb"
+                  end
+auto_load_files.each do |google_cloud_service|
   require google_cloud_service
 end
