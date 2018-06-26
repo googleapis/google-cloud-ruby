@@ -31,6 +31,9 @@ s.copy(v1_library / 'lib/google/cloud/video_intelligence/v1.rb')
 s.copy(v1_library / 'lib/google/cloud/videointelligence/v1')
 s.copy(v1_library / 'test/google/cloud/video_intelligence/v1')
 
+# Copy base module from the v1 library so v1 is the default
+s.copy(v1_library / 'lib/google/cloud/video_intelligence.rb')
+
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
