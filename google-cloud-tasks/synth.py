@@ -26,4 +26,4 @@ s.replace(
 	('gem.add_dependency "google-gax", "~> 1.0"' + "\n" + '  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"')
 )
 
-# Move credentials class under the v2beta2 module
+# lib/google/cloud/tasks/ Move Credentials class under the V2beta2 module
