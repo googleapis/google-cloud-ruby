@@ -215,8 +215,8 @@ module Google
           backtrace = exception.backtrace
           message = exception.message
 
-          if !backtrace.nil? && !backtrace.first.nil?
-            error_location = backtrace.first
+          unless backtrace.nil?
+            error_location = String backtrace.first
 
             message = "#{error_location}: #{message} (#{exception.class})\n\t" +
                       backtrace.drop(1).join("\n\t")

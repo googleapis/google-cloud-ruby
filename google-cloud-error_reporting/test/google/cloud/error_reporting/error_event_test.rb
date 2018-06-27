@@ -86,7 +86,7 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
       exception.set_backtrace([])
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_equal exception_message
+      error_event.message.must_match exception_message
     end
 
     it "includes exception message and backtrace if backtrace is available" do
