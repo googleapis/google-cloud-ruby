@@ -43,6 +43,11 @@ s.replace(
     'TRACE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON',
     'TRACE_CREDENTIALS_JSON TRACE_KEYFILE_JSON GOOGLE_CLOUD_CREDENTIALS_JSON GOOGLE_CLOUD_KEYFILE_JSON')
 
+# https://github.com/googleapis/gapic-generator/issues/2124
+s.replace(
+    'lib/google/cloud/trace/v1/credentials.rb',
+    'SCOPE = \[[^\]]+\]\.freeze',
+    'SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze')
 
 v2_library = gapic.ruby_library(
     'trace', 'v2',
@@ -64,3 +69,9 @@ s.replace(
     'lib/google/cloud/trace/v2/credentials.rb',
     'TRACE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON',
     'TRACE_CREDENTIALS_JSON TRACE_KEYFILE_JSON GOOGLE_CLOUD_CREDENTIALS_JSON GOOGLE_CLOUD_KEYFILE_JSON')
+
+# https://github.com/googleapis/gapic-generator/issues/2124
+s.replace(
+    'lib/google/cloud/trace/v2/credentials.rb',
+    'SCOPE = \[[^\]]+\]\.freeze',
+    'SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze')
