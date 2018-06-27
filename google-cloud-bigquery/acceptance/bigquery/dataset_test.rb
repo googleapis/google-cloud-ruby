@@ -170,7 +170,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   it "imports data from a local file and creates a new table with specified schema in a block with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
-    job = dataset.load_job "local_file_table", local_file, job_id: job_id do |job|
+    job = dataset.load_job "local_file_table_#{SecureRandom.hex(21)}", local_file, job_id: job_id do |job|
       job.schema.integer   "id",    description: "id description",    mode: :required
       job.schema.string    "breed", description: "breed description", mode: :required
       job.schema.string    "name",  description: "name description",  mode: :required
