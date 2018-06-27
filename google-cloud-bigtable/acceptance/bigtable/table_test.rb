@@ -99,4 +99,24 @@ describe "Instance Tables", :bigtable do
 
     column_families.find{|c| c.name == "cf2"}.must_be :nil?
   end
+
+  describe "replication consistency" do
+    before do
+      @table_id = "test-table-#{random_str}"
+      @table = instance.create_table(@table_id)
+    end
+
+    it "generate consistency token and check consistency" do
+      token = @table.generate_consistency_token
+      token.wont_be :nil?
+      result = @table.check_consistency(token)
+      [true, false].must_include result
+    end
+
+    it "generate consistency token and check consistency wail unitil complete" do
+      result = @table.wait_for_replication(timeout: 600, check_interval: 3)
+      [true, false].must_include result
+    end
+  end
+
 end

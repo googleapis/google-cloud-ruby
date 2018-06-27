@@ -422,6 +422,46 @@ module Google
           end
         end
 
+        # Generates a consistency token for a Table, which can be used in
+        # CheckConsistency to check whether mutations to the table that finished
+        # before this call started have been replicated. The tokens will be available
+        # for 90 days.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the Table for which to create a consistency token.
+        # @return [Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse]
+
+        def generate_consistency_token instance_id, table_id
+          execute do
+            tables.generate_consistency_token(
+              table_path(instance_id, table_id)
+            )
+          end
+        end
+
+        # Checks replication consistency based on a consistency token, that is, if
+        # replication has caught up based on the conditions specified in the token
+        # and the check request.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the Table for which to check replication consistency.
+        # @param token [String] Consistency token
+        #   The token created using GenerateConsistencyToken for the Table.
+        # @return [Google::Bigtable::Admin::V2::CheckConsistencyResponse]
+
+        def check_consistency instance_id, table_id, token
+          execute do
+            tables.check_consistency(
+              table_path(instance_id, table_id),
+              token
+            )
+          end
+        end
+
         # Creates an app profile within an instance.
         #
         # @param instance_id [String]
