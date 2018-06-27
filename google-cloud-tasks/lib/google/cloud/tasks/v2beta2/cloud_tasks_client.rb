@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/tasks/v2beta2/cloudtasks_pb"
-require "google/cloud/tasks/credentials"
+require "google/cloud/tasks/v2beta2/credentials"
 
 module Google
   module Cloud
