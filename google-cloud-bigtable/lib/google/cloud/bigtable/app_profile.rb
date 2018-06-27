@@ -184,7 +184,8 @@ module Google
         # Delete app profile.
         #
         # @param ignore_warnings [Boolean]
-        #   If true, ignore safety checks when deleting the app profile.
+        #   Default value is false. If true, ignore safety checks when deleting
+        #   the app profile.
         # @return [Boolean] Returns `true` if the app profile was deleted.
         #
         # @example
@@ -213,7 +214,8 @@ module Google
         # Update app profile.
         #
         # @param ignore_warnings [Boolean]
-        #   If true, ignore safety checks when updating the app profile.
+        #   Default value is false. If true, ignore safety checks when updating
+        #   the app profile.
         # @return [Google::Cloud::Bigtable::AppProfile::Job]
         #
         # @example Update
