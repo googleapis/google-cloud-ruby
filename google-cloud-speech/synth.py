@@ -66,3 +66,29 @@ s.replace(
     'lib/google/cloud/speech/v1.rb',
     'gs://gapic-toolkit/hello.flac',
     'gs://bucket-name/hello.flac')
+
+
+v1p1beta1_library = gapic.ruby_library(
+    'speech', 'v1p1beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-speech'
+)
+s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1')
+s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1.rb')
+
+# PERMANENT: Install partial gapics
+s.replace(
+    'lib/google/cloud/speech/v1p1beta1.rb',
+    'require "google/cloud/speech/v1p1beta1/speech_client"',
+    'require "google/cloud/speech/v1p1beta1/speech_client"\nrequire "google/cloud/speech/v1p1beta1/helpers"')
+
+# PERMANENT: Remove methods replaced by partial gapics
+s.replace(
+    'lib/google/cloud/speech/v1p1beta1/speech_client.rb',
+    '\n\n(\s{10}#[^\n]*\n)+\n*\s{10}def streaming_recognize[^\n]+\n(\s{12}[^\n]+\n+)+\s{10}end\n',
+    '\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2122
+s.replace(
+    'lib/google/cloud/speech/v1p1beta1.rb',
+    'gs://gapic-toolkit/hello.flac',
+    'gs://bucket-name/hello.flac')

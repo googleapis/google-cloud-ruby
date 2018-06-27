@@ -46,6 +46,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           # The scopes needed to make gRPC calls to all of the methods defined in
@@ -56,6 +59,7 @@ module Google
 
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = SpeechClient::SERVICE_ADDRESS
+            self::GRPC_INTERCEPTORS = SpeechClient::GRPC_INTERCEPTORS
           end
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -157,6 +161,7 @@ module Google
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @speech_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -164,6 +169,7 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Speech::V1p1beta1::Speech::Stub.method(:new)
             )
 
