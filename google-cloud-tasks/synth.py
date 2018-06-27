@@ -14,3 +14,4 @@ v1_library = gapic.ruby_library(
 
 s.copy(v1_library / 'lib')
 s.copy(v1_library / 'test')
+s.copy(v1_libary / 'README.md')
