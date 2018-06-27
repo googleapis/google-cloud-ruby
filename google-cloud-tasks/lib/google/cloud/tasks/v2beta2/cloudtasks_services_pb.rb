@@ -147,11 +147,6 @@ module Google
             rpc :GetTask, GetTaskRequest, Task
             # Creates a task and adds it to a queue.
             #
-            # To add multiple tasks at the same time, use
-            # [HTTP batching](/storage/docs/json_api/v1/how-tos/batch)
-            # or the batching documentation for your client library, for example
-            # https://developers.google.com/api-client-library/python/guide/batch.
-            #
             # Tasks cannot be updated after creation; there is no UpdateTask command.
             #
             # * For [App Engine queues](google.cloud.tasks.v2beta2.AppEngineHttpTarget),
@@ -201,11 +196,6 @@ module Google
             # by a later [LeaseTasks][google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks],
             # [GetTask][google.cloud.tasks.v2beta2.CloudTasks.GetTask], or
             # [ListTasks][google.cloud.tasks.v2beta2.CloudTasks.ListTasks].
-            #
-            # To acknowledge multiple tasks at the same time, use
-            # [HTTP batching](/storage/docs/json_api/v1/how-tos/batch)
-            # or the batching documentation for your client library, for example
-            # https://developers.google.com/api-client-library/python/guide/batch.
             rpc :AcknowledgeTask, AcknowledgeTaskRequest, Google::Protobuf::Empty
             # Renew the current lease of a pull task.
             #

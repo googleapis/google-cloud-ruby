@@ -12,19 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "googleauth"
-
 module Google
-  module Cloud
-    module Tasks
-      class Credentials < Google::Auth::Credentials
-        SCOPE = [
-          "https://www.googleapis.com/auth/cloud-platform"
-        ].freeze
-        PATH_ENV_VARS = %w(CLOUDTASKS_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(CLOUDTASKS_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
-        DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
-      end
-    end
+  module Protobuf
+    # A generic empty message that you can re-use to avoid defining duplicated
+    # empty messages in your APIs. A typical example is to use it as the request
+    # or the response type of an API method. For instance:
+    #
+    #     service Foo {
+    #       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+    #     }
+    #
+    # The JSON representation for +Empty+ is empty JSON object +{}+.
+    class Empty; end
   end
 end

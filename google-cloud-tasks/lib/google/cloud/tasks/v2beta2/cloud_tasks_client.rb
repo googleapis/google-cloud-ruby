@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/tasks/v2beta2/cloudtasks_pb"
-require "google/cloud/tasks/credentials"
+require "google/cloud/tasks/v2beta2/credentials"
 
 module Google
   module Cloud
@@ -44,6 +44,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -67,6 +70,12 @@ module Google
           ].freeze
 
 
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
+
           LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}"
           )
@@ -84,6 +93,15 @@ module Google
           )
 
           private_constant :TASK_PATH_TEMPLATE
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
 
           # Returns a fully-qualified location resource name string.
           # @param project [String]
@@ -148,11 +166,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -161,10 +186,10 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/tasks/v2beta2/cloudtasks_services_pb"
 
-            credentials ||= Google::Cloud::Tasks::Credentials.default
+            credentials ||= Google::Cloud::Tasks::V2beta2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Tasks::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Tasks::V2beta2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -188,6 +213,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "cloud_tasks_client_config.json"
             )
@@ -200,13 +226,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @cloud_tasks_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -214,88 +241,169 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.method(:new)
             )
 
             @list_queues = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:list_queues),
-              defaults["list_queues"]
+              defaults["list_queues"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_queue = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:get_queue),
-              defaults["get_queue"]
+              defaults["get_queue"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_queue = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:create_queue),
-              defaults["create_queue"]
+              defaults["create_queue"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_queue = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:update_queue),
-              defaults["update_queue"]
+              defaults["update_queue"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'queue.name' => request.queue.name}
+              end
             )
             @delete_queue = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:delete_queue),
-              defaults["delete_queue"]
+              defaults["delete_queue"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @purge_queue = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:purge_queue),
-              defaults["purge_queue"]
+              defaults["purge_queue"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @pause_queue = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:pause_queue),
-              defaults["pause_queue"]
+              defaults["pause_queue"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @resume_queue = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:resume_queue),
-              defaults["resume_queue"]
+              defaults["resume_queue"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_iam_policy = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:get_iam_policy),
-              defaults["get_iam_policy"]
+              defaults["get_iam_policy"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @set_iam_policy = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:set_iam_policy),
-              defaults["set_iam_policy"]
+              defaults["set_iam_policy"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @test_iam_permissions = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:test_iam_permissions),
-              defaults["test_iam_permissions"]
+              defaults["test_iam_permissions"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @list_tasks = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:list_tasks),
-              defaults["list_tasks"]
+              defaults["list_tasks"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_task = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:get_task),
-              defaults["get_task"]
+              defaults["get_task"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_task = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:create_task),
-              defaults["create_task"]
+              defaults["create_task"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @delete_task = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:delete_task),
-              defaults["delete_task"]
+              defaults["delete_task"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @lease_tasks = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:lease_tasks),
-              defaults["lease_tasks"]
+              defaults["lease_tasks"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @acknowledge_task = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:acknowledge_task),
-              defaults["acknowledge_task"]
+              defaults["acknowledge_task"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @renew_lease = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:renew_lease),
-              defaults["renew_lease"]
+              defaults["renew_lease"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @cancel_lease = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:cancel_lease),
-              defaults["cancel_lease"]
+              defaults["cancel_lease"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @run_task = Google::Gax.create_api_call(
               @cloud_tasks_stub.method(:run_task),
-              defaults["run_task"]
+              defaults["run_task"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
           end
 
@@ -330,6 +438,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Queue>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Queue>]
           #   An enumerable of Google::Cloud::Tasks::V2beta2::Queue instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -359,14 +470,15 @@ module Google
               parent,
               filter: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               filter: filter,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::ListQueuesRequest)
-            @list_queues.call(req, options)
+            @list_queues.call(req, options, &block)
           end
 
           # Gets a queue.
@@ -379,6 +491,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Queue]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -390,12 +505,13 @@ module Google
 
           def get_queue \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::GetQueueRequest)
-            @get_queue.call(req, options)
+            @get_queue.call(req, options, &block)
           end
 
           # Creates a queue.
@@ -430,6 +546,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Queue]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -445,13 +564,14 @@ module Google
           def create_queue \
               parent,
               queue,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               queue: queue
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::CreateQueueRequest)
-            @create_queue.call(req, options)
+            @create_queue.call(req, options, &block)
           end
 
           # Updates a queue.
@@ -490,6 +610,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Queue]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -504,13 +627,14 @@ module Google
           def update_queue \
               queue,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               queue: queue,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::UpdateQueueRequest)
-            @update_queue.call(req, options)
+            @update_queue.call(req, options, &block)
           end
 
           # Deletes a queue.
@@ -534,6 +658,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/tasks/v2beta2"
@@ -544,12 +671,13 @@ module Google
 
           def delete_queue \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::DeleteQueueRequest)
-            @delete_queue.call(req, options)
+            @delete_queue.call(req, options, &block)
             nil
           end
 
@@ -568,6 +696,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Queue]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -579,12 +710,13 @@ module Google
 
           def purge_queue \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::PurgeQueueRequest)
-            @purge_queue.call(req, options)
+            @purge_queue.call(req, options, &block)
           end
 
           # Pauses the queue.
@@ -603,6 +735,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Queue]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -614,12 +749,13 @@ module Google
 
           def pause_queue \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::PauseQueueRequest)
-            @pause_queue.call(req, options)
+            @pause_queue.call(req, options, &block)
           end
 
           # Resume a queue.
@@ -643,6 +779,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Queue]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -654,12 +793,13 @@ module Google
 
           def resume_queue \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::ResumeQueueRequest)
-            @resume_queue.call(req, options)
+            @resume_queue.call(req, options, &block)
           end
 
           # Gets the access control policy for a {Google::Cloud::Tasks::V2beta2::Queue Queue}.
@@ -678,6 +818,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Iam::V1::Policy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -689,12 +832,13 @@ module Google
 
           def get_iam_policy \
               resource,
-              options: nil
+              options: nil,
+              &block
             req = {
               resource: resource
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::GetIamPolicyRequest)
-            @get_iam_policy.call(req, options)
+            @get_iam_policy.call(req, options, &block)
           end
 
           # Sets the access control policy for a {Google::Cloud::Tasks::V2beta2::Queue Queue}. Replaces any existing
@@ -722,6 +866,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Iam::V1::Policy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -737,13 +884,14 @@ module Google
           def set_iam_policy \
               resource,
               policy,
-              options: nil
+              options: nil,
+              &block
             req = {
               resource: resource,
               policy: policy
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::SetIamPolicyRequest)
-            @set_iam_policy.call(req, options)
+            @set_iam_policy.call(req, options, &block)
           end
 
           # Returns permissions that a caller has on a {Google::Cloud::Tasks::V2beta2::Queue Queue}.
@@ -766,6 +914,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Iam::V1::TestIamPermissionsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Iam::V1::TestIamPermissionsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -781,13 +932,14 @@ module Google
           def test_iam_permissions \
               resource,
               permissions,
-              options: nil
+              options: nil,
+              &block
             req = {
               resource: resource,
               permissions: permissions
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
-            @test_iam_permissions.call(req, options)
+            @test_iam_permissions.call(req, options, &block)
           end
 
           # Lists the tasks in a queue.
@@ -829,6 +981,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Task>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Task>]
           #   An enumerable of Google::Cloud::Tasks::V2beta2::Task instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -859,7 +1014,8 @@ module Google
               response_view: nil,
               order_by: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               response_view: response_view,
@@ -867,7 +1023,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::ListTasksRequest)
-            @list_tasks.call(req, options)
+            @list_tasks.call(req, options, &block)
           end
 
           # Gets a task.
@@ -893,6 +1049,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Task]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -905,21 +1064,17 @@ module Google
           def get_task \
               name,
               response_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               response_view: response_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::GetTaskRequest)
-            @get_task.call(req, options)
+            @get_task.call(req, options, &block)
           end
 
           # Creates a task and adds it to a queue.
-          #
-          # To add multiple tasks at the same time, use
-          # [HTTP batching](https://cloud.google.com/storage/docs/json_api/v1/how-tos/batch)
-          # or the batching documentation for your client library, for example
-          # https://developers.google.com/api-client-library/python/guide/batch.
           #
           # Tasks cannot be updated after creation; there is no UpdateTask command.
           #
@@ -989,6 +1144,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Task]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -1005,14 +1163,15 @@ module Google
               parent,
               task,
               response_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               task: task,
               response_view: response_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::CreateTaskRequest)
-            @create_task.call(req, options)
+            @create_task.call(req, options, &block)
           end
 
           # Deletes a task.
@@ -1029,6 +1188,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/tasks/v2beta2"
@@ -1039,12 +1201,13 @@ module Google
 
           def delete_task \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::DeleteTaskRequest)
-            @delete_task.call(req, options)
+            @delete_task.call(req, options, &block)
             nil
           end
 
@@ -1089,8 +1252,12 @@ module Google
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param max_tasks [Integer]
-          #   The maximum number of tasks to lease. The maximum that can be
-          #   requested is 1000.
+          #   The maximum number of tasks to lease.
+          #
+          #   The system will make a best effort to return as close to as
+          #   +max_tasks+ as possible.
+          #
+          #   The largest that +max_tasks+ can be is 1000.
           # @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
           #   returned.
@@ -1137,6 +1304,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -1155,7 +1325,8 @@ module Google
               max_tasks: nil,
               response_view: nil,
               filter: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               lease_duration: lease_duration,
@@ -1164,7 +1335,7 @@ module Google
               filter: filter
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::LeaseTasksRequest)
-            @lease_tasks.call(req, options)
+            @lease_tasks.call(req, options, &block)
           end
 
           # Acknowledges a pull task.
@@ -1180,11 +1351,6 @@ module Google
           # by a later {Google::Cloud::Tasks::V2beta2::CloudTasks::LeaseTasks LeaseTasks},
           # {Google::Cloud::Tasks::V2beta2::CloudTasks::GetTask GetTask}, or
           # {Google::Cloud::Tasks::V2beta2::CloudTasks::ListTasks ListTasks}.
-          #
-          # To acknowledge multiple tasks at the same time, use
-          # [HTTP batching](https://cloud.google.com/storage/docs/json_api/v1/how-tos/batch)
-          # or the batching documentation for your client library, for example
-          # https://developers.google.com/api-client-library/python/guide/batch.
           #
           # @param name [String]
           #   Required.
@@ -1204,6 +1370,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/tasks/v2beta2"
@@ -1218,13 +1387,14 @@ module Google
           def acknowledge_task \
               name,
               schedule_time,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               schedule_time: schedule_time
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest)
-            @acknowledge_task.call(req, options)
+            @acknowledge_task.call(req, options, &block)
             nil
           end
 
@@ -1275,6 +1445,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Task]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -1295,7 +1468,8 @@ module Google
               schedule_time,
               lease_duration,
               response_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               schedule_time: schedule_time,
@@ -1303,7 +1477,7 @@ module Google
               response_view: response_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::RenewLeaseRequest)
-            @renew_lease.call(req, options)
+            @renew_lease.call(req, options, &block)
           end
 
           # Cancel a pull task's lease.
@@ -1344,6 +1518,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Task]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -1360,14 +1537,15 @@ module Google
               name,
               schedule_time,
               response_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               schedule_time: schedule_time,
               response_view: response_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::CancelLeaseRequest)
-            @cancel_lease.call(req, options)
+            @cancel_lease.call(req, options, &block)
           end
 
           # Forces a task to run now.
@@ -1419,6 +1597,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::Task]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -1431,13 +1612,14 @@ module Google
           def run_task \
               name,
               response_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               response_view: response_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::RunTaskRequest)
-            @run_task.call(req, options)
+            @run_task.call(req, options, &block)
           end
         end
       end

@@ -19,6 +19,8 @@ module Google
         # A unit of scheduled work.
         # @!attribute [rw] name
         #   @return [String]
+        #     Optionally caller-specified in {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateTask CreateTask}.
+        #
         #     The task name.
         #
         #     The task name must have the following format:
@@ -36,8 +38,6 @@ module Google
         #       hyphens (-). The maximum length is 100 characters.
         #     * +TASK_ID+ can contain only letters ([A-Za-z]), numbers ([0-9]),
         #       hyphens (-), or underscores (_). The maximum length is 500 characters.
-        #
-        #     Optionally caller-specified in {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateTask CreateTask}.
         # @!attribute [rw] app_engine_http_request
         #   @return [Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest]
         #     App Engine HTTP request that is sent to the task's target. Can

@@ -21,6 +21,9 @@ module Google
         # retry options, target types, and others.
         # @!attribute [rw] name
         #   @return [String]
+        #     Caller-specified and required in {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateQueue CreateQueue},
+        #     after which it becomes output only.
+        #
         #     The queue name.
         #
         #     The queue name must have the following format:
@@ -36,9 +39,6 @@ module Google
         #       For more information, see https://cloud.google.com/about/locations/.
         #     * +QUEUE_ID+ can contain letters ([A-Za-z]), numbers ([0-9]), or
         #       hyphens (-). The maximum length is 100 characters.
-        #
-        #     Caller-specified and required in {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateQueue CreateQueue},
-        #     after which it becomes output only.
         # @!attribute [rw] app_engine_http_target
         #   @return [Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget]
         #     App Engine HTTP target.

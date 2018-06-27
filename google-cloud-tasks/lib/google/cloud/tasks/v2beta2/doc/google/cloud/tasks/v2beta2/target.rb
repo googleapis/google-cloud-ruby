@@ -207,7 +207,7 @@ module Google
         #     App service.
         #
         #     By default, the task is sent to the service which is the default
-        #     service when the task is attempted ("default").
+        #     service when the task is attempted.
         #
         #     For some queues or tasks which were created using the App Engine
         #     Task Queue API, {Google::Cloud::Tasks::V2beta2::AppEngineRouting#host host} is not parsable
@@ -225,7 +225,7 @@ module Google
         #     App version.
         #
         #     By default, the task is sent to the version which is the default
-        #     version when the task is attempted ("default").
+        #     version when the task is attempted.
         #
         #     For some queues or tasks which were created using the App Engine
         #     Task Queue API, {Google::Cloud::Tasks::V2beta2::AppEngineRouting#host host} is not parsable
@@ -306,12 +306,6 @@ module Google
         #     If {Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance instance} is empty, then the task
         #     will be sent to an instance which is available when the task is
         #     attempted.
-        #
-        #     When {Google::Cloud::Tasks::V2beta2::AppEngineRouting#service service} is "default",
-        #     {Google::Cloud::Tasks::V2beta2::AppEngineRouting#version version} is "default", and
-        #     {Google::Cloud::Tasks::V2beta2::AppEngineRouting#instance instance} is empty,
-        #     {Google::Cloud::Tasks::V2beta2::AppEngineRouting#host host} is shortened to just the
-        #     +application_domain_name+.
         #
         #     If {Google::Cloud::Tasks::V2beta2::AppEngineRouting#service service},
         #     {Google::Cloud::Tasks::V2beta2::AppEngineRouting#version version}, or
