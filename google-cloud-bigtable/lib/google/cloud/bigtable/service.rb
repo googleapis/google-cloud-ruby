@@ -422,6 +422,113 @@ module Google
           end
         end
 
+        # Creates an app profile within an instance.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance.
+        # @param app_profile_id [String]
+        #   The ID to be used when referring to the new app profile within its
+        #   instance, e.g., +myprofile+
+        # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
+        #   The app profile to be created.
+        #   Fields marked +OutputOnly+ will be ignored.
+        #   A hash of the same form as `Google::Bigtable::Admin::V2::AppProfile`
+        #   can also be provided.
+        # @param ignore_warnings [Boolean]
+        #   If true, ignore safety checks when creating the app profile.
+        # @return [Google::Bigtable::Admin::V2::AppProfile]
+
+        def create_app_profile \
+            instance_id,
+            app_profile_id,
+            app_profile,
+            ignore_warnings: nil
+          execute do
+            instances.create_app_profile(
+              instance_path(instance_id),
+              app_profile_id,
+              app_profile,
+              ignore_warnings: ignore_warnings
+            )
+          end
+        end
+
+        # Gets information about an app profile.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance.
+        # @param app_profile_id [String]
+        #   The unique Id of the requested app profile.
+        # @return [Google::Bigtable::Admin::V2::AppProfile]
+
+        def get_app_profile instance_id, app_profile_id
+          execute do
+            instances.get_app_profile(
+              app_profile_path(instance_id, app_profile_id)
+            )
+          end
+        end
+
+        # Lists information about app profiles in an instance.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instanc
+        # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::AppProfile>]
+        #   An enumerable of Google::Bigtable::Admin::V2::AppProfile instances.
+        #   See Google::Gax::PagedEnumerable documentation for other
+        #   operations such as per-page iteration or access to the response
+        #   object.
+        def list_app_profiles instance_id
+          execute do
+            instances.list_app_profiles(
+              instance_path(instance_id)
+            )
+          end
+        end
+
+        # Updates an app profile within an instance.
+        #
+        # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
+        #   The app profile which will (partially) replace the current value.
+        #   A hash of the same form as `Google::Bigtable::Admin::V2::AppProfile`
+        #   can also be provided.
+        # @param update_mask [Google::Protobuf::FieldMask | Hash]
+        #   The subset of app profile fields which should be replaced.
+        #   If unset, all fields will be replaced.
+        #   A hash of the same form as `Google::Protobuf::FieldMask`
+        #   can also be provided.
+        # @param ignore_warnings [Boolean]
+        #   If true, ignore safety checks when updating the app profile.
+        # @return [Google::Longrunning::Operation]
+
+        def update_app_profile app_profile, update_mask, ignore_warnings: nil
+          execute do
+            instances.update_app_profile(
+              app_profile,
+              update_mask,
+              ignore_warnings: ignore_warnings
+            )
+          end
+        end
+
+        # Deletes an app profile from an instance.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance.
+        # @param app_profile_id [String]
+        #   The unique Id of the app profile to be deleted.
+        # @param ignore_warnings [Boolean]
+        #   If true, ignore safety checks when deleting the app profile.
+
+        def delete_app_profile instance_id, app_profile_id, ignore_warnings: nil
+          execute do
+            instances.delete_app_profile(
+              app_profile_path(instance_id, app_profile_id),
+              ignore_warnings
+            )
+          end
+        end
+
         # Execute api call and wrap errors to {Google::Cloud::Error}
         #
         # @raise [Google::Cloud::Error]

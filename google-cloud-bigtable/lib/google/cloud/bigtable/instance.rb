@@ -19,6 +19,7 @@ require "google/cloud/bigtable/instance/job"
 require "google/cloud/bigtable/instance/list"
 require "google/cloud/bigtable/instance/cluster_map"
 require "google/cloud/bigtable/table"
+require "google/cloud/bigtable/app_profile"
 
 module Google
   module Cloud
@@ -572,6 +573,175 @@ module Google
             initial_splits: initial_splits,
             &block
           )
+        end
+
+        # Create app profile of instance with routing policy.
+        # Only one routing policy can applied to app profile. It can be
+        # multi cluster routing or single cluster routing
+        #
+        # @param name [String] Unique Id of the app profile
+        # @param routing_policy [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting | Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
+        #   The routing policy for all read/write requests which use this app profile.
+        #   A value must be explicitly set.
+        #
+        #   Routing Policies:
+        #   * `multi_cluster_routing` - Read/write requests may be routed to any
+        #     cluster in the instance, and will fail over to another cluster in the event
+        #     of transient errors or delays. Choosing this option sacrifices
+        #     read-your-writes consistency to improve availability.
+        #   * `single_cluster_routing` - Unconditionally routes all read/write requests
+        #     to a specific cluster. This option preserves read-your-writes consistency,
+        #     but does not improve availability.
+        #     Value contain `cluster_id` and optional field `allow_transactional_writes`.
+        # @param description [String] Description of the use case for this AppProfile
+        # @param etag [String]
+        #   Strongly validated etag for optimistic concurrency control. Preserve the
+        #   value returned from `GetAppProfile` when calling `UpdateAppProfile` to
+        #   fail the request if there has been a modification in the mean time. The
+        #   `update_mask` of the request need not include `etag` for this protection
+        #   to apply.
+        #   See [Wikipedia](https://en.wikipedia.org/wiki/HTTP_ETag) and
+        #   [RFC 7232](https://tools.ietf.org/html/rfc7232#section-2.3) for more details.
+        # @param ignore_warnings [Boolean]
+        #   If true, ignore safety checks when creating the app profile.
+        #   Default value is `false`
+        # @return [Google::Cloud::Bigtable::AppProfile]
+        #
+        # @example Create app profile with single cluster routing policy
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
+        #     "my-instance-cluster-1"
+        #     allow_transactional_writes: true
+        #   )
+        #
+        #   app_profile = instance.create_app_profile(
+        #     "my-app-profile",
+        #     routing_policy: routing_policy,
+        #     description: "App profile for user data instance"
+        #   )
+        #   puts app_profile.name
+        #
+        # @example Create app profile with multi cluster routing policy
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+        #
+        #   app_profile = instance.create_app_profile(
+        #     "my-app-profile",
+        #     routing_policy,
+        #     description: "App profile for user data instance"
+        #   )
+        #   puts app_profile.name
+        #
+        # @example Create app profile and ignore warnings.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
+        #
+        #   app_profile = instance.create_app_profile(
+        #     "my-app-profile",
+        #     routing_policy,
+        #     description: "App profile for user data instance",
+        #     ignore_warnings: true
+        #   )
+        #   puts app_profile.name
+
+        def create_app_profile \
+            name,
+            routing_policy,
+            description: nil,
+            etag: nil,
+            ignore_warnings: false
+          ensure_service!
+
+          if routing_policy.is_a?(Google::Bigtable::Admin::V2::AppProfile:: \
+              MultiClusterRoutingUseAny)
+            multi_cluster_routing = routing_policy
+          else
+            single_cluster_routing = routing_policy
+          end
+
+          app_profile_attrs = {
+            multi_cluster_routing_use_any: multi_cluster_routing,
+            single_cluster_routing: single_cluster_routing,
+            description: description,
+            etag: etag
+          }.delete_if { |_, v| v.nil? }
+
+          grpc = service.create_app_profile(
+            instance_id,
+            name,
+            Google::Bigtable::Admin::V2::AppProfile.new(app_profile_attrs),
+            ignore_warnings: ignore_warnings
+          )
+          AppProfile.from_grpc(grpc, service)
+        end
+
+        # Get app profile.
+        #
+        #  See to delete app_profile {Google::Cloud::Bigtable::AppProfile#delete} and update
+        #  app_profile {Google::Cloud::Bigtable::AppProfile#save}.
+        #
+        # @param app_profile_id [String] The unique name of the requested app profile.
+        # @return [Google::Cloud::Bigtable::AppProfile, nil]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   app_profile = instance.app_profile("my-app-profile")
+        #
+        #   if app_profile
+        #     puts app_profile.name
+        #   end
+
+        def app_profile app_profile_id
+          ensure_service!
+          grpc = service.get_app_profile(instance_id, app_profile_id)
+          AppProfile.from_grpc(grpc, service)
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        # List all app profiles
+        #
+        #  See to delete app_profile {Google::Cloud::Bigtable::AppProfile#delete} and update
+        #  app_profile {Google::Cloud::Bigtable::AppProfile#save}.
+        #
+        # @return [Array<Google::Cloud::Bigtable::AppProfile>]
+        #  (See {Google::Cloud::Bigtable::AppProfile::List})
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   instance.app_profiles.all do |app_profile|
+        #     puts app_profile.name
+        #   end
+
+        def app_profiles
+          ensure_service!
+          grpc = service.list_app_profiles(instance_id)
+          AppProfile::List.from_grpc(grpc, service)
         end
 
         # @private
