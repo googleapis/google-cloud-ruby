@@ -2172,10 +2172,10 @@ module Google
 
         ##
         # @private New Table from a Google API Client object.
-        def self.from_gapi gapi, conn
+        def self.from_gapi gapi, service
           new.tap do |f|
             f.gapi = gapi
-            f.service = conn
+            f.service = service
           end
         end
 
@@ -2191,6 +2191,15 @@ module Google
             )
             b.service = service
             b.instance_variable_set :@reference, reference_gapi
+          end
+        end
+
+        ##
+        # @private New lazy Table object from a Google API Client object.
+        def self.new_reference_from_gapi gapi, service
+          new.tap do |b|
+            b.service = service
+            b.instance_variable_set :@reference, gapi
           end
         end
 

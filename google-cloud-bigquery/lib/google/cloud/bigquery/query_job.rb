@@ -148,13 +148,14 @@ module Google
         #   `false` otherwise.
         #
         def cache_hit?
+          return false unless @gapi.statistics.query
           @gapi.statistics.query.cache_hit
         end
 
         ##
         # The number of bytes processed by the query.
         #
-        # @return [Integer] Total bytes processed for the job.
+        # @return [Integer, nil] Total bytes processed for the job.
         #
         def bytes_processed
           Integer @gapi.statistics.query.total_bytes_processed
@@ -165,8 +166,8 @@ module Google
         ##
         # Describes the execution plan for the query.
         #
-        # @return [Array<Google::Cloud::Bigquery::QueryJob::Stage>] An array
-        #   containing the stages of the execution plan.
+        # @return [Array<Google::Cloud::Bigquery::QueryJob::Stage>, nil] An
+        #   array containing the stages of the execution plan.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -188,10 +189,68 @@ module Google
         #   end
         #
         def query_plan
-          return nil unless @gapi.statistics.query.query_plan
+          return nil unless @gapi.statistics.query &&
+                            @gapi.statistics.query.query_plan
           Array(@gapi.statistics.query.query_plan).map do |stage|
             Stage.from_gapi stage
           end
+        end
+
+        ##
+        # The type of query statement, if valid. Possible values (new values
+        # might be added in the future):
+        #
+        # * "SELECT": `SELECT` query.
+        # * "INSERT": `INSERT` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
+        # * "UPDATE": `UPDATE` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
+        # * "DELETE": `DELETE` query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
+        # * "CREATE_TABLE": `CREATE [OR REPLACE] TABLE` without `AS SELECT`.
+        # * "CREATE_TABLE_AS_SELECT": `CREATE [OR REPLACE] TABLE ... AS SELECT`.
+        # * "DROP_TABLE": `DROP TABLE` query.
+        # * "CREATE_VIEW": `CREATE [OR REPLACE] VIEW ... AS SELECT ...`.
+        # * "DROP_VIEW": `DROP VIEW` query.
+        #
+        # @return [String, nil] The type of query statement.
+        #
+        def statement_type
+          return nil unless @gapi.statistics.query
+          @gapi.statistics.query.statement_type
+        end
+
+        ##
+        # The DDL operation performed, possibly dependent on the pre-existence
+        # of the DDL target. (See {#ddl_target_table}.) Possible values (new
+        # values might be added in the future):
+        #
+        # * "CREATE": The query created the DDL target.
+        # * "SKIP": No-op. Example cases: the query is
+        #   `CREATE TABLE IF NOT EXISTS` while the table already exists, or the
+        #   query is `DROP TABLE IF EXISTS` while the table does not exist.
+        # * "REPLACE": The query replaced the DDL target. Example case: the
+        #   query is `CREATE OR REPLACE TABLE`, and the table already exists.
+        # * "DROP": The query deleted the DDL target.
+        #
+        # @return [String, nil] The DDL operation performed.
+        #
+        def ddl_operation_performed
+          return nil unless @gapi.statistics.query
+          @gapi.statistics.query.ddl_operation_performed
+        end
+
+        ##
+        # The DDL target table, in reference state. (See {Table#reference?}.)
+        # Present only for `CREATE/DROP TABLE/VIEW` queries. (See
+        # {#statement_type}.)
+        #
+        # @return [Google::Cloud::Bigquery::Table, nil] The DDL target table, in
+        #   reference state.
+        #
+        def ddl_target_table
+          return nil unless @gapi.statistics.query
+          ensure_service!
+          table = @gapi.statistics.query.ddl_target_table
+          return nil unless table
+          Google::Cloud::Bigquery::Table.new_reference_from_gapi table, service
         end
 
         ##
