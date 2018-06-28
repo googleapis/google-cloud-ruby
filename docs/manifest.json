@@ -504,8 +504,9 @@
       "name": "google-cloud-tasks",
       "defaultService": "google/cloud/tasks",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
