@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.2 / 2018-06-28
+
+* Use Kubernetes Engine names.
+  * Alias old method names for backwards compatibility.
+* Handle EHOSTDOWN error when connecting to env.
+
 ### 1.0.1 / 2017-07-11
 
 * Update gem spec homepage links.
