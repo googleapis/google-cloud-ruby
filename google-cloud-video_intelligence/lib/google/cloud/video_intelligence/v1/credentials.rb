@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,16 +17,15 @@ require "googleauth"
 module Google
   module Cloud
     module VideoIntelligence
-      ##
-      # @deprecated Use version-specific credentials classes
-      #
-      class Credentials < Google::Auth::Credentials
-        SCOPE = [
-          "https://www.googleapis.com/auth/cloud-platform"
-        ].freeze
-        PATH_ENV_VARS = %w(VIDEO_INTELLIGENCE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(VIDEO_INTELLIGENCE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
-        DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+      module V1
+        class Credentials < Google::Auth::Credentials
+          SCOPE = [
+            "https://www.googleapis.com/auth/cloud-platform"
+          ].freeze
+          PATH_ENV_VARS = %w(VIDEO_INTELLIGENCE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
+          JSON_ENV_VARS = %w(VIDEO_INTELLIGENCE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
+          DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+        end
       end
     end
   end

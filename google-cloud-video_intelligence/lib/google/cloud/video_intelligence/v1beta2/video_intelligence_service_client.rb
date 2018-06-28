@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -30,7 +27,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/videointelligence/v1beta2/video_intelligence_pb"
-require "google/cloud/video_intelligence/credentials"
+require "google/cloud/video_intelligence/v1beta2/credentials"
 
 module Google
   module Cloud
@@ -49,6 +46,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           # The scopes needed to make gRPC calls to all of the methods defined in
@@ -58,7 +58,8 @@ module Google
           ].freeze
 
           class OperationsClient < Google::Longrunning::OperationsClient
-            SERVICE_ADDRESS = SERVICE_ADDRESS
+            self::SERVICE_ADDRESS = VideoIntelligenceServiceClient::SERVICE_ADDRESS
+            self::GRPC_INTERCEPTORS = VideoIntelligenceServiceClient::GRPC_INTERCEPTORS
           end
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -85,11 +86,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -98,7 +106,7 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/videointelligence/v1beta2/video_intelligence_services_pb"
 
-            credentials ||= Google::Cloud::VideoIntelligence::Credentials.default
+            credentials ||= Google::Cloud::VideoIntelligence::V1beta2::Credentials.default
 
             @operations_client = OperationsClient.new(
               credentials: credentials,
@@ -110,7 +118,7 @@ module Google
             )
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::VideoIntelligence::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::VideoIntelligence::V1beta2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -134,6 +142,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "video_intelligence_service_client_config.json"
             )
@@ -145,13 +154,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @video_intelligence_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -159,12 +169,14 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Videointelligence::V1beta2::VideoIntelligenceService::Stub.method(:new)
             )
 
             @annotate_video = Google::Gax.create_api_call(
               @video_intelligence_service_stub.method(:annotate_video),
-              defaults["annotate_video"]
+              defaults["annotate_video"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -216,9 +228,12 @@ module Google
           #   require "google/cloud/video_intelligence/v1beta2"
           #
           #   video_intelligence_service_client = Google::Cloud::VideoIntelligence::V1beta2.new
+          #   input_uri = "gs://demomaker/cat.mp4"
+          #   features_element = :LABEL_DETECTION
+          #   features = [features_element]
           #
           #   # Register a callback during the method call.
-          #   operation = video_intelligence_service_client.annotate_video do |op|
+          #   operation = video_intelligence_service_client.annotate_video(input_uri: input_uri, features: features) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.

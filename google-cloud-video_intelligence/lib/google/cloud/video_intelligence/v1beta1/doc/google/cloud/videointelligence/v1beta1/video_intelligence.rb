@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [VideoIntelligenceServiceClient][] | Google Cloud Video Intelligence API. |
+      # | [VideoIntelligenceServiceClient][] | Service that implements Google Cloud Video Intelligence API. |
       # | [Data Types][] | Data types for Google::Cloud::VideoIntelligence::V1beta1 |
       #
       # [VideoIntelligenceServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1beta1/videointelligenceserviceclient
