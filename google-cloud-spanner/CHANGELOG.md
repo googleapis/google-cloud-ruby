@@ -1,5 +1,12 @@
 # Release History
 
+### 1.6.0 / 2018-06-28
+
+* Add Session labels
+  * Add labels optional argument to Project#client and #batch_client.
+  * Add labels optional argument to Project#batch_client.
+* Bug fix when an error is raised while returning results.
+
 ### 1.5.0 / 2018-06-12
 
 * Support STRUCT values in query parameters.
