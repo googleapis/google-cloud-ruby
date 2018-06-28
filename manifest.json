@@ -426,9 +426,8 @@
       "name": "google-cloud-spanner",
       "defaultService": "google/cloud/spanner",
       "versions": [
-        "v1.6.0",
-        "master",
         "v1.5.0",
+        "master",
         "v1.4.0",
         "v1.3.1",
         "v1.2.0",
@@ -504,8 +503,9 @@
       "name": "google-cloud-tasks",
       "defaultService": "google/cloud/tasks",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
