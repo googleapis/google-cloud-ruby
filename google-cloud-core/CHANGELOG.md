@@ -1,5 +1,10 @@
 # Release History
 
+### 1.2.1 / 2018-06-28
+
+* Warn when using Ruby version that is end-of-life.
+* Fix google-cloud-* auto-load to load only the latest version.
+
 ### 1.2.0 / 2018-02-27
 
 * Add Shared Configuration.
