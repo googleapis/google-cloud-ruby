@@ -33,6 +33,7 @@ describe "Instance Clusters", :bigtable do
   end
 
   it "create cluster, update and delete" do
+    skip "Google::Cloud::ResourceExhaustedError: 8:Insufficient node quota. You requested a node count of 5 nodes for your cluster, but this request would exceed your project's node quota of 30 nodes total across all clusters in this zone. Contact us to request a quota increase: https://goo.gl/pf2Su8"
     cluster_id = "#{$bigtable_cluster_id}2"
     location = "us-east1-c"
 
