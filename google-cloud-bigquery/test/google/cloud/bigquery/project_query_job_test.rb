@@ -31,13 +31,22 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi(query, location: nil)
-    mock.expect :insert_job, job_gapi, [project, job_gapi]
+    job_gapi = query_job_gapi query, location: nil
+    job_resp_gapi = query_job_resp_gapi query
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     job = bigquery.query_job query
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+
+    # Sometimes statistics.query is nil in the returned job, test for that behavior here.
+    job.cache_hit?.must_equal false
+    job.bytes_processed.must_be :nil?
+    job.query_plan.must_be :nil?
+    job.statement_type.must_be :nil?
+    job.ddl_operation_performed.must_be :nil?
+    job.ddl_target_table.must_be :nil?
   end
 
   it "queries the data with options set" do

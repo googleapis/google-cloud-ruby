@@ -136,6 +136,15 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.wait_until_done!
     rows = job.data
     rows.total.must_equal 100
+
+    # @gapi.statistics.query
+    job.cache_hit?.must_equal true
+    job.bytes_processed.must_equal 0
+    job.query_plan.must_be :nil?
+    # Sometimes values are nil in the returned job, so currently comment out unreliable expectations
+    # job.statement_type.must_equal "SELECT"
+    job.ddl_operation_performed.must_be :nil?
+    job.ddl_target_table.must_be :nil?
   end
 
   it "should run a query job with job labels" do

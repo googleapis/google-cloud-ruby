@@ -52,8 +52,14 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
   end
 
   it "knows its statistics data" do
-    job.wont_be :cache_hit?
     job.bytes_processed.must_equal 123456
+    job.cache_hit?.must_equal true
+    job.ddl_operation_performed.must_equal "CREATE"
+    job.ddl_target_table.must_be_kind_of Google::Cloud::Bigquery::Table
+    job.ddl_target_table.project_id.must_equal "target_project_id"
+    job.ddl_target_table.dataset_id.must_equal "target_dataset_id"
+    job.ddl_target_table.table_id.must_equal "target_table_id"
+    job.statement_type.must_equal "CREATE_TABLE"
   end
 
   it "knows its query config" do
@@ -152,8 +158,13 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
   def statistics_query_gapi
     Google::Apis::BigqueryV2::JobStatistics2.new(
       billing_tier: 1,
-      cache_hit: false,
-      total_bytes_processed: 123456,
+      cache_hit: true,
+      ddl_operation_performed: "CREATE",
+      ddl_target_table: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: "target_project_id",
+        dataset_id: "target_dataset_id",
+        table_id: "target_table_id"
+      ),
       query_plan: [
         Google::Apis::BigqueryV2::ExplainQueryStage.new(
           compute_ratio_avg: 1.0,
@@ -179,7 +190,9 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
           write_ratio_avg: 0.05389444608201358,
           write_ratio_max: 0.05389444608201358
         )
-      ]
+      ],
+      statement_type: "CREATE_TABLE",
+      total_bytes_processed: 123456
     )
   end
 end
