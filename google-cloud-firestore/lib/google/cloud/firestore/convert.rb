@@ -115,8 +115,7 @@ module Google
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               obj.rewind
               content = obj.read.force_encoding "ASCII-8BIT"
-              encoded_content = Base64.strict_encode64 content
-              Google::Firestore::V1beta1::Value.new bytes_value: encoded_content
+              Google::Firestore::V1beta1::Value.new bytes_value: content
             else
               raise ArgumentError,
                    "A value of type #{obj.class} is not supported."
