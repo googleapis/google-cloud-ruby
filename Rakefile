@@ -770,8 +770,24 @@ end
 desc "Print all the changes since the last release."
 task :changes, [:gem] do |t, args|
   gem = args[:gem]
-  Rake::Task["changes:log"].invoke gem
-  Rake::Task["changes:diff"].invoke gem
+  if gem
+    Rake::Task["changes:log"].invoke gem
+    Rake::Task["changes:diff"].invoke gem
+  else # Print git log for all gems except the meta-packages
+    valid_gems.each do |gem|
+      begin
+        tag = current_release_tag gem
+        stats = (`git diff --stat #{tag}..master #{gem}`).split("\n")
+        if stats.empty?
+          puts "#{gem} - no changes"
+        else
+          puts "#{gem} -#{stats.last}"
+        end
+      rescue
+        puts "#{gem} - not yet released"
+      end
+    end
+  end
 end
 namespace :changes do
   desc "Print a diff of the changes since the last release."
