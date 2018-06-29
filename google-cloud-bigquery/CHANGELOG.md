@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 / 2018-06-29
+
+* Add #schema_update_options to LoadJob and #schema_update_options= to LoadJob::Updater.
+* Add time partitioning for the target table to LoadJob and QueryJob.
+* Add #statement_type, #ddl_operation_performed, #ddl_target_table to QueryJob.
+
 ### 1.6.0 / 2018-06-22
 
 * Documentation updates.
