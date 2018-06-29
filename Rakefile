@@ -777,19 +777,21 @@ namespace :changes do
   desc "Print a diff of the changes since the last release."
   task :diff, [:gem] do |t, args|
     gem = args[:gem]
-    versions = `git tag --sort=-creatordate | grep #{gem}/v`.split
-    fail "Cannot find a release for #{gem}" unless versions.any?
-    tag = versions.first
+    tag = current_release_tag gem
     sh "git diff #{tag}..master #{gem}"
   end
 
   desc "Print the logs of changes since the last release."
   task :log, [:gem] do |t, args|
     gem = args[:gem]
-    versions = `git tag --sort=-creatordate | grep #{gem}/v`.split
-    fail "Cannot find a release for #{gem}" unless versions.any?
-    tag = versions.first
+    tag = current_release_tag gem
     sh "git log #{tag}..master #{gem}"
+  end
+
+  def current_release_tag gem
+    tags = `git tag --sort=-creatordate | grep #{gem}/v`.split
+    fail "Cannot find a release for #{gem}" unless tags.any?
+    tags.first
   end
 end
 
