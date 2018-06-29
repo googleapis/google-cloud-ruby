@@ -819,6 +819,21 @@ namespace :changes do
     end
   end
 
+  desc "Print the commits of changes since the last release."
+  task :commits, [:gem] do |t, args|
+    gems = Array args[:gem]
+    gems = valid_gems if gems.empty?
+    gems.each do |gem|
+      begin
+        header gem
+        tag = current_release_tag gem
+        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" #{tag}..master #{gem}"
+      rescue => e
+        puts e
+      end
+    end
+  end
+
   def current_release_tag gem
     tags = `git tag --sort=-creatordate | grep #{gem}/v`.split
     fail "Cannot find a release for #{gem}" unless tags.any?
