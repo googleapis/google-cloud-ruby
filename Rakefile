@@ -804,6 +804,21 @@ namespace :changes do
     sh "git log #{tag}..master #{gem}"
   end
 
+  desc "Print the stats of changes since the last release."
+  task :stats, [:gem] do |t, args|
+    gems = Array args[:gem]
+    gems = valid_gems if gems.empty?
+    gems.each do |gem|
+      begin
+        header gem
+        tag = current_release_tag gem
+        sh "git diff --stat #{tag}..master #{gem}"
+      rescue => e
+        puts e
+      end
+    end
+  end
+
   def current_release_tag gem
     tags = `git tag --sort=-creatordate | grep #{gem}/v`.split
     fail "Cannot find a release for #{gem}" unless tags.any?
