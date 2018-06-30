@@ -213,12 +213,12 @@ module Google
         #   from the given exception.
         def self.from_exception exception
           backtrace = exception.backtrace
-          message = exception.message
+          message = "#{exception.message} (#{exception.class})"
 
-          unless backtrace.nil?
-            error_location = String backtrace.first
+          if !backtrace.nil? && !backtrace.empty?
+            error_location = backtrace.first
 
-            message = "#{error_location}: #{message} (#{exception.class})\n\t" +
+            message = "#{error_location}: #{message}\n\t" +
                       backtrace.drop(1).join("\n\t")
             file_path, line_number, function_name = error_location.split(":")
             function_name = function_name.to_s[/`(.*)'/, 1]
