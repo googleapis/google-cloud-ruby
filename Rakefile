@@ -779,12 +779,12 @@ task :changes, [:gem] do |t, args|
         tag = current_release_tag gem
         stats = (`git diff --stat #{tag}..master #{gem}`).split("\n")
         if stats.empty?
-          puts "#{gem} - no changes"
+          puts "#{gem}: no changes"
         else
-          puts "#{gem} -#{stats.last}"
+          puts "#{gem}:#{stats.last} (#{oldest_commit_since_release gem, tag})"
         end
       rescue
-        puts "#{gem} - not yet released"
+        puts "#{gem}: not yet released"
       end
     end
   end
@@ -838,6 +838,11 @@ namespace :changes do
     tags = `git tag --sort=-creatordate | grep #{gem}/v`.split
     fail "Cannot find a release for #{gem}" unless tags.any?
     tags.first
+  end
+
+  def oldest_commit_since_release gem, tag
+    commit_dates = (`git log --pretty=format:\"%ad\" --date=relative #{tag}..master #{gem}`).split("\n")
+    commit_dates.last
   end
 end
 
