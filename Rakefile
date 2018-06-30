@@ -827,7 +827,7 @@ namespace :changes do
       begin
         header gem
         tag = current_release_tag gem
-        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" #{tag}..master #{gem}"
+        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=relative #{tag}..master #{gem}"
       rescue => e
         puts e
       end
