@@ -770,26 +770,79 @@ end
 desc "Print all the changes since the last release."
 task :changes, [:gem] do |t, args|
   gem = args[:gem]
-  Rake::Task["changes:log"].invoke gem
-  Rake::Task["changes:diff"].invoke gem
+  if gem
+    Rake::Task["changes:log"].invoke gem
+    Rake::Task["changes:diff"].invoke gem
+  else # Print git log for all gems except the meta-packages
+    valid_gems.each do |gem|
+      begin
+        tag = current_release_tag gem
+        stats = (`git diff --stat #{tag}..master #{gem}`).split("\n")
+        if stats.empty?
+          puts "#{gem}: no changes"
+        else
+          puts "#{gem}:#{stats.last} (#{oldest_commit_since_release gem, tag})"
+        end
+      rescue
+        puts "#{gem}: not yet released"
+      end
+    end
+  end
 end
 namespace :changes do
   desc "Print a diff of the changes since the last release."
   task :diff, [:gem] do |t, args|
     gem = args[:gem]
-    versions = `git tag --sort=-creatordate | grep #{gem}/v`.split
-    fail "Cannot find a release for #{gem}" unless versions.any?
-    tag = versions.first
+    tag = current_release_tag gem
     sh "git diff #{tag}..master #{gem}"
   end
 
   desc "Print the logs of changes since the last release."
   task :log, [:gem] do |t, args|
     gem = args[:gem]
-    versions = `git tag --sort=-creatordate | grep #{gem}/v`.split
-    fail "Cannot find a release for #{gem}" unless versions.any?
-    tag = versions.first
+    tag = current_release_tag gem
     sh "git log #{tag}..master #{gem}"
+  end
+
+  desc "Print the stats of changes since the last release."
+  task :stats, [:gem] do |t, args|
+    gems = Array args[:gem]
+    gems = valid_gems if gems.empty?
+    gems.each do |gem|
+      begin
+        header gem
+        tag = current_release_tag gem
+        sh "git diff --stat #{tag}..master #{gem}"
+      rescue => e
+        puts e
+      end
+    end
+  end
+
+  desc "Print the commits of changes since the last release."
+  task :commits, [:gem] do |t, args|
+    gems = Array args[:gem]
+    gems = valid_gems if gems.empty?
+    gems.each do |gem|
+      begin
+        header gem
+        tag = current_release_tag gem
+        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=relative #{tag}..master #{gem}"
+      rescue => e
+        puts e
+      end
+    end
+  end
+
+  def current_release_tag gem
+    tags = `git tag --sort=-creatordate | grep #{gem}/v`.split
+    fail "Cannot find a release for #{gem}" unless tags.any?
+    tags.first
+  end
+
+  def oldest_commit_since_release gem, tag
+    commit_dates = (`git log --pretty=format:\"%ad\" --date=relative #{tag}..master #{gem}`).split("\n")
+    commit_dates.last
   end
 end
 
