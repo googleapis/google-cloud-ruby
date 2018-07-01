@@ -70,7 +70,7 @@ module Google
             when :string_value
               value.string_value
             when :bytes_value
-              StringIO.new Base64.decode64 value.bytes_value
+              StringIO.new value.bytes_value
             when :reference_value
               Google::Cloud::Firestore::DocumentReference.from_path \
                 value.reference_value, context
