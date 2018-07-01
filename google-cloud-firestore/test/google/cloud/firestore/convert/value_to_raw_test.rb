@@ -76,7 +76,7 @@ describe Google::Cloud::Firestore::Convert, :value_to_raw, :mock_firestore do
 	contents = StringIO.new
 	contents.binmode()
 	contents.write("c\0ntents")
-	contents.close_writing()
+	contents.close_write()
 	
     raw.must_equal contents
   end
