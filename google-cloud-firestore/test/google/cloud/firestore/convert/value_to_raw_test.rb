@@ -69,11 +69,11 @@ describe Google::Cloud::Firestore::Convert, :value_to_raw, :mock_firestore do
   end
 
   it "converts a bytes value" do
-    value = Google::Firestore::V1beta1::Value.new(bytes_value: Base64.encode64("contents"))
+    value = Google::Firestore::V1beta1::Value.new(bytes_value: "c\0ntents")
 
     raw = Google::Cloud::Firestore::Convert.value_to_raw value, firestore
     raw.must_be_kind_of StringIO
-    raw.read.must_equal "contents"
+    raw.read.must_equal "c\0ntents"
   end
 
   it "converts a reference value" do

@@ -99,7 +99,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
   it "holds a bytes value" do
     document.grpc = Google::Firestore::V1beta1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",
-      fields: { "avatar" => Google::Firestore::V1beta1::Value.new(bytes_value: Base64.strict_encode64("contents")) },
+      fields: { "avatar" => Google::Firestore::V1beta1::Value.new(bytes_value: "contents") },
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
@@ -161,7 +161,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
                 "ratio" => Google::Firestore::V1beta1::Value.new(double_value: 0.9),
                 "published_at" => Google::Firestore::V1beta1::Value.new(timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483326245, nanos: 60000000)),
                 "name" => Google::Firestore::V1beta1::Value.new(string_value: "Mike"),
-                "avatar" => Google::Firestore::V1beta1::Value.new(bytes_value: Base64.strict_encode64("contents")),
+                "avatar" => Google::Firestore::V1beta1::Value.new(bytes_value: "contents"),
                 "friend" => Google::Firestore::V1beta1::Value.new(reference_value: "projects/#{project}/databases/(default)/documents/users/chris"),
                 "location" => Google::Firestore::V1beta1::Value.new(geo_point_value: Google::Type::LatLng.new(latitude: 43.878264, longitude: -103.45700740814209)),
                 "details" => Google::Firestore::V1beta1::Value.new(map_value: Google::Firestore::V1beta1::MapValue.new(fields: { "score"=>Google::Firestore::V1beta1::Value.new(double_value: 0.9), "env"=>Google::Firestore::V1beta1::Value.new(string_value: "production"), "project_ids"=>Google::Firestore::V1beta1::Value.new(array_value: Google::Firestore::V1beta1::ArrayValue.new(values: [Google::Firestore::V1beta1::Value.new(integer_value: 1), Google::Firestore::V1beta1::Value.new(integer_value: 2), Google::Firestore::V1beta1::Value.new(integer_value: 3)] )) })) },

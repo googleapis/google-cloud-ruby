@@ -70,7 +70,7 @@ module Google
             when :string_value
               value.string_value
             when :bytes_value
-              StringIO.new Base64.decode64 value.bytes_value
+              StringIO.new value.bytes_value
             when :reference_value
               Google::Cloud::Firestore::DocumentReference.from_path \
                 value.reference_value, context
@@ -115,8 +115,7 @@ module Google
             elsif obj.respond_to?(:read) && obj.respond_to?(:rewind)
               obj.rewind
               content = obj.read.force_encoding "ASCII-8BIT"
-              encoded_content = Base64.strict_encode64 content
-              Google::Firestore::V1beta1::Value.new bytes_value: encoded_content
+              Google::Firestore::V1beta1::Value.new bytes_value: content
             else
               raise ArgumentError,
                    "A value of type #{obj.class} is not supported."
