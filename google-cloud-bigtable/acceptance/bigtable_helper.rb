@@ -145,12 +145,10 @@ $bigtable_zone_locations = [
   [ "us-east1-b", "us-east1-c"]
 ]
 
-# NOTE: To avoide insufficient nodes quota limit per zone.
-$bigtable_zone_locations.sample.tap do |zones|
-  $bigtable_cluster_location = zones.first
-  $bigtable_cluster_location_2 = zones.last
-end
-
+# NOTE: To avoid insufficient nodes quota limit per zone.
+zones = $bigtable_zone_locations.sample
+$bigtable_cluster_location = zones.first
+$bigtable_cluster_location_2 = zones.last
 $bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
 
 create_test_instance(
