@@ -370,6 +370,105 @@ module Google
           from_grpc(grpc, service)
         end
 
+        # Generates a consistency token for a Table, which can be used in
+        # CheckConsistency to check whether mutations to the table that finished
+        # before this call started have been replicated. The tokens will be available
+        # for 90 days.
+        #
+        # @return [String] Generated consistency token
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   table = instance.table("my-table")
+        #
+        #   table.generate_consistency_token # "l947XelENinaxJQP0nnrZJjHnAF7YrwW8HCJLotwrF"
+        #
+        def generate_consistency_token
+          ensure_service!
+          response = service.generate_consistency_token(instance_id, name)
+          response.consistency_token
+        end
+
+        # Checks replication consistency based on a consistency token, that is, if
+        # replication has caught up based on the conditions specified in the token
+        # and the check request.
+        # @param token [String] Consistency token
+        # @return [Boolean] Replication is consistent or not.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   table = instance.table("my-table")
+        #
+        #   token = "l947XelENinaxJQP0nnrZJjHnAF7YrwW8HCJLotwrF"
+        #
+        #   if table.check_consistency(token)
+        #     puts "Replication is consistent"
+        #   end
+        #
+        def check_consistency token
+          ensure_service!
+          response = service.check_consistency(instance_id, name, token)
+          response.consistent
+        end
+
+        # Wait for replication to check replication consistency of table
+        # Checks replication consistency by generating consistency token and
+        # calling +check_consistency+ api call 5 times(default).
+        # If the response is consistent then return true. Otherwise try again.
+        # If consistency checking will run for more than 10 minutes and still
+        # not got the +true+ response then return +false+.
+        #
+        # @param timeout [Integer]
+        #   Timeout in seconds. Defaults value is 600 seconds.
+        # @param check_interval [Integer]
+        #   Consistency check interval in seconds. Default is 5 seconds.
+        # @return [Boolean] Replication is consistent or not.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   table = instance.table("my-table")
+        #
+        #   if table.wait_for_replication
+        #     puts "Replication done"
+        #   end
+        #
+        #   # With custom timeout and interval
+        #   if table.wait_for_replication(timeout: 300, check_interval: 10)
+        #     puts "Replication done"
+        #   end
+        #
+        def wait_for_replication timeout: 600, check_interval: 5
+          if check_interval > timeout
+            raise(
+              InvalidArgumentError,
+              "'check_interval' can not be greather then timeout"
+            )
+          end
+          token = generate_consistency_token
+          status = false
+          start_at = Time.now
+
+          loop do
+            status = check_consistency(token)
+
+            break if status || (Time.now - start_at) >= timeout
+            sleep(check_interval)
+          end
+          status
+        end
+
         # @private
         # Creates a new Table instance from a Google::Bigtable::Admin::V2::Table.
         #
