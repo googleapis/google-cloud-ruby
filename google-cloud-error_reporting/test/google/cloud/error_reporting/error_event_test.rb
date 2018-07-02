@@ -73,13 +73,21 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
   end
 
   describe ".from_exception" do
-    exception_message = "A serious error from application"
+    let(:exception_message) { "A serious error from application" }
     let(:exception) { StandardError.new exception_message }
+    let(:error_message) { "#{exception_message} (#{exception.class})" }
 
     it "includes exception message when backtrace isn't present" do
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_equal exception_message
+      error_event.message.must_equal error_message
+    end
+
+    it "includes exception message when backtrace is an empty array" do
+      exception.set_backtrace([])
+      error_event =
+        Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
+      error_event.message.must_equal error_message
     end
 
     it "includes exception message and backtrace if backtrace is available" do
@@ -88,7 +96,7 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
 
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_match exception_message
+      error_event.message.must_match error_message
       error_event.message.must_match backtrace
     end
 
@@ -98,7 +106,7 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
 
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_match exception_message
+      error_event.message.must_match error_message
       error_event.file_path.must_equal(
         "test/test_more.rb"
       )
