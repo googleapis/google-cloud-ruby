@@ -88,7 +88,7 @@ end
 
 # Create instance
 def create_test_instance instance_id, cluster_id, cluster_location
-  p "=> Creating instance #{instance_id}."
+  p "=> Creating instance #{instance_id} in zone #{cluster_location}."
 
   job = $bigtable.create_instance(
    instance_id,
@@ -135,7 +135,20 @@ require "securerandom"
 
 # Test instance
 $bigtable_instance_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
-$bigtable_cluster_location = "us-east1-b"
+
+# https://cloud.google.com/bigtable/docs/locations
+$bigtable_zone_locations = [
+  [ "us-central1-a", "us-central1-b"],
+  [ "northamerica-northeast1-a", "northamerica-northeast1-b"],
+  [ "us-east4-a", "us-east4-b"],
+  [ "us-west1-c", "us-west1-b"],
+  [ "us-east1-b", "us-east1-c"]
+]
+
+# NOTE: To avoid insufficient nodes quota limit per zone.
+zones = $bigtable_zone_locations.sample
+$bigtable_cluster_location = zones.first
+$bigtable_cluster_location_2 = zones.last
 $bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
 
 create_test_instance(
