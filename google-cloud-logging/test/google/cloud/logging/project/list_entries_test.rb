@@ -97,9 +97,23 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
     first_entries.token.wont_be :nil?
     first_entries.token.must_equal "next_page_token"
 
+    # ensure the correct values are propogated to the ivars
+    first_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
+    first_entries.instance_variable_get(:@resources).must_be_nil
+    first_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
+    first_entries.instance_variable_get(:@order).must_equal "timestamp"
+    first_entries.instance_variable_get(:@max).must_be_nil
+
     second_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
     second_entries.count.must_equal 2
     second_entries.token.must_be :nil?
+
+    # ensure the correct values are propogated to the ivars
+    second_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
+    second_entries.instance_variable_get(:@resources).must_be_nil
+    second_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
+    second_entries.instance_variable_get(:@order).must_equal "timestamp"
+    second_entries.instance_variable_get(:@max).must_be_nil
   end
 
   it "paginates entries using next? and next" do
@@ -144,10 +158,26 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
     first_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
     first_entries.count.must_equal 3
     first_entries.next?.must_equal true #must_be :next?
+    first_entries.token.must_equal "next_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    first_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
+    first_entries.instance_variable_get(:@resources).must_be_nil
+    first_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
+    first_entries.instance_variable_get(:@order).must_equal "timestamp"
+    first_entries.instance_variable_get(:@max).must_be_nil
 
     second_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
     second_entries.count.must_equal 2
     second_entries.next?.must_equal false #wont_be :next?
+    second_entries.token.must_be :nil?
+
+    # ensure the correct values are propogated to the ivars
+    second_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
+    second_entries.instance_variable_get(:@resources).must_be_nil
+    second_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
+    second_entries.instance_variable_get(:@order).must_equal "timestamp"
+    second_entries.instance_variable_get(:@max).must_be_nil
   end
 
   it "paginates entries using all" do

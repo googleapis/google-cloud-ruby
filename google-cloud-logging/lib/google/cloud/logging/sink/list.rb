@@ -71,7 +71,7 @@ module Google
             return nil unless next?
             ensure_service!
             list_grpc = @service.list_sinks token: token, max: @max
-            self.class.from_grpc list_grpc, @service
+            self.class.from_grpc list_grpc, @service, @max
           end
 
           ##

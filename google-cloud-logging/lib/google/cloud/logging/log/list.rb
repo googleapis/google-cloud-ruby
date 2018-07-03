@@ -72,7 +72,8 @@ module Google
             ensure_service!
             grpc = @service.list_logs token: token, resource: @resource,
                                       max: @max
-            self.class.from_grpc grpc, @service
+            self.class.from_grpc grpc, @service, resource: @resource,
+                                                 max: @max
           end
 
           ##

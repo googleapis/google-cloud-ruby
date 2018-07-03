@@ -72,7 +72,7 @@ module Google
             return nil unless next?
             ensure_service!
             grpc = @service.list_metrics token: token, max: @max
-            self.class.from_grpc grpc, @service
+            self.class.from_grpc grpc, @service, @max
           end
 
           ##

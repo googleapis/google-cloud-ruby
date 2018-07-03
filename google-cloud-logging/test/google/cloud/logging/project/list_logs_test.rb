@@ -164,22 +164,70 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     logs.token.must_equal "next_page_token"
   end
 
-  it "paginates logs with max set" do
-    list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.decode_json(list_logs_json(3, "next_page_token"))))
+  it "paginates logs with a resource" do
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.decode_json(list_logs_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.decode_json(list_logs_json(2, "second_page_token"))))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, list_res, ["projects/#{project}", page_size: 3, options: default_options]
-
+    mock.expect :list_logs, first_list_res, ["projects/project1", page_size: nil, options: default_options]
+    mock.expect :list_logs, second_list_res, ["projects/project1", page_size: nil, options: token_options("next_page_token")]
     logging.service.mocked_logging = mock
 
-    logs = logging.logs max: 3
+    first_logs = logging.logs resource: "projects/project1"
+    second_logs = first_logs.next
 
     mock.verify
 
-    logs.each { |m| m.must_be_kind_of String }
-    logs.count.must_equal 3
-    logs.token.wont_be :nil?
-    logs.token.must_equal "next_page_token"
+    first_logs.each { |m| m.must_be_kind_of String }
+    first_logs.count.must_equal 3
+    first_logs.next?.must_equal true
+    first_logs.token.must_equal "next_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    first_logs.instance_variable_get(:@resource).must_equal "projects/project1"
+    first_logs.instance_variable_get(:@max).must_be_nil
+
+    second_logs.each { |m| m.must_be_kind_of String }
+    second_logs.count.must_equal 2
+    second_logs.next?.must_equal true
+    second_logs.token.must_equal "second_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    second_logs.instance_variable_get(:@resource).must_equal "projects/project1"
+    second_logs.instance_variable_get(:@max).must_be_nil
+  end
+
+  it "paginates logs with a resource" do
+    first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.decode_json(list_logs_json(3, "next_page_token"))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogsResponse.decode_json(list_logs_json(2, "second_page_token"))))
+
+    mock = Minitest::Mock.new
+    mock.expect :list_logs, first_list_res, ["projects/#{project}", page_size: 3, options: default_options]
+    mock.expect :list_logs, second_list_res, ["projects/#{project}", page_size: 3, options: token_options("next_page_token")]
+    logging.service.mocked_logging = mock
+
+    first_logs = logging.logs max: 3
+    second_logs = first_logs.next
+
+    mock.verify
+
+    first_logs.each { |m| m.must_be_kind_of String }
+    first_logs.count.must_equal 3
+    first_logs.next?.must_equal true
+    first_logs.token.must_equal "next_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    first_logs.instance_variable_get(:@resource).must_be_nil
+    first_logs.instance_variable_get(:@max).must_equal 3
+
+    second_logs.each { |m| m.must_be_kind_of String }
+    second_logs.count.must_equal 2
+    second_logs.next?.must_equal true
+    second_logs.token.must_equal "second_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    second_logs.instance_variable_get(:@resource).must_be_nil
+    second_logs.instance_variable_get(:@max).must_equal 3
   end
 
   def list_logs_json count = 2, token = nil
