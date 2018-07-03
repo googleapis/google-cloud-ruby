@@ -139,10 +139,11 @@ $bigtable_instance_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.h
 # https://cloud.google.com/bigtable/docs/locations
 $bigtable_zone_locations = [
   [ "us-central1-a", "us-central1-b"],
-  [ "northamerica-northeast1-a", "northamerica-northeast1-b"],
   [ "us-east4-a", "us-east4-b"],
   [ "us-west1-c", "us-west1-b"],
-  [ "us-east1-b", "us-east1-c"]
+  [ "us-east1-b", "us-east1-c"],
+  [ "europe-west1-b", "europe-west1-c"],
+  [ "europe-west2-b", "europe-west2-c"]
 ]
 
 # NOTE: To avoid insufficient nodes quota limit per zone.
