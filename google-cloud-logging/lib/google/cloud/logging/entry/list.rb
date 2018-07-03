@@ -150,7 +150,7 @@ module Google
               Entry.from_grpc grpc_entry
             end)
             token = grpc_list.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             entries.instance_variable_set :@token,     token
             entries.instance_variable_set :@service,   service
             entries.instance_variable_set :@projects,  projects

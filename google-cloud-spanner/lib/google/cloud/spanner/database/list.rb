@@ -150,7 +150,7 @@ module Google
             end)
             databases.instance_variable_set :@instance_id, instance_id
             token = grpc.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             databases.instance_variable_set :@token,   token
             databases.instance_variable_set :@service, service
             databases.instance_variable_set :@max,     max

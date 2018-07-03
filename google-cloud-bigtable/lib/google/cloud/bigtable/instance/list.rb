@@ -139,7 +139,7 @@ module Google
               Instance.from_grpc(instance, service)
             end)
             token = grpc.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             instances.token = token
             instances.service = service
             instances.failed_locations = grpc.failed_locations.map(&:to_s)

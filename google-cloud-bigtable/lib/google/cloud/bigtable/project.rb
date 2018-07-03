@@ -236,7 +236,7 @@ module Google
           yield clusters if block_given?
 
           clusters.each_value do |cluster|
-            unless cluster.location == ""
+            unless cluster.location == "".freeze
               cluster.location = service.location_path(cluster.location)
             end
           end

@@ -132,7 +132,7 @@ module Google
           def self.from_grpc grpc_list, service, resource: nil, max: nil
             logs = new(Array(grpc_list.log_names))
             token = grpc_list.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             logs.instance_variable_set :@token,    token
             logs.instance_variable_set :@service,  service
             logs.instance_variable_set :@resource, resource

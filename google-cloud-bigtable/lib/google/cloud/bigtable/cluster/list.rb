@@ -146,7 +146,7 @@ module Google
               Cluster.from_grpc(cluster, service)
             end)
             token = grpc.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             clusters.token = token
             clusters.instance_id = instance_id
             clusters.service = service

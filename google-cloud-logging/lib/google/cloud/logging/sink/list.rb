@@ -147,7 +147,7 @@ module Google
               Sink.from_grpc grpc, service
             end)
             token = grpc_list.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             sinks.instance_variable_set :@token,   token
             sinks.instance_variable_set :@service, service
             sinks.instance_variable_set :@max,     max

@@ -128,7 +128,7 @@ module Google
               l.instance_variable_set :@key,         grpc.key
               l.instance_variable_set :@type,        type_sym
               l.instance_variable_set :@description, grpc.description
-            ebd
+            end
           end
         end
       end
