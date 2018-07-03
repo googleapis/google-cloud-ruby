@@ -199,7 +199,7 @@ module Google
         # @return [Google::Gax::Operation]
 
         def create_cluster instance_id, cluster_id, cluster
-          unless cluster.location == ""
+          unless cluster.location == "".freeze
             cluster.location = location_path(cluster.location)
           end
 

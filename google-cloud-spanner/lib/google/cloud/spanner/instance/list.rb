@@ -146,7 +146,7 @@ module Google
               Instance.from_grpc instance, service
             end)
             token = grpc.next_page_token
-            token = nil if token == ""
+            token = nil if token == "".freeze
             instances.instance_variable_set :@token,   token
             instances.instance_variable_set :@service, service
             instances.instance_variable_set :@max,     max

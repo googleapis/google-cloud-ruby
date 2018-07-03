@@ -149,7 +149,7 @@ module Google
                 Instance::Config.from_grpc config
               end)
               token = grpc.next_page_token
-              token = nil if token == ""
+              token = nil if token == "".freeze
               configs.instance_variable_set :@token,   token
               configs.instance_variable_set :@service, service
               configs.instance_variable_set :@max,     max

@@ -426,14 +426,14 @@ module Google
             e.insert_id = grpc.insert_id
             e.labels = Convert.map_to_hash(grpc.labels)
             e.payload = extract_payload(grpc)
-            e.instance_variable_set "@resource",
+            e.instance_variable_set :@resource,
                                     Resource.from_grpc(grpc.resource)
-            e.instance_variable_set "@http_request",
+            e.instance_variable_set :@http_request,
                                     HttpRequest.from_grpc(grpc.http_request)
-            e.instance_variable_set "@operation",
+            e.instance_variable_set :@operation,
                                     Operation.from_grpc(grpc.operation)
             e.trace = grpc.trace
-            e.instance_variable_set "@source_location",
+            e.instance_variable_set :@source_location,
                                     SourceLocation.from_grpc(
                                       grpc.source_location
                                     )

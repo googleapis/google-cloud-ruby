@@ -148,10 +148,10 @@ module Google
               Metric.from_grpc grpc_metric, service
             end)
             token = grpc_list.next_page_token
-            token = nil if token == ""
-            metrics.instance_variable_set "@token", token
-            metrics.instance_variable_set "@service", service
-            metrics.instance_variable_set "@max", max
+            token = nil if token == "".freeze
+            metrics.instance_variable_set :@token,   token
+            metrics.instance_variable_set :@service, service
+            metrics.instance_variable_set :@max,     max
             metrics
           end
 

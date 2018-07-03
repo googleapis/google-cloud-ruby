@@ -150,10 +150,10 @@ module Google
             changes = new(Array(gapi.changes).map do |g|
               Change.from_gapi g, zone
             end)
-            changes.instance_variable_set "@token", gapi.next_page_token
-            changes.instance_variable_set "@zone",  zone
-            changes.instance_variable_set "@max",   max
-            changes.instance_variable_set "@order", order
+            changes.instance_variable_set :@token, gapi.next_page_token
+            changes.instance_variable_set :@zone,  zone
+            changes.instance_variable_set :@max,   max
+            changes.instance_variable_set :@order, order
             changes
           end
 

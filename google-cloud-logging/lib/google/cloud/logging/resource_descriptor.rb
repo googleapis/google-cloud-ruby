@@ -73,15 +73,15 @@ module Google
         # @private New ResourceDescriptor from a
         # Google::Api::MonitoredResourceDescriptor object.
         def self.from_grpc grpc
-          r = new
-          r.instance_variable_set "@type", grpc.type
-          r.instance_variable_set "@name", grpc.display_name
-          r.instance_variable_set "@description", grpc.description
           labels = Array(grpc.labels).map do |g|
             LabelDescriptor.from_grpc g
           end
-          r.instance_variable_set "@labels", labels
-          r
+          new.tap do |r|
+            r.instance_variable_set :@type,        grpc.type
+            r.instance_variable_set :@name,        grpc.display_name
+            r.instance_variable_set :@description, grpc.description
+            r.instance_variable_set :@labels,      labels
+          end
         end
 
         ##
@@ -124,11 +124,11 @@ module Google
             type_sym = { STRING: :string,
                          BOOL:   :boolean,
                          INT64:  :integer }[grpc.value_type]
-            l = new
-            l.instance_variable_set "@key", grpc.key
-            l.instance_variable_set "@type", type_sym
-            l.instance_variable_set "@description", grpc.description
-            l
+            new.tap do |l|
+              l.instance_variable_set :@key,         grpc.key
+              l.instance_variable_set :@type,        type_sym
+              l.instance_variable_set :@description, grpc.description
+            end
           end
         end
       end

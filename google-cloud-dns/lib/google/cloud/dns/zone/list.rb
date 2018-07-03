@@ -145,9 +145,9 @@ module Google
             zones = new(Array(gapi.managed_zones).map do |g|
               Zone.from_gapi g, conn
             end)
-            zones.instance_variable_set "@token",   gapi.next_page_token
-            zones.instance_variable_set "@service", conn
-            zones.instance_variable_set "@max",     max
+            zones.instance_variable_set :@token,   gapi.next_page_token
+            zones.instance_variable_set :@service, conn
+            zones.instance_variable_set :@max,     max
             zones
           end
 
