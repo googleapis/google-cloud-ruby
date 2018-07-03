@@ -133,10 +133,10 @@ module Google
             logs = new(Array(grpc_list.log_names))
             token = grpc_list.next_page_token
             token = nil if token == ""
-            logs.instance_variable_set "@token", token
-            logs.instance_variable_set "@service", service
-            logs.instance_variable_set "@resource", resource
-            logs.instance_variable_set "@max", max
+            logs.instance_variable_set :@token,    token
+            logs.instance_variable_set :@service,  service
+            logs.instance_variable_set :@resource, resource
+            logs.instance_variable_set :@max,      max
             logs
           end
 

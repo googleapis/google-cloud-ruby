@@ -175,7 +175,7 @@ module Google
             roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
               memo[k] = v.dup rescue value
             end
-            p.instance_variable_set "@roles", roles_dup
+            p.instance_variable_set :@roles, roles_dup
           end
         end
 

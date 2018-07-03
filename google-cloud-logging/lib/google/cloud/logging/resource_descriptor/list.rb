@@ -155,9 +155,9 @@ module Google
             end)
             token = grpc_list.next_page_token
             token = nil if token == ""
-            rds.instance_variable_set "@token", token
-            rds.instance_variable_set "@service", service
-            rds.instance_variable_set "@max", max
+            rds.instance_variable_set :@token,   token
+            rds.instance_variable_set :@service, service
+            rds.instance_variable_set :@max,     max
             rds
           end
 

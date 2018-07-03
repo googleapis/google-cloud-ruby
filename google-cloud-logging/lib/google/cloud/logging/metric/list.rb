@@ -149,9 +149,9 @@ module Google
             end)
             token = grpc_list.next_page_token
             token = nil if token == ""
-            metrics.instance_variable_set "@token", token
-            metrics.instance_variable_set "@service", service
-            metrics.instance_variable_set "@max", max
+            metrics.instance_variable_set :@token,   token
+            metrics.instance_variable_set :@service, service
+            metrics.instance_variable_set :@max,     max
             metrics
           end
 

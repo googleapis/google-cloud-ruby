@@ -1219,7 +1219,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
 
       stub = Object.new
-      stub.instance_variable_set "@response", begin_tx_res
+      stub.instance_variable_set :@response, begin_tx_res
       def stub.begin_transaction read_only: nil, previous_transaction: nil
         @response
       end

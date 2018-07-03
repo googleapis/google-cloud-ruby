@@ -150,11 +150,11 @@ module Google
             records = new(Array(gapi.rrsets).map do |g|
               Record.from_gapi g
             end)
-            records.instance_variable_set "@token", gapi.next_page_token
-            records.instance_variable_set "@zone",  zone
-            records.instance_variable_set "@name",  name
-            records.instance_variable_set "@type",  type
-            records.instance_variable_set "@max",   max
+            records.instance_variable_set :@token, gapi.next_page_token
+            records.instance_variable_set :@zone,  zone
+            records.instance_variable_set :@name,  name
+            records.instance_variable_set :@type,  type
+            records.instance_variable_set :@max,   max
             records
           end
 
