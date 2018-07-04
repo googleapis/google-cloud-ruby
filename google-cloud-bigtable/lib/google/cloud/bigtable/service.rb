@@ -569,6 +569,64 @@ module Google
           end
         end
 
+        # Gets the access control policy for an instance resource. Returns an empty
+        # policy if an instance exists but does not have a policy set.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance for which the policy is being requested.
+        # @return [Google::Iam::V1::Policy]
+
+        def get_instance_policy instance_id
+          execute do
+            instances.get_iam_policy(
+              instance_path(instance_id)
+            )
+          end
+        end
+
+        # Sets the access control policy on an instance resource. Replaces any
+        # existing policy.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance for which the policy is being updated.
+        # @param policy [Google::Iam::V1::Policy | Hash]
+        #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+        #   the policy is limited to a few 10s of KB. An empty policy is a
+        #   valid policy but certain Cloud Platform services (such as Projects)
+        #   might reject them.
+        #   A hash of the same form as `Google::Iam::V1::Policy`
+        #   can also be provided.
+        # @return [Google::Iam::V1::Policy]
+
+        def set_instance_policy instance_id, policy
+          execute do
+            instances.set_iam_policy(
+              instance_path(instance_id),
+              policy
+            )
+          end
+        end
+
+        # Returns permissions that the caller has on the specified instance resource.
+        #
+        # @param instance_id [String]
+        #   The instance Id of instance for which the policy detail is being requested.
+        # @param permissions [Array<String>]
+        #   The set of permissions to check for the +resource+. Permissions with
+        #   wildcards (such as '*' or 'storage.*') are not allowed. For more
+        #   information see
+        #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+        # @return [Google::Iam::V1::TestIamPermissionsResponse]
+
+        def test_instance_permissions instance_id, permissions
+          execute do
+            instances.test_iam_permissions(
+              instance_path(instance_id),
+              permissions
+            )
+          end
+        end
+
         # Execute api call and wrap errors to {Google::Cloud::Error}
         #
         # @raise [Google::Cloud::Error]
