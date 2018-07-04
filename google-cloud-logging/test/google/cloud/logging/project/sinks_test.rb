@@ -96,7 +96,7 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
   it "paginates sinks with next? and next and max set" do
     first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListSinksResponse.decode_json(list_sinks_json(2, "second_page_token"))))
 
     mock = Minitest::Mock.new
     mock.expect :list_sinks, first_list_res, [project_path, page_size: 3, options: default_options]
@@ -110,11 +110,19 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     first_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
     first_sinks.count.must_equal 3
-    first_sinks.next?.must_equal true #must_be :next?
+    first_sinks.next?.must_equal true
+    first_sinks.token.must_equal "next_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    first_sinks.instance_variable_get(:@max).must_equal 3
 
     second_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
     second_sinks.count.must_equal 2
-    second_sinks.next?.must_equal false #wont_be :next?
+    second_sinks.next?.must_equal true
+    second_sinks.token.must_equal "second_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    second_sinks.instance_variable_get(:@max).must_equal 3
   end
 
   it "paginates sinks with all" do

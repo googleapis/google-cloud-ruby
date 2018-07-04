@@ -75,7 +75,7 @@ module Google
             list_grpc = @service.list_resource_descriptors(
               token: token, max: @max
             )
-            self.class.from_grpc list_grpc, @service
+            self.class.from_grpc list_grpc, @service, @max
           end
 
           ##

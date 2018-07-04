@@ -97,7 +97,7 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
   it "paginates resource descriptors with next? and next and max set" do
     first_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(3, "next_page_token"))
-    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2))
+    second_list_res = Google::Logging::V2::ListMonitoredResourceDescriptorsResponse.decode_json(list_resource_descriptors_json(2, "second_page_token"))
 
     mock = Minitest::Mock.new
     mock.expect :list_monitored_resource_descriptors, first_list_res, [page_size: 3, options: default_options]
@@ -112,11 +112,19 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     first_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
     first_descriptors.count.must_equal 3
-    first_descriptors.next?.must_equal true #must_be :next?
+    first_descriptors.next?.must_equal true
+    first_descriptors.token.must_equal "next_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    first_descriptors.instance_variable_get(:@max).must_equal 3
 
     second_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
     second_descriptors.count.must_equal 2
-    second_descriptors.next?.must_equal false #wont_be :next?
+    second_descriptors.next?.must_equal true
+    second_descriptors.token.must_equal "second_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    second_descriptors.instance_variable_get(:@max).must_equal 3
   end
 
   it "paginates resource descriptors with all" do

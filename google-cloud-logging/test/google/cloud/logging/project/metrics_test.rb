@@ -96,7 +96,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
   it "paginates metrics with next? and next and max set" do
     first_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(3, "next_page_token"))))
-    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2))))
+    second_list_res = OpenStruct.new(page: OpenStruct.new(response: Google::Logging::V2::ListLogMetricsResponse.decode_json(list_metrics_json(2, "second_page_token"))))
 
     mock = Minitest::Mock.new
     mock.expect :list_log_metrics, first_list_res, [project_path, page_size: 3, options: default_options]
@@ -110,11 +110,19 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     first_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
     first_metrics.count.must_equal 3
-    first_metrics.next?.must_equal true #must_be :next?
+    first_metrics.next?.must_equal true
+    first_metrics.token.must_equal "next_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    first_metrics.instance_variable_get(:@max).must_equal 3
 
     second_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
     second_metrics.count.must_equal 2
-    second_metrics.next?.must_equal false #wont_be :next?
+    second_metrics.next?.must_equal true
+    second_metrics.token.must_equal "second_page_token"
+
+    # ensure the correct values are propogated to the ivars
+    second_metrics.instance_variable_get(:@max).must_equal 3
   end
 
   it "paginates metrics with all" do

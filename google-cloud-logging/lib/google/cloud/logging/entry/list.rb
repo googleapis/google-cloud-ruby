@@ -73,7 +73,9 @@ module Google
             grpc = @service.list_entries token: token, resources: @resources,
                                          filter: @filter, order: @order,
                                          max: @max, projects: @projects
-            self.class.from_grpc grpc, @service
+            self.class.from_grpc grpc, @service, resources: @resources,
+                                                 filter: @filter, order: @order,
+                                                 max: @max, projects: @projects
           end
 
           ##
