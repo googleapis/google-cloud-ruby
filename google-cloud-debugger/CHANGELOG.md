@@ -1,5 +1,10 @@
 # Release History
 
+### 0.32.1 / 2018-07-05
+
+* Fix issue when disabling Stackdriver components with Rails.env.production.
+* Add documentation for enabling gRPC logging.
+
 ### 0.32.0 / 2018-05-24
 
 * Delay starting the debugger agent until the first request to ensure it
