@@ -1,5 +1,9 @@
 # Release History
 
+### 0.29.1 / 2018-07-05
+
+* Update google-gax dependency to version 1.3.
+
 ### 0.29.0 / 2018-06-22
 
 * Add V1 API.

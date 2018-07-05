@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Vision
-      VERSION = "0.29.0".freeze
+      VERSION = "0.29.1".freeze
     end
   end
 end
