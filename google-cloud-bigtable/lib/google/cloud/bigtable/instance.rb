@@ -766,11 +766,24 @@ module Google
         #
         #   instance = bigtable.instance("my-instance")
         #   policy = instance.policy
+        #
+        # @example Update the policy by passing a block:
+        #   require "google/cloud/spanner"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   instance.policy do |p|
+        #     p.add("roles/owner", "user:owner@example.com")
+        #   end # 2 API calls
 
         def policy
           ensure_service!
           grpc = service.get_instance_policy(instance_id)
-          Policy.from_grpc(grpc)
+          policy = Policy.from_grpc(grpc)
+          return policy unless block_given?
+          yield policy
+          update_policy policy
         end
 
         # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
@@ -804,6 +817,7 @@ module Google
           grpc = service.set_instance_policy(instance_id, new_policy.to_grpc)
           Policy.from_grpc(grpc)
         end
+        alias policy= update_policy
 
         # Tests the specified permissions against the [Cloud
         # IAM](https://cloud.google.com/iam/) access control policy.

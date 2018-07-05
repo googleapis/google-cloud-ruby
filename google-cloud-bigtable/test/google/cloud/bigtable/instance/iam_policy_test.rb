@@ -102,6 +102,38 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
     policy.roles["roles/owner"].last.must_equal  "user:newowner@example.com"
   end
 
+  it "get and set policy using block" do
+    get_res = Google::Iam::V1::Policy.decode_json(owner_policy_json)
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [instance.path]
+
+    updated_policy_hash = JSON.parse(owner_policy_json)
+    updated_policy_hash["bindings"].first["members"].shift
+    updated_policy_hash["bindings"].first["members"] << "user:newowner@example.com"
+
+    set_req = Google::Iam::V1::Policy.decode_json(updated_policy_hash.to_json)
+    set_res = Google::Iam::V1::Policy.decode_json(updated_policy_hash.merge(etag: "eHl6").to_json)
+    mock.expect :set_iam_policy, set_res, [instance.path, set_req]
+    instance.service.mocked_instances = mock
+
+    policy = instance.policy do |v|
+      v.add("roles/owner", "user:newowner@example.com")
+      v.remove("roles/owner", "user:owner@example.com")
+    end
+
+    mock.verify
+
+    policy.must_be_kind_of Google::Cloud::Bigtable::Policy
+    policy.etag.must_equal "xyz"
+    policy.roles.must_be_kind_of Hash
+    policy.roles.size.must_equal 1
+    policy.roles["roles/viewer"].must_be :nil?
+    policy.roles["roles/owner"].must_be_kind_of Array
+    policy.roles["roles/owner"].count.must_equal 2
+    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    policy.roles["roles/owner"].last.must_equal  "user:newowner@example.com"
+  end
+
   it "tests the available permissions" do
    permissions = ["bigtable.tables.create", "bigtable.tables.list"]
    test_res = Google::Iam::V1::TestIamPermissionsResponse.new(
