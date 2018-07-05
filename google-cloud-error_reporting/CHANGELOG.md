@@ -1,5 +1,12 @@
 # Release History
 
+### 0.30.1 / 2018-07-05
+
+* Fix undefined method for nil error when error object has empty backtrace.
+* Fix issue when disabling Stackdriver components with Rails.env.production.
+* Capture env["rack.exception"] errors from Rack env.
+* Add documentation for enabling gRPC logging.
+
 ### 0.30.0 / 2018-02-27
 
 * Use Google Cloud Shared Configuration.

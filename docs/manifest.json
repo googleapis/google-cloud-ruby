@@ -253,8 +253,9 @@
       "name": "google-cloud-error_reporting",
       "defaultService": "google/cloud/errorreporting",
       "versions": [
-        "v0.30.0",
+        "v0.30.1",
         "master",
+        "v0.30.0",
         "v0.29.0",
         "v0.28.1",
         "v0.28.0",
