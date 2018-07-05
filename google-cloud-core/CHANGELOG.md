@@ -1,5 +1,9 @@
 # Release History
 
+### 1.2.2 / 2018-07-05
+
+* Disable warnings while auto-loading gems to avoid circular require warnings.
+
 ### 1.2.1 / 2018-06-28
 
 * Warn when using Ruby version that is end-of-life.
