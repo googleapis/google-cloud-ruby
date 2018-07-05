@@ -1,0 +1,8 @@
+--no-private
+--title=Google Cloud Key Management Service (KMS) API
+--exclude _pb\.rb$
+--markup markdown
+
+./lib/**/*.rb
+-
+README.md
