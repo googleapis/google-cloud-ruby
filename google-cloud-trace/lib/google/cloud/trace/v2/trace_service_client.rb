@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/devtools/cloudtrace/v2/tracing_pb"
-require "google/cloud/trace/credentials"
+require "google/cloud/trace/v2/credentials"
 
 module Google
   module Cloud
@@ -50,6 +47,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -119,11 +119,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -132,10 +139,10 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/cloudtrace/v2/tracing_services_pb"
 
-            credentials ||= Google::Cloud::Trace::Credentials.default
+            credentials ||= Google::Cloud::Trace::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Trace::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Trace::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -159,6 +166,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "trace_service_client_config.json"
             )
@@ -170,13 +178,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @trace_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -184,16 +193,19 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Devtools::Cloudtrace::V2::TraceService::Stub.method(:new)
             )
 
             @batch_write_spans = Google::Gax.create_api_call(
               @trace_service_stub.method(:batch_write_spans),
-              defaults["batch_write_spans"]
+              defaults["batch_write_spans"],
+              exception_transformer: exception_transformer
             )
             @create_span = Google::Gax.create_api_call(
               @trace_service_stub.method(:create_span),
-              defaults["create_span"]
+              defaults["create_span"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -213,25 +225,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/trace/v2"
           #
           #   trace_service_client = Google::Cloud::Trace::V2.new
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize +spans+:
           #   spans = []
           #   trace_service_client.batch_write_spans(formatted_name, spans)
 
           def batch_write_spans \
               name,
               spans,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               spans: spans
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V2::BatchWriteSpansRequest)
-            @batch_write_spans.call(req, options)
+            @batch_write_spans.call(req, options, &block)
             nil
           end
 
@@ -311,6 +329,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Cloudtrace::V2::Span]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Devtools::Cloudtrace::V2::Span]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -318,9 +339,17 @@ module Google
           #
           #   trace_service_client = Google::Cloud::Trace::V2.new
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.span_path("[PROJECT]", "[TRACE]", "[SPAN]")
+          #
+          #   # TODO: Initialize +span_id+:
           #   span_id = ''
+          #
+          #   # TODO: Initialize +display_name+:
           #   display_name = {}
+          #
+          #   # TODO: Initialize +start_time+:
           #   start_time = {}
+          #
+          #   # TODO: Initialize +end_time+:
           #   end_time = {}
           #   response = trace_service_client.create_span(formatted_name, span_id, display_name, start_time, end_time)
 
@@ -338,7 +367,8 @@ module Google
               status: nil,
               same_process_as_parent_span: nil,
               child_span_count: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               span_id: span_id,
@@ -355,7 +385,7 @@ module Google
               child_span_count: child_span_count
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Cloudtrace::V2::Span)
-            @create_span.call(req, options)
+            @create_span.call(req, options, &block)
           end
         end
       end
