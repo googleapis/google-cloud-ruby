@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.1 / 2018-07-05
+
+* Fix issue when disabling Stackdriver components with Rails.env.production.
+* Add /healthz to the ignored requests. (diegodurs)
+* Add documentation for enabling gRPC logging.
+
 ### 0.33.0 / 2018-05-01
 
 * Fix labels in Trace. (tareksamni)
