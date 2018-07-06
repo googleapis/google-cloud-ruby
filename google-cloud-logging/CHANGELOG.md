@@ -1,5 +1,12 @@
 # Release History
 
+### 1.5.1 / 2018-07-05
+
+* Fix bug in List classes by propagating arguments needed for pagination calls.
+* Fix issue when disabling Stackdriver components with Rails.env.production.
+* Reduce string memory usage.
+* Add documentation for enabling gRPC logging.
+
 ### 1.5.0 / 2018-02-27
 
 * Use Google Cloud Shared Configuration.
