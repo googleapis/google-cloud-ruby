@@ -407,6 +407,19 @@ firestore.transaction do |tx|
 end
 ```
 
+### Cloud KMS (Alpha)
+
+- [google-cloud-kms README](google-cloud-kms/README.md)
+- [google-cloud-kms API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-kms/latest)
+- [google-cloud-kms on RubyGems](https://rubygems.org/gems/[google-cloud-kms)
+- [Google Cloud KMS documentation](https://cloud.google.com/kms/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-kms
+```
+
 ### Stackdriver Logging (GA)
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
