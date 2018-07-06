@@ -286,6 +286,15 @@
       ]
     },
     {
+      "id": "google-cloud-kms",
+      "name": "google-cloud-kms",
+      "defaultService": "google/cloud/kms",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-language",
       "name": "google-cloud-language",
       "defaultService": "google/cloud/language",
