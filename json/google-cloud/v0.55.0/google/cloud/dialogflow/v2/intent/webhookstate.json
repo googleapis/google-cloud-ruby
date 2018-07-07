@@ -1,0 +1,1 @@
+{"id":"google/cloud/dialogflow/v2/intent/webhookstate","name":"WebhookState","title":["Google","Cloud","Dialogflow","V2","Intent","WebhookState"],"description":"<p>Represents the different states that webhooks can be in.</p>","source":"google-cloud-dialogflow/lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb#L538","resources":[],"examples":[],"methods":[]}
