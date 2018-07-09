@@ -45,6 +45,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
 * [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
 * [Cloud Tasks API](#cloud-tasks-api-alpha) (Alpha)
+* [Cloud Text-To-Speech API](#cloud-text-to-speech-api-alpha) (Alpha)
 * [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
 
 The support for each service is distributed as a separate gem. However, for your convenience, the `google-cloud` gem lets you install the entire collection.
@@ -735,6 +736,30 @@ $ gem install google-cloud-tasks
      # Process element.
    end
  end
+```
+
+### Cloud Text To Speech API (Alpha)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-text_to_speech
+```
+
+#### Preview
+
+```rb
+require "google/cloud/text_to_speech/v1"
+
+text_to_speech_client = Google::Cloud::TextToSpeech::V1.new
+
+input = {text: "Hello, world!"}
+voice = {language_code: "en-US"}
+audio_config = {audio_encoding: Google::Cloud::Texttospeech::V1::AudioEncoding::MP3}
+response = text_to_speech_client.synthesize_speech input, voice, audio_config
+File.open "hello.mp3", "w" do |file|
+  file.write response.audio_content
+end
 ```
 
 ### Cloud Translation API (GA)

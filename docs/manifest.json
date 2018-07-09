@@ -517,6 +517,15 @@
       ]
     },
     {
+      "id": "google-cloud-text_to_speech",
+      "name": "google-cloud-text_to_speech",
+      "defaultService": "google/cloud/texttospeech",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-trace",
       "name": "google-cloud-trace",
       "defaultService": "google/cloud/trace",

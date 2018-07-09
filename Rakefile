@@ -311,6 +311,7 @@ namespace :jsondoc do
       "google-cloud-speech",
       "google-cloud-storage",
       "google-cloud-tasks",
+      "google-cloud-text_to_speech",
       "google-cloud-trace",
       "google-cloud-translate",
       "google-cloud-video_intelligence",
