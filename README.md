@@ -39,6 +39,7 @@ This client supports the following Google Cloud Platform services at an [Alpha](
 * [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
 * [Dialogflow API](#dialogflow-api-alpha) (Alpha)
 * [Cloud DNS](#cloud-dns-alpha) (Alpha)
+* [Cloud KMS](#cloud-kms-alpha) (Alpha)
 * [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
 * [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
 * [Cloud Redis](#cloud-redis-api-alpha) (Alpha)

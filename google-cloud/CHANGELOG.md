@@ -1,5 +1,9 @@
 # Release History
 
+### 0.55.0 / 2018-07-06
+
+* Add Google Cloud KMS
+
 ### 0.54.0 / 2018-05-30
 
 * Add Google Cloud Tasks
