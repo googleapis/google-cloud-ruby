@@ -114,6 +114,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :parent, :string, 1
     optional :inspect_config, :message, 2, "google.privacy.dlp.v2.InspectConfig"
     repeated :image_redaction_configs, :message, 5, "google.privacy.dlp.v2.RedactImageRequest.ImageRedactionConfig"
+    optional :include_findings, :bool, 6
     optional :byte_item, :message, 7, "google.privacy.dlp.v2.ByteContentItem"
   end
   add_message "google.privacy.dlp.v2.RedactImageRequest.ImageRedactionConfig" do
@@ -131,6 +132,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2.RedactImageResponse" do
     optional :redacted_image, :bytes, 1
     optional :extracted_text, :string, 2
+    optional :inspect_result, :message, 3, "google.privacy.dlp.v2.InspectResult"
   end
   add_message "google.privacy.dlp.v2.DeidentifyContentRequest" do
     optional :parent, :string, 1
@@ -213,6 +215,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :source_table, :message, 2, "google.privacy.dlp.v2.BigQueryTable"
     repeated :actions, :message, 3, "google.privacy.dlp.v2.Action"
   end
+  add_message "google.privacy.dlp.v2.QuasiId" do
+    optional :field, :message, 1, "google.privacy.dlp.v2.FieldId"
+    oneof :tag do
+      optional :info_type, :message, 2, "google.privacy.dlp.v2.InfoType"
+      optional :custom_tag, :string, 3
+      optional :inferred, :message, 4, "google.protobuf.Empty"
+    end
+  end
+  add_message "google.privacy.dlp.v2.StatisticalTable" do
+    optional :table, :message, 3, "google.privacy.dlp.v2.BigQueryTable"
+    repeated :quasi_ids, :message, 1, "google.privacy.dlp.v2.StatisticalTable.QuasiIdentifierField"
+    optional :relative_frequency, :message, 2, "google.privacy.dlp.v2.FieldId"
+  end
+  add_message "google.privacy.dlp.v2.StatisticalTable.QuasiIdentifierField" do
+    optional :field, :message, 1, "google.privacy.dlp.v2.FieldId"
+    optional :custom_tag, :string, 2
+  end
   add_message "google.privacy.dlp.v2.PrivacyMetric" do
     oneof :type do
       optional :numerical_stats_config, :message, 1, "google.privacy.dlp.v2.PrivacyMetric.NumericalStatsConfig"
@@ -220,6 +239,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :k_anonymity_config, :message, 3, "google.privacy.dlp.v2.PrivacyMetric.KAnonymityConfig"
       optional :l_diversity_config, :message, 4, "google.privacy.dlp.v2.PrivacyMetric.LDiversityConfig"
       optional :k_map_estimation_config, :message, 5, "google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig"
+      optional :delta_presence_estimation_config, :message, 6, "google.privacy.dlp.v2.PrivacyMetric.DeltaPresenceEstimationConfig"
     end
   end
   add_message "google.privacy.dlp.v2.PrivacyMetric.NumericalStatsConfig" do
@@ -258,6 +278,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :field, :message, 1, "google.privacy.dlp.v2.FieldId"
     optional :custom_tag, :string, 2
   end
+  add_message "google.privacy.dlp.v2.PrivacyMetric.DeltaPresenceEstimationConfig" do
+    repeated :quasi_ids, :message, 1, "google.privacy.dlp.v2.QuasiId"
+    optional :region_code, :string, 2
+    repeated :auxiliary_tables, :message, 3, "google.privacy.dlp.v2.StatisticalTable"
+  end
   add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails" do
     optional :requested_privacy_metric, :message, 1, "google.privacy.dlp.v2.PrivacyMetric"
     optional :requested_source_table, :message, 2, "google.privacy.dlp.v2.BigQueryTable"
@@ -267,6 +292,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :k_anonymity_result, :message, 5, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult"
       optional :l_diversity_result, :message, 6, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult"
       optional :k_map_estimation_result, :message, 7, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult"
+      optional :delta_presence_estimation_result, :message, 9, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult"
     end
   end
   add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.NumericalStatsResult" do
@@ -326,6 +352,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :max_anonymity, :int64, 2
     optional :bucket_size, :int64, 5
     repeated :bucket_values, :message, 6, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationQuasiIdValues"
+    optional :bucket_value_count, :int64, 7
+  end
+  add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult" do
+    repeated :delta_presence_estimation_histogram, :message, 1, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationHistogramBucket"
+  end
+  add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues" do
+    repeated :quasi_ids_values, :message, 1, "google.privacy.dlp.v2.Value"
+    optional :estimated_probability, :double, 2
+  end
+  add_message "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationHistogramBucket" do
+    optional :min_probability, :double, 1
+    optional :max_probability, :double, 2
+    optional :bucket_size, :int64, 5
+    repeated :bucket_values, :message, 6, "google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues"
     optional :bucket_value_count, :int64, 7
   end
   add_message "google.privacy.dlp.v2.ValueFrequency" do
@@ -807,6 +847,9 @@ module Google
         ListInfoTypesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListInfoTypesRequest").msgclass
         ListInfoTypesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListInfoTypesResponse").msgclass
         RiskAnalysisJobConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RiskAnalysisJobConfig").msgclass
+        QuasiId = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.QuasiId").msgclass
+        StatisticalTable = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StatisticalTable").msgclass
+        StatisticalTable::QuasiIdentifierField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StatisticalTable.QuasiIdentifierField").msgclass
         PrivacyMetric = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrivacyMetric").msgclass
         PrivacyMetric::NumericalStatsConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrivacyMetric.NumericalStatsConfig").msgclass
         PrivacyMetric::CategoricalStatsConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrivacyMetric.CategoricalStatsConfig").msgclass
@@ -816,6 +859,7 @@ module Google
         PrivacyMetric::KMapEstimationConfig::TaggedField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.TaggedField").msgclass
         PrivacyMetric::KMapEstimationConfig::AuxiliaryTable = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.AuxiliaryTable").msgclass
         PrivacyMetric::KMapEstimationConfig::AuxiliaryTable::QuasiIdField = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.AuxiliaryTable.QuasiIdField").msgclass
+        PrivacyMetric::DeltaPresenceEstimationConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrivacyMetric.DeltaPresenceEstimationConfig").msgclass
         AnalyzeDataSourceRiskDetails = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails").msgclass
         AnalyzeDataSourceRiskDetails::NumericalStatsResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.NumericalStatsResult").msgclass
         AnalyzeDataSourceRiskDetails::CategoricalStatsResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.CategoricalStatsResult").msgclass
@@ -829,6 +873,9 @@ module Google
         AnalyzeDataSourceRiskDetails::KMapEstimationResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult").msgclass
         AnalyzeDataSourceRiskDetails::KMapEstimationResult::KMapEstimationQuasiIdValues = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationQuasiIdValues").msgclass
         AnalyzeDataSourceRiskDetails::KMapEstimationResult::KMapEstimationHistogramBucket = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationHistogramBucket").msgclass
+        AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult").msgclass
+        AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationQuasiIdValues = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues").msgclass
+        AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationHistogramBucket = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationHistogramBucket").msgclass
         ValueFrequency = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ValueFrequency").msgclass
         Value = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Value").msgclass
         QuoteInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.QuoteInfo").msgclass

@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/privacy/dlp/v2/dlp_pb"
-require "google/cloud/dlp/credentials"
+require "google/cloud/dlp/v2/credentials"
 
 module Google
   module Cloud
@@ -38,6 +38,9 @@ module Google
         # The service also includes methods for sensitive data redaction and
         # scheduling of data scans on Google Cloud Platform based data sets.
         #
+        # To learn more about concepts and find how-to guides see
+        # https://cloud.google.com/dlp/docs/.
+        #
         # @!attribute [r] dlp_service_stub
         #   @return [Google::Privacy::Dlp::V2::DlpService::Stub]
         class DlpServiceClient
@@ -48,6 +51,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -235,11 +241,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -248,10 +261,10 @@ module Google
             require "google/gax/grpc"
             require "google/privacy/dlp/v2/dlp_services_pb"
 
-            credentials ||= Google::Cloud::Dlp::Credentials.default
+            credentials ||= Google::Cloud::Dlp::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dlp::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dlp::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -275,6 +288,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "dlp_service_client_config.json"
             )
@@ -287,13 +301,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @dlp_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -301,108 +316,134 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Privacy::Dlp::V2::DlpService::Stub.method(:new)
             )
 
             @inspect_content = Google::Gax.create_api_call(
               @dlp_service_stub.method(:inspect_content),
-              defaults["inspect_content"]
+              defaults["inspect_content"],
+              exception_transformer: exception_transformer
             )
             @redact_image = Google::Gax.create_api_call(
               @dlp_service_stub.method(:redact_image),
-              defaults["redact_image"]
+              defaults["redact_image"],
+              exception_transformer: exception_transformer
             )
             @deidentify_content = Google::Gax.create_api_call(
               @dlp_service_stub.method(:deidentify_content),
-              defaults["deidentify_content"]
+              defaults["deidentify_content"],
+              exception_transformer: exception_transformer
             )
             @reidentify_content = Google::Gax.create_api_call(
               @dlp_service_stub.method(:reidentify_content),
-              defaults["reidentify_content"]
+              defaults["reidentify_content"],
+              exception_transformer: exception_transformer
             )
             @list_info_types = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_info_types),
-              defaults["list_info_types"]
+              defaults["list_info_types"],
+              exception_transformer: exception_transformer
             )
             @create_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_inspect_template),
-              defaults["create_inspect_template"]
+              defaults["create_inspect_template"],
+              exception_transformer: exception_transformer
             )
             @update_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:update_inspect_template),
-              defaults["update_inspect_template"]
+              defaults["update_inspect_template"],
+              exception_transformer: exception_transformer
             )
             @get_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_inspect_template),
-              defaults["get_inspect_template"]
+              defaults["get_inspect_template"],
+              exception_transformer: exception_transformer
             )
             @list_inspect_templates = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_inspect_templates),
-              defaults["list_inspect_templates"]
+              defaults["list_inspect_templates"],
+              exception_transformer: exception_transformer
             )
             @delete_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_inspect_template),
-              defaults["delete_inspect_template"]
+              defaults["delete_inspect_template"],
+              exception_transformer: exception_transformer
             )
             @create_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_deidentify_template),
-              defaults["create_deidentify_template"]
+              defaults["create_deidentify_template"],
+              exception_transformer: exception_transformer
             )
             @update_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:update_deidentify_template),
-              defaults["update_deidentify_template"]
+              defaults["update_deidentify_template"],
+              exception_transformer: exception_transformer
             )
             @get_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_deidentify_template),
-              defaults["get_deidentify_template"]
+              defaults["get_deidentify_template"],
+              exception_transformer: exception_transformer
             )
             @list_deidentify_templates = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_deidentify_templates),
-              defaults["list_deidentify_templates"]
+              defaults["list_deidentify_templates"],
+              exception_transformer: exception_transformer
             )
             @delete_deidentify_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_deidentify_template),
-              defaults["delete_deidentify_template"]
+              defaults["delete_deidentify_template"],
+              exception_transformer: exception_transformer
             )
             @create_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_dlp_job),
-              defaults["create_dlp_job"]
+              defaults["create_dlp_job"],
+              exception_transformer: exception_transformer
             )
             @list_dlp_jobs = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_dlp_jobs),
-              defaults["list_dlp_jobs"]
+              defaults["list_dlp_jobs"],
+              exception_transformer: exception_transformer
             )
             @get_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_dlp_job),
-              defaults["get_dlp_job"]
+              defaults["get_dlp_job"],
+              exception_transformer: exception_transformer
             )
             @delete_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_dlp_job),
-              defaults["delete_dlp_job"]
+              defaults["delete_dlp_job"],
+              exception_transformer: exception_transformer
             )
             @cancel_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:cancel_dlp_job),
-              defaults["cancel_dlp_job"]
+              defaults["cancel_dlp_job"],
+              exception_transformer: exception_transformer
             )
             @list_job_triggers = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_job_triggers),
-              defaults["list_job_triggers"]
+              defaults["list_job_triggers"],
+              exception_transformer: exception_transformer
             )
             @get_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:get_job_trigger),
-              defaults["get_job_trigger"]
+              defaults["get_job_trigger"],
+              exception_transformer: exception_transformer
             )
             @delete_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_job_trigger),
-              defaults["delete_job_trigger"]
+              defaults["delete_job_trigger"],
+              exception_transformer: exception_transformer
             )
             @update_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:update_job_trigger),
-              defaults["update_job_trigger"]
+              defaults["update_job_trigger"],
+              exception_transformer: exception_transformer
             )
             @create_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_job_trigger),
-              defaults["create_job_trigger"]
+              defaults["create_job_trigger"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -410,8 +451,13 @@ module Google
 
           # Finds potentially sensitive info in content.
           # This method has limits on input size, processing time, and output size.
-          # [How-to guide for text](https://cloud.google.com/dlp/docs/inspecting-text), [How-to guide for
-          # images](/dlp/docs/inspecting-images)
+          #
+          # When no InfoTypes or CustomInfoTypes are specified in this request, the
+          # system will automatically choose what detectors to run. By default this may
+          # be all types, but may change over time as detectors are updated.
+          #
+          # For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images
+          # and https://cloud.google.com/dlp/docs/inspecting-text,
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
@@ -433,12 +479,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::InspectContentResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::InspectContentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #   response = dlp_service_client.inspect_content(formatted_parent)
 
@@ -447,7 +496,8 @@ module Google
               inspect_config: nil,
               item: nil,
               inspect_template_name: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               inspect_config: inspect_config,
@@ -455,12 +505,17 @@ module Google
               inspect_template_name: inspect_template_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::InspectContentRequest)
-            @inspect_content.call(req, options)
+            @inspect_content.call(req, options, &block)
           end
 
           # Redacts potentially sensitive info from an image.
           # This method has limits on input size, processing time, and output size.
-          # [How-to guide](https://cloud.google.com/dlp/docs/redacting-sensitive-data-images)
+          # See https://cloud.google.com/dlp/docs/redacting-sensitive-data-images to
+          # learn more.
+          #
+          # When no InfoTypes or CustomInfoTypes are specified in this request, the
+          # system will automatically choose what detectors to run. By default this may
+          # be all types, but may change over time as detectors are updated.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
@@ -472,6 +527,9 @@ module Google
           #   The configuration for specifying what content to redact from images.
           #   A hash of the same form as `Google::Privacy::Dlp::V2::RedactImageRequest::ImageRedactionConfig`
           #   can also be provided.
+          # @param include_findings [true, false]
+          #   Whether the response should include findings along with the redacted
+          #   image.
           # @param byte_item [Google::Privacy::Dlp::V2::ByteContentItem | Hash]
           #   The content must be PNG, JPEG, SVG or BMP.
           #   A hash of the same form as `Google::Privacy::Dlp::V2::ByteContentItem`
@@ -479,12 +537,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::RedactImageResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::RedactImageResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #   response = dlp_service_client.redact_image(formatted_parent)
 
@@ -492,21 +553,29 @@ module Google
               parent,
               inspect_config: nil,
               image_redaction_configs: nil,
+              include_findings: nil,
               byte_item: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               inspect_config: inspect_config,
               image_redaction_configs: image_redaction_configs,
+              include_findings: include_findings,
               byte_item: byte_item
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::RedactImageRequest)
-            @redact_image.call(req, options)
+            @redact_image.call(req, options, &block)
           end
 
           # De-identifies potentially sensitive info from a ContentItem.
           # This method has limits on input size and output size.
-          # [How-to guide](https://cloud.google.com/dlp/docs/deidentify-sensitive-data)
+          # See https://cloud.google.com/dlp/docs/deidentify-sensitive-data to
+          # learn more.
+          #
+          # When no InfoTypes or CustomInfoTypes are specified in this request, the
+          # system will automatically choose what detectors to run. By default this may
+          # be all types, but may change over time as detectors are updated.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
@@ -541,12 +610,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::DeidentifyContentResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::DeidentifyContentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #   response = dlp_service_client.deidentify_content(formatted_parent)
 
@@ -557,7 +629,8 @@ module Google
               item: nil,
               inspect_template_name: nil,
               deidentify_template_name: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               deidentify_config: deidentify_config,
@@ -567,10 +640,13 @@ module Google
               deidentify_template_name: deidentify_template_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeidentifyContentRequest)
-            @deidentify_content.call(req, options)
+            @deidentify_content.call(req, options, &block)
           end
 
           # Re-identifies content that has been de-identified.
+          # See
+          # https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
+          # to learn more.
           #
           # @param parent [String]
           #   The parent resource name.
@@ -610,12 +686,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::ReidentifyContentResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::ReidentifyContentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #   response = dlp_service_client.reidentify_content(formatted_parent)
 
@@ -626,7 +705,8 @@ module Google
               item: nil,
               inspect_template_name: nil,
               reidentify_template_name: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               reidentify_config: reidentify_config,
@@ -636,12 +716,12 @@ module Google
               reidentify_template_name: reidentify_template_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ReidentifyContentRequest)
-            @reidentify_content.call(req, options)
+            @reidentify_content.call(req, options, &block)
           end
 
           # Returns a list of the sensitive information types that the DLP API
-          # supports. For more information, see [Listing supported predefined
-          # infoTypes](/dlp/docs/listing-infotypes).
+          # supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
+          # learn more.
           #
           # @param language_code [String]
           #   Optional BCP-47 language code for localized infoType friendly
@@ -653,28 +733,33 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::ListInfoTypesResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::ListInfoTypesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   response = dlp_service_client.list_info_types
 
           def list_info_types \
               language_code: nil,
               filter: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               language_code: language_code,
               filter: filter
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListInfoTypesRequest)
-            @list_info_types.call(req, options)
+            @list_info_types.call(req, options, &block)
           end
 
           # Creates an InspectTemplate for re-using frequently used configuration
           # for inspecting content, images, and storage.
+          # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -691,12 +776,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::InspectTemplate]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::InspectTemplate]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
           #   response = dlp_service_client.create_inspect_template(formatted_parent)
 
@@ -704,17 +792,19 @@ module Google
               parent,
               inspect_template: nil,
               template_id: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               inspect_template: inspect_template,
               template_id: template_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateInspectTemplateRequest)
-            @create_inspect_template.call(req, options)
+            @create_inspect_template.call(req, options, &block)
           end
 
           # Updates the InspectTemplate.
+          # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
           #   Resource name of organization and inspectTemplate to be updated, for
@@ -731,12 +821,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::InspectTemplate]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::InspectTemplate]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_inspect_template_path("[ORGANIZATION]", "[INSPECT_TEMPLATE]")
           #   response = dlp_service_client.update_inspect_template(formatted_name)
 
@@ -744,17 +837,19 @@ module Google
               name,
               inspect_template: nil,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               inspect_template: inspect_template,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::UpdateInspectTemplateRequest)
-            @update_inspect_template.call(req, options)
+            @update_inspect_template.call(req, options, &block)
           end
 
           # Gets an InspectTemplate.
+          # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
           #   Resource name of the organization and inspectTemplate to be read, for
@@ -763,25 +858,30 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::InspectTemplate]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::InspectTemplate]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   response = dlp_service_client.get_inspect_template
 
           def get_inspect_template \
               name: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::GetInspectTemplateRequest)
-            @get_inspect_template.call(req, options)
+            @get_inspect_template.call(req, options, &block)
           end
 
           # Lists InspectTemplates.
+          # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -795,6 +895,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::InspectTemplate>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::InspectTemplate>]
           #   An enumerable of Google::Privacy::Dlp::V2::InspectTemplate instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -802,9 +905,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
           #
           #   # Iterate over all results.
@@ -823,16 +926,18 @@ module Google
           def list_inspect_templates \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListInspectTemplatesRequest)
-            @list_inspect_templates.call(req, options)
+            @list_inspect_templates.call(req, options, &block)
           end
 
           # Deletes an InspectTemplate.
+          # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
           #   Resource name of the organization and inspectTemplate to be deleted, for
@@ -841,27 +946,33 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_inspect_template_path("[ORGANIZATION]", "[INSPECT_TEMPLATE]")
           #   dlp_service_client.delete_inspect_template(formatted_name)
 
           def delete_inspect_template \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteInspectTemplateRequest)
-            @delete_inspect_template.call(req, options)
+            @delete_inspect_template.call(req, options, &block)
             nil
           end
 
           # Creates a DeidentifyTemplate for re-using frequently used configuration
           # for de-identifying content, images, and storage.
+          # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+          # more.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -878,12 +989,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::DeidentifyTemplate]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::DeidentifyTemplate]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
           #   response = dlp_service_client.create_deidentify_template(formatted_parent)
 
@@ -891,17 +1005,20 @@ module Google
               parent,
               deidentify_template: nil,
               template_id: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               deidentify_template: deidentify_template,
               template_id: template_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateDeidentifyTemplateRequest)
-            @create_deidentify_template.call(req, options)
+            @create_deidentify_template.call(req, options, &block)
           end
 
           # Updates the DeidentifyTemplate.
+          # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+          # more.
           #
           # @param name [String]
           #   Resource name of organization and deidentify template to be updated, for
@@ -918,12 +1035,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::DeidentifyTemplate]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::DeidentifyTemplate]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_deidentify_template_path("[ORGANIZATION]", "[DEIDENTIFY_TEMPLATE]")
           #   response = dlp_service_client.update_deidentify_template(formatted_name)
 
@@ -931,17 +1051,20 @@ module Google
               name,
               deidentify_template: nil,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               deidentify_template: deidentify_template,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::UpdateDeidentifyTemplateRequest)
-            @update_deidentify_template.call(req, options)
+            @update_deidentify_template.call(req, options, &block)
           end
 
           # Gets a DeidentifyTemplate.
+          # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+          # more.
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be read, for
@@ -950,26 +1073,32 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::DeidentifyTemplate]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::DeidentifyTemplate]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_deidentify_template_path("[ORGANIZATION]", "[DEIDENTIFY_TEMPLATE]")
           #   response = dlp_service_client.get_deidentify_template(formatted_name)
 
           def get_deidentify_template \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::GetDeidentifyTemplateRequest)
-            @get_deidentify_template.call(req, options)
+            @get_deidentify_template.call(req, options, &block)
           end
 
           # Lists DeidentifyTemplates.
+          # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+          # more.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id or
@@ -983,6 +1112,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::DeidentifyTemplate>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::DeidentifyTemplate>]
           #   An enumerable of Google::Privacy::Dlp::V2::DeidentifyTemplate instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -990,9 +1122,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
           #
           #   # Iterate over all results.
@@ -1011,16 +1143,19 @@ module Google
           def list_deidentify_templates \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListDeidentifyTemplatesRequest)
-            @list_deidentify_templates.call(req, options)
+            @list_deidentify_templates.call(req, options, &block)
           end
 
           # Deletes a DeidentifyTemplate.
+          # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+          # more.
           #
           # @param name [String]
           #   Resource name of the organization and deidentify template to be deleted,
@@ -1029,27 +1164,36 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_deidentify_template_path("[ORGANIZATION]", "[DEIDENTIFY_TEMPLATE]")
           #   dlp_service_client.delete_deidentify_template(formatted_name)
 
           def delete_deidentify_template \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteDeidentifyTemplateRequest)
-            @delete_deidentify_template.call(req, options)
+            @delete_deidentify_template.call(req, options, &block)
             nil
           end
 
           # Creates a new job to inspect storage or calculate risk metrics.
-          # [How-to guide](https://cloud.google.com/dlp/docs/compute-risk-analysis).
+          # See https://cloud.google.com/dlp/docs/inspecting-storage and
+          # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+          #
+          # When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
+          # system will automatically choose what detectors to run. By default this may
+          # be all types, but may change over time as detectors are updated.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
@@ -1067,12 +1211,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::DlpJob]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::DlpJob]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #   response = dlp_service_client.create_dlp_job(formatted_parent)
 
@@ -1081,7 +1228,8 @@ module Google
               inspect_job: nil,
               risk_job: nil,
               job_id: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               inspect_job: inspect_job,
@@ -1089,10 +1237,12 @@ module Google
               job_id: job_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateDlpJobRequest)
-            @create_dlp_job.call(req, options)
+            @create_dlp_job.call(req, options, &block)
           end
 
           # Lists DlpJobs that match the specified filter in the request.
+          # See https://cloud.google.com/dlp/docs/inspecting-storage and
+          # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
@@ -1131,6 +1281,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::DlpJob>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::DlpJob>]
           #   An enumerable of Google::Privacy::Dlp::V2::DlpJob instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -1138,9 +1291,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -1161,7 +1314,8 @@ module Google
               filter: nil,
               page_size: nil,
               type: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               filter: filter,
@@ -1169,95 +1323,114 @@ module Google
               type: type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListDlpJobsRequest)
-            @list_dlp_jobs.call(req, options)
+            @list_dlp_jobs.call(req, options, &block)
           end
 
           # Gets the latest state of a long-running DlpJob.
+          # See https://cloud.google.com/dlp/docs/inspecting-storage and
+          # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param name [String]
           #   The name of the DlpJob resource.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::DlpJob]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::DlpJob]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
           #   response = dlp_service_client.get_dlp_job(formatted_name)
 
           def get_dlp_job \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::GetDlpJobRequest)
-            @get_dlp_job.call(req, options)
+            @get_dlp_job.call(req, options, &block)
           end
 
           # Deletes a long-running DlpJob. This method indicates that the client is
           # no longer interested in the DlpJob result. The job will be cancelled if
           # possible.
+          # See https://cloud.google.com/dlp/docs/inspecting-storage and
+          # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param name [String]
           #   The name of the DlpJob resource to be deleted.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
           #   dlp_service_client.delete_dlp_job(formatted_name)
 
           def delete_dlp_job \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteDlpJobRequest)
-            @delete_dlp_job.call(req, options)
+            @delete_dlp_job.call(req, options, &block)
             nil
           end
 
           # Starts asynchronous cancellation on a long-running DlpJob. The server
           # makes a best effort to cancel the DlpJob, but success is not
           # guaranteed.
+          # See https://cloud.google.com/dlp/docs/inspecting-storage and
+          # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
           #
           # @param name [String]
           #   The name of the DlpJob resource to be cancelled.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
           #   dlp_service_client.cancel_dlp_job(formatted_name)
 
           def cancel_dlp_job \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CancelDlpJobRequest)
-            @cancel_dlp_job.call(req, options)
+            @cancel_dlp_job.call(req, options, &block)
             nil
           end
 
           # Lists job triggers.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param parent [String]
-          #   The parent resource name, for example projects/my-project-id.
+          #   The parent resource name, for example +projects/my-project-id+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -1266,21 +1439,23 @@ module Google
           #   resources in a page.
           # @param order_by [String]
           #   Optional comma separated list of triggeredJob fields to order by,
-          #   followed by 'asc/desc' postfix, i.e.
-          #   +"create_time asc,name desc,schedule_mode asc"+. This list is
-          #   case-insensitive.
+          #   followed by +asc+ or +desc+ postfix. This list is case-insensitive,
+          #   default sorting order is ascending, redundant space characters are
+          #   insignificant.
           #
-          #   Example: +"name asc,schedule_mode desc, status desc"+
+          #   Example: +name asc,update_time, create_time desc+
           #
-          #   Supported filters keys and values are:
+          #   Supported fields are:
           #
           #   * +create_time+: corresponds to time the triggeredJob was created.
           #   * +update_time+: corresponds to time the triggeredJob was last updated.
-          #   * +name+: corresponds to JobTrigger's display name.
-          #   * +status+: corresponds to the triggeredJob status.
+          #   * +name+: corresponds to JobTrigger's name.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::JobTrigger>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::JobTrigger>]
           #   An enumerable of Google::Privacy::Dlp::V2::JobTrigger instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -1288,9 +1463,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -1310,17 +1485,19 @@ module Google
               parent,
               page_size: nil,
               order_by: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size,
               order_by: order_by
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListJobTriggersRequest)
-            @list_job_triggers.call(req, options)
+            @list_job_triggers.call(req, options, &block)
           end
 
           # Gets a job trigger.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param name [String]
           #   Resource name of the project and the triggeredJob, for example
@@ -1328,26 +1505,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::JobTrigger]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
           #   response = dlp_service_client.get_job_trigger(formatted_name)
 
           def get_job_trigger \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::GetJobTriggerRequest)
-            @get_job_trigger.call(req, options)
+            @get_job_trigger.call(req, options, &block)
           end
 
           # Deletes a job trigger.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param name [String]
           #   Resource name of the project and the triggeredJob, for example
@@ -1355,11 +1537,14 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #
           #   # TODO: Initialize +name+:
           #   name = ''
@@ -1367,16 +1552,18 @@ module Google
 
           def delete_job_trigger \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteJobTriggerRequest)
-            @delete_job_trigger.call(req, options)
+            @delete_job_trigger.call(req, options, &block)
             nil
           end
 
           # Updates a job trigger.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param name [String]
           #   Resource name of the project and the triggeredJob, for example
@@ -1392,12 +1579,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::JobTrigger]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
           #   response = dlp_service_client.update_job_trigger(formatted_name)
 
@@ -1405,18 +1595,20 @@ module Google
               name,
               job_trigger: nil,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               job_trigger: job_trigger,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::UpdateJobTriggerRequest)
-            @update_job_trigger.call(req, options)
+            @update_job_trigger.call(req, options, &block)
           end
 
           # Creates a job trigger to run DLP actions such as scanning storage for
           # sensitive information on a set schedule.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
@@ -1432,12 +1624,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Privacy::Dlp::V2::JobTrigger]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dlp/v2"
+          #   require "google/cloud/dlp"
           #
-          #   dlp_service_client = Google::Cloud::Dlp::V2.new
+          #   dlp_service_client = Google::Cloud::Dlp.new(version: :V2)
           #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #   response = dlp_service_client.create_job_trigger(formatted_parent)
 
@@ -1445,14 +1640,15 @@ module Google
               parent,
               job_trigger: nil,
               trigger_id: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               job_trigger: job_trigger,
               trigger_id: trigger_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateJobTriggerRequest)
-            @create_job_trigger.call(req, options)
+            @create_job_trigger.call(req, options, &block)
           end
         end
       end

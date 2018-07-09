@@ -33,11 +33,17 @@ module Google
         # @!attribute [rw] info_types
         #   @return [Array<Google::Privacy::Dlp::V2::InfoType>]
         #     Restricts what info_types to look for. The values must correspond to
-        #     InfoType values returned by ListInfoTypes or found in documentation.
+        #     InfoType values returned by ListInfoTypes or listed at
+        #     https://cloud.google.com/dlp/docs/infotypes-reference.
+        #
+        #     When no InfoTypes or CustomInfoTypes are specified in a request, the
+        #     system may automatically choose what detectors to run. By default this may
+        #     be all types, but may change over time as detectors are updated.
         # @!attribute [rw] min_likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
         #     Only returns findings equal or above this threshold. The default is
         #     POSSIBLE.
+        #     See https://cloud.google.com/dlp/docs/likelihood to learn more.
         # @!attribute [rw] limits
         #   @return [Google::Privacy::Dlp::V2::InspectConfig::FindingLimits]
         # @!attribute [rw] include_quote
@@ -49,7 +55,8 @@ module Google
         #     When true, excludes type information of the findings.
         # @!attribute [rw] custom_info_types
         #   @return [Array<Google::Privacy::Dlp::V2::CustomInfoType>]
-        #     Custom infoTypes provided by the user.
+        #     CustomInfoTypes provided by the user. See
+        #     https://cloud.google.com/dlp/docs/creating-custom-infotypes to learn more.
         # @!attribute [rw] content_options
         #   @return [Array<Google::Privacy::Dlp::V2::ContentOption>]
         #     List of options defining data content to scan.
@@ -116,13 +123,17 @@ module Google
         #     String data to inspect or redact.
         # @!attribute [rw] table
         #   @return [Google::Privacy::Dlp::V2::Table]
-        #     Structured content for inspection.
+        #     Structured content for inspection. See
+        #     https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
+        #     learn more.
         # @!attribute [rw] byte_item
         #   @return [Google::Privacy::Dlp::V2::ByteContentItem]
         #     Content data to inspect or redact. Replaces +type+ and +data+.
         class ContentItem; end
 
         # Structured content to inspect. Up to 50,000 +Value+s per request allowed.
+        # See https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
+        # learn more.
         # @!attribute [rw] headers
         #   @return [Array<Google::Privacy::Dlp::V2::FieldId>]
         # @!attribute [rw] rows
@@ -152,16 +163,16 @@ module Google
         #   @return [String]
         #     The content that was found. Even if the content is not textual, it
         #     may be converted to a textual representation here.
-        #     Provided if requested by the +InspectConfig+ and the finding is
+        #     Provided if +include_quote+ is true and the finding is
         #     less than or equal to 4096 bytes long. If the finding exceeds 4096 bytes
         #     in length, the quote may be omitted.
         # @!attribute [rw] info_type
         #   @return [Google::Privacy::Dlp::V2::InfoType]
         #     The type of content that might have been found.
-        #     Provided if requested by the +InspectConfig+.
+        #     Provided if +excluded_types+ is false.
         # @!attribute [rw] likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
-        #     Estimate of how likely it is that the +info_type+ is correct.
+        #     Confidence of how likely it is that the +info_type+ is correct.
         # @!attribute [rw] location
         #   @return [Google::Privacy::Dlp::V2::Location]
         #     Where the content was found.
@@ -277,8 +288,8 @@ module Google
         #     Height of the bounding box in pixels.
         class BoundingBox; end
 
-        # Request to search for potentially sensitive info in a list of items
-        # and replace it with a default or provided content.
+        # Request to search for potentially sensitive info in an image and redact it
+        # by covering it with a colored rectangle.
         # @!attribute [rw] parent
         #   @return [String]
         #     The parent resource name, for example projects/my-project-id.
@@ -288,6 +299,10 @@ module Google
         # @!attribute [rw] image_redaction_configs
         #   @return [Array<Google::Privacy::Dlp::V2::RedactImageRequest::ImageRedactionConfig>]
         #     The configuration for specifying what content to redact from images.
+        # @!attribute [rw] include_findings
+        #   @return [true, false]
+        #     Whether the response should include findings along with the redacted
+        #     image.
         # @!attribute [rw] byte_item
         #   @return [Google::Privacy::Dlp::V2::ByteContentItem]
         #     The content must be PNG, JPEG, SVG or BMP.
@@ -302,7 +317,7 @@ module Google
           # @!attribute [rw] redact_all_text
           #   @return [true, false]
           #     If true, all text found in the image, regardless whether it matches an
-          #     info_type, is redacted.
+          #     info_type, is redacted. Only one should be provided.
           # @!attribute [rw] redaction_color
           #   @return [Google::Privacy::Dlp::V2::Color]
           #     The color to use when redacting content from an image. If not specified,
@@ -331,6 +346,9 @@ module Google
         #     If an image was being inspected and the InspectConfig's include_quote was
         #     set to true, then this field will include all text, if any, that was found
         #     in the image.
+        # @!attribute [rw] inspect_result
+        #   @return [Google::Privacy::Dlp::V2::InspectResult]
+        #     The findings. Populated when include_findings in the request is true.
         class RedactImageResponse; end
 
         # Request to de-identify a list of items.
@@ -452,17 +470,26 @@ module Google
         # @!attribute [rw] table
         #   @return [Google::Privacy::Dlp::V2::BigQueryTable]
         #     Store findings in an existing table or a new table in an existing
-        #     dataset. Each column in an existing table must have the same name, type,
-        #     and mode of a field in the +Finding+ object. If table_id is not set a new
-        #     one will be generated for you with the following format:
+        #     dataset. If table_id is not set a new one will be generated
+        #     for you with the following format:
         #     dlp_googleapis_yyyy_mm_dd_[dlp_job_id]. Pacific timezone will be used for
         #     generating the date details.
+        #
+        #     For Inspect, each column in an existing output table must have the same
+        #     name, type, and mode of a field in the +Finding+ object.
+        #
+        #     For Risk, an existing output table should be the output of a previous
+        #     Risk analysis job run on the same source table, with the same privacy
+        #     metric and quasi-identifiers. Risk jobs that analyze the same table but
+        #     compute a different privacy metric, or use different sets of
+        #     quasi-identifiers, cannot store their results in the same table.
         # @!attribute [rw] output_schema
         #   @return [Google::Privacy::Dlp::V2::OutputStorageConfig::OutputSchema]
-        #     Schema used for writing the findings. Columns are derived from the
-        #     +Finding+ object. If appending to an existing table, any columns from the
-        #     predefined schema that are missing will be added. No columns in the
-        #     existing table will be deleted.
+        #     Schema used for writing the findings for Inspect jobs. This field is only
+        #     used for Inspect and must be unspecified for Risk jobs. Columns are derived
+        #     from the +Finding+ object. If appending to an existing table, any columns
+        #     from the predefined schema that are missing will be added. No columns in
+        #     the existing table will be deleted.
         #
         #     If unspecified, then all available columns will be used for a new table,
         #     and no changes will be made to an existing table.
@@ -557,7 +584,8 @@ module Google
         #     Set of sensitive infoTypes.
         class ListInfoTypesResponse; end
 
-        # Configuration for a risk analysis job.
+        # Configuration for a risk analysis job. See
+        # https://cloud.google.com/dlp/docs/concepts-risk-analysis to learn more.
         # @!attribute [rw] privacy_metric
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric]
         #     Privacy metric to compute.
@@ -570,6 +598,56 @@ module Google
         #     provided.
         class RiskAnalysisJobConfig; end
 
+        # A column with a semantic tag attached.
+        # @!attribute [rw] field
+        #   @return [Google::Privacy::Dlp::V2::FieldId]
+        #     Identifies the column. [required]
+        # @!attribute [rw] info_type
+        #   @return [Google::Privacy::Dlp::V2::InfoType]
+        #     A column can be tagged with a InfoType to use the relevant public
+        #     dataset as a statistical model of population, if available. We
+        #     currently support US ZIP codes, region codes, ages and genders.
+        #     To programmatically obtain the list of supported InfoTypes, use
+        #     ListInfoTypes with the supported_by=RISK_ANALYSIS filter.
+        # @!attribute [rw] custom_tag
+        #   @return [String]
+        #     A column can be tagged with a custom tag. In this case, the user must
+        #     indicate an auxiliary table that contains statistical information on
+        #     the possible values of this column (below).
+        # @!attribute [rw] inferred
+        #   @return [Google::Protobuf::Empty]
+        #     If no semantic tag is indicated, we infer the statistical model from
+        #     the distribution of values in the input data
+        class QuasiId; end
+
+        # An auxiliary table containing statistical information on the relative
+        # frequency of different quasi-identifiers values. It has one or several
+        # quasi-identifiers columns, and one column that indicates the relative
+        # frequency of each quasi-identifier tuple.
+        # If a tuple is present in the data but not in the auxiliary table, the
+        # corresponding relative frequency is assumed to be zero (and thus, the
+        # tuple is highly reidentifiable).
+        # @!attribute [rw] table
+        #   @return [Google::Privacy::Dlp::V2::BigQueryTable]
+        #     Auxiliary table location. [required]
+        # @!attribute [rw] quasi_ids
+        #   @return [Array<Google::Privacy::Dlp::V2::StatisticalTable::QuasiIdentifierField>]
+        #     Quasi-identifier columns. [required]
+        # @!attribute [rw] relative_frequency
+        #   @return [Google::Privacy::Dlp::V2::FieldId]
+        #     The relative frequency column must contain a floating-point number
+        #     between 0 and 1 (inclusive). Null values are assumed to be zero.
+        #     [required]
+        class StatisticalTable
+          # A quasi-identifier column has a custom_tag, used to know which column
+          # in the data corresponds to which column in the statistical model.
+          # @!attribute [rw] field
+          #   @return [Google::Privacy::Dlp::V2::FieldId]
+          # @!attribute [rw] custom_tag
+          #   @return [String]
+          class QuasiIdentifierField; end
+        end
+
         # Privacy metric to compute for reidentification risk analysis.
         # @!attribute [rw] numerical_stats_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::NumericalStatsConfig]
@@ -581,6 +659,8 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::LDiversityConfig]
         # @!attribute [rw] k_map_estimation_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig]
+        # @!attribute [rw] delta_presence_estimation_config
+        #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::DeltaPresenceEstimationConfig]
         class PrivacyMetric
           # Compute numerical stats over an individual column, including
           # min, max, and quantiles.
@@ -639,6 +719,7 @@ module Google
           # using publicly available data (like the US Census), or using a custom
           # statistical model (indicated as one or several BigQuery tables), or by
           # extrapolating from the distribution of values in the input dataset.
+          # A column with a semantic tag attached.
           # @!attribute [rw] quasi_ids
           #   @return [Array<Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField>]
           #     Fields considered to be quasi-identifiers. No two columns can have the
@@ -654,7 +735,6 @@ module Google
           #     used to tag a quasi-identifiers column must appear in exactly one column
           #     of one auxiliary table.
           class KMapEstimationConfig
-            # A column with a semantic tag attached.
             # @!attribute [rw] field
             #   @return [Google::Privacy::Dlp::V2::FieldId]
             #     Identifies the column. [required]
@@ -704,6 +784,26 @@ module Google
               class QuasiIdField; end
             end
           end
+
+          # δ-presence metric, used to estimate how likely it is for an attacker to
+          # figure out that one given individual appears in a de-identified dataset.
+          # Similarly to the k-map metric, we cannot compute δ-presence exactly without
+          # knowing the attack dataset, so we use a statistical model instead.
+          # @!attribute [rw] quasi_ids
+          #   @return [Array<Google::Privacy::Dlp::V2::QuasiId>]
+          #     Fields considered to be quasi-identifiers. No two fields can have the
+          #     same tag. [required]
+          # @!attribute [rw] region_code
+          #   @return [String]
+          #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
+          #     Required if no column is tagged with a region-specific InfoType (like
+          #     US_ZIP_5) or a region code.
+          # @!attribute [rw] auxiliary_tables
+          #   @return [Array<Google::Privacy::Dlp::V2::StatisticalTable>]
+          #     Several auxiliary tables can be used in the analysis. Each custom_tag
+          #     used to tag a quasi-identifiers field must appear in exactly one
+          #     field of one auxiliary table.
+          class DeltaPresenceEstimationConfig; end
         end
 
         # Result of a risk analysis operation request.
@@ -723,6 +823,8 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult]
         # @!attribute [rw] k_map_estimation_result
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult]
+        # @!attribute [rw] delta_presence_estimation_result
+        #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult]
         class AnalyzeDataSourceRiskDetails
           # Result of the numerical stats computation.
           # @!attribute [rw] min_value
@@ -886,6 +988,63 @@ module Google
             #   @return [Integer]
             #     Total number of distinct quasi-identifier tuple values in this bucket.
             class KMapEstimationHistogramBucket; end
+          end
+
+          # Result of the δ-presence computation. Note that these results are an
+          # estimation, not exact values.
+          # @!attribute [rw] delta_presence_estimation_histogram
+          #   @return [Array<Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationHistogramBucket>]
+          #     The intervals [min_probability, max_probability) do not overlap. If a
+          #     value doesn't correspond to any such interval, the associated frequency
+          #     is zero. For example, the following records:
+          #       {min_probability: 0, max_probability: 0.1, frequency: 17}
+          #       {min_probability: 0.2, max_probability: 0.3, frequency: 42}
+          #       {min_probability: 0.3, max_probability: 0.4, frequency: 99}
+          #     mean that there are no record with an estimated probability in [0.1, 0.2)
+          #     nor larger or equal to 0.4.
+          class DeltaPresenceEstimationResult
+            # A tuple of values for the quasi-identifier columns.
+            # @!attribute [rw] quasi_ids_values
+            #   @return [Array<Google::Privacy::Dlp::V2::Value>]
+            #     The quasi-identifier values.
+            # @!attribute [rw] estimated_probability
+            #   @return [Float]
+            #     The estimated probability that a given individual sharing these
+            #     quasi-identifier values is in the dataset. This value, typically called
+            #     δ, is the ratio between the number of records in the dataset with these
+            #     quasi-identifier values, and the total number of individuals (inside
+            #     *and* outside the dataset) with these quasi-identifier values.
+            #     For example, if there are 15 individuals in the dataset who share the
+            #     same quasi-identifier values, and an estimated 100 people in the entire
+            #     population with these values, then δ is 0.15.
+            class DeltaPresenceEstimationQuasiIdValues; end
+
+            # A DeltaPresenceEstimationHistogramBucket message with the following
+            # values:
+            #   min_probability: 0.1
+            #   max_probability: 0.2
+            #   frequency: 42
+            # means that there are 42 records for which δ is in [0.1, 0.2). An
+            # important particular case is when min_probability = max_probability = 1:
+            # then, every individual who shares this quasi-identifier combination is in
+            # the dataset.
+            # @!attribute [rw] min_probability
+            #   @return [Float]
+            #     Between 0 and 1.
+            # @!attribute [rw] max_probability
+            #   @return [Float]
+            #     Always greater than or equal to min_probability.
+            # @!attribute [rw] bucket_size
+            #   @return [Integer]
+            #     Number of records within these probability bounds.
+            # @!attribute [rw] bucket_values
+            #   @return [Array<Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationQuasiIdValues>]
+            #     Sample of quasi-identifier tuple values in this bucket. The total
+            #     number of classes returned per bucket is capped at 20.
+            # @!attribute [rw] bucket_value_count
+            #   @return [Integer]
+            #     Total number of distinct quasi-identifier tuple values in this bucket.
+            class DeltaPresenceEstimationHistogramBucket; end
           end
         end
 
@@ -1105,6 +1264,8 @@ module Google
         # If the bound Value type differs from the type of data
         # being transformed, we will first attempt converting the type of the data to
         # be transformed to match the type of the bound before comparing.
+        #
+        # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] lower_bound
         #   @return [Google::Privacy::Dlp::V2::Value]
         #     Lower bound value of buckets. All values less than +lower_bound+ are
@@ -1132,6 +1293,7 @@ module Google
         # If the bound +Value+ type differs from the type of data being transformed, we
         # will first attempt converting the type of the data to be transformed to match
         # the type of the bound before comparing.
+        # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] buckets
         #   @return [Array<Google::Privacy::Dlp::V2::BucketingConfig::Bucket>]
         #     Set of buckets. Ranges must be non-overlapping.
@@ -1160,7 +1322,7 @@ module Google
         # replaced with the same surrogate.
         # Identifiers must be at least two characters long.
         # In the case that the identifier is the empty string, it will be skipped.
-        # See [Pseudonymization](https://cloud.google.com/dlp/docs/pseudonymization) for example usage.
+        # See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
         # @!attribute [rw] crypto_key
         #   @return [Google::Privacy::Dlp::V2::CryptoKey]
         #     The key used by the encryption algorithm. [required]
@@ -1185,8 +1347,7 @@ module Google
         #     such that:
         #
         #     * a 64 bit integer is encoded followed by a single byte of value 1
-        #     * a string is encoded in UTF-8 format followed by a single byte of value
-        #       å 2
+        #     * a string is encoded in UTF-8 format followed by a single byte of value 2
         # @!attribute [rw] common_alphabet
         #   @return [Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet]
         # @!attribute [rw] custom_alphabet
@@ -1294,7 +1455,8 @@ module Google
         class KmsWrappedCryptoKey; end
 
         # Shifts dates by random number of days, with option to be consistent for the
-        # same context.
+        # same context. See https://cloud.google.com/dlp/docs/concepts-date-shifting
+        # to learn more.
         # @!attribute [rw] upper_bound_days
         #   @return [Integer]
         #     Range of shift in days. Actual shift will be selected at random within this
@@ -1331,8 +1493,9 @@ module Google
           # info_type.
           # @!attribute [rw] info_types
           #   @return [Array<Google::Privacy::Dlp::V2::InfoType>]
-          #     InfoTypes to apply the transformation to. Empty list will match all
-          #     available infoTypes for this transformation.
+          #     InfoTypes to apply the transformation to. An empty list will cause
+          #     this transformation to apply to all findings that correspond to
+          #     infoTypes that were requested in +InspectConfig+.
           # @!attribute [rw] primitive_transformation
           #   @return [Google::Privacy::Dlp::V2::PrimitiveTransformation]
           #     Primitive transformation to apply to the infoType. [required]
@@ -1499,18 +1662,19 @@ module Google
         # @!attribute [rw] recurrence_period_duration
         #   @return [Google::Protobuf::Duration]
         #     With this option a job is started a regular periodic basis. For
-        #     example: every 10 minutes.
+        #     example: every day (86400 seconds).
         #
         #     A scheduled start time will be skipped if the previous
         #     execution has not ended when its scheduled time occurs.
         #
         #     This value must be set to a time duration greater than or equal
-        #     to 60 minutes and can be no longer than 60 days.
+        #     to 1 day and can be no longer than 60 days.
         class Schedule; end
 
         # The inspectTemplate contains a configuration (set of types of sensitive data
         # to be detected) to be used anywhere you otherwise would normally specify
-        # InspectConfig.
+        # InspectConfig. See https://cloud.google.com/dlp/docs/concepts-templates
+        # to learn more.
         # @!attribute [rw] name
         #   @return [String]
         #     The template name. Output only.
@@ -1536,6 +1700,7 @@ module Google
         class InspectTemplate; end
 
         # The DeidentifyTemplates contains instructions on how to deidentify content.
+        # See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
         # @!attribute [rw] name
         #   @return [String]
         #     The template name. Output only.
@@ -1571,6 +1736,7 @@ module Google
         class Error; end
 
         # Contains a configuration to make dlp api calls on a repeating basis.
+        # See https://cloud.google.com/dlp/docs/concepts-job-triggers to learn more.
         # @!attribute [rw] name
         #   @return [String]
         #     Unique resource name for the triggeredJob, assigned by the service when the
@@ -1633,6 +1799,7 @@ module Google
         end
 
         # A task to execute on the completion of a job.
+        # See https://cloud.google.com/dlp/docs/concepts-actions to learn more.
         # @!attribute [rw] save_findings
         #   @return [Google::Privacy::Dlp::V2::Action::SaveFindings]
         #     Save resulting findings in a provided location.
@@ -1646,7 +1813,7 @@ module Google
           # If set, the detailed findings will be persisted to the specified
           # OutputStorageConfig. Only a single instance of this action can be
           # specified.
-          # Compatible with: Inspect
+          # Compatible with: Inspect, Risk
           # @!attribute [rw] output_config
           #   @return [Google::Privacy::Dlp::V2::OutputStorageConfig]
           class SaveFindings; end
@@ -1801,30 +1968,29 @@ module Google
         # Request message for ListJobTriggers.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource name, for example projects/my-project-id.
+        #     The parent resource name, for example +projects/my-project-id+.
         # @!attribute [rw] page_token
         #   @return [String]
         #     Optional page token to continue retrieval. Comes from previous call
-        #     to ListJobTriggers. +order_by+ and +filter+ should not change for
-        #     subsequent calls, but can be omitted if token is specified.
+        #     to ListJobTriggers. +order_by+ field must not
+        #     change for subsequent calls.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional size of the page, can be limited by a server.
         # @!attribute [rw] order_by
         #   @return [String]
         #     Optional comma separated list of triggeredJob fields to order by,
-        #     followed by 'asc/desc' postfix, i.e.
-        #     +"create_time asc,name desc,schedule_mode asc"+. This list is
-        #     case-insensitive.
+        #     followed by +asc+ or +desc+ postfix. This list is case-insensitive,
+        #     default sorting order is ascending, redundant space characters are
+        #     insignificant.
         #
-        #     Example: +"name asc,schedule_mode desc, status desc"+
+        #     Example: +name asc,update_time, create_time desc+
         #
-        #     Supported filters keys and values are:
+        #     Supported fields are:
         #
         #     * +create_time+: corresponds to time the triggeredJob was created.
         #     * +update_time+: corresponds to time the triggeredJob was last updated.
-        #     * +name+: corresponds to JobTrigger's display name.
-        #     * +status+: corresponds to the triggeredJob status.
+        #     * +name+: corresponds to JobTrigger's name.
         class ListJobTriggersRequest; end
 
         # Response message for ListJobTriggers.
