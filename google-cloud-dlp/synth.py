@@ -27,5 +27,6 @@ v2_library = gapic.ruby_library(
     artman_output_name='google-cloud-ruby/google-cloud-dlp'
 )
 
-s.copy(v2_library / 'lib')
+s.copy(v2_library / 'lib/google/cloud/dlp')
+s.copy(v2_library / 'lib/google/cloud/privacy')
 s.copy(v2_library / 'test')
