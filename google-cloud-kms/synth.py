@@ -12,4 +12,5 @@ v1_library = gapic.ruby_library(
     config_path='artman_cloudkms.yaml'
 )
 
-s.copy(v1_library)
+s.copy(v1_library / 'lib')
+s.copy(v1_library / 'test')

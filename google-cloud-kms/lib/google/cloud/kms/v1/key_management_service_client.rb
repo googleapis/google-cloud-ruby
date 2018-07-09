@@ -301,97 +301,154 @@ module Google
             @list_key_rings = Google::Gax.create_api_call(
               @key_management_service_stub.method(:list_key_rings),
               defaults["list_key_rings"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_crypto_keys = Google::Gax.create_api_call(
               @key_management_service_stub.method(:list_crypto_keys),
               defaults["list_crypto_keys"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @list_crypto_key_versions = Google::Gax.create_api_call(
               @key_management_service_stub.method(:list_crypto_key_versions),
               defaults["list_crypto_key_versions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @get_key_ring = Google::Gax.create_api_call(
               @key_management_service_stub.method(:get_key_ring),
               defaults["get_key_ring"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_crypto_key = Google::Gax.create_api_call(
               @key_management_service_stub.method(:get_crypto_key),
               defaults["get_crypto_key"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @get_crypto_key_version = Google::Gax.create_api_call(
               @key_management_service_stub.method(:get_crypto_key_version),
               defaults["get_crypto_key_version"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @create_key_ring = Google::Gax.create_api_call(
               @key_management_service_stub.method(:create_key_ring),
               defaults["create_key_ring"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @create_crypto_key = Google::Gax.create_api_call(
               @key_management_service_stub.method(:create_crypto_key),
               defaults["create_crypto_key"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @create_crypto_key_version = Google::Gax.create_api_call(
               @key_management_service_stub.method(:create_crypto_key_version),
               defaults["create_crypto_key_version"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
             )
             @update_crypto_key = Google::Gax.create_api_call(
               @key_management_service_stub.method(:update_crypto_key),
               defaults["update_crypto_key"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'crypto_key.name' => request.crypto_key.name}
+              end
             )
             @update_crypto_key_version = Google::Gax.create_api_call(
               @key_management_service_stub.method(:update_crypto_key_version),
               defaults["update_crypto_key_version"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'crypto_key_version.name' => request.crypto_key_version.name}
+              end
             )
             @encrypt = Google::Gax.create_api_call(
               @key_management_service_stub.method(:encrypt),
               defaults["encrypt"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @decrypt = Google::Gax.create_api_call(
               @key_management_service_stub.method(:decrypt),
               defaults["decrypt"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @update_crypto_key_primary_version = Google::Gax.create_api_call(
               @key_management_service_stub.method(:update_crypto_key_primary_version),
               defaults["update_crypto_key_primary_version"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @destroy_crypto_key_version = Google::Gax.create_api_call(
               @key_management_service_stub.method(:destroy_crypto_key_version),
               defaults["destroy_crypto_key_version"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @restore_crypto_key_version = Google::Gax.create_api_call(
               @key_management_service_stub.method(:restore_crypto_key_version),
               defaults["restore_crypto_key_version"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
             )
             @set_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:set_iam_policy),
               defaults["set_iam_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @get_iam_policy = Google::Gax.create_api_call(
               @iam_policy_stub.method(:get_iam_policy),
               defaults["get_iam_policy"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
             @test_iam_permissions = Google::Gax.create_api_call(
               @iam_policy_stub.method(:test_iam_permissions),
               defaults["test_iam_permissions"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
             )
           end
 
