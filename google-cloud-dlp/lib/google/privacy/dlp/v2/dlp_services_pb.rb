@@ -30,6 +30,9 @@ module Google
           # blocks or images.
           # The service also includes methods for sensitive data redaction and
           # scheduling of data scans on Google Cloud Platform based data sets.
+          #
+          # To learn more about concepts and find how-to guides see
+          # https://cloud.google.com/dlp/docs/.
           class Service
 
             include GRPC::GenericService
@@ -40,70 +43,121 @@ module Google
 
             # Finds potentially sensitive info in content.
             # This method has limits on input size, processing time, and output size.
-            # [How-to guide for text](/dlp/docs/inspecting-text), [How-to guide for
-            # images](/dlp/docs/inspecting-images)
+            #
+            # When no InfoTypes or CustomInfoTypes are specified in this request, the
+            # system will automatically choose what detectors to run. By default this may
+            # be all types, but may change over time as detectors are updated.
+            #
+            # For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images
+            # and https://cloud.google.com/dlp/docs/inspecting-text,
             rpc :InspectContent, InspectContentRequest, InspectContentResponse
             # Redacts potentially sensitive info from an image.
             # This method has limits on input size, processing time, and output size.
-            # [How-to guide](/dlp/docs/redacting-sensitive-data-images)
+            # See https://cloud.google.com/dlp/docs/redacting-sensitive-data-images to
+            # learn more.
+            #
+            # When no InfoTypes or CustomInfoTypes are specified in this request, the
+            # system will automatically choose what detectors to run. By default this may
+            # be all types, but may change over time as detectors are updated.
             rpc :RedactImage, RedactImageRequest, RedactImageResponse
             # De-identifies potentially sensitive info from a ContentItem.
             # This method has limits on input size and output size.
-            # [How-to guide](/dlp/docs/deidentify-sensitive-data)
+            # See https://cloud.google.com/dlp/docs/deidentify-sensitive-data to
+            # learn more.
+            #
+            # When no InfoTypes or CustomInfoTypes are specified in this request, the
+            # system will automatically choose what detectors to run. By default this may
+            # be all types, but may change over time as detectors are updated.
             rpc :DeidentifyContent, DeidentifyContentRequest, DeidentifyContentResponse
             # Re-identifies content that has been de-identified.
+            # See
+            # https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
+            # to learn more.
             rpc :ReidentifyContent, ReidentifyContentRequest, ReidentifyContentResponse
             # Returns a list of the sensitive information types that the DLP API
-            # supports. For more information, see [Listing supported predefined
-            # infoTypes](/dlp/docs/listing-infotypes).
+            # supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
+            # learn more.
             rpc :ListInfoTypes, ListInfoTypesRequest, ListInfoTypesResponse
             # Creates an InspectTemplate for re-using frequently used configuration
             # for inspecting content, images, and storage.
+            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             rpc :CreateInspectTemplate, CreateInspectTemplateRequest, InspectTemplate
             # Updates the InspectTemplate.
+            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             rpc :UpdateInspectTemplate, UpdateInspectTemplateRequest, InspectTemplate
             # Gets an InspectTemplate.
+            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             rpc :GetInspectTemplate, GetInspectTemplateRequest, InspectTemplate
             # Lists InspectTemplates.
+            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             rpc :ListInspectTemplates, ListInspectTemplatesRequest, ListInspectTemplatesResponse
             # Deletes an InspectTemplate.
+            # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
             rpc :DeleteInspectTemplate, DeleteInspectTemplateRequest, Google::Protobuf::Empty
             # Creates a DeidentifyTemplate for re-using frequently used configuration
             # for de-identifying content, images, and storage.
+            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+            # more.
             rpc :CreateDeidentifyTemplate, CreateDeidentifyTemplateRequest, DeidentifyTemplate
             # Updates the DeidentifyTemplate.
+            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+            # more.
             rpc :UpdateDeidentifyTemplate, UpdateDeidentifyTemplateRequest, DeidentifyTemplate
             # Gets a DeidentifyTemplate.
+            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+            # more.
             rpc :GetDeidentifyTemplate, GetDeidentifyTemplateRequest, DeidentifyTemplate
             # Lists DeidentifyTemplates.
+            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+            # more.
             rpc :ListDeidentifyTemplates, ListDeidentifyTemplatesRequest, ListDeidentifyTemplatesResponse
             # Deletes a DeidentifyTemplate.
+            # See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+            # more.
             rpc :DeleteDeidentifyTemplate, DeleteDeidentifyTemplateRequest, Google::Protobuf::Empty
             # Creates a job trigger to run DLP actions such as scanning storage for
             # sensitive information on a set schedule.
+            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
             rpc :CreateJobTrigger, CreateJobTriggerRequest, JobTrigger
             # Updates a job trigger.
+            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
             rpc :UpdateJobTrigger, UpdateJobTriggerRequest, JobTrigger
             # Gets a job trigger.
+            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
             rpc :GetJobTrigger, GetJobTriggerRequest, JobTrigger
             # Lists job triggers.
+            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
             rpc :ListJobTriggers, ListJobTriggersRequest, ListJobTriggersResponse
             # Deletes a job trigger.
+            # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
             rpc :DeleteJobTrigger, DeleteJobTriggerRequest, Google::Protobuf::Empty
             # Creates a new job to inspect storage or calculate risk metrics.
-            # [How-to guide](/dlp/docs/compute-risk-analysis).
+            # See https://cloud.google.com/dlp/docs/inspecting-storage and
+            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+            #
+            # When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
+            # system will automatically choose what detectors to run. By default this may
+            # be all types, but may change over time as detectors are updated.
             rpc :CreateDlpJob, CreateDlpJobRequest, DlpJob
             # Lists DlpJobs that match the specified filter in the request.
+            # See https://cloud.google.com/dlp/docs/inspecting-storage and
+            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
             rpc :ListDlpJobs, ListDlpJobsRequest, ListDlpJobsResponse
             # Gets the latest state of a long-running DlpJob.
+            # See https://cloud.google.com/dlp/docs/inspecting-storage and
+            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
             rpc :GetDlpJob, GetDlpJobRequest, DlpJob
             # Deletes a long-running DlpJob. This method indicates that the client is
             # no longer interested in the DlpJob result. The job will be cancelled if
             # possible.
+            # See https://cloud.google.com/dlp/docs/inspecting-storage and
+            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
             rpc :DeleteDlpJob, DeleteDlpJobRequest, Google::Protobuf::Empty
             # Starts asynchronous cancellation on a long-running DlpJob. The server
             # makes a best effort to cancel the DlpJob, but success is not
             # guaranteed.
+            # See https://cloud.google.com/dlp/docs/inspecting-storage and
+            # https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
             rpc :CancelDlpJob, CancelDlpJobRequest, Google::Protobuf::Empty
           end
 

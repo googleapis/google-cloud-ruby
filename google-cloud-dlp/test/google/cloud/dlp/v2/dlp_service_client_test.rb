@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockDlpServiceCredentials < Google::Cloud::Dlp::Credentials
+class MockDlpServiceCredentials < Google::Cloud::Dlp::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -90,7 +90,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("inspect_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -98,6 +98,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.inspect_content(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -118,7 +125,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("inspect_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -158,7 +165,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("redact_image")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -166,6 +173,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.redact_image(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -186,7 +200,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("redact_image")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -224,7 +238,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("deidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -232,6 +246,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.deidentify_content(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -252,7 +273,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("deidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -290,7 +311,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("reidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -298,6 +319,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.reidentify_content(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -318,7 +346,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("reidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -351,7 +379,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_info_types")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -359,6 +387,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_info_types do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -374,7 +409,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_info_types")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -419,7 +454,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -427,6 +462,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_inspect_template(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -447,7 +489,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -492,7 +534,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("update_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -500,6 +542,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_inspect_template(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -520,7 +569,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("update_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -560,7 +609,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -568,6 +617,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_inspect_template do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -583,7 +639,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -624,7 +680,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_inspect_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -655,7 +711,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_inspect_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -689,7 +745,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -697,6 +753,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_inspect_template(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -717,7 +780,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -762,7 +825,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -770,6 +833,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_deidentify_template(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -790,7 +860,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -835,7 +905,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("update_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -843,6 +913,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_deidentify_template(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -863,7 +940,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("update_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -908,7 +985,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -916,6 +993,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_deidentify_template(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -936,7 +1020,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -977,7 +1061,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_deidentify_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1008,7 +1092,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_deidentify_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1042,7 +1126,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1050,6 +1134,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_deidentify_template(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1070,7 +1161,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1110,7 +1201,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1118,6 +1209,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_dlp_job(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1138,7 +1236,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1179,7 +1277,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_dlp_jobs")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1210,7 +1308,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_dlp_jobs")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1250,7 +1348,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1258,6 +1356,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_dlp_job(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1278,7 +1383,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1312,7 +1417,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1320,6 +1425,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_dlp_job(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1340,7 +1452,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1374,7 +1486,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("cancel_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1382,6 +1494,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.cancel_dlp_job(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1402,7 +1521,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("cancel_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1443,7 +1562,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_job_triggers")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1474,7 +1593,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("list_job_triggers")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1519,7 +1638,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1527,6 +1646,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_job_trigger(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1547,7 +1673,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("get_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1581,7 +1707,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1589,6 +1715,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_job_trigger(name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1609,7 +1742,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("delete_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1654,7 +1787,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("update_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1662,6 +1795,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_job_trigger(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1682,7 +1822,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("update_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1727,7 +1867,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method
@@ -1735,6 +1875,13 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_job_trigger(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1755,7 +1902,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_credentials = MockDlpServiceCredentials.new("create_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dlp::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dlp.new(version: :v2)
 
           # Call method

@@ -19,34 +19,38 @@ module Google
         # Type of information detected by the API.
         # @!attribute [rw] name
         #   @return [String]
-        #     Name of the information type.
+        #     Name of the information type. Either a name of your choosing when
+        #     creating a CustomInfoType, or one of the names listed
+        #     at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
+        #     a built-in type.
         class InfoType; end
 
         # Custom information type provided by the user. Used to find domain-specific
         # sensitive information configurable to the data in question.
         # @!attribute [rw] info_type
         #   @return [Google::Privacy::Dlp::V2::InfoType]
-        #     Info type configuration. All custom info types must have configurations
-        #     that do not conflict with built-in info types or other custom info types.
+        #     All CustomInfoTypes must have a name
+        #     that does not conflict with built-in InfoTypes or other CustomInfoTypes.
         # @!attribute [rw] likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
-        #     Likelihood to return for this custom info type. This base value can be
+        #     Likelihood to return for this CustomInfoType. This base value can be
         #     altered by a detection rule if the finding meets the criteria specified by
         #     the rule. Defaults to +VERY_LIKELY+ if not specified.
         # @!attribute [rw] dictionary
         #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary]
-        #     Dictionary-based custom info type.
+        #     A list of phrases to detect as a CustomInfoType.
         # @!attribute [rw] regex
         #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
-        #     Regex-based custom info type.
+        #     Regular expression based CustomInfoType.
         # @!attribute [rw] surrogate_type
         #   @return [Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType]
-        #     Surrogate info type.
+        #     Message for detecting output from deidentification transformations that
+        #     support reversing.
         # @!attribute [rw] detection_rules
         #   @return [Array<Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule>]
-        #     Set of detection rules to apply to all findings of this custom info type.
+        #     Set of detection rules to apply to all findings of this CustomInfoType.
         #     Rules are applied in order that they are specified. Not supported for the
-        #     +surrogate_type+ custom info type.
+        #     +surrogate_type+ CustomInfoType.
         class CustomInfoType
           # Custom information type based on a dictionary of words or phrases. This can
           # be used to match sensitive information specific to the data, such as a list
@@ -96,11 +100,11 @@ module Google
           # These types of transformations are
           # those that perform pseudonymization, thereby producing a "surrogate" as
           # output. This should be used in conjunction with a field on the
-          # transformation such as +surrogate_info_type+. This custom info type does
+          # transformation such as +surrogate_info_type+. This CustomInfoType does
           # not support the use of +detection_rules+.
           class SurrogateType; end
 
-          # Rule for modifying a custom info type to alter behavior under certain
+          # Rule for modifying a CustomInfoType to alter behavior under certain
           # circumstances, depending on the specific details of the rule. Not supported
           # for the +surrogate_type+ custom info type.
           # @!attribute [rw] hotword_rule
@@ -134,11 +138,11 @@ module Google
             #     a final likelihood of +LIKELY+.
             class LikelihoodAdjustment; end
 
-            # Detection rule that adjusts the likelihood of findings within a certain
+            # The rule that adjusts the likelihood of findings within a certain
             # proximity of hotwords.
             # @!attribute [rw] hotword_regex
             #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
-            #     Regex pattern defining what qualifies as a hotword.
+            #     Regular expression pattern defining what qualifies as a hotword.
             # @!attribute [rw] proximity
             #   @return [Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
             #     Proximity of the finding within which the entire hotword must reside.
@@ -205,6 +209,13 @@ module Google
         #     List of file type groups to include in the scan.
         #     If empty, all files are scanned and available data format processors
         #     are applied.
+        # @!attribute [rw] sample_method
+        #   @return [Google::Privacy::Dlp::V2::CloudStorageOptions::SampleMethod]
+        # @!attribute [rw] files_limit_percent
+        #   @return [Integer]
+        #     Limits the number of files to scan to this percentage of the input FileSet.
+        #     Number of files scanned is rounded down. Must be between 0 and 100,
+        #     inclusively. Both 0 and 100 means no limit. Defaults to 0.
         class CloudStorageOptions
           # Set of files to scan.
           # @!attribute [rw] url
@@ -212,9 +223,23 @@ module Google
           #     The url, in the format +gs://<bucket>/<path>+. Trailing wildcard in the
           #     path is allowed.
           class FileSet; end
+
+          # How to sample bytes if not all bytes are scanned. Meaningful only when used
+          # in conjunction with bytes_limit_per_file. If not specified, scanning would
+          # start from the top.
+          module SampleMethod
+            SAMPLE_METHOD_UNSPECIFIED = 0
+
+            # Scan from the top (default).
+            TOP = 1
+
+            # For each file larger than bytes_limit_per_file, randomly pick the offset
+            # to start scanning. The scanned bytes are contiguous.
+            RANDOM_START = 2
+          end
         end
 
-        # Message representing a path in Cloud Storage.
+        # Message representing a single file or path in Cloud Storage.
         # @!attribute [rw] path
         #   @return [String]
         #     A url representing a file or path (no wildcards) in Cloud Storage.
@@ -234,7 +259,22 @@ module Google
         #     Max number of rows to scan. If the table has more rows than this value, the
         #     rest of the rows are omitted. If not set, or if set to 0, all rows will be
         #     scanned. Cannot be used in conjunction with TimespanConfig.
-        class BigQueryOptions; end
+        # @!attribute [rw] sample_method
+        #   @return [Google::Privacy::Dlp::V2::BigQueryOptions::SampleMethod]
+        class BigQueryOptions
+          # How to sample rows if not all rows are scanned. Meaningful only when used
+          # in conjunction with rows_limit. If not specified, scanning would start
+          # from the top.
+          module SampleMethod
+            SAMPLE_METHOD_UNSPECIFIED = 0
+
+            # Scan from the top (default).
+            TOP = 1
+
+            # Randomly pick the row to start scanning. The scanned rows are contiguous.
+            RANDOM_START = 2
+          end
+        end
 
         # Shared message indicating Cloud storage type.
         # @!attribute [rw] datastore_options
@@ -374,7 +414,7 @@ module Google
         # Categorization of results based on how likely they are to represent a match,
         # based on the number of elements they contain which imply a match.
         module Likelihood
-          # Default value; information with all likelihoods is included.
+          # Default value; same as POSSIBLE.
           LIKELIHOOD_UNSPECIFIED = 0
 
           # Few matching elements.

@@ -71,9 +71,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :file_set, :message, 1, "google.privacy.dlp.v2.CloudStorageOptions.FileSet"
     optional :bytes_limit_per_file, :int64, 4
     repeated :file_types, :enum, 5, "google.privacy.dlp.v2.FileType"
+    optional :sample_method, :enum, 6, "google.privacy.dlp.v2.CloudStorageOptions.SampleMethod"
+    optional :files_limit_percent, :int32, 7
   end
   add_message "google.privacy.dlp.v2.CloudStorageOptions.FileSet" do
     optional :url, :string, 1
+  end
+  add_enum "google.privacy.dlp.v2.CloudStorageOptions.SampleMethod" do
+    value :SAMPLE_METHOD_UNSPECIFIED, 0
+    value :TOP, 1
+    value :RANDOM_START, 2
   end
   add_message "google.privacy.dlp.v2.CloudStoragePath" do
     optional :path, :string, 1
@@ -82,6 +89,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :table_reference, :message, 1, "google.privacy.dlp.v2.BigQueryTable"
     repeated :identifying_fields, :message, 2, "google.privacy.dlp.v2.FieldId"
     optional :rows_limit, :int64, 3
+    optional :sample_method, :enum, 4, "google.privacy.dlp.v2.BigQueryOptions.SampleMethod"
+  end
+  add_enum "google.privacy.dlp.v2.BigQueryOptions.SampleMethod" do
+    value :SAMPLE_METHOD_UNSPECIFIED, 0
+    value :TOP, 1
+    value :RANDOM_START, 2
   end
   add_message "google.privacy.dlp.v2.StorageConfig" do
     optional :timespan_config, :message, 6, "google.privacy.dlp.v2.StorageConfig.TimespanConfig"
@@ -164,8 +177,10 @@ module Google
         DatastoreOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DatastoreOptions").msgclass
         CloudStorageOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStorageOptions").msgclass
         CloudStorageOptions::FileSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStorageOptions.FileSet").msgclass
+        CloudStorageOptions::SampleMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStorageOptions.SampleMethod").enummodule
         CloudStoragePath = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CloudStoragePath").msgclass
         BigQueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.BigQueryOptions").msgclass
+        BigQueryOptions::SampleMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.BigQueryOptions.SampleMethod").enummodule
         StorageConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StorageConfig").msgclass
         StorageConfig::TimespanConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StorageConfig.TimespanConfig").msgclass
         BigQueryKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.BigQueryKey").msgclass
