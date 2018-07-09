@@ -80,9 +80,9 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DLP_TEST_PROJECT=test123 DLP_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   # clear any env var already set
-  require "google/cloud/dlp/credentials"
-  (Google::Cloud::Dlp::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Dlp::Credentials::JSON_ENV_VARS).each do |path|
+  require "google/cloud/dlp/v2/credentials"
+  (Google::Cloud::Dlp::V2::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Dlp::V2::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
   # always overwrite when running tests
