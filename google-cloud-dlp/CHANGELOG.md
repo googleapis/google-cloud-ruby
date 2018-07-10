@@ -1,5 +1,10 @@
 # Release History
 
+### 0.5.0 / 2018-07-10
+
+* Documentation updates
+* Credentials env_vars change
+
 ### 0.4.0 / 2018-4-26
 
 * Documentation updates

@@ -49,7 +49,6 @@ gem "google-cloud-vision", path: "google-cloud-vision"
 gem "google-cloud", path: "google-cloud"
 gem "gcloud", path: "gcloud"
 gem "stackdriver-core", path: "stackdriver-core"
-gem "google-cloud-redis", path: "google-cloud-redis"
 
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.2.0")
   gem "stackdriver", path: "stackdriver"
