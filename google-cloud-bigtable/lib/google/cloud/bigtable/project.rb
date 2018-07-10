@@ -21,6 +21,7 @@ require "google/cloud/bigtable/convert"
 require "google/cloud/bigtable/service"
 require "google/cloud/bigtable/instance"
 require "google/cloud/bigtable/cluster"
+require "google/cloud/bigtable/client"
 
 module Google
   module Cloud
@@ -502,6 +503,38 @@ module Google
             table_id,
             modifications
           )
+        end
+
+        # Creates a Bigtable data client instance to perform data operations.
+        #
+        # See {Google::Cloud::Bigtable::Client::Table} for list of data operations.
+        #
+        # @param instance_id [String] The unique identifier for the instance.
+        #   Required.
+        # @return [Google::Cloud::Bigtable::Client] The newly created data client.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   client = bigtable.client("my-instance")
+        #   table = client.table("my-table")
+        #
+        #   entry = table.new_mutation_entry("user-1")
+        #   entry.set_cell(
+        #     "cf-1",
+        #     "field-1",
+        #     "XYZ"
+        #     timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+        #   ).delete_from_column("cf2", "field02")
+        #
+        #   table.mutate_row(entry)
+        #
+
+        def client instance_id
+          ensure_service!
+          Client.new(service, instance_id)
         end
 
         protected

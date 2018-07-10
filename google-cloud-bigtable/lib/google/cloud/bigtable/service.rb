@@ -93,6 +93,21 @@ module Google
             )
         end
 
+        # Create instance of data client.
+        #
+        # @return [Google::Cloud::Bigtable::V2::BigtableClient]
+
+        def client
+          @client ||= \
+            V2::BigtableClient.new(
+              credentials: credentials,
+              timeout: timeout,
+              client_config: client_config,
+              lib_name: "gccl",
+              lib_version: Google::Cloud::Bigtable::VERSION
+            )
+        end
+
         # Create an instance within a project.
         #
         # @param instance_id [String]

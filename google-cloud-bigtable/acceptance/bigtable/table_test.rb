@@ -118,5 +118,4 @@ describe "Instance Tables", :bigtable do
       [true, false].must_include result
     end
   end
-
 end
