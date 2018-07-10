@@ -68,4 +68,35 @@ describe "Instances", :bigtable do
 
     instance.table(table_id).must_be :nil?
   end
+
+  describe "IAM policies and permissions" do
+    let(:service_account) { bigtable.service.credentials.client.issuer }
+
+    it "test permissions" do
+      instance = bigtable_instance
+
+      roles = ["bigtable.instances.get", "bigtable.tables.get"]
+      permissions = instance.test_iam_permissions(roles)
+      permissions.must_equal roles
+    end
+
+    it "allows policy to be updated on an instance" do
+      instance = bigtable_instance
+      instance.policy.must_be_kind_of Google::Cloud::Bigtable::Policy
+
+      service_account.wont_be :nil?
+
+      role = "roles/bigtable.user"
+      member = "serviceAccount:#{service_account}"
+
+      policy = instance.policy
+      policy.add(role, member)
+      updated_policy = instance.update_policy(policy)
+
+      updated_policy.role(role).wont_be :nil?
+
+      role_member = instance.policy.role(role).select { |m| m == member }
+      role_member.size.must_equal 1
+    end
+  end
 end
