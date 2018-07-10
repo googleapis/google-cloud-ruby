@@ -40,8 +40,9 @@
       "name": "google-cloud",
       "defaultService": "google/cloud",
       "versions": [
-        "v0.54.0",
+        "v0.55.0",
         "master",
+        "v0.54.0",
         "v0.53.0",
         "v0.52.0",
         "v0.51.1",
@@ -211,8 +212,9 @@
       "name": "google-cloud-dlp",
       "defaultService": "google/cloud/dlp",
       "versions": [
-        "v0.4.0",
+        "v0.5.0",
         "master",
+        "v0.4.0",
         "v0.3.0",
         "v0.2.0",
         "v0.1.0"
@@ -524,6 +526,15 @@
         "master",
         "v0.2.0",
         "v0.1.0"
+      ]
+    },
+    {
+      "id": "google-cloud-text_to_speech",
+      "name": "google-cloud-text_to_speech",
+      "defaultService": "google/cloud/texttospeech",
+      "versions": [
+        "v0.1.0",
+        "master"
       ]
     },
     {
