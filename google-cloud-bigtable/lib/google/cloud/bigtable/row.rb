@@ -52,7 +52,7 @@ module Google
           # @return [Time | nil]
           #
           def to_time granularity = nil
-            return nil if @timestamp == 0
+            return nil if @timestamp.zero?
             return Time.at(@timestamp / 100_0000.0) if granularity == :micros
             Time.at(@timestamp / 1000.0)
           end
