@@ -73,7 +73,7 @@ module Google
         #
         # @example
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.set_cell("cf1", "field01", "XYZ"})
+        #   entry.set_cell("cf1", "field01", "XYZ")
         #
         # @example With timestamp
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
@@ -86,7 +86,7 @@ module Google
         #
         def set_cell family, qualifier, value, timestamp: nil
           # If value is integer then covert it to sign 64 bit int big-endian.
-          value = [value].pack("q>") if value.instance_of?(Integer)
+          value = [value].pack("q>") if value.is_a?(Integer)
           options = {
             family_name: family,
             column_qualifier: qualifier,
