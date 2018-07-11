@@ -448,9 +448,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # Iterate over all results.
@@ -497,9 +497,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #   response = cloud_tasks_client.get_queue(formatted_name)
 
@@ -523,7 +523,7 @@ module Google
           # WARNING: Using this method may have unintended side effects if you are
           # using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
           # Read
-          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/cloud-tasks/docs/queue-yaml)
+          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
           # before using this method.
           #
           # @param parent [String]
@@ -552,9 +552,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # TODO: Initialize +queue+:
@@ -586,7 +586,7 @@ module Google
           # WARNING: Using this method may have unintended side effects if you are
           # using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
           # Read
-          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/cloud-tasks/docs/queue-yaml)
+          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
           # before using this method.
           #
           # @param queue [Google::Cloud::Tasks::V2beta2::Queue | Hash]
@@ -616,9 +616,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #
           #   # TODO: Initialize +queue+:
           #   queue = {}
@@ -647,7 +647,7 @@ module Google
           # WARNING: Using this method may have unintended side effects if you are
           # using an App Engine +queue.yaml+ or +queue.xml+ file to manage your queues.
           # Read
-          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/cloud-tasks/docs/queue-yaml)
+          # [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
           # before using this method.
           #
           # @param name [String]
@@ -663,9 +663,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #   cloud_tasks_client.delete_queue(formatted_name)
 
@@ -702,9 +702,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #   response = cloud_tasks_client.purge_queue(formatted_name)
 
@@ -741,9 +741,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #   response = cloud_tasks_client.pause_queue(formatted_name)
 
@@ -769,7 +769,7 @@ module Google
           # WARNING: Resuming many high-QPS queues at the same time can
           # lead to target overloading. If you are resuming high-QPS
           # queues, follow the 500/50/5 pattern described in
-          # [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/cloud-tasks/pdfs/managing-cloud-tasks-scaling-risks-2017-06-05.pdf).
+          # [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
           #
           # @param name [String]
           #   Required.
@@ -785,9 +785,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Queue]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #   response = cloud_tasks_client.resume_queue(formatted_name)
 
@@ -824,9 +824,9 @@ module Google
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #   response = cloud_tasks_client.get_iam_policy(formatted_resource)
 
@@ -872,9 +872,9 @@ module Google
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
           #   # TODO: Initialize +policy+:
@@ -920,9 +920,9 @@ module Google
           # @return [Google::Iam::V1::TestIamPermissionsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
           #   # TODO: Initialize +permissions+:
@@ -967,11 +967,6 @@ module Google
           #   Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
           #   +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
           #   {Google::Cloud::Tasks::V2beta2::Task Task} resource.
-          # @param order_by [String]
-          #   Sort order used for the query. The only fields supported for sorting
-          #   are +schedule_time+ and +pull_message.tag+. All results will be
-          #   returned in approximately ascending order. The default ordering is by
-          #   +schedule_time+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -991,9 +986,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
           #   # Iterate over all results.
@@ -1012,14 +1007,12 @@ module Google
           def list_tasks \
               parent,
               response_view: nil,
-              order_by: nil,
               page_size: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               response_view: response_view,
-              order_by: order_by,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::ListTasksRequest)
@@ -1055,9 +1048,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #   response = cloud_tasks_client.get_task(formatted_name)
 
@@ -1150,9 +1143,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
           #   # TODO: Initialize +task+:
@@ -1193,9 +1186,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #   cloud_tasks_client.delete_task(formatted_name)
 
@@ -1310,9 +1303,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
           #
           #   # TODO: Initialize +lease_duration+:
@@ -1375,9 +1368,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #
           #   # TODO: Initialize +schedule_time+:
@@ -1451,9 +1444,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #
           #   # TODO: Initialize +schedule_time+:
@@ -1524,9 +1517,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #
           #   # TODO: Initialize +schedule_time+:
@@ -1603,9 +1596,9 @@ module Google
           # @return [Google::Cloud::Tasks::V2beta2::Task]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/tasks/v2beta2"
+          #   require "google/cloud/tasks"
           #
-          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new
+          #   cloud_tasks_client = Google::Cloud::Tasks::V2beta2.new(version: :V2beta2)
           #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
           #   response = cloud_tasks_client.run_task(formatted_name)
 

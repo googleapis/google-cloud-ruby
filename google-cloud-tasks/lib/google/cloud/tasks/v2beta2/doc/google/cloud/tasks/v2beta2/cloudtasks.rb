@@ -189,12 +189,6 @@ module Google
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
         #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
         #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
-        # @!attribute [rw] order_by
-        #   @return [String]
-        #     Sort order used for the query. The only fields supported for sorting
-        #     are +schedule_time+ and +pull_message.tag+. All results will be
-        #     returned in approximately ascending order. The default ordering is by
-        #     +schedule_time+.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Requested page size. Fewer tasks than requested might be returned.
