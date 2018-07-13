@@ -88,8 +88,8 @@ module Google
         end
         alias table_id name
 
-        # The full path for the instance resource. Values are of the form
-        # `projects/<project_id>/instances/<instance_id>`.
+        # The full path for the table resource. Values are of the form
+        # `projects/<project_id>/instances/<instance_id>/table/<table_id>`.
         #
         # @return [String]
         def path
@@ -101,6 +101,7 @@ module Google
         # @param view [Symbol] Table view type.
         #   Default view type is `:SCHEMA_VIEW`
         #   Valid view types are.
+        #
         #   * `:NAME_ONLY` - Only populates `name`
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.

@@ -24,10 +24,14 @@ describe Google::Cloud::Bigtable::Client::Table, :table, :mock_bigtable do
   it "create mutation entry instance" do
     mutation_entry = table.new_mutation_entry("row-1")
     mutation_entry.must_be_kind_of Google::Cloud::Bigtable::MutationEntry
+    mutation_entry.row_key.must_equal "row-1"
   end
 
   it "create read modify write row rule instance" do
     rule = table.new_read_modify_write_rule("cf", "field1")
     rule.must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
+    grpc = rule.to_grpc
+    grpc.family_name.must_equal "cf"
+    grpc.column_qualifier.must_equal "field1"
   end
 end

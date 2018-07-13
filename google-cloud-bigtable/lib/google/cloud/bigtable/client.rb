@@ -22,7 +22,8 @@ module Google
     module Bigtable
       # # Client
       #
-      # A client is used to read and/or modify data in a Cloud Bigtable table.
+      # A client is used to create table data client instance with or without app profile id to
+      # read and/or modify data in a Cloud Bigtable table.
       #
       # # See {Google::Cloud::Bigtable::Project#client}.
       #

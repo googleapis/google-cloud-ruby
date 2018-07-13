@@ -20,9 +20,13 @@ module Google
     module Bigtable
       # # MutationEntry
       #
-      # MutationEntry is a chainable structure, which hold data for diffrent
-      # type of mutations. It is used in mutate rows, and check and mutate row
-      # using predicate.
+      # MutationEntry is a chainable structure, which holds data for diffrent
+      # type of mutations.
+      # MutationEntry is used in following data operations
+      #
+      #   * Mutate row. See {Google::Cloud::Bigtable::Client::Table#mutate_row}
+      #   * Mutate rows. See {Google::Cloud::Bigtable::Client::Table#mutate_rows}
+      #   * Check and mutate row using a predicate.
       #
       # @example
       #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")

@@ -24,7 +24,7 @@ module Google
       # @private
       # # RowsMutator
       #
-      # Retyable mutate rows helper
+      # Retryable mutate rows helper
       #
       class RowsMutator
         # @private
