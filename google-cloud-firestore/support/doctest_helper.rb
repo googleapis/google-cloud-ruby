@@ -241,6 +241,34 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Firestore::Query#start_at@Starting a query at a DocumentSnapshot" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Query#start_after@Starting a query after a DocumentSnapshot" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Query#end_before@Ending a query before a DocumentSnapshot" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::Query#end_at@Ending a query at a DocumentSnapshot" do
+    mock_firestore do |mock|
+      mock.expect :batch_get_documents, batch_get_resp, batch_get_args
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
   doctest.before "Google::Cloud::Firestore::CollectionReference" do
     mock_firestore do |mock|
       mock.expect :run_query, run_query_resp, run_query_args

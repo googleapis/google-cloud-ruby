@@ -213,6 +213,11 @@ module Google
         #   end
         #
         def where field, operator, value
+          if query_has_cursors?
+            raise "cannot call where after calling " \
+                  "start_at, start_after, end_before, or end_at"
+          end
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -274,6 +279,11 @@ module Google
         #   end
         #
         def order field, direction = :asc
+          if query_has_cursors?
+            raise "cannot call order after calling " \
+                  "start_at, start_after, end_before, or end_at"
+          end
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
@@ -355,22 +365,60 @@ module Google
         end
 
         ##
-        # Starts query results at a set of field values. The result set will
+        # Starts query results at a set of field values. The field values can be
+        # specified explicitly as arguments, or can be specified implicitly by
+        # providing a {DocumentSnapshot} object instead. The result set will
         # include the document specified by `values`.
         #
         # If the current query already has specified `start_at` or
         # `start_after`, this will overwrite it.
         #
-        # The values provided here are for the field paths provides to `order`.
-        # Values provided to `start_at` without an associated field path
-        # provided to `order` will result in an error.
+        # The values are associated with the field paths that have been provided
+        # to `order`, and must match the same sort order. An ArgumentError will
+        # be raised if more explicit values are given than are present in
+        # `order`.
         #
-        # @param [Object, Array<Object>] values The field value to start the
-        #   query at.
+        # @param [DocumentSnapshot, Object, Array<Object>] values The field
+        #   values to start the query at.
         #
         # @return [Query] New query with `start_at` called on it.
         #
-        # @example
+        # @example Starting a query at a document reference id
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .start_at(nyc_doc_id)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Starting a query at a document reference object
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #   nyc_ref = cities_col.doc nyc_doc_id
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .start_at(nyc_ref)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Starting a query at multiple explicit values
         #   require "google/cloud/firestore"
         #
         #   firestore = Google::Cloud::Firestore.new
@@ -379,41 +427,102 @@ module Google
         #   cities_col = firestore.col "cities"
         #
         #   # Create a query
-        #   query = cities_col.start_at("NYC").order(firestore.document_id)
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .start_at(1000000, "New York City")
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Starting a query at a DocumentSnapshot
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Get a document snapshot
+        #   nyc_snap = firestore.doc("cities/NYC").get
+        #
+        #   # Create a query
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .start_at(nyc_snap)
         #
         #   query.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
         def start_at *values
+          raise ArgumentError, "must provide values" if values.empty?
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
-          values = values.flatten.map { |value| Convert.raw_to_value value }
-          new_query.start_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: true
-          )
+          cursor = values_to_cursor values, new_query
+          cursor.before = true
+          new_query.start_at = cursor
 
           Query.start new_query, parent_path, client
         end
 
         ##
-        # Starts query results after a set of field values. The result set will
+        # Starts query results after a set of field values. The field values can
+        # be specified explicitly as arguments, or can be specified implicitly
+        # by providing a {DocumentSnapshot} object instead. The result set will
         # not include the document specified by `values`.
         #
         # If the current query already has specified `start_at` or
         # `start_after`, this will overwrite it.
         #
-        # The values provided here are for the field paths provides to `order`.
-        # Values provided to `start_after` without an associated field path
-        # provided to `order` will result in an error.
+        # The values are associated with the field paths that have been provided
+        # to `order`, and must match the same sort order. An ArgumentError will
+        # be raised if more explicit values are given than are present in
+        # `order`.
         #
-        # @param [Object, Array<Object>] values The field value to start the
-        #   query after.
+        # @param [DocumentSnapshot, Object, Array<Object>] values The field
+        #   values to start the query after.
         #
         # @return [Query] New query with `start_after` called on it.
         #
-        # @example
+        # @example Starting a query after a document reference id
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .start_after(nyc_doc_id)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Starting a query after a document reference object
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #   nyc_ref = cities_col.doc nyc_doc_id
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .start_after(nyc_ref)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Starting a query after multiple explicit values
         #   require "google/cloud/firestore"
         #
         #   firestore = Google::Cloud::Firestore.new
@@ -422,41 +531,102 @@ module Google
         #   cities_col = firestore.col "cities"
         #
         #   # Create a query
-        #   query = cities_col.start_after("NYC").order(firestore.document_id)
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .start_after(1000000, "New York City")
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Starting a query after a DocumentSnapshot
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Get a document snapshot
+        #   nyc_snap = firestore.doc("cities/NYC").get
+        #
+        #   # Create a query
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .start_after(nyc_snap)
         #
         #   query.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
         def start_after *values
+          raise ArgumentError, "must provide values" if values.empty?
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
-          values = values.flatten.map { |value| Convert.raw_to_value value }
-          new_query.start_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: false
-          )
+          cursor = values_to_cursor values, new_query
+          cursor.before = false
+          new_query.start_at = cursor
 
           Query.start new_query, parent_path, client
         end
 
         ##
-        # Ends query results before a set of field values. The result set will
+        # Ends query results before a set of field values. The field values can
+        # be specified explicitly as arguments, or can be specified implicitly
+        # by providing a {DocumentSnapshot} object instead. The result set will
         # not include the document specified by `values`.
         #
         # If the current query already has specified `end_before` or
         # `end_at`, this will overwrite it.
         #
-        # The values provided here are for the field paths provides to `order`.
-        # Values provided to `end_before` without an associated field path
-        # provided to `order` will result in an error.
+        # The values are associated with the field paths that have been provided
+        # to `order`, and must match the same sort order. An ArgumentError will
+        # be raised if more explicit values are given than are present in
+        # `order`.
         #
-        # @param [Object, Array<Object>] values The field value to end the query
-        #   before.
+        # @param [DocumentSnapshot, Object, Array<Object>] values The field
+        #   values to end the query before.
         #
         # @return [Query] New query with `end_before` called on it.
         #
-        # @example
+        # @example Ending a query before a document reference id
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .end_before(nyc_doc_id)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Ending a query before a document reference object
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #   nyc_ref = cities_col.doc nyc_doc_id
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .end_before(nyc_ref)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Ending a query before multiple explicit values
         #   require "google/cloud/firestore"
         #
         #   firestore = Google::Cloud::Firestore.new
@@ -465,41 +635,102 @@ module Google
         #   cities_col = firestore.col "cities"
         #
         #   # Create a query
-        #   query = cities_col.end_before("NYC").order(firestore.document_id)
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .end_before(1000000, "New York City")
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Ending a query before a DocumentSnapshot
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Get a document snapshot
+        #   nyc_snap = firestore.doc("cities/NYC").get
+        #
+        #   # Create a query
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .end_before(nyc_snap)
         #
         #   query.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
         def end_before *values
+          raise ArgumentError, "must provide values" if values.empty?
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
-          values = values.flatten.map { |value| Convert.raw_to_value value }
-          new_query.end_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: true
-          )
+          cursor = values_to_cursor values, new_query
+          cursor.before = true
+          new_query.end_at = cursor
 
           Query.start new_query, parent_path, client
         end
 
         ##
-        # Ends query results at a set of field values. The result set will
+        # Ends query results at a set of field values. The field values can
+        # be specified explicitly as arguments, or can be specified implicitly
+        # by providing a {DocumentSnapshot} object instead. The result set will
         # include the document specified by `values`.
         #
         # If the current query already has specified `end_before` or
         # `end_at`, this will overwrite it.
         #
-        # The values provided here are for the field paths provides to `order`.
-        # Values provided to `end_at` without an associated field path provided
-        # to `order` will result in an error.
+        # The values are associated with the field paths that have been provided
+        # to `order`, and must match the same sort order. An ArgumentError will
+        # be raised if more explicit values are given than are present in
+        # `order`.
         #
-        # @param [Object, Array<Object>] values The field value to end the query
-        #   at.
+        # @param [DocumentSnapshot, Object, Array<Object>] values The field
+        #   values to end the query at.
         #
         # @return [Query] New query with `end_at` called on it.
         #
-        # @example
+        # @example Ending a query at a document reference id
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .end_at(nyc_doc_id)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Ending a query at a document reference object
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #   nyc_doc_id = "NYC"
+        #   nyc_ref = cities_col.doc nyc_doc_id
+        #
+        #   # Create a query
+        #   query = cities_col.order(firestore.document_id)
+        #                     .end_at(nyc_ref)
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Ending a query at multiple explicit values
         #   require "google/cloud/firestore"
         #
         #   firestore = Google::Cloud::Firestore.new
@@ -508,20 +739,43 @@ module Google
         #   cities_col = firestore.col "cities"
         #
         #   # Create a query
-        #   query = cities_col.end_at("NYC").order(firestore.document_id)
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .end_at(1000000, "New York City")
+        #
+        #   query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        # @example Ending a query at a DocumentSnapshot
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   cities_col = firestore.col "cities"
+        #
+        #   # Get a document snapshot
+        #   nyc_snap = firestore.doc("cities/NYC").get
+        #
+        #   # Create a query
+        #   query = cities_col.order(:population, :desc)
+        #                     .order(:name)
+        #                     .end_at(nyc_snap)
         #
         #   query.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
         def end_at *values
+          raise ArgumentError, "must provide values" if values.empty?
+
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
-          values = values.flatten.map { |value| Convert.raw_to_value value }
-          new_query.end_at = Google::Firestore::V1beta1::Cursor.new(
-            values: values, before: false
-          )
+          cursor = values_to_cursor values, new_query
+          cursor.before = false
+          new_query.end_at = cursor
 
           Query.start new_query, parent_path, client
         end
@@ -636,13 +890,123 @@ module Google
         end
 
         def order_direction direction
-          if direction.to_s.downcase.start_with? "a"
-            :ASCENDING
-          elsif direction.to_s.downcase.start_with? "d"
-            :DESCENDING
-          else
-            :DIRECTION_UNSPECIFIED
+          return :DESCENDING if direction.to_s.downcase.start_with? "d".freeze
+          :ASCENDING
+        end
+
+        def query_has_cursors?
+          query.start_at || query.end_at
+        end
+
+        def values_to_cursor values, query
+          if values.count == 1 && values.first.is_a?(DocumentSnapshot)
+            return snapshot_to_cursor(values.first, query)
           end
+
+          # pair values with their field_paths to ensure correct formatting
+          order_field_paths = order_by_field_paths query
+          if values.count > order_field_paths.count
+            # raise if too many values provided for the cursor
+            raise ArgumentError, "too many values"
+          end
+
+          values = values.zip(order_field_paths).map do |value, field_path|
+            if field_path == doc_id_path && !value.is_a?(DocumentReference)
+              value = document_reference value
+            end
+            Convert.raw_to_value value
+          end
+
+          Google::Firestore::V1beta1::Cursor.new values: values
+        end
+
+        def snapshot_to_cursor snapshot, query
+          # first, add any inequality filters missing from existing order_by
+          ensure_inequality_field_paths_in_order_by! query
+
+          # second, make sure __name__ is present in order_by
+          ensure_document_id_in_order_by! query
+
+          # lastly, create cursor for all field_paths in order_by
+          values = order_by_field_paths(query).map do |field_path|
+            if field_path == doc_id_path
+              snapshot.ref
+            else
+              snapshot[field_path]
+            end
+          end
+
+          values_to_cursor values, query
+        end
+
+        def ensure_inequality_field_paths_in_order_by! query
+          inequality_paths = inequality_filter_field_paths query
+          orig_order = order_by_field_paths query
+
+          inequality_paths.reverse.each do |field_path|
+            next if orig_order.include? field_path
+
+            query.order_by.unshift StructuredQuery::Order.new(
+              field: StructuredQuery::FieldReference.new(
+                field_path: field_path
+              ),
+              direction: :ASCENDING
+            )
+          end
+        end
+
+        def ensure_document_id_in_order_by! query
+          return if order_by_field_paths(query).include? doc_id_path
+
+          query.order_by.push StructuredQuery::Order.new(
+            field: StructuredQuery::FieldReference.new(
+              field_path: doc_id_path
+            ),
+            direction: last_order_direction(query)
+          )
+        end
+
+        def inequality_filter_field_paths query
+          return [] if query.where.nil?
+
+          # The way we construct a query, where is always a CompositeFilter
+          ineq_filters = query.where.composite_filter.filters.select do |filter|
+            if filter.filter_type == :field_filter
+              filter.field_filter.op != :EQUAL
+            end
+          end
+          ineq_filters.map { |filter| filter.field_filter.field.field_path }
+        end
+
+        def order_by_field_paths query
+          query.order_by.map { |order_by| order_by.field.field_path }
+        end
+
+        def last_order_direction query
+          last_order_by = query.order_by.last
+          return :ASCENDING if last_order_by.nil?
+          last_order_by.direction
+        end
+
+        def document_reference document_path
+          if document_path.to_s.split("/").count.even?
+            raise ArgumentError, "document_path must refer to a document."
+          end
+
+          DocumentReference.from_path(
+            "#{parent_path}/#{collection_id}/#{document_path}", client
+          )
+        end
+
+        def collection_id
+          # We trust that query.from is always set, since Query cannot be
+          # created without it.
+          return nil if query.from.empty?
+          query.from.first.collection_id
+        end
+
+        def doc_id_path
+          "__name__".freeze
         end
 
         ##

@@ -129,9 +129,9 @@ module Google
         #   cities_col = firestore.col "cities"
         #
         #   # Create a query
-        #   query = cities_col.start_at("NYC").order(
+        #   query = cities_col.order(
         #     Google::Cloud::Firestore::FieldPath.document_id
-        #   )
+        #   ).start_at("NYC")
         #
         #   query.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
