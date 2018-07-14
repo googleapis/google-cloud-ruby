@@ -1,0 +1,66 @@
+version: 2
+jobs:
+  test-25:
+    working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
+    shell: /bin/bash --login
+    docker:
+    - image: circleci/ruby:2.5.1-stretch
+    steps:
+    - checkout
+    - run: gem update --system
+    - run: gem install bundler
+    - run: bundle update
+    - run: bundle exec rake circleci:build
+    - run: bundle exec rake circleci:post
+  test-24:
+    working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
+    shell: /bin/bash --login
+    docker:
+    - image: circleci/ruby:2.4.4-stretch
+    steps:
+    - checkout
+    - run: gem update --system
+    - run: gem install bundler
+    - run: bundle update
+    - run: bundle exec rake circleci:build
+    - run: bundle exec rake test:coveralls
+  test-23:
+    working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
+    shell: /bin/bash --login
+    docker:
+    - image: circleci/ruby:2.3.7-stretch
+    steps:
+    - checkout
+    - run: gem update --system
+    - run: gem install bundler
+    - run: bundle update
+    - run: bundle exec rake circleci:build
+  release:
+    working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
+    shell: /bin/bash --login
+    docker:
+    - image: circleci/ruby:2.5.1-stretch
+    steps:
+    - checkout
+    - run: gem update --system
+    - run: gem install bundler
+    - run: bundle update
+    - run: bundle exec rake circletest
+#    - run: bundle exec rake circleci:release
+workflows:
+  version: 2
+  normal-build:
+    jobs:
+      - test-25
+      - test-24
+      - test-23
+  normal-release:
+    jobs:
+      - release:
+          filters:
+            tags:
+              only: /circletest-\S+/
+#              only: /\S+\/v\S+/
+notify:
+  webhooks:
+    - url: https://coveralls.io/webhook?repo_token=VdG8EataF3PrWBZOBH7Hr80BXUjYRLh7o
