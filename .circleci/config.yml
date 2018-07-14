@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test-2.5:
+  test-ruby-2.5:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
     docker:
@@ -12,7 +12,7 @@ jobs:
     - run: bundle update
     - run: bundle exec rake circleci:build
     - run: bundle exec rake circleci:post
-  test-2.4:
+  test-ruby-2.4:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
     docker:
@@ -24,7 +24,7 @@ jobs:
     - run: bundle update
     - run: bundle exec rake circleci:build
     - run: bundle exec rake test:coveralls
-  test-2.3:
+  test-ruby-2.3:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
     docker:
@@ -45,15 +45,14 @@ jobs:
     - run: gem update --system
     - run: gem install bundler
     - run: bundle update
-    - run: bundle exec rake circletest
-#    - run: bundle exec rake circleci:release
+    - run: bundle exec rake circleci:release
 workflows:
   version: 2
-  ci:
+  tests:
     jobs:
-      - test-2.5
-      - test-2.4
-      - test-2.3
+      - test-ruby-2.5
+      - test-ruby-2.4
+      - test-ruby-2.3
   gem-release:
     jobs:
       - release:
@@ -61,8 +60,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /circletest-\S+/
-#              only: /\S+\/v\S+/
+              only: /\S+\/v\S+/
 notify:
   webhooks:
     - url: https://coveralls.io/webhook?repo_token=VdG8EataF3PrWBZOBH7Hr80BXUjYRLh7o
