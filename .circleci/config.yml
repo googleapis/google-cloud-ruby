@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test-25:
+  test-2.5:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
     docker:
@@ -12,7 +12,7 @@ jobs:
     - run: bundle update
     - run: bundle exec rake circleci:build
     - run: bundle exec rake circleci:post
-  test-24:
+  test-2.4:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
     docker:
@@ -24,7 +24,7 @@ jobs:
     - run: bundle update
     - run: bundle exec rake circleci:build
     - run: bundle exec rake test:coveralls
-  test-23:
+  test-2.3:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
     docker:
@@ -49,15 +49,17 @@ jobs:
 #    - run: bundle exec rake circleci:release
 workflows:
   version: 2
-  normal-build:
+  ci:
     jobs:
-      - test-25
-      - test-24
-      - test-23
-  normal-release:
+      - test-2.5
+      - test-2.4
+      - test-2.3
+  gem-release:
     jobs:
       - release:
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /circletest-\S+/
 #              only: /\S+\/v\S+/

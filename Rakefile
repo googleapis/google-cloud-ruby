@@ -4,7 +4,7 @@ require "json"
 
 task :circletest do
   puts "Testing circleCI!"
-  puts "Tag is #{ENV['CIRCLE_TAG']}"
+  puts "Tag is #{ENV['CIRCLE_TAG'].inspect}"
 end
 
 task :bundleupdate do
@@ -506,7 +506,7 @@ namespace :circleci do
   desc "Build for CircleCI"
   task :build do
     run_acceptance = false
-    if ENV["CIRCLE_BRANCH"] == "master" && ENV["CIRCLE_PR_NUMBER"].nil?
+    if ENV["CIRCLE_BRANCH"] == "circle2" && ENV["CIRCLE_PR_NUMBER"].nil?
       run_acceptance = true
     end
 
