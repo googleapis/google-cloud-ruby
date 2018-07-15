@@ -1,4 +1,5 @@
 version: 2
+
 jobs:
   test-ruby-2.5:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
@@ -12,6 +13,7 @@ jobs:
     - run: bundle update
     - run: bundle exec rake circleci:build
     - run: bundle exec rake circleci:post
+
   test-ruby-2.4:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
@@ -24,6 +26,7 @@ jobs:
     - run: bundle update
     - run: bundle exec rake circleci:build
     - run: bundle exec rake test:coveralls
+
   test-ruby-2.3:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
@@ -35,6 +38,7 @@ jobs:
     - run: gem install bundler
     - run: bundle update
     - run: bundle exec rake circleci:build
+
   release:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
     shell: /bin/bash --login
@@ -46,13 +50,23 @@ jobs:
     - run: gem install bundler
     - run: bundle update
     - run: bundle exec rake circleci:release
+
 workflows:
   version: 2
   tests:
     jobs:
-      - test-ruby-2.5
-      - test-ruby-2.4
-      - test-ruby-2.3
+      - test-ruby-2.5: &test-filters
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - gcloud-jsondoc
+                - gcloud-rdoc
+                - yard-gcloud
+      - test-ruby-2.4:
+          <<: *test-filters
+      - test-ruby-2.3:
+          <<: *test-filters
   gem-release:
     jobs:
       - release:
@@ -61,6 +75,7 @@ workflows:
               ignore: /.*/
             tags:
               only: /\S+\/v\S+/
+
 notify:
   webhooks:
     - url: https://coveralls.io/webhook?repo_token=VdG8EataF3PrWBZOBH7Hr80BXUjYRLh7o
