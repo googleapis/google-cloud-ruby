@@ -41,14 +41,14 @@ jobs:
 
   release:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
-    shell: /bin/bash --login
+    shell: /bin/bash --login -eo pipefail
     docker:
     - image: circleci/ruby:2.5.1-stretch
     steps:
     - checkout
-    - run: gem update --system
-    - run: gem install bundler
-    - run: bundle update
+    - run:
+        name: Install bundle
+        command: gem update --system && gem install bundler && bundle update
     - run: bundle exec rake circleci:release
 
 workflows:
