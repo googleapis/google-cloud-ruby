@@ -2,11 +2,6 @@ require "bundler/setup"
 require "open3"
 require "json"
 
-task :circletest do
-  puts "Testing circleCI!"
-  puts "Tag is #{ENV['CIRCLE_TAG'].inspect}"
-end
-
 task :bundleupdate do
   valid_gems.each do |gem|
     Dir.chdir gem do
