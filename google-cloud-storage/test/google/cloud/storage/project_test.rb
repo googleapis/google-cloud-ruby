@@ -16,6 +16,8 @@ require "helper"
 require "json"
 
 describe Google::Cloud::Storage::Project, :mock_storage do
+  let(:email) { "my_service_account@gs-project-accounts.iam.gserviceaccount.com" }
+  let(:service_account_resp) { OpenStruct.new email_address: email }
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
   let(:bucket_url_root) { "https://www.googleapis.com/storage/v1" }
   let(:bucket_url) { "#{bucket_url_root}/b/#{bucket_name}" }
@@ -32,6 +34,17 @@ describe Google::Cloud::Storage::Project, :mock_storage do
                          response_header: ["X-My-Custom-Header"] }] }
   let(:bucket_cors_gapi) { bucket_cors.map { |c| Google::Apis::StorageV1::Bucket::CorsConfiguration.new c } }
   let(:kms_key) { "path/to/encryption_key_name" }
+
+  it "gets and memoizes its service_account_email" do
+    mock = Minitest::Mock.new
+    mock.expect :get_project_service_account, service_account_resp, [project]
+    storage.service.mocked_service = mock
+
+    storage.service_account_email.must_equal email
+    storage.service_account_email.must_equal email # memoized, no request
+
+    mock.verify
+  end
 
   it "creates a bucket" do
     mock = Minitest::Mock.new
