@@ -17,7 +17,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Client::Table, :mutate_rows, :mock_bigtable do
+describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
   let(:app_profile_id) { "test-app-profile-id" }
@@ -51,12 +51,13 @@ describe Google::Cloud::Bigtable::Client::Table, :mutate_rows, :mock_bigtable do
       )
     end
   end
+  let(:table) {
+    bigtable.table(instance_id, table_id, skip_lookup: true, app_profile_id: app_profile_id)
+  }
 
   it "mutate rows with success mutation response" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    client = bigtable.client(instance_id)
-    table = client.table(table_id, app_profile_id: app_profile_id)
     res = Google::Bigtable::V2::MutateRowsResponse.new(
       entries: [{
         index: 0,
@@ -113,8 +114,6 @@ describe Google::Cloud::Bigtable::Client::Table, :mutate_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    client = bigtable.client(instance_id)
-    table = client.table(table_id, app_profile_id: app_profile_id)
 
     entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
     entry.set_cell(family, qualifier, cell_value, timestamp: -1)
@@ -176,8 +175,6 @@ describe Google::Cloud::Bigtable::Client::Table, :mutate_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    client = bigtable.client(instance_id)
-    table = client.table(table_id, app_profile_id: app_profile_id)
 
     mutation_entries = req_entries.map do |r|
       entry = Google::Cloud::Bigtable::MutationEntry.new(r.row_key)
@@ -235,9 +232,7 @@ describe Google::Cloud::Bigtable::Client::Table, :mutate_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    client = bigtable.client(instance_id)
-    table = client.table(table_id, app_profile_id: app_profile_id)
-
+    
     mutation_entries = req_entries.map do |r|
       entry = Google::Cloud::Bigtable::MutationEntry.new(r.row_key)
       entry.mutations.concat(r.mutations)

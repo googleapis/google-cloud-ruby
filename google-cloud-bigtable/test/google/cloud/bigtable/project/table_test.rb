@@ -99,4 +99,14 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     end
     mock.verify
   end
+
+  it "get table object without fetching table" do
+    table_id = "my-table"
+    app_profile_id = "my-app-profile"
+
+    table = bigtable.table(instance_id, table_id, skip_lookup: true, app_profile_id: app_profile_id)
+    table.must_be_kind_of Google::Cloud::Bigtable::Table
+    table.path.must_equal table_path(instance_id, table_id)
+    table.app_profile_id.must_equal app_profile_id
+  end
 end

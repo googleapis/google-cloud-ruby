@@ -21,7 +21,6 @@ require "google/cloud/bigtable/convert"
 require "google/cloud/bigtable/service"
 require "google/cloud/bigtable/instance"
 require "google/cloud/bigtable/cluster"
-require "google/cloud/bigtable/client"
 
 module Google
   module Cloud
@@ -297,6 +296,7 @@ module Google
 
         # Get table information.
         #
+        #
         # @param instance_id [String] Existing instance Id.
         # @param table_id [String] Existing table Id.
         # @param view [Symbol] Optional. Table view type. Default `:SCHEMA_VIEW`
@@ -305,6 +305,15 @@ module Google
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
         #   * `:FULL` - Populates all fields
+        # @param skip_lookup [Boolean] Create table object without verifying
+        #   that the table resource exists.
+        #   Calls made on this object will raise errors if the table.
+        #   does not exist. Default is `false`. Optional.
+        #   It helps to reduce admin apis calls.
+        # @param app_profile_id [String] The unique identifier for the app profile. Optional.
+        #   It is used only in data operations.
+        #   This value specifies routing for replication. If not specified, the
+        #   "default" application profile will be used.
         # @return [Google::Cloud::Bigtable::Table, nil]
         #
         # @example Get table with schema only view
@@ -329,9 +338,41 @@ module Google
         #     p table.column_families
         #     p table.cluster_states
         #   end
+        #
+        # @example Mutate rows
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #
+        #   entry = table.new_mutation_entry("user-1")
+        #   entry.set_cell(
+        #     "cf-1",
+        #     "field-1",
+        #     "XYZ"
+        #     timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+        #   ).delete_from_column("cf2", "field02")
+        #
+        #   table.mutate_row(entry)
 
-        def table instance_id, table_id, view: nil
+        def table \
+            instance_id,
+            table_id,
+            view: nil,
+            skip_lookup: nil,
+            app_profile_id: nil
           ensure_service!
+
+          if skip_lookup
+            table = Table.from_path(
+              service.table_path(instance_id, table_id),
+              service
+            )
+            table.app_profile_id = app_profile_id
+            return table
+          end
+
           grpc = service.get_table(instance_id, table_id, view: view)
           Table.from_grpc(grpc, service, view: view)
         rescue Google::Cloud::NotFoundError
@@ -503,38 +544,6 @@ module Google
             table_id,
             modifications
           )
-        end
-
-        # Creates a Bigtable data client instance to perform data operations.
-        #
-        # See {Google::Cloud::Bigtable::Client::Table} for list of data operations.
-        #
-        # @param instance_id [String] The unique identifier for the instance.
-        #   Required.
-        # @return [Google::Cloud::Bigtable::Client] The newly created data client.
-        #
-        # @example
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
-        #
-        #   entry = table.new_mutation_entry("user-1")
-        #   entry.set_cell(
-        #     "cf-1",
-        #     "field-1",
-        #     "XYZ"
-        #     timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
-        #   ).delete_from_column("cf2", "field02")
-        #
-        #   table.mutate_row(entry)
-        #
-
-        def client instance_id
-          ensure_service!
-          Client.new(service, instance_id)
         end
 
         protected

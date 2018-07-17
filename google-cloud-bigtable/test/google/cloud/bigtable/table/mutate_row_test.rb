@@ -17,16 +17,17 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Client::Table, :mutate_row, :mock_bigtable do
+describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
   let(:app_profile_id) { "test-app-profile-id"}
+  let(:table) {
+    bigtable.table(instance_id, table_id, skip_lookup: true, app_profile_id: app_profile_id)
+  }
 
   it "mutate row" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    client = bigtable.client(instance_id)
-    table = client.table(table_id, app_profile_id: app_profile_id)
     row_key = "user-1"
 
     entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)

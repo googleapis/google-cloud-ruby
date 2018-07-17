@@ -17,7 +17,7 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Client::Table, :read_modify_write_row, :mock_bigtable do
+describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
   let(:family_name) { "cf" }
@@ -27,12 +27,13 @@ describe Google::Cloud::Bigtable::Client::Table, :read_modify_write_row, :mock_b
   let(:cell_value) { "xyz" }
   let(:append_value) { "append-123" }
   let(:increment_amount) { 1 }
+  let(:table) {
+    bigtable.table(instance_id, table_id, skip_lookup: true)
+  }
 
   it "read modify and write row with single rule" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    client = bigtable.client(instance_id)
-    table = client.table(table_id)
 
     row_key = "user-1"
 
@@ -77,9 +78,7 @@ describe Google::Cloud::Bigtable::Client::Table, :read_modify_write_row, :mock_b
   it "read modify and write row with multiple rule" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    client = bigtable.client(instance_id)
-    table = client.table(table_id)
-
+  
     row_key = "user-1"
 
     cell1 = { value: cell_value + "1", timestamp_micros: 0 }
