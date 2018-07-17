@@ -61,6 +61,8 @@ module Google
         ##
         # The Storage project connected to.
         #
+        # @return [String]
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -410,6 +412,8 @@ module Google
         #   using the URL, but only when the file resource is missing the
         #   corresponding values. (These values can be permanently set using
         #   {File#content_disposition=} and {File#content_type=}.)
+        #
+        # @return [String]
         #
         # @example
         #   require "google/cloud/storage"

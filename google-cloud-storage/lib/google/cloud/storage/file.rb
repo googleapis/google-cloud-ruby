@@ -108,24 +108,36 @@ module Google
         ##
         # The kind of item this is.
         # For files, this is always storage#object.
+        #
+        # @return [String]
+        #
         def kind
           @gapi.kind
         end
 
         ##
         # The ID of the file.
+        #
+        # @return [String]
+        #
         def id
           @gapi.id
         end
 
         ##
         # The name of this file.
+        #
+        # @return [String]
+        #
         def name
           @gapi.name
         end
 
         ##
         # The name of the {Bucket} containing this file.
+        #
+        # @return [String]
+        #
         def bucket
           @gapi.bucket
         end
@@ -133,6 +145,9 @@ module Google
         ##
         # The content generation of this file.
         # Used for object versioning.
+        #
+        # @return [Fixnum]
+        #
         def generation
           @gapi.generation
         end
@@ -142,30 +157,45 @@ module Google
         # Used for preconditions and for detecting changes in metadata.
         # A metageneration number is only meaningful in the context of a
         # particular generation of a particular file.
+        #
+        # @return [Fixnum]
+        #
         def metageneration
           @gapi.metageneration
         end
 
         ##
         # A URL that can be used to access the file using the REST API.
+        #
+        # @return [String]
+        #
         def api_url
           @gapi.self_link
         end
 
         ##
         # A URL that can be used to download the file using the REST API.
+        #
+        # @return [String]
+        #
         def media_url
           @gapi.media_link
         end
 
         ##
         # Content-Length of the data in bytes.
+        #
+        # @return [Integer]
+        #
         def size
           @gapi.size.to_i if @gapi.size
         end
 
         ##
         # Creation time of the file.
+        #
+        # @return [DateTime]
+        #
         def created_at
           @gapi.time_created
         end
@@ -174,12 +204,18 @@ module Google
         # The creation or modification time of the file.
         # For buckets with versioning enabled, changing an object's
         # metadata does not change this property.
+        #
+        # @return [DateTime]
+        #
         def updated_at
           @gapi.updated
         end
 
         ##
         # MD5 hash of the data; encoded using base64.
+        #
+        # @return [String]
+        #
         def md5
           @gapi.md5_hash
         end
@@ -188,19 +224,29 @@ module Google
         # The CRC32c checksum of the data, as described in
         # [RFC 4960, Appendix B](http://tools.ietf.org/html/rfc4960#appendix-B).
         # Encoded using base64 in big-endian byte order.
+        #
+        # @return [String]
+        #
         def crc32c
           @gapi.crc32c
         end
 
         ##
         # HTTP 1.1 Entity tag for the file.
+        #
+        # @return [String]
+        #
         def etag
           @gapi.etag
         end
 
         ##
         # The [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
-        # directive for the file data.
+        # directive for the file data. If omitted, and the file is accessible
+        # to all anonymous users, the default will be `public, max-age=3600`.
+        #
+        # @return [String]
+        #
         def cache_control
           @gapi.cache_control
         end
@@ -208,7 +254,11 @@ module Google
         ##
         # Updates the
         # [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2)
-        # directive for the file data.
+        # directive for the file data. If omitted, and the file is accessible
+        # to all anonymous users, the default will be `public, max-age=3600`.
+        #
+        # @param [String] cache_control The Cache-Control directive.
+        #
         def cache_control= cache_control
           @gapi.cache_control = cache_control
           update_gapi! :cache_control
@@ -217,6 +267,9 @@ module Google
         ##
         # The [Content-Disposition](https://tools.ietf.org/html/rfc6266) of the
         # file data.
+        #
+        # @return [String]
+        #
         def content_disposition
           @gapi.content_disposition
         end
@@ -224,6 +277,10 @@ module Google
         ##
         # Updates the [Content-Disposition](https://tools.ietf.org/html/rfc6266)
         # of the file data.
+        #
+        # @param [String] content_disposition The Content-Disposition of the
+        #   file.
+        #
         def content_disposition= content_disposition
           @gapi.content_disposition = content_disposition
           update_gapi! :content_disposition
@@ -233,6 +290,9 @@ module Google
         # The [Content-Encoding
         # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file
         # data.
+        #
+        # @return [String]
+        #
         def content_encoding
           @gapi.content_encoding
         end
@@ -241,6 +301,9 @@ module Google
         # Updates the [Content-Encoding
         # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file
         # data.
+        #
+        # @param [String] content_encoding The Content-Encoding of the file.
+        #
         def content_encoding= content_encoding
           @gapi.content_encoding = content_encoding
           update_gapi! :content_encoding
@@ -249,6 +312,9 @@ module Google
         ##
         # The [Content-Language](http://tools.ietf.org/html/bcp47) of the file
         # data.
+        #
+        # @return [String]
+        #
         def content_language
           @gapi.content_language
         end
@@ -256,6 +322,9 @@ module Google
         ##
         # Updates the [Content-Language](http://tools.ietf.org/html/bcp47) of
         # the file data.
+        #
+        # @param [String] content_language The Content-Language of the file.
+        #
         def content_language= content_language
           @gapi.content_language = content_language
           update_gapi! :content_language
@@ -264,6 +333,9 @@ module Google
         ##
         # The [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17)
         # of the file data.
+        #
+        # @return [String]
+        #
         def content_type
           @gapi.content_type
         end
@@ -272,6 +344,9 @@ module Google
         # Updates the
         # [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of
         # the file data.
+        #
+        # @param [String] content_type The Content-Type of the file.
+        #
         def content_type= content_type
           @gapi.content_type = content_type
           update_gapi! :content_type
@@ -281,6 +356,9 @@ module Google
         # A hash of custom, user-provided web-safe keys and arbitrary string
         # values that will returned with requests for the file as "x-goog-meta-"
         # response headers.
+        #
+        # @return [Hash(String => String)]
+        #
         def metadata
           m = @gapi.metadata
           m = m.to_h if m.respond_to? :to_h
@@ -291,6 +369,10 @@ module Google
         # Updates the hash of custom, user-provided web-safe keys and arbitrary
         # string values that will returned with requests for the file as
         # "x-goog-meta-" response headers.
+        #
+        # @param [Hash(String => String)] metadata The user-provided metadata,
+        #   in key/value pairs.
+        #
         def metadata= metadata
           @gapi.metadata = metadata
           update_gapi! :metadata
@@ -303,6 +385,9 @@ module Google
         # key](https://cloud.google.com/storage/docs/encryption#customer-supplied).
         # You can use this SHA256 hash to uniquely identify the AES-256
         # encryption key required to decrypt this file.
+        #
+        # @return [String]
+        #
         def encryption_key_sha256
           return nil unless @gapi.customer_encryption
           Base64.decode64 @gapi.customer_encryption.key_sha256
@@ -318,9 +403,6 @@ module Google
         # @return [String, nil] A Cloud KMS encryption key, or `nil` if none has
         #   been configured.
         #
-        # @see https://cloud.google.com/kms/docs/ Cloud Key Management Service
-        #   Documentation
-        #
         def kms_key
           @gapi.kms_key_name
         end
@@ -332,6 +414,9 @@ module Google
         # Classes](https://cloud.google.com/storage/docs/storage-classes) and
         # [Per-Object Storage
         # Class](https://cloud.google.com/storage/docs/per-object-storage-class).
+        #
+        # @return [String]
+        #
         def storage_class
           @gapi.storage_class
         end
@@ -352,7 +437,9 @@ module Google
         # Class](https://cloud.google.com/storage/docs/per-object-storage-class).
         # The  default value is the default storage class for the bucket. See
         # {Bucket#storage_class}.
+        #
         # @param [Symbol, String] storage_class Storage class of the file.
+        #
         def storage_class= storage_class
           @gapi.storage_class = storage_class_for(storage_class)
           update_gapi! :storage_class
@@ -952,12 +1039,12 @@ module Google
         ##
         # Permanently deletes the file.
         #
-        # @return [Boolean] Returns `true` if the file was deleted.
         # @param [Boolean, Integer] generation Specify a version of the file to
         #   delete. When `true`, it will delete the version returned by
         #   {#generation}. The default behavior is to delete the latest version
         #   of the file (regardless of the version to which the file is set,
         #   which is the version returned by {#generation}.)
+        # @return [Boolean] Returns `true` if the file was deleted.
         #
         # @example
         #   require "google/cloud/storage"
@@ -1008,6 +1095,8 @@ module Google
         #
         # @param [String] protocol The protocol to use for the URL. Default is
         #   `HTTPS`.
+        #
+        # @return [String]
         #
         # @example
         #   require "google/cloud/storage"
@@ -1081,6 +1170,8 @@ module Google
         #   corresponding values. (These values can be permanently set using
         #   {#content_disposition=} and {#content_type=}.)
         #
+        # @return [String]
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -1148,6 +1239,8 @@ module Google
         #
         # @see https://cloud.google.com/storage/docs/access-control Access
         #   Control guide
+        #
+        # @return [File::Acl]
         #
         # @example Grant access to a user by prepending `"user-"` to an email:
         #   require "google/cloud/storage"
@@ -1423,6 +1516,9 @@ module Google
           # A hash of custom, user-provided web-safe keys and arbitrary string
           # values that will returned with requests for the file as
           # "x-goog-meta-" response headers.
+          #
+          # @return [Hash(String => String)]
+          #
           def metadata
             @metadata
           end
@@ -1431,6 +1527,10 @@ module Google
           # Updates the hash of custom, user-provided web-safe keys and
           # arbitrary string values that will returned with requests for the
           # file as "x-goog-meta-" response headers.
+          #
+          # @param [Hash(String => String)] metadata The user-provided metadata,
+          #   in key/value pairs.
+          #
           def metadata= metadata
             @metadata = metadata
             @gapi.metadata = @metadata
