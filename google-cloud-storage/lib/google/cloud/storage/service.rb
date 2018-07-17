@@ -63,6 +63,10 @@ module Google
         end
         attr_accessor :mocked_service
 
+        def project_service_account
+          service.get_project_service_account project
+        end
+
         ##
         # Retrieves a list of buckets for the given project.
         def list_buckets prefix: nil, token: nil, max: nil, user_project: nil

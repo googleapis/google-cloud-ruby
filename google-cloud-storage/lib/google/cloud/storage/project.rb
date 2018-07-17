@@ -79,6 +79,18 @@ module Google
         alias project project_id
 
         ##
+        # The Google Cloud Storage managed service account created for the
+        # project used to initialize the client library. (See also
+        # {#project_id}.)
+        #
+        # @return [String] The service account email address.
+        #
+        def service_account_email
+          @service_account_email ||= \
+            service.project_service_account.email_address
+        end
+
+        ##
         # Retrieves a list of buckets for the given project.
         #
         # @param [String] prefix Filter results to buckets whose names begin
