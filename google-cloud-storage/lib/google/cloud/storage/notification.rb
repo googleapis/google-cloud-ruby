@@ -78,18 +78,27 @@ module Google
         ##
         # The kind of item this is.
         # For notifications, this is always storage#notification.
+        #
+        # @return [String]
+        #
         def kind
           @gapi.kind
         end
 
         ##
         # The ID of the notification.
+        #
+        # @return [String]
+        #
         def id
           @gapi.id
         end
 
         ##
         # A URL that can be used to access the notification using the REST API.
+        #
+        # @return [String]
+        #
         def api_url
           @gapi.self_link
         end
@@ -98,6 +107,9 @@ module Google
         # The custom attributes of this notification. An optional list of
         # additional attributes to attach to each Cloud Pub/Sub message
         # published for this notification subscription.
+        #
+        # @return [Hash(String => String)]
+        #
         def custom_attrs
           @gapi.custom_attributes
         end
@@ -133,6 +145,8 @@ module Google
         # explicitly specify in their notification configuration which event
         # types they are prepared to accept.
         #
+        # @return [Array<String>]
+        #
         def event_types
           @gapi.event_types
         end
@@ -141,6 +155,8 @@ module Google
         # The file name prefix of this notification. If present, only apply
         # this notification configuration to file names that begin with this
         # prefix.
+        #
+        # @return [String]
         #
         def prefix
           @gapi.object_name_prefix
@@ -156,6 +172,8 @@ module Google
         #   of the file's metadata.
         # * `NONE` - No payload is included with the notification.
         #
+        # @return [String]
+        #
         def payload
           @gapi.payload_format
         end
@@ -164,6 +182,9 @@ module Google
         # The Cloud Pub/Sub topic to which this subscription publishes.
         # Formatted as:
         # `//pubsub.googleapis.com/projects/{project-id}/topics/{my-topic}`
+        #
+        # @return [String]
+        #
         def topic
           @gapi.topic
         end

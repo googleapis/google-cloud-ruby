@@ -86,30 +86,45 @@ module Google
         ##
         # The kind of item this is.
         # For buckets, this is always `storage#bucket`.
+        #
+        # @return [String]
+        #
         def kind
           @gapi.kind
         end
 
         ##
         # The ID of the bucket.
+        #
+        # @return [String]
+        #
         def id
           @gapi.id
         end
 
         ##
         # The name of the bucket.
+        #
+        # @return [String]
+        #
         def name
           @gapi.name
         end
 
         ##
         # A URL that can be used to access the bucket using the REST API.
+        #
+        # @return [String]
+        #
         def api_url
           @gapi.self_link
         end
 
         ##
         # Creation time of the bucket.
+        #
+        # @return [DateTime]
+        #
         def created_at
           @gapi.time_created
         end
@@ -130,6 +145,8 @@ module Google
         #
         # @yield [cors] a block for setting CORS rules
         # @yieldparam [Bucket::Cors] cors the object accepting CORS rules
+        #
+        # @return [Bucket::Cors] The frozen builder object.
         #
         # @example Retrieving the bucket's CORS rules.
         #   require "google/cloud/storage"
@@ -177,13 +194,18 @@ module Google
         # storage within this region. Defaults to US.
         # See the developer's guide for the authoritative list.
         #
+        # @return [String]
+        #
         # @see https://cloud.google.com/storage/docs/concepts-techniques
+        #
         def location
           @gapi.location
         end
 
         ##
         # The destination bucket name for the bucket's logs.
+        #
+        # @return [String]
         #
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
@@ -209,6 +231,8 @@ module Google
         #
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
+        # @return [String]
+        #
         def logging_prefix
           @gapi.logging.log_object_prefix if @gapi.logging
         end
@@ -223,6 +247,8 @@ module Google
         #
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
+        # @param [String] logging_prefix The logging object prefix.
+        #
         def logging_prefix= logging_prefix
           @gapi.logging ||= Google::Apis::StorageV1::Bucket::Logging.new
           @gapi.logging.log_object_prefix = logging_prefix
@@ -234,6 +260,9 @@ module Google
         # stored and determines the SLA and the cost of storage. Values include
         # `MULTI_REGIONAL`, `REGIONAL`, `NEARLINE`, `COLDLINE`, and
         # `DURABLE_REDUCED_AVAILABILITY`.
+        #
+        # @return [String]
+        #
         def storage_class
           @gapi.storage_class
         end
@@ -245,7 +274,9 @@ module Google
         # and `:coldline`, as well as the equivalent strings returned by
         # {Bucket#storage_class}. For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/storage-classes).
+        #
         # @param [Symbol, String] new_storage_class Storage class of the bucket.
+        #
         def storage_class= new_storage_class
           @gapi.storage_class = storage_class_for(new_storage_class)
           patch_gapi! :storage_class
@@ -255,6 +286,9 @@ module Google
         # Whether [Object
         # Versioning](https://cloud.google.com/storage/docs/object-versioning)
         # is enabled for the bucket.
+        #
+        # @return [Boolean]
+        #
         def versioning?
           @gapi.versioning.enabled? unless @gapi.versioning.nil?
         end
@@ -264,7 +298,8 @@ module Google
         # Versioning](https://cloud.google.com/storage/docs/object-versioning)
         # is enabled for the bucket.
         #
-        # @return [Boolean]
+        # @param [Boolean] new_versioning true if versioning is to be enabled
+        #   for the bucket.
         #
         def versioning= new_versioning
           @gapi.versioning ||= Google::Apis::StorageV1::Bucket::Versioning.new
@@ -273,22 +308,28 @@ module Google
         end
 
         ##
-        # The index page returned from a static website served from the bucket
-        # when a site visitor requests the top level directory.
+        # The main page suffix for a static website. If the requested object
+        # path is missing, the service will ensure the path has a trailing '/',
+        # append this suffix, and attempt to retrieve the resulting object. This
+        # allows the creation of index.html objects to represent directory
+        # pages.
         #
         # @see https://cloud.google.com/storage/docs/website-configuration#step4
         #   How to Host a Static Website
+        #
+        # @return [String] The main page suffix.
         #
         def website_main
           @gapi.website.main_page_suffix if @gapi.website
         end
 
         ##
-        # Updates the index page returned from a static website served from the
-        # bucket when a site visitor requests the top level directory.
+        # Updates the main page suffix for a static website.
         #
         # @see https://cloud.google.com/storage/docs/website-configuration#step4
         #   How to Host a Static Website
+        #
+        # @param [String] website_main The main page suffix.
         #
         def website_main= website_main
           @gapi.website ||= Google::Apis::StorageV1::Bucket::Website.new
@@ -303,6 +344,8 @@ module Google
         # @see https://cloud.google.com/storage/docs/website-configuration#step4
         #   How to Host a Static Website
         #
+        # @return [String]
+        #
         def website_404
           @gapi.website.not_found_page if @gapi.website
         end
@@ -310,6 +353,9 @@ module Google
         ##
         # A hash of user-provided labels. The hash is frozen and changes are not
         # allowed.
+        #
+        # @return [Hash(String => String)]
+        #
         def labels
           m = @gapi.labels
           m = m.to_h if m.respond_to? :to_h
@@ -318,6 +364,9 @@ module Google
 
         ##
         # Updates the hash of user-provided labels.
+        #
+        # @param [Hash(String => String)] labels The user-provided labels.
+        #
         def labels= labels
           @gapi.labels = labels
           patch_gapi! :labels
@@ -406,7 +455,7 @@ module Google
         # Set the Cloud KMS encryption key that will be used to protect files.
         # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
         #
-        # @param [String] new_default_kms_key New Cloud KMS key name
+        # @param [String] new_default_kms_key New Cloud KMS key name.
         #
         # @example
         #   require "google/cloud/storage"
@@ -972,6 +1021,8 @@ module Google
         #   corresponding values. (These values can be permanently set using
         #   {File#content_disposition=} and {File#content_type=}.)
         #
+        # @return [String]
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -1136,7 +1187,7 @@ module Google
         end
 
         ##
-        # The Bucket::Acl instance used to control access to the bucket.
+        # The {Bucket::Acl} instance used to control access to the bucket.
         #
         # A bucket has owners, writers, and readers. Permissions can be granted
         # to an individual user's email address, a group's email address, as
@@ -1144,6 +1195,8 @@ module Google
         #
         # @see https://cloud.google.com/storage/docs/access-control Access
         #   Control guide
+        #
+        # @return [Bucket::Acl]
         #
         # @example Grant access to a user by prepending `"user-"` to an email:
         #   require "google/cloud/storage"
@@ -1179,8 +1232,8 @@ module Google
         end
 
         ##
-        # The Bucket::DefaultAcl instance used to control access to the bucket's
-        # files.
+        # The {Bucket::DefaultAcl} instance used to control access to the
+        # bucket's files.
         #
         # A bucket's files have owners, writers, and readers. Permissions can be
         # granted to an individual user's email address, a group's email
@@ -1188,6 +1241,8 @@ module Google
         #
         # @see https://cloud.google.com/storage/docs/access-control Access
         #   Control guide
+        #
+        # @return [Bucket::DefaultAcl]
         #
         # @example Grant access to a user by prepending `"user-"` to an email:
         #   require "google/cloud/storage"
@@ -1490,6 +1545,7 @@ module Google
 
         ##
         # Reloads the bucket with current data from the Storage service.
+        #
         def reload!
           ensure_service!
           @gapi = service.get_bucket name, user_project: user_project
@@ -1501,6 +1557,9 @@ module Google
 
         ##
         # Determines whether the bucket exists in the Storage service.
+        #
+        # @return [Boolean] true if the bucket exists in the Storage service.
+        #
         def exists?
           # Always true if we have a grpc object
           return true unless lazy?
@@ -1607,12 +1666,18 @@ module Google
 
           ##
           # A hash of user-provided labels. Changes are allowed.
+          #
+          # @return [Hash(String => String)]
+          #
           def labels
             @labels
           end
 
           ##
           # Updates the hash of user-provided labels.
+          #
+          # @param [Hash(String => String)] labels The user-provided labels.
+          #
           def labels= labels
             @labels = labels
             @gapi.labels = @labels

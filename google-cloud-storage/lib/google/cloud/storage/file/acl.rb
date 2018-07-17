@@ -161,6 +161,8 @@ module Google
           # @param [Integer] generation When present, selects a specific
           #   revision of this object. Default is the latest version.
           #
+          # @return [String] The entity.
+          #
           # @example Grant access to a user by prepending `"user-"` to an email:
           #   require "google/cloud/storage"
           #
@@ -210,6 +212,8 @@ module Google
           # @param [Integer] generation When present, selects a specific
           #   revision of this object. Default is the latest version.
           #
+          # @return [String] The entity.
+          #
           # @example Grant access to a user by prepending `"user-"` to an email:
           #   require "google/cloud/storage"
           #
@@ -258,6 +262,9 @@ module Google
           #
           # @param [Integer] generation When present, selects a specific
           #   revision of this object. Default is the latest version.
+          #
+          # @return [Boolean] true if the delete operation did not raise an
+          #   error
           #
           # @example
           #   require "google/cloud/storage"

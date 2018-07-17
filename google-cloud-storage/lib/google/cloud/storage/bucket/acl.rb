@@ -172,6 +172,8 @@ module Google
           #   * allUsers
           #   * allAuthenticatedUsers
           #
+          # @return [String] The entity.
+          #
           # @example Grant access to a user by prepending `"user-"` to an email:
           #   require "google/cloud/storage"
           #
@@ -214,6 +216,8 @@ module Google
           #   * project-team-projectId
           #   * allUsers
           #   * allAuthenticatedUsers
+          #
+          # @return [String] The entity.
           #
           # @example Grant access to a user by prepending `"user-"` to an email:
           #   require "google/cloud/storage"
@@ -258,6 +262,8 @@ module Google
           #   * allUsers
           #   * allAuthenticatedUsers
           #
+          # @return [String] The entity.
+          #
           # @example Grant access to a user by prepending `"user-"` to an email:
           #   require "google/cloud/storage"
           #
@@ -301,6 +307,8 @@ module Google
           #   * project-team-projectId
           #   * allUsers
           #   * allAuthenticatedUsers
+          #
+          # @return [Boolean]
           #
           # @example
           #   require "google/cloud/storage"
