@@ -36,7 +36,7 @@ module Google
     #
     # ### Installation
     # ```
-    # $ gem install google-cloud-vision
+    # $ gem install google-cloud
     # ```
     #
     # ### Preview
@@ -44,7 +44,7 @@ module Google
     # ```rb
     # require "google/cloud/vision"
     #
-    # image_annotator_client = Google::Cloud::Vision.new
+    # image_annotator_client = Google::Cloud::Vision::V1.new
     # gcs_image_uri = "gs://gapic-toolkit/President_Barack_Obama.jpg"
     # source = { gcs_image_uri: gcs_image_uri }
     # image = { source: source }

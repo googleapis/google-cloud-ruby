@@ -136,7 +136,7 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
-            package_version = Gem.loaded_specs['google-cloud-vision'].version.version
+            package_version = Gem.loaded_specs['google-cloud'].version.version
 
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
@@ -205,9 +205,9 @@ module Google
           # @return [Google::Cloud::Vision::V1::BatchAnnotateImagesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/vision/v1"
+          #   require "google/cloud/vision"
           #
-          #   image_annotator_client = Google::Cloud::Vision::V1.new
+          #   image_annotator_client = Google::Cloud::Vision::V1.new(version: :v1)
           #
           #   # TODO: Initialize +requests+:
           #   requests = []
@@ -241,9 +241,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/vision/v1"
+          #   require "google/cloud/vision"
           #
-          #   image_annotator_client = Google::Cloud::Vision::V1.new
+          #   image_annotator_client = Google::Cloud::Vision::V1.new(version: :v1)
           #
           #   # TODO: Initialize +requests+:
           #   requests = []

@@ -28,6 +28,7 @@ v1_library = gapic.ruby_library(
 
 s.copy(v1_library / 'lib/google/cloud/vision/v1')
 s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
+s.copy(v1_library / 'test/google/cloud/vision/v1')
 
 # Note: Not copying 'test/google/cloud/vision/v1' yet, because it generates
 # tests for a gapic-only library, whereas this library currently is handwritten
