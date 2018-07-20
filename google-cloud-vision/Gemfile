@@ -21,6 +21,3 @@ end
 # pin to the last known good version
 gem "public_suffix", "~> 2.0"
 gem "rake", "~> 11.0"
-
-# Added at 2018-07-19 17:08:47 -0700 by paye:
-gem "pry", "~> 0.11.3"
