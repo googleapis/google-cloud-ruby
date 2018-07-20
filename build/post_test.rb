@@ -1,8 +1,11 @@
 require "pty"
 
 commands = [
-  "rvm-exec 2.5.0 bundle update; rvm-exec 2.5.0 bundle exec rake circleci:post",
-  "rvm-exec 2.4.2 bundle update; rvm-exec 2.4.2 bundle exec rake test:coveralls"
+  # These jobs are run on separate versions just so they run on different
+  # servers and don't block each other. They don't actually have a version
+  # dependency.
+  "rvm-exec 2.5.1 bundle update; rvm-exec 2.5.1 bundle exec rake circleci:post",
+  "rvm-exec 2.4.4 bundle update; rvm-exec 2.4.4 bundle exec rake test:coveralls"
 ]
 
 node_index = Integer ENV["CIRCLE_NODE_INDEX"]

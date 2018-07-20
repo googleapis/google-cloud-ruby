@@ -23,14 +23,14 @@ $ gem install google-cloud-dlp
 
 ### Supported Ruby Versions
 
-This library is supported on Ruby 2.0+.
+This library is supported on Ruby 2.3+.
 
-However, Ruby 2.3 or later is strongly recommended, as earlier releases have
-reached or are nearing end-of-life. After June 1, 2018, Google will provide
-official support only for Ruby versions that are considered current and
-supported by Ruby Core (that is, Ruby versions that are either in normal
-maintenance or in security maintenance).
-See https://www.ruby-lang.org/en/downloads/branches/ for further details.
+Google provides official support for Ruby versions that are actively supported
+by Ruby Core—that is, Ruby versions that are either in normal maintenance or
+in security maintenance, and not end of life. Currently, this means Ruby 2.3
+and later. Older versions of Ruby _may_ still work, but are unsupported and not
+recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
+about the Ruby support schedule.
 
 ### Preview
 #### DlpServiceClient
@@ -39,15 +39,15 @@ require "google/cloud/dlp"
 
 dlp = Google::Cloud::Dlp.new
 
-inspect_config = { 
-  info_types: [{ name: "PHONE_NUMBER" }], 
+inspect_config = {
+  info_types: [{ name: "PHONE_NUMBER" }],
   min_likelihood: :POSSIBLE
 }
 item = { value: "my phone number is 215-512-1212" }
 parent = "projects/#{ENV["MY_PROJECT"]}"
 
-response = dlp.inspect_content parent, 
-  inspect_config: inspect_config, 
+response = dlp.inspect_content parent,
+  inspect_config: inspect_config,
   item: item
 ```
 

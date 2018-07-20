@@ -1,25 +1,15 @@
 require "pty"
 
 command_groups = [
-  ["rvm-exec 2.5.0 gem install bundler",
-   "rvm-exec 2.5.0 bundle update",
-   "rvm-exec 2.5.0 bundle exec rake circleci:build"],
-  ["rvm-exec 2.4.2 gem install bundler",
-   "rvm-exec 2.4.2 bundle update",
-   "rvm-exec 2.4.2 bundle exec rake circleci:build"],
-  ["rvm-exec 2.3.5 gem install bundler",
-   "rvm-exec 2.3.5 bundle update",
-   "rvm-exec 2.3.5 bundle exec rake circleci:build"],
-  ["rvm-exec 2.2.7 gem install bundler",
-   "rvm-exec 2.2.7 bundle update",
-   "rvm-exec 2.2.7 bundle exec rake circleci:build"],
-  ["rvm rubygems current",
-   "gem install bundler",
-   "bundle update",
-   "bundle exec rake circleci:build"],
-  ["rvm-exec 2.0.0-p648 gem install bundler",
-   "rvm-exec 2.0.0-p648 bundle update",
-   "rvm-exec 2.0.0-p648 bundle exec rake circleci:build"]
+  ["rvm-exec 2.5.1 gem install bundler",
+   "rvm-exec 2.5.1 bundle update",
+   "rvm-exec 2.5.1 bundle exec rake circleci:build"],
+  ["rvm-exec 2.4.4 gem install bundler",
+   "rvm-exec 2.4.4 bundle update",
+   "rvm-exec 2.4.4 bundle exec rake circleci:build"],
+  ["rvm-exec 2.3.7 gem install bundler",
+   "rvm-exec 2.3.7 bundle update",
+   "rvm-exec 2.3.7 bundle exec rake circleci:build"]
 ]
 
 node_index = Integer ENV["CIRCLE_NODE_INDEX"]

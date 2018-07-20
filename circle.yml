@@ -1,11 +1,9 @@
 machine:
   timezone: America/Los_Angeles
 
-  # Since 2.1.9 test execution fails to locate gem dependencies when run via
-  # rvm-exec, set it to be the machine default.
   ruby:
     version:
-      2.1.9
+      2.5.1
 
 general:
   branches:
@@ -20,15 +18,10 @@ dependencies:
     - "/opt/circleci/.rvm"
 
   pre:
-    # The following three commands install 2.0.0
     - rvm get stable
-    - gem update --system
-    - rvm-exec 2.5.0 gem update --system
-    - rvm-exec 2.4.2 gem update --system
-    - rvm-exec 2.3.5 gem update --system
-    - rvm-exec 2.2.7 gem update --system
-    - rvm install 2.0.0-p648
-    - rvm-exec 2.0.0-p648 gem update --system
+    - rvm-exec 2.5.1 gem update --system
+    - rvm-exec 2.4.4 gem update --system
+    - rvm-exec 2.3.7 gem update --system
 
 test:
   override:
@@ -44,7 +37,7 @@ deployment:
     tag: /(\S*)\/v(\S*)/
     owner: GoogleCloudPlatform
     commands:
-      - rvm-exec 2.5.0 bundle exec rake circleci:release
+      - rvm-exec 2.5.1 bundle exec rake circleci:release
 
 notify:
   webhooks:

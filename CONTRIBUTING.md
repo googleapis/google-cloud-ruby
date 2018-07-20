@@ -19,7 +19,7 @@ In order to use the google-cloud-ruby console and run the project's tests, there
 small amount of setup:
 
 1. Install Ruby.
-    google-cloud-ruby requires Ruby 2.0+. You may choose to manage your Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or [chruby](https://github.com/postmodern/chruby).
+    google-cloud-ruby requires Ruby 2.3+. You may choose to manage your Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or [chruby](https://github.com/postmodern/chruby).
 
 2. Install [Bundler](http://bundler.io/).
 
