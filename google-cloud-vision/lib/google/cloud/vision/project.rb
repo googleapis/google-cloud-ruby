@@ -287,8 +287,8 @@ module Google
         # @param requests
         #   [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest | Hash>]
         #   Individual async file annotation requests for this batch.
-        #   A hash of the same form as `
-        #     Google::Cloud::Vision::V1::AsyncAnnotateFileRequest` can also be
+        #   A hash of the same form as
+        #     `Google::Cloud::Vision::V1::AsyncAnnotateFileRequest` can also be
         #   provided.
         # @param options [Google::Gax::CallOptions]
         #   Overrides the default settings for this call, e.g, timeout,
