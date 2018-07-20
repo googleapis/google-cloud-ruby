@@ -17,7 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/tasks/v2beta2"
+require "google/cloud/tasks"
 require "google/cloud/tasks/v2beta2/cloud_tasks_client"
 require "google/cloud/tasks/v2beta2/cloudtasks_services_pb"
 
@@ -94,7 +94,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.list_queues(formatted_parent)
@@ -125,7 +125,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -164,7 +164,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.get_queue(formatted_name)
@@ -199,7 +199,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -240,7 +240,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.create_queue(formatted_parent, queue)
@@ -277,7 +277,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -316,7 +316,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.update_queue(queue)
@@ -351,7 +351,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -385,7 +385,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.delete_queue(formatted_name)
@@ -420,7 +420,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -459,7 +459,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.purge_queue(formatted_name)
@@ -494,7 +494,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -533,7 +533,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.pause_queue(formatted_name)
@@ -568,7 +568,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -607,7 +607,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.resume_queue(formatted_name)
@@ -642,7 +642,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -682,7 +682,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.get_iam_policy(formatted_resource)
@@ -717,7 +717,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -759,7 +759,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.set_iam_policy(formatted_resource, policy)
@@ -796,7 +796,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -836,7 +836,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.test_iam_permissions(formatted_resource, permissions)
@@ -873,7 +873,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -914,7 +914,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.list_tasks(formatted_parent)
@@ -945,7 +945,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -984,7 +984,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.get_task(formatted_name)
@@ -1019,7 +1019,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -1060,7 +1060,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.create_task(formatted_parent, task)
@@ -1097,7 +1097,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -1131,7 +1131,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.delete_task(formatted_name)
@@ -1166,7 +1166,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -1206,7 +1206,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.lease_tasks(formatted_parent, lease_duration)
@@ -1243,7 +1243,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -1279,7 +1279,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.acknowledge_task(formatted_name, schedule_time)
@@ -1316,7 +1316,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -1359,7 +1359,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.renew_lease(
@@ -1406,7 +1406,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -1451,7 +1451,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.cancel_lease(formatted_name, schedule_time)
@@ -1488,7 +1488,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
@@ -1527,7 +1527,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           response = client.run_task(formatted_name)
@@ -1562,7 +1562,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Tasks::V2beta2.new
+          client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do

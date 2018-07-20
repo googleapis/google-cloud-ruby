@@ -148,7 +148,7 @@ module Google
         #
         #     This map contains the header field names and values.
         #     Headers can be set when the
-        #     [task is created](https://cloud.google.comgoogle.cloud.tasks.v2beta2.CloudTasks.CreateTask).
+        #     {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateTask task is created}.
         #     Repeated headers are not supported but a header value can contain commas.
         #
         #     Cloud Tasks sets some headers to default values:
@@ -165,7 +165,7 @@ module Google
         #     * +Content-Type+: By default, the +Content-Type+ header is set to
         #       +"application/octet-stream"+. The default can be overridden by explicitly
         #       setting +Content-Type+ to a particular media type when the
-        #       [task is created](https://cloud.google.comgoogle.cloud.tasks.v2beta2.CloudTasks.CreateTask).
+        #       {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateTask task is created}.
         #       For example, +Content-Type+ can be set to +"application/json"+.
         #     * +Content-Length+: This is computed by Cloud Tasks. This value is
         #       output only.   It cannot be changed.
@@ -319,19 +319,19 @@ module Google
           # HTTP method unspecified
           HTTP_METHOD_UNSPECIFIED = 0
 
-          # HTTP Post
+          # HTTP POST
           POST = 1
 
-          # HTTP Get
+          # HTTP GET
           GET = 2
 
-          # HTTP Head
+          # HTTP HEAD
           HEAD = 3
 
-          # HTTP Put
+          # HTTP PUT
           PUT = 4
 
-          # HTTP Delete
+          # HTTP DELETE
           DELETE = 5
         end
       end

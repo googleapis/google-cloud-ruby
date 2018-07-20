@@ -187,14 +187,8 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
-        #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
-        # @!attribute [rw] order_by
-        #   @return [String]
-        #     Sort order used for the query. The only fields supported for sorting
-        #     are +schedule_time+ and +pull_message.tag+. All results will be
-        #     returned in approximately ascending order. The default ordering is by
-        #     +schedule_time+.
+        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Requested page size. Fewer tasks than requested might be returned.
@@ -251,8 +245,8 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
-        #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class GetTaskRequest; end
 
         # Request message for {Google::Cloud::Tasks::V2beta2::CloudTasks::CreateTask CreateTask}.
@@ -313,8 +307,8 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
-        #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class CreateTaskRequest; end
 
         # Request message for deleting a task using
@@ -365,8 +359,8 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
-        #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         # @!attribute [rw] filter
         #   @return [String]
         #     +filter+ can be used to specify a subset of tasks to lease.
@@ -463,8 +457,8 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
-        #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class RenewLeaseRequest; end
 
         # Request message for canceling a lease using
@@ -496,8 +490,8 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
-        #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class CancelLeaseRequest; end
 
         # Request message for forcing a task to run now using
@@ -520,8 +514,8 @@ module Google
         #     contains.
         #
         #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/) permission on the
-        #     {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+        #     +cloudtasks.tasks.fullView+ [Google IAM](https://cloud.google.com/iam/)
+        #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class RunTaskRequest; end
       end
     end

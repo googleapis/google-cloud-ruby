@@ -50,7 +50,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.tasks.v2beta2.ListTasksRequest" do
     optional :parent, :string, 1
     optional :response_view, :enum, 2, "google.cloud.tasks.v2beta2.Task.View"
-    optional :order_by, :string, 3
     optional :page_size, :int32, 4
     optional :page_token, :string, 5
   end
