@@ -19,6 +19,7 @@ require "google/cloud/vision/credentials"
 require "google/cloud/vision/annotate"
 require "google/cloud/vision/image"
 require "google/cloud/vision/annotation"
+require "google/cloud/vision/v1"
 
 module Google
   module Cloud
@@ -276,6 +277,12 @@ module Google
         end
         alias mark annotate
         alias detect annotate
+
+        def async_batch_annotate_files requests, options = {}
+          Google::Cloud::Vision::V1::ImageAnnotatorClient
+            .new
+            .async_batch_annotate_files requests, options
+        end
 
         protected
 
