@@ -46,7 +46,7 @@ class File
     true
   end
   def self.read *args
-    "fake file data"
+    '{"fake": "file data"}'
   end
   def self.open *args
     # Examples use file paths such as "path/to/face.jpg"

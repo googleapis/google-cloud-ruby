@@ -275,14 +275,78 @@ module Google
           return annotations.first if annotations.count == 1
           annotations
         end
+
+        ##
+        # Run asynchronous image detection and annotation for a list of generic
+        # files, such as PDF files, which may contain multiple pages and
+        # multiple images per page. Progress and results can be retrieved
+        # through the google.longrunning.Operations interface.
+        # Operation.metadata contains OperationMetadata (metadata).
+        # Operation.response contains AsyncBatchAnnotateFilesResponse
+        # (results).
+        #
+        # @param requests
+        #   [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest | Hash>]
+        #   Individual async file annotation requests for this batch.
+        #   A hash of the same form as
+        # `Google::Cloud::Vision::V1::AsyncAnnotateFileRequest` can also be
+        #   provided.
+        # @param options [Google::Gax::CallOptions]
+        #   Overrides the default settings for this call, e.g, timeout,
+        #   retries, etc.
+        # @return [Google::Gax::Operation]
+        # @raise [Google::Gax::GaxError] if the RPC is aborted.
+        # example
+        #   require "google/cloud/vision"
+        #
+        #   vision_client = Google::Cloud::Vision.new project_id: 'project_id'
+        #
+        #   requests = [{
+        #     input_config: {
+        #       gcs_source: { uri: 'source_uri' },
+        #       mime_type: "application/pdf"
+        #     },
+        #     features: [{ type: :DOCUMENT_TEXT_DETECTION }],
+        #     output_config: {
+        #       gcs_destination: { uri: 'destination_uri' },
+        #       batch_size: 2
+        #     }
+        #   }]
+        #
+        #   # Register a callback during the method call.
+        #   operation = vision_client
+        #     .async_batch_annotate_files(requests) do |op|
+        #     raise op.results.message if op.error?
+        #     op_results = op.results
+        #     # Process the results.
+        #
+        #     metadata = op.metadata
+        #     # Process the metadata.
+        #   end
+        #
+        #   # Or use the return value to register a callback.
+        #   operation.on_done do |op|
+        #     raise op.results.message if op.error?
+        #     op_results = op.results
+        #     # Process the results.
+        #
+        #     metadata = op.metadata
+        #     # Process the metadata.
+        #   end
+        #
+        #   # Manually reload the operation.
+        #   operation.reload!
+        #
+        #   # Or block until the operation completes, triggering callbacks on
+        #   # completion.
+        #   operation.wait_until_done!
+        #
+        def async_batch_annotate_files requests, options = {}
+          service.service.async_batch_annotate_files requests, options
+        end
+
         alias mark annotate
         alias detect annotate
-
-        def async_batch_annotate_files requests, options = {}
-          Google::Cloud::Vision::V1::ImageAnnotatorClient
-            .new
-            .async_batch_annotate_files requests, options
-        end
 
         protected
 
