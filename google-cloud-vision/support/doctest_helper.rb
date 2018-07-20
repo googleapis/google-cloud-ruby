@@ -46,7 +46,7 @@ class File
     true
   end
   def self.read *args
-    "fake file data"
+    '{"fake": "file data"}'
   end
   def self.open *args
     # Examples use file paths such as "path/to/face.jpg"
@@ -125,6 +125,7 @@ YARD::Doctest.configure do |doctest|
   # Skip all aliases, since tests would be exact duplicates
   doctest.skip "Google::Cloud::Vision::Project#mark"
   doctest.skip "Google::Cloud::Vision::Project#detect"
+  doctest.skip "Google::Cloud::Vision::Project#async_batch_annotate_files"
   doctest.skip "Google::Cloud::Vision::Image#mark"
   doctest.skip "Google::Cloud::Vision::Image#detect"
   doctest.skip "Google::Cloud::Vision::Annotation::Face::Angles#pan"
