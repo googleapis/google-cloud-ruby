@@ -19,7 +19,6 @@ require "google/cloud/vision/credentials"
 require "google/cloud/vision/annotate"
 require "google/cloud/vision/image"
 require "google/cloud/vision/annotation"
-require "google/cloud/vision/v1"
 
 module Google
   module Cloud
@@ -288,19 +287,20 @@ module Google
         # @param requests
         #   [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest | Hash>]
         #   Individual async file annotation requests for this batch.
-        #   A hash of the same form as
-        # `Google::Cloud::Vision::V1::AsyncAnnotateFileRequest` can also be
+        #   A hash of the same form as `
+        #     Google::Cloud::Vision::V1::AsyncAnnotateFileRequest` can also be
         #   provided.
         # @param options [Google::Gax::CallOptions]
         #   Overrides the default settings for this call, e.g, timeout,
         #   retries, etc.
         # @return [Google::Gax::Operation]
         # @raise [Google::Gax::GaxError] if the RPC is aborted.
-        # example
+        #
+        # @example
         #   require "google/cloud/vision"
         #
+        #   # Create a new vision client.
         #   vision_client = Google::Cloud::Vision.new project_id: 'project_id'
-        #
         #   requests = [{
         #     input_config: {
         #       gcs_source: { uri: 'source_uri' },
