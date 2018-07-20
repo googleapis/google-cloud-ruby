@@ -53,6 +53,7 @@ jobs:
 
 workflows:
   version: 2
+
   tests:
     jobs:
       - test-ruby-2.5: &test-filters
@@ -67,6 +68,7 @@ workflows:
           <<: *test-filters
       - test-ruby-2.3:
           <<: *test-filters
+
   gem-release:
     jobs:
       - release:
