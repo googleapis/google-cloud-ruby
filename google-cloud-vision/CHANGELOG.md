@@ -1,5 +1,9 @@
 # Release History
 
+### 0.30.0 / 2018-07-20
+
+* Add async_batch_annotate_files method to Google::Cloud::Vision::Project
+
 ### 0.29.1 / 2018-07-05
 
 * Update google-gax dependency to version 1.3.
