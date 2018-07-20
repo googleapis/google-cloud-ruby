@@ -26,7 +26,7 @@ require "google/cloud/bigtable"
 require "google/cloud/bigtable/project"
 
 class BigtableServiceWithMock < Google::Cloud::Bigtable::Service
-  attr_accessor :mocked_instances, :mocked_tables
+  attr_accessor :mocked_instances, :mocked_tables, :mocked_client
 
   def instances
     mocked_instances || super
@@ -34,6 +34,10 @@ class BigtableServiceWithMock < Google::Cloud::Bigtable::Service
 
   def tables
     mocked_tables || super
+  end
+
+  def client
+    mocked_client || super
   end
 end
 

@@ -412,14 +412,6 @@ module Google
         #  See to delete table {Google::Cloud::Bigtable::Table#delete} and update
         #  table {Google::Cloud::Bigtable::Table#save}.
         #
-        # @param view [Symbol]
-        #   The view to be applied to the returned tables' fields
-        #   Defaults to `NAME_ONLY` if unspecified.
-        #   Valid view types are.
-        #   * `:NAME_ONLY` - Only populates `name`
-        #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
-        #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
-        #   * `:FULL` - Populates all fields
         # @return [Array<Google::Cloud::Bigtable::Table>]
         #   (See {Google::Cloud::Bigtable::Table::List})
         #
@@ -441,9 +433,9 @@ module Google
         #     puts table.column_families
         #   end
         #
-        def tables view: nil
+        def tables
           ensure_service!
-          grpc = service.list_tables(instance_id, view: view)
+          grpc = service.list_tables(instance_id)
           Table::List.from_grpc(grpc, service)
         end
 
@@ -457,6 +449,15 @@ module Google
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
         #   * `:FULL` - Populates all fields
+        # @param skip_lookup [Boolean] Create table object without verifying
+        #   that the table resource exists.
+        #   Calls made on this object will raise errors if the table.
+        #   does not exist. Default is `false`. Optional.
+        #   It helps to reduce admin apis calls.
+        # @param app_profile_id [String] The unique identifier for the app profile. Optional.
+        #   It is used only in data operations.
+        #   This value specifies routing for replication. If not specified, the
+        #   "default" application profile will be used.
         # @return [Google::Cloud::Bigtable::Table]
         #
         # @example
@@ -475,9 +476,36 @@ module Google
         #   table = instance.table("my-table", view: :NAME_ONLY)
         #   puts table.name
         #
+        # @example  Mutate rows
+        #   require "google/cloud/bigtable"
         #
-        def table table_id, view: nil
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #
+        #   entry = table.new_mutation_entry("user-1")
+        #   entry.set_cell(
+        #     "cf-1",
+        #     "field-1",
+        #     "XYZ"
+        #     timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+        #   ).delete_from_column("cf2", "field02")
+        #
+        #   table.mutate_row(entry)
+
+        #
+        def table table_id, view: nil, skip_lookup: nil, app_profile_id: nil
           ensure_service!
+
+          if skip_lookup
+            table = Table.from_path(
+              service.table_path(instance_id, table_id),
+              service
+            )
+            table.app_profile_id = app_profile_id
+            return table
+          end
+
           grpc = service.get_table(instance_id, table_id, view: view)
           Table.from_grpc(grpc, service, view: view)
         rescue Google::Cloud::NotFoundError

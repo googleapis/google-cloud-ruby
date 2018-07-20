@@ -20,6 +20,7 @@ require "google/cloud/bigtable/table/cluster_state"
 require "google/cloud/bigtable/column_family"
 require "google/cloud/bigtable/table/column_family_map"
 require "google/cloud/bigtable/gc_rule"
+require "google/cloud/bigtable/mutation_operations"
 
 module Google
   module Cloud
@@ -53,9 +54,15 @@ module Google
       #   table.delete
       #
       class Table
+        # @!parse extend MutationOperations
+        include MutationOperations
+
         # @private
         # The gRPC Service object.
         attr_accessor :service
+
+        # @return [String] App profile id for request routing.
+        attr_accessor :app_profile_id
 
         # @private
         #
@@ -88,8 +95,8 @@ module Google
         end
         alias table_id name
 
-        # The full path for the instance resource. Values are of the form
-        # `projects/<project_id>/instances/<instance_id>`.
+        # The full path for the table resource. Values are of the form
+        # `projects/<project_id>/instances/<instance_id>/table/<table_id>`.
         #
         # @return [String]
         def path
@@ -101,6 +108,7 @@ module Google
         # @param view [Symbol] Table view type.
         #   Default view type is `:SCHEMA_VIEW`
         #   Valid view types are.
+        #
         #   * `:NAME_ONLY` - Only populates `name`
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
@@ -184,6 +192,45 @@ module Google
           ensure_service!
           service.delete_table(instance_id, name)
           true
+        end
+
+        # Check table existence.
+        #
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #
+        #   if table.exists?
+        #     p "Table is exists."
+        #   else
+        #     p "Table is not exists"
+        #   end
+        #
+        # @example Using bigtable instance
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance", skip_lookup: true)
+        #
+        #   table = instance.table("my-table")
+        #
+        #   if table.exists?
+        #     p "Table is exists."
+        #   else
+        #     p "Table is not exists"
+        #   end
+        #
+
+        def exists?
+          reload!(view: :SCHEMA_VIEW)
+          true
+        rescue Google::Cloud::NotFoundError
+          false
         end
 
         # Create column family object to perform create,update or delete operation.
@@ -470,6 +517,15 @@ module Google
         end
 
         # @private
+        # Get Data client instance
+        #
+        # @return [Google::Cloud::Bigtable::V2::BigtableClient]
+        #
+        def client
+          service.client
+        end
+
+        # @private
         # Creates a new Table instance from a Google::Bigtable::Admin::V2::Table.
         #
         # @param grpc [Google::Bigtable::Admin::V2::Table]
@@ -479,6 +535,20 @@ module Google
         #
         def self.from_grpc grpc, service, view: nil
           new(grpc, service, view: view)
+        end
+
+        # @private
+        # Creates a new Table object from table path.
+        #
+        # @param path [String] Table path.
+        #   Formatted table path
+        #   +projects/<project>/instances/<instance>/tables/<table>+
+        # @param service [Google::Cloud::Bigtable::Service]
+        # @return [Google::Cloud::Bigtable::Table]
+        #
+        def self.from_path path, service
+          grpc = Google::Bigtable::Admin::V2::Table.new(name: path)
+          new(grpc, service, view: :NAME_ONLY)
         end
 
         protected

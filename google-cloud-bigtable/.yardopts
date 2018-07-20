@@ -2,6 +2,7 @@
 --title=Cloud Bigtable API
 --exclude _pb\.rb$
 --markup markdown
+--embed-mixins
 
 ./lib/**/*.rb
 -
