@@ -20,8 +20,7 @@ require "google/cloud/bigtable/table/cluster_state"
 require "google/cloud/bigtable/column_family"
 require "google/cloud/bigtable/table/column_family_map"
 require "google/cloud/bigtable/gc_rule"
-require "google/cloud/bigtable/mutation_operations"
-require "google/cloud/bigtable/read_operations"
+require "google/cloud/bigtable/data_operations"
 
 module Google
   module Cloud
@@ -56,10 +55,7 @@ module Google
       #
       class Table
         # @!parse extend MutationOperations
-        include MutationOperations
-
-        # @!parse extend ReadOperations
-        include ReadOperations
+        include DataOperations
 
         # @private
         # The gRPC Service object.

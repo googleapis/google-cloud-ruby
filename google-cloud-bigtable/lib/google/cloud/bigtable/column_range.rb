@@ -31,8 +31,7 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
-      #   client = bigtable.client("my-instance")
-      #   table = client.table("my-table")
+      #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
       #
       #   # Range that includes all qualifiers including "user-001" up until "user-010"
       #   table.column_range("cf").from("user-001").to("user-010")
@@ -85,8 +84,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   table.column_range("cf").from("qualifier-1")
         #
@@ -94,8 +92,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   table.column_range("cf").from("qualifier-1", inclusive: false)
         #
@@ -119,8 +116,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   table.column_range("cf").to("qualifier-10", inclusive: true)
         #
@@ -128,8 +124,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   table.column_range("cf").to("qualifier-10")
         #
@@ -152,8 +147,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   table.column_range("cf").between("qualifier-1", "qualifier-10")
         #
@@ -171,8 +165,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   table.column_range("cf").of("qualifier-1", "qualifier-10")
         #

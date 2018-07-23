@@ -346,7 +346,7 @@ module Google
         #
         # @example
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.key("user-*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.key("user-.*")
         #
         def self.key regex
           SimpleFilter.new.key(regex)
@@ -386,7 +386,7 @@ module Google
         #
         # @example
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.family("cf-*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.family("cf-.*")
         #
         def self.family regex
           SimpleFilter.new.family(regex)
@@ -409,7 +409,7 @@ module Google
         #
         # @example
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.qualifier("user-name*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.qualifier("user-name.*")
         #
         def self.qualifier regex
           SimpleFilter.new.qualifier(regex)
@@ -431,7 +431,7 @@ module Google
         #
         # @example
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.value("abc*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.value("abc.*")
         #
         def self.value regex
           SimpleFilter.new.value(regex)
@@ -559,7 +559,7 @@ module Google
         #
         # @example Start to end range
         #
-        #   range = Google::Cloud::Bigtable::ValueRange.from("abc").to('xyz')
+        #   range = Google::Cloud::Bigtable::ValueRange.from("abc").to("xyz")
         #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
         #
         # @example Start exlusive to infinite end range
@@ -580,7 +580,7 @@ module Google
         #
         # @example
         #
-        #   range = Google::Cloud::Bigtable::ColumnRange.new(cf).from("field0").to('field5')
+        #   range = Google::Cloud::Bigtable::ColumnRange.new(cf).from("field0").to("field5")
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.column_range(range)
         #

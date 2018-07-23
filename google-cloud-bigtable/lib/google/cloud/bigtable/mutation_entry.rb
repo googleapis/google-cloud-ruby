@@ -24,9 +24,10 @@ module Google
       # type of mutations.
       # MutationEntry is used in following data operations
       #
-      #   * Mutate row. See {Google::Cloud::Bigtable::Client::Table#mutate_row}
-      #   * Mutate rows. See {Google::Cloud::Bigtable::Client::Table#mutate_rows}
+      #   * Mutate row. See {Google::Cloud::Bigtable::Table#mutate_row}
+      #   * Mutate rows. See {Google::Cloud::Bigtable::Table#mutate_rows}
       #   * Check and mutate row using a predicate.
+      #     see {Google::Cloud::Bigtable::Table#check_and_mutate_row}
       #
       # @example
       #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
@@ -38,6 +39,17 @@ module Google
       #     timestamp_from: (Time.now.to_i - 1800) * 1000,
       #     timestamp_to: (Time.now.to_i * 1000)
       #   ).delete_from_family("cf3").delete_from_row
+      #
+      # @example Using table
+      #   require "google/cloud/bigtable"
+      #
+      #   bigtable = Google::Cloud::Bigtable.new
+      #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+      #
+      #   entry = table.new_mutation_entry("user-1")
+      #   entry.set_cell(
+      #     "cf1", "fiel01", "XYZ", timestamp: Time.now.to_i * 1000
+      #   )
       #
       class MutationEntry
         attr_accessor :row_key

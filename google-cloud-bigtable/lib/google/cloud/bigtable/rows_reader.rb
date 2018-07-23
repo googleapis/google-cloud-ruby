@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/bigtable/row"
+
 require "google/cloud/bigtable/chunk_processor"
 
 module Google

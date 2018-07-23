@@ -31,8 +31,7 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
-      #   client = bigtable.client("my-instance")
-      #   table = client.table("my-table")
+      #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
       #
       #   # Range that includes all row keys including "value-001" to "value-005" excluding
       #   table.value_range.from("value-001").to("value-005")
@@ -73,8 +72,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   range = table.value_range.from("value-001")
         #
@@ -82,8 +80,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   range = table.value_range.from("value-001", inclusive: false)
         #
@@ -107,8 +104,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   range = table.value_range.to("value-010", inclusive: true)
         #
@@ -116,8 +112,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   range = table.value_range.to("value-010")
         #
@@ -141,8 +136,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   range = table.value_range.between("value-001", "value-010")
         #
@@ -160,8 +154,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   client = bigtable.client("my-instance")
-        #   table = client.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
         #
         #   range = table.value_range.of("value-001", "value-010")
         #
