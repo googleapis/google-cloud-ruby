@@ -68,7 +68,7 @@ module Google
 
         # Set column family name
         #
-        # @param [String] Column family name
+        # @param name [String] Column family name
         #
         def family= name
           @grpc.family_name = name

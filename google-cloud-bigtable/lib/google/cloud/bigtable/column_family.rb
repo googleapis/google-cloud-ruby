@@ -185,7 +185,6 @@ module Google
         # Create drop column family modification gRPC instance
         #
         # @param name [String] Column family name
-        # @param gc_rule [Google::Cloud::Bigtable::GcRule] GC Rule
         # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
         #
         # @example
