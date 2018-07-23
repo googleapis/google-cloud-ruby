@@ -28,6 +28,10 @@ describe "Table ColumnFamily", :bigtable do
     end
   end
 
+  after(:all) do
+    @table.delete
+  end
+
   it "create column family" do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
     cf = @table.column_family("cfcreate", gc_rule).create

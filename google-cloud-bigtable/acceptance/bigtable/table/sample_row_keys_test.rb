@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,23 +15,11 @@
 # limitations under the License.
 
 
-module Google
-  module Cloud
-    module Bigtable
-      # Invalid read row state error
-      class InvalidRowStateError < Google::Cloud::Error
-        # Invalid row chunk data
-        attr_reader :data
+require "bigtable_helper"
 
-        def initialize message, data = nil
-          super(message)
-          @data = data if data
-        end
-      end
-
-      # Row filter error.
-      class RowFilterError < Google::Cloud::Error
-      end
-    end
+describe "DataClient Sample Rows Keys", :bigtable do
+  it "read sample rows keys" do
+    sample_row_keys = bigtable_table.sample_row_keys.to_a
+    sample_row_keys.wont_be :empty?
   end
 end

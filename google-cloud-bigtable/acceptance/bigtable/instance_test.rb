@@ -47,28 +47,6 @@ describe "Instances", :bigtable do
     instance.labels["updated-at"].must_equal time
   end
 
-  it "create, list all, get table and delete table" do
-    table_id = "test-table"
-    instance = bigtable_instance
-    table = instance.create_table(table_id) do |column_families|
-      column_families.add("cf1", Google::Cloud::Bigtable::GcRule.max_versions(3))
-    end
-
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
-
-    tables = instance.tables.to_a
-    tables.wont_be :empty?
-    tables.each do |t|
-      t.must_be_kind_of Google::Cloud::Bigtable::Table
-    end
-
-    table = instance.table(table_id)
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
-    table.delete
-
-    instance.table(table_id).must_be :nil?
-  end
-
   describe "IAM policies and permissions" do
     let(:service_account) { bigtable.service.credentials.client.issuer }
 

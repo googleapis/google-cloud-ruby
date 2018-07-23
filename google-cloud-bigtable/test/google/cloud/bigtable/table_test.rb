@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,6 +51,47 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
     table.column_families.map(&:name).sort.must_equal column_families.keys
     table.column_families.each do |cf|
       cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+    end
+  end
+
+  describe "#helpers" do
+    let(:table) do
+      Google::Cloud::Bigtable::Table.new(Object.new, Object.new)
+    end
+
+    it "create mutation entry instance" do
+      mutation_entry = table.new_mutation_entry("row-1")
+      mutation_entry.must_be_kind_of Google::Cloud::Bigtable::MutationEntry
+      mutation_entry.row_key.must_equal "row-1"
+    end
+
+    it "create read modify write row rule instance" do
+      table = Google::Cloud::Bigtable::Table.new(Object.new, Object.new)
+      rule = table.new_read_modify_write_rule("cf", "field1")
+      rule.must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
+      rule.to_grpc.family_name.must_equal "cf"
+      rule.to_grpc.column_qualifier.must_equal "field1"
+    end
+
+    it "create value range instance" do
+      range = table.new_value_range
+      range.must_be_kind_of Google::Cloud::Bigtable::ValueRange
+    end
+
+    it "create column range instance" do
+      range = table.new_column_range("cf")
+      range.must_be_kind_of Google::Cloud::Bigtable::ColumnRange
+      range.family.must_equal "cf"
+    end
+
+    it "create row range instance" do
+      range = table.new_row_range
+      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+    end
+
+    it "get filter module" do
+      filter = table.filter
+      filter.must_equal Google::Cloud::Bigtable::RowFilter
     end
   end
 end

@@ -51,7 +51,7 @@ module Acceptance
     end
 
     def bigtable_instance
-      @bigtable.instance($bigtable_instance_id)
+      @instance ||= @bigtable.instance($bigtable_instance_id)
     end
 
     def bigtable_cluster_id
@@ -66,14 +66,24 @@ module Acceptance
       $bigtable_cluster_location
     end
 
+    def bigtable_table_id
+      $bigtable_table_id
+    end
+
+    def bigtable_table
+      @table ||= @bigtable.table(
+        $bigtable_instance_id,
+        $bigtable_table_id,
+        skip_lookup: true
+      )
+    end
+
     def random_str
       SecureRandom.hex(4)
     end
 
-    def create_test_table table_id
-      bigtable_instance.create_table(table_id) do |cfs|
-        cfs.add('cf', Google::Cloud::Bigtable::GcRule.max_versions(1))
-      end
+    def create_table table_id, row_count: nil
+      create_test_table(bigtable_instance_id, table_id, row_count: row_count)
     end
 
     # Add spec DSL
@@ -86,78 +96,85 @@ module Acceptance
   end
 end
 
-# Create instance
+# Find or create instance
 def create_test_instance instance_id, cluster_id, cluster_location
-  p "=> Creating instance #{instance_id} in zone #{cluster_location}."
+  instance = $bigtable.instance(instance_id)
 
-  job = $bigtable.create_instance(
-   instance_id,
-   display_name: "Ruby Acceptance Test",
-   labels: { env: "test" },
-  ) do |clusters|
-    clusters.add(cluster_id, cluster_location, nodes: 3)
+  if instance.nil?
+    p "=> Creating instance #{instance_id} in zone #{cluster_location}."
+
+    job = $bigtable.create_instance(
+      instance_id,
+      display_name: "Ruby Acceptance Test",
+      labels: { env: "test" }
+    ) do |clusters|
+      clusters.add(cluster_id, cluster_location, nodes: 3)
+    end
+
+    job.wait_until_done!
+
+    raise GRPC::BadStatus.new(job.error.code, job.error.message) if job.error?
+
+    instance = job.instance
   end
 
-  job.wait_until_done!
-
-  fail GRPC::BadStatus.new(job.error.code, job.error.message) if job.error?
-
-  instance = job.instance
-
   loop do
-    instance.reload!
-
     # Wait until instance ready
     if instance.ready?
       p "=> '#{instance.instance_id}' instance is ready."
       break
     else
       sleep(5)
+      instance.reload!
     end
   end
 
   instance
 end
 
-def clean_up_bigtable_objects instance_id
-  instance = $bigtable.instance(instance_id)
+def create_test_table instance_id, table_id, row_count: nil
+  table = $bigtable.create_table(instance_id, table_id) do |cfs|
+    cfs.add('cf', Google::Cloud::Bigtable::GcRule.max_versions(1))
+  end
 
-  p "=> Deleting acceptance test instance #{instance_id}."
+  return table unless row_count
+
+  entries = row_count.times.map do |i|
+    table.new_mutation_entry("test-#{i+1}").set_cell("cf", "field1", "value-#{i+1}")
+  end
+
+  table.mutate_rows(entries)
+  table
+end
+
+def clean_up_bigtable_objects instance_id, table_ids = []
+  p "=> Deleting acceptance test tables from instance #{instance_id}."
+
   begin
-    instance.delete
+    table_ids.each do |table_id|
+      $bigtable.delete_table(instance_id, table_id)
+    end
   rescue StandardError => e
-    puts "Error while cleaning up #{instance.instance_id} instance.\n\n#{e}"
+    puts "Error while cleaning up #{instance.instance_id} instance tables.\n\n#{e}"
   end
 end
 
 require "date"
 require "securerandom"
 
-# Test instance
-$bigtable_instance_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
-
-# https://cloud.google.com/bigtable/docs/locations
-$bigtable_zone_locations = [
-  [ "us-central1-a", "us-central1-b"],
-  [ "us-east4-a", "us-east4-b"],
-  [ "us-west1-c", "us-west1-b"],
-  [ "us-east1-b", "us-east1-c"],
-  [ "europe-west1-b", "europe-west1-c"],
-  [ "europe-west2-b", "europe-west2-c"]
-]
-
-# NOTE: To avoid insufficient nodes quota limit per zone.
-zones = $bigtable_zone_locations.sample
-$bigtable_cluster_location = zones.first
-$bigtable_cluster_location_2 = zones.last
+$bigtable_instance_id = "google-cloud-ruby-tests"
+$bigtable_cluster_location = "us-east1-b"
+$bigtable_cluster_location_2 = "us-east1-c"
 $bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
+$bigtable_table_id = "rt-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 
 create_test_instance(
   $bigtable_instance_id,
   $bigtable_cluster_id,
   $bigtable_cluster_location
 )
+create_test_table($bigtable_instance_id, $bigtable_table_id, row_count: 10)
 
 Minitest.after_run do
-  clean_up_bigtable_objects($bigtable_instance_id)
+  clean_up_bigtable_objects($bigtable_instance_id, [$bigtable_table_id])
 end
