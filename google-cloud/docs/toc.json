@@ -764,7 +764,7 @@
           ]
         }
       ]
-    }
+    },
     {
       "title": "Trace",
       "type": "google/cloud/trace",
