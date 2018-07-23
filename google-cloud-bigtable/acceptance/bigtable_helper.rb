@@ -86,6 +86,10 @@ module Acceptance
       create_test_table(bigtable_instance_id, table_id, row_count: row_count)
     end
 
+    def add_table_to_cleanup_list table_id
+      $table_list_for_cleanup << table_id
+    end
+
     # Add spec DSL
     extend Minitest::Spec::DSL
 
@@ -132,15 +136,22 @@ def create_test_instance instance_id, cluster_id, cluster_location
   instance
 end
 
+$table_list_for_cleanup = []
+
 def create_test_table instance_id, table_id, row_count: nil
   table = $bigtable.create_table(instance_id, table_id) do |cfs|
     cfs.add('cf', Google::Cloud::Bigtable::GcRule.max_versions(1))
   end
 
+  $table_list_for_cleanup << table_id
+
   return table unless row_count
 
   entries = row_count.times.map do |i|
-    table.new_mutation_entry("test-#{i+1}").set_cell("cf", "field1", "value-#{i+1}")
+    table
+      .new_mutation_entry("test-#{i+1}")
+      .set_cell("cf", "field1", "value-#{i+1}")
+      .set_cell("cf", "field2", "value-#{i+1}")
   end
 
   table.mutate_rows(entries)
@@ -176,5 +187,5 @@ create_test_instance(
 create_test_table($bigtable_instance_id, $bigtable_table_id, row_count: 10)
 
 Minitest.after_run do
-  clean_up_bigtable_objects($bigtable_instance_id, [$bigtable_table_id])
+  clean_up_bigtable_objects($bigtable_instance_id, $table_list_for_cleanup)
 end

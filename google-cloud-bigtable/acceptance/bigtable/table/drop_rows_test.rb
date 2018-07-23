@@ -25,7 +25,6 @@ describe "Table drop rows", :bigtable do
 
     rows = table.read_rows.to_a
     rows.must_be_empty
-    table.delete
   end
 
   it "delete rows by prefix" do
@@ -35,6 +34,5 @@ describe "Table drop rows", :bigtable do
 
     rows = table.read_rows.to_a
     rows.length.must_equal 1
-    table.delete
   end
 end
