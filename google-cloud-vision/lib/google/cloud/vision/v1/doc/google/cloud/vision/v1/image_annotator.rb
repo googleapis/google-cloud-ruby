@@ -23,8 +23,8 @@ module Google
       # | [ImageAnnotatorClient][] | Service that performs Google Cloud Vision API detection tasks over client images, such as face, landmark, logo, label, and text detection. |
       # | [Data Types][] | Data types for Google::Cloud::Vision::V1 |
       #
-      # [ImageAnnotatorClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/latest/google/cloud/vision/v1/imageannotatorclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-vision/latest/google/cloud/vision/v1/datatypes
+      # [ImageAnnotatorClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/latest/google/cloud/vision/v1/imageannotatorclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/latest/google/cloud/vision/v1/datatypes
       #
       module V1
         # The type of Google Cloud Vision API detection to perform, and the maximum
