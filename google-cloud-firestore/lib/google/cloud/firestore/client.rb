@@ -212,7 +212,7 @@ module Google
         ##
         # Creates a field path object representing the sentinel ID of a
         # document. It can be used in queries to sort or filter by the document
-        # ID. See {Client#document_id}.
+        # ID. See {FieldPath#document_id}.
         #
         # @return [FieldPath] The field path object.
         #
@@ -225,9 +225,8 @@ module Google
         #   cities_col = firestore.col "cities"
         #
         #   # Create a query
-        #   query = cities_col.start_at("NYC").order(
-        #     Google::Cloud::Firestore::FieldPath.document_id
-        #   )
+        #   query = cities_col.order(firestore.document_id)
+        #                     .start_at("NYC")
         #
         #   query.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."

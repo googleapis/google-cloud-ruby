@@ -160,4 +160,26 @@ describe "Query", :firestore_acceptance do
     results.map(&:document_id).must_equal ["doc1", "doc2"]
     results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
   end
+
+  it "can call cursor methods with a DocumentSnapshot object" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.doc("doc1").create({foo: "a"})
+    rand_query_col.doc("doc2").create({foo: "b"})
+
+    results = rand_query_col.order(:foo).start_at(rand_query_col.doc("doc1").get).get
+    results.map(&:document_id).must_equal ["doc1", "doc2"]
+    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+
+    results = rand_query_col.order(:foo).start_after(rand_query_col.doc("doc1").get).get
+    results.map(&:document_id).must_equal ["doc2"]
+    results.map { |doc| doc[:foo] }.must_equal ["b"]
+
+    results = rand_query_col.order(:foo).end_before(rand_query_col.doc("doc2").get).get
+    results.map(&:document_id).must_equal ["doc1"]
+    results.map { |doc| doc[:foo] }.must_equal ["a"]
+
+    results = rand_query_col.order(:foo).end_at(rand_query_col.doc("doc2").get).get
+    results.map(&:document_id).must_equal ["doc1", "doc2"]
+    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+  end
 end
