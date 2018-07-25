@@ -325,7 +325,7 @@ describe "Cross-Language Update Tests", :mock_firestore do
             }
           ),
           update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-            field_paths: ["a", "b.d", "b.c"]
+            field_paths: ["a", "b.c", "b.d"]
           ),
           current_document: Google::Firestore::V1beta1::Precondition.new(
             exists: true)
@@ -687,7 +687,7 @@ describe "Cross-Language Update Tests", :mock_firestore do
             }
           ),
           update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-            field_paths: ["`*`.`~`", "`*`.`\\``"]
+            field_paths: ["`*`.`\\``", "`*`.`~`"]
           ),
           current_document: Google::Firestore::V1beta1::Precondition.new(
             exists: true)

@@ -388,7 +388,7 @@ describe "Cross-Language Set Tests", :mock_firestore do
             }
           ),
           update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-            field_paths: ["h.g", "h.f"]
+            field_paths: ["h.f", "h.g"]
           )
         )
       ]

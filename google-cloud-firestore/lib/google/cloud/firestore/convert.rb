@@ -248,7 +248,7 @@ module Google
                   name: doc_path,
                   fields: hash_to_fields(data)),
                 update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-                  field_paths: field_paths.map(&:formatted_string))
+                  field_paths: field_paths.map(&:formatted_string).sort)
               )
             end
 
@@ -321,7 +321,7 @@ module Google
                   name: doc_path,
                   fields: hash_to_fields(data)),
                 update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-                  field_paths: field_paths.map(&:formatted_string)),
+                  field_paths: field_paths.map(&:formatted_string).sort),
                 current_document: Google::Firestore::V1beta1::Precondition.new(
                   exists: true)
               )

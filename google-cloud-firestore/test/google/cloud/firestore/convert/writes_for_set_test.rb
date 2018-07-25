@@ -360,7 +360,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
             }
           ),
           update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-            field_paths: ["h.g", "h.f"]
+            field_paths: ["h.f", "h.g"]
           )
         )
       ]
