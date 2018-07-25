@@ -20,6 +20,16 @@ class ConformanceTest < MockFirestore
     Google::Cloud::Firestore::DocumentReference.from_path doc_path, firestore
   end
 
+  def doc_snap_from_path_and_json_data doc_path, json_data
+    Google::Cloud::Firestore::DocumentSnapshot.new.tap do |s|
+      s.grpc = Google::Firestore::V1beta1::Document.new(
+        name: doc_path,
+        fields: Google::Cloud::Firestore::Convert.hash_to_fields(data_from_json(json_data))
+      )
+      s.instance_variable_set :@ref, doc_ref_from_path(doc_path)
+    end
+  end
+
   def data_from_json data_json
     convert_values JSON.parse data_json
   end
@@ -39,6 +49,8 @@ class ConformanceTest < MockFirestore
       firestore.field_delete
     elsif data == "ServerTimestamp"
       firestore.field_server_time
+    elsif data == "NaN"
+      Float::NAN
     elsif data.is_a? Hash
       Hash[data.map { |k, v| [k, convert_values(v)] }]
     elsif data.is_a? Array
@@ -214,8 +226,14 @@ end
 class ConformanceQuery < ConformanceTest
   def self.build_test_for description, test, i
     define_method("test_#{i}: #{description}") do
-      query = build_query test, get_collection_reference(test.coll_path)
-      assert_equal test.query, query
+      if test.is_error
+        expect do
+          build_query test, get_collection_reference(test.coll_path)
+        end.must_raise ArgumentError
+      else
+        query = build_query test, get_collection_reference(test.coll_path)
+        assert_equal test.query, query
+      end
     end
   end
 
@@ -229,8 +247,8 @@ class ConformanceQuery < ConformanceTest
       col = if clause.select
               col.select(clause.select.fields.map(&:field))
             elsif where = clause.where
-              field_path = Google::Cloud::Firestore::FieldPath.new convert_field_path(where)
-              where_value = JSON.parse where.json_value
+              field_path = convert_field_path where
+              where_value = data_from_json where.json_value
               col.where(field_path, where.op, where_value)
             elsif clause.order_by
               direction = clause.order_by.direction
@@ -240,13 +258,13 @@ class ConformanceQuery < ConformanceTest
             elsif  clause.limit && clause.limit != 0
               col.limit clause.limit
             elsif clause.start_at
-              col.start_at convert_cursor(clause.start_at)
+              col.start_at *convert_cursor(clause.start_at)
             elsif clause.start_after
-              col.start_after convert_cursor(clause.start_after)
+              col.start_after *convert_cursor(clause.start_after)
             elsif clause.end_at
-              col.end_at convert_cursor(clause.end_at)
+              col.end_at *convert_cursor(clause.end_at)
             elsif clause.end_before
-              col.end_before convert_cursor(clause.end_before)
+              col.end_before *convert_cursor(clause.end_before)
             else
               raise "Unexpected Clause state: #{clause.inspect}"
             end
@@ -255,11 +273,15 @@ class ConformanceQuery < ConformanceTest
   end
 
   def convert_cursor clause_val
-    clause_val.json_values.map {|x| JSON.parse x }
+    if clause_val.doc_snapshot
+      return [doc_snap_from_path_and_json_data(clause_val.doc_snapshot.path, clause_val.doc_snapshot.json_data)]
+    end
+
+    clause_val.json_values.map {|x| data_from_json x }
   end
 
   def convert_field_path clause_val
-    clause_val.path.field.first
+    firestore.field_path clause_val.path.field
   end
 end
 
@@ -273,7 +295,7 @@ failing_tests = {
     update: [62, 65, 66, 74],
     update_paths: [79, 80, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 99, 100, 102],
     delete: [],
-    query: [106, 108, 109, 111, 112, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138],
+    query: [],
     listen: [],
 
 }
@@ -519,5 +541,3 @@ end
 # 150 - listen: TargetChange_ADD is a no-op if it has the same target ID
 # 151 - listen: TargetChange_ADD is an error if it has a different target ID [Error]
 # 152 - listen: TargetChange_REMOVE should not appear [Error]
-
-

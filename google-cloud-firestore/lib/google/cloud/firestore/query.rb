@@ -88,13 +88,15 @@ module Google
           new_query = @query.dup
           new_query ||= StructuredQuery.new
 
+          fields = Array(fields).flatten.compact
+          fields = [FieldPath.document_id] if fields.empty?
           field_refs = fields.flatten.compact.map do |field|
             field = FieldPath.parse field unless field.is_a? FieldPath
             StructuredQuery::FieldReference.new \
               field_path: field.formatted_string
           end
 
-          new_query.select ||= StructuredQuery::Projection.new
+          new_query.select = StructuredQuery::Projection.new
           field_refs.each do |field_ref|
             new_query.select.fields << field_ref
           end
@@ -130,7 +132,7 @@ module Google
           new_query ||= StructuredQuery.new
 
           if new_query.from.empty?
-            raise "missing collection_id to specify descendants."
+            raise "missing collection_id to specify descendants"
           end
 
           new_query.from.last.all_descendants = true
@@ -166,7 +168,7 @@ module Google
           new_query ||= StructuredQuery.new
 
           if new_query.from.empty?
-            raise "missing collection_id to specify descendants."
+            raise "missing collection_id to specify descendants"
           end
 
           new_query.from.last.all_descendants = false
@@ -223,9 +225,17 @@ module Google
 
           field = FieldPath.parse field unless field.is_a? FieldPath
 
-          new_query.where ||= default_filter
-          new_query.where.composite_filter.filters << \
-            filter(field.formatted_string, operator, value)
+          new_filter = filter field.formatted_string, operator, value
+          if new_query.where.nil?
+            new_query.where = new_filter
+          elsif new_query.where.filter_type == :composite_filter
+            new_query.where.composite_filter.filters << new_filter
+          else
+            old_filter = new_query.where
+            new_query.where = composite_filter
+            new_query.where.composite_filter.filters << old_filter
+            new_query.where.composite_filter.filters << new_filter
+          end
 
           Query.start new_query, parent_path, client
         end
@@ -862,29 +872,32 @@ module Google
 
         def filter name, op, value
           field = StructuredQuery::FieldReference.new field_path: name.to_s
-          op = FILTER_OPS[op.to_s.downcase] || :EQUAL
+          operator = FILTER_OPS[op.to_s.downcase]
+          raise ArgumentError, "unknown operator #{op}" if operator.nil?
 
           is_value_nan = value.respond_to?(:nan?) && value.nan?
           if UNARY_VALUES.include?(value) || is_value_nan
-            if op != :EQUAL
+            if operator != :EQUAL
               raise ArgumentError,
-                    "can only check equality for #{value} values."
+                    "can only check equality for #{value} values"
             end
 
-            op = :IS_NULL
-            op = :IS_NAN if UNARY_NAN_VALUES.include?(value) || is_value_nan
+            operator = :IS_NULL
+            if UNARY_NAN_VALUES.include?(value) || is_value_nan
+              operator = :IS_NAN
+            end
 
             return StructuredQuery::Filter.new(unary_filter:
-              StructuredQuery::UnaryFilter.new(field: field, op: op))
+              StructuredQuery::UnaryFilter.new(field: field, op: operator))
           end
 
           value = Convert.raw_to_value value
           StructuredQuery::Filter.new(field_filter:
-              StructuredQuery::FieldFilter.new(field: field, op: op,
+              StructuredQuery::FieldFilter.new(field: field, op: operator,
                                                value: value))
         end
 
-        def default_filter
+        def composite_filter
           StructuredQuery::Filter.new(composite_filter:
               StructuredQuery::CompositeFilter.new(op: :AND))
         end
@@ -921,6 +934,10 @@ module Google
         end
 
         def snapshot_to_cursor snapshot, query
+          if snapshot.parent.path != query_collection_path
+            raise ArgumentError, "cursor snapshot must belong to collection"
+          end
+
           # first, add any inequality filters missing from existing order_by
           ensure_inequality_field_paths_in_order_by! query
 
@@ -970,7 +987,12 @@ module Google
           return [] if query.where.nil?
 
           # The way we construct a query, where is always a CompositeFilter
-          ineq_filters = query.where.composite_filter.filters.select do |filter|
+          filters = if query.where.filter_type == :composite_filter
+                      query.where.composite_filter.filters
+                    else
+                      [query.where]
+                    end
+          ineq_filters = filters.select do |filter|
             if filter.filter_type == :field_filter
               filter.field_filter.op != :EQUAL
             end
@@ -990,15 +1012,19 @@ module Google
 
         def document_reference document_path
           if document_path.to_s.split("/").count.even?
-            raise ArgumentError, "document_path must refer to a document."
+            raise ArgumentError, "document_path must refer to a document"
           end
 
           DocumentReference.from_path(
-            "#{parent_path}/#{collection_id}/#{document_path}", client
+            "#{query_collection_path}/#{document_path}", client
           )
         end
 
-        def collection_id
+        def query_collection_path
+          "#{parent_path}/#{query_collection_id}"
+        end
+
+        def query_collection_id
           # We trust that query.from is always set, since Query cannot be
           # created without it.
           return nil if query.from.empty?

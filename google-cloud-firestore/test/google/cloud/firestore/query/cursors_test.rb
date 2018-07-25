@@ -48,19 +48,12 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-        composite_filter: Google::Firestore::V1beta1::StructuredQuery::CompositeFilter.new(
-          op: :AND,
-          filters: [
-            Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
-                  field_path: "a"
-                ),
-                op: :EQUAL,
-                value: Google::Firestore::V1beta1::Value.new(integer_value: 3)
-              )
-            )
-          ]
+        field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
+          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
+            field_path: "a"
+          ),
+          op: :EQUAL,
+          value: Google::Firestore::V1beta1::Value.new(integer_value: 3)
         )
       ),
       order_by: [
@@ -89,19 +82,12 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-        composite_filter: Google::Firestore::V1beta1::StructuredQuery::CompositeFilter.new(
-          op: :AND,
-          filters: [
-            Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
-                  field_path: "a"
-                ),
-                op: :LESS_THAN_OR_EQUAL,
-                value: Google::Firestore::V1beta1::Value.new(integer_value: 3)
-              )
-            )
-          ]
+        field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
+          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
+            field_path: "a"
+          ),
+          op: :LESS_THAN_OR_EQUAL,
+          value: Google::Firestore::V1beta1::Value.new(integer_value: 3)
         )
       ),
       order_by: [
@@ -135,19 +121,12 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-        composite_filter: Google::Firestore::V1beta1::StructuredQuery::CompositeFilter.new(
-          op: :AND,
-          filters: [
-            Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
-                  field_path: "a"
-                ),
-                op: :LESS_THAN,
-                value: Google::Firestore::V1beta1::Value.new(integer_value: 4)
-              )
-            )
-          ]
+        field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
+          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
+            field_path: "a"
+          ),
+          op: :LESS_THAN,
+          value: Google::Firestore::V1beta1::Value.new(integer_value: 4)
         )
       ),
       order_by: [
@@ -181,19 +160,12 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       from: [Google::Firestore::V1beta1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       where: Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-        composite_filter: Google::Firestore::V1beta1::StructuredQuery::CompositeFilter.new(
-          op: :AND,
-          filters: [
-            Google::Firestore::V1beta1::StructuredQuery::Filter.new(
-              field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
-                field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
-                  field_path: "a"
-                ),
-                op: :LESS_THAN,
-                value: Google::Firestore::V1beta1::Value.new(integer_value: 4)
-              )
-            )
-          ]
+        field_filter: Google::Firestore::V1beta1::StructuredQuery::FieldFilter.new(
+          field: Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(
+            field_path: "a"
+          ),
+          op: :LESS_THAN,
+          value: Google::Firestore::V1beta1::Value.new(integer_value: 4)
         )
       ),
       order_by: [
