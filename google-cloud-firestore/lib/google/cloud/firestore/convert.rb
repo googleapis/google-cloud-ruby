@@ -235,8 +235,10 @@ module Google
             field_paths -= delete_paths
             field_paths -= server_time_paths
             data = select_by_field_paths data, field_paths
+            # Restore delete paths
+            field_paths += delete_paths
 
-            if data.empty?
+            if data.empty? && delete_paths.empty?
               if server_time_paths.empty?
                 raise ArgumentError, "data required for set with merge"
               end
