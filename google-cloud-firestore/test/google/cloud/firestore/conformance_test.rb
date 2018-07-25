@@ -20,8 +20,18 @@ class ConformanceTest < MockFirestore
     Google::Cloud::Firestore::DocumentReference.from_path doc_path, firestore
   end
 
-  def doc_data_from_json data_json
+  def data_from_json data_json
     convert_values JSON.parse data_json
+  end
+
+  def data_from_field_paths_and_json field_paths, data_json
+    keys = field_paths.map do |fp|
+      firestore.field_path fp.field
+    end
+    values = data_json.map {|v| JSON.parse v }
+    data = Hash[keys.zip(values)]
+    convert_values data
+    data
   end
 
   def convert_values data
@@ -49,17 +59,17 @@ class ConformanceCreate < ConformanceTest
       )
   end
 
-  def self.build_test_for wrapper
-    define_method("test_: #{wrapper.description}") do
-      doc_ref = doc_ref_from_path wrapper.create.doc_ref_path
-      data = doc_data_from_json wrapper.create.json_data
+  def self.build_test_for description, test, i
+    define_method("test_#{i}: #{description}") do
+      doc_ref = doc_ref_from_path test.doc_ref_path
+      data = data_from_json test.json_data
 
-      if wrapper.create.is_error
+      if test.is_error
         expect do
           doc_ref.create data
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [wrapper.create.request.database, wrapper.create.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
 
         doc_ref.create data
       end
@@ -77,22 +87,22 @@ class ConformanceSet < ConformanceTest
       )
   end
 
-  def self.build_test_for wrapper
-    define_method("test_: #{wrapper.description}") do
-      doc_ref = doc_ref_from_path wrapper.set.doc_ref_path
-      data = doc_data_from_json wrapper.set.json_data
+  def self.build_test_for description, test, i
+    define_method("test_#{i}: #{description}") do
+      doc_ref = doc_ref_from_path test.doc_ref_path
+      data = data_from_json test.json_data
 
-      if wrapper.set.is_error
+      if test.is_error
         expect do
-          doc_ref.create data
+          doc_ref.set data
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [wrapper.set.request.database, wrapper.set.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
 
-        merge = if wrapper.set.option && wrapper.set.option.all
+        merge = if test.option && test.option.all
                   true
-                elsif wrapper.set.option && !wrapper.set.option.fields.empty?
-                  wrapper.set.option.fields.map do |fp|
+                elsif test.option && !test.option.fields.empty?
+                  test.option.fields.map do |fp|
                     Google::Cloud::Firestore::FieldPath.new fp.field
                   end
                 end
@@ -103,39 +113,155 @@ class ConformanceSet < ConformanceTest
   end
 end
 
-  #   #next
-  #   client_mocks firestore_execute_mock
-  #   puts test.request.inspect
-  #   firestore_execute_mock.expect :call, firestore_execute_mock, [test.request, Hash]
-  #   firestore_execute_mock.expect :execute, OpenStruct.new(write_results: nil), []
-  #
-  #   Google::Gax::Grpc.stub :create_stub, firestore_execute_mock do
-  #
-  #     gax_client = Google::Cloud::Firestore::V1beta1::FirestoreClient.new(
-  #         credentials: credentials,
-  #         lib_name: "gccl",
-  #         lib_version: Google::Cloud::Firestore::VERSION
-  #     )
-  #     firestore.service.instance_variable_set :@firestore, gax_client
-  #     document_path = test.doc_ref_path.split("/documents/")[1]
-  #     data = JSON.parse(test.json_data)
-  #     convert_values data
-  #
-  #     merge = if test.option && test.option.all
-  #               true
-  #             elsif test.option && !test.option.fields.empty?
-  #               test.option.fields.map do |fp|
-  #                 Google::Cloud::Firestore::FieldPath.new fp.field
-  #               end
-  #             end
-  #     puts "merge: #{merge}"
-  #
-  #     # API under test
-  #     firestore.batch do |b|
-  #       b.set document_path, data, merge: merge
-  #     end
-  #   end
-  #   firestore_execute_mock.verify
+class ConformanceUpdate < ConformanceTest
+  let(:commit_time) { Time.now }
+  let :commit_resp do
+    Google::Firestore::V1beta1::CommitResponse.new(
+        commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
+        write_results: [Google::Firestore::V1beta1::WriteResult.new(
+                            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
+    )
+  end
+
+  def self.build_test_for description, test, i
+    define_method("test_#{i}: #{description}") do
+      doc_ref = doc_ref_from_path test.doc_ref_path
+      data = data_from_json test.json_data
+
+      if test.is_error
+        expect do
+          doc_ref.update data
+        end.must_raise ArgumentError
+      else
+        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+
+        if test.precondition && test.precondition.update_time
+          update_time = Time.at(test.precondition.update_time.seconds)
+        end
+
+        doc_ref.update data, update_time: update_time
+      end
+    end
+  end
+end
+
+class ConformanceUpdatePaths < ConformanceTest
+  let(:commit_time) { Time.now }
+  let :commit_resp do
+    Google::Firestore::V1beta1::CommitResponse.new(
+        commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
+        write_results: [Google::Firestore::V1beta1::WriteResult.new(
+                            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
+    )
+  end
+
+  def self.build_test_for description, test, i
+    define_method("test_#{i}: #{description}") do
+      doc_ref = doc_ref_from_path test.doc_ref_path
+
+      if test.is_error
+        expect do
+          data = data_from_field_paths_and_json test.field_paths, test.json_values
+          doc_ref.update data
+        end.must_raise ArgumentError
+      else
+        data =  data_from_field_paths_and_json test.field_paths, test.json_values
+        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+
+        if test.precondition && test.precondition.update_time
+          update_time = Time.at(test.precondition.update_time.seconds)
+        end
+
+        doc_ref.update data, update_time: update_time
+      end
+    end
+  end
+end
+
+class ConformanceDelete < ConformanceTest
+  let(:commit_time) { Time.now }
+  let :commit_resp do
+    Google::Firestore::V1beta1::CommitResponse.new(
+        commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
+        write_results: [Google::Firestore::V1beta1::WriteResult.new(
+                            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
+    )
+  end
+
+  def self.build_test_for description, test, i
+    define_method("test_#{i}: #{description}") do
+      doc_ref = doc_ref_from_path test.doc_ref_path
+      opts = {}
+      if test.precondition && test.precondition.exists
+        opts[:exists] = test.precondition.exists
+      end
+      if test.precondition && test.precondition.update_time
+        opts[:update_time] = Time.at(test.precondition.update_time.seconds)
+      end
+      if test.is_error
+        expect do
+          doc_ref.delete opts
+        end.must_raise ArgumentError
+      else
+        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+
+        doc_ref.delete opts
+      end
+    end
+  end
+end
+
+class ConformanceQuery < ConformanceTest
+  def self.build_test_for description, test, i
+    define_method("test_#{i}: #{description}") do
+      query = build_query test, get_collection_reference(test.coll_path)
+      assert_equal test.query, query
+    end
+  end
+
+  def get_collection_reference resource_name
+    col_path = resource_name.split("/documents/")[1]
+    firestore.col col_path
+  end
+
+  def build_query test, col
+    test.clauses.each do |clause|
+      col = if clause.select
+              col.select(clause.select.fields.map(&:field))
+            elsif where = clause.where
+              field_path = Google::Cloud::Firestore::FieldPath.new convert_field_path(where)
+              where_value = JSON.parse where.json_value
+              col.where(field_path, where.op, where_value)
+            elsif clause.order_by
+              direction = clause.order_by.direction
+              col.order convert_field_path(clause.order_by), direction
+            elsif clause.offset && clause.offset != 0
+              col.offset clause.offset
+            elsif  clause.limit && clause.limit != 0
+              col.limit clause.limit
+            elsif clause.start_at
+              col.start_at convert_cursor(clause.start_at)
+            elsif clause.start_after
+              col.start_after convert_cursor(clause.start_after)
+            elsif clause.end_at
+              col.end_at convert_cursor(clause.end_at)
+            elsif clause.end_before
+              col.end_before convert_cursor(clause.end_before)
+            else
+              raise "Unexpected Clause state: #{clause.inspect}"
+            end
+    end
+    col.query
+  end
+
+  def convert_cursor clause_val
+    clause_val.json_values.map {|x| JSON.parse x }
+  end
+
+  def convert_field_path clause_val
+    clause_val.path.field.first
+  end
+end
 
 file = File.open "conformance/test-suite.binproto", "rb"
 test_suite = Tests::TestSuite.decode file.read
@@ -143,121 +269,28 @@ test_suite = Tests::TestSuite.decode file.read
 test_suite.tests.each_with_index do |wrapper, i|
 
   #next unless [:query].include?(wrapper.test)
-  #next unless (77..102).include?(i)
-  # next unless [9].include?(i)
+  #next unless (106..118).include?(i)
+  #next unless [107].include?(i)
 
   case wrapper.test
     when :get
-      puts "skip - Google::Firestore::V1beta1::GetDocumentRequest is not used."
+      next # Google::Firestore::V1beta1::GetDocumentRequest is not used.
     when :create
-      ConformanceCreate.build_test_for wrapper
+      ConformanceCreate.build_test_for wrapper.description, wrapper.create, i
     when :set
-      ConformanceSet.build_test_for wrapper
-
-
-  # when :update
-  #   #next
-  #   client_mocks firestore_execute_mock
-  #   puts test.request.inspect
-  #   firestore_execute_mock.expect :call, firestore_execute_mock, [test.request, Hash]
-  #   firestore_execute_mock.expect :execute, OpenStruct.new(write_results: nil), []
-  #
-  #   Google::Gax::Grpc.stub :create_stub, firestore_execute_mock do
-  #
-  #     gax_client = Google::Cloud::Firestore::V1beta1::FirestoreClient.new(
-  #         credentials: credentials,
-  #         lib_name: "gccl",
-  #         lib_version: Google::Cloud::Firestore::VERSION
-  #     )
-  #     firestore.service.instance_variable_set :@firestore, gax_client
-  #     document_path = test.doc_ref_path.split("/documents/")[1]
-  #     data = JSON.parse(test.json_data)
-  #     convert_values data
-  #
-  #     if test.precondition && test.precondition.update_time
-  #       update_time = Time.at(test.precondition.update_time.seconds)
-  #     end
-  #
-  #     # API under test
-  #     firestore.batch do |b|
-  #       b.update document_path, data, update_time: update_time
-  #     end
-  #   end
-  #   firestore_execute_mock.verify
-  # when :update_paths
-  #   #next
-  #   client_mocks firestore_execute_mock
-  #   puts test.request.inspect
-  #   firestore_execute_mock.expect :call, firestore_execute_mock, [test.request, Hash]
-  #   firestore_execute_mock.expect :execute, OpenStruct.new(write_results: nil), []
-  #
-  #   Google::Gax::Grpc.stub :create_stub, firestore_execute_mock do
-  #
-  #     gax_client = Google::Cloud::Firestore::V1beta1::FirestoreClient.new(
-  #         credentials: credentials,
-  #         lib_name: "gccl",
-  #         lib_version: Google::Cloud::Firestore::VERSION
-  #     )
-  #     firestore.service.instance_variable_set :@firestore, gax_client
-  #     document_path = test.doc_ref_path.split("/documents/")[1]
-  #
-  #     keys = test.field_paths.map do |fp|
-  #       firestore.field_path fp.field
-  #     end
-  #     values = test.json_values.map {|v| JSON.parse v }
-  #     data = Hash[keys.zip(values)]
-  #     puts "#{data.inspect}"
-  #     convert_values data
-  #     puts "#{data.inspect}"
-  #
-  #     if test.precondition && test.precondition.update_time
-  #       update_time = Time.at(test.precondition.update_time.seconds)
-  #     end
-  #
-  #     # API under test
-  #     firestore.batch do |b|
-  #       b.update document_path, data, update_time: update_time
-  #     end
-  #   end
-  #   firestore_execute_mock.verify
-  # when :delete
-  #
-  #   client_mocks firestore_execute_mock
-  #   puts test.inspect
-  #   firestore_execute_mock.expect :call, firestore_execute_mock, [test.request, Hash]
-  #   firestore_execute_mock.expect :execute, OpenStruct.new(write_results: nil), []
-  #   opts = {}
-  #   if test.precondition && test.precondition.exists
-  #     opts[:exists] = test.precondition.exists
-  #   end
-  #   if test.precondition && test.precondition.update_time
-  #     opts[:update_time] = Time.at(test.precondition.update_time.seconds)
-  #   end
-  #   Google::Gax::Grpc.stub :create_stub, firestore_execute_mock do
-  #
-  #     gax_client = Google::Cloud::Firestore::V1beta1::FirestoreClient.new(
-  #         credentials: credentials,
-  #         lib_name: "gccl",
-  #         lib_version: Google::Cloud::Firestore::VERSION
-  #     )
-  #     firestore.service.instance_variable_set :@firestore, gax_client
-  #     document_path = test.doc_ref_path.split("/documents/")[1]
-  #
-  #     # API under test
-  #     firestore.batch do |b|
-  #       b.delete document_path, opts
-  #     end
-  #   end
-  #   firestore_execute_mock.verify
-  # when :query
-  #   next
-  #   puts test.inspect
-  #   query = build_query test, get_collection_reference(test.coll_path)
-  #   assert_equal test.query, query
-  # when :listen
-  #   next
-  #   # TODO
-  # else
-  #   raise "Unexpected test: #{test_name}"
+      ConformanceSet.build_test_for wrapper.description, wrapper.set, i
+    when :update
+      ConformanceUpdate.build_test_for wrapper.description, wrapper.update, i
+    when :update_paths
+      ConformanceUpdatePaths.build_test_for wrapper.description, wrapper.update_paths, i
+    when :delete
+      ConformanceDelete.build_test_for wrapper.description, wrapper.delete, i
+    when :query
+      ConformanceQuery.build_test_for wrapper.description, wrapper.query, i
+    when :listen
+      next
+      # TODO
+    else
+      raise "Unexpected test: #{wrapper.inspect}"
   end
 end

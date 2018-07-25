@@ -37,6 +37,12 @@ namespace :test do
 
     Rake::Task["test"].invoke
   end
+
+  desc "Run conformance tests."
+  task :conformance do
+    $LOAD_PATH.unshift "lib", "test"
+    require_relative "test/google/cloud/firestore/conformance_test.rb"
+  end
 end
 
 # Acceptance tests
@@ -125,32 +131,6 @@ namespace :acceptance do
   task :run do
     $LOAD_PATH.unshift "lib", "acceptance"
     Dir.glob("acceptance/**/*_test.rb").each { |file| require_relative file }
-  end
-end
-
-desc "Run conformance tests."
-task :conformance do
-  $LOAD_PATH.unshift "lib", "conformance"
-  Dir.glob("conformance/**/*test.rb")
-      .each { |file| require_relative file }
-end
-
-namespace :conformance do
-  desc "Run conformance tests with coverage."
-  task :coverage, :project, :keyfile do |t, args|
-    require "simplecov"
-    SimpleCov.start do
-      command_name "google-cloud-firestore"
-      track_files "lib/**/*.rb"
-      add_filter "conformance/"
-    end
-
-    Rake::Task["conformance"].invoke
-  end
-
-  task :run do
-    $LOAD_PATH.unshift "lib", "conformance"
-    Dir.glob("conformance/**/*_test.rb").each { |file| require_relative file }
   end
 end
 
