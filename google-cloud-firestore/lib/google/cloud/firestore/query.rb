@@ -226,16 +226,7 @@ module Google
           field = FieldPath.parse field unless field.is_a? FieldPath
 
           new_filter = filter field.formatted_string, operator, value
-          if new_query.where.nil?
-            new_query.where = new_filter
-          elsif new_query.where.filter_type == :composite_filter
-            new_query.where.composite_filter.filters << new_filter
-          else
-            old_filter = new_query.where
-            new_query.where = composite_filter
-            new_query.where.composite_filter.filters << old_filter
-            new_query.where.composite_filter.filters << new_filter
-          end
+          add_filters_to_query new_query, new_filter
 
           Query.start new_query, parent_path, client
         end
@@ -900,6 +891,19 @@ module Google
         def composite_filter
           StructuredQuery::Filter.new(composite_filter:
               StructuredQuery::CompositeFilter.new(op: :AND))
+        end
+
+        def add_filters_to_query query, filter
+          if query.where.nil?
+            query.where = filter
+          elsif query.where.filter_type == :composite_filter
+            query.where.composite_filter.filters << filter
+          else
+            old_filter = query.where
+            query.where = composite_filter
+            query.where.composite_filter.filters << old_filter
+            query.where.composite_filter.filters << filter
+          end
         end
 
         def order_direction direction
