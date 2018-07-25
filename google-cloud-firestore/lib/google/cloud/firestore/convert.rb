@@ -466,13 +466,15 @@ module Google
             tmp_hash = ret_hash
             prev_hash = ret_hash
             dup_hash = hash.dup
-            fields = field_path.fields
+            fields = field_path.fields.dup
             last_field = nil
 
             # squash fields until the key exists?
-            until dup_hash.key? fields.first
-              fields.unshift "#{fields.shift}.#{fields.shift}"
-              break if fields.count <= 1
+            if fields.count > 1
+              until dup_hash.key? fields.first
+                fields.unshift "#{fields.shift}.#{fields.shift}"
+                break if fields.count <= 1
+              end
             end
 
             fields.each do |field|
