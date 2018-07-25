@@ -180,7 +180,7 @@ module Google
     # ```
     #
     # Notice that in legacy SQL, a fully-qualified table name uses brackets
-    # instead of back-ticks, and a semi-colon instead of a dot to separate the
+    # instead of back-ticks, and a colon instead of a dot to separate the
     # project and the dataset: `[my-dashed-project:dataset1.tableName]`.
     #
     # #### Query parameters
