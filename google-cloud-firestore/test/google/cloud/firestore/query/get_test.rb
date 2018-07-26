@@ -77,7 +77,7 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
     )
     firestore_mock.expect :run_query, query_results_enum, ["projects/#{project}/databases/(default)/documents", structured_query: expected_query, options: default_options]
 
-    results_enum = query.select(:name).select("status").select(:activity).get
+    results_enum = query.select(:name, "status", :activity).get
 
     assert_results_enum results_enum
   end

@@ -37,6 +37,12 @@ namespace :test do
 
     Rake::Task["test"].invoke
   end
+
+  desc "Run conformance tests separately from other unit tests."
+  task :conformance do
+    $LOAD_PATH.unshift "lib", "test"
+    require_relative "test/google/cloud/firestore/conformance_test.rb"
+  end
 end
 
 # Acceptance tests

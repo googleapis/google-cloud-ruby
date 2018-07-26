@@ -74,12 +74,10 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
     assert_results_enum results_enum
   end
 
-  it "runs a query with multiple select calls" do
+  it "runs a query with multiple select calls only uses the last one" do
     expected_query = Google::Firestore::V1beta1::StructuredQuery.new(
       select: Google::Firestore::V1beta1::StructuredQuery::Projection.new(
         fields: [
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "name"),
-          Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "status"),
           Google::Firestore::V1beta1::StructuredQuery::FieldReference.new(field_path: "activity")
         ]
       ),

@@ -360,7 +360,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
             }
           ),
           update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-            field_paths: ["h.g", "h.f"]
+            field_paths: ["h.f", "h.g"]
           )
         )
       ]
@@ -374,7 +374,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       data = {}
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: true
+        Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: []
       end.must_raise ArgumentError
       error.message.must_equal "data required for set with merge"
     end
