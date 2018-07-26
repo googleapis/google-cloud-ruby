@@ -61,7 +61,7 @@ describe "Document", :firestore_acceptance do
       list: ["foo", 42, "bar"],
       empty_list: [],
       null: nil,
-      location: { longitude: 50.1430847, latitude: -122.947778 },
+      location: { longitude: -122.947778, latitude: 50.1430847 },
       binary: StringIO.new("\x01\x02")
     }
 

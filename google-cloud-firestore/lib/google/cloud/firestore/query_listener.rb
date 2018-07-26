@@ -445,19 +445,24 @@ module Google
           end
 
           def path_comparison value
-            nodes = value.split("/")
-            [nodes.count, nodes]
+            value.split("/")
           end
 
           def field_type value
             return 0 if value.nil?
             return 1 if value == false
             return 1 if value == true
-            return 2 if value.is_a? Numeric
-            return 3 if value.is_a? String
-            return 4 if value.is_a? StringIO
-            return 5 if value.is_a? Array
-            return 6 if value.is_a? Hash
+            return 2 if value.respond_to?(:nan?) && value.nan?
+            return 3 if value.is_a? Numeric
+            return 4 if value.is_a? Time
+            return 5 if value.is_a? String
+            return 6 if value.is_a? StringIO
+            return 7 if value.is_a? DocumentReference
+            return 9 if value.is_a? Array
+            if value.is_a? Hash
+              return 8 if Convert.hash_is_geo_point? value
+              return 10
+            end
 
             raise "Can't determine field type for #{value.class}"
           end
@@ -466,11 +471,16 @@ module Google
             return 0 if value.nil?
             return 0 if value == false
             return 1 if value == true
+            return 0 if value.respond_to?(:nan?) && value.nan?
             return value if value.is_a? Numeric
+            return value if value.is_a? Time
             return value if value.is_a? String
             return value.string if value.is_a? StringIO
+            return path_comparison(value.path) if value.is_a? DocumentReference
             return value.map { |v| field_comparison(v) } if value.is_a? Array
             if value.is_a? Hash
+              geo_pairs = Convert.hash_is_geo_point? value
+              return geo_pairs.map(&:last) if geo_pairs
               return value.sort.map { |k, v| [k, field_comparison(v)] }
             end
 

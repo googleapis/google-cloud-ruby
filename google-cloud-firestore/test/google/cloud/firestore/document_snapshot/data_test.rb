@@ -66,6 +66,26 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
     document.data.must_equal({ score: 29 })
   end
 
+  it "holds a nan value" do
+    document.grpc = Google::Firestore::V1beta1::Document.new \
+      name: "projects/#{project}/databases/(default)/documents/#{document_path}",
+      fields: { "ratio" => Google::Firestore::V1beta1::Value.new(double_value: Float::NAN) },
+      create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
+      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
+
+    document.data[:ratio].must_be :nan?
+  end
+
+  it "holds an infinity value" do
+    document.grpc = Google::Firestore::V1beta1::Document.new \
+      name: "projects/#{project}/databases/(default)/documents/#{document_path}",
+      fields: { "ratio" => Google::Firestore::V1beta1::Value.new(double_value: Float::INFINITY) },
+      create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
+      update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
+
+    document.data.must_equal({ ratio: Float::INFINITY })
+  end
+
   it "holds a float value" do
     document.grpc = Google::Firestore::V1beta1::Document.new \
       name: "projects/#{project}/databases/(default)/documents/#{document_path}",

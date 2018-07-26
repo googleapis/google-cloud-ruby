@@ -24,8 +24,11 @@ describe "Watch", :firestore_acceptance do
     watch_col.doc("false").create(val: false)
     watch_col.doc("num").create(val: 0.0)
     watch_col.doc("str").create(val: "")
+    watch_col.doc("time").create(val: Time.now)
     watch_col.doc("array").create(val: [])
     watch_col.doc("hash").create(val: {})
+    watch_col.doc("ref").create(val: root_col.doc("ref"))
+    watch_col.doc("geo").create(val: { longitude: 45, latitude: 45 })
     watch_col.doc("io").create(val: StringIO.new)
 
     query_snapshots = []
@@ -52,27 +55,27 @@ describe "Watch", :firestore_acceptance do
     query_snapshots.count.must_equal 4
     query_snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::QuerySnapshot }
 
-    query_snapshots[0].count.must_equal 9
-    query_snapshots[0].changes.count.must_equal 9
-    query_snapshots[0].docs.map(&:document_id).must_equal ["hash", "array", "io", "str", "num", "int", "true", "false", "nil"]
+    query_snapshots[0].count.must_equal 12
+    query_snapshots[0].changes.count.must_equal 12
+    query_snapshots[0].docs.map(&:document_id).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
     query_snapshots[0].changes.each { |change| change.must_be :added? }
-    query_snapshots[0].changes.map(&:doc).map(&:document_id).must_equal ["hash", "array", "io", "str", "num", "int", "true", "false", "nil"]
+    query_snapshots[0].changes.map(&:doc).map(&:document_id).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
 
-    query_snapshots[1].count.must_equal 10
+    query_snapshots[1].count.must_equal 13
     query_snapshots[1].changes.count.must_equal 1
-    query_snapshots[1].docs.map(&:document_id).must_equal ["hash", "array", "io", "str", "num", "int", "true", "false", "added", "nil"]
+    query_snapshots[1].docs.map(&:document_id).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
     query_snapshots[1].changes.each { |change| change.must_be :added? }
     query_snapshots[1].changes.map(&:doc).map(&:document_id).must_equal ["added"]
 
-    query_snapshots[2].count.must_equal 9
+    query_snapshots[2].count.must_equal 12
     query_snapshots[2].changes.count.must_equal 1
-    query_snapshots[2].docs.map(&:document_id).must_equal ["hash", "io", "str", "num", "int", "true", "false", "added", "nil"]
+    query_snapshots[2].docs.map(&:document_id).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
     query_snapshots[2].changes.each { |change| change.must_be :removed? }
     query_snapshots[2].changes.map(&:doc).map(&:document_id).must_equal ["array"]
 
-    query_snapshots[3].count.must_equal 9
+    query_snapshots[3].count.must_equal 12
     query_snapshots[3].changes.count.must_equal 1
-    query_snapshots[3].docs.map(&:document_id).must_equal ["hash", "io", "str", "num", "int", "true", "added", "false", "nil"]
+    query_snapshots[3].docs.map(&:document_id).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "added", "false", "nil"]
     query_snapshots[3].changes.each { |change| change.must_be :modified? }
     query_snapshots[3].changes.map(&:doc).map(&:document_id).must_equal ["added"]
   end

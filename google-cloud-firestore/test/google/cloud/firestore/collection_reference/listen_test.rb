@@ -29,6 +29,11 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :mock_firestore
       doc_change_resp("num", 0, val: 3.14),
       doc_change_resp("str", 0, val: ""),
       doc_change_resp("io", 0, val: StringIO.new),
+      doc_change_resp("time", 0, val: read_time),
+      doc_change_resp("ref2", 0, val: firestore.doc("C/d2")),
+      doc_change_resp("ref1", 0, val: firestore.doc("C/d1")),
+      doc_change_resp("geo2", 0, val: { "longitude" => 40, "latitude" => 50 }),
+      doc_change_resp("geo1", 0, val: { longitude: 45, latitude: 45 }),
       doc_change_resp("array", 0, val: []),
       doc_change_resp("hash", 0, val: {}),
       current_resp("DOCUMENTSHAVEBEENADDED", 1),
@@ -65,27 +70,27 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :mock_firestore
     query_snapshots.count.must_equal 4
     query_snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::QuerySnapshot }
 
-    query_snapshots[0].count.must_equal 9
-    query_snapshots[0].changes.count.must_equal 9
-    query_snapshots[0].docs.map(&:document_id).must_equal ["nil", "false", "true", "int", "num", "str", "io", "array", "hash"]
+    query_snapshots[0].count.must_equal 14
+    query_snapshots[0].changes.count.must_equal 14
+    query_snapshots[0].docs.map(&:document_id).must_equal ["nil", "false", "true", "int", "num", "time", "str", "io", "ref1", "ref2", "geo1", "geo2", "array", "hash"]
     query_snapshots[0].changes.each { |change| change.must_be :added? }
-    query_snapshots[0].changes.map(&:doc).map(&:document_id).must_equal ["nil", "false", "true", "int", "num", "str", "io", "array", "hash"]
+    query_snapshots[0].changes.map(&:doc).map(&:document_id).must_equal ["nil", "false", "true", "int", "num", "time", "str", "io", "ref1", "ref2", "geo1", "geo2", "array", "hash"]
 
-    query_snapshots[1].count.must_equal 9
+    query_snapshots[1].count.must_equal 14
     query_snapshots[1].changes.count.must_equal 2
-    query_snapshots[1].docs.map(&:document_id).must_equal ["nil", "false", "true", "num", "int", "str", "io", "array", "hash"]
+    query_snapshots[1].docs.map(&:document_id).must_equal ["nil", "false", "true", "num", "int", "time", "str", "io", "ref1", "ref2", "geo1", "geo2", "array", "hash"]
     query_snapshots[1].changes.each { |change| change.must_be :modified? }
     query_snapshots[1].changes.map(&:doc).map(&:document_id).must_equal ["num", "int"]
 
-    query_snapshots[2].count.must_equal 9
+    query_snapshots[2].count.must_equal 14
     query_snapshots[2].changes.count.must_equal 1
-    query_snapshots[2].docs.map(&:document_id).must_equal ["nil", "false", "true", "num", "int", "str", "io", "array", "hash"]
+    query_snapshots[2].docs.map(&:document_id).must_equal ["nil", "false", "true", "num", "int", "time", "str", "io", "ref1", "ref2", "geo1", "geo2", "array", "hash"]
     query_snapshots[2].changes.each { |change| change.must_be :modified? }
     query_snapshots[2].changes.map(&:doc).map(&:document_id).must_equal ["array"]
 
-    query_snapshots[3].count.must_equal 7
+    query_snapshots[3].count.must_equal 12
     query_snapshots[3].changes.count.must_equal 2
-    query_snapshots[3].docs.map(&:document_id).must_equal ["nil", "false", "true", "num", "int", "str", "io"]
+    query_snapshots[3].docs.map(&:document_id).must_equal ["nil", "false", "true", "num", "int", "time", "str", "io", "ref1", "ref2", "geo1", "geo2"]
     query_snapshots[3].changes.each { |change| change.must_be :removed? }
     query_snapshots[3].changes.map(&:doc).map(&:document_id).must_equal ["array", "hash"]
   end

@@ -54,6 +54,20 @@ describe Google::Cloud::Firestore::Convert, :value_to_raw, :mock_firestore do
     raw.must_equal 0.9
   end
 
+  it "converts a nan value" do
+    value = Google::Firestore::V1beta1::Value.new(double_value: Float::NAN)
+
+    raw = Google::Cloud::Firestore::Convert.value_to_raw value, firestore
+    raw.must_be :nan?
+  end
+
+  it "converts an infinity value" do
+    value = Google::Firestore::V1beta1::Value.new(double_value: Float::INFINITY)
+
+    raw = Google::Cloud::Firestore::Convert.value_to_raw value, firestore
+    raw.must_equal Float::INFINITY
+  end
+
   it "converts a timestamp value" do
     value = Google::Firestore::V1beta1::Value.new(timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483326245, nanos: 60000000))
 
