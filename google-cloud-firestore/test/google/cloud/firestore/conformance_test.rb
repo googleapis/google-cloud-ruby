@@ -17,10 +17,11 @@ require_relative "../../../../conformance/test-definition_pb"
 
 ##
 # This suite of unit tests is dynamically generated from the contents of
-# test-definition_pb.rb, which was manually generated using `protoc` from
-# test-suite.binproto. See [Protocol Buffers - Ruby Generated
+# `conformance/test-suite.binproto`, using the protobuf types defined in
+# `conformance/test-definition_pb.rb`, which was manually generated from
+# `conformance/test-definition.proto`. See [Protocol Buffers - Ruby Generated
 # Code](https://developers.google.com/protocol-buffers/docs/reference/ruby-generated)
-# for instructions in case test-suite.binproto is updated.
+# for instructions in case `test-definition.proto` is updated.
 #
 # This code was adapted from google-cloud-dotnet
 # [ProtoTest.cs](https://github.com/GoogleCloudPlatform/google-cloud-dotnet/blob/master/apis/Google.Cloud.Firestore/Google.Cloud.Firestore.Tests/Proto/ProtoTest.cs).
@@ -304,8 +305,9 @@ class ConformanceQuery < ConformanceTest
   end
 end
 
-file = File.open "conformance/test-suite.binproto", "rb"
-test_suite = Tests::TestSuite.decode file.read
+proto_file = File.expand_path "../../../../conformance/test-suite.binproto", __dir__
+proto_contents = File.read proto_file, mode: "rb"
+test_suite = Tests::TestSuite.decode proto_contents
 
 test_suite.tests.each_with_index do |wrapper, i|
   case wrapper.test
