@@ -15,6 +15,16 @@
 require "helper.rb"
 require_relative "../../../../conformance/test-definition_pb"
 
+##
+# This suite of unit tests is dynamically generated from the contents of
+# test-definition_pb.rb, which was manually generated using `protoc` from
+# test-suite.binproto. See [Protocol Buffers - Ruby Generated
+# Code](https://developers.google.com/protocol-buffers/docs/reference/ruby-generated)
+# for instructions in case test-suite.binproto is updated.
+#
+# This code was adapted from google-cloud-dotnet
+# [ProtoTest.cs](https://github.com/GoogleCloudPlatform/google-cloud-dotnet/blob/master/apis/Google.Cloud.Firestore/Google.Cloud.Firestore.Tests/Proto/ProtoTest.cs).
+#
 class ConformanceTest < MockFirestore
   def doc_ref_from_path doc_path
     Google::Cloud::Firestore::DocumentReference.from_path doc_path, firestore
