@@ -305,9 +305,8 @@ module Google
             data, nested_server_time_paths = remove_field_value_from data, :server_time
 
             server_time_paths = root_server_time_paths + nested_server_time_paths
-            server_time_paths = root_server_time_paths + nested_server_time_paths
 
-            field_paths = (field_paths - (field_paths - identify_all_file_paths(data)) + delete_paths).uniq
+            field_paths = (field_paths + delete_paths).uniq
             field_paths.each do |field_path|
               raise ArgumentError, "empty paths not allowed" if field_path.fields.empty?
             end
@@ -322,7 +321,7 @@ module Google
                   name: doc_path,
                   fields: hash_to_fields(data)),
                 update_mask: Google::Firestore::V1beta1::DocumentMask.new(
-                  field_paths: field_paths.map(&:formatted_string).sort),
+                  field_paths: (field_paths).map(&:formatted_string).sort),
                 current_document: Google::Firestore::V1beta1::Precondition.new(
                   exists: true)
               )

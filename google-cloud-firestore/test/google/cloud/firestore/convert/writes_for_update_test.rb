@@ -549,7 +549,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
               "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
             }
           ),
-          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a"]),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a", "c"]),
           current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
         ),
         Google::Firestore::V1beta1::Write.new(
@@ -585,7 +585,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_update do
               "a" => Google::Firestore::V1beta1::Value.new(integer_value: 1)
             }
           ),
-          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a"]),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(field_paths: ["a", "b"]),
           current_document: Google::Firestore::V1beta1::Precondition.new(exists: true)
         ),
         Google::Firestore::V1beta1::Write.new(
