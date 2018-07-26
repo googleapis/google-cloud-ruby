@@ -138,7 +138,7 @@ class ConformanceUpdate < ConformanceTest
   def self.build_test_for description, test, i
     define_method("test_#{i}: #{description}") do
       if test.precondition && test.precondition.exists
-        skip "The ruby implementation does not allow exists on update"
+        fail "The ruby implementation does not allow exists on update"
       end
 
       doc_ref = doc_ref_from_path test.doc_ref_path
@@ -173,7 +173,7 @@ class ConformanceUpdatePaths < ConformanceTest
   def self.build_test_for description, test, i
     define_method("test_#{i}: #{description}") do
       if test.precondition && test.precondition.exists
-        skip "The ruby implementation does not allow exists on update"
+        fail "The ruby implementation does not allow exists on update"
       end
 
       doc_ref = doc_ref_from_path test.doc_ref_path
@@ -318,8 +318,14 @@ test_suite.tests.each_with_index do |wrapper, i|
     when :set
       ConformanceSet.build_test_for wrapper.description, wrapper.set, i
     when :update
+      # The ruby implementation does not allow exists on update, so skip
+      next if wrapper.update.precondition && wrapper.update.precondition.exists
+
       ConformanceUpdate.build_test_for wrapper.description, wrapper.update, i
     when :update_paths
+      # The ruby implementation does not allow exists on update, so skip
+      next if wrapper.update_paths.precondition && wrapper.update_paths.precondition.exists
+
       ConformanceUpdatePaths.build_test_for wrapper.description, wrapper.update_paths, i
     when :delete
       ConformanceDelete.build_test_for wrapper.description, wrapper.delete, i
