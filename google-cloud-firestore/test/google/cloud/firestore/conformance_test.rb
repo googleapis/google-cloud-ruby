@@ -126,11 +126,12 @@ class ConformanceUpdate < ConformanceTest
 
   def self.build_test_for description, test, i
     define_method("test_#{i}: #{description}") do
-      doc_ref = doc_ref_from_path test.doc_ref_path
-      data = data_from_json test.json_data
       if test.precondition && test.precondition.exists
         skip "The ruby implementation does not allow exists on update"
       end
+
+      doc_ref = doc_ref_from_path test.doc_ref_path
+      data = data_from_json test.json_data
       update_time = if test.precondition && test.precondition.update_time
                       Time.at(test.precondition.update_time.seconds)
                     end
@@ -160,21 +161,25 @@ class ConformanceUpdatePaths < ConformanceTest
 
   def self.build_test_for description, test, i
     define_method("test_#{i}: #{description}") do
-      doc_ref = doc_ref_from_path test.doc_ref_path
-      data = data_from_field_paths_and_json test.field_paths, test.json_values
       if test.precondition && test.precondition.exists
         skip "The ruby implementation does not allow exists on update"
       end
+
+      doc_ref = doc_ref_from_path test.doc_ref_path
       update_time = if test.precondition && test.precondition.update_time
                       Time.at(test.precondition.update_time.seconds)
                     end
 
       if test.is_error
         expect do
+          data = data_from_field_paths_and_json test.field_paths, test.json_values
+
           doc_ref.update data, update_time: update_time
         end.must_raise ArgumentError
       else
         firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+
+        data = data_from_field_paths_and_json test.field_paths, test.json_values
 
         doc_ref.update data, update_time: update_time
       end
@@ -182,9 +187,15 @@ class ConformanceUpdatePaths < ConformanceTest
   end
 
   def data_from_field_paths_and_json field_paths, json_values
-    Hash[field_paths.zip(json_values).map do |field_path, data_json|
+    raise ArgumentError, "bad test data" if field_paths.size != json_values.size
+
+    hash_args = Hash[field_paths.zip(json_values).map do |field_path, data_json|
       [firestore.field_path(field_path.field), data_from_json(data_json)]
     end]
+
+    raise ArgumentError, "cannot duplicate args when using a hash in ruby" if hash_args.size != field_paths.size
+
+    hash_args
   end
 end
 
@@ -291,11 +302,10 @@ failing_tests = {
     create: [],
     set: [],
     update: [],
-    update_paths: [79, 80, 83, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 100, 102],
+    update_paths: [],
     delete: [],
     query: [],
-    listen: [],
-
+    listen: []
 }
 
 test_suite.tests.each_with_index do |wrapper, i|
