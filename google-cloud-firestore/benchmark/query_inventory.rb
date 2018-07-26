@@ -49,12 +49,12 @@ $init_docs = Array.new(25_000) do |i|
   new_doc_snp "doc-#{i}", val: i
 end.reverse
 $init_docs.each do |doc|
-  $query_inventory.add doc
+  $query_inventory.add doc.grpc
 end
 
 Benchmark.bm(25) do |x|
   x.report('init 25k array:') { array_inventory = sort_array_inventory($init_docs) }
-  x.report('init 25k inventory:')  { snapshot_inventory = $query_inventory.to_query_snapshot(Time.now).docs }
+  x.report('init 25k inventory:')  { $query_inventory.persist("", Time.now); snapshot_inventory = $query_inventory.build_query_snapshot.docs }
 end
 
 raise "sorted docs no longer match" if array_inventory.map(&:document_id) != snapshot_inventory.map(&:document_id)
@@ -63,7 +63,7 @@ new_doc = new_doc_snp("doc-add", val: 500)
 
 Benchmark.bm(25) do |x|
   x.report('insert 1 into array:') { array_inventory << new_doc; array_inventory = sort_array_inventory(array_inventory) }
-  x.report('insert 1 into inventory:')  { $query_inventory.add(new_doc); snapshot_inventory = $query_inventory.to_query_snapshot(Time.now).docs }
+  x.report('insert 1 into inventory:')  { $query_inventory.add(new_doc.grpc); $query_inventory.persist("", Time.now); snapshot_inventory = $query_inventory.build_query_snapshot.docs }
 end
 
 raise "sorted docs no longer match" if array_inventory.map(&:document_id) != snapshot_inventory.map(&:document_id)
@@ -81,9 +81,9 @@ Benchmark.bm(25) do |x|
   end
   x.report('bulk insert 500 inventory:') do
     new_random_docs.each do |new_random_doc|
-      $query_inventory.add new_random_doc
+      $query_inventory.add new_random_doc.grpc
     end
-    snapshot_inventory = $query_inventory.to_query_snapshot(Time.now).docs
+    $query_inventory.persist("", Time.now); snapshot_inventory = $query_inventory.build_query_snapshot.docs
   end
 end
 
@@ -91,7 +91,7 @@ raise "sorted docs no longer match" if array_inventory.map(&:document_id) != sna
 
 Benchmark.bm(25) do |x|
   x.report('delete 1 from array:') { array_inventory.delete_at(array_inventory.find_index { |doc| doc.path == new_doc.path }); array_inventory = sort_array_inventory(array_inventory) }
-  x.report('delete 1 from inventory:')  { $query_inventory.delete(new_doc.path); snapshot_inventory = $query_inventory.to_query_snapshot(Time.now).docs }
+  x.report('delete 1 from inventory:')  { $query_inventory.delete(new_doc.path); $query_inventory.persist("", Time.now); snapshot_inventory = $query_inventory.build_query_snapshot.docs }
 end
 
 raise "sorted docs no longer match" if array_inventory.map(&:document_id) != snapshot_inventory.map(&:document_id)
