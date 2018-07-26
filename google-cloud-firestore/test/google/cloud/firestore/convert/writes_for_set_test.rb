@@ -374,7 +374,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_set do
       data = {}
 
       error = expect do
-        Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: true
+        Google::Cloud::Firestore::Convert.writes_for_set document_path, data, merge: []
       end.must_raise ArgumentError
       error.message.must_equal "data required for set with merge"
     end

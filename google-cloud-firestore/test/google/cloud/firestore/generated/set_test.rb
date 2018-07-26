@@ -362,14 +362,25 @@ describe "Cross-Language Set Tests", :mock_firestore do
       firestore.batch { |b| b.set document_path, set_data, merge: "a" }
     end
 
-    it "MergeAll cannot be specified with empty data" do
+    it "MergeAll can be specified with empty data" do
       set_json = "{}"
       set_data = JSON.parse set_json
 
-      error = expect do
-        firestore.batch { |b| b.set document_path, set_data, merge: true }
-      end.must_raise ArgumentError
-      error.message.must_equal "data required for set with merge"
+      set_writes = [
+        Google::Firestore::V1beta1::Write.new(
+          update: Google::Firestore::V1beta1::Document.new(
+            name: "projects/projectID/databases/(default)/documents/C/d",
+            fields: {}
+          ),
+          update_mask: Google::Firestore::V1beta1::DocumentMask.new(
+            field_paths: []
+          )
+        )
+      ]
+
+      firestore_mock.expect :commit, commit_resp, [database_path, set_writes, options: default_options]
+
+      firestore.batch { |b| b.set document_path, set_data, merge: true }
     end
 
     it "MergeAll with nested fields" do

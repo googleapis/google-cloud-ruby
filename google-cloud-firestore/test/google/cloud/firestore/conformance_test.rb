@@ -103,21 +103,20 @@ class ConformanceSet < ConformanceTest
     define_method("test_#{i}: #{description}") do
       doc_ref = doc_ref_from_path test.doc_ref_path
       data = data_from_json test.json_data
+      merge = if test.option && test.option.all
+                true
+              elsif test.option && !test.option.fields.empty?
+                test.option.fields.map do |fp|
+                  firestore.field_path fp.field
+                end
+              end
 
       if test.is_error
         expect do
-          doc_ref.set data
+          doc_ref.set data, merge: merge
         end.must_raise ArgumentError
       else
         firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
-
-        merge = if test.option && test.option.all
-                  true
-                elsif test.option && !test.option.fields.empty?
-                  test.option.fields.map do |fp|
-                    Google::Cloud::Firestore::FieldPath.new fp.field
-                  end
-                end
 
         doc_ref.set data, merge: merge
       end
@@ -291,7 +290,7 @@ test_suite = Tests::TestSuite.decode file.read
 failing_tests = {
     get: [],
     create: [],
-    set: [38, 41, 45, 46, 50],
+    set: [],
     update: [62, 65, 66],
     update_paths: [79, 80, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 100, 102],
     delete: [],

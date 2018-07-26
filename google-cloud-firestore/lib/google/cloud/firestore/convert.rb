@@ -164,13 +164,15 @@ module Google
               if merge == true
                 # extract the leaf node field paths from data
                 field_paths = identify_leaf_nodes data
+                allow_empty = true
               else
                 field_paths = Array(merge).map do |field_path|
                   field_path = FieldPath.parse field_path unless field_path.is_a? FieldPath
                   field_path
                 end
+                allow_empty = false
               end
-              return writes_for_set_merge doc_path, data, field_paths
+              return writes_for_set_merge doc_path, data, field_paths, allow_empty
             end
 
             writes = []
@@ -195,8 +197,10 @@ module Google
             writes
           end
 
-          def writes_for_set_merge doc_path, data, field_paths
+          def writes_for_set_merge doc_path, data, field_paths, allow_empty
             raise ArgumentError, "data is required" unless data.is_a? Hash
+
+            validate_field_paths! field_paths
 
             writes = []
 
@@ -231,6 +235,12 @@ module Google
             delete_valid_check = delete_valid_check.include? false
             raise ArgumentError, "deleted field not included in merge" if delete_valid_check
 
+            server_time_paths.select! do |server_time_path|
+              field_paths.any? do |field_path|
+                server_time_path.formatted_string.start_with? field_path.formatted_string
+              end
+            end
+
             # Choose only the data there are field paths for
             field_paths -= delete_paths
             field_paths -= server_time_paths
@@ -238,11 +248,13 @@ module Google
             # Restore delete paths
             field_paths += delete_paths
 
-            if data.empty? && delete_paths.empty?
-              if server_time_paths.empty?
+            if data.empty? && !allow_empty
+              if server_time_paths.empty? && delete_paths.empty?
                 raise ArgumentError, "data required for set with merge"
               end
-            else
+            end
+
+            if data.any? || field_paths.any? || (allow_empty && server_time_paths.empty?)
               writes << Google::Firestore::V1beta1::Write.new(
                 update: Google::Firestore::V1beta1::Document.new(
                   name: doc_path,
@@ -271,18 +283,7 @@ module Google
             end
 
             # Duplicate field paths check
-            dup_keys = new_data_pairs.map(&:first).map(&:formatted_string)
-            if dup_keys.size != dup_keys.uniq.size
-              raise ArgumentError, "duplicate field paths"
-            end
-            dup_keys.each do |field_path|
-              prefix_check = dup_keys.select do |this_path|
-                this_path.start_with? "#{field_path}."
-              end
-              if prefix_check.any?
-                raise ArgumentError, "one field cannot be a prefix of another"
-              end
-            end
+            validate_field_paths! new_data_pairs.map(&:first)
 
             delete_paths, new_data_pairs = new_data_pairs.partition do |field_path, value|
               value.is_a?(FieldValue) && value.type == :delete
@@ -486,7 +487,23 @@ module Google
               dup_hash = dup_hash[field]
             end
             prev_hash[last_field] = dup_hash
+            prev_hash.delete_if { |_k, v| v.nil? }
             ret_hash
+          end
+
+          def validate_field_paths! field_paths
+            field_paths_strings = field_paths.map(&:formatted_string)
+            if field_paths_strings.size != field_paths_strings.uniq.size
+              raise ArgumentError, "duplicate field paths"
+            end
+            field_paths_strings.each do |field_path|
+              prefix_check = field_paths_strings.select do |this_path|
+                this_path.start_with? "#{field_path}."
+              end
+              if prefix_check.any?
+                raise ArgumentError, "one field cannot be a prefix of another"
+              end
+            end
           end
 
           def deep_merge_hashes left_hash, right_hash
