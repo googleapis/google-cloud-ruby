@@ -47,14 +47,23 @@ class StreamingListenStub
 
   def initialize responses
     # EnumeratorQueue will return an enum that blocks
-    @responses = Google::Cloud::Firestore::EnumeratorQueue.new
-    responses.each { |response| @responses.push response }
+    @responses = [Google::Cloud::Firestore::EnumeratorQueue.new]
+    responses.each do |response|
+      @responses.last.push response
+
+      # create a new response enum when reset is received
+      if (response.response_type == :target_change &&
+          response.target_change.target_change_type == :RESET)
+        @responses << Google::Cloud::Firestore::EnumeratorQueue.new
+      end
+    end
   end
 
   def listen request_enum, options: nil
     @request_enum = request_enum
     # return response enumerator
-    @responses.each
+    response_enum = @responses.shift
+    response_enum.each
   end
 end
 
@@ -77,5 +86,14 @@ class MockFirestore < Minitest::Spec
   # Register this spec type for when :firestore is used.
   register_spec_type(self) do |desc, *addl|
     addl.include? :mock_firestore
+  end
+
+  def wait_until &block
+    wait_count = 0
+    until block.call
+      fail "wait_until criterial was not met" if wait_count > 100
+      wait_count += 1
+      sleep 0.01
+    end
   end
 end

@@ -250,6 +250,8 @@ module Google
                 Google::Firestore::V1beta1::Target::DocumentsTarget.new(
                   documents: [@doc_ref.path]
                 ),
+              resume_token: String(@resume_token),
+              read_time: Convert.time_to_timestamp(@read_time),
               target_id: 0x42
             )
           )

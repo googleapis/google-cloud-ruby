@@ -54,12 +54,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :mock_firestore d
       doc_snapshots << doc_snp
     end
 
-    wait_count = 0
-    while doc_snapshots.count < 6
-      fail "total number of calls were never made" if wait_count > 100
-      wait_count += 1
-      sleep 0.01
-    end
+    wait_until { doc_snapshots.count == 6 }
 
     listener.stop
 

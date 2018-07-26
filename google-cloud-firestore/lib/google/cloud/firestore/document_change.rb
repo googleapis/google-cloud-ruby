@@ -58,7 +58,9 @@ module Google
         # @return [Symbol] The type of change.
         #
         def type
-          @type
+          return :removed if @new_index.nil?
+          return :added if @old_index.nil?
+          :modified
         end
 
         ##
@@ -109,10 +111,9 @@ module Google
         ##
         # @private New DocumentChange from a
         # Google::Cloud::Firestore::DocumentSnapshot object.
-        def self.from_doc doc, type, old_index, new_index
+        def self.from_doc doc, old_index, new_index
           new.tap do |s|
             s.instance_variable_set :@doc, doc
-            s.instance_variable_set :@type, type
             s.instance_variable_set :@old_index, old_index
             s.instance_variable_set :@new_index, new_index
           end

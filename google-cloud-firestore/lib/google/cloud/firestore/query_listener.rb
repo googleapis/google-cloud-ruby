@@ -62,9 +62,7 @@ module Google
           @callback = callback
           raise ArgumentError if @callback.nil?
 
-          @inventory    = nil
-          @resume_token = nil
-          @read_time    = nil
+          @inventory = nil
 
           super() # to init MonitorMixin
         end
@@ -160,12 +158,15 @@ module Google
                   # +resume_token+.
 
                   synchronize do
-                    @resume_token = response.target_change.resume_token
-                    @read_time    = Convert.timestamp_to_time \
-                      response.target_change.read_time
+                    @inventory.persist(
+                      response.target_change.resume_token,
+                      Convert.timestamp_to_time(
+                        response.target_change.read_time
+                      )
+                    )
 
-                    if @inventory.pending?
-                      send_callback @inventory.to_query_snapshot(@read_time)
+                    if @inventory.current? && @inventory.changes?
+                      send_callback @inventory.build_query_snapshot
                     end
                   end
                 when :CURRENT
@@ -180,11 +181,14 @@ module Google
                   # semantics are desired.
 
                   synchronize do
-                    @resume_token = response.target_change.resume_token
-                    @read_time    = Convert.timestamp_to_time \
-                      response.target_change.read_time
+                    @inventory.persist(
+                      response.target_change.resume_token,
+                      Convert.timestamp_to_time(
+                        response.target_change.read_time
+                      )
+                    )
 
-                    send_callback @inventory.to_query_snapshot(@read_time)
+                    @inventory.current = true
                   end
                 when :RESET
                   # The targets have been reset, and a new initial state for the
@@ -200,7 +204,11 @@ module Google
                 # A {Google::Firestore::V1beta1::Document Document} has changed.
 
                 synchronize do
-                  @inventory.add response.document_change.document
+                  if response.document_change.removed_target_ids.any?
+                    @inventory.delete response.document_change.document.name
+                  else
+                    @inventory.add response.document_change.document
+                  end
                 end
               when :document_delete
                 # A {Google::Firestore::V1beta1::Document Document} has been
@@ -252,7 +260,7 @@ module Google
 
           # Reuse inventory if one already exists
           @inventory ||= Inventory.new @query
-          @inventory.clear
+          @inventory.reset
 
           # Send stop if already running
           @request_queue.push self if @request_queue
@@ -265,8 +273,8 @@ module Google
                 parent: @query.parent_path,
                 structured_query: @query.query
               ),
-              resume_token: String(@resume_token),
-              read_time: Convert.time_to_timestamp(@read_time),
+              resume_token: String(@inventory.resume_token),
+              read_time: Convert.time_to_timestamp(@inventory.read_time),
               target_id: 0x42
             )
           )
@@ -287,73 +295,113 @@ module Google
         # Uses RBTree to hold a sorted list of DocumentSnapshot objects and to
         # make inserting and removing objects much more efficent.
         class Inventory
+          attr_accessor :current
+          attr_reader :resume_token, :read_time
+
           def initialize query
             @query = query
-            @to_add = []
-            @to_delete = []
+            @pending = {
+              add: [],
+              delete: []
+            }
+            @current = nil
+            @resume_token = nil
+            @read_time = nil
             @tree = RBTree.new
-            @tree.readjust(&method(:init_aware_query_comparison_proc))
-            @old_order = {}
-
-            @initial_load = true
+            @tree.readjust(&method(:query_comparison_proc))
+            @old_order = nil
           end
 
-          def add doc_snp
-            @to_add << doc_snp
+          def current?
+            @current
+          end
+
+          def add doc_grpc
+            @pending[:add] << doc_grpc
           end
 
           def delete doc_path
-            @to_delete << doc_path
+            @pending[:delete] << doc_path
           end
 
           def pending?
-            @to_add.any? || @to_delete.any?
+            @pending[:add].any? || @pending[:delete].any?
           end
 
-          def clear
-            @to_add.clear
-            @to_delete.clear
+          def clear_pending
+            @pending[:add].clear
+            @pending[:delete].clear
           end
 
-          def to_query_snapshot read_time
+          def reset
+            # clears all but query, resume token, read time, and old order
+            clear_pending
+
+            @current = nil
+
+            @tree.clear
+          end
+
+          def persist resume_token, read_time
             # Remove the deleted documents
-            @to_delete.each do |doc_path|
-              remove_doc_path doc_path
+            @pending[:delete].each do |doc_path|
+              remove_doc_from_tree doc_path
             end
 
             # Add/update the changed documents
-            @to_add.each do |doc_grpc|
-              remove_doc_path doc_grpc.name
-              add_doc_snp DocumentSnapshot.from_document(
+            @pending[:add].each do |doc_grpc|
+              removed_doc = remove_doc_from_tree doc_grpc.name
+              added_doc = DocumentSnapshot.from_document(
                 doc_grpc, @query.client, read_at: read_time
               )
+
+              if removed_doc && removed_doc.updated_at >= added_doc.updated_at
+                # Restore the removed doc if the added doc isn't newer
+                added_doc = removed_doc
+              end
+
+              add_doc_to_tree added_doc
             end
 
-            # Get the new set of documents, changes, order
-            docs = @tree.keys
-            new_order = Hash[docs.map(&:path).each_with_index.to_a] # O(n)
-            changes = calc_changes \
-              @to_add, @to_delete, @old_order, new_order, read_time
+            @resume_token = resume_token
+            @read_time = read_time
+            clear_pending
+          end
 
+          def changes?
+            # Act like there are changes if we have never run before
+            return true if @old_order.nil?
+            added_paths, deleted_paths, changed_paths = \
+              change_paths current_order, @old_order
+            added_paths.any? || deleted_paths.any? || changed_paths.any?
+          end
+
+          def current_docs
+            @tree.keys
+          end
+
+          def order_for docs
+            Hash[docs.map { |doc| [doc.path, doc.updated_at] }]
+          end
+
+          def current_order
+            order_for current_docs
+          end
+
+          def build_query_snapshot
+            # If this is the first time building, set to empty hash
+            @old_order ||= {}
+
+            # Get the new set of documents, changes, order
+            docs = current_docs
+            new_order = order_for docs
+            changes = build_changes new_order, @old_order
             @old_order = new_order
 
-            clear
-            @initial_load = false
-
-            QuerySnapshot.from_docs @query, docs, changes, read_time
+            QuerySnapshot.from_docs @query, docs, changes, @read_time
           end
 
           protected
-
-          def init_aware_query_comparison_proc a, b
-            # When loading for the first time we want to always append.
-            # This is because the API returns sorted query results.
-            # This also provides a massive performance improvement because
-            # sorting an already sorted red-black tree is a worst case scenario.
-            return 1 if @initial_load
-
-            query_comparison_proc a, b
-          end
 
           def query_comparison_proc a, b
             last_direction = nil
@@ -429,36 +477,52 @@ module Google
             raise "Can't determine field value for #{value}"
           end
 
-          def calc_changes add_docs, del_docs, old_order, new_order, read_time
-            additions = add_docs.map do |doc_grpc|
-              old_index = old_order[doc_grpc.name]
-              new_index = new_order[doc_grpc.name]
-              type = type_from_indexes old_index, new_index
-              doc_snp = DocumentSnapshot.from_document(
-                doc_grpc, @query.client, read_at: read_time
-              )
-              DocumentChange.from_doc doc_snp, type, old_index, new_index
+          def change_paths new_order, old_order
+            added_paths = new_order.keys - old_order.keys
+            deleted_paths = old_order.keys - new_order.keys
+            new_hash = new_order.dup.delete_if do |path, _updated_at|
+              added_paths.include? path
             end
-            removals = del_docs.map do |doc_path|
-              old_index = old_order[doc_path]
-              doc_ref = DocumentReference.from_path doc_path, @query.client
-              doc_snp = DocumentSnapshot.missing doc_ref, read_at: read_time
-              DocumentChange.from_doc doc_snp, :removed, old_index, nil
+            old_hash = old_order.dup.delete_if do |path, _updated_at|
+              deleted_paths.include? path
             end
-            additions + removals
+            changed_paths = (new_hash.to_a - old_hash.to_a).map(&:first)
+
+            [added_paths, deleted_paths, changed_paths]
           end
 
-          def add_doc_snp doc_snp
+          def build_changes new_order, old_order
+            added_paths, deleted_paths, changed_paths = \
+              change_paths new_order, old_order
+
+            changes = deleted_paths.map do |doc_path|
+              doc_ref = DocumentReference.from_path doc_path, @query.client
+              doc_snp = DocumentSnapshot.missing doc_ref
+              DocumentChange.from_doc \
+                doc_snp, old_order.keys.index(doc_path), nil
+            end
+            changes += added_paths.map do |doc_path|
+              DocumentChange.from_doc \
+                @tree.key(doc_path), nil, new_order.keys.index(doc_path)
+            end
+            changes += changed_paths.map do |doc_path|
+              DocumentChange.from_doc \
+                @tree.key(doc_path),
+                old_order.keys.index(doc_path),
+                new_order.keys.index(doc_path)
+            end
+            changes
+          end
+
+          def add_doc_to_tree doc_snp
             @tree[doc_snp] = doc_snp.path
           end
 
-          def remove_doc_path doc_path
-            # # lookup using Hash#[] is faster than RBTree#key, O(1) vs O(???)
-            # return if @old_order[doc_path].nil?
-
+          def remove_doc_from_tree doc_path
             # Remove old snapshot
             old_snp = @tree.key doc_path
             @tree.delete old_snp unless old_snp.nil?
+            old_snp
           end
 
           def type_from_indexes old_index, new_index
