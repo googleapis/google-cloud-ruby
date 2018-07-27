@@ -272,8 +272,13 @@ end
 class ConformanceListen < ConformanceTest
   def self.build_test_for description, test, index
     define_method("test_#{index}: #{description}") do
+      # slice responses into groups ending on RESET
+      sliced_responses = test.responses.slice_when do |before_response, _after_response|
+        before_response.response_type == :target_change &&
+          before_response.target_change.target_change_type == :RESET
+      end
       # set stub because we can't mock a streaming request/response
-      listen_stub = StreamingListenStub.new test.responses.to_a.each
+      listen_stub = StreamingListenStub.new sliced_responses
       firestore.service.instance_variable_set :@firestore, listen_stub
 
       query_snapshots = []

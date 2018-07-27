@@ -62,8 +62,6 @@ module Google
           @callback = callback
           raise ArgumentError if @callback.nil?
 
-          @inventory = nil
-
           super() # to init MonitorMixin
         end
 
@@ -138,9 +136,57 @@ module Google
           @callback.call query_snp
         end
 
+        def start_listening!
+          # create new background thread to handle the stream's enumerator
+          @background_thread = Thread.new { background_run }
+        end
+
+        # @private
+        class RestartStream < StandardError; end
+
         # rubocop:disable all
 
-        def background_run enum
+        def background_run
+          # Don't allow a stream to restart if already stopped
+          return if synchronize { @stopped }
+
+          @backoff ||= { max: 5, current: 0, delay: 1.0, mod: 1.3 }
+
+          # Reuse inventory if one already exists
+          # Even though this uses an @var, no need to synchronize
+          @inventory ||= Inventory.new(synchronize { @query })
+          @inventory.reset
+
+          # Send stop if already running
+          synchronize do
+            @request_queue.push self if @request_queue
+          end
+
+          # Customize the provided initial listen request
+          init_listen_req = Google::Firestore::V1beta1::ListenRequest.new(
+            database: synchronize { @query.client.path },
+            add_target: Google::Firestore::V1beta1::Target.new(
+              query: Google::Firestore::V1beta1::Target::QueryTarget.new(
+                parent: synchronize { @query.parent_path },
+                structured_query: synchronize { @query.query }
+              ),
+              resume_token: String(@inventory.resume_token),
+              read_time: Convert.time_to_timestamp(@inventory.read_time),
+              target_id: 0x42
+            )
+          )
+
+          # Always create a new enum queue
+          synchronize do
+            @request_queue = EnumeratorQueue.new self
+            @request_queue.push init_listen_req
+          end
+
+          # Not an @var, we get a new enum each time
+          enum = synchronize do
+            @query.client.service.listen @request_queue.each
+          end
+
           loop do
 
             # Break loop, close thread if stopped
@@ -157,15 +203,15 @@ module Google
                   # No change has occurred. Used only to send an updated
                   # +resume_token+.
 
-                  synchronize do
-                    @inventory.persist(
-                      response.target_change.resume_token,
-                      Convert.timestamp_to_time(
-                        response.target_change.read_time
-                      )
+                  @inventory.persist(
+                    response.target_change.resume_token,
+                    Convert.timestamp_to_time(
+                      response.target_change.read_time
                     )
+                  )
 
-                    if @inventory.current? && @inventory.changes?
+                  if @inventory.current? && @inventory.changes?
+                    synchronize do
                       send_callback @inventory.build_query_snapshot
                     end
                   end
@@ -180,16 +226,14 @@ module Google
                   # Listeners can wait for this change if read-after-write
                   # semantics are desired.
 
-                  synchronize do
-                    @inventory.persist(
-                      response.target_change.resume_token,
-                      Convert.timestamp_to_time(
-                        response.target_change.read_time
-                      )
+                  @inventory.persist(
+                    response.target_change.resume_token,
+                    Convert.timestamp_to_time(
+                      response.target_change.read_time
                     )
+                  )
 
-                    @inventory.current = true
-                  end
+                  @inventory.current = true
                 when :RESET
                   # The targets have been reset, and a new initial state for the
                   # targets will be returned in subsequent changes.
@@ -198,98 +242,69 @@ module Google
                   # returned even if the target was previously indicated to be
                   # +CURRENT+.
 
-                  raise "restart stream" # Raise to restart the stream
+                  raise RestartStream # Raise to restart the stream
                 end
               when :document_change
                 # A {Google::Firestore::V1beta1::Document Document} has changed.
 
-                synchronize do
-                  if response.document_change.removed_target_ids.any?
-                    @inventory.delete response.document_change.document.name
-                  else
-                    @inventory.add response.document_change.document
-                  end
+                if response.document_change.removed_target_ids.any?
+                  @inventory.delete response.document_change.document.name
+                else
+                  @inventory.add response.document_change.document
                 end
               when :document_delete
                 # A {Google::Firestore::V1beta1::Document Document} has been
                 # deleted.
 
-                synchronize do
-                  @inventory.delete response.document_delete.document
-                end
+                @inventory.delete response.document_delete.document
               when :document_remove
                 # A {Google::Firestore::V1beta1::Document Document} has been
                 # removed from a target (because it is no longer relevant to
                 # that target).
 
-                synchronize do
-                  @inventory.delete response.document_remove.document
-                end
+                @inventory.delete response.document_remove.document
               end
             rescue StopIteration
               break
             end
+
+            # Reset backoff values when completed without an error
+            @backoff[:current] = 0
+            @backoff[:delay] = 1.0
           end
+
           # Has the loop broken but we aren't stopped?
           # Could be GRPC has thrown an internal error, so restart.
-          synchronize { raise "restart thread" unless @stopped }
+          raise RestartStream
         rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
-               GRPC::ResourceExhausted, GRPC::Internal,
-               GRPC::Core::CallError => e
+               GRPC::ResourceExhausted, GRPC::Internal, GRPC::Core::CallError
+          # Incrementally back off when restart the stream on Unavailable.
           # The GAPIC layer will raise DeadlineExceeded when stream is opened
           # longer than the timeout value it is configured for. When this
           # happends, restart the stream stealthly.
-          # Also stealthly restart the stream on Unavailable, Cancelled,
-          # ResourceExhausted, and Internal.
+          # Also stealthly restart the stream on Cancelled, ResourceExhausted,
+          # and Internal.
           # Also, also stealthly restart the stream when GRPC raises the
           # internal CallError.
-          synchronize { start_listening! }
-        rescue StandardError => e
-          synchronize do
-            raise Google::Cloud::Error.from_error(e) if @stopped
 
-            start_listening!
-          end
+          # Update increment backoff values
+          @backoff[:current] += 1
+          @backoff[:delay] *= @backoff[:mod]
+
+          # Re-raise if retried more than the max
+          raise err if @backoff[:current] >= @backoff[:max]
+
+          # Sleep with incremental backoff before restarting
+          sleep @backoff[:delay]
+
+          retry
+        rescue RestartStream
+          retry
+        rescue StandardError
+          raise Google::Cloud::Error.from_error(e)
         end
 
         # rubocop:enable all
-
-        def start_listening!
-          # Don't allow a stream to restart if already stopped
-          return if @stopped
-
-          # Reuse inventory if one already exists
-          @inventory ||= Inventory.new @query
-          @inventory.reset
-
-          # Send stop if already running
-          @request_queue.push self if @request_queue
-
-          # Customize the provided initial listen request
-          init_listen_req = Google::Firestore::V1beta1::ListenRequest.new(
-            database: @query.client.path,
-            add_target: Google::Firestore::V1beta1::Target.new(
-              query: Google::Firestore::V1beta1::Target::QueryTarget.new(
-                parent: @query.parent_path,
-                structured_query: @query.query
-              ),
-              resume_token: String(@inventory.resume_token),
-              read_time: Convert.time_to_timestamp(@inventory.read_time),
-              target_id: 0x42
-            )
-          )
-
-          # Always create a new enum queue
-          @request_queue = EnumeratorQueue.new self
-          @request_queue.push init_listen_req
-
-          output_enum = @query.client.service.listen @request_queue.each
-
-          # create new background thread to handle new enumerator
-          @background_thread = Thread.new(output_enum) do |enum|
-            background_run enum
-          end
-        end
 
         # @private Collects changes and produces a QuerySnapshot.
         # Uses RBTree to hold a sorted list of DocumentSnapshot objects and to
@@ -331,6 +346,10 @@ module Google
           def clear_pending
             @pending[:add].clear
             @pending[:delete].clear
+          end
+
+          def size
+            @tree.size
           end
 
           def reset

@@ -382,31 +382,37 @@ module Google
         #
         def transaction max_retries: nil
           max_retries = 5 unless max_retries.is_a? Integer
-          retries = 0
-          backoff = 1.0
+          backoff = { max: max_retries, current: 0, delay: 1.0, mod: 1.3 }
 
           transaction = Transaction.from_client self
           begin
             yield transaction
             transaction.commit
           rescue Google::Cloud::UnavailableError => err
-            # Re-raise if deadline has passed
-            raise err if retries >= max_retries
+            # Increment backoff values
+            backoff[:current] += 1
+            backoff[:delay] *= backoff[:mod]
+
+            # Re-raise if retried more than the max
+            raise err if backoff[:current] >= backoff[:max]
+
             # Sleep with incremental backoff
-            sleep(backoff *= 1.3)
+            sleep backoff[:delay]
+
             # Create new transaction and retry
             transaction = Transaction.from_client \
               self, previous_transaction: transaction.transaction_id
-            retries += 1
             retry
           rescue Google::Cloud::InvalidArgumentError => err
-            # Return if a previous call has succeeded
-            return nil if retries > 0
+            # Return if a previous call was retried but ultimately succeeded
+            return nil if backoff[:current] > 0
+
             # Re-raise error.
             raise err
           rescue StandardError => err
             # Rollback transaction when handling unexpected error
             transaction.rollback rescue nil
+
             # Re-raise error.
             raise err
           end

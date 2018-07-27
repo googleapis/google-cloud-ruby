@@ -43,27 +43,45 @@ class Google::Gax::CallOptions
 end
 
 class StreamingListenStub
-  attr_reader :request_enum, :responses
+  attr_reader :requests, :responses
 
-  def initialize responses
-    # EnumeratorQueue will return an enum that blocks
-    @responses = [Google::Cloud::Firestore::EnumeratorQueue.new]
-    responses.each do |response|
-      @responses.last.push response
-
-      # create a new response enum when reset is received
-      if (response.response_type == :target_change &&
-          response.target_change.target_change_type == :RESET)
-        @responses << Google::Cloud::Firestore::EnumeratorQueue.new
+  def initialize response_groups
+    @requests = []
+    @responses = response_groups.map do |responses|
+      RaisableEnumeratorQueue.new.tap do |q|
+        responses.each do |response|
+          q.push response
+        end
       end
     end
   end
 
   def listen request_enum, options: nil
-    @request_enum = request_enum
-    # return response enumerator
-    response_enum = @responses.shift
-    response_enum.each
+    @requests << request_enum
+    @responses.shift.each
+  end
+
+  class RaisableEnumeratorQueue
+    def initialize sentinel = nil
+      @queue    = Queue.new
+      @sentinel = sentinel
+    end
+
+    def push obj
+      @queue.push obj
+    end
+
+    def each
+      return enum_for(:each) unless block_given?
+
+      loop do
+        obj = @queue.pop
+        # This is the only way to raise and have it be handled by the steam thread
+        raise obj if obj.is_a? StandardError
+        break if obj.equal? @sentinel
+        yield obj
+      end
+    end
   end
 end
 
@@ -95,5 +113,85 @@ class MockFirestore < Minitest::Spec
       wait_count += 1
       sleep 0.01
     end
+  end
+end
+
+class WatchFirestore < MockFirestore
+  let(:read_time) { Time.now }
+
+  def add_resp
+    Google::Firestore::V1beta1::ListenResponse.new(
+      target_change: Google::Firestore::V1beta1::TargetChange.new(
+        target_change_type: :ADD
+      )
+    )
+  end
+
+  def reset_resp
+    Google::Firestore::V1beta1::ListenResponse.new(
+      target_change: Google::Firestore::V1beta1::TargetChange.new(
+        target_change_type: :RESET
+      )
+    )
+  end
+
+  def current_resp token, offset
+    Google::Firestore::V1beta1::ListenResponse.new(
+      target_change: Google::Firestore::V1beta1::TargetChange.new(
+        target_change_type: :CURRENT,
+        resume_token: token,
+        read_time: build_timestamp(offset)
+      )
+    )
+  end
+
+  def no_change_resp token, offset
+    Google::Firestore::V1beta1::ListenResponse.new(
+      target_change: Google::Firestore::V1beta1::TargetChange.new(
+        target_change_type: :NO_CHANGE,
+        resume_token: token,
+        read_time: build_timestamp(offset)
+      )
+    )
+  end
+
+  def doc_change_resp doc_id, offset, data
+    Google::Firestore::V1beta1::ListenResponse.new(
+      document_change: Google::Firestore::V1beta1::DocumentChange.new(
+        document: Google::Firestore::V1beta1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/watch/#{doc_id}",
+          fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
+          create_time: build_timestamp(offset),
+          update_time: build_timestamp(offset)
+        )
+      )
+    )
+  end
+
+  def doc_delete_resp doc_id, offset
+    Google::Firestore::V1beta1::ListenResponse.new(
+      document_delete: Google::Firestore::V1beta1::DocumentDelete.new(
+        document: "projects/#{project}/databases/(default)/documents/watch/#{doc_id}",
+        read_time: build_timestamp(offset)
+      )
+    )
+  end
+
+  def doc_remove_resp doc_id, offset
+    Google::Firestore::V1beta1::ListenResponse.new(
+      document_remove: Google::Firestore::V1beta1::DocumentRemove.new(
+        document: "projects/#{project}/databases/(default)/documents/watch/#{doc_id}",
+        read_time: build_timestamp(offset)
+      )
+    )
+  end
+
+  def build_timestamp offset = 0
+    Google::Cloud::Firestore::Convert.time_to_timestamp(read_time + offset)
+  end
+
+  # Register this spec type for when :firestore is used.
+  register_spec_type(self) do |desc, *addl|
+    addl.include? :watch_firestore
   end
 end

@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Firestore::Query, :listen, :mock_firestore do
+describe Google::Cloud::Firestore::Query, :listen, :watch_firestore do
   let(:query_grpc) { StructuredQuery.new(from: [StructuredQuery::CollectionSelector.new(collection_id: "watch")]) }
   let(:query) { Google::Cloud::Firestore::Query.start nil, "#{firestore.path}/documents", firestore }
   let(:read_time) { Time.now }
@@ -22,39 +22,39 @@ describe Google::Cloud::Firestore::Query, :listen, :mock_firestore do
   it "listens to a query and yields query snapshots" do
     listen_responses = [
       add_resp,
-      doc_change_resp("nil", 0, val: nil),
+      doc_change_resp("nil",   0, val: nil),
       doc_change_resp("false", 0, val: false),
-      doc_change_resp("true", 0, val: true),
-      doc_change_resp("int", 0, val: 1),
-      doc_change_resp("num", 0, val: 3.14),
-      doc_change_resp("str", 0, val: ""),
-      doc_change_resp("io", 0, val: StringIO.new),
-      doc_change_resp("time", 0, val: read_time),
-      doc_change_resp("ref2", 0, val: firestore.doc("C/d2")),
-      doc_change_resp("ref1", 0, val: firestore.doc("C/d1")),
-      doc_change_resp("geo2", 0, val: { "longitude" => 40, "latitude" => 50 }),
-      doc_change_resp("geo1", 0, val: { longitude: 45, latitude: 45 }),
+      doc_change_resp("true",  0, val: true),
+      doc_change_resp("int",   0, val: 1),
+      doc_change_resp("num",   0, val: 3.14),
+      doc_change_resp("str",   0, val: ""),
+      doc_change_resp("io",    0, val: StringIO.new),
+      doc_change_resp("time",  0, val: read_time),
+      doc_change_resp("ref2",  0, val: firestore.doc("C/d2")),
+      doc_change_resp("ref1",  0, val: firestore.doc("C/d1")),
+      doc_change_resp("geo2",  0, val: { "longitude" => 40, "latitude" => 50 }),
+      doc_change_resp("geo1",  0, val: { longitude: 45, latitude: 45 }),
       doc_change_resp("array", 0, val: []),
-      doc_change_resp("hash", 0, val: {}),
-      current_resp("DOCUMENTSHAVEBEENADDED", 1),
+      doc_change_resp("hash",  0, val: {}),
+      current_resp("DOCUMENTSHAVEBEENADDED", 0.1),
 
-      no_change_resp("THISTOKENWILLNEVERBESEEN", 2),
-      no_change_resp("NEITHERWILLTHISTOKEN", 3),
-      doc_change_resp("int", 4, val: 42),
-      doc_change_resp("num", 4, val: 11.1),
-      no_change_resp("DOCUMENTSUPDATEDTOKEN", 5),
+      no_change_resp("THISTOKENWILLNEVERBESEEN", 1),
+      no_change_resp("NEITHERWILLTHISTOKEN", 1.1),
+      doc_change_resp("int", 1.2, val: 42),
+      doc_change_resp("num", 1.2, val: 11.1),
+      no_change_resp("DOCUMENTSUPDATEDTOKEN", 1.3),
 
-      no_change_resp("THISTOKENWILLNEVERBESEEN2", 6),
-      no_change_resp("NEITHERWILLTHISTOKEN2", 7),
-      doc_change_resp("array", 8, val: [1, 2, 3]),
-      no_change_resp("DOCUMENTUPDATEDTOKEN", 9),
+      no_change_resp("THISTOKENWILLNEVERBESEEN2", 2),
+      no_change_resp("NEITHERWILLTHISTOKEN2", 2.1),
+      doc_change_resp("array", 2.2, val: [1, 2, 3]),
+      no_change_resp("DOCUMENTUPDATEDTOKEN", 2.3),
 
-      doc_delete_resp("array", 10),
-      doc_remove_resp("hash", 11),
-      no_change_resp("DOCUMENTSDELETEDTOKEN", 12)
+      doc_delete_resp("array", 3),
+      doc_remove_resp("hash",  3),
+      no_change_resp("DOCUMENTSDELETEDTOKEN", 3.1)
     ]
     # set stub because we can't mock a streaming request/response
-    listen_stub = StreamingListenStub.new listen_responses.each
+    listen_stub = StreamingListenStub.new [listen_responses]
     firestore.service.instance_variable_set :@firestore, listen_stub
 
     query_snapshots = []
@@ -93,68 +93,5 @@ describe Google::Cloud::Firestore::Query, :listen, :mock_firestore do
     query_snapshots[3].docs.map(&:document_id).must_equal ["nil", "false", "true", "num", "int", "time", "str", "io", "ref1", "ref2", "geo1", "geo2"]
     query_snapshots[3].changes.each { |change| change.must_be :removed? }
     query_snapshots[3].changes.map(&:doc).map(&:document_id).must_equal ["array", "hash"]
-  end
-
-  def add_resp
-    Google::Firestore::V1beta1::ListenResponse.new(
-      target_change: Google::Firestore::V1beta1::TargetChange.new(
-        target_change_type: :ADD
-      )
-    )
-  end
-
-  def current_resp token, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      target_change: Google::Firestore::V1beta1::TargetChange.new(
-        target_change_type: :CURRENT,
-        resume_token: token,
-        read_time: build_timestamp(offset)
-      )
-    )
-  end
-
-  def no_change_resp token, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      target_change: Google::Firestore::V1beta1::TargetChange.new(
-        target_change_type: :NO_CHANGE,
-        resume_token: token,
-        read_time: build_timestamp(offset)
-      )
-    )
-  end
-
-  def doc_change_resp doc_path, offset, data
-    Google::Firestore::V1beta1::ListenResponse.new(
-      document_change: Google::Firestore::V1beta1::DocumentChange.new(
-        document: Google::Firestore::V1beta1::Document.new(
-          name: "projects/#{project}/databases/(default)/watch/#{doc_path}",
-          fields: Google::Cloud::Firestore::Convert.hash_to_fields(data),
-          create_time: build_timestamp(offset),
-          update_time: build_timestamp(offset)
-        )
-      )
-    )
-  end
-
-  def doc_delete_resp doc_path, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      document_delete: Google::Firestore::V1beta1::DocumentDelete.new(
-        document: "projects/#{project}/databases/(default)/watch/#{doc_path}",
-        read_time: build_timestamp(offset)
-      )
-    )
-  end
-
-  def doc_remove_resp doc_path, offset
-    Google::Firestore::V1beta1::ListenResponse.new(
-      document_remove: Google::Firestore::V1beta1::DocumentRemove.new(
-        document: "projects/#{project}/databases/(default)/watch/#{doc_path}",
-        read_time: build_timestamp(offset)
-      )
-    )
-  end
-
-  def build_timestamp offset = 0
-    Google::Cloud::Firestore::Convert.time_to_timestamp(read_time + offset)
   end
 end

@@ -56,10 +56,6 @@ module Google
           @callback = callback
           raise ArgumentError if @callback.nil?
 
-          @inventory    = []
-          @resume_token = nil
-          @read_time    = nil
-
           super() # to init MonitorMixin
         end
 
@@ -134,9 +130,57 @@ module Google
           @callback.call doc_snp
         end
 
+        def start_listening!
+          # create new background thread to handle the stream's enumerator
+          @background_thread = Thread.new { background_run }
+        end
+
+        # @private
+        class RestartStream < StandardError; end
+
         # rubocop:disable all
 
-        def background_run enum
+        def background_run
+          # Don't allow a stream to restart if already stopped
+          return if synchronize { @stopped }
+
+          @backoff ||= { max: 5, current: 0, delay: 1.0, mod: 1.3 }
+
+          # Create empty inventory every time
+          # Even though this uses an @var, no need to synchronize
+          @inventory = []
+
+          # Send stop if already running
+          synchronize do
+            @request_queue.push self if @request_queue
+          end
+
+          # Customize the provided initial listen request
+          init_listen_req = Google::Firestore::V1beta1::ListenRequest.new(
+            database: synchronize { @doc_ref.client.path },
+            add_target: Google::Firestore::V1beta1::Target.new(
+              documents: \
+                Google::Firestore::V1beta1::Target::DocumentsTarget.new(
+                  documents: synchronize { [@doc_ref.path] }
+                ),
+              resume_token: String(@resume_token),
+              read_time: Convert.time_to_timestamp(@read_time),
+              target_id: 0x42
+            )
+          )
+
+          # Always create a new enum queue
+          synchronize do
+            @request_queue = EnumeratorQueue.new self
+            @request_queue.push init_listen_req
+
+          end
+
+          # Not an @var, we get a new enum each time
+          enum = synchronize do
+            @doc_ref.client.service.listen @request_queue.each
+          end
+
           loop do
 
             # Break loop, close thread if stopped
@@ -158,7 +202,9 @@ module Google
                     response.target_change.read_time
 
                   unless @inventory.empty?
-                    send_callback get_latest_doc_snp(@read_time)
+                    synchronize do
+                      send_callback get_latest_doc_snp(@read_time)
+                    end
                   end
                 when :CURRENT
                   # The targets reflect all changes committed before the targets
@@ -174,8 +220,6 @@ module Google
                   @resume_token = response.target_change.resume_token
                   @read_time    = Convert.timestamp_to_time \
                     response.target_change.read_time
-
-                  send_callback get_latest_doc_snp(@read_time)
                 when :RESET
                   # The targets have been reset, and a new initial state for the
                   # targets will be returned in subsequent changes.
@@ -184,7 +228,7 @@ module Google
                   # returned even if the target was previously indicated to be
                   # +CURRENT+.
 
-                  raise "restart stream" # Raise to restart the stream
+                  raise RestartStream # Raise to restart the stream
                 end
               when :document_change
                 # A {Google::Firestore::V1beta1::Document Document} has changed.
@@ -206,66 +250,41 @@ module Google
             rescue StopIteration
               break
             end
+
+            # Reset backoff values when completed without an error
+            @backoff[:current] = 0
+            @backoff[:delay] = 1.0
           end
+
           # Has the loop broken but we aren't stopped?
           # Could be GRPC has thrown an internal error, so restart.
-          synchronize { raise "restart thread" unless @stopped }
+          raise RestartStream
         rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
-               GRPC::ResourceExhausted, GRPC::Internal,
-               GRPC::Core::CallError => e
+               GRPC::ResourceExhausted, GRPC::Internal, GRPC::Core::CallError
+          # Incrementally back off when restart the stream on Unavailable.
           # The GAPIC layer will raise DeadlineExceeded when stream is opened
           # longer than the timeout value it is configured for. When this
           # happends, restart the stream stealthly.
-          # Also stealthly restart the stream on Unavailable, Cancelled,
-          # ResourceExhausted, and Internal.
+          # Also stealthly restart the stream on Cancelled, ResourceExhausted,
+          # and Internal.
           # Also, also stealthly restart the stream when GRPC raises the
           # internal CallError.
-          synchronize { start_listening! }
+
+          # Update increment backoff values
+          @backoff[:current] += 1
+          @backoff[:delay] *= @backoff[:mod]
+
+          # Re-raise if retried more than the max
+          raise err if @backoff[:current] >= @backoff[:max]
+
+          # Sleep with incremental backoff before restarting
+          sleep @backoff[:delay]
+
+          retry
+        rescue RestartStream
+          retry
         rescue StandardError => e
-          synchronize do
-            raise Google::Cloud::Error.from_error(e) if @stopped
-
-            start_listening!
-          end
-        end
-
-        # rubocop:enable all
-
-        def start_listening!
-          # Don't allow a stream to restart if already stopped
-          return if @stopped
-
-          # Reuse inventory if one already exists
-          @inventory ||= []
-          @inventory.clear
-
-          # Send stop if already running
-          @request_queue.push self if @request_queue
-
-          # Customize the provided initial listen request
-          init_listen_req = Google::Firestore::V1beta1::ListenRequest.new(
-            database: @doc_ref.client.path,
-            add_target: Google::Firestore::V1beta1::Target.new(
-              documents: \
-                Google::Firestore::V1beta1::Target::DocumentsTarget.new(
-                  documents: [@doc_ref.path]
-                ),
-              resume_token: String(@resume_token),
-              read_time: Convert.time_to_timestamp(@read_time),
-              target_id: 0x42
-            )
-          )
-
-          # Always create a new enum queue
-          @request_queue = EnumeratorQueue.new self
-          @request_queue.push init_listen_req
-
-          output_enum = @doc_ref.client.service.listen @request_queue.each
-
-          # create new background thread to handle new enumerator
-          @background_thread = Thread.new(output_enum) do |enum|
-            background_run enum
-          end
+          raise Google::Cloud::Error.from_error(e)
         end
 
         def get_latest_doc_snp read_time = nil
