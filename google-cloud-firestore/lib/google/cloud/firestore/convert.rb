@@ -126,6 +126,8 @@ module Google
           end
 
           def hash_is_geo_point? hash
+            return false unless hash.keys.count == 2
+
             pairs = hash.map { |k, v| [String(k), v] }.sort
             if pairs.map(&:first) == ["latitude".freeze, "longitude".freeze]
               pairs
