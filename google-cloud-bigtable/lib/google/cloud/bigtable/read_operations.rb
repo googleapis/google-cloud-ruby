@@ -48,7 +48,7 @@ module Google
         #   require "google/cloud"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   table.sample_row_keys.each do |sample_row_key|
         #     p sample_row_key.key # user00116
@@ -90,7 +90,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   table.read_rows(limit: 10).each do |row|
         #     puts row
@@ -100,7 +100,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   table.read_rows(keys: ["user-1", "user-2"]).each do |row|
         #     puts row
@@ -110,7 +110,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   range =  table.row_range.between("user-1", "user-100")
         #
@@ -123,7 +123,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   filter = table.filter.key("user-*")
         #   # OR
@@ -138,7 +138,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   filter = table.filter.key("user-*")
         #   # OR
@@ -177,8 +177,8 @@ module Google
               &block
             )
           rescue *RowsReader::RETRYABLE_ERRORS => e
-            retry_count += 1
-            if retry_count >= RowsReader::RETRY_LIMIT
+            rows_reader.retry_count += 1
+            unless rows_reader.retryable?
               raise Google::Cloud::Error.from_error(e)
             end
             rows_limit, row_set = rows_reader.retry_options(limit, row_set)
@@ -198,7 +198,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   row = table.read_row("user-1")
         #
@@ -207,14 +207,14 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row(3)
         #
         #   row = table.read_row("user-1", filter: filter)
         #
         def read_row key, filter: nil
-          read_rows(keys: [key], filter: filter, limit: 1).first
+          read_rows(keys: [key], filter: filter).first
         end
 
         # Create new instance of ValueRange.
@@ -225,7 +225,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   range = table.value_range
         #   range.from("abc")
@@ -238,7 +238,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   range = table.value_range.from("abc", inclusive: false).to("xyz")
         #
@@ -255,7 +255,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   range = table.column_range("test-family")
         #   range.from("abc")
@@ -268,7 +268,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   range = table.column_range("test-family").from("key-1", inclusive: false).to("key-5")
         #
@@ -284,7 +284,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   range = table.row_range
         #   range.from("abc")
@@ -297,7 +297,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   range = table.row_range.from("key-1", inclusive: false).to("key-5")
         #
@@ -313,7 +313,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   filter = table.filter.key("user-*")
         #

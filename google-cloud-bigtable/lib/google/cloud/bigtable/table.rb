@@ -207,7 +207,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   if table.exists?
         #     p "Table is exists."
@@ -219,9 +219,8 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance", skip_lookup: true)
         #
-        #   table = instance.table("my-table")
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   if table.exists?
         #     p "Table is exists."
@@ -562,7 +561,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   table.delete_rows_by_prefix("user-100")
         #
@@ -584,7 +583,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   # Delete rows using row key prefix.
         #   table.drop_row_range("user-100")

@@ -36,7 +36,7 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     mock = Minitest::Mock.new
     mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :FULL]
     bigtable.service.mocked_tables = mock
-    table = bigtable.table(instance_id, table_id, view: :FULL)
+    table = bigtable.table(instance_id, table_id, view: :FULL, skip_lookup: false)
 
     mock.verify
 
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
 
     bigtable.service.mocked_tables = stub
 
-    table = bigtable.table(instance_id, not_found_table_id)
+    table = bigtable.table(instance_id, not_found_table_id, skip_lookup: false)
     table.must_be :nil?
   end
 

@@ -35,11 +35,12 @@ describe "Instance Tables", :bigtable do
       t.must_be_kind_of Google::Cloud::Bigtable::Table
     end
 
-    table = instance.table(table_id)
+    table = instance.table(table_id, skip_lookup: false)
     table.must_be_kind_of Google::Cloud::Bigtable::Table
 
     table.delete
-    instance.table(table_id).must_be :nil?
+    table = instance.table(table_id)
+    table.exists?.must_equal false
   end
 
   it "create table with initial splits" do
@@ -52,7 +53,7 @@ describe "Instance Tables", :bigtable do
     end
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
-    instance.table(table_id, view: :FULL).wont_be :nil?
+    instance.table(table_id, view: :FULL, skip_lookup: false).wont_be :nil?
     table.delete
   end
 
@@ -65,7 +66,7 @@ describe "Instance Tables", :bigtable do
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     table.granularity_millis?.must_equal true
-    instance.table(table_id, view: :NAME_ONLY).wont_be :nil?
+    instance.table(table_id, view: :NAME_ONLY, skip_lookup: false).wont_be :nil?
     table.delete
   end
 

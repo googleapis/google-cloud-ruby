@@ -451,7 +451,7 @@ module Google
         # @param skip_lookup [Boolean] Create table object without verifying
         #   that the table resource exists.
         #   Calls made on this object will raise errors if the table.
-        #   does not exist. Default is `false`. Optional.
+        #   does not exist. Default value is `true`. Optional.
         #   It helps to reduce admin apis calls.
         # @param app_profile_id [String] The unique identifier for the app profile. Optional.
         #   It is used only in data operations.
@@ -480,7 +480,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   entry = table.new_mutation_entry("user-1")
         #   entry.set_cell(
@@ -493,7 +493,7 @@ module Google
         #   table.mutate_row(entry)
 
         #
-        def table table_id, view: nil, skip_lookup: nil, app_profile_id: nil
+        def table table_id, view: nil, skip_lookup: true, app_profile_id: nil
           ensure_service!
 
           if skip_lookup

@@ -49,7 +49,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   entry = table.new_mutation_entry.new("user-1")
         #   entry.set_cell("cf1", "field1", "XYZ")
@@ -60,7 +60,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   entry = table.new_mutation_entry("user-1")
         #   entry.set_cell(
@@ -99,11 +99,11 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   entries = []
-        #   entries << table.new_mutation_entry.new("row-1").set_cell("cf1", "field1", "XYZ")
-        #   entries << table.new_mutation_entry.new("row-2").set_cell("cf1", "field1", "ABC")
+        #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
+        #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
         #   table.mutate_row(entries)
         #
         def mutate_rows entries
@@ -127,7 +127,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   rule_1 = table.new_read_modify_write_rule("cf", "field01")
         #   rule_1.append("append-xyz")
@@ -143,7 +143,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   rule = table.new_read_modify_write_rule("cf", "field01").append("append-xyz")
         #
@@ -206,7 +206,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   predicate_filter = Google::Cloud::Bigtable::RowFilter.key("user-10")
         #   on_match_mutations = Google::Cloud::Bigtable::MutationEntry.new
@@ -264,7 +264,7 @@ module Google
         #   require "google/cloud"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   table.sample_row_keys.each do |sample_row_key|
         #     p sample_row_key.key # user00116
@@ -293,7 +293,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   entry = table.new_mutation_entry("row-key-1")
         #
@@ -317,7 +317,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #   rule = table.new_read_modify_write_rule("cf", "qualifier-1")
         #   rule.append("append-xyz")
         #
@@ -325,7 +325,7 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #   rule = table.new_read_modify_write_rule("cf", "qualifier-1")
         #   rule.increment(100)
         #

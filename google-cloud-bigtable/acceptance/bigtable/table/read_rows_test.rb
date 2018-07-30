@@ -23,6 +23,7 @@ describe "DataClient Read Rows", :bigtable do
 
   it "read single row" do
     row = table.read_row("test-1")
+    row.key.must_equal "test-1"
     row.must_be_kind_of Google::Cloud::Bigtable::Row
   end
 

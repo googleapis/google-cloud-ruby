@@ -309,7 +309,7 @@ module Google
         # @param skip_lookup [Boolean]
         #   Get table object without verifying that the table resource exists.
         #   Calls made on this object will raise errors if the table does not exist.
-        #   Default is `false`. Optional.
+        #   Default value is `true`. Optional.
         #   It helps to reduce admin apis calls.
         # @param app_profile_id [String] The unique identifier for the app profile. Optional.
         #   It is used only in data operations.
@@ -322,18 +322,25 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: false, view: :SCHEMA_VIEW)
         #   if table
         #     p table.name
         #     p table.column_families
         #   end
+        #
+        # @example Get table object without calling get table admin api.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table")
         #
         # @example Get table with all fields. Clusters states, column families
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", view: :FULL)
+        #   table = bigtable.table("my-instance", "my-table", view: :FULL, skip_lookup: false)
         #   if table
         #     puts table.name
         #     p table.column_families
@@ -345,7 +352,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: false)
         #
         #   entry = table.new_mutation_entry("user-1")
         #   entry.set_cell(
@@ -356,12 +363,22 @@ module Google
         #   ).delete_from_column("cf2", "field02")
         #
         #   table.mutate_row(entry)
-
+        # @example Read rows using app profile routing
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", app_profile_id: "my-app-profile")
+        #
+        #   table.read_rows(limit: 5).each do |row|
+        #     row
+        #   end
+        
         def table \
             instance_id,
             table_id,
             view: nil,
-            skip_lookup: nil,
+            skip_lookup: true,
             app_profile_id: nil
           ensure_service!
 

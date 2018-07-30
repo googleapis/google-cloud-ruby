@@ -71,11 +71,7 @@ module Acceptance
     end
 
     def bigtable_table
-      @table ||= @bigtable.table(
-        $bigtable_instance_id,
-        $bigtable_table_id,
-        skip_lookup: true
-      )
+      @table ||= @bigtable.table($bigtable_instance_id, $bigtable_table_id)
     end
 
     def random_str

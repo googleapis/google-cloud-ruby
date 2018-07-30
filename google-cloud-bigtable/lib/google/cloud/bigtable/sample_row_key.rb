@@ -41,7 +41,7 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+      #   table = bigtable.table("my-instance", "my-table")
       #
       #   table.sample_row_keys.each do |r|
       #     p r
