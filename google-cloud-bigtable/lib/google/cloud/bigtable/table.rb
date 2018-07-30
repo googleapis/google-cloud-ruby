@@ -21,6 +21,7 @@ require "google/cloud/bigtable/column_family"
 require "google/cloud/bigtable/table/column_family_map"
 require "google/cloud/bigtable/gc_rule"
 require "google/cloud/bigtable/mutation_operations"
+require "google/cloud/bigtable/read_operations"
 
 module Google
   module Cloud
@@ -56,6 +57,9 @@ module Google
       class Table
         # @!parse extend MutationOperations
         include MutationOperations
+
+        # @!parse extend ReadOperations
+        include ReadOperations
 
         # @private
         # The gRPC Service object.
@@ -523,6 +527,84 @@ module Google
         #
         def client
           service.client
+        end
+
+        # Delete all rows
+        #
+        # @param timeout [Integer] Call timeout in seconds
+        #   Use in case of : Insufficient deadline for DropRowRange then
+        #   try again with a longer request deadline.
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #   table = instance.table("my-table")
+        #   table.delete_all_rows
+        #
+        #   # With timeout
+        #   table.delete_all_rows(timeout: 120) # 120 seconds.
+        #
+        def delete_all_rows timeout: nil
+          drop_row_range(delete_all_data: true, timeout: timeout)
+        end
+
+        # Delete rows using row key prefix.
+        #
+        # @param prefix [String] Row key prefix. i.e "user"
+        # @param timeout [Integer] Call timeout in seconds
+        # @return [Boolean]
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #
+        #   table.delete_rows_by_prefix("user-100")
+        #
+        #   # With timeout
+        #   table.delete_all_rows("user-1", timeout: 120) # 120 seconds.
+        #
+        def delete_rows_by_prefix prefix, timeout: nil
+          drop_row_range(row_key_prefix: prefix, timeout: timeout)
+        end
+
+        # Drop row range by row key prefix or delete all.
+        #
+        # @param row_key_prefix [String] Row key prefix. i.e "user"
+        # @param delete_all_data [Boolean]
+        # @return [Boolean]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #
+        #   # Delete rows using row key prefix.
+        #   table.drop_row_range("user-100")
+        #
+        #   # Delete all data With timeout
+        #   table.drop_row_range(delete_all_data: true, timeout: 120) # 120 seconds.
+        #
+        def drop_row_range \
+            row_key_prefix: nil,
+            delete_all_data: nil,
+            timeout: nil
+          ensure_service!
+          service.drop_row_range(
+            instance_id,
+            name,
+            row_key_prefix: row_key_prefix,
+            delete_all_data_from_table: delete_all_data,
+            timeout: timeout
+          )
+          true
         end
 
         # @private

@@ -18,7 +18,6 @@
 require "google/cloud/bigtable/instance/job"
 require "google/cloud/bigtable/instance/list"
 require "google/cloud/bigtable/instance/cluster_map"
-require "google/cloud/bigtable/table"
 require "google/cloud/bigtable/app_profile"
 require "google/cloud/bigtable/policy"
 

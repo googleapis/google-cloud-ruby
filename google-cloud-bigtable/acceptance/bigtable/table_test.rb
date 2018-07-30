@@ -53,6 +53,7 @@ describe "Instance Tables", :bigtable do
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     instance.table(table_id, view: :FULL).wont_be :nil?
+    table.delete
   end
 
   it "create table with time granularity" do
@@ -65,6 +66,7 @@ describe "Instance Tables", :bigtable do
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     table.granularity_millis?.must_equal true
     instance.table(table_id, view: :NAME_ONLY).wont_be :nil?
+    table.delete
   end
 
   it "modify column families" do
@@ -98,23 +100,42 @@ describe "Instance Tables", :bigtable do
     cf1.gc_rule.max_versions.must_equal 5
 
     column_families.find{|c| c.name == "cf2"}.must_be :nil?
+
+    table.delete
+  end
+
+  describe "drop rows" do
+    it "delete all rows" do
+      table_id = "test-table-#{random_str}"
+      table = create_table(table_id, row_count: 2)
+      table.delete_all_rows.must_equal true
+
+      rows = table.read_rows.to_a
+      rows.must_be_empty
+    end
+
+    it "delete rows by prefix" do
+      table_id = "test-table-#{random_str}"
+      table = create_table(table_id, row_count: 2)
+      table.delete_rows_by_prefix("test-1").must_equal true
+
+      rows = table.read_rows.to_a
+      rows.length.must_equal 1
+    end
   end
 
   describe "replication consistency" do
-    before do
-      @table_id = "test-table-#{random_str}"
-      @table = instance.create_table(@table_id)
-    end
+    let(:table) { bigtable_table }
 
     it "generate consistency token and check consistency" do
-      token = @table.generate_consistency_token
+      token = table.generate_consistency_token
       token.wont_be :nil?
-      result = @table.check_consistency(token)
+      result = table.check_consistency(token)
       [true, false].must_include result
     end
 
     it "generate consistency token and check consistency wail unitil complete" do
-      result = @table.wait_for_replication(timeout: 600, check_interval: 3)
+      result = table.wait_for_replication(timeout: 600, check_interval: 3)
       [true, false].must_include result
     end
   end

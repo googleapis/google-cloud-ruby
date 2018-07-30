@@ -21,6 +21,7 @@ require "google/cloud/bigtable/convert"
 require "google/cloud/bigtable/service"
 require "google/cloud/bigtable/instance"
 require "google/cloud/bigtable/cluster"
+require "google/cloud/bigtable/table"
 
 module Google
   module Cloud
@@ -305,10 +306,10 @@ module Google
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
         #   * `:FULL` - Populates all fields
-        # @param skip_lookup [Boolean] Create table object without verifying
-        #   that the table resource exists.
-        #   Calls made on this object will raise errors if the table.
-        #   does not exist. Default is `false`. Optional.
+        # @param skip_lookup [Boolean]
+        #   Get table object without verifying that the table resource exists.
+        #   Calls made on this object will raise errors if the table does not exist.
+        #   Default is `false`. Optional.
         #   It helps to reduce admin apis calls.
         # @param app_profile_id [String] The unique identifier for the app profile. Optional.
         #   It is used only in data operations.

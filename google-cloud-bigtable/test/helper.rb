@@ -244,7 +244,18 @@ class MockPagedEnumerable
   end
 end
 
-def load_acceptance_test_json_data file_name
-  file = "#{File.dirname(__FILE__)}/../acceptance/data/#{file_name}.json"
-  JSON.parse(File.read(file))
+def read_rows_acceptance_test_data
+  file = "#{File.dirname(__FILE__)}/../acceptance/data/read-rows-acceptance-test.json"
+  data = JSON.parse(File.read(file))
+
+  tests = { with_errors: [], without_errors: [] }
+  data["tests"].each do |t|
+    if t["results"] && t["results"].any? { |r| r["error"] }
+      tests[:with_errors] << t
+    else
+      tests[:without_errors] << t
+    end
+  end
+
+  tests
 end

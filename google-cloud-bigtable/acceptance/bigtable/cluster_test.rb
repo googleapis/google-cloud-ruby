@@ -55,5 +55,5 @@ describe "Instance Clusters", :bigtable do
 
     cluster.delete
     instance.cluster(cluster_id).must_be :nil?
-  end
+  end if ENV["BIGTABLE_ALL_ACCEPTANCE_TESTS"]
 end

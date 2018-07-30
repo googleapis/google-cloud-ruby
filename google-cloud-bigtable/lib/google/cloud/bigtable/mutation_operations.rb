@@ -30,6 +30,7 @@ module Google
       #   * Mutate single row
       #   * Mutate multiple rows
       #   * Read modify and write row atomically on the server
+      #   * Check and mutate row
       #
       module MutationOperations
         # Mutate row.
@@ -174,6 +175,112 @@ module Google
             end
           end
           row
+        end
+
+        # Mutates a row atomically based on the output of a predicate Reader filter.
+        #
+        # NOTE: Condition predicate filter is not supported.
+        #
+        # @param key [String] Row key.
+        #   The key of the row to which the conditional mutation should be applied.
+        # @param predicate [SimpleFilter, ChainFilter, InterleaveFilter] Predicate filter.
+        #   The filter to be applied to the contents of the specified row. Depending
+        #   on whether or not any results are yielded, either +true_mutations+ or
+        #   +false_mutations+ will be executed. If unset, checks that the row contains
+        #   any values at all.
+        # @param on_match [Google::Cloud::Bigtable::MutationEntry] Mutation entry apply on predicate filter match.
+        #   Changes to be atomically applied to the specified row if +predicate_filter+
+        #   yields at least one cell when applied to +row_key+. Entries are applied in
+        #   order, meaning that earlier mutations can be masked by later ones.
+        #   Must contain at least one entry if +false_mutations+ is empty, and at most
+        #   100000.
+        # @param otherwise [Google::Cloud::Bigtable::MutationEntry] Mutation entry apply on predicate filter do not match.
+        #   Changes to be atomically applied to the specified row if +predicate_filter+
+        #   does not yield any cells when applied to +row_key+. Entries are applied in
+        #   order, meaning that earlier mutations can be masked by later ones.
+        #   Must contain at least one entry if +true_mutations+ is empty, and at most
+        #   100000.
+        # @return [Boolean]
+        #   Predicate match or not status
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #
+        #   predicate_filter = Google::Cloud::Bigtable::RowFilter.key("user-10")
+        #   on_match_mutations = Google::Cloud::Bigtable::MutationEntry.new
+        #   on_match_mutations.set_cell(
+        #     "cf-1",
+        #     "field-1",
+        #     "XYZ",
+        #     timestamp: Time.now.to_i * 1000 # Time stamp in micro seconds.
+        #   ).delete_from_column("cf2", "field02")
+        #
+        #   otherwise_mutations = Google::Cloud::Bigtable::MutationEntry.new
+        #   otherwise_mutations.delete_from_family("cf3")
+        #
+        #   response = table.check_and_mutate_row(
+        #     "user01",
+        #     predicate_filter,
+        #     on_match: on_match_mutations,
+        #     otherwise: otherwise_mutations
+        #   )
+        #
+        #   if response
+        #     puts "All predicates matched"
+        #   end
+        #
+        def check_and_mutate_row \
+            key,
+            predicate,
+            on_match: nil,
+            otherwise: nil
+          true_mutations = on_match.mutations if on_match
+          false_mutations = otherwise.mutations if otherwise
+          response = client.check_and_mutate_row(
+            path,
+            key,
+            predicate_filter: predicate.to_grpc,
+            true_mutations: true_mutations,
+            false_mutations: false_mutations,
+            app_profile_id: @app_profile_id
+          )
+          response.predicate_matched
+        end
+
+        # Read sample row keys.
+        #
+        # Returns a sample of row keys in the table. The returned row keys will
+        # delimit contiguous sections of the table of approximately equal size,
+        # which can be used to break up the data for distributed tasks like
+        # mapreduces.
+        #
+        # @yieldreturn [Google::Cloud::Bigtable::SampleRowKey]
+        # @return [:yields: sample_row_key]
+        #   Yield block for each processed SampleRowKey.
+        #
+        # @example
+        #   require "google/cloud"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #
+        #   table.sample_row_keys.each do |sample_row_key|
+        #     p sample_row_key.key # user00116
+        #     p sample_row_key.offset # 805306368
+        #   end
+        #
+        def sample_row_keys
+          return enum_for(:sample_row_keys) unless block_given?
+
+          response = client.sample_row_keys(
+            path,
+            app_profile_id: @app_profile_id
+          )
+          response.each do |grpc|
+            yield SampleRowKey.from_grpc(grpc)
+          end
         end
 
         # Create instance of mutation_entry

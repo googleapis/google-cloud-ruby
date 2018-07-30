@@ -157,7 +157,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   Google::Cloud::Bigtable::ColumnFamilyModification.create(
+        #   Google::Cloud::Bigtable::ColumnFamily.create_modification(
         #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
         #   )
         #
@@ -165,10 +165,33 @@ module Google
           column_modification_grpc(:create, name, gc_rule)
         end
 
+        # Create update column family modification gPRC instance
+        #
+        # @param name [String] Column family name
+        # @param gc_rule [Google::Cloud::Bigtable::GcRule] GC Rule
+        # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   Google::Cloud::Bigtable::ColumnFamily.update_modification(
+        #     "cf1", Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   )
+        #
         def self.update_modification name, gc_rule
           column_modification_grpc(:update, name, gc_rule)
         end
 
+        # Create drop column family modification gRPC instance
+        #
+        # @param name [String] Column family name
+        # @return [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   Google::Cloud::Bigtable::ColumnFamily.drop_modification("cf1")
+        #
         def self.drop_modification name
           column_modification_grpc(:drop, name)
         end
@@ -229,7 +252,7 @@ module Google
         #
         # Create/Update/Delete column_family.
         #
-        # @param modification [Google::Cloud::Bigtable::ColumnFamilyModification]
+        # @param modification [Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification]
         # @return [Google::Cloud::Bigtable::ColumnFamily]
         #
         def modify_column_family modification

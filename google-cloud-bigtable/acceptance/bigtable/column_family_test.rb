@@ -19,44 +19,45 @@ require "bigtable_helper"
 
 describe "Table ColumnFamily", :bigtable do
   let(:instance) { bigtable_instance }
+  let(:table_id) { "test-table-#{random_str}" }
+  let(:table){
+    add_table_to_cleanup_list(table_id)
 
-  before(:all) do
-    @table_id = "test-table-#{random_str}"
-    @table = instance.create_table(@table_id) do |cfs|
+    instance.create_table(table_id) do |cfs|
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_age(600))
       cfs.add('cf2', Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
-  end
+  }
 
   it "create column family" do
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
-    cf = @table.column_family("cfcreate", gc_rule).create
+    cf = table.column_family("cfcreate", gc_rule).create
 
     cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
     cf.name.must_equal "cfcreate"
     cf.gc_rule.max_versions.must_equal 1
 
-    instance.table(@table_id).column_families.find{|cf| cf.name == "cfcreate"}.wont_be :nil?
+    instance.table(table_id).column_families.find{|cf| cf.name == "cfcreate"}.wont_be :nil?
   end
 
   it "update column family" do
-    cf = @table.column_families.find{|cf| cf.name == "cf1"}
+    cf = table.column_families.find{|cf| cf.name == "cf1"}
     cf.gc_rule.max_age = 300
     updated_cf = cf.save
     updated_cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
     updated_cf.gc_rule.max_age.must_equal 300
 
-    @table.reload!
-    cf = @table.column_families.find{|cf| cf.name == "cf1"}
+    table.reload!
+    cf = table.column_families.find{|cf| cf.name == "cf1"}
     cf.gc_rule.max_age.must_equal 300
   end
 
   it "delete column family" do
-    cf = @table.column_families.find{|cf| cf.name == "cf2"}
+    cf = table.column_families.find{|cf| cf.name == "cf2"}
     cf.delete.must_equal true
 
-    @table.reload!
-    @table.column_families.find{|cf| cf.name == "cf2"}.must_be :nil?
+    table.reload!
+    table.column_families.find{|cf| cf.name == "cf2"}.must_be :nil?
   end
 
   it "create column family with union gc rules" do
@@ -64,7 +65,7 @@ describe "Table ColumnFamily", :bigtable do
     gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_age(300)
     gc_union_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
 
-    cf = @table.column_family("cfunion", gc_union_rule).create
+    cf = table.column_family("cfunion", gc_union_rule).create
 
     cf.gc_rule.union.rules.length.must_equal 2
   end
@@ -76,7 +77,7 @@ describe "Table ColumnFamily", :bigtable do
       gc_rule_1, gc_rule_2
     )
 
-    cf = @table.column_family("cfintersect", gc_intersection_rule).create
+    cf = table.column_family("cfintersect", gc_intersection_rule).create
 
     cf.gc_rule.intersection.rules.length.must_equal 2
   end

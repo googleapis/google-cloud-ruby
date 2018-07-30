@@ -20,6 +20,7 @@ require "google/cloud/bigtable/errors"
 require "google/cloud/bigtable/credentials"
 require "google/cloud/bigtable/admin/v2/bigtable_instance_admin_client"
 require "google/cloud/bigtable/admin/v2/bigtable_table_admin_client"
+require "google/cloud/bigtable/v2/bigtable_client"
 
 module Google
   module Cloud
@@ -214,7 +215,7 @@ module Google
         # @return [Google::Gax::Operation]
 
         def create_cluster instance_id, cluster_id, cluster
-          unless cluster.location == "".freeze
+          unless cluster.location == ""
             cluster.location = location_path(cluster.location)
           end
 
@@ -473,6 +474,52 @@ module Google
             tables.check_consistency(
               table_path(instance_id, table_id),
               token
+            )
+          end
+        end
+
+        # Permanently drop/delete a row range from a specified table. The request can
+        # specify whether to delete all rows in a table, or only those that match a
+        # particular prefix.
+        #
+        # @param instance_id [String]
+        #   The unique Id of the instance in which table is exists.
+        # @param table_id [String]
+        #   The unique Id of the table on which to drop a range of rows.
+        # @param row_key_prefix [String]
+        #   Delete all rows that start with this row key prefix. Prefix cannot be
+        #   zero length.
+        # @param delete_all_data_from_table [true, false]
+        #   Delete all rows in the table. Setting this to false is a no-op.
+        # @param timeout [Integer]
+        #   Set api call timeout if deadline exceeded exception.
+
+        def drop_row_range \
+             instance_id,
+             table_id,
+             row_key_prefix: nil,
+             delete_all_data_from_table: nil,
+             timeout: nil
+          call_options = nil
+
+          # Pass timeout with larger value if drop operation throw error for
+          # tiemout time.
+          if timeout
+            retry_options = Google::Gax::RetryOptions.new(
+              [],
+              Google::Gax::BackoffSettings.new(0, 0, 0, timeout * 1000, 0, 0, 0)
+            )
+            call_options = Google::Gax::CallOptions.new(
+              retry_options: retry_options
+            )
+          end
+
+          execute do
+            tables.drop_row_range(
+              table_path(instance_id, table_id),
+              row_key_prefix: row_key_prefix,
+              delete_all_data_from_table: delete_all_data_from_table,
+              options: call_options
             )
           end
         end
