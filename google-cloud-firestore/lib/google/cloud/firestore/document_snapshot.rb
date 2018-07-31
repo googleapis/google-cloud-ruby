@@ -17,6 +17,7 @@ require "google/cloud/firestore/v1beta1"
 require "google/cloud/firestore/document_reference"
 require "google/cloud/firestore/collection_reference"
 require "google/cloud/firestore/convert"
+require "google/cloud/firestore/watch/order"
 
 module Google
   module Cloud
@@ -137,9 +138,11 @@ module Google
         # @!group Data
 
         ##
-        # Retrieves the document data.
+        # Retrieves the document data. When the document exists the data hash is
+        # frozen and will not allow any changes. When the document does not
+        # exist `nil` will be returned.
         #
-        # @return [Hash] The document data.
+        # @return [Hash, nil] The document data.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -153,7 +156,7 @@ module Google
         #
         def data
           return nil if missing?
-          Convert.fields_to_hash grpc.fields, ref.client
+          @data ||= Convert.fields_to_hash(grpc.fields, ref.client).freeze
         end
         alias fields data
 
@@ -211,7 +214,7 @@ module Google
           end
 
           nodes = field_path.fields.map(&:to_sym)
-          return path if nodes == [:__name__] # asking for document_id
+          return ref if nodes == [:__name__]
 
           selected_data = data
           nodes.each do |node|
@@ -303,6 +306,42 @@ module Google
         #
         def missing?
           grpc.nil?
+        end
+
+        ##
+        # @private
+        def <=> other
+          return nil unless other.is_a? DocumentSnapshot
+          grpc <=> other.grpc
+        end
+
+        ##
+        # @private
+        def eql? other
+          return nil unless other.is_a? DocumentSnapshot
+          grpc.eql? other.grpc
+        end
+
+        ##
+        # @private
+        def hash
+          # Use the Google::Firestore::V1beta1::Document object's hash, because
+          # the google-protobuf library calculates the hash by value, so two
+          # instance objects with the same values will be treated the same.
+          grpc.hash
+        end
+
+        ##
+        # @private
+        def query_comparisons_for query_grpc
+          @memoized_comps ||= {}
+          if @memoized_comps.key? query_grpc.hash
+            return @memoized_comps[query_grpc.hash]
+          end
+
+          @memoized_comps[query_grpc.hash] = query_grpc.order_by.map do |order|
+            Watch::Order.field_comparison get(order.field.field_path)
+          end
         end
 
         ##

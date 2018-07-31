@@ -19,6 +19,7 @@ require "google/cloud/firestore/document_reference"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/document_change"
 require "google/cloud/firestore/query_snapshot"
+require "google/cloud/firestore/watch/order"
 require "rbtree"
 
 module Google
@@ -47,6 +48,9 @@ module Google
             @tree = RBTree.new
             @tree.readjust(&method(:query_comparison_proc))
             @old_order = nil
+
+            # TODO: Remove this when done benchmarking
+            @comp_proc_counter = 0
           end
 
           def current?
@@ -89,6 +93,13 @@ module Google
             # clears the resume token and read time, but not query and old order
             @resume_token = nil
             @read_time = nil
+          end
+
+          # TODO: Remove this when done benchmarking
+          def reset_comp_proc_counter!
+            old_count = @comp_proc_counter
+            @comp_proc_counter = 0
+            old_count
           end
 
           def persist resume_token, read_time
@@ -153,98 +164,25 @@ module Google
           protected
 
           def query_comparison_proc a, b
-            last_direction = nil
+            # TODO: Remove this when done benchmarking
+            @comp_proc_counter += 1
 
-            if @query
-              @query.query.order_by.each do |order|
-                field_path = order.field.field_path # "__name__"
-                last_direction = order.direction
+            return Order.compare_field_values a.ref, b.ref if @query.nil?
 
-                comp = compare_fields field_path, a[field_path], b[field_path]
-                comp = apply_direction comp, last_direction
-                return comp unless comp.zero?
-              end
+            @directions ||= @query.query.order_by.map(&:direction)
+
+            a_comps = a.query_comparisons_for @query.query
+            b_comps = b.query_comparisons_for @query.query
+            @directions.zip(a_comps, b_comps).each do |dir, a_comp, b_comp|
+              comp = a_comp <=> b_comp
+              comp = 0 - comp if dir == :DESCENDING
+              return comp unless comp.zero?
             end
 
-            apply_direction compare_paths(a.path, b.path), last_direction
-          end
-
-          def apply_direction comparision, direction
-            return 0 - comparision if direction == :DESCENDING
-
-            comparision
-          end
-
-          def compare_fields field_path, a_value, b_value
-            if field_path == "__name__".freeze
-              return compare_paths a_value, b_value
-            end
-
-            compare_values a_value, b_value
-          end
-
-          def compare_values a_value, b_value
-            field_comparison(a_value) <=> field_comparison(b_value)
-          end
-
-          def compare_paths a_path, b_path
-            path_comparison(a_path) <=> path_comparison(b_path)
-          end
-
-          def field_comparison value
-            [field_type(value), field_value(value)]
-          end
-
-          def path_comparison value
-            value.split("/")
-          end
-
-          def field_type value
-            return 0 if value.nil?
-            return 1 if value == false
-            return 1 if value == true
-            # The backend ordering semantics treats NaN and Numbers as the same
-            # type, and then internally orders NaNs before Numbers. Ruby's
-            # Float::NAN cannot be compared, similar to nil, so we need to use a
-            # stand in value instead. Therefore the desired sorting is achieved
-            # by separating NaN and Number types. This is an intentional
-            # divergence from type order that is used in the backend and in the
-            # other SDKs. (And because Ruby has to be special.)
-            return 2 if value.respond_to?(:nan?) && value.nan?
-            return 3 if value.is_a? Numeric
-            return 4 if value.is_a? Time
-            return 5 if value.is_a? String
-            return 6 if value.is_a? StringIO
-            return 7 if value.is_a? DocumentReference
-            return 9 if value.is_a? Array
-            if value.is_a? Hash
-              return 8 if Convert.hash_is_geo_point? value
-              return 10
-            end
-
-            raise "Can't determine field type for #{value.class}"
-          end
-
-          def field_value value
-            # nil can't be compared, so use 0 as a stand in.
-            return 0 if value.nil?
-            return 0 if value == false
-            return 1 if value == true
-            # NaN can't be compared, so use 0 as a stand in.
-            return 0 if value.respond_to?(:nan?) && value.nan?
-            return value if value.is_a? Numeric
-            return value if value.is_a? Time
-            return value if value.is_a? String
-            return value.string if value.is_a? StringIO
-            return path_comparison(value.path) if value.is_a? DocumentReference
-            return value.map { |v| field_comparison(v) } if value.is_a? Array
-            if value.is_a? Hash
-              geo_pairs = Convert.hash_is_geo_point? value
-              return geo_pairs.map(&:last) if geo_pairs
-              return value.sort.map { |k, v| [k, field_comparison(v)] }
-            end
-
-            raise "Can't determine field value for #{value}"
+            # Compare paths when everything else is equal
+            ref_comp = Order.compare_field_values a.ref, b.ref
+            ref_comp = 0 - ref_comp if @directions.last == :DESCENDING
+            ref_comp
           end
 
           def change_paths new_order, old_order
@@ -262,26 +200,49 @@ module Google
           end
 
           def build_changes new_order, old_order
+            new_paths = new_order.keys
+            old_paths = old_order.keys
             added_paths, deleted_paths, changed_paths = \
               change_paths new_order, old_order
 
             changes = deleted_paths.map do |doc_path|
-              doc_ref = DocumentReference.from_path doc_path, @client
-              doc_snp = DocumentSnapshot.missing doc_ref
-              DocumentChange.from_doc \
-                doc_snp, old_order.keys.index(doc_path), nil
+              build_deleted_doc_change doc_path, old_paths
             end
             changes += added_paths.map do |doc_path|
-              DocumentChange.from_doc \
-                @tree.key(doc_path), nil, new_order.keys.index(doc_path)
+              build_added_doc_change doc_path, new_paths
             end
             changes += changed_paths.map do |doc_path|
-              DocumentChange.from_doc \
-                @tree.key(doc_path),
-                old_order.keys.index(doc_path),
-                new_order.keys.index(doc_path)
+              build_modified_doc_change doc_path, new_paths, old_paths
             end
             changes
+          end
+
+          def build_deleted_doc_change doc_path, old_paths
+            doc_ref = DocumentReference.from_path doc_path, @client
+            doc_snp = DocumentSnapshot.missing doc_ref
+            old_index = get_index_from_order_array doc_path, old_paths
+            DocumentChange.from_doc doc_snp, old_index, nil
+          end
+
+          def build_added_doc_change doc_path, new_paths
+            doc_snp = get_doc_from_tree doc_path
+            new_index = get_index_from_order_array doc_path, new_paths
+            DocumentChange.from_doc doc_snp, nil, new_index
+          end
+
+          def build_modified_doc_change doc_path, new_paths, old_paths
+            doc_snp = get_doc_from_tree doc_path
+            old_index = get_index_from_order_array doc_path, old_paths
+            new_index = get_index_from_order_array doc_path, new_paths
+            DocumentChange.from_doc doc_snp, old_index, new_index
+          end
+
+          def get_index_from_order_array doc_path, order_array
+            order_array.index doc_path
+          end
+
+          def get_doc_from_tree doc_path
+            @tree.key doc_path
           end
 
           def add_doc_to_tree doc_snp
