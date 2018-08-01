@@ -163,7 +163,6 @@ module Google
               limit: limit
             )
           end
-          retry_count = 0
           row_set = build_row_set(keys, ranges)
           rows_limit = limit
           rows_filter = filter.to_grpc if filter

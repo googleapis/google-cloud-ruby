@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -119,53 +117,58 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     mock.retry_count.must_equal 3
   end
 
-  # TODO: Fixit
   it "reads rows with not successive faliure errors" do
-    chunks_base64 = [
-      "CgJSSxIDCgFBGgMKAUMgZDILdmFsdWUtVkFMXzFIAA==",
-      "IGIyC3ZhbHVlLVZBTF8ySAA=",
-      "QAE=",
-      "CgJSSxIDCgFBGgMKAUMgZDILdmFsdWUtVkFMXzJIAQ=="
-    ]
-    chunks = chunks_base64.map do |chunk|
-      Google::Bigtable::V2::ReadRowsResponse::CellChunk.decode(Base64.decode64(chunk))
+    read_resp_base64 = "ChwKBXRlc3QxEgQKAmNmGggKBmZpZWxkMTIBQUgBChwKBXRlc3QyEgQKAmNm\nGggKBmZpZWxkMTIBQkgBChwKBXRlc3QzEgQKAmNmGggKBmZpZWxkMTIBQ0gB\n"
+    read_response = Google::Bigtable::V2::ReadRowsResponse.decode(Base64.decode64(read_resp_base64))
+
+    mock_itr = OpenStruct.new(
+      read_response: read_response,
+      counter: 0,
+    )
+
+    def mock_itr.each
+      if counter < 2
+        self.counter += 1
+        raise GRPC::DeadlineExceeded, "Dead line exceeded"
+      end
+
+      yield read_response if self.counter == 2
+
+      if counter == 3
+        self.counter += 1
+        raise GRPC::DeadlineExceeded, "Dead line exceeded"
+      end
     end
 
     mock = OpenStruct.new(
-      retry_count: 0,
-      read_response: [Google::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)],
-      rows_counter: 0
+      mock_itr: mock_itr,
+      retry_count: 0
     )
-
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      Enumerator.new do |y|
-        1.times do |x|
-          y << read_response
-        end
-      end
-
-      # if retry_count == 0
-      #   self.retry_count += 1
-      #   raise GRPC::DeadlineExceeded, "Dead line exceeded"
-      # else
-      #   read_response
-      # end
+      mock_itr
     end
 
-    expected_row = Google::Cloud::Bigtable::Row.new("RK")
-    expected_row.cells["A"] << Google::Cloud::Bigtable::Row::Cell.new(
-      "A", "C", 100, "value-VAL_2"
-    )
+    value = "A"
+    expected_rows = 3.times.map do |i|
+      row = Google::Cloud::Bigtable::Row.new("test#{i+1}")
+      row.cells["cf"] << Google::Cloud::Bigtable::Row::Cell.new(
+        "cf", "field1", 0,  value
+      )
+      value.next!
+      row
+    end
 
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
 
     rows = table.read_rows.to_a
 
-    mock.retry_count.must_equal 1
-    rows.length.must_equal 1
-    rows.first.column_families.must_equal ["A"]
-    rows.first.must_equal expected_row
+    mock_itr.counter.must_equal 2
+    rows.length.must_equal 3
+
+    expected_rows.each_with_index do |r, i|
+      rows[i].key.must_equal r.key
+    end
   end
 
   it "raise error if retry limit reached" do
