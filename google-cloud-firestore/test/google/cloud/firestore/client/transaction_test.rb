@@ -411,12 +411,78 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
           )
       end
 
+      def firestore.set_sleep_mock sleep_mock
+        @sleep_mock = sleep_mock
+      end
+      def firestore.sleep num
+        @sleep_mock.sleep num
+      end
+      sleep_mock = Minitest::Mock.new
+      sleep_mock.expect :sleep, nil, [1.0]
+      firestore.set_sleep_mock sleep_mock
+
       firestore.transaction do |tx|
         tx.create(document_path, { name: "Mike" })
         tx.set(document_path, { name: "Mike" })
         tx.update(document_path, { name: "Mike" })
         tx.delete document_path
       end
+
+      sleep_mock.verify
+    end
+
+    it "retries multiple times when an unavailable error is raised" do
+      # Unable to use mocks to define the responses, so stub the methods instead
+      def firestore_mock.begin_transaction path, options_: nil, options: nil
+        @begin_retries ||= 0
+        @begin_retries += 1
+
+        if @begin_retries < 4
+          return Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "transaction_#{@begin_retries}")
+        end
+
+        raise "bad final begin_transaction" unless options_.read_write.retry_transaction == "transaction_3"
+        Google::Firestore::V1beta1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
+      end
+      def firestore_mock.commit database, writes, transaction: nil, options: nil
+        @commit_retries ||= 0
+        @commit_retries += 1
+
+        if @commit_retries < 4
+          raise "bad commit" unless transaction.start_with?("transaction_")
+          gax_error = Google::Gax::GaxError.new "unavailable"
+          gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(14, "unavailable")
+          raise gax_error
+        end
+
+        raise "bad final commit" unless transaction == "new_transaction_xyz"
+        Google::Firestore::V1beta1::CommitResponse.new(
+          commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
+          write_results: [Google::Firestore::V1beta1::WriteResult.new(
+            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
+          )
+      end
+
+      def firestore.set_sleep_mock sleep_mock
+        @sleep_mock = sleep_mock
+      end
+      def firestore.sleep num
+        @sleep_mock.sleep num
+      end
+      sleep_mock = Minitest::Mock.new
+      sleep_mock.expect :sleep, nil, [1.0]
+      sleep_mock.expect :sleep, nil, [1.3]
+      sleep_mock.expect :sleep, nil, [1.3*1.3]
+      firestore.set_sleep_mock sleep_mock
+
+      firestore.transaction do |tx|
+        tx.create(document_path, { name: "Mike" })
+        tx.set(document_path, { name: "Mike" })
+        tx.update(document_path, { name: "Mike" })
+        tx.delete document_path
+      end
+
+      sleep_mock.verify
     end
 
     it "retries when unavailable, succeeds if invalid arg raised after" do
@@ -446,12 +512,24 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         raise gax_error
       end
 
+      def firestore.set_sleep_mock sleep_mock
+        @sleep_mock = sleep_mock
+      end
+      def firestore.sleep num
+        @sleep_mock.sleep num
+      end
+      sleep_mock = Minitest::Mock.new
+      sleep_mock.expect :sleep, nil, [1.0]
+      firestore.set_sleep_mock sleep_mock
+
       firestore.transaction do |tx|
         tx.create(document_path, { name: "Mike" })
         tx.set(document_path, { name: "Mike" })
         tx.update(document_path, { name: "Mike" })
         tx.delete document_path
       end
+
+      sleep_mock.verify
     end
 
     it "does not retry when an unsupported error is raised" do

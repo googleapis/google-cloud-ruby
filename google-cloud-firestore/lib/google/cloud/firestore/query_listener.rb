@@ -150,7 +150,7 @@ module Google
           # Don't allow a stream to restart if already stopped
           return if synchronize { @stopped }
 
-          @backoff ||= { max: 5, current: 0, delay: 1.0, mod: 1.3 }
+          @backoff ||= { current: 0, delay: 1.0, max: 5, mod: 1.3 }
 
           # Reuse inventory if one already exists
           # Even though this uses an @var, no need to synchronize
@@ -276,26 +276,21 @@ module Google
           # Has the loop broken but we aren't stopped?
           # Could be GRPC has thrown an internal error, so restart.
           raise RestartStream
-        rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
-               GRPC::ResourceExhausted, GRPC::Internal, GRPC::Core::CallError
-          # Incrementally back off when restart the stream on Unavailable.
-          # The GAPIC layer will raise DeadlineExceeded when stream is opened
-          # longer than the timeout value it is configured for. When this
-          # happends, restart the stream stealthly.
-          # Also stealthly restart the stream on Cancelled, ResourceExhausted,
-          # and Internal.
-          # Also, also stealthly restart the stream when GRPC raises the
-          # internal CallError.
-
-          # Update increment backoff values
-          @backoff[:current] += 1
-          @backoff[:delay] *= @backoff[:mod]
+        rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
+               GRPC::ResourceExhausted, GRPC::Unauthenticated,
+               GRPC::Unavailable, GRPC::Core::CallError
+          # Restart the stream with an incremental back for a retriable error.
+          # Also when GRPC raises the internal CallError.
 
           # Re-raise if retried more than the max
-          raise err if @backoff[:current] >= @backoff[:max]
+          raise err if @backoff[:current] > @backoff[:max]
 
           # Sleep with incremental backoff before restarting
           sleep @backoff[:delay]
+
+          # Update increment backoff delay and retry counter
+          @backoff[:delay] *= @backoff[:mod]
+          @backoff[:current] += 1
 
           retry
         rescue RestartStream
