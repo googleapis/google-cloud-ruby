@@ -155,7 +155,7 @@ module Google
           # Reuse inventory if one already exists
           # Even though this uses an @var, no need to synchronize
           @inventory ||= Inventory.new(synchronize { @query })
-          @inventory.reset
+          @inventory.restart
 
           # Send stop if already running
           synchronize do
@@ -242,6 +242,7 @@ module Google
                   # returned even if the target was previously indicated to be
                   # +CURRENT+.
 
+                  @inventory.reset
                   raise RestartStream # Raise to restart the stream
                 end
               when :document_change
@@ -347,13 +348,21 @@ module Google
             @tree.size
           end
 
-          def reset
+          def restart
             # clears all but query, resume token, read time, and old order
             clear_pending
 
             @current = nil
 
             @tree.clear
+          end
+
+          def reset
+            restart
+
+            # clears the resume token and read time, but not query and old order
+            @resume_token = nil
+            @read_time = nil
           end
 
           def persist resume_token, read_time

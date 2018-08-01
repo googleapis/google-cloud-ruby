@@ -227,6 +227,9 @@ module Google
                   # returned even if the target was previously indicated to be
                   # +CURRENT+.
 
+                  # Reset must be a clean restart
+                  @resume_token = nil
+                  @read_time    = nil
                   raise RestartStream # Raise to restart the stream
                 end
               when :document_change
