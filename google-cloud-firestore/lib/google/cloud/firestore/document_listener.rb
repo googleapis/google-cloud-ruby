@@ -149,6 +149,7 @@ module Google
           # Create empty inventory every time
           # Even though this uses an @var, no need to synchronize
           @inventory = []
+          @current   = nil
 
           # Send stop if already running
           synchronize do
@@ -201,7 +202,7 @@ module Google
                   @read_time    = Convert.timestamp_to_time \
                     response.target_change.read_time
 
-                  unless @inventory.empty?
+                  if @current && !@inventory.empty?
                     synchronize do
                       send_callback get_latest_doc_snp(@read_time)
                     end
@@ -217,9 +218,7 @@ module Google
                   # Listeners can wait for this change if read-after-write
                   # semantics are desired.
 
-                  @resume_token = response.target_change.resume_token
-                  @read_time    = Convert.timestamp_to_time \
-                    response.target_change.read_time
+                  @current = true
                 when :RESET
                   # The targets have been reset, and a new initial state for the
                   # targets will be returned in subsequent changes.

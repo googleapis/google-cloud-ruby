@@ -210,10 +210,12 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
       [error],
       [error],
       [
+        add_resp,
         no_change_resp("THISTOKENWILLNEVERBESEEN", 3),
         no_change_resp("NEITHERWILLTHISTOKEN", 3.1),
         doc_change_resp("doc", 3.2, val: 11.1),
-        no_change_resp("CALLBACKSENTHERE", 3.3),
+        current_resp("DOCUMENTSHAVEBEENADDED", 3.3),
+        no_change_resp("CALLBACKSENTHERE", 3.4),
 
         doc_delete_resp("doc", 4),
         no_change_resp("CALLBACKSENTHERE", 4.1),
