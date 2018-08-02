@@ -193,9 +193,9 @@ module Google
           # @return [Google::Cloud::Texttospeech::V1::ListVoicesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/text_to_speech/v1"
+          #   require "google/cloud/text_to_speech"
           #
-          #   text_to_speech_client = Google::Cloud::TextToSpeech::V1.new
+          #   text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
           #   response = text_to_speech_client.list_voices
 
           def list_voices \
@@ -233,9 +233,9 @@ module Google
           # @return [Google::Cloud::Texttospeech::V1::SynthesizeSpeechResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/text_to_speech/v1"
+          #   require "google/cloud/text_to_speech"
           #
-          #   text_to_speech_client = Google::Cloud::TextToSpeech::V1.new
+          #   text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
           #
           #   # TODO: Initialize +input+:
           #   input = {}
