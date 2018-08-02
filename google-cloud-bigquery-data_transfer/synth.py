@@ -50,6 +50,16 @@ s.replace(
     'https://cloud.google.com/bigquerydatatransfer',
     'https://cloud.google.com/bigquery/transfer/')
 
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/bigquery/data_transfer/v1/credentials.rb',
+    'BIGQUERYDATATRANSFER_KEYFILE\\n(\s+)BIGQUERYDATATRANSFER_CREDENTIALS\n',
+    'DATA_TRANSFER_CREDENTIALS\\n\\1DATA_TRANSFER_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/bigquery/data_transfer/v1/credentials.rb',
+    'BIGQUERYDATATRANSFER_KEYFILE_JSON\\n(\s+)BIGQUERYDATATRANSFER_CREDENTIALS_JSON\n',
+    'DATA_TRANSFER_CREDENTIALS_JSON\\n\\1DATA_TRANSFER_KEYFILE_JSON\n')
+
 
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):

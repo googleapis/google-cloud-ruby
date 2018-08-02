@@ -23,13 +23,13 @@ module Google
             SCOPE = [
               "https://www.googleapis.com/auth/cloud-platform"
             ].freeze
-            PATH_ENV_VARS = %w(BIGQUERYDATATRANSFER_KEYFILE
-                               BIGQUERYDATATRANSFER_CREDENTIALS
+            PATH_ENV_VARS = %w(DATA_TRANSFER_CREDENTIALS
+                               DATA_TRANSFER_KEYFILE
                                GOOGLE_CLOUD_CREDENTIALS
                                GOOGLE_CLOUD_KEYFILE
                                GCLOUD_KEYFILE)
-            JSON_ENV_VARS = %w(BIGQUERYDATATRANSFER_KEYFILE_JSON
-                               BIGQUERYDATATRANSFER_CREDENTIALS_JSON
+            JSON_ENV_VARS = %w(DATA_TRANSFER_CREDENTIALS_JSON
+                               DATA_TRANSFER_KEYFILE_JSON
                                GOOGLE_CLOUD_CREDENTIALS_JSON
                                GOOGLE_CLOUD_KEYFILE_JSON
                                GCLOUD_KEYFILE_JSON)
