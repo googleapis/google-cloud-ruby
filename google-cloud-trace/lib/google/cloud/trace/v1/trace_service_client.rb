@@ -213,9 +213,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v1"
+          #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace::V1.new
+          #   trace_service_client = Google::Cloud::Trace.new(version: :v1)
           #
           #   # TODO: Initialize +project_id+:
           #   project_id = ''
@@ -253,9 +253,9 @@ module Google
           # @return [Google::Devtools::Cloudtrace::V1::Trace]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v1"
+          #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace::V1.new
+          #   trace_service_client = Google::Cloud::Trace.new(version: :v1)
           #
           #   # TODO: Initialize +project_id+:
           #   project_id = ''
@@ -356,9 +356,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v1"
+          #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace::V1.new
+          #   trace_service_client = Google::Cloud::Trace.new(version: :v1)
           #
           #   # TODO: Initialize +project_id+:
           #   project_id = ''
