@@ -65,30 +65,30 @@ desc "Run the google-cloud-bigquery-data_transfer acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
-    ENV["BIGQUERYDATATRANSFER_TEST_PROJECT"] ||
+    ENV["DATA_TRANSFER_TEST_PROJECT"] ||
     ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||=
-    ENV["BIGQUERYDATATRANSFER_KEYFILE"] ||
+    ENV["DATA_TRANSFER_TEST_KEYFILE"] ||
     ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
     keyfile ||=
-      ENV["BIGQUERYDATATRANSFER_KEYFILE_JSON"] ||
+      ENV["DATA_TRANSFER_TEST_KEYFILE_JSON"] ||
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGQUERYDATATRANSFER_TEST_PROJECT=test123 BIGQUERYDATATRANSFER_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATA_TRANSFER_TEST_PROJECT=test123 DATA_TRANSFER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/bigquery/data_transfer/credentials"
-  (Google::Cloud::Bigquery::DataTransfer::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Bigquery::DataTransfer::Credentials::JSON_ENV_VARS).each do |path|
+  require "google/cloud/bigquery/data_transfer/v1/credentials"
+  (Google::Cloud::Bigquery::DataTransfer::V1::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Bigquery::DataTransfer::V1::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
-  ENV["BIGQUERYDATATRANSFER_PROJECT"] = project
-  ENV["BIGQUERYDATATRANSFER_TEST_PROJECT"] = project
-  ENV["BIGQUERYDATATRANSFER_KEYFILE_JSON"] = keyfile
+  ENV["DATA_TRANSFER_PROJECT"] = project
+  ENV["DATA_TRANSFER_TEST_PROJECT"] = project
+  ENV["DATA_TRANSFER_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end
@@ -122,11 +122,11 @@ task :jsondoc => :yard do
     documents: [
       {
         type: "toc",
-        title: "Google::Cloud::Bigquery::DataTransfer::V1::DataTypes",
+        title: "Google::Cloud::Bigquery::Datatransfer::V1::DataTypes",
         modules: [
           {
-            title: "Google::Cloud::Bigquery::DataTransfer::V1",
-            include: ["google/cloud/bigquery/datatransfer/v1/"]
+            title: "Google::Cloud::Bigquery::Datatransfer::V1",
+            include: ["google/cloud/bigquery/data_transfer/v1"]
           },
           {
             title: "Google::Protobuf",
