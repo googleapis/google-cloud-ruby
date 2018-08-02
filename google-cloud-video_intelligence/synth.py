@@ -41,6 +41,16 @@ s.replace(
     'File\.join\(dir, "\.rb"\)',
     'dir + ".rb"')
 
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/video_intelligence/v1/credentials.rb',
+    'VIDEO_INTELLIGENCE_KEYFILE\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS\n',
+    'VIDEO_INTELLIGENCE_CREDENTIALS\\n\\1VIDEO_INTELLIGENCE_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/video_intelligence/v1/credentials.rb',
+    'VIDEO_INTELLIGENCE_KEYFILE_JSON\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS_JSON\n',
+    'VIDEO_INTELLIGENCE_CREDENTIALS_JSON\\n\\1VIDEO_INTELLIGENCE_KEYFILE_JSON\n')
+
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
@@ -76,6 +86,16 @@ s.copy(v1beta1_library / 'lib/google/cloud/video_intelligence/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/cloud/videointelligence/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/video_intelligence/v1beta1')
 
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/video_intelligence/v1beta1/credentials.rb',
+    'VIDEO_INTELLIGENCE_KEYFILE\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS\n',
+    'VIDEO_INTELLIGENCE_CREDENTIALS\\n\\1VIDEO_INTELLIGENCE_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/video_intelligence/v1beta1/credentials.rb',
+    'VIDEO_INTELLIGENCE_KEYFILE_JSON\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS_JSON\n',
+    'VIDEO_INTELLIGENCE_CREDENTIALS_JSON\\n\\1VIDEO_INTELLIGENCE_KEYFILE_JSON\n')
+
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client_test.rb',
@@ -96,6 +116,16 @@ s.copy(v1beta2_library / 'lib/google/cloud/video_intelligence/v1beta2')
 s.copy(v1beta2_library / 'lib/google/cloud/video_intelligence/v1beta2.rb')
 s.copy(v1beta2_library / 'lib/google/cloud/videointelligence/v1beta2')
 s.copy(v1beta2_library / 'test/google/cloud/video_intelligence/v1beta2')
+
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/video_intelligence/v1beta2/credentials.rb',
+    'VIDEO_INTELLIGENCE_KEYFILE\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS\n',
+    'VIDEO_INTELLIGENCE_CREDENTIALS\\n\\1VIDEO_INTELLIGENCE_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/video_intelligence/v1beta2/credentials.rb',
+    'VIDEO_INTELLIGENCE_KEYFILE_JSON\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS_JSON\n',
+    'VIDEO_INTELLIGENCE_CREDENTIALS_JSON\\n\\1VIDEO_INTELLIGENCE_KEYFILE_JSON\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(

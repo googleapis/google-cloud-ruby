@@ -22,13 +22,13 @@ module Google
           SCOPE = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
-          PATH_ENV_VARS = %w(VIDEO_INTELLIGENCE_KEYFILE
-                             VIDEO_INTELLIGENCE_CREDENTIALS
+          PATH_ENV_VARS = %w(VIDEO_INTELLIGENCE_CREDENTIALS
+                             VIDEO_INTELLIGENCE_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
                              GOOGLE_CLOUD_KEYFILE
                              GCLOUD_KEYFILE)
-          JSON_ENV_VARS = %w(VIDEO_INTELLIGENCE_KEYFILE_JSON
-                             VIDEO_INTELLIGENCE_CREDENTIALS_JSON
+          JSON_ENV_VARS = %w(VIDEO_INTELLIGENCE_CREDENTIALS_JSON
+                             VIDEO_INTELLIGENCE_KEYFILE_JSON
                              GOOGLE_CLOUD_CREDENTIALS_JSON
                              GOOGLE_CLOUD_KEYFILE_JSON
                              GCLOUD_KEYFILE_JSON)
