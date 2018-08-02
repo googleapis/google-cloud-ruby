@@ -62,7 +62,7 @@ module Google
           # @return [Integer]
           #
           def to_i
-            @value.unpack1("q>")
+            @value.unpack("q>").first
           end
 
           # @private
