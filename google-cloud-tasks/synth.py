@@ -29,6 +29,16 @@ s.replace(
     'File\.join\(dir, "\.rb"\)',
     'dir + ".rb"')
 
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/tasks/v2beta2/credentials.rb',
+    'TASKS_KEYFILE\\n(\s+)TASKS_CREDENTIALS\n',
+    'TASKS_CREDENTIALS\\n\\1TASKS_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/tasks/v2beta2/credentials.rb',
+    'TASKS_KEYFILE_JSON\\n(\s+)TASKS_CREDENTIALS_JSON\n',
+    'TASKS_CREDENTIALS_JSON\\n\\1TASKS_KEYFILE_JSON\n')
+
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
     regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)

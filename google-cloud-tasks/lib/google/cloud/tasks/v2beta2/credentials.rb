@@ -22,13 +22,13 @@ module Google
           SCOPE = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
-          PATH_ENV_VARS = %w(TASKS_KEYFILE
-                             TASKS_CREDENTIALS
+          PATH_ENV_VARS = %w(TASKS_CREDENTIALS
+                             TASKS_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
                              GOOGLE_CLOUD_KEYFILE
                              GCLOUD_KEYFILE)
-          JSON_ENV_VARS = %w(TASKS_KEYFILE_JSON
-                             TASKS_CREDENTIALS_JSON
+          JSON_ENV_VARS = %w(TASKS_CREDENTIALS_JSON
+                             TASKS_KEYFILE_JSON
                              GOOGLE_CLOUD_CREDENTIALS_JSON
                              GOOGLE_CLOUD_KEYFILE_JSON
                              GCLOUD_KEYFILE_JSON)
