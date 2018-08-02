@@ -17,7 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/video_intelligence/v1beta1"
+require "google/cloud/video_intelligence"
 require "google/cloud/video_intelligence/v1beta1/video_intelligence_service_client"
 require "google/cloud/videointelligence/v1beta1/video_intelligence_services_pb"
 require "google/longrunning/operations_pb"
@@ -102,7 +102,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
         Google::Cloud::VideoIntelligence::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::VideoIntelligence::V1beta1.new
+          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
 
           # Call method
           response = client.annotate_video(input_uri, features)
@@ -143,7 +143,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
         Google::Cloud::VideoIntelligence::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::VideoIntelligence::V1beta1.new
+          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
 
           # Call method
           response = client.annotate_video(input_uri, features)
@@ -175,7 +175,7 @@ describe Google::Cloud::VideoIntelligence::V1beta1::VideoIntelligenceServiceClie
 
       Google::Cloud::Videointelligence::V1beta1::VideoIntelligenceService::Stub.stub(:new, mock_stub) do
         Google::Cloud::VideoIntelligence::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::VideoIntelligence::V1beta1.new
+          client = Google::Cloud::VideoIntelligence.new(version: :v1beta1)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do

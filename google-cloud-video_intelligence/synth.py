@@ -17,6 +17,7 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -34,6 +35,12 @@ s.copy(v1_library / 'test/google/cloud/video_intelligence/v1')
 # Copy base module from the v1 library so v1 is the default
 s.copy(v1_library / 'lib/google/cloud/video_intelligence.rb')
 
+# https://github.com/googleapis/gapic-generator/issues/2174
+s.replace(
+    'lib/google/cloud/video_intelligence.rb',
+    'File\.join\(dir, "\.rb"\)',
+    'dir + ".rb"')
+
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
@@ -45,6 +52,20 @@ s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
     'MockVideoIntelligenceServiceCredentials',
     'MockVideoIntelligenceServiceCredentials_v1')
+
+# Temporary until we get Ruby-specific tools into synthtool
+def merge_gemspec(src, dest, path):
+    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
+    match = regex.search(dest)
+    if match:
+        src = regex.sub(match.group(0), src, count=1)
+    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
+    match = regex.search(dest)
+    if match:
+        src = regex.sub(match.group(0), src, count=1)
+    return src
+
+s.copy(v1_library / 'google-cloud-video_intelligence.gemspec', merge=merge_gemspec)
 
 v1beta1_library = gapic.ruby_library(
     'videointelligence', 'v1beta1',

@@ -225,9 +225,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/video_intelligence/v1"
+          #   require "google/cloud/video_intelligence"
           #
-          #   video_intelligence_service_client = Google::Cloud::VideoIntelligence::V1.new
+          #   video_intelligence_service_client = Google::Cloud::VideoIntelligence.new(version: :v1)
           #   input_uri = "gs://demomaker/cat.mp4"
           #   features_element = :LABEL_DETECTION
           #   features = [features_element]
