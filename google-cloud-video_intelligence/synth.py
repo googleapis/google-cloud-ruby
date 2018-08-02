@@ -32,15 +32,6 @@ s.copy(v1_library / 'lib/google/cloud/video_intelligence/v1.rb')
 s.copy(v1_library / 'lib/google/cloud/videointelligence/v1')
 s.copy(v1_library / 'test/google/cloud/video_intelligence/v1')
 
-# Copy base module from the v1 library so v1 is the default
-s.copy(v1_library / 'lib/google/cloud/video_intelligence.rb')
-
-# https://github.com/googleapis/gapic-generator/issues/2174
-s.replace(
-    'lib/google/cloud/video_intelligence.rb',
-    'File\.join\(dir, "\.rb"\)',
-    'dir + ".rb"')
-
 # https://github.com/googleapis/gapic-generator/issues/2182
 s.replace(
     'lib/google/cloud/video_intelligence/v1/credentials.rb',
@@ -62,6 +53,23 @@ s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
     'MockVideoIntelligenceServiceCredentials',
     'MockVideoIntelligenceServiceCredentials_v1')
+
+
+# Copy base module from the v1 library so v1 is the default
+s.copy(v1_library / 'lib/google/cloud/video_intelligence.rb')
+
+# https://github.com/googleapis/gapic-generator/issues/2174
+s.replace(
+    'lib/google/cloud/video_intelligence.rb',
+    'File\.join\(dir, "\.rb"\)',
+    'dir + ".rb"')
+
+# Copy other base files from v1
+s.copy(v1_library / 'README.md')
+s.copy(v1_library / 'LICENSE')
+s.copy(v1_library / '.gitignore')
+s.copy(v1_library / '.rubocop.yml')
+s.copy(v1_library / '.yardopts')
 
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):

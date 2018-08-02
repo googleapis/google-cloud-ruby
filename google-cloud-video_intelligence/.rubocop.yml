@@ -1,12 +1,10 @@
 AllCops:
   Exclude:
     - "google-cloud-video_intelligence.gemspec"
-    - "lib/google/cloud/video_intelligence.rb"
-    - "lib/google/cloud/video_intelligence/**/*"
-    - "lib/google/cloud/videointelligence/**/*"
+    - "lib/google/**/*"
     - "Rakefile"
     - "test/**/*"
-    - "acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb"
+    - "acceptance/**/*smoke_test.rb"
 
 Documentation:
   Enabled: false
