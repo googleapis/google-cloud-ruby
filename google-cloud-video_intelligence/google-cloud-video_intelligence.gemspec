@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.name          = "google-cloud-video_intelligence"
   gem.version       = "1.0.0"
 
-  gem.authors       = ["Google Inc"]
+  gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-video_intelligence is the official library for Cloud Video Intelligence API."
   gem.summary       = "API Client library for Cloud Video Intelligence API"
