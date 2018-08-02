@@ -475,6 +475,13 @@ module Google
             return 0 if value.nil?
             return 1 if value == false
             return 1 if value == true
+            # The backend ordering semantics treats NaN and Numbers as the same
+            # type, and then internally orders NaNs before Numbers. Ruby's
+            # Float::NAN cannot be compared, similar to nil, so we need to use a
+            # stand in value instead. Therefore the desired sorting is achieved
+            # by separating NaN and Number types. This is an intentional
+            # divergence from type order that is used in the backend and in the
+            # other SDKs. (And because Ruby has to be special.)
             return 2 if value.respond_to?(:nan?) && value.nan?
             return 3 if value.is_a? Numeric
             return 4 if value.is_a? Time
@@ -491,9 +498,11 @@ module Google
           end
 
           def field_value value
+            # nil can't be compared, so use 0 as a stand in.
             return 0 if value.nil?
             return 0 if value == false
             return 1 if value == true
+            # NaN can't be compared, so use 0 as a stand in.
             return 0 if value.respond_to?(:nan?) && value.nan?
             return value if value.is_a? Numeric
             return value if value.is_a? Time
