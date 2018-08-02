@@ -29,6 +29,7 @@ v1_library = gapic.ruby_library(
 )
 
 # Copy everything but Gemfile, .gemspec, and Changelog.md
+s.copy(v1_library / 'acceptance')
 s.copy(v1_library / 'lib')
 s.copy(v1_library / 'test')
 s.copy(v1_library / 'Rakefile')
