@@ -19,7 +19,7 @@ require "google/gax"
 
 require "google/cloud/bigquery/data_transfer"
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service_client"
-require "google/cloud/bigquery/data_transfer/v1/data_transfer_services_pb"
+require "google/cloud/bigquery/datatransfer/v1/datatransfer_services_pb"
 
 class CustomTestError < StandardError; end
 
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockDataTransferServiceCredentials < Google::Cloud::Bigquery::DataTransfer::Credentials
+class MockDataTransferServiceCredentials < Google::Cloud::Bigquery::DataTransfer::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -101,11 +101,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         default_data_refresh_window_days: default_data_refresh_window_days,
         manual_runs_disabled: manual_runs_disabled
       }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::DataSource)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::DataSource)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::GetDataSourceRequest, request)
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
@@ -114,8 +114,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("get_data_source")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -123,6 +123,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_data_source(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -133,7 +140,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::GetDataSourceRequest, request)
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
@@ -142,8 +149,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("get_data_source")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -170,11 +177,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       data_sources_element = {}
       data_sources = [data_sources_element]
       expected_response = { next_page_token: next_page_token, data_sources: data_sources }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesResponse)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::ListDataSourcesResponse)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListDataSourcesRequest, request)
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
@@ -183,8 +190,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_data_sources")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -205,7 +212,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListDataSourcesRequest, request)
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
@@ -214,8 +221,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_data_sources")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -259,13 +266,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         user_id: user_id,
         dataset_region: dataset_region
       }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::CreateTransferConfigRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config)
+        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig), request.transfer_config)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:create_transfer_config, mock_method)
@@ -273,8 +280,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("create_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -282,6 +289,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_transfer_config(formatted_parent, transfer_config) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -293,9 +307,9 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::CreateTransferConfigRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config)
+        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig), request.transfer_config)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub.new(:create_transfer_config, mock_method)
@@ -303,8 +317,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("create_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -348,12 +362,12 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         user_id: user_id,
         dataset_region: dataset_region
       }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest, request)
-        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::UpdateTransferConfigRequest, request)
+        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig), request.transfer_config)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: expected_response)
       end
@@ -362,8 +376,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("update_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -371,6 +385,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_transfer_config(transfer_config, update_mask) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -382,8 +403,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest, request)
-        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig), request.transfer_config)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::UpdateTransferConfigRequest, request)
+        assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig), request.transfer_config)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
@@ -392,8 +413,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("update_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -417,7 +438,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::DeleteTransferConfigRequest, request)
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
@@ -426,8 +447,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -435,6 +456,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_transfer_config(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -445,7 +473,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::DeleteTransferConfigRequest, request)
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
@@ -454,8 +482,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -498,11 +526,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         user_id: user_id,
         dataset_region: dataset_region
       }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::GetTransferConfigRequest, request)
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
@@ -511,8 +539,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -520,6 +548,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_transfer_config(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -530,7 +565,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::GetTransferConfigRequest, request)
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
@@ -539,8 +574,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_config")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -567,11 +602,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       transfer_configs_element = {}
       transfer_configs = [transfer_configs_element]
       expected_response = { next_page_token: next_page_token, transfer_configs: transfer_configs }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsResponse)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::ListTransferConfigsResponse)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListTransferConfigsRequest, request)
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
@@ -580,8 +615,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_configs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -602,7 +637,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListTransferConfigsRequest, request)
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
@@ -611,8 +646,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_configs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -638,11 +673,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Create expected grpc response
       expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsResponse)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::ScheduleTransferRunsResponse)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ScheduleTransferRunsRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(start_time, Google::Protobuf::Timestamp), request.start_time)
         assert_equal(Google::Gax::to_proto(end_time, Google::Protobuf::Timestamp), request.end_time)
@@ -653,8 +688,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("schedule_transfer_runs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -666,6 +701,17 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.schedule_transfer_runs(
+            formatted_parent,
+            start_time,
+            end_time
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -678,7 +724,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ScheduleTransferRunsRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(start_time, Google::Protobuf::Timestamp), request.start_time)
         assert_equal(Google::Gax::to_proto(end_time, Google::Protobuf::Timestamp), request.end_time)
@@ -689,8 +735,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("schedule_transfer_runs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -729,11 +775,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         user_id: user_id,
         schedule: schedule
       }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::TransferRun)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferRun)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::GetTransferRunRequest, request)
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
@@ -742,8 +788,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_run")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -751,6 +797,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_transfer_run(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -761,7 +814,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::GetTransferRunRequest, request)
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
@@ -770,8 +823,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_run")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -795,7 +848,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::DeleteTransferRunRequest, request)
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
@@ -804,8 +857,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_run")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -813,6 +866,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_transfer_run(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -823,7 +883,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::DeleteTransferRunRequest, request)
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
@@ -832,8 +892,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_run")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -860,11 +920,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       transfer_runs_element = {}
       transfer_runs = [transfer_runs_element]
       expected_response = { next_page_token: next_page_token, transfer_runs: transfer_runs }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsResponse)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::ListTransferRunsResponse)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListTransferRunsRequest, request)
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
@@ -873,8 +933,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_runs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -895,7 +955,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListTransferRunsRequest, request)
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
@@ -904,8 +964,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_runs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -932,11 +992,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       transfer_messages_element = {}
       transfer_messages = [transfer_messages_element]
       expected_response = { next_page_token: next_page_token, transfer_messages: transfer_messages }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsResponse)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::ListTransferLogsResponse)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListTransferLogsRequest, request)
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
@@ -945,8 +1005,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_logs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -967,7 +1027,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::ListTransferLogsRequest, request)
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
@@ -976,8 +1036,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_logs")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -1002,11 +1062,11 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Create expected grpc response
       has_valid_creds = false
       expected_response = { has_valid_creds: has_valid_creds }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsResponse)
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::CheckValidCredsResponse)
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::CheckValidCredsRequest, request)
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
@@ -1015,8 +1075,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("check_valid_creds")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
@@ -1024,6 +1084,13 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.check_valid_creds(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1034,7 +1101,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest, request)
+        assert_instance_of(Google::Cloud::Bigquery::Datatransfer::V1::CheckValidCredsRequest, request)
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
@@ -1043,8 +1110,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       # Mock auth layer
       mock_credentials = MockDataTransferServiceCredentials.new("check_valid_creds")
 
-      Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::Credentials.stub(:default, mock_credentials) do
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
 
           # Call method
