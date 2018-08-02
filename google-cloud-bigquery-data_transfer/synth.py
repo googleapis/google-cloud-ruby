@@ -44,6 +44,12 @@ s.replace(
     'File\.join\(dir, "\.rb"\)',
     'dir + ".rb"')
 
+# https://github.com/googleapis/gapic-generator/issues/2179
+s.replace(
+    'README.md',
+    'https://cloud.google.com/bigquerydatatransfer',
+    'https://cloud.google.com/bigquery/transfer/')
+
 
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):

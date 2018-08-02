@@ -51,7 +51,7 @@ end
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest/google/cloud/bigquery/datatransfer/v1
-[Product Documentation]: https://cloud.google.com/bigquerydatatransfer
+[Product Documentation]: https://cloud.google.com/bigquery/transfer/
 
 ## Enabling Logging
 
