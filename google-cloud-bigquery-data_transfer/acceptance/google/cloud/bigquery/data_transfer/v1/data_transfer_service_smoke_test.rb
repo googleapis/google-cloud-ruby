@@ -21,10 +21,10 @@ require "google/cloud/bigquery/data_transfer"
 
 describe "DataTransferServiceSmokeTest" do
   it "runs one smoke test with list_data_sources" do
-    unless ENV["BIGQUERYDATATRANSFER_TEST_PROJECT"]
-      fail "BIGQUERYDATATRANSFER_TEST_PROJECT environment variable must be defined"
+    unless ENV["DATA_TRANSFER_TEST_PROJECT"]
+      fail "DATA_TRANSFER_TEST_PROJECT environment variable must be defined"
     end
-    project_id = ENV["BIGQUERYDATATRANSFER_TEST_PROJECT"].freeze
+    project_id = ENV["DATA_TRANSFER_TEST_PROJECT"].freeze
 
     data_transfer_service_client = Google::Cloud::Bigquery::DataTransfer.new
     formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(project_id)
