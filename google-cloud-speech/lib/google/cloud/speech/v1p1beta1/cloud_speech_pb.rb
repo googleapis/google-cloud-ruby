@@ -32,12 +32,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.speech.v1p1beta1.RecognitionConfig" do
     optional :encoding, :enum, 1, "google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding"
     optional :sample_rate_hertz, :int32, 2
+    optional :audio_channel_count, :int32, 7
+    optional :enable_separate_recognition_per_channel, :bool, 12
     optional :language_code, :string, 3
+    repeated :alternative_language_codes, :string, 18
     optional :max_alternatives, :int32, 4
     optional :profanity_filter, :bool, 5
     repeated :speech_contexts, :message, 6, "google.cloud.speech.v1p1beta1.SpeechContext"
     optional :enable_word_time_offsets, :bool, 8
+    optional :enable_word_confidence, :bool, 15
     optional :enable_automatic_punctuation, :bool, 11
+    optional :enable_speaker_diarization, :bool, 16
+    optional :diarization_speaker_count, :int32, 17
     optional :metadata, :message, 9, "google.cloud.speech.v1p1beta1.RecognitionMetadata"
     optional :model, :string, 13
     optional :use_enhanced, :bool, 14
@@ -127,9 +133,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     repeated :alternatives, :message, 1, "google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative"
     optional :is_final, :bool, 2
     optional :stability, :float, 3
+    optional :channel_tag, :int32, 5
+    optional :language_code, :string, 6
   end
   add_message "google.cloud.speech.v1p1beta1.SpeechRecognitionResult" do
     repeated :alternatives, :message, 1, "google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative"
+    optional :channel_tag, :int32, 2
+    optional :language_code, :string, 5
   end
   add_message "google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative" do
     optional :transcript, :string, 1
@@ -140,6 +150,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :start_time, :message, 1, "google.protobuf.Duration"
     optional :end_time, :message, 2, "google.protobuf.Duration"
     optional :word, :string, 3
+    optional :confidence, :float, 4
+    optional :speaker_tag, :int32, 5
   end
 end
 

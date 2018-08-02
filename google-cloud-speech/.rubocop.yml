@@ -1,11 +1,10 @@
 AllCops:
   Exclude:
-    - "acceptance/**/*"
     - "google-cloud-speech.gemspec"
-    - "lib/google/cloud/speech.rb"
-    - "lib/google/cloud/speech/**/*"
+    - "lib/google/**/*"
     - "Rakefile"
-    - "test/google/cloud/speech/**/*"
+    - "test/**/*"
+    - "acceptance/**/*smoke_test.rb"
 
 Documentation:
   Enabled: false
@@ -14,9 +13,3 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
-Metrics/MethodLength:
-  Max: 20
-Metrics/BlockLength:
-  Exclude:
-    - "acceptance/**/*"
-    - "test/**/*"

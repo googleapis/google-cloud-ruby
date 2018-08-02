@@ -213,9 +213,9 @@ module Google
           # @return [Google::Cloud::Speech::V1::RecognizeResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1"
+          #   require "google/cloud/speech"
           #
-          #   speech_client = Google::Cloud::Speech::V1.new
+          #   speech_client = Google::Cloud::Speech.new(version: :v1)
           #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
@@ -261,9 +261,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/speech/v1"
+          #   require "google/cloud/speech"
           #
-          #   speech_client = Google::Cloud::Speech::V1.new
+          #   speech_client = Google::Cloud::Speech.new(version: :v1)
           #   encoding = :FLAC
           #   sample_rate_hertz = 44100
           #   language_code = "en-US"
