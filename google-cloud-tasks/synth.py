@@ -29,12 +29,22 @@ s.replace(
     'File\.join\(dir, "\.rb"\)',
     'dir + ".rb"')
 
+# Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
-    version_re = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
-    match = version_re.search(dest)
+    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
+    match = regex.search(dest)
     if match:
-        return version_re.sub(match.group(0), src, count=1)
-    else:
-        return src
+        src = regex.sub(match.group(0), src, count=1)
+    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
+    match = regex.search(dest)
+    if match:
+        src = regex.sub(match.group(0), src, count=1)
+    return src
 
 s.copy(v2beta2_library / 'google-cloud-tasks.gemspec', merge=merge_gemspec)
+
+# https://github.com/googleapis/gapic-generator/issues/2180
+s.replace(
+    'google-cloud-tasks.gemspec',
+    '(gem\.add_dependency\s+"google-gax",\s+"[^"]+")',
+    '\\1\n  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"')

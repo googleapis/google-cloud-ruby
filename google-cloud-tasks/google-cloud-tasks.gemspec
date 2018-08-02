@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-tasks is the official library for Cloud Tasks API."
   gem.summary       = "API Client library for Cloud Tasks API"
-  gem.homepage      = "https://github.com/googleapis/googleapis"
+  gem.homepage      = "https://github.com/GoogleCloudPlatform/google-cloud-ruby/tree/master/google-cloud-tasks"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY
@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.0.0"
 
   gem.add_dependency "google-gax", "~> 1.3"
+  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"
 
   gem.add_development_dependency "minitest", "~> 5.10"
   gem.add_development_dependency "rubocop", "~> 0.50.0"
