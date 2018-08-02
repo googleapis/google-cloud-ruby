@@ -230,9 +230,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v2"
+          #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace::V2.new
+          #   trace_service_client = Google::Cloud::Trace.new(version: :v2)
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +spans+:
@@ -335,9 +335,9 @@ module Google
           # @return [Google::Devtools::Cloudtrace::V2::Span]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/trace/v2"
+          #   require "google/cloud/trace"
           #
-          #   trace_service_client = Google::Cloud::Trace::V2.new
+          #   trace_service_client = Google::Cloud::Trace.new(version: :v2)
           #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.span_path("[PROJECT]", "[TRACE]", "[SPAN]")
           #
           #   # TODO: Initialize +span_id+:

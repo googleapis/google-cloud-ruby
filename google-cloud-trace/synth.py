@@ -33,21 +33,21 @@ s.copy(v1_library / 'lib/google/devtools/cloudtrace/v1')
 # Omitting lib/google/cloud/trace/v1.rb for now because we are not exposing the
 # low-level API.
 
-# https://github.com/googleapis/gapic-generator/issues/2118
-s.replace(
-    'lib/google/cloud/trace/v1/credentials.rb',
-    'TRACE_KEYFILE GOOGLE_CLOUD_KEYFILE',
-    'TRACE_CREDENTIALS TRACE_KEYFILE GOOGLE_CLOUD_CREDENTIALS GOOGLE_CLOUD_KEYFILE')
-s.replace(
-    'lib/google/cloud/trace/v1/credentials.rb',
-    'TRACE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON',
-    'TRACE_CREDENTIALS_JSON TRACE_KEYFILE_JSON GOOGLE_CLOUD_CREDENTIALS_JSON GOOGLE_CLOUD_KEYFILE_JSON')
-
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(
     'lib/google/cloud/trace/v1/credentials.rb',
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze')
+
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/trace/v1/credentials.rb',
+    'TRACE_KEYFILE\\n(\s+)TRACE_CREDENTIALS\n',
+    'TRACE_CREDENTIALS\\n\\1TRACE_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/trace/v1/credentials.rb',
+    'TRACE_KEYFILE_JSON\\n(\s+)TRACE_CREDENTIALS_JSON\n',
+    'TRACE_CREDENTIALS_JSON\\n\\1TRACE_KEYFILE_JSON\n')
 
 v2_library = gapic.ruby_library(
     'trace', 'v2',
@@ -60,18 +60,18 @@ s.copy(v2_library / 'lib/google/devtools/cloudtrace/v2')
 # Omitting lib/google/cloud/trace/v2.rb for now because we are not exposing the
 # low-level API.
 
-# https://github.com/googleapis/gapic-generator/issues/2118
-s.replace(
-    'lib/google/cloud/trace/v2/credentials.rb',
-    'TRACE_KEYFILE GOOGLE_CLOUD_KEYFILE',
-    'TRACE_CREDENTIALS TRACE_KEYFILE GOOGLE_CLOUD_CREDENTIALS GOOGLE_CLOUD_KEYFILE')
-s.replace(
-    'lib/google/cloud/trace/v2/credentials.rb',
-    'TRACE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON',
-    'TRACE_CREDENTIALS_JSON TRACE_KEYFILE_JSON GOOGLE_CLOUD_CREDENTIALS_JSON GOOGLE_CLOUD_KEYFILE_JSON')
-
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(
     'lib/google/cloud/trace/v2/credentials.rb',
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze')
+
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/trace/v2/credentials.rb',
+    'TRACE_KEYFILE\\n(\s+)TRACE_CREDENTIALS\n',
+    'TRACE_CREDENTIALS\\n\\1TRACE_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/trace/v2/credentials.rb',
+    'TRACE_KEYFILE_JSON\\n(\s+)TRACE_CREDENTIALS_JSON\n',
+    'TRACE_CREDENTIALS_JSON\\n\\1TRACE_KEYFILE_JSON\n')
