@@ -32,3 +32,13 @@ s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
 # Note: Not copying 'test/google/cloud/vision/v1' yet, because it generates
 # tests for a gapic-only library, whereas this library currently is handwritten
 # atop a low-level gapic.
+
+# https://github.com/googleapis/gapic-generator/issues/2182
+s.replace(
+    'lib/google/cloud/vision/v1/credentials.rb',
+    'VISION_KEYFILE\\n(\s+)VISION_CREDENTIALS\n',
+    'VISION_CREDENTIALS\\n\\1VISION_KEYFILE\n')
+s.replace(
+    'lib/google/cloud/vision/v1/credentials.rb',
+    'VISION_KEYFILE_JSON\\n(\s+)VISION_CREDENTIALS_JSON\n',
+    'VISION_CREDENTIALS_JSON\\n\\1VISION_KEYFILE_JSON\n')
