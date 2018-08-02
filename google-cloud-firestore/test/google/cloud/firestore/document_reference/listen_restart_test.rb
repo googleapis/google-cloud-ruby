@@ -30,7 +30,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
   before do
     # Remove start method, make no-op
-    class Google::Cloud::Firestore::DocumentListener
+    class Google::Cloud::Firestore::Watch::Listener
       alias_method :start_for_realz, :start
       remove_method :start
 
@@ -51,7 +51,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
   after do
     # restore start method, cleanup our methods
-    class Google::Cloud::Firestore::DocumentListener
+    class Google::Cloud::Firestore::Watch::Listener
       alias_method :start, :start_for_realz
       remove_method :start_for_realz
       remove_method :sleep
@@ -73,7 +73,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
     # Start listener because we stopped this from happening in this setup
     # Pass in mock to verify incremental backoff is happening
-    listener.start_with_sleep_mock sleep_mock
+    listener.instance_variable_get(:@listener).start_with_sleep_mock sleep_mock
 
     wait_until { doc_snapshots.count == 6 }
 
@@ -94,7 +94,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
     # Start listener because we stopped this from happening in this setup
     # Pass in mock to verify incremental backoff is happening
-    listener.start_with_sleep_mock sleep_mock
+    listener.instance_variable_get(:@listener).start_with_sleep_mock sleep_mock
 
     wait_until { doc_snapshots.count == 6 }
 
@@ -115,7 +115,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
     # Start listener because we stopped this from happening in this setup
     # Pass in mock to verify incremental backoff is happening
-    listener.start_with_sleep_mock sleep_mock
+    listener.instance_variable_get(:@listener).start_with_sleep_mock sleep_mock
 
     wait_until { doc_snapshots.count == 6 }
 
@@ -136,7 +136,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
     # Start listener because we stopped this from happening in this setup
     # Pass in mock to verify incremental backoff is happening
-    listener.start_with_sleep_mock sleep_mock
+    listener.instance_variable_get(:@listener).start_with_sleep_mock sleep_mock
 
     wait_until { doc_snapshots.count == 6 }
 
@@ -157,7 +157,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
     # Start listener because we stopped this from happening in this setup
     # Pass in mock to verify incremental backoff is happening
-    listener.start_with_sleep_mock sleep_mock
+    listener.instance_variable_get(:@listener).start_with_sleep_mock sleep_mock
 
     wait_until { doc_snapshots.count == 6 }
 
@@ -178,7 +178,7 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
     # Start listener because we stopped this from happening in this setup
     # Pass in mock to verify incremental backoff is happening
-    listener.start_with_sleep_mock sleep_mock
+    listener.instance_variable_get(:@listener).start_with_sleep_mock sleep_mock
 
     wait_until { doc_snapshots.count == 6 }
 

@@ -19,23 +19,26 @@ module Google
   module Cloud
     module Firestore
       # @private
-      class EnumeratorQueue
-        def initialize sentinel = nil
-          @queue    = Queue.new
-          @sentinel = sentinel
-        end
+      module Watch
+        # @private
+        class EnumeratorQueue
+          def initialize sentinel = nil
+            @queue    = Queue.new
+            @sentinel = sentinel
+          end
 
-        def push obj
-          @queue.push obj
-        end
+          def push obj
+            @queue.push obj
+          end
 
-        def each
-          return enum_for(:each) unless block_given?
+          def each
+            return enum_for(:each) unless block_given?
 
-          loop do
-            obj = @queue.pop
-            break if obj.equal? @sentinel
-            yield obj
+            loop do
+              obj = @queue.pop
+              break if obj.equal? @sentinel
+              yield obj
+            end
           end
         end
       end

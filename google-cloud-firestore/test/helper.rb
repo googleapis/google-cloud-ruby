@@ -186,6 +186,14 @@ class WatchFirestore < MockFirestore
     )
   end
 
+  def filter_resp count
+    Google::Firestore::V1beta1::ListenResponse.new(
+      filter: Google::Firestore::V1beta1::ExistenceFilter.new(
+        count: count
+      )
+    )
+  end
+
   def build_timestamp offset = 0
     Google::Cloud::Firestore::Convert.time_to_timestamp(read_time + offset)
   end

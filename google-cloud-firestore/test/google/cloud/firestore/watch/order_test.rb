@@ -135,7 +135,7 @@ describe "Watch", :order, :mock_firestore do
   def compare_values a, b
     # This is currently implemented in QueryListener::Inventory.
     # This may move in the future, but for now this location is fine.
-    @inventory ||= Google::Cloud::Firestore::QueryListener::Inventory.new nil
+    @inventory ||= Google::Cloud::Firestore::Watch::Inventory.new firestore, nil
     @inventory.send :compare_values, a, b
   end
 
