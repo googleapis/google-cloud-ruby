@@ -29,6 +29,18 @@ v1_library = gapic.ruby_library(
     artman_output_name='google-cloud-ruby/google-cloud-speech'
 )
 
+s.copy(v1_library / 'acceptance')
+
+# https://github.com/googleapis/gapic-generator/issues/2185
+s.replace(
+    'acceptance/google/cloud/speech/v1/speech_smoke_test.rb',
+    'describe "SpeechSmokeTest"',
+    'describe "SpeechSmokeTest V1"')
+s.replace(
+    'acceptance/google/cloud/speech/v1/speech_smoke_test.rb',
+    'speech_client = Google::Cloud::Speech\\.new',
+    'speech_client = Google::Cloud::Speech.new version: :v1')
+
 s.copy(v1_library / 'lib/google/cloud/speech/v1.rb')
 
 # PERMANENT: Install partial gapics
@@ -162,6 +174,18 @@ v1p1beta1_library = gapic.ruby_library(
     'speech', 'v1p1beta1',
     artman_output_name='google-cloud-ruby/google-cloud-speech'
 )
+
+s.copy(v1p1beta1_library / 'acceptance')
+
+# https://github.com/googleapis/gapic-generator/issues/2185
+s.replace(
+    'acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb',
+    'describe "SpeechSmokeTest"',
+    'describe "SpeechSmokeTest V1p1beta1"')
+s.replace(
+    'acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb',
+    'speech_client = Google::Cloud::Speech\\.new',
+    'speech_client = Google::Cloud::Speech.new version: :v1p1beta1')
 
 s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1.rb')
 
