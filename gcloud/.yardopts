@@ -1,6 +1,7 @@
 --no-private
 --title=Gcloud
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

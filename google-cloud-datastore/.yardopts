@@ -2,6 +2,7 @@
 --title=Google Cloud Datastore
 --exclude lib/google/datastore/v1
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

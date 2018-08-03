@@ -2,6 +2,7 @@
 --title=Stackdriver Error Reporting
 --exclude lib/google/devtools/clouderrorreporting/v1beta1
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

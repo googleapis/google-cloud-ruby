@@ -2,6 +2,7 @@
 --title=BigQuery Data Transfer API
 --exclude _pb\.rb$
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

@@ -2,6 +2,7 @@
 --title=Stackdriver Debugger
 --exclude lib/google/devtools
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

@@ -2,6 +2,7 @@
 --title=Google Cloud Firestore API
 --exclude lib/google/firestore/v1beta1
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

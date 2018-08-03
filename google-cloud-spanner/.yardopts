@@ -4,6 +4,7 @@
 --exclude lib/google/cloud/spanner/admin/database/v1.rb
 --exclude lib/google/cloud/spanner/admin/instance/v1.rb
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

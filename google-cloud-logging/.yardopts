@@ -2,6 +2,7 @@
 --title=Stackdriver Logging
 --exclude lib/google/logging/v2
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

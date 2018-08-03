@@ -2,6 +2,7 @@
 --title=Cloud Video Intelligence API
 --exclude _pb\.rb$
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -
