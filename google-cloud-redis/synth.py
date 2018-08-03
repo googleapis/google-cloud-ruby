@@ -40,6 +40,18 @@ s.replace(
     'REDIS_KEYFILE_JSON\\n(\s+)REDIS_CREDENTIALS_JSON\n',
     'REDIS_CREDENTIALS_JSON\\n\\1REDIS_KEYFILE_JSON\n')
 
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'README.md',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/redis\\)',
+    '(https://console.cloud.google.com/apis/library/redis.googleapis.com)')
+
+# https://github.com/googleapis/gapic-generator/issues/2196
+s.replace(
+    'README.md',
+    '\\[Product Documentation\\]: https://cloud\\.google\\.com/redis\n',
+    '[Product Documentation]: https://cloud.google.com/memorystore\n')
+
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
     regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)

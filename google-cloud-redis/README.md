@@ -12,7 +12,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Google Cloud Memorystore for Redis API.](https://console.cloud.google.com/apis/api/redis)
+3. [Enable the Google Cloud Memorystore for Redis API.](https://console.cloud.google.com/apis/library/redis.googleapis.com)
 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
 
 ### Installation
@@ -29,7 +29,7 @@ $ gem install google-cloud-redis
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest/google/cloud/redis/v1beta1
-[Product Documentation]: https://cloud.google.com/redis
+[Product Documentation]: https://cloud.google.com/memorystore
 
 ## Enabling Logging
 
