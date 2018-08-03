@@ -142,6 +142,12 @@ s.replace(
 
       ### Preview\n"""))
 
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'README.md',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/speech\\)',
+    '(https://console.cloud.google.com/apis/library/speech.googleapis.com)')
+
 # https://github.com/googleapis/gapic-generator/issues/2186
 s.replace(
     '.rubocop.yml',
