@@ -73,6 +73,8 @@ module Google
         # @!attribute [rw] key_set
         #   @return [Google::Spanner::V1::KeySet]
         #     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
+        #     Delete is idempotent. The transaction will succeed even if some or all
+        #     rows do not exist.
         class Delete; end
       end
     end
