@@ -113,6 +113,25 @@ module Google
         #     the audio source (instead of re-sampling).
         #     This field is optional for +FLAC+ and +WAV+ audio files and required
         #     for all other audio formats. For details, see {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        # @!attribute [rw] audio_channel_count
+        #   @return [Integer]
+        #     *Optional* The number of channels in the input audio data.
+        #     ONLY set this for MULTI-CHANNEL recognition.
+        #     Valid values for LINEAR16 and FLAC are +1+-+8+.
+        #     Valid values for OGG_OPUS are '1'-'254'.
+        #     Valid value for MULAW, AMR, AMR_WB and SPEEX_WITH_HEADER_BYTE is only +1+.
+        #     If +0+ or omitted, defaults to one channel (mono).
+        #     NOTE: We only recognize the first channel by default.
+        #     To perform independent recognition on each channel set
+        #     enable_separate_recognition_per_channel to 'true'.
+        # @!attribute [rw] enable_separate_recognition_per_channel
+        #   @return [true, false]
+        #     This needs to be set to ‘true’ explicitly and audio_channel_count > 1
+        #     to get each channel recognized separately. The recognition result will
+        #     contain a channel_tag field to state which channel that result belongs to.
+        #     If this is not ‘true’, we will only recognize the first channel.
+        #     NOTE: The request is also billed cumulatively for all channels recognized:
+        #         (audio_channel_count times the audio length)
         # @!attribute [rw] language_code
         #   @return [String]
         #     *Required* The language of the supplied audio as a
@@ -120,6 +139,20 @@ module Google
         #     Example: "en-US".
         #     See [Language Support](https://cloud.google.com/speech/docs/languages)
         #     for a list of the currently supported language codes.
+        # @!attribute [rw] alternative_language_codes
+        #   @return [Array<String>]
+        #     *Optional* A list of up to 3 additional
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags,
+        #     listing possible alternative languages of the supplied audio.
+        #     See [Language Support](https://cloud.google.com/speech/docs/languages)
+        #     for a list of the currently supported language codes.
+        #     If alternative languages are listed, recognition result will contain
+        #     recognition in the most likely language detected including the main
+        #     language_code. The recognition result will include the language tag
+        #     of the language detected in the audio.
+        #     NOTE: This feature is only supported for Voice Command and Voice Search
+        #     use cases and performance may vary for other use cases (e.g., phone call
+        #     transcription).
         # @!attribute [rw] max_alternatives
         #   @return [Integer]
         #     *Optional* Maximum number of recognition hypotheses to be returned.
@@ -143,6 +176,11 @@ module Google
         #     the start and end time offsets (timestamps) for those words. If
         #     +false+, no word-level time offset information is returned. The default is
         #     +false+.
+        # @!attribute [rw] enable_word_confidence
+        #   @return [true, false]
+        #     *Optional* If +true+, the top result includes a list of words and the
+        #     confidence for those words. If +false+, no word-level confidence
+        #     information is returned. The default is +false+.
         # @!attribute [rw] enable_automatic_punctuation
         #   @return [true, false]
         #     *Optional* If 'true', adds punctuation to recognition result hypotheses.
@@ -152,6 +190,21 @@ module Google
         #     NOTE: "This is currently offered as an experimental service, complimentary
         #     to all users. In the future this may be exclusively available as a
         #     premium feature."
+        # @!attribute [rw] enable_speaker_diarization
+        #   @return [true, false]
+        #     *Optional* If 'true', enables speaker detection for each recognized word in
+        #     the top alternative of the recognition result using a speaker_tag provided
+        #     in the WordInfo.
+        #     Note: When this is true, we send all the words from the beginning of the
+        #     audio for the top alternative in every consecutive responses.
+        #     This is done in order to improve our speaker tags as our models learn to
+        #     identify the speakers in the conversation over time.
+        # @!attribute [rw] diarization_speaker_count
+        #   @return [Integer]
+        #     *Optional*
+        #     If set, specifies the estimated number of speakers in the conversation.
+        #     If not set, defaults to '2'.
+        #     Ignored unless enable_speaker_diarization is set to true."
         # @!attribute [rw] metadata
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionMetadata]
         #     *Optional* Metadata regarding this request.
@@ -567,6 +620,17 @@ module Google
         #     (completely unstable) to 1.0 (completely stable).
         #     This field is only provided for interim results (+is_final=false+).
         #     The default of 0.0 is a sentinel value indicating +stability+ was not set.
+        # @!attribute [rw] channel_tag
+        #   @return [Integer]
+        #     For multi-channel audio, this is the channel number corresponding to the
+        #     recognized result for the audio from that channel.
+        #     For audio_channel_count = N, its output values can range from '1' to 'N'.
+        # @!attribute [rw] language_code
+        #   @return [String]
+        #     Output only. The
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+        #     language in this result. This language code was detected to have the most
+        #     likelihood of being spoken in the audio.
         class StreamingRecognitionResult; end
 
         # A speech recognition result corresponding to a portion of the audio.
@@ -576,6 +640,17 @@ module Google
         #     maximum specified in +max_alternatives+).
         #     These alternatives are ordered in terms of accuracy, with the top (first)
         #     alternative being the most probable, as ranked by the recognizer.
+        # @!attribute [rw] channel_tag
+        #   @return [Integer]
+        #     For multi-channel audio, this is the channel number corresponding to the
+        #     recognized result for the audio from that channel.
+        #     For audio_channel_count = N, its output values can range from '1' to 'N'.
+        # @!attribute [rw] language_code
+        #   @return [String]
+        #     Output only. The
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+        #     language in this result. This language code was detected to have the most
+        #     likelihood of being spoken in the audio.
         class SpeechRecognitionResult; end
 
         # Alternative hypotheses (a.k.a. n-best list).
@@ -618,6 +693,22 @@ module Google
         # @!attribute [rw] word
         #   @return [String]
         #     Output only. The word corresponding to this set of information.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     Output only. The confidence estimate between 0.0 and 1.0. A higher number
+        #     indicates an estimated greater likelihood that the recognized words are
+        #     correct. This field is set only for the top alternative of a non-streaming
+        #     result or, of a streaming result where +is_final=true+.
+        #     This field is not guaranteed to be accurate and users should not rely on it
+        #     to be always provided.
+        #     The default of 0.0 is a sentinel value indicating +confidence+ was not set.
+        # @!attribute [rw] speaker_tag
+        #   @return [Integer]
+        #     Output only. A distinct integer value is assigned for every speaker within
+        #     the audio. This field specifies which one of those speakers was detected to
+        #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
+        #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+        #     top alternative.
         class WordInfo; end
       end
     end

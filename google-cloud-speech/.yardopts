@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Speech API
+--title=Google Cloud Speech API
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
