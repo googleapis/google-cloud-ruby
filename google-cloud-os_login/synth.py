@@ -61,6 +61,18 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
 
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'README.md',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/os-login\\)',
+    '(https://console.cloud.google.com/apis/library/oslogin.googleapis.com)')
+
+# https://github.com/googleapis/gapic-generator/issues/2196
+s.replace(
+    'README.md',
+    '\\[Product Documentation\\]: https://cloud\\.google\\.com/os-login\n',
+    '[Product Documentation]: https://cloud.google.com/compute/docs/oslogin/rest/\n')
+
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
     regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
