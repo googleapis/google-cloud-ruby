@@ -27,6 +27,7 @@ v1_library = gapic.ruby_library(
     'videointelligence', 'v1',
     artman_output_name='google-cloud-ruby/google-cloud-video_intelligence'
 )
+s.copy(v1_library / 'acceptance')
 s.copy(v1_library / 'lib/google/cloud/video_intelligence/v1')
 s.copy(v1_library / 'lib/google/cloud/video_intelligence/v1.rb')
 s.copy(v1_library / 'lib/google/cloud/videointelligence/v1')
@@ -54,6 +55,15 @@ s.replace(
     'MockVideoIntelligenceServiceCredentials',
     'MockVideoIntelligenceServiceCredentials_v1')
 
+# https://github.com/googleapis/gapic-generator/issues/2185
+s.replace(
+    'acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb',
+    'describe "VideoIntelligenceServiceSmokeTest"',
+    'describe "VideoIntelligenceServiceSmokeTest V1"')
+s.replace(
+    'acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb',
+    'video_intelligence_service_client = Google::Cloud::VideoIntelligence\\.new',
+    'video_intelligence_service_client = Google::Cloud::VideoIntelligence.new version: :v1')
 
 # Copy base module from the v1 library so v1 is the default
 s.copy(v1_library / 'lib/google/cloud/video_intelligence.rb')
@@ -70,6 +80,12 @@ s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
+
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'README.md',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/video-intelligence\\)',
+    '(https://console.cloud.google.com/apis/library/videointelligence.googleapis.com)')
 
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):

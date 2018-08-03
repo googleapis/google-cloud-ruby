@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,10 +19,10 @@ require "minitest/spec"
 
 require "google/cloud/video_intelligence"
 
-describe "VideoIntelligenceServiceSmokeTest" do
+describe "VideoIntelligenceServiceSmokeTest V1" do
   it "runs one smoke test with annotate_video" do
 
-    video_intelligence_service_client = Google::Cloud::VideoIntelligence.new
+    video_intelligence_service_client = Google::Cloud::VideoIntelligence.new version: :v1
     input_uri = "gs://demomaker/cat.mp4"
     features_element = :LABEL_DETECTION
     features = [features_element]
