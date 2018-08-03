@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "googleauth"
-
 module Google
-  module Cloud
-    module OsLogin
-      ##
-      # @deprecated Use version-specific credentials classes
-      #
-      Credentials = Google::Cloud::OsLogin::V1::Credentials
-    end
+  module Protobuf
+    # A generic empty message that you can re-use to avoid defining duplicated
+    # empty messages in your APIs. A typical example is to use it as the request
+    # or the response type of an API method. For instance:
+    #
+    #     service Foo {
+    #       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+    #     }
+    #
+    # The JSON representation for +Empty+ is empty JSON object +{}+.
+    class Empty; end
   end
 end

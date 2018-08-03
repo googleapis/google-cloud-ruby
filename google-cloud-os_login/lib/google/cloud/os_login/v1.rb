@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/os_login/v1beta/os_login_service_client"
+require "google/cloud/os_login/v1/os_login_service_client"
 
 module Google
   module Cloud
@@ -69,7 +69,7 @@ module Google
       # end
       # ```
       #
-      module V1beta
+      module V1
         # rubocop:enable LineLength
 
         ##
@@ -126,7 +126,7 @@ module Google
             lib_name: lib_name,
             lib_version: lib_version
           }.select { |_, v| v != nil }
-          Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.new(**kwargs)
+          Google::Cloud::OsLogin::V1::OsLoginServiceClient.new(**kwargs)
         end
       end
     end
