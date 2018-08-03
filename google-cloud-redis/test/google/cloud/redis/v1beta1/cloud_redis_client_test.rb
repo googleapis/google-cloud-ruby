@@ -16,7 +16,6 @@ require "minitest/autorun"
 require "minitest/spec"
 
 require "google/gax"
-require "ostruct"
 
 require "google/cloud/redis"
 require "google/cloud/redis/v1beta1/cloud_redis_client"
@@ -54,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockCloudRedisCredentials < Google::Cloud::Redis::Credentials
+class MockCloudRedisCredentials < Google::Cloud::Redis::V1beta1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -87,7 +86,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::ListInstancesRequest, request)
         assert_equal(formatted_parent, request.parent)
-        OpenStruct.new execute: expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
 
@@ -95,7 +94,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("list_instances")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -126,7 +125,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("list_instances")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -181,7 +180,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::GetInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        OpenStruct.new execute: expected_response
+        OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
 
@@ -189,7 +188,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("get_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -197,6 +196,13 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_instance(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -217,7 +223,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("get_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -285,7 +291,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        OpenStruct.new execute: operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
@@ -293,7 +299,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("create_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -333,7 +339,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_parent, request.parent)
         assert_equal(instance_id, request.instance_id)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        OpenStruct.new execute: operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
 
@@ -341,7 +347,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("create_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -380,7 +386,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("create_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -453,7 +459,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_instance_of(Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, request)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        OpenStruct.new execute: operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
@@ -461,7 +467,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("update_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -498,7 +504,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_instance_of(Google::Cloud::Redis::V1beta1::UpdateInstanceRequest, request)
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
-        OpenStruct.new execute: operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
 
@@ -506,7 +512,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("update_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -542,7 +548,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("update_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -579,7 +585,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        OpenStruct.new execute: operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
 
@@ -587,7 +593,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("delete_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -617,7 +623,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, request)
         assert_equal(formatted_name, request.name)
-        OpenStruct.new execute: operation
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
 
@@ -625,7 +631,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("delete_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
@@ -654,7 +660,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       mock_credentials = MockCloudRedisCredentials.new("delete_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Redis::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Redis.new(version: :v1beta1)
 
           # Call method
