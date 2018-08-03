@@ -142,6 +142,12 @@ s.replace(
 
       ### Preview\n"""))
 
+# https://github.com/googleapis/gapic-generator/issues/2186
+s.replace(
+    '.rubocop.yml',
+    '- "acceptance/\\*\\*/\\*smoke_test\\.rb"',
+    '- "acceptance/**/*"')
+
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
     regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
