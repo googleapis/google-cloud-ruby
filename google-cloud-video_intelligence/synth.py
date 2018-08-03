@@ -81,6 +81,12 @@ s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
 
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'README.md',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/video-intelligence\\)',
+    '(https://console.cloud.google.com/apis/library/videointelligence.googleapis.com)')
+
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
     regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
