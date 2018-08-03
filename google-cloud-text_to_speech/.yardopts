@@ -2,6 +2,7 @@
 --title=Cloud Text-to-Speech API
 --exclude _pb\.rb$
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

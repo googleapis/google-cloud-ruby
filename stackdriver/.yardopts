@@ -1,6 +1,7 @@
 --no-private
 --title=Stackdriver
 --markup markdown
+--markup-provider redcarpet
 --exclude ./lib/legacy_stackdriver.rb
 
 ./lib/**/*.rb

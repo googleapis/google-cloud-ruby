@@ -2,6 +2,7 @@
 --title=Google Cloud Pub/Sub
 --exclude lib/google/pubsub/v1
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

@@ -1,6 +1,7 @@
 --no-private
 --title=Google Cloud Resource Manager
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

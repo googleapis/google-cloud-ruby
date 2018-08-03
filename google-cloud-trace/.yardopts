@@ -2,6 +2,7 @@
 --title=Stackdriver Trace
 --exclude lib/google/devtools/cloudtrace/v1
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -

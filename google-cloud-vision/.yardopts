@@ -2,6 +2,7 @@
 --title=Google Cloud Vision
 --exclude lib/google/cloud/vision/v1.rb
 --markup markdown
+--markup-provider redcarpet
 
 ./lib/**/*.rb
 -
