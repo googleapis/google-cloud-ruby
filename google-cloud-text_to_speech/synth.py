@@ -52,6 +52,12 @@ s.replace(
     'TEXTTOSPEECH_KEYFILE_JSON\\n(\s+)TEXTTOSPEECH_CREDENTIALS_JSON\n',
     'TEXTTOSPEECH_CREDENTIALS_JSON\\n\\1TEXTTOSPEECH_KEYFILE_JSON\n')
 
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'README.md',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/texttospeech\\)',
+    '(https://console.cloud.google.com/apis/library/texttospeech.googleapis.com)')
+
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
     regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
