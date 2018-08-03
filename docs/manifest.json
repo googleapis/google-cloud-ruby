@@ -116,8 +116,9 @@
       "name": "google-cloud-bigquery-data_transfer",
       "defaultService": "google/cloud/bigquery/datatransfer",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
