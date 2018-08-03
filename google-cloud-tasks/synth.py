@@ -39,6 +39,12 @@ s.replace(
     'TASKS_KEYFILE_JSON\\n(\s+)TASKS_CREDENTIALS_JSON\n',
     'TASKS_CREDENTIALS_JSON\\n\\1TASKS_KEYFILE_JSON\n')
 
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'README.md',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/tasks\\)',
+    '(https://console.cloud.google.com/apis/library/tasks.googleapis.com)')
+
 # Temporary until we get Ruby-specific tools into synthtool
 def merge_gemspec(src, dest, path):
     regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
@@ -51,7 +57,9 @@ def merge_gemspec(src, dest, path):
         src = regex.sub(match.group(0), src, count=1)
     return src
 
-s.copy(v2beta2_library / 'google-cloud-tasks.gemspec', merge=merge_gemspec)
+# Temporarily remove because this is currently autosynthing. Put back once
+# synthtool releases again after 2018-08-03.
+# s.copy(v2beta2_library / 'google-cloud-tasks.gemspec', merge=merge_gemspec)
 
 # https://github.com/googleapis/gapic-generator/issues/2180
 s.replace(
