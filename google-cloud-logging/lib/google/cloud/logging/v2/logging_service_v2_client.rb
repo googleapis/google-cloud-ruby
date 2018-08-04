@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/logging/v2/logging_pb"
-require "google/cloud/logging/credentials"
+require "google/cloud/logging/v2/credentials"
 
 module Google
   module Cloud
@@ -46,6 +43,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -88,11 +88,6 @@ module Google
             "https://www.googleapis.com/auth/logging.write"
           ].freeze
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
 
           LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/logs/{log}"
@@ -100,14 +95,11 @@ module Google
 
           private_constant :LOG_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
+
+          private_constant :PROJECT_PATH_TEMPLATE
 
           # Returns a fully-qualified log resource name string.
           # @param project [String]
@@ -117,6 +109,15 @@ module Google
             LOG_PATH_TEMPLATE.render(
               :"project" => project,
               :"log" => log
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
             )
           end
 
@@ -144,16 +145,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -162,21 +165,10 @@ module Google
             require "google/gax/grpc"
             require "google/logging/v2/logging_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Logging::Credentials.default
+            credentials ||= Google::Cloud::Logging::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Logging::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Logging::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -191,13 +183,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-logging'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "logging_service_v2_client_config.json"
             )
@@ -211,9 +206,14 @@ module Google
                 bundle_descriptors: BUNDLE_DESCRIPTORS,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @logging_service_v2_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -221,28 +221,34 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Logging::V2::LoggingServiceV2::Stub.method(:new)
             )
 
             @delete_log = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:delete_log),
-              defaults["delete_log"]
+              defaults["delete_log"],
+              exception_transformer: exception_transformer
             )
             @write_log_entries = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:write_log_entries),
-              defaults["write_log_entries"]
+              defaults["write_log_entries"],
+              exception_transformer: exception_transformer
             )
             @list_log_entries = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:list_log_entries),
-              defaults["list_log_entries"]
+              defaults["list_log_entries"],
+              exception_transformer: exception_transformer
             )
             @list_monitored_resource_descriptors = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:list_monitored_resource_descriptors),
-              defaults["list_monitored_resource_descriptors"]
+              defaults["list_monitored_resource_descriptors"],
+              exception_transformer: exception_transformer
             )
             @list_logs = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:list_logs),
-              defaults["list_logs"]
+              defaults["list_logs"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -269,39 +275,45 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
+          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
           #   formatted_log_name = Google::Cloud::Logging::V2::LoggingServiceV2Client.log_path("[PROJECT]", "[LOG]")
           #   logging_service_v2_client.delete_log(formatted_log_name)
 
           def delete_log \
               log_name,
-              options: nil
+              options: nil,
+              &block
             req = {
               log_name: log_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteLogRequest)
-            @delete_log.call(req, options)
+            @delete_log.call(req, options, &block)
             nil
           end
 
-          # == Log entry resources
-          #
           # Writes log entries to Stackdriver Logging. This API method is the
           # only way to send log entries to Stackdriver Logging. This method
           # is used, directly or indirectly, by the Stackdriver Logging agent
           # (fluentd) and all logging libraries configured to use Stackdriver
           # Logging.
+          # A single request may contain log entries for a maximum of 1000
+          # different resources (projects, organizations, billing accounts or
+          # folders)
           #
           # @param entries [Array<Google::Logging::V2::LogEntry | Hash>]
           #   Required. The log entries to send to Stackdriver Logging. The order of log
           #   entries in this list does not matter. Values supplied in this method's
           #   +log_name+, +resource+, and +labels+ fields are copied into those log
           #   entries in this list that do not include values for their corresponding
-          #   fields. For more information, see the {Google::Logging::V2::LogEntry LogEntry} type.
+          #   fields. For more information, see the
+          #   {Google::Logging::V2::LogEntry LogEntry} type.
           #
           #   If the +timestamp+ or +insert_id+ fields are missing in log entries, then
           #   this method supplies the current time or a unique identifier, respectively.
@@ -311,8 +323,9 @@ module Google
           #
           #   Log entries with timestamps that are more than the
           #   [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
-          #   24 hours in the future might be discarded. Discarding does not return
-          #   an error.
+          #   24 hours in the future will not be available when calling +entries.list+.
+          #   However, those log entries can still be exported with
+          #   [LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
           #
           #   To improve throughput and to avoid exceeding the
           #   [quota limit](https://cloud.google.com/logging/quota-policy) for calls to +entries.write+,
@@ -356,15 +369,24 @@ module Google
           #   entry is not written, then the response status is the error associated
           #   with one of the failed entries and the response includes error details
           #   keyed by the entries' zero-based index in the +entries.write+ method.
+          # @param dry_run [true, false]
+          #   Optional. If true, the request should expect normal response, but the
+          #   entries won't be persisted nor exported. Useful for checking whether the
+          #   logging API endpoints are working properly before sending valuable data.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::WriteLogEntriesResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::WriteLogEntriesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
+          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
+          #
+          #   # TODO: Initialize +entries+:
           #   entries = []
           #   response = logging_service_v2_client.write_log_entries(entries)
 
@@ -374,16 +396,19 @@ module Google
               resource: nil,
               labels: nil,
               partial_success: nil,
-              options: nil
+              dry_run: nil,
+              options: nil,
+              &block
             req = {
               entries: entries,
               log_name: log_name,
               resource: resource,
               labels: labels,
-              partial_success: partial_success
+              partial_success: partial_success,
+              dry_run: dry_run
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::WriteLogEntriesRequest)
-            @write_log_entries.call(req, options)
+            @write_log_entries.call(req, options, &block)
           end
 
           # Lists log entries.  Use this method to retrieve log entries from
@@ -430,6 +455,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Logging::V2::LogEntry>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Logging::V2::LogEntry>]
           #   An enumerable of Google::Logging::V2::LogEntry instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -437,18 +465,20 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
-          #   resource_names = []
+          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
+          #
+          #   # TODO: Initialize +formatted_resource_names+:
+          #   formatted_resource_names = []
           #
           #   # Iterate over all results.
-          #   logging_service_v2_client.list_log_entries(resource_names).each do |element|
+          #   logging_service_v2_client.list_log_entries(formatted_resource_names).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   logging_service_v2_client.list_log_entries(resource_names).each_page do |page|
+          #   logging_service_v2_client.list_log_entries(formatted_resource_names).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -461,7 +491,8 @@ module Google
               filter: nil,
               order_by: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               resource_names: resource_names,
               project_ids: project_ids,
@@ -470,7 +501,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::ListLogEntriesRequest)
-            @list_log_entries.call(req, options)
+            @list_log_entries.call(req, options, &block)
           end
 
           # Lists the descriptors for monitored resource types used by Stackdriver
@@ -485,6 +516,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Api::MonitoredResourceDescriptor>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Api::MonitoredResourceDescriptor>]
           #   An enumerable of Google::Api::MonitoredResourceDescriptor instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -492,9 +526,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
+          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
           #
           #   # Iterate over all results.
           #   logging_service_v2_client.list_monitored_resource_descriptors.each do |element|
@@ -511,12 +545,13 @@ module Google
 
           def list_monitored_resource_descriptors \
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::ListMonitoredResourceDescriptorsRequest)
-            @list_monitored_resource_descriptors.call(req, options)
+            @list_monitored_resource_descriptors.call(req, options, &block)
           end
 
           # Lists the logs in projects, organizations, folders, or billing accounts.
@@ -538,6 +573,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<String>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<String>]
           #   An enumerable of String instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -545,9 +583,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::V2::Logging.new
+          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
           #   formatted_parent = Google::Cloud::Logging::V2::LoggingServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -566,13 +604,14 @@ module Google
           def list_logs \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::ListLogsRequest)
-            @list_logs.call(req, options)
+            @list_logs.call(req, options, &block)
           end
         end
       end

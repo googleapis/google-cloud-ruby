@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :insert_id, :string, 4
     optional :http_request, :message, 7, "google.logging.type.HttpRequest"
     map :labels, :string, :string, 11
+    optional :metadata, :message, 25, "google.api.MonitoredResourceMetadata"
     optional :operation, :message, 15, "google.logging.v2.LogEntryOperation"
     optional :trace, :string, 22
     optional :span_id, :string, 27

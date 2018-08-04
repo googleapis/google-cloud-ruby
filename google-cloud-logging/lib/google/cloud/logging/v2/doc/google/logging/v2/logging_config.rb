@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,14 +19,10 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [LoggingServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
-    # | [ConfigServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
-    # | [MetricsServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
+    # | [ConfigServiceV2Client][] | Service for configuring sinks used to export log entries outside of Stackdriver Logging. |
     # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
     #
-    # [LoggingServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/loggingservicev2client
     # [ConfigServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/configservicev2client
-    # [MetricsServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/metricsservicev2client
     # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/datatypes
     #
     module V2
@@ -281,12 +277,12 @@ module Google
       #     For example, the following filter matches 99% of low-severity log
       #     entries from load balancers:
       #
-      #         "resource.type=http_load_balancer severity<ERROR sample(insertId, 0.99)"
+      #     +"resource.type=http_load_balancer severity<ERROR sample(insertId, 0.99)"+
       # @!attribute [rw] disabled
       #   @return [true, false]
       #     Optional. If set to True, then this exclusion is disabled and it does not
       #     exclude any log entries. You can use
-      #     [exclusions.patch](https://cloud.google.com/logging/docs/alpha-exclusion/docs/reference/v2/rest/v2/projects.exclusions/patch)
+      #     [exclusions.patch](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.exclusions/patch)
       #     to change the value of this field.
       class LogExclusion; end
 

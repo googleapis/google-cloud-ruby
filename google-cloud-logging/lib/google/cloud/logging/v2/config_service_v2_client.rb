@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/logging/v2/logging_config_pb"
-require "google/cloud/logging/credentials"
+require "google/cloud/logging/v2/credentials"
 
 module Google
   module Cloud
@@ -47,6 +44,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -72,6 +72,7 @@ module Google
             "https://www.googleapis.com/auth/logging.read",
             "https://www.googleapis.com/auth/logging.write"
           ].freeze
+
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -146,16 +147,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -164,21 +167,10 @@ module Google
             require "google/gax/grpc"
             require "google/logging/v2/logging_config_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Logging::Credentials.default
+            credentials ||= Google::Cloud::Logging::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Logging::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Logging::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -193,13 +185,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-logging'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "config_service_v2_client_config.json"
             )
@@ -212,9 +207,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @config_service_v2_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -222,48 +222,59 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Logging::V2::ConfigServiceV2::Stub.method(:new)
             )
 
             @list_sinks = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:list_sinks),
-              defaults["list_sinks"]
+              defaults["list_sinks"],
+              exception_transformer: exception_transformer
             )
             @get_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:get_sink),
-              defaults["get_sink"]
+              defaults["get_sink"],
+              exception_transformer: exception_transformer
             )
             @create_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:create_sink),
-              defaults["create_sink"]
+              defaults["create_sink"],
+              exception_transformer: exception_transformer
             )
             @update_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:update_sink),
-              defaults["update_sink"]
+              defaults["update_sink"],
+              exception_transformer: exception_transformer
             )
             @delete_sink = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:delete_sink),
-              defaults["delete_sink"]
+              defaults["delete_sink"],
+              exception_transformer: exception_transformer
             )
             @list_exclusions = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:list_exclusions),
-              defaults["list_exclusions"]
+              defaults["list_exclusions"],
+              exception_transformer: exception_transformer
             )
             @get_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:get_exclusion),
-              defaults["get_exclusion"]
+              defaults["get_exclusion"],
+              exception_transformer: exception_transformer
             )
             @create_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:create_exclusion),
-              defaults["create_exclusion"]
+              defaults["create_exclusion"],
+              exception_transformer: exception_transformer
             )
             @update_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:update_exclusion),
-              defaults["update_exclusion"]
+              defaults["update_exclusion"],
+              exception_transformer: exception_transformer
             )
             @delete_exclusion = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:delete_exclusion),
-              defaults["delete_exclusion"]
+              defaults["delete_exclusion"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -287,6 +298,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Logging::V2::LogSink>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Logging::V2::LogSink>]
           #   An enumerable of Google::Logging::V2::LogSink instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -294,9 +308,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -315,13 +329,14 @@ module Google
           def list_sinks \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::ListSinksRequest)
-            @list_sinks.call(req, options)
+            @list_sinks.call(req, options, &block)
           end
 
           # Gets a sink.
@@ -338,23 +353,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogSink]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #   response = config_service_v2_client.get_sink(formatted_sink_name)
 
           def get_sink \
               sink_name,
-              options: nil
+              options: nil,
+              &block
             req = {
               sink_name: sink_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::GetSinkRequest)
-            @get_sink.call(req, options)
+            @get_sink.call(req, options, &block)
           end
 
           # Creates a sink that exports specified log entries to a destination.  The
@@ -391,13 +410,18 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogSink]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize +sink+:
           #   sink = {}
           #   response = config_service_v2_client.create_sink(formatted_parent, sink)
 
@@ -405,14 +429,15 @@ module Google
               parent,
               sink,
               unique_writer_identity: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               sink: sink,
               unique_writer_identity: unique_writer_identity
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::CreateSinkRequest)
-            @create_sink.call(req, options)
+            @create_sink.call(req, options, &block)
           end
 
           # Updates a sink.  This method replaces the following fields in the existing
@@ -468,13 +493,18 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogSink]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
+          #
+          #   # TODO: Initialize +sink+:
           #   sink = {}
           #   response = config_service_v2_client.update_sink(formatted_sink_name, sink)
 
@@ -483,7 +513,8 @@ module Google
               sink,
               unique_writer_identity: nil,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               sink_name: sink_name,
               sink: sink,
@@ -491,7 +522,7 @@ module Google
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateSinkRequest)
-            @update_sink.call(req, options)
+            @update_sink.call(req, options, &block)
           end
 
           # Deletes a sink. If the sink has a unique +writer_identity+, then that
@@ -510,22 +541,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #   config_service_v2_client.delete_sink(formatted_sink_name)
 
           def delete_sink \
               sink_name,
-              options: nil
+              options: nil,
+              &block
             req = {
               sink_name: sink_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteSinkRequest)
-            @delete_sink.call(req, options)
+            @delete_sink.call(req, options, &block)
             nil
           end
 
@@ -547,6 +582,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Logging::V2::LogExclusion>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Logging::V2::LogExclusion>]
           #   An enumerable of Google::Logging::V2::LogExclusion instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -554,9 +592,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -575,13 +613,14 @@ module Google
           def list_exclusions \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::ListExclusionsRequest)
-            @list_exclusions.call(req, options)
+            @list_exclusions.call(req, options, &block)
           end
 
           # Gets the description of an exclusion.
@@ -598,23 +637,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogExclusion]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogExclusion]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
           #   response = config_service_v2_client.get_exclusion(formatted_name)
 
           def get_exclusion \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::GetExclusionRequest)
-            @get_exclusion.call(req, options)
+            @get_exclusion.call(req, options, &block)
           end
 
           # Creates a new exclusion in a specified parent resource.
@@ -638,26 +681,32 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogExclusion]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogExclusion]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize +exclusion+:
           #   exclusion = {}
           #   response = config_service_v2_client.create_exclusion(formatted_parent, exclusion)
 
           def create_exclusion \
               parent,
               exclusion,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               exclusion: exclusion
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::CreateExclusionRequest)
-            @create_exclusion.call(req, options)
+            @create_exclusion.call(req, options, &block)
           end
 
           # Changes one or more properties of an existing exclusion.
@@ -689,14 +738,21 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogExclusion]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogExclusion]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
+          #
+          #   # TODO: Initialize +exclusion+:
           #   exclusion = {}
+          #
+          #   # TODO: Initialize +update_mask+:
           #   update_mask = {}
           #   response = config_service_v2_client.update_exclusion(formatted_name, exclusion, update_mask)
 
@@ -704,14 +760,15 @@ module Google
               name,
               exclusion,
               update_mask,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               exclusion: exclusion,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateExclusionRequest)
-            @update_exclusion.call(req, options)
+            @update_exclusion.call(req, options, &block)
           end
 
           # Deletes an exclusion.
@@ -728,22 +785,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::V2::Config.new
+          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
           #   config_service_v2_client.delete_exclusion(formatted_name)
 
           def delete_exclusion \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteExclusionRequest)
-            @delete_exclusion.call(req, options)
+            @delete_exclusion.call(req, options, &block)
             nil
           end
         end

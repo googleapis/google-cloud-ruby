@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Stackdriver Logging API ([GA](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Stackdriver Logging API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Stackdriver Logging API][Product Documentation]:
     # Writes log entries and manages your Stackdriver Logging configuration.
@@ -28,25 +28,13 @@ module Google
     # steps:
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Stackdriver Logging API.](https://console.cloud.google.com/apis/api/logging)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+    # 3. [Enable the Stackdriver Logging API.](https://console.cloud.google.com/apis/api/logging)
+    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
     # ```
     # $ gem install google-cloud-logging
-    # ```
-    #
-    # ### Preview
-    # #### LoggingServiceV2Client
-    # ```rb
-    # require "google/cloud/logging"
-    #
-    # logging_service_v2_client = Google::Cloud::Logging::Logging.new
-    # formatted_log_name = Google::Cloud::Logging::V2::LoggingServiceV2Client.log_path(project_id, "test-" + Time.new.to_i.to_s)
-    # resource = {}
-    # labels = {}
-    # entries = []
-    # response = logging_service_v2_client.write_log_entries(entries, log_name: formatted_log_name, resource: resource, labels: labels)
     # ```
     #
     # ### Next Steps
@@ -57,6 +45,31 @@ module Google
     #
     # [Product Documentation]: https://cloud.google.com/logging
     #
+    # ## Enabling Logging
+    #
+    # To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
+    # The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+    # or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+    # that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+    # and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+    #
+    # Configuring a Ruby stdlib logger:
+    #
+    # ```ruby
+    # require "logger"
+    #
+    # module MyLogger
+    #   LOGGER = Logger.new $stderr, level: Logger::WARN
+    #   def logger
+    #     LOGGER
+    #   end
+    # end
+    #
+    # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
+    # module GRPC
+    #   extend MyLogger
+    # end
+    # ```
     #
     module Logging
       module V2

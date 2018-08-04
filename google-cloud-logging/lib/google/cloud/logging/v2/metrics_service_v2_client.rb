@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/logging/v2/logging_metrics_pb"
-require "google/cloud/logging/credentials"
+require "google/cloud/logging/v2/credentials"
 
 module Google
   module Cloud
@@ -46,6 +43,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -67,6 +67,7 @@ module Google
             "https://www.googleapis.com/auth/logging.read",
             "https://www.googleapis.com/auth/logging.write"
           ].freeze
+
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -124,16 +125,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -142,21 +145,10 @@ module Google
             require "google/gax/grpc"
             require "google/logging/v2/logging_metrics_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Logging::Credentials.default
+            credentials ||= Google::Cloud::Logging::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Logging::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Logging::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -171,13 +163,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-logging'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "metrics_service_v2_client_config.json"
             )
@@ -190,9 +185,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @metrics_service_v2_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -200,28 +200,34 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Logging::V2::MetricsServiceV2::Stub.method(:new)
             )
 
             @list_log_metrics = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:list_log_metrics),
-              defaults["list_log_metrics"]
+              defaults["list_log_metrics"],
+              exception_transformer: exception_transformer
             )
             @get_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:get_log_metric),
-              defaults["get_log_metric"]
+              defaults["get_log_metric"],
+              exception_transformer: exception_transformer
             )
             @create_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:create_log_metric),
-              defaults["create_log_metric"]
+              defaults["create_log_metric"],
+              exception_transformer: exception_transformer
             )
             @update_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:update_log_metric),
-              defaults["update_log_metric"]
+              defaults["update_log_metric"],
+              exception_transformer: exception_transformer
             )
             @delete_log_metric = Google::Gax.create_api_call(
               @metrics_service_v2_stub.method(:delete_log_metric),
-              defaults["delete_log_metric"]
+              defaults["delete_log_metric"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -242,6 +248,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Logging::V2::LogMetric>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Logging::V2::LogMetric>]
           #   An enumerable of Google::Logging::V2::LogMetric instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -249,9 +258,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::V2::Metrics.new
+          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
           #   formatted_parent = Google::Cloud::Logging::V2::MetricsServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -270,13 +279,14 @@ module Google
           def list_log_metrics \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::ListLogMetricsRequest)
-            @list_log_metrics.call(req, options)
+            @list_log_metrics.call(req, options, &block)
           end
 
           # Gets a logs-based metric.
@@ -288,23 +298,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogMetric]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::V2::Metrics.new
+          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
           #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
           #   response = metrics_service_v2_client.get_log_metric(formatted_metric_name)
 
           def get_log_metric \
               metric_name,
-              options: nil
+              options: nil,
+              &block
             req = {
               metric_name: metric_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::GetLogMetricRequest)
-            @get_log_metric.call(req, options)
+            @get_log_metric.call(req, options, &block)
           end
 
           # Creates a logs-based metric.
@@ -323,26 +337,32 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogMetric]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::V2::Metrics.new
+          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
           #   formatted_parent = Google::Cloud::Logging::V2::MetricsServiceV2Client.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize +metric+:
           #   metric = {}
           #   response = metrics_service_v2_client.create_log_metric(formatted_parent, metric)
 
           def create_log_metric \
               parent,
               metric,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               metric: metric
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::CreateLogMetricRequest)
-            @create_log_metric.call(req, options)
+            @create_log_metric.call(req, options, &block)
           end
 
           # Creates or updates a logs-based metric.
@@ -362,26 +382,32 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogMetric]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::V2::Metrics.new
+          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
           #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
+          #
+          #   # TODO: Initialize +metric+:
           #   metric = {}
           #   response = metrics_service_v2_client.update_log_metric(formatted_metric_name, metric)
 
           def update_log_metric \
               metric_name,
               metric,
-              options: nil
+              options: nil,
+              &block
             req = {
               metric_name: metric_name,
               metric: metric
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateLogMetricRequest)
-            @update_log_metric.call(req, options)
+            @update_log_metric.call(req, options, &block)
           end
 
           # Deletes a logs-based metric.
@@ -393,22 +419,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging/v2"
+          #   require "google/cloud/logging"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::V2::Metrics.new
+          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
           #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
           #   metrics_service_v2_client.delete_log_metric(formatted_metric_name)
 
           def delete_log_metric \
               metric_name,
-              options: nil
+              options: nil,
+              &block
             req = {
               metric_name: metric_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteLogMetricRequest)
-            @delete_log_metric.call(req, options)
+            @delete_log_metric.call(req, options, &block)
             nil
           end
         end
