@@ -25,14 +25,14 @@ require "pathname"
 require "google/gax"
 
 require "google/monitoring/v3/group_service_pb"
-require "google/cloud/monitoring/credentials"
+require "google/cloud/monitoring/v3/credentials"
 
 module Google
   module Cloud
     module Monitoring
       module V3
         # The Group API lets you inspect and manage your
-        # [groups](https://cloud.google.comgoogle.monitoring.v3.Group).
+        # [groups](https://cloud.google.com#google.monitoring.v3.Group).
         #
         # A group is a named filter that is used to identify
         # a collection of monitored resources. Groups are typically used to
@@ -54,6 +54,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -136,11 +139,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -149,10 +159,10 @@ module Google
             require "google/gax/grpc"
             require "google/monitoring/v3/group_service_services_pb"
 
-            credentials ||= Google::Cloud::Monitoring::Credentials.default
+            credentials ||= Google::Cloud::Monitoring::V3::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Monitoring::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Monitoring::V3::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -176,6 +186,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "group_service_client_config.json"
             )
@@ -188,13 +199,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @group_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -202,32 +214,39 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Monitoring::V3::GroupService::Stub.method(:new)
             )
 
             @list_groups = Google::Gax.create_api_call(
               @group_service_stub.method(:list_groups),
-              defaults["list_groups"]
+              defaults["list_groups"],
+              exception_transformer: exception_transformer
             )
             @get_group = Google::Gax.create_api_call(
               @group_service_stub.method(:get_group),
-              defaults["get_group"]
+              defaults["get_group"],
+              exception_transformer: exception_transformer
             )
             @create_group = Google::Gax.create_api_call(
               @group_service_stub.method(:create_group),
-              defaults["create_group"]
+              defaults["create_group"],
+              exception_transformer: exception_transformer
             )
             @update_group = Google::Gax.create_api_call(
               @group_service_stub.method(:update_group),
-              defaults["update_group"]
+              defaults["update_group"],
+              exception_transformer: exception_transformer
             )
             @delete_group = Google::Gax.create_api_call(
               @group_service_stub.method(:delete_group),
-              defaults["delete_group"]
+              defaults["delete_group"],
+              exception_transformer: exception_transformer
             )
             @list_group_members = Google::Gax.create_api_call(
               @group_service_stub.method(:list_group_members),
-              defaults["list_group_members"]
+              defaults["list_group_members"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -262,6 +281,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Monitoring::V3::Group>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::Group>]
           #   An enumerable of Google::Monitoring::V3::Group instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -269,9 +291,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
+          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -293,7 +315,8 @@ module Google
               ancestors_of_group: nil,
               descendants_of_group: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               children_of_group: children_of_group,
@@ -302,7 +325,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListGroupsRequest)
-            @list_groups.call(req, options)
+            @list_groups.call(req, options, &block)
           end
 
           # Gets a single group.
@@ -313,23 +336,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::Group]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::Group]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
+          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
           #   response = group_service_client.get_group(formatted_name)
 
           def get_group \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetGroupRequest)
-            @get_group.call(req, options)
+            @get_group.call(req, options, &block)
           end
 
           # Creates a new group.
@@ -347,12 +374,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::Group]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::Group]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
+          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +group+:
@@ -363,14 +393,15 @@ module Google
               name,
               group,
               validate_only: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               group: group,
               validate_only: validate_only
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateGroupRequest)
-            @create_group.call(req, options)
+            @create_group.call(req, options, &block)
           end
 
           # Updates an existing group.
@@ -386,12 +417,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::Group]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::Group]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
+          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #
           #   # TODO: Initialize +group+:
           #   group = {}
@@ -400,13 +434,14 @@ module Google
           def update_group \
               group,
               validate_only: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               group: group,
               validate_only: validate_only
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::UpdateGroupRequest)
-            @update_group.call(req, options)
+            @update_group.call(req, options, &block)
           end
 
           # Deletes an existing group.
@@ -417,22 +452,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
+          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
           #   group_service_client.delete_group(formatted_name)
 
           def delete_group \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteGroupRequest)
-            @delete_group.call(req, options)
+            @delete_group.call(req, options, &block)
             nil
           end
 
@@ -465,6 +504,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Api::MonitoredResource>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Api::MonitoredResource>]
           #   An enumerable of Google::Api::MonitoredResource instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -472,9 +514,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   group_service_client = Google::Cloud::Monitoring::V3::Group.new
+          #   group_service_client = Google::Cloud::Monitoring::Group.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::GroupServiceClient.group_path("[PROJECT]", "[GROUP]")
           #
           #   # Iterate over all results.
@@ -495,7 +537,8 @@ module Google
               page_size: nil,
               filter: nil,
               interval: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               page_size: page_size,
@@ -503,7 +546,7 @@ module Google
               interval: interval
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListGroupMembersRequest)
-            @list_group_members.call(req, options)
+            @list_group_members.call(req, options, &block)
           end
         end
       end

@@ -85,13 +85,11 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or MONITORING_TEST_PROJECT=test123 MONITORING_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  # clear any env var already set
-  require "google/cloud/monitoring/credentials"
-  (Google::Cloud::Monitoring::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Monitoring::Credentials::JSON_ENV_VARS).each do |path|
+  require "google/cloud/monitoring/v3/credentials"
+  (Google::Cloud::Monitoring::V3::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Monitoring::V3::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
-  # always overwrite when running tests
   ENV["MONITORING_PROJECT"] = project
   ENV["MONITORING_TEST_PROJECT"] = project
   ENV["MONITORING_KEYFILE_JSON"] = keyfile

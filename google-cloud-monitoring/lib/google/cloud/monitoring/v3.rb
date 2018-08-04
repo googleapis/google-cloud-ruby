@@ -17,61 +17,88 @@ require "google/cloud/monitoring/v3/group_service_client"
 require "google/cloud/monitoring/v3/metric_service_client"
 require "google/cloud/monitoring/v3/notification_channel_service_client"
 require "google/cloud/monitoring/v3/uptime_check_service_client"
+require "google/monitoring/v3/span_context_pb"
+require "google/monitoring/v3/dropped_labels_pb"
 
 module Google
   module Cloud
-    # rubocop:disable LineLength
-
-    ##
-    # # Ruby Client for Stackdriver Monitoring API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
-    #
-    # [Stackdriver Monitoring API][Product Documentation]:
-    # Manages your Stackdriver Monitoring data and configurations. Most projects
-    # must be associated with a Stackdriver account, with a few exceptions as
-    # noted on the individual method pages.
-    # - [Product Documentation][]
-    #
-    # ## Quick Start
-    # In order to use this library, you first need to go through the following
-    # steps:
-    #
-    # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Stackdriver Monitoring API.](https://console.cloud.google.com/apis/api/monitoring)
-    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
-    #
-    # ### Preview
-    # #### MetricServiceClient
-    # ```rb
-    # require "google/cloud/monitoring/v3"
-    #
-    # metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
-    # formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path(project_id)
-    #
-    # # Iterate over all results.
-    # metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
-    #   # Process element.
-    # end
-    #
-    # # Or iterate over results one page at a time.
-    # metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
-    #   # Process each page at a time.
-    #   page.each do |element|
-    #     # Process element.
-    #   end
-    # end
-    # ```
-    #
-    # ### Next Steps
-    # - Read the [Stackdriver Monitoring API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
-    #
-    # [Product Documentation]: https://cloud.google.com/monitoring
-    #
-    #
     module Monitoring
+      # rubocop:disable LineLength
+
+      ##
+      # # Ruby Client for Stackdriver Monitoring API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+      #
+      # [Stackdriver Monitoring API][Product Documentation]:
+      # Manages your Stackdriver Monitoring data and configurations. Most projects
+      # must be associated with a Stackdriver account, with a few exceptions as
+      # noted on the individual method pages.
+      # - [Product Documentation][]
+      #
+      # ## Quick Start
+      # In order to use this library, you first need to go through the following
+      # steps:
+      #
+      # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+      # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+      # 3. [Enable the Stackdriver Monitoring API.](https://console.cloud.google.com/apis/api/monitoring)
+      # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+      #
+      # ### Preview
+      # #### MetricServiceClient
+      # ```rb
+      # require "google/cloud/monitoring"
+      #
+      # metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
+      # formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path(project_id)
+      #
+      # # Iterate over all results.
+      # metric_service_client.list_monitored_resource_descriptors(formatted_name).each do |element|
+      #   # Process element.
+      # end
+      #
+      # # Or iterate over results one page at a time.
+      # metric_service_client.list_monitored_resource_descriptors(formatted_name).each_page do |page|
+      #   # Process each page at a time.
+      #   page.each do |element|
+      #     # Process element.
+      #   end
+      # end
+      # ```
+      #
+      # ### Next Steps
+      # - Read the [Stackdriver Monitoring API Product documentation][Product Documentation]
+      #   to learn more about the product and see How-to Guides.
+      # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+      #   to see the full list of Cloud APIs that we cover.
+      #
+      # [Product Documentation]: https://cloud.google.com/monitoring
+      #
+      # ## Enabling Logging
+      #
+      # To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
+      # The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+      # or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+      # that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+      # and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+      #
+      # Configuring a Ruby stdlib logger:
+      #
+      # ```ruby
+      # require "logger"
+      #
+      # module MyLogger
+      #   LOGGER = Logger.new $stderr, level: Logger::WARN
+      #   def logger
+      #     LOGGER
+      #   end
+      # end
+      #
+      # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
+      # module GRPC
+      #   extend MyLogger
+      # end
+      # ```
+      #
       module V3
         # rubocop:enable LineLength
 
@@ -111,11 +138,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def self.new \
               credentials: nil,
               scopes: nil,
               client_config: nil,
               timeout: nil,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: nil
             kwargs = {
@@ -123,6 +157,8 @@ module Google
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }
@@ -133,7 +169,7 @@ module Google
         module Group
           ##
           # The Group API lets you inspect and manage your
-          # [groups](https://cloud.google.comgoogle.monitoring.v3.Group).
+          # [groups](https://cloud.google.com#google.monitoring.v3.Group).
           #
           # A group is a named filter that is used to identify
           # a collection of monitored resources. Groups are typically used to
@@ -169,11 +205,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def self.new \
               credentials: nil,
               scopes: nil,
               client_config: nil,
               timeout: nil,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: nil
             kwargs = {
@@ -181,6 +224,8 @@ module Google
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }
@@ -217,11 +262,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def self.new \
               credentials: nil,
               scopes: nil,
               client_config: nil,
               timeout: nil,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: nil
             kwargs = {
@@ -229,6 +281,8 @@ module Google
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }
@@ -265,11 +319,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def self.new \
               credentials: nil,
               scopes: nil,
               client_config: nil,
               timeout: nil,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: nil
             kwargs = {
@@ -277,6 +338,8 @@ module Google
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }
@@ -319,11 +382,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def self.new \
               credentials: nil,
               scopes: nil,
               client_config: nil,
               timeout: nil,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: nil
             kwargs = {
@@ -331,6 +401,8 @@ module Google
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }

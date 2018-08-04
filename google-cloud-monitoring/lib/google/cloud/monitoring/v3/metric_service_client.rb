@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/monitoring/v3/metric_service_pb"
-require "google/cloud/monitoring/credentials"
+require "google/cloud/monitoring/v3/credentials"
 
 module Google
   module Cloud
@@ -44,6 +44,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -147,11 +150,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -160,10 +170,10 @@ module Google
             require "google/gax/grpc"
             require "google/monitoring/v3/metric_service_services_pb"
 
-            credentials ||= Google::Cloud::Monitoring::Credentials.default
+            credentials ||= Google::Cloud::Monitoring::V3::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Monitoring::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Monitoring::V3::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -187,6 +197,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "metric_service_client_config.json"
             )
@@ -199,13 +210,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @metric_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -213,40 +225,49 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Monitoring::V3::MetricService::Stub.method(:new)
             )
 
             @list_monitored_resource_descriptors = Google::Gax.create_api_call(
               @metric_service_stub.method(:list_monitored_resource_descriptors),
-              defaults["list_monitored_resource_descriptors"]
+              defaults["list_monitored_resource_descriptors"],
+              exception_transformer: exception_transformer
             )
             @get_monitored_resource_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:get_monitored_resource_descriptor),
-              defaults["get_monitored_resource_descriptor"]
+              defaults["get_monitored_resource_descriptor"],
+              exception_transformer: exception_transformer
             )
             @list_metric_descriptors = Google::Gax.create_api_call(
               @metric_service_stub.method(:list_metric_descriptors),
-              defaults["list_metric_descriptors"]
+              defaults["list_metric_descriptors"],
+              exception_transformer: exception_transformer
             )
             @get_metric_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:get_metric_descriptor),
-              defaults["get_metric_descriptor"]
+              defaults["get_metric_descriptor"],
+              exception_transformer: exception_transformer
             )
             @create_metric_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:create_metric_descriptor),
-              defaults["create_metric_descriptor"]
+              defaults["create_metric_descriptor"],
+              exception_transformer: exception_transformer
             )
             @delete_metric_descriptor = Google::Gax.create_api_call(
               @metric_service_stub.method(:delete_metric_descriptor),
-              defaults["delete_metric_descriptor"]
+              defaults["delete_metric_descriptor"],
+              exception_transformer: exception_transformer
             )
             @list_time_series = Google::Gax.create_api_call(
               @metric_service_stub.method(:list_time_series),
-              defaults["list_time_series"]
+              defaults["list_time_series"],
+              exception_transformer: exception_transformer
             )
             @create_time_series = Google::Gax.create_api_call(
               @metric_service_stub.method(:create_time_series),
-              defaults["create_time_series"]
+              defaults["create_time_series"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -274,6 +295,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Api::MonitoredResourceDescriptor>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Api::MonitoredResourceDescriptor>]
           #   An enumerable of Google::Api::MonitoredResourceDescriptor instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -281,9 +305,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -303,14 +327,15 @@ module Google
               name,
               filter: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               filter: filter,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListMonitoredResourceDescriptorsRequest)
-            @list_monitored_resource_descriptors.call(req, options)
+            @list_monitored_resource_descriptors.call(req, options, &block)
           end
 
           # Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
@@ -323,23 +348,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Api::MonitoredResourceDescriptor]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Api::MonitoredResourceDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.monitored_resource_descriptor_path("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]")
           #   response = metric_service_client.get_monitored_resource_descriptor(formatted_name)
 
           def get_monitored_resource_descriptor \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetMonitoredResourceDescriptorRequest)
-            @get_monitored_resource_descriptor.call(req, options)
+            @get_monitored_resource_descriptor.call(req, options, &block)
           end
 
           # Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
@@ -365,6 +394,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Api::MetricDescriptor>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Api::MetricDescriptor>]
           #   An enumerable of Google::Api::MetricDescriptor instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -372,9 +404,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -394,14 +426,15 @@ module Google
               name,
               filter: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               filter: filter,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListMetricDescriptorsRequest)
-            @list_metric_descriptors.call(req, options)
+            @list_metric_descriptors.call(req, options, &block)
           end
 
           # Gets a single metric descriptor. This method does not require a Stackdriver account.
@@ -414,23 +447,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Api::MetricDescriptor]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Api::MetricDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
           #   response = metric_service_client.get_metric_descriptor(formatted_name)
 
           def get_metric_descriptor \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetMetricDescriptorRequest)
-            @get_metric_descriptor.call(req, options)
+            @get_metric_descriptor.call(req, options, &block)
           end
 
           # Creates a new metric descriptor.
@@ -448,12 +485,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Api::MetricDescriptor]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Api::MetricDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +metric_descriptor+:
@@ -463,13 +503,14 @@ module Google
           def create_metric_descriptor \
               name,
               metric_descriptor,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               metric_descriptor: metric_descriptor
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateMetricDescriptorRequest)
-            @create_metric_descriptor.call(req, options)
+            @create_metric_descriptor.call(req, options, &block)
           end
 
           # Deletes a metric descriptor. Only user-created
@@ -483,22 +524,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.metric_descriptor_path("[PROJECT]", "[METRIC_DESCRIPTOR]")
           #   metric_service_client.delete_metric_descriptor(formatted_name)
 
           def delete_metric_descriptor \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteMetricDescriptorRequest)
-            @delete_metric_descriptor.call(req, options)
+            @delete_metric_descriptor.call(req, options, &block)
             nil
           end
 
@@ -530,9 +575,8 @@ module Google
           #   A hash of the same form as `Google::Monitoring::V3::Aggregation`
           #   can also be provided.
           # @param order_by [String]
-          #   Specifies the order in which the points of the time series should
-          #   be returned.  By default, results are not ordered.  Currently,
-          #   this field must be left blank.
+          #   Unsupported: must be left blank. The points in each time series are
+          #   returned in reverse time order.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -542,6 +586,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Monitoring::V3::TimeSeries>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::TimeSeries>]
           #   An enumerable of Google::Monitoring::V3::TimeSeries instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -549,9 +596,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +filter+:
@@ -584,7 +631,8 @@ module Google
               aggregation: nil,
               order_by: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               filter: filter,
@@ -595,7 +643,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListTimeSeriesRequest)
-            @list_time_series.call(req, options)
+            @list_time_series.call(req, options, &block)
           end
 
           # Creates or adds data to one or more time series.
@@ -617,11 +665,14 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   metric_service_client = Google::Cloud::Monitoring::V3::Metric.new
+          #   metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +time_series+:
@@ -631,13 +682,14 @@ module Google
           def create_time_series \
               name,
               time_series,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               time_series: time_series
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateTimeSeriesRequest)
-            @create_time_series.call(req, options)
+            @create_time_series.call(req, options, &block)
             nil
           end
         end

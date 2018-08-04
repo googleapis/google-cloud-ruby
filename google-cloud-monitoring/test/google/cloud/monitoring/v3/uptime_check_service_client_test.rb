@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockUptimeCheckServiceCredentials < Google::Cloud::Monitoring::Credentials
+class MockUptimeCheckServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -76,9 +76,14 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
 
       # Create expected grpc response
       next_page_token = ""
+      total_size = 705419236
       uptime_check_configs_element = {}
       uptime_check_configs = [uptime_check_configs_element]
-      expected_response = { next_page_token: next_page_token, uptime_check_configs: uptime_check_configs }
+      expected_response = {
+        next_page_token: next_page_token,
+        total_size: total_size,
+        uptime_check_configs: uptime_check_configs
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::ListUptimeCheckConfigsResponse)
 
       # Mock Grpc layer
@@ -93,7 +98,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_configs")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -124,7 +129,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_configs")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -149,7 +154,12 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       # Create expected grpc response
       name_2 = "name2-1052831874"
       display_name = "displayName1615086568"
-      expected_response = { name: name_2, display_name: display_name }
+      is_internal = true
+      expected_response = {
+        name: name_2,
+        display_name: display_name,
+        is_internal: is_internal
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::UptimeCheckConfig)
 
       # Mock Grpc layer
@@ -164,7 +174,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("get_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -172,6 +182,13 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_uptime_check_config(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -192,7 +209,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("get_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -218,7 +235,12 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       # Create expected grpc response
       name = "name3373707"
       display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
+      is_internal = true
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        is_internal: is_internal
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::UptimeCheckConfig)
 
       # Mock Grpc layer
@@ -234,7 +256,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("create_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -242,6 +264,13 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_uptime_check_config(formatted_parent, uptime_check_config) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -264,7 +293,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("create_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -289,7 +318,12 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       # Create expected grpc response
       name = "name3373707"
       display_name = "displayName1615086568"
-      expected_response = { name: name, display_name: display_name }
+      is_internal = true
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        is_internal: is_internal
+      }
       expected_response = Google::Gax::to_proto(expected_response, Google::Monitoring::V3::UptimeCheckConfig)
 
       # Mock Grpc layer
@@ -304,7 +338,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("update_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -312,6 +346,13 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_uptime_check_config(uptime_check_config) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -332,7 +373,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("update_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -366,7 +407,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("delete_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -374,6 +415,13 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_uptime_check_config(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -394,7 +442,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("delete_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -430,7 +478,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_ips")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method
@@ -456,7 +504,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_ips")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
 
           # Call method

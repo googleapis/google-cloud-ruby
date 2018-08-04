@@ -8,6 +8,7 @@ require 'google/api/metric_pb'
 require 'google/api/monitored_resource_pb'
 require 'google/monitoring/v3/common_pb'
 require 'google/monitoring/v3/metric_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -61,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.ListTimeSeriesResponse" do
     repeated :time_series, :message, 1, "google.monitoring.v3.TimeSeries"
     optional :next_page_token, :string, 2
+    repeated :execution_errors, :message, 3, "google.rpc.Status"
   end
   add_message "google.monitoring.v3.CreateTimeSeriesRequest" do
     optional :name, :string, 3

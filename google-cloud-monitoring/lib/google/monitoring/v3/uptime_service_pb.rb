@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.ListUptimeCheckConfigsResponse" do
     repeated :uptime_check_configs, :message, 1, "google.monitoring.v3.UptimeCheckConfig"
     optional :next_page_token, :string, 2
+    optional :total_size, :int32, 3
   end
   add_message "google.monitoring.v3.GetUptimeCheckConfigRequest" do
     optional :name, :string, 1

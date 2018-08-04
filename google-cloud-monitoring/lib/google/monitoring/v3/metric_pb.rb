@@ -3,6 +3,8 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
+require 'google/api/label_pb'
 require 'google/api/metric_pb'
 require 'google/api/monitored_resource_pb'
 require 'google/monitoring/v3/common_pb'
@@ -14,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.TimeSeries" do
     optional :metric, :message, 1, "google.api.Metric"
     optional :resource, :message, 2, "google.api.MonitoredResource"
+    optional :metadata, :message, 7, "google.api.MonitoredResourceMetadata"
     optional :metric_kind, :enum, 3, "google.api.MetricDescriptor.MetricKind"
     optional :value_type, :enum, 4, "google.api.MetricDescriptor.ValueType"
     repeated :points, :message, 5, "google.monitoring.v3.Point"

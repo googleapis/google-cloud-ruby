@@ -18,14 +18,14 @@ module Google
       # A single data point in a time series.
       # @!attribute [rw] interval
       #   @return [Google::Monitoring::V3::TimeInterval]
-      #     The time interval to which the data point applies.  For GAUGE metrics, only
-      #     the end time of the interval is used.  For DELTA metrics, the start and end
-      #     time should specify a non-zero interval, with subsequent points specifying
-      #     contiguous and non-overlapping intervals.  For CUMULATIVE metrics, the
-      #     start and end time should specify a non-zero interval, with subsequent
-      #     points specifying the same start time and increasing end times, until an
-      #     event resets the cumulative value to zero and sets a new start time for the
-      #     following points.
+      #     The time interval to which the data point applies.  For +GAUGE+ metrics,
+      #     only the end time of the interval is used.  For +DELTA+ metrics, the start
+      #     and end time should specify a non-zero interval, with subsequent points
+      #     specifying contiguous and non-overlapping intervals.  For +CUMULATIVE+
+      #     metrics, the start and end time should specify a non-zero interval, with
+      #     subsequent points specifying the same start time and increasing end times,
+      #     until an event resets the cumulative value to zero and sets a new start
+      #     time for the following points.
       # @!attribute [rw] value
       #   @return [Google::Monitoring::V3::TypedValue]
       #     The value of the data point.
@@ -41,8 +41,13 @@ module Google
       #     series.
       # @!attribute [rw] resource
       #   @return [Google::Api::MonitoredResource]
-      #     The associated resource. A fully-specified monitored resource used to
-      #     identify the time series.
+      #     The associated monitored resource.  Custom metrics can use only certain
+      #     monitored resource types in their time series data.
+      # @!attribute [rw] metadata
+      #   @return [Google::Api::MonitoredResourceMetadata]
+      #     Output only. The associated monitored resource metadata. When reading a
+      #     a timeseries, this field will include metadata labels that are explicitly
+      #     named in the reduction. When creating a timeseries, this field is ignored.
       # @!attribute [rw] metric_kind
       #   @return [Google::Api::MetricDescriptor::MetricKind]
       #     The metric kind of the time series. When listing time series, this metric
@@ -64,8 +69,8 @@ module Google
       #     the same as the type of the data in the +points+ field.
       # @!attribute [rw] points
       #   @return [Array<Google::Monitoring::V3::Point>]
-      #     The data points of this time series. When listing time series, the order of
-      #     the points is specified by the list method.
+      #     The data points of this time series. When listing time series, points are
+      #     returned in reverse time order.
       #
       #     When creating a time series, this field must contain exactly one point and
       #     the point's type must be the same as the value type of the associated

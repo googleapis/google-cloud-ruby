@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockAlertPolicyServiceCredentials < Google::Cloud::Monitoring::Credentials
+class MockAlertPolicyServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -93,7 +93,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("list_alert_policies")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -124,7 +124,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("list_alert_policies")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -164,7 +164,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("get_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -172,6 +172,13 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_alert_policy(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -192,7 +199,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("get_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -234,7 +241,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("create_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -242,6 +249,13 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_alert_policy(formatted_name, alert_policy) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -264,7 +278,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("create_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -298,7 +312,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("delete_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -306,6 +320,13 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_alert_policy(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -326,7 +347,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("delete_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -366,7 +387,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("update_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method
@@ -374,6 +395,13 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_alert_policy(alert_policy) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -394,7 +422,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
       mock_credentials = MockAlertPolicyServiceCredentials.new("update_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
 
           # Call method

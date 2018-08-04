@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/monitoring/v3/alert_service_pb"
-require "google/cloud/monitoring/credentials"
+require "google/cloud/monitoring/v3/credentials"
 
 module Google
   module Cloud
@@ -51,6 +51,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -148,11 +151,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -161,10 +171,10 @@ module Google
             require "google/gax/grpc"
             require "google/monitoring/v3/alert_service_services_pb"
 
-            credentials ||= Google::Cloud::Monitoring::Credentials.default
+            credentials ||= Google::Cloud::Monitoring::V3::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Monitoring::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Monitoring::V3::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -188,6 +198,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "alert_policy_service_client_config.json"
             )
@@ -200,13 +211,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @alert_policy_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -214,28 +226,34 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Monitoring::V3::AlertPolicyService::Stub.method(:new)
             )
 
             @list_alert_policies = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:list_alert_policies),
-              defaults["list_alert_policies"]
+              defaults["list_alert_policies"],
+              exception_transformer: exception_transformer
             )
             @get_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:get_alert_policy),
-              defaults["get_alert_policy"]
+              defaults["get_alert_policy"],
+              exception_transformer: exception_transformer
             )
             @create_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:create_alert_policy),
-              defaults["create_alert_policy"]
+              defaults["create_alert_policy"],
+              exception_transformer: exception_transformer
             )
             @delete_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:delete_alert_policy),
-              defaults["delete_alert_policy"]
+              defaults["delete_alert_policy"],
+              exception_transformer: exception_transformer
             )
             @update_alert_policy = Google::Gax.create_api_call(
               @alert_policy_service_stub.method(:update_alert_policy),
-              defaults["update_alert_policy"]
+              defaults["update_alert_policy"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -275,6 +293,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Monitoring::V3::AlertPolicy>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::AlertPolicy>]
           #   An enumerable of Google::Monitoring::V3::AlertPolicy instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -282,9 +303,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::V3::AlertPolicy.new
+          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -305,7 +326,8 @@ module Google
               filter: nil,
               order_by: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               filter: filter,
@@ -313,7 +335,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListAlertPoliciesRequest)
-            @list_alert_policies.call(req, options)
+            @list_alert_policies.call(req, options, &block)
           end
 
           # Gets a single alerting policy.
@@ -325,23 +347,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::AlertPolicy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::AlertPolicy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::V3::AlertPolicy.new
+          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.alert_policy_path("[PROJECT]", "[ALERT_POLICY]")
           #   response = alert_policy_service_client.get_alert_policy(formatted_name)
 
           def get_alert_policy \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetAlertPolicyRequest)
-            @get_alert_policy.call(req, options)
+            @get_alert_policy.call(req, options, &block)
           end
 
           # Creates a new alerting policy.
@@ -364,12 +390,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::AlertPolicy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::AlertPolicy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::V3::AlertPolicy.new
+          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +alert_policy+:
@@ -379,13 +408,14 @@ module Google
           def create_alert_policy \
               name,
               alert_policy,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               alert_policy: alert_policy
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateAlertPolicyRequest)
-            @create_alert_policy.call(req, options)
+            @create_alert_policy.call(req, options, &block)
           end
 
           # Deletes an alerting policy.
@@ -399,22 +429,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::V3::AlertPolicy.new
+          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::AlertPolicyServiceClient.alert_policy_path("[PROJECT]", "[ALERT_POLICY]")
           #   alert_policy_service_client.delete_alert_policy(formatted_name)
 
           def delete_alert_policy \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteAlertPolicyRequest)
-            @delete_alert_policy.call(req, options)
+            @delete_alert_policy.call(req, options, &block)
             nil
           end
 
@@ -457,12 +491,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::AlertPolicy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::AlertPolicy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   alert_policy_service_client = Google::Cloud::Monitoring::V3::AlertPolicy.new
+          #   alert_policy_service_client = Google::Cloud::Monitoring::AlertPolicy.new(version: :v3)
           #
           #   # TODO: Initialize +alert_policy+:
           #   alert_policy = {}
@@ -471,13 +508,14 @@ module Google
           def update_alert_policy \
               alert_policy,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               alert_policy: alert_policy,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::UpdateAlertPolicyRequest)
-            @update_alert_policy.call(req, options)
+            @update_alert_policy.call(req, options, &block)
           end
         end
       end
