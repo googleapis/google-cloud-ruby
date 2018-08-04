@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -29,14 +26,15 @@ require "google/gax"
 
 require "google/iam/v1/iam_policy_pb"
 require "google/pubsub/v1/pubsub_pb"
-require "google/cloud/pubsub/credentials"
+require "google/cloud/pubsub/v1/credentials"
 
 module Google
   module Cloud
     module Pubsub
       module V1
         # The service that an application uses to manipulate subscriptions and to
-        # consume messages from a subscription via the +Pull+ method.
+        # consume messages from a subscription via the +Pull+ method or by
+        # establishing a bi-directional stream using the +StreamingPull+ method.
         #
         # @!attribute [r] iam_policy_stub
         #   @return [Google::Iam::V1::IAMPolicy::Stub]
@@ -50,6 +48,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -73,17 +74,6 @@ module Google
             "https://www.googleapis.com/auth/pubsub"
           ].freeze
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
-          SNAPSHOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/snapshots/{snapshot}"
-          )
-
-          private_constant :SNAPSHOT_PATH_TEMPLATE
 
           SUBSCRIPTION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/subscriptions/{subscription}"
@@ -97,25 +87,17 @@ module Google
 
           private_constant :TOPIC_PATH_TEMPLATE
 
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
+          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}"
+          )
 
-          # Returns a fully-qualified snapshot resource name string.
-          # @param project [String]
-          # @param snapshot [String]
-          # @return [String]
-          def self.snapshot_path project, snapshot
-            SNAPSHOT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"snapshot" => snapshot
-            )
-          end
+          private_constant :PROJECT_PATH_TEMPLATE
+
+          SNAPSHOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/snapshots/{snapshot}"
+          )
+
+          private_constant :SNAPSHOT_PATH_TEMPLATE
 
           # Returns a fully-qualified subscription resource name string.
           # @param project [String]
@@ -136,6 +118,26 @@ module Google
             TOPIC_PATH_TEMPLATE.render(
               :"project" => project,
               :"topic" => topic
+            )
+          end
+
+          # Returns a fully-qualified project resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.project_path project
+            PROJECT_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
+
+          # Returns a fully-qualified snapshot resource name string.
+          # @param project [String]
+          # @param snapshot [String]
+          # @return [String]
+          def self.snapshot_path project, snapshot
+            SNAPSHOT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"snapshot" => snapshot
             )
           end
 
@@ -163,16 +165,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -182,21 +186,10 @@ module Google
             require "google/iam/v1/iam_policy_services_pb"
             require "google/pubsub/v1/pubsub_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Pubsub::Credentials.default
+            credentials ||= Google::Cloud::Pubsub::V1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Pubsub::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Pubsub::V1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -211,13 +204,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-pubsub'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "subscriber_client_config.json"
             )
@@ -230,9 +226,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @iam_policy_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -240,6 +241,7 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Iam::V1::IAMPolicy::Stub.method(:new)
             )
             @subscriber_stub = Google::Gax::Grpc.create_stub(
@@ -249,86 +251,106 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Pubsub::V1::Subscriber::Stub.method(:new)
             )
 
-            @set_iam_policy = Google::Gax.create_api_call(
-              @iam_policy_stub.method(:set_iam_policy),
-              defaults["set_iam_policy"]
-            )
-            @get_iam_policy = Google::Gax.create_api_call(
-              @iam_policy_stub.method(:get_iam_policy),
-              defaults["get_iam_policy"]
-            )
-            @test_iam_permissions = Google::Gax.create_api_call(
-              @iam_policy_stub.method(:test_iam_permissions),
-              defaults["test_iam_permissions"]
-            )
             @create_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:create_subscription),
-              defaults["create_subscription"]
+              defaults["create_subscription"],
+              exception_transformer: exception_transformer
             )
             @get_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:get_subscription),
-              defaults["get_subscription"]
+              defaults["get_subscription"],
+              exception_transformer: exception_transformer
             )
             @update_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:update_subscription),
-              defaults["update_subscription"]
+              defaults["update_subscription"],
+              exception_transformer: exception_transformer
             )
             @list_subscriptions = Google::Gax.create_api_call(
               @subscriber_stub.method(:list_subscriptions),
-              defaults["list_subscriptions"]
+              defaults["list_subscriptions"],
+              exception_transformer: exception_transformer
             )
             @delete_subscription = Google::Gax.create_api_call(
               @subscriber_stub.method(:delete_subscription),
-              defaults["delete_subscription"]
+              defaults["delete_subscription"],
+              exception_transformer: exception_transformer
             )
             @modify_ack_deadline = Google::Gax.create_api_call(
               @subscriber_stub.method(:modify_ack_deadline),
-              defaults["modify_ack_deadline"]
+              defaults["modify_ack_deadline"],
+              exception_transformer: exception_transformer
             )
             @acknowledge = Google::Gax.create_api_call(
               @subscriber_stub.method(:acknowledge),
-              defaults["acknowledge"]
+              defaults["acknowledge"],
+              exception_transformer: exception_transformer
             )
             @pull = Google::Gax.create_api_call(
               @subscriber_stub.method(:pull),
-              defaults["pull"]
+              defaults["pull"],
+              exception_transformer: exception_transformer
             )
             @streaming_pull = Google::Gax.create_api_call(
               @subscriber_stub.method(:streaming_pull),
-              defaults["streaming_pull"]
+              defaults["streaming_pull"],
+              exception_transformer: exception_transformer
             )
             @modify_push_config = Google::Gax.create_api_call(
               @subscriber_stub.method(:modify_push_config),
-              defaults["modify_push_config"]
+              defaults["modify_push_config"],
+              exception_transformer: exception_transformer
             )
             @list_snapshots = Google::Gax.create_api_call(
               @subscriber_stub.method(:list_snapshots),
-              defaults["list_snapshots"]
+              defaults["list_snapshots"],
+              exception_transformer: exception_transformer
             )
             @create_snapshot = Google::Gax.create_api_call(
               @subscriber_stub.method(:create_snapshot),
-              defaults["create_snapshot"]
+              defaults["create_snapshot"],
+              exception_transformer: exception_transformer
             )
             @update_snapshot = Google::Gax.create_api_call(
               @subscriber_stub.method(:update_snapshot),
-              defaults["update_snapshot"]
+              defaults["update_snapshot"],
+              exception_transformer: exception_transformer
             )
             @delete_snapshot = Google::Gax.create_api_call(
               @subscriber_stub.method(:delete_snapshot),
-              defaults["delete_snapshot"]
+              defaults["delete_snapshot"],
+              exception_transformer: exception_transformer
             )
             @seek = Google::Gax.create_api_call(
               @subscriber_stub.method(:seek),
-              defaults["seek"]
+              defaults["seek"],
+              exception_transformer: exception_transformer
+            )
+            @set_iam_policy = Google::Gax.create_api_call(
+              @iam_policy_stub.method(:set_iam_policy),
+              defaults["set_iam_policy"],
+              exception_transformer: exception_transformer
+            )
+            @get_iam_policy = Google::Gax.create_api_call(
+              @iam_policy_stub.method(:get_iam_policy),
+              defaults["get_iam_policy"],
+              exception_transformer: exception_transformer
+            )
+            @test_iam_permissions = Google::Gax.create_api_call(
+              @iam_policy_stub.method(:test_iam_permissions),
+              defaults["test_iam_permissions"],
+              exception_transformer: exception_transformer
             )
           end
 
           # Service calls
 
-          # Creates a subscription to a given topic.
+          # Creates a subscription to a given topic. See the
+          # <a href="/pubsub/docs/admin#resource_names"> resource name rules</a>.
           # If the subscription already exists, returns +ALREADY_EXISTS+.
           # If the corresponding topic doesn't exist, returns +NOT_FOUND+.
           #
@@ -345,7 +367,7 @@ module Google
           #   start with a letter, and contain only letters (+[A-Za-z]+), numbers
           #   (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
           #   plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
-          #   in length, and it must not start with +"goog"+.
+          #   in length, and it must not start with +"goog"+
           # @param topic [String]
           #   The name of the topic from which this subscription is receiving messages.
           #   Format is +projects/{project}/topics/{topic}+.
@@ -367,7 +389,8 @@ module Google
           #   For pull subscriptions, this value is used as the initial value for the ack
           #   deadline. To override this value for a given message, call
           #   +ModifyAckDeadline+ with the corresponding +ack_id+ if using
-          #   pull.
+          #   non-streaming pull or send the +ack_id+ in a
+          #   +StreamingModifyAckDeadlineRequest+ if using streaming pull.
           #   The minimum custom deadline you can specify is 10 seconds.
           #   The maximum custom deadline you can specify is 600 seconds (10 minutes).
           #   If this parameter is 0, a default value of 10 seconds is used.
@@ -381,14 +404,20 @@ module Google
           #   Indicates whether to retain acknowledged messages. If true, then
           #   messages are not expunged from the subscription's backlog, even if they are
           #   acknowledged, until they fall out of the +message_retention_duration+
-          #   window.
+          #   window.<br><br>
+          #   <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          #   changed in backward-incompatible ways and is not recommended for production
+          #   use. It is not subject to any SLA or deprecation policy.
           # @param message_retention_duration [Google::Protobuf::Duration | Hash]
           #   How long to retain unacknowledged messages in the subscription's backlog,
           #   from the moment a message is published.
           #   If +retain_acked_messages+ is true, then this also configures the retention
           #   of acknowledged messages, and thus configures how far back in time a +Seek+
           #   can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-          #   minutes.
+          #   minutes.<br><br>
+          #   <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          #   changed in backward-incompatible ways and is not recommended for production
+          #   use. It is not subject to any SLA or deprecation policy.
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param labels [Hash{String => String}]
@@ -396,12 +425,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Pubsub::V1::Subscription]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Pubsub::V1::Subscription]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_name = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   formatted_topic = Google::Cloud::Pubsub::V1::SubscriberClient.topic_path("[PROJECT]", "[TOPIC]")
           #   response = subscriber_client.create_subscription(formatted_name, formatted_topic)
@@ -414,7 +446,8 @@ module Google
               retain_acked_messages: nil,
               message_retention_duration: nil,
               labels: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               topic: topic,
@@ -425,7 +458,7 @@ module Google
               labels: labels
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::Subscription)
-            @create_subscription.call(req, options)
+            @create_subscription.call(req, options, &block)
           end
 
           # Gets the configuration details of a subscription.
@@ -436,31 +469,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Pubsub::V1::Subscription]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Pubsub::V1::Subscription]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   response = subscriber_client.get_subscription(formatted_subscription)
 
           def get_subscription \
               subscription,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::GetSubscriptionRequest)
-            @get_subscription.call(req, options)
+            @get_subscription.call(req, options, &block)
           end
 
           # Updates an existing subscription. Note that certain properties of a
           # subscription, such as its topic, are not modifiable.
-          # NOTE:  The style guide requires body: "subscription" instead of body: "*".
-          # Keeping the latter for internal consistency in V1, however it should be
-          # corrected in V2.  See
-          # https://cloud.google.com/apis/design/standard_methods#update for details.
           #
           # @param subscription [Google::Pubsub::V1::Subscription | Hash]
           #   The updated subscription object.
@@ -474,26 +507,33 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Pubsub::V1::Subscription]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Pubsub::V1::Subscription]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
-          #   subscription = {}
-          #   update_mask = {}
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
+          #   ack_deadline_seconds = 42
+          #   subscription = { ack_deadline_seconds: ack_deadline_seconds }
+          #   paths_element = "ack_deadline_seconds"
+          #   paths = [paths_element]
+          #   update_mask = { paths: paths }
           #   response = subscriber_client.update_subscription(subscription, update_mask)
 
           def update_subscription \
               subscription,
               update_mask,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::UpdateSubscriptionRequest)
-            @update_subscription.call(req, options)
+            @update_subscription.call(req, options, &block)
           end
 
           # Lists matching subscriptions.
@@ -510,6 +550,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Pubsub::V1::Subscription>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Pubsub::V1::Subscription>]
           #   An enumerable of Google::Pubsub::V1::Subscription instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -517,9 +560,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_project = Google::Cloud::Pubsub::V1::SubscriberClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -538,13 +581,14 @@ module Google
           def list_subscriptions \
               project,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project: project,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::ListSubscriptionsRequest)
-            @list_subscriptions.call(req, options)
+            @list_subscriptions.call(req, options, &block)
           end
 
           # Deletes an existing subscription. All messages retained in the subscription
@@ -559,22 +603,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   subscriber_client.delete_subscription(formatted_subscription)
 
           def delete_subscription \
               subscription,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::DeleteSubscriptionRequest)
-            @delete_subscription.call(req, options)
+            @delete_subscription.call(req, options, &block)
             nil
           end
 
@@ -600,13 +648,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize +ack_ids+:
           #   ack_ids = []
+          #
+          #   # TODO: Initialize +ack_deadline_seconds+:
           #   ack_deadline_seconds = 0
           #   subscriber_client.modify_ack_deadline(formatted_subscription, ack_ids, ack_deadline_seconds)
 
@@ -614,14 +669,15 @@ module Google
               subscription,
               ack_ids,
               ack_deadline_seconds,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription,
               ack_ids: ack_ids,
               ack_deadline_seconds: ack_deadline_seconds
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::ModifyAckDeadlineRequest)
-            @modify_ack_deadline.call(req, options)
+            @modify_ack_deadline.call(req, options, &block)
             nil
           end
 
@@ -642,25 +698,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize +ack_ids+:
           #   ack_ids = []
           #   subscriber_client.acknowledge(formatted_subscription, ack_ids)
 
           def acknowledge \
               subscription,
               ack_ids,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription,
               ack_ids: ack_ids
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::AcknowledgeRequest)
-            @acknowledge.call(req, options)
+            @acknowledge.call(req, options, &block)
             nil
           end
 
@@ -685,13 +747,18 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Pubsub::V1::PullResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Pubsub::V1::PullResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize +max_messages+:
           #   max_messages = 0
           #   response = subscriber_client.pull(formatted_subscription, max_messages)
 
@@ -699,28 +766,24 @@ module Google
               subscription,
               max_messages,
               return_immediately: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription,
               max_messages: max_messages,
               return_immediately: return_immediately
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::PullRequest)
-            @pull.call(req, options)
+            @pull.call(req, options, &block)
           end
 
-          # (EXPERIMENTAL) StreamingPull is an experimental feature. This RPC will
-          # respond with UNIMPLEMENTED errors unless you have been invited to test
-          # this feature. Contact cloud-pubsub@google.com with any questions.
-          #
           # Establishes a stream with the server, which sends messages down to the
           # client. The client streams acknowledgements and ack deadline modifications
           # back to the server. The server will close the stream and return the status
-          # on any error. The server may close the stream with status +OK+ to reassign
-          # server-side resources, in which case, the client should re-establish the
-          # stream. +UNAVAILABLE+ may also be returned in the case of a transient error
-          # (e.g., a server restart). These should also be retried by the client. Flow
-          # control can be achieved by configuring the underlying RPC channel.
+          # on any error. The server may close the stream with status +UNAVAILABLE+ to
+          # reassign server-side resources, in which case, the client should
+          # re-establish the stream. Flow control can be achieved by configuring the
+          # underlying RPC channel.
           #
           # @param reqs [Enumerable<Google::Pubsub::V1::StreamingPullRequest>]
           #   The input requests.
@@ -738,10 +801,12 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize +stream_ack_deadline_seconds+:
           #   stream_ack_deadline_seconds = 0
           #   request = { subscription: formatted_subscription, stream_ack_deadline_seconds: stream_ack_deadline_seconds }
           #   requests = [request]
@@ -772,35 +837,44 @@ module Google
           #   An empty +pushConfig+ indicates that the Pub/Sub system should
           #   stop pushing messages from the given subscription and allow
           #   messages to be pulled and acknowledged - effectively pausing
-          #   the subscription if +Pull+ is not called.
+          #   the subscription if +Pull+ or +StreamingPull+ is not called.
           #   A hash of the same form as `Google::Pubsub::V1::PushConfig`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize +push_config+:
           #   push_config = {}
           #   subscriber_client.modify_push_config(formatted_subscription, push_config)
 
           def modify_push_config \
               subscription,
               push_config,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription,
               push_config: push_config
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::ModifyPushConfigRequest)
-            @modify_push_config.call(req, options)
+            @modify_push_config.call(req, options, &block)
             nil
           end
 
-          # Lists the existing snapshots.
+          # Lists the existing snapshots.<br><br>
+          # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          # changed in backward-incompatible ways and is not recommended for production
+          # use. It is not subject to any SLA or deprecation policy.
           #
           # @param project [String]
           #   The name of the cloud project that snapshots belong to.
@@ -814,6 +888,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Pubsub::V1::Snapshot>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Pubsub::V1::Snapshot>]
           #   An enumerable of Google::Pubsub::V1::Snapshot instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -821,9 +898,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_project = Google::Cloud::Pubsub::V1::SubscriberClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -842,25 +919,31 @@ module Google
           def list_snapshots \
               project,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project: project,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::ListSnapshotsRequest)
-            @list_snapshots.call(req, options)
+            @list_snapshots.call(req, options, &block)
           end
 
-          # Creates a snapshot from the requested subscription.
+          # Creates a snapshot from the requested subscription.<br><br>
+          # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          # changed in backward-incompatible ways and is not recommended for production
+          # use. It is not subject to any SLA or deprecation policy.
           # If the snapshot already exists, returns +ALREADY_EXISTS+.
           # If the requested subscription doesn't exist, returns +NOT_FOUND+.
-          #
-          # If the name is not provided in the request, the server will assign a random
+          # If the backlog in the subscription is too old -- and the resulting snapshot
+          # would expire in less than 1 hour -- then +FAILED_PRECONDITION+ is returned.
+          # See also the +Snapshot.expire_time+ field. If the name is not provided in
+          # the request, the server will assign a random
           # name for this snapshot on the same project as the subscription, conforming
-          # to the
-          # [resource name format](https://cloud.google.com/pubsub/docs/overview#names).
-          # The generated name is populated in the returned Snapshot object.
-          # Note that for REST API requests, you must specify a name in the request.
+          # to the [resource name format](https://cloud.google.com/pubsub/docs/overview#names).
+          # The generated
+          # name is populated in the returned Snapshot object. Note that for REST API
+          # requests, you must specify a name in the request.
           #
           # @param name [String]
           #   Optional user-provided name for this snapshot.
@@ -878,15 +961,20 @@ module Google
           #    (b) Any messages published to the subscription's topic following the
           #        successful completion of the CreateSnapshot request.
           #   Format is +projects/{project}/subscriptions/{sub}+.
+          # @param labels [Hash{String => String}]
+          #   User labels.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Pubsub::V1::Snapshot]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Pubsub::V1::Snapshot]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_name = Google::Cloud::Pubsub::V1::SubscriberClient.snapshot_path("[PROJECT]", "[SNAPSHOT]")
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   response = subscriber_client.create_snapshot(formatted_name, formatted_subscription)
@@ -894,24 +982,26 @@ module Google
           def create_snapshot \
               name,
               subscription,
-              options: nil
+              labels: nil,
+              options: nil,
+              &block
             req = {
               name: name,
-              subscription: subscription
+              subscription: subscription,
+              labels: labels
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::CreateSnapshotRequest)
-            @create_snapshot.call(req, options)
+            @create_snapshot.call(req, options, &block)
           end
 
-          # Updates an existing snapshot. Note that certain properties of a snapshot
-          # are not modifiable.
-          # NOTE:  The style guide requires body: "snapshot" instead of body: "*".
-          # Keeping the latter for internal consistency in V1, however it should be
-          # corrected in V2.  See
-          # https://cloud.google.com/apis/design/standard_methods#update for details.
+          # Updates an existing snapshot.<br><br>
+          # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          # changed in backward-incompatible ways and is not recommended for production
+          # use. It is not subject to any SLA or deprecation policy.
+          # Note that certain properties of a snapshot are not modifiable.
           #
           # @param snapshot [Google::Pubsub::V1::Snapshot | Hash]
-          #   The updated snpashot object.
+          #   The updated snapshot object.
           #   A hash of the same form as `Google::Pubsub::V1::Snapshot`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -922,29 +1012,41 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Pubsub::V1::Snapshot]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Pubsub::V1::Snapshot]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
-          #   snapshot = {}
-          #   update_mask = {}
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
+          #   seconds = 123456
+          #   expire_time = { seconds: seconds }
+          #   snapshot = { expire_time: expire_time }
+          #   paths_element = "expire_time"
+          #   paths = [paths_element]
+          #   update_mask = { paths: paths }
           #   response = subscriber_client.update_snapshot(snapshot, update_mask)
 
           def update_snapshot \
               snapshot,
               update_mask,
-              options: nil
+              options: nil,
+              &block
             req = {
               snapshot: snapshot,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::UpdateSnapshotRequest)
-            @update_snapshot.call(req, options)
+            @update_snapshot.call(req, options, &block)
           end
 
-          # Removes an existing snapshot. All messages retained in the snapshot
+          # Removes an existing snapshot. <br><br>
+          # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          # changed in backward-incompatible ways and is not recommended for production
+          # use. It is not subject to any SLA or deprecation policy.
+          # When the snapshot is deleted, all messages retained in the snapshot
           # are immediately dropped. After a snapshot is deleted, a new one may be
           # created with the same name, but the new one has no association with the old
           # snapshot or its subscription, unless the same subscription is specified.
@@ -955,27 +1057,34 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_snapshot = Google::Cloud::Pubsub::V1::SubscriberClient.snapshot_path("[PROJECT]", "[SNAPSHOT]")
           #   subscriber_client.delete_snapshot(formatted_snapshot)
 
           def delete_snapshot \
               snapshot,
-              options: nil
+              options: nil,
+              &block
             req = {
               snapshot: snapshot
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::DeleteSnapshotRequest)
-            @delete_snapshot.call(req, options)
+            @delete_snapshot.call(req, options, &block)
             nil
           end
 
           # Seeks an existing subscription to a point in time or to a given snapshot,
-          # whichever is provided in the request.
+          # whichever is provided in the request.<br><br>
+          # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          # changed in backward-incompatible ways and is not recommended for production
+          # use. It is not subject to any SLA or deprecation policy.
           #
           # @param subscription [String]
           #   The subscription to affect.
@@ -1000,12 +1109,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Pubsub::V1::SeekResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Pubsub::V1::SeekResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_subscription = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   response = subscriber_client.seek(formatted_subscription)
 
@@ -1013,14 +1125,15 @@ module Google
               subscription,
               time: nil,
               snapshot: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               subscription: subscription,
               time: time,
               snapshot: snapshot
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Pubsub::V1::SeekRequest)
-            @seek.call(req, options)
+            @seek.call(req, options, &block)
           end
 
           # Sets the access control policy on the specified resource. Replaces any
@@ -1040,26 +1153,32 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Iam::V1::Policy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_resource = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize +policy+:
           #   policy = {}
           #   response = subscriber_client.set_iam_policy(formatted_resource, policy)
 
           def set_iam_policy \
               resource,
               policy,
-              options: nil
+              options: nil,
+              &block
             req = {
               resource: resource,
               policy: policy
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::SetIamPolicyRequest)
-            @set_iam_policy.call(req, options)
+            @set_iam_policy.call(req, options, &block)
           end
 
           # Gets the access control policy for a resource.
@@ -1073,23 +1192,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Iam::V1::Policy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Iam::V1::Policy]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_resource = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
           #   response = subscriber_client.get_iam_policy(formatted_resource)
 
           def get_iam_policy \
               resource,
-              options: nil
+              options: nil,
+              &block
             req = {
               resource: resource
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::GetIamPolicyRequest)
-            @get_iam_policy.call(req, options)
+            @get_iam_policy.call(req, options, &block)
           end
 
           # Returns permissions that a caller has on the specified resource.
@@ -1108,26 +1231,32 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Iam::V1::TestIamPermissionsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Iam::V1::TestIamPermissionsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/pubsub/v1"
+          #   require "google/cloud/pubsub"
           #
-          #   subscriber_client = Google::Cloud::Pubsub::V1::Subscriber.new
+          #   subscriber_client = Google::Cloud::Pubsub::Subscriber.new(version: :v1)
           #   formatted_resource = Google::Cloud::Pubsub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize +permissions+:
           #   permissions = []
           #   response = subscriber_client.test_iam_permissions(formatted_resource, permissions)
 
           def test_iam_permissions \
               resource,
               permissions,
-              options: nil
+              options: nil,
+              &block
             req = {
               resource: resource,
               permissions: permissions
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
-            @test_iam_permissions.call(req, options)
+            @test_iam_permissions.call(req, options, &block)
           end
         end
       end

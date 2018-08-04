@@ -9,9 +9,13 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.pubsub.v1.MessageStoragePolicy" do
+    repeated :allowed_persistence_regions, :string, 1
+  end
   add_message "google.pubsub.v1.Topic" do
     optional :name, :string, 1
     map :labels, :string, :string, 2
+    optional :message_storage_policy, :message, 3, "google.pubsub.v1.MessageStoragePolicy"
   end
   add_message "google.pubsub.v1.PubsubMessage" do
     optional :data, :bytes, 1
@@ -49,6 +53,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.pubsub.v1.ListTopicSubscriptionsResponse" do
     repeated :subscriptions, :string, 1
+    optional :next_page_token, :string, 2
+  end
+  add_message "google.pubsub.v1.ListTopicSnapshotsRequest" do
+    optional :topic, :string, 1
+    optional :page_size, :int32, 2
+    optional :page_token, :string, 3
+  end
+  add_message "google.pubsub.v1.ListTopicSnapshotsResponse" do
+    repeated :snapshots, :string, 1
     optional :next_page_token, :string, 2
   end
   add_message "google.pubsub.v1.DeleteTopicRequest" do
@@ -124,6 +137,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.pubsub.v1.CreateSnapshotRequest" do
     optional :name, :string, 1
     optional :subscription, :string, 2
+    map :labels, :string, :string, 3
   end
   add_message "google.pubsub.v1.UpdateSnapshotRequest" do
     optional :snapshot, :message, 1, "google.pubsub.v1.Snapshot"
@@ -134,6 +148,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :topic, :string, 2
     optional :expire_time, :message, 3, "google.protobuf.Timestamp"
     map :labels, :string, :string, 4
+  end
+  add_message "google.pubsub.v1.GetSnapshotRequest" do
+    optional :snapshot, :string, 1
   end
   add_message "google.pubsub.v1.ListSnapshotsRequest" do
     optional :project, :string, 1
@@ -161,6 +178,7 @@ end
 module Google
   module Pubsub
     module V1
+      MessageStoragePolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.MessageStoragePolicy").msgclass
       Topic = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Topic").msgclass
       PubsubMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PubsubMessage").msgclass
       GetTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetTopicRequest").msgclass
@@ -171,6 +189,8 @@ module Google
       ListTopicsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicsResponse").msgclass
       ListTopicSubscriptionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSubscriptionsRequest").msgclass
       ListTopicSubscriptionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSubscriptionsResponse").msgclass
+      ListTopicSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsRequest").msgclass
+      ListTopicSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListTopicSnapshotsResponse").msgclass
       DeleteTopicRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteTopicRequest").msgclass
       Subscription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Subscription").msgclass
       PushConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig").msgclass
@@ -190,6 +210,7 @@ module Google
       CreateSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CreateSnapshotRequest").msgclass
       UpdateSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSnapshotRequest").msgclass
       Snapshot = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Snapshot").msgclass
+      GetSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSnapshotRequest").msgclass
       ListSnapshotsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSnapshotsRequest").msgclass
       ListSnapshotsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSnapshotsResponse").msgclass
       DeleteSnapshotRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteSnapshotRequest").msgclass
