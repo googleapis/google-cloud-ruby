@@ -33,6 +33,12 @@ s.copy(v1_library / 'lib/google/pubsub/v1')
 # Omitting lib/google/cloud/pusbusb/v1.rb for now because we are not exposing
 # the low-level API.
 
+# https://github.com/googleapis/gapic-generator/issues/2124
+s.replace(
+    'lib/google/cloud/pubsub/v1/credentials.rb',
+    'SCOPE = \[[^\]]+\]\.freeze',
+    'SCOPE = ["https://www.googleapis.com/auth/pubsub"].freeze')
+
 # https://github.com/googleapis/gapic-generator/issues/2182
 s.replace(
     'lib/google/cloud/pubsub/v1/credentials.rb',

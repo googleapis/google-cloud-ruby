@@ -19,10 +19,7 @@ module Google
     module Pubsub
       module V1
         class Credentials < Google::Auth::Credentials
-          SCOPE = [
-            "https://www.googleapis.com/auth/cloud-platform",
-            "https://www.googleapis.com/auth/pubsub"
-          ].freeze
+          SCOPE = ["https://www.googleapis.com/auth/pubsub"].freeze
           PATH_ENV_VARS = %w(PUBSUB_CREDENTIALS
                              PUBSUB_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
