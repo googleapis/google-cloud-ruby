@@ -72,7 +72,7 @@ module Google
     # ```
     #
     module OsLogin
-      module V1beta
+      module V1
       end
     end
   end

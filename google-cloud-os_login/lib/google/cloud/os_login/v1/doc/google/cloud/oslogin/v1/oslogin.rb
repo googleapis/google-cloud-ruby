@@ -21,12 +21,12 @@ module Google
       # | Class | Description |
       # | ----- | ----------- |
       # | [OsLoginServiceClient][] | Cloud OS Login API |
-      # | [Data Types][] | Data types for Google::Cloud::OsLogin::V1beta |
+      # | [Data Types][] | Data types for Google::Cloud::OsLogin::V1 |
       #
-      # [OsLoginServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1beta/osloginserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1beta/datatypes
+      # [OsLoginServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1/osloginserviceclient
+      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1/datatypes
       #
-      module V1beta
+      module V1
         # The user profile information used for logging in to a virtual machine on
         # Google Compute Engine.
         # @!attribute [rw] name
@@ -88,7 +88,7 @@ module Google
 
         # A response message for importing an SSH public key.
         # @!attribute [rw] login_profile
-        #   @return [Google::Cloud::Oslogin::V1beta::LoginProfile]
+        #   @return [Google::Cloud::Oslogin::V1::LoginProfile]
         #     The login profile information for the user.
         class ImportSshPublicKeyResponse; end
 

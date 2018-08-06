@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -41,7 +41,8 @@ end
 
 # Acceptance tests
 desc "Run the google-cloud-os_login acceptance tests."
-task :acceptance do
+task :acceptance, :project, :keyfile do |t, args|
+
   Rake::Task["acceptance:run"].invoke
 end
 
@@ -89,6 +90,24 @@ task :jsondoc => :yard do
             include: ["google/rpc"]
           }
         ]
+      },
+      {
+        type: "toc",
+        title: "Google::Cloud::Oslogin::V1::DataTypes",
+        modules: [
+          {
+            title: "Google::Cloud::Oslogin::V1",
+            include: ["google/cloud/os_login/v1"]
+          },
+          {
+            title: "Google::Protobuf",
+            include: ["google/protobuf"]
+          },
+          {
+            title: "Google::Rpc",
+            include: ["google/rpc"]
+          }
+        ]
       }
     ]
   }
@@ -118,7 +137,6 @@ task :ci do
   header "google-cloud-os_login test", "*"
   sh "bundle exec rake test"
 end
-
 
 namespace :ci do
   desc "Run the CI build, with acceptance tests."

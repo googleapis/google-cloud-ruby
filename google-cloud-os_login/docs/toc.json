@@ -7,6 +7,21 @@
       "patterns": ["\/oslogin", "google\/api", "google\/protobuf"],
       "nav": [
         {
+          "title": "V1",
+          "type": "google/cloud/oslogin/v1",
+          "patterns": ["\/oslogin\/v1", "google\/api", "google\/protobuf"],
+          "nav": [
+            {
+              "title": "OsLoginServiceClient",
+              "type": "google/cloud/oslogin/v1/osloginserviceclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/cloud/oslogin/v1/datatypes"
+            }
+          ]
+        },
+        {
           "title": "V1Beta",
           "type": "google/cloud/oslogin/v1beta",
           "patterns": ["\/oslogin\/v1beta", "google\/api", "google\/protobuf"],

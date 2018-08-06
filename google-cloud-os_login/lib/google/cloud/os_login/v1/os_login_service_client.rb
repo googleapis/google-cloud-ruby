@@ -14,7 +14,7 @@
 #
 # EDITING INSTRUCTIONS
 # This file was generated from the file
-# https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto,
+# https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1/oslogin.proto,
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
@@ -24,20 +24,20 @@ require "pathname"
 
 require "google/gax"
 
-require "google/cloud/oslogin/v1beta/oslogin_pb"
-require "google/cloud/os_login/v1beta/credentials"
+require "google/cloud/oslogin/v1/oslogin_pb"
+require "google/cloud/os_login/v1/credentials"
 
 module Google
   module Cloud
     module OsLogin
-      module V1beta
+      module V1
         # Cloud OS Login API
         #
         # The Cloud OS Login API allows you to manage users and their associated SSH
         # public keys for logging into virtual machines on Google Cloud Platform.
         #
         # @!attribute [r] os_login_service_stub
-        #   @return [Google::Cloud::Oslogin::V1beta::OsLoginService::Stub]
+        #   @return [Google::Cloud::Oslogin::V1::OsLoginService::Stub]
         class OsLoginServiceClient
           attr_reader :os_login_service_stub
 
@@ -153,12 +153,12 @@ module Google
             # the gRPC module only when it's required.
             # See https://github.com/googleapis/toolkit/issues/446
             require "google/gax/grpc"
-            require "google/cloud/oslogin/v1beta/oslogin_services_pb"
+            require "google/cloud/oslogin/v1/oslogin_services_pb"
 
-            credentials ||= Google::Cloud::OsLogin::V1beta::Credentials.default
+            credentials ||= Google::Cloud::OsLogin::V1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::OsLogin::V1beta::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::OsLogin::V1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -188,7 +188,7 @@ module Google
             )
             defaults = client_config_file.open do |f|
               Google::Gax.construct_settings(
-                "google.cloud.oslogin.v1beta.OsLoginService",
+                "google.cloud.oslogin.v1.OsLoginService",
                 JSON.parse(f.read),
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
@@ -210,7 +210,7 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Oslogin::V1beta::OsLoginService::Stub.method(:new)
+              &Google::Cloud::Oslogin::V1::OsLoginService::Stub.method(:new)
             )
 
             @delete_posix_account = Google::Gax.create_api_call(
@@ -263,8 +263,8 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
-          #   formatted_name = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.project_path("[USER]", "[PROJECT]")
+          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.project_path("[USER]", "[PROJECT]")
           #   os_login_service_client.delete_posix_account(formatted_name)
 
           def delete_posix_account \
@@ -274,7 +274,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::DeletePosixAccountRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1::DeletePosixAccountRequest)
             @delete_posix_account.call(req, options, &block)
             nil
           end
@@ -295,8 +295,8 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
-          #   formatted_name = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
           #   os_login_service_client.delete_ssh_public_key(formatted_name)
 
           def delete_ssh_public_key \
@@ -306,7 +306,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::DeleteSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1::DeleteSshPublicKeyRequest)
             @delete_ssh_public_key.call(req, options, &block)
             nil
           end
@@ -320,15 +320,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Oslogin::V1beta::LoginProfile]
+          # @yieldparam result [Google::Cloud::Oslogin::V1::LoginProfile]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Oslogin::V1beta::LoginProfile]
+          # @return [Google::Cloud::Oslogin::V1::LoginProfile]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
-          #   formatted_name = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.user_path("[USER]")
+          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.user_path("[USER]")
           #   response = os_login_service_client.get_login_profile(formatted_name)
 
           def get_login_profile \
@@ -338,7 +338,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::GetLoginProfileRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1::GetLoginProfileRequest)
             @get_login_profile.call(req, options, &block)
           end
 
@@ -359,8 +359,8 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
-          #   formatted_name = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
           #   response = os_login_service_client.get_ssh_public_key(formatted_name)
 
           def get_ssh_public_key \
@@ -370,7 +370,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::GetSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1::GetSshPublicKeyRequest)
             @get_ssh_public_key.call(req, options, &block)
           end
 
@@ -390,15 +390,15 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyResponse]
+          # @yieldparam result [Google::Cloud::Oslogin::V1::ImportSshPublicKeyResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyResponse]
+          # @return [Google::Cloud::Oslogin::V1::ImportSshPublicKeyResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
-          #   formatted_parent = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.user_path("[USER]")
+          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   formatted_parent = Google::Cloud::OsLogin::V1::OsLoginServiceClient.user_path("[USER]")
           #
           #   # TODO: Initialize +ssh_public_key+:
           #   ssh_public_key = {}
@@ -415,7 +415,7 @@ module Google
               ssh_public_key: ssh_public_key,
               project_id: project_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1::ImportSshPublicKeyRequest)
             @import_ssh_public_key.call(req, options, &block)
           end
 
@@ -445,8 +445,8 @@ module Google
           # @example
           #   require "google/cloud/os_login"
           #
-          #   os_login_service_client = Google::Cloud::OsLogin::V1beta.new(version: :v1beta)
-          #   formatted_name = Google::Cloud::OsLogin::V1beta::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
+          #   os_login_service_client = Google::Cloud::OsLogin.new(version: :v1)
+          #   formatted_name = Google::Cloud::OsLogin::V1::OsLoginServiceClient.fingerprint_path("[USER]", "[FINGERPRINT]")
           #
           #   # TODO: Initialize +ssh_public_key+:
           #   ssh_public_key = {}
@@ -463,7 +463,7 @@ module Google
               ssh_public_key: ssh_public_key,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::UpdateSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1::UpdateSshPublicKeyRequest)
             @update_ssh_public_key.call(req, options, &block)
           end
         end
