@@ -373,7 +373,7 @@ module Google
         #   table.read_rows(limit: 5).each do |row|
         #     row
         #   end
-        
+
         def table \
             instance_id,
             table_id,
