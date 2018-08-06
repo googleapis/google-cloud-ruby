@@ -19,10 +19,10 @@ require "minitest/spec"
 
 require "google/cloud/language"
 
-describe "LanguageServiceSmokeTest" do
+describe "LanguageServiceSmokeTest V1" do
   it "runs one smoke test with analyze_sentiment" do
 
-    language_service_client = Google::Cloud::Language.new
+    language_service_client = Google::Cloud::Language.new version: :v1
     content = "Hello, world!"
     type = :PLAIN_TEXT
     document = { content: content, type: type }
