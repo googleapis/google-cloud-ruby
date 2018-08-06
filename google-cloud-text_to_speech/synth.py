@@ -52,6 +52,12 @@ s.replace(
     'TEXTTOSPEECH_KEYFILE_JSON\\n(\s+)TEXTTOSPEECH_CREDENTIALS_JSON\n',
     'TEXTTOSPEECH_CREDENTIALS_JSON\\n\\1TEXTTOSPEECH_KEYFILE_JSON\n')
 
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    '.yardopts',
+    '\n--markup markdown\n\n',
+    '\n--markup markdown\n--markup-provider redcarpet\n\n')
+
 # https://github.com/googleapis/gapic-generator/issues/2195
 s.replace(
     'README.md',
@@ -71,3 +77,14 @@ def merge_gemspec(src, dest, path):
     return src
 
 s.copy(v1_library / 'google-cloud-text_to_speech.gemspec', merge=merge_gemspec)
+
+
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    'google-cloud-text_to_speech.gemspec',
+    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
+    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
+s.replace(
+    'google-cloud-text_to_speech.gemspec',
+    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
+    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
