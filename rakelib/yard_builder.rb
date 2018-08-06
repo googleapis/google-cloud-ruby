@@ -206,6 +206,23 @@ class YardBuilder
       FileUtils.mv(docs_dir + gem + version + "css", docs_dir)
       FileUtils.mv(docs_dir + gem + version + "js", docs_dir)
     end
+    fix_gem_docs gem, gh_pages_repo_dir
+  end
+
+  def fix_gem_docs gem, gh_pages_repo_dir
+    if gem == "google-cloud-trace"
+      puts "cd #{gh_pages_repo_dir + "docs" + gem} [google-cloud-trace fixes]"
+      Dir.chdir(gh_pages_repo_dir + "docs" + gem) do
+        Dir.glob(File.join("**","*.html")).each do |file_path|
+          file_contents = File.read file_path
+          file_contents.gsub! "dynamic print site_values.console_name %",
+                              "Google Cloud Platform Console"
+          file_contents.gsub! "{% dynamic print site_values.console_name %}",
+                              "Google Cloud Platform Console"
+          File.write file_path, file_contents
+        end
+      end
+    end
   end
 
   def create_tmp_dir dir_name
