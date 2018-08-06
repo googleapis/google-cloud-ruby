@@ -626,11 +626,11 @@ capture stack traces. Ignored if sampled is not true.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='label'>trace_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>is_new:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>span_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>sampled:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                <span class='label'>capture_stack:</span> <span class='kw'>false</span>
   <span class='ivar'>@trace_id</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_id'>trace_id</span> <span class='op'>||</span> <span class='id identifier rubyid_new_random_trace_id'>new_random_trace_id</span>
-  <span class='ivar'>@is_new</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_is_new'>is_new</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-              <span class='op'>!</span><span class='id identifier rubyid_trace_id'>trace_id</span>
-            <span class='kw'>else</span>
-              <span class='id identifier rubyid_is_new'>is_new</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
-            <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_is_new'>is_new</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='ivar'>@is_new</span> <span class='op'>=</span> <span class='op'>!</span><span class='id identifier rubyid_trace_id'>trace_id</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@is_new</span> <span class='op'>=</span> <span class='id identifier rubyid_is_new'>is_new</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
   <span class='ivar'>@span_id</span> <span class='op'>=</span> <span class='id identifier rubyid_span_id'>span_id</span> <span class='op'>?</span> <span class='id identifier rubyid_span_id'>span_id</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>:</span> <span class='kw'>nil</span>
   <span class='ivar'>@sampled</span> <span class='op'>=</span> <span class='id identifier rubyid_sampled'>sampled</span>
   <span class='kw'>if</span> <span class='ivar'>@sampled</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -819,12 +819,12 @@ context has been set.</p>
       <pre class="lines">
 
 
-322
-323
-324</pre>
+324
+325
+326</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/stackdriver/core/trace_context.rb', line 322</span>
+      <pre class="code"><span class="info file"># File 'lib/stackdriver/core/trace_context.rb', line 324</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span>
   <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span><span class='lbracket'>[</span><span class='const'>THREAD_KEY</span><span class='rbracket'>]</span>
@@ -929,16 +929,16 @@ Rack environment.</p>
       <pre class="lines">
 
 
-281
-282
 283
 284
 285
 286
-287</pre>
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/stackdriver/core/trace_context.rb', line 281</span>
+      <pre class="code"><span class="info file"># File 'lib/stackdriver/core/trace_context.rb', line 283</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse_rack_env'>parse_rack_env</span> <span class='id identifier rubyid_env'>env</span>
   <span class='id identifier rubyid_trace_context'>trace_context</span> <span class='op'>=</span> <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='const'>MEMO_RACK_KEY</span><span class='rbracket'>]</span> <span class='op'>||</span>
@@ -1038,26 +1038,30 @@ trace context, or <code>nil</code> if the string was malformed.</p>
 239
 240
 241
-242</pre>
+242
+243
+244</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/stackdriver/core/trace_context.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse_string'>parse_string</span> <span class='id identifier rubyid_str'>str</span>
   <span class='id identifier rubyid_match'>match</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>%r|</span><span class='tstring_content'>^(\w{32})(/(\d+))?(;o=(\d+))?</span><span class='regexp_end'>|</span></span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span> <span class='id identifier rubyid_str'>str</span>
-  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_match'>match</span>
-
-  <span class='id identifier rubyid_trace_id'>trace_id</span> <span class='op'>=</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
-  <span class='id identifier rubyid_span_id'>span_id</span> <span class='op'>=</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>:</span> <span class='kw'>nil</span>
-  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>5</span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>5</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>:</span> <span class='kw'>nil</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='id identifier rubyid_sampled'>sampled</span> <span class='op'>=</span> <span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_match'>match</span>
+    <span class='id identifier rubyid_trace_id'>trace_id</span> <span class='op'>=</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_span_id'>span_id</span> <span class='op'>=</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>5</span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='id identifier rubyid_match'>match</span><span class='lbracket'>[</span><span class='int'>5</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>:</span> <span class='kw'>nil</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+      <span class='id identifier rubyid_sampled'>sampled</span> <span class='op'>=</span> <span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_sampled'>sampled</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>&amp;</span> <span class='int'>1</span> <span class='op'>!=</span> <span class='int'>0</span>
+      <span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>&amp;</span> <span class='int'>2</span> <span class='op'>!=</span> <span class='int'>0</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_new'>new</span> <span class='label'>trace_id:</span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span> <span class='label'>span_id:</span> <span class='id identifier rubyid_span_id'>span_id</span><span class='comma'>,</span> <span class='label'>sampled:</span> <span class='id identifier rubyid_sampled'>sampled</span><span class='comma'>,</span>
+        <span class='label'>capture_stack:</span> <span class='id identifier rubyid_capture_stack'>capture_stack</span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_sampled'>sampled</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>&amp;</span> <span class='int'>1</span> <span class='op'>!=</span> <span class='int'>0</span>
-    <span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>&amp;</span> <span class='int'>2</span> <span class='op'>!=</span> <span class='int'>0</span>
+    <span class='kw'>nil</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_new'>new</span> <span class='label'>trace_id:</span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span> <span class='label'>span_id:</span> <span class='id identifier rubyid_span_id'>span_id</span><span class='comma'>,</span> <span class='label'>sampled:</span> <span class='id identifier rubyid_sampled'>sampled</span><span class='comma'>,</span>
-      <span class='label'>capture_stack:</span> <span class='id identifier rubyid_capture_stack'>capture_stack</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1138,13 +1142,13 @@ set for the current thread. May be <code>nil</code>.</p>
       <pre class="lines">
 
 
-304
-305
 306
-307</pre>
+307
+308
+309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/stackdriver/core/trace_context.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/stackdriver/core/trace_context.rb', line 306</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span> <span class='id identifier rubyid_trace_context'>trace_context</span>
   <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_current'>current</span><span class='lbracket'>[</span><span class='const'>THREAD_KEY</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_context'>trace_context</span>
