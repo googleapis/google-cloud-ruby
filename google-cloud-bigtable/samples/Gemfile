@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+# TODO: Updated with GEM after alpha release
+github "jiren/google-cloud-ruby", branch: "perf-redesign" do
+  gem "google-cloud-bigtable"
+end
+
+gem 'commander', '~> 4.4', '>= 4.4.5'
