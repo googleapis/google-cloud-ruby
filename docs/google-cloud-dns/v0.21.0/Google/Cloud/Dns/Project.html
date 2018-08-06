@@ -1,0 +1,1236 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Dns::Project - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Dns::Project";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Dns.html" title="Google::Cloud::Dns (module)">Dns</a></span></span>
+     &raquo; 
+    <span class="title">Project</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Dns::Project
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Dns::Project</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dns/project.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Project</h1>
+
+<p>The project is a top level container for resources including Cloud DNS
+ManagedZones. Projects can be created only in the <a href="https://console.developers.google.com">Google Developers
+Console</a>.</p>
+
+<p>See <span class='object_link'><a href="../../Cloud.html#dns-instance_method" title="Google::Cloud#dns (method)">Google::Cloud#dns</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/dns</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dns.html" title="Google::Cloud::Dns (module)">Dns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Dns.html#new-class_method" title="Google::Cloud::Dns.new (method)">new</a></span></span>
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_records'>records</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_record'>record</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#additions_per_change-instance_method" title="#additions_per_change (instance method)">#<strong>additions_per_change</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum allowed number of records to add per change.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_zone-instance_method" title="#create_zone (instance method)">#<strong>create_zone</strong>(zone_name, zone_dns, description: nil, name_server_set: nil)  &#x21d2; Google::Cloud::Dns::Zone </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new zone.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#data_per_record-instance_method" title="#data_per_record (instance method)">#<strong>data_per_record</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum allowed number of data entries per record.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deletions_per_change-instance_method" title="#deletions_per_change (instance method)">#<strong>deletions_per_change</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum allowed number of records to delete per change.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#number-instance_method" title="#number (instance method)">#<strong>number</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The project number.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project-instance_method" title="#project (instance method)">#<strong>project</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #id)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The unique ID string for the current project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#records_per_zone-instance_method" title="#records_per_zone (instance method)">#<strong>records_per_zone</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum allowed number of records per zone in the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reload!-instance_method" title="#reload! (instance method)">#<strong>reload!</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #refresh!)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reloads the change with updated status from the DNS service.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#total_data_per_change-instance_method" title="#total_data_per_change (instance method)">#<strong>total_data_per_change</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum allowed total bytes size for all the data in one change.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#zone-instance_method" title="#zone (instance method)">#<strong>zone</strong>(zone_id)  &#x21d2; Google::Cloud::Dns::Zone<sup>?</sup> </a>
+    
+
+    
+      (also: #find_zone, #get_zone)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves an existing zone by name or id.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#zones-instance_method" title="#zones (instance method)">#<strong>zones</strong>(token: nil, max: nil)  &#x21d2; Array&lt;Google::Cloud::Dns::Zone&gt; </a>
+    
+
+    
+      (also: #find_zones)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the list of zones belonging to the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#zones_quota-instance_method" title="#zones_quota (instance method)">#<strong>zones_quota</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Maximum allowed number of zones in the project.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="additions_per_change-instance_method">
+  
+    #<strong>additions_per_change</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum allowed number of records to add per change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 101</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_additions_per_change'>additions_per_change</span>
+  <span class='id identifier rubyid_reload!'>reload!</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span><span class='period'>.</span><span class='id identifier rubyid_rrset_additions_per_change'>rrset_additions_per_change</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_zone-instance_method">
+  
+    #<strong>create_zone</strong>(zone_name, zone_dns, description: nil, name_server_set: nil)  &#x21d2; <tt><span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Google::Cloud::Dns::Zone</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new zone.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/dns</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dns.html" title="Google::Cloud::Dns (module)">Dns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Dns.html#new-class_method" title="Google::Cloud::Dns.new (method)">new</a></span></span>
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_create_zone'>create_zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example.com.</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>zone_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>User assigned name for this resource. Must
+be unique within the project. The name must be 1-32 characters long,
+must begin with a letter, end with a letter or digit, and only
+contain lowercase letters, digits or dashes.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>zone_dns</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The DNS name of this managed zone, for
+instance &quot;example.com.&quot;.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>description</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string of at most 1024 characters
+associated with this resource for the user&#39;s convenience. Has no
+effect on the managed zone&#39;s function.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name_server_set</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A NameServerSet is a set of DNS name
+servers that all host the same ManagedZones. Most users will leave
+this field unset.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Google::Cloud::Dns::Zone</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+220
+221
+222
+223
+224
+225
+226
+227</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 220</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_zone'>create_zone</span> <span class='id identifier rubyid_zone_name'>zone_name</span><span class='comma'>,</span> <span class='id identifier rubyid_zone_dns'>zone_dns</span><span class='comma'>,</span> <span class='label'>description:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>name_server_set:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_zone'>create_zone</span> <span class='id identifier rubyid_zone_name'>zone_name</span><span class='comma'>,</span> <span class='id identifier rubyid_zone_dns'>zone_dns</span><span class='comma'>,</span>
+                             <span class='label'>description:</span> <span class='id identifier rubyid_description'>description</span><span class='comma'>,</span>
+                             <span class='label'>name_server_set:</span> <span class='id identifier rubyid_name_server_set'>name_server_set</span>
+  <span class='const'><span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Zone</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="data_per_record-instance_method">
+  
+    #<strong>data_per_record</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum allowed number of data entries per record.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_data_per_record'>data_per_record</span>
+  <span class='id identifier rubyid_reload!'>reload!</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span><span class='period'>.</span><span class='id identifier rubyid_resource_records_per_rrset'>resource_records_per_rrset</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deletions_per_change-instance_method">
+  
+    #<strong>deletions_per_change</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum allowed number of records to delete per change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 108</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_deletions_per_change'>deletions_per_change</span>
+  <span class='id identifier rubyid_reload!'>reload!</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span><span class='period'>.</span><span class='id identifier rubyid_rrset_deletions_per_change'>rrset_deletions_per_change</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="number-instance_method">
+  
+    #<strong>number</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The project number.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 80</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_number'>number</span>
+  <span class='id identifier rubyid_reload!'>reload!</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_number'>number</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project-instance_method">
+  
+    #<strong>project</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='id-instance_method'>id</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The unique ID string for the current project.</p>
+
+<p>)</p>
+
+<p>dns.project #=&gt; &quot;my-todo-project&quot;</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>require &quot;google/cloud/dns&quot;
+
+dns = Google::Cloud::Dns.new(
+        project: &quot;my-todo-project&quot;,
+        keyfile: &quot;/path/to/keyfile.json&quot;</code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="records_per_zone-instance_method">
+  
+    #<strong>records_per_zone</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum allowed number of records per zone in the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_records_per_zone'>records_per_zone</span>
+  <span class='id identifier rubyid_reload!'>reload!</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span><span class='period'>.</span><span class='id identifier rubyid_rrsets_per_managed_zone'>rrsets_per_managed_zone</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reload!-instance_method">
+  
+    #<strong>reload!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='refresh!-instance_method'>refresh!</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reloads the change with updated status from the DNS service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+231
+232
+233
+234</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 231</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reload!'>reload!</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='ivar'>@gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_project'>get_project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="total_data_per_change-instance_method">
+  
+    #<strong>total_data_per_change</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum allowed total bytes size for all the data in one change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 122</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_total_data_per_change'>total_data_per_change</span>
+  <span class='id identifier rubyid_reload!'>reload!</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span><span class='period'>.</span><span class='id identifier rubyid_total_rrdata_size_per_change'>total_rrdata_size_per_change</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="zone-instance_method">
+  
+    #<strong>zone</strong>(zone_id)  &#x21d2; <tt><span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Google::Cloud::Dns::Zone</a></span></tt><sup>?</sup> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='find_zone-instance_method'>find_zone</span>, <span id='get_zone-instance_method'>get_zone</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves an existing zone by name or id.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/dns</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dns.html" title="Google::Cloud::Dns (module)">Dns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Dns.html#new-class_method" title="Google::Cloud::Dns.new (method)">new</a></span></span>
+<span class='id identifier rubyid_zone'>zone</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zone'>zone</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example-com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>zone_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name or id of a zone.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Google::Cloud::Dns::Zone</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>nil</code> if the zone does
+not exist.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+151
+152
+153
+154
+155
+156
+157</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 151</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_zone'>zone</span> <span class='id identifier rubyid_zone_id'>zone_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_zone'>get_zone</span> <span class='id identifier rubyid_zone_id'>zone_id</span>
+  <span class='const'><span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Zone</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="zones-instance_method">
+  
+    #<strong>zones</strong>(token: nil, max: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Google::Cloud::Dns::Zone</a></span>&gt;</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='find_zones-instance_method'>find_zones</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the list of zones belonging to the project.</p>
+
+<p><span class='object_link'><a href="Zone/List.html" title="Google::Cloud::Dns::Zone::List (class)">Zone::List</a></span>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/dns</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dns.html" title="Google::Cloud::Dns (module)">Dns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Dns.html#new-class_method" title="Google::Cloud::Dns.new (method)">new</a></span></span>
+<span class='id identifier rubyid_zones'>zones</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zones'>zones</span>
+<span class='id identifier rubyid_zones'>zones</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_zone'>zone</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Retrieve all zones: (See <span class='object_link'><a href="Zone/List.html#all-instance_method" title="Google::Cloud::Dns::Zone::List#all (method)">Zone::List#all</a></span>)</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/dns</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_dns'>dns</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Dns.html" title="Google::Cloud::Dns (module)">Dns</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Dns.html#new-class_method" title="Google::Cloud::Dns.new (method)">new</a></span></span>
+<span class='id identifier rubyid_zones'>zones</span> <span class='op'>=</span> <span class='id identifier rubyid_dns'>dns</span><span class='period'>.</span><span class='id identifier rubyid_zones'>zones</span>
+<span class='id identifier rubyid_zones'>zones</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_zone'>zone</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_zone'>zone</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A previously-returned page token representing
+part of the larger set of results to view.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of zones to return.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Google::Cloud::Dns::Zone</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(See</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+189
+190
+191
+192
+193</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 189</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_zones'>zones</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_gapi'>gapi</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_zones'>list_zones</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max'>max</span>
+  <span class='const'><span class='object_link'><a href="Zone.html" title="Google::Cloud::Dns::Zone (class)">Zone</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Zone/List.html" title="Google::Cloud::Dns::Zone::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_gapi'>from_gapi</span> <span class='id identifier rubyid_gapi'>gapi</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="zones_quota-instance_method">
+  
+    #<strong>zones_quota</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Maximum allowed number of zones in the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dns/project.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_zones_quota'>zones_quota</span>
+  <span class='id identifier rubyid_reload!'>reload!</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span><span class='period'>.</span><span class='id identifier rubyid_managed_zones'>managed_zones</span> <span class='kw'>if</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_quota'>quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
