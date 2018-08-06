@@ -82,6 +82,11 @@ s.replace(
 
 # https://github.com/googleapis/gapic-generator/issues/2195
 s.replace(
-    'README.md',
+    [
+      'README.md',
+      'lib/google/cloud/dlp.rb',
+      'lib/google/cloud/dlp/v2.rb',
+      'lib/google/cloud/dlp/v2/doc/overview.rb'
+    ],
     '\\(https://console\\.cloud\\.google\\.com/apis/api/dlp\\)',
     '(https://console.cloud.google.com/apis/library/dlp.googleapis.com)')
