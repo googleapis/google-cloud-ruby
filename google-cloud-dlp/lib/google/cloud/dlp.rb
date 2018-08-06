@@ -37,21 +37,6 @@ module Google
     # 3. [Enable the Cloud Data Loss Prevention (DLP) API.](https://console.cloud.google.com/apis/api/dlp)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
-    # ### Preview
-    # #### DlpServiceClient
-    # ```rb
-    # require "google/cloud/dlp"
-    #
-    # dlp_service_client = Google::Cloud::Dlp.new
-    # min_likelihood = :POSSIBLE
-    # inspect_config = { min_likelihood: min_likelihood }
-    # type = "text/plain"
-    # value = "my phone number is 215-512-1212"
-    # items_element = { type: type, value: value }
-    # items = [items_element]
-    # response = dlp_service_client.inspect_content(inspect_config, items)
-    # ```
-    #
     # ### Next Steps
     # - Read the [Cloud Data Loss Prevention (DLP) API Product documentation][Product Documentation]
     #   to learn more about the product and see How-to Guides.
@@ -85,9 +70,6 @@ module Google
     #   extend MyLogger
     # end
     # ```
-    #
-    # [Product Documentation]: https://cloud.google.com/dlp
-    #
     #
     module Dlp
       # rubocop:enable LineLength
