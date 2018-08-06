@@ -46,14 +46,14 @@ s.replace(
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
-    'CustomTestError', 'CustomTestError_v1')
+    'CustomTestError([^_])', 'CustomTestError_v1\\1')
 s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
-    'MockGrpcClientStub', 'MockGrpcClientStub_v1')
+    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1\\1')
 s.replace(
     'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
-    'MockVideoIntelligenceServiceCredentials',
-    'MockVideoIntelligenceServiceCredentials_v1')
+    'MockVideoIntelligenceServiceCredentials([^_])',
+    'MockVideoIntelligenceServiceCredentials_v1\\1')
 
 # https://github.com/googleapis/gapic-generator/issues/2185
 s.replace(
@@ -62,8 +62,8 @@ s.replace(
     'describe "VideoIntelligenceServiceSmokeTest V1"')
 s.replace(
     'acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb',
-    'video_intelligence_service_client = Google::Cloud::VideoIntelligence\\.new',
-    'video_intelligence_service_client = Google::Cloud::VideoIntelligence.new version: :v1')
+    'video_intelligence_service_client = Google::Cloud::VideoIntelligence\\.new\n',
+    'video_intelligence_service_client = Google::Cloud::VideoIntelligence.new version: :v1\n')
 
 # Copy base module from the v1 library so v1 is the default
 s.copy(v1_library / 'lib/google/cloud/video_intelligence.rb')
@@ -80,6 +80,12 @@ s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
+
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    '.yardopts',
+    '\n--markup markdown\n\n',
+    '\n--markup markdown\n--markup-provider redcarpet\n\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2195
 s.replace(
@@ -100,6 +106,16 @@ def merge_gemspec(src, dest, path):
     return src
 
 s.copy(v1_library / 'google-cloud-video_intelligence.gemspec', merge=merge_gemspec)
+
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    'google-cloud-video_intelligence.gemspec',
+    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
+    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
+s.replace(
+    'google-cloud-video_intelligence.gemspec',
+    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
+    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
 
 v1beta1_library = gapic.ruby_library(
     'videointelligence', 'v1beta1',
@@ -123,14 +139,14 @@ s.replace(
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client_test.rb',
-    'CustomTestError', 'CustomTestError_v1beta1')
+    'CustomTestError([^_])', 'CustomTestError_v1beta1\\1')
 s.replace(
     'test/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client_test.rb',
-    'MockGrpcClientStub', 'MockGrpcClientStub_v1beta1')
+    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1beta1\\1')
 s.replace(
     'test/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client_test.rb',
-    'MockVideoIntelligenceServiceCredentials',
-    'MockVideoIntelligenceServiceCredentials_v1beta1')
+    'MockVideoIntelligenceServiceCredentials([^_])',
+    'MockVideoIntelligenceServiceCredentials_v1beta1\\1')
 
 v1beta2_library = gapic.ruby_library(
     'videointelligence', 'v1beta2',
@@ -154,11 +170,11 @@ s.replace(
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client_test.rb',
-    'CustomTestError', 'CustomTestError_v1beta2')
+    'CustomTestError([^_])', 'CustomTestError_v1beta2\\1')
 s.replace(
     'test/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client_test.rb',
-    'MockGrpcClientStub', 'MockGrpcClientStub_v1beta2')
+    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1beta2\\1')
 s.replace(
     'test/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client_test.rb',
-    'MockVideoIntelligenceServiceCredentials',
-    'MockVideoIntelligenceServiceCredentials_v1beta2')
+    'MockVideoIntelligenceServiceCredentials([^_])',
+    'MockVideoIntelligenceServiceCredentials_v1beta2\\1')
