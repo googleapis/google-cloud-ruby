@@ -1,0 +1,178 @@
+---
+layout: yard_main
+title: "File: README - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>google-cloud-bigquery</h1>
+
+<p><a href="https://cloud.google.com/bigquery/">Google BigQuery</a> (<a href="https://cloud.google.com/bigquery/docs">docs</a>) enables super-fast, SQL-like queries against append-only tables, using the processing power of Google&#39;s infrastructure. Simply move your data into BigQuery and let it handle the hard work. You can control access to both the project and your data based on your business needs, such as giving others the ability to view or query your data.</p>
+
+<ul>
+<li><a href="http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/latest">google-cloud-bigquery API documentation</a></li>
+<li><a href="https://rubygems.org/gems/google-cloud-bigquery">google-cloud-bigquery on RubyGems</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs">Google BigQuery documentation</a></li>
+</ul>
+
+<h2>Quick Start</h2>
+
+<pre class="code sh"><code class="sh">$ gem install google-cloud-bigquery
+</code></pre>
+
+<h2>Authentication</h2>
+
+<p>This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.</p>
+
+<p>Instructions and configuration options are covered in the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigquery/guides/authentication">Authentication Guide</a>.</p>
+
+<h2>Example</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_create_dataset'>create_dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_create_table'>create_table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_table</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>My Table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A description of my table.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>first_name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>last_name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_integer'>integer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>mode:</span> <span class='symbol'>:required</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Load data into the table from Google Cloud Storage
+</span><span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://my-bucket/file-name.csv</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Run a query
+</span><span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT first_name FROM my_table</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:first_name</span><span class='rbracket'>]</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Enabling Logging</h2>
+
+<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/google/google-api-ruby-client/blob/master/README.md#logging">Google API Client</a> library. The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.4.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below, or a <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a> that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>.</p>
+
+<p>If you do not set the logger explicitly and your application is running in a Rails environment, it will default to <code>Rails.logger</code>. Otherwise, if you do not set the logger and you are not using Rails, logging is disabled by default.</p>
+
+<p>Configuring a Ruby stdlib logger:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>logger</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_my_logger'>my_logger</span> <span class='op'>=</span> <span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='gvar'>$stderr</span>
+<span class='id identifier rubyid_my_logger'>my_logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span>
+
+<span class='comment'># Set the Google API Client logger
+</span><span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Apis</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_my_logger'>my_logger</span>
+</code></pre>
+
+<h2>Supported Ruby Versions</h2>
+
+<p>This library is supported on Ruby 2.0+.</p>
+
+<p>However, Ruby 2.3 or later is strongly recommended, as earlier releases have
+reached or are nearing end-of-life. After June 1, 2018, Google will provide
+official support only for Ruby versions that are considered current and
+supported by Ruby Core (that is, Ruby versions that are either in normal
+maintenance or in security maintenance).
+See <a href="https://www.ruby-lang.org/en/downloads/branches/">https://www.ruby-lang.org/en/downloads/branches/</a> for further details.</p>
+
+<h2>Versioning</h2>
+
+<p>This library follows <a href="http://semver.org/">Semantic Versioning</a>.</p>
+
+<p>It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.</p>
+
+<h2>Contributing</h2>
+
+<p>Contributions to this library are always welcome and highly encouraged.</p>
+
+<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing">Contributing Guide</a> for more information on how to get started.</p>
+
+<p>Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See <a href="../CODE_OF_CONDUCT.md">Code of Conduct</a> for more information.</p>
+
+<h2>License</h2>
+
+<p>This library is licensed under Apache 2.0. Full license text is available in <a href="LICENSE">LICENSE</a>.</p>
+
+<h2>Support</h2>
+
+<p>Please <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues">report bugs at the project on Github</a>.
+Don&#39;t hesitate to <a href="http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby">ask questions</a> about the client or APIs on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

@@ -1,0 +1,799 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigquery::CopyJob - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigquery::CopyJob";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span>
+     &raquo; 
+    <span class="title">CopyJob</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigquery::CopyJob
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="Job.html" title="Google::Cloud::Bigquery::Job (class)">Job</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Job.html" title="Google::Cloud::Bigquery::Job (class)">Job</a></span></li>
+          
+            <li class="next">Google::Cloud::Bigquery::CopyJob</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigquery/copy_job.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>CopyJob</h1>
+
+<p>A <span class='object_link'><a href="Job.html" title="Google::Cloud::Bigquery::Job (class)">Job</a></span> subclass representing a copy operation that may be performed on
+a <span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span>. A CopyJob instance is created when you call <span class='object_link'><a href="Table.html#copy_job-instance_method" title="Google::Cloud::Bigquery::Table#copy_job (method)">Table#copy_job</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+<span class='id identifier rubyid_dataset'>dataset</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_dataset</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_table</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_destination_table'>destination_table</span> <span class='op'>=</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_destination_table</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_copy_job'>copy_job</span> <span class='op'>=</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_copy_job'>copy_job</span> <span class='id identifier rubyid_destination_table'>destination_table</span>
+
+<span class='id identifier rubyid_copy_job'>copy_job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+<span class='id identifier rubyid_copy_job'>copy_job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/tables#copy-table" target="_parent" title="Copying an Existing Table">Copying an Existing Table</a></li>
+    
+      <li><a href="https://cloud.google.com/bigquery/docs/reference/v2/jobs" target="_parent" title="Jobs API reference">Jobs API reference</a></li>
+    
+  </ul>
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_if_needed%3F-instance_method" title="#create_if_needed? (instance method)">#<strong>create_if_needed?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the create disposition for the job is <code>CREATE_IF_NEEDED</code>, which provides the following behavior: If the table does not exist, the copy operation creates the table.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_never%3F-instance_method" title="#create_never? (instance method)">#<strong>create_never?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the create disposition for the job is <code>CREATE_NEVER</code>, which provides the following behavior: The table must already exist; if it does not, an error is returned in the job result.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destination-instance_method" title="#destination (instance method)">#<strong>destination</strong>  &#x21d2; Table </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The table to which data is copied.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source-instance_method" title="#source (instance method)">#<strong>source</strong>  &#x21d2; Table </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The table from which data is copied.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_append%3F-instance_method" title="#write_append? (instance method)">#<strong>write_append?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the write disposition for the job is <code>WRITE_APPEND</code>, which provides the following behavior: If the table already exists, the copy operation appends the data to the table.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_empty%3F-instance_method" title="#write_empty? (instance method)">#<strong>write_empty?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the write disposition for the job is <code>WRITE_EMPTY</code>, which provides the following behavior: If the table already exists and contains data, the job will have an error.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_truncate%3F-instance_method" title="#write_truncate? (instance method)">#<strong>write_truncate?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks if the write disposition for the job is <code>WRITE_TRUNCATE</code>, which provides the following behavior: If the table already exists, the copy operation overwrites the table data.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Job.html" title="Google::Cloud::Bigquery::Job (class)">Job</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Job.html#cancel-instance_method" title="Google::Cloud::Bigquery::Job#cancel (method)">#cancel</a></span>, <span class='object_link'><a href="Job.html#configuration-instance_method" title="Google::Cloud::Bigquery::Job#configuration (method)">#configuration</a></span>, <span class='object_link'><a href="Job.html#created_at-instance_method" title="Google::Cloud::Bigquery::Job#created_at (method)">#created_at</a></span>, <span class='object_link'><a href="Job.html#done%3F-instance_method" title="Google::Cloud::Bigquery::Job#done? (method)">#done?</a></span>, <span class='object_link'><a href="Job.html#ended_at-instance_method" title="Google::Cloud::Bigquery::Job#ended_at (method)">#ended_at</a></span>, <span class='object_link'><a href="Job.html#error-instance_method" title="Google::Cloud::Bigquery::Job#error (method)">#error</a></span>, <span class='object_link'><a href="Job.html#errors-instance_method" title="Google::Cloud::Bigquery::Job#errors (method)">#errors</a></span>, <span class='object_link'><a href="Job.html#failed%3F-instance_method" title="Google::Cloud::Bigquery::Job#failed? (method)">#failed?</a></span>, <span class='object_link'><a href="Job.html#job_id-instance_method" title="Google::Cloud::Bigquery::Job#job_id (method)">#job_id</a></span>, <span class='object_link'><a href="Job.html#labels-instance_method" title="Google::Cloud::Bigquery::Job#labels (method)">#labels</a></span>, <span class='object_link'><a href="Job.html#pending%3F-instance_method" title="Google::Cloud::Bigquery::Job#pending? (method)">#pending?</a></span>, <span class='object_link'><a href="Job.html#project_id-instance_method" title="Google::Cloud::Bigquery::Job#project_id (method)">#project_id</a></span>, <span class='object_link'><a href="Job.html#reload!-instance_method" title="Google::Cloud::Bigquery::Job#reload! (method)">#reload!</a></span>, <span class='object_link'><a href="Job.html#rerun!-instance_method" title="Google::Cloud::Bigquery::Job#rerun! (method)">#rerun!</a></span>, <span class='object_link'><a href="Job.html#running%3F-instance_method" title="Google::Cloud::Bigquery::Job#running? (method)">#running?</a></span>, <span class='object_link'><a href="Job.html#started_at-instance_method" title="Google::Cloud::Bigquery::Job#started_at (method)">#started_at</a></span>, <span class='object_link'><a href="Job.html#state-instance_method" title="Google::Cloud::Bigquery::Job#state (method)">#state</a></span>, <span class='object_link'><a href="Job.html#statistics-instance_method" title="Google::Cloud::Bigquery::Job#statistics (method)">#statistics</a></span>, <span class='object_link'><a href="Job.html#status-instance_method" title="Google::Cloud::Bigquery::Job#status (method)">#status</a></span>, <span class='object_link'><a href="Job.html#user_email-instance_method" title="Google::Cloud::Bigquery::Job#user_email (method)">#user_email</a></span>, <span class='object_link'><a href="Job.html#wait_until_done!-instance_method" title="Google::Cloud::Bigquery::Job#wait_until_done! (method)">#wait_until_done!</a></span></p>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="create_if_needed?-instance_method">
+  
+    #<strong>create_if_needed?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the create disposition for the job is <code>CREATE_IF_NEEDED</code>,
+which provides the following behavior: If the table does not exist,
+the copy operation creates the table. This is the default create
+disposition for copy jobs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when <code>CREATE_IF_NEEDED</code>, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_if_needed?'>create_if_needed?</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_create_disposition'>create_disposition</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CREATE_IF_NEEDED</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_never?-instance_method">
+  
+    #<strong>create_never?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the create disposition for the job is <code>CREATE_NEVER</code>, which
+provides the following behavior: The table must already exist; if it
+does not, an error is returned in the job result.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when <code>CREATE_NEVER</code>, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_never?'>create_never?</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_create_disposition'>create_disposition</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>CREATE_NEVER</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="destination-instance_method">
+  
+    #<strong>destination</strong>  &#x21d2; <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The table to which data is copied.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A table instance.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_destination'>destination</span>
+  <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_destination_table'>destination_table</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_table'>table</span>
+  <span class='id identifier rubyid_retrieve_table'>retrieve_table</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+                 <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span>
+                 <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_table_id'>table_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="source-instance_method">
+  
+    #<strong>source</strong>  &#x21d2; <tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The table from which data is copied. This is the table on
+which <span class='object_link'><a href="Table.html#copy_job-instance_method" title="Google::Cloud::Bigquery::Table#copy_job (method)">Table#copy_job</a></span> was called.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Table.html" title="Google::Cloud::Bigquery::Table (class)">Table</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A table instance.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_source'>source</span>
+  <span class='id identifier rubyid_table'>table</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_source_table'>source_table</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='id identifier rubyid_table'>table</span>
+  <span class='id identifier rubyid_retrieve_table'>retrieve_table</span> <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+                 <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_dataset_id'>dataset_id</span><span class='comma'>,</span>
+                 <span class='id identifier rubyid_table'>table</span><span class='period'>.</span><span class='id identifier rubyid_table_id'>table_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write_append?-instance_method">
+  
+    #<strong>write_append?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the write disposition for the job is <code>WRITE_APPEND</code>, which
+provides the following behavior: If the table already exists, the copy
+operation appends the data to the table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when <code>WRITE_APPEND</code>, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_append?'>write_append?</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_write_disposition'>write_disposition</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WRITE_APPEND</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write_empty?-instance_method">
+  
+    #<strong>write_empty?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the write disposition for the job is <code>WRITE_EMPTY</code>, which
+provides the following behavior: If the table already exists and
+contains data, the job will have an error. This is the default write
+disposition for copy jobs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when <code>WRITE_EMPTY</code>, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 128</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_empty?'>write_empty?</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_write_disposition'>write_disposition</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WRITE_EMPTY</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write_truncate?-instance_method">
+  
+    #<strong>write_truncate?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks if the write disposition for the job is <code>WRITE_TRUNCATE</code>, which
+provides the following behavior: If the table already exists, the copy
+operation overwrites the table data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> when <code>WRITE_TRUNCATE</code>, <code>false</code> otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+103
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/copy_job.rb', line 103</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_truncate?'>write_truncate?</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>=</span> <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_copy'>copy</span><span class='period'>.</span><span class='id identifier rubyid_write_disposition'>write_disposition</span>
+  <span class='id identifier rubyid_disp'>disp</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WRITE_TRUNCATE</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

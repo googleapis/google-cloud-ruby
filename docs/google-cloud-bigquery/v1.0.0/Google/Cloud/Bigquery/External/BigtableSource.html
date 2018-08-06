@@ -1,0 +1,737 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigquery::External::BigtableSource - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigquery::External::BigtableSource";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../External.html" title="Google::Cloud::Bigquery::External (module)">External</a></span></span>
+     &raquo; 
+    <span class="title">BigtableSource</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigquery::External::BigtableSource
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="DataSource.html" title="Google::Cloud::Bigquery::External::DataSource (class)">DataSource</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="DataSource.html" title="Google::Cloud::Bigquery::External::DataSource (class)">DataSource</a></span></li>
+          
+            <li class="next">Google::Cloud::Bigquery::External::BigtableSource</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigquery/external.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>BigtableSource</h1>
+
+<p><span class='object_link'><a href="" title="Google::Cloud::Bigquery::External::BigtableSource (class)">BigtableSource</a></span> is a subclass of <span class='object_link'><a href="DataSource.html" title="Google::Cloud::Bigquery::External::DataSource (class)">DataSource</a></span> and
+represents a Bigtable external data source that can be queried from
+directly, even though the data is not stored in BigQuery. Instead of
+loading or streaming the data, this object references the external
+data source.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://googleapis.com/bigtable/projects/...</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bt'>bt</span><span class='op'>|</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_add_family'>add_family</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='op'>|</span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_string'>add_string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_string'>add_string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_integer'>add_integer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_boolean'>add_boolean</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM my_ext_table</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                      <span class='label'>external:</span> <span class='lbrace'>{</span> <span class='label'>my_ext_table:</span> <span class='id identifier rubyid_bigtable_table'>bigtable_table</span> <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="BigtableSource/Column.html" title="Google::Cloud::Bigquery::External::BigtableSource::Column (class)">Column</a></span>, <span class='object_link'><a href="BigtableSource/ColumnFamily.html" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily (class)">ColumnFamily</a></span>
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_family-instance_method" title="#add_family (instance method)">#<strong>add_family</strong>(family_id, encoding: nil, latest: nil, type: nil) {|family| ... } &#x21d2; BigtableSource::ColumnFamily </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Add a column family to expose in the table schema along with its types.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#families-instance_method" title="#families (instance method)">#<strong>families</strong>  &#x21d2; Array&lt;BigtableSource::ColumnFamily&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of column families to expose in the table schema along with their types.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rowkey_as_string-instance_method" title="#rowkey_as_string (instance method)">#<strong>rowkey_as_string</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether the rowkey column families will be read and converted to string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rowkey_as_string=-instance_method" title="#rowkey_as_string= (instance method)">#<strong>rowkey_as_string=</strong>(row_rowkey)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set the number of rows at the top of a sheet that BigQuery will skip when reading the data.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="DataSource.html" title="Google::Cloud::Bigquery::External::DataSource (class)">DataSource</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="DataSource.html#autodetect-instance_method" title="Google::Cloud::Bigquery::External::DataSource#autodetect (method)">#autodetect</a></span>, <span class='object_link'><a href="DataSource.html#autodetect=-instance_method" title="Google::Cloud::Bigquery::External::DataSource#autodetect= (method)">#autodetect=</a></span>, <span class='object_link'><a href="DataSource.html#avro%3F-instance_method" title="Google::Cloud::Bigquery::External::DataSource#avro? (method)">#avro?</a></span>, <span class='object_link'><a href="DataSource.html#backup%3F-instance_method" title="Google::Cloud::Bigquery::External::DataSource#backup? (method)">#backup?</a></span>, <span class='object_link'><a href="DataSource.html#bigtable%3F-instance_method" title="Google::Cloud::Bigquery::External::DataSource#bigtable? (method)">#bigtable?</a></span>, <span class='object_link'><a href="DataSource.html#compression-instance_method" title="Google::Cloud::Bigquery::External::DataSource#compression (method)">#compression</a></span>, <span class='object_link'><a href="DataSource.html#compression=-instance_method" title="Google::Cloud::Bigquery::External::DataSource#compression= (method)">#compression=</a></span>, <span class='object_link'><a href="DataSource.html#csv%3F-instance_method" title="Google::Cloud::Bigquery::External::DataSource#csv? (method)">#csv?</a></span>, <span class='object_link'><a href="DataSource.html#format-instance_method" title="Google::Cloud::Bigquery::External::DataSource#format (method)">#format</a></span>, <span class='object_link'><a href="DataSource.html#ignore_unknown-instance_method" title="Google::Cloud::Bigquery::External::DataSource#ignore_unknown (method)">#ignore_unknown</a></span>, <span class='object_link'><a href="DataSource.html#ignore_unknown=-instance_method" title="Google::Cloud::Bigquery::External::DataSource#ignore_unknown= (method)">#ignore_unknown=</a></span>, <span class='object_link'><a href="DataSource.html#json%3F-instance_method" title="Google::Cloud::Bigquery::External::DataSource#json? (method)">#json?</a></span>, <span class='object_link'><a href="DataSource.html#max_bad_records-instance_method" title="Google::Cloud::Bigquery::External::DataSource#max_bad_records (method)">#max_bad_records</a></span>, <span class='object_link'><a href="DataSource.html#max_bad_records=-instance_method" title="Google::Cloud::Bigquery::External::DataSource#max_bad_records= (method)">#max_bad_records=</a></span>, <span class='object_link'><a href="DataSource.html#sheets%3F-instance_method" title="Google::Cloud::Bigquery::External::DataSource#sheets? (method)">#sheets?</a></span>, <span class='object_link'><a href="DataSource.html#urls-instance_method" title="Google::Cloud::Bigquery::External::DataSource#urls (method)">#urls</a></span></p>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_family-instance_method">
+  
+    #<strong>add_family</strong>(family_id, encoding: nil, latest: nil, type: nil) {|family| ... } &#x21d2; <tt><span class='object_link'><a href="BigtableSource/ColumnFamily.html" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily (class)">BigtableSource::ColumnFamily</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Add a column family to expose in the table schema along with its
+types. Columns belonging to the column family may also be exposed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://googleapis.com/bigtable/projects/...</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bt'>bt</span><span class='op'>|</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_add_family'>add_family</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='op'>|</span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_string'>add_string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_string'>add_string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_integer'>add_integer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_boolean'>add_boolean</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>family_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Identifier of the column family. See
+<span class='object_link'><a href="BigtableSource/ColumnFamily.html#family_id-instance_method" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#family_id (method)">Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#family_id</a></span>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The encoding of the values when the type is
+not <code>STRING</code>. See <span class='object_link'><a href="BigtableSource/ColumnFamily.html#encoding-instance_method" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#encoding (method)">Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#encoding</a></span>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>latest</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether only the latest version of value are
+exposed for all columns in this column family. See
+<span class='object_link'><a href="BigtableSource/ColumnFamily.html#latest-instance_method" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#latest (method)">Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#latest</a></span>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The type to convert the value in cells of this
+column. See <span class='object_link'><a href="BigtableSource/ColumnFamily.html#type-instance_method" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#type (method)">Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#type</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>family</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a block for setting the family</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>family</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BigtableSource/ColumnFamily.html" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily (class)">BigtableSource::ColumnFamily</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the family object</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BigtableSource/ColumnFamily.html" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily (class)">BigtableSource::ColumnFamily</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1339
+1340
+1341
+1342
+1343
+1344
+1345
+1346
+1347
+1348
+1349</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 1339</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_family'>add_family</span> <span class='id identifier rubyid_family_id'>family_id</span><span class='comma'>,</span> <span class='label'>encoding:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>latest:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_frozen_check!'>frozen_check!</span>
+  <span class='id identifier rubyid_fam'>fam</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::External::BigtableSource (class)">BigtableSource</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="BigtableSource/ColumnFamily.html" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily (class)">ColumnFamily</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_fam'>fam</span><span class='period'>.</span><span class='id identifier rubyid_family_id'>family_id</span> <span class='op'>=</span> <span class='id identifier rubyid_family_id'>family_id</span>
+  <span class='id identifier rubyid_fam'>fam</span><span class='period'>.</span><span class='id identifier rubyid_encoding'>encoding</span> <span class='op'>=</span> <span class='id identifier rubyid_encoding'>encoding</span> <span class='kw'>if</span> <span class='id identifier rubyid_encoding'>encoding</span>
+  <span class='id identifier rubyid_fam'>fam</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='op'>=</span> <span class='id identifier rubyid_latest'>latest</span> <span class='kw'>if</span> <span class='id identifier rubyid_latest'>latest</span>
+  <span class='id identifier rubyid_fam'>fam</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='id identifier rubyid_type'>type</span> <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>yield</span> <span class='id identifier rubyid_fam'>fam</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+  <span class='ivar'>@families</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_fam'>fam</span>
+  <span class='id identifier rubyid_fam'>fam</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="families-instance_method">
+  
+    #<strong>families</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="BigtableSource/ColumnFamily.html" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily (class)">BigtableSource::ColumnFamily</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>List of column families to expose in the table schema along with
+their types. This list restricts the column families that can be
+referenced in queries and specifies their value types. You can use
+this list to do type conversions - see
+<span class='object_link'><a href="BigtableSource/ColumnFamily.html#type-instance_method" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#type (method)">Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily#type</a></span> for more details. If you leave
+this list empty, all column families are present in the table schema
+and their values are read as <code>BYTES</code>. During a query only the column
+families referenced in that query are read from Bigtable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://googleapis.com/bigtable/projects/...</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bt'>bt</span><span class='op'>|</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_add_family'>add_family</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_u'>u</span><span class='op'>|</span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_string'>add_string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>name</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_string'>add_string</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>email</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_integer'>add_integer</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>age</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_add_boolean'>add_boolean</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>active</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span><span class='period'>.</span><span class='id identifier rubyid_families'>families</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="BigtableSource/ColumnFamily.html" title="Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily (class)">BigtableSource::ColumnFamily</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1300
+1301
+1302</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 1300</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_families'>families</span>
+  <span class='ivar'>@families</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rowkey_as_string-instance_method">
+  
+    #<strong>rowkey_as_string</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether the rowkey column families will be read and converted to
+string. Otherwise they are read with <code>BYTES</code> type values and users
+need to manually cast them with <code>CAST</code> if necessary. The default
+value is <code>false</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://googleapis.com/bigtable/projects/...</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bt'>bt</span><span class='op'>|</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span><span class='period'>.</span><span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1371
+1372
+1373</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 1371</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_bigtable_options'>bigtable_options</span><span class='period'>.</span><span class='id identifier rubyid_read_rowkey_as_string'>read_rowkey_as_string</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rowkey_as_string=-instance_method">
+  
+    #<strong>rowkey_as_string=</strong>(row_rowkey)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set the number of rows at the top of a sheet that BigQuery will skip
+when reading the data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://googleapis.com/bigtable/projects/...</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_external'>external</span> <span class='id identifier rubyid_bigtable_url'>bigtable_url</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bt'>bt</span><span class='op'>|</span>
+  <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_bigtable_table'>bigtable_table</span><span class='period'>.</span><span class='id identifier rubyid_rowkey_as_string'>rowkey_as_string</span> <span class='comment'>#=&gt; true</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>row_rowkey</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>New rowkey_as_string value</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1393
+1394
+1395
+1396</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/external.rb', line 1393</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rowkey_as_string='>rowkey_as_string=</span> <span class='id identifier rubyid_row_rowkey'>row_rowkey</span>
+  <span class='id identifier rubyid_frozen_check!'>frozen_check!</span>
+  <span class='ivar'>@gapi</span><span class='period'>.</span><span class='id identifier rubyid_bigtable_options'>bigtable_options</span><span class='period'>.</span><span class='id identifier rubyid_read_rowkey_as_string'>read_rowkey_as_string</span> <span class='op'>=</span> <span class='id identifier rubyid_row_rowkey'>row_rowkey</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
