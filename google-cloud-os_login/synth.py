@@ -33,14 +33,14 @@ s.copy(v1_library / 'test/google/cloud/os_login/v1')
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/os_login/v1/os_login_service_client_test.rb',
-    'CustomTestError', 'CustomTestError_v1')
+    'CustomTestError([^_])', 'CustomTestError_v1\\1')
 s.replace(
     'test/google/cloud/os_login/v1/os_login_service_client_test.rb',
-    'MockGrpcClientStub', 'MockGrpcClientStub_v1')
+    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1\\1')
 s.replace(
     'test/google/cloud/os_login/v1/os_login_service_client_test.rb',
-    'MockOsLoginServiceCredentials',
-    'MockOsLoginServiceCredentials_v1')
+    'MockOsLoginServiceCredentials([^_])',
+    'MockOsLoginServiceCredentials_v1\\1')
 
 # Copy base module from the v1 library so v1 is the default
 s.copy(v1_library / 'lib/google/cloud/os_login.rb')
@@ -60,6 +60,12 @@ s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
+
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    '.yardopts',
+    '\n--markup markdown\n\n',
+    '\n--markup markdown\n--markup-provider redcarpet\n\n')
 
 # https://github.com/googleapis/gapic-generator/issues/2195
 s.replace(
@@ -87,6 +93,16 @@ def merge_gemspec(src, dest, path):
 
 s.copy(v1_library / 'google-cloud-os_login.gemspec', merge=merge_gemspec)
 
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    'google-cloud-os_login.gemspec',
+    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
+    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
+s.replace(
+    'google-cloud-os_login.gemspec',
+    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
+    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
+
 
 v1beta_library = gapic.ruby_library(
     'oslogin', 'v1beta',
@@ -113,11 +129,11 @@ s.copy(v1beta_library / 'test/google/cloud/os_login/v1beta')
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/os_login/v1beta/os_login_service_client_test.rb',
-    'CustomTestError', 'CustomTestError_v1beta')
+    'CustomTestError([^_])', 'CustomTestError_v1beta\\1')
 s.replace(
     'test/google/cloud/os_login/v1beta/os_login_service_client_test.rb',
-    'MockGrpcClientStub', 'MockGrpcClientStub_v1beta')
+    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1beta\\1')
 s.replace(
     'test/google/cloud/os_login/v1beta/os_login_service_client_test.rb',
-    'MockOsLoginServiceCredentials',
-    'MockOsLoginServiceCredentials_v1beta')
+    'MockOsLoginServiceCredentials([^_])',
+    'MockOsLoginServiceCredentials_v1beta\\1')
