@@ -1,0 +1,2804 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigquery::QueryJob::Stage - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigquery::QueryJob::Stage";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../QueryJob.html" title="Google::Cloud::Bigquery::QueryJob (class)">QueryJob</a></span></span>
+     &raquo; 
+    <span class="title">Stage</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigquery::QueryJob::Stage
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigquery::QueryJob::Stage</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigquery/query_job.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Represents a stage in the execution plan for the query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sql'>sql</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT word FROM `bigquery-public-data.samples.shakespeare`</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query_job'>query_job</span> <span class='id identifier rubyid_sql'>sql</span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+
+<span class='id identifier rubyid_stages'>stages</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_plan'>query_plan</span>
+<span class='id identifier rubyid_stages'>stages</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_stage'>stage</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_stage'>stage</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_stage'>stage</span><span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_substeps'>substeps</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+  <h2>Attributes <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compute_ratio_avg-instance_method" title="#compute_ratio_avg (instance method)">#<strong>compute_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent on CPU-bound tasks.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compute_ratio_max-instance_method" title="#compute_ratio_max (instance method)">#<strong>compute_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent on CPU-bound tasks.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">#<strong>id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Unique ID for the stage within the query plan.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Human-readable name for the stage.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_ratio_avg-instance_method" title="#read_ratio_avg (instance method)">#<strong>read_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent reading input.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_ratio_max-instance_method" title="#read_ratio_max (instance method)">#<strong>read_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent reading input.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#records_read-instance_method" title="#records_read (instance method)">#<strong>records_read</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of records read into the stage.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#records_written-instance_method" title="#records_written (instance method)">#<strong>records_written</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of records written by the stage.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute status.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#steps-instance_method" title="#steps (instance method)">#<strong>steps</strong>  &#x21d2; Array&lt;Step&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of operations within the stage in dependency order (approximately chronological).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_ratio_avg-instance_method" title="#wait_ratio_avg (instance method)">#<strong>wait_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent waiting to be scheduled.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_ratio_max-instance_method" title="#wait_ratio_max (instance method)">#<strong>wait_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent waiting to be scheduled.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_ratio_avg-instance_method" title="#write_ratio_avg (instance method)">#<strong>write_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent on writing output.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_ratio_max-instance_method" title="#write_ratio_max (instance method)">#<strong>write_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent on writing output.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="compute_ratio_avg-instance_method">
+  
+    #<strong>compute_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent on CPU-bound tasks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of compute_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compute_ratio_avg'>compute_ratio_avg</span>
+  <span class='ivar'>@compute_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="compute_ratio_max-instance_method">
+  
+    #<strong>compute_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent on CPU-bound tasks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of compute_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compute_ratio_max'>compute_ratio_max</span>
+  <span class='ivar'>@compute_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="id-instance_method">
+  
+    #<strong>id</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Unique ID for the stage within the query
+plan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Human-readable name for the stage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="read_ratio_avg-instance_method">
+  
+    #<strong>read_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent reading input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of read_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_ratio_avg'>read_ratio_avg</span>
+  <span class='ivar'>@read_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="read_ratio_max-instance_method">
+  
+    #<strong>read_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent reading input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of read_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_ratio_max'>read_ratio_max</span>
+  <span class='ivar'>@read_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="records_read-instance_method">
+  
+    #<strong>records_read</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Number of records read into the
+stage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of records_read</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_records_read'>records_read</span>
+  <span class='ivar'>@records_read</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="records_written-instance_method">
+  
+    #<strong>records_written</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Number of records written by
+the stage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of records_written</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_records_written'>records_written</span>
+  <span class='ivar'>@records_written</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute status</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1040
+1041
+1042</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1040</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
+  <span class='ivar'>@status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="steps-instance_method">
+  
+    #<strong>steps</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Step.html" title="Google::Cloud::Bigquery::QueryJob::Step (class)">Step</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>List of operations within the stage
+in dependency order (approximately chronological).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Step.html" title="Google::Cloud::Bigquery::QueryJob::Step (class)">Step</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of steps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
+  <span class='ivar'>@steps</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="wait_ratio_avg-instance_method">
+  
+    #<strong>wait_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent waiting to be scheduled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of wait_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_wait_ratio_avg'>wait_ratio_avg</span>
+  <span class='ivar'>@wait_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="wait_ratio_max-instance_method">
+  
+    #<strong>wait_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent waiting to be scheduled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of wait_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_wait_ratio_max'>wait_ratio_max</span>
+  <span class='ivar'>@wait_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="write_ratio_avg-instance_method">
+  
+    #<strong>write_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent on writing output.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of write_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_ratio_avg'>write_ratio_avg</span>
+  <span class='ivar'>@write_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="write_ratio_max-instance_method">
+  
+    #<strong>write_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent on writing output.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of write_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_ratio_max'>write_ratio_max</span>
+  <span class='ivar'>@write_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Google::Cloud::Bigquery::QueryJob::Stage
+  
+    &mdash; Google
+  
+</title>
+
+  <link rel="stylesheet" href="../../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigquery::QueryJob::Stage";
+  relpath = '../../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../QueryJob.html" title="Google::Cloud::Bigquery::QueryJob (class)">QueryJob</a></span></span>
+     &raquo; 
+    <span class="title">Stage</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Google::Cloud::Bigquery::QueryJob::Stage
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigquery::QueryJob::Stage</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigquery/query_job.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Represents a stage in the execution plan for the query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/bigquery</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bigquery'>bigquery</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Bigquery.html#new-class_method" title="Google::Cloud::Bigquery.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sql'>sql</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT word FROM `bigquery-public-data.samples.shakespeare`</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_bigquery'>bigquery</span><span class='period'>.</span><span class='id identifier rubyid_query_job'>query_job</span> <span class='id identifier rubyid_sql'>sql</span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_done!'>wait_until_done!</span>
+
+<span class='id identifier rubyid_stages'>stages</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_query_plan'>query_plan</span>
+<span class='id identifier rubyid_stages'>stages</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_stage'>stage</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_stage'>stage</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_stage'>stage</span><span class='period'>.</span><span class='id identifier rubyid_steps'>steps</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_step'>step</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_kind'>kind</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_step'>step</span><span class='period'>.</span><span class='id identifier rubyid_substeps'>substeps</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+  <h2>Attributes <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compute_ratio_avg-instance_method" title="#compute_ratio_avg (instance method)">#<strong>compute_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent on CPU-bound tasks.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compute_ratio_max-instance_method" title="#compute_ratio_max (instance method)">#<strong>compute_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent on CPU-bound tasks.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#id-instance_method" title="#id (instance method)">#<strong>id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Unique ID for the stage within the query plan.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Human-readable name for the stage.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_ratio_avg-instance_method" title="#read_ratio_avg (instance method)">#<strong>read_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent reading input.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_ratio_max-instance_method" title="#read_ratio_max (instance method)">#<strong>read_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent reading input.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#records_read-instance_method" title="#records_read (instance method)">#<strong>records_read</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of records read into the stage.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#records_written-instance_method" title="#records_written (instance method)">#<strong>records_written</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Number of records written by the stage.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#status-instance_method" title="#status (instance method)">#<strong>status</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute status.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#steps-instance_method" title="#steps (instance method)">#<strong>steps</strong>  &#x21d2; Array&lt;Step&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of operations within the stage in dependency order (approximately chronological).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_ratio_avg-instance_method" title="#wait_ratio_avg (instance method)">#<strong>wait_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent waiting to be scheduled.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_ratio_max-instance_method" title="#wait_ratio_max (instance method)">#<strong>wait_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent waiting to be scheduled.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_ratio_avg-instance_method" title="#write_ratio_avg (instance method)">#<strong>write_ratio_avg</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the average shard spent on writing output.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_ratio_max-instance_method" title="#write_ratio_max (instance method)">#<strong>write_ratio_max</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Relative amount of time the slowest shard spent on writing output.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="compute_ratio_avg-instance_method">
+  
+    #<strong>compute_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent on CPU-bound tasks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of compute_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compute_ratio_avg'>compute_ratio_avg</span>
+  <span class='ivar'>@compute_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="compute_ratio_max-instance_method">
+  
+    #<strong>compute_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent on CPU-bound tasks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of compute_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compute_ratio_max'>compute_ratio_max</span>
+  <span class='ivar'>@compute_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="id-instance_method">
+  
+    #<strong>id</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Unique ID for the stage within the query
+plan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of id</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_id'>id</span>
+  <span class='ivar'>@id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Human-readable name for the stage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="read_ratio_avg-instance_method">
+  
+    #<strong>read_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent reading input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of read_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_ratio_avg'>read_ratio_avg</span>
+  <span class='ivar'>@read_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="read_ratio_max-instance_method">
+  
+    #<strong>read_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent reading input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of read_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_ratio_max'>read_ratio_max</span>
+  <span class='ivar'>@read_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="records_read-instance_method">
+  
+    #<strong>records_read</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Number of records read into the
+stage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of records_read</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_records_read'>records_read</span>
+  <span class='ivar'>@records_read</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="records_written-instance_method">
+  
+    #<strong>records_written</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Number of records written by
+the stage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of records_written</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_records_written'>records_written</span>
+  <span class='ivar'>@records_written</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="status-instance_method">
+  
+    #<strong>status</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute status</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1040
+1041
+1042</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1040</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
+  <span class='ivar'>@status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="steps-instance_method">
+  
+    #<strong>steps</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Step.html" title="Google::Cloud::Bigquery::QueryJob::Step (class)">Step</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>List of operations within the stage
+in dependency order (approximately chronological).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Step.html" title="Google::Cloud::Bigquery::QueryJob::Step (class)">Step</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of steps</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_steps'>steps</span>
+  <span class='ivar'>@steps</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="wait_ratio_avg-instance_method">
+  
+    #<strong>wait_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent waiting to be scheduled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of wait_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_wait_ratio_avg'>wait_ratio_avg</span>
+  <span class='ivar'>@wait_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="wait_ratio_max-instance_method">
+  
+    #<strong>wait_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent waiting to be scheduled.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of wait_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_wait_ratio_max'>wait_ratio_max</span>
+  <span class='ivar'>@wait_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="write_ratio_avg-instance_method">
+  
+    #<strong>write_ratio_avg</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+average shard spent on writing output.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of write_ratio_avg</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_ratio_avg'>write_ratio_avg</span>
+  <span class='ivar'>@write_ratio_avg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="write_ratio_max-instance_method">
+  
+    #<strong>write_ratio_max</strong>  &#x21d2; <tt>Float</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Relative amount of time the
+slowest shard spent on writing output.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current value of write_ratio_max</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1039
+1040
+1041</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/query_job.rb', line 1039</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_ratio_max'>write_ratio_max</span>
+  <span class='ivar'>@write_ratio_max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->
