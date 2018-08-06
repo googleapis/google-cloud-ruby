@@ -1,0 +1,1386 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Dialogflow::V2::StreamingRecognitionResult - Dialogflow"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Dialogflow::V2::StreamingRecognitionResult";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">StreamingRecognitionResult</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Dialogflow::V2::StreamingRecognitionResult
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Dialogflow::V2::StreamingRecognitionResult</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Contains a speech recognition result corresponding to a portion of the audio
+that is currently being processed or an indication that this is the end
+of the single requested utterance.</p>
+
+<p>Example:</p>
+
+<ol>
+<li><p>transcript: &quot;tube&quot;</p></li>
+<li><p>transcript: &quot;to be a&quot;</p></li>
+<li><p>transcript: &quot;to be&quot;</p></li>
+<li><p>transcript: &quot;to be or not to be&quot;
+is_final: true</p></li>
+<li><p>transcript: &quot; that&#39;s&quot;</p></li>
+<li><p>transcript: &quot; that is&quot;</p></li>
+<li><p>recognition_event_type: +RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE+</p></li>
+<li><p>transcript: &quot; that is the question&quot;
+is_final: true</p></li>
+</ol>
+
+<p>Only two of the responses contain final results (#4 and #8 indicated by
++is_final: true+). Concatenating these generates the full transcript: &quot;to be
+or not to be that is the question&quot;.</p>
+
+<p>In each response we populate:</p>
+
+<ul>
+<li><p>for +MESSAGE_TYPE_TRANSCRIPT+: +transcript+ and possibly +is_final+.</p></li>
+<li><p>for +MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE+: only +event_type+.</p></li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#confidence-instance_method" title="#confidence (instance method)">#<strong>confidence</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Speech confidence between 0.0 and 1.0 for the current portion of audio.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_final-instance_method" title="#is_final (instance method)">#<strong>is_final</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#message_type-instance_method" title="#message_type (instance method)">#<strong>message_type</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Type of the result message.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transcript-instance_method" title="#transcript (instance method)">#<strong>transcript</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Transcript text representing the words that the user spoke.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="confidence=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="confidence-instance_method">
+  
+    #<strong>confidence</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The Speech confidence between 0.0 and 1.0 for the current portion of audio.
+A higher number indicates an estimated greater likelihood that the
+recognized words are correct. The default of 0.0 is a sentinel value
+indicating that confidence was not set.</p>
+
+<p>This field is typically only provided if +is_final+ is true and you should
+not rely on it being accurate or even set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Speech confidence between 0.0 and 1.0 for the current portion of audio.
+A higher number indicates an estimated greater likelihood that the
+recognized words are correct. The default of 0.0 is a sentinel value
+indicating that confidence was not set.</p>
+
+<p>This field is typically only provided if +is_final+ is true and you should
+not rely on it being accurate or even set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_final=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_final-instance_method">
+  
+    #<strong>is_final</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The default of 0.0 is a sentinel value indicating +confidence+ was not set.
+If +false+, the +StreamingRecognitionResult+ represents an
+interim result that may change. If +true+, the recognizer will not return
+any further hypotheses about this piece of the audio. May only be populated
+for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default of 0.0 is a sentinel value indicating +confidence+ was not set.
+If +false+, the +StreamingRecognitionResult+ represents an
+interim result that may change. If +true+, the recognizer will not return
+any further hypotheses about this piece of the audio. May only be populated
+for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="message_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="message_type-instance_method">
+  
+    #<strong>message_type</strong>  &#x21d2; <tt><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Type of the result message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Type of the result message.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="transcript=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="transcript-instance_method">
+  
+    #<strong>transcript</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Transcript text representing the words that the user spoke.
+Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Transcript text representing the words that the user spoke.
+Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Google::Cloud::Dialogflow::V2::StreamingRecognitionResult
+  
+    &mdash; Dialogflow
+  
+</title>
+
+  <link rel="stylesheet" href="../../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Dialogflow::V2::StreamingRecognitionResult";
+  relpath = '../../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">StreamingRecognitionResult</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Google::Cloud::Dialogflow::V2::StreamingRecognitionResult
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Dialogflow::V2::StreamingRecognitionResult</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Contains a speech recognition result corresponding to a portion of the audio
+that is currently being processed or an indication that this is the end
+of the single requested utterance.</p>
+
+<p>Example:</p>
+
+<ol>
+<li><p>transcript: &quot;tube&quot;</p></li>
+<li><p>transcript: &quot;to be a&quot;</p></li>
+<li><p>transcript: &quot;to be&quot;</p></li>
+<li><p>transcript: &quot;to be or not to be&quot;
+is_final: true</p></li>
+<li><p>transcript: &quot; that&#39;s&quot;</p></li>
+<li><p>transcript: &quot; that is&quot;</p></li>
+<li><p>recognition_event_type: +RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE+</p></li>
+<li><p>transcript: &quot; that is the question&quot;
+is_final: true</p></li>
+</ol>
+
+<p>Only two of the responses contain final results (#4 and #8 indicated by
++is_final: true+). Concatenating these generates the full transcript: &quot;to be
+or not to be that is the question&quot;.</p>
+
+<p>In each response we populate:</p>
+
+<ul>
+<li><p>for +MESSAGE_TYPE_TRANSCRIPT+: +transcript+ and possibly +is_final+.</p></li>
+<li><p>for +MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE+: only +event_type+.</p></li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#confidence-instance_method" title="#confidence (instance method)">#<strong>confidence</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Speech confidence between 0.0 and 1.0 for the current portion of audio.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_final-instance_method" title="#is_final (instance method)">#<strong>is_final</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The default of 0.0 is a sentinel value indicating +confidence+ was not set.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#message_type-instance_method" title="#message_type (instance method)">#<strong>message_type</strong>  &#x21d2; Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Type of the result message.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transcript-instance_method" title="#transcript (instance method)">#<strong>transcript</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Transcript text representing the words that the user spoke.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="confidence=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="confidence-instance_method">
+  
+    #<strong>confidence</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The Speech confidence between 0.0 and 1.0 for the current portion of audio.
+A higher number indicates an estimated greater likelihood that the
+recognized words are correct. The default of 0.0 is a sentinel value
+indicating that confidence was not set.</p>
+
+<p>This field is typically only provided if +is_final+ is true and you should
+not rely on it being accurate or even set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Speech confidence between 0.0 and 1.0 for the current portion of audio.
+A higher number indicates an estimated greater likelihood that the
+recognized words are correct. The default of 0.0 is a sentinel value
+indicating that confidence was not set.</p>
+
+<p>This field is typically only provided if +is_final+ is true and you should
+not rely on it being accurate or even set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_final=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_final-instance_method">
+  
+    #<strong>is_final</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The default of 0.0 is a sentinel value indicating +confidence+ was not set.
+If +false+, the +StreamingRecognitionResult+ represents an
+interim result that may change. If +true+, the recognizer will not return
+any further hypotheses about this piece of the audio. May only be populated
+for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default of 0.0 is a sentinel value indicating +confidence+ was not set.
+If +false+, the +StreamingRecognitionResult+ represents an
+interim result that may change. If +true+, the recognizer will not return
+any further hypotheses about this piece of the audio. May only be populated
+for +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="message_type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="message_type-instance_method">
+  
+    #<strong>message_type</strong>  &#x21d2; <tt><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Type of the result message.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Type of the result message.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="transcript=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="transcript-instance_method">
+  
+    #<strong>transcript</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Transcript text representing the words that the user spoke.
+Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Transcript text representing the words that the user spoke.
+Populated if and only if +event_type+ = +RECOGNITION_EVENT_TRANSCRIPT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb', line 326</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult (class)">StreamingRecognitionResult</a></span></span>
+  <span class='comment'># Type of the response message.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="StreamingRecognitionResult/MessageType.html" title="Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType (module)">MessageType</a></span></span>
+    <span class='comment'># Not specified. Should never be used.
+</span>    <span class='const'>MESSAGE_TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Message contains a (possibly partial) transcript.
+</span>    <span class='const'>TRANSCRIPT</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Event indicates that the server has detected the end of the user&#39;s speech
+</span>    <span class='comment'># utterance and expects no additional speech. Therefore, the server will
+</span>    <span class='comment'># not process additional audio (although it may subsequently return
+</span>    <span class='comment'># additional results). The client should stop sending additional audio
+</span>    <span class='comment'># data, half-close the gRPC connection, and wait for any additional results
+</span>    <span class='comment'># until the server closes the gRPC connection. This message is only sent if
+</span>    <span class='comment'># +single_utterance+ was set to +true+, and is not used otherwise.
+</span>    <span class='const'>END_OF_SINGLE_UTTERANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->
