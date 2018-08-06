@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,34 +17,60 @@ require "google/cloud/debugger/v2/controller2_client"
 
 module Google
   module Cloud
-    # rubocop:disable LineLength
-
-    ##
-    # # Ruby Client for Stackdriver Debugger API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
-    #
-    # [Stackdriver Debugger API][Product Documentation]:
-    # Examines the call stack and variables of a running application
-    # without stopping or slowing it down.
-    # - [Product Documentation][]
-    #
-    # ## Quick Start
-    # In order to use this library, you first need to go through the following
-    # steps:
-    #
-    # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable the Stackdriver Debugger API.](https://console.cloud.google.com/apis/api/debugger)
-    # 3. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
-    #
-    # ### Next Steps
-    # - Read the [Stackdriver Debugger API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
-    #
-    # [Product Documentation]: https://cloud.google.com/debugger
-    #
-    #
     module Debugger
+      # rubocop:disable LineLength
+
+      ##
+      # # Ruby Client for Stackdriver Debugger API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+      #
+      # [Stackdriver Debugger API][Product Documentation]:
+      # Examines the call stack and variables of a running application
+      # without stopping or slowing it down.
+      # - [Product Documentation][]
+      #
+      # ## Quick Start
+      # In order to use this library, you first need to go through the following
+      # steps:
+      #
+      # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+      # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+      # 3. [Enable the Stackdriver Debugger API.](https://console.cloud.google.com/apis/api/debugger)
+      # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+      #
+      # ### Next Steps
+      # - Read the [Stackdriver Debugger API Product documentation][Product Documentation]
+      #   to learn more about the product and see How-to Guides.
+      # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+      #   to see the full list of Cloud APIs that we cover.
+      #
+      # [Product Documentation]: https://cloud.google.com/debugger
+      #
+      # ## Enabling Logging
+      #
+      # To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
+      # The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+      # or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+      # that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+      # and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+      #
+      # Configuring a Ruby stdlib logger:
+      #
+      # ```ruby
+      # require "logger"
+      #
+      # module MyLogger
+      #   LOGGER = Logger.new $stderr, level: Logger::WARN
+      #   def logger
+      #     LOGGER
+      #   end
+      # end
+      #
+      # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
+      # module GRPC
+      #   extend MyLogger
+      # end
+      # ```
+      #
       module V2
         # rubocop:enable LineLength
 
@@ -87,28 +113,27 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def self.new \
-              service_path: nil,
-              port: nil,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: nil,
               client_config: nil,
               timeout: nil,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: nil
             kwargs = {
-              service_path: service_path,
-              port: port,
-              channel: channel,
-              chan_creds: chan_creds,
-              updater_proc: updater_proc,
               credentials: credentials,
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }
@@ -163,28 +188,27 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def self.new \
-              service_path: nil,
-              port: nil,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: nil,
               client_config: nil,
               timeout: nil,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: nil
             kwargs = {
-              service_path: service_path,
-              port: port,
-              channel: channel,
-              chan_creds: chan_creds,
-              updater_proc: updater_proc,
               credentials: credentials,
               scopes: scopes,
               client_config: client_config,
               timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
               lib_name: lib_name,
               lib_version: lib_version
             }.select { |_, v| v != nil }

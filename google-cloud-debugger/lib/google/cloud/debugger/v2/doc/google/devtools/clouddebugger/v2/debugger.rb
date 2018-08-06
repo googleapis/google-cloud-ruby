@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,12 +20,10 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [Debugger2Client][] | Examines the call stack and variables of a running application without stopping or slowing it down. |
-      # | [Controller2Client][] | Examines the call stack and variables of a running application without stopping or slowing it down. |
+      # | [Debugger2Client][] | The Debugger service provides the API that allows users to collect run-time information from a running application, without stopping or slowing it down and without modifying its state. |
       # | [Data Types][] | Data types for Google::Cloud::Debugger::V2 |
       #
       # [Debugger2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/debugger2client
-      # [Controller2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/controller2client
       # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/datatypes
       #
       module V2

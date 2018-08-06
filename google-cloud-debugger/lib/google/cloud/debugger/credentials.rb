@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require "googleauth"
+require "google/cloud/debugger/v2/credentials"
 require "google/cloud/logging/credentials"
 
 module Google
@@ -38,21 +38,9 @@ module Google
       #
       #   debugger.project_id #=> "my-project"
       #
-      class Credentials < Google::Auth::Credentials
-        SCOPE = (["https://www.googleapis.com/auth/cloud_debugger"] +
-                 Google::Cloud::Logging::Credentials::SCOPE).freeze
-        PATH_ENV_VARS = %w[DEBUGGER_CREDENTIALS
-                           GOOGLE_CLOUD_CREDENTIALS
-                           DEBUGGER_KEYFILE
-                           GOOGLE_CLOUD_KEYFILE
-                           GCLOUD_KEYFILE].freeze
-        JSON_ENV_VARS = %w[DEBUGGER_CREDENTIALS_JSON
-                           GOOGLE_CLOUD_CREDENTIALS_JSON
-                           DEBUGGER_KEYFILE_JSON
-                           GOOGLE_CLOUD_KEYFILE_JSON
-                           GCLOUD_KEYFILE_JSON].freeze
-        DEFAULT_PATHS = \
-          ["~/.config/gcloud/application_default_credentials.json"].freeze
+      class Credentials < Google::Cloud::Debugger::V2::Credentials
+        SCOPE = (Google::Cloud::Debugger::V2::Credentials::SCOPE +
+                 Google::Cloud::Logging::Credentials::SCOPE).uniq.freeze
       end
     end
   end
