@@ -198,6 +198,32 @@ task :rubocop, :bundleupdate do |t, args|
   end
 end
 
+require_relative "rakelib/yard_builder.rb"
+
+namespace :docs do
+  desc "Builds documentation for all gems on current branch (assumes master)"
+  task :build_master do
+    YardBuilder.new(__dir__).build_master
+  end
+
+  desc "Add release and builds documentation for a tag"
+  task :publish_tag, [:tag] do |t, args|
+    tag = extract_args args, :tag
+    YardBuilder.new(__dir__).publish_tag(tag)
+  end
+
+  desc "Rebuilds documentation for a tag"
+  task :rebuild_tag, [:tag] do |t, args|
+    tag = extract_args args, :tag
+    YardBuilder.new(__dir__).rebuild_tag(tag)
+  end
+
+  desc "Builds documentation for all tags and current branch (assumes master)"
+  task :rebuild_all do
+    YardBuilder.new(__dir__).rebuild_all
+  end
+end
+
 desc "Runs yard-doctest example tests for all gems individually."
 task :doctest, :bundleupdate do |t, args|
   bundleupdate = args[:bundleupdate]
@@ -527,6 +553,7 @@ namespace :circleci do
       if ENV["CIRCLE_BRANCH"] == "master"
         Rake::Task["bundleupdate"].invoke
         Rake::Task["jsondoc:master"].invoke
+        Rake::Task["docs:build_master"].invoke
       end
     end
   end
@@ -538,6 +565,7 @@ namespace :circleci do
     end
 
     Rake::Task["release"].invoke tag
+    Rake::Task["docs:publish_tag"].invoke tag
   end
 end
 
