@@ -27,7 +27,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/dialogflow/v2/agent_pb"
-require "google/cloud/dialogflow/credentials"
+require "google/cloud/dialogflow/v2/credentials"
 
 module Google
   module Cloud
@@ -70,6 +70,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -89,6 +92,7 @@ module Google
 
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = AgentsClient::SERVICE_ADDRESS
+            self::GRPC_INTERCEPTORS = AgentsClient::GRPC_INTERCEPTORS
           end
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
@@ -130,11 +134,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -143,7 +154,7 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dialogflow/v2/agent_services_pb"
 
-            credentials ||= Google::Cloud::Dialogflow::Credentials.default
+            credentials ||= Google::Cloud::Dialogflow::V2::Credentials.default
 
             @operations_client = OperationsClient.new(
               credentials: credentials,
@@ -155,7 +166,7 @@ module Google
             )
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dialogflow::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dialogflow::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -179,6 +190,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "agents_client_config.json"
             )
@@ -191,13 +203,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @agents_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -205,32 +218,39 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dialogflow::V2::Agents::Stub.method(:new)
             )
 
             @get_agent = Google::Gax.create_api_call(
               @agents_stub.method(:get_agent),
-              defaults["get_agent"]
+              defaults["get_agent"],
+              exception_transformer: exception_transformer
             )
             @search_agents = Google::Gax.create_api_call(
               @agents_stub.method(:search_agents),
-              defaults["search_agents"]
+              defaults["search_agents"],
+              exception_transformer: exception_transformer
             )
             @train_agent = Google::Gax.create_api_call(
               @agents_stub.method(:train_agent),
-              defaults["train_agent"]
+              defaults["train_agent"],
+              exception_transformer: exception_transformer
             )
             @export_agent = Google::Gax.create_api_call(
               @agents_stub.method(:export_agent),
-              defaults["export_agent"]
+              defaults["export_agent"],
+              exception_transformer: exception_transformer
             )
             @import_agent = Google::Gax.create_api_call(
               @agents_stub.method(:import_agent),
-              defaults["import_agent"]
+              defaults["import_agent"],
+              exception_transformer: exception_transformer
             )
             @restore_agent = Google::Gax.create_api_call(
               @agents_stub.method(:restore_agent),
-              defaults["restore_agent"]
+              defaults["restore_agent"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -244,23 +264,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Agent]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::Agent]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   agents_client = Google::Cloud::Dialogflow::V2::Agents.new
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::AgentsClient.project_path("[PROJECT]")
           #   response = agents_client.get_agent(formatted_parent)
 
           def get_agent \
               parent,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::GetAgentRequest)
-            @get_agent.call(req, options)
+            @get_agent.call(req, options, &block)
           end
 
           # Returns the list of agents.
@@ -283,6 +307,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::Agent>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::Agent>]
           #   An enumerable of Google::Cloud::Dialogflow::V2::Agent instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -290,9 +317,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   agents_client = Google::Cloud::Dialogflow::V2::Agents.new
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::AgentsClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -311,13 +338,14 @@ module Google
           def search_agents \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::SearchAgentsRequest)
-            @search_agents.call(req, options)
+            @search_agents.call(req, options, &block)
           end
 
           # Trains the specified agent.
@@ -334,9 +362,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   agents_client = Google::Cloud::Dialogflow::V2::Agents.new
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::AgentsClient.project_path("[PROJECT]")
           #
           #   # Register a callback during the method call.
@@ -402,9 +430,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   agents_client = Google::Cloud::Dialogflow::V2::Agents.new
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::AgentsClient.project_path("[PROJECT]")
           #
           #   # Register a callback during the method call.
@@ -490,9 +518,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   agents_client = Google::Cloud::Dialogflow::V2::Agents.new
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::AgentsClient.project_path("[PROJECT]")
           #
           #   # Register a callback during the method call.
@@ -579,9 +607,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   agents_client = Google::Cloud::Dialogflow::V2::Agents.new
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::AgentsClient.project_path("[PROJECT]")
           #
           #   # Register a callback during the method call.

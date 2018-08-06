@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/dialogflow/v2/session_entity_type_pb"
-require "google/cloud/dialogflow/credentials"
+require "google/cloud/dialogflow/v2/credentials"
 
 module Google
   module Cloud
@@ -54,6 +54,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -133,11 +136,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -146,10 +156,10 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dialogflow/v2/session_entity_type_services_pb"
 
-            credentials ||= Google::Cloud::Dialogflow::Credentials.default
+            credentials ||= Google::Cloud::Dialogflow::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dialogflow::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dialogflow::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -173,6 +183,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "session_entity_types_client_config.json"
             )
@@ -185,13 +196,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @session_entity_types_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -199,28 +211,34 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.method(:new)
             )
 
             @list_session_entity_types = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:list_session_entity_types),
-              defaults["list_session_entity_types"]
+              defaults["list_session_entity_types"],
+              exception_transformer: exception_transformer
             )
             @get_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:get_session_entity_type),
-              defaults["get_session_entity_type"]
+              defaults["get_session_entity_type"],
+              exception_transformer: exception_transformer
             )
             @create_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:create_session_entity_type),
-              defaults["create_session_entity_type"]
+              defaults["create_session_entity_type"],
+              exception_transformer: exception_transformer
             )
             @update_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:update_session_entity_type),
-              defaults["update_session_entity_type"]
+              defaults["update_session_entity_type"],
+              exception_transformer: exception_transformer
             )
             @delete_session_entity_type = Google::Gax.create_api_call(
               @session_entity_types_stub.method(:delete_session_entity_type),
-              defaults["delete_session_entity_type"]
+              defaults["delete_session_entity_type"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -240,6 +258,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::SessionEntityType>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::SessionEntityType>]
           #   An enumerable of Google::Cloud::Dialogflow::V2::SessionEntityType instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -247,9 +268,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   session_entity_types_client = Google::Cloud::Dialogflow::V2::SessionEntityTypes.new
+          #   session_entity_types_client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::SessionEntityTypesClient.session_path("[PROJECT]", "[SESSION]")
           #
           #   # Iterate over all results.
@@ -268,13 +289,14 @@ module Google
           def list_session_entity_types \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest)
-            @list_session_entity_types.call(req, options)
+            @list_session_entity_types.call(req, options, &block)
           end
 
           # Retrieves the specified session entity type.
@@ -286,23 +308,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::SessionEntityType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   session_entity_types_client = Google::Cloud::Dialogflow::V2::SessionEntityTypes.new
+          #   session_entity_types_client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::SessionEntityTypesClient.session_entity_type_path("[PROJECT]", "[SESSION]", "[ENTITY_TYPE]")
           #   response = session_entity_types_client.get_session_entity_type(formatted_name)
 
           def get_session_entity_type \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest)
-            @get_session_entity_type.call(req, options)
+            @get_session_entity_type.call(req, options, &block)
           end
 
           # Creates a session entity type.
@@ -317,12 +343,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::SessionEntityType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   session_entity_types_client = Google::Cloud::Dialogflow::V2::SessionEntityTypes.new
+          #   session_entity_types_client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::SessionEntityTypesClient.session_path("[PROJECT]", "[SESSION]")
           #
           #   # TODO: Initialize +session_entity_type+:
@@ -332,13 +361,14 @@ module Google
           def create_session_entity_type \
               parent,
               session_entity_type,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               session_entity_type: session_entity_type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest)
-            @create_session_entity_type.call(req, options)
+            @create_session_entity_type.call(req, options, &block)
           end
 
           # Updates the specified session entity type.
@@ -356,12 +386,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::SessionEntityType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   session_entity_types_client = Google::Cloud::Dialogflow::V2::SessionEntityTypes.new
+          #   session_entity_types_client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
           #
           #   # TODO: Initialize +session_entity_type+:
           #   session_entity_type = {}
@@ -370,13 +403,14 @@ module Google
           def update_session_entity_type \
               session_entity_type,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               session_entity_type: session_entity_type,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest)
-            @update_session_entity_type.call(req, options)
+            @update_session_entity_type.call(req, options, &block)
           end
 
           # Deletes the specified session entity type.
@@ -388,22 +422,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   session_entity_types_client = Google::Cloud::Dialogflow::V2::SessionEntityTypes.new
+          #   session_entity_types_client = Google::Cloud::Dialogflow::SessionEntityTypes.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::SessionEntityTypesClient.session_entity_type_path("[PROJECT]", "[SESSION]", "[ENTITY_TYPE]")
           #   session_entity_types_client.delete_session_entity_type(formatted_name)
 
           def delete_session_entity_type \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest)
-            @delete_session_entity_type.call(req, options)
+            @delete_session_entity_type.call(req, options, &block)
             nil
           end
         end

@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/dialogflow/v2/context_pb"
-require "google/cloud/dialogflow/credentials"
+require "google/cloud/dialogflow/v2/credentials"
 
 module Google
   module Cloud
@@ -59,6 +59,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -138,11 +141,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -151,10 +161,10 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dialogflow/v2/context_services_pb"
 
-            credentials ||= Google::Cloud::Dialogflow::Credentials.default
+            credentials ||= Google::Cloud::Dialogflow::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dialogflow::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dialogflow::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -178,6 +188,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "contexts_client_config.json"
             )
@@ -190,13 +201,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @contexts_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -204,32 +216,39 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dialogflow::V2::Contexts::Stub.method(:new)
             )
 
             @list_contexts = Google::Gax.create_api_call(
               @contexts_stub.method(:list_contexts),
-              defaults["list_contexts"]
+              defaults["list_contexts"],
+              exception_transformer: exception_transformer
             )
             @get_context = Google::Gax.create_api_call(
               @contexts_stub.method(:get_context),
-              defaults["get_context"]
+              defaults["get_context"],
+              exception_transformer: exception_transformer
             )
             @create_context = Google::Gax.create_api_call(
               @contexts_stub.method(:create_context),
-              defaults["create_context"]
+              defaults["create_context"],
+              exception_transformer: exception_transformer
             )
             @update_context = Google::Gax.create_api_call(
               @contexts_stub.method(:update_context),
-              defaults["update_context"]
+              defaults["update_context"],
+              exception_transformer: exception_transformer
             )
             @delete_context = Google::Gax.create_api_call(
               @contexts_stub.method(:delete_context),
-              defaults["delete_context"]
+              defaults["delete_context"],
+              exception_transformer: exception_transformer
             )
             @delete_all_contexts = Google::Gax.create_api_call(
               @contexts_stub.method(:delete_all_contexts),
-              defaults["delete_all_contexts"]
+              defaults["delete_all_contexts"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -249,6 +268,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::Context>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::Context>]
           #   An enumerable of Google::Cloud::Dialogflow::V2::Context instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -256,9 +278,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   contexts_client = Google::Cloud::Dialogflow::V2::Contexts.new
+          #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::ContextsClient.session_path("[PROJECT]", "[SESSION]")
           #
           #   # Iterate over all results.
@@ -277,13 +299,14 @@ module Google
           def list_contexts \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::ListContextsRequest)
-            @list_contexts.call(req, options)
+            @list_contexts.call(req, options, &block)
           end
 
           # Retrieves the specified context.
@@ -294,23 +317,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Context]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::Context]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   contexts_client = Google::Cloud::Dialogflow::V2::Contexts.new
+          #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::ContextsClient.context_path("[PROJECT]", "[SESSION]", "[CONTEXT]")
           #   response = contexts_client.get_context(formatted_name)
 
           def get_context \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::GetContextRequest)
-            @get_context.call(req, options)
+            @get_context.call(req, options, &block)
           end
 
           # Creates a context.
@@ -325,12 +352,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Context]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::Context]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   contexts_client = Google::Cloud::Dialogflow::V2::Contexts.new
+          #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::ContextsClient.session_path("[PROJECT]", "[SESSION]")
           #
           #   # TODO: Initialize +context+:
@@ -340,13 +370,14 @@ module Google
           def create_context \
               parent,
               context,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               context: context
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::CreateContextRequest)
-            @create_context.call(req, options)
+            @create_context.call(req, options, &block)
           end
 
           # Updates the specified context.
@@ -362,12 +393,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Context]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::Context]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   contexts_client = Google::Cloud::Dialogflow::V2::Contexts.new
+          #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #
           #   # TODO: Initialize +context+:
           #   context = {}
@@ -376,13 +410,14 @@ module Google
           def update_context \
               context,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               context: context,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::UpdateContextRequest)
-            @update_context.call(req, options)
+            @update_context.call(req, options, &block)
           end
 
           # Deletes the specified context.
@@ -393,22 +428,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   contexts_client = Google::Cloud::Dialogflow::V2::Contexts.new
+          #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::ContextsClient.context_path("[PROJECT]", "[SESSION]", "[CONTEXT]")
           #   contexts_client.delete_context(formatted_name)
 
           def delete_context \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DeleteContextRequest)
-            @delete_context.call(req, options)
+            @delete_context.call(req, options, &block)
             nil
           end
 
@@ -420,22 +459,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   contexts_client = Google::Cloud::Dialogflow::V2::Contexts.new
+          #   contexts_client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::ContextsClient.session_path("[PROJECT]", "[SESSION]")
           #   contexts_client.delete_all_contexts(formatted_parent)
 
           def delete_all_contexts \
               parent,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest)
-            @delete_all_contexts.call(req, options)
+            @delete_all_contexts.call(req, options, &block)
             nil
           end
         end

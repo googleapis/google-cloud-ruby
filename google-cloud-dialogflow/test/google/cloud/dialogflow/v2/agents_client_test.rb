@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockAgentsCredentials < Google::Cloud::Dialogflow::Credentials
+class MockAgentsCredentials < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -108,7 +108,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("get_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -116,6 +116,13 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_agent(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -136,7 +143,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("get_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -177,7 +184,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("search_agents")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -208,7 +215,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("search_agents")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -253,7 +260,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("train_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -291,7 +298,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("train_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -320,7 +327,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("train_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -366,7 +373,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("export_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -404,7 +411,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("export_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -433,7 +440,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("export_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -478,7 +485,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("import_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -516,7 +523,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("import_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -545,7 +552,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("import_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -590,7 +597,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("restore_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -628,7 +635,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("restore_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method
@@ -657,7 +664,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       mock_credentials = MockAgentsCredentials.new("restore_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
 
           # Call method

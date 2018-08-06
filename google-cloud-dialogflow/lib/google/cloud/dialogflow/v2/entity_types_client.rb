@@ -27,7 +27,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/dialogflow/v2/entity_type_pb"
-require "google/cloud/dialogflow/credentials"
+require "google/cloud/dialogflow/v2/credentials"
 
 module Google
   module Cloud
@@ -72,6 +72,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -91,6 +94,7 @@ module Google
 
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = EntityTypesClient::SERVICE_ADDRESS
+            self::GRPC_INTERCEPTORS = EntityTypesClient::GRPC_INTERCEPTORS
           end
 
           PROJECT_AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
@@ -149,11 +153,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -162,7 +173,7 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dialogflow/v2/entity_type_services_pb"
 
-            credentials ||= Google::Cloud::Dialogflow::Credentials.default
+            credentials ||= Google::Cloud::Dialogflow::V2::Credentials.default
 
             @operations_client = OperationsClient.new(
               credentials: credentials,
@@ -174,7 +185,7 @@ module Google
             )
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dialogflow::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dialogflow::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -198,6 +209,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "entity_types_client_config.json"
             )
@@ -210,13 +222,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @entity_types_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -224,48 +237,59 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dialogflow::V2::EntityTypes::Stub.method(:new)
             )
 
             @list_entity_types = Google::Gax.create_api_call(
               @entity_types_stub.method(:list_entity_types),
-              defaults["list_entity_types"]
+              defaults["list_entity_types"],
+              exception_transformer: exception_transformer
             )
             @get_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:get_entity_type),
-              defaults["get_entity_type"]
+              defaults["get_entity_type"],
+              exception_transformer: exception_transformer
             )
             @create_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:create_entity_type),
-              defaults["create_entity_type"]
+              defaults["create_entity_type"],
+              exception_transformer: exception_transformer
             )
             @update_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:update_entity_type),
-              defaults["update_entity_type"]
+              defaults["update_entity_type"],
+              exception_transformer: exception_transformer
             )
             @delete_entity_type = Google::Gax.create_api_call(
               @entity_types_stub.method(:delete_entity_type),
-              defaults["delete_entity_type"]
+              defaults["delete_entity_type"],
+              exception_transformer: exception_transformer
             )
             @batch_update_entity_types = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_update_entity_types),
-              defaults["batch_update_entity_types"]
+              defaults["batch_update_entity_types"],
+              exception_transformer: exception_transformer
             )
             @batch_delete_entity_types = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_delete_entity_types),
-              defaults["batch_delete_entity_types"]
+              defaults["batch_delete_entity_types"],
+              exception_transformer: exception_transformer
             )
             @batch_create_entities = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_create_entities),
-              defaults["batch_create_entities"]
+              defaults["batch_create_entities"],
+              exception_transformer: exception_transformer
             )
             @batch_update_entities = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_update_entities),
-              defaults["batch_update_entities"]
+              defaults["batch_update_entities"],
+              exception_transformer: exception_transformer
             )
             @batch_delete_entities = Google::Gax.create_api_call(
               @entity_types_stub.method(:batch_delete_entities),
-              defaults["batch_delete_entities"]
+              defaults["batch_delete_entities"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -291,6 +315,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::EntityType>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::EntityType>]
           #   An enumerable of Google::Cloud::Dialogflow::V2::EntityType instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -298,9 +325,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -320,14 +347,15 @@ module Google
               parent,
               language_code: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               language_code: language_code,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::ListEntityTypesRequest)
-            @list_entity_types.call(req, options)
+            @list_entity_types.call(req, options, &block)
           end
 
           # Retrieves the specified entity type.
@@ -344,25 +372,29 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::EntityType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::EntityType]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #   response = entity_types_client.get_entity_type(formatted_name)
 
           def get_entity_type \
               name,
               language_code: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               language_code: language_code
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::GetEntityTypeRequest)
-            @get_entity_type.call(req, options)
+            @get_entity_type.call(req, options, &block)
           end
 
           # Creates an entity type in the specified agent.
@@ -383,12 +415,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::EntityType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::EntityType]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path("[PROJECT]")
           #
           #   # TODO: Initialize +entity_type+:
@@ -399,14 +434,15 @@ module Google
               parent,
               entity_type,
               language_code: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               entity_type: entity_type,
               language_code: language_code
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest)
-            @create_entity_type.call(req, options)
+            @create_entity_type.call(req, options, &block)
           end
 
           # Updates the specified entity type.
@@ -429,12 +465,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::EntityType]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::EntityType]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #
           #   # TODO: Initialize +entity_type+:
           #   entity_type = {}
@@ -444,14 +483,15 @@ module Google
               entity_type,
               language_code: nil,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               entity_type: entity_type,
               language_code: language_code,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest)
-            @update_entity_type.call(req, options)
+            @update_entity_type.call(req, options, &block)
           end
 
           # Deletes the specified entity type.
@@ -462,22 +502,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #   entity_types_client.delete_entity_type(formatted_name)
 
           def delete_entity_type \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest)
-            @delete_entity_type.call(req, options)
+            @delete_entity_type.call(req, options, &block)
             nil
           end
 
@@ -514,9 +558,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path("[PROJECT]")
           #
           #   # Register a callback during the method call.
@@ -589,9 +633,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.project_agent_path("[PROJECT]")
           #
           #   # TODO: Initialize +entity_type_names+:
@@ -668,9 +712,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #
           #   # TODO: Initialize +entities+:
@@ -754,9 +798,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #
           #   # TODO: Initialize +entities+:
@@ -837,9 +881,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   entity_types_client = Google::Cloud::Dialogflow::V2::EntityTypes.new
+          #   entity_types_client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::EntityTypesClient.entity_type_path("[PROJECT]", "[ENTITY_TYPE]")
           #
           #   # TODO: Initialize +entity_values+:

@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/dialogflow/v2/session_pb"
-require "google/cloud/dialogflow/credentials"
+require "google/cloud/dialogflow/v2/credentials"
 
 module Google
   module Cloud
@@ -46,6 +46,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -97,11 +100,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -110,10 +120,10 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dialogflow/v2/session_services_pb"
 
-            credentials ||= Google::Cloud::Dialogflow::Credentials.default
+            credentials ||= Google::Cloud::Dialogflow::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dialogflow::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dialogflow::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -137,6 +147,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "sessions_client_config.json"
             )
@@ -148,13 +159,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @sessions_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -162,16 +174,19 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dialogflow::V2::Sessions::Stub.method(:new)
             )
 
             @detect_intent = Google::Gax.create_api_call(
               @sessions_stub.method(:detect_intent),
-              defaults["detect_intent"]
+              defaults["detect_intent"],
+              exception_transformer: exception_transformer
             )
             @streaming_detect_intent = Google::Gax.create_api_call(
               @sessions_stub.method(:streaming_detect_intent),
-              defaults["streaming_detect_intent"]
+              defaults["streaming_detect_intent"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -210,12 +225,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::DetectIntentResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::DetectIntentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   sessions_client = Google::Cloud::Dialogflow::V2::Sessions.new
+          #   sessions_client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
           #   formatted_session = Google::Cloud::Dialogflow::V2::SessionsClient.session_path("[PROJECT]", "[SESSION]")
           #
           #   # TODO: Initialize +query_input+:
@@ -227,7 +245,8 @@ module Google
               query_input,
               query_params: nil,
               input_audio: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               session: session,
               query_input: query_input,
@@ -235,7 +254,7 @@ module Google
               input_audio: input_audio
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DetectIntentRequest)
-            @detect_intent.call(req, options)
+            @detect_intent.call(req, options, &block)
           end
 
           # Processes a natural language query in audio format in a streaming fashion
@@ -258,9 +277,9 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   sessions_client = Google::Cloud::Dialogflow::V2::Sessions.new
+          #   sessions_client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
           #
           #   # TODO: Initialize +session+:
           #   session = ''

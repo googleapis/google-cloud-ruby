@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockContextsCredentials < Google::Cloud::Dialogflow::Credentials
+class MockContextsCredentials < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -93,7 +93,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("list_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -124,7 +124,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("list_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -164,7 +164,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("get_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -172,6 +172,13 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_context(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -192,7 +199,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("get_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -234,7 +241,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("create_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -242,6 +249,13 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_context(formatted_parent, context) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -264,7 +278,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("create_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -304,7 +318,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("update_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -312,6 +326,13 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_context(context) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -332,7 +353,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("update_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -366,7 +387,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("delete_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -374,6 +395,13 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_context(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -394,7 +422,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("delete_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -428,7 +456,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("delete_all_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
@@ -436,6 +464,13 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_all_contexts(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -456,7 +491,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
       mock_credentials = MockContextsCredentials.new("delete_all_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Contexts.new(version: :v2)
 
           # Call method
