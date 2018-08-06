@@ -17,6 +17,7 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
+import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -32,6 +33,10 @@ s.copy(v1_library / 'lib/google/devtools/cloudtrace/v1')
 
 # Omitting lib/google/cloud/trace/v1.rb for now because we are not exposing the
 # low-level API.
+
+# PERMANENT: We don't want the generated overview.rb file because we have our
+# own toplevel docs for the handwritten layer.
+os.remove('lib/google/cloud/trace/v1/doc/overview.rb')
 
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(
@@ -59,6 +64,10 @@ s.copy(v2_library / 'lib/google/devtools/cloudtrace/v2')
 
 # Omitting lib/google/cloud/trace/v2.rb for now because we are not exposing the
 # low-level API.
+
+# PERMANENT: We don't want the generated overview.rb file because we have our
+# own toplevel docs for the handwritten layer.
+os.remove('lib/google/cloud/trace/v2/doc/overview.rb')
 
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(

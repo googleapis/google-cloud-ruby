@@ -38,8 +38,8 @@ s.replace(
     'describe "SpeechSmokeTest V1"')
 s.replace(
     'acceptance/google/cloud/speech/v1/speech_smoke_test.rb',
-    'speech_client = Google::Cloud::Speech\\.new',
-    'speech_client = Google::Cloud::Speech.new version: :v1')
+    'speech_client = Google::Cloud::Speech\\.new\n',
+    'speech_client = Google::Cloud::Speech.new version: :v1\n')
 
 s.copy(v1_library / 'lib/google/cloud/speech/v1.rb')
 
@@ -84,13 +84,13 @@ s.replace(
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/speech/v1/speech_client_test.rb',
-    'CustomTestError', 'CustomTestError_v1')
+    'CustomTestError([^_])', 'CustomTestError_v1\\1')
 s.replace(
     'test/google/cloud/speech/v1/speech_client_test.rb',
-    'MockGrpcClientStub', 'MockGrpcClientStub_v1')
+    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1\\1')
 s.replace(
     'test/google/cloud/speech/v1/speech_client_test.rb',
-    'MockSpeechCredentials', 'MockSpeechCredentials_v1')
+    'MockSpeechCredentials([^_])', 'MockSpeechCredentials_v1\\1')
 
 # Copy base module from the v1 library so v1 is the default
 s.copy(v1_library / 'lib/google/cloud/speech.rb')
@@ -142,6 +142,12 @@ s.replace(
 
       ### Preview\n"""))
 
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    '.yardopts',
+    '\n--markup markdown\n\n',
+    '\n--markup markdown\n--markup-provider redcarpet\n\n')
+
 # https://github.com/googleapis/gapic-generator/issues/2195
 s.replace(
     'README.md',
@@ -181,6 +187,16 @@ s.replace(
 
         gem.platform\\1= Gem::Platform::RUBY"""))
 
+# https://github.com/googleapis/gapic-generator/issues/2194
+s.replace(
+    'google-cloud-speech.gemspec',
+    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
+    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
+s.replace(
+    'google-cloud-speech.gemspec',
+    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
+    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
+
 
 v1p1beta1_library = gapic.ruby_library(
     'speech', 'v1p1beta1',
@@ -196,8 +212,8 @@ s.replace(
     'describe "SpeechSmokeTest V1p1beta1"')
 s.replace(
     'acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb',
-    'speech_client = Google::Cloud::Speech\\.new',
-    'speech_client = Google::Cloud::Speech.new version: :v1p1beta1')
+    'speech_client = Google::Cloud::Speech\\.new\n',
+    'speech_client = Google::Cloud::Speech.new version: :v1p1beta1\n')
 
 s.copy(v1p1beta1_library / 'lib/google/cloud/speech/v1p1beta1.rb')
 
@@ -242,10 +258,10 @@ s.replace(
 # https://github.com/googleapis/gapic-generator/issues/2117
 s.replace(
     'test/google/cloud/speech/v1p1beta1/speech_client_test.rb',
-    'CustomTestError', 'CustomTestError_v1p1beta1')
+    'CustomTestError([^_])', 'CustomTestError_v1p1beta1\\1')
 s.replace(
     'test/google/cloud/speech/v1p1beta1/speech_client_test.rb',
-    'MockGrpcClientStub', 'MockGrpcClientStub_v1p1beta1')
+    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1p1beta1\\1')
 s.replace(
     'test/google/cloud/speech/v1p1beta1/speech_client_test.rb',
-    'MockSpeechCredentials', 'MockSpeechCredentials_v1p1beta1')
+    'MockSpeechCredentials([^_])', 'MockSpeechCredentials_v1p1beta1\\1')
