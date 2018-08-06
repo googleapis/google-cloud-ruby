@@ -1,0 +1,3272 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Logging::Logger - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Logging::Logger";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span>
+     &raquo; 
+    <span class="title">Logger</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Logging::Logger
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Logging::Logger</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/logger.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Logger</h1>
+
+<p>An API-compatible replacement for ruby&#39;s Logger that logs to the
+Stackdriver Logging Service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Provide a hash to write a JSON payload to the log:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+
+<span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stats</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>a</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='int'>8</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>b</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='float'>12.5</span><span class='rbrace'>}</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='id identifier rubyid_payload'>payload</span></code></pre>
+    
+  </div>
+
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#datetime_format-instance_method" title="#datetime_format (instance method)">#<strong>datetime_format</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This logger does not use a formatter, but it implements this attribute for API compatibility with the standard Logger.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#formatter-instance_method" title="#formatter (instance method)">#<strong>formatter</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This logger does not use a formatter, but it provides a default Logger::Formatter for API compatibility with the standard Logger.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Google Cloud labels to write the log entry with.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#level-instance_method" title="#level (instance method)">#<strong>level</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #sev_threshold, #local_level)
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The logging severity threshold (e.g. <code>Logger::INFO</code>).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_name-instance_method" title="#log_name (instance method)">#<strong>log_name</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #progname)
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Google Cloud log_name to write the log entry with.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project-instance_method" title="#project (instance method)">#<strong>project</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The project ID this logger is sending data to.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource-instance_method" title="#resource (instance method)">#<strong>resource</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Google Cloud resource to write the log entry with.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#silencer-instance_method" title="#silencer (instance method)">#<strong>silencer</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Boolean flag that indicates whether this logger can be silenced or not.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#writer-instance_method" title="#writer (instance method)">#<strong>writer</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Google Cloud writer object that calls to #write_entries are made on.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#<<-instance_method" title="#&lt;&lt; (instance method)">#<strong>&lt;&lt;</strong>(msg)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Logs the given message at UNKNOWN severity.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add-instance_method" title="#add (instance method)">#<strong>add</strong>(severity, message = nil, progname = nil) { ... } &#x21d2; Object </a>
+    
+
+    
+      (also: #log)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Log a message if the given severity is high enough.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_request_info-instance_method" title="#add_request_info (instance method)">#<strong>add_request_info</strong>(info: nil, env: nil, trace_id: nil, log_name: nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Associate request data with the current Thread.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public deprecated">
+  <span class="summary_signature">
+    
+      <a href="#add_trace_id-instance_method" title="#add_trace_id (instance method)">#<strong>add_trace_id</strong>(trace_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  <span class="deprecated note title">deprecated</span>
+  
+
+  
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'><p>Use add_request_info</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Close the logging &quot;device&quot;.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug-instance_method" title="#debug (instance method)">#<strong>debug</strong>(message = nil) { ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Log a <code>DEBUG</code> entry.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug%3F-instance_method" title="#debug? (instance method)">#<strong>debug?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the current severity level allows for sending <code>DEBUG</code> messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_request_info-instance_method" title="#delete_request_info (instance method)">#<strong>delete_request_info</strong>  &#x21d2; RequestInfo </a>
+    
+
+    
+      (also: #delete_trace_id)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Untrack the RequestInfo that&#39;s associated with current Thread.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error-instance_method" title="#error (instance method)">#<strong>error</strong>(message = nil) { ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Log an <code>ERROR</code> entry.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error%3F-instance_method" title="#error? (instance method)">#<strong>error?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the current severity level allows for sending <code>ERROR</code> messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fatal-instance_method" title="#fatal (instance method)">#<strong>fatal</strong>(message = nil) { ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Log a <code>FATAL</code> entry.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fatal%3F-instance_method" title="#fatal? (instance method)">#<strong>fatal?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the current severity level allows for sending <code>FATAL</code> messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">#<strong>flush</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>No-op method.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#info-instance_method" title="#info (instance method)">#<strong>info</strong>(message = nil) { ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Log an <code>INFO</code> entry.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#info%3F-instance_method" title="#info? (instance method)">#<strong>info?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the current severity level allows for sending <code>INFO</code> messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(writer, log_name, resource, labels = nil)  &#x21d2; Google::Cloud::Logging::Logger </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Logger instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#progname=-instance_method" title="#progname= (instance method)">#<strong>progname=</strong>(name)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This logger treats progname as an alias for log_name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reopen-instance_method" title="#reopen (instance method)">#<strong>reopen</strong>(_logdev = nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Re-enable logging if the logger has been closed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_info-instance_method" title="#request_info (instance method)">#<strong>request_info</strong>  &#x21d2; RequestInfo<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Get the request data for the current Thread.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#silence-instance_method" title="#silence (instance method)">#<strong>silence</strong>(temp_level = ::Logger::ERROR)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Filter out low severity messages within block.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public deprecated">
+  <span class="summary_signature">
+    
+      <a href="#trace_ids-instance_method" title="#trace_ids (instance method)">#<strong>trace_ids</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  <span class="deprecated note title">deprecated</span>
+  
+
+  
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'><p>Use request_info</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unknown-instance_method" title="#unknown (instance method)">#<strong>unknown</strong>(message = nil) { ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Log an <code>UNKNOWN</code> entry.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unknown%3F-instance_method" title="#unknown? (instance method)">#<strong>unknown?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the current severity level allows for sending <code>UNKNOWN</code> messages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warn-instance_method" title="#warn (instance method)">#<strong>warn</strong>(message = nil) { ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Log a <code>WARN</code> entry.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warn%3F-instance_method" title="#warn? (instance method)">#<strong>warn?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the current severity level allows for sending <code>WARN</code> messages.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(writer, log_name, resource, labels = nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::Logger (class)">Google::Cloud::Logging::Logger</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Logger instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_writer'>writer</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_async_writer'>async_writer</span> <span class='label'>max_queue_size:</span> <span class='int'>1000</span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='lbrace'>{</span>
+                              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>module_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>version_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+                            <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='id identifier rubyid_writer'>writer</span><span class='comma'>,</span>
+                                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                            <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+                                            <span class='label'>env:</span> <span class='symbol'>:production</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>writer</span>
+      
+      
+        <span class='type'>(<tt>#write_entries</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The object that will transmit log
+entries. Generally, to create a logger that blocks on transmitting
+log entries, pass the Project; otherwise, to create a logger that
+transmits log entries in the background, pass an AsyncWriter. You
+may also pass any other object that responds to #write_entries.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>log_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A log resource name to be associated with the
+written log entries.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>resource</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Google::Cloud::Logging::Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The monitored
+resource to be associated with written log entries.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>A set of user-defined data to be associated with
+written log entries.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 163</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_writer'>writer</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@writer</span> <span class='op'>=</span> <span class='id identifier rubyid_writer'>writer</span>
+  <span class='ivar'>@log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_log_name'>log_name</span>
+  <span class='ivar'>@resource</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span>
+  <span class='ivar'>@labels</span> <span class='op'>=</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@level</span> <span class='op'>=</span> <span class='int'>0</span> <span class='comment'># DEBUG is the default behavior
+</span>  <span class='ivar'>@request_info</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@closed</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='comment'># Unused, but present for API compatibility
+</span>  <span class='ivar'>@formatter</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>Formatter</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@datetime_format</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@silencer</span> <span class='op'>=</span> <span class='kw'>true</span>
+
+  <span class='comment'># The writer is usually a Project or AsyncWriter.
+</span>  <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='ivar'>@writer</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:logging</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='ivar'>@writer</span><span class='period'>.</span><span class='id identifier rubyid_logging'>logging</span> <span class='op'>:</span> <span class='ivar'>@writer</span>
+  <span class='ivar'>@project</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='kw'>if</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="datetime_format=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="datetime_format-instance_method">
+  
+    #<strong>datetime_format</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This logger does not use a formatter, but it implements this
+attribute for API compatibility with the standard Logger.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 103</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_datetime_format'>datetime_format</span>
+  <span class='ivar'>@datetime_format</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="formatter=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="formatter-instance_method">
+  
+    #<strong>formatter</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This logger does not use a formatter, but it provides a default
+Logger::Formatter for API compatibility with the standard Logger.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_formatter'>formatter</span>
+  <span class='ivar'>@formatter</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Google Cloud labels to write the log entry with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='ivar'>@labels</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="level=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="level-instance_method">
+  
+    #<strong>level</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='sev_threshold-instance_method'>sev_threshold</span>, <span id='local_level-instance_method'>local_level</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The logging severity threshold (e.g. <code>Logger::INFO</code>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_level'>level</span>
+  <span class='ivar'>@level</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="log_name-instance_method">
+  
+    #<strong>log_name</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='progname-instance_method'>progname</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Google Cloud log_name to write the log entry with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_log_name'>log_name</span>
+  <span class='ivar'>@log_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="project=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="project-instance_method">
+  
+    #<strong>project</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The project ID this logger is sending data to. If set, this value is
+used to set the trace field of log entries.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 108</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='ivar'>@project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="resource-instance_method">
+  
+    #<strong>resource</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Google Cloud resource to write the log entry with.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resource'>resource</span>
+  <span class='ivar'>@resource</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="silencer=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="silencer-instance_method">
+  
+    #<strong>silencer</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Boolean flag that indicates whether this logger can be silenced or
+not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 93</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_silencer'>silencer</span>
+  <span class='ivar'>@silencer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="writer-instance_method">
+  
+    #<strong>writer</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Google Cloud writer object that calls to #write_entries are made
+on. Either an AsyncWriter or Project object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_writer'>writer</span>
+  <span class='ivar'>@writer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="<<-instance_method">
+  
+    #<strong>&lt;&lt;</strong>(msg)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Logs the given message at UNKNOWN severity.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>msg</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload as a string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+327
+328
+329
+330</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 327</span>
+
+<span class='kw'>def</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_msg'>msg</span>
+  <span class='id identifier rubyid_unknown'>unknown</span> <span class='id identifier rubyid_msg'>msg</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add-instance_method">
+  
+    #<strong>add</strong>(severity, message = nil, progname = nil) { ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='log-instance_method'>log</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Log a message if the given severity is high enough. This is the
+generic logging method. Users will be more inclined to use <span class='object_link'><a href="#debug-instance_method" title="Google::Cloud::Logging::Logger#debug (method)">#debug</a></span>,
+<span class='object_link'><a href="#info-instance_method" title="Google::Cloud::Logging::Logger#info (method)">#info</a></span>, <span class='object_link'><a href="#warn-instance_method" title="Google::Cloud::Logging::Logger#warn (method)">#warn</a></span>, <span class='object_link'><a href="#error-instance_method" title="Google::Cloud::Logging::Logger#error (method)">#error</a></span>, and <span class='object_link'><a href="#fatal-instance_method" title="Google::Cloud::Logging::Logger#fatal (method)">#fatal</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>severity</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the integer code for or the
+name of the severity level</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as
+either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Evaluates to the message to log. This is not evaluated unless
+the logger&#39;s level is sufficient to log the message. This allows you
+to create potentially expensive logging messages that are only
+called when the logger is configured to show them.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 304</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add'>add</span> <span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_progname'>progname</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='id identifier rubyid_derive_severity'>derive_severity</span><span class='lparen'>(</span><span class='id identifier rubyid_severity'>severity</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>UNKNOWN</span>
+  <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_severity'>severity</span> <span class='op'>&lt;</span> <span class='ivar'>@level</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+      <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>yield</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='id identifier rubyid_progname'>progname</span>
+      <span class='comment'># progname = nil # TODO: Figure out what to do with the progname
+</span>    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_write_entry'>write_entry</span> <span class='id identifier rubyid_severity'>severity</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span> <span class='kw'>unless</span> <span class='ivar'>@closed</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_request_info-instance_method">
+  
+    #<strong>add_request_info</strong>(info: nil, env: nil, trace_id: nil, log_name: nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Associate request data with the current Thread. You may provide
+either the individual pieces of data (trace ID, log name) or a
+populated RequestInfo object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>info</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Info about the current request. Optional.
+If not present, a new RequestInfo is created using the remaining
+parameters.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trace_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The trace ID, or <code>nil</code> if no trace ID
+should be logged.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>log_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The log name to use, or nil to use
+this logger&#39;s default.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>env</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The request&#39;s Rack environment or <code>nil</code> if not
+available.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 449</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_request_info'>add_request_info</span> <span class='label'>info:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                     <span class='label'>env:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                     <span class='label'>trace_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                     <span class='label'>log_name:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_info'>info</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Logging::Logger#initialize (method)">new</a></span></span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='ivar'>@request_info</span><span class='lbracket'>[</span><span class='id identifier rubyid_current_thread_id'>current_thread_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_info'>info</span>
+
+  <span class='comment'># Start removing old entries if hash gets too large.
+</span>  <span class='comment'># This should never happen, because middleware should automatically
+</span>  <span class='comment'># remove entries when a request is finished
+</span>  <span class='ivar'>@request_info</span><span class='period'>.</span><span class='id identifier rubyid_shift'>shift</span> <span class='kw'>while</span> <span class='ivar'>@request_info</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>10_000</span>
+
+  <span class='id identifier rubyid_info'>info</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_trace_id-instance_method">
+  
+    #<strong>add_trace_id</strong>(trace_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'><p>Use add_request_info</p>
+</div></div>
+<p>Track a given trace_id by associating it with the current
+Thread</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+430
+431
+432</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 430</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_trace_id'>add_trace_id</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
+  <span class='id identifier rubyid_add_request_id'>add_request_id</span> <span class='label'>trace_id:</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="close-instance_method">
+  
+    #<strong>close</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Close the logging &quot;device&quot;. This effectively disables logging from
+this logger; any further log messages will be silently ignored. The
+logger may be re-enabled by calling #reopen.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+407
+408
+409
+410</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 407</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
+  <span class='ivar'>@closed</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debug-instance_method">
+  
+    #<strong>debug</strong>(message = nil) { ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Log a <code>DEBUG</code> entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as
+either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Evaluates to the message to log. This is not evaluated unless
+the logger&#39;s level is sufficient to log the message. This allows you
+to create potentially expensive logging messages that are only
+called when the logger is configured to show them.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191
+192
+193
+194
+195
+196
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 191</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_debug'>debug</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>DEBUG</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>DEBUG</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debug?-instance_method">
+  
+    #<strong>debug?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the current severity level allows for sending
+<code>DEBUG</code> messages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+335
+336
+337</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 335</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_debug?'>debug?</span>
+  <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>DEBUG</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_request_info-instance_method">
+  
+    #<strong>delete_request_info</strong>  &#x21d2; <tt><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='delete_trace_id-instance_method'>delete_trace_id</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Untrack the RequestInfo that&#39;s associated with current Thread</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The info that&#39;s being deleted</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+479
+480
+481</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 479</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_request_info'>delete_request_info</span>
+  <span class='ivar'>@request_info</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_current_thread_id'>current_thread_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error-instance_method">
+  
+    #<strong>error</strong>(message = nil) { ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Log an <code>ERROR</code> entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as
+either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Evaluates to the message to log. This is not evaluated unless
+the logger&#39;s level is sufficient to log the message. This allows you
+to create potentially expensive logging messages that are only
+called when the logger is configured to show them.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+245
+246
+247
+248
+249
+250
+251</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 245</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_error'>error</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>ERROR</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>ERROR</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error?-instance_method">
+  
+    #<strong>error?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the current severity level allows for sending
+<code>ERROR</code> messages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+356
+357
+358</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 356</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_error?'>error?</span>
+  <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>ERROR</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fatal-instance_method">
+  
+    #<strong>fatal</strong>(message = nil) { ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Log a <code>FATAL</code> entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as
+either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Evaluates to the message to log. This is not evaluated unless
+the logger&#39;s level is sufficient to log the message. This allows you
+to create potentially expensive logging messages that are only
+called when the logger is configured to show them.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+263
+264
+265
+266
+267
+268
+269</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 263</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fatal'>fatal</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>FATAL</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>FATAL</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fatal?-instance_method">
+  
+    #<strong>fatal?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the current severity level allows for sending
+<code>FATAL</code> messages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+363
+364
+365</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 363</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fatal?'>fatal?</span>
+  <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>FATAL</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="flush-instance_method">
+  
+    #<strong>flush</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>No-op method. Created to match the spec of ActiveSupport::Logger#flush
+method when used in Rails application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+490
+491
+492</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 490</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_flush'>flush</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="info-instance_method">
+  
+    #<strong>info</strong>(message = nil) { ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Log an <code>INFO</code> entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as
+either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Evaluates to the message to log. This is not evaluated unless
+the logger&#39;s level is sufficient to log the message. This allows you
+to create potentially expensive logging messages that are only
+called when the logger is configured to show them.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+209
+210
+211
+212
+213
+214
+215</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 209</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_info'>info</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>INFO</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>INFO</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="info?-instance_method">
+  
+    #<strong>info?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the current severity level allows for sending <code>INFO</code>
+messages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+342
+343
+344</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 342</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_info?'>info?</span>
+  <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>INFO</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="progname=-instance_method">
+  
+    #<strong>progname=</strong>(name)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This logger treats progname as an alias for log_name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 112</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_progname='>progname=</span> <span class='id identifier rubyid_name'>name</span>
+  <span class='ivar'>@log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reopen-instance_method">
+  
+    #<strong>reopen</strong>(_logdev = nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Re-enable logging if the logger has been closed.</p>
+
+<p>Note that this method accepts a &quot;logdev&quot; argument for compatibility
+with the standard Ruby Logger class; however, this argument is
+ignored because this logger does not use a log device.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+419
+420
+421
+422</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 419</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reopen'>reopen</span> <span class='id identifier rubyid__logdev'>_logdev</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@closed</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_info-instance_method">
+  
+    #<strong>request_info</strong>  &#x21d2; <tt><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Get the request data for the current Thread</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Logger/RequestInfo.html" title="Google::Cloud::Logging::Logger::RequestInfo (class)">RequestInfo</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The request data for the current thread,
+or <code>nil</code> if there is no data set.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+470
+471
+472</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 470</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_request_info'>request_info</span>
+  <span class='ivar'>@request_info</span><span class='lbracket'>[</span><span class='id identifier rubyid_current_thread_id'>current_thread_id</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="silence-instance_method">
+  
+    #<strong>silence</strong>(temp_level = ::Logger::ERROR)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Filter out low severity messages within block.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_silence'>silence</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Info message</span><span class='tstring_end'>&quot;</span></span>   <span class='comment'># No log entry written
+</span>  <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error message</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># Log entry written
+</span><span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>temp_level</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>::Logger::ERROR</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Severity threshold to filter within the
+block. Messages with lower severity will be blocked. Default
+::Logger::ERROR</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 516</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_silence'>silence</span> <span class='id identifier rubyid_temp_level'>temp_level</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>ERROR</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_silencer'>silencer</span>
+    <span class='kw'>begin</span>
+      <span class='id identifier rubyid_old_level'>old_level</span> <span class='op'>=</span> <span class='id identifier rubyid_level'>level</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='id identifier rubyid_temp_level'>temp_level</span>
+
+      <span class='kw'>yield</span> <span class='kw'>self</span>
+    <span class='kw'>ensure</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='id identifier rubyid_old_level'>old_level</span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='kw'>yield</span> <span class='kw'>self</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="trace_ids-instance_method">
+  
+    #<strong>trace_ids</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'><p>Use request_info</p>
+</div></div>
+<p>A Hash of Thread IDs to Stackdriver request trace ID. The
+Stackdriver trace ID is a shared request identifier across all
+Stackdriver services.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_trace_ids'>trace_ids</span>
+  <span class='ivar'>@request_info</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span><span class='op'>|</span> <span class='id identifier rubyid_r'>r</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_trace_id'>trace_id</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unknown-instance_method">
+  
+    #<strong>unknown</strong>(message = nil) { ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Log an <code>UNKNOWN</code> entry. This will be printed no matter what the
+logger&#39;s current severity level is.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as
+either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Evaluates to the message to log. This is not evaluated unless
+the logger&#39;s level is sufficient to log the message. This allows you
+to create potentially expensive logging messages that are only
+called when the logger is configured to show them.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+282
+283
+284
+285
+286
+287
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 282</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unknown'>unknown</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>UNKNOWN</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>UNKNOWN</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="unknown?-instance_method">
+  
+    #<strong>unknown?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the current severity level allows for sending
+<code>UNKNOWN</code> messages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+370
+371
+372</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 370</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_unknown?'>unknown?</span>
+  <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>UNKNOWN</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="warn-instance_method">
+  
+    #<strong>warn</strong>(message = nil) { ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Log a <code>WARN</code> entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>message</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>The log entry payload, represented as
+either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>Evaluates to the message to log. This is not evaluated unless
+the logger&#39;s level is sufficient to log the message. This allows you
+to create potentially expensive logging messages that are only
+called when the logger is configured to show them.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+227
+228
+229
+230
+231
+232
+233</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 227</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_warn'>warn</span> <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_add'>add</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span><span class='comma'>,</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="warn?-instance_method">
+  
+    #<strong>warn?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the current severity level allows for sending <code>WARN</code>
+messages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+349
+350
+351</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/logger.rb', line 349</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_warn?'>warn?</span>
+  <span class='ivar'>@level</span> <span class='op'>&lt;=</span> <span class='op'>::</span><span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

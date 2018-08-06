@@ -1,0 +1,797 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Logging::AsyncWriter - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Logging::AsyncWriter";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span>
+     &raquo; 
+    <span class="title">AsyncWriter</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Logging::AsyncWriter
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Logging::AsyncWriter</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>Stackdriver::Core::AsyncActor</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/async_writer.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>AsyncWriter</h1>
+
+<p>An object that batches and transmits log entries asynchronously.</p>
+
+<p>Use this object to transmit log entries efficiently. It keeps a queue
+of log entries, and runs a background thread that transmits them to
+the logging service in batches. Generally, adding to the queue will
+not block.</p>
+
+<p>This object is thread-safe; it may accept write requests from
+multiple threads simultaneously, and will serialize them when
+executing in the background thread.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_async'>async</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_async_writer'>async_writer</span>
+
+<span class='id identifier rubyid_entry1'>entry1</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span> <span class='label'>payload:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry2'>entry2</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span> <span class='label'>payload:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job completed.</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>job_size:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>large</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>job_code:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>red</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>module_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>version_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='lbracket'>[</span><span class='id identifier rubyid_entry1'>entry1</span><span class='comma'>,</span> <span class='id identifier rubyid_entry2'>entry2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                    <span class='label'>log_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+                    <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span></code></pre>
+    
+  </div>
+
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_MAX_QUEUE_SIZE-constant" class="">DEFAULT_MAX_QUEUE_SIZE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>10000</span></pre></dd>
+      
+        <dt id="CLEANUP_TIMEOUT-constant" class="">CLEANUP_TIMEOUT =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Stackdriver</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>AsyncActor</span><span class='op'>::</span><span class='const'>CLEANUP_TIMEOUT</span></pre></dd>
+      
+        <dt id="WAIT_INTERVAL-constant" class="">WAIT_INTERVAL =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Stackdriver</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>AsyncActor</span><span class='op'>::</span><span class='const'>WAIT_INTERVAL</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#last_exception-instance_method" title="#last_exception (instance method)">#<strong>last_exception</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The last exception thrown by the background thread, or nil if nothing has been thrown.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-instance_method" title="#logger (instance method)">#<strong>logger</strong>(log_name, resource, labels = {})  &#x21d2; Google::Cloud::Logging::Logger </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a logger instance that is API-compatible with Ruby&#39;s standard library <a href="http://ruby-doc.org/stdlib/libdoc/logger/rdoc">Logger</a>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop!-instance_method" title="#stop! (instance method)">#<strong>stop!</strong>(timeout, force: false)  &#x21d2; Symbol </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stop this asynchronous writer and block until it has been stopped.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#write_entries-instance_method" title="#write_entries (instance method)">#<strong>write_entries</strong>(entries, log_name: nil, resource: nil, labels: nil)  &#x21d2; Google::Cloud::Logging::AsyncWriter </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Asynchronously write one or more log entries to the Stackdriver Logging service.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="last_exception-instance_method">
+  
+    #<strong>last_exception</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The last exception thrown by the background thread, or nil if nothing
+has been thrown.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_last_exception'>last_exception</span>
+  <span class='ivar'>@last_exception</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="logger-instance_method">
+  
+    #<strong>logger</strong>(log_name, resource, labels = {})  &#x21d2; <tt><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Google::Cloud::Logging::Logger</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a logger instance that is API-compatible with Ruby&#39;s standard
+library <a href="http://ruby-doc.org/stdlib/libdoc/logger/rdoc">Logger</a>.</p>
+
+<p>The logger will use AsyncWriter to transmit log entries on a
+background thread.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_async'>async</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_async_writer'>async_writer</span>
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>log_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A log resource name to be associated with the
+written log entries.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>resource</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Google::Cloud::Logging::Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The monitored
+resource to be associated with written log entries.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>A set of user-defined data to be associated with
+written log entries.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Google::Cloud::Logging::Logger</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Logger object that can be
+used in place of a ruby standard library logger object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 197</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='const'><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop!-instance_method">
+  
+    #<strong>stop!</strong>(timeout, force: false)  &#x21d2; <tt>Symbol</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stop this asynchronous writer and block until it has been stopped.</p>
+
+<p>DEPRECATED. Use #async_stop! instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Number</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Timeout in seconds.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>force</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If set to true, and the writer hasn&#39;t stopped
+within the given timeout, kill it forcibly by terminating the
+thread. This should be used with extreme caution, as it can
+leave RPCs unfinished. Default is false.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns <code>:stopped</code> if the AsyncWriter was already
+stopped at the time of invocation, <code>:waited</code> if it stopped
+during the timeout period, <code>:timeout</code> if it is still running
+after the timeout, or <code>:forced</code> if it was forcibly killed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+309
+310
+311
+312
+313
+314</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 309</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stop!'>stop!</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span> <span class='label'>force:</span> <span class='kw'>false</span>
+  <span class='ivar'>@cleanup_options</span><span class='lbracket'>[</span><span class='symbol'>:timeout</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_timeout'>timeout</span> <span class='kw'>unless</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@cleanup_options</span><span class='lbracket'>[</span><span class='symbol'>:force</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_force'>force</span> <span class='kw'>unless</span> <span class='id identifier rubyid_force'>force</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_async_stop!'>async_stop!</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="write_entries-instance_method">
+  
+    #<strong>write_entries</strong>(entries, log_name: nil, resource: nil, labels: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">Google::Cloud::Logging::AsyncWriter</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Asynchronously write one or more log entries to the Stackdriver
+Logging service.</p>
+
+<p>Unlike the main write_entries method, this method usually does not
+block. The actual write RPCs will happen in the background, and may
+be batched with related calls. However, if the queue is full, this
+method will block until enough space has cleared out.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_async'>async</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_async_writer'>async_writer</span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span> <span class='label'>payload:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                      <span class='label'>log_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:module_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:version_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entry'>entry</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>entries</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entry.html" title="Google::Cloud::Logging::Entry (class)">Google::Cloud::Logging::Entry</a></span></tt>, <tt>Array&lt;<span class='object_link'><a href="Entry.html" title="Google::Cloud::Logging::Entry (class)">Google::Cloud::Logging::Entry</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>One or more entry
+objects to write. The log entries must have values for all required
+fields.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>log_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A default log ID for those log entries in
+<code>entries</code> that do not specify their own <code>log_name</code>. See also
+<span class='object_link'><a href="Entry.html#log_name=-instance_method" title="Google::Cloud::Logging::Entry#log_name= (method)">Entry#log_name=</a></span>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>resource</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A default monitored resource for those log
+entries in entries that do not specify their own resource. See also
+<span class='object_link'><a href="Entry.html#resource-instance_method" title="Google::Cloud::Logging::Entry#resource (method)">Entry#resource</a></span>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol,String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>User-defined <code>key:value</code>
+items that are added to the <code>labels</code> field of each log entry in
+<code>entries</code>, except when a log entry specifies its own <code>key:value</code>
+item with the same key. See also <span class='object_link'><a href="Entry.html#labels=-instance_method" title="Google::Cloud::Logging::Entry#labels= (method)">Entry#labels=</a></span>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Logging::AsyncWriter (class)">Google::Cloud::Logging::AsyncWriter</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Returns self.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/async_writer.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entries'>entries</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>resource:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_thread'>ensure_thread</span>
+  <span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='const'>Array</span><span class='lparen'>(</span><span class='id identifier rubyid_entries'>entries</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AsyncWriter has been stopped</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_writable?'>writable?</span>
+    <span class='id identifier rubyid_queue_item'>queue_item</span> <span class='op'>=</span> <span class='const'>QueueItem</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_entries'>entries</span><span class='comma'>,</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span>
+    <span class='kw'>if</span> <span class='ivar'>@queue</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>||</span> <span class='op'>!</span><span class='ivar'>@queue</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='period'>.</span><span class='id identifier rubyid_try_combine'>try_combine</span><span class='lparen'>(</span><span class='id identifier rubyid_queue_item'>queue_item</span><span class='rparen'>)</span>
+      <span class='ivar'>@queue</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_queue_item'>queue_item</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@queue_size</span> <span class='op'>+=</span> <span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
+    <span class='ivar'>@queue_resource</span><span class='period'>.</span><span class='id identifier rubyid_broadcast'>broadcast</span>
+    <span class='kw'>while</span> <span class='ivar'>@max_queue_size</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@queue_size</span> <span class='op'>&gt;</span> <span class='ivar'>@max_queue_size</span>
+      <span class='ivar'>@queue_resource</span><span class='period'>.</span><span class='id identifier rubyid_wait'>wait</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

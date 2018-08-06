@@ -1,0 +1,754 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Logging::Middleware - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Logging::Middleware";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (M)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span>
+     &raquo; 
+    <span class="title">Middleware</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Logging::Middleware
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Logging::Middleware</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/middleware.rb</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_LOG_NAME-constant" class="">DEFAULT_LOG_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default log name used to instantiate the default logger if one
+isn&#39;t provided.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby_app_log</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="DEFAULT_LOG_NAME_MAP-constant" class="">DEFAULT_LOG_NAME_MAP =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A default value for the log_name_map argument. Directs health check
+logs to a separate log name so they don&#39;t spam the main log.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/_ah/health</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby_health_check_log</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-instance_method" title="#logger (instance method)">#<strong>logger</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The Google::Cloud::Logging::Logger instance.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#build_monitored_resource-class_method" title="build_monitored_resource (class method)">.<strong>build_monitored_resource</strong>(type = nil, labels = nil)  &#x21d2; Google::Cloud::Logging::Resource </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Construct a monitored resource based on the given type and label if both are provided.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#call-instance_method" title="#call (instance method)">#<strong>call</strong>(env)  &#x21d2; Rack::Response </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Rack middleware entry point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(app, logger: nil, **kwargs)  &#x21d2; Google::Cloud::Logging::Middleware </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new AppEngine logging Middleware.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(app, logger: nil, **kwargs)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Google::Cloud::Logging::Middleware</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new AppEngine logging Middleware.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>app</span>
+      
+      
+        <span class='type'>(<tt>Rack Application</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Rack application</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logger</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Logger.html" title="Google::Cloud::Logging::Logger (class)">Google::Cloud::Logging::Logger</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A logger to be used by
+this middleware. The middleware will be interacting with the logger
+to track Stackdriver request trace ID. It also properly sets
+env[&quot;rack.logger&quot;] to this assigned logger for accessing. If not
+specified, a default logger with be used.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>*kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of configuration settings. Used for
+backward API compatibility. See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration">Configuration
+Guide</a>
+for the prefered way to set configuration parameters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_app'>app</span><span class='comma'>,</span> <span class='label'>logger:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span>
+  <span class='ivar'>@app</span> <span class='op'>=</span> <span class='id identifier rubyid_app'>app</span>
+
+  <span class='id identifier rubyid_load_config'>load_config</span> <span class='id identifier rubyid_kwargs'>kwargs</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_logger'>logger</span>
+    <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span>
+    <span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='label'>project:</span> <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+                          <span class='label'>keyfile:</span> <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span>
+    <span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'><span class='object_link'><a href="#build_monitored_resource-class_method" title="Google::Cloud::Logging::Middleware.build_monitored_resource (method)">build_monitored_resource</a></span></span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_monitored_resource'>monitored_resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_configuration'>configuration</span><span class='period'>.</span><span class='id identifier rubyid_monitored_resource'>monitored_resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='rparen'>)</span>
+    <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='id identifier rubyid_log_name'>log_name</span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="logger-instance_method">
+  
+    #<strong>logger</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The Google::Cloud::Logging::Logger instance</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
+  <span class='ivar'>@logger</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="build_monitored_resource-class_method">
+  
+    .<strong>build_monitored_resource</strong>(type = nil, labels = nil)  &#x21d2; <tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Google::Cloud::Logging::Resource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Construct a monitored resource based on the given type and label if
+both are provided. Otherwise, construct a default monitored resource
+based on the current environment.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>If both type and labels are provided, it returns resource:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_rc'>rc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span><span class='lparen'>(</span>
+       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>aws_ec2_instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+       <span class='lbrace'>{</span>
+         <span class='label'>instance_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ec2-id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+         <span class='label'>aws_account:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>aws-id</span><span class='tstring_end'>&quot;</span></span>
+       <span class='rbrace'>}</span>
+     <span class='rparen'>)</span>
+<span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>   <span class='comment'>#=&gt; &quot;aws_ec2_instance&quot;
+</span><span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='comment'>#=&gt; { instance_id: &quot;ec2-id&quot;, aws_account: &quot;aws-id&quot; }</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>If running from GAE, returns default resource:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_rc'>rc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span>
+<span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>   <span class='comment'>#=&gt; &quot;gae_app&quot;
+</span><span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='comment'># { module_id: [GAE module name],
+</span>          <span class='comment'>#   version_id: [GAE module version] }</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>If running from GKE, returns default resource:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_rc'>rc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span>
+<span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>   <span class='comment'>#=&gt; &quot;container&quot;
+</span><span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='comment'># { cluster_name: [GKE cluster name],
+</span>          <span class='comment'>#   namespace_id: [GKE namespace_id] }</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>If running from GCE, return default resource:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_rc'>rc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span>
+<span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>   <span class='comment'>#=&gt; &quot;gce_instance&quot;
+</span><span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='comment'># { instance_id: [GCE VM instance id],
+</span>          <span class='comment'>#   zone: [GCE vm group zone] }</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Otherwise default to generic &quot;global&quot; type:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_rc'>rc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span></span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span>
+<span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>   <span class='comment'>#=&gt; &quot;global&quot;
+</span><span class='id identifier rubyid_rc'>rc</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='comment'>#=&gt; {}</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Type of Google::Cloud::Logging::Resource</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;String, String&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Metadata lebels of
+Google::Cloud::Logging::Resource</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Google::Cloud::Logging::Resource</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An Resource object with
+type and labels</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/logging/docs/api/v2/resource-list" target="_parent" title="Monitored Resources and Services">Monitored Resources and Services</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 174</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_build_monitored_resource'>build_monitored_resource</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_labels'>labels</span>
+    <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>
+      <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='id identifier rubyid_type'>type</span>
+      <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='id identifier rubyid_labels'>labels</span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_default_monitored_resource'>default_monitored_resource</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="call-instance_method">
+  
+    #<strong>call</strong>(env)  &#x21d2; <tt>Rack::Response</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Rack middleware entry point. In most Rack based frameworks, a request
+is served by one thread. So entry point, we associate the GCP request
+trace_id with the current thread&#39;s object_id in logger. All the logs
+written by logger beyond this point will carry this request&#39;s
+trace_id. Untrack the trace_id with this thread upon exiting.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>env</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Rack environment hash</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Rack::Response</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The response from downstream Rack app</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/middleware.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='id identifier rubyid_env'>env</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rack.logger</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span>
+  <span class='id identifier rubyid_trace_id'>trace_id</span> <span class='op'>=</span> <span class='id identifier rubyid_get_trace_id'>get_trace_id</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='id identifier rubyid_get_log_name'>get_log_name</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_add_request_info'>add_request_info</span> <span class='label'>trace_id:</span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='id identifier rubyid_log_name'>log_name</span>
+  <span class='kw'>begin</span>
+    <span class='ivar'>@app</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span> <span class='id identifier rubyid_env'>env</span>
+  <span class='kw'>ensure</span>
+    <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_delete_request_info'>delete_request_info</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

@@ -1,0 +1,691 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud::Logging - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Logging";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span>
+     &raquo; 
+    <span class="title">Logging</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud::Logging
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging.rb<span class="defines">,<br />
+  lib/google/cloud/logging/sink.rb,<br /> lib/google/cloud/logging/entry.rb,<br /> lib/google/cloud/logging/rails.rb,<br /> lib/google/cloud/logging/logger.rb,<br /> lib/google/cloud/logging/metric.rb,<br /> lib/google/cloud/logging/project.rb,<br /> lib/google/cloud/logging/service.rb,<br /> lib/google/cloud/logging/version.rb,<br /> lib/google/cloud/logging/resource.rb,<br /> lib/google/cloud/logging/sink/list.rb,<br /> lib/google/cloud/logging/entry/list.rb,<br /> lib/google/cloud/logging/middleware.rb,<br /> lib/google/cloud/logging/credentials.rb,<br /> lib/google/cloud/logging/metric/list.rb,<br /> lib/google/cloud/logging/async_writer.rb,<br /> lib/google/cloud/logging/entry/operation.rb,<br /> lib/google/cloud/logging/entry/http_request.rb,<br /> lib/google/cloud/logging/resource_descriptor.rb,<br /> lib/google/cloud/logging/resource_descriptor/list.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Stackdriver Logging</h1>
+
+<p>The Stackdriver Logging service collects and stores logs from applications
+and services on the Google Cloud Platform, giving you fine-grained,
+programmatic control over your projects&#39; logs. You can use the Stackdriver
+Logging API to:</p>
+
+<ul>
+<li><a href="#listing-log-entries">Read and filter log entries</a></li>
+<li><a href="#exporting-log-entries">Export your log entries</a> to Cloud Storage,
+BigQuery, or Cloud Pub/Sub</li>
+<li><a href="#creating-logs-based-metrics">Create logs-based metrics</a> for use in
+Cloud Monitoring</li>
+<li><a href="#writing-log-entries">Write log entries</a></li>
+</ul>
+
+<p>For general information about Stackdriver Logging, read <a href="https://cloud.google.com/logging/docs/">Stackdriver
+Logging Documentation</a>.</p>
+
+<p>The goal of google-cloud is to provide an API that is comfortable to
+Rubyists. Authentication is handled by <span class='object_link'><a href="../Cloud.html#logging-instance_method" title="Google::Cloud#logging (method)">#logging</a></span>. You can
+provide the project and credential information to connect to the
+Stackdriver Logging service, or if you are running on Google Compute
+Engine this configuration is taken care of for you. You can read more
+about the options for connecting in the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+<p>If you just want to write your application&#39;s logs to the Stackdriver
+Logging service, you may find it easiest to use the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/instrumentation">Stackdriver Logging
+Instrumentation</a>
+or the <a href="#creating-a-ruby-logger-implementation">Ruby Logger
+implementation</a> provided by this
+library. Otherwise, read on to learn more about the Logging API.</p>
+
+<h2>Listing log entries</h2>
+
+<p>Stackdriver Logging gathers log entries from many services, including
+Google App Engine and Google Compute Engine. (See the <a href="https://cloud.google.com/logging/docs/view/logs_index">List of Log
+Types</a>.) In
+addition, you can write your own log entries to the service.</p>
+
+<p><span class='object_link'><a href="Logging/Project.html#entries-instance_method" title="Google::Cloud::Logging::Project#entries (method)">Project#entries</a></span> returns the
+<span class='object_link'><a href="Logging/Entry.html" title="Google::Cloud::Logging::Entry (class)">Entry</a></span> records belonging to your project:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span>
+<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>You can narrow the results to a single log using an <a href="https://cloud.google.com/logging/docs/view/advanced_filters">advanced logs
+filter</a>. A
+log is a named collection of entries. Logs can be produced by Google Cloud
+Platform services, by third-party services, or by your applications. For
+example, the log <code>compute.googleapis.com/activity_log</code> is produced by
+Google Compute Engine. Logs are simply referenced by name in google-cloud.
+There is no <code>Log</code> type in google-cloud or <code>Log</code> resource in the
+Stackdriver Logging API.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span> <span class='label'>filter:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>log:syslog</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>You can also order the log entries by <code>timestamp</code>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span> <span class='label'>order:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>timestamp desc</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Exporting log entries</h2>
+
+<p>Stackdriver Logging lets you export log entries to destinations including
+Google Cloud Storage buckets (for long term log storage), Google BigQuery
+datasets (for log analysis), and Google Pub/Sub (for streaming to other
+applications).</p>
+
+<h3>Creating sinks</h3>
+
+<p>A <span class='object_link'><a href="Logging/Sink.html" title="Google::Cloud::Logging::Sink (class)">Sink</a></span> is an object that lets you to specify a
+set of log entries to export.</p>
+
+<p>In addition to the name of the sink and the export destination,
+<span class='object_link'><a href="Logging/Project.html#create_sink-instance_method" title="Google::Cloud::Logging::Project#create_sink (method)">Project#create_sink</a></span> accepts an <a href="https://cloud.google.com/logging/docs/view/advanced_filters">advanced logs
+filter</a> to
+narrow the collection.</p>
+
+<p>Before creating the sink, ensure that you have granted
+<code>cloud-logs@google.com</code> permission to write logs to the destination. See
+<a href="https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs">Permissions for writing exported
+logs</a>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-logs-bucket</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Grant owner permission to Stackdriver Logging service
+</span><span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloud-logs@google.com</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_add_owner'>add_owner</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sink'>sink</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_create_sink'>create_sink</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-sink</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                           <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>storage.googleapis.com/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>When you create a sink, only new log entries are exported. Stackdriver
+Logging does not send previously-ingested log entries to the sink&#39;s
+destination.</p>
+
+<h3>Listing sinks</h3>
+
+<p>You can also list the sinks belonging to your project with
+<span class='object_link'><a href="Logging/Project.html#sinks-instance_method" title="Google::Cloud::Logging::Project#sinks (method)">Project#sinks</a></span>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_sinks'>sinks</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_sinks'>sinks</span>
+<span class='id identifier rubyid_sinks'>sinks</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='embexpr_end'>}</span><span class='tstring_content'> -&gt; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_destination'>destination</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Creating logs-based metrics</h2>
+
+<p>You can use log entries in your project as the basis for <a href="https://cloud.google.com/monitoring/docs">Google Cloud
+Monitoring</a> metrics. These
+metrics can then be used to produce Cloud Monitoring reports and alerts.</p>
+
+<h3>Creating metrics</h3>
+
+<p>A metric is a measured value that can be used to assess a system. Use
+<span class='object_link'><a href="Logging/Project.html#create_metric-instance_method" title="Google::Cloud::Logging::Project#create_metric (method)">Project#create_metric</a></span> to configure a
+<span class='object_link'><a href="Logging/Metric.html" title="Google::Cloud::Logging::Metric (class)">Metric</a></span> based on a collection of log entries
+matching an <a href="https://cloud.google.com/logging/docs/view/advanced_filters">advanced logs
+filter</a>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_metric'>metric</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_create_metric'>create_metric</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>errors</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>severity&gt;=ERROR</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h3>Listing metrics</h3>
+
+<p>You can also list the metrics belonging to your project with
+<span class='object_link'><a href="Logging/Project.html#metrics-instance_method" title="Google::Cloud::Logging::Project#metrics (method)">Project#metrics</a></span>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_metrics'>metrics</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_metrics'>metrics</span>
+<span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_filter'>filter</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Writing log entries</h2>
+
+<p>An <span class='object_link'><a href="Logging/Entry.html" title="Google::Cloud::Logging::Entry (class)">Entry</a></span> is composed of metadata and a payload.
+The payload is traditionally a message string, but in Stackdriver Logging
+it can also be a JSON or protocol buffer object. A single log can have
+entries with different payload types. In addition to the payload, your
+argument(s) to <span class='object_link'><a href="Logging/Project.html#write_entries-instance_method" title="Google::Cloud::Logging::Project#write_entries (method)">Project#write_entries</a></span> must also
+contain a log name and a resource.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:module_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:version_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entry'>entry</span>
+</code></pre>
+
+<p>If you write a collection of log entries, you can provide the log name,
+resource, and/or labels hash to be used for all of the entries, and omit
+these values from the individual entries.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry1'>entry1</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry1'>entry1</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry2'>entry2</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry2'>entry2</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job completed.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>job_size:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>large</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>job_code:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>red</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>module_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>version_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='lbracket'>[</span><span class='id identifier rubyid_entry1'>entry1</span><span class='comma'>,</span> <span class='id identifier rubyid_entry2'>entry2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                      <span class='label'>log_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                      <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+                      <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span>
+</code></pre>
+
+<p>Normally, writing log entries is done synchronously; the call to
+<span class='object_link'><a href="Logging/Project.html#write_entries-instance_method" title="Google::Cloud::Logging::Project#write_entries (method)">Project#write_entries</a></span> will block until it has
+either completed transmitting the data or encountered an error. To &quot;fire
+and forget&quot; without blocking, use <span class='object_link'><a href="Logging/AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span>;
+it spins up a background thread that writes log entries in batches. Calls
+to <span class='object_link'><a href="Logging/AsyncWriter.html#write_entries-instance_method" title="Google::Cloud::Logging::AsyncWriter#write_entries (method)">AsyncWriter#write_entries</a></span> simply add entries
+to its work queue and return immediately.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+<span class='id identifier rubyid_async'>async</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_async_writer'>async_writer</span>
+
+<span class='id identifier rubyid_entry1'>entry1</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry1'>entry1</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry2'>entry2</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry2'>entry2</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job completed.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_labels'>labels</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>job_size:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>large</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>job_code:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>red</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>module_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>version_id</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_async'>async</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='lbracket'>[</span><span class='id identifier rubyid_entry1'>entry1</span><span class='comma'>,</span> <span class='id identifier rubyid_entry2'>entry2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                    <span class='label'>log_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                    <span class='label'>resource:</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+                    <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span>
+</code></pre>
+
+<h3>Creating a Ruby Logger implementation</h3>
+
+<p>If your environment requires a logger instance that is API-compatible with
+Ruby&#39;s standard library
+<a href="http://ruby-doc.org/stdlib/libdoc/logger/rdoc">Logger</a>, you can use
+<span class='object_link'><a href="Logging/Project.html#logger-instance_method" title="Google::Cloud::Logging::Project#logger (method)">Project#logger</a></span> to create one.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='label'>env:</span> <span class='symbol'>:production</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>By default, the logger instance writes log entries asynchronously in a
+background thread using an <span class='object_link'><a href="Logging/AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span>. If you
+want to customize or disable asynchronous writing, you may call the
+Logger constructor directly.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>module_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                            <span class='label'>version_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logger'>logger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Logging/Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='id identifier rubyid_logging'>logging</span><span class='comma'>,</span>
+                                            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                            <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
+                                            <span class='lbrace'>{</span><span class='label'>env:</span> <span class='symbol'>:production</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Log entry written synchronously.</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h2>Configuring timeout</h2>
+
+<p>You can configure the request <code>timeout</code> value in seconds.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Logging</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span> <span class='label'>timeout:</span> <span class='int'>120</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Logging/AsyncWriter.html" title="Google::Cloud::Logging::AsyncWriter (class)">AsyncWriter</a></span>, <span class='object_link'><a href="Logging/Entry.html" title="Google::Cloud::Logging::Entry (class)">Entry</a></span>, <span class='object_link'><a href="Logging/Logger.html" title="Google::Cloud::Logging::Logger (class)">Logger</a></span>, <span class='object_link'><a href="Logging/Metric.html" title="Google::Cloud::Logging::Metric (class)">Metric</a></span>, <span class='object_link'><a href="Logging/Middleware.html" title="Google::Cloud::Logging::Middleware (class)">Middleware</a></span>, <span class='object_link'><a href="Logging/Project.html" title="Google::Cloud::Logging::Project (class)">Project</a></span>, <span class='object_link'><a href="Logging/Railtie.html" title="Google::Cloud::Logging::Railtie (class)">Railtie</a></span>, <span class='object_link'><a href="Logging/Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span>, <span class='object_link'><a href="Logging/ResourceDescriptor.html" title="Google::Cloud::Logging::ResourceDescriptor (class)">ResourceDescriptor</a></span>, <span class='object_link'><a href="Logging/Sink.html" title="Google::Cloud::Logging::Sink (class)">Sink</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_LOG_NAME-constant" class="">DEFAULT_LOG_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Default log name to be used for Stackdriver Logging</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby_app_log</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.21.2</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project: nil, keyfile: nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::Logging::Project </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new object for connecting to the Stackdriver Logging service.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="new-class_method">
+  
+    .<strong>new</strong>(project: nil, keyfile: nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Logging/Project.html" title="Google::Cloud::Logging::Project (class)">Google::Cloud::Logging::Project</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new object for connecting to the Stackdriver Logging service.
+Each call creates a new connection.</p>
+
+<p>For more information on connecting to Google Cloud see the
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='id identifier rubyid_entries'>entries</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span>
+<span class='id identifier rubyid_entries'>entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_e'>e</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_timestamp'>timestamp</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_log_name'>log_name</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Project identifier for the Stackdriver Logging
+service.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyfile</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Keyfile downloaded from Google Cloud. If
+file path the file must be readable.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth 2.0 scopes controlling
+the set of resources and operations that the connection can access.
+See <a href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+<li><code>https://www.googleapis.com/auth/logging.admin</code></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default timeout to use in requests. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of values to override the default
+behavior of the API client. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Logging/Project.html" title="Google::Cloud::Logging::Project (class)">Google::Cloud::Logging::Project</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging.rb', line 368</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>client_config:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_project'>project</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Logging/Project.html" title="Google::Cloud::Logging::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_project'>default_project</span>
+  <span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
+</span>  <span class='id identifier rubyid_fail'>fail</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span>
+    <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'>Credentials</span><span class='period'>.</span><span class='id identifier rubyid_credentials_with_scope'>credentials_with_scope</span> <span class='id identifier rubyid_keyfile'>keyfile</span><span class='comma'>,</span>
+                                                               <span class='id identifier rubyid_scope'>scope</span>
+
+  <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Logging/Project.html" title="Google::Cloud::Logging::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+                            <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

@@ -1,0 +1,2433 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Logging::Entry - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Logging::Entry";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span>
+     &raquo; 
+    <span class="title">Entry</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Logging::Entry
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Logging::Entry</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/entry.rb<span class="defines">,<br />
+  lib/google/cloud/logging/entry/list.rb,<br /> lib/google/cloud/logging/entry/operation.rb,<br /> lib/google/cloud/logging/entry/http_request.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Entry</h1>
+
+<p>An individual entry in a log.</p>
+
+<p>Each log entry is composed of metadata and a payload. The metadata
+includes standard information used by Stackdriver Logging, such as when
+the entry was created and where it came from. The payload is the event
+record. Traditionally this is a message string, but in Stackdriver
+Logging it can also be a JSON or protocol buffer object. A single log
+can have entries with different payload types.</p>
+
+<p>A log is a named collection of entries. Logs can be produced by Google
+Cloud Platform services, by third-party services, or by your
+applications. For example, the log <code>compute.googleapis.com/activity_log</code>
+is produced by Google Compute Engine. Logs are simply referenced by name
+in google-cloud. There is no <code>Log</code> type in google-cloud or <code>Log</code>
+resource in the Stackdriver Logging API.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span> <span class='label'>payload:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job started.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>log_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my_app_log</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gae_app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:module_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='lbracket'>[</span><span class='symbol'>:version_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>20150925t173233</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_write_entries'>write_entries</span> <span class='id identifier rubyid_entry'>entry</span></code></pre>
+    
+  </div>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/logging/docs/view/logs_index" target="_parent" title="List of Log Types">List of Log Types</a></li>
+    
+  </ul>
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Entry/HttpRequest.html" title="Google::Cloud::Logging::Entry::HttpRequest (class)">HttpRequest</a></span>, <span class='object_link'><a href="Entry/List.html" title="Google::Cloud::Logging::Entry::List (class)">List</a></span>, <span class='object_link'><a href="Entry/Operation.html" title="Google::Cloud::Logging::Entry::Operation (class)">Operation</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#http_request-instance_method" title="#http_request (instance method)">#<strong>http_request</strong>  &#x21d2; Google::Cloud::Logging::Entry::HttpRequest </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Information about the HTTP request associated with this log entry, if applicable.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#insert_id-instance_method" title="#insert_id (instance method)">#<strong>insert_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A unique ID for the log entry.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A set of user-defined data that provides additional information about the log entry.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_name-instance_method" title="#log_name (instance method)">#<strong>log_name</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The resource name of the log to which this log entry belongs.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#operation-instance_method" title="#operation (instance method)">#<strong>operation</strong>  &#x21d2; Google::Cloud::Logging::Entry::Operation </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Information about an operation associated with the log entry, if applicable.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#payload-instance_method" title="#payload (instance method)">#<strong>payload</strong>  &#x21d2; String, Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The log entry payload, represented as either a string, a hash (JSON), or a hash (protocol buffer).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource-instance_method" title="#resource (instance method)">#<strong>resource</strong>  &#x21d2; Google::Cloud::Logging::Resource </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The monitored resource associated with this log entry.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#severity-instance_method" title="#severity (instance method)">#<strong>severity</strong>  &#x21d2; Symbol </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The severity level of the log entry.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#timestamp-instance_method" title="#timestamp (instance method)">#<strong>timestamp</strong>  &#x21d2; Time </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time the event described by the log entry occurred.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alert!-instance_method" title="#alert! (instance method)">#<strong>alert!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:ALERT</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alert%3F-instance_method" title="#alert? (instance method)">#<strong>alert?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:ALERT</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#critical!-instance_method" title="#critical! (instance method)">#<strong>critical!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:CRITICAL</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#critical%3F-instance_method" title="#critical? (instance method)">#<strong>critical?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:CRITICAL</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug!-instance_method" title="#debug! (instance method)">#<strong>debug!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:DEBUG</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug%3F-instance_method" title="#debug? (instance method)">#<strong>debug?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:DEBUG</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default!-instance_method" title="#default! (instance method)">#<strong>default!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:DEFAULT</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default%3F-instance_method" title="#default? (instance method)">#<strong>default?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:DEFAULT</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#emergency!-instance_method" title="#emergency! (instance method)">#<strong>emergency!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:EMERGENCY</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#emergency%3F-instance_method" title="#emergency? (instance method)">#<strong>emergency?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:EMERGENCY</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error!-instance_method" title="#error! (instance method)">#<strong>error!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:ERROR</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error%3F-instance_method" title="#error? (instance method)">#<strong>error?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:ERROR</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#info!-instance_method" title="#info! (instance method)">#<strong>info!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:INFO</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#info%3F-instance_method" title="#info? (instance method)">#<strong>info?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:INFO</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>  &#x21d2; Entry </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Entry instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#notice!-instance_method" title="#notice! (instance method)">#<strong>notice!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:NOTICE</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#notice%3F-instance_method" title="#notice? (instance method)">#<strong>notice?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:NOTICE</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warning!-instance_method" title="#warning! (instance method)">#<strong>warning!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the severity level to <code>:WARNING</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warning%3F-instance_method" title="#warning? (instance method)">#<strong>warning?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns <code>true</code> if the severity level is <code>:WARNING</code>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Logging::Entry (class)">Entry</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Entry instance. The <span class='object_link'><a href="#resource-instance_method" title="Google::Cloud::Logging::Entry#resource (method)">#resource</a></span> attribute is
+pre-populated with a new <span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span> instance.
+See also <span class='object_link'><a href="Project.html#entry-instance_method" title="Google::Cloud::Logging::Project#entry (method)">Project#entry</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='ivar'>@labels</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Resource</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+  <span class='ivar'>@http_request</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entry/HttpRequest.html" title="Google::Cloud::Logging::Entry::HttpRequest (class)">HttpRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@operation</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Entry/Operation.html" title="Google::Cloud::Logging::Entry::Operation (class)">Operation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@severity</span> <span class='op'>=</span> <span class='symbol'>:DEFAULT</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="http_request-instance_method">
+  
+    #<strong>http_request</strong>  &#x21d2; <tt><span class='object_link'><a href="Entry/HttpRequest.html" title="Google::Cloud::Logging::Entry::HttpRequest (class)">Google::Cloud::Logging::Entry::HttpRequest</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Information about the HTTP request associated with this log entry, if
+applicable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entry/HttpRequest.html" title="Google::Cloud::Logging::Entry::HttpRequest (class)">Google::Cloud::Logging::Entry::HttpRequest</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+344
+345
+346</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 344</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_http_request'>http_request</span>
+  <span class='ivar'>@http_request</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="insert_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="insert_id-instance_method">
+  
+    #<strong>insert_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A unique ID for the log entry. If you provide this field, the logging
+service considers other log entries in the same log with the same ID
+as duplicates which can be removed. If omitted, Stackdriver Logging
+will generate a unique ID for this log entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+326
+327
+328</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 326</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_insert_id'>insert_id</span>
+  <span class='ivar'>@insert_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="labels=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A set of user-defined data that provides additional information about
+the log entry.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+332
+333
+334</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 332</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='ivar'>@labels</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="log_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="log_name-instance_method">
+  
+    #<strong>log_name</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The resource name of the log to which this log entry belongs. The
+format of the name is <code>projects/&lt;project-id&gt;/logs/&lt;log-id&gt;</code>. e.g.
+<code>projects/my-projectid/logs/my_app_log</code> and
+<code>projects/1234567890/logs/library.googleapis.com%2Fbook_log</code></p>
+
+<p>The log ID part of resource name must be less than 512 characters long
+and can only include the following characters: upper and lower case
+alphanumeric characters: <code>[A-Za-z0-9]</code>; and punctuation characters:
+forward-slash (<code>/</code>), underscore (<code>_</code>), hyphen (<code>-</code>), and period (<code>.</code>).
+Forward-slash (<code>/</code>) characters in the log ID must be URL-encoded.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_log_name'>log_name</span>
+  <span class='ivar'>@log_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="operation-instance_method">
+  
+    #<strong>operation</strong>  &#x21d2; <tt><span class='object_link'><a href="Entry/Operation.html" title="Google::Cloud::Logging::Entry::Operation (class)">Google::Cloud::Logging::Entry::Operation</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Information about an operation associated with the log entry, if
+applicable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Entry/Operation.html" title="Google::Cloud::Logging::Entry::Operation (class)">Google::Cloud::Logging::Entry::Operation</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+350
+351
+352</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 350</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_operation'>operation</span>
+  <span class='ivar'>@operation</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="payload=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="payload-instance_method">
+  
+    #<strong>payload</strong>  &#x21d2; <tt>String</tt>, <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The log entry payload, represented as either a string, a hash (JSON),
+or a hash (protocol buffer).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+338
+339
+340</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 338</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_payload'>payload</span>
+  <span class='ivar'>@payload</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="resource=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="resource-instance_method">
+  
+    #<strong>resource</strong>  &#x21d2; <tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Google::Cloud::Logging::Resource</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The monitored resource associated with this log entry. Example: a log
+entry that reports a database error would be associated with the
+monitored resource designating the particular database that reported
+the error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Resource.html" title="Google::Cloud::Logging::Resource (class)">Google::Cloud::Logging::Resource</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_resource'>resource</span>
+  <span class='ivar'>@resource</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="severity=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="severity-instance_method">
+  
+    #<strong>severity</strong>  &#x21d2; <tt>Symbol</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The severity level of the log entry. The default value is <code>:DEFAULT</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_severity'>severity</span>
+  <span class='ivar'>@severity</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="timestamp=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="timestamp-instance_method">
+  
+    #<strong>timestamp</strong>  &#x21d2; <tt>Time</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time the event described by the log entry occurred. If omitted,
+Stackdriver Logging will use the time the log entry is written.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_timestamp'>timestamp</span>
+  <span class='ivar'>@timestamp</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="alert!-instance_method">
+  
+    #<strong>alert!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:ALERT</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_alert!'>alert!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_alert?'>alert?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :ALERT</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+292
+293
+294</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 292</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_alert!'>alert!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:ALERT</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="alert?-instance_method">
+  
+    #<strong>alert?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:ALERT</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+274
+275
+276</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 274</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_alert?'>alert?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:ALERT</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="critical!-instance_method">
+  
+    #<strong>critical!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:CRITICAL</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_critical!'>critical!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_critical?'>critical?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :CRITICAL</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+268
+269
+270</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 268</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_critical!'>critical!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:CRITICAL</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="critical?-instance_method">
+  
+    #<strong>critical?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:CRITICAL</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+250
+251
+252</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 250</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_critical?'>critical?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:CRITICAL</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debug!-instance_method">
+  
+    #<strong>debug!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:DEBUG</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_debug!'>debug!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_debug?'>debug?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEBUG</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_debug!'>debug!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:DEBUG</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debug?-instance_method">
+  
+    #<strong>debug?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:DEBUG</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_debug?'>debug?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:DEBUG</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default!-instance_method">
+  
+    #<strong>default!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:DEFAULT</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:DEBUG</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_default!'>default!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_default?'>default?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 124</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_default!'>default!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:DEFAULT</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default?-instance_method">
+  
+    #<strong>default?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:DEFAULT</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_default?'>default?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:DEFAULT</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="emergency!-instance_method">
+  
+    #<strong>emergency!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:EMERGENCY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_emergency!'>emergency!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_emergency?'>emergency?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :EMERGENCY</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+316
+317
+318</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 316</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_emergency!'>emergency!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:EMERGENCY</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="emergency?-instance_method">
+  
+    #<strong>emergency?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:EMERGENCY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+298
+299
+300</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 298</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_emergency?'>emergency?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:EMERGENCY</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error!-instance_method">
+  
+    #<strong>error!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:ERROR</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_error!'>error!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_error?'>error?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :ERROR</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+244
+245
+246</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 244</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_error!'>error!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:ERROR</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="error?-instance_method">
+  
+    #<strong>error?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:ERROR</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+226
+227
+228</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 226</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_error?'>error?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:ERROR</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="info!-instance_method">
+  
+    #<strong>info!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:INFO</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_info!'>info!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_info?'>info?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :INFO</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+172
+173
+174</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 172</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_info!'>info!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:INFO</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="info?-instance_method">
+  
+    #<strong>info?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:INFO</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 154</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_info?'>info?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:INFO</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="notice!-instance_method">
+  
+    #<strong>notice!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:NOTICE</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_notice!'>notice!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_notice?'>notice?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :NOTICE</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+196
+197
+198</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 196</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_notice!'>notice!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:NOTICE</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="notice?-instance_method">
+  
+    #<strong>notice?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:NOTICE</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+178
+179
+180</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 178</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_notice?'>notice?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:NOTICE</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="warning!-instance_method">
+  
+    #<strong>warning!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the severity level to <code>:WARNING</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/logging</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_logging'>logging</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Logging.html" title="Google::Cloud::Logging (module)">Logging</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Logging.html#new-class_method" title="Google::Cloud::Logging.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='id identifier rubyid_logging'>logging</span><span class='period'>.</span><span class='id identifier rubyid_entry'>entry</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :DEFAULT
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_warning!'>warning!</span>
+<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_warning?'>warning?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='comment'>#=&gt; :WARNING</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+220
+221
+222</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 220</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_warning!'>warning!</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_severity'>severity</span> <span class='op'>=</span> <span class='symbol'>:WARNING</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="warning?-instance_method">
+  
+    #<strong>warning?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns <code>true</code> if the severity level is <code>:WARNING</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+202
+203
+204</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/entry.rb', line 202</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_warning?'>warning?</span>
+  <span class='id identifier rubyid_severity'>severity</span> <span class='op'>==</span> <span class='symbol'>:WARNING</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

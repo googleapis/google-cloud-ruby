@@ -1,0 +1,1114 @@
+---
+layout: yard_main
+title: "Class: Google::Logging::V2::LogMetric - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Logging::V2::LogMetric";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Logging.html" title="Google::Logging (module)">Logging</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">LogMetric</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Logging::V2::LogMetric
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Logging::V2::LogMetric</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Describes a logs-based metric.  The value of the metric is the
+number of log entries that match a logs filter in a given time interval.</p>
+
+<p>A logs-based metric can also be used to extract values from logs and create a
+a distribution of the values. The distribution records the statistics of the
+extracted values along with an optional histogram of the values as specified
+by the bucket options.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bucket_options-instance_method" title="#bucket_options (instance method)">#<strong>bucket_options</strong>  &#x21d2; Google::Api::Distribution::BucketOptions </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filter-instance_method" title="#filter (instance method)">#<strong>filter</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#label_extractors-instance_method" title="#label_extractors (instance method)">#<strong>label_extractors</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#metric_descriptor-instance_method" title="#metric_descriptor (instance method)">#<strong>metric_descriptor</strong>  &#x21d2; Google::Api::MetricDescriptor </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value_extractor-instance_method" title="#value_extractor (instance method)">#<strong>value_extractor</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version-instance_method" title="#version (instance method)">#<strong>version</strong>  &#x21d2; Google::Logging::V2::LogMetric::ApiVersion </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deprecated.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="bucket_options=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="bucket_options-instance_method">
+  
+    #<strong>bucket_options</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Api/Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">Google::Api::Distribution::BucketOptions</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The +bucket_options+ are required when the logs-based metric is
+using a DISTRIBUTION value type and it describes the bucket boundaries
+used to create a histogram of the extracted values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Api/Distribution/BucketOptions.html" title="Google::Api::Distribution::BucketOptions (class)">Google::Api::Distribution::BucketOptions</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The +bucket_options+ are required when the logs-based metric is
+using a DISTRIBUTION value type and it describes the bucket boundaries
+used to create a histogram of the extracted values.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="description=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="description-instance_method">
+  
+    #<strong>description</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. A description of this metric, which is used in documentation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A description of this metric, which is used in documentation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="filter=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="filter-instance_method">
+  
+    #<strong>filter</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. An <a href="https://cloud.google.com/logging/docs/view/advanced_filters">advanced logs filter</a>
+which is used to match log entries.
+Example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resource.type=gae_app AND severity&gt;=ERROR</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>The maximum length of the filter is 20000 characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. An <a href="https://cloud.google.com/logging/docs/view/advanced_filters">advanced logs filter</a>
+which is used to match log entries.
+Example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>resource.type=gae_app AND severity&gt;=ERROR</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>The maximum length of the filter is 20000 characters.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="label_extractors=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="label_extractors-instance_method">
+  
+    #<strong>label_extractors</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. A map from a label key string to an extractor expression which is
+used to extract data from a log entry field and assign as the label value.
+Each label key specified in the LabelDescriptor must have an associated
+extractor expression in this map. The syntax of the extractor expression
+is the same as for the +value_extractor+ field.</p>
+
+<p>The extracted value is converted to the type defined in the label
+descriptor. If the either the extraction or the type conversion fails,
+the label will have a default value. The default value for a string
+label is an empty string, for an integer label its 0, and for a boolean
+label its +false+.</p>
+
+<p>Note that there are upper bounds on the maximum number of labels and the
+number of active time series that are allowed in a project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A map from a label key string to an extractor expression which is
+used to extract data from a log entry field and assign as the label value.
+Each label key specified in the LabelDescriptor must have an associated
+extractor expression in this map. The syntax of the extractor expression
+is the same as for the +value_extractor+ field.</p>
+
+<p>The extracted value is converted to the type defined in the label
+descriptor. If the either the extraction or the type conversion fails,
+the label will have a default value. The default value for a string
+label is an empty string, for an integer label its 0, and for a boolean
+label its +false+.</p>
+
+<p>Note that there are upper bounds on the maximum number of labels and the
+number of active time series that are allowed in a project.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="metric_descriptor=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="metric_descriptor-instance_method">
+  
+    #<strong>metric_descriptor</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Api/MetricDescriptor.html" title="Google::Api::MetricDescriptor (class)">Google::Api::MetricDescriptor</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. The metric descriptor associated with the logs-based metric.
+If unspecified, it uses a default metric descriptor with a DELTA metric
+kind, INT64 value type, with no labels and a unit of &quot;1&quot;. Such a metric
+counts the number of log entries matching the +filter+ expression.</p>
+
+<p>The +name+, +type+, and +description+ fields in the +metric_descriptor+
+are output only, and is constructed using the +name+ and +description+
+field in the LogMetric.</p>
+
+<p>To create a logs-based metric that records a distribution of log values, a
+DELTA metric kind with a DISTRIBUTION value type must be used along with
+a +value_extractor+ expression in the LogMetric.</p>
+
+<p>Each label in the metric descriptor must have a matching label
+name as the key and an extractor expression as the value in the
++label_extractors+ map.</p>
+
+<p>The +metric_kind+ and +value_type+ fields in the +metric_descriptor+ cannot
+be updated once initially configured. New labels can be added in the
++metric_descriptor+, but existing labels cannot be modified except for
+their description.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Api/MetricDescriptor.html" title="Google::Api::MetricDescriptor (class)">Google::Api::MetricDescriptor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. The metric descriptor associated with the logs-based metric.
+If unspecified, it uses a default metric descriptor with a DELTA metric
+kind, INT64 value type, with no labels and a unit of &quot;1&quot;. Such a metric
+counts the number of log entries matching the +filter+ expression.</p>
+
+<p>The +name+, +type+, and +description+ fields in the +metric_descriptor+
+are output only, and is constructed using the +name+ and +description+
+field in the LogMetric.</p>
+
+<p>To create a logs-based metric that records a distribution of log values, a
+DELTA metric kind with a DISTRIBUTION value type must be used along with
+a +value_extractor+ expression in the LogMetric.</p>
+
+<p>Each label in the metric descriptor must have a matching label
+name as the key and an extractor expression as the value in the
++label_extractors+ map.</p>
+
+<p>The +metric_kind+ and +value_type+ fields in the +metric_descriptor+ cannot
+be updated once initially configured. New labels can be added in the
++metric_descriptor+, but existing labels cannot be modified except for
+their description.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. The client-assigned metric identifier.
+Examples: +&quot;error_count&quot;+, +&quot;nginx/requests&quot;+.</p>
+
+<p>Metric identifiers are limited to 100 characters and can include
+only the following characters: +A-Z+, +a-z+, +0-9+, and the
+special characters +_-.,+!*&#39;,()%/+.  The forward-slash character
+(+/+) denotes a hierarchy of name pieces, and it cannot be the
+first character of the name.</p>
+
+<p>The metric identifier in this field must not be
+<a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encoded</a>.
+However, when the metric identifier appears as the +[METRIC_ID]+
+part of a +metric_name+ API parameter, then the metric identifier
+must be URL-encoded. Example:
++&quot;projects/my-project/metrics/nginx%2Frequests&quot;+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The client-assigned metric identifier.
+Examples: +&quot;error_count&quot;+, +&quot;nginx/requests&quot;+.</p>
+
+<p>Metric identifiers are limited to 100 characters and can include
+only the following characters: +A-Z+, +a-z+, +0-9+, and the
+special characters +_-.,+!*&#39;,()%/+.  The forward-slash character
+(+/+) denotes a hierarchy of name pieces, and it cannot be the
+first character of the name.</p>
+
+<p>The metric identifier in this field must not be
+<a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encoded</a>.
+However, when the metric identifier appears as the +[METRIC_ID]+
+part of a +metric_name+ API parameter, then the metric identifier
+must be URL-encoded. Example:
++&quot;projects/my-project/metrics/nginx%2Frequests&quot;+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="value_extractor=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="value_extractor-instance_method">
+  
+    #<strong>value_extractor</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. A +value_extractor+ is required when using a distribution
+logs-based metric to extract the values to record from a log entry.
+Two functions are supported for value extraction: +EXTRACT(field)+ or
++REGEXP_EXTRACT(field, regex)+. The argument are:</p>
+
+<ol>
+<li>field: The name of the log entry field from which the value is to be
+ extracted.</li>
+<li>regex: A regular expression using the Google RE2 syntax
+ (<a href="https://github.com/google/re2/wiki/Syntax">https://github.com/google/re2/wiki/Syntax</a>) with a single capture
+ group to extract data from the specified log entry field. The value
+ of the field is converted to a string before applying the regex.
+ It is an error to specify a regex that does not include exactly one
+ capture group.</li>
+</ol>
+
+<p>The result of the extraction must be convertible to a double type, as the
+distribution always records double values. If either the extraction or
+the conversion to double fails, then those values are not recorded in the
+distribution.</p>
+
+<p>Example: +REGEXP_EXTRACT(jsonPayload.request, &quot;.<em>quantity=(\d+).</em>&quot;)+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. A +value_extractor+ is required when using a distribution
+logs-based metric to extract the values to record from a log entry.
+Two functions are supported for value extraction: +EXTRACT(field)+ or
++REGEXP_EXTRACT(field, regex)+. The argument are:</p>
+
+<ol>
+<li>field: The name of the log entry field from which the value is to be
+ extracted.</li>
+<li>regex: A regular expression using the Google RE2 syntax
+ (<a href="https://github.com/google/re2/wiki/Syntax">https://github.com/google/re2/wiki/Syntax</a>) with a single capture
+ group to extract data from the specified log entry field. The value
+ of the field is converted to a string before applying the regex.
+ It is an error to specify a regex that does not include exactly one
+ capture group.</li>
+</ol>
+
+<p>The result of the extraction must be convertible to a double type, as the
+distribution always records double values. If either the extraction or
+the conversion to double fails, then those values are not recorded in the
+distribution.</p>
+
+<p>Example: +REGEXP_EXTRACT(jsonPayload.request, &quot;.<em>quantity=(\d+).</em>&quot;)+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="version=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="version-instance_method">
+  
+    #<strong>version</strong>  &#x21d2; <tt><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">Google::Logging::V2::LogMetric::ApiVersion</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Deprecated. The API version that created or updated this metric.
+The v2 format is used by default and cannot be changed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">Google::Logging::V2::LogMetric::ApiVersion</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Deprecated. The API version that created or updated this metric.
+The v2 format is used by default and cannot be changed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_metrics.rb', line 138</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogMetric (class)">LogMetric</a></span></span>
+  <span class='comment'># Stackdriver Logging API version.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="LogMetric/ApiVersion.html" title="Google::Logging::V2::LogMetric::ApiVersion (module)">ApiVersion</a></span></span>
+    <span class='comment'># Stackdriver Logging API v2.
+</span>    <span class='const'><span class='object_link'><a href="../V2.html" title="Google::Logging::V2 (module)">V2</a></span></span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Stackdriver Logging API v1.
+</span>    <span class='const'>V1</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
