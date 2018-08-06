@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockIntentsCredentials < Google::Cloud::Dialogflow::Credentials
+class MockIntentsCredentials < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -94,7 +94,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("list_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -125,7 +125,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("list_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -182,7 +182,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("get_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -190,6 +190,13 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_intent(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -210,7 +217,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("get_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -269,7 +276,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("create_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -277,6 +284,13 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_intent(formatted_parent, intent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -299,7 +313,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("create_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -358,7 +372,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("update_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -366,6 +380,13 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_intent(intent, language_code) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -388,7 +409,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("update_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -422,7 +443,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("delete_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -430,6 +451,13 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_intent(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -450,7 +478,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("delete_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -497,7 +525,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("batch_update_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -537,7 +565,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("batch_update_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -568,7 +596,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("batch_update_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -618,7 +646,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("batch_delete_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -661,7 +689,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("batch_delete_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
@@ -695,7 +723,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_credentials = MockIntentsCredentials.new("batch_delete_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method

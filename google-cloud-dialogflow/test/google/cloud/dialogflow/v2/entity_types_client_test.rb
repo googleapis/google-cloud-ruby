@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockEntityTypesCredentials < Google::Cloud::Dialogflow::Credentials
+class MockEntityTypesCredentials < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -94,7 +94,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("list_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -125,7 +125,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("list_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -165,7 +165,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("get_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -173,6 +173,13 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_entity_type(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -193,7 +200,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("get_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -235,7 +242,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("create_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -243,6 +250,13 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_entity_type(formatted_parent, entity_type) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -265,7 +279,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("create_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -305,7 +319,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("update_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -313,6 +327,13 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_entity_type(entity_type) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -333,7 +354,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("update_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -367,7 +388,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("delete_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -375,6 +396,13 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_entity_type(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -395,7 +423,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("delete_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -440,7 +468,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_update_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -478,7 +506,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_update_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -507,7 +535,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_update_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -554,7 +582,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_delete_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -594,7 +622,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_delete_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -625,7 +653,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_delete_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -675,7 +703,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_create_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -718,7 +746,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_create_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -752,7 +780,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_create_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -802,7 +830,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_update_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -845,7 +873,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_update_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -879,7 +907,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_update_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -926,7 +954,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_delete_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -966,7 +994,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_delete_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method
@@ -997,7 +1025,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
       mock_credentials = MockEntityTypesCredentials.new("batch_delete_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::EntityTypes.new(version: :v2)
 
           # Call method

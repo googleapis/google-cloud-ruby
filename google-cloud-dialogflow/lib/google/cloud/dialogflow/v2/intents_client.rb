@@ -27,7 +27,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/dialogflow/v2/intent_pb"
-require "google/cloud/dialogflow/credentials"
+require "google/cloud/dialogflow/v2/credentials"
 
 module Google
   module Cloud
@@ -76,6 +76,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -95,6 +98,7 @@ module Google
 
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = IntentsClient::SERVICE_ADDRESS
+            self::GRPC_INTERCEPTORS = IntentsClient::GRPC_INTERCEPTORS
           end
 
           PROJECT_AGENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
@@ -170,11 +174,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -183,7 +194,7 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dialogflow/v2/intent_services_pb"
 
-            credentials ||= Google::Cloud::Dialogflow::Credentials.default
+            credentials ||= Google::Cloud::Dialogflow::V2::Credentials.default
 
             @operations_client = OperationsClient.new(
               credentials: credentials,
@@ -195,7 +206,7 @@ module Google
             )
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dialogflow::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dialogflow::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -219,6 +230,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "intents_client_config.json"
             )
@@ -231,13 +243,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @intents_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -245,36 +258,44 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dialogflow::V2::Intents::Stub.method(:new)
             )
 
             @list_intents = Google::Gax.create_api_call(
               @intents_stub.method(:list_intents),
-              defaults["list_intents"]
+              defaults["list_intents"],
+              exception_transformer: exception_transformer
             )
             @get_intent = Google::Gax.create_api_call(
               @intents_stub.method(:get_intent),
-              defaults["get_intent"]
+              defaults["get_intent"],
+              exception_transformer: exception_transformer
             )
             @create_intent = Google::Gax.create_api_call(
               @intents_stub.method(:create_intent),
-              defaults["create_intent"]
+              defaults["create_intent"],
+              exception_transformer: exception_transformer
             )
             @update_intent = Google::Gax.create_api_call(
               @intents_stub.method(:update_intent),
-              defaults["update_intent"]
+              defaults["update_intent"],
+              exception_transformer: exception_transformer
             )
             @delete_intent = Google::Gax.create_api_call(
               @intents_stub.method(:delete_intent),
-              defaults["delete_intent"]
+              defaults["delete_intent"],
+              exception_transformer: exception_transformer
             )
             @batch_update_intents = Google::Gax.create_api_call(
               @intents_stub.method(:batch_update_intents),
-              defaults["batch_update_intents"]
+              defaults["batch_update_intents"],
+              exception_transformer: exception_transformer
             )
             @batch_delete_intents = Google::Gax.create_api_call(
               @intents_stub.method(:batch_delete_intents),
-              defaults["batch_delete_intents"]
+              defaults["batch_delete_intents"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -302,6 +323,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::Intent>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Dialogflow::V2::Intent>]
           #   An enumerable of Google::Cloud::Dialogflow::V2::Intent instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -309,9 +333,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   intents_client = Google::Cloud::Dialogflow::V2::Intents.new
+          #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -332,7 +356,8 @@ module Google
               language_code: nil,
               intent_view: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               language_code: language_code,
@@ -340,7 +365,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::ListIntentsRequest)
-            @list_intents.call(req, options)
+            @list_intents.call(req, options, &block)
           end
 
           # Retrieves the specified intent.
@@ -359,12 +384,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Intent]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::Intent]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   intents_client = Google::Cloud::Dialogflow::V2::Intents.new
+          #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::IntentsClient.intent_path("[PROJECT]", "[INTENT]")
           #   response = intents_client.get_intent(formatted_name)
 
@@ -372,14 +400,15 @@ module Google
               name,
               language_code: nil,
               intent_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               language_code: language_code,
               intent_view: intent_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::GetIntentRequest)
-            @get_intent.call(req, options)
+            @get_intent.call(req, options, &block)
           end
 
           # Creates an intent in the specified agent.
@@ -402,12 +431,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Intent]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::Intent]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   intents_client = Google::Cloud::Dialogflow::V2::Intents.new
+          #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
           #   # TODO: Initialize +intent+:
@@ -419,7 +451,8 @@ module Google
               intent,
               language_code: nil,
               intent_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               intent: intent,
@@ -427,7 +460,7 @@ module Google
               intent_view: intent_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::CreateIntentRequest)
-            @create_intent.call(req, options)
+            @create_intent.call(req, options, &block)
           end
 
           # Updates the specified intent.
@@ -452,12 +485,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::Intent]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dialogflow::V2::Intent]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   intents_client = Google::Cloud::Dialogflow::V2::Intents.new
+          #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #
           #   # TODO: Initialize +intent+:
           #   intent = {}
@@ -471,7 +507,8 @@ module Google
               language_code,
               update_mask: nil,
               intent_view: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               intent: intent,
               language_code: language_code,
@@ -479,7 +516,7 @@ module Google
               intent_view: intent_view
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::UpdateIntentRequest)
-            @update_intent.call(req, options)
+            @update_intent.call(req, options, &block)
           end
 
           # Deletes the specified intent.
@@ -490,22 +527,26 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   intents_client = Google::Cloud::Dialogflow::V2::Intents.new
+          #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_name = Google::Cloud::Dialogflow::V2::IntentsClient.intent_path("[PROJECT]", "[INTENT]")
           #   intents_client.delete_intent(formatted_name)
 
           def delete_intent \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DeleteIntentRequest)
-            @delete_intent.call(req, options)
+            @delete_intent.call(req, options, &block)
             nil
           end
 
@@ -542,9 +583,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   intents_client = Google::Cloud::Dialogflow::V2::Intents.new
+          #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
           #   # TODO: Initialize +language_code+:
@@ -623,9 +664,9 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dialogflow/v2"
+          #   require "google/cloud/dialogflow"
           #
-          #   intents_client = Google::Cloud::Dialogflow::V2::Intents.new
+          #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
           #   # TODO: Initialize +intents+:

@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockSessionsCredentials < Google::Cloud::Dialogflow::Credentials
+class MockSessionsCredentials < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -93,7 +93,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
       mock_credentials = MockSessionsCredentials.new("detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
 
           # Call method
@@ -101,6 +101,13 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.detect_intent(formatted_session, query_input) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -123,7 +130,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
       mock_credentials = MockSessionsCredentials.new("detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
 
           # Call method
@@ -166,7 +173,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
       mock_credentials = MockSessionsCredentials.new("streaming_detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
 
           # Call method
@@ -199,7 +206,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
       mock_credentials = MockSessionsCredentials.new("streaming_detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dialogflow::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dialogflow::Sessions.new(version: :v2)
 
           # Call method
