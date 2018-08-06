@@ -17,6 +17,7 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
+import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -32,6 +33,16 @@ s.copy(v2_library / 'lib/google/logging/v2')
 
 # Omitting lib/google/cloud/logging/v2.rb for now because we are not exposing
 # the low-level API.
+
+# PERMANENT: We don't want the generated overview.rb file because we have our
+# own toplevel docs for the handwritten layer.
+os.remove('lib/google/cloud/logging/v2/doc/overview.rb')
+
+# https://github.com/googleapis/gapic-generator/issues/2124
+s.replace(
+    'lib/google/cloud/logging/v2/credentials.rb',
+    'SCOPE = \[[^\]]+\]\.freeze',
+    'SCOPE = ["https://www.googleapis.com/auth/logging.admin"].freeze')
 
 # https://github.com/googleapis/gapic-generator/issues/2182
 s.replace(

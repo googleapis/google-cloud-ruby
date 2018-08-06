@@ -19,13 +19,7 @@ module Google
     module Logging
       module V2
         class Credentials < Google::Auth::Credentials
-          SCOPE = [
-            "https://www.googleapis.com/auth/cloud-platform",
-            "https://www.googleapis.com/auth/cloud-platform.read-only",
-            "https://www.googleapis.com/auth/logging.admin",
-            "https://www.googleapis.com/auth/logging.read",
-            "https://www.googleapis.com/auth/logging.write"
-          ].freeze
+          SCOPE = ["https://www.googleapis.com/auth/logging.admin"].freeze
           PATH_ENV_VARS = %w(LOGGING_CREDENTIALS
                              LOGGING_KEYFILE
                              GOOGLE_CLOUD_CREDENTIALS
