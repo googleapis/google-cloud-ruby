@@ -1,0 +1,718 @@
+---
+layout: yard_main
+title: "Class: Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig";
+  relpath = '../../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../../_index.html">Index (K)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Privacy.html" title="Google::Privacy (module)">Privacy</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Dlp.html" title="Google::Privacy::Dlp (module)">Dlp</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V2.html" title="Google::Privacy::Dlp::V2 (module)">V2</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../PrivacyMetric.html" title="Google::Privacy::Dlp::V2::PrivacyMetric (class)">PrivacyMetric</a></span></span>
+     &raquo; 
+    <span class="title">KMapEstimationConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Reidentifiability metric. This corresponds to a risk model similar to what
+is called &quot;journalist risk&quot; in the literature, except the attack dataset is
+statistically modeled instead of being perfectly known. This can be done
+using publicly available data (like the US Census), or using a custom
+statistical model (indicated as one or several BigQuery tables), or by
+extrapolating from the distribution of values in the input dataset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="KMapEstimationConfig/AuxiliaryTable.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable (class)">AuxiliaryTable</a></span>, <span class='object_link'><a href="KMapEstimationConfig/TaggedField.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField (class)">TaggedField</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#auxiliary_tables-instance_method" title="#auxiliary_tables (instance method)">#<strong>auxiliary_tables</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Several auxiliary tables can be used in the analysis.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#quasi_ids-instance_method" title="#quasi_ids (instance method)">#<strong>quasi_ids</strong>  &#x21d2; Array&lt;Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Fields considered to be quasi-identifiers.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#region_code-instance_method" title="#region_code (instance method)">#<strong>region_code</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>ISO 3166-1 alpha-2 region code to use in the statistical modeling.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="auxiliary_tables=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="auxiliary_tables-instance_method">
+  
+    #<strong>auxiliary_tables</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="KMapEstimationConfig/AuxiliaryTable.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable (class)">Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Several auxiliary tables can be used in the analysis. Each custom_tag
+used to tag a quasi-identifiers column must appear in exactly one column
+of one auxiliary table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="KMapEstimationConfig/AuxiliaryTable.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable (class)">Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Several auxiliary tables can be used in the analysis. Each custom_tag
+used to tag a quasi-identifiers column must appear in exactly one column
+of one auxiliary table.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 656</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig (class)">KMapEstimationConfig</a></span></span>
+  <span class='comment'># A column with a semantic tag attached.
+</span>  <span class='comment'># @!attribute [rw] field
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>  <span class='comment'>#     Identifies the column. [required]
+</span>  <span class='comment'># @!attribute [rw] info_type
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>  <span class='comment'>#     A column can be tagged with a InfoType to use the relevant public
+</span>  <span class='comment'>#     dataset as a statistical model of population, if available. We
+</span>  <span class='comment'>#     currently support US ZIP codes, region codes, ages and genders.
+</span>  <span class='comment'>#     To programmatically obtain the list of supported InfoTypes, use
+</span>  <span class='comment'>#     ListInfoTypes with the supported_by=RISK_ANALYSIS filter.
+</span>  <span class='comment'># @!attribute [rw] custom_tag
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A column can be tagged with a custom tag. In this case, the user must
+</span>  <span class='comment'>#     indicate an auxiliary table that contains statistical information on
+</span>  <span class='comment'>#     the possible values of this column (below).
+</span>  <span class='comment'># @!attribute [rw] inferred
+</span>  <span class='comment'>#   @return [Google::Protobuf::Empty]
+</span>  <span class='comment'>#     If no semantic tag is indicated, we infer the statistical model from
+</span>  <span class='comment'>#     the distribution of values in the input data
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="KMapEstimationConfig/TaggedField.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField (class)">TaggedField</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># An auxiliary table contains statistical information on the relative
+</span>  <span class='comment'># frequency of different quasi-identifiers values. It has one or several
+</span>  <span class='comment'># quasi-identifiers columns, and one column that indicates the relative
+</span>  <span class='comment'># frequency of each quasi-identifier tuple.
+</span>  <span class='comment'># If a tuple is present in the data but not in the auxiliary table, the
+</span>  <span class='comment'># corresponding relative frequency is assumed to be zero (and thus, the
+</span>  <span class='comment'># tuple is highly reidentifiable).
+</span>  <span class='comment'># @!attribute [rw] table
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::BigQueryTable]
+</span>  <span class='comment'>#     Auxiliary table location. [required]
+</span>  <span class='comment'># @!attribute [rw] quasi_ids
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable::QuasiIdField&gt;]
+</span>  <span class='comment'>#     Quasi-identifier columns. [required]
+</span>  <span class='comment'># @!attribute [rw] relative_frequency
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>  <span class='comment'>#     The relative frequency column must contain a floating-point number
+</span>  <span class='comment'>#     between 0 and 1 (inclusive). Null values are assumed to be zero.
+</span>  <span class='comment'>#     [required]
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="KMapEstimationConfig/AuxiliaryTable.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable (class)">AuxiliaryTable</a></span></span>
+    <span class='comment'># A quasi-identifier column has a custom_tag, used to know which column
+</span>    <span class='comment'># in the data corresponds to which column in the statistical model.
+</span>    <span class='comment'># @!attribute [rw] field
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>    <span class='comment'># @!attribute [rw] custom_tag
+</span>    <span class='comment'>#   @return [String]
+</span>    <span class='kw'>class</span> <span class='const'>QuasiIdField</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="quasi_ids=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="quasi_ids-instance_method">
+  
+    #<strong>quasi_ids</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="KMapEstimationConfig/TaggedField.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField (class)">Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Fields considered to be quasi-identifiers. No two columns can have the
+same tag. [required]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="KMapEstimationConfig/TaggedField.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField (class)">Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Fields considered to be quasi-identifiers. No two columns can have the
+same tag. [required]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 656</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig (class)">KMapEstimationConfig</a></span></span>
+  <span class='comment'># A column with a semantic tag attached.
+</span>  <span class='comment'># @!attribute [rw] field
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>  <span class='comment'>#     Identifies the column. [required]
+</span>  <span class='comment'># @!attribute [rw] info_type
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>  <span class='comment'>#     A column can be tagged with a InfoType to use the relevant public
+</span>  <span class='comment'>#     dataset as a statistical model of population, if available. We
+</span>  <span class='comment'>#     currently support US ZIP codes, region codes, ages and genders.
+</span>  <span class='comment'>#     To programmatically obtain the list of supported InfoTypes, use
+</span>  <span class='comment'>#     ListInfoTypes with the supported_by=RISK_ANALYSIS filter.
+</span>  <span class='comment'># @!attribute [rw] custom_tag
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A column can be tagged with a custom tag. In this case, the user must
+</span>  <span class='comment'>#     indicate an auxiliary table that contains statistical information on
+</span>  <span class='comment'>#     the possible values of this column (below).
+</span>  <span class='comment'># @!attribute [rw] inferred
+</span>  <span class='comment'>#   @return [Google::Protobuf::Empty]
+</span>  <span class='comment'>#     If no semantic tag is indicated, we infer the statistical model from
+</span>  <span class='comment'>#     the distribution of values in the input data
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="KMapEstimationConfig/TaggedField.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField (class)">TaggedField</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># An auxiliary table contains statistical information on the relative
+</span>  <span class='comment'># frequency of different quasi-identifiers values. It has one or several
+</span>  <span class='comment'># quasi-identifiers columns, and one column that indicates the relative
+</span>  <span class='comment'># frequency of each quasi-identifier tuple.
+</span>  <span class='comment'># If a tuple is present in the data but not in the auxiliary table, the
+</span>  <span class='comment'># corresponding relative frequency is assumed to be zero (and thus, the
+</span>  <span class='comment'># tuple is highly reidentifiable).
+</span>  <span class='comment'># @!attribute [rw] table
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::BigQueryTable]
+</span>  <span class='comment'>#     Auxiliary table location. [required]
+</span>  <span class='comment'># @!attribute [rw] quasi_ids
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable::QuasiIdField&gt;]
+</span>  <span class='comment'>#     Quasi-identifier columns. [required]
+</span>  <span class='comment'># @!attribute [rw] relative_frequency
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>  <span class='comment'>#     The relative frequency column must contain a floating-point number
+</span>  <span class='comment'>#     between 0 and 1 (inclusive). Null values are assumed to be zero.
+</span>  <span class='comment'>#     [required]
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="KMapEstimationConfig/AuxiliaryTable.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable (class)">AuxiliaryTable</a></span></span>
+    <span class='comment'># A quasi-identifier column has a custom_tag, used to know which column
+</span>    <span class='comment'># in the data corresponds to which column in the statistical model.
+</span>    <span class='comment'># @!attribute [rw] field
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>    <span class='comment'># @!attribute [rw] custom_tag
+</span>    <span class='comment'>#   @return [String]
+</span>    <span class='kw'>class</span> <span class='const'>QuasiIdField</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="region_code=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="region_code-instance_method">
+  
+    #<strong>region_code</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns ISO 3166-1 alpha-2 region code to use in the statistical modeling.
+Required if no column is tagged with a region-specific InfoType (like
+US_ZIP_5) or a region code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ISO 3166-1 alpha-2 region code to use in the statistical modeling.
+Required if no column is tagged with a region-specific InfoType (like
+US_ZIP_5) or a region code.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/dlp.rb', line 656</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig (class)">KMapEstimationConfig</a></span></span>
+  <span class='comment'># A column with a semantic tag attached.
+</span>  <span class='comment'># @!attribute [rw] field
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>  <span class='comment'>#     Identifies the column. [required]
+</span>  <span class='comment'># @!attribute [rw] info_type
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::InfoType]
+</span>  <span class='comment'>#     A column can be tagged with a InfoType to use the relevant public
+</span>  <span class='comment'>#     dataset as a statistical model of population, if available. We
+</span>  <span class='comment'>#     currently support US ZIP codes, region codes, ages and genders.
+</span>  <span class='comment'>#     To programmatically obtain the list of supported InfoTypes, use
+</span>  <span class='comment'>#     ListInfoTypes with the supported_by=RISK_ANALYSIS filter.
+</span>  <span class='comment'># @!attribute [rw] custom_tag
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     A column can be tagged with a custom tag. In this case, the user must
+</span>  <span class='comment'>#     indicate an auxiliary table that contains statistical information on
+</span>  <span class='comment'>#     the possible values of this column (below).
+</span>  <span class='comment'># @!attribute [rw] inferred
+</span>  <span class='comment'>#   @return [Google::Protobuf::Empty]
+</span>  <span class='comment'>#     If no semantic tag is indicated, we infer the statistical model from
+</span>  <span class='comment'>#     the distribution of values in the input data
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="KMapEstimationConfig/TaggedField.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField (class)">TaggedField</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># An auxiliary table contains statistical information on the relative
+</span>  <span class='comment'># frequency of different quasi-identifiers values. It has one or several
+</span>  <span class='comment'># quasi-identifiers columns, and one column that indicates the relative
+</span>  <span class='comment'># frequency of each quasi-identifier tuple.
+</span>  <span class='comment'># If a tuple is present in the data but not in the auxiliary table, the
+</span>  <span class='comment'># corresponding relative frequency is assumed to be zero (and thus, the
+</span>  <span class='comment'># tuple is highly reidentifiable).
+</span>  <span class='comment'># @!attribute [rw] table
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::BigQueryTable]
+</span>  <span class='comment'>#     Auxiliary table location. [required]
+</span>  <span class='comment'># @!attribute [rw] quasi_ids
+</span>  <span class='comment'>#   @return [Array&lt;Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable::QuasiIdField&gt;]
+</span>  <span class='comment'>#     Quasi-identifier columns. [required]
+</span>  <span class='comment'># @!attribute [rw] relative_frequency
+</span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>  <span class='comment'>#     The relative frequency column must contain a floating-point number
+</span>  <span class='comment'>#     between 0 and 1 (inclusive). Null values are assumed to be zero.
+</span>  <span class='comment'>#     [required]
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="KMapEstimationConfig/AuxiliaryTable.html" title="Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable (class)">AuxiliaryTable</a></span></span>
+    <span class='comment'># A quasi-identifier column has a custom_tag, used to know which column
+</span>    <span class='comment'># in the data corresponds to which column in the statistical model.
+</span>    <span class='comment'># @!attribute [rw] field
+</span>    <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
+</span>    <span class='comment'># @!attribute [rw] custom_tag
+</span>    <span class='comment'>#   @return [String]
+</span>    <span class='kw'>class</span> <span class='const'>QuasiIdField</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
