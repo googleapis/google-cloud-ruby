@@ -29,7 +29,7 @@ module Google
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Google Cloud OS Login API.](https://console.cloud.google.com/apis/api/os-login)
+    # 3. [Enable the Google Cloud OS Login API.](https://console.cloud.google.com/apis/library/oslogin.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
@@ -43,7 +43,7 @@ module Google
     # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
     #   to see the full list of Cloud APIs that we cover.
     #
-    # [Product Documentation]: https://cloud.google.com/os-login
+    # [Product Documentation]: https://cloud.google.com/compute/docs/oslogin/rest/
     #
     # ## Enabling Logging
     #
