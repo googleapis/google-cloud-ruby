@@ -23,11 +23,22 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
 
+# Temporary until we get Ruby-specific tools into synthtool
+def merge_gemspec(src, dest, path):
+    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
+    match = regex.search(dest)
+    if match:
+        src = regex.sub(match.group(0), src, count=1)
+    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
+    match = regex.search(dest)
+    if match:
+        src = regex.sub(match.group(0), src, count=1)
+    return src
+
 v1_library = gapic.ruby_library(
     'texttospeech', 'v1',
     artman_output_name='google-cloud-ruby/google-cloud-texttospeech'
 )
-
 s.copy(v1_library / 'lib')
 s.copy(v1_library / 'test')
 s.copy(v1_library / 'README.md')
@@ -35,6 +46,7 @@ s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
+s.copy(v1_library / 'google-cloud-text_to_speech.gemspec', merge=merge_gemspec)
 
 # https://github.com/googleapis/gapic-generator/issues/2174
 s.replace(
@@ -58,27 +70,6 @@ s.replace(
     '\n--markup markdown\n\n',
     '\n--markup markdown\n--markup-provider redcarpet\n\n')
 
-# https://github.com/googleapis/gapic-generator/issues/2195
-s.replace(
-    'README.md',
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/texttospeech\\)',
-    '(https://console.cloud.google.com/apis/library/texttospeech.googleapis.com)')
-
-# Temporary until we get Ruby-specific tools into synthtool
-def merge_gemspec(src, dest, path):
-    regex = re.compile(r'^\s+gem.version\s*=\s*"[\d\.]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    regex = re.compile(r'^\s+gem.homepage\s*=\s*"[^"]+"$', flags=re.MULTILINE)
-    match = regex.search(dest)
-    if match:
-        src = regex.sub(match.group(0), src, count=1)
-    return src
-
-s.copy(v1_library / 'google-cloud-text_to_speech.gemspec', merge=merge_gemspec)
-
-
 # https://github.com/googleapis/gapic-generator/issues/2194
 s.replace(
     'google-cloud-text_to_speech.gemspec',
@@ -88,3 +79,14 @@ s.replace(
     'google-cloud-text_to_speech.gemspec',
     '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
     '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
+
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    [
+      'README.md',
+      'lib/google/cloud/text_to_speech.rb',
+      'lib/google/cloud/text_to_speech/v1.rb',
+      'lib/google/cloud/text_to_speech/v1/doc/overview.rb'
+    ],
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/texttospeech\\)',
+    '(https://console.cloud.google.com/apis/library/texttospeech.googleapis.com)')

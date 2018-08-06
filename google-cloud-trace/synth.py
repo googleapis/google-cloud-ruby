@@ -31,29 +31,6 @@ v1_library = gapic.ruby_library(
 s.copy(v1_library / 'lib/google/cloud/trace/v1')
 s.copy(v1_library / 'lib/google/devtools/cloudtrace/v1')
 
-# Omitting lib/google/cloud/trace/v1.rb for now because we are not exposing the
-# low-level API.
-
-# PERMANENT: We don't want the generated overview.rb file because we have our
-# own toplevel docs for the handwritten layer.
-os.remove('lib/google/cloud/trace/v1/doc/overview.rb')
-
-# https://github.com/googleapis/gapic-generator/issues/2124
-s.replace(
-    'lib/google/cloud/trace/v1/credentials.rb',
-    'SCOPE = \[[^\]]+\]\.freeze',
-    'SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/trace/v1/credentials.rb',
-    'TRACE_KEYFILE\\n(\s+)TRACE_CREDENTIALS\n',
-    'TRACE_CREDENTIALS\\n\\1TRACE_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/trace/v1/credentials.rb',
-    'TRACE_KEYFILE_JSON\\n(\s+)TRACE_CREDENTIALS_JSON\n',
-    'TRACE_CREDENTIALS_JSON\\n\\1TRACE_KEYFILE_JSON\n')
-
 v2_library = gapic.ruby_library(
     'trace', 'v2',
     config_path='/google/devtools/cloudtrace/artman_cloudtrace_v2.yaml',
@@ -62,25 +39,45 @@ v2_library = gapic.ruby_library(
 s.copy(v2_library / 'lib/google/cloud/trace/v2')
 s.copy(v2_library / 'lib/google/devtools/cloudtrace/v2')
 
-# Omitting lib/google/cloud/trace/v2.rb for now because we are not exposing the
-# low-level API.
+# Omitting lib/google/cloud/trace/v{1,2}.rb for now because we are not exposing
+# the low-level API.
 
-# PERMANENT: We don't want the generated overview.rb file because we have our
+# PERMANENT: We don't want the generated overview.rb files because we have our
 # own toplevel docs for the handwritten layer.
+os.remove('lib/google/cloud/trace/v1/doc/overview.rb')
 os.remove('lib/google/cloud/trace/v2/doc/overview.rb')
 
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(
-    'lib/google/cloud/trace/v2/credentials.rb',
+    [
+      'lib/google/cloud/trace/v1/credentials.rb',
+      'lib/google/cloud/trace/v2/credentials.rb'
+    ],
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze')
 
 # https://github.com/googleapis/gapic-generator/issues/2182
 s.replace(
-    'lib/google/cloud/trace/v2/credentials.rb',
+    [
+      'lib/google/cloud/trace/v1/credentials.rb',
+      'lib/google/cloud/trace/v2/credentials.rb'
+    ],
     'TRACE_KEYFILE\\n(\s+)TRACE_CREDENTIALS\n',
     'TRACE_CREDENTIALS\\n\\1TRACE_KEYFILE\n')
 s.replace(
-    'lib/google/cloud/trace/v2/credentials.rb',
+    [
+      'lib/google/cloud/trace/v1/credentials.rb',
+      'lib/google/cloud/trace/v2/credentials.rb'
+    ],
     'TRACE_KEYFILE_JSON\\n(\s+)TRACE_CREDENTIALS_JSON\n',
     'TRACE_CREDENTIALS_JSON\\n\\1TRACE_KEYFILE_JSON\n')
+
+# TEMPORARY: Get rid of devsite markup
+s.replace(
+    [
+      'lib/google/cloud/trace/v1/doc/google/devtools/cloudtrace/v1/trace.rb',
+      'lib/google/cloud/trace/v2/doc/google/devtools/cloudtrace/v2/trace.rb',
+      'lib/google/cloud/trace/v2/trace_service_client.rb'
+    ],
+    '\\{% dynamic print site_values.console_name %\\}',
+    'Google Cloud Platform Console')
