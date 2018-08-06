@@ -1,0 +1,1271 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Vision::Annotation::Face::Likelihood - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Vision::Annotation::Face::Likelihood";
+  relpath = '../../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../../_index.html">Index (L)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Annotation.html" title="Google::Cloud::Vision::Annotation (class)">Annotation</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Face.html" title="Google::Cloud::Vision::Annotation::Face (class)">Face</a></span></span>
+     &raquo; 
+    <span class="title">Likelihood</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Vision::Annotation::Face::Likelihood
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Vision::Annotation::Face::Likelihood</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/vision/annotation/face.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Likelihood</h1>
+
+<p>A bucketized representation of likelihood of various separate facial
+characteristics, meant to give highly stable results across model
+upgrades.</p>
+
+<p>See <span class='object_link'><a href="../Face.html" title="Google::Cloud::Vision::Annotation::Face (class)">Google::Cloud::Vision::Annotation::Face</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_face'>face</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_face'>face</span>
+
+<span class='id identifier rubyid_face'>face</span><span class='period'>.</span><span class='id identifier rubyid_likelihood'>likelihood</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 7
+</span><span class='id identifier rubyid_face'>face</span><span class='period'>.</span><span class='id identifier rubyid_likelihood'>likelihood</span><span class='period'>.</span><span class='id identifier rubyid_sorrow?'>sorrow?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_face'>face</span><span class='period'>.</span><span class='id identifier rubyid_likelihood'>likelihood</span><span class='period'>.</span><span class='id identifier rubyid_sorrow'>sorrow</span> <span class='comment'>#=&gt; &quot;VERY_UNLIKELY&quot;</span></code></pre>
+    
+  </div>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><a href="https://cloud.google.com/vision/reference/rest/v1/images/annotate#Likelihood" target="_parent" title="images.annotate Likelihood">images.annotate Likelihood</a></li>
+    
+  </ul>
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="POSITIVE_RATINGS-constant" class="">POSITIVE_RATINGS =
+          
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i(</span><span class='tstring_content'>POSSIBLE</span><span class='words_sep'> </span><span class='tstring_content'>LIKELY</span><span class='words_sep'> </span><span class='tstring_content'>VERY_LIKELY</span><span class='tstring_end'>)</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#anger-instance_method" title="#anger (instance method)">#<strong>anger</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Joy likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#anger%3F-instance_method" title="#anger? (instance method)">#<strong>anger?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Anger likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blurred-instance_method" title="#blurred (instance method)">#<strong>blurred</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Blurred likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#blurred%3F-instance_method" title="#blurred? (instance method)">#<strong>blurred?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Blurred likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#headwear-instance_method" title="#headwear (instance method)">#<strong>headwear</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Headwear likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#headwear%3F-instance_method" title="#headwear? (instance method)">#<strong>headwear?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Headwear likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#joy-instance_method" title="#joy (instance method)">#<strong>joy</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Joy likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#joy%3F-instance_method" title="#joy? (instance method)">#<strong>joy?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Joy likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sorrow-instance_method" title="#sorrow (instance method)">#<strong>sorrow</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sorrow likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sorrow%3F-instance_method" title="#sorrow? (instance method)">#<strong>sorrow?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sorrow likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#surprise-instance_method" title="#surprise (instance method)">#<strong>surprise</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Surprise likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#surprise%3F-instance_method" title="#surprise? (instance method)">#<strong>surprise?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Surprise likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_h-instance_method" title="#to_h (instance method)">#<strong>to_h</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts object to a hash.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#under_exposed-instance_method" title="#under_exposed (instance method)">#<strong>under_exposed</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Under Exposed likelihood rating.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#under_exposed%3F-instance_method" title="#under_exposed? (instance method)">#<strong>under_exposed?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Under Exposed likelihood.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="anger-instance_method">
+  
+    #<strong>anger</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Joy likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1375
+1376
+1377</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1375</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_anger'>anger</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_anger_likelihood'>anger_likelihood</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="anger?-instance_method">
+  
+    #<strong>anger?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Anger likelihood. Returns <code>true</code> if <span class='object_link'><a href="#anger-instance_method" title="Google::Cloud::Vision::Annotation::Face::Likelihood#anger (method)">#anger</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1385
+1386
+1387</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1385</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_anger?'>anger?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::Face::Likelihood::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_anger'>anger</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blurred-instance_method">
+  
+    #<strong>blurred</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Blurred likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1427
+1428
+1429</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1427</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_blurred'>blurred</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_blurred_likelihood'>blurred_likelihood</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="blurred?-instance_method">
+  
+    #<strong>blurred?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Blurred likelihood. Returns <code>true</code> if <span class='object_link'><a href="#blurred-instance_method" title="Google::Cloud::Vision::Annotation::Face::Likelihood#blurred (method)">#blurred</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1437
+1438
+1439</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1437</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_blurred?'>blurred?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::Face::Likelihood::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_blurred'>blurred</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="headwear-instance_method">
+  
+    #<strong>headwear</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Headwear likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1444
+1445
+1446</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1444</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_headwear'>headwear</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_headwear_likelihood'>headwear_likelihood</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="headwear?-instance_method">
+  
+    #<strong>headwear?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Headwear likelihood. Returns <code>true</code> if <span class='object_link'><a href="#headwear-instance_method" title="Google::Cloud::Vision::Annotation::Face::Likelihood#headwear (method)">#headwear</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1454
+1455
+1456</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1454</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_headwear?'>headwear?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::Face::Likelihood::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_headwear'>headwear</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="joy-instance_method">
+  
+    #<strong>joy</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Joy likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1341
+1342
+1343</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1341</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_joy'>joy</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_joy_likelihood'>joy_likelihood</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="joy?-instance_method">
+  
+    #<strong>joy?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Joy likelihood. Returns <code>true</code> if <span class='object_link'><a href="#joy-instance_method" title="Google::Cloud::Vision::Annotation::Face::Likelihood#joy (method)">#joy</a></span> is <code>POSSIBLE</code>, <code>LIKELY</code>,
+or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1351
+1352
+1353</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1351</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_joy?'>joy?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::Face::Likelihood::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_joy'>joy</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sorrow-instance_method">
+  
+    #<strong>sorrow</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sorrow likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1358
+1359
+1360</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1358</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sorrow'>sorrow</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_sorrow_likelihood'>sorrow_likelihood</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sorrow?-instance_method">
+  
+    #<strong>sorrow?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sorrow likelihood. Returns <code>true</code> if <span class='object_link'><a href="#sorrow-instance_method" title="Google::Cloud::Vision::Annotation::Face::Likelihood#sorrow (method)">#sorrow</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1368
+1369
+1370</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1368</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sorrow?'>sorrow?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::Face::Likelihood::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_sorrow'>sorrow</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="surprise-instance_method">
+  
+    #<strong>surprise</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Surprise likelihood rating. Possible values are <code>VERY_UNLIKELY</code>,
+<code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1392
+1393
+1394</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1392</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_surprise'>surprise</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_surprise_likelihood'>surprise_likelihood</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="surprise?-instance_method">
+  
+    #<strong>surprise?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Surprise likelihood. Returns <code>true</code> if <span class='object_link'><a href="#surprise-instance_method" title="Google::Cloud::Vision::Annotation::Face::Likelihood#surprise (method)">#surprise</a></span> is <code>POSSIBLE</code>,
+<code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1402
+1403
+1404</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1402</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_surprise?'>surprise?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::Face::Likelihood::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_surprise'>surprise</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_h-instance_method">
+  
+    #<strong>to_h</strong>  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts object to a hash. All keys will be symbolized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1463
+1464
+1465
+1466
+1467</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1463</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='lbrace'>{</span> <span class='label'>joy:</span> <span class='id identifier rubyid_joy?'>joy?</span><span class='comma'>,</span> <span class='label'>sorrow:</span> <span class='id identifier rubyid_sorrow?'>sorrow?</span><span class='comma'>,</span> <span class='label'>anger:</span> <span class='id identifier rubyid_anger?'>anger?</span><span class='comma'>,</span> <span class='label'>surprise:</span> <span class='id identifier rubyid_surprise?'>surprise?</span><span class='comma'>,</span>
+    <span class='label'>under_exposed:</span> <span class='id identifier rubyid_under_exposed?'>under_exposed?</span><span class='comma'>,</span> <span class='label'>blurred:</span> <span class='id identifier rubyid_blurred?'>blurred?</span><span class='comma'>,</span>
+    <span class='label'>headwear:</span> <span class='id identifier rubyid_headwear?'>headwear?</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="under_exposed-instance_method">
+  
+    #<strong>under_exposed</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Under Exposed likelihood rating. Possible values are
+<code>VERY_UNLIKELY</code>, <code>UNLIKELY</code>, <code>POSSIBLE</code>, <code>LIKELY</code>, and
+<code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1410
+1411
+1412</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1410</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_under_exposed'>under_exposed</span>
+  <span class='ivar'>@grpc</span><span class='period'>.</span><span class='id identifier rubyid_under_exposed_likelihood'>under_exposed_likelihood</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="under_exposed?-instance_method">
+  
+    #<strong>under_exposed?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Under Exposed likelihood. Returns <code>true</code> if <span class='object_link'><a href="#under_exposed-instance_method" title="Google::Cloud::Vision::Annotation::Face::Likelihood#under_exposed (method)">#under_exposed</a></span> is
+<code>POSSIBLE</code>, <code>LIKELY</code>, or <code>VERY_LIKELY</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1420
+1421
+1422</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/annotation/face.rb', line 1420</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_under_exposed?'>under_exposed?</span>
+  <span class='const'><span class='object_link'><a href="#POSITIVE_RATINGS-constant" title="Google::Cloud::Vision::Annotation::Face::Likelihood::POSITIVE_RATINGS (constant)">POSITIVE_RATINGS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_under_exposed'>under_exposed</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
