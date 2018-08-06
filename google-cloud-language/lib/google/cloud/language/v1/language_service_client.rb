@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/language/v1/language_service_pb"
-require "google/cloud/language/credentials"
+require "google/cloud/language/v1/credentials"
 
 module Google
   module Cloud
@@ -44,6 +44,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -78,11 +81,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -91,10 +101,10 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/language/v1/language_service_services_pb"
 
-            credentials ||= Google::Cloud::Language::Credentials.default
+            credentials ||= Google::Cloud::Language::V1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Language::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Language::V1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -118,6 +128,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "language_service_client_config.json"
             )
@@ -129,13 +140,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @language_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -143,32 +155,39 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Language::V1::LanguageService::Stub.method(:new)
             )
 
             @analyze_sentiment = Google::Gax.create_api_call(
               @language_service_stub.method(:analyze_sentiment),
-              defaults["analyze_sentiment"]
+              defaults["analyze_sentiment"],
+              exception_transformer: exception_transformer
             )
             @analyze_entities = Google::Gax.create_api_call(
               @language_service_stub.method(:analyze_entities),
-              defaults["analyze_entities"]
+              defaults["analyze_entities"],
+              exception_transformer: exception_transformer
             )
             @analyze_entity_sentiment = Google::Gax.create_api_call(
               @language_service_stub.method(:analyze_entity_sentiment),
-              defaults["analyze_entity_sentiment"]
+              defaults["analyze_entity_sentiment"],
+              exception_transformer: exception_transformer
             )
             @analyze_syntax = Google::Gax.create_api_call(
               @language_service_stub.method(:analyze_syntax),
-              defaults["analyze_syntax"]
+              defaults["analyze_syntax"],
+              exception_transformer: exception_transformer
             )
             @classify_text = Google::Gax.create_api_call(
               @language_service_stub.method(:classify_text),
-              defaults["classify_text"]
+              defaults["classify_text"],
+              exception_transformer: exception_transformer
             )
             @annotate_text = Google::Gax.create_api_call(
               @language_service_stub.method(:annotate_text),
-              defaults["annotate_text"]
+              defaults["annotate_text"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -185,25 +204,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Language::V1::AnalyzeSentimentResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Language::V1::AnalyzeSentimentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1"
+          #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language::V1.new
+          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
           #   response = language_service_client.analyze_sentiment(document)
 
           def analyze_sentiment \
               document,
               encoding_type: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               document: document,
               encoding_type: encoding_type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeSentimentRequest)
-            @analyze_sentiment.call(req, options)
+            @analyze_sentiment.call(req, options, &block)
           end
 
           # Finds named entities (currently proper names and common nouns) in the text
@@ -219,25 +244,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Language::V1::AnalyzeEntitiesResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Language::V1::AnalyzeEntitiesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1"
+          #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language::V1.new
+          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
           #   response = language_service_client.analyze_entities(document)
 
           def analyze_entities \
               document,
               encoding_type: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               document: document,
               encoding_type: encoding_type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeEntitiesRequest)
-            @analyze_entities.call(req, options)
+            @analyze_entities.call(req, options, &block)
           end
 
           # Finds entities, similar to {Google::Cloud::Language::V1::LanguageService::AnalyzeEntities AnalyzeEntities} in the text and analyzes
@@ -252,25 +283,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1"
+          #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language::V1.new
+          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
           #   response = language_service_client.analyze_entity_sentiment(document)
 
           def analyze_entity_sentiment \
               document,
               encoding_type: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               document: document,
               encoding_type: encoding_type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest)
-            @analyze_entity_sentiment.call(req, options)
+            @analyze_entity_sentiment.call(req, options, &block)
           end
 
           # Analyzes the syntax of the text and provides sentence boundaries and
@@ -286,25 +323,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Language::V1::AnalyzeSyntaxResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Language::V1::AnalyzeSyntaxResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1"
+          #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language::V1.new
+          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
           #   response = language_service_client.analyze_syntax(document)
 
           def analyze_syntax \
               document,
               encoding_type: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               document: document,
               encoding_type: encoding_type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnalyzeSyntaxRequest)
-            @analyze_syntax.call(req, options)
+            @analyze_syntax.call(req, options, &block)
           end
 
           # Classifies a document into categories.
@@ -316,23 +359,29 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Language::V1::ClassifyTextResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Language::V1::ClassifyTextResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1"
+          #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language::V1.new
+          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
           #   response = language_service_client.classify_text(document)
 
           def classify_text \
               document,
-              options: nil
+              options: nil,
+              &block
             req = {
               document: document
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::ClassifyTextRequest)
-            @classify_text.call(req, options)
+            @classify_text.call(req, options, &block)
           end
 
           # A convenience method that provides all the features that analyzeSentiment,
@@ -351,13 +400,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Language::V1::AnnotateTextResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Language::V1::AnnotateTextResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/language/v1"
+          #   require "google/cloud/language"
           #
-          #   language_service_client = Google::Cloud::Language::V1.new
+          #   language_service_client = Google::Cloud::Language.new(version: :v1)
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
+          #
+          #   # TODO: Initialize +features+:
           #   features = {}
           #   response = language_service_client.annotate_text(document, features)
 
@@ -365,14 +421,15 @@ module Google
               document,
               features,
               encoding_type: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               document: document,
               features: features,
               encoding_type: encoding_type
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Language::V1::AnnotateTextRequest)
-            @annotate_text.call(req, options)
+            @annotate_text.call(req, options, &block)
           end
         end
       end
