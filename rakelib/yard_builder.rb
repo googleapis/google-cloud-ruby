@@ -28,6 +28,7 @@ class YardBuilder
     ensure_gem_latest_dir gem
     ensure_gem_index_file gem
     commit_changes gh_pages_dir, "Add #{gem} documentation for #{version} release"
+    push_changes gh_pages_dir
   end
 
   def rebuild_tag *tags
@@ -105,7 +106,6 @@ class YardBuilder
   end
 
   def ensure_gem_index_file gem
-    # This requires Ruby 2.5 or better
     template_path = gh_pages_dir + "_yard_templates" + "index.html.erb"
     index_path = gh_pages_dir + "docs" + gem + "index.html"
 
@@ -145,9 +145,8 @@ class YardBuilder
   def store_releases data
     require "yaml"
     sorted_data_pairs = data.each.sort.map do |gem, versions|
-      # sort versions in descending order
+      # Sort in descending order
       versions.uniq!.sort! do |a, b|
-        # Sort in descending order
         Gem::Version.new(b.sub(/^v/,"")) <=> Gem::Version.new(a.sub(/^v/,""))
       end
       [gem, versions]
