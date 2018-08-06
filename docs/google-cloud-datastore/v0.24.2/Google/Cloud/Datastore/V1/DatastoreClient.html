@@ -1,0 +1,2490 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Datastore::V1::DatastoreClient - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Datastore::V1::DatastoreClient";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Datastore::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">DatastoreClient</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Datastore::V1::DatastoreClient
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Datastore::V1::DatastoreClient</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/datastore/v1/datastore_client.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Each RPC normalizes the partition IDs of the keys in its input entities,
+and always returns entities with keys with normalized partition IDs.
+This applies to all keys and entities, including those in values, except keys
+with both an empty path and an empty or unset partition ID. Normalization of
+input keys sets the project ID (if not already set) to the project ID from
+the request.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="SERVICE_ADDRESS-constant" class="">SERVICE_ADDRESS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default address of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>datastore.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="DEFAULT_SERVICE_PORT-constant" class="">DEFAULT_SERVICE_PORT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default port of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>443</span></pre></dd>
+      
+        <dt id="DEFAULT_TIMEOUT-constant" class="">DEFAULT_TIMEOUT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span></pre></dd>
+      
+        <dt id="ALL_SCOPES-constant" class="">ALL_SCOPES =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The scopes needed to make gRPC calls to all of the methods defined in
+this service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/datastore</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#datastore_stub-instance_method" title="#datastore_stub (instance method)">#<strong>datastore_stub</strong>  &#x21d2; Google::Datastore::V1::Datastore::Stub </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#allocate_ids-instance_method" title="#allocate_ids (instance method)">#<strong>allocate_ids</strong>(project_id, keys, options: nil)  &#x21d2; Google::Datastore::V1::AllocateIdsResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Allocates IDs for the given keys, which is useful for referencing an entity before it is inserted.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#begin_transaction-instance_method" title="#begin_transaction (instance method)">#<strong>begin_transaction</strong>(project_id, options: nil)  &#x21d2; Google::Datastore::V1::BeginTransactionResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Begins a new transaction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#commit-instance_method" title="#commit (instance method)">#<strong>commit</strong>(project_id, mode, mutations, transaction: nil, options: nil)  &#x21d2; Google::Datastore::V1::CommitResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Commits a transaction, optionally creating, deleting or modifying some entities.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service_path: SERVICE_ADDRESS, port: DEFAULT_SERVICE_PORT, channel: nil, chan_creds: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, app_name: nil, app_version: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; DatastoreClient </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new instance of DatastoreClient.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lookup-instance_method" title="#lookup (instance method)">#<strong>lookup</strong>(project_id, read_options, keys, options: nil)  &#x21d2; Google::Datastore::V1::LookupResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Looks up entities by key.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rollback-instance_method" title="#rollback (instance method)">#<strong>rollback</strong>(project_id, transaction, options: nil)  &#x21d2; Google::Datastore::V1::RollbackResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Rolls back a transaction.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run_query-instance_method" title="#run_query (instance method)">#<strong>run_query</strong>(project_id, partition_id, read_options, query: nil, gql_query: nil, options: nil)  &#x21d2; Google::Datastore::V1::RunQueryResponse </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Queries for entities.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(service_path: SERVICE_ADDRESS, port: DEFAULT_SERVICE_PORT, channel: nil, chan_creds: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, app_name: nil, app_version: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of DatastoreClient</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The domain name of the API remote host.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The port on which to connect to the remote host.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Channel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Channel object through which to make calls.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>chan_creds</span>
+      
+      
+        <span class='type'>(<tt>Grpc::ChannelCredentials</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A ChannelCredentials for the setting up the RPC client.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Hash for call options for each method. See
+Google::Gax#construct_settings for the structure of
+this data. Falls back to the default config if not specified
+or the specified config is missing data points.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default timeout, in seconds, for calls made through this client.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
+    <span class='label'>service_path:</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span><span class='comma'>,</span>
+    <span class='label'>port:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span><span class='comma'>,</span>
+    <span class='label'>channel:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>chan_creds:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+    <span class='label'>app_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>app_version:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='comment'># These require statements are intentionally placed here to initialize
+</span>  <span class='comment'># the gRPC module only when it&#39;s required.
+</span>  <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
+</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/datastore/v1/datastore_services_pb</span><span class='tstring_end'>&quot;</span></span>
+
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_app_name'>app_name</span> <span class='op'>||</span> <span class='id identifier rubyid_app_version'>app_version</span>
+    <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`app_name` and `app_version` are no longer being used in the request headers.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/0.6.8 gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>datastore_client_config.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.datastore.v1.Datastore</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+      <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
+      <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@datastore_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
+    <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
+    <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+
+  <span class='ivar'>@lookup</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:lookup</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lookup</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@run_query</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:run_query</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>run_query</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@begin_transaction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:begin_transaction</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>begin_transaction</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@commit</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:commit</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>commit</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@rollback</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:rollback</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rollback</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@allocate_ids</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:allocate_ids</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>allocate_ids</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="datastore_stub-instance_method">
+  
+    #<strong>datastore_stub</strong>  &#x21d2; <tt>Google::Datastore::V1::Datastore::Stub</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Datastore::V1::Datastore::Stub</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 44</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:datastore_stub</span>
+
+  <span class='comment'># The default address of the service.
+</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>datastore.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='comment'># The default port of the service.
+</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
+
+  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
+
+  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
+</span>  <span class='comment'># this service.
+</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/datastore</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='comment'># @param service_path [String]
+</span>  <span class='comment'>#   The domain name of the API remote host.
+</span>  <span class='comment'># @param port [Integer]
+</span>  <span class='comment'>#   The port on which to connect to the remote host.
+</span>  <span class='comment'># @param channel [Channel]
+</span>  <span class='comment'>#   A Channel object through which to make calls.
+</span>  <span class='comment'># @param chan_creds [Grpc::ChannelCredentials]
+</span>  <span class='comment'>#   A ChannelCredentials for the setting up the RPC client.
+</span>  <span class='comment'># @param client_config[Hash]
+</span>  <span class='comment'>#   A Hash for call options for each method. See
+</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
+</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
+</span>  <span class='comment'>#   or the specified config is missing data points.
+</span>  <span class='comment'># @param timeout [Numeric]
+</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
+      <span class='label'>service_path:</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span><span class='comma'>,</span>
+      <span class='label'>port:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span><span class='comma'>,</span>
+      <span class='label'>channel:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>chan_creds:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
+      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
+      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Datastore::V1::DatastoreClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+      <span class='label'>app_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>app_version:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='comment'># These require statements are intentionally placed here to initialize
+</span>    <span class='comment'># the gRPC module only when it&#39;s required.
+</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
+</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/datastore/v1/datastore_services_pb</span><span class='tstring_end'>&quot;</span></span>
+
+
+    <span class='kw'>if</span> <span class='id identifier rubyid_app_name'>app_name</span> <span class='op'>||</span> <span class='id identifier rubyid_app_version'>app_version</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`app_name` and `app_version` are no longer being used in the request headers.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/0.6.8 gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>datastore_client_config.json</span><span class='tstring_end'>&quot;</span></span>
+    <span class='rparen'>)</span>
+    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
+        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.datastore.v1.Datastore</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
+        <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+      <span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@datastore_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
+      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
+      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
+      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>Datastore</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+
+    <span class='ivar'>@lookup</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:lookup</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lookup</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@run_query</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:run_query</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>run_query</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@begin_transaction</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:begin_transaction</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>begin_transaction</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@commit</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:commit</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>commit</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@rollback</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:rollback</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rollback</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@allocate_ids</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@datastore_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:allocate_ids</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>allocate_ids</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Service calls
+</span>
+  <span class='comment'># Looks up entities by key.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   The ID of the project against which to make the request.
+</span>  <span class='comment'># @param read_options [Google::Datastore::V1::ReadOptions]
+</span>  <span class='comment'>#   The options for this lookup request.
+</span>  <span class='comment'># @param keys [Array&lt;Google::Datastore::V1::Key&gt;]
+</span>  <span class='comment'>#   Keys of entities to look up.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Datastore::V1::LookupResponse]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/datastore/v1/datastore_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
+</span>  <span class='comment'>#   ReadOptions = Google::Datastore::V1::ReadOptions
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   datastore_client = DatastoreClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   read_options = ReadOptions.new
+</span>  <span class='comment'>#   keys = []
+</span>  <span class='comment'>#   response = datastore_client.lookup(project_id, read_options, keys)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_lookup'>lookup</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_keys'>keys</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/LookupRequest.html" title="Google::Datastore::V1::LookupRequest (class)">LookupRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>read_options:</span> <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+      <span class='label'>keys:</span> <span class='id identifier rubyid_keys'>keys</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@lookup</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Queries for entities.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   The ID of the project against which to make the request.
+</span>  <span class='comment'># @param partition_id [Google::Datastore::V1::PartitionId]
+</span>  <span class='comment'>#   Entities are partitioned into subsets, identified by a partition ID.
+</span>  <span class='comment'>#   Queries are scoped to a single partition.
+</span>  <span class='comment'>#   This partition ID is normalized with the standard default context
+</span>  <span class='comment'>#   partition ID.
+</span>  <span class='comment'># @param read_options [Google::Datastore::V1::ReadOptions]
+</span>  <span class='comment'>#   The options for this query.
+</span>  <span class='comment'># @param query [Google::Datastore::V1::Query]
+</span>  <span class='comment'>#   The query to run.
+</span>  <span class='comment'># @param gql_query [Google::Datastore::V1::GqlQuery]
+</span>  <span class='comment'>#   The GQL query to run.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Datastore::V1::RunQueryResponse]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/datastore/v1/datastore_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
+</span>  <span class='comment'>#   PartitionId = Google::Datastore::V1::PartitionId
+</span>  <span class='comment'>#   ReadOptions = Google::Datastore::V1::ReadOptions
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   datastore_client = DatastoreClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   partition_id = PartitionId.new
+</span>  <span class='comment'>#   read_options = ReadOptions.new
+</span>  <span class='comment'>#   response = datastore_client.run_query(project_id, partition_id, read_options)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_run_query'>run_query</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_partition_id'>partition_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+      <span class='label'>query:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>gql_query:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/RunQueryRequest.html" title="Google::Datastore::V1::RunQueryRequest (class)">RunQueryRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>partition_id:</span> <span class='id identifier rubyid_partition_id'>partition_id</span><span class='comma'>,</span>
+      <span class='label'>read_options:</span> <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+      <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span>
+      <span class='label'>gql_query:</span> <span class='id identifier rubyid_gql_query'>gql_query</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@run_query</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Begins a new transaction.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   The ID of the project against which to make the request.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Datastore::V1::BeginTransactionResponse]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/datastore/v1/datastore_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   datastore_client = DatastoreClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   response = datastore_client.begin_transaction(project_id)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/BeginTransactionRequest.html" title="Google::Datastore::V1::BeginTransactionRequest (class)">BeginTransactionRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@begin_transaction</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Commits a transaction, optionally creating, deleting or modifying some
+</span>  <span class='comment'># entities.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   The ID of the project against which to make the request.
+</span>  <span class='comment'># @param mode [Google::Datastore::V1::CommitRequest::Mode]
+</span>  <span class='comment'>#   The type of commit to perform. Defaults to +TRANSACTIONAL+.
+</span>  <span class='comment'># @param transaction [String]
+</span>  <span class='comment'>#   The identifier of the transaction associated with the commit. A
+</span>  <span class='comment'>#   transaction identifier is returned by a call to
+</span>  <span class='comment'>#   Datastore::BeginTransaction.
+</span>  <span class='comment'># @param mutations [Array&lt;Google::Datastore::V1::Mutation&gt;]
+</span>  <span class='comment'>#   The mutations to perform.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+</span>  <span class='comment'>#   applied in order. The following sequences of mutations affecting a single
+</span>  <span class='comment'>#   entity are not permitted in a single +Commit+ request:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   - +insert+ followed by +insert+
+</span>  <span class='comment'>#   - +update+ followed by +insert+
+</span>  <span class='comment'>#   - +upsert+ followed by +insert+
+</span>  <span class='comment'>#   - +delete+ followed by +update+
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
+</span>  <span class='comment'>#   entity.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Datastore::V1::CommitResponse]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/datastore/v1/datastore_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
+</span>  <span class='comment'>#   Mode = Google::Datastore::V1::CommitRequest::Mode
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   datastore_client = DatastoreClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   mode = Mode::MODE_UNSPECIFIED
+</span>  <span class='comment'>#   mutations = []
+</span>  <span class='comment'>#   response = datastore_client.commit(project_id, mode, mutations)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_mode'>mode</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_mutations'>mutations</span><span class='comma'>,</span>
+      <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/CommitRequest.html" title="Google::Datastore::V1::CommitRequest (class)">CommitRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>mode:</span> <span class='id identifier rubyid_mode'>mode</span><span class='comma'>,</span>
+      <span class='label'>mutations:</span> <span class='id identifier rubyid_mutations'>mutations</span><span class='comma'>,</span>
+      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@commit</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Rolls back a transaction.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   The ID of the project against which to make the request.
+</span>  <span class='comment'># @param transaction [String]
+</span>  <span class='comment'>#   The transaction identifier, returned by a call to
+</span>  <span class='comment'>#   Datastore::BeginTransaction.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Datastore::V1::RollbackResponse]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/datastore/v1/datastore_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   datastore_client = DatastoreClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   transaction = &#39;&#39;
+</span>  <span class='comment'>#   response = datastore_client.rollback(project_id, transaction)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/RollbackRequest.html" title="Google::Datastore::V1::RollbackRequest (class)">RollbackRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@rollback</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Allocates IDs for the given keys, which is useful for referencing an entity
+</span>  <span class='comment'># before it is inserted.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   The ID of the project against which to make the request.
+</span>  <span class='comment'># @param keys [Array&lt;Google::Datastore::V1::Key&gt;]
+</span>  <span class='comment'>#   A list of keys with incomplete key paths for which to allocate IDs.
+</span>  <span class='comment'>#   No key may be reserved/read-only.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Datastore::V1::AllocateIdsResponse]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/datastore/v1/datastore_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   DatastoreClient = Google::Cloud::Datastore::V1::DatastoreClient
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   datastore_client = DatastoreClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   keys = []
+</span>  <span class='comment'>#   response = datastore_client.allocate_ids(project_id, keys)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_allocate_ids'>allocate_ids</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_keys'>keys</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/AllocateIdsRequest.html" title="Google::Datastore::V1::AllocateIdsRequest (class)">AllocateIdsRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>keys:</span> <span class='id identifier rubyid_keys'>keys</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@allocate_ids</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="allocate_ids-instance_method">
+  
+    #<strong>allocate_ids</strong>(project_id, keys, options: nil)  &#x21d2; <tt><span class='object_link'><a href="../../../Datastore/V1/AllocateIdsResponse.html" title="Google::Datastore::V1::AllocateIdsResponse (class)">Google::Datastore::V1::AllocateIdsResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Allocates IDs for the given keys, which is useful for referencing an entity
+before it is inserted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore/v1/datastore_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span>
+
+<span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Datastore::V1::DatastoreClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_allocate_ids'>allocate_ids</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID of the project against which to make the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keys</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../../Datastore/V1/Key.html" title="Google::Datastore::V1::Key (class)">Google::Datastore::V1::Key</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of keys with incomplete key paths for which to allocate IDs.
+No key may be reserved/read-only.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/AllocateIdsResponse.html" title="Google::Datastore::V1::AllocateIdsResponse (class)">Google::Datastore::V1::AllocateIdsResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 386</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_allocate_ids'>allocate_ids</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_keys'>keys</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/AllocateIdsRequest.html" title="Google::Datastore::V1::AllocateIdsRequest (class)">AllocateIdsRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>keys:</span> <span class='id identifier rubyid_keys'>keys</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@allocate_ids</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="begin_transaction-instance_method">
+  
+    #<strong>begin_transaction</strong>(project_id, options: nil)  &#x21d2; <tt><span class='object_link'><a href="../../../Datastore/V1/BeginTransactionResponse.html" title="Google::Datastore::V1::BeginTransactionResponse (class)">Google::Datastore::V1::BeginTransactionResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Begins a new transaction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore/v1/datastore_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span>
+
+<span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Datastore::V1::DatastoreClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_begin_transaction'>begin_transaction</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID of the project against which to make the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/BeginTransactionResponse.html" title="Google::Datastore::V1::BeginTransactionResponse (class)">Google::Datastore::V1::BeginTransactionResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+264
+265
+266
+267
+268
+269
+270
+271</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 264</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_begin_transaction'>begin_transaction</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/BeginTransactionRequest.html" title="Google::Datastore::V1::BeginTransactionRequest (class)">BeginTransactionRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@begin_transaction</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="commit-instance_method">
+  
+    #<strong>commit</strong>(project_id, mode, mutations, transaction: nil, options: nil)  &#x21d2; <tt><span class='object_link'><a href="../../../Datastore/V1/CommitResponse.html" title="Google::Datastore::V1::CommitResponse (class)">Google::Datastore::V1::CommitResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Commits a transaction, optionally creating, deleting or modifying some
+entities.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore/v1/datastore_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span>
+<span class='const'>Mode</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/CommitRequest.html" title="Google::Datastore::V1::CommitRequest (class)">CommitRequest</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/CommitRequest/Mode.html" title="Google::Datastore::V1::CommitRequest::Mode (module)">Mode</a></span></span>
+
+<span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Datastore::V1::DatastoreClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_mode'>mode</span> <span class='op'>=</span> <span class='const'>Mode</span><span class='op'>::</span><span class='const'>MODE_UNSPECIFIED</span>
+<span class='id identifier rubyid_mutations'>mutations</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_commit'>commit</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_mode'>mode</span><span class='comma'>,</span> <span class='id identifier rubyid_mutations'>mutations</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID of the project against which to make the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mode</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/CommitRequest/Mode.html" title="Google::Datastore::V1::CommitRequest::Mode (module)">Google::Datastore::V1::CommitRequest::Mode</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The type of commit to perform. Defaults to +TRANSACTIONAL+.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>transaction</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The identifier of the transaction associated with the commit. A
+transaction identifier is returned by a call to
+Datastore::BeginTransaction.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mutations</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../../Datastore/V1/Mutation.html" title="Google::Datastore::V1::Mutation (class)">Google::Datastore::V1::Mutation</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The mutations to perform.</p>
+
+<p>When mode is +TRANSACTIONAL+, mutations affecting a single entity are
+applied in order. The following sequences of mutations affecting a single
+entity are not permitted in a single +Commit+ request:</p>
+
+<ul>
+<li>+insert+ followed by +insert+</li>
+<li>+update+ followed by +insert+</li>
+<li>+upsert+ followed by +insert+</li>
+<li>+delete+ followed by +update+</li>
+</ul>
+
+<p>When mode is +NON_TRANSACTIONAL+, no two mutations may affect a single
+entity.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/CommitResponse.html" title="Google::Datastore::V1::CommitResponse (class)">Google::Datastore::V1::CommitResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 315</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_commit'>commit</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_mode'>mode</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_mutations'>mutations</span><span class='comma'>,</span>
+    <span class='label'>transaction:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/CommitRequest.html" title="Google::Datastore::V1::CommitRequest (class)">CommitRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>mode:</span> <span class='id identifier rubyid_mode'>mode</span><span class='comma'>,</span>
+    <span class='label'>mutations:</span> <span class='id identifier rubyid_mutations'>mutations</span><span class='comma'>,</span>
+    <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@commit</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="lookup-instance_method">
+  
+    #<strong>lookup</strong>(project_id, read_options, keys, options: nil)  &#x21d2; <tt><span class='object_link'><a href="../../../Datastore/V1/LookupResponse.html" title="Google::Datastore::V1::LookupResponse (class)">Google::Datastore::V1::LookupResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Looks up entities by key.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore/v1/datastore_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span>
+<span class='const'>ReadOptions</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/ReadOptions.html" title="Google::Datastore::V1::ReadOptions (class)">ReadOptions</a></span></span>
+
+<span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Datastore::V1::DatastoreClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_read_options'>read_options</span> <span class='op'>=</span> <span class='const'>ReadOptions</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_keys'>keys</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_lookup'>lookup</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span> <span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID of the project against which to make the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>read_options</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/ReadOptions.html" title="Google::Datastore::V1::ReadOptions (class)">Google::Datastore::V1::ReadOptions</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The options for this lookup request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keys</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../../../Datastore/V1/Key.html" title="Google::Datastore::V1::Key (class)">Google::Datastore::V1::Key</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Keys of entities to look up.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/LookupResponse.html" title="Google::Datastore::V1::LookupResponse (class)">Google::Datastore::V1::LookupResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 183</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_lookup'>lookup</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_keys'>keys</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/LookupRequest.html" title="Google::Datastore::V1::LookupRequest (class)">LookupRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>read_options:</span> <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+    <span class='label'>keys:</span> <span class='id identifier rubyid_keys'>keys</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@lookup</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rollback-instance_method">
+  
+    #<strong>rollback</strong>(project_id, transaction, options: nil)  &#x21d2; <tt><span class='object_link'><a href="../../../Datastore/V1/RollbackResponse.html" title="Google::Datastore::V1::RollbackResponse (class)">Google::Datastore::V1::RollbackResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Rolls back a transaction.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore/v1/datastore_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span>
+
+<span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Datastore::V1::DatastoreClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_transaction'>transaction</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_rollback'>rollback</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_transaction'>transaction</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID of the project against which to make the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>transaction</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The transaction identifier, returned by a call to
+Datastore::BeginTransaction.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/RollbackResponse.html" title="Google::Datastore::V1::RollbackResponse (class)">Google::Datastore::V1::RollbackResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 352</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rollback'>rollback</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_transaction'>transaction</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/RollbackRequest.html" title="Google::Datastore::V1::RollbackRequest (class)">RollbackRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>transaction:</span> <span class='id identifier rubyid_transaction'>transaction</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@rollback</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="run_query-instance_method">
+  
+    #<strong>run_query</strong>(project_id, partition_id, read_options, query: nil, gql_query: nil, options: nil)  &#x21d2; <tt><span class='object_link'><a href="../../../Datastore/V1/RunQueryResponse.html" title="Google::Datastore::V1::RunQueryResponse (class)">Google::Datastore::V1::RunQueryResponse</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Queries for entities.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/datastore/v1/datastore_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Datastore.html" title="Google::Cloud::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span>
+<span class='const'>PartitionId</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/PartitionId.html" title="Google::Datastore::V1::PartitionId (class)">PartitionId</a></span></span>
+<span class='const'>ReadOptions</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/ReadOptions.html" title="Google::Datastore::V1::ReadOptions (class)">ReadOptions</a></span></span>
+
+<span class='id identifier rubyid_datastore_client'>datastore_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Datastore::V1::DatastoreClient (class)">DatastoreClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Datastore::V1::DatastoreClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_partition_id'>partition_id</span> <span class='op'>=</span> <span class='const'>PartitionId</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_read_options'>read_options</span> <span class='op'>=</span> <span class='const'>ReadOptions</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_datastore_client'>datastore_client</span><span class='period'>.</span><span class='id identifier rubyid_run_query'>run_query</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_partition_id'>partition_id</span><span class='comma'>,</span> <span class='id identifier rubyid_read_options'>read_options</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ID of the project against which to make the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>partition_id</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/PartitionId.html" title="Google::Datastore::V1::PartitionId (class)">Google::Datastore::V1::PartitionId</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Entities are partitioned into subsets, identified by a partition ID.
+Queries are scoped to a single partition.
+This partition ID is normalized with the standard default context
+partition ID.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>read_options</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/ReadOptions.html" title="Google::Datastore::V1::ReadOptions (class)">Google::Datastore::V1::ReadOptions</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The options for this query.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/Query.html" title="Google::Datastore::V1::Query (class)">Google::Datastore::V1::Query</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The query to run.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>gql_query</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/GqlQuery.html" title="Google::Datastore::V1::GqlQuery (class)">Google::Datastore::V1::GqlQuery</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The GQL query to run.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Datastore/V1/RunQueryResponse.html" title="Google::Datastore::V1::RunQueryResponse (class)">Google::Datastore::V1::RunQueryResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/datastore/v1/datastore_client.rb', line 229</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_run_query'>run_query</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_partition_id'>partition_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+    <span class='label'>query:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>gql_query:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore.html" title="Google::Datastore (module)">Datastore</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1.html" title="Google::Datastore::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Datastore/V1/RunQueryRequest.html" title="Google::Datastore::V1::RunQueryRequest (class)">RunQueryRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>partition_id:</span> <span class='id identifier rubyid_partition_id'>partition_id</span><span class='comma'>,</span>
+    <span class='label'>read_options:</span> <span class='id identifier rubyid_read_options'>read_options</span><span class='comma'>,</span>
+    <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span>
+    <span class='label'>gql_query:</span> <span class='id identifier rubyid_gql_query'>gql_query</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@run_query</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
