@@ -75,5 +75,9 @@ s.copy(v3_library / 'google-cloud-monitoring.gemspec', merge=merge_gemspec)
 # https://github.com/googleapis/gapic-generator/issues/2194
 s.replace(
     'google-cloud-monitoring.gemspec',
-    '\nend',
-    '\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
+    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
+    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
+s.replace(
+    'google-cloud-monitoring.gemspec',
+    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
+    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
