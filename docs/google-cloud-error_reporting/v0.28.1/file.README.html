@@ -1,0 +1,291 @@
+---
+layout: yard_main
+title: "File: README - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>google-cloud-error_reporting</h1>
+
+<p><a href="https://cloud.google.com/error-reporting/">Stackdriver Error Reporting</a> counts,
+analyzes and aggregates errors raised in your running cloud services. A
+centralized error management interface displays the results with sorting 
+and filtering capabilities. A dedicated view shows the error details: time 
+chart, occurrences, affected user count, first and last seen dates and a 
+cleaned exception stack trace. Opt-in to receive email and mobile alerts on 
+new errors.</p>
+
+<ul>
+<li><a href="http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest">google-cloud-error_reporting API documentation</a></li>
+<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/guides/instrumentation">google-cloud-error_reporting instrumentation documentation</a></li>
+<li><a href="https://rubygems.org/gems/google-cloud-error_reporting">google-cloud-error_reporting on RubyGems</a></li>
+<li><a href="https://cloud.google.com/error-reporting/docs/">Stackdriver ErrorReporting documentation</a></li>
+</ul>
+
+<h2>Quick Start</h2>
+
+<p>Install the gem directly:</p>
+
+<pre class="code sh"><code class="sh">$ gem install google-cloud-error_reporting
+</code></pre>
+
+<p>Or install through Bundler:</p>
+
+<ol>
+<li>Add the <code>google-cloud-error_reporting</code> gem to your Gemfile:</li>
+</ol>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google-cloud-error_reporting</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<ol>
+<li>Use Bundler to install the gem:</li>
+</ol>
+
+<pre class="code sh"><code class="sh">$ bundle install
+</code></pre>
+
+<p>Alternatively, check out the <a href="../stackdriver"><code>stackdriver</code></a> gem that includes 
+the <code>google-cloud-error_reporting</code> gem.</p>
+
+<h2>Enable Stackdriver Error Reporting API</h2>
+
+<p>The Stackdriver Error Reporting library needs the <a href="https://console.cloud.google.com/apis/library/clouderrorreporting.googleapis.com">Stackdriver Error
+Reporting API</a> 
+to be enabled on your Google Cloud project. Make sure it&#39;s enabled if not 
+already.</p>
+
+<h2>Reporting errors in Rack-based frameworks</h2>
+
+<p>The Stackdriver Error Reporting library for Ruby makes it easy to integrate 
+Stackdriver Error Reporting into popular Rack-based Ruby web frameworks such as 
+Ruby on Rails and Sinatra. When the library integration is enabled, it 
+automatically reports exceptions captured from the application&#39;s Rack stack.</p>
+
+<h3>With Ruby on Rails</h3>
+
+<p>You can load the Railtie that comes with the library into your Ruby 
+on Rails application by explicitly requiring it during the application startup:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># In config/application.rb
+</span><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting/rails</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>If you&#39;re using the <code>stackdriver</code> gem, it automatically loads the Railtie into 
+your application when it starts.</p>
+
+<h3>With other Rack-based frameworks</h3>
+
+<p>Other Rack-based frameworks, such as Sinatra, can use the Rack Middleware 
+provided by the library:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting/Middleware.html" title="Google::Cloud::ErrorReporting::Middleware (class)">Middleware</a></span></span>
+</code></pre>
+
+<h2>Reporting errors manually</h2>
+
+<p>Manually reporting an error is as easy as calling the report method:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>begin</span>
+  <span class='id identifier rubyid_fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>boom!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_exception'>exception</span>
+  <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html" title="Google::Cloud::ErrorReporting (module)">ErrorReporting</a></span></span><span class='period'>.</span><span class='id identifier rubyid_report'><span class='object_link'><a href="Google/Cloud/ErrorReporting.html#report-class_method" title="Google::Cloud::ErrorReporting.report (method)">report</a></span></span> <span class='id identifier rubyid_exception'>exception</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Configuring the library</h2>
+
+<p>You can customize the behavior of the Stackdriver Error Reporting library for 
+Ruby. See the <a href="../stackdriver/docs/configuration.md">configuration guide</a> for a list 
+of possible configuration options.</p>
+
+<h2>Running on Google Cloud Platform</h2>
+
+<p>The Stackdriver Error Reporting library for Ruby should work without you 
+manually providing authentication credentials for instances running on Google 
+Cloud Platform, as long as the Stackdriver Error Reporting API access scope is 
+enabled on that instance.</p>
+
+<h3>App Engine</h3>
+
+<p>On Google App Engine, the Stackdriver Error Reporting API access scope is 
+enabled by default, and the Stackdriver Error Reporting library for Ruby can 
+be used without providing credentials or a project ID.</p>
+
+<h3>Container Engine</h3>
+
+<p>On Google Container Engine, you must explicitly add the <code>cloud-platform</code> OAuth 
+scope when creating the cluster:</p>
+
+<pre class="code sh"><code class="sh">$ gcloud container clusters create example-cluster-name --scopes https://www.googleapis.com/auth/cloud-platform
+</code></pre>
+
+<p>You may also do this through the Google Cloud Platform Console. Select 
+<strong>Enabled</strong> in the <strong>Cloud Platform</strong> section of <strong>Create a container cluster</strong>.</p>
+
+<h3>Compute Engine</h3>
+
+<p>For Google Compute Engine instances, you must explicitly enable the 
+<code>cloud-platform</code> access scope for each instance. When you create a new instance 
+through the Google Cloud Platform Console, you can do this under Identity and 
+API access: Use the Compute Engine default service account and select &quot;Allow 
+full access to all Cloud APIs&quot; under Access scopes.</p>
+
+<h2>Running locally and elsewhere</h2>
+
+<p>To run the Stackdriver Error Reporting outside of Google Cloud Platform, you 
+must supply your GCP project ID and appropriate service account credentials 
+directly to the Stackdriver Error Reporting. This applies to running the 
+library on your own workstation, on your datacenter&#39;s computers, or on the VM 
+instances of another cloud provider. See the <a href="#authentication">Authentication 
+section</a> for instructions on how to do so.</p>
+
+<h2>Authentication</h2>
+
+<p>The Instrumentation client and API use Service Account credentials to connect 
+to Google Cloud services. When running on Google Cloud Platform environments, 
+the credentials will be discovered automatically. When running on other 
+environments the Service Account credentials can be specified by providing in 
+several ways.</p>
+
+<p>The best way to provide authentication information if you&#39;re using Ruby on Rails
+is through the Rails configuration interface:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># in config/environments/*.rb
+</span><span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_application'>application</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='comment'># Shared parameters
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>your-project-id</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/key.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='comment'># Or Stackdriver Error Reporting specific parameters
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>your-project-id</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/key.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>Other Rack-based applications that are loading the Rack Middleware directly or
+using the manually reporting interface can leverage the configration interface:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/error_reporting</span><span class='tstring_end'>&quot;</span></span>
+<span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='comment'># Shared parameters
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>your-project-id</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/key.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='comment'># Or Stackdriver Error Reporting specific parameters
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>your-project-id</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_error_reporting'>error_reporting</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/key.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>This library also supports the other authentication methods provided by the 
+<code>google-cloud-ruby</code> suite. Instructions and configuration options are covered 
+in the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/guides/authentication">Authentication Guide</a>.</p>
+
+<h2>Supported Ruby Versions</h2>
+
+<p>This library is supported on Ruby 2.0+.</p>
+
+<h2>Versioning</h2>
+
+<p>This library follows <a href="http://semver.org/">Semantic Versioning</a>.</p>
+
+<p>It is currently in major version zero (0.y.z), which means that anything may 
+change at any time and the public API should not be considered stable.</p>
+
+<h2>Contributing</h2>
+
+<p>Contributions to this library are always welcome and highly encouraged.</p>
+
+<p>See the 
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing">Contributing Guide</a> 
+for more information on how to get started.</p>
+
+<p>Please note that this project is released with a Contributor Code of Conduct. By
+participating in this project you agree to abide by its terms. See 
+<a href="../CODE_OF_CONDUCT.md">Code of Conduct</a> for more information.</p>
+
+<h2>License</h2>
+
+<p>This library is licensed under Apache 2.0. Full license text is available in
+ <a href="LICENSE">LICENSE</a>.</p>
+
+<h2>Support</h2>
+
+<p>Please 
+<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues">report bugs at the project on Github</a>.
+Don&#39;t hesitate to 
+<a href="http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby">ask questions</a> 
+about the client or APIs on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
