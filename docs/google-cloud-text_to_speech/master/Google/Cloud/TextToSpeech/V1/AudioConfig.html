@@ -1,0 +1,1208 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Texttospeech::V1::AudioConfig - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Texttospeech::V1::AudioConfig";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Texttospeech.html" title="Google::Cloud::Texttospeech (module)">Texttospeech</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Texttospeech::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">AudioConfig</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Texttospeech::V1::AudioConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Texttospeech::V1::AudioConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Description of audio data to be synthesized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_encoding-instance_method" title="#audio_encoding (instance method)">#<strong>audio_encoding</strong>  &#x21d2; Google::Cloud::Texttospeech::V1::AudioEncoding </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pitch-instance_method" title="#pitch (instance method)">#<strong>pitch</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional speaking pitch, in the range [-20.0, 20.0].</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sample_rate_hertz-instance_method" title="#sample_rate_hertz (instance method)">#<strong>sample_rate_hertz</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The synthesis sample rate (in hertz) for this audio.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#speaking_rate-instance_method" title="#speaking_rate (instance method)">#<strong>speaking_rate</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional speaking rate/speed, in the range [0.25, 4.0].</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#volume_gain_db-instance_method" title="#volume_gain_db (instance method)">#<strong>volume_gain_db</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional volume gain (in dB) of the normal native volume supported by the specific voice, in the range [-96.0, 16.0].</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="audio_encoding=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="audio_encoding-instance_method">
+  
+    #<strong>audio_encoding</strong>  &#x21d2; <tt><span class='object_link'><a href="AudioEncoding.html" title="Google::Cloud::Texttospeech::V1::AudioEncoding (module)">Google::Cloud::Texttospeech::V1::AudioEncoding</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. The format of the requested audio byte stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AudioEncoding.html" title="Google::Cloud::Texttospeech::V1::AudioEncoding (module)">Google::Cloud::Texttospeech::V1::AudioEncoding</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The format of the requested audio byte stream.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="pitch=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="pitch-instance_method">
+  
+    #<strong>pitch</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
+semitones from the original pitch. -20 means decrease 20 semitones from the
+original pitch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
+semitones from the original pitch. -20 means decrease 20 semitones from the
+original pitch.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="sample_rate_hertz=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="sample_rate_hertz-instance_method">
+  
+    #<strong>sample_rate_hertz</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The synthesis sample rate (in hertz) for this audio. Optional.  If this is
+different from the voice&#39;s natural sample rate, then the synthesizer will
+honor this request by converting to the desired sample rate (which might
+result in worse audio quality), unless the specified sample rate is not
+supported for the encoding chosen, in which case it will fail the request
+and return Rpc::Code::INVALID_ARGUMENT.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The synthesis sample rate (in hertz) for this audio. Optional.  If this is
+different from the voice&#39;s natural sample rate, then the synthesizer will
+honor this request by converting to the desired sample rate (which might
+result in worse audio quality), unless the specified sample rate is not
+supported for the encoding chosen, in which case it will fail the request
+and return Rpc::Code::INVALID_ARGUMENT.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="speaking_rate=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="speaking_rate-instance_method">
+  
+    #<strong>speaking_rate</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal
+native speed supported by the specific voice. 2.0 is twice as fast, and
+0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any
+other values &lt; 0.25 or &gt; 4.0 will return an error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal
+native speed supported by the specific voice. 2.0 is twice as fast, and
+0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any
+other values &lt; 0.25 or &gt; 4.0 will return an error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="volume_gain_db=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="volume_gain_db-instance_method">
+  
+    #<strong>volume_gain_db</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional volume gain (in dB) of the normal native volume supported by the
+specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of
+0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB)
+will play at approximately half the amplitude of the normal native signal
+amplitude. A value of +6.0 (dB) will play at approximately twice the
+amplitude of the normal native signal amplitude. Strongly recommend not to
+exceed +10 (dB) as there&#39;s usually no effective increase in loudness for
+any value greater than that.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional volume gain (in dB) of the normal native volume supported by the
+specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of
+0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB)
+will play at approximately half the amplitude of the normal native signal
+amplitude. A value of +6.0 (dB) will play at approximately twice the
+amplitude of the normal native signal amplitude. Strongly recommend not to
+exceed +10 (dB) as there&#39;s usually no effective increase in loudness for
+any value greater than that.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Google::Cloud::Texttospeech::V1::AudioConfig
+  
+    &mdash; Cloud
+  
+</title>
+
+  <link rel="stylesheet" href="../../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Texttospeech::V1::AudioConfig";
+  relpath = '../../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Texttospeech.html" title="Google::Cloud::Texttospeech (module)">Texttospeech</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Texttospeech::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">AudioConfig</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Google::Cloud::Texttospeech::V1::AudioConfig
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Texttospeech::V1::AudioConfig</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Description of audio data to be synthesized.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#audio_encoding-instance_method" title="#audio_encoding (instance method)">#<strong>audio_encoding</strong>  &#x21d2; Google::Cloud::Texttospeech::V1::AudioEncoding </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pitch-instance_method" title="#pitch (instance method)">#<strong>pitch</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional speaking pitch, in the range [-20.0, 20.0].</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sample_rate_hertz-instance_method" title="#sample_rate_hertz (instance method)">#<strong>sample_rate_hertz</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The synthesis sample rate (in hertz) for this audio.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#speaking_rate-instance_method" title="#speaking_rate (instance method)">#<strong>speaking_rate</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional speaking rate/speed, in the range [0.25, 4.0].</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#volume_gain_db-instance_method" title="#volume_gain_db (instance method)">#<strong>volume_gain_db</strong>  &#x21d2; Float </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional volume gain (in dB) of the normal native volume supported by the specific voice, in the range [-96.0, 16.0].</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="audio_encoding=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="audio_encoding-instance_method">
+  
+    #<strong>audio_encoding</strong>  &#x21d2; <tt><span class='object_link'><a href="AudioEncoding.html" title="Google::Cloud::Texttospeech::V1::AudioEncoding (module)">Google::Cloud::Texttospeech::V1::AudioEncoding</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Required. The format of the requested audio byte stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AudioEncoding.html" title="Google::Cloud::Texttospeech::V1::AudioEncoding (module)">Google::Cloud::Texttospeech::V1::AudioEncoding</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Required. The format of the requested audio byte stream.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="pitch=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="pitch-instance_method">
+  
+    #<strong>pitch</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
+semitones from the original pitch. -20 means decrease 20 semitones from the
+original pitch.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
+semitones from the original pitch. -20 means decrease 20 semitones from the
+original pitch.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="sample_rate_hertz=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="sample_rate_hertz-instance_method">
+  
+    #<strong>sample_rate_hertz</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The synthesis sample rate (in hertz) for this audio. Optional.  If this is
+different from the voice&#39;s natural sample rate, then the synthesizer will
+honor this request by converting to the desired sample rate (which might
+result in worse audio quality), unless the specified sample rate is not
+supported for the encoding chosen, in which case it will fail the request
+and return Rpc::Code::INVALID_ARGUMENT.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The synthesis sample rate (in hertz) for this audio. Optional.  If this is
+different from the voice&#39;s natural sample rate, then the synthesizer will
+honor this request by converting to the desired sample rate (which might
+result in worse audio quality), unless the specified sample rate is not
+supported for the encoding chosen, in which case it will fail the request
+and return Rpc::Code::INVALID_ARGUMENT.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="speaking_rate=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="speaking_rate-instance_method">
+  
+    #<strong>speaking_rate</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal
+native speed supported by the specific voice. 2.0 is twice as fast, and
+0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any
+other values &lt; 0.25 or &gt; 4.0 will return an error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal
+native speed supported by the specific voice. 2.0 is twice as fast, and
+0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any
+other values &lt; 0.25 or &gt; 4.0 will return an error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="volume_gain_db=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="volume_gain_db-instance_method">
+  
+    #<strong>volume_gain_db</strong>  &#x21d2; <tt>Float</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional volume gain (in dB) of the normal native volume supported by the
+specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of
+0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB)
+will play at approximately half the amplitude of the normal native signal
+amplitude. A value of +6.0 (dB) will play at approximately twice the
+amplitude of the normal native signal amplitude. Strongly recommend not to
+exceed +10 (dB) as there&#39;s usually no effective increase in loudness for
+any value greater than that.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional volume gain (in dB) of the normal native volume supported by the
+specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of
+0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB)
+will play at approximately half the amplitude of the normal native signal
+amplitude. A value of +6.0 (dB) will play at approximately twice the
+amplitude of the normal native signal amplitude. Strongly recommend not to
+exceed +10 (dB) as there&#39;s usually no effective increase in loudness for
+any value greater than that.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/text_to_speech/v1/doc/google/cloud/texttospeech/v1/cloud_tts.rb', line 153</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Texttospeech::V1::AudioConfig (class)">AudioConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->
