@@ -1,0 +1,802 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud::Storage - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Storage";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span>
+     &raquo; 
+    <span class="title">Storage</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud::Storage
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/storage.rb<span class="defines">,<br />
+  lib/google/cloud/storage/file.rb,<br /> lib/google/cloud/storage/bucket.rb,<br /> lib/google/cloud/storage/errors.rb,<br /> lib/google/cloud/storage/policy.rb,<br /> lib/google/cloud/storage/project.rb,<br /> lib/google/cloud/storage/service.rb,<br /> lib/google/cloud/storage/version.rb,<br /> lib/google/cloud/storage/file/acl.rb,<br /> lib/google/cloud/storage/file/list.rb,<br /> lib/google/cloud/storage/bucket/acl.rb,<br /> lib/google/cloud/storage/bucket/cors.rb,<br /> lib/google/cloud/storage/bucket/list.rb,<br /> lib/google/cloud/storage/credentials.rb,<br /> lib/google/cloud/storage/file/signer.rb,<br /> lib/google/cloud/storage/post_object.rb,<br /> lib/google/cloud/storage/file/verifier.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Google Cloud Storage</h1>
+
+<p>Google Cloud Storage is an Internet service to store data in Google&#39;s
+cloud. It allows world-wide storage and retrieval of any amount of data
+and at any time, taking advantage of Google&#39;s own reliable and fast
+networking infrastructure to perform data operations in a cost effective
+manner.</p>
+
+<p>The goal of google-cloud is to provide a API that is comfortable to
+Rubyists. Authentication is handled by <span class='object_link'><a href="../Cloud.html#storage-instance_method" title="Google::Cloud#storage (method)">#storage</a></span>. You can
+provide the project and credential information to connect to the Storage
+service, or if you are running on Google Compute Engine this configuration
+is taken care of for you.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>keyfile:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>You can learn more about various options for connection on the
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+<p>To learn more about Cloud Storage, read the
+<a href="https://cloud.google.com/storage/docs/overview">Google Cloud Storage Overview
+</a>.</p>
+
+<h2>Retrieving Buckets</h2>
+
+<p>A <span class='object_link'><a href="Storage/Bucket.html" title="Google::Cloud::Storage::Bucket (class)">Bucket</a></span> instance is a container for your data.
+There is no limit on the number of buckets that you can create in a
+project. You can use buckets to organize and control access to your data.
+For more information, see <a href="https://cloud.google.com/storage/docs/creating-buckets">Working with
+Buckets</a>.</p>
+
+<p>Each bucket has a globally unique name, which is how they are retrieved:
+(See <span class='object_link'><a href="Storage/Project.html#bucket-instance_method" title="Google::Cloud::Storage::Project#bucket (method)">Project#bucket</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>You can also retrieve all buckets on a project: (See
+<span class='object_link'><a href="Storage/Project.html#buckets-instance_method" title="Google::Cloud::Storage::Project#buckets (method)">Project#buckets</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_all_buckets'>all_buckets</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_buckets'>buckets</span>
+</code></pre>
+
+<p>If you have a significant number of buckets, you may need to fetch them
+in multiple service requests.</p>
+
+<p>Iterating over each bucket, potentially with multiple API calls, by
+invoking <code>all</code> with a block:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_buckets'>buckets</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_buckets'>buckets</span>
+<span class='id identifier rubyid_buckets'>buckets</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bucket'>bucket</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>Limiting the number of API calls made:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_buckets'>buckets</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_buckets'>buckets</span>
+<span class='id identifier rubyid_buckets'>buckets</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='lparen'>(</span><span class='label'>request_limit:</span> <span class='int'>10</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_bucket'>bucket</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Storage/Bucket/List.html" title="Google::Cloud::Storage::Bucket::List (class)">Bucket::List</a></span> for details.</p>
+
+<h2>Creating a Bucket</h2>
+
+<p>A unique name is all that is needed to create a new bucket: (See
+<span class='object_link'><a href="Storage/Project.html#create_bucket-instance_method" title="Google::Cloud::Storage::Project#create_bucket (method)">Project#create_bucket</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_create_bucket'>create_bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app-attachments</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h2>Retrieving Files</h2>
+
+<p>A <span class='object_link'><a href="Storage/File.html" title="Google::Cloud::Storage::File (class)">File</a></span> instance is an individual data object
+that you store in Google Cloud Storage. Files contain the data stored as
+well as metadata describing the data. Files belong to a bucket and cannot
+be shared among buckets. There is no limit on the number of files that
+you can create in a bucket. For more information, see <a href="https://cloud.google.com/storage/docs/object-basics">Working with
+Objects</a>.</p>
+
+<p>Files are retrieved by their name, which is the path of the file in the
+bucket: (See <span class='object_link'><a href="Storage/Bucket.html#file-instance_method" title="Google::Cloud::Storage::Bucket#file (method)">Bucket#file</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>You can also retrieve all files in a bucket: (See Bucket#files)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_all_files'>all_files</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_files'>files</span>
+</code></pre>
+
+<p>Or you can retrieve all files in a specified path:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_avatar_files'>avatar_files</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_files'>files</span> <span class='label'>prefix:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>If you have a significant number of files, you may need to fetch them
+in multiple service requests.</p>
+
+<p>Iterating over each file, potentially with multiple API calls, by
+invoking <code>all</code> with a block:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_files'>files</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_files'>files</span>
+<span class='id identifier rubyid_files'>files</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>Limiting the number of API calls made:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_files'>files</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_files'>files</span>
+<span class='id identifier rubyid_files'>files</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='lparen'>(</span><span class='label'>request_limit:</span> <span class='int'>10</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Storage/File/List.html" title="Google::Cloud::Storage::File::List (class)">File::List</a></span> for details.</p>
+
+<h2>Creating a File</h2>
+
+<p>A new file can be uploaded by specifying the location of a file on the
+local file system, and the name/path that the file should be stored in the
+bucket. (See <span class='object_link'><a href="Storage/Bucket.html#create_file-instance_method" title="Google::Cloud::Storage::Bucket#create_file (method)">Bucket#create_file</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/todo-app/avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Files can also be created from an in-memory StringIO object:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span> <span class='const'>StringIO</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello world!</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hello-world.txt</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h3>Customer-supplied encryption keys</h3>
+
+<p>By default, Google Cloud Storage manages server-side encryption keys on
+your behalf. However, a <a href="https://cloud.google.com/storage/docs/encryption#customer-supplied">customer-supplied encryption
+key</a>
+can be provided with the <code>encryption_key</code> option. If given, the same key
+must be provided to subsequently download or copy the file. If you use
+customer-supplied encryption keys, you must securely manage your keys and
+ensure that they are not lost. Also, please note that file metadata is not
+encrypted, with the exception of the CRC32C checksum and MD5 hash. The
+names of files and buckets are also not encrypted, and you can read or
+update the metadata of an encrypted file without providing the encryption
+key.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Key generation shown for example purposes only. Write your own.
+</span><span class='id identifier rubyid_cipher'>cipher</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>Cipher</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>aes-256-cfb</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_cipher'>cipher</span><span class='period'>.</span><span class='id identifier rubyid_encrypt'>encrypt</span>
+<span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='id identifier rubyid_cipher'>cipher</span><span class='period'>.</span><span class='id identifier rubyid_random_key'>random_key</span>
+
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/todo-app/avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='label'>encryption_key:</span> <span class='id identifier rubyid_key'>key</span>
+
+<span class='comment'># Store your key and hash securely for later use.
+</span><span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                   <span class='label'>encryption_key:</span> <span class='id identifier rubyid_key'>key</span>
+</code></pre>
+
+<p>Use <span class='object_link'><a href="Storage/File.html#rotate-instance_method" title="Google::Cloud::Storage::File#rotate (method)">File#rotate</a></span> to rotate customer-supplied
+encryption keys.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Old key was stored securely for later use.
+</span><span class='id identifier rubyid_old_key'>old_key</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>y\x03\&quot;\x0E\xB6\xD3\x9B\x0E\xAB*\x19\xFAv\xDEY\xBEI...</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>encryption_key:</span> <span class='id identifier rubyid_old_key'>old_key</span>
+
+<span class='comment'># Key generation shown for example purposes only. Write your own.
+</span><span class='id identifier rubyid_cipher'>cipher</span> <span class='op'>=</span> <span class='const'>OpenSSL</span><span class='op'>::</span><span class='const'>Cipher</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>aes-256-cfb</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_cipher'>cipher</span><span class='period'>.</span><span class='id identifier rubyid_encrypt'>encrypt</span>
+<span class='id identifier rubyid_new_key'>new_key</span> <span class='op'>=</span> <span class='id identifier rubyid_cipher'>cipher</span><span class='period'>.</span><span class='id identifier rubyid_random_key'>random_key</span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_rotate'>rotate</span> <span class='label'>encryption_key:</span> <span class='id identifier rubyid_old_key'>old_key</span><span class='comma'>,</span> <span class='label'>new_encryption_key:</span> <span class='id identifier rubyid_new_key'>new_key</span>
+</code></pre>
+
+<h2>Downloading a File</h2>
+
+<p>Files can be downloaded to the local file system. (See
+<span class='object_link'><a href="Storage/File.html#download-instance_method" title="Google::Cloud::Storage::File#download (method)">File#download</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_download'>download</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/todo-app/avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Files can also be downloaded to an in-memory StringIO object:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hello-world.txt</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_downloaded'>downloaded</span> <span class='op'>=</span> <span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_download'>download</span>
+<span class='id identifier rubyid_downloaded'>downloaded</span><span class='period'>.</span><span class='id identifier rubyid_rewind'>rewind</span>
+<span class='id identifier rubyid_downloaded'>downloaded</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span> <span class='comment'>#=&gt; &quot;Hello world!&quot;
+</span></code></pre>
+
+<h2>Using Signed URLs</h2>
+
+<p>Access without authentication can be granted to a file for a specified
+period of time. This URL uses a cryptographic signature of your
+credentials to access the file. (See
+<span class='object_link'><a href="Storage/File.html#signed_url-instance_method" title="Google::Cloud::Storage::File#signed_url (method)">File#signed_url</a></span>)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_shared_url'>shared_url</span> <span class='op'>=</span> <span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_signed_url'>signed_url</span> <span class='label'>method:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GET</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                             <span class='label'>expires:</span> <span class='int'>300</span> <span class='comment'># 5 minutes from now
+</span></code></pre>
+
+<h2>Controlling Access to a Bucket</h2>
+
+<p>Access to a bucket is controlled with
+<span class='object_link'><a href="Storage/Bucket.html#acl-instance_method" title="Google::Cloud::Storage::Bucket#acl (method)">Bucket#acl</a></span>. A bucket has owners, writers, and
+readers. Permissions can be granted to an individual user&#39;s email address,
+a group&#39;s email address, as well as many predefined lists. See the <a href="https://cloud.google.com/storage/docs/access-control">Access
+Control guide</a> for
+more.</p>
+
+<p>Access to a bucket can be granted to a user by appending <code>&quot;user-&quot;</code> to the
+email address:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_add_reader'>add_reader</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Access to a bucket can be granted to a group by appending <code>&quot;group-&quot;</code> to
+the email address:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authors@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_add_reader'>add_reader</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Access to a bucket can also be granted to a predefined list of
+permissions:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_public!'>public!</span>
+</code></pre>
+
+<h2>Controlling Access to a File</h2>
+
+<p>Access to a file is controlled in two ways, either by the setting the
+default permissions to all files in a bucket with
+<span class='object_link'><a href="Storage/Bucket.html#default_acl-instance_method" title="Google::Cloud::Storage::Bucket#default_acl (method)">Bucket#default_acl</a></span>, or by setting permissions to
+an individual file with <span class='object_link'><a href="Storage/File.html#acl-instance_method" title="Google::Cloud::Storage::File#acl (method)">File#acl</a></span>.</p>
+
+<p>Access to a file can be granted to a user by appending <code>&quot;user-&quot;</code> to the
+email address:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>heidi@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_add_reader'>add_reader</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Access to a file can be granted to a group by appending <code>&quot;group-&quot;</code> to the
+email address:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authors@example.net</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_add_reader'>add_reader</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_email'>email</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Access to a file can also be granted to a predefined list of permissions:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>avatars/heidi/400x400.png</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_file'>file</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span><span class='period'>.</span><span class='id identifier rubyid_public!'>public!</span>
+</code></pre>
+
+<h2>Configuring retries and timeout</h2>
+
+<p>You can configure how many times API requests may be automatically
+retried. When an API request fails, the response will be inspected to see
+if the request meets criteria indicating that it may succeed on retry,
+such as <code>500</code> and <code>503</code> status codes or a specific internal error code
+such as <code>rateLimitExceeded</code>. If it meets the criteria, the request will be
+retried after a delay. If another error occurs, the delay will be
+increased before a subsequent attempt, until the <code>retries</code> limit is
+reached.</p>
+
+<p>You can also set the request <code>timeout</code> value in seconds.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Storage</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Storage.new (method)">new</a></span></span> <span class='label'>retries:</span> <span class='int'>10</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='int'>120</span>
+</code></pre>
+
+<p>See the <a href="https://cloud.google.com/storage/docs/json_api/v1/status-codes">Storage status and error
+codes</a>
+for a list of error conditions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Storage/Bucket.html" title="Google::Cloud::Storage::Bucket (class)">Bucket</a></span>, <span class='object_link'><a href="Storage/File.html" title="Google::Cloud::Storage::File (class)">File</a></span>, <span class='object_link'><a href="Storage/FileVerificationError.html" title="Google::Cloud::Storage::FileVerificationError (class)">FileVerificationError</a></span>, <span class='object_link'><a href="Storage/Policy.html" title="Google::Cloud::Storage::Policy (class)">Policy</a></span>, <span class='object_link'><a href="Storage/PostObject.html" title="Google::Cloud::Storage::PostObject (class)">PostObject</a></span>, <span class='object_link'><a href="Storage/Project.html" title="Google::Cloud::Storage::Project (class)">Project</a></span>, <span class='object_link'><a href="Storage/SignedUrlUnavailable.html" title="Google::Cloud::Storage::SignedUrlUnavailable (class)">SignedUrlUnavailable</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="GOOGLEAPIS_URL-constant" class="">GOOGLEAPIS_URL =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://storage.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.0.1</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project: nil, keyfile: nil, scope: nil, retries: nil, timeout: nil)  &#x21d2; Google::Cloud::Storage::Project </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new object for connecting to the Storage service.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="new-class_method">
+  
+    .<strong>new</strong>(project: nil, keyfile: nil, scope: nil, retries: nil, timeout: nil)  &#x21d2; <tt><span class='object_link'><a href="Storage/Project.html" title="Google::Cloud::Storage::Project (class)">Google::Cloud::Storage::Project</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new object for connecting to the Storage service.
+Each call creates a new connection.</p>
+
+<p>For more information on connecting to Google Cloud see the
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/storage</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-todo-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>keyfile:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+
+<span class='id identifier rubyid_bucket'>bucket</span> <span class='op'>=</span> <span class='id identifier rubyid_storage'>storage</span><span class='period'>.</span><span class='id identifier rubyid_bucket'>bucket</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-bucket</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_bucket'>bucket</span><span class='period'>.</span><span class='id identifier rubyid_file'>file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/my-file.ext</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Project identifier for the Storage service you
+are connecting to.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyfile</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Keyfile downloaded from Google Cloud. If
+file path the file must be readable.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth 2.0 scopes controlling
+the set of resources and operations that the connection can access.
+See <a href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+<li><code>https://www.googleapis.com/auth/devstorage.full_control</code></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>retries</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of times to retry requests on server
+error. The default value is <code>3</code>. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default timeout to use in requests. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Storage/Project.html" title="Google::Cloud::Storage::Project (class)">Google::Cloud::Storage::Project</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/storage.rb', line 499</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>retries:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>timeout:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_project'>project</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Storage/Project.html" title="Google::Cloud::Storage::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_project'>default_project</span>
+  <span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
+</span>  <span class='id identifier rubyid_fail'>fail</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_keyfile'>keyfile</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='op'>::</span><span class='const'>Credentials</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='op'>::</span><span class='const'>Credentials</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_keyfile'>keyfile</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Storage/Project.html" title="Google::Cloud::Storage::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Storage (module)">Storage</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>retries:</span> <span class='id identifier rubyid_retries'>retries</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
