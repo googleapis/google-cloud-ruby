@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [FirestoreClient][] |  |
+    # | [FirestoreClient][] | The Cloud Firestore service. |
     # | [Data Types][] | Data types for Google::Cloud::Firestore::V1beta1 |
     #
-    # [FirestoreClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest/google/firestore/v1beta1/v1beta1/firestoreclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest/google/firestore/v1beta1/v1beta1/datatypes
+    # [FirestoreClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest/google/firestore/v1beta1/firestoreclient
+    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest/google/firestore/v1beta1/datatypes
     #
     module V1beta1
       # The request for {Google::Firestore::V1beta1::Firestore::GetDocument Firestore::GetDocument}.

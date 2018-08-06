@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,6 +55,7 @@ module Google
       #   @return [Array<Google::Firestore::V1beta1::DocumentTransform::FieldTransform>]
       #     The list of transformations to apply to the fields of the document, in
       #     order.
+      #     This must not be empty.
       class DocumentTransform
         # A transformation of a field of the document.
         # @!attribute [rw] field_path
@@ -70,7 +71,8 @@ module Google
             # Unspecified. This value must not be used.
             SERVER_VALUE_UNSPECIFIED = 0
 
-            # The time at which the server processed the request.
+            # The time at which the server processed the request, with millisecond
+            # precision.
             REQUEST_TIME = 1
           end
         end
@@ -92,7 +94,7 @@ module Google
 
       # A {Google::Firestore::V1beta1::Document Document} has changed.
       #
-      # May be the result of multiple {Google::Firestore::V1beta1::Write Writes}, including deletes, that
+      # May be the result of multiple {Google::Firestore::V1beta1::Write writes}, including deletes, that
       # ultimately resulted in a new value for the {Google::Firestore::V1beta1::Document Document}.
       #
       # Multiple {Google::Firestore::V1beta1::DocumentChange DocumentChange} messages may be returned for the same logical
@@ -112,7 +114,7 @@ module Google
 
       # A {Google::Firestore::V1beta1::Document Document} has been deleted.
       #
-      # May be the result of multiple {Google::Firestore::V1beta1::Write Writes}, including updates, the
+      # May be the result of multiple {Google::Firestore::V1beta1::Write writes}, including updates, the
       # last of which deleted the {Google::Firestore::V1beta1::Document Document}.
       #
       # Multiple {Google::Firestore::V1beta1::DocumentDelete DocumentDelete} messages may be returned for the same logical
@@ -157,7 +159,7 @@ module Google
       #     The target ID to which this filter applies.
       # @!attribute [rw] count
       #   @return [Integer]
-      #     The total count of documents that match {Google::Firestore::V1beta1::ExistenceFilter#target_id Target_id}.
+      #     The total count of documents that match {Google::Firestore::V1beta1::ExistenceFilter#target_id target_id}.
       #
       #     If different from the count of documents in the client that match, the
       #     client must manually determine which documents no longer match the target.

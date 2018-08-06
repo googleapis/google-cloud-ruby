@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/firestore/v1beta1/firestore_pb"
-require "google/cloud/firestore/credentials"
+require "google/cloud/firestore/v1beta1/credentials"
 
 module Google
   module Cloud
@@ -62,6 +59,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -83,6 +83,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform",
             "https://www.googleapis.com/auth/datastore"
           ].freeze
+
 
           DATABASE_ROOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/databases/{database}"
@@ -182,16 +183,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -200,21 +203,10 @@ module Google
             require "google/gax/grpc"
             require "google/firestore/v1beta1/firestore_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Firestore::Credentials.default
+            credentials ||= Google::Cloud::Firestore::V1beta1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Firestore::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Firestore::V1beta1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -229,13 +221,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-firestore'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.6.8 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "firestore_client_config.json"
             )
@@ -248,9 +243,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @firestore_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -258,60 +258,74 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Firestore::V1beta1::Firestore::Stub.method(:new)
             )
 
             @get_document = Google::Gax.create_api_call(
               @firestore_stub.method(:get_document),
-              defaults["get_document"]
+              defaults["get_document"],
+              exception_transformer: exception_transformer
             )
             @list_documents = Google::Gax.create_api_call(
               @firestore_stub.method(:list_documents),
-              defaults["list_documents"]
+              defaults["list_documents"],
+              exception_transformer: exception_transformer
             )
             @create_document = Google::Gax.create_api_call(
               @firestore_stub.method(:create_document),
-              defaults["create_document"]
+              defaults["create_document"],
+              exception_transformer: exception_transformer
             )
             @update_document = Google::Gax.create_api_call(
               @firestore_stub.method(:update_document),
-              defaults["update_document"]
+              defaults["update_document"],
+              exception_transformer: exception_transformer
             )
             @delete_document = Google::Gax.create_api_call(
               @firestore_stub.method(:delete_document),
-              defaults["delete_document"]
+              defaults["delete_document"],
+              exception_transformer: exception_transformer
             )
             @batch_get_documents = Google::Gax.create_api_call(
               @firestore_stub.method(:batch_get_documents),
-              defaults["batch_get_documents"]
+              defaults["batch_get_documents"],
+              exception_transformer: exception_transformer
             )
             @begin_transaction = Google::Gax.create_api_call(
               @firestore_stub.method(:begin_transaction),
-              defaults["begin_transaction"]
+              defaults["begin_transaction"],
+              exception_transformer: exception_transformer
             )
             @commit = Google::Gax.create_api_call(
               @firestore_stub.method(:commit),
-              defaults["commit"]
+              defaults["commit"],
+              exception_transformer: exception_transformer
             )
             @rollback = Google::Gax.create_api_call(
               @firestore_stub.method(:rollback),
-              defaults["rollback"]
+              defaults["rollback"],
+              exception_transformer: exception_transformer
             )
             @run_query = Google::Gax.create_api_call(
               @firestore_stub.method(:run_query),
-              defaults["run_query"]
+              defaults["run_query"],
+              exception_transformer: exception_transformer
             )
             @write = Google::Gax.create_api_call(
               @firestore_stub.method(:write),
-              defaults["write"]
+              defaults["write"],
+              exception_transformer: exception_transformer
             )
             @listen = Google::Gax.create_api_call(
               @firestore_stub.method(:listen),
-              defaults["listen"]
+              defaults["listen"],
+              exception_transformer: exception_transformer
             )
             @list_collection_ids = Google::Gax.create_api_call(
               @firestore_stub.method(:list_collection_ids),
-              defaults["list_collection_ids"]
+              defaults["list_collection_ids"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -339,12 +353,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Firestore::V1beta1::Document]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Firestore::V1beta1::Document]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_name = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #   response = firestore_client.get_document(formatted_name)
 
@@ -353,7 +370,8 @@ module Google
               mask: nil,
               transaction: nil,
               read_time: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               mask: mask,
@@ -361,7 +379,7 @@ module Google
               read_time: read_time
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::GetDocumentRequest)
-            @get_document.call(req, options)
+            @get_document.call(req, options, &block)
           end
 
           # Lists documents.
@@ -409,6 +427,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Firestore::V1beta1::Document>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Firestore::V1beta1::Document>]
           #   An enumerable of Google::Firestore::V1beta1::Document instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -416,10 +437,12 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+          #
+          #   # TODO: Initialize +collection_id+:
           #   collection_id = ''
           #
           #   # Iterate over all results.
@@ -444,7 +467,8 @@ module Google
               transaction: nil,
               read_time: nil,
               show_missing: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               collection_id: collection_id,
@@ -456,7 +480,7 @@ module Google
               show_missing: show_missing
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::ListDocumentsRequest)
-            @list_documents.call(req, options)
+            @list_documents.call(req, options, &block)
           end
 
           # Creates a new document.
@@ -485,15 +509,24 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Firestore::V1beta1::Document]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Firestore::V1beta1::Document]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+          #
+          #   # TODO: Initialize +collection_id+:
           #   collection_id = ''
+          #
+          #   # TODO: Initialize +document_id+:
           #   document_id = ''
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
           #   response = firestore_client.create_document(formatted_parent, collection_id, document_id, document)
 
@@ -503,7 +536,8 @@ module Google
               document_id,
               document,
               mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               collection_id: collection_id,
@@ -512,7 +546,7 @@ module Google
               mask: mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::CreateDocumentRequest)
-            @create_document.call(req, options)
+            @create_document.call(req, options, &block)
           end
 
           # Updates or inserts a document.
@@ -547,13 +581,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Firestore::V1beta1::Document]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Firestore::V1beta1::Document]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #
+          #   # TODO: Initialize +document+:
           #   document = {}
+          #
+          #   # TODO: Initialize +update_mask+:
           #   update_mask = {}
           #   response = firestore_client.update_document(document, update_mask)
 
@@ -562,7 +603,8 @@ module Google
               update_mask,
               mask: nil,
               current_document: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               document: document,
               update_mask: update_mask,
@@ -570,7 +612,7 @@ module Google
               current_document: current_document
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::UpdateDocumentRequest)
-            @update_document.call(req, options)
+            @update_document.call(req, options, &block)
           end
 
           # Deletes a document.
@@ -586,24 +628,28 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_name = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #   firestore_client.delete_document(formatted_name)
 
           def delete_document \
               name,
               current_document: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               current_document: current_document
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::DeleteDocumentRequest)
-            @delete_document.call(req, options)
+            @delete_document.call(req, options, &block)
             nil
           end
 
@@ -649,10 +695,12 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+          #
+          #   # TODO: Initialize +documents+:
           #   documents = []
           #   firestore_client.batch_get_documents(formatted_database, documents).each do |element|
           #     # Process element.
@@ -691,25 +739,29 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Firestore::V1beta1::BeginTransactionResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Firestore::V1beta1::BeginTransactionResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #   response = firestore_client.begin_transaction(formatted_database)
 
           def begin_transaction \
               database,
               options_: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               database: database,
               options: options_
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::BeginTransactionRequest)
-            @begin_transaction.call(req, options)
+            @begin_transaction.call(req, options, &block)
           end
 
           # Commits a transaction, while optionally updating documents.
@@ -728,13 +780,18 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Firestore::V1beta1::CommitResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Firestore::V1beta1::CommitResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+          #
+          #   # TODO: Initialize +writes+:
           #   writes = []
           #   response = firestore_client.commit(formatted_database, writes)
 
@@ -742,14 +799,15 @@ module Google
               database,
               writes,
               transaction: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               database: database,
               writes: writes,
               transaction: transaction
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::CommitRequest)
-            @commit.call(req, options)
+            @commit.call(req, options, &block)
           end
 
           # Rolls back a transaction.
@@ -762,25 +820,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+          #
+          #   # TODO: Initialize +transaction+:
           #   transaction = ''
           #   firestore_client.rollback(formatted_database, transaction)
 
           def rollback \
               database,
               transaction,
-              options: nil
+              options: nil,
+              &block
             req = {
               database: database,
               transaction: transaction
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::RollbackRequest)
-            @rollback.call(req, options)
+            @rollback.call(req, options, &block)
             nil
           end
 
@@ -819,9 +883,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #   firestore_client.run_query(formatted_parent).each do |element|
           #     # Process element.
@@ -863,9 +927,9 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #   request = { database: formatted_database }
           #   requests = [request]
@@ -898,9 +962,9 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #   request = { database: formatted_database }
           #   requests = [request]
@@ -931,6 +995,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<String>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<String>]
           #   An enumerable of String instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -938,9 +1005,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore/v1beta1"
+          #   require "google/cloud/firestore"
           #
-          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
+          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #
           #   # Iterate over all results.
@@ -959,13 +1026,14 @@ module Google
           def list_collection_ids \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1beta1::ListCollectionIdsRequest)
-            @list_collection_ids.call(req, options)
+            @list_collection_ids.call(req, options, &block)
           end
         end
       end
