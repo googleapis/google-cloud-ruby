@@ -1,0 +1,2168 @@
+---
+layout: yard_main
+title: "Class: Google::Monitoring::V3::Aggregation - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Monitoring::V3::Aggregation";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span>
+     &raquo; 
+    <span class="title">Aggregation</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Monitoring::V3::Aggregation
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Monitoring::V3::Aggregation</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/common.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Describes how to combine multiple time series to provide different views of
+the data.  Aggregation consists of an alignment step on individual time
+series (+per_series_aligner+) followed by an optional reduction of the data
+across different time series (+cross_series_reducer+).  For more details, see
+<a href="https://cloud.google.com/monitoring/api/learn_more#aggregation">Aggregation</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Aggregation/Aligner.html" title="Google::Monitoring::V3::Aggregation::Aligner (module)">Aligner</a></span>, <span class='object_link'><a href="Aggregation/Reducer.html" title="Google::Monitoring::V3::Aggregation::Reducer (module)">Reducer</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alignment_period-instance_method" title="#alignment_period (instance method)">#<strong>alignment_period</strong>  &#x21d2; Google::Protobuf::Duration </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The alignment period for per-<span class='object_link'><a href="TimeSeries.html" title="Google::Monitoring::V3::TimeSeries (class)">time series</a></span> alignment.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cross_series_reducer-instance_method" title="#cross_series_reducer (instance method)">#<strong>cross_series_reducer</strong>  &#x21d2; Google::Monitoring::V3::Aggregation::Reducer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The approach to be used to combine time series.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#group_by_fields-instance_method" title="#group_by_fields (instance method)">#<strong>group_by_fields</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The set of fields to preserve when +crossSeriesReducer+ is specified.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#per_series_aligner-instance_method" title="#per_series_aligner (instance method)">#<strong>per_series_aligner</strong>  &#x21d2; Google::Monitoring::V3::Aggregation::Aligner </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The approach to be used to align individual time series.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="alignment_period=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="alignment_period-instance_method">
+  
+    #<strong>alignment_period</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The alignment period for per-<span class='object_link'><a href="TimeSeries.html" title="Google::Monitoring::V3::TimeSeries (class)">time series</a></span>
+alignment. If present, +alignmentPeriod+ must be at least 60
+seconds.  After per-time series alignment, each time series will
+contain data points only on the period boundaries. If
++perSeriesAligner+ is not specified or equals +ALIGN_NONE+, then
+this field is ignored. If +perSeriesAligner+ is specified and
+does not equal +ALIGN_NONE+, then this field must be defined;
+otherwise an error is returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Duration.html" title="Google::Protobuf::Duration (class)">Google::Protobuf::Duration</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The alignment period for per-<span class='object_link'><a href="TimeSeries.html" title="Google::Monitoring::V3::TimeSeries (class)">time series</a></span>
+alignment. If present, +alignmentPeriod+ must be at least 60
+seconds.  After per-time series alignment, each time series will
+contain data points only on the period boundaries. If
++perSeriesAligner+ is not specified or equals +ALIGN_NONE+, then
+this field is ignored. If +perSeriesAligner+ is specified and
+does not equal +ALIGN_NONE+, then this field must be defined;
+otherwise an error is returned.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/common.rb', line 108</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::Aggregation (class)">Aggregation</a></span></span>
+  <span class='comment'># The Aligner describes how to bring the data points in a single
+</span>  <span class='comment'># time series into temporal alignment.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Aligner.html" title="Google::Monitoring::V3::Aggregation::Aligner (module)">Aligner</a></span></span>
+    <span class='comment'># No alignment. Raw data is returned. Not valid if cross-time
+</span>    <span class='comment'># series reduction is requested. The value type of the result is
+</span>    <span class='comment'># the same as the value type of the input.
+</span>    <span class='const'>ALIGN_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Align and convert to delta metric type. This alignment is valid
+</span>    <span class='comment'># for cumulative metrics and delta metrics. Aligning an existing
+</span>    <span class='comment'># delta metric to a delta metric requires that the alignment
+</span>    <span class='comment'># period be increased. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_DELTA</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Align and convert to a rate. This alignment is valid for
+</span>    <span class='comment'># cumulative metrics and delta metrics with numeric values. The output is a
+</span>    <span class='comment'># gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_RATE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Align by interpolating between adjacent points around the
+</span>    <span class='comment'># period boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics with numeric values. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_INTERPOLATE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Align by shifting the oldest data point before the period
+</span>    <span class='comment'># boundary to the boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics. The value type of the result is the same as the
+</span>    <span class='comment'># value type of the input.
+</span>    <span class='const'>ALIGN_NEXT_OLDER</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the minimum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MIN</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the maximum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MAX</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the average or arithmetic mean of all
+</span>    <span class='comment'># data points in the period. This alignment is valid for gauge and delta
+</span>    <span class='comment'># metrics with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_MEAN</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># or Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT</span> <span class='op'>=</span> <span class='int'>13</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the sum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># and distribution values. The value type of the output is the
+</span>    <span class='comment'># same as the value type of the input.
+</span>    <span class='const'>ALIGN_SUM</span> <span class='op'>=</span> <span class='int'>14</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the standard deviation of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_STDDEV</span> <span class='op'>=</span> <span class='int'>15</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with
+</span>    <span class='comment'># Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>16</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the fraction of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with Boolean values.
+</span>    <span class='comment'># The output value is in the range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>17</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 99th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>18</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 95th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>19</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 50th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>20</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 5th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>21</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># A Reducer describes how to aggregate data points from multiple
+</span>  <span class='comment'># time series into a single time series.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Reducer.html" title="Google::Monitoring::V3::Aggregation::Reducer (module)">Reducer</a></span></span>
+    <span class='comment'># No cross-time series reduction. The output of the aligner is
+</span>    <span class='comment'># returned.
+</span>    <span class='const'>REDUCE_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Reduce by computing the mean across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric or distribution values. The value type of the
+</span>    <span class='comment'># output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_MEAN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Reduce by computing the minimum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MIN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Reduce by computing the maximum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MAX</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Reduce by computing the sum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric and distribution values. The value type of
+</span>    <span class='comment'># the output is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_SUM</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Reduce by computing the standard deviation across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics with numeric or distribution values. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_STDDEV</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Reduce by computing the count of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of numeric, Boolean, distribution, and string value
+</span>    <span class='comment'># type. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Reduce by computing the count of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Reduce by computing the fraction of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The output value is in the
+</span>    <span class='comment'># range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Reduce by computing 99th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Reduce by computing 95th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Reduce by computing 50th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Reduce by computing 5th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>12</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="cross_series_reducer=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="cross_series_reducer-instance_method">
+  
+    #<strong>cross_series_reducer</strong>  &#x21d2; <tt><span class='object_link'><a href="Aggregation/Reducer.html" title="Google::Monitoring::V3::Aggregation::Reducer (module)">Google::Monitoring::V3::Aggregation::Reducer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The approach to be used to combine time series. Not all reducer
+functions may be applied to all time series, depending on the
+metric type and the value type of the original time
+series. Reduction may change the metric type of value type of the
+time series.</p>
+
+<p>Time series data must be aligned in order to perform cross-time
+series reduction. If +crossSeriesReducer+ is specified, then
++perSeriesAligner+ must be specified and not equal +ALIGN_NONE+
+and +alignmentPeriod+ must be specified; otherwise, an error is
+returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Aggregation/Reducer.html" title="Google::Monitoring::V3::Aggregation::Reducer (module)">Google::Monitoring::V3::Aggregation::Reducer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The approach to be used to combine time series. Not all reducer
+functions may be applied to all time series, depending on the
+metric type and the value type of the original time
+series. Reduction may change the metric type of value type of the
+time series.</p>
+
+<p>Time series data must be aligned in order to perform cross-time
+series reduction. If +crossSeriesReducer+ is specified, then
++perSeriesAligner+ must be specified and not equal +ALIGN_NONE+
+and +alignmentPeriod+ must be specified; otherwise, an error is
+returned.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/common.rb', line 108</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::Aggregation (class)">Aggregation</a></span></span>
+  <span class='comment'># The Aligner describes how to bring the data points in a single
+</span>  <span class='comment'># time series into temporal alignment.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Aligner.html" title="Google::Monitoring::V3::Aggregation::Aligner (module)">Aligner</a></span></span>
+    <span class='comment'># No alignment. Raw data is returned. Not valid if cross-time
+</span>    <span class='comment'># series reduction is requested. The value type of the result is
+</span>    <span class='comment'># the same as the value type of the input.
+</span>    <span class='const'>ALIGN_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Align and convert to delta metric type. This alignment is valid
+</span>    <span class='comment'># for cumulative metrics and delta metrics. Aligning an existing
+</span>    <span class='comment'># delta metric to a delta metric requires that the alignment
+</span>    <span class='comment'># period be increased. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_DELTA</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Align and convert to a rate. This alignment is valid for
+</span>    <span class='comment'># cumulative metrics and delta metrics with numeric values. The output is a
+</span>    <span class='comment'># gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_RATE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Align by interpolating between adjacent points around the
+</span>    <span class='comment'># period boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics with numeric values. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_INTERPOLATE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Align by shifting the oldest data point before the period
+</span>    <span class='comment'># boundary to the boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics. The value type of the result is the same as the
+</span>    <span class='comment'># value type of the input.
+</span>    <span class='const'>ALIGN_NEXT_OLDER</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the minimum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MIN</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the maximum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MAX</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the average or arithmetic mean of all
+</span>    <span class='comment'># data points in the period. This alignment is valid for gauge and delta
+</span>    <span class='comment'># metrics with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_MEAN</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># or Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT</span> <span class='op'>=</span> <span class='int'>13</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the sum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># and distribution values. The value type of the output is the
+</span>    <span class='comment'># same as the value type of the input.
+</span>    <span class='const'>ALIGN_SUM</span> <span class='op'>=</span> <span class='int'>14</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the standard deviation of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_STDDEV</span> <span class='op'>=</span> <span class='int'>15</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with
+</span>    <span class='comment'># Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>16</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the fraction of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with Boolean values.
+</span>    <span class='comment'># The output value is in the range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>17</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 99th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>18</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 95th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>19</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 50th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>20</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 5th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>21</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># A Reducer describes how to aggregate data points from multiple
+</span>  <span class='comment'># time series into a single time series.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Reducer.html" title="Google::Monitoring::V3::Aggregation::Reducer (module)">Reducer</a></span></span>
+    <span class='comment'># No cross-time series reduction. The output of the aligner is
+</span>    <span class='comment'># returned.
+</span>    <span class='const'>REDUCE_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Reduce by computing the mean across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric or distribution values. The value type of the
+</span>    <span class='comment'># output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_MEAN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Reduce by computing the minimum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MIN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Reduce by computing the maximum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MAX</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Reduce by computing the sum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric and distribution values. The value type of
+</span>    <span class='comment'># the output is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_SUM</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Reduce by computing the standard deviation across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics with numeric or distribution values. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_STDDEV</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Reduce by computing the count of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of numeric, Boolean, distribution, and string value
+</span>    <span class='comment'># type. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Reduce by computing the count of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Reduce by computing the fraction of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The output value is in the
+</span>    <span class='comment'># range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Reduce by computing 99th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Reduce by computing 95th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Reduce by computing 50th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Reduce by computing 5th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>12</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="group_by_fields=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="group_by_fields-instance_method">
+  
+    #<strong>group_by_fields</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The set of fields to preserve when +crossSeriesReducer+ is
+specified. The +groupByFields+ determine how the time series are
+partitioned into subsets prior to applying the aggregation
+function. Each subset contains time series that have the same
+value for each of the grouping fields. Each individual time
+series is a member of exactly one subset. The
++crossSeriesReducer+ is applied to each subset of time series.
+It is not possible to reduce across different resource types, so
+this field implicitly contains +resource.type+.  Fields not
+specified in +groupByFields+ are aggregated away.  If
++groupByFields+ is not specified and all the time series have
+the same resource type, then the time series are aggregated into
+a single output time series. If +crossSeriesReducer+ is not
+defined, this field is ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The set of fields to preserve when +crossSeriesReducer+ is
+specified. The +groupByFields+ determine how the time series are
+partitioned into subsets prior to applying the aggregation
+function. Each subset contains time series that have the same
+value for each of the grouping fields. Each individual time
+series is a member of exactly one subset. The
++crossSeriesReducer+ is applied to each subset of time series.
+It is not possible to reduce across different resource types, so
+this field implicitly contains +resource.type+.  Fields not
+specified in +groupByFields+ are aggregated away.  If
++groupByFields+ is not specified and all the time series have
+the same resource type, then the time series are aggregated into
+a single output time series. If +crossSeriesReducer+ is not
+defined, this field is ignored.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/common.rb', line 108</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::Aggregation (class)">Aggregation</a></span></span>
+  <span class='comment'># The Aligner describes how to bring the data points in a single
+</span>  <span class='comment'># time series into temporal alignment.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Aligner.html" title="Google::Monitoring::V3::Aggregation::Aligner (module)">Aligner</a></span></span>
+    <span class='comment'># No alignment. Raw data is returned. Not valid if cross-time
+</span>    <span class='comment'># series reduction is requested. The value type of the result is
+</span>    <span class='comment'># the same as the value type of the input.
+</span>    <span class='const'>ALIGN_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Align and convert to delta metric type. This alignment is valid
+</span>    <span class='comment'># for cumulative metrics and delta metrics. Aligning an existing
+</span>    <span class='comment'># delta metric to a delta metric requires that the alignment
+</span>    <span class='comment'># period be increased. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_DELTA</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Align and convert to a rate. This alignment is valid for
+</span>    <span class='comment'># cumulative metrics and delta metrics with numeric values. The output is a
+</span>    <span class='comment'># gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_RATE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Align by interpolating between adjacent points around the
+</span>    <span class='comment'># period boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics with numeric values. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_INTERPOLATE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Align by shifting the oldest data point before the period
+</span>    <span class='comment'># boundary to the boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics. The value type of the result is the same as the
+</span>    <span class='comment'># value type of the input.
+</span>    <span class='const'>ALIGN_NEXT_OLDER</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the minimum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MIN</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the maximum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MAX</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the average or arithmetic mean of all
+</span>    <span class='comment'># data points in the period. This alignment is valid for gauge and delta
+</span>    <span class='comment'># metrics with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_MEAN</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># or Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT</span> <span class='op'>=</span> <span class='int'>13</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the sum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># and distribution values. The value type of the output is the
+</span>    <span class='comment'># same as the value type of the input.
+</span>    <span class='const'>ALIGN_SUM</span> <span class='op'>=</span> <span class='int'>14</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the standard deviation of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_STDDEV</span> <span class='op'>=</span> <span class='int'>15</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with
+</span>    <span class='comment'># Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>16</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the fraction of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with Boolean values.
+</span>    <span class='comment'># The output value is in the range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>17</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 99th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>18</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 95th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>19</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 50th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>20</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 5th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>21</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># A Reducer describes how to aggregate data points from multiple
+</span>  <span class='comment'># time series into a single time series.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Reducer.html" title="Google::Monitoring::V3::Aggregation::Reducer (module)">Reducer</a></span></span>
+    <span class='comment'># No cross-time series reduction. The output of the aligner is
+</span>    <span class='comment'># returned.
+</span>    <span class='const'>REDUCE_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Reduce by computing the mean across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric or distribution values. The value type of the
+</span>    <span class='comment'># output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_MEAN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Reduce by computing the minimum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MIN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Reduce by computing the maximum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MAX</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Reduce by computing the sum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric and distribution values. The value type of
+</span>    <span class='comment'># the output is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_SUM</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Reduce by computing the standard deviation across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics with numeric or distribution values. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_STDDEV</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Reduce by computing the count of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of numeric, Boolean, distribution, and string value
+</span>    <span class='comment'># type. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Reduce by computing the count of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Reduce by computing the fraction of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The output value is in the
+</span>    <span class='comment'># range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Reduce by computing 99th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Reduce by computing 95th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Reduce by computing 50th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Reduce by computing 5th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>12</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="per_series_aligner=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="per_series_aligner-instance_method">
+  
+    #<strong>per_series_aligner</strong>  &#x21d2; <tt><span class='object_link'><a href="Aggregation/Aligner.html" title="Google::Monitoring::V3::Aggregation::Aligner (module)">Google::Monitoring::V3::Aggregation::Aligner</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The approach to be used to align individual time series. Not all
+alignment functions may be applied to all time series, depending
+on the metric type and value type of the original time
+series. Alignment may change the metric type or the value type of
+the time series.</p>
+
+<p>Time series data must be aligned in order to perform cross-time
+series reduction. If +crossSeriesReducer+ is specified, then
++perSeriesAligner+ must be specified and not equal +ALIGN_NONE+
+and +alignmentPeriod+ must be specified; otherwise, an error is
+returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Aggregation/Aligner.html" title="Google::Monitoring::V3::Aggregation::Aligner (module)">Google::Monitoring::V3::Aggregation::Aligner</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The approach to be used to align individual time series. Not all
+alignment functions may be applied to all time series, depending
+on the metric type and value type of the original time
+series. Alignment may change the metric type or the value type of
+the time series.</p>
+
+<p>Time series data must be aligned in order to perform cross-time
+series reduction. If +crossSeriesReducer+ is specified, then
++perSeriesAligner+ must be specified and not equal +ALIGN_NONE+
+and +alignmentPeriod+ must be specified; otherwise, an error is
+returned.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/common.rb', line 108</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::Aggregation (class)">Aggregation</a></span></span>
+  <span class='comment'># The Aligner describes how to bring the data points in a single
+</span>  <span class='comment'># time series into temporal alignment.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Aligner.html" title="Google::Monitoring::V3::Aggregation::Aligner (module)">Aligner</a></span></span>
+    <span class='comment'># No alignment. Raw data is returned. Not valid if cross-time
+</span>    <span class='comment'># series reduction is requested. The value type of the result is
+</span>    <span class='comment'># the same as the value type of the input.
+</span>    <span class='const'>ALIGN_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Align and convert to delta metric type. This alignment is valid
+</span>    <span class='comment'># for cumulative metrics and delta metrics. Aligning an existing
+</span>    <span class='comment'># delta metric to a delta metric requires that the alignment
+</span>    <span class='comment'># period be increased. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_DELTA</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Align and convert to a rate. This alignment is valid for
+</span>    <span class='comment'># cumulative metrics and delta metrics with numeric values. The output is a
+</span>    <span class='comment'># gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_RATE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Align by interpolating between adjacent points around the
+</span>    <span class='comment'># period boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics with numeric values. The value type of the result is the same
+</span>    <span class='comment'># as the value type of the input.
+</span>    <span class='const'>ALIGN_INTERPOLATE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Align by shifting the oldest data point before the period
+</span>    <span class='comment'># boundary to the boundary. This alignment is valid for gauge
+</span>    <span class='comment'># metrics. The value type of the result is the same as the
+</span>    <span class='comment'># value type of the input.
+</span>    <span class='const'>ALIGN_NEXT_OLDER</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the minimum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MIN</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the maximum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># values. The value type of the result is the same as the value
+</span>    <span class='comment'># type of the input.
+</span>    <span class='const'>ALIGN_MAX</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the average or arithmetic mean of all
+</span>    <span class='comment'># data points in the period. This alignment is valid for gauge and delta
+</span>    <span class='comment'># metrics with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_MEAN</span> <span class='op'>=</span> <span class='int'>12</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># or Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT</span> <span class='op'>=</span> <span class='int'>13</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the sum of all data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge and delta metrics with numeric
+</span>    <span class='comment'># and distribution values. The value type of the output is the
+</span>    <span class='comment'># same as the value type of the input.
+</span>    <span class='const'>ALIGN_SUM</span> <span class='op'>=</span> <span class='int'>14</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the standard deviation of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with numeric values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_STDDEV</span> <span class='op'>=</span> <span class='int'>15</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the count of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with
+</span>    <span class='comment'># Boolean values. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>ALIGN_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>16</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the fraction of True-valued data points in the
+</span>    <span class='comment'># period. This alignment is valid for gauge metrics with Boolean values.
+</span>    <span class='comment'># The output value is in the range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>17</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 99th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>18</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 95th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>19</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 50th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>20</span>
+
+    <span class='comment'># Align time series via aggregation. The resulting data point in
+</span>    <span class='comment'># the alignment period is the 5th percentile of all data
+</span>    <span class='comment'># points in the period. This alignment is valid for gauge and delta metrics
+</span>    <span class='comment'># with distribution values. The output is a gauge metric with value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>ALIGN_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>21</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># A Reducer describes how to aggregate data points from multiple
+</span>  <span class='comment'># time series into a single time series.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Aggregation/Reducer.html" title="Google::Monitoring::V3::Aggregation::Reducer (module)">Reducer</a></span></span>
+    <span class='comment'># No cross-time series reduction. The output of the aligner is
+</span>    <span class='comment'># returned.
+</span>    <span class='const'>REDUCE_NONE</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Reduce by computing the mean across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric or distribution values. The value type of the
+</span>    <span class='comment'># output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_MEAN</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Reduce by computing the minimum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MIN</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Reduce by computing the maximum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric values. The value type of the output
+</span>    <span class='comment'># is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_MAX</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Reduce by computing the sum across time series for each
+</span>    <span class='comment'># alignment period. This reducer is valid for delta and
+</span>    <span class='comment'># gauge metrics with numeric and distribution values. The value type of
+</span>    <span class='comment'># the output is the same as the value type of the input.
+</span>    <span class='const'>REDUCE_SUM</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Reduce by computing the standard deviation across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics with numeric or distribution values. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_STDDEV</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Reduce by computing the count of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of numeric, Boolean, distribution, and string value
+</span>    <span class='comment'># type. The value type of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT</span> <span class='op'>=</span> <span class='int'>6</span>
+
+    <span class='comment'># Reduce by computing the count of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The value type of
+</span>    <span class='comment'># the output is {Google::Api::MetricDescriptor::ValueType::INT64 INT64}.
+</span>    <span class='const'>REDUCE_COUNT_TRUE</span> <span class='op'>=</span> <span class='int'>7</span>
+
+    <span class='comment'># Reduce by computing the fraction of True-valued data points across time
+</span>    <span class='comment'># series for each alignment period. This reducer is valid for delta
+</span>    <span class='comment'># and gauge metrics of Boolean value type. The output value is in the
+</span>    <span class='comment'># range [0, 1] and has value type
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+</span>    <span class='const'>REDUCE_FRACTION_TRUE</span> <span class='op'>=</span> <span class='int'>8</span>
+
+    <span class='comment'># Reduce by computing 99th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_99</span> <span class='op'>=</span> <span class='int'>9</span>
+
+    <span class='comment'># Reduce by computing 95th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_95</span> <span class='op'>=</span> <span class='int'>10</span>
+
+    <span class='comment'># Reduce by computing 50th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_50</span> <span class='op'>=</span> <span class='int'>11</span>
+
+    <span class='comment'># Reduce by computing 5th percentile of data points across time series
+</span>    <span class='comment'># for each alignment period. This reducer is valid for gauge and delta
+</span>    <span class='comment'># metrics of numeric and distribution type. The value of the output is
+</span>    <span class='comment'># {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}
+</span>    <span class='const'>REDUCE_PERCENTILE_05</span> <span class='op'>=</span> <span class='int'>12</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
