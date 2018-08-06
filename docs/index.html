@@ -16,7 +16,7 @@ layout: default
       {% for release in gem[1] %}
         <li>
           <a href="/google-cloud-ruby/docs/{{ gem[0] }}/{{ release }}">{{ release }}</a>
-          <em><a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/tag/{{ gem }}/{{ release }}">{Release notes}</a></em>
+          <em><a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/tag/{{ gem[0] }}/{{ release }}">{Release notes}</a></em>
         </li>
       {% endfor %}
       <li>
