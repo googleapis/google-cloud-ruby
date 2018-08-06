@@ -448,10 +448,10 @@ module Google
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
         #   * `:FULL` - Populates all fields
-        # @param skip_lookup [Boolean] Create table object without verifying
+        # @param perform_lookup [Boolean] Create table object without verifying
         #   that the table resource exists.
         #   Calls made on this object will raise errors if the table.
-        #   does not exist. Default value is `true`. Optional.
+        #   does not exist. Default value is `false`. Optional.
         #   It helps to reduce admin apis calls.
         # @param app_profile_id [String] The unique identifier for the app profile. Optional.
         #   It is used only in data operations.
@@ -467,12 +467,12 @@ module Google
         #   instance = bigtable.instance("my-instance")
         #
         #   # Default view is full view
-        #   table = instance.table("my-table")
+        #   table = instance.table("my-table", perform_lookup: true)
         #   puts table.name
         #   puts table.column_families
         #
         #   # Name only view
-        #   table = instance.table("my-table", view: :NAME_ONLY)
+        #   table = instance.table("my-table", view: :NAME_ONLY, perform_lookup: true)
         #   puts table.name
         #
         # @example  Mutate rows
@@ -493,20 +493,21 @@ module Google
         #   table.mutate_row(entry)
 
         #
-        def table table_id, view: nil, skip_lookup: true, app_profile_id: nil
+        def table table_id, view: nil, perform_lookup: nil, app_profile_id: nil
           ensure_service!
 
-          if skip_lookup
-            table = Table.from_path(
-              service.table_path(instance_id, table_id),
-              service
-            )
-            table.app_profile_id = app_profile_id
-            return table
-          end
+          table = if perform_lookup
+                    grpc = service.get_table(instance_id, table_id, view: view)
+                    Table.from_grpc(grpc, service, view: view)
+                  else
+                    Table.from_path(
+                      service.table_path(instance_id, table_id),
+                      service
+                    )
+                  end
 
-          grpc = service.get_table(instance_id, table_id, view: view)
-          Table.from_grpc(grpc, service, view: view)
+          table.app_profile_id = app_profile_id
+          table
         rescue Google::Cloud::NotFoundError
           nil
         end

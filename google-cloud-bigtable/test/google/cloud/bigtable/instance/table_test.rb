@@ -42,7 +42,7 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
     mock = Minitest::Mock.new
     mock.expect :get_table, get_res, [table_path(instance_id, table_id), view: :FULL]
     bigtable.service.mocked_tables = mock
-    table = instance.table(table_id, view: :FULL, skip_lookup: false)
+    table = instance.table(table_id, view: :FULL, perform_lookup: true)
 
     mock.verify
 
@@ -74,7 +74,7 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
 
     bigtable.service.mocked_tables = stub
 
-    table = instance.table(not_found_table_id, skip_lookup: false)
+    table = instance.table(not_found_table_id, perform_lookup: true)
     table.must_be :nil?
   end
 
@@ -82,7 +82,7 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
     table_id = "my-table"
     app_profile_id = "my-app-profile"
 
-    table = instance.table(table_id, skip_lookup: true, app_profile_id: app_profile_id)
+    table = instance.table(table_id, app_profile_id: app_profile_id)
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     table.path.must_equal table_path(instance_id, table_id)
     table.app_profile_id.must_equal app_profile_id

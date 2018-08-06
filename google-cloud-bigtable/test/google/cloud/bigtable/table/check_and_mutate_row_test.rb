@@ -24,7 +24,7 @@ describe Google::Cloud::Bigtable::Table, :check_and_mutate_row, :mock_bigtable d
   it "check and mutate row" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     row_key = "user-1"
     predicate_filter = Google::Bigtable::V2::RowFilter.new(row_key_regex_filter: "user-1*")
