@@ -1,0 +1,38 @@
+---
+layout: default
+title: google-cloud-datastore
+gem: google-cloud-datastore
+---
+{% assign releases = site.data.releases[page.gem] %}
+{% for release in releases limit:1 %}
+  {% assign latest_release = release %}
+{% endfor %}
+
+<header class="docs-header">
+  <h1 class="page-title">{{ page.gem }} <small>(latest: {{ latest_release }})</small></h1>
+</header>
+
+<section class="content">
+
+  <h2>Releases</h2>
+  <ul class="v-list">
+    {% for release in releases %}
+      <li>
+        <a href="/google-cloud-ruby/docs/{{ page.gem }}/{{ release }}">{{ release }}</a>
+        <em><a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/tag/{{ page.gem }}/{{ release }}">(Release notes)</a></em>
+      </li>
+    {% endfor %}
+  </ul>
+
+</section>
+
+<nav class="side-nav">
+  <ul class="external-links">
+    <li>
+      <a href="/google-cloud-ruby/docs/{{ page.gem }}/latest">Latest release</a>
+    </li>
+    <li>
+      <a href="/google-cloud-ruby/docs/{{ page.gem }}/master">Active development</a>
+    </li>
+  </ul>
+</nav>
