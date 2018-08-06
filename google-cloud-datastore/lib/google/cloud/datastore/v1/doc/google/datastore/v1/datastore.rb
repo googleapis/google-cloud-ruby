@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [DatastoreClient][] | Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application. |
+    # | [DatastoreClient][] | Each RPC normalizes the partition IDs of the keys in its input entities, and always returns entities with keys with normalized partition IDs. |
     # | [Data Types][] | Data types for Google::Cloud::Datastore::V1 |
     #
     # [DatastoreClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest/google/datastore/v1/datastoreclient

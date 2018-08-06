@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/datastore/v1/datastore_pb"
-require "google/cloud/datastore/credentials"
+require "google/cloud/datastore/v1/credentials"
 
 module Google
   module Cloud
@@ -52,6 +49,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           # The scopes needed to make gRPC calls to all of the methods defined in
@@ -60,6 +60,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform",
             "https://www.googleapis.com/auth/datastore"
           ].freeze
+
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -85,16 +86,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -103,21 +106,10 @@ module Google
             require "google/gax/grpc"
             require "google/datastore/v1/datastore_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Datastore::Credentials.default
+            credentials ||= Google::Cloud::Datastore::V1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Datastore::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Datastore::V1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -132,13 +124,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-datastore'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "datastore_client_config.json"
             )
@@ -150,9 +145,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @datastore_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -160,36 +160,44 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Datastore::V1::Datastore::Stub.method(:new)
             )
 
             @lookup = Google::Gax.create_api_call(
               @datastore_stub.method(:lookup),
-              defaults["lookup"]
+              defaults["lookup"],
+              exception_transformer: exception_transformer
             )
             @run_query = Google::Gax.create_api_call(
               @datastore_stub.method(:run_query),
-              defaults["run_query"]
+              defaults["run_query"],
+              exception_transformer: exception_transformer
             )
             @begin_transaction = Google::Gax.create_api_call(
               @datastore_stub.method(:begin_transaction),
-              defaults["begin_transaction"]
+              defaults["begin_transaction"],
+              exception_transformer: exception_transformer
             )
             @commit = Google::Gax.create_api_call(
               @datastore_stub.method(:commit),
-              defaults["commit"]
+              defaults["commit"],
+              exception_transformer: exception_transformer
             )
             @rollback = Google::Gax.create_api_call(
               @datastore_stub.method(:rollback),
-              defaults["rollback"]
+              defaults["rollback"],
+              exception_transformer: exception_transformer
             )
             @allocate_ids = Google::Gax.create_api_call(
               @datastore_stub.method(:allocate_ids),
-              defaults["allocate_ids"]
+              defaults["allocate_ids"],
+              exception_transformer: exception_transformer
             )
             @reserve_ids = Google::Gax.create_api_call(
               @datastore_stub.method(:reserve_ids),
-              defaults["reserve_ids"]
+              defaults["reserve_ids"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -210,13 +218,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::LookupResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Datastore::V1::LookupResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1"
+          #   require "google/cloud/datastore"
           #
-          #   datastore_client = Google::Cloud::Datastore::V1.new
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +keys+:
           #   keys = []
           #   response = datastore_client.lookup(project_id, keys)
 
@@ -224,14 +239,15 @@ module Google
               project_id,
               keys,
               read_options: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               keys: keys,
               read_options: read_options
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::LookupRequest)
-            @lookup.call(req, options)
+            @lookup.call(req, options, &block)
           end
 
           # Queries for entities.
@@ -260,13 +276,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::RunQueryResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Datastore::V1::RunQueryResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1"
+          #   require "google/cloud/datastore"
           #
-          #   datastore_client = Google::Cloud::Datastore::V1.new
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +partition_id+:
           #   partition_id = {}
           #   response = datastore_client.run_query(project_id, partition_id)
 
@@ -276,7 +299,8 @@ module Google
               read_options: nil,
               query: nil,
               gql_query: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               partition_id: partition_id,
@@ -285,7 +309,7 @@ module Google
               gql_query: gql_query
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::RunQueryRequest)
-            @run_query.call(req, options)
+            @run_query.call(req, options, &block)
           end
 
           # Begins a new transaction.
@@ -299,25 +323,31 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::BeginTransactionResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Datastore::V1::BeginTransactionResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1"
+          #   require "google/cloud/datastore"
           #
-          #   datastore_client = Google::Cloud::Datastore::V1.new
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
           #   response = datastore_client.begin_transaction(project_id)
 
           def begin_transaction \
               project_id,
               transaction_options: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               transaction_options: transaction_options
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::BeginTransactionRequest)
-            @begin_transaction.call(req, options)
+            @begin_transaction.call(req, options, &block)
           end
 
           # Commits a transaction, optionally creating, deleting or modifying some
@@ -350,14 +380,23 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::CommitResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Datastore::V1::CommitResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1"
+          #   require "google/cloud/datastore"
           #
-          #   datastore_client = Google::Cloud::Datastore::V1.new
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +mode+:
           #   mode = :MODE_UNSPECIFIED
+          #
+          #   # TODO: Initialize +mutations+:
           #   mutations = []
           #   response = datastore_client.commit(project_id, mode, mutations)
 
@@ -366,7 +405,8 @@ module Google
               mode,
               mutations,
               transaction: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               mode: mode,
@@ -374,7 +414,7 @@ module Google
               transaction: transaction
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::CommitRequest)
-            @commit.call(req, options)
+            @commit.call(req, options, &block)
           end
 
           # Rolls back a transaction.
@@ -387,26 +427,34 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::RollbackResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Datastore::V1::RollbackResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1"
+          #   require "google/cloud/datastore"
           #
-          #   datastore_client = Google::Cloud::Datastore::V1.new
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +transaction+:
           #   transaction = ''
           #   response = datastore_client.rollback(project_id, transaction)
 
           def rollback \
               project_id,
               transaction,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               transaction: transaction
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::RollbackRequest)
-            @rollback.call(req, options)
+            @rollback.call(req, options, &block)
           end
 
           # Allocates IDs for the given keys, which is useful for referencing an entity
@@ -422,26 +470,34 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::AllocateIdsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Datastore::V1::AllocateIdsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1"
+          #   require "google/cloud/datastore"
           #
-          #   datastore_client = Google::Cloud::Datastore::V1.new
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +keys+:
           #   keys = []
           #   response = datastore_client.allocate_ids(project_id, keys)
 
           def allocate_ids \
               project_id,
               keys,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               keys: keys
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::AllocateIdsRequest)
-            @allocate_ids.call(req, options)
+            @allocate_ids.call(req, options, &block)
           end
 
           # Prevents the supplied keys' IDs from being auto-allocated by Cloud
@@ -459,13 +515,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Datastore::V1::ReserveIdsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Datastore::V1::ReserveIdsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/datastore/v1"
+          #   require "google/cloud/datastore"
           #
-          #   datastore_client = Google::Cloud::Datastore::V1.new
+          #   datastore_client = Google::Cloud::Datastore.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +keys+:
           #   keys = []
           #   response = datastore_client.reserve_ids(project_id, keys)
 
@@ -473,14 +536,15 @@ module Google
               project_id,
               keys,
               database_id: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               keys: keys,
               database_id: database_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::ReserveIdsRequest)
-            @reserve_ids.call(req, options)
+            @reserve_ids.call(req, options, &block)
           end
         end
       end
