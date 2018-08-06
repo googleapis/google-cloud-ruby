@@ -13,3 +13,4 @@ pkg
 # directories left by gh-pages
 /_site
 /html
+/.jekyll-metadata
