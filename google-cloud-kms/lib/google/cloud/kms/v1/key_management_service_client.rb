@@ -480,7 +480,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # Iterate over all results.
@@ -535,7 +535,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #
           #   # Iterate over all results.
@@ -590,7 +590,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #
           #   # Iterate over all results.
@@ -634,7 +634,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #   response = key_management_service_client.get_key_ring(formatted_name)
 
@@ -665,7 +665,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #   response = key_management_service_client.get_crypto_key(formatted_name)
 
@@ -695,7 +695,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
           #   response = key_management_service_client.get_crypto_key_version(formatted_name)
 
@@ -733,7 +733,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # TODO: Initialize +key_ring_id+:
@@ -783,7 +783,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #   crypto_key_id = "my-app-key"
           #   purpose = :ENCRYPT_DECRYPT
@@ -837,7 +837,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #
           #   # TODO: Initialize +crypto_key_version+:
@@ -878,7 +878,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #
           #   # TODO: Initialize +crypto_key+:
           #   crypto_key = {}
@@ -927,7 +927,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #
           #   # TODO: Initialize +crypto_key_version+:
           #   crypto_key_version = {}
@@ -974,7 +974,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY_PATH]")
           #
           #   # TODO: Initialize +plaintext+:
@@ -1018,7 +1018,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #
           #   # TODO: Initialize +ciphertext+:
@@ -1057,7 +1057,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]")
           #
           #   # TODO: Initialize +crypto_key_version_id+:
@@ -1103,7 +1103,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
           #   response = key_management_service_client.destroy_crypto_key_version(formatted_name)
 
@@ -1139,7 +1139,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY]", "[CRYPTO_KEY_VERSION]")
           #   response = key_management_service_client.restore_crypto_key_version(formatted_name)
 
@@ -1179,7 +1179,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #
           #   # TODO: Initialize +policy+:
@@ -1218,7 +1218,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #   response = key_management_service_client.get_iam_policy(formatted_resource)
 
@@ -1257,7 +1257,7 @@ module Google
           # @example
           #   require "google/cloud/kms"
           #
-          #   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+          #   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
           #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
           #
           #   # TODO: Initialize +permissions+:
