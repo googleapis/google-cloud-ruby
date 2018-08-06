@@ -1,0 +1,109 @@
+---
+layout: home
+title: Google Cloud Ruby
+---
+{% assign release = site.data.releases limit:1 %}
+<section class="hero-banner">
+  <div class="container clearfix">
+    <div class="col col-left">
+      <h1>Google Cloud</h1>
+      <p>Google Cloud Client Library for Ruby - an idiomatic, intuitive, and natural way for Ruby developers to integrate with Google Cloud Platform services, like Cloud Datastore and Cloud Storage.</p>
+    </div>
+
+    <div class="col col-right">
+      <h2>One-line install</h2>
+      <pre>$ gem install google-cloud</pre>
+      <!-- <h4 class="latest-release">Latest Release
+        <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/releases/tag/{{ release.version }}">{{ release.version }}</a>
+        {{ release.date | date: "%b %d, %Y" }}
+      </h4> -->
+    </div>
+  </div>
+</section>
+
+<section class="block featuring">
+  <div class="container">
+    <ul class="featuring-links">
+      <li>
+        <a href="docs" title="Google Cloud Documentation" class="btn btn-docs">
+          <img src="/google-cloud-ruby/img/icon-lang-ruby-gray.svg" alt="Ruby icon"> Documentation
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github" class="ext-link">
+          <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github" class="ext-link">
+          <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+        </a>
+      </li>
+      <li>
+        <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow" class="ext-link">
+          <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+        </a>
+      </li>
+      <li>
+        <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems" class="ext-link">
+          <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+<section class="block about">
+  <div class="container clearfix">
+    <div class="col col-left">
+      <h3 class="block-title">What is it?</h3>
+
+      <p>The google-cloud library is a client for accessing Google Cloud
+      Platform services that significantly reduces the boilerplate code you have
+      to write. The library provides high-level API abstractions so they're
+      easier to understand. It embraces Ruby idioms, works well with the
+      standard library, and integrates better with your codebase. All this means
+      you spend more time creating code that matters to you.</p>
+
+      <p>The google-cloud library is configured to access Google Cloud Platform
+      services and authenticate (OAuth 2.0) automatically on your behalf. With a
+      one-line install and a private key, you are up and ready to go. Better
+      yet, if you are running on a Google Compute Engine instance, the one-line
+      install is enough!</p>
+    </div>
+
+    <div class="col col-right">
+      <h4>Retrieve and entity from Cloud Datastore</h4>
+
+      <div class="code-example">
+<pre class="code ruby"><code class="ruby"><span class="id identifier rubyid_require">require</span> <span class="tstring"><span class="tstring_beg">"</span><span class="tstring_content">google/cloud</span><span class="tstring_end">"</span></span>
+
+<span class="id identifier rubyid_gcloud">gcloud</span> <span class="op">=</span> <span class="const"><span class="object_link">Google</span></span><span class="op">::</span><span class="const"><span class="object_link">Cloud</span></span><span class="period">.</span><span class="id identifier rubyid_new">new</span><span class="lparen">(</span>
+  <span class="tstring"><span class="tstring_beg">"</span><span class="tstring_content">my-todo-project-id</span><span class="tstring_end">"</span></span><span class="comma">,</span>
+  <span class="tstring"><span class="tstring_beg">"</span><span class="tstring_content">/path/to/keyfile.json</span><span class="tstring_end">"</span></span>
+<span class="rparen">)</span>
+
+<span class="id identifier rubyid_datastore">datastore</span> <span class="op">=</span> <span class="id identifier rubyid_gcloud">gcloud</span><span class="period">.</span><span class="id identifier rubyid_datastore">datastore</span>
+
+<span class="id identifier rubyid_product">product</span> <span class="op">=</span> <span class="id identifier rubyid_datastore">datastore</span><span class="period">.</span><span class="id identifier rubyid_find">find</span> <span class="tstring"><span class="tstring_beg">"</span><span class="tstring_content">Product</span><span class="tstring_end">"</span></span><span class="comma">,</span> <span class="int">123</span>
+</code></pre>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="block faq">
+  <div class="container clearfix">
+    <h3 class="block-title">FAQ</h3>
+
+    <h4>What is the relationship between the gcloud package and the gcloud command-line tool?</h4>
+
+    <p>Both the gcloud command-line tool and gcloud package are a part of the Google Cloud SDK: a collection of tools and libraries that enable you to easily create and manage resources on the Google Cloud Platform. The gcloud command-line tool can be used to manage both your development workflow and your Google Cloud Platform resources while the gcloud package is the Google Cloud Client Library for Ruby.</p>
+
+    <h4>What is the relationship between gcloud and the Google APIs Ruby Client?</h4>
+
+    <p>The <a href="https://github.com/google/google-api-ruby-client">Google APIs Ruby Client</a> is a client library for using the broad set of Google APIs. gcloud is built specifically for the Google Cloud Platform and is the recommended way to integrate Google Cloud APIs into your Ruby applications. If your application requires both Google Cloud Platform and other Google APIs, the 2 libraries may be used by your application.</p>
+  </div>
+</section>

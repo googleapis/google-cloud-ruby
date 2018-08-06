@@ -6,17 +6,20 @@
 
   {% include head.html %}
 
-  <body class="lang-page">
+  <body class="yard-main">
 
     <header class="page-header fixed" role="banner">
       {% include header.html %}
+
+      <div class="github-issue">
+        <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues/new?title=%5BDocumentation+Issue%5D+" target="_blank" class="v-btn">
+          <img src="/google-cloud-ruby/img/icon-link-github.svg" />
+          Report an Issue
+        </a>
+      </div>
     </header>
 
-    <article class="main" role="main">
-
-        {{ content }}
-
-    </article>
+    {{ content }}
 
     {% include footer.html %}
 

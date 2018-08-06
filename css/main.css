@@ -169,27 +169,6 @@ a {
 }
 
 
-/* Anchors
-   ========================================================================== */
-
-*[id]:before,
-a[name]:before {
-  display: block;
-  content: " ";
-  margin-top: -70px;
-  height: 70px;
-  visibility: hidden;
-}
-
-h1[id]:before,
-h2[id]:before,
-h3[id]:before,
-h4[id]:before {
-  margin-top: -90px;
-  height: 90px;
-}
-
-
 /* Header
    ========================================================================== */
 
@@ -236,29 +215,31 @@ h4[id]:before {
     width: 13em;
     font-size: 1em;
     line-height: normal;
+    padding: 0;
+    border: 0;
 }
 
-.page-header.fixed .logo {
+.page-header .logo {
     width: auto;
 }
 
-.page-header.fixed a {
+.page-header a {
     color: #fff;
     text-decoration: none;
 }
 
-.page-header.fixed a:hover {
+.page-header a:hover {
     opacity: 0.4;
 }
 
-.page-header.fixed .logo img {
+.page-header .logo img {
     position: relative;
     top: -0.2em;
     width: 2em;
     margin: 0 0.5em;
 }
 
-.page-header.fixed .gcloud {
+.page-header .site-name {
     display: inline-block;
     padding: 0.4em 0 0.6em 0.6em;
     border-left: 1px solid rgba(255,255,255,0.2);
@@ -272,7 +253,7 @@ h4[id]:before {
 */
 
 .nav-current {
-    display: block;
+    display: none;
     position: absolute;
     top: 1.2em;
     right: 1em;
@@ -284,6 +265,7 @@ h4[id]:before {
 }
 
 .page-header.fixed .nav-current {
+    display: block;
     top: 1em;
 }
 
@@ -353,7 +335,7 @@ h4[id]:before {
 .page-header .github-issue {
     position: absolute;
     display: block;
-    top: 15px;
+    top: 10px;
     right: 50px;
 }
 
@@ -362,7 +344,7 @@ h4[id]:before {
     color: #444;
     border-radius: 5px;
     border: 0;
-    padding: 11px 10px;
+    padding: 10px;
     font-size: .8em;
     transition: all 0.3s ease;
 }
@@ -1147,19 +1129,26 @@ h2 .headerlink:hover {
         padding: 1.6em;
     }
 
-    .page-header.fixed .logo img {
+    .page-header .logo img {
+      font-size: 1.4em;
         margin: 0 0.8em;
+        top: -0.3em;
     }
 
-    .page-header.fixed .gcloud {
+    .page-header .site-name {
         padding: 0 0 0 1em;
         height: 70px;
         line-height: 70px;
+        font-size: 1.8em;
     }
 
     .page-header .github-issue {
-        top: 20px;
+        top: 25px;
         right: 20px;
+    }
+    .page-header .github-issue .v-btn {
+        font-size: 0.9em;
+        padding: 15px;
     }
 
     /*
@@ -1167,7 +1156,7 @@ h2 .headerlink:hover {
     */
 
     .logo {
-        width: 280px;
+        width: 380px;
     }
 
     /*
@@ -1176,22 +1165,25 @@ h2 .headerlink:hover {
 
     .main-nav {
         position: absolute;
-        top: 1.2em;
-        left: 21.5em;
+        top: 1.8em;
+        left: 20em;
+        font-size: 1.1em;
     }
 
     .page-header.fixed .main-nav {
+        left: 18em;
         top: 0;
-        left: 11.5em;
     }
 
     .nav-current {
+        display: block;
         position: relative;
         top: 0;
         left: 0;
         padding: 0.8em 1.6em;
         width: 150px;
         height: auto;
+        font-size: 1.1em;
         border: 1px solid rgba(255,255,255,0.4);
         background: url(../img/icon-dropdown.svg) 90% 50% no-repeat;
         text-indent: 0;
@@ -1256,13 +1248,17 @@ h2 .headerlink:hover {
     }
 
     .hero-banner h1 {
-        font-size: 5em;
+        font-size: 4em;
         margin-bottom: 0.8em;
     }
 
     .hero-banner p {
         font-size: 1em;
         line-height: 2em;
+    }
+
+    .code-example {
+        font-size: 0.9em;
     }
 
     /*
@@ -1316,7 +1312,7 @@ h2 .headerlink:hover {
     }
 
     .hero-banner h1 {
-        font-size: 5.6em;
+        font-size: 4em;
     }
 
     .hero-banner p {
@@ -1388,10 +1384,6 @@ h2 .headerlink:hover {
      Docs Page
     */
 
-    .lang-page {
-        background: url(../img/lang-bg.png) repeat-y;
-    }
-
     .docs-header {
         margin-left: 240px;
     }
@@ -1439,117 +1431,6 @@ h2 .headerlink:hover {
        (-webkit-min-device-pixel-ratio: 1.25),
        (min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */
-}
-
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid required HTTP connection: h5bp.com/r
-   ========================================================================== */
-
-@media print {
-    * {
-        background: transparent !important;
-        color: #000 !important; /* Black prints faster: h5bp.com/s */
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
-
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-
-    /*
-     * Don't show links for images, or javascript/internal links
-     */
-
-    .ir a:after,
-    a[href^="javascript:"]:after,
-    a[href^="#"]:after {
-        content: "";
-    }
-
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    thead {
-        display: table-header-group; /* h5bp.com/t */
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    img {
-        max-width: 100% !important;
-    }
-
-    @page {
-        margin: 0.5cm;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
-}
-
-/* ==========================================================================
-   Additional styles for RDoc
-   ========================================================================== */
-
-/* Heading anchor links
-   ========================================================================== */
-
-h1 > span,
-h2 > span,
-h3 > span,
-h4 > span {
-  padding-left: 0.5em;
-}
-
-h1 > span > a,
-h2 > span > a,
-h3 > span > a,
-h4 > span > a {
-  color: #4285f4;
-  text-decoration: none;
-  visibility: hidden;
-}
-
-h1 > span > a:first-child:before,
-h2 > span > a:first-child:before,
-h3 > span > a:first-child:before,
-h4 > span > a:first-child:before {
-  content: '#';
-  visibility: visible;
-}
-
-h1 > span.attribute-access-type,
-h2 > span.attribute-access-type,
-h3 > span.attribute-access-type,
-h4 > span.attribute-access-type {
-  color: #ccc;
-  font-size: smaller;
 }
 
 /* Ruby code styles
@@ -1654,49 +1535,3 @@ pre.ruby .vc { color: #458 } /* Name.Variable.Class */
 pre.ruby .vg { color: #008080 } /* Name.Variable.Global */
 pre.ruby .vi { color: #008080 } /* Name.Variable.Instance */
 pre.ruby .il { color: #d14 } /* Literal.Number.Integer.Long */
-
-/* Documentation styles
-   ========================================================================== */
-
-.method h4 {
-  font-size: 1.5em;
-}
-
-.method-description,
-.aliases {
-  padding-left: 1em;
-}
-
-/* Definition lists
-   ========================================================================== */
-
-@media only screen and (min-width: 60em) {
-  dl.rdoc-list {
-    float: left;
-    width: 100%;
-    margin: 0 0 1em 0;
-    padding: 0;
-  }
-
-  dl.rdoc-list dt {
-    background-color: #f6f6f6;
-    border: 1px solid #fff;
-    clear: left;
-    float: left;
-    width: 25%;
-    margin: 0;
-    padding: 0 0.5em;
-  }
-
-  dl.rdoc-list dd {
-    float: left;
-    width: 70%;
-    margin: 0;
-    padding: 0 0.5em;
-  }
-
-  dl.rdoc-list dd p {
-    margin: 0;
-    padding: 0;
-  }
-}

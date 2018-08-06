@@ -11,5 +11,5 @@ pkg
 .vagrant
 
 # directories left by gh-pages
-_site
-html
+/_site
+/html

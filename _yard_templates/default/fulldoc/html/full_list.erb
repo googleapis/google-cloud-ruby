@@ -1,0 +1,29 @@
+---
+layout: yard_side
+title: "<%= @list_title %>"
+target: _parent
+css: <% stylesheets_full_list.each do |stylesheet| %>
+  - /docs/<%= stylesheet %><% end %>
+  - /css/docs.css
+js: <% javascripts_full_list.each do |javascript| %>
+  - /docs/<%= javascript %><% end %>
+  - /js/docs.js
+---
+<div id="content">
+  <div class="fixed_header">
+    <h1 id="full_list_header"><%= @list_title %></h1>
+    <div id="full_list_nav">
+      <% menu_lists.each do |list| %>
+        <span><a target="_self" href="<%= url_for_list list[:type] %>">
+          <%= list[:title] %>
+        </a></span>
+      <% end %>
+    </div>
+
+    <div id="search">Search: <input type="text" /></div>
+  </div>
+
+  <ul id="full_list" class="<%= @list_class || @list_type %>">
+    <%= erb "full_list_#{@list_type}" %>
+  </ul>
+</div>

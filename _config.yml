@@ -11,3 +11,7 @@ github_username:  GoogleCloudPlatform
 
 # Build settings
 markdown: kramdown
+
+# Include all YARD files
+include:
+- _index.html

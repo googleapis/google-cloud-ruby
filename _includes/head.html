@@ -1,12 +1,20 @@
 <head>
+  <title>{{ page.title }}</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ "/css/normalize.css" | prepend: site.baseurl }}">
-  <link rel="stylesheet" href="{{ "/css/github.min.css" | prepend: site.baseurl }}">
-  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
-  <script src="{{ "/js/vendor/modernizr-2.6.2.min.js" | prepend: site.baseurl }}"></script>
+  <link rel="stylesheet" href="{{ "/css/normalize.css" | prepend: site.baseurl }}" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}" type="text/css" media="screen" charset="utf-8">
+  {% for stylesheet in page.css %}
+  <link rel="stylesheet" href="{{ stylesheet | prepend: site.baseurl }}" type="text/css" media="screen" charset="utf-8">{% endfor %}
+  <script type="text/javascript" charset="utf-8" src="{{ "/js/vendor/jquery-v1.7.1.min.js" | prepend: site.baseurl }}"></script>
+  <script type="text/javascript" charset="utf-8" src="{{ "/js/plugins.js" | prepend: site.baseurl }}"></script>
+  <script type="text/javascript" charset="utf-8" src="{{ "/js/main.js" | prepend: site.baseurl }}"></script>
+  <script type="text/javascript" charset="utf-8" src="{{ "/js/vendor/modernizr-2.6.2.min.js" | prepend: site.baseurl }}"></script>
+  {% for javascript in page.js %}
+  <script type="text/javascript" charset="utf-8" src="{{ javascript | prepend: site.baseurl }}"></script>{% endfor %}
   <link href="//fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="//cloud.google.com/images/gcp-favicon.ico">
+  {% if page.target %}<base id="base_target" target="{{ page.target }}" />{% endif %}
 </head>
