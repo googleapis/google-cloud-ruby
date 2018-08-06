@@ -1,0 +1,925 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Debugger::Breakpoint::Variable - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::Breakpoint::Variable";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span>
+     &raquo; 
+    <span class="title">Variable</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Debugger::Breakpoint::Variable
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Debugger::Breakpoint::Variable</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/breakpoint/variable.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Variable</h1>
+
+<p>Represents a variable or an argument possibly of a compound object
+type. Note how the following variables are represented:</p>
+
+<p>A simple Variable:</p>
+
+<pre class="code ruby"><code class="ruby">  <span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='int'>5</span>
+  <span class='comment'># Captured variable:
+</span>  <span class='comment'># { name: &quot;x&quot;, value: &quot;5&quot;, type: &quot;Integer&quot; }
+</span></code></pre>
+
+<p>A Compound Variable:</p>
+
+<pre class="code ruby"><code class="ruby">  class T
+    attr_accessor :m1, :m2
+    ...
+  end
+  v = T.new(1, &quot;2&quot;)
+  # Captured variable:
+  # {
+  #   name: &quot;v&quot;,
+  #   type: &quot;T&quot;,
+  #   members: [
+  #     { name: &quot;@m1&quot;, value: &quot;1&quot;, type: &quot;Integer&quot; },
+  #     { name: &quot;@m2&quot;, value: &quot;2&quot;, type: &quot;String&quot; }
+  #   ]
+  # }
+</code></pre>
+
+<p>A Hash object:</p>
+
+<pre class="code ruby"><code class="ruby">  <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='label'>a:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>b:</span> <span class='symbol'>:two</span> <span class='rbrace'>}</span>
+  <span class='comment'># Captured variable:
+</span>  <span class='comment'># {
+</span>  <span class='comment'>#   name: &quot;hash&quot;,
+</span>  <span class='comment'>#   type: &quot;Hash&quot;,
+</span>  <span class='comment'>#   members: [
+</span>  <span class='comment'>#     { name: &quot;a&quot;, value: &quot;1&quot;, type: &quot;Integer&quot; },
+</span>  <span class='comment'>#     { name: &quot;b&quot;, value: &quot;:2&quot;, type: &quot;Symbol&quot; }
+</span>  <span class='comment'>#   ]
+</span>  <span class='comment'># }
+</span></code></pre>
+
+<p>An Array object:</p>
+
+<pre class="code ruby"><code class="ruby">  <span class='id identifier rubyid_ary'>ary</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rbracket'>]</span>
+  <span class='comment'># Captured variable:
+</span>  <span class='comment'># {
+</span>  <span class='comment'>#   name: &quot;ary&quot;,
+</span>  <span class='comment'>#   type: &quot;Array&quot;,
+</span>  <span class='comment'>#   members: [
+</span>  <span class='comment'>#     { name: &quot;[0]&quot;, value: &quot;1&quot;, type: &quot;Integer&quot; },
+</span>  <span class='comment'>#     { name: &quot;[1]&quot;, value: &quot;nil&quot;, type: &quot;NilClass&quot; }
+</span>  <span class='comment'>#   ]
+</span>  <span class='comment'># }
+</span></code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="MAX_DEPTH-constant" class="">MAX_DEPTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Max depth to convert on compound variables</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="MAX_MEMBERS-constant" class="">MAX_MEMBERS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Max number of member variables to evaluate in compound variables</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1000</span></pre></dd>
+      
+        <dt id="MAX_STRING_LENGTH-constant" class="">MAX_STRING_LENGTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Max length on variable inspect results. Truncate extra and replace
+with ellipsis.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>500</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_rb_var-class_method" title="from_rb_var (class method)">.<strong>from_rb_var</strong>(source, name: nil, depth: MAX_DEPTH, var_table: nil, limit: nil)  &#x21d2; Google::Cloud::Debugger::Breakpoint::Variable </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert a Ruby variable into a Google::Cloud::Debugger::Breakpoint::Variable object.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#payload_size-instance_method" title="#payload_size (instance method)">#<strong>payload_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Calculate the bytesize of all the attributes and that of the member variables.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_error_state-instance_method" title="#set_error_state (instance method)">#<strong>set_error_state</strong>(message, refers_to: StatusMessage::VARIABLE_VALUE)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set this variable to an error state by setting the status field.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_grpc-instance_method" title="#to_grpc (instance method)">#<strong>to_grpc</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Exports the Variable to a Google::Devtools::Clouddebugger::V2::Variable object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#total_size-instance_method" title="#total_size (instance method)">#<strong>total_size</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Calculate the total bytesize of all the attributes and that of the member variables, plus references into other variables in the variable table.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="from_rb_var-class_method">
+  
+    .<strong>from_rb_var</strong>(source, name: nil, depth: MAX_DEPTH, var_table: nil, limit: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Google::Cloud::Debugger::Breakpoint::Variable</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert a Ruby variable into a
+Google::Cloud::Debugger::Breakpoint::Variable object. If
+a variable table is provided, it will store all the subsequently
+created compound variables into the variable table for sharing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Simple variable conversion</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_x'>x</span> <span class='op'>=</span> <span class='float'>3.0</span>
+<span class='id identifier rubyid_var'>var</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Variable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_rb_var'>from_rb_var</span> \
+        <span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>x</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>  <span class='comment'>#=&gt; &quot;x&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='comment'>#=&gt; &quot;3.0&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>  <span class='comment'>#=&gt; &quot;Float&quot;</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Hash conversion</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>a:</span> <span class='float'>1.0</span><span class='comma'>,</span> <span class='label'>b:</span> <span class='symbol'>:two</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_var'>var</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Variable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_rb_var'>from_rb_var</span> \
+        <span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hash</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>  <span class='comment'>#=&gt; &quot;hash&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>  <span class='comment'>#=&gt; &quot;Hash&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>  <span class='comment'>#=&gt; &quot;a&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='comment'>#=&gt; &quot;1.0&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>  <span class='comment'>#=&gt; &quot;Float&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>  <span class='comment'>#=&gt; &quot;b&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='comment'>#=&gt; &quot;:two&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>  <span class='comment'>#=&gt; &quot;Symbol&quot;</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Custom compound variable conversion</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_foo'>foo</span> <span class='op'>=</span> <span class='const'>Foo</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>a:</span> <span class='float'>1.0</span><span class='comma'>,</span> <span class='label'>b:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_foo'>foo</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>  <span class='comment'>#=&gt; &quot;#&lt;Foo:0xXXXXXX @a=1.0, @b=[]&gt;&quot;
+</span><span class='id identifier rubyid_var'>var</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Variable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_rb_var'>from_rb_var</span> \
+        <span class='id identifier rubyid_foo'>foo</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>  <span class='comment'>#=&gt; &quot;foo&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>  <span class='comment'>#=&gt; &quot;Foo&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>  <span class='comment'>#=&gt; &quot;@a&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='comment'>#=&gt; &quot;1.0&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>  <span class='comment'>#=&gt; &quot;Float&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>  <span class='comment'>#=&gt; &quot;@b&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='comment'>#=&gt; &quot;[]&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>  <span class='comment'>#=&gt; &quot;Array&quot;</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Use variable table for shared compound variables</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>a:</span> <span class='float'>1.0</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_ary'>ary</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='id identifier rubyid_hash'>hash</span><span class='rbracket'>]</span>
+<span class='id identifier rubyid_var_table'>var_table</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VariableTable.html" title="Google::Cloud::Debugger::Breakpoint::VariableTable (class)">VariableTable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_var'>var</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Variable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_rb_var'>from_rb_var</span> \
+        <span class='id identifier rubyid_ary'>ary</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ary</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>var_table:</span> <span class='id identifier rubyid_var_table'>var_table</span>
+<span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>            <span class='comment'>#=&gt; &quot;ary&quot;
+</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_var_table_index'>var_table_index</span> <span class='comment'>#=&gt; 0
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>   <span class='comment'>#=&gt; &quot;Array&quot;
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>            <span class='comment'>#=&gt; &quot;[0]&quot;
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_var_table_index'>var_table_index</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>            <span class='comment'>#=&gt; &quot;[1]&quot;
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_var_table_index'>var_table_index</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='comment'>#=&gt; &quot;Hash&quot;
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='comment'>#=&gt; &quot;a&quot;
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='comment'>#=&gt; &quot;Float&quot;
+</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_members'>members</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='comment'>#=&gt; &quot;1.0&quot;</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>source</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Source Ruby variable to convert from</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Name of the varaible</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Number of levels to evaluate in compound
+variables. Default to
+<span class='object_link'><a href="#MAX_DEPTH-constant" title="Google::Cloud::Debugger::Breakpoint::Variable::MAX_DEPTH (constant)">MAX_DEPTH</a></span></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>var_table</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="VariableTable.html" title="Google::Cloud::Debugger::Breakpoint::VariableTable (class)">Breakpoint::VariableTable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A variable table
+to store shared compound variables. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of bytes this conversion
+should take. This include nested compound member variables&#39;
+conversions.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Google::Cloud::Debugger::Breakpoint::Variable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Converted
+variable.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/variable.rb', line 236</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from_rb_var'>from_rb_var</span> <span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='const'><span class='object_link'><a href="#MAX_DEPTH-constant" title="Google::Cloud::Debugger::Breakpoint::Variable::MAX_DEPTH (constant)">MAX_DEPTH</a></span></span><span class='comma'>,</span>
+                     <span class='label'>var_table:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_source'>source</span> <span class='kw'>if</span> <span class='id identifier rubyid_source'>source</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Variable</a></span></span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_limit'>limit</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_limit'>limit</span> <span class='op'>&lt;</span> <span class='const'>MIN_REQUIRED_SIZE</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_buffer_full_variable'>buffer_full_variable</span> <span class='id identifier rubyid_var_table'>var_table</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># If source is a non-empty Array or Hash, or source has instance
+</span>  <span class='comment'># variables, evaluate source as a compound variable.
+</span>  <span class='kw'>if</span> <span class='id identifier rubyid_compound_var?'>compound_var?</span><span class='lparen'>(</span><span class='id identifier rubyid_source'>source</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_depth'>depth</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_from_compound_var'>from_compound_var</span> <span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='id identifier rubyid_depth'>depth</span><span class='comma'>,</span>
+                              <span class='label'>var_table:</span> <span class='id identifier rubyid_var_table'>var_table</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_from_primitive_var'>from_primitive_var</span> <span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span>
+  <span class='kw'>end</span>
+<span class='kw'>rescue</span>
+  <span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_var'>var</span><span class='op'>|</span>
+    <span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='kw'>if</span> <span class='id identifier rubyid_name'>name</span>
+    <span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_set_error_state'>set_error_state</span> <span class='const'>FAIL_CONVERSION_MSG</span>
+    <span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_source_var'>source_var</span> <span class='op'>=</span> <span class='id identifier rubyid_source'>source</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="payload_size-instance_method">
+  
+    #<strong>payload_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Calculate the bytesize of all the attributes and that of the
+member variables.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The total payload size of this variable in bytes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/variable.rb', line 510</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_payload_size'>payload_size</span>
+  <span class='kw'>unless</span> <span class='ivar'>@payload_size</span>
+    <span class='ivar'>@payload_size</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_bytesize'>bytesize</span> <span class='op'>+</span>
+                    <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_bytesize'>bytesize</span> <span class='op'>+</span>
+                    <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_bytesize'>bytesize</span>
+
+    <span class='kw'>unless</span> <span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+      <span class='ivar'>@payload_size</span> <span class='op'>=</span> <span class='id identifier rubyid_members'>members</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='ivar'>@payload_size</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sum'>sum</span><span class='comma'>,</span> <span class='id identifier rubyid_member'>member</span><span class='op'>|</span>
+        <span class='id identifier rubyid_sum'>sum</span> <span class='op'>+</span> <span class='id identifier rubyid_member'>member</span><span class='period'>.</span><span class='id identifier rubyid_payload_size'>payload_size</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@payload_size</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_error_state-instance_method">
+  
+    #<strong>set_error_state</strong>(message, refers_to: StatusMessage::VARIABLE_VALUE)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set this variable to an error state by setting the status field</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+475
+476
+477
+478
+479
+480
+481</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/variable.rb', line 475</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_error_state'>set_error_state</span> <span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='label'>refers_to:</span> <span class='const'><span class='object_link'><a href="StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="StatusMessage.html#VARIABLE_VALUE-constant" title="Google::Cloud::Debugger::Breakpoint::StatusMessage::VARIABLE_VALUE (constant)">VARIABLE_VALUE</a></span></span>
+  <span class='ivar'>@status</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="StatusMessage.html" title="Google::Cloud::Debugger::Breakpoint::StatusMessage (class)">StatusMessage</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_is_error'>is_error</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_refers_to'>refers_to</span> <span class='op'>=</span> <span class='id identifier rubyid_refers_to'>refers_to</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_grpc-instance_method">
+  
+    #<strong>to_grpc</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Exports the Variable to a
+Google::Devtools::Clouddebugger::V2::Variable object.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/variable.rb', line 461</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_grpc'>to_grpc</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/Variable.html" title="Google::Devtools::Clouddebugger::V2::Variable (class)">Variable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>type:</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='label'>var_table_index:</span> <span class='id identifier rubyid_var_table_index_to_grpc'>var_table_index_to_grpc</span><span class='comma'>,</span>
+    <span class='label'>members:</span> <span class='id identifier rubyid_members_to_grpc'>members_to_grpc</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>status:</span> <span class='id identifier rubyid_status_to_grpc'>status_to_grpc</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="total_size-instance_method">
+  
+    #<strong>total_size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Calculate the total bytesize of all the attributes and that of the
+member variables, plus references into other variables in the
+variable table.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The total payload size of this variable in bytes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/variable.rb', line 489</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_total_size'>total_size</span>
+  <span class='kw'>unless</span> <span class='ivar'>@total_size</span>
+    <span class='id identifier rubyid_vars'>vars</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='kw'>self</span><span class='comma'>,</span> <span class='op'>*</span><span class='lparen'>(</span><span class='id identifier rubyid_unique_members'>unique_members</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+
+    <span class='ivar'>@total_size</span> <span class='op'>=</span> <span class='id identifier rubyid_vars'>vars</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='id identifier rubyid_payload_size'>payload_size</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sum'>sum</span><span class='comma'>,</span> <span class='id identifier rubyid_var'>var</span><span class='op'>|</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_var_table'>var_table</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_var_table_index'>var_table_index</span>
+        <span class='id identifier rubyid_sum'>sum</span> <span class='op'>+</span> <span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_var_table'>var_table</span><span class='lbracket'>[</span><span class='id identifier rubyid_var'>var</span><span class='period'>.</span><span class='id identifier rubyid_var_table_index'>var_table_index</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_total_size'>total_size</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_sum'>sum</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@total_size</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

@@ -1,0 +1,580 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud::Debugger::Breakpoint::Evaluator - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::Breakpoint::Evaluator";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span>
+     &raquo; 
+    <span class="title">Evaluator</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud::Debugger::Breakpoint::Evaluator
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/breakpoint/evaluator.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Helps to evaluate program state at the location of breakpoint during
+executing. The program state, such as local variables and call stack,
+are retrieved using Ruby Binding objects.</p>
+
+<p>The breakpoints may consist of conditional expression and other
+code expressions. The Evaluator helps evaluates these expression in
+a read-only context. Meaning if the expressions trigger any write
+operations in middle of the evaluation, the evaluator is able to
+abort the operation and prevent the program state from being altered.</p>
+
+<p>The evaluated results are saved onto the breakpoints fields. See
+<a href="https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint">Stackdriver Breakpoints
+Doc</a>
+for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="STACK_EVAL_DEPTH-constant" class="">STACK_EVAL_DEPTH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Max number of top stacks to collect local variables information</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eval_call_stack-class_method" title="eval_call_stack (class method)">.<strong>eval_call_stack</strong>(call_stack_bindings)  &#x21d2; Array&lt;Google::Cloud::Debugger::Breakpoint::StackFrame&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Evaluates call stack.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eval_condition-class_method" title="eval_condition (class method)">.<strong>eval_condition</strong>(binding, condition)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Evaluates a boolean conditional expression in the given context binding.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eval_expressions-class_method" title="eval_expressions (class method)">.<strong>eval_expressions</strong>(binding, expressions)  &#x21d2; Array&lt;Google::Cloud::Debugger::Breakpoint::Variable&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Evaluates the breakpoint expressions at the point that triggered the breakpoint.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="eval_call_stack-class_method">
+  
+    .<strong>eval_call_stack</strong>(call_stack_bindings)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="StackFrame.html" title="Google::Cloud::Debugger::Breakpoint::StackFrame (class)">Google::Cloud::Debugger::Breakpoint::StackFrame</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Evaluates call stack. Collects function name and location of each
+frame from given binding objects. Collects local variable
+information from top frames.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>call_stack_bindings</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Binding&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of binding
+objects that come from each of the call stack frames.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="StackFrame.html" title="Google::Cloud::Debugger::Breakpoint::StackFrame (class)">Google::Cloud::Debugger::Breakpoint::StackFrame</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of StackFrame objects that represent state of the
+call stack</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/evaluator.rb', line 788</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eval_call_stack'>eval_call_stack</span> <span class='id identifier rubyid_call_stack_bindings'>call_stack_bindings</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_call_stack_bindings'>call_stack_bindings</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_frame_binding'>frame_binding</span><span class='comma'>,</span> <span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='id identifier rubyid_frame_info'>frame_info</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="StackFrame.html" title="Google::Cloud::Debugger::Breakpoint::StackFrame (class)">StackFrame</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_sf'>sf</span><span class='op'>|</span>
+      <span class='id identifier rubyid_sf'>sf</span><span class='period'>.</span><span class='id identifier rubyid_function'>function</span> <span class='op'>=</span> <span class='id identifier rubyid_frame_binding'>frame_binding</span><span class='period'>.</span><span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>__method__</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+      <span class='id identifier rubyid_sf'>sf</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="SourceLocation.html" title="Google::Cloud::Debugger::Breakpoint::SourceLocation (class)">SourceLocation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span>
+        <span class='id identifier rubyid_l'>l</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='op'>=</span>
+          <span class='id identifier rubyid_frame_binding'>frame_binding</span><span class='period'>.</span><span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>::File.absolute_path(__FILE__)</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_l'>l</span><span class='period'>.</span><span class='id identifier rubyid_line'>line</span> <span class='op'>=</span> <span class='id identifier rubyid_frame_binding'>frame_binding</span><span class='period'>.</span><span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>__LINE__</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>if</span> <span class='id identifier rubyid_i'>i</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="#STACK_EVAL_DEPTH-constant" title="Google::Cloud::Debugger::Breakpoint::Evaluator::STACK_EVAL_DEPTH (constant)">STACK_EVAL_DEPTH</a></span></span>
+      <span class='id identifier rubyid_frame_info'>frame_info</span><span class='period'>.</span><span class='id identifier rubyid_locals'>locals</span> <span class='op'>=</span> <span class='id identifier rubyid_eval_frame_variables'>eval_frame_variables</span> <span class='id identifier rubyid_frame_binding'>frame_binding</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_result'>result</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_frame_info'>frame_info</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="eval_condition-class_method">
+  
+    .<strong>eval_condition</strong>(binding, condition)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Evaluates a boolean conditional expression in the given context
+binding. The evaluation subjects to the read-only rules. If
+the expression does any write operation, the evaluation aborts
+and returns false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>binding</span>
+      
+      
+        <span class='type'>(<tt>Binding</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The binding object from the context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string of code to be evaluates</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if condition expression read-only evaluates
+to true. Otherwise false.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/evaluator.rb', line 822</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eval_condition'>eval_condition</span> <span class='id identifier rubyid_binding'>binding</span><span class='comma'>,</span> <span class='id identifier rubyid_condition'>condition</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_readonly_eval_expression_exec'>readonly_eval_expression_exec</span> <span class='id identifier rubyid_binding'>binding</span><span class='comma'>,</span> <span class='id identifier rubyid_condition'>condition</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Exception</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>
+     <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='symbol'>:@mutation_cause</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="eval_expressions-class_method">
+  
+    .<strong>eval_expressions</strong>(binding, expressions)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Variable.html" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Google::Cloud::Debugger::Breakpoint::Variable</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Evaluates the breakpoint expressions at the point that triggered
+the breakpoint. The expressions subject to the read-only rules.
+If the expressions do any write operations, the evaluations abort
+and show an error message in place of the real result.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>binding</span>
+      
+      
+        <span class='type'>(<tt>Binding</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The binding object from the context</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expressions</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of code strings to be
+evaluated</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Variable.html" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Google::Cloud::Debugger::Breakpoint::Variable</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A list of Breakpoint::Variables objects that represent the
+expression evaluations results.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+846
+847
+848
+849
+850
+851
+852
+853</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/breakpoint/evaluator.rb', line 846</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eval_expressions'>eval_expressions</span> <span class='id identifier rubyid_binding'>binding</span><span class='comma'>,</span> <span class='id identifier rubyid_expressions'>expressions</span>
+  <span class='id identifier rubyid_expressions'>expressions</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_expression'>expression</span><span class='op'>|</span>
+    <span class='id identifier rubyid_eval_result'>eval_result</span> <span class='op'>=</span> <span class='id identifier rubyid_readonly_eval_expression'>readonly_eval_expression</span> <span class='id identifier rubyid_binding'>binding</span><span class='comma'>,</span> <span class='id identifier rubyid_expression'>expression</span>
+    <span class='id identifier rubyid_evaluated_var'>evaluated_var</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Variable.html" title="Google::Cloud::Debugger::Breakpoint::Variable (class)">Variable</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_rb_var'><span class='object_link'><a href="Variable.html#from_rb_var-class_method" title="Google::Cloud::Debugger::Breakpoint::Variable.from_rb_var (method)">from_rb_var</a></span></span> <span class='id identifier rubyid_eval_result'>eval_result</span>
+    <span class='id identifier rubyid_evaluated_var'>evaluated_var</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_expression'>expression</span>
+    <span class='id identifier rubyid_evaluated_var'>evaluated_var</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

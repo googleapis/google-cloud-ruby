@@ -1,0 +1,800 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud::Debugger - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span>
+     &raquo; 
+    <span class="title">Debugger</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud::Debugger
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger.rb<span class="defines">,<br />
+  lib/google/cloud/debugger/agent.rb,<br /> lib/google/cloud/debugger/rails.rb,<br /> lib/google/cloud/debugger/tracer.rb,<br /> lib/google/cloud/debugger/backoff.rb,<br /> lib/google/cloud/debugger/project.rb,<br /> lib/google/cloud/debugger/service.rb,<br /> lib/google/cloud/debugger/version.rb,<br /> lib/google/cloud/debugger/debuggee.rb,<br /> lib/google/cloud/debugger/logpoint.rb,<br /> lib/google/cloud/debugger/snappoint.rb,<br /> lib/google/cloud/debugger/breakpoint.rb,<br /> lib/google/cloud/debugger/middleware.rb,<br /> lib/google/cloud/debugger/credentials.rb,<br /> lib/google/cloud/debugger/transmitter.rb,<br /> lib/google/cloud/debugger/breakpoint_manager.rb,<br /> lib/google/cloud/debugger/breakpoint/variable.rb,<br /> lib/google/cloud/debugger/v2/debugger2_client.rb,<br /> lib/google/cloud/debugger/breakpoint/evaluator.rb,<br /> lib/google/cloud/debugger/breakpoint/validator.rb,<br /> lib/google/cloud/debugger/request_quota_manager.rb,<br /> lib/google/cloud/debugger/v2/controller2_client.rb,<br /> lib/google/cloud/debugger/breakpoint/stack_frame.rb,<br /> lib/google/cloud/debugger/breakpoint/status_message.rb,<br /> lib/google/cloud/debugger/breakpoint/variable_table.rb,<br /> lib/google/cloud/debugger/breakpoint/source_location.rb,<br /> lib/google/cloud/debugger/debuggee/app_uniquifier_generator.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Stackdriver Debugger</h1>
+
+<p>Stackdriver Debugger is a feature of the Google Cloud Platform that lets
+you inspect the state of an application at any code location without using
+logging statements and without stopping or slowing down your applications.
+Your users are not impacted during debugging. Using the production
+debugger you can capture the local variables and call stack and link it
+back to a specific line location in your source code. You can use this to
+analyze the production state of your application and understand the
+behavior of your code in production.</p>
+
+<p>For general information about Stackdriver Debugger, read <a href="https://cloud.google.com/debugger/docs/">Stackdriver
+Debugger Documentation</a>.</p>
+
+<p>The Stackdriver Debugger Ruby library, <code>google-cloud-debugger</code>, provides:</p>
+
+<ul>
+<li>  Easy-to-use debugger instrumentation that reports state data, such as
+value of program variables and the call stack, to Stackdriver Debugger
+when the code at a breakpoint location is executed in your Ruby
+application. See the <a href="#instrumenting-your-app">instrumenting your app</a>
+section for how to debug your application, in both development and
+production.</li>
+<li>  An idiomatic Ruby API for registerying debuggee application, and
+querying or manipulating breakpoints in registered Ruby debuggee
+application. See <a href="#stackdriver-debugger-api">Debugger API</a> section for
+an introduction to Stackdriver Debugger API.</li>
+</ul>
+
+<h2>Instrumenting Your App</h2>
+
+<p>This instrumentation library provides the following features to help you
+debug your applications in production:</p>
+
+<ul>
+<li>  Automatic application registration. It facilitates multiple running
+instances of same version of application when hosted in production.</li>
+<li>  A background debugger agent that runs side-by-side with your
+application that automatically collects state data when code is
+executed at breakpoint locations.</li>
+<li>  A Rack middleware and Railtie that automatically manages the debugger
+agent for Ruby on Rails and other Rack-based Ruby applications.</li>
+</ul>
+
+<p>When this library is configured in your running application, and the
+source code and breakpoints are setup through the Google Cloud Console,
+You&#39;ll be able to
+<a href="https://cloud.google.com/debugger/docs/debugging">interact</a> with your
+application in real time through the <a href="https://console.cloud.google.com/debug?_ga=1.84295834.280814654.1476313407">Stackdriver Debugger
+UI</a>.
+This library also integrates with Google App Engine Flexible to make
+debuggee application configuration more seemless.</p>
+
+<p>Note that when no breakpoints are created, the debugger agent consumes
+very little resource and has no interference with the running application.
+Once breakpoints are created and depends on where the breakpoints are
+located, the debugger agent may add a little latency onto each request.
+The application performance will be back to normal after all breakpoints
+are finished being evaluated. Be aware the more breakpoints are created,
+or the harder to reach the breakpoints, the more resource the debugger
+agent would need to consume.</p>
+
+<h3>Using instrumentation with Ruby on Rails</h3>
+
+<p>To install application instrumentation in your Ruby on Rails app, add this
+gem, <code>google-cloud-debugger</code>, to your Gemfile and update your bundle. Then
+add the following line to your <code>config/application.rb</code> file:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/rails</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>This will load a Railtie that automatically integrates with the Rails
+framework by injecting a Rack middleware. The Railtie also takes in the
+following Rails configuration as parameter of the debugger agent
+initialization:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Explicitly enable or disable Stackdriver Debugger Agent
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_use_debugger'>use_debugger</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='comment'># Shared Google Cloud Platform project identifier
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gcloud-project</span><span class='tstring_end'>&quot;</span></span>
+<span class='comment'># Google Cloud Platform project identifier for Stackdriver Debugger only
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_debugger'>debugger</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>debugger-project</span><span class='tstring_end'>&quot;</span></span>
+<span class='comment'># Shared Google Cloud authentication json file
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='comment'># Google Cloud authentication json file for Stackdriver Debugger only
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_debugger'>debugger</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/debugger/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='comment'># Stackdriver Debugger Agent service name identifier
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_debugger'>debugger</span><span class='period'>.</span><span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-ruby-app</span><span class='tstring_end'>&quot;</span></span>
+<span class='comment'># Stackdriver Debugger Agent service version identifier
+</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_debugger'>debugger</span><span class='period'>.</span><span class='id identifier rubyid_service_version'>service_version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>v1</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>See the <span class='object_link'><a href="Debugger/Railtie.html" title="Google::Cloud::Debugger::Railtie (class)">Railtie</a></span> class for more information.</p>
+
+<h3>Using instrumentation with Sinatra</h3>
+
+<p>To install application instrumentation in your Sinatra app, add this gem,
+<code>google-cloud-debugger</code>, to your Gemfile and update your bundle. Then add
+the following lines to your main application Ruby file:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span></span>
+</code></pre>
+
+<p>This will install the debugger middleware in your application.</p>
+
+<p>Configuration parameters may also be passed in as arguments to Middleware.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span></span> <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>debugger-project-id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                        <span class='label'>keyfile:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                        <span class='label'>service_name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-ruby-app</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                                        <span class='label'>service_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>v1</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<h3>Using instrumentation with other Rack-based frameworks</h3>
+
+<p>To install application instrumentation in an app using another Rack-based
+web framework, add this gem, <code>google-cloud-debugger</code>, to your Gemfile and
+update your bundle. Then add install the debugger middleware in your
+middleware stack. In most cases, this means adding these lines to your
+<code>config.ru</code> Rack configuration file:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_use'>use</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span></span>
+</code></pre>
+
+<p>Some web frameworks have an alternate mechanism for modifying the
+middleware stack. Consult your web framework&#39;s documentation for more
+information.</p>
+
+<h3>The Stackdriver diagnostics suite</h3>
+
+<p>The debugger library is part of the Stackdriver diagnostics suite, which
+also includes error reporting, log analysis, and tracing analysis. If you
+include the <code>stackdriver</code> gem in your Gemfile, this debugger library will
+be included automatically. In addition, if you include the <code>stackdriver</code>
+gem in an application using Ruby On Rails, the Railties will be installed
+automatically. See the documentation for the &quot;stackdriver&quot; gem
+for more details.</p>
+
+<h2>Stackdriver Debugger API</h2>
+
+<p>This library also includes an easy to use Ruby client for the
+Stackdriver Debugger API. This API provides calls to register debuggee
+application, as well as creating or modifying breakpoints.</p>
+
+<p>For further information on the Debugger API, see
+<span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Project</a></span></p>
+
+<h3>Registering debuggee application</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>Controller2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Controller2Client.html" title="Google::Cloud::Debugger::V2::Controller2Client (class)">Controller2Client</a></span></span>
+<span class='const'><span class='object_link'><a href="Debugger/Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Debuggee</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger/V2/Debuggee.html" title="Google::Devtools::Clouddebugger::V2::Debuggee (class)">Debuggee</a></span></span>
+
+<span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'>Controller2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_debuggee'>debuggee</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Debugger/Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Debuggee</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_register_debuggee'>register_debuggee</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee'>debuggee</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_debuggee'>debuggee</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+</code></pre>
+
+<p>See <a href="https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Debuggee">Stackdriver Debugger Debuggee
+doc</a>
+on fields necessary for registerying a debuggee.</p>
+
+<p>Upon successful registration, the response debuggee object will contain
+a debuggee_id that&#39;s later needed to interact with the other Stackdriver
+Debugger API.</p>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Controller2Client.html" title="Google::Cloud::Debugger::V2::Controller2Client (class)">V2::Controller2Client</a></span> for details.</p>
+
+<h3>List Active Breakpoints</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>Controller2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Controller2Client.html" title="Google::Cloud::Debugger::V2::Controller2Client (class)">Controller2Client</a></span></span>
+<span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'>Controller2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_list_active_breakpoints'>list_active_breakpoints</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_breakpoints'>breakpoints</span> <span class='op'>=</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_breakpoints'>breakpoints</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Controller2Client.html" title="Google::Cloud::Debugger::V2::Controller2Client (class)">V2::Controller2Client</a></span> for details.</p>
+
+<h3>Update Active Breakpoint</h3>
+
+<p>Users can send custom snapshots for active breakpoints using this API.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="Debugger/Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger/V2/Breakpoint.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+<span class='const'>Controller2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Controller2Client.html" title="Google::Cloud::Debugger::V2::Controller2Client (class)">Controller2Client</a></span></span>
+
+<span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'>Controller2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Debugger/Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span>
+  <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_update_active_breakpoint'>update_active_breakpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See <a href="https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint">Stackdriver Debugger Breakpoint
+doc</a>
+for all available fields for breakpoint.</p>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Controller2Client.html" title="Google::Cloud::Debugger::V2::Controller2Client (class)">V2::Controller2Client</a></span> for details.</p>
+
+<h3>Set Breakpoint</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="Debugger/Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Devtools/Clouddebugger/V2/Breakpoint.html" title="Google::Devtools::Clouddebugger::V2::Breakpoint (class)">Breakpoint</a></span></span>
+<span class='const'>Debugger2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">Debugger2Client</a></span></span>
+
+<span class='id identifier rubyid_debugger2_client'>debugger2_client</span> <span class='op'>=</span> <span class='const'>Debugger2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Debugger/Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span>
+<span class='id identifier rubyid_client_version'>client_version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_debugger2_client'>debugger2_client</span><span class='period'>.</span><span class='id identifier rubyid_set_breakpoint'>set_breakpoint</span><span class='lparen'>(</span>
+             <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='comma'>,</span> <span class='id identifier rubyid_client_version'>client_version</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See <a href="https://cloud.google.com/debugger/api/reference/rpc/google.devtools.clouddebugger.v2#google.devtools.clouddebugger.v2.Breakpoint">Stackdriver Debugger Breakpoint
+doc</a>
+for fields needed to specify breakpoint location.</p>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">V2::Debugger2Client</a></span> for details.</p>
+
+<h3>Get Breakpoint</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>Debugger2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">Debugger2Client</a></span></span>
+
+<span class='id identifier rubyid_debugger2_client'>debugger2_client</span> <span class='op'>=</span> <span class='const'>Debugger2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_breakpoint_id'>breakpoint_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_client_version'>client_version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_debugger2_client'>debugger2_client</span><span class='period'>.</span><span class='id identifier rubyid_get_breakpoint'>get_breakpoint</span><span class='lparen'>(</span>
+             <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint_id'>breakpoint_id</span><span class='comma'>,</span> <span class='id identifier rubyid_client_version'>client_version</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">V2::Debugger2Client</a></span> for details.</p>
+
+<h3>Delete Breakpoint</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>Debugger2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">Debugger2Client</a></span></span>
+
+<span class='id identifier rubyid_debugger2_client'>debugger2_client</span> <span class='op'>=</span> <span class='const'>Debugger2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_breakpoint_id'>breakpoint_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_client_version'>client_version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_debugger2_client'>debugger2_client</span><span class='period'>.</span><span class='id identifier rubyid_delete_breakpoint'>delete_breakpoint</span><span class='lparen'>(</span>
+  <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint_id'>breakpoint_id</span><span class='comma'>,</span> <span class='id identifier rubyid_client_version'>client_version</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">V2::Debugger2Client</a></span> for details.</p>
+
+<h3>List Breakpoints</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>Debugger2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">Debugger2Client</a></span></span>
+
+<span class='const'>Debugger2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">Debugger2Client</a></span></span>
+
+<span class='id identifier rubyid_debugger2_client'>debugger2_client</span> <span class='op'>=</span> <span class='const'>Debugger2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_client_version'>client_version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_debugger2_client'>debugger2_client</span><span class='period'>.</span><span class='id identifier rubyid_list_breakpoints'>list_breakpoints</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span> <span class='id identifier rubyid_client_version'>client_version</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">V2::Debugger2Client</a></span> for details.</p>
+
+<h3>List Debuggees</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'>Debugger2Client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Debugger</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">Debugger2Client</a></span></span>
+
+<span class='id identifier rubyid_debugger2_client'>debugger2_client</span> <span class='op'>=</span> <span class='const'>Debugger2Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_client_version'>client_version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_debugger2_client'>debugger2_client</span><span class='period'>.</span><span class='id identifier rubyid_list_debuggees'>list_debuggees</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_client_version'>client_version</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>See <span class='object_link'><a href="Debugger/V2/Debugger2Client.html" title="Google::Cloud::Debugger::V2::Debugger2Client (class)">V2::Debugger2Client</a></span> for details.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Debugger/V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Debugger/Agent.html" title="Google::Cloud::Debugger::Agent (class)">Agent</a></span>, <span class='object_link'><a href="Debugger/Breakpoint.html" title="Google::Cloud::Debugger::Breakpoint (class)">Breakpoint</a></span>, <span class='object_link'><a href="Debugger/BreakpointManager.html" title="Google::Cloud::Debugger::BreakpointManager (class)">BreakpointManager</a></span>, <span class='object_link'><a href="Debugger/Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Debuggee</a></span>, <span class='object_link'><a href="Debugger/Logpoint.html" title="Google::Cloud::Debugger::Logpoint (class)">Logpoint</a></span>, <span class='object_link'><a href="Debugger/Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span>, <span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Project</a></span>, <span class='object_link'><a href="Debugger/Railtie.html" title="Google::Cloud::Debugger::Railtie (class)">Railtie</a></span>, <span class='object_link'><a href="Debugger/RequestQuotaManager.html" title="Google::Cloud::Debugger::RequestQuotaManager (class)">RequestQuotaManager</a></span>, <span class='object_link'><a href="Debugger/Snappoint.html" title="Google::Cloud::Debugger::Snappoint (class)">Snappoint</a></span>, <span class='object_link'><a href="Debugger/Tracer.html" title="Google::Cloud::Debugger::Tracer (class)">Tracer</a></span>, <span class='object_link'><a href="Debugger/Transmitter.html" title="Google::Cloud::Debugger::Transmitter (class)">Transmitter</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.28.2</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#configure-class_method" title="configure (class method)">.<strong>configure</strong> {|Google::Cloud.configure[:debugger]| ... } &#x21d2; Stackdriver::Core::Configuration </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Configure the Stackdriver Debugger agent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(project: nil, keyfile: nil, service_name: nil, service_version: nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::Debugger::Project </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new debugger object for instrumenting Stackdriver Debugger for an application.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="configure-class_method">
+  
+    .<strong>configure</strong> {|Google::Cloud.configure[:debugger]| ... } &#x21d2; <tt>Stackdriver::Core::Configuration</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Configure the Stackdriver Debugger agent.</p>
+
+<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/stackdriver/guides/instrumentation_configuration">Configuration
+Guide</a>
+for full configuration parameters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Google::Cloud</a></span>.<span class='object_link'><a href="#configure-class_method" title="Google::Cloud::Debugger.configure (method)">configure</a></span>[:debugger]</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Stackdriver::Core::Configuration</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The configuration object
+the Google::Cloud::ErrorReporting module uses.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+401
+402
+403
+404
+405</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 401</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span>
+  <span class='kw'>yield</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lbracket'>[</span><span class='symbol'>:debugger</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+
+  <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_configure'>configure</span><span class='lbracket'>[</span><span class='symbol'>:debugger</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-class_method">
+  
+    .<strong>new</strong>(project: nil, keyfile: nil, service_name: nil, service_version: nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Google::Cloud::Debugger::Project</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new debugger object for instrumenting Stackdriver Debugger for
+an application. Each call creates a new debugger agent with independent
+connection service.</p>
+
+<p>For more information on connecting to Google Cloud see the
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_debugger'>debugger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_debugger'>debugger</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Project identifier for the Stackdriver Debugger
+service.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyfile</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Keyfile downloaded from Google Cloud:
+either the JSON data or the path to a readable file.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Name for the debuggee application.
+Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_version</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Version identifier for the debuggee
+application. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth 2.0 scopes controlling
+the set of resources and operations that the connection can access.
+See <a href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth 2.0 to Access Google
+APIs</a>.
+The default scope is <code>https://www.googleapis.com/auth/cloud-platform</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default timeout to use in requests. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Google::Cloud::Debugger::Project</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger.rb', line 365</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>project:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>service_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>service_version:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+             <span class='label'>client_config:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_project'>project</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_project'>default_project</span>
+  <span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='comment'># Always cast to a string
+</span>  <span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_service_name'>default_service_name</span>
+  <span class='id identifier rubyid_service_name'>service_name</span> <span class='op'>=</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_service_version'>service_version</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default_service_version'>default_service_version</span>
+  <span class='id identifier rubyid_service_version'>service_version</span> <span class='op'>=</span> <span class='id identifier rubyid_service_version'>service_version</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+
+  <span class='id identifier rubyid_fail'>fail</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_fail'>fail</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service_name is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_fail'>fail</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>service_version is missing</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_service_version'>service_version</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>=</span> <span class='const'>Credentials</span><span class='period'>.</span><span class='id identifier rubyid_credentials_with_scope'>credentials_with_scope</span> <span class='id identifier rubyid_keyfile'>keyfile</span><span class='comma'>,</span> <span class='id identifier rubyid_scope'>scope</span>
+
+  <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Debugger/Project.html" title="Google::Cloud::Debugger::Project (class)">Project</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'>Service</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+                            <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='label'>service_name:</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='comma'>,</span>
+    <span class='label'>service_version:</span> <span class='id identifier rubyid_service_version'>service_version</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
