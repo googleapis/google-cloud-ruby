@@ -1,0 +1,525 @@
+---
+layout: yard_main
+title: "Module: Google::Cloud - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud";
+  relpath = '../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span>
+     &raquo; 
+    <span class="title">Cloud</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Cloud
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google-cloud-speech.rb<span class="defines">,<br />
+  lib/google/cloud/speech.rb,<br /> lib/google/cloud/speech/v1.rb,<br /> lib/google/cloud/speech/audio.rb,<br /> lib/google/cloud/speech/result.rb,<br /> lib/google/cloud/speech/stream.rb,<br /> lib/google/cloud/speech/convert.rb,<br /> lib/google/cloud/speech/project.rb,<br /> lib/google/cloud/speech/service.rb,<br /> lib/google/cloud/speech/version.rb,<br /> lib/google/cloud/speech/operation.rb,<br /> lib/google/cloud/speech/credentials.rb,<br /> lib/google/cloud/speech/v1/speech_client.rb,<br /> lib/google/cloud/speech/v1/cloud_speech_pb.rb,<br /> lib/google/cloud/speech/v1/cloud_speech_services_pb.rb,<br /> lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Cloud/Speech.html" title="Google::Cloud::Speech (module)">Speech</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#speech-class_method" title="speech (class method)">.<strong>speech</strong>(project = nil, keyfile = nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::Speech::Project </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new object for connecting to the Speech service.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#speech-instance_method" title="#speech (instance method)">#<strong>speech</strong>(scope: nil, timeout: nil, client_config: nil)  &#x21d2; Google::Cloud::Speech::Project </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new object for connecting to the Speech service.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="speech-class_method">
+  
+    .<strong>speech</strong>(project = nil, keyfile = nil, scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Cloud/Speech/Project.html" title="Google::Cloud::Speech::Project (class)">Google::Cloud::Speech::Project</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new object for connecting to the Speech service.
+Each call creates a new connection.</p>
+
+<p>For more information on connecting to Google Cloud see the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_speech'>speech</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_speech'>speech</span>
+
+<span class='id identifier rubyid_audio'>audio</span> <span class='op'>=</span> <span class='id identifier rubyid_speech'>speech</span><span class='period'>.</span><span class='id identifier rubyid_audio'>audio</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/audio.raw</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                     <span class='label'>encoding:</span> <span class='symbol'>:linear16</span><span class='comma'>,</span>
+                     <span class='label'>language:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>en-US</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                     <span class='label'>sample_rate:</span> <span class='int'>16000</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Project identifier for the Speech service you are
+connecting to.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keyfile</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>Keyfile downloaded from Google Cloud. If
+file path the file must be readable.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See
+<a href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+<li><code>https://www.googleapis.com/auth/speech</code></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default timeout to use in requests. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of values to override the default
+behavior of the API client. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cloud/Speech/Project.html" title="Google::Cloud::Speech::Project (class)">Google::Cloud::Speech::Project</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google-cloud-speech.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_speech'>speech</span> <span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                <span class='label'>client_config:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/speech</span><span class='tstring_end'>&quot;</span></span>
+  <span class='const'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Cloud/Speech.html" title="Google::Cloud::Speech (module)">Speech</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Cloud/Speech.html#new-class_method" title="Google::Cloud::Speech.new (method)">new</a></span></span> <span class='label'>project:</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='label'>keyfile:</span> <span class='id identifier rubyid_keyfile'>keyfile</span><span class='comma'>,</span>
+                            <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+                            <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="speech-instance_method">
+  
+    #<strong>speech</strong>(scope: nil, timeout: nil, client_config: nil)  &#x21d2; <tt><span class='object_link'><a href="Cloud/Speech/Project.html" title="Google::Cloud::Speech::Project (class)">Google::Cloud::Speech::Project</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new object for connecting to the Speech service.
+Each call creates a new connection.</p>
+
+<p>For more information on connecting to Google Cloud see the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_speech'>speech</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_speech'>speech</span>
+
+<span class='id identifier rubyid_audio'>audio</span> <span class='op'>=</span> <span class='id identifier rubyid_speech'>speech</span><span class='period'>.</span><span class='id identifier rubyid_audio'>audio</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/audio.raw</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                     <span class='label'>encoding:</span> <span class='symbol'>:linear16</span><span class='comma'>,</span>
+                     <span class='label'>language:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>en-US</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                     <span class='label'>sample_rate:</span> <span class='int'>16000</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>The default scope can be overridden with the <code>scope</code> option:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_gcloud'>gcloud</span>  <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_platform_scope'>platform_scope</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_speech'>speech</span> <span class='op'>=</span> <span class='id identifier rubyid_gcloud'>gcloud</span><span class='period'>.</span><span class='id identifier rubyid_speech'>speech</span> <span class='label'>scope:</span> <span class='id identifier rubyid_platform_scope'>platform_scope</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth 2.0 scopes controlling the
+set of resources and operations that the connection can access. See
+<a href="https://developers.google.com/identity/protocols/OAuth2">Using OAuth 2.0 to Access Google
+APIs</a>.</p>
+
+<p>The default scope is:</p>
+
+<ul>
+<li><code>https://www.googleapis.com/auth/speech</code></li>
+</ul>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default timeout to use in requests. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of values to override the default
+behavior of the API client. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cloud/Speech/Project.html" title="Google::Cloud::Speech::Project (class)">Google::Cloud::Speech::Project</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google-cloud-speech.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_speech'>speech</span> <span class='label'>scope:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>client_config:</span> <span class='kw'>nil</span>
+  <span class='const'><span class='object_link'><a href="../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_speech'><span class='object_link'><a href="#speech-class_method" title="Google::Cloud.speech (method)">speech</a></span></span> <span class='ivar'>@project</span><span class='comma'>,</span> <span class='ivar'>@keyfile</span><span class='comma'>,</span> <span class='label'>scope:</span> <span class='id identifier rubyid_scope'>scope</span><span class='comma'>,</span>
+                                           <span class='label'>timeout:</span> <span class='lparen'>(</span><span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>||</span> <span class='ivar'>@timeout</span><span class='rparen'>)</span><span class='comma'>,</span>
+                                           <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
