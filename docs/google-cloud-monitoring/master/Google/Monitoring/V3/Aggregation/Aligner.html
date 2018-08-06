@@ -1,0 +1,1056 @@
+---
+layout: yard_main
+title: "Module: Google::Monitoring::V3::Aggregation::Aligner - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Monitoring::V3::Aggregation::Aligner";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Aggregation.html" title="Google::Monitoring::V3::Aggregation (class)">Aggregation</a></span></span>
+     &raquo; 
+    <span class="title">Aligner</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Module: Google::Monitoring::V3::Aggregation::Aligner
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/common.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Aligner describes how to bring the data points in a single
+time series into temporal alignment.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ALIGN_NONE-constant" class="">ALIGN_NONE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>No alignment. Raw data is returned. Not valid if cross-time
+series reduction is requested. The value type of the result is
+the same as the value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="ALIGN_DELTA-constant" class="">ALIGN_DELTA =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align and convert to delta metric type. This alignment is valid
+for cumulative metrics and delta metrics. Aligning an existing
+delta metric to a delta metric requires that the alignment
+period be increased. The value type of the result is the same
+as the value type of the input.</p>
+
+<p>One can think of this aligner as a rate but without time units; that
+is, the output is conceptually (second_point - first_point).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="ALIGN_RATE-constant" class="">ALIGN_RATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align and convert to a rate. This alignment is valid for
+cumulative metrics and delta metrics with numeric values. The output is a
+gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+<p>One can think of this aligner as conceptually providing the slope of
+the line that passes through the value at the start and end of the
+window. In other words, this is conceptually ((y1 - y0)/(t1 - t0)),
+and the output unit is one that has a &quot;/time&quot; dimension.</p>
+
+<p>If, by rate, you are looking for percentage change, see the
++ALIGN_PERCENT_CHANGE+ aligner option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="ALIGN_INTERPOLATE-constant" class="">ALIGN_INTERPOLATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align by interpolating between adjacent points around the
+period boundary. This alignment is valid for gauge
+metrics with numeric values. The value type of the result is the same
+as the value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="ALIGN_NEXT_OLDER-constant" class="">ALIGN_NEXT_OLDER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align by shifting the oldest data point before the period
+boundary to the boundary. This alignment is valid for gauge
+metrics. The value type of the result is the same as the
+value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="ALIGN_MIN-constant" class="">ALIGN_MIN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the minimum of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+values. The value type of the result is the same as the value
+type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+        <dt id="ALIGN_MAX-constant" class="">ALIGN_MAX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the maximum of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+values. The value type of the result is the same as the value
+type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span></pre></dd>
+      
+        <dt id="ALIGN_MEAN-constant" class="">ALIGN_MEAN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the average or arithmetic mean of all
+data points in the period. This alignment is valid for gauge and delta
+metrics with numeric values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span></pre></dd>
+      
+        <dt id="ALIGN_COUNT-constant" class="">ALIGN_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the count of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+or Boolean values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#INT64-constant" title="Google::Api::MetricDescriptor::ValueType::INT64 (constant)">INT64</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span></pre></dd>
+      
+        <dt id="ALIGN_SUM-constant" class="">ALIGN_SUM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the sum of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+and distribution values. The value type of the output is the
+same as the value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span></pre></dd>
+      
+        <dt id="ALIGN_STDDEV-constant" class="">ALIGN_STDDEV =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the standard deviation of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with numeric values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span></pre></dd>
+      
+        <dt id="ALIGN_COUNT_TRUE-constant" class="">ALIGN_COUNT_TRUE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the count of True-valued data points in the
+period. This alignment is valid for gauge metrics with
+Boolean values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#INT64-constant" title="Google::Api::MetricDescriptor::ValueType::INT64 (constant)">INT64</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span></pre></dd>
+      
+        <dt id="ALIGN_COUNT_FALSE-constant" class="">ALIGN_COUNT_FALSE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the count of False-valued data points in the
+period. This alignment is valid for gauge metrics with
+Boolean values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#INT64-constant" title="Google::Api::MetricDescriptor::ValueType::INT64 (constant)">INT64</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span></pre></dd>
+      
+        <dt id="ALIGN_FRACTION_TRUE-constant" class="">ALIGN_FRACTION_TRUE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the fraction of True-valued data points in the
+period. This alignment is valid for gauge metrics with Boolean values.
+The output value is in the range [0, 1] and has value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_99-constant" class="">ALIGN_PERCENTILE_99 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 99th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_95-constant" class="">ALIGN_PERCENTILE_95 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 95th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_50-constant" class="">ALIGN_PERCENTILE_50 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 50th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_05-constant" class="">ALIGN_PERCENTILE_05 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 5th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENT_CHANGE-constant" class="">ALIGN_PERCENT_CHANGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align and convert to a percentage change. This alignment is valid for
+gauge and delta metrics with numeric values. This alignment conceptually
+computes the equivalent of &quot;((current - previous)/previous)*100&quot;
+where previous value is determined based on the alignmentPeriod.
+In the event that previous is 0 the calculated value is infinity with the
+exception that if both (current - previous) and previous are 0 the
+calculated value is 0.
+A 10 minute moving mean is computed at each point of the time window
+prior to the above calculation to smooth the metric and prevent false
+positives from very short lived spikes.
+Only applicable for data that is &gt;= 0. Any values &lt; 0 are treated as
+no data. While delta metrics are accepted by this alignment special care
+should be taken that the values for the metric will always be positive.
+The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Google::Monitoring::V3::Aggregation::Aligner
+  
+    &mdash; Stackdriver
+  
+</title>
+
+  <link rel="stylesheet" href="../../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Monitoring::V3::Aggregation::Aligner";
+  relpath = '../../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Monitoring.html" title="Google::Monitoring (module)">Monitoring</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../V3.html" title="Google::Monitoring::V3 (module)">V3</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Aggregation.html" title="Google::Monitoring::V3::Aggregation (class)">Aggregation</a></span></span>
+     &raquo; 
+    <span class="title">Aligner</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Google::Monitoring::V3::Aggregation::Aligner
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/common.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Aligner describes how to bring the data points in a single
+time series into temporal alignment.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ALIGN_NONE-constant" class="">ALIGN_NONE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>No alignment. Raw data is returned. Not valid if cross-time
+series reduction is requested. The value type of the result is
+the same as the value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="ALIGN_DELTA-constant" class="">ALIGN_DELTA =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align and convert to delta metric type. This alignment is valid
+for cumulative metrics and delta metrics. Aligning an existing
+delta metric to a delta metric requires that the alignment
+period be increased. The value type of the result is the same
+as the value type of the input.</p>
+
+<p>One can think of this aligner as a rate but without time units; that
+is, the output is conceptually (second_point - first_point).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="ALIGN_RATE-constant" class="">ALIGN_RATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align and convert to a rate. This alignment is valid for
+cumulative metrics and delta metrics with numeric values. The output is a
+gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+<p>One can think of this aligner as conceptually providing the slope of
+the line that passes through the value at the start and end of the
+window. In other words, this is conceptually ((y1 - y0)/(t1 - t0)),
+and the output unit is one that has a &quot;/time&quot; dimension.</p>
+
+<p>If, by rate, you are looking for percentage change, see the
++ALIGN_PERCENT_CHANGE+ aligner option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="ALIGN_INTERPOLATE-constant" class="">ALIGN_INTERPOLATE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align by interpolating between adjacent points around the
+period boundary. This alignment is valid for gauge
+metrics with numeric values. The value type of the result is the same
+as the value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="ALIGN_NEXT_OLDER-constant" class="">ALIGN_NEXT_OLDER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align by shifting the oldest data point before the period
+boundary to the boundary. This alignment is valid for gauge
+metrics. The value type of the result is the same as the
+value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="ALIGN_MIN-constant" class="">ALIGN_MIN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the minimum of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+values. The value type of the result is the same as the value
+type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+        <dt id="ALIGN_MAX-constant" class="">ALIGN_MAX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the maximum of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+values. The value type of the result is the same as the value
+type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span></pre></dd>
+      
+        <dt id="ALIGN_MEAN-constant" class="">ALIGN_MEAN =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the average or arithmetic mean of all
+data points in the period. This alignment is valid for gauge and delta
+metrics with numeric values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12</span></pre></dd>
+      
+        <dt id="ALIGN_COUNT-constant" class="">ALIGN_COUNT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the count of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+or Boolean values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#INT64-constant" title="Google::Api::MetricDescriptor::ValueType::INT64 (constant)">INT64</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>13</span></pre></dd>
+      
+        <dt id="ALIGN_SUM-constant" class="">ALIGN_SUM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the sum of all data points in the
+period. This alignment is valid for gauge and delta metrics with numeric
+and distribution values. The value type of the output is the
+same as the value type of the input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>14</span></pre></dd>
+      
+        <dt id="ALIGN_STDDEV-constant" class="">ALIGN_STDDEV =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the standard deviation of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with numeric values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>15</span></pre></dd>
+      
+        <dt id="ALIGN_COUNT_TRUE-constant" class="">ALIGN_COUNT_TRUE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the count of True-valued data points in the
+period. This alignment is valid for gauge metrics with
+Boolean values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#INT64-constant" title="Google::Api::MetricDescriptor::ValueType::INT64 (constant)">INT64</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>16</span></pre></dd>
+      
+        <dt id="ALIGN_COUNT_FALSE-constant" class="">ALIGN_COUNT_FALSE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the count of False-valued data points in the
+period. This alignment is valid for gauge metrics with
+Boolean values. The value type of the output is
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#INT64-constant" title="Google::Api::MetricDescriptor::ValueType::INT64 (constant)">INT64</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>24</span></pre></dd>
+      
+        <dt id="ALIGN_FRACTION_TRUE-constant" class="">ALIGN_FRACTION_TRUE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the fraction of True-valued data points in the
+period. This alignment is valid for gauge metrics with Boolean values.
+The output value is in the range [0, 1] and has value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>17</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_99-constant" class="">ALIGN_PERCENTILE_99 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 99th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_95-constant" class="">ALIGN_PERCENTILE_95 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 95th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_50-constant" class="">ALIGN_PERCENTILE_50 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 50th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENTILE_05-constant" class="">ALIGN_PERCENTILE_05 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align time series via aggregation. The resulting data point in
+the alignment period is the 5th percentile of all data
+points in the period. This alignment is valid for gauge and delta metrics
+with distribution values. The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span></pre></dd>
+      
+        <dt id="ALIGN_PERCENT_CHANGE-constant" class="">ALIGN_PERCENT_CHANGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Align and convert to a percentage change. This alignment is valid for
+gauge and delta metrics with numeric values. This alignment conceptually
+computes the equivalent of &quot;((current - previous)/previous)*100&quot;
+where previous value is determined based on the alignmentPeriod.
+In the event that previous is 0 the calculated value is infinity with the
+exception that if both (current - previous) and previous are 0 the
+calculated value is 0.
+A 10 minute moving mean is computed at each point of the time window
+prior to the above calculation to smooth the metric and prevent false
+positives from very short lived spikes.
+Only applicable for data that is &gt;= 0. Any values &lt; 0 are treated as
+no data. While delta metrics are accepted by this alignment special care
+should be taken that the values for the metric will always be positive.
+The output is a gauge metric with value type
+<span class='object_link'><a href="../../../Api/MetricDescriptor/ValueType.html#DOUBLE-constant" title="Google::Api::MetricDescriptor::ValueType::DOUBLE (constant)">DOUBLE</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->
