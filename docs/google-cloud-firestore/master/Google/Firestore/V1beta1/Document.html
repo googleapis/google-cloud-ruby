@@ -1,0 +1,1122 @@
+---
+layout: yard_main
+title: "Class: Google::Firestore::V1beta1::Document - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Firestore::V1beta1::Document";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">Document</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Firestore::V1beta1::Document
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Firestore::V1beta1::Document</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A Firestore document.</p>
+
+<p>Must not exceed 1 MiB - 4 bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fields-instance_method" title="#fields (instance method)">#<strong>fields</strong>  &#x21d2; Hash{String =&gt; Google::Firestore::V1beta1::Value} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The document&#39;s fields.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The resource name of the document, for example +projects/project_id/databases/database_id/documents/document_path+.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_time-instance_method" title="#update_time (instance method)">#<strong>update_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="create_time=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="create_time-instance_method">
+  
+    #<strong>create_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The time at which the document was created.</p>
+
+<p>This value increases monotonically when a document is deleted then
+recreated. It can also be compared to values from other documents and
+the +read_time+ of a query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The time at which the document was created.</p>
+
+<p>This value increases monotonically when a document is deleted then
+recreated. It can also be compared to values from other documents and
+the +read_time+ of a query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fields=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="fields-instance_method">
+  
+    #<strong>fields</strong>  &#x21d2; <tt>Hash{String =&gt; <span class='object_link'><a href="Value.html" title="Google::Firestore::V1beta1::Value (class)">Google::Firestore::V1beta1::Value</a></span>}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The document&#39;s fields.</p>
+
+<p>The map keys represent field names.</p>
+
+<p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
++0+ to +9+, or +<em>+, and must not start with +0+ to +9+ or +</em>+. For example,
++foo_bar_17+.</p>
+
+<p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
+field names are forbidden except in certain documented contexts. The map
+keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be
+empty.</p>
+
+<p>Field paths may be used in other contexts to refer to structured fields
+defined here. For +map_value+, the field path is represented by the simple
+or quoted field names of the containing fields, delimited by +.+. For
+example, the structured field
++&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}+ would be
+represented by the field path +foo.x&amp;y+.</p>
+
+<p>Within a field path, a quoted field name starts and ends with + + + and
+may contain any character. Some characters, including + + +, must be
+escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
+
+<ul>
+<li>+bak+tik+ + represents + bak+tik +.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="Value.html" title="Google::Firestore::V1beta1::Value (class)">Google::Firestore::V1beta1::Value</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The document&#39;s fields.</p>
+
+<p>The map keys represent field names.</p>
+
+<p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
++0+ to +9+, or +<em>+, and must not start with +0+ to +9+ or +</em>+. For example,
++foo_bar_17+.</p>
+
+<p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
+field names are forbidden except in certain documented contexts. The map
+keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be
+empty.</p>
+
+<p>Field paths may be used in other contexts to refer to structured fields
+defined here. For +map_value+, the field path is represented by the simple
+or quoted field names of the containing fields, delimited by +.+. For
+example, the structured field
++&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}+ would be
+represented by the field path +foo.x&amp;y+.</p>
+
+<p>Within a field path, a quoted field name starts and ends with + + + and
+may contain any character. Some characters, including + + +, must be
+escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
+
+<ul>
+<li>+bak+tik+ + represents + bak+tik +.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The resource name of the document, for example
++projects/project_id/databases/database_id/documents/document_path+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The resource name of the document, for example
++projects/project_id/databases/database_id/documents/document_path+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="update_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="update_time-instance_method">
+  
+    #<strong>update_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The time at which the document was last changed.</p>
+
+<p>This value is initally set to the +create_time+ then increases
+monotonically with each change to the document. It can also be
+compared to values from other documents and the +read_time+ of a query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The time at which the document was last changed.</p>
+
+<p>This value is initally set to the +create_time+ then increases
+monotonically with each change to the document. It can also be
+compared to values from other documents and the +read_time+ of a query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Google::Firestore::V1beta1::Document
+  
+    &mdash; Google
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Firestore::V1beta1::Document";
+  relpath = '../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Firestore.html" title="Google::Firestore (module)">Firestore</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1beta1.html" title="Google::Firestore::V1beta1 (module)">V1beta1</a></span></span>
+     &raquo; 
+    <span class="title">Document</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Google::Firestore::V1beta1::Document
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Firestore::V1beta1::Document</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A Firestore document.</p>
+
+<p>Must not exceed 1 MiB - 4 bytes.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_time-instance_method" title="#create_time (instance method)">#<strong>create_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fields-instance_method" title="#fields (instance method)">#<strong>fields</strong>  &#x21d2; Hash{String =&gt; Google::Firestore::V1beta1::Value} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The document&#39;s fields.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The resource name of the document, for example +projects/project_id/databases/database_id/documents/document_path+.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_time-instance_method" title="#update_time (instance method)">#<strong>update_time</strong>  &#x21d2; Google::Protobuf::Timestamp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="create_time=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="create_time-instance_method">
+  
+    #<strong>create_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The time at which the document was created.</p>
+
+<p>This value increases monotonically when a document is deleted then
+recreated. It can also be compared to values from other documents and
+the +read_time+ of a query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The time at which the document was created.</p>
+
+<p>This value increases monotonically when a document is deleted then
+recreated. It can also be compared to values from other documents and
+the +read_time+ of a query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fields=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="fields-instance_method">
+  
+    #<strong>fields</strong>  &#x21d2; <tt>Hash{String =&gt; <span class='object_link'><a href="Value.html" title="Google::Firestore::V1beta1::Value (class)">Google::Firestore::V1beta1::Value</a></span>}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The document&#39;s fields.</p>
+
+<p>The map keys represent field names.</p>
+
+<p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
++0+ to +9+, or +<em>+, and must not start with +0+ to +9+ or +</em>+. For example,
++foo_bar_17+.</p>
+
+<p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
+field names are forbidden except in certain documented contexts. The map
+keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be
+empty.</p>
+
+<p>Field paths may be used in other contexts to refer to structured fields
+defined here. For +map_value+, the field path is represented by the simple
+or quoted field names of the containing fields, delimited by +.+. For
+example, the structured field
++&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}+ would be
+represented by the field path +foo.x&amp;y+.</p>
+
+<p>Within a field path, a quoted field name starts and ends with + + + and
+may contain any character. Some characters, including + + +, must be
+escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
+
+<ul>
+<li>+bak+tik+ + represents + bak+tik +.</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="Value.html" title="Google::Firestore::V1beta1::Value (class)">Google::Firestore::V1beta1::Value</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The document&#39;s fields.</p>
+
+<p>The map keys represent field names.</p>
+
+<p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
++0+ to +9+, or +<em>+, and must not start with +0+ to +9+ or +</em>+. For example,
++foo_bar_17+.</p>
+
+<p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
+field names are forbidden except in certain documented contexts. The map
+keys, represented as UTF-8, must not exceed 1,500 bytes and cannot be
+empty.</p>
+
+<p>Field paths may be used in other contexts to refer to structured fields
+defined here. For +map_value+, the field path is represented by the simple
+or quoted field names of the containing fields, delimited by +.+. For
+example, the structured field
++&quot;foo&quot; : { map_value: { &quot;x&amp;y&quot; : { string_value: &quot;hello&quot; }}}+ would be
+represented by the field path +foo.x&amp;y+.</p>
+
+<p>Within a field path, a quoted field name starts and ends with + + + and
+may contain any character. Some characters, including + + +, must be
+escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
+
+<ul>
+<li>+bak+tik+ + represents + bak+tik +.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The resource name of the document, for example
++projects/project_id/databases/database_id/documents/document_path+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The resource name of the document, for example
++projects/project_id/databases/database_id/documents/document_path+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="update_time=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="update_time-instance_method">
+  
+    #<strong>update_time</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. The time at which the document was last changed.</p>
+
+<p>This value is initally set to the +create_time+ then increases
+monotonically with each change to the document. It can also be
+compared to values from other documents and the +read_time+ of a query.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. The time at which the document was last changed.</p>
+
+<p>This value is initally set to the +create_time+ then increases
+monotonically with each change to the document. It can also be
+compared to values from other documents and the +read_time+ of a query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb', line 65</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::Document (class)">Document</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->
