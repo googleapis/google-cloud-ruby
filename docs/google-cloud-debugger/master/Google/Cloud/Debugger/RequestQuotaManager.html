@@ -1,0 +1,1692 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Debugger::RequestQuotaManager - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::RequestQuotaManager";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span>
+     &raquo; 
+    <span class="title">RequestQuotaManager</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Debugger::RequestQuotaManager
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Debugger::RequestQuotaManager</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/request_quota_manager.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>RequestQuotaManager</h1>
+
+<p>Tracking object used by debugger agent to manage quota in
+request-based applications. This class tracks the amount of time
+and number of breakpoints to evaluation in a single session.</p>
+
+<p>The debugger agent doesn&#39;t have use a quota manager by default, which
+means it will evaluate all breakpoints encountered and takes as much
+time as needed. This class is utilized by
+<span class='object_link'><a href="Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span> class to limit latency overhead
+when used in Rack-based applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_TIME_QUOTA-constant" class="">DEFAULT_TIME_QUOTA =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Default Total time allowed to consume, in seconds</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='float'>0.05</span></pre></dd>
+      
+        <dt id="DEFAULT_COUNT_QUOTA-constant" class="">DEFAULT_COUNT_QUOTA =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Default max number of breakpoints to evaluate</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#count_quota-instance_method" title="#count_quota (instance method)">#<strong>count_quota</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The count quota for this manager.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#count_used-instance_method" title="#count_used (instance method)">#<strong>count_used</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The count quota used.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_quota-instance_method" title="#time_quota (instance method)">#<strong>time_quota</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time quota for this manager.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_used-instance_method" title="#time_used (instance method)">#<strong>time_used</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time quota used.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#consume-instance_method" title="#consume (instance method)">#<strong>consume</strong>(time: 0)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Notify the quota manager some resource has been consumed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(time_quota: DEFAULT_TIME_QUOTA, count_quota: DEFAULT_COUNT_QUOTA)  &#x21d2; RequestQuotaManager </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Construct a new RequestQuotaManager instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#more%3F-instance_method" title="#more? (instance method)">#<strong>more?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if there&#39;s more quota left.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset-instance_method" title="#reset (instance method)">#<strong>reset</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reset all the quota usage.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(time_quota: DEFAULT_TIME_QUOTA, count_quota: DEFAULT_COUNT_QUOTA)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::RequestQuotaManager (class)">RequestQuotaManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Construct a new RequestQuotaManager instance</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time_quota</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The max quota for time consumed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>count_quota</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The max quota for count usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='label'>time_quota:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIME_QUOTA-constant" title="Google::Cloud::Debugger::RequestQuotaManager::DEFAULT_TIME_QUOTA (constant)">DEFAULT_TIME_QUOTA</a></span></span><span class='comma'>,</span>
+               <span class='label'>count_quota:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_COUNT_QUOTA-constant" title="Google::Cloud::Debugger::RequestQuotaManager::DEFAULT_COUNT_QUOTA (constant)">DEFAULT_COUNT_QUOTA</a></span></span>
+  <span class='ivar'>@time_quota</span> <span class='op'>=</span> <span class='id identifier rubyid_time_quota'>time_quota</span>
+  <span class='ivar'>@time_used</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@count_quota</span> <span class='op'>=</span> <span class='id identifier rubyid_count_quota'>count_quota</span>
+  <span class='ivar'>@count_used</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="count_quota=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="count_quota-instance_method">
+  
+    #<strong>count_quota</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The count quota for this manager</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_count_quota'>count_quota</span>
+  <span class='ivar'>@count_quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="count_used=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="count_used-instance_method">
+  
+    #<strong>count_used</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The count quota used</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_count_used'>count_used</span>
+  <span class='ivar'>@count_used</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="time_quota=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="time_quota-instance_method">
+  
+    #<strong>time_quota</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time quota for this manager</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_time_quota'>time_quota</span>
+  <span class='ivar'>@time_quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="time_used=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="time_used-instance_method">
+  
+    #<strong>time_used</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time quota used</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_time_used'>time_used</span>
+  <span class='ivar'>@time_used</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="consume-instance_method">
+  
+    #<strong>consume</strong>(time: 0)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Notify the quota manager some resource has been consumed. Each time
+called increases the count quota usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Amount of time to deduct from the time quota.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 88</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_consume'>consume</span> <span class='label'>time:</span> <span class='int'>0</span>
+  <span class='ivar'>@time_used</span> <span class='op'>+=</span> <span class='id identifier rubyid_time'>time</span>
+  <span class='ivar'>@count_used</span> <span class='op'>+=</span> <span class='int'>1</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="more?-instance_method">
+  
+    #<strong>more?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if there&#39;s more quota left.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if there&#39;s more quota; false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_more?'>more?</span>
+  <span class='lparen'>(</span><span class='id identifier rubyid_time_used'>time_used</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_time_quota'>time_quota</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_count_used'>count_used</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_count_quota'>count_quota</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset-instance_method">
+  
+    #<strong>reset</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reset all the quota usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
+  <span class='ivar'>@time_used</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@count_used</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Google::Cloud::Debugger::RequestQuotaManager
+  
+    &mdash; Stackdriver
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::RequestQuotaManager";
+  relpath = '../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span>
+     &raquo; 
+    <span class="title">RequestQuotaManager</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Google::Cloud::Debugger::RequestQuotaManager
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Debugger::RequestQuotaManager</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/request_quota_manager.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>RequestQuotaManager</h1>
+
+<p>Tracking object used by debugger agent to manage quota in
+request-based applications. This class tracks the amount of time
+and number of breakpoints to evaluation in a single session.</p>
+
+<p>The debugger agent doesn&#39;t have use a quota manager by default, which
+means it will evaluate all breakpoints encountered and takes as much
+time as needed. This class is utilized by
+<span class='object_link'><a href="Middleware.html" title="Google::Cloud::Debugger::Middleware (class)">Middleware</a></span> class to limit latency overhead
+when used in Rack-based applications.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_TIME_QUOTA-constant" class="">DEFAULT_TIME_QUOTA =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Default Total time allowed to consume, in seconds</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='float'>0.05</span></pre></dd>
+      
+        <dt id="DEFAULT_COUNT_QUOTA-constant" class="">DEFAULT_COUNT_QUOTA =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Default max number of breakpoints to evaluate</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#count_quota-instance_method" title="#count_quota (instance method)">#<strong>count_quota</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The count quota for this manager.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#count_used-instance_method" title="#count_used (instance method)">#<strong>count_used</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The count quota used.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_quota-instance_method" title="#time_quota (instance method)">#<strong>time_quota</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time quota for this manager.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_used-instance_method" title="#time_used (instance method)">#<strong>time_used</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time quota used.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#consume-instance_method" title="#consume (instance method)">#<strong>consume</strong>(time: 0)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Notify the quota manager some resource has been consumed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(time_quota: DEFAULT_TIME_QUOTA, count_quota: DEFAULT_COUNT_QUOTA)  &#x21d2; RequestQuotaManager </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Construct a new RequestQuotaManager instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#more%3F-instance_method" title="#more? (instance method)">#<strong>more?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check if there&#39;s more quota left.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reset-instance_method" title="#reset (instance method)">#<strong>reset</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reset all the quota usage.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(time_quota: DEFAULT_TIME_QUOTA, count_quota: DEFAULT_COUNT_QUOTA)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::RequestQuotaManager (class)">RequestQuotaManager</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Construct a new RequestQuotaManager instance</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time_quota</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The max quota for time consumed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>count_quota</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The max quota for count usage.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='label'>time_quota:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIME_QUOTA-constant" title="Google::Cloud::Debugger::RequestQuotaManager::DEFAULT_TIME_QUOTA (constant)">DEFAULT_TIME_QUOTA</a></span></span><span class='comma'>,</span>
+               <span class='label'>count_quota:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_COUNT_QUOTA-constant" title="Google::Cloud::Debugger::RequestQuotaManager::DEFAULT_COUNT_QUOTA (constant)">DEFAULT_COUNT_QUOTA</a></span></span>
+  <span class='ivar'>@time_quota</span> <span class='op'>=</span> <span class='id identifier rubyid_time_quota'>time_quota</span>
+  <span class='ivar'>@time_used</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@count_quota</span> <span class='op'>=</span> <span class='id identifier rubyid_count_quota'>count_quota</span>
+  <span class='ivar'>@count_used</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="count_quota=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="count_quota-instance_method">
+  
+    #<strong>count_quota</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The count quota for this manager</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_count_quota'>count_quota</span>
+  <span class='ivar'>@count_quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="count_used=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="count_used-instance_method">
+  
+    #<strong>count_used</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The count quota used</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_count_used'>count_used</span>
+  <span class='ivar'>@count_used</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="time_quota=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="time_quota-instance_method">
+  
+    #<strong>time_quota</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time quota for this manager</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_time_quota'>time_quota</span>
+  <span class='ivar'>@time_quota</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="time_used=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="time_used-instance_method">
+  
+    #<strong>time_used</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time quota used</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_time_used'>time_used</span>
+  <span class='ivar'>@time_used</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="consume-instance_method">
+  
+    #<strong>consume</strong>(time: 0)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Notify the quota manager some resource has been consumed. Each time
+called increases the count quota usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Amount of time to deduct from the time quota.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 88</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_consume'>consume</span> <span class='label'>time:</span> <span class='int'>0</span>
+  <span class='ivar'>@time_used</span> <span class='op'>+=</span> <span class='id identifier rubyid_time'>time</span>
+  <span class='ivar'>@count_used</span> <span class='op'>+=</span> <span class='int'>1</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="more?-instance_method">
+  
+    #<strong>more?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check if there&#39;s more quota left.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if there&#39;s more quota; false otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_more?'>more?</span>
+  <span class='lparen'>(</span><span class='id identifier rubyid_time_used'>time_used</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_time_quota'>time_quota</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_count_used'>count_used</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_count_quota'>count_quota</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reset-instance_method">
+  
+    #<strong>reset</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reset all the quota usage.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/request_quota_manager.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
+  <span class='ivar'>@time_used</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@count_used</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->

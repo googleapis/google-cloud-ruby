@@ -1,0 +1,2372 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Debugger::Agent - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::Agent";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span>
+     &raquo; 
+    <span class="title">Agent</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Debugger::Agent
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Debugger::Agent</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>Stackdriver::Core::AsyncActor</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/agent.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Agent</h1>
+
+<p>The Stackdriver Debugger Agent runs on the same system where a debuggee
+application is running. The agent is responsible for sending state data,
+such as the value of program variables and the call stack, to
+Stackdriver Debugger when the code at a breakpoint location is executed.</p>
+
+<p>The Debugger Agent runs in its own child thread when started. It ensures
+the instrumented application is registered properly and constantly
+monitors for any active breakpoints. Once the agent gets updated with
+active breakpoints from Stackdriver Debugger service, it facilitates
+the breakpoints in application requests thread, then transport the
+result snapshot back to Stackdriver Debugger service asynchronously.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_debugger'>debugger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span>
+<span class='id identifier rubyid_agent'>agent</span> <span class='op'>=</span> <span class='id identifier rubyid_debugger'>debugger</span><span class='period'>.</span><span class='id identifier rubyid_agent'>agent</span>
+<span class='id identifier rubyid_agent'>agent</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span></code></pre>
+    
+  </div>
+
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_LOG_NAME-constant" class="">DEFAULT_LOG_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Name of the logpoints log file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>debugger_logpoints</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#app_root-instance_method" title="#app_root (instance method)">#<strong>app_root</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Absolute path to the debuggee Ruby application root directory.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#breakpoint_manager-instance_method" title="#breakpoint_manager (instance method)">#<strong>breakpoint_manager</strong>  &#x21d2; Google::Cloud::Debugger::BreakpointManager </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>It manages syncing breakpoints between the Debugger Agent and Stackdriver Debugger service.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debuggee-instance_method" title="#debuggee (instance method)">#<strong>debuggee</strong>  &#x21d2; Google::Cloud::Debugger::Debuggee </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The gRPC Debuggee representation of the debuggee application.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-instance_method" title="#logger (instance method)">#<strong>logger</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The logger used to write the results of Logpoints.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#quota_manager-instance_method" title="#quota_manager (instance method)">#<strong>quota_manager</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A quota tracking object helps tracking resource consumption during evaluations.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tracer-instance_method" title="#tracer (instance method)">#<strong>tracer</strong>  &#x21d2; Google::Cloud::Debugger::Tracer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>It monitors the debuggee application and triggers breakpoint evaluation when breakpoints are set.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transmitter-instance_method" title="#transmitter (instance method)">#<strong>transmitter</strong>  &#x21d2; Google::Cloud::Debugger::Transmiter </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>It sends evaluated breakpoints snapshot back to Stackdriver Debugger Service.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service, logger: nil, service_name:, service_version:, app_root: nil)  &#x21d2; Agent </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Debugger Agent instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start-instance_method" title="#start (instance method)">#<strong>start</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Starts the Debugger Agent in a child thread, where debuggee application registration and breakpoints querying will take place.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stops and terminates the Debugger Agent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop_tracer-instance_method" title="#stop_tracer (instance method)">#<strong>stop_tracer</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stops the tracer regardless of whether any active breakpoints are present.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(service, logger: nil, service_name:, service_version:, app_root: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::Agent (class)">Agent</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Debugger Agent instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'>Google::Cloud::Debugger::Service</span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The gRPC Service
+object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logger</span>
+      
+      
+        <span class='type'>(<tt>Google::Cloud::Logging::Logger</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The logger used
+to write the results of Logpoints.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Name for the debuggee application.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_version</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Version identifier for the debuggee
+application.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>app_root</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Absolute path to the root directory of
+the debuggee application. Default to Rack root.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>logger:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>service_name:</span><span class='comma'>,</span> <span class='label'>service_version:</span><span class='comma'>,</span>
+               <span class='label'>app_root:</span> <span class='kw'>nil</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@service</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span>
+  <span class='ivar'>@debuggee</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Debuggee</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>service_name:</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='comma'>,</span>
+                                    <span class='label'>service_version:</span> <span class='id identifier rubyid_service_version'>service_version</span>
+  <span class='ivar'>@tracer</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tracer.html" title="Google::Cloud::Debugger::Tracer (class)">Tracer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>self</span>
+  <span class='ivar'>@breakpoint_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="BreakpointManager.html" title="Google::Cloud::Debugger::BreakpointManager (class)">BreakpointManager</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+  <span class='ivar'>@breakpoint_manager</span><span class='period'>.</span><span class='id identifier rubyid_on_breakpoints_change'>on_breakpoints_change</span> <span class='op'>=</span>
+    <span class='id identifier rubyid_method'>method</span> <span class='symbol'>:breakpoints_change_callback</span>
+
+  <span class='ivar'>@transmitter</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Transmitter.html" title="Google::Cloud::Debugger::Transmitter (class)">Transmitter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+
+  <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span> <span class='op'>||</span> <span class='id identifier rubyid_default_logger'>default_logger</span>
+
+  <span class='id identifier rubyid_init_app_root'>init_app_root</span> <span class='id identifier rubyid_app_root'>app_root</span>
+
+  <span class='comment'># Agent actor thread needs to force exit immediately.
+</span>  <span class='id identifier rubyid_set_cleanup_options'>set_cleanup_options</span> <span class='label'>timeout:</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="app_root=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="app_root-instance_method">
+  
+    #<strong>app_root</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Absolute path to the debuggee Ruby application root directory. The
+Stackdriver Debugger service creates canonical breakpoints with only
+relative path. So the debugger agent combines the relative path to
+the application directory to trace and evaluate breakpoints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_app_root'>app_root</span>
+  <span class='ivar'>@app_root</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="breakpoint_manager-instance_method">
+  
+    #<strong>breakpoint_manager</strong>  &#x21d2; <tt><span class='object_link'><a href="BreakpointManager.html" title="Google::Cloud::Debugger::BreakpointManager (class)">Google::Cloud::Debugger::BreakpointManager</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>It manages syncing breakpoints between the Debugger Agent and
+Stackdriver Debugger service</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BreakpointManager.html" title="Google::Cloud::Debugger::BreakpointManager (class)">Google::Cloud::Debugger::BreakpointManager</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_breakpoint_manager'>breakpoint_manager</span>
+  <span class='ivar'>@breakpoint_manager</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="debuggee-instance_method">
+  
+    #<strong>debuggee</strong>  &#x21d2; <tt><span class='object_link'><a href="Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Google::Cloud::Debugger::Debuggee</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The gRPC Debuggee representation of the debuggee application. It
+contains identification information to match running application to
+specific Cloud Source Repository code base, and correctly group
+same versions of the debuggee application together through a generated
+unique identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Google::Cloud::Debugger::Debuggee</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_debuggee'>debuggee</span>
+  <span class='ivar'>@debuggee</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="logger=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="logger-instance_method">
+  
+    #<strong>logger</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The logger used to write the results of Logpoints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
+  <span class='ivar'>@logger</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="quota_manager=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="quota_manager-instance_method">
+  
+    #<strong>quota_manager</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A quota tracking object helps tracking resource consumption during
+evaluations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_quota_manager'>quota_manager</span>
+  <span class='ivar'>@quota_manager</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tracer-instance_method">
+  
+    #<strong>tracer</strong>  &#x21d2; <tt><span class='object_link'><a href="Tracer.html" title="Google::Cloud::Debugger::Tracer (class)">Google::Cloud::Debugger::Tracer</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>It monitors the debuggee application and triggers breakpoint
+evaluation when breakpoints are set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Tracer.html" title="Google::Cloud::Debugger::Tracer (class)">Google::Cloud::Debugger::Tracer</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tracer'>tracer</span>
+  <span class='ivar'>@tracer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="transmitter-instance_method">
+  
+    #<strong>transmitter</strong>  &#x21d2; <tt>Google::Cloud::Debugger::Transmiter</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>It sends evaluated breakpoints snapshot back to Stackdriver Debugger
+Service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Cloud::Debugger::Transmiter</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_transmitter'>transmitter</span>
+  <span class='ivar'>@transmitter</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="start-instance_method">
+  
+    #<strong>start</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Starts the Debugger Agent in a child thread, where debuggee
+application registration and breakpoints querying will take place.
+It also starts the transmitter in another child thread.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 150</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_start'>start</span>
+  <span class='id identifier rubyid_transmitter'>transmitter</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+  <span class='id identifier rubyid_async_start'>async_start</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stops and terminates the Debugger Agent. It also properly shuts down
+transmitter and tracer.</p>
+
+<p>Once Debugger Agent is stopped, it cannot be started again.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161
+162
+163
+164</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 161</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
+  <span class='id identifier rubyid_transmitter'>transmitter</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span>
+  <span class='id identifier rubyid_async_stop'>async_stop</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop_tracer-instance_method">
+  
+    #<strong>stop_tracer</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stops the tracer regardless of whether any active breakpoints are
+present. Once the tracer stops monitoring the debuggee application,
+the application can return to normal performance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+170
+171
+172</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 170</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stop_tracer'>stop_tracer</span>
+  <span class='id identifier rubyid_tracer'>tracer</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Google::Cloud::Debugger::Agent
+  
+    &mdash; Stackdriver
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Debugger::Agent";
+  relpath = '../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span>
+     &raquo; 
+    <span class="title">Agent</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Google::Cloud::Debugger::Agent
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Debugger::Agent</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd>Stackdriver::Core::AsyncActor</dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/debugger/agent.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Agent</h1>
+
+<p>The Stackdriver Debugger Agent runs on the same system where a debuggee
+application is running. The agent is responsible for sending state data,
+such as the value of program variables and the call stack, to
+Stackdriver Debugger when the code at a breakpoint location is executed.</p>
+
+<p>The Debugger Agent runs in its own child thread when started. It ensures
+the instrumented application is registered properly and constantly
+monitors for any active breakpoints. Once the agent gets updated with
+active breakpoints from Stackdriver Debugger service, it facilitates
+the breakpoints in application requests thread, then transport the
+result snapshot back to Stackdriver Debugger service asynchronously.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_debugger'>debugger</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span>
+<span class='id identifier rubyid_agent'>agent</span> <span class='op'>=</span> <span class='id identifier rubyid_debugger'>debugger</span><span class='period'>.</span><span class='id identifier rubyid_agent'>agent</span>
+<span class='id identifier rubyid_agent'>agent</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span></code></pre>
+    
+  </div>
+
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_LOG_NAME-constant" class="">DEFAULT_LOG_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Name of the logpoints log file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>debugger_logpoints</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#app_root-instance_method" title="#app_root (instance method)">#<strong>app_root</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Absolute path to the debuggee Ruby application root directory.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#breakpoint_manager-instance_method" title="#breakpoint_manager (instance method)">#<strong>breakpoint_manager</strong>  &#x21d2; Google::Cloud::Debugger::BreakpointManager </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>It manages syncing breakpoints between the Debugger Agent and Stackdriver Debugger service.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debuggee-instance_method" title="#debuggee (instance method)">#<strong>debuggee</strong>  &#x21d2; Google::Cloud::Debugger::Debuggee </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The gRPC Debuggee representation of the debuggee application.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#logger-instance_method" title="#logger (instance method)">#<strong>logger</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The logger used to write the results of Logpoints.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#quota_manager-instance_method" title="#quota_manager (instance method)">#<strong>quota_manager</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A quota tracking object helps tracking resource consumption during evaluations.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tracer-instance_method" title="#tracer (instance method)">#<strong>tracer</strong>  &#x21d2; Google::Cloud::Debugger::Tracer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>It monitors the debuggee application and triggers breakpoint evaluation when breakpoints are set.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transmitter-instance_method" title="#transmitter (instance method)">#<strong>transmitter</strong>  &#x21d2; Google::Cloud::Debugger::Transmiter </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>It sends evaluated breakpoints snapshot back to Stackdriver Debugger Service.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service, logger: nil, service_name:, service_version:, app_root: nil)  &#x21d2; Agent </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a new Debugger Agent instance.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start-instance_method" title="#start (instance method)">#<strong>start</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Starts the Debugger Agent in a child thread, where debuggee application registration and breakpoints querying will take place.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop-instance_method" title="#stop (instance method)">#<strong>stop</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stops and terminates the Debugger Agent.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stop_tracer-instance_method" title="#stop_tracer (instance method)">#<strong>stop_tracer</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stops the tracer regardless of whether any active breakpoints are present.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(service, logger: nil, service_name:, service_version:, app_root: nil)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::Agent (class)">Agent</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a new Debugger Agent instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'>Google::Cloud::Debugger::Service</span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The gRPC Service
+object</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logger</span>
+      
+      
+        <span class='type'>(<tt>Google::Cloud::Logging::Logger</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The logger used
+to write the results of Logpoints.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Name for the debuggee application.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_version</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Version identifier for the debuggee
+application.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>app_root</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Absolute path to the root directory of
+the debuggee application. Default to Rack root.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>logger:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>service_name:</span><span class='comma'>,</span> <span class='label'>service_version:</span><span class='comma'>,</span>
+               <span class='label'>app_root:</span> <span class='kw'>nil</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@service</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span>
+  <span class='ivar'>@debuggee</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Debuggee</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='label'>service_name:</span> <span class='id identifier rubyid_service_name'>service_name</span><span class='comma'>,</span>
+                                    <span class='label'>service_version:</span> <span class='id identifier rubyid_service_version'>service_version</span>
+  <span class='ivar'>@tracer</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tracer.html" title="Google::Cloud::Debugger::Tracer (class)">Tracer</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>self</span>
+  <span class='ivar'>@breakpoint_manager</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="BreakpointManager.html" title="Google::Cloud::Debugger::BreakpointManager (class)">BreakpointManager</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+  <span class='ivar'>@breakpoint_manager</span><span class='period'>.</span><span class='id identifier rubyid_on_breakpoints_change'>on_breakpoints_change</span> <span class='op'>=</span>
+    <span class='id identifier rubyid_method'>method</span> <span class='symbol'>:breakpoints_change_callback</span>
+
+  <span class='ivar'>@transmitter</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Transmitter.html" title="Google::Cloud::Debugger::Transmitter (class)">Transmitter</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+
+  <span class='ivar'>@logger</span> <span class='op'>=</span> <span class='id identifier rubyid_logger'>logger</span> <span class='op'>||</span> <span class='id identifier rubyid_default_logger'>default_logger</span>
+
+  <span class='id identifier rubyid_init_app_root'>init_app_root</span> <span class='id identifier rubyid_app_root'>app_root</span>
+
+  <span class='comment'># Agent actor thread needs to force exit immediately.
+</span>  <span class='id identifier rubyid_set_cleanup_options'>set_cleanup_options</span> <span class='label'>timeout:</span> <span class='int'>0</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="app_root=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="app_root-instance_method">
+  
+    #<strong>app_root</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Absolute path to the debuggee Ruby application root directory. The
+Stackdriver Debugger service creates canonical breakpoints with only
+relative path. So the debugger agent combines the relative path to
+the application directory to trace and evaluate breakpoints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_app_root'>app_root</span>
+  <span class='ivar'>@app_root</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="breakpoint_manager-instance_method">
+  
+    #<strong>breakpoint_manager</strong>  &#x21d2; <tt><span class='object_link'><a href="BreakpointManager.html" title="Google::Cloud::Debugger::BreakpointManager (class)">Google::Cloud::Debugger::BreakpointManager</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>It manages syncing breakpoints between the Debugger Agent and
+Stackdriver Debugger service</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="BreakpointManager.html" title="Google::Cloud::Debugger::BreakpointManager (class)">Google::Cloud::Debugger::BreakpointManager</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_breakpoint_manager'>breakpoint_manager</span>
+  <span class='ivar'>@breakpoint_manager</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="debuggee-instance_method">
+  
+    #<strong>debuggee</strong>  &#x21d2; <tt><span class='object_link'><a href="Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Google::Cloud::Debugger::Debuggee</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The gRPC Debuggee representation of the debuggee application. It
+contains identification information to match running application to
+specific Cloud Source Repository code base, and correctly group
+same versions of the debuggee application together through a generated
+unique identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Debuggee.html" title="Google::Cloud::Debugger::Debuggee (class)">Google::Cloud::Debugger::Debuggee</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_debuggee'>debuggee</span>
+  <span class='ivar'>@debuggee</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="logger=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="logger-instance_method">
+  
+    #<strong>logger</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The logger used to write the results of Logpoints.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
+  <span class='ivar'>@logger</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="quota_manager=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="quota_manager-instance_method">
+  
+    #<strong>quota_manager</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A quota tracking object helps tracking resource consumption during
+evaluations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_quota_manager'>quota_manager</span>
+  <span class='ivar'>@quota_manager</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="tracer-instance_method">
+  
+    #<strong>tracer</strong>  &#x21d2; <tt><span class='object_link'><a href="Tracer.html" title="Google::Cloud::Debugger::Tracer (class)">Google::Cloud::Debugger::Tracer</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>It monitors the debuggee application and triggers breakpoint
+evaluation when breakpoints are set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Tracer.html" title="Google::Cloud::Debugger::Tracer (class)">Google::Cloud::Debugger::Tracer</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_tracer'>tracer</span>
+  <span class='ivar'>@tracer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="transmitter-instance_method">
+  
+    #<strong>transmitter</strong>  &#x21d2; <tt>Google::Cloud::Debugger::Transmiter</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>It sends evaluated breakpoints snapshot back to Stackdriver Debugger
+Service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Cloud::Debugger::Transmiter</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_transmitter'>transmitter</span>
+  <span class='ivar'>@transmitter</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="start-instance_method">
+  
+    #<strong>start</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Starts the Debugger Agent in a child thread, where debuggee
+application registration and breakpoints querying will take place.
+It also starts the transmitter in another child thread.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 150</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_start'>start</span>
+  <span class='id identifier rubyid_transmitter'>transmitter</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+  <span class='id identifier rubyid_async_start'>async_start</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop-instance_method">
+  
+    #<strong>stop</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stops and terminates the Debugger Agent. It also properly shuts down
+transmitter and tracer.</p>
+
+<p>Once Debugger Agent is stopped, it cannot be started again.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161
+162
+163
+164</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 161</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
+  <span class='id identifier rubyid_transmitter'>transmitter</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span>
+  <span class='id identifier rubyid_async_stop'>async_stop</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="stop_tracer-instance_method">
+  
+    #<strong>stop_tracer</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stops the tracer regardless of whether any active breakpoints are
+present. Once the tracer stops monitoring the debuggee application,
+the application can return to normal performance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+170
+171
+172</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/agent.rb', line 170</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_stop_tracer'>stop_tracer</span>
+  <span class='id identifier rubyid_tracer'>tracer</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->
