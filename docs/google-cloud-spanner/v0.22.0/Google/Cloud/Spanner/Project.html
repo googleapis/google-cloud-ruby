@@ -1,0 +1,1711 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Spanner::Project - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Spanner::Project";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span>
+     &raquo; 
+    <span class="title">Project</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Spanner::Project
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Spanner::Project</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/spanner/project.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Project</h1>
+
+<p>Projects are top-level containers in Google Cloud Platform. They store
+information about billing and authorized users, and they contain
+Cloud Spanner data. Each project has a friendly name and a unique ID.</p>
+
+<p>Google::Cloud::Spanner::Project is the main object for interacting with
+Cloud Spanner.</p>
+
+<p><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Instance</a></span> and
+<span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Database</a></span> objects are created,
+accessed, and managed by Google::Cloud::Spanner::Project.</p>
+
+<p>A <span class='object_link'><a href="Client.html" title="Google::Cloud::Spanner::Client (class)">Client</a></span> obtained from a project can be used
+to read and/or modify data in a Cloud Spanner database.</p>
+
+<p>See <span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span> and <span class='object_link'><a href="../../Cloud.html#spanner-instance_method" title="Google::Cloud#spanner (method)">Google::Cloud#spanner</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'><p>Obtaining an instance and a database from a project.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_database'>database</span> <span class='op'>=</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_database'>database</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Obtaining a client for use with a database.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_db'>db</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_db'>db</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#client-instance_method" title="#client (instance method)">#<strong>client</strong>(instance_id, database_id, pool: {})  &#x21d2; Client </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a Cloud Spanner client.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_database-instance_method" title="#create_database (instance method)">#<strong>create_database</strong>(instance_id, database_id, statements: [])  &#x21d2; Database::Job </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a database and starts preparing it to begin serving.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_instance-instance_method" title="#create_instance (instance method)">#<strong>create_instance</strong>(instance_id, name: nil, config: nil, nodes: nil, labels: nil)  &#x21d2; Instance::Job </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a Cloud Spanner instance and starts preparing it to begin serving.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#database-instance_method" title="#database (instance method)">#<strong>database</strong>(instance_id, database_id)  &#x21d2; Google::Cloud::Spanner::Database<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a database by unique identifier.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#databases-instance_method" title="#databases (instance method)">#<strong>databases</strong>(instance_id, token: nil, max: nil)  &#x21d2; Array&lt;Google::Cloud::Spanner::Database&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the list of databases for the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instance-instance_method" title="#instance (instance method)">#<strong>instance</strong>(instance_id)  &#x21d2; Google::Cloud::Spanner::Instance<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves a Cloud Spanner instance by unique identifier.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instance_config-instance_method" title="#instance_config (instance method)">#<strong>instance_config</strong>(instance_config_id)  &#x21d2; Google::Cloud::Spanner::Instance::Config<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves an instance configuration by unique identifier.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instance_configs-instance_method" title="#instance_configs (instance method)">#<strong>instance_configs</strong>(token: nil, max: nil)  &#x21d2; Array&lt;Google::Cloud::Spanner::Instance::Config&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the list of instance configurations for the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#instances-instance_method" title="#instances (instance method)">#<strong>instances</strong>(token: nil, max: nil)  &#x21d2; Array&lt;Google::Cloud::Spanner::Instance&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the list of Cloud Spanner instances for the project.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project-instance_method" title="#project (instance method)">#<strong>project</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #project_id)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The identifier for the Cloud Spanner project.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="client-instance_method">
+  
+    #<strong>client</strong>(instance_id, database_id, pool: {})  &#x21d2; <tt><span class='object_link'><a href="Client.html" title="Google::Cloud::Spanner::Client (class)">Client</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a Cloud Spanner client. A client is used to read and/or modify
+data in a Cloud Spanner database.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_db'>db</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_db'>db</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_tx'>tx</span><span class='op'>|</span>
+  <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_tx'>tx</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT * FROM users</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_rows'>rows</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_row'>row</span><span class='op'>|</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_row'>row</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the instance.
+Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>database_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the database.
+Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pool</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Settings to control how and when sessions are
+managed by the client. The following settings can be provided:</p>
+
+<ul>
+<li><code>:min</code> (Integer) Minimum number of sessions that the client will
+maintain at any point in time. The default is 10.</li>
+<li><code>:max</code> (Integer) Maximum number of sessions that the client will
+have at any point in time. The default is 100.</li>
+<li><code>:keepalive</code> (Numeric) The amount of time a session can be idle
+before an attempt is made to prevent the idle sessions from being
+closed by the Cloud Spanner service. The default is 1800 (30
+minutes).</li>
+<li><code>:write_ratio</code> (Float) The ratio of sessions with pre-allocated
+transactions to those without. Pre-allocating transactions
+improves the performance of writes made by the client. The higher
+the value, the more transactions are pre-allocated. The value must
+be &gt;= 0 and &lt;= 1. The default is 0.3.</li>
+<li><code>:fail</code> (true/false) When <code>true</code> the client raises a
+<span class='object_link'><a href="SessionLimitError.html" title="Google::Cloud::Spanner::SessionLimitError (class)">SessionLimitError</a></span> when the client has allocated the <code>max</code> number
+of sessions. When <code>false</code> the client blocks until a session
+becomes available. The default is <code>true</code>.</li>
+<li><code>:threads</code> (Integer) The number of threads in the thread pool. The
+default is twice the number of available CPUs.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Client.html" title="Google::Cloud::Spanner::Client (class)">Client</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The newly created client.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+455
+456
+457
+458</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 455</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_client'>client</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_database_id'>database_id</span><span class='comma'>,</span> <span class='label'>pool:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='const'><span class='object_link'><a href="Client.html" title="Google::Cloud::Spanner::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_database_id'>database_id</span><span class='comma'>,</span>
+             <span class='id identifier rubyid_valid_session_pool_options'>valid_session_pool_options</span><span class='lparen'>(</span><span class='id identifier rubyid_pool'>pool</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_database-instance_method">
+  
+    #<strong>create_database</strong>(instance_id, database_id, statements: [])  &#x21d2; <tt><span class='object_link'><a href="Database/Job.html" title="Google::Cloud::Spanner::Database::Job (class)">Database::Job</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a database and starts preparing it to begin serving.</p>
+
+<p>See <span class='object_link'><a href="Database/Job.html" title="Google::Cloud::Spanner::Database::Job (class)">Database::Job</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_create_database'>create_database</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                              <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-new-database</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_reload!'>reload!</span> <span class='comment'># API call
+</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_database'>database</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_database'>database</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the instance.
+Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>database_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the database,
+which cannot be changed after the database is created. Values are of
+the form <code>[a-z][a-z0-9_\-]*[a-z0-9]</code> and must be between 2 and 30
+characters in length. Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>statements</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>DDL statements to run inside the
+newly created database. Statements can create tables, indexes, etc.
+These statements execute atomically with the creation of the
+database: if there is an error in any statement, the database is not
+created. Optional.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Database/Job.html" title="Google::Cloud::Spanner::Database::Job (class)">Database::Job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The job representing the long-running,
+asynchronous processing of a database create operation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+401
+402
+403
+404
+405</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 401</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_database'>create_database</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_database_id'>database_id</span><span class='comma'>,</span> <span class='label'>statements:</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_database'>create_database</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_database_id'>database_id</span><span class='comma'>,</span>
+                                 <span class='label'>statements:</span> <span class='id identifier rubyid_statements'>statements</span>
+  <span class='const'><span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Database/Job.html" title="Google::Cloud::Spanner::Database::Job (class)">Job</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_instance-instance_method">
+  
+    #<strong>create_instance</strong>(instance_id, name: nil, config: nil, nodes: nil, labels: nil)  &#x21d2; <tt><span class='object_link'><a href="Instance/Job.html" title="Google::Cloud::Spanner::Instance::Job (class)">Instance::Job</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a Cloud Spanner instance and starts preparing it to begin
+serving.</p>
+
+<p>See <span class='object_link'><a href="Instance/Job.html" title="Google::Cloud::Spanner::Instance::Job (class)">Instance::Job</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_job'>job</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_create_instance'>create_instance</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-new-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                              <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>My New Instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                              <span class='label'>config:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>regional-us-central1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                              <span class='label'>nodes:</span> <span class='int'>5</span><span class='comma'>,</span>
+                              <span class='label'>labels:</span> <span class='lbrace'>{</span> <span class='label'>production:</span> <span class='symbol'>:env</span> <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; false
+</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_reload!'>reload!</span> <span class='comment'># API call
+</span><span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_done?'>done?</span> <span class='comment'>#=&gt; true
+</span><span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_job'>job</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the instance,
+which cannot be changed after the instance is created. Values are of
+the form <code>[a-z][-a-z0-9]*[a-z0-9]</code> and must be between 6 and 30
+characters in length. Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The descriptive name for this instance as it
+appears in UIs. Must be unique per project and between 4 and 30
+characters in length. Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>config</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt><span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Instance::Config</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The name of the instance&#39;s
+configuration. Values can be the <code>instance_config_id</code>, the full
+path, or an <span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Instance::Config</a></span> object. Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nodes</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of nodes allocated to this instance.
+Required.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>labels</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Cloud Labels are a flexible and lightweight
+mechanism for organizing cloud resources into groups that reflect a
+customer&#39;s organizational needs and deployment strategies. Cloud
+Labels can be used to filter collections of resources. They can be
+used to control how resource metrics are aggregated. And they can be
+used as arguments to policy management rules (e.g. route, firewall,
+load balancing, etc.).</p>
+
+<ul>
+<li>Label keys must be between 1 and 63 characters long and must
+conform to the following regular expression:
+<code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.</li>
+<li>Label values must be between 0 and 63 characters long and must
+conform to the regular expression <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.</li>
+<li>No more than 64 labels can be associated with a given resource.</li>
+</ul>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Instance/Job.html" title="Google::Cloud::Spanner::Instance::Job (class)">Instance::Job</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The job representing the long-running,
+asynchronous processing of an instance create operation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+223
+224
+225
+226
+227
+228
+229
+230</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 223</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_instance'>create_instance</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>config:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>nodes:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                    <span class='label'>labels:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span> <span class='kw'>if</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:path</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_create_instance'>create_instance</span> \
+    <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>config:</span> <span class='id identifier rubyid_config'>config</span><span class='comma'>,</span> <span class='label'>nodes:</span> <span class='id identifier rubyid_nodes'>nodes</span><span class='comma'>,</span>
+                 <span class='label'>labels:</span> <span class='id identifier rubyid_labels'>labels</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/Job.html" title="Google::Cloud::Spanner::Instance::Job (class)">Job</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="database-instance_method">
+  
+    #<strong>database</strong>(instance_id, database_id)  &#x21d2; <tt><span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Google::Cloud::Spanner::Database</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a database by unique identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_database'>database</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_database'>database</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Will return <code>nil</code> if instance does not exist.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_database'>database</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_database'>database</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-database</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># nil</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the instance.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>database_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the database.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Google::Cloud::Spanner::Database</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The database, or <code>nil</code>
+if the database does not exist.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+360
+361
+362
+363
+364
+365
+366</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 360</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_database'>database</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_database_id'>database_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_database'>get_database</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_database_id'>database_id</span>
+  <span class='const'><span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Database</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="databases-instance_method">
+  
+    #<strong>databases</strong>(instance_id, token: nil, max: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Google::Cloud::Spanner::Database</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the list of databases for the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_databases'>databases</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_databases'>databases</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_databases'>databases</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_database'>database</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_database'>database</span><span class='period'>.</span><span class='id identifier rubyid_database_id'>database_id</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Retrieve all: (See Instance::Config::List::List#all)</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_databases'>databases</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_databases'>databases</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_databases'>databases</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_database'>database</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_database'>database</span><span class='period'>.</span><span class='id identifier rubyid_database_id'>database_id</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the instance.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>token</code> value returned by the last call to
+<code>databases</code>; indicates that this is a continuation of a call,
+and that the system should return the next page of data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of databases to return.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Google::Cloud::Spanner::Database</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of
+databases. (See <span class='object_link'><a href="Database/List.html" title="Google::Cloud::Spanner::Database::List (class)">Database::List</a></span>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+333
+334
+335
+336
+337</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 333</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_databases'>databases</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_databases'>list_databases</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max'>max</span>
+  <span class='const'><span class='object_link'><a href="Database.html" title="Google::Cloud::Spanner::Database (class)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Database/List.html" title="Google::Cloud::Spanner::Database::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='id identifier rubyid_instance_id'>instance_id</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="instance-instance_method">
+  
+    #<strong>instance</strong>(instance_id)  &#x21d2; <tt><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Google::Cloud::Spanner::Instance</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves a Cloud Spanner instance by unique identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-instance</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Will return <code>nil</code> if instance does not exist.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instance'>instance</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non-existing</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># nil</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The unique identifier for the instance.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Google::Cloud::Spanner::Instance</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The instance, or <code>nil</code>
+if the instance does not exist.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+163
+164
+165
+166
+167
+168
+169</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 163</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instance'>instance</span> <span class='id identifier rubyid_instance_id'>instance_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_instance'>get_instance</span> <span class='id identifier rubyid_instance_id'>instance_id</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Instance</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span>
+<span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="instance_config-instance_method">
+  
+    #<strong>instance_config</strong>(instance_config_id)  &#x21d2; <tt><span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Google::Cloud::Spanner::Instance::Config</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves an instance configuration by unique identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instance_config'>instance_config</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>regional-us-central1</span><span class='tstring_end'>&quot;</span></span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Will return <code>nil</code> if instance config does not exist.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+<span class='id identifier rubyid_config'>config</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instance_config'>instance_config</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non-existing</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># nil</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>instance_config_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The instance configuration
+identifier. Values can be the <code>instance_config_id</code>, or the full
+path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Google::Cloud::Spanner::Instance::Config</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The instance
+configuration, or <code>nil</code> if the instance configuration does not
+exist.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+293
+294
+295
+296
+297
+298
+299</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 293</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instance_config'>instance_config</span> <span class='id identifier rubyid_instance_config_id'>instance_config_id</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_get_instance_config'>get_instance_config</span> <span class='id identifier rubyid_instance_config_id'>instance_config_id</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Config</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span>
+<span class='kw'>rescue</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>NotFoundError</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="instance_configs-instance_method">
+  
+    #<strong>instance_configs</strong>(token: nil, max: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Google::Cloud::Spanner::Instance::Config</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the list of instance configurations for the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance_configs'>instance_configs</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instance_configs'>instance_configs</span>
+<span class='id identifier rubyid_instance_configs'>instance_configs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_instance_config_id'>instance_config_id</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Retrieve all: (See Instance::Config::List::List#all)</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instance_configs'>instance_configs</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instance_configs'>instance_configs</span>
+<span class='id identifier rubyid_instance_configs'>instance_configs</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_instance_config_id'>instance_config_id</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>token</code> value returned by the last call to
+<code>instance_configs</code>; indicates that this is a continuation of a call,
+and that the system should return the next page of data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of instance configs to return.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Google::Cloud::Spanner::Instance::Config</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of
+instance configurations. (See
+<span class='object_link'><a href="Instance/Config/List.html" title="Google::Cloud::Spanner::Instance::Config::List (class)">Instance::Config::List</a></span>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+264
+265
+266
+267
+268</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 264</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instance_configs'>instance_configs</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_instance_configs'>list_instance_configs</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max'>max</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/Config.html" title="Google::Cloud::Spanner::Instance::Config (class)">Config</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/Config/List.html" title="Google::Cloud::Spanner::Instance::Config::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="instances-instance_method">
+  
+    #<strong>instances</strong>(token: nil, max: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Google::Cloud::Spanner::Instance</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the list of Cloud Spanner instances for the project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instances'>instances</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instances'>instances</span>
+<span class='id identifier rubyid_instances'>instances</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_instance'>instance</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_instance_id'>instance_id</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Retrieve all: (See Instance::Config::List::List#all)</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/spanner</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_instances'>instances</span> <span class='op'>=</span> <span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_instances'>instances</span>
+<span class='id identifier rubyid_instances'>instances</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_instance'>instance</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_instance_id'>instance_id</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>token</code> value returned by the last call to
+<code>instances</code>; indicates that this is a continuation of a call,
+and that the system should return the next page of data.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of instances to return.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Google::Cloud::Spanner::Instance</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of
+instances. (See <span class='object_link'><a href="Instance/List.html" title="Google::Cloud::Spanner::Instance::List (class)">Instance::List</a></span>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140
+141</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_instances'>instances</span> <span class='label'>token:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_ensure_service!'>ensure_service!</span>
+  <span class='id identifier rubyid_grpc'>grpc</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_list_instances'>list_instances</span> <span class='label'>token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>max:</span> <span class='id identifier rubyid_max'>max</span>
+  <span class='const'><span class='object_link'><a href="Instance.html" title="Google::Cloud::Spanner::Instance (class)">Instance</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Instance/List.html" title="Google::Cloud::Spanner::Instance::List (class)">List</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_grpc'>from_grpc</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='comma'>,</span> <span class='id identifier rubyid_service'>service</span><span class='comma'>,</span> <span class='id identifier rubyid_max'>max</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="project-instance_method">
+  
+    #<strong>project</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='project_id-instance_method'>project_id</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The identifier for the Cloud Spanner project.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_spanner'>spanner</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Spanner.html#new-class_method" title="Google::Cloud::Spanner.new (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>project:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project-id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>keyfile:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+
+<span class='id identifier rubyid_spanner'>spanner</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span> <span class='comment'>#=&gt; &quot;my-project-id&quot;</span></code></pre>
+    
+  </div>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/project.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_project'>project</span>
+  <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_project'>project</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
