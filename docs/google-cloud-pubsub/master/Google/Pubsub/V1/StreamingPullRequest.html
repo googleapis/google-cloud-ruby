@@ -1,0 +1,1240 @@
+---
+layout: yard_main
+title: "Class: Google::Pubsub::V1::StreamingPullRequest - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Pubsub::V1::StreamingPullRequest";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Pubsub.html" title="Google::Pubsub (module)">Pubsub</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Pubsub::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">StreamingPullRequest</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Pubsub::V1::StreamingPullRequest
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Pubsub::V1::StreamingPullRequest</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Request for the +StreamingPull+ streaming RPC method. This request is used to
+establish the initial stream as well as to stream acknowledgements and ack
+deadline modifications from the client to the server.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ack_ids-instance_method" title="#ack_ids (instance method)">#<strong>ack_ids</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of acknowledgement IDs for acknowledging previously received messages (received on this stream or a different stream).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modify_deadline_ack_ids-instance_method" title="#modify_deadline_ack_ids (instance method)">#<strong>modify_deadline_ack_ids</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of acknowledgement IDs whose deadline will be modified based on the corresponding element in +modify_deadline_seconds+.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modify_deadline_seconds-instance_method" title="#modify_deadline_seconds (instance method)">#<strong>modify_deadline_seconds</strong>  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The list of new ack deadlines for the IDs listed in +modify_deadline_ack_ids+.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream_ack_deadline_seconds-instance_method" title="#stream_ack_deadline_seconds (instance method)">#<strong>stream_ack_deadline_seconds</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The ack deadline to use for the stream.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subscription-instance_method" title="#subscription (instance method)">#<strong>subscription</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The subscription for which to initialize the new stream.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="ack_ids=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="ack_ids-instance_method">
+  
+    #<strong>ack_ids</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns List of acknowledgement IDs for acknowledging previously received messages
+(received on this stream or a different stream). If an ack ID has expired,
+the corresponding message may be redelivered later. Acknowledging a message
+more than once will not result in an error. If the acknowledgement ID is
+malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of acknowledgement IDs for acknowledging previously received messages
+(received on this stream or a different stream). If an ack ID has expired,
+the corresponding message may be redelivered later. Acknowledging a message
+more than once will not result in an error. If the acknowledgement ID is
+malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="modify_deadline_ack_ids=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="modify_deadline_ack_ids-instance_method">
+  
+    #<strong>modify_deadline_ack_ids</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns List of acknowledgement IDs whose deadline will be modified based on the
+corresponding element in +modify_deadline_seconds+. This field can be used
+to indicate that more time is needed to process a message by the
+subscriber, or to make the message available for redelivery if the
+processing was interrupted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of acknowledgement IDs whose deadline will be modified based on the
+corresponding element in +modify_deadline_seconds+. This field can be used
+to indicate that more time is needed to process a message by the
+subscriber, or to make the message available for redelivery if the
+processing was interrupted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="modify_deadline_seconds=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="modify_deadline_seconds-instance_method">
+  
+    #<strong>modify_deadline_seconds</strong>  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The list of new ack deadlines for the IDs listed in
++modify_deadline_ack_ids+. The size of this list must be the same as the
+size of +modify_deadline_ack_ids+. If it differs the stream will be aborted
+with +INVALID_ARGUMENT+. Each element in this list is applied to the
+element in the same position in +modify_deadline_ack_ids+. The new ack
+deadline is with respect to the time this request was sent to the Pub/Sub
+system. Must be &gt;= 0. For example, if the value is 10, the new ack deadline
+will expire 10 seconds after this request is received. If the value is 0,
+the message is immediately made available for another streaming or
+non-streaming pull request. If the value is &lt; 0 (an error), the stream will
+be aborted with status +INVALID_ARGUMENT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of new ack deadlines for the IDs listed in
++modify_deadline_ack_ids+. The size of this list must be the same as the
+size of +modify_deadline_ack_ids+. If it differs the stream will be aborted
+with +INVALID_ARGUMENT+. Each element in this list is applied to the
+element in the same position in +modify_deadline_ack_ids+. The new ack
+deadline is with respect to the time this request was sent to the Pub/Sub
+system. Must be &gt;= 0. For example, if the value is 10, the new ack deadline
+will expire 10 seconds after this request is received. If the value is 0,
+the message is immediately made available for another streaming or
+non-streaming pull request. If the value is &lt; 0 (an error), the stream will
+be aborted with status +INVALID_ARGUMENT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stream_ack_deadline_seconds=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stream_ack_deadline_seconds-instance_method">
+  
+    #<strong>stream_ack_deadline_seconds</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The ack deadline to use for the stream. This must be provided in the
+first request on the stream, but it can also be updated on subsequent
+requests from client to server. The minimum deadline you can specify is 10
+seconds. The maximum deadline you can specify is 600 seconds (10 minutes).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ack deadline to use for the stream. This must be provided in the
+first request on the stream, but it can also be updated on subsequent
+requests from client to server. The minimum deadline you can specify is 10
+seconds. The maximum deadline you can specify is 600 seconds (10 minutes).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="subscription=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="subscription-instance_method">
+  
+    #<strong>subscription</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The subscription for which to initialize the new stream. This must be
+provided in the first request on the stream, and must not be set in
+subsequent requests from client to server.
+Format is +projects/project/subscriptions/sub+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The subscription for which to initialize the new stream. This must be
+provided in the first request on the stream, and must not be set in
+subsequent requests from client to server.
+Format is +projects/project/subscriptions/sub+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Google::Pubsub::V1::StreamingPullRequest
+  
+    &mdash; Google
+  
+</title>
+
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Pubsub::V1::StreamingPullRequest";
+  relpath = '../../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="google-cloud-header"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../../_index.html">Index (S)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Pubsub.html" title="Google::Pubsub (module)">Pubsub</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Pubsub::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">StreamingPullRequest</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Google::Pubsub::V1::StreamingPullRequest
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Pubsub::V1::StreamingPullRequest</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Request for the +StreamingPull+ streaming RPC method. This request is used to
+establish the initial stream as well as to stream acknowledgements and ack
+deadline modifications from the client to the server.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ack_ids-instance_method" title="#ack_ids (instance method)">#<strong>ack_ids</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of acknowledgement IDs for acknowledging previously received messages (received on this stream or a different stream).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modify_deadline_ack_ids-instance_method" title="#modify_deadline_ack_ids (instance method)">#<strong>modify_deadline_ack_ids</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>List of acknowledgement IDs whose deadline will be modified based on the corresponding element in +modify_deadline_seconds+.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#modify_deadline_seconds-instance_method" title="#modify_deadline_seconds (instance method)">#<strong>modify_deadline_seconds</strong>  &#x21d2; Array&lt;Integer&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The list of new ack deadlines for the IDs listed in +modify_deadline_ack_ids+.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stream_ack_deadline_seconds-instance_method" title="#stream_ack_deadline_seconds (instance method)">#<strong>stream_ack_deadline_seconds</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The ack deadline to use for the stream.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#subscription-instance_method" title="#subscription (instance method)">#<strong>subscription</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The subscription for which to initialize the new stream.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="ack_ids=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="ack_ids-instance_method">
+  
+    #<strong>ack_ids</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns List of acknowledgement IDs for acknowledging previously received messages
+(received on this stream or a different stream). If an ack ID has expired,
+the corresponding message may be redelivered later. Acknowledging a message
+more than once will not result in an error. If the acknowledgement ID is
+malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of acknowledgement IDs for acknowledging previously received messages
+(received on this stream or a different stream). If an ack ID has expired,
+the corresponding message may be redelivered later. Acknowledging a message
+more than once will not result in an error. If the acknowledgement ID is
+malformed, the stream will be aborted with status +INVALID_ARGUMENT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="modify_deadline_ack_ids=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="modify_deadline_ack_ids-instance_method">
+  
+    #<strong>modify_deadline_ack_ids</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns List of acknowledgement IDs whose deadline will be modified based on the
+corresponding element in +modify_deadline_seconds+. This field can be used
+to indicate that more time is needed to process a message by the
+subscriber, or to make the message available for redelivery if the
+processing was interrupted.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of acknowledgement IDs whose deadline will be modified based on the
+corresponding element in +modify_deadline_seconds+. This field can be used
+to indicate that more time is needed to process a message by the
+subscriber, or to make the message available for redelivery if the
+processing was interrupted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="modify_deadline_seconds=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="modify_deadline_seconds-instance_method">
+  
+    #<strong>modify_deadline_seconds</strong>  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The list of new ack deadlines for the IDs listed in
++modify_deadline_ack_ids+. The size of this list must be the same as the
+size of +modify_deadline_ack_ids+. If it differs the stream will be aborted
+with +INVALID_ARGUMENT+. Each element in this list is applied to the
+element in the same position in +modify_deadline_ack_ids+. The new ack
+deadline is with respect to the time this request was sent to the Pub/Sub
+system. Must be &gt;= 0. For example, if the value is 10, the new ack deadline
+will expire 10 seconds after this request is received. If the value is 0,
+the message is immediately made available for another streaming or
+non-streaming pull request. If the value is &lt; 0 (an error), the stream will
+be aborted with status +INVALID_ARGUMENT+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The list of new ack deadlines for the IDs listed in
++modify_deadline_ack_ids+. The size of this list must be the same as the
+size of +modify_deadline_ack_ids+. If it differs the stream will be aborted
+with +INVALID_ARGUMENT+. Each element in this list is applied to the
+element in the same position in +modify_deadline_ack_ids+. The new ack
+deadline is with respect to the time this request was sent to the Pub/Sub
+system. Must be &gt;= 0. For example, if the value is 10, the new ack deadline
+will expire 10 seconds after this request is received. If the value is 0,
+the message is immediately made available for another streaming or
+non-streaming pull request. If the value is &lt; 0 (an error), the stream will
+be aborted with status +INVALID_ARGUMENT+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stream_ack_deadline_seconds=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stream_ack_deadline_seconds-instance_method">
+  
+    #<strong>stream_ack_deadline_seconds</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The ack deadline to use for the stream. This must be provided in the
+first request on the stream, but it can also be updated on subsequent
+requests from client to server. The minimum deadline you can specify is 10
+seconds. The maximum deadline you can specify is 600 seconds (10 minutes).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The ack deadline to use for the stream. This must be provided in the
+first request on the stream, but it can also be updated on subsequent
+requests from client to server. The minimum deadline you can specify is 10
+seconds. The maximum deadline you can specify is 600 seconds (10 minutes).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="subscription=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="subscription-instance_method">
+  
+    #<strong>subscription</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The subscription for which to initialize the new stream. This must be
+provided in the first request on the stream, and must not be set in
+subsequent requests from client to server.
+Format is +projects/project/subscriptions/sub+.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The subscription for which to initialize the new stream. This must be
+provided in the first request on the stream, and must not be set in
+subsequent requests from client to server.
+Format is +projects/project/subscriptions/sub+.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 423</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::StreamingPullRequest (class)">StreamingPullRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+    </div>
+  </body>
+</html>
+-->
