@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,9 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [ErrorGroupServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
-      # | [ErrorStatsServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
-      # | [ReportErrorsServiceClient][] | Stackdriver Error Reporting groups and counts similar errors from cloud services. The Stackdriver Error Reporting API provides a way to report new errors and read access to error groups and their associated errors. |
+      # | [ReportErrorsServiceClient][] | An API for reporting error events. |
       # | [Data Types][] | Data types for Google::Cloud::ErrorReporting::V1beta1 |
       #
-      # [ErrorGroupServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorgroupserviceclient
-      # [ErrorStatsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorstatsserviceclient
       # [ReportErrorsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/reporterrorsserviceclient
       # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/datatypes
       #

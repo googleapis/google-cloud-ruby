@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_pb"
-require "google/cloud/error_reporting/credentials"
+require "google/cloud/error_reporting/v1beta1/credentials"
 
 module Google
   module Cloud
@@ -47,6 +44,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           # The scopes needed to make gRPC calls to all of the methods defined in
@@ -54,6 +54,7 @@ module Google
           ALL_SCOPES = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
+
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -94,16 +95,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -112,21 +115,10 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::ErrorReporting::Credentials.default
+            credentials ||= Google::Cloud::ErrorReporting::V1beta1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::ErrorReporting::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::ErrorReporting::V1beta1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -141,13 +133,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-error_reporting'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "report_errors_service_client_config.json"
             )
@@ -159,9 +154,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @report_errors_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -169,12 +169,14 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorsService::Stub.method(:new)
             )
 
             @report_error_event = Google::Gax.create_api_call(
               @report_errors_service_stub.method(:report_error_event),
-              defaults["report_error_event"]
+              defaults["report_error_event"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -201,26 +203,32 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/error_reporting/v1beta1"
+          #   require "google/cloud/error_reporting"
           #
-          #   report_errors_service_client = Google::Cloud::ErrorReporting::V1beta1::ReportErrors.new
+          #   report_errors_service_client = Google::Cloud::ErrorReporting::ReportErrors.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize +event+:
           #   event = {}
           #   response = report_errors_service_client.report_error_event(formatted_project_name, event)
 
           def report_error_event \
               project_name,
               event,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_name: project_name,
               event: event
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouderrorreporting::V1beta1::ReportErrorEventRequest)
-            @report_error_event.call(req, options)
+            @report_error_event.call(req, options, &block)
           end
         end
       end
