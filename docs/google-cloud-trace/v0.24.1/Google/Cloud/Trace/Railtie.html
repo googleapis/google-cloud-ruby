@@ -1,0 +1,542 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Trace::Railtie - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Trace::Railtie";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (R)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span>
+     &raquo; 
+    <span class="title">Railtie</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Trace::Railtie
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Rails::Railtie</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rails::Railtie</li>
+          
+            <li class="next">Google::Cloud::Trace::Railtie</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/trace/rails.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>Rails integration for Stackdriver Trace</h1>
+
+<p>This Railtie is a drop-in Stackdriver Trace instrumentation plugin
+for Ruby on Rails applications. If present, it automatically
+instruments your Rails app to record performance traces and cause them
+to appear on your Stackdriver console.</p>
+
+<h2>Installation</h2>
+
+<p>To install this plugin, the gem <code>google-cloud-trace</code> must be in your
+Gemfile. You also must add the following line to your <code>application.rb</code>
+file:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace/rails</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>If you include the <code>stackdriver</code> gem in your Gemfile, the above is done
+for you automatically, and you do not need to edit your
+<code>application.rb</code>.</p>
+
+<h2>Configuration</h2>
+
+<p>The following Rails configuration options are recognized.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_use_trace'>use_trace</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='op'>|</span> <span class='kw'>false</span>
+</code></pre>
+
+<p>Normally, tracing is activated when <code>RAILS_ENV</code> is set to <code>production</code>
+and credentials are available. You can override this and enable tracing
+in other environments by setting <code>use_trace</code> explicitly.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/file</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>If your application is running on Google Cloud Platform, it will
+automatically use credentials available to your project. However, if
+you are running an application locally or on a different hosting
+provider, you may provide a path to your credentials file using this
+configuration.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project-id</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>If your application is running on Google Cloud Platform, it will
+automatically select the project under which it is running. However, if
+you are running an application locally or on a different hosting
+provider, or if you want to log traces to a different project than you
+are using to host your application, you may provide the project ID.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_notifications'>notifications</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>event1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>event2</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+</code></pre>
+
+<p>By default, this Railtie subscribes to ActiveSupport notifications
+emitted by ActiveRecord queries, rendering, and emailing functions.
+See <span class='object_link'><a href="#DEFAULT_NOTIFICATIONS-constant" title="Google::Cloud::Trace::Railtie::DEFAULT_NOTIFICATIONS (constant)">DEFAULT_NOTIFICATIONS</a></span>. If you want to customize the list of
+notification types, edit the notifications configuration.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_max_data_length'>max_data_length</span> <span class='op'>=</span> <span class='int'>1024</span>
+</code></pre>
+
+<p>The maximum length of span properties recorded with ActiveSupport
+notification events. Any property value larger than this length is
+truncated.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_capture_stack'>capture_stack</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='op'>|</span> <span class='kw'>false</span>
+</code></pre>
+
+<p>Whether to capture the call stack with each trace span. Default is
+false.</p>
+
+<h2>Measuring custom functionality</h2>
+
+<p>To add a custom measurement to a request trace, use the classes
+provided in this library. Below is an example to get you started.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='kw'>class</span> <span class='const'>MyController</span> <span class='op'>&lt;</span> <span class='const'>ApplicationController</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
+    <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='period'>.</span><span class='id identifier rubyid_in_span'><span class='object_link'><a href="../Trace.html#in_span-class_method" title="Google::Cloud::Trace.in_span (method)">in_span</a></span></span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Sleeping on the job!</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_sleep'>sleep</span> <span class='id identifier rubyid_rand'>rand</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_render'>render</span> <span class='label'>plain:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello World!</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_NOTIFICATIONS-constant" class="">DEFAULT_NOTIFICATIONS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default list of ActiveSupport notification types to include in
+traces.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sql.active_record</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>render_template.action_view</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>send_file.action_controller</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>send_data.action_controller</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>deliver.action_mailer</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#project_id-class_method" title="project_id (class method)">.<strong>project_id</strong>(config)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the effective project ID for this app, given a Rails config.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_trace%3F-class_method" title="use_trace? (class method)">.<strong>use_trace?</strong>(config)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determine whether to use Stackdriver Trace or not.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="project_id-class_method">
+  
+    .<strong>project_id</strong>(config)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the effective project ID for this app, given a Rails config.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>config</span>
+      
+      
+        <span class='type'>(<tt>Rails::Railtie::Configuration</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The
+Rails.application.config</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The project ID, or nil if not found.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+193
+194
+195
+196
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/rails.rb', line 193</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='id identifier rubyid_config'>config</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span>
+    <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span>
+    <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TRACE_PROJECT</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>||</span>
+    <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GOOGLE_CLOUD_PROJECT</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>||</span>
+    <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='period'>.</span><span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_trace?-class_method">
+  
+    .<strong>use_trace?</strong>(config)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determine whether to use Stackdriver Trace or not.</p>
+
+<p>Returns true if valid GCP project_id and keyfile are provided and
+either Rails is in &quot;production&quot; environment or
+config.google_cloud.use_trace is explicitly true. Otherwise false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>config</span>
+      
+      
+        <span class='type'>(<tt>Rails::Railtie::Configuration</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The
+Rails.application.config</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether to use Stackdriver Trace</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/rails.rb', line 155</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_use_trace?'>use_trace?</span> <span class='id identifier rubyid_config'>config</span>
+  <span class='id identifier rubyid_gcp_config'>gcp_config</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_google_cloud'>google_cloud</span>
+
+  <span class='comment'># Return false if config.google_cloud.use_trace is
+</span>  <span class='comment'># explicitly false
+</span>  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_gcp_config'>gcp_config</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='symbol'>:use_trace</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>
+                  <span class='op'>!</span><span class='id identifier rubyid_gcp_config'>gcp_config</span><span class='period'>.</span><span class='id identifier rubyid_use_trace'>use_trace</span>
+
+  <span class='comment'># Try authenticate authorize client API. Return false if unable to
+</span>  <span class='comment'># authorize.
+</span>  <span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>=</span> <span class='id identifier rubyid_gcp_config'>gcp_config</span><span class='period'>.</span><span class='id identifier rubyid_trace'>trace</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span> <span class='op'>||</span> <span class='id identifier rubyid_gcp_config'>gcp_config</span><span class='period'>.</span><span class='id identifier rubyid_keyfile'>keyfile</span>
+  <span class='kw'>begin</span>
+    <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'>Credentials</span><span class='period'>.</span><span class='id identifier rubyid_credentials_with_scope'>credentials_with_scope</span> <span class='id identifier rubyid_keyfile'>keyfile</span>
+  <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+    <span class='const'>STDOUT</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Note: Google::Cloud::Trace is disabled because </span><span class='tstring_end'>&quot;</span></span> \
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>it failed to authorize with the service. (</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='lparen'>(</span><span class='id identifier rubyid_config'>config</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='const'>STDOUT</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Note: Google::Cloud::Trace is disabled because </span><span class='tstring_end'>&quot;</span></span> \
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>the project ID could not be determined.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Otherwise return true if Rails is running in production or
+</span>  <span class='comment'># config.google_cloud.use_trace is explicitly true
+</span>  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_production?'>production?</span> <span class='op'>||</span>
+    <span class='lparen'>(</span><span class='id identifier rubyid_gcp_config'>gcp_config</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='symbol'>:use_trace</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_gcp_config'>gcp_config</span><span class='period'>.</span><span class='id identifier rubyid_use_trace'>use_trace</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

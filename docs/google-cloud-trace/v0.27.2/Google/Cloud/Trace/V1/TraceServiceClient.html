@@ -1,0 +1,1780 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Trace::V1::TraceServiceClient - Stackdriver"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Trace::V1::TraceServiceClient";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Trace::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">TraceServiceClient</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Trace::V1::TraceServiceClient
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Trace::V1::TraceServiceClient</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/trace/v1/trace_service_client.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>This file describes an API for collecting and viewing traces and spans
+within a trace.  A Trace is a collection of spans corresponding to a single
+operation or set of operations for an application. A span is an individual
+timed event which forms a node of the trace tree. Spans for a single trace
+may span multiple services.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="SERVICE_ADDRESS-constant" class="">SERVICE_ADDRESS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default address of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloudtrace.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="DEFAULT_SERVICE_PORT-constant" class="">DEFAULT_SERVICE_PORT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default port of the service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>443</span></pre></dd>
+      
+        <dt id="DEFAULT_TIMEOUT-constant" class="">DEFAULT_TIMEOUT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>30</span></pre></dd>
+      
+        <dt id="ALL_SCOPES-constant" class="">ALL_SCOPES =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The scopes needed to make gRPC calls to all of the methods defined in
+this service.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/trace.append</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/trace.readonly</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#trace_service_stub-instance_method" title="#trace_service_stub (instance method)">#<strong>trace_service_stub</strong>  &#x21d2; Google::Devtools::Cloudtrace::V1::TraceService::Stub </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_trace-instance_method" title="#get_trace (instance method)">#<strong>get_trace</strong>(project_id, trace_id, options: nil)  &#x21d2; Google::Devtools::Cloudtrace::V1::Trace </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets a single trace by its ID.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service_path: SERVICE_ADDRESS, port: DEFAULT_SERVICE_PORT, channel: nil, chan_creds: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, app_name: nil, app_version: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; TraceServiceClient </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new instance of TraceServiceClient.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_traces-instance_method" title="#list_traces (instance method)">#<strong>list_traces</strong>(project_id, view: nil, page_size: nil, start_time: nil, end_time: nil, filter: nil, order_by: nil, options: nil)  &#x21d2; Google::Gax::PagedEnumerable&lt;Google::Devtools::Cloudtrace::V1::Trace&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns of a list of traces that match the specified filter conditions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#patch_traces-instance_method" title="#patch_traces (instance method)">#<strong>patch_traces</strong>(project_id, traces, options: nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sends new traces to Stackdriver Trace or updates existing traces.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(service_path: SERVICE_ADDRESS, port: DEFAULT_SERVICE_PORT, channel: nil, chan_creds: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, app_name: nil, app_version: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of TraceServiceClient</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>service_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The domain name of the API remote host.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>port</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The port on which to connect to the remote host.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt>Channel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Channel object through which to make calls.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>chan_creds</span>
+      
+      
+        <span class='type'>(<tt>Grpc::ChannelCredentials</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A ChannelCredentials for the setting up the RPC client.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Hash for call options for each method. See
+Google::Gax#construct_settings for the structure of
+this data. Falls back to the default config if not specified
+or the specified config is missing data points.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default timeout, in seconds, for calls made through this client.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v1/trace_service_client.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
+    <span class='label'>service_path:</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span><span class='comma'>,</span>
+    <span class='label'>port:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span><span class='comma'>,</span>
+    <span class='label'>channel:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>chan_creds:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+    <span class='label'>app_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>app_version:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='comment'># These require statements are intentionally placed here to initialize
+</span>  <span class='comment'># the gRPC module only when it&#39;s required.
+</span>  <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
+</span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/devtools/cloudtrace/v1/trace_services_pb</span><span class='tstring_end'>&quot;</span></span>
+
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_app_name'>app_name</span> <span class='op'>||</span> <span class='id identifier rubyid_app_version'>app_version</span>
+    <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`app_name` and `app_version` are no longer being used in the request headers.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/0.6.8 gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../GRPC.html" title="GRPC (module)">GRPC</a></span></span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trace_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+  <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+    <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.devtools.cloudtrace.v1.TraceService</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+      <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
+      <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
+      <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@trace_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
+    <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
+    <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>TraceService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
+  <span class='rparen'>)</span>
+
+  <span class='ivar'>@patch_traces</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:patch_traces</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>patch_traces</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@get_trace</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_trace</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_trace</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+  <span class='ivar'>@list_traces</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+    <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_traces</span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_traces</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="trace_service_stub-instance_method">
+  
+    #<strong>trace_service_stub</strong>  &#x21d2; <tt>Google::Devtools::Cloudtrace::V1::TraceService::Stub</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Devtools::Cloudtrace::V1::TraceService::Stub</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v1/trace_service_client.rb', line 44</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span>
+  <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:trace_service_stub</span>
+
+  <span class='comment'># The default address of the service.
+</span>  <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cloudtrace.googleapis.com</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='comment'># The default port of the service.
+</span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
+
+  <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
+
+  <span class='const'>PAGE_DESCRIPTORS</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_traces</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>PageDescriptor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>next_page_token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>traces</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='id identifier rubyid_private_constant'>private_constant</span> <span class='symbol'>:PAGE_DESCRIPTORS</span>
+
+  <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
+</span>  <span class='comment'># this service.
+</span>  <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/trace.append</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/trace.readonly</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+  <span class='comment'># @param service_path [String]
+</span>  <span class='comment'>#   The domain name of the API remote host.
+</span>  <span class='comment'># @param port [Integer]
+</span>  <span class='comment'>#   The port on which to connect to the remote host.
+</span>  <span class='comment'># @param channel [Channel]
+</span>  <span class='comment'>#   A Channel object through which to make calls.
+</span>  <span class='comment'># @param chan_creds [Grpc::ChannelCredentials]
+</span>  <span class='comment'>#   A ChannelCredentials for the setting up the RPC client.
+</span>  <span class='comment'># @param client_config[Hash]
+</span>  <span class='comment'>#   A Hash for call options for each method. See
+</span>  <span class='comment'>#   Google::Gax#construct_settings for the structure of
+</span>  <span class='comment'>#   this data. Falls back to the default config if not specified
+</span>  <span class='comment'>#   or the specified config is missing data points.
+</span>  <span class='comment'># @param timeout [Numeric]
+</span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
+</span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
+      <span class='label'>service_path:</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span><span class='comma'>,</span>
+      <span class='label'>port:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span><span class='comma'>,</span>
+      <span class='label'>channel:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>chan_creds:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
+      <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
+      <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Trace::V1::TraceServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+      <span class='label'>app_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>app_version:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='comment'># These require statements are intentionally placed here to initialize
+</span>    <span class='comment'># the gRPC module only when it&#39;s required.
+</span>    <span class='comment'># See https://github.com/googleapis/toolkit/issues/446
+</span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/devtools/cloudtrace/v1/trace_services_pb</span><span class='tstring_end'>&quot;</span></span>
+
+
+    <span class='kw'>if</span> <span class='id identifier rubyid_app_name'>app_name</span> <span class='op'>||</span> <span class='id identifier rubyid_app_version'>app_version</span>
+      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`app_name` and `app_version` are no longer being used in the request headers.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/0.6.8 gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../GRPC.html" title="GRPC (module)">GRPC</a></span></span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
+    <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>trace_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
+    <span class='rparen'>)</span>
+    <span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='id identifier rubyid_client_config_file'>client_config_file</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+      <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_construct_settings'>construct_settings</span><span class='lparen'>(</span>
+        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google.devtools.cloudtrace.v1.TraceService</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+        <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='rparen'>)</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+        <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+        <span class='label'>page_descriptors:</span> <span class='const'>PAGE_DESCRIPTORS</span><span class='comma'>,</span>
+        <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
+        <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+      <span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@trace_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
+      <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
+      <span class='label'>chan_creds:</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span><span class='comma'>,</span>
+      <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
+      <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>TraceService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
+    <span class='rparen'>)</span>
+
+    <span class='ivar'>@patch_traces</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:patch_traces</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>patch_traces</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@get_trace</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:get_trace</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_trace</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='ivar'>@list_traces</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
+      <span class='ivar'>@trace_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_traces</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_traces</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Service calls
+</span>
+  <span class='comment'># Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+</span>  <span class='comment'># of a trace that you send matches that of an existing trace, any fields
+</span>  <span class='comment'># in the existing trace and its spans are overwritten by the provided values,
+</span>  <span class='comment'># and any new fields provided are merged with the existing trace data. If the
+</span>  <span class='comment'># ID does not match, a new trace is created.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   ID of the Cloud project where the trace data is stored.
+</span>  <span class='comment'># @param traces [Google::Devtools::Cloudtrace::V1::Traces]
+</span>  <span class='comment'>#   The body of the message.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/trace/v1/trace_service_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   TraceServiceClient = Google::Cloud::Trace::V1::TraceServiceClient
+</span>  <span class='comment'>#   Traces = Google::Devtools::Cloudtrace::V1::Traces
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   trace_service_client = TraceServiceClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   traces = Traces.new
+</span>  <span class='comment'>#   trace_service_client.patch_traces(project_id, traces)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_patch_traces'>patch_traces</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_traces'>traces</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/PatchTracesRequest.html" title="Google::Devtools::Cloudtrace::V1::PatchTracesRequest (class)">PatchTracesRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>traces:</span> <span class='id identifier rubyid_traces'>traces</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@patch_traces</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Gets a single trace by its ID.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   ID of the Cloud project where the trace data is stored.
+</span>  <span class='comment'># @param trace_id [String]
+</span>  <span class='comment'>#   ID of the trace to return.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Devtools::Cloudtrace::V1::Trace]
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/trace/v1/trace_service_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   TraceServiceClient = Google::Cloud::Trace::V1::TraceServiceClient
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   trace_service_client = TraceServiceClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#   trace_id = &#39;&#39;
+</span>  <span class='comment'>#   response = trace_service_client.get_trace(project_id, trace_id)
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_get_trace'>get_trace</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/GetTraceRequest.html" title="Google::Devtools::Cloudtrace::V1::GetTraceRequest (class)">GetTraceRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>trace_id:</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@get_trace</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Returns of a list of traces that match the specified filter conditions.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @param project_id [String]
+</span>  <span class='comment'>#   ID of the Cloud project where the trace data is stored.
+</span>  <span class='comment'># @param view [Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType]
+</span>  <span class='comment'>#   Type of data returned for traces in the list. Optional. Default is
+</span>  <span class='comment'>#   +MINIMAL+.
+</span>  <span class='comment'># @param page_size [Integer]
+</span>  <span class='comment'>#   Maximum number of traces to return. If not specified or &lt;= 0, the
+</span>  <span class='comment'>#   implementation selects a reasonable value.  The implementation may
+</span>  <span class='comment'>#   return fewer traces than the requested page size. Optional.
+</span>  <span class='comment'># @param start_time [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#   End of the time interval (inclusive) during which the trace data was
+</span>  <span class='comment'>#   collected from the application.
+</span>  <span class='comment'># @param end_time [Google::Protobuf::Timestamp]
+</span>  <span class='comment'>#   Start of the time interval (inclusive) during which the trace data was
+</span>  <span class='comment'>#   collected from the application.
+</span>  <span class='comment'># @param filter [String]
+</span>  <span class='comment'>#   An optional filter for the request.
+</span>  <span class='comment'># @param order_by [String]
+</span>  <span class='comment'>#   Field used to sort the returned traces. Optional.
+</span>  <span class='comment'>#   Can be one of the following:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   *   +trace_id+
+</span>  <span class='comment'>#   *   +name+ (+name+ field of root span in the trace)
+</span>  <span class='comment'>#   *   +duration+ (difference between +end_time+ and +start_time+ fields of
+</span>  <span class='comment'>#        the root span)
+</span>  <span class='comment'>#   *   +start+ (+start_time+ field of the root span)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   Descending order can be specified by appending +desc+ to the sort field
+</span>  <span class='comment'>#   (for example, +name desc+).
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   Only one sort field is permitted.
+</span>  <span class='comment'># @param options [Google::Gax::CallOptions]
+</span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
+</span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @return [Google::Gax::PagedEnumerable&lt;Google::Devtools::Cloudtrace::V1::Trace&gt;]
+</span>  <span class='comment'>#   An enumerable of Google::Devtools::Cloudtrace::V1::Trace instances.
+</span>  <span class='comment'>#   See Google::Gax::PagedEnumerable documentation for other
+</span>  <span class='comment'>#   operations such as per-page iteration or access to the response
+</span>  <span class='comment'>#   object.
+</span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
+</span>  <span class='comment'># @example
+</span>  <span class='comment'>#   require &quot;google/cloud/trace/v1/trace_service_client&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   TraceServiceClient = Google::Cloud::Trace::V1::TraceServiceClient
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   trace_service_client = TraceServiceClient.new
+</span>  <span class='comment'>#   project_id = &#39;&#39;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # Iterate over all results.
+</span>  <span class='comment'>#   trace_service_client.list_traces(project_id).each do |element|
+</span>  <span class='comment'>#     # Process element.
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # Or iterate over results one page at a time.
+</span>  <span class='comment'>#   trace_service_client.list_traces(project_id).each_page do |page|
+</span>  <span class='comment'>#     # Process each page at a time.
+</span>  <span class='comment'>#     page.each do |element|
+</span>  <span class='comment'>#       # Process element.
+</span>  <span class='comment'>#     end
+</span>  <span class='comment'>#   end
+</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_list_traces'>list_traces</span> \
+      <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>view:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>start_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>end_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>order_by:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/ListTracesRequest.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+      <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+      <span class='label'>view:</span> <span class='id identifier rubyid_view'>view</span><span class='comma'>,</span>
+      <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='comma'>,</span>
+      <span class='label'>start_time:</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='comma'>,</span>
+      <span class='label'>end_time:</span> <span class='id identifier rubyid_end_time'>end_time</span><span class='comma'>,</span>
+      <span class='label'>filter:</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span>
+      <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='ivar'>@list_traces</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="get_trace-instance_method">
+  
+    #<strong>get_trace</strong>(project_id, trace_id, options: nil)  &#x21d2; <tt><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/Trace.html" title="Google::Devtools::Cloudtrace::V1::Trace (class)">Google::Devtools::Cloudtrace::V1::Trace</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets a single trace by its ID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace/v1/trace_service_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Trace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span>
+
+<span class='id identifier rubyid_trace_service_client'>trace_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Trace::V1::TraceServiceClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_trace_id'>trace_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_trace_service_client'>trace_service_client</span><span class='period'>.</span><span class='id identifier rubyid_get_trace'>get_trace</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_trace_id'>trace_id</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ID of the Cloud project where the trace data is stored.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trace_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ID of the trace to return.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/Trace.html" title="Google::Devtools::Cloudtrace::V1::Trace (class)">Google::Devtools::Cloudtrace::V1::Trace</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v1/trace_service_client.rb', line 215</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_trace'>get_trace</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_trace_id'>trace_id</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/GetTraceRequest.html" title="Google::Devtools::Cloudtrace::V1::GetTraceRequest (class)">GetTraceRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>trace_id:</span> <span class='id identifier rubyid_trace_id'>trace_id</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@get_trace</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_traces-instance_method">
+  
+    #<strong>list_traces</strong>(project_id, view: nil, page_size: nil, start_time: nil, end_time: nil, filter: nil, order_by: nil, options: nil)  &#x21d2; <tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/Trace.html" title="Google::Devtools::Cloudtrace::V1::Trace (class)">Google::Devtools::Cloudtrace::V1::Trace</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns of a list of traces that match the specified filter conditions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace/v1/trace_service_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Trace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span>
+
+<span class='id identifier rubyid_trace_service_client'>trace_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Trace::V1::TraceServiceClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='comment'># Iterate over all results.
+</span><span class='id identifier rubyid_trace_service_client'>trace_service_client</span><span class='period'>.</span><span class='id identifier rubyid_list_traces'>list_traces</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
+  <span class='comment'># Process element.
+</span><span class='kw'>end</span>
+
+<span class='comment'># Or iterate over results one page at a time.
+</span><span class='id identifier rubyid_trace_service_client'>trace_service_client</span><span class='period'>.</span><span class='id identifier rubyid_list_traces'>list_traces</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each_page'>each_page</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_page'>page</span><span class='op'>|</span>
+  <span class='comment'># Process each page at a time.
+</span>  <span class='id identifier rubyid_page'>page</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_element'>element</span><span class='op'>|</span>
+    <span class='comment'># Process element.
+</span>  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ID of the Cloud project where the trace data is stored.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>view</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/ListTracesRequest/ViewType.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType (module)">Google::Devtools::Cloudtrace::V1::ListTracesRequest::ViewType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Type of data returned for traces in the list. Optional. Default is
++MINIMAL+.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>page_size</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Maximum number of traces to return. If not specified or &lt;= 0, the
+implementation selects a reasonable value.  The implementation may
+return fewer traces than the requested page size. Optional.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_time</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>End of the time interval (inclusive) during which the trace data was
+collected from the application.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end_time</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Protobuf/Timestamp.html" title="Google::Protobuf::Timestamp (class)">Google::Protobuf::Timestamp</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Start of the time interval (inclusive) during which the trace data was
+collected from the application.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>filter</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional filter for the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>order_by</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Field used to sort the returned traces. Optional.
+Can be one of the following:</p>
+
+<ul>
+<li>  +trace_id+</li>
+<li>  +name+ (+name+ field of root span in the trace)</li>
+<li>  +duration+ (difference between +end_time+ and +start_time+ fields of
+ the root span)</li>
+<li>  +start+ (+start_time+ field of the root span)</li>
+</ul>
+
+<p>Descending order can be specified by appending +desc+ to the sort field
+(for example, +name desc+).</p>
+
+<p>Only one sort field is permitted.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::PagedEnumerable&lt;<span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/Trace.html" title="Google::Devtools::Cloudtrace::V1::Trace (class)">Google::Devtools::Cloudtrace::V1::Trace</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An enumerable of Google::Devtools::Cloudtrace::V1::Trace instances.
+See Google::Gax::PagedEnumerable documentation for other
+operations such as per-page iteration or access to the response
+object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v1/trace_service_client.rb', line 289</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_list_traces'>list_traces</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>view:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>start_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>end_time:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>order_by:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/ListTracesRequest.html" title="Google::Devtools::Cloudtrace::V1::ListTracesRequest (class)">ListTracesRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>view:</span> <span class='id identifier rubyid_view'>view</span><span class='comma'>,</span>
+    <span class='label'>page_size:</span> <span class='id identifier rubyid_page_size'>page_size</span><span class='comma'>,</span>
+    <span class='label'>start_time:</span> <span class='id identifier rubyid_start_time'>start_time</span><span class='comma'>,</span>
+    <span class='label'>end_time:</span> <span class='id identifier rubyid_end_time'>end_time</span><span class='comma'>,</span>
+    <span class='label'>filter:</span> <span class='id identifier rubyid_filter'>filter</span><span class='comma'>,</span>
+    <span class='label'>order_by:</span> <span class='id identifier rubyid_order_by'>order_by</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@list_traces</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="patch_traces-instance_method">
+  
+    #<strong>patch_traces</strong>(project_id, traces, options: nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sends new traces to Stackdriver Trace or updates existing traces. If the ID
+of a trace that you send matches that of an existing trace, any fields
+in the existing trace and its spans are overwritten by the provided values,
+and any new fields provided are merged with the existing trace data. If the
+ID does not match, a new trace is created.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/trace/v1/trace_service_client</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Trace.html" title="Google::Cloud::Trace (module)">Trace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Trace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span>
+<span class='const'>Traces</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/Traces.html" title="Google::Devtools::Cloudtrace::V1::Traces (class)">Traces</a></span></span>
+
+<span class='id identifier rubyid_trace_service_client'>trace_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Trace::V1::TraceServiceClient (class)">TraceServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Trace::V1::TraceServiceClient#initialize (method)">new</a></span></span>
+<span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_traces'>traces</span> <span class='op'>=</span> <span class='const'>Traces</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_trace_service_client'>trace_service_client</span><span class='period'>.</span><span class='id identifier rubyid_patch_traces'>patch_traces</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_traces'>traces</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ID of the Cloud project where the trace data is stored.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>traces</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/Traces.html" title="Google::Devtools::Cloudtrace::V1::Traces (class)">Google::Devtools::Cloudtrace::V1::Traces</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The body of the message.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Google::Gax::CallOptions</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Overrides the default settings for this call, e.g, timeout,
+retries, etc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Google::Gax::GaxError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the RPC is aborted.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/trace/v1/trace_service_client.rb', line 182</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_patch_traces'>patch_traces</span> \
+    <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='id identifier rubyid_traces'>traces</span><span class='comma'>,</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace.html" title="Google::Devtools::Cloudtrace (module)">Cloudtrace</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1.html" title="Google::Devtools::Cloudtrace::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Cloudtrace/V1/PatchTracesRequest.html" title="Google::Devtools::Cloudtrace::V1::PatchTracesRequest (class)">PatchTracesRequest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span>
+    <span class='label'>project_id:</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
+    <span class='label'>traces:</span> <span class='id identifier rubyid_traces'>traces</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@patch_traces</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
