@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [PublisherClient][] | Provides reliable, many-to-many, asynchronous messaging between applications. |
-    # | [SubscriberClient][] | Provides reliable, many-to-many, asynchronous messaging between applications. |
+    # | [PublisherClient][] | The service that an application uses to manipulate topics, and to send messages to a topic. |
+    # | [SubscriberClient][] | The service that an application uses to manipulate subscriptions and to consume messages from a subscription via the +Pull+ method or by establishing a bi-directional stream using the +StreamingPull+ method. |
     # | [Data Types][] | Data types for Google::Cloud::Pubsub::V1 |
     #
     # [PublisherClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/publisherclient
@@ -28,6 +28,16 @@ module Google
     # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/datatypes
     #
     module V1
+      # @!attribute [rw] allowed_persistence_regions
+      #   @return [Array<String>]
+      #     The list of GCP regions where messages that are published to the topic may
+      #     be persisted in storage. Messages published by publishers running in
+      #     non-allowed GCP regions (or running outside of GCP altogether) will be
+      #     routed for storage in one of the allowed regions. An empty list indicates a
+      #     misconfiguration at the project or organization level, which will result in
+      #     all Publish operations failing.
+      class MessageStoragePolicy; end
+
       # A topic resource.
       # @!attribute [rw] name
       #   @return [String]
@@ -40,6 +50,14 @@ module Google
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     User labels.
+      # @!attribute [rw] message_storage_policy
+      #   @return [Google::Pubsub::V1::MessageStoragePolicy]
+      #     Policy constraining how messages published to the topic may be stored. It
+      #     is determined when the topic is created based on the policy configured at
+      #     the project level. It must not be set by the caller in the request to
+      #     CreateTopic or to UpdateTopic. This field will be populated in the
+      #     responses for GetTopic, CreateTopic, and UpdateTopic: if not present in the
+      #     response, then no constraints are in effect.
       class Topic; end
 
       # A message data and its attributes. The message payload must not be empty;
@@ -73,11 +91,14 @@ module Google
       # Request for the UpdateTopic method.
       # @!attribute [rw] topic
       #   @return [Google::Pubsub::V1::Topic]
-      #     The topic to update.
+      #     The updated topic object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Indicates which fields in the provided topic to update.
-      #     Must be specified and non-empty.
+      #     Indicates which fields in the provided topic to update. Must be specified
+      #     and non-empty. Note that if +update_mask+ contains
+      #     "message_storage_policy" then the new value will be determined based on the
+      #     policy configured at the project or organization level. The
+      #     +message_storage_policy+ must not be set in the +topic+ provided above.
       class UpdateTopicRequest; end
 
       # Request for the Publish method.
@@ -149,6 +170,38 @@ module Google
       #     +ListTopicSubscriptionsRequest+ to get more subscriptions.
       class ListTopicSubscriptionsResponse; end
 
+      # Request for the +ListTopicSnapshots+ method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
+      # @!attribute [rw] topic
+      #   @return [String]
+      #     The name of the topic that snapshots are attached to.
+      #     Format is +projects/{project}/topics/{topic}+.
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     Maximum number of snapshot names to return.
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     The value returned by the last +ListTopicSnapshotsResponse+; indicates
+      #     that this is a continuation of a prior +ListTopicSnapshots+ call, and
+      #     that the system should return the next page of data.
+      class ListTopicSnapshotsRequest; end
+
+      # Response for the +ListTopicSnapshots+ method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
+      # @!attribute [rw] snapshots
+      #   @return [Array<String>]
+      #     The names of the snapshots that match the request.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     If not empty, indicates that there may be more snapshots that match
+      #     the request; this value should be passed in a new
+      #     +ListTopicSnapshotsRequest+ to get more snapshots.
+      class ListTopicSnapshotsResponse; end
+
       # Request for the +DeleteTopic+ method.
       # @!attribute [rw] topic
       #   @return [String]
@@ -164,7 +217,7 @@ module Google
       #     start with a letter, and contain only letters (+[A-Za-z]+), numbers
       #     (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
       #     plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
-      #     in length, and it must not start with +"goog"+.
+      #     in length, and it must not start with +"goog"+
       # @!attribute [rw] topic
       #   @return [String]
       #     The name of the topic from which this subscription is receiving messages.
@@ -187,7 +240,8 @@ module Google
       #     For pull subscriptions, this value is used as the initial value for the ack
       #     deadline. To override this value for a given message, call
       #     +ModifyAckDeadline+ with the corresponding +ack_id+ if using
-      #     pull.
+      #     non-streaming pull or send the +ack_id+ in a
+      #     +StreamingModifyAckDeadlineRequest+ if using streaming pull.
       #     The minimum custom deadline you can specify is 10 seconds.
       #     The maximum custom deadline you can specify is 600 seconds (10 minutes).
       #     If this parameter is 0, a default value of 10 seconds is used.
@@ -202,7 +256,10 @@ module Google
       #     Indicates whether to retain acknowledged messages. If true, then
       #     messages are not expunged from the subscription's backlog, even if they are
       #     acknowledged, until they fall out of the +message_retention_duration+
-      #     window.
+      #     window.<br><br>
+      #     <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      #     changed in backward-incompatible ways and is not recommended for production
+      #     use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] message_retention_duration
       #   @return [Google::Protobuf::Duration]
       #     How long to retain unacknowledged messages in the subscription's backlog,
@@ -210,7 +267,10 @@ module Google
       #     If +retain_acked_messages+ is true, then this also configures the retention
       #     of acknowledged messages, and thus configures how far back in time a +Seek+
       #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-      #     minutes.
+      #     minutes.<br><br>
+      #     <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      #     changed in backward-incompatible ways and is not recommended for production
+      #     use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     User labels.
@@ -317,7 +377,7 @@ module Google
       #     An empty +pushConfig+ indicates that the Pub/Sub system should
       #     stop pushing messages from the given subscription and allow
       #     messages to be pulled and acknowledged - effectively pausing
-      #     the subscription if +Pull+ is not called.
+      #     the subscription if +Pull+ or +StreamingPull+ is not called.
       class ModifyPushConfigRequest; end
 
       # Request for the +Pull+ method.
@@ -429,7 +489,10 @@ module Google
       #     Received Pub/Sub messages. This will not be empty.
       class StreamingPullResponse; end
 
-      # Request for the +CreateSnapshot+ method.
+      # Request for the +CreateSnapshot+ method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be changed in
+      # backward-incompatible ways and is not recommended for production use.
+      # It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] name
       #   @return [String]
       #     Optional user-provided name for this snapshot.
@@ -448,19 +511,28 @@ module Google
       #      (b) Any messages published to the subscription's topic following the
       #          successful completion of the CreateSnapshot request.
       #     Format is +projects/{project}/subscriptions/{sub}+.
+      # @!attribute [rw] labels
+      #   @return [Hash{String => String}]
+      #     User labels.
       class CreateSnapshotRequest; end
 
-      # Request for the UpdateSnapshot method.
+      # Request for the UpdateSnapshot method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] snapshot
       #   @return [Google::Pubsub::V1::Snapshot]
-      #     The updated snpashot object.
+      #     The updated snapshot object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
       #     Indicates which fields in the provided snapshot to update.
       #     Must be specified and non-empty.
       class UpdateSnapshotRequest; end
 
-      # A snapshot resource.
+      # A snapshot resource.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] name
       #   @return [String]
       #     The name of the snapshot.
@@ -477,13 +549,27 @@ module Google
       #     For example, consider a subscription whose oldest unacked message is 3 days
       #     old. If a snapshot is created from this subscription, the snapshot -- which
       #     will always capture this 3-day-old backlog as long as the snapshot
-      #     exists -- will expire in 4 days.
+      #     exists -- will expire in 4 days. The service will refuse to create a
+      #     snapshot that would expire in less than 1 hour after creation.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     User labels.
       class Snapshot; end
 
-      # Request for the +ListSnapshots+ method.
+      # Request for the GetSnapshot method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
+      # @!attribute [rw] snapshot
+      #   @return [String]
+      #     The name of the snapshot to get.
+      #     Format is +projects/{project}/snapshots/{snap}+.
+      class GetSnapshotRequest; end
+
+      # Request for the +ListSnapshots+ method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] project
       #   @return [String]
       #     The name of the cloud project that snapshots belong to.
@@ -498,7 +584,10 @@ module Google
       #     should return the next page of data.
       class ListSnapshotsRequest; end
 
-      # Response for the +ListSnapshots+ method.
+      # Response for the +ListSnapshots+ method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] snapshots
       #   @return [Array<Google::Pubsub::V1::Snapshot>]
       #     The resulting snapshots.
@@ -508,14 +597,20 @@ module Google
       #     request; this value should be passed in a new +ListSnapshotsRequest+.
       class ListSnapshotsResponse; end
 
-      # Request for the +DeleteSnapshot+ method.
+      # Request for the +DeleteSnapshot+ method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] snapshot
       #   @return [String]
       #     The name of the snapshot to delete.
       #     Format is +projects/{project}/snapshots/{snap}+.
       class DeleteSnapshotRequest; end
 
-      # Request for the +Seek+ method.
+      # Request for the +Seek+ method.<br><br>
+      # <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      # changed in backward-incompatible ways and is not recommended for production
+      # use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription to affect.
