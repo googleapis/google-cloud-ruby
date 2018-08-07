@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-require 'commander/import'
+require "commander/import"
 
 # Import google bigtable client lib
 require "google-cloud-bigtable"
@@ -38,17 +38,22 @@ def run_table_operations instance_id, table_id
 
   puts "==> Listing tables in instance"
   # [START bigtable_list_tables]
-  bigtable.tables(instance_id).all.each do |table|
-    p table.name
+  bigtable.tables(instance_id).all.each do |t|
+    p t.name
   end
   # [END bigtable_list_tables]
   puts "\n"
 
   puts "==> Get table and print details:"
   # [START bigtable_get_table_metadata]
-  table = bigtable.table(instance_id, table_id, view: :FULL, perform_lookup: true)
+  table = bigtable.table(
+    instance_id,
+    table_id,
+    view: :FULL,
+    perform_lookup: true
+  )
   puts "Cluster states:"
-  table.cluster_states.each{ |s| p s }
+  table.cluster_states.each { |s| p s }
   # [END bigtable_get_table_metadata]
   puts "Timestamp granularity: #{table.granularity}"
   puts ""
@@ -102,50 +107,57 @@ def run_table_operations instance_id, table_id
   # Drop cells that are either older than the 10 recent versions
   # OR
   # Drop cells that are older than a month AND older than the 2 recent versions
-  gc_rule_1 = Google::Cloud::Bigtable::GcRule.max_age(60 * 60 * 24 * 30)
-  gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_versions(2)
-  nested_gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
+  gc_rule1 = Google::Cloud::Bigtable::GcRule.max_age(60 * 60 * 24 * 30)
+  gc_rule2 = Google::Cloud::Bigtable::GcRule.max_versions(2)
+  nested_gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule1, gc_rule2)
   # [END bigtable_create_family_gc_nested]
-  family = table.column_family("cf5", gc_rule).create
+  family = table.column_family("cf5", nested_gc_rule).create
   puts "==> Created column family: `#{family.name}`"
   puts ""
 
   puts "==> Printing name and GC Rule for all column families"
   # [START bigtable_list_column_families]
-  table = bigtable.table(instance_id, table_id, view: :FULL, perform_lookup: true)
-  table.column_families.each do |family|
-    p "Column family name: #{family.name}"
+  table = bigtable.table(
+    instance_id,
+    table_id,
+    view: :FULL,
+    perform_lookup: true
+  )
+  table.column_families.each do |f|
+    p "Column family name: #{f.name}"
     p "GC Rule:"
-    p family.gc_rule
+    p f.gc_rule
   end
   # [END bigtable_list_column_families]
 
   puts ""
   puts "==> Updating column family cf1 GC rule"
   # [START bigtable_update_gc_rule]
-  family = table.column_families.find{|cf| cf.name == "cf1"}
+  family = table.column_families.find { |cf| cf.name == "cf1" }
   family.gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
   updated_family = family.save
+  p updated_family
   # [END bigtable_update_gc_rule]
   puts "==> Updated GC rule."
   puts ""
 
   puts "==> Print updated column family cf1 GC rule"
   # [START bigtable_family_get_gc_rule]
-  family = table.column_families.find{|cf| cf.name == "cf1"}
+  family = table.column_families.find { |cf| cf.name == "cf1" }
   # [END bigtable_family_get_gc_rule]
   p family
 
   puts ""
   puts "==> Delete a column family cf2"
   # [START bigtable_delete_family]
-  family = table.column_families.find{|cf| cf.name == "cf2"}
+  family = table.column_families.find { |cf| cf.name == "cf2" }
   family.delete
   # [END bigtable_delete_family]
   puts "==> #{family.name} deleted successfully"
 
   puts ""
-  puts "===> Run `bundle exec tableadmin.rb delete instance_id table_id` to delete the table"
+  puts "===> Run `bundle exec tableadmin.rb delete instance_id table_id` \
+to delete the table"
 end
 
 def delete_table instance_id, table_id
@@ -163,16 +175,17 @@ end
 
 program :version, "0.0.1"
 program :name, "tableadmin"
-program :description, <<-EOS
-Perform Bigtable Table admin operations
+program :description, <<~DESC
+  Perform Bigtable Table admin operations
 
-bundle exec ruby tableadmin.rb <command> <instance_id> <table_id>
-EOS
+  bundle exec ruby tableadmin.rb <command> <instance_id> <table_id>
+DESC
 
 command "run" do |c|
   c.syntax = "run <instance_id> <table_id>"
-  c.description = "Create a table (if does not exist) and run basic table operations"
-  c.action do |args, options|
+  c.description =
+    "Create a table (if does not exist) and run basic table operations"
+  c.action do |args, _options|
     instance_id, table_id = args
 
     if instance_id && table_id
@@ -186,7 +199,7 @@ end
 command "delete" do |c|
   c.syntax = "delete <instance_id> <table_id>"
   c.description = "Delete table"
-  c.action do |args, options|
+  c.action do |args, _options|
     instance_id, table_id = args
 
     if instance_id && table_id

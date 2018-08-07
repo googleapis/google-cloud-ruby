@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-require 'commander/import'
+require "commander/import"
 
 # Import google bigtable client lib
 require "google-cloud-bigtable"
@@ -34,7 +34,7 @@ def create_prod_instance instance_id, cluster_id
     job = bigtable.create_instance(
       instance_id,
       display_name: "Sample production instance",
-      labels: { "env": "production"},
+      labels: { "env": "production" },
       type: :PRODUCTION # Optional as default type is :PRODUCTION
     ) do |clusters|
       clusters.add(cluster_id, "us-central1-f", nodes: 3, storage_type: :SSD)
@@ -48,8 +48,8 @@ def create_prod_instance instance_id, cluster_id
 
   puts "==> Listing Instances"
   # [START bigtable_list_instances]
-  bigtable.instances.all do |instance|
-    p instance.instance_id
+  bigtable.instances.all do |i|
+    p i.instance_id
   end
   # [END bigtable_list_instances]
 
@@ -77,7 +77,7 @@ def create_dev_instance instance_id, cluster_id
   job = bigtable.create_instance(
     instance_id,
     display_name: "Sample development instance",
-    labels: { "env": "development"},
+    labels: { "env": "development" },
     type: :DEVELOPMENT
   ) do |clusters|
     clusters.add(cluster_id, "us-central1-f", storage_type: :HDD)
@@ -142,16 +142,17 @@ end
 
 program :version, "0.0.1"
 program :name, "instances"
-program :description, <<-EOS
-Perform Bigtable Instance management operations.
+program :description, <<~DESC
+  Perform Bigtable Instance management operations.
 
-bundle exec ruby instances.rb <command> <instance_id> <cluster_id>
-EOS
+  bundle exec ruby instances.rb <command> <instance_id> <cluster_id>
+DESC
 
 command "run" do |c|
   c.syntax = "run <instance_id> <cluster_id>"
-  c.description = "Creates an Instance(type: PRODUCTION) and run basic instance-operations"
-  c.action do |args, options|
+  c.description =
+    "Creates an Instance(type: PRODUCTION) and run basic instance-operations"
+  c.action do |args, _options|
     instance_id, cluster_id = args
 
     if instance_id && cluster_id
@@ -165,7 +166,7 @@ end
 command "dev-instance" do |c|
   c.syntax = "dev-instance <instance_id>"
   c.description = "Create Development Instance"
-  c.action do |args, options|
+  c.action do |args, _options|
     instance_id, cluster_id = args
 
     if instance_id && cluster_id
@@ -179,7 +180,7 @@ end
 command "del-instance" do |c|
   c.syntax = "del-instance <instance_id>"
   c.description = "Delete the Instance"
-  c.action do |args, options|
+  c.action do |args, _options|
     instance_id = args.first
 
     if instance_id
@@ -193,7 +194,7 @@ end
 command "add-cluster" do |c|
   c.syntax = "add-cluster <instance_id> <cluster_id>"
   c.description = "Add Cluster"
-  c.action do |args, options|
+  c.action do |args, _options|
     instance_id, cluster_id = args
 
     if instance_id && cluster_id
@@ -207,7 +208,7 @@ end
 command "del-cluster" do |c|
   c.syntax = "del-cluster <instance_id> <cluster_id>"
   c.description = "Delete the Cluster"
-  c.action do |args, options|
+  c.action do |args, _options|
     instance_id, cluster_id = args
 
     if instance_id && cluster_id

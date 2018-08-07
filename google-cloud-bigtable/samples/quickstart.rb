@@ -27,7 +27,7 @@ INSTANCE_NAME = "my-bigtable-instance"
 #  The name of the Cloud Bigtable table
 TABLE_NAME = "my-table"
 
-gcloud  = Google::Cloud.new
+gcloud = Google::Cloud.new
 bigtable = gcloud.bigtable
 
 # Get table client

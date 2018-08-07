@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 # TODO: Updated with GEM after alpha release
 github "GoogleCloudPlatform/google-cloud-ruby" do
   gem "google-cloud-bigtable"
 end
 
-gem 'commander', '~> 4.4', '>= 4.4.5'
+gem "commander", "~> 4.4", ">= 4.4.5"
