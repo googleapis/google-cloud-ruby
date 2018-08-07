@@ -393,8 +393,8 @@ module Google
     # ### Listening for changes
     #
     # You can listen to a document reference or a collection reference/query for
-    # changes. A document or query snapshot will be yielded immediately, and
-    # each time the contents change.
+    # changes. The current document snapshot or query results snapshot will be
+    # yielded first, and each time the contents change.
     #
     # You can use {Firestore::DocumentReference#listen} to be notified of
     # changes to a single document:
