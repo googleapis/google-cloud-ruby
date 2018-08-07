@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ require "minitest/spec"
 
 require "google/gax"
 
-require "google/cloud/firestore"
+require "google/cloud/firestore/v1beta1"
 require "google/cloud/firestore/v1beta1/firestore_client"
 require "google/firestore/v1beta1/firestore_services_pb"
 
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockCredentialsClass < Google::Cloud::Firestore::Credentials
+class MockFirestoreCredentials < Google::Cloud::Firestore::V1beta1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -88,10 +88,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:get_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_document")
+      mock_credentials = MockFirestoreCredentials.new("get_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -99,6 +99,13 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_document(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -116,10 +123,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:get_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("get_document")
+      mock_credentials = MockFirestoreCredentials.new("get_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -159,10 +166,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:list_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_documents")
+      mock_credentials = MockFirestoreCredentials.new("list_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -192,10 +199,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:list_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_documents")
+      mock_credentials = MockFirestoreCredentials.new("list_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -237,10 +244,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:create_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_document")
+      mock_credentials = MockFirestoreCredentials.new("create_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -253,6 +260,18 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_document(
+            formatted_parent,
+            collection_id,
+            document_id,
+            document
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -276,10 +295,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:create_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("create_document")
+      mock_credentials = MockFirestoreCredentials.new("create_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -322,10 +341,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:update_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("update_document")
+      mock_credentials = MockFirestoreCredentials.new("update_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -333,6 +352,13 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_document(document, update_mask) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -352,10 +378,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:update_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("update_document")
+      mock_credentials = MockFirestoreCredentials.new("update_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -386,10 +412,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:delete_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_document")
+      mock_credentials = MockFirestoreCredentials.new("delete_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -397,6 +423,13 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_document(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -414,10 +447,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:delete_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("delete_document")
+      mock_credentials = MockFirestoreCredentials.new("delete_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -456,10 +489,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:batch_get_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("batch_get_documents")
+      mock_credentials = MockFirestoreCredentials.new("batch_get_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -487,10 +520,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:batch_get_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("batch_get_documents")
+      mock_credentials = MockFirestoreCredentials.new("batch_get_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -526,10 +559,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:begin_transaction, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("begin_transaction")
+      mock_credentials = MockFirestoreCredentials.new("begin_transaction")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -537,6 +570,13 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.begin_transaction(formatted_database) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -554,10 +594,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:begin_transaction, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("begin_transaction")
+      mock_credentials = MockFirestoreCredentials.new("begin_transaction")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -597,10 +637,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:commit, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("commit")
+      mock_credentials = MockFirestoreCredentials.new("commit")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -608,6 +648,13 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.commit(formatted_database, writes) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -630,10 +677,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:commit, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("commit")
+      mock_credentials = MockFirestoreCredentials.new("commit")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -666,10 +713,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:rollback, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("rollback")
+      mock_credentials = MockFirestoreCredentials.new("rollback")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -677,6 +724,13 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.rollback(formatted_database, transaction) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -696,10 +750,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:rollback, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("rollback")
+      mock_credentials = MockFirestoreCredentials.new("rollback")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -736,10 +790,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:run_query, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("run_query")
+      mock_credentials = MockFirestoreCredentials.new("run_query")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -765,10 +819,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:run_query, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("run_query")
+      mock_credentials = MockFirestoreCredentials.new("run_query")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -807,10 +861,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:write, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("write")
+      mock_credentials = MockFirestoreCredentials.new("write")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -838,10 +892,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:write, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("write")
+      mock_credentials = MockFirestoreCredentials.new("write")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -878,10 +932,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:listen, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("listen")
+      mock_credentials = MockFirestoreCredentials.new("listen")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -909,10 +963,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:listen, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("listen")
+      mock_credentials = MockFirestoreCredentials.new("listen")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -950,10 +1004,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:list_collection_ids, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_collection_ids")
+      mock_credentials = MockFirestoreCredentials.new("list_collection_ids")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
@@ -981,10 +1035,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
       mock_stub = MockGrpcClientStub.new(:list_collection_ids, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCredentialsClass.new("list_collection_ids")
+      mock_credentials = MockFirestoreCredentials.new("list_collection_ids")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::V1beta1.new
 
           # Call method
