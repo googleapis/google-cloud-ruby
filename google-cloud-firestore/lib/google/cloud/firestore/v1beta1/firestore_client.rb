@@ -359,9 +359,9 @@ module Google
           # @return [Google::Firestore::V1beta1::Document]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_name = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #   response = firestore_client.get_document(formatted_name)
 
@@ -437,9 +437,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #
           #   # TODO: Initialize +collection_id+:
@@ -515,9 +515,9 @@ module Google
           # @return [Google::Firestore::V1beta1::Document]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #
           #   # TODO: Initialize +collection_id+:
@@ -587,9 +587,9 @@ module Google
           # @return [Google::Firestore::V1beta1::Document]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #
           #   # TODO: Initialize +document+:
           #   document = {}
@@ -633,9 +633,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_name = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #   firestore_client.delete_document(formatted_name)
 
@@ -695,9 +695,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
           #   # TODO: Initialize +documents+:
@@ -745,9 +745,9 @@ module Google
           # @return [Google::Firestore::V1beta1::BeginTransactionResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #   response = firestore_client.begin_transaction(formatted_database)
 
@@ -786,9 +786,9 @@ module Google
           # @return [Google::Firestore::V1beta1::CommitResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
           #   # TODO: Initialize +writes+:
@@ -825,9 +825,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
           #   # TODO: Initialize +transaction+:
@@ -883,9 +883,9 @@ module Google
           #
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #   firestore_client.run_query(formatted_parent).each do |element|
           #     # Process element.
@@ -927,9 +927,9 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #   request = { database: formatted_database }
           #   requests = [request]
@@ -962,9 +962,9 @@ module Google
           #     This method interface might change in the future.
           #
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_database = Google::Cloud::Firestore::V1beta1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #   request = { database: formatted_database }
           #   requests = [request]
@@ -1005,9 +1005,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/firestore"
+          #   require "google/cloud/firestore/v1beta1"
           #
-          #   firestore_client = Google::Cloud::Firestore.new(version: :v1beta1)
+          #   firestore_client = Google::Cloud::Firestore::V1beta1.new
           #   formatted_parent = Google::Cloud::Firestore::V1beta1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
           #
           #   # Iterate over all results.
