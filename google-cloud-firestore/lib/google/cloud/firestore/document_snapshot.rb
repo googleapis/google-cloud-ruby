@@ -312,23 +312,20 @@ module Google
         # @private
         def <=> other
           return nil unless other.is_a? DocumentSnapshot
-          grpc <=> other.grpc
+          path <=> other.path
         end
 
         ##
         # @private
         def eql? other
           return nil unless other.is_a? DocumentSnapshot
-          grpc.eql? other.grpc
+          path.eql? other.path
         end
 
         ##
         # @private
         def hash
-          # Use the Google::Firestore::V1beta1::Document object's hash, because
-          # the google-protobuf library calculates the hash by value, so two
-          # instance objects with the same values will be treated the same.
-          grpc.hash
+          path.hash
         end
 
         ##
