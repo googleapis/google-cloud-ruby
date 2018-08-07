@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/devtools/clouddebugger/v2/debugger_pb"
-require "google/cloud/debugger/credentials"
+require "google/cloud/debugger/v2/credentials"
 
 module Google
   module Cloud
@@ -58,6 +55,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           # The scopes needed to make gRPC calls to all of the methods defined in
@@ -66,6 +66,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform",
             "https://www.googleapis.com/auth/cloud_debugger"
           ].freeze
+
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -91,16 +92,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
-              service_path: SERVICE_ADDRESS,
-              port: DEFAULT_SERVICE_PORT,
-              channel: nil,
-              chan_creds: nil,
-              updater_proc: nil,
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -109,21 +112,10 @@ module Google
             require "google/gax/grpc"
             require "google/devtools/clouddebugger/v2/debugger_services_pb"
 
-            if channel || chan_creds || updater_proc
-              warn "The `channel`, `chan_creds`, and `updater_proc` parameters will be removed " \
-                "on 2017/09/08"
-              credentials ||= channel
-              credentials ||= chan_creds
-              credentials ||= updater_proc
-            end
-            if service_path != SERVICE_ADDRESS || port != DEFAULT_SERVICE_PORT
-              warn "`service_path` and `port` parameters are deprecated and will be removed"
-            end
-
-            credentials ||= Google::Cloud::Debugger::Credentials.default
+            credentials ||= Google::Cloud::Debugger::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Debugger::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Debugger::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -138,13 +130,16 @@ module Google
               updater_proc = credentials.updater_proc
             end
 
+            package_version = Gem.loaded_specs['google-cloud-debugger'].version.version
+
             google_api_client = "gl-ruby/#{RUBY_VERSION}"
             google_api_client << " #{lib_name}/#{lib_version}" if lib_name
-            google_api_client << " gapic/0.1.0 gax/#{Google::Gax::VERSION}"
+            google_api_client << " gapic/#{package_version} gax/#{Google::Gax::VERSION}"
             google_api_client << " grpc/#{GRPC::VERSION}"
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "debugger2_client_config.json"
             )
@@ -156,9 +151,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
+
+            # Allow overriding the service path/port in subclasses.
+            service_path = self.class::SERVICE_ADDRESS
+            port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @debugger2_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -166,28 +166,34 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Devtools::Clouddebugger::V2::Debugger2::Stub.method(:new)
             )
 
             @set_breakpoint = Google::Gax.create_api_call(
               @debugger2_stub.method(:set_breakpoint),
-              defaults["set_breakpoint"]
+              defaults["set_breakpoint"],
+              exception_transformer: exception_transformer
             )
             @get_breakpoint = Google::Gax.create_api_call(
               @debugger2_stub.method(:get_breakpoint),
-              defaults["get_breakpoint"]
+              defaults["get_breakpoint"],
+              exception_transformer: exception_transformer
             )
             @delete_breakpoint = Google::Gax.create_api_call(
               @debugger2_stub.method(:delete_breakpoint),
-              defaults["delete_breakpoint"]
+              defaults["delete_breakpoint"],
+              exception_transformer: exception_transformer
             )
             @list_breakpoints = Google::Gax.create_api_call(
               @debugger2_stub.method(:list_breakpoints),
-              defaults["list_breakpoints"]
+              defaults["list_breakpoints"],
+              exception_transformer: exception_transformer
             )
             @list_debuggees = Google::Gax.create_api_call(
               @debugger2_stub.method(:list_debuggees),
-              defaults["list_debuggees"]
+              defaults["list_debuggees"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -208,14 +214,23 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouddebugger::V2::SetBreakpointResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Devtools::Clouddebugger::V2::SetBreakpointResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/debugger/v2"
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
+          #
+          #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
+          #
+          #   # TODO: Initialize +breakpoint+:
           #   breakpoint = {}
+          #
+          #   # TODO: Initialize +client_version+:
           #   client_version = ''
           #   response = debugger2_client.set_breakpoint(debuggee_id, breakpoint, client_version)
 
@@ -223,14 +238,15 @@ module Google
               debuggee_id,
               breakpoint,
               client_version,
-              options: nil
+              options: nil,
+              &block
             req = {
               debuggee_id: debuggee_id,
               breakpoint: breakpoint,
               client_version: client_version
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::SetBreakpointRequest)
-            @set_breakpoint.call(req, options)
+            @set_breakpoint.call(req, options, &block)
           end
 
           # Gets breakpoint information.
@@ -245,14 +261,23 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouddebugger::V2::GetBreakpointResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Devtools::Clouddebugger::V2::GetBreakpointResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/debugger/v2"
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
+          #
+          #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
+          #
+          #   # TODO: Initialize +breakpoint_id+:
           #   breakpoint_id = ''
+          #
+          #   # TODO: Initialize +client_version+:
           #   client_version = ''
           #   response = debugger2_client.get_breakpoint(debuggee_id, breakpoint_id, client_version)
 
@@ -260,14 +285,15 @@ module Google
               debuggee_id,
               breakpoint_id,
               client_version,
-              options: nil
+              options: nil,
+              &block
             req = {
               debuggee_id: debuggee_id,
               breakpoint_id: breakpoint_id,
               client_version: client_version
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::GetBreakpointRequest)
-            @get_breakpoint.call(req, options)
+            @get_breakpoint.call(req, options, &block)
           end
 
           # Deletes the breakpoint from the debuggee.
@@ -282,13 +308,22 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/debugger/v2"
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
+          #
+          #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
+          #
+          #   # TODO: Initialize +breakpoint_id+:
           #   breakpoint_id = ''
+          #
+          #   # TODO: Initialize +client_version+:
           #   client_version = ''
           #   debugger2_client.delete_breakpoint(debuggee_id, breakpoint_id, client_version)
 
@@ -296,14 +331,15 @@ module Google
               debuggee_id,
               breakpoint_id,
               client_version,
-              options: nil
+              options: nil,
+              &block
             req = {
               debuggee_id: debuggee_id,
               breakpoint_id: breakpoint_id,
               client_version: client_version
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::DeleteBreakpointRequest)
-            @delete_breakpoint.call(req, options)
+            @delete_breakpoint.call(req, options, &block)
             nil
           end
 
@@ -336,13 +372,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/debugger/v2"
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
+          #
+          #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
+          #
+          #   # TODO: Initialize +client_version+:
           #   client_version = ''
           #   response = debugger2_client.list_breakpoints(debuggee_id, client_version)
 
@@ -354,7 +397,8 @@ module Google
               action: nil,
               strip_results: nil,
               wait_token: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               debuggee_id: debuggee_id,
               client_version: client_version,
@@ -365,7 +409,7 @@ module Google
               wait_token: wait_token
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::ListBreakpointsRequest)
-            @list_breakpoints.call(req, options)
+            @list_breakpoints.call(req, options, &block)
           end
 
           # Lists all the debuggees that the user has access to.
@@ -381,13 +425,20 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/debugger/v2"
           #
           #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
+          #
+          #   # TODO: Initialize +project+:
           #   project = ''
+          #
+          #   # TODO: Initialize +client_version+:
           #   client_version = ''
           #   response = debugger2_client.list_debuggees(project, client_version)
 
@@ -395,14 +446,15 @@ module Google
               project,
               client_version,
               include_inactive: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project: project,
               client_version: client_version,
               include_inactive: include_inactive
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Devtools::Clouddebugger::V2::ListDebuggeesRequest)
-            @list_debuggees.call(req, options)
+            @list_debuggees.call(req, options, &block)
           end
         end
       end
