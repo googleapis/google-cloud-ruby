@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - "benchmark/**/*"
     - "google-cloud-firestore.gemspec"
     - "lib/google/firestore/v1beta1/**/*"
     - "lib/google/cloud/firestore/v1beta1/**/*"
@@ -22,11 +23,11 @@ Style/RescueModifier:
 Style/TrivialAccessors:
   Enabled: false
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 15
 Metrics/PerceivedComplexity:
-  Max: 10
+  Max: 15
 Metrics/AbcSize:
-  Max: 25
+  Max: 30
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:

@@ -61,15 +61,15 @@ module Google
         #   user_snap.get(nested_field_path) #=> "Pizza"
         #
         def initialize *fields
-          @fields = fields.flatten.map(&:to_s)
-          @fields.each do |field|
-            raise ArgumentError, "empty paths not allowed" if field.empty?
-          end
+          @fields = fields.flatten.map(&:to_s).freeze
+
+          invalid_fields = @fields.detect(&:empty?)
+          raise ArgumentError, "empty paths not allowed" if invalid_fields
         end
 
         ##
         # @private The individual fields representing the nested field path for
-        # document data.
+        # document data. The fields are frozen.
         #
         # @return [Array<String>] The fields.
         #
@@ -145,6 +145,8 @@ module Google
         # @private Creates a field path object representing the nested fields
         # for document data.
         #
+        # The values are memoized to increase performance.
+        #
         # @param [String] dotted_string A string representing the path of the
         #   document data. The string can represent as a string of individual
         #   fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
@@ -166,15 +168,23 @@ module Google
         #   field_path.fields #=> ["favorites", "food"]
         #
         def self.parse dotted_string
-          return new dotted_string if dotted_string.is_a? Array
+          # Memoize parsed field paths
+          @memoized_field_paths ||= {}
+          if @memoized_field_paths.key? dotted_string
+            return @memoized_field_paths[dotted_string]
+          end
+
+          if dotted_string.is_a? Array
+            return @memoized_field_paths[dotted_string] = new(dotted_string)
+          end
 
           fields = String(dotted_string).split(".")
-          fields.each do |field|
-            if INVALID_FIELD_PATH_CHARS.match field
-              raise ArgumentError, "invalid character, use FieldPath instead"
-            end
+
+          if fields.grep(INVALID_FIELD_PATH_CHARS).any?
+            raise ArgumentError, "invalid character, use FieldPath instead"
           end
-          new fields
+
+          @memoized_field_paths[dotted_string] = new(fields)
         end
 
         ##

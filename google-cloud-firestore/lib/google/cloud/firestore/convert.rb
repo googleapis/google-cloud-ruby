@@ -43,9 +43,9 @@ module Google
             Time.at timestamp.seconds, Rational(timestamp.nanos, 1000)
           end
 
-          def fields_to_hash fields, context
+          def fields_to_hash fields, client
             Hash[fields.map do |key, value|
-              [key.to_sym, value_to_raw(value, context)]
+              [key.to_sym, value_to_raw(value, client)]
             end]
           end
 
@@ -55,7 +55,7 @@ module Google
             end]
           end
 
-          def value_to_raw value, context
+          def value_to_raw value, client
             case value.value_type
             when :null_value
               nil
@@ -73,13 +73,13 @@ module Google
               StringIO.new value.bytes_value
             when :reference_value
               Google::Cloud::Firestore::DocumentReference.from_path \
-                value.reference_value, context
+                value.reference_value, client
             when :geo_point_value
               value.geo_point_value.to_hash
             when :array_value
-              value.array_value.values.map { |v| value_to_raw v, context }
+              value.array_value.values.map { |v| value_to_raw v, client }
             when :map_value
-              fields_to_hash value.map_value.fields, context
+              fields_to_hash value.map_value.fields, client
             end
           end
 
@@ -104,9 +104,12 @@ module Google
               Google::Firestore::V1beta1::Value.new(array_value:
                 Google::Firestore::V1beta1::ArrayValue.new(values: values))
             elsif Hash === obj
-              if obj.keys.sort == [:latitude, :longitude]
-                Google::Firestore::V1beta1::Value.new(geo_point_value:
-                  Google::Type::LatLng.new(obj))
+              # keys have been changed to strings before the hash gets here
+              geo_pairs = hash_is_geo_point? obj
+              if geo_pairs
+                Google::Firestore::V1beta1::Value.new(
+                  geo_point_value: hash_to_geo_point(obj, geo_pairs)
+                )
               else
                 fields = hash_to_fields obj
                 Google::Firestore::V1beta1::Value.new(map_value:
@@ -118,8 +121,28 @@ module Google
               Google::Firestore::V1beta1::Value.new bytes_value: content
             else
               raise ArgumentError,
-                   "A value of type #{obj.class} is not supported."
+                    "A value of type #{obj.class} is not supported."
             end
+          end
+
+          def hash_is_geo_point? hash
+            return false unless hash.keys.count == 2
+
+            pairs = hash.map { |k, v| [String(k), v] }.sort
+            if pairs.map(&:first) == ["latitude".freeze, "longitude".freeze]
+              pairs
+            end
+          end
+
+          def hash_to_geo_point hash, pairs = nil
+            pairs ||= hash_is_geo_point? hash
+
+            raise ArgumentError, "value is not a geo point" unless pairs
+
+            Google::Type::LatLng.new(
+              latitude: pairs.first.last,
+              longitude: pairs.last.last,
+            )
           end
 
           def writes_for_create doc_path, data

@@ -103,6 +103,22 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
     document.get("").must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
   end
 
+  it "retrieves path given __name__" do
+    document.get("__name__").must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    document.get(:__name__).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+
+    document.get("__name__").path.must_equal document.path
+    document.get(:__name__).path.must_equal document.path
+  end
+
+  it "retrieves path given document_id" do
+    document.get(firestore.document_id).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    document.get(Google::Cloud::Firestore::FieldPath.document_id).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+
+    document.get(firestore.document_id).path.must_equal document.path
+    document.get(Google::Cloud::Firestore::FieldPath.document_id).path.must_equal document.path
+  end
+
   describe "strange data" do
     let :document_grpc do
       Google::Firestore::V1beta1::Document.new(
@@ -187,6 +203,22 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
 
     it "retrieves full data given an empty string" do
       document[""].must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+    end
+
+    it "retrieves path given __name__" do
+      document["__name__"].must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      document[:__name__].must_be_kind_of Google::Cloud::Firestore::DocumentReference
+
+      document["__name__"].path.must_equal document.path
+      document[:__name__].path.must_equal document.path
+    end
+
+    it "retrieves path given document_id" do
+      document[firestore.document_id].must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      document[Google::Cloud::Firestore::FieldPath.document_id].must_be_kind_of Google::Cloud::Firestore::DocumentReference
+
+      document[firestore.document_id].path.must_equal document.path
+      document[Google::Cloud::Firestore::FieldPath.document_id].path.must_equal document.path
     end
 
     describe "strange data" do

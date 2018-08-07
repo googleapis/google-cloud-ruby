@@ -91,6 +91,14 @@ module Google
           end
         end
 
+        def listen enum
+          options = call_options parent: database_path
+
+          execute do
+            firestore.listen enum, options: options
+          end
+        end
+
         def begin_transaction transaction_opt
           options = call_options parent: database_path
 

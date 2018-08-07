@@ -117,10 +117,13 @@ namespace :acceptance do
     firestore = Google::Cloud::Firestore.new
     firestore.cols do |col|
       begin
-        firestore.batch do |b|
-          col.select(firestore.document_id).all_descendants.run do |doc|
-            b.delete doc
+        col.select(firestore.document_id).all_descendants.run.each_slice(500).with_index do |slice, index|
+          firestore.batch do |b|
+            slice.each do |doc|
+              b.delete doc
+            end
           end
+          puts "Deleted batch #{index+1} of #{slice.count} documents"
         end
       rescue => e
         puts "Error while cleaning up #{col} documents.\n\n#{e}"

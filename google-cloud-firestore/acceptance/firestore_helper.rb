@@ -86,8 +86,12 @@ def clean_up_firestore
   puts "Cleaning up documents and collections after firestore tests."
 
   $firestore.batch do |b|
-    $firestore.col($firestore_prefix).select($firestore.document_id).all_descendants.run do |doc|
-      b.delete doc
+    $firestore.col($firestore_prefix).select($firestore.document_id).all_descendants.run.each_slice(500).with_index do |slice, index|
+      $firestore.batch do |b|
+        slice.each do |doc|
+          b.delete doc
+        end
+      end
     end
   end
 rescue => e

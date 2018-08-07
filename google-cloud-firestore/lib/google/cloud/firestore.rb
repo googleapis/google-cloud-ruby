@@ -390,6 +390,52 @@ module Google
     # user_ref.update({ nested_field_path => "Pasta" })
     # ```
     #
+    # ### Listening for changes
+    #
+    # You can listen to a document reference or a collection reference/query for
+    # changes. The current document snapshot or query results snapshot will be
+    # yielded first, and each time the contents change.
+    #
+    # You can use {Firestore::DocumentReference#listen} to be notified of
+    # changes to a single document:
+    #
+    # ```ruby
+    # require "google/cloud/firestore"
+    #
+    # firestore = Google::Cloud::Firestore.new
+    #
+    # # Get a document reference
+    # nyc_ref = firestore.doc "cities/NYC"
+    #
+    # listener = nyc_ref.listen do |snapshot|
+    #   puts "The population of #{snapshot[:name]} "
+    #   puts "is #{snapshot[:population]}."
+    # end
+    #
+    # # When ready, stop the listen operation and close the stream.
+    # listener.stop
+    # ```
+    #
+    # You can use {Firestore::Query#listen} to be notified of changes to any
+    # document contained in the query:
+    #
+    # ```ruby
+    # require "google/cloud/firestore"
+    #
+    # firestore = Google::Cloud::Firestore.new
+    #
+    # # Create a query
+    # query = firestore.col(:cities).order(:population, :desc)
+    #
+    # listener = query.listen do |snapshot|
+    #   puts "The query snapshot has #{snapshot.docs.count} documents "
+    #   puts "and has #{snapshot.changes.count} changes."
+    # end
+    #
+    # # When ready, stop the listen operation and close the stream.
+    # listener.stop
+    # ```
+    #
     # ## Using transactions and batched writes
     #
     # Cloud Firestore supports atomic operations for reading and writing data.

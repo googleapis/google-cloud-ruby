@@ -27,6 +27,15 @@ require_relative "../../../../conformance/test-definition_pb"
 # [ProtoTest.cs](https://github.com/GoogleCloudPlatform/google-cloud-dotnet/blob/master/apis/Google.Cloud.Firestore/Google.Cloud.Firestore.Tests/Proto/ProtoTest.cs).
 #
 class ConformanceTest < MockFirestore
+  let(:commit_time) { Time.now }
+  let :commit_resp do
+    Google::Firestore::V1beta1::CommitResponse.new(
+      commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
+      write_results: [Google::Firestore::V1beta1::WriteResult.new(
+        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
+      )
+  end
+
   def doc_ref_from_path doc_path
     Google::Cloud::Firestore::DocumentReference.from_path doc_path, firestore
   end
@@ -63,17 +72,8 @@ class ConformanceTest < MockFirestore
 end
 
 class ConformanceCreate < ConformanceTest
-  let(:commit_time) { Time.now }
-  let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
-      commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
-        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
-      )
-  end
-
-  def self.build_test_for description, test, i
-    define_method("test_#{i}: #{description}") do
+  def self.build_test_for description, test, index
+    define_method("test_#{index}: #{description}") do
       doc_ref = doc_ref_from_path test.doc_ref_path
       data = data_from_json test.json_data
 
@@ -91,17 +91,8 @@ class ConformanceCreate < ConformanceTest
 end
 
 class ConformanceSet < ConformanceTest
-  let(:commit_time) { Time.now }
-  let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
-      commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-      write_results: [Google::Firestore::V1beta1::WriteResult.new(
-        update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
-      )
-  end
-
-  def self.build_test_for description, test, i
-    define_method("test_#{i}: #{description}") do
+  def self.build_test_for description, test, index
+    define_method("test_#{index}: #{description}") do
       doc_ref = doc_ref_from_path test.doc_ref_path
       data = data_from_json test.json_data
       merge = if test.option && test.option.all
@@ -126,17 +117,8 @@ class ConformanceSet < ConformanceTest
 end
 
 class ConformanceUpdate < ConformanceTest
-  let(:commit_time) { Time.now }
-  let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
-        commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-        write_results: [Google::Firestore::V1beta1::WriteResult.new(
-                            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
-    )
-  end
-
-  def self.build_test_for description, test, i
-    define_method("test_#{i}: #{description}") do
+  def self.build_test_for description, test, index
+    define_method("test_#{index}: #{description}") do
       if test.precondition && test.precondition.exists
         fail "The ruby implementation does not allow exists on update"
       end
@@ -161,17 +143,8 @@ class ConformanceUpdate < ConformanceTest
 end
 
 class ConformanceUpdatePaths < ConformanceTest
-  let(:commit_time) { Time.now }
-  let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
-        commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-        write_results: [Google::Firestore::V1beta1::WriteResult.new(
-                            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
-    )
-  end
-
-  def self.build_test_for description, test, i
-    define_method("test_#{i}: #{description}") do
+  def self.build_test_for description, test, index
+    define_method("test_#{index}: #{description}") do
       if test.precondition && test.precondition.exists
         fail "The ruby implementation does not allow exists on update"
       end
@@ -211,17 +184,8 @@ class ConformanceUpdatePaths < ConformanceTest
 end
 
 class ConformanceDelete < ConformanceTest
-  let(:commit_time) { Time.now }
-  let :commit_resp do
-    Google::Firestore::V1beta1::CommitResponse.new(
-        commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time),
-        write_results: [Google::Firestore::V1beta1::WriteResult.new(
-                            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))]
-    )
-  end
-
-  def self.build_test_for description, test, i
-    define_method("test_#{i}: #{description}") do
+  def self.build_test_for description, test, index
+    define_method("test_#{index}: #{description}") do
       doc_ref = doc_ref_from_path test.doc_ref_path
       opts = {}
       if test.precondition && test.precondition.exists
@@ -244,8 +208,8 @@ class ConformanceDelete < ConformanceTest
 end
 
 class ConformanceQuery < ConformanceTest
-  def self.build_test_for description, test, i
-    define_method("test_#{i}: #{description}") do
+  def self.build_test_for description, test, index
+    define_method("test_#{index}: #{description}") do
       if test.is_error
         expect do
           build_query test, get_collection_reference(test.coll_path)
@@ -305,35 +269,76 @@ class ConformanceQuery < ConformanceTest
   end
 end
 
+class ConformanceListen < ConformanceTest
+  def self.build_test_for description, test, index
+    define_method("test_#{index}: #{description}") do
+      # slice responses into groups ending on RESET
+      sliced_responses = test.responses.slice_when do |before_response, _after_response|
+        before_response.response_type == :target_change &&
+          before_response.target_change.target_change_type == :RESET
+      end
+      # set stub because we can't mock a streaming request/response
+      listen_stub = StreamingListenStub.new sliced_responses
+      firestore.service.instance_variable_set :@firestore, listen_stub
+
+      query_snapshots = []
+      listener = firestore.col("C").order("a").listen do |query_snp|
+        query_snapshots << query_snp
+      end
+
+      wait_until { query_snapshots.count == test.snapshots.count }
+
+      listener.stop
+
+      query_snapshots.count.must_equal test.snapshots.count
+      query_snapshots.zip(test.snapshots).each do |ruby_snapshot, proto_snapshot|
+        compare_query_snapshot ruby_snapshot, proto_snapshot
+      end
+    end
+  end
+
+  def compare_query_snapshot ruby_snapshot, proto_snapshot
+    ruby_snapshot.docs.count.must_equal proto_snapshot.docs.count
+    ruby_snapshot.docs.map(&:path).must_equal proto_snapshot.docs.map(&:name)
+    ruby_snapshot.docs.zip(proto_snapshot.docs).each do |ruby_doc, proto_doc|
+      compare_document_snapshot ruby_doc, proto_doc
+    end
+    ruby_snapshot.changes.count.must_equal proto_snapshot.changes.count
+  end
+
+  def compare_document_snapshot ruby_snapshot, proto_snapshot
+    ruby_snapshot.grpc.to_h.must_equal proto_snapshot.to_h
+  end
+end
+
 proto_file = File.expand_path "../../../../conformance/test-suite.binproto", __dir__
 proto_contents = File.read proto_file, mode: "rb"
 test_suite = Tests::TestSuite.decode proto_contents
 
-test_suite.tests.each_with_index do |wrapper, i|
+test_suite.tests.each_with_index do |wrapper, index|
   case wrapper.test
     when :get
       next # Google::Firestore::V1beta1::GetDocumentRequest is not used.
     when :create
-      ConformanceCreate.build_test_for wrapper.description, wrapper.create, i
+      ConformanceCreate.build_test_for wrapper.description, wrapper.create, index
     when :set
-      ConformanceSet.build_test_for wrapper.description, wrapper.set, i
+      ConformanceSet.build_test_for wrapper.description, wrapper.set, index
     when :update
       # The ruby implementation does not allow exists on update, so skip
       next if wrapper.update.precondition && wrapper.update.precondition.exists
 
-      ConformanceUpdate.build_test_for wrapper.description, wrapper.update, i
+      ConformanceUpdate.build_test_for wrapper.description, wrapper.update, index
     when :update_paths
       # The ruby implementation does not allow exists on update, so skip
       next if wrapper.update_paths.precondition && wrapper.update_paths.precondition.exists
 
-      ConformanceUpdatePaths.build_test_for wrapper.description, wrapper.update_paths, i
+      ConformanceUpdatePaths.build_test_for wrapper.description, wrapper.update_paths, index
     when :delete
-      ConformanceDelete.build_test_for wrapper.description, wrapper.delete, i
+      ConformanceDelete.build_test_for wrapper.description, wrapper.delete, index
     when :query
-      ConformanceQuery.build_test_for wrapper.description, wrapper.query, i
+      ConformanceQuery.build_test_for wrapper.description, wrapper.query, index
     when :listen
-      next
-      # TODO
+      ConformanceListen.build_test_for wrapper.description, wrapper.listen, index
     else
       raise "Unexpected test: #{wrapper.inspect}"
   end

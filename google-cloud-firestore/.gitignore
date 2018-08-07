@@ -5,6 +5,9 @@ pkg/*
 html/*
 jsondoc/*
 
+# Benchmark files
+benchmark/watch_sort_perf.dump
+
 # Ignore YARD stuffs
 .yardoc
 

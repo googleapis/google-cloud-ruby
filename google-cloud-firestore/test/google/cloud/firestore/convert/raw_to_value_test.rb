@@ -54,6 +54,20 @@ describe Google::Cloud::Firestore::Convert, :raw_to_value, :mock_firestore do
     converted.must_equal value
   end
 
+  it "converts a nan value" do
+    value = Google::Firestore::V1beta1::Value.new double_value: Float::NAN
+
+    converted = Google::Cloud::Firestore::Convert.raw_to_value Float::NAN
+    converted.must_equal value
+  end
+
+  it "converts an infinity value" do
+    value = Google::Firestore::V1beta1::Value.new double_value: Float::INFINITY
+
+    converted = Google::Cloud::Firestore::Convert.raw_to_value Float::INFINITY
+    converted.must_equal value
+  end
+
   it "converts a timestamp value" do
     value = Google::Firestore::V1beta1::Value.new timestamp_value: Google::Protobuf::Timestamp.new(seconds: 1483326245, nanos: 60000000)
 
@@ -96,7 +110,7 @@ describe Google::Cloud::Firestore::Convert, :raw_to_value, :mock_firestore do
   it "converts a geo_point value" do
     value = Google::Firestore::V1beta1::Value.new geo_point_value: Google::Type::LatLng.new(latitude: 43.878264, longitude: -103.45700740814209)
 
-    converted = Google::Cloud::Firestore::Convert.raw_to_value({ longitude: -103.45700740814209, latitude: 43.878264 })
+    converted = Google::Cloud::Firestore::Convert.raw_to_value({ "longitude" => -103.45700740814209, "latitude" => 43.878264 })
     converted.must_equal value
   end
 
