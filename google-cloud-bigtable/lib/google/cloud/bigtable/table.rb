@@ -36,8 +36,7 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   instance = bigtable.instance("my-instance")
-      #   table = instance.table("my-table")
+      #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
       #
       #   table.column_families.each do |cf|
       #     p cf.name
@@ -188,8 +187,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
+        #   instance = bigtable.table("my-instance", "my-table")
         #   table.delete
         #
         def delete
@@ -220,7 +218,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   instance = bigtable.instance("my-instance")
+        #   table = bigtable.table("my-table")
         #
         #   if table.exists?
         #     p "Table is exists."
@@ -262,7 +261,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", my-table)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   gc_rule = Google::Cloud::Bigtable::GcRule.max_age(1800)
         #   column_family = table.column_family("cf2", gc_rule)
@@ -275,7 +274,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", my-table)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   column_family = table.column_family("cf3")
         #   column_family.delete
@@ -487,8 +486,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
-        #   table = instance.table("my-table")
+        #   table = bigtable.table("instance_id", "my-table", perform_lookup: true)
         #
         #   if table.wait_for_replication
         #     puts "Replication done"

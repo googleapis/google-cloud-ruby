@@ -12,6 +12,7 @@ AllCops:
     - "Rakefile"
     - "test/**/*"
     - "acceptance/**/*"
+    - "samples/**/*"
 
 Documentation:
   Enabled: true
