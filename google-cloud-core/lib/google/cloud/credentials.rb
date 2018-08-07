@@ -30,8 +30,8 @@ module Google
     # This class is intended to be inherited by API-specific classes
     # which overrides the SCOPE constant.
     class Credentials
-      TOKEN_CREDENTIAL_URI = "https://accounts.google.com/o/oauth2/token"
-      AUDIENCE = "https://accounts.google.com/o/oauth2/token"
+      TOKEN_CREDENTIAL_URI = "https://oauth2.googleapis.com/token"
+      AUDIENCE = "https://oauth2.googleapis.com/token"
       SCOPE = []
       PATH_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE]
       JSON_ENV_VARS = %w[GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON]
