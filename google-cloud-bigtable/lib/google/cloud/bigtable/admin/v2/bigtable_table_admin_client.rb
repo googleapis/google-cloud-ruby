@@ -27,7 +27,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/bigtable/admin/v2/bigtable_table_admin_pb"
-require "google/cloud/bigtable/admin/credentials"
+require "google/cloud/bigtable/admin/v2/credentials"
 
 module Google
   module Cloud
@@ -50,6 +50,9 @@ module Google
 
             # The default port of the service.
             DEFAULT_SERVICE_PORT = 443
+
+            # The default set of gRPC interceptors.
+            GRPC_INTERCEPTORS = []
 
             DEFAULT_TIMEOUT = 30
 
@@ -82,6 +85,7 @@ module Google
 
             class OperationsClient < Google::Longrunning::OperationsClient
               self::SERVICE_ADDRESS = BigtableTableAdminClient::SERVICE_ADDRESS
+              self::GRPC_INTERCEPTORS = BigtableTableAdminClient::GRPC_INTERCEPTORS
             end
 
             INSTANCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
@@ -184,11 +188,18 @@ module Google
             #   or the specified config is missing data points.
             # @param timeout [Numeric]
             #   The default timeout, in seconds, for calls made through this client.
+            # @param metadata [Hash]
+            #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+            # @param exception_transformer [Proc]
+            #   An optional proc that intercepts any exceptions raised during an API call to inject
+            #   custom error handling.
             def initialize \
                 credentials: nil,
                 scopes: ALL_SCOPES,
                 client_config: {},
                 timeout: DEFAULT_TIMEOUT,
+                metadata: nil,
+                exception_transformer: nil,
                 lib_name: nil,
                 lib_version: ""
               # These require statements are intentionally placed here to initialize
@@ -197,7 +208,7 @@ module Google
               require "google/gax/grpc"
               require "google/bigtable/admin/v2/bigtable_table_admin_services_pb"
 
-              credentials ||= Google::Cloud::Bigtable::Admin::Credentials.default
+              credentials ||= Google::Cloud::Bigtable::Admin::V2::Credentials.default
 
               @operations_client = OperationsClient.new(
                 credentials: credentials,
@@ -209,7 +220,7 @@ module Google
               )
 
               if credentials.is_a?(String) || credentials.is_a?(Hash)
-                updater_proc = Google::Cloud::Bigtable::Admin::Credentials.new(credentials).updater_proc
+                updater_proc = Google::Cloud::Bigtable::Admin::V2::Credentials.new(credentials).updater_proc
               end
               if credentials.is_a?(GRPC::Core::Channel)
                 channel = credentials
@@ -233,6 +244,7 @@ module Google
               google_api_client.freeze
 
               headers = { :"x-goog-api-client" => google_api_client }
+              headers.merge!(metadata) unless metadata.nil?
               client_config_file = Pathname.new(__dir__).join(
                 "bigtable_table_admin_client_config.json"
               )
@@ -245,13 +257,14 @@ module Google
                   timeout,
                   page_descriptors: PAGE_DESCRIPTORS,
                   errors: Google::Gax::Grpc::API_ERRORS,
-                  kwargs: headers
+                  metadata: headers
                 )
               end
 
               # Allow overriding the service path/port in subclasses.
               service_path = self.class::SERVICE_ADDRESS
               port = self.class::DEFAULT_SERVICE_PORT
+              interceptors = self.class::GRPC_INTERCEPTORS
               @bigtable_table_admin_stub = Google::Gax::Grpc.create_stub(
                 service_path,
                 port,
@@ -259,12 +272,14 @@ module Google
                 channel: channel,
                 updater_proc: updater_proc,
                 scopes: scopes,
+                interceptors: interceptors,
                 &Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.method(:new)
               )
 
               @create_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:create_table),
                 defaults["create_table"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'parent' => request.parent}
                 end
@@ -272,6 +287,7 @@ module Google
               @create_table_from_snapshot = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:create_table_from_snapshot),
                 defaults["create_table_from_snapshot"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'parent' => request.parent}
                 end
@@ -279,6 +295,7 @@ module Google
               @list_tables = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:list_tables),
                 defaults["list_tables"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'parent' => request.parent}
                 end
@@ -286,6 +303,7 @@ module Google
               @get_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:get_table),
                 defaults["get_table"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -293,6 +311,7 @@ module Google
               @delete_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:delete_table),
                 defaults["delete_table"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -300,6 +319,7 @@ module Google
               @modify_column_families = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:modify_column_families),
                 defaults["modify_column_families"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -307,6 +327,7 @@ module Google
               @drop_row_range = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:drop_row_range),
                 defaults["drop_row_range"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -314,6 +335,7 @@ module Google
               @generate_consistency_token = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:generate_consistency_token),
                 defaults["generate_consistency_token"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -321,6 +343,7 @@ module Google
               @check_consistency = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:check_consistency),
                 defaults["check_consistency"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -328,6 +351,7 @@ module Google
               @snapshot_table = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:snapshot_table),
                 defaults["snapshot_table"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -335,6 +359,7 @@ module Google
               @get_snapshot = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:get_snapshot),
                 defaults["get_snapshot"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -342,6 +367,7 @@ module Google
               @list_snapshots = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:list_snapshots),
                 defaults["list_snapshots"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'parent' => request.parent}
                 end
@@ -349,6 +375,7 @@ module Google
               @delete_snapshot = Google::Gax.create_api_call(
                 @bigtable_table_admin_stub.method(:delete_snapshot),
                 defaults["delete_snapshot"],
+                exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
                   {'name' => request.name}
                 end
@@ -393,12 +420,15 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::Table]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Bigtable::Admin::V2::Table]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
             #   # TODO: Initialize +table_id+:
@@ -413,7 +443,8 @@ module Google
                 table_id,
                 table,
                 initial_splits: nil,
-                options: nil
+                options: nil,
+                &block
               req = {
                 parent: parent,
                 table_id: table_id,
@@ -421,7 +452,7 @@ module Google
                 initial_splits: initial_splits
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CreateTableRequest)
-              @create_table.call(req, options)
+              @create_table.call(req, options, &block)
             end
 
             # Creates a new table from the specified snapshot. The target table must
@@ -450,9 +481,9 @@ module Google
             # @return [Google::Gax::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
             #   # TODO: Initialize +table_id+:
@@ -521,6 +552,9 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Table>]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Table>]
             #   An enumerable of Google::Bigtable::Admin::V2::Table instances.
             #   See Google::Gax::PagedEnumerable documentation for other
@@ -528,9 +562,9 @@ module Google
             #   object.
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
             #   # Iterate over all results.
@@ -549,13 +583,14 @@ module Google
             def list_tables \
                 parent,
                 view: nil,
-                options: nil
+                options: nil,
+                &block
               req = {
                 parent: parent,
                 view: view
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ListTablesRequest)
-              @list_tables.call(req, options)
+              @list_tables.call(req, options, &block)
             end
 
             # Gets metadata information about the specified table.
@@ -570,25 +605,29 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::Table]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Bigtable::Admin::V2::Table]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #   response = bigtable_table_admin_client.get_table(formatted_name)
 
             def get_table \
                 name,
                 view: nil,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name,
                 view: view
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::GetTableRequest)
-              @get_table.call(req, options)
+              @get_table.call(req, options, &block)
             end
 
             # Permanently deletes a specified table and all of its data.
@@ -600,22 +639,26 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result []
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #   bigtable_table_admin_client.delete_table(formatted_name)
 
             def delete_table \
                 name,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DeleteTableRequest)
-              @delete_table.call(req, options)
+              @delete_table.call(req, options, &block)
               nil
             end
 
@@ -638,12 +681,15 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::Table]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Bigtable::Admin::V2::Table]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #
             #   # TODO: Initialize +modifications+:
@@ -653,13 +699,14 @@ module Google
             def modify_column_families \
                 name,
                 modifications,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name,
                 modifications: modifications
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest)
-              @modify_column_families.call(req, options)
+              @modify_column_families.call(req, options, &block)
             end
 
             # Permanently drop/delete a row range from a specified table. The request can
@@ -678,11 +725,14 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result []
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #   bigtable_table_admin_client.drop_row_range(formatted_name)
 
@@ -690,14 +740,15 @@ module Google
                 name,
                 row_key_prefix: nil,
                 delete_all_data_from_table: nil,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name,
                 row_key_prefix: row_key_prefix,
                 delete_all_data_from_table: delete_all_data_from_table
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DropRowRangeRequest)
-              @drop_row_range.call(req, options)
+              @drop_row_range.call(req, options, &block)
               nil
             end
 
@@ -713,23 +764,27 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Bigtable::Admin::V2::GenerateConsistencyTokenResponse]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #   response = bigtable_table_admin_client.generate_consistency_token(formatted_name)
 
             def generate_consistency_token \
                 name,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::GenerateConsistencyTokenRequest)
-              @generate_consistency_token.call(req, options)
+              @generate_consistency_token.call(req, options, &block)
             end
 
             # Checks replication consistency based on a consistency token, that is, if
@@ -745,12 +800,15 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::CheckConsistencyResponse]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Bigtable::Admin::V2::CheckConsistencyResponse]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #
             #   # TODO: Initialize +consistency_token+:
@@ -760,13 +818,14 @@ module Google
             def check_consistency \
                 name,
                 consistency_token,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name,
                 consistency_token: consistency_token
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CheckConsistencyRequest)
-              @check_consistency.call(req, options)
+              @check_consistency.call(req, options, &block)
             end
 
             # Creates a new snapshot in the specified cluster from the specified
@@ -806,9 +865,9 @@ module Google
             # @return [Google::Gax::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
             #
             #   # TODO: Initialize +cluster+:
@@ -888,23 +947,27 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::Snapshot]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Bigtable::Admin::V2::Snapshot]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
             #   response = bigtable_table_admin_client.get_snapshot(formatted_name)
 
             def get_snapshot \
                 name,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::GetSnapshotRequest)
-              @get_snapshot.call(req, options)
+              @get_snapshot.call(req, options, &block)
             end
 
             # Lists all snapshots associated with the specified cluster.
@@ -930,6 +993,9 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Snapshot>]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Snapshot>]
             #   An enumerable of Google::Bigtable::Admin::V2::Snapshot instances.
             #   See Google::Gax::PagedEnumerable documentation for other
@@ -937,9 +1003,9 @@ module Google
             #   object.
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
             #
             #   # Iterate over all results.
@@ -958,13 +1024,14 @@ module Google
             def list_snapshots \
                 parent,
                 page_size: nil,
-                options: nil
+                options: nil,
+                &block
               req = {
                 parent: parent,
                 page_size: page_size
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ListSnapshotsRequest)
-              @list_snapshots.call(req, options)
+              @list_snapshots.call(req, options, &block)
             end
 
             # Permanently deletes the specified snapshot.
@@ -982,22 +1049,26 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result []
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
-            #   require "google/cloud/bigtable/admin/v2"
+            #   require "google/cloud/bigtable/admin"
             #
-            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin.new
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
             #   bigtable_table_admin_client.delete_snapshot(formatted_name)
 
             def delete_snapshot \
                 name,
-                options: nil
+                options: nil,
+                &block
               req = {
                 name: name
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DeleteSnapshotRequest)
-              @delete_snapshot.call(req, options)
+              @delete_snapshot.call(req, options, &block)
               nil
             end
           end
