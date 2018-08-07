@@ -312,6 +312,7 @@ module Google
         # @private
         def <=> other
           return nil unless other.is_a? DocumentSnapshot
+          return data <=> other.data if path == other.path
           path <=> other.path
         end
 
@@ -319,13 +320,14 @@ module Google
         # @private
         def eql? other
           return nil unless other.is_a? DocumentSnapshot
+          return data.eql? other.data if path == other.path
           path.eql? other.path
         end
 
         ##
         # @private
         def hash
-          path.hash
+          @hash ||= [path, data].hash
         end
 
         ##
