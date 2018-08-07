@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -41,10 +41,6 @@ end
 
 desc "Runs the smoke tests."
 task :smoke_test do
-  if ENV["DATAPROC_TEST_PROJECT"].nil?
-    fail "The DATAPROC_TEST_PROJECT environment variable must be set. "\
-      "e.g DATAPROC_TEST_PROJECT=test123 rake smoke_test"
-  end
 
   $LOAD_PATH.unshift "lib", "smoke_test"
   Dir.glob("acceptance/**/*smoke_test.rb").each { |file| require_relative file }
@@ -68,29 +64,31 @@ end
 desc "Run the google-cloud-dataproc acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
-  project ||= ENV["DATAPROC_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
+  project ||=
+    ENV["DATAPROC_TEST_PROJECT"] ||
+    ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["DATAPROC_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
+  keyfile ||=
+    ENV["DATAPROC_TEST_KEYFILE"] ||
+    ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
-    keyfile ||= ENV["DATAPROC_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    keyfile ||=
+      ENV["DATAPROC_TEST_KEYFILE_JSON"] ||
+      ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATAPROC_TEST_PROJECT=test123 VIDEO_INTELLIGENCE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATAPROC_TEST_PROJECT=test123 DATAPROC_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  # clear any env var already set
-  require "google/cloud/dataproc/credentials"
-  (Google::Cloud::Dataproc::Credentials::PATH_ENV_VARS +
-   Google::Cloud::Dataproc::Credentials::JSON_ENV_VARS).each do |path|
+  require "google/cloud/dataproc/v1/credentials"
+  (Google::Cloud::Dataproc::V1::Credentials::PATH_ENV_VARS +
+   Google::Cloud::Dataproc::V1::Credentials::JSON_ENV_VARS).each do |path|
     ENV[path] = nil
   end
-  # always overwrite when running tests
   ENV["DATAPROC_PROJECT"] = project
-  ENV["DATAPROC_KEYFILE_JSON"] = keyfile
-
-  # Required for smoke tests
   ENV["DATAPROC_TEST_PROJECT"] = project
+  ENV["DATAPROC_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end
@@ -176,9 +174,6 @@ namespace :ci do
     header "google-cloud-dataproc smoke_test", "*"
     sh "bundle exec rake smoke_test -v"
   end
-end
-
-namespace :ci do
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
     Rake::Task["ci"].invoke

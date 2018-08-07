@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockJobControllerCredentials < Google::Cloud::Dataproc::Credentials
+class MockJobControllerCredentials < Google::Cloud::Dataproc::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -96,7 +96,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("submit_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -108,6 +108,17 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.submit_job(
+            project_id,
+            region,
+            job
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -132,7 +143,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("submit_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -180,7 +191,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("get_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -192,6 +203,17 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_job(
+            project_id,
+            region,
+            job_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -216,7 +238,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("get_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -263,7 +285,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("list_jobs")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -296,7 +318,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("list_jobs")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -344,7 +366,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("update_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -358,6 +380,19 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_job(
+            project_id,
+            region,
+            job_id,
+            job,
+            update_mask
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -386,7 +421,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("update_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -436,7 +471,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("cancel_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -448,6 +483,17 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.cancel_job(
+            project_id,
+            region,
+            job_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -472,7 +518,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("cancel_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -514,7 +560,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("delete_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method
@@ -526,6 +572,17 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_job(
+            project_id,
+            region,
+            job_id
+          ) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -550,7 +607,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
       mock_credentials = MockJobControllerCredentials.new("delete_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::JobController.new(version: :v1)
 
           # Call method

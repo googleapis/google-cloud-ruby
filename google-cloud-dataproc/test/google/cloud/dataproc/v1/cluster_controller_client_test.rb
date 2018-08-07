@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockClusterControllerCredentials < Google::Cloud::Dataproc::Credentials
+class MockClusterControllerCredentials < Google::Cloud::Dataproc::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -109,7 +109,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("create_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -155,7 +155,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("create_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -192,7 +192,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("create_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -256,7 +256,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("update_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -308,7 +308,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("update_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -351,7 +351,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("update_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -406,7 +406,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("delete_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -452,7 +452,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("delete_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -489,7 +489,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("delete_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -542,7 +542,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("get_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -554,6 +554,17 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_cluster(
+            project_id,
+            region,
+            cluster_name
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -578,7 +589,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("get_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -625,7 +636,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("list_clusters")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -658,7 +669,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("list_clusters")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -707,7 +718,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("diagnose_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -753,7 +764,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("diagnose_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method
@@ -790,7 +801,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
       mock_credentials = MockClusterControllerCredentials.new("diagnose_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Dataproc::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
 
           # Call method

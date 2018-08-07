@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Google Cloud Dataproc API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+    # # Ruby Client for Google Cloud Dataproc API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
     #
     # [Google Cloud Dataproc API][Product Documentation]:
     # Manages Hadoop-based clusters and jobs on Google Cloud Platform.
@@ -29,7 +29,7 @@ module Google
     #
     # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
     # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Google Cloud Dataproc API.](https://console.cloud.google.com/apis/api/dataproc)
+    # 3. [Enable the Google Cloud Dataproc API.](https://console.cloud.google.com/apis/library/dataproc.googleapis.com)
     # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
     #
     # ### Installation
@@ -68,6 +68,31 @@ module Google
     #
     # [Product Documentation]: https://cloud.google.com/dataproc
     #
+    # ## Enabling Logging
+    #
+    # To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
+    # The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+    # or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+    # that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+    # and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+    #
+    # Configuring a Ruby stdlib logger:
+    #
+    # ```ruby
+    # require "logger"
+    #
+    # module MyLogger
+    #   LOGGER = Logger.new $stderr, level: Logger::WARN
+    #   def logger
+    #     LOGGER
+    #   end
+    # end
+    #
+    # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
+    # module GRPC
+    #   extend MyLogger
+    # end
+    # ```
     #
     module Dataproc
       module V1

@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,11 +20,9 @@ module Google
       #
       # | Class | Description |
       # | ----- | ----------- |
-      # | [ClusterControllerClient][] | Manages Hadoop-based clusters and jobs on Google Cloud Platform. |
-      # | [JobControllerClient][] | Manages Hadoop-based clusters and jobs on Google Cloud Platform. |
+      # | [JobControllerClient][] | The JobController provides methods to manage jobs. |
       # | [Data Types][] | Data types for Google::Cloud::Dataproc::V1 |
       #
-      # [ClusterControllerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1/clustercontrollerclient
       # [JobControllerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1/jobcontrollerclient
       # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1/datatypes
       #
