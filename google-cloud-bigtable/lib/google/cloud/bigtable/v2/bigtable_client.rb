@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/bigtable/v2/bigtable_pb"
-require "google/cloud/bigtable/credentials"
+require "google/cloud/bigtable/v2/credentials"
 
 module Google
   module Cloud
@@ -43,6 +43,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -101,11 +104,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -114,10 +124,10 @@ module Google
             require "google/gax/grpc"
             require "google/bigtable/v2/bigtable_services_pb"
 
-            credentials ||= Google::Cloud::Bigtable::Credentials.default
+            credentials ||= Google::Cloud::Bigtable::V2::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Bigtable::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Bigtable::V2::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -141,6 +151,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "bigtable_client_config.json"
             )
@@ -152,13 +163,14 @@ module Google
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @bigtable_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -166,12 +178,14 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Bigtable::V2::Bigtable::Stub.method(:new)
             )
 
             @read_rows = Google::Gax.create_api_call(
               @bigtable_stub.method(:read_rows),
               defaults["read_rows"],
+              exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'table_name' => request.table_name}
               end
@@ -179,6 +193,7 @@ module Google
             @sample_row_keys = Google::Gax.create_api_call(
               @bigtable_stub.method(:sample_row_keys),
               defaults["sample_row_keys"],
+              exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'table_name' => request.table_name}
               end
@@ -186,6 +201,7 @@ module Google
             @mutate_row = Google::Gax.create_api_call(
               @bigtable_stub.method(:mutate_row),
               defaults["mutate_row"],
+              exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'table_name' => request.table_name}
               end
@@ -193,6 +209,7 @@ module Google
             @mutate_rows = Google::Gax.create_api_call(
               @bigtable_stub.method(:mutate_rows),
               defaults["mutate_rows"],
+              exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'table_name' => request.table_name}
               end
@@ -200,6 +217,7 @@ module Google
             @check_and_mutate_row = Google::Gax.create_api_call(
               @bigtable_stub.method(:check_and_mutate_row),
               defaults["check_and_mutate_row"],
+              exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'table_name' => request.table_name}
               end
@@ -207,6 +225,7 @@ module Google
             @read_modify_write_row = Google::Gax.create_api_call(
               @bigtable_stub.method(:read_modify_write_row),
               defaults["read_modify_write_row"],
+              exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'table_name' => request.table_name}
               end
@@ -335,6 +354,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Bigtable::V2::MutateRowResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Bigtable::V2::MutateRowResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -355,7 +377,8 @@ module Google
               row_key,
               mutations,
               app_profile_id: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               table_name: table_name,
               row_key: row_key,
@@ -363,7 +386,7 @@ module Google
               app_profile_id: app_profile_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Bigtable::V2::MutateRowRequest)
-            @mutate_row.call(req, options)
+            @mutate_row.call(req, options, &block)
           end
 
           # Mutates multiple rows in a batch. Each individual row is mutated
@@ -454,6 +477,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Bigtable::V2::CheckAndMutateRowResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Bigtable::V2::CheckAndMutateRowResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -473,7 +499,8 @@ module Google
               predicate_filter: nil,
               true_mutations: nil,
               false_mutations: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               table_name: table_name,
               row_key: row_key,
@@ -483,7 +510,7 @@ module Google
               false_mutations: false_mutations
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Bigtable::V2::CheckAndMutateRowRequest)
-            @check_and_mutate_row.call(req, options)
+            @check_and_mutate_row.call(req, options, &block)
           end
 
           # Modifies a row atomically on the server. The method reads the latest
@@ -511,6 +538,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Bigtable::V2::ReadModifyWriteRowResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Bigtable::V2::ReadModifyWriteRowResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
@@ -531,7 +561,8 @@ module Google
               row_key,
               rules,
               app_profile_id: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               table_name: table_name,
               row_key: row_key,
@@ -539,7 +570,7 @@ module Google
               app_profile_id: app_profile_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Bigtable::V2::ReadModifyWriteRowRequest)
-            @read_modify_write_row.call(req, options)
+            @read_modify_write_row.call(req, options, &block)
           end
         end
       end

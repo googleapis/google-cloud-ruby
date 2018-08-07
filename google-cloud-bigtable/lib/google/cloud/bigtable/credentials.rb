@@ -12,23 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "googleauth"
+require "google/cloud/bigtable/v2/credentials"
 
 module Google
   module Cloud
     module Bigtable
-      class Credentials < Google::Auth::Credentials
-        SCOPE = [
-          "https://www.googleapis.com/auth/bigtable.data",
-          "https://www.googleapis.com/auth/bigtable.data.readonly",
-          "https://www.googleapis.com/auth/cloud-bigtable.data",
-          "https://www.googleapis.com/auth/cloud-bigtable.data.readonly",
-          "https://www.googleapis.com/auth/cloud-platform",
-          "https://www.googleapis.com/auth/cloud-platform.read-only"
-        ].freeze
-        PATH_ENV_VARS = %w(BIGTABLE_KEYFILE GOOGLE_CLOUD_KEYFILE GCLOUD_KEYFILE)
-        JSON_ENV_VARS = %w(BIGTABLE_KEYFILE_JSON GOOGLE_CLOUD_KEYFILE_JSON GCLOUD_KEYFILE_JSON)
-        DEFAULT_PATHS = ["~/.config/gcloud/application_default_credentials.json"]
+      class Credentials < Google::Cloud::Bigtable::V2::Credentials
       end
     end
   end

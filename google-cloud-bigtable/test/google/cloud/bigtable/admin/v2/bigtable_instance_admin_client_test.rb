@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockBigtableInstanceAdminCredentials < Google::Cloud::Bigtable::Admin::Credentials
+class MockBigtableInstanceAdminCredentials < Google::Cloud::Bigtable::Admin::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -106,7 +106,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -155,7 +155,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -195,7 +195,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -240,7 +240,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -248,6 +248,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_instance(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -268,7 +275,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -307,7 +314,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("list_instances")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -315,6 +322,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_instances(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -335,7 +349,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("list_instances")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -381,7 +395,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -394,6 +408,18 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_instance(
+            formatted_name,
+            display_name,
+            type,
+            labels
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -420,7 +446,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -474,7 +500,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("partial_update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -514,7 +540,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("partial_update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -545,7 +571,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("partial_update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -579,7 +605,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -587,6 +613,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_instance(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -607,7 +640,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -663,7 +696,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -709,7 +742,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -746,7 +779,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -795,7 +828,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -803,6 +836,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_cluster(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -823,7 +863,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -862,7 +902,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("list_clusters")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -870,6 +910,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_clusters(formatted_parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -890,7 +937,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("list_clusters")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -911,16 +958,15 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
     it 'invokes update_cluster without error' do
       # Create request parameters
       formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
-      location = ''
       serve_nodes = 0
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
-      location_2 = "location21541837352"
+      location = "location1901043637"
       serve_nodes_2 = 1623486220
       expected_response = {
         name: name_2,
-        location: location_2,
+        location: location,
         serve_nodes: serve_nodes_2
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Cluster)
@@ -936,7 +982,6 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::Cluster, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(location, request.location)
         assert_equal(serve_nodes, request.serve_nodes)
         OpenStruct.new(execute: operation)
       end
@@ -946,15 +991,11 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          response = client.update_cluster(
-            formatted_name,
-            location,
-            serve_nodes
-          )
+          response = client.update_cluster(formatted_name, serve_nodes)
 
           # Verify the response
           assert_equal(expected_response, response.response)
@@ -965,7 +1006,6 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
     it 'invokes update_cluster and returns an operation error.' do
       # Create request parameters
       formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
-      location = ''
       serve_nodes = 0
 
       # Create expected grpc response
@@ -982,7 +1022,6 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::Cluster, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(location, request.location)
         assert_equal(serve_nodes, request.serve_nodes)
         OpenStruct.new(execute: operation)
       end
@@ -992,15 +1031,11 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
-          response = client.update_cluster(
-            formatted_name,
-            location,
-            serve_nodes
-          )
+          response = client.update_cluster(formatted_name, serve_nodes)
 
           # Verify the response
           assert(response.error?)
@@ -1012,14 +1047,12 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
     it 'invokes update_cluster with error' do
       # Create request parameters
       formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
-      location = ''
       serve_nodes = 0
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::Cluster, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(location, request.location)
         assert_equal(serve_nodes, request.serve_nodes)
         raise custom_error
       end
@@ -1029,16 +1062,12 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
           err = assert_raises Google::Gax::GaxError do
-            client.update_cluster(
-              formatted_name,
-              location,
-              serve_nodes
-            )
+            client.update_cluster(formatted_name, serve_nodes)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1067,7 +1096,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1075,6 +1104,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_cluster(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1095,7 +1131,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1144,7 +1180,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1156,6 +1192,17 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_app_profile(
+            formatted_parent,
+            app_profile_id,
+            app_profile
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1180,7 +1227,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("create_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1229,7 +1276,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1237,6 +1284,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_app_profile(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1257,7 +1311,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1298,7 +1352,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("list_app_profiles")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1329,7 +1383,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("list_app_profiles")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1383,7 +1437,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1423,7 +1477,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1454,7 +1508,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("update_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1490,7 +1544,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1498,6 +1552,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_app_profile(formatted_name, ignore_warnings) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1520,7 +1581,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1560,7 +1621,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1568,6 +1629,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_iam_policy(formatted_resource) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1588,7 +1656,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("get_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1630,7 +1698,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("set_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1638,6 +1706,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1660,7 +1735,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("set_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1700,7 +1775,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("test_iam_permissions")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
@@ -1708,6 +1783,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1730,7 +1812,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
       mock_credentials = MockBigtableInstanceAdminCredentials.new("test_iam_permissions")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigtable::Admin::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
 
           # Call method
