@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,46 +16,71 @@ require "google/cloud/container/v1/cluster_manager_client"
 
 module Google
   module Cloud
-    # rubocop:disable LineLength
-
-    ##
-    # # Ruby Client for Google Container Engine API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
-    #
-    # [Google Container Engine API][Product Documentation]:
-    # The Google Kubernetes Engine API is used for building and managing container
-    # based applications, powered by the open source Kubernetes technology.
-    # - [Product Documentation][]
-    #
-    # ## Quick Start
-    # In order to use this library, you first need to go through the following
-    # steps:
-    #
-    # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Google Container Engine API.](https://console.cloud.google.com/apis/api/container)
-    # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
-    #
-    # ### Preview
-    # #### ClusterManagerClient
-    # ```rb
-    # require "google/cloud/container/v1"
-    #
-    # cluster_manager_client = Google::Cloud::Container::V1.new
-    # project_id_2 = project_id
-    # zone = "us-central1-a"
-    # response = cluster_manager_client.list_clusters(project_id_2, zone)
-    # ```
-    #
-    # ### Next Steps
-    # - Read the [Google Container Engine API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
-    #
-    # [Product Documentation]: https://cloud.google.com/container
-    #
-    #
     module Container
+      # rubocop:disable LineLength
+
+      ##
+      # # Ruby Client for Google Container Engine API ([Beta](https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning))
+      #
+      # [Google Container Engine API][Product Documentation]:
+      # The Google Kubernetes Engine API is used for building and managing container
+      # based applications, powered by the open source Kubernetes technology.
+      # - [Product Documentation][]
+      #
+      # ## Quick Start
+      # In order to use this library, you first need to go through the following
+      # steps:
+      #
+      # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+      # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+      # 3. [Enable the Google Container Engine API.](https://console.cloud.google.com/apis/library/container.googleapis.com)
+      # 4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication)
+      #
+      # ### Preview
+      # #### ClusterManagerClient
+      # ```rb
+      # require "google/cloud/container"
+      #
+      # cluster_manager_client = Google::Cloud::Container.new(version: :v1)
+      # project_id_2 = project_id
+      # zone = "us-central1-a"
+      # response = cluster_manager_client.list_clusters(project_id_2, zone)
+      # ```
+      #
+      # ### Next Steps
+      # - Read the [Google Container Engine API Product documentation][Product Documentation]
+      #   to learn more about the product and see How-to Guides.
+      # - View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md)
+      #   to see the full list of Cloud APIs that we cover.
+      #
+      # [Product Documentation]: https://cloud.google.com/kubernetes-engine
+      #
+      # ## Enabling Logging
+      #
+      # To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
+      # The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+      # or a [`Google::Cloud::Logging::Logger`](https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger)
+      # that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+      # and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
+      #
+      # Configuring a Ruby stdlib logger:
+      #
+      # ```ruby
+      # require "logger"
+      #
+      # module MyLogger
+      #   LOGGER = Logger.new $stderr, level: Logger::WARN
+      #   def logger
+      #     LOGGER
+      #   end
+      # end
+      #
+      # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
+      # module GRPC
+      #   extend MyLogger
+      # end
+      # ```
+      #
       module V1
         # rubocop:enable LineLength
 
@@ -86,11 +111,18 @@ module Google
         #   or the specified config is missing data points.
         # @param timeout [Numeric]
         #   The default timeout, in seconds, for calls made through this client.
+        # @param metadata [Hash]
+        #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+        # @param exception_transformer [Proc]
+        #   An optional proc that intercepts any exceptions raised during an API call to inject
+        #   custom error handling.
         def self.new \
             credentials: nil,
             scopes: nil,
             client_config: nil,
             timeout: nil,
+            metadata: nil,
+            exception_transformer: nil,
             lib_name: nil,
             lib_version: nil
           kwargs = {
@@ -98,6 +130,8 @@ module Google
             scopes: scopes,
             client_config: client_config,
             timeout: timeout,
+            metadata: metadata,
+            exception_transformer: exception_transformer,
             lib_name: lib_name,
             lib_version: lib_version
           }.select { |_, v| v != nil }
