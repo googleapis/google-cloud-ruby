@@ -17,6 +17,7 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
+import os
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -28,10 +29,31 @@ v1_library = gapic.ruby_library(
 
 s.copy(v1_library / 'lib/google/cloud/vision/v1')
 s.copy(v1_library / 'lib/google/cloud/vision/v1.rb')
+s.copy(v1_library / 'test/google/cloud/vision/v1')
 
-# Note: Not copying 'test/google/cloud/vision/v1' yet, because it generates
-# tests for a gapic-only library, whereas this library currently is handwritten
-# atop a low-level gapic.
+# PERMANENT: We don't want the generated overview.rb file because we have our
+# own toplevel docs for the handwritten layer.
+# REMOVE when we migrate to gapic-only.
+os.remove('lib/google/cloud/vision/v1/doc/overview.rb')
+
+# PERMANENT: Handwritten layer owns Vision.new so low-level clients need to
+# use Vision::V1.new instead of Vision.new(version: :v1). Update the examples
+# and tests.
+# REMOVE when we migrate to gapic-only.
+s.replace(
+    [
+      'lib/google/cloud/vision/v1/image_annotator_client.rb',
+      'test/google/cloud/vision/v1/image_annotator_client_test.rb'
+    ],
+    'require "google/cloud/vision"',
+    'require "google/cloud/vision/v1"')
+s.replace(
+    [
+      'lib/google/cloud/vision/v1/image_annotator_client.rb',
+      'test/google/cloud/vision/v1/image_annotator_client_test.rb'
+    ],
+    'Google::Cloud::Vision\\.new\\(version: :v1\\)',
+    'Google::Cloud::Vision::V1.new')
 
 # https://github.com/googleapis/gapic-generator/issues/2182
 s.replace(
@@ -42,3 +64,9 @@ s.replace(
     'lib/google/cloud/vision/v1/credentials.rb',
     'VISION_KEYFILE_JSON\\n(\s+)VISION_CREDENTIALS_JSON\n',
     'VISION_CREDENTIALS_JSON\\n\\1VISION_KEYFILE_JSON\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'lib/google/cloud/vision/v1.rb',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/vision\\)',
+    '(https://console.cloud.google.com/apis/library/vision.googleapis.com)')
