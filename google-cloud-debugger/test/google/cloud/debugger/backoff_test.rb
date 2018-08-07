@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "helper"
 
 describe Google::Cloud::Debugger::Backoff do
   let(:backoff) { Google::Cloud::Debugger::Backoff.new }
