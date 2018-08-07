@@ -34,7 +34,7 @@ describe Google::Cloud::Bigtable::Table, :exists?, :mock_bigtable do
     mock.expect :get_table, table_grpc, [table_path(instance_id, table_id), view: :SCHEMA_VIEW]
     bigtable.service.mocked_tables = mock
 
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
     table.exists?.must_equal true
     mock.verify
   end

@@ -83,7 +83,7 @@ describe Google::Cloud::Bigtable::RowsReader, :read_state_machine_acceptance, :m
       mock = Minitest::Mock.new
       bigtable.service.mocked_client = mock
 
-      table = bigtable.table(instance_id, table_id, skip_lookup: true)
+      table = bigtable.table(instance_id, table_id)
 
       get_res = chunk_data_to_read_res(test_data["chunks_base64"])
       mock.expect :read_rows, get_res, [table_path(instance_id, table_id), Hash]
@@ -99,7 +99,7 @@ describe Google::Cloud::Bigtable::RowsReader, :read_state_machine_acceptance, :m
     it test_data["name"] do
       mock = Minitest::Mock.new
       bigtable.service.mocked_client = mock
-      table = bigtable.table(instance_id, table_id, skip_lookup: true)
+      table = bigtable.table(instance_id, table_id)
 
       get_res = chunk_data_to_read_res(test_data["chunks_base64"])
       mock.expect :read_rows, get_res, [table_path(instance_id, table_id), Hash]

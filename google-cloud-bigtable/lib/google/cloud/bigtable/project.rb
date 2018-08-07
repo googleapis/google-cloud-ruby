@@ -306,10 +306,10 @@ module Google
         #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
         #   * `:FULL` - Populates all fields
-        # @param skip_lookup [Boolean]
+        # @param perform_lookup [Boolean]
         #   Get table object without verifying that the table resource exists.
         #   Calls made on this object will raise errors if the table does not exist.
-        #   Default is `false`. Optional.
+        #   Default value is `false`. Optional.
         #   It helps to reduce admin apis calls.
         # @param app_profile_id [String] The unique identifier for the app profile. Optional.
         #   It is used only in data operations.
@@ -322,19 +322,26 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true, view: :SCHEMA_VIEW)
         #   if table
         #     p table.name
         #     p table.column_families
         #   end
+        #
+        # @example Get table object without calling get table admin api.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table")
         #
         # @example Get table with all fields. Clusters states, column families
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", view: :FULL)
-        #   if table
+        #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
+        #   iftruee
         #     puts table.name
         #     p table.column_families
         #     p table.cluster_states
@@ -345,7 +352,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+        #   table = bigtable.table("my-instance", "my-table")
         #
         #   entry = table.new_mutation_entry("user-1")
         #   entry.set_cell(
@@ -356,26 +363,37 @@ module Google
         #   ).delete_from_column("cf2", "field02")
         #
         #   table.mutate_row(entry)
+        # @example Read rows using app profile routing
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", app_profile_id: "my-app-profile")
+        #
+        #   table.read_rows(limit: 5).each do |row|
+        #     row
+        #   end
 
         def table \
             instance_id,
             table_id,
             view: nil,
-            skip_lookup: nil,
+            perform_lookup: nil,
             app_profile_id: nil
           ensure_service!
 
-          if skip_lookup
-            table = Table.from_path(
-              service.table_path(instance_id, table_id),
-              service
-            )
-            table.app_profile_id = app_profile_id
-            return table
-          end
+          table = if perform_lookup
+                    grpc = service.get_table(instance_id, table_id, view: view)
+                    Table.from_grpc(grpc, service, view: view)
+                  else
+                    Table.from_path(
+                      service.table_path(instance_id, table_id),
+                      service
+                    )
+                  end
 
-          grpc = service.get_table(instance_id, table_id, view: view)
-          Table.from_grpc(grpc, service, view: view)
+          table.app_profile_id = app_profile_id
+          table
         rescue Google::Cloud::NotFoundError
           nil
         end

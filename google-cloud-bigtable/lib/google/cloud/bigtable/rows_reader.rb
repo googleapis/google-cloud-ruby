@@ -40,6 +40,10 @@ module Google
         RETRY_LIMIT = 3
 
         # @private
+        # @return [Integer] Current retry count
+        attr_accessor :retry_count
+
+        # @private
         #
         # Create read rows instance
         #
@@ -49,6 +53,7 @@ module Google
           @table = table
           @chunk_processor = ChunkProcessor.new
           @rows_count = 0
+          @retry_count = 0
         end
 
         # Read rows
@@ -86,6 +91,7 @@ module Google
               next if row.nil?
               yield row
               @rows_count += 1
+              @retry_count = 0
             end
           end
 
@@ -144,6 +150,13 @@ module Google
 
           @chunk_processor.reset_to_new_row
           [rows_limit, row_set]
+        end
+
+        # Check if read operation is retryable.
+        #
+        # @return [Boolean]
+        def retryable?
+          @retry_count < RowsReader::RETRY_LIMIT
         end
 
         private

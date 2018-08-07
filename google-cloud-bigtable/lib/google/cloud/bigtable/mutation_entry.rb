@@ -44,7 +44,7 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
-      #   table = bigtable.table("my-instance", "my-table", skip_lookup: true)
+      #   table = bigtable.table("my-instance", "my-table")
       #
       #   entry = table.new_mutation_entry("user-1")
       #   entry.set_cell(

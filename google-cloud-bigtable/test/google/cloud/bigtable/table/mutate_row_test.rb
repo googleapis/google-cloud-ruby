@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
   let(:table_id) { "test-table" }
   let(:app_profile_id) { "test-app-profile-id"}
   let(:table) {
-    bigtable.table(instance_id, table_id, skip_lookup: true, app_profile_id: app_profile_id)
+    bigtable.table(instance_id, table_id, app_profile_id: app_profile_id)
   }
 
   it "mutate row" do

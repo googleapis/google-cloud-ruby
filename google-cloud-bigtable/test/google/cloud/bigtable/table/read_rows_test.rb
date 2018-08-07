@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +27,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "read rows" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     chunks_base64 = [
       "CgJSSxIDCgFBGgMKAUMgZDILdmFsdWUtVkFMXzFIAA==",
@@ -63,7 +61,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     rows.first.must_equal expected_row
   end
 
-  it "retry on retyable errors" do
+  it "retry on retyable error" do
     chunks_base64 = [
       "CgJSSxIDCgFBGgMKAUMgZDILdmFsdWUtVkFMXzFIAA==",
       "IGIyC3ZhbHVlLVZBTF8ySAA=",
@@ -94,7 +92,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     )
 
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     rows = table.read_rows.map {|v| v}
 
@@ -102,6 +100,75 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     rows.length.must_equal 1
     rows.first.column_families.must_equal ["A"]
     rows.first.must_equal expected_row
+  end
+
+  it "do not retry on successive 3 failure" do
+    mock = OpenStruct.new(retry_count: 0)
+
+    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+      self.retry_count += 1
+      raise GRPC::DeadlineExceeded, "Dead line exceeded"
+    end
+
+    bigtable.service.mocked_client = mock
+    table = bigtable.table(instance_id, table_id)
+
+    proc { table.read_rows.to_a }.must_raise Google::Cloud::Error
+    mock.retry_count.must_equal 3
+  end
+
+  it "reads rows with not successive faliure errors" do
+    read_resp_base64 = "ChwKBXRlc3QxEgQKAmNmGggKBmZpZWxkMTIBQUgBChwKBXRlc3QyEgQKAmNm\nGggKBmZpZWxkMTIBQkgBChwKBXRlc3QzEgQKAmNmGggKBmZpZWxkMTIBQ0gB\n"
+    read_response = Google::Bigtable::V2::ReadRowsResponse.decode(Base64.decode64(read_resp_base64))
+
+    mock_itr = OpenStruct.new(
+      read_response: read_response,
+      counter: 0,
+    )
+
+    def mock_itr.each
+      if counter < 2
+        self.counter += 1
+        raise GRPC::DeadlineExceeded, "Dead line exceeded"
+      end
+
+      yield read_response if self.counter == 2
+
+      if counter == 3
+        self.counter += 1
+        raise GRPC::DeadlineExceeded, "Dead line exceeded"
+      end
+    end
+
+    mock = OpenStruct.new(
+      mock_itr: mock_itr,
+      retry_count: 0
+    )
+    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
+      mock_itr
+    end
+
+    value = "A"
+    expected_rows = 3.times.map do |i|
+      row = Google::Cloud::Bigtable::Row.new("test#{i+1}")
+      row.cells["cf"] << Google::Cloud::Bigtable::Row::Cell.new(
+        "cf", "field1", 0,  value
+      )
+      value.next!
+      row
+    end
+
+    bigtable.service.mocked_client = mock
+    table = bigtable.table(instance_id, table_id)
+
+    rows = table.read_rows.to_a
+
+    mock_itr.counter.must_equal 2
+    rows.length.must_equal 3
+
+    expected_rows.each_with_index do |r, i|
+      rows[i].key.must_equal r.key
+    end
   end
 
   it "raise error if retry limit reached" do
@@ -113,7 +180,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     proc {
       table.read_rows.map {|v| v}
@@ -130,7 +197,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
     table.read_rows(keys: ["A", "B"]).map {|v| v}
   end
 
@@ -146,7 +213,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     range = table.new_row_range.from("user-1")
     table.read_rows(ranges: range).map {|v| v}
@@ -164,7 +231,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     range1 = table.new_row_range.from("user-1").to("user-10")
     range2 = table.new_row_range.between("user-100", "user-110")
@@ -180,7 +247,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
     table.read_rows(limit: 100).map {|v| v}
   end
 
@@ -193,7 +260,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     end
 
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     filter = table.filter.key("user-*")
     table.read_rows(filter: filter).map {|v| v}

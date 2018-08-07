@@ -24,7 +24,7 @@ describe Google::Cloud::Bigtable::Table, :sample_row_keys, :mock_bigtable do
   it "get sample row keys" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
-    table = bigtable.table(instance_id, table_id, skip_lookup: true)
+    table = bigtable.table(instance_id, table_id)
 
     row_key = "user-1"
     offset = 1000

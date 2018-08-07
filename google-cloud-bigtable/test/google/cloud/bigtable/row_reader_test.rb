@@ -77,4 +77,15 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     row_ranges.length.must_equal 1
     row_ranges.first.must_equal Google::Bigtable::V2::RowRange.new(start_key_open: "3", end_key_closed: "5")
   end
+
+  it "increment and check read is retryable" do
+    rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
+
+    rows_reader.retryable?.must_equal true
+
+    [true, true, false].each do |expected_value|
+      rows_reader.retry_count += 1
+      rows_reader.retryable?.must_equal expected_value
+    end
+  end
 end
