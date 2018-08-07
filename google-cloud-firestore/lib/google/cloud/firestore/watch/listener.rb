@@ -151,8 +151,6 @@ module Google
             # Customize the provided initial listen request
             init_listen_req = @init_listen_req.dup.tap do |req|
               req.add_target.resume_token = String(@inventory.resume_token)
-              req.add_target.read_time = \
-                Convert.time_to_timestamp(@inventory.read_time)
               req.add_target.target_id = 0x42
             end
 
