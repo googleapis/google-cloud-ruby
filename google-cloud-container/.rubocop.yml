@@ -4,7 +4,7 @@ AllCops:
     - "lib/google/**/*"
     - "Rakefile"
     - "test/**/*"
-    - "acceptance/google/cloud/container/v1/cluster_manager_smoke_test.rb"
+    - "acceptance/**/*smoke_test.rb"
 
 Documentation:
   Enabled: false

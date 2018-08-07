@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockClusterManagerCredentials < Google::Cloud::Container::Credentials
+class MockClusterManagerCredentials < Google::Cloud::Container::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -92,7 +92,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("list_clusters")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -100,6 +100,13 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_clusters(project_id, zone) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -122,7 +129,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("list_clusters")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -209,7 +216,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -221,6 +228,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_cluster(
+            project_id,
+            zone,
+            cluster_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -245,7 +263,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -308,7 +326,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("create_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -320,6 +338,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_cluster(
+            project_id,
+            zone,
+            cluster
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -344,7 +373,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("create_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -409,7 +438,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("update_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -422,6 +451,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_cluster(
+            project_id,
+            zone,
+            cluster_id,
+            update
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -448,7 +489,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("update_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -518,7 +559,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("update_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -533,6 +574,20 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_node_pool(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool_id,
+            node_version,
+            image_type
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -563,7 +618,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("update_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -633,7 +688,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_node_pool_autoscaling")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -647,6 +702,19 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_node_pool_autoscaling(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool_id,
+            autoscaling
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -675,7 +743,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_node_pool_autoscaling")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -742,7 +810,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_logging_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -755,6 +823,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_logging_service(
+            project_id,
+            zone,
+            cluster_id,
+            logging_service
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -781,7 +861,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_logging_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -847,7 +927,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_monitoring_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -860,6 +940,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_monitoring_service(
+            project_id,
+            zone,
+            cluster_id,
+            monitoring_service
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -886,7 +978,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_monitoring_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -952,7 +1044,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_addons_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -965,6 +1057,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_addons_config(
+            project_id,
+            zone,
+            cluster_id,
+            addons_config
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -991,7 +1095,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_addons_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1057,7 +1161,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_locations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1070,6 +1174,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_locations(
+            project_id,
+            zone,
+            cluster_id,
+            locations
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1096,7 +1212,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_locations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1162,7 +1278,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("update_master")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1175,6 +1291,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_master(
+            project_id,
+            zone,
+            cluster_id,
+            master_version
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1201,7 +1329,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("update_master")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1269,7 +1397,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_master_auth")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1283,6 +1411,19 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_master_auth(
+            project_id,
+            zone,
+            cluster_id,
+            action,
+            update
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1311,7 +1452,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_master_auth")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1376,7 +1517,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("delete_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1388,6 +1529,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.delete_cluster(
+            project_id,
+            zone,
+            cluster_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1412,7 +1564,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("delete_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1456,7 +1608,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("list_operations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1464,6 +1616,13 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_operations(project_id, zone) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1486,7 +1645,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("list_operations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1545,7 +1704,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1557,6 +1716,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_operation(
+            project_id,
+            zone,
+            operation_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1581,7 +1751,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1623,7 +1793,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("cancel_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1635,6 +1805,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.cancel_operation(
+            project_id,
+            zone,
+            operation_id
+          ) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1659,7 +1840,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("cancel_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1705,7 +1886,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_server_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1713,6 +1894,13 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_server_config(project_id, zone) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1735,7 +1923,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_server_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1777,7 +1965,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("list_node_pools")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1789,6 +1977,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_node_pools(
+            project_id,
+            zone,
+            cluster_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1813,7 +2012,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("list_node_pools")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1872,7 +2071,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1885,6 +2084,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_node_pool(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -1911,7 +2122,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("get_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1977,7 +2188,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("create_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -1990,6 +2201,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_node_pool(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2016,7 +2239,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("create_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2082,7 +2305,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("delete_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2095,6 +2318,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.delete_node_pool(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2121,7 +2356,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("delete_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2187,7 +2422,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("rollback_node_pool_upgrade")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2200,6 +2435,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.rollback_node_pool_upgrade(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2226,7 +2473,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("rollback_node_pool_upgrade")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2294,7 +2541,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_node_pool_management")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2308,6 +2555,19 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_node_pool_management(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool_id,
+            management
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2336,7 +2596,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_node_pool_management")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2395,7 +2655,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        # assert_equal(Google::Gax::to_proto(resource_labels, Google::Container::V1::SetLabelsRequest::ResourceLabelsEntry), request.resource_labels)
+        assert_equal(resource_labels, request.resource_labels)
         assert_equal(label_fingerprint, request.label_fingerprint)
         OpenStruct.new(execute: expected_response)
       end
@@ -2405,7 +2665,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_labels")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2419,6 +2679,19 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_labels(
+            project_id,
+            zone,
+            cluster_id,
+            resource_labels,
+            label_fingerprint
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2437,7 +2710,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(project_id, request.project_id)
         assert_equal(zone, request.zone)
         assert_equal(cluster_id, request.cluster_id)
-        # assert_equal(Google::Gax::to_proto(resource_labels, Google::Container::V1::SetLabelsRequest::ResourceLabelsEntry), request.resource_labels)
+        assert_equal(resource_labels, request.resource_labels)
         assert_equal(label_fingerprint, request.label_fingerprint)
         raise custom_error
       end
@@ -2447,7 +2720,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_labels")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2514,7 +2787,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_legacy_abac")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2527,6 +2800,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_legacy_abac(
+            project_id,
+            zone,
+            cluster_id,
+            enabled
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2553,7 +2838,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_legacy_abac")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2617,7 +2902,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("start_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2629,6 +2914,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.start_ip_rotation(
+            project_id,
+            zone,
+            cluster_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2653,7 +2949,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("start_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2716,7 +3012,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("complete_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2728,6 +3024,17 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.complete_ip_rotation(
+            project_id,
+            zone,
+            cluster_id
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2752,7 +3059,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("complete_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2819,7 +3126,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_node_pool_size")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2833,6 +3140,19 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_node_pool_size(
+            project_id,
+            zone,
+            cluster_id,
+            node_pool_id,
+            node_count
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2861,7 +3181,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_node_pool_size")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2928,7 +3248,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_network_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -2941,6 +3261,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_network_policy(
+            project_id,
+            zone,
+            cluster_id,
+            network_policy
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -2967,7 +3299,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_network_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -3033,7 +3365,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_maintenance_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method
@@ -3046,6 +3378,18 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.set_maintenance_policy(
+            project_id,
+            zone,
+            cluster_id,
+            maintenance_policy
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -3072,7 +3416,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
       mock_credentials = MockClusterManagerCredentials.new("set_maintenance_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Container::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Container.new(version: :v1)
 
           # Call method

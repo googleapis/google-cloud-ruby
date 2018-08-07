@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [ClusterManagerClient][] | The Google Kubernetes Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology. |
+    # | [ClusterManagerClient][] | Google Container Engine Cluster Manager v1 |
     # | [Data Types][] | Data types for Google::Cloud::Container::V1 |
     #
     # [ClusterManagerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-container/latest/google/container/v1/clustermanagerclient
