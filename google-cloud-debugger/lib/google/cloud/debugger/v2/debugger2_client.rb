@@ -220,9 +220,9 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::SetBreakpointResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger"
+          #   require "google/cloud/debugger/v2"
           #
-          #   debugger2_client = Google::Cloud::Debugger::Debugger2.new(version: :v2)
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
           #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
@@ -267,9 +267,9 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::GetBreakpointResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger"
+          #   require "google/cloud/debugger/v2"
           #
-          #   debugger2_client = Google::Cloud::Debugger::Debugger2.new(version: :v2)
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
           #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
@@ -313,9 +313,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger"
+          #   require "google/cloud/debugger/v2"
           #
-          #   debugger2_client = Google::Cloud::Debugger::Debugger2.new(version: :v2)
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
           #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
@@ -378,9 +378,9 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger"
+          #   require "google/cloud/debugger/v2"
           #
-          #   debugger2_client = Google::Cloud::Debugger::Debugger2.new(version: :v2)
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
           #   # TODO: Initialize +debuggee_id+:
           #   debuggee_id = ''
@@ -431,9 +431,9 @@ module Google
           # @return [Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/debugger"
+          #   require "google/cloud/debugger/v2"
           #
-          #   debugger2_client = Google::Cloud::Debugger::Debugger2.new(version: :v2)
+          #   debugger2_client = Google::Cloud::Debugger::V2::Debugger2.new
           #
           #   # TODO: Initialize +project+:
           #   project = ''

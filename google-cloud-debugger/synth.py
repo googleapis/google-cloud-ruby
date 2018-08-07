@@ -31,10 +31,38 @@ v2_library = gapic.ruby_library(
 s.copy(v2_library / 'lib/google/cloud/debugger/v2')
 s.copy(v2_library / 'lib/google/cloud/debugger/v2.rb')
 s.copy(v2_library / 'lib/google/devtools')
+s.copy(v2_library / 'test/google/cloud/debugger/v2')
 
 # PERMANENT: We don't want the generated overview.rb file because we have our
 # own toplevel docs for the handwritten layer.
 os.remove('lib/google/cloud/debugger/v2/doc/overview.rb')
+
+# PERMANENT: Handwritten layer owns Debugger.new so low-level clients need to
+# use Debugger::V2.new instead of Debugger.new(version: :v2). Update the
+# examples and tests.
+s.replace(
+    [
+      'lib/google/cloud/debugger/v2/controller2_client.rb',
+      'lib/google/cloud/debugger/v2/debugger2_client.rb',
+      'test/google/cloud/debugger/v2/controller2_client_test.rb',
+      'test/google/cloud/debugger/v2/debugger2_client_test.rb'
+    ],
+    'require "google/cloud/debugger"',
+    'require "google/cloud/debugger/v2"')
+s.replace(
+    [
+      'lib/google/cloud/debugger/v2/controller2_client.rb',
+      'test/google/cloud/debugger/v2/controller2_client_test.rb'
+    ],
+    'Google::Cloud::Debugger::Controller2\\.new\\(version: :v2\\)',
+    'Google::Cloud::Debugger::V2::Controller2.new')
+s.replace(
+    [
+      'lib/google/cloud/debugger/v2/debugger2_client.rb',
+      'test/google/cloud/debugger/v2/debugger2_client_test.rb'
+    ],
+    'Google::Cloud::Debugger::Debugger2\\.new\\(version: :v2\\)',
+    'Google::Cloud::Debugger::V2::Debugger2.new')
 
 # https://github.com/googleapis/gapic-generator/issues/2182
 s.replace(
