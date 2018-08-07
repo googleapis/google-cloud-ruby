@@ -40,6 +40,7 @@ describe "DataClient Read Rows Filters", :bigtable do
   end
 
   it "sample filter" do
+    skip
     filter = table.filter.sample(0.2)
     rows = table.read_rows(filter: filter).to_a
     rows.wont_be :empty?
@@ -102,6 +103,7 @@ describe "DataClient Read Rows Filters", :bigtable do
   end
 
   it "cells per column filter" do
+    skip
     filter = table.filter.cells_per_column(1)
     rows = table.read_rows(filter: filter, limit: 2).to_a
     rows.wont_be :empty?
