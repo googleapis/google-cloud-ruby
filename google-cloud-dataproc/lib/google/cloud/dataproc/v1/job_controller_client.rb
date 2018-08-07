@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -28,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/cloud/dataproc/v1/jobs_pb"
-require "google/cloud/dataproc/credentials"
+require "google/cloud/dataproc/v1/credentials"
 
 module Google
   module Cloud
@@ -46,6 +43,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -89,11 +89,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -102,10 +109,10 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dataproc/v1/jobs_services_pb"
 
-            credentials ||= Google::Cloud::Dataproc::Credentials.default
+            credentials ||= Google::Cloud::Dataproc::V1::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dataproc::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dataproc::V1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -129,6 +136,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "job_controller_client_config.json"
             )
@@ -141,13 +149,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @job_controller_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -155,32 +164,39 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dataproc::V1::JobController::Stub.method(:new)
             )
 
             @submit_job = Google::Gax.create_api_call(
               @job_controller_stub.method(:submit_job),
-              defaults["submit_job"]
+              defaults["submit_job"],
+              exception_transformer: exception_transformer
             )
             @get_job = Google::Gax.create_api_call(
               @job_controller_stub.method(:get_job),
-              defaults["get_job"]
+              defaults["get_job"],
+              exception_transformer: exception_transformer
             )
             @list_jobs = Google::Gax.create_api_call(
               @job_controller_stub.method(:list_jobs),
-              defaults["list_jobs"]
+              defaults["list_jobs"],
+              exception_transformer: exception_transformer
             )
             @update_job = Google::Gax.create_api_call(
               @job_controller_stub.method(:update_job),
-              defaults["update_job"]
+              defaults["update_job"],
+              exception_transformer: exception_transformer
             )
             @cancel_job = Google::Gax.create_api_call(
               @job_controller_stub.method(:cancel_job),
-              defaults["cancel_job"]
+              defaults["cancel_job"],
+              exception_transformer: exception_transformer
             )
             @delete_job = Google::Gax.create_api_call(
               @job_controller_stub.method(:delete_job),
-              defaults["delete_job"]
+              defaults["delete_job"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -200,14 +216,23 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dataproc::V1::Job]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dataproc::V1::Job]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   job_controller_client = Google::Cloud::Dataproc::V1::JobController.new
+          #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +job+:
           #   job = {}
           #   response = job_controller_client.submit_job(project_id, region, job)
 
@@ -215,14 +240,15 @@ module Google
               project_id,
               region,
               job,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
               job: job
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::SubmitJobRequest)
-            @submit_job.call(req, options)
+            @submit_job.call(req, options, &block)
           end
 
           # Gets the resource representation for a job in a project.
@@ -237,14 +263,23 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dataproc::V1::Job]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dataproc::V1::Job]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   job_controller_client = Google::Cloud::Dataproc::V1::JobController.new
+          #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +job_id+:
           #   job_id = ''
           #   response = job_controller_client.get_job(project_id, region, job_id)
 
@@ -252,14 +287,15 @@ module Google
               project_id,
               region,
               job_id,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
               job_id: job_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::GetJobRequest)
-            @get_job.call(req, options)
+            @get_job.call(req, options, &block)
           end
 
           # Lists regions/{region}/jobs in a project.
@@ -301,6 +337,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Dataproc::V1::Job>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Dataproc::V1::Job>]
           #   An enumerable of Google::Cloud::Dataproc::V1::Job instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -308,10 +347,14 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   job_controller_client = Google::Cloud::Dataproc::V1::JobController.new
+          #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
           #
           #   # Iterate over all results.
@@ -334,7 +377,8 @@ module Google
               cluster_name: nil,
               job_state_matcher: nil,
               filter: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
@@ -344,7 +388,7 @@ module Google
               filter: filter
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::ListJobsRequest)
-            @list_jobs.call(req, options)
+            @list_jobs.call(req, options, &block)
           end
 
           # Updates a job in a project.
@@ -372,16 +416,29 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dataproc::V1::Job]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dataproc::V1::Job]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   job_controller_client = Google::Cloud::Dataproc::V1::JobController.new
+          #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +job_id+:
           #   job_id = ''
+          #
+          #   # TODO: Initialize +job+:
           #   job = {}
+          #
+          #   # TODO: Initialize +update_mask+:
           #   update_mask = {}
           #   response = job_controller_client.update_job(project_id, region, job_id, job, update_mask)
 
@@ -391,7 +448,8 @@ module Google
               job_id,
               job,
               update_mask,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
@@ -400,7 +458,7 @@ module Google
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::UpdateJobRequest)
-            @update_job.call(req, options)
+            @update_job.call(req, options, &block)
           end
 
           # Starts a job cancellation request. To access the job resource
@@ -418,14 +476,23 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dataproc::V1::Job]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dataproc::V1::Job]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   job_controller_client = Google::Cloud::Dataproc::V1::JobController.new
+          #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +job_id+:
           #   job_id = ''
           #   response = job_controller_client.cancel_job(project_id, region, job_id)
 
@@ -433,14 +500,15 @@ module Google
               project_id,
               region,
               job_id,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
               job_id: job_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::CancelJobRequest)
-            @cancel_job.call(req, options)
+            @cancel_job.call(req, options, &block)
           end
 
           # Deletes the job from the project. If the job is active, the delete fails,
@@ -456,13 +524,22 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   job_controller_client = Google::Cloud::Dataproc::V1::JobController.new
+          #   job_controller_client = Google::Cloud::Dataproc::JobController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +job_id+:
           #   job_id = ''
           #   job_controller_client.delete_job(project_id, region, job_id)
 
@@ -470,14 +547,15 @@ module Google
               project_id,
               region,
               job_id,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
               job_id: job_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::DeleteJobRequest)
-            @delete_job.call(req, options)
+            @delete_job.call(req, options, &block)
             nil
           end
         end

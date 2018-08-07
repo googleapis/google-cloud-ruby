@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,6 @@
 # and updates to that file get reflected here through a refresh process.
 # For the short term, the refresh process will only be runnable by Google
 # engineers.
-#
-# The only allowed edits are to method and file documentation. A 3-way
-# merge preserves those additions if the generated source changes.
 
 require "json"
 require "pathname"
@@ -30,7 +27,7 @@ require "google/gax/operation"
 require "google/longrunning/operations_client"
 
 require "google/cloud/dataproc/v1/clusters_pb"
-require "google/cloud/dataproc/credentials"
+require "google/cloud/dataproc/v1/credentials"
 
 module Google
   module Cloud
@@ -50,6 +47,9 @@ module Google
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
 
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
+
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
@@ -68,7 +68,8 @@ module Google
           ].freeze
 
           class OperationsClient < Google::Longrunning::OperationsClient
-            SERVICE_ADDRESS = SERVICE_ADDRESS
+            self::SERVICE_ADDRESS = ClusterControllerClient::SERVICE_ADDRESS
+            self::GRPC_INTERCEPTORS = ClusterControllerClient::GRPC_INTERCEPTORS
           end
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
@@ -95,11 +96,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -108,7 +116,7 @@ module Google
             require "google/gax/grpc"
             require "google/cloud/dataproc/v1/clusters_services_pb"
 
-            credentials ||= Google::Cloud::Dataproc::Credentials.default
+            credentials ||= Google::Cloud::Dataproc::V1::Credentials.default
 
             @operations_client = OperationsClient.new(
               credentials: credentials,
@@ -120,7 +128,7 @@ module Google
             )
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Dataproc::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Dataproc::V1::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -144,6 +152,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "cluster_controller_client_config.json"
             )
@@ -156,13 +165,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @cluster_controller_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -170,32 +180,39 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Cloud::Dataproc::V1::ClusterController::Stub.method(:new)
             )
 
             @create_cluster = Google::Gax.create_api_call(
               @cluster_controller_stub.method(:create_cluster),
-              defaults["create_cluster"]
+              defaults["create_cluster"],
+              exception_transformer: exception_transformer
             )
             @update_cluster = Google::Gax.create_api_call(
               @cluster_controller_stub.method(:update_cluster),
-              defaults["update_cluster"]
+              defaults["update_cluster"],
+              exception_transformer: exception_transformer
             )
             @delete_cluster = Google::Gax.create_api_call(
               @cluster_controller_stub.method(:delete_cluster),
-              defaults["delete_cluster"]
+              defaults["delete_cluster"],
+              exception_transformer: exception_transformer
             )
             @get_cluster = Google::Gax.create_api_call(
               @cluster_controller_stub.method(:get_cluster),
-              defaults["get_cluster"]
+              defaults["get_cluster"],
+              exception_transformer: exception_transformer
             )
             @list_clusters = Google::Gax.create_api_call(
               @cluster_controller_stub.method(:list_clusters),
-              defaults["list_clusters"]
+              defaults["list_clusters"],
+              exception_transformer: exception_transformer
             )
             @diagnose_cluster = Google::Gax.create_api_call(
               @cluster_controller_stub.method(:diagnose_cluster),
-              defaults["diagnose_cluster"]
+              defaults["diagnose_cluster"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -218,11 +235,17 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   cluster_controller_client = Google::Cloud::Dataproc::V1::ClusterController.new
+          #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +cluster+:
           #   cluster = {}
           #
           #   # Register a callback during the method call.
@@ -343,13 +366,23 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   cluster_controller_client = Google::Cloud::Dataproc::V1::ClusterController.new
+          #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +cluster_name+:
           #   cluster_name = ''
+          #
+          #   # TODO: Initialize +cluster+:
           #   cluster = {}
+          #
+          #   # TODO: Initialize +update_mask+:
           #   update_mask = {}
           #
           #   # Register a callback during the method call.
@@ -420,11 +453,17 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   cluster_controller_client = Google::Cloud::Dataproc::V1::ClusterController.new
+          #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +cluster_name+:
           #   cluster_name = ''
           #
           #   # Register a callback during the method call.
@@ -488,14 +527,23 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dataproc::V1::Cluster]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Cloud::Dataproc::V1::Cluster]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   cluster_controller_client = Google::Cloud::Dataproc::V1::ClusterController.new
+          #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +cluster_name+:
           #   cluster_name = ''
           #   response = cluster_controller_client.get_cluster(project_id, region, cluster_name)
 
@@ -503,14 +551,15 @@ module Google
               project_id,
               region,
               cluster_name,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
               cluster_name: cluster_name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::GetClusterRequest)
-            @get_cluster.call(req, options)
+            @get_cluster.call(req, options, &block)
           end
 
           # Lists all regions/{region}/clusters in a project.
@@ -549,6 +598,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Dataproc::V1::Cluster>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Cloud::Dataproc::V1::Cluster>]
           #   An enumerable of Google::Cloud::Dataproc::V1::Cluster instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -556,10 +608,14 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   cluster_controller_client = Google::Cloud::Dataproc::V1::ClusterController.new
+          #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
           #
           #   # Iterate over all results.
@@ -580,7 +636,8 @@ module Google
               region,
               filter: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               project_id: project_id,
               region: region,
@@ -588,7 +645,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::ListClustersRequest)
-            @list_clusters.call(req, options)
+            @list_clusters.call(req, options, &block)
           end
 
           # Gets cluster diagnostic information.
@@ -608,11 +665,17 @@ module Google
           # @return [Google::Gax::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/dataproc/v1"
+          #   require "google/cloud/dataproc"
           #
-          #   cluster_controller_client = Google::Cloud::Dataproc::V1::ClusterController.new
+          #   cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
+          #
+          #   # TODO: Initialize +project_id+:
           #   project_id = ''
+          #
+          #   # TODO: Initialize +region+:
           #   region = ''
+          #
+          #   # TODO: Initialize +cluster_name+:
           #   cluster_name = ''
           #
           #   # Register a callback during the method call.

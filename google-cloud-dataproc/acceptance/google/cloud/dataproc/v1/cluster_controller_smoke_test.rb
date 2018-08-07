@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ require "google/cloud/dataproc"
 describe "ClusterControllerSmokeTest" do
   it "runs one smoke test with list_clusters" do
     unless ENV["DATAPROC_TEST_PROJECT"]
-      fail "Usage: DATAPROC_TEST_PROJECT=<project_id> ruby #{$0}"
+      fail "DATAPROC_TEST_PROJECT environment variable must be defined"
     end
     project_id = ENV["DATAPROC_TEST_PROJECT"].freeze
 
