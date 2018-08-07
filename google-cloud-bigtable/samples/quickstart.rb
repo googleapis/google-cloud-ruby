@@ -30,12 +30,9 @@ TABLE_NAME = "my-table"
 gcloud  = Google::Cloud.new
 bigtable = gcloud.bigtable
 
-# Connect and an existing instance:my-bigtable-instance and create client
-client = bigtable.client(INSTANCE_NAME)
-
 # Get table client
-table = client.table(TABLE_NAME)
+table = bigtable.table(INSTANCE_NAME, TABLE_NAME)
 
 # Read and print row
-pp table.read_row("user-1")
+pp table.read_row("user00000001")
 # [END bigtable_quickstart]

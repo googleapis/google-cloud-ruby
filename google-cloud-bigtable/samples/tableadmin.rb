@@ -22,24 +22,23 @@ require "google-cloud-bigtable"
 
 def run_table_operations instance_id, table_id
   bigtable = Google::Cloud.new.bigtable
-  instance = bigtable.instance(instance_id)
 
   puts "==> Checking if table exists"
-  table = instance.table(table_id)
+  table = bigtable.table(instance_id, table_id, perform_lookup: true)
 
   if table
     puts "==> Table exists"
   else
     puts "==> Table does not exist. Creating table `#{table_id}`"
     # [START bigtable_create_table]
-    table = instance.create_table(table_id)
+    table = bigtable.create_table(instance_id, table_id)
     puts "==> Table created #{table.name}\n"
     # [END bigtable_create_table]
   end
 
   puts "==> Listing tables in instance"
   # [START bigtable_list_tables]
-  instance.tables.all.each do |table|
+  bigtable.tables(instance_id).all.each do |table|
     p table.name
   end
   # [END bigtable_list_tables]
@@ -47,7 +46,7 @@ def run_table_operations instance_id, table_id
 
   puts "==> Get table and print details:"
   # [START bigtable_get_table_metadata]
-  table = instance.table(table_id, view: :FULL)
+  table = bigtable.table(instance_id, table_id, view: :FULL, perform_lookup: true)
   puts "Cluster states:"
   table.cluster_states.each{ |s| p s }
   # [END bigtable_get_table_metadata]
@@ -60,7 +59,7 @@ def run_table_operations instance_id, table_id
   # where age = current time minus cell timestamp
   # NOTE: Age value must be atleast 1 millisecond
   gc_rule = Google::Cloud::Bigtable::GcRule.max_age(60 * 60 * 24 * 5)
-  family = table.column_families.create("cf1", gc_rule: gc_rule)
+  family = table.column_family("cf1", gc_rule).create
   # [END bigtable_create_family_gc_max_age]
   puts "==> Created column family: `#{family.name}`"
   puts ""
@@ -70,7 +69,7 @@ def run_table_operations instance_id, table_id
   # Create a column family with GC policy : most recent N versions
   # where 1 = most recent version
   gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
-  family = table.column_families.create("cf2", gc_rule: gc_rule)
+  family = table.column_family("cf2", gc_rule).create
   # [END bigtable_create_family_gc_max_versions]
   puts "==> Created column family: `#{family.name}`"
   puts ""
@@ -81,7 +80,7 @@ def run_table_operations instance_id, table_id
   # one condition
   gc_rule = Google::Cloud::Bigtable::GcRule.max_age(60 * 60 * 24 * 5)
   union_gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule)
-  family = table.column_families.create("cf3", gc_rule: union_gc_rule)
+  family = table.column_family("cf3", union_gc_rule).create
   # [END bigtable_create_family_gc_union]
   puts "==> Created column family: `#{family.name}`"
   puts ""
@@ -92,7 +91,7 @@ def run_table_operations instance_id, table_id
   # one condition
   gc_rule = Google::Cloud::Bigtable::GcRule.max_age(60 * 60 * 24 * 5)
   intersection_gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule)
-  family = table.column_families.create("cf4", gc_rule: intersection_gc_rule)
+  family = table.column_family("cf4", intersection_gc_rule).create
   # [END bigtable_create_family_gc_intersection]
   puts "==> Created column family: `#{family.name}`"
   puts ""
@@ -107,13 +106,13 @@ def run_table_operations instance_id, table_id
   gc_rule_2 = Google::Cloud::Bigtable::GcRule.max_versions(2)
   nested_gc_rule = Google::Cloud::Bigtable::GcRule.union(gc_rule_1, gc_rule_2)
   # [END bigtable_create_family_gc_nested]
-  family = table.column_families.create("cf5", gc_rule: gc_rule)
+  family = table.column_family("cf5", gc_rule).create
   puts "==> Created column family: `#{family.name}`"
   puts ""
 
   puts "==> Printing name and GC Rule for all column families"
   # [START bigtable_list_column_families]
-  table = instance.table(table_id, view: :FULL)
+  table = bigtable.table(instance_id, table_id, view: :FULL, perform_lookup: true)
   table.column_families.each do |family|
     p "Column family name: #{family.name}"
     p "GC Rule:"
@@ -124,7 +123,7 @@ def run_table_operations instance_id, table_id
   puts ""
   puts "==> Updating column family cf1 GC rule"
   # [START bigtable_update_gc_rule]
-  family = table.column_families.find_by_name("cf1")
+  family = table.column_families.find{|cf| cf.name == "cf1"}
   family.gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
   updated_family = family.save
   # [END bigtable_update_gc_rule]
@@ -133,14 +132,14 @@ def run_table_operations instance_id, table_id
 
   puts "==> Print updated column family cf1 GC rule"
   # [START bigtable_family_get_gc_rule]
-  family = table.column_families.find_by_name("cf1")
+  family = table.column_families.find{|cf| cf.name == "cf1"}
   # [END bigtable_family_get_gc_rule]
   p family
 
   puts ""
   puts "==> Delete a column family cf2"
   # [START bigtable_delete_family]
-  family = table.column_families.find_by_name("cf2")
+  family = table.column_families.find{|cf| cf.name == "cf2"}
   family.delete
   # [END bigtable_delete_family]
   puts "==> #{family.name} deleted successfully"
@@ -151,13 +150,12 @@ end
 
 def delete_table instance_id, table_id
   bigtable = Google::Cloud.new.bigtable
-  instance = bigtable.instance(instance_id)
 
   puts "==> Delete the table."
   #  [START bigtable_delete_table]
-  table = instance.table(table_id)
-  #  [END bigtable_delete_table]
+  table = bigtable.table(instance_id, table_id)
   table.delete
+  #  [END bigtable_delete_table]
 
   puts "==> Table deleted: #{table.name}"
   puts "\n"
