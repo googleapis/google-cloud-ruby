@@ -45,3 +45,9 @@ s.replace(
     'lib/google/cloud/debugger/v2/credentials.rb',
     'DEBUGGER_KEYFILE_JSON\\n(\s+)DEBUGGER_CREDENTIALS_JSON\n',
     'DEBUGGER_CREDENTIALS_JSON\\n\\1DEBUGGER_KEYFILE_JSON\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2195
+s.replace(
+    'lib/google/cloud/debugger/v2.rb',
+    '\\(https://console\\.cloud\\.google\\.com/apis/api/debugger\\)',
+    '(https://console.cloud.google.com/apis/library/clouddebugger.googleapis.com)')
