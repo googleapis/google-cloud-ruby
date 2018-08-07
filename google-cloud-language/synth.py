@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import re
+from textwrap import dedent
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -45,6 +46,7 @@ s.copy(v1_library / 'lib/google/cloud/language/v1.rb')
 s.copy(v1_library / 'lib/google/cloud/language/v1')
 s.copy(v1_library / 'lib/google/cloud/language.rb')
 s.copy(v1_library / 'test/google/cloud/language/v1')
+s.copy(v1_library / 'Rakefile')
 s.copy(v1_library / 'README.md')
 s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
@@ -156,3 +158,18 @@ s.replace(
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/language\n',
     '[Product Documentation]: https://cloud.google.com/natural-language\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2211
+s.replace(
+    'Rakefile',
+    'namespace :ci do\n  desc "Run the CI build, with acceptance tests\\."\n  task :acceptance do',
+    dedent("""\
+      namespace :ci do
+        desc "Run the CI build, with smoke tests."
+        task :smoke_test do
+          Rake::Task["ci"].invoke
+          header "google-cloud-language smoke_test", "*"
+          sh "bundle exec rake smoke_test -v"
+        end
+        desc "Run the CI build, with acceptance tests."
+        task :acceptance do"""))
