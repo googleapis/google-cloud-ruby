@@ -77,6 +77,14 @@ module Google
           def size
             @tree.size
           end
+          alias count size
+
+          def size_with_pending
+            count_with_pending_tree = @tree.dup
+            apply_pending_changes_to_tree @pending, count_with_pending_tree
+            count_with_pending_tree.size
+          end
+          alias count_with_pending size_with_pending
 
           def restart
             # clears all but query, resume token, read time, and old order
@@ -103,28 +111,10 @@ module Google
           end
 
           def persist resume_token, read_time
-            # Remove the deleted documents
-            @pending[:delete].each do |doc_path|
-              remove_doc_from_tree doc_path
-            end
-
-            # Add/update the changed documents
-            @pending[:add].each do |doc_grpc|
-              removed_doc = remove_doc_from_tree doc_grpc.name
-              added_doc = DocumentSnapshot.from_document(
-                doc_grpc, @client, read_at: read_time
-              )
-
-              if removed_doc && removed_doc.updated_at >= added_doc.updated_at
-                # Restore the removed doc if the added doc isn't newer
-                added_doc = removed_doc
-              end
-
-              add_doc_to_tree added_doc
-            end
-
             @resume_token = resume_token
             @read_time = read_time
+
+            apply_pending_changes_to_tree @pending, @tree
             clear_pending
           end
 
@@ -185,6 +175,28 @@ module Google
             ref_comp
           end
 
+          def apply_pending_changes_to_tree pending, tree
+            # Remove the deleted documents
+            pending[:delete].each do |doc_path|
+              remove_doc_from_tree doc_path, tree
+            end
+
+            # Add/update the changed documents
+            pending[:add].each do |doc_grpc|
+              removed_doc = remove_doc_from_tree doc_grpc.name, tree
+              added_doc = DocumentSnapshot.from_document(
+                doc_grpc, @client, read_at: read_time
+              )
+
+              if removed_doc && removed_doc.updated_at >= added_doc.updated_at
+                # Restore the removed doc if the added doc isn't newer
+                added_doc = removed_doc
+              end
+
+              add_doc_to_tree added_doc, tree
+            end
+          end
+
           def change_paths new_order, old_order
             added_paths = new_order.keys - old_order.keys
             deleted_paths = old_order.keys - new_order.keys
@@ -225,13 +237,13 @@ module Google
           end
 
           def build_added_doc_change doc_path, new_paths
-            doc_snp = get_doc_from_tree doc_path
+            doc_snp = get_doc_from_tree doc_path, @tree
             new_index = get_index_from_order_array doc_path, new_paths
             DocumentChange.from_doc doc_snp, nil, new_index
           end
 
           def build_modified_doc_change doc_path, new_paths, old_paths
-            doc_snp = get_doc_from_tree doc_path
+            doc_snp = get_doc_from_tree doc_path, @tree
             old_index = get_index_from_order_array doc_path, old_paths
             new_index = get_index_from_order_array doc_path, new_paths
             DocumentChange.from_doc doc_snp, old_index, new_index
@@ -241,18 +253,18 @@ module Google
             order_array.index doc_path
           end
 
-          def get_doc_from_tree doc_path
-            @tree.key doc_path
+          def get_doc_from_tree doc_path, tree
+            tree.key doc_path
           end
 
-          def add_doc_to_tree doc_snp
-            @tree[doc_snp] = doc_snp.path
+          def add_doc_to_tree doc_snp, tree
+            tree[doc_snp] = doc_snp.path
           end
 
-          def remove_doc_from_tree doc_path
+          def remove_doc_from_tree doc_path, tree
             # Remove old snapshot
-            old_snp = @tree.key doc_path
-            @tree.delete old_snp unless old_snp.nil?
+            old_snp = tree.key doc_path
+            tree.delete old_snp unless old_snp.nil?
             old_snp
           end
 

@@ -249,7 +249,7 @@ module Google
                   # Returned when documents may have been removed from the given
                   # target, but the exact documents are unknown.
 
-                  if response.filter.count != @inventory.size
+                  if response.filter.count != @inventory.count_with_pending
                     @inventory.reset
                     raise RestartStream # Raise to restart the stream
                   end
