@@ -41,6 +41,12 @@ s.replace(
     '\\Z',
     '\nNaming/FileName:\n  Exclude:\n    - "lib/google-cloud-monitoring.rb"\n')
 
+# PERMANENT: Use a compatible version of googleapis-common-protos-types
+s.replace(
+    'google-cloud-monitoring.gemspec',
+    '\n  gem\\.add_dependency "google-gax", "~> ([\\d\\.]+)"',
+    '\n  gem.add_dependency "google-gax", "~> \\1"\n  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.2"')
+
 # https://github.com/googleapis/gapic-generator/issues/2174
 s.replace(
     'lib/google/cloud/monitoring.rb',
