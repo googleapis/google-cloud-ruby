@@ -45,7 +45,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><div id='filecontents'><h1>Ruby Client for Google Cloud Dataproc API (<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning">Alpha</a>)</h1>
+  <div id="content"><div id='filecontents'><h1>Ruby Client for Google Cloud Dataproc API (<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning">Beta</a>)</h1>
 
 <p><a href="https://cloud.google.com/dataproc">Google Cloud Dataproc API</a>:
 Manages Hadoop-based clusters and jobs on Google Cloud Platform.</p>
@@ -63,7 +63,7 @@ steps:</p>
 <ol>
 <li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
 <li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
-<li><a href="https://console.cloud.google.com/apis/api/dataproc">Enable the Google Cloud Dataproc API.</a></li>
+<li><a href="https://console.cloud.google.com/apis/library/dataproc.googleapis.com">Enable the Google Cloud Dataproc API.</a></li>
 <li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
 </ol>
 
@@ -109,7 +109,11 @@ to see the full list of Cloud APIs that we cover.</li>
 
 <h2>Enabling Logging</h2>
 
-<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library. The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below, or a <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a> that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>. See <a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a> and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a> for additional information.</p>
+<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library.
+The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below,
+or a <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a>
+that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>. See <a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a>
+and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a> for additional information.</p>
 
 <p>Configuring a Ruby stdlib logger:</p>
 
