@@ -137,6 +137,21 @@ recognition.</p>
         </dt>
         <dd><pre class="code"><span class='int'>443</span></pre></dd>
       
+        <dt id="GRPC_INTERCEPTORS-constant" class="">GRPC_INTERCEPTORS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default set of gRPC interceptors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='rbracket'>]</span></pre></dd>
+      
         <dt id="DEFAULT_TIMEOUT-constant" class="">DEFAULT_TIMEOUT =
           
         </dt>
@@ -212,7 +227,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#analyze_entities-instance_method" title="#analyze_entities (instance method)">#<strong>analyze_entities</strong>(document, encoding_type: nil, options: nil)  &#x21d2; Google::Cloud::Language::V1::AnalyzeEntitiesResponse </a>
+      <a href="#analyze_entities-instance_method" title="#analyze_entities (instance method)">#<strong>analyze_entities</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Language::V1::AnalyzeEntitiesResponse </a>
     
 
     
@@ -235,7 +250,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#analyze_entity_sentiment-instance_method" title="#analyze_entity_sentiment (instance method)">#<strong>analyze_entity_sentiment</strong>(document, encoding_type: nil, options: nil)  &#x21d2; Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse </a>
+      <a href="#analyze_entity_sentiment-instance_method" title="#analyze_entity_sentiment (instance method)">#<strong>analyze_entity_sentiment</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse </a>
     
 
     
@@ -258,7 +273,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#analyze_sentiment-instance_method" title="#analyze_sentiment (instance method)">#<strong>analyze_sentiment</strong>(document, encoding_type: nil, options: nil)  &#x21d2; Google::Cloud::Language::V1::AnalyzeSentimentResponse </a>
+      <a href="#analyze_sentiment-instance_method" title="#analyze_sentiment (instance method)">#<strong>analyze_sentiment</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Language::V1::AnalyzeSentimentResponse </a>
     
 
     
@@ -281,7 +296,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#analyze_syntax-instance_method" title="#analyze_syntax (instance method)">#<strong>analyze_syntax</strong>(document, encoding_type: nil, options: nil)  &#x21d2; Google::Cloud::Language::V1::AnalyzeSyntaxResponse </a>
+      <a href="#analyze_syntax-instance_method" title="#analyze_syntax (instance method)">#<strong>analyze_syntax</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Language::V1::AnalyzeSyntaxResponse </a>
     
 
     
@@ -304,7 +319,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#annotate_text-instance_method" title="#annotate_text (instance method)">#<strong>annotate_text</strong>(document, features, encoding_type: nil, options: nil)  &#x21d2; Google::Cloud::Language::V1::AnnotateTextResponse </a>
+      <a href="#annotate_text-instance_method" title="#annotate_text (instance method)">#<strong>annotate_text</strong>(document, features, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Language::V1::AnnotateTextResponse </a>
     
 
     
@@ -327,7 +342,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#classify_text-instance_method" title="#classify_text (instance method)">#<strong>classify_text</strong>(document, options: nil)  &#x21d2; Google::Cloud::Language::V1::ClassifyTextResponse </a>
+      <a href="#classify_text-instance_method" title="#classify_text (instance method)">#<strong>classify_text</strong>(document, options: nil) {|result, operation| ... } &#x21d2; Google::Cloud::Language::V1::ClassifyTextResponse </a>
     
 
     
@@ -350,7 +365,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; LanguageServiceClient </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; LanguageServiceClient </a>
     
 
     
@@ -381,7 +396,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Language::V1::LanguageServiceClient (class)">LanguageServiceClient</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Language::V1::LanguageServiceClient (class)">LanguageServiceClient</a></span></tt> 
   
 
   
@@ -474,6 +489,37 @@ or the specified config is missing data points.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>metadata</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default metadata to be sent with each request. This can be overridden on a per call basis.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exception_transformer</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional proc that intercepts any exceptions raised during an API call to inject
+custom error handling.</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 
@@ -483,14 +529,6 @@ or the specified config is missing data points.</p>
       <pre class="lines">
 
 
-81
-82
-83
-84
-85
-86
-87
-88
 89
 90
 91
@@ -575,16 +613,37 @@ or the specified config is missing data points.</p>
 170
 171
 172
-173</pre>
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Language::V1::LanguageServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Language::V1::LanguageServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
   <span class='comment'># These require statements are intentionally placed here to initialize
@@ -593,10 +652,10 @@ or the specified config is missing data points.</p>
 </span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1/language_service_services_pb</span><span class='tstring_end'>&quot;</span></span>
 
-  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Language::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Language::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Language::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Language::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
@@ -620,6 +679,7 @@ or the specified config is missing data points.</p>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
   <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>language_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
   <span class='rparen'>)</span>
@@ -631,13 +691,14 @@ or the specified config is missing data points.</p>
       <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
       <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
       <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-      <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+      <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
     <span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Allow overriding the service path/port in subclasses.
 </span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
   <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+  <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@language_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
     <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
@@ -645,32 +706,39 @@ or the specified config is missing data points.</p>
     <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
     <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>LanguageService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
   <span class='rparen'>)</span>
 
   <span class='ivar'>@analyze_sentiment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_sentiment</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@analyze_entities</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_entities</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entities</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entities</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@analyze_entity_sentiment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_entity_sentiment</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entity_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entity_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@analyze_syntax</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_syntax</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_syntax</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_syntax</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@classify_text</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:classify_text</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>classify_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>classify_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@annotate_text</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:annotate_text</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>annotate_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>annotate_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1060,7 +1128,64 @@ or the specified config is missing data points.</p>
 374
 375
 376
-377</pre>
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 39</span>
@@ -1073,6 +1198,9 @@ or the specified config is missing data points.</p>
 
   <span class='comment'># The default port of the service.
 </span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Language::V1::LanguageServiceClient::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
+
+  <span class='comment'># The default set of gRPC interceptors.
+</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Language::V1::LanguageServiceClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
 
   <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Language::V1::LanguageServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
 
@@ -1107,11 +1235,18 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'>#   or the specified config is missing data points.
 </span>  <span class='comment'># @param timeout [Numeric]
 </span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
+</span>  <span class='comment'># @param metadata [Hash]
+</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
+</span>  <span class='comment'># @param exception_transformer [Proc]
+</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
+</span>  <span class='comment'>#   custom error handling.
 </span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
       <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Language::V1::LanguageServiceClient::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
       <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
       <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Language::V1::LanguageServiceClient::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
     <span class='comment'># These require statements are intentionally placed here to initialize
@@ -1120,10 +1255,10 @@ or the specified config is missing data points.</p>
 </span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1/language_service_services_pb</span><span class='tstring_end'>&quot;</span></span>
 
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Language::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Language::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
     <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Language::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Language::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
     <span class='kw'>end</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
@@ -1147,6 +1282,7 @@ or the specified config is missing data points.</p>
     <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
     <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>language_service_client_config.json</span><span class='tstring_end'>&quot;</span></span>
     <span class='rparen'>)</span>
@@ -1158,13 +1294,14 @@ or the specified config is missing data points.</p>
         <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
         <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
         <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
       <span class='rparen'>)</span>
     <span class='kw'>end</span>
 
     <span class='comment'># Allow overriding the service path/port in subclasses.
 </span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
     <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
     <span class='ivar'>@language_service_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
       <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
       <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
@@ -1172,32 +1309,39 @@ or the specified config is missing data points.</p>
       <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
       <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
       <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'>LanguageService</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
     <span class='rparen'>)</span>
 
     <span class='ivar'>@analyze_sentiment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_sentiment</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
     <span class='ivar'>@analyze_entities</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_entities</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entities</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entities</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
     <span class='ivar'>@analyze_entity_sentiment</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_entity_sentiment</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entity_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_entity_sentiment</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
     <span class='ivar'>@analyze_syntax</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:analyze_syntax</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_syntax</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>analyze_syntax</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
     <span class='ivar'>@classify_text</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:classify_text</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>classify_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>classify_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
     <span class='ivar'>@annotate_text</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@language_service_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:annotate_text</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>annotate_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>annotate_text</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
   <span class='kw'>end</span>
 
@@ -1214,25 +1358,31 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Cloud::Language::V1::AnalyzeSentimentResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Cloud::Language::V1::AnalyzeSentimentResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/language/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/language&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language::V1.new
+</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language.new(version: :v1)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +document+:
 </span>  <span class='comment'>#   document = {}
 </span>  <span class='comment'>#   response = language_service_client.analyze_sentiment(document)
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_analyze_sentiment'>analyze_sentiment</span> \
       <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeSentimentRequest.html" title="Google::Cloud::Language::V1::AnalyzeSentimentRequest (class)">AnalyzeSentimentRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@analyze_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='ivar'>@analyze_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Finds named entities (currently proper names and common nouns) in the text
@@ -1248,25 +1398,31 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Cloud::Language::V1::AnalyzeEntitiesResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Cloud::Language::V1::AnalyzeEntitiesResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/language/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/language&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language::V1.new
+</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language.new(version: :v1)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +document+:
 </span>  <span class='comment'>#   document = {}
 </span>  <span class='comment'>#   response = language_service_client.analyze_entities(document)
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entities'>analyze_entities</span> \
       <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeEntitiesRequest.html" title="Google::Cloud::Language::V1::AnalyzeEntitiesRequest (class)">AnalyzeEntitiesRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@analyze_entities</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='ivar'>@analyze_entities</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Finds entities, similar to {Google::Cloud::Language::V1::LanguageService::AnalyzeEntities AnalyzeEntities} in the text and analyzes
@@ -1281,25 +1437,31 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/language/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/language&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language::V1.new
+</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language.new(version: :v1)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +document+:
 </span>  <span class='comment'>#   document = {}
 </span>  <span class='comment'>#   response = language_service_client.analyze_entity_sentiment(document)
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entity_sentiment'>analyze_entity_sentiment</span> \
       <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeEntitySentimentRequest.html" title="Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest (class)">AnalyzeEntitySentimentRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@analyze_entity_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='ivar'>@analyze_entity_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Analyzes the syntax of the text and provides sentence boundaries and
@@ -1315,25 +1477,31 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Cloud::Language::V1::AnalyzeSyntaxResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Cloud::Language::V1::AnalyzeSyntaxResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/language/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/language&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language::V1.new
+</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language.new(version: :v1)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +document+:
 </span>  <span class='comment'>#   document = {}
 </span>  <span class='comment'>#   response = language_service_client.analyze_syntax(document)
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_analyze_syntax'>analyze_syntax</span> \
       <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeSyntaxRequest.html" title="Google::Cloud::Language::V1::AnalyzeSyntaxRequest (class)">AnalyzeSyntaxRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@analyze_syntax</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='ivar'>@analyze_syntax</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Classifies a document into categories.
@@ -1345,23 +1513,29 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Cloud::Language::V1::ClassifyTextResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Cloud::Language::V1::ClassifyTextResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/language/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/language&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language::V1.new
+</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language.new(version: :v1)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +document+:
 </span>  <span class='comment'>#   document = {}
 </span>  <span class='comment'>#   response = language_service_client.classify_text(document)
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_classify_text'>classify_text</span> \
       <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ClassifyTextRequest.html" title="Google::Cloud::Language::V1::ClassifyTextRequest (class)">ClassifyTextRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@classify_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='ivar'>@classify_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># A convenience method that provides all the features that analyzeSentiment,
@@ -1380,13 +1554,20 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Cloud::Language::V1::AnnotateTextResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Cloud::Language::V1::AnnotateTextResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/language/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/language&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language::V1.new
+</span>  <span class='comment'>#   language_service_client = Google::Cloud::Language.new(version: :v1)
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +document+:
 </span>  <span class='comment'>#   document = {}
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +features+:
 </span>  <span class='comment'>#   features = {}
 </span>  <span class='comment'>#   response = language_service_client.annotate_text(document, features)
 </span>
@@ -1394,14 +1575,15 @@ or the specified config is missing data points.</p>
       <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='id identifier rubyid_features'>features</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
       <span class='label'>features:</span> <span class='id identifier rubyid_features'>features</span><span class='comma'>,</span>
       <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnnotateTextRequest.html" title="Google::Cloud::Language::V1::AnnotateTextRequest (class)">AnnotateTextRequest</a></span></span><span class='rparen'>)</span>
-    <span class='ivar'>@annotate_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='ivar'>@annotate_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1419,7 +1601,7 @@ or the specified config is missing data points.</p>
       <div class="method_details first">
   <h3 class="signature first" id="analyze_entities-instance_method">
   
-    #<strong>analyze_entities</strong>(document, encoding_type: nil, options: nil)  &#x21d2; <tt><span class='object_link'><a href="AnalyzeEntitiesResponse.html" title="Google::Cloud::Language::V1::AnalyzeEntitiesResponse (class)">Google::Cloud::Language::V1::AnalyzeEntitiesResponse</a></span></tt> 
+    #<strong>analyze_entities</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="AnalyzeEntitiesResponse.html" title="Google::Cloud::Language::V1::AnalyzeEntitiesResponse (class)">Google::Cloud::Language::V1::AnalyzeEntitiesResponse</a></span></tt> 
   
 
   
@@ -1440,10 +1622,12 @@ other properties.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span>
-<span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +document+:
+</span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_entities'>analyze_entities</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1500,6 +1684,49 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnalyzeEntitiesResponse.html" title="Google::Cloud::Language::V1::AnalyzeEntitiesResponse (class)">Google::Cloud::Language::V1::AnalyzeEntitiesResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -1537,31 +1764,33 @@ retries, etc.</p>
       <pre class="lines">
 
 
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241</pre>
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 261</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entities'>analyze_entities</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeEntitiesRequest.html" title="Google::Cloud::Language::V1::AnalyzeEntitiesRequest (class)">AnalyzeEntitiesRequest</a></span></span><span class='rparen'>)</span>
-  <span class='ivar'>@analyze_entities</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='ivar'>@analyze_entities</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1571,7 +1800,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="analyze_entity_sentiment-instance_method">
   
-    #<strong>analyze_entity_sentiment</strong>(document, encoding_type: nil, options: nil)  &#x21d2; <tt><span class='object_link'><a href="AnalyzeEntitySentimentResponse.html" title="Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse (class)">Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse</a></span></tt> 
+    #<strong>analyze_entity_sentiment</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="AnalyzeEntitySentimentResponse.html" title="Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse (class)">Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse</a></span></tt> 
   
 
   
@@ -1591,10 +1820,12 @@ sentiment associated with each entity and its mentions.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span>
-<span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +document+:
+</span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_entity_sentiment'>analyze_entity_sentiment</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1651,6 +1882,49 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnalyzeEntitySentimentResponse.html" title="Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse (class)">Google::Cloud::Language::V1::AnalyzeEntitySentimentResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -1688,31 +1962,33 @@ retries, etc.</p>
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274</pre>
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 300</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_entity_sentiment'>analyze_entity_sentiment</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeEntitySentimentRequest.html" title="Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest (class)">AnalyzeEntitySentimentRequest</a></span></span><span class='rparen'>)</span>
-  <span class='ivar'>@analyze_entity_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='ivar'>@analyze_entity_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1722,7 +1998,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="analyze_sentiment-instance_method">
   
-    #<strong>analyze_sentiment</strong>(document, encoding_type: nil, options: nil)  &#x21d2; <tt><span class='object_link'><a href="AnalyzeSentimentResponse.html" title="Google::Cloud::Language::V1::AnalyzeSentimentResponse (class)">Google::Cloud::Language::V1::AnalyzeSentimentResponse</a></span></tt> 
+    #<strong>analyze_sentiment</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="AnalyzeSentimentResponse.html" title="Google::Cloud::Language::V1::AnalyzeSentimentResponse (class)">Google::Cloud::Language::V1::AnalyzeSentimentResponse</a></span></tt> 
   
 
   
@@ -1741,10 +2017,12 @@ retries, etc.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span>
-<span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +document+:
+</span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_sentiment'>analyze_sentiment</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1801,6 +2079,49 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnalyzeSentimentResponse.html" title="Google::Cloud::Language::V1::AnalyzeSentimentResponse (class)">Google::Cloud::Language::V1::AnalyzeSentimentResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -1838,31 +2159,33 @@ retries, etc.</p>
       <pre class="lines">
 
 
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207</pre>
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 221</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_sentiment'>analyze_sentiment</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeSentimentRequest.html" title="Google::Cloud::Language::V1::AnalyzeSentimentRequest (class)">AnalyzeSentimentRequest</a></span></span><span class='rparen'>)</span>
-  <span class='ivar'>@analyze_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='ivar'>@analyze_sentiment</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1872,7 +2195,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="analyze_syntax-instance_method">
   
-    #<strong>analyze_syntax</strong>(document, encoding_type: nil, options: nil)  &#x21d2; <tt><span class='object_link'><a href="AnalyzeSyntaxResponse.html" title="Google::Cloud::Language::V1::AnalyzeSyntaxResponse (class)">Google::Cloud::Language::V1::AnalyzeSyntaxResponse</a></span></tt> 
+    #<strong>analyze_syntax</strong>(document, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="AnalyzeSyntaxResponse.html" title="Google::Cloud::Language::V1::AnalyzeSyntaxResponse (class)">Google::Cloud::Language::V1::AnalyzeSyntaxResponse</a></span></tt> 
   
 
   
@@ -1893,10 +2216,12 @@ properties.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span>
-<span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +document+:
+</span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_analyze_syntax'>analyze_syntax</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1953,6 +2278,49 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnalyzeSyntaxResponse.html" title="Google::Cloud::Language::V1::AnalyzeSyntaxResponse (class)">Google::Cloud::Language::V1::AnalyzeSyntaxResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -1990,31 +2358,33 @@ retries, etc.</p>
       <pre class="lines">
 
 
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308</pre>
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 298</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 340</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_analyze_syntax'>analyze_syntax</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnalyzeSyntaxRequest.html" title="Google::Cloud::Language::V1::AnalyzeSyntaxRequest (class)">AnalyzeSyntaxRequest</a></span></span><span class='rparen'>)</span>
-  <span class='ivar'>@analyze_syntax</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='ivar'>@analyze_syntax</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2024,7 +2394,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="annotate_text-instance_method">
   
-    #<strong>annotate_text</strong>(document, features, encoding_type: nil, options: nil)  &#x21d2; <tt><span class='object_link'><a href="AnnotateTextResponse.html" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">Google::Cloud::Language::V1::AnnotateTextResponse</a></span></tt> 
+    #<strong>annotate_text</strong>(document, features, encoding_type: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="AnnotateTextResponse.html" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">Google::Cloud::Language::V1::AnnotateTextResponse</a></span></tt> 
   
 
   
@@ -2044,11 +2414,15 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span>
-<span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
-<span class='id identifier rubyid_features'>features</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +document+:
+</span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+<span class='comment'># TODO: Initialize +features+:
+</span><span class='id identifier rubyid_features'>features</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_annotate_text'>annotate_text</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='comma'>,</span> <span class='id identifier rubyid_features'>features</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -2122,6 +2496,49 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AnnotateTextResponse.html" title="Google::Cloud::Language::V1::AnnotateTextResponse (class)">Google::Cloud::Language::V1::AnnotateTextResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -2159,35 +2576,37 @@ retries, etc.</p>
       <pre class="lines">
 
 
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373
-374
-375
-376</pre>
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 364</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 420</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_annotate_text'>annotate_text</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='id identifier rubyid_features'>features</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
     <span class='label'>features:</span> <span class='id identifier rubyid_features'>features</span><span class='comma'>,</span>
     <span class='label'>encoding_type:</span> <span class='id identifier rubyid_encoding_type'>encoding_type</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="AnnotateTextRequest.html" title="Google::Cloud::Language::V1::AnnotateTextRequest (class)">AnnotateTextRequest</a></span></span><span class='rparen'>)</span>
-  <span class='ivar'>@annotate_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='ivar'>@annotate_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2197,7 +2616,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="classify_text-instance_method">
   
-    #<strong>classify_text</strong>(document, options: nil)  &#x21d2; <tt><span class='object_link'><a href="ClassifyTextResponse.html" title="Google::Cloud::Language::V1::ClassifyTextResponse (class)">Google::Cloud::Language::V1::ClassifyTextResponse</a></span></tt> 
+    #<strong>classify_text</strong>(document, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="ClassifyTextResponse.html" title="Google::Cloud::Language::V1::ClassifyTextResponse (class)">Google::Cloud::Language::V1::ClassifyTextResponse</a></span></tt> 
   
 
   
@@ -2216,10 +2635,12 @@ retries, etc.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/language</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::Language::V1.new (method)">new</a></span></span>
-<span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_language_service_client'>language_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Language.html#new-class_method" title="Google::Cloud::Language.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+
+<span class='comment'># TODO: Initialize +document+:
+</span><span class='id identifier rubyid_document'>document</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_language_service_client'>language_service_client</span><span class='period'>.</span><span class='id identifier rubyid_classify_text'>classify_text</span><span class='lparen'>(</span><span class='id identifier rubyid_document'>document</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -2261,6 +2682,49 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ClassifyTextResponse.html" title="Google::Cloud::Language::V1::ClassifyTextResponse (class)">Google::Cloud::Language::V1::ClassifyTextResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -2298,27 +2762,29 @@ retries, etc.</p>
       <pre class="lines">
 
 
-328
-329
-330
-331
-332
-333
-334
-335
-336</pre>
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 328</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/language/v1/language_service_client.rb', line 376</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_classify_text'>classify_text</span> \
     <span class='id identifier rubyid_document'>document</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>document:</span> <span class='id identifier rubyid_document'>document</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Language.html" title="Google::Cloud::Language (module)">Language</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Language::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ClassifyTextRequest.html" title="Google::Cloud::Language::V1::ClassifyTextRequest (class)">ClassifyTextRequest</a></span></span><span class='rparen'>)</span>
-  <span class='ivar'>@classify_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='ivar'>@classify_text</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
