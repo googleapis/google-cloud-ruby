@@ -272,11 +272,11 @@ class YardBuilder
     def push_changes repo
       Dir.chdir repo do
         if ENV["GH_OAUTH_TOKEN"]
-          cmd "git pull #{git_repository} --rebase"
-          cmd "git push -q #{git_repository}"
+          `git pull -q --rebase #{git_repository} gh-pages`
+          `git push -q #{git_repository} gh-pages`
         else
-          cmd "git pull origin --rebase"
-          cmd "git push -q origin"
+          `git pull -q --rebase origin gh-pages`
+          `git push -q origin gh-pages`
         end
       end
     end
