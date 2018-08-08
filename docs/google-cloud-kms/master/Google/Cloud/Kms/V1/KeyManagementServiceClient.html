@@ -3187,7 +3187,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # Iterate over all results.
@@ -3242,7 +3242,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # Iterate over all results.
@@ -3297,7 +3297,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # Iterate over all results.
@@ -3341,7 +3341,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_key_ring(formatted_name)
 </span>
@@ -3372,7 +3372,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_crypto_key(formatted_name)
 </span>
@@ -3402,7 +3402,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_crypto_key_version(formatted_name)
 </span>
@@ -3440,7 +3440,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +key_ring_id+:
@@ -3490,7 +3490,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#   crypto_key_id = &quot;my-app-key&quot;
 </span>  <span class='comment'>#   purpose = :ENCRYPT_DECRYPT
@@ -3544,7 +3544,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key_version+:
@@ -3585,7 +3585,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key+:
 </span>  <span class='comment'>#   crypto_key = {}
@@ -3634,7 +3634,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key_version+:
 </span>  <span class='comment'>#   crypto_key_version = {}
@@ -3681,7 +3681,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY_PATH]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +plaintext+:
@@ -3725,7 +3725,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +ciphertext+:
@@ -3764,7 +3764,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key_version_id+:
@@ -3810,7 +3810,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.destroy_crypto_key_version(formatted_name)
 </span>
@@ -3846,7 +3846,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.restore_crypto_key_version(formatted_name)
 </span>
@@ -3886,7 +3886,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +policy+:
@@ -3925,7 +3925,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_iam_policy(formatted_resource)
 </span>
@@ -3964,7 +3964,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +permissions+:
@@ -5699,7 +5699,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # Iterate over all results.
@@ -5754,7 +5754,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # Iterate over all results.
@@ -5809,7 +5809,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # Iterate over all results.
@@ -5853,7 +5853,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_key_ring(formatted_name)
 </span>
@@ -5884,7 +5884,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_crypto_key(formatted_name)
 </span>
@@ -5914,7 +5914,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_crypto_key_version(formatted_name)
 </span>
@@ -5952,7 +5952,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +key_ring_id+:
@@ -6002,7 +6002,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#   crypto_key_id = &quot;my-app-key&quot;
 </span>  <span class='comment'>#   purpose = :ENCRYPT_DECRYPT
@@ -6056,7 +6056,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_parent = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key_version+:
@@ -6097,7 +6097,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key+:
 </span>  <span class='comment'>#   crypto_key = {}
@@ -6146,7 +6146,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key_version+:
 </span>  <span class='comment'>#   crypto_key_version = {}
@@ -6193,7 +6193,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY_PATH]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +plaintext+:
@@ -6237,7 +6237,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +ciphertext+:
@@ -6276,7 +6276,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +crypto_key_version_id+:
@@ -6322,7 +6322,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.destroy_crypto_key_version(formatted_name)
 </span>
@@ -6358,7 +6358,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.restore_crypto_key_version(formatted_name)
 </span>
@@ -6398,7 +6398,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +policy+:
@@ -6437,7 +6437,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#   response = key_management_service_client.get_iam_policy(formatted_resource)
 </span>
@@ -6476,7 +6476,7 @@ custom error handling.</p>
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/kms&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :V1)
+</span>  <span class='comment'>#   key_management_service_client = Google::Cloud::Kms.new(version: :v1)
 </span>  <span class='comment'>#   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +permissions+:
@@ -7069,7 +7069,7 @@ custom error handling.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_crypto_key_id'>crypto_key_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-app-key</span><span class='tstring_end'>&quot;</span></span>
 <span class='id identifier rubyid_purpose'>purpose</span> <span class='op'>=</span> <span class='symbol'>:ENCRYPT_DECRYPT</span>
@@ -7300,7 +7300,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +crypto_key_version+:
@@ -7499,7 +7499,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_location_path'><span class='object_link'><a href="#location_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path (method)">location_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +key_ring_id+:
@@ -7721,7 +7721,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +ciphertext+:
@@ -7950,7 +7950,7 @@ RestoreCryptoKeyVersion may be called to reverse the process.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'><span class='object_link'><a href="#crypto_key_version_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path (method)">crypto_key_version_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_VERSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_destroy_crypto_key_version'>destroy_crypto_key_version</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
     
@@ -8124,7 +8124,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path_path'><span class='object_link'><a href="#crypto_key_path_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path (method)">crypto_key_path_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_PATH]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +plaintext+:
@@ -8346,7 +8346,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_get_crypto_key'>get_crypto_key</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
     
@@ -8520,7 +8520,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'><span class='object_link'><a href="#crypto_key_version_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path (method)">crypto_key_version_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_VERSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_get_crypto_key_version'>get_crypto_key_version</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
     
@@ -8696,7 +8696,7 @@ set.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_resource'>formatted_resource</span><span class='rparen'>)</span></code></pre>
     
@@ -8872,7 +8872,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_get_key_ring'>get_key_ring</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
     
@@ -9046,7 +9046,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># Iterate over all results.
@@ -9263,7 +9263,7 @@ object.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># Iterate over all results.
@@ -9480,7 +9480,7 @@ object.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_parent'>formatted_parent</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_location_path'><span class='object_link'><a href="#location_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.location_path (method)">location_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># Iterate over all results.
@@ -9703,7 +9703,7 @@ and <span class='object_link'><a href="CryptoKeyVersion.html#destroy_time-instan
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_version_path'><span class='object_link'><a href="#crypto_key_version_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path (method)">crypto_key_version_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY_VERSION]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span><span class='period'>.</span><span class='id identifier rubyid_restore_crypto_key_version'>restore_crypto_key_version</span><span class='lparen'>(</span><span class='id identifier rubyid_formatted_name'>formatted_name</span><span class='rparen'>)</span></code></pre>
     
@@ -9878,7 +9878,7 @@ existing policy.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +policy+:
@@ -10083,7 +10083,7 @@ permissions, not a NOT_FOUND error.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_resource'>formatted_resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_key_ring_path'><span class='object_link'><a href="#key_ring_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path (method)">key_ring_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +permissions+:
@@ -10284,7 +10284,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +crypto_key+:
 </span><span class='id identifier rubyid_crypto_key'>crypto_key</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -10486,7 +10486,7 @@ retries, etc.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_formatted_name'>formatted_name</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Kms::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::Kms::V1::KeyManagementServiceClient (class)">KeyManagementServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_crypto_key_path'><span class='object_link'><a href="#crypto_key_path-class_method" title="Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path (method)">crypto_key_path</a></span></span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[PROJECT]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[LOCATION]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[KEY_RING]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[CRYPTO_KEY]</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +crypto_key_version_id+:
@@ -10688,7 +10688,7 @@ move between other states.</p>
       
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/kms</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:V1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_key_management_service_client'>key_management_service_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Kms.html" title="Google::Cloud::Kms (module)">Kms</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Kms.html#new-class_method" title="Google::Cloud::Kms.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +crypto_key_version+:
 </span><span class='id identifier rubyid_crypto_key_version'>crypto_key_version</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
