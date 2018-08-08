@@ -262,8 +262,8 @@ class YardBuilder
       puts `git add -A .`
       unless `git status --porcelain`.chomp.empty?
         if ENV["GH_OAUTH_TOKEN"]
-          `git config user.email "google-cloud+ruby@google.com"`
-          `git config user.name "google-cloud-ruby"`
+          `git config --global user.email "google-cloud+ruby@google.com"`
+          `git config --global user.name "google-cloud-ruby"`
         end
         cmd "git commit -m '#{message}'"
       end
