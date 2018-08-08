@@ -89,7 +89,10 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A snapshot resource.</p>
+    <p>A snapshot resource.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 
 
   </div>
@@ -238,7 +241,8 @@ snapshot is +7 days - (age of oldest unacked message in the subscription)+.
 For example, consider a subscription whose oldest unacked message is 3 days
 old. If a snapshot is created from this subscription, the snapshot -- which
 will always capture this 3-day-old backlog as long as the snapshot
-exists -- will expire in 4 days.</p>
+exists -- will expire in 4 days. The service will refuse to create a
+snapshot that would expire in less than 1 hour after creation.</p>
 
 
   </div>
@@ -264,7 +268,8 @@ snapshot is +7 days - (age of oldest unacked message in the subscription)+.
 For example, consider a subscription whose oldest unacked message is 3 days
 old. If a snapshot is created from this subscription, the snapshot -- which
 will always capture this 3-day-old backlog as long as the snapshot
-exists -- will expire in 4 days.</p>
+exists -- will expire in 4 days. The service will refuse to create a
+snapshot that would expire in less than 1 hour after creation.</p>
 </div>
       
     </li>
@@ -277,10 +282,10 @@ exists -- will expire in 4 days.</p>
       <pre class="lines">
 
 
-484</pre>
+557</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 484</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 557</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Snapshot (class)">Snapshot</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -332,10 +337,10 @@ exists -- will expire in 4 days.</p>
       <pre class="lines">
 
 
-484</pre>
+557</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 484</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 557</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Snapshot (class)">Snapshot</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -387,10 +392,10 @@ exists -- will expire in 4 days.</p>
       <pre class="lines">
 
 
-484</pre>
+557</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 484</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 557</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Snapshot (class)">Snapshot</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -442,10 +447,10 @@ exists -- will expire in 4 days.</p>
       <pre class="lines">
 
 
-484</pre>
+557</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 484</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 557</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Snapshot (class)">Snapshot</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

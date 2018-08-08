@@ -317,7 +317,8 @@ again during that time (on a best-effort basis).</p>
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
 +ModifyAckDeadline+ with the corresponding +ack_id+ if using
-pull.
+non-streaming pull or send the +ack_id+ in a
++StreamingModifyAckDeadlineRequest+ if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -353,7 +354,8 @@ again during that time (on a best-effort basis).</p>
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
 +ModifyAckDeadline+ with the corresponding +ack_id+ if using
-pull.
+non-streaming pull or send the +ack_id+ in a
++StreamingModifyAckDeadlineRequest+ if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -375,10 +377,10 @@ system will eventually redeliver the message.</p>
       <pre class="lines">
 
 
-217</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 277</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -430,10 +432,10 @@ system will eventually redeliver the message.</p>
       <pre class="lines">
 
 
-217</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 277</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -459,7 +461,10 @@ from the moment a message is published.
 If +retain_acked_messages+ is true, then this also configures the retention
 of acknowledged messages, and thus configures how far back in time a +Seek+
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-minutes.</p>
+minutes.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 
 
   </div>
@@ -482,7 +487,10 @@ from the moment a message is published.
 If +retain_acked_messages+ is true, then this also configures the retention
 of acknowledged messages, and thus configures how far back in time a +Seek+
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-minutes.</p>
+minutes.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
       
     </li>
@@ -495,10 +503,10 @@ minutes.</p>
       <pre class="lines">
 
 
-217</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 277</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -524,7 +532,7 @@ minutes.</p>
 start with a letter, and contain only letters (+[A-Za-z]+), numbers
 (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
 plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
-in length, and it must not start with +&quot;goog&quot;+.</p>
+in length, and it must not start with +&quot;goog&quot;+</p>
 
 
   </div>
@@ -547,7 +555,7 @@ in length, and it must not start with +&quot;goog&quot;+.</p>
 start with a letter, and contain only letters (+[A-Za-z]+), numbers
 (+[0-9]+), dashes (+-+), underscores (+_+), periods (+.+), tildes (+~+),
 plus (+++) or percent signs (+%+). It must be between 3 and 255 characters
-in length, and it must not start with +&quot;goog&quot;+.</p>
+in length, and it must not start with +&quot;goog&quot;+</p>
 </div>
       
     </li>
@@ -560,10 +568,10 @@ in length, and it must not start with +&quot;goog&quot;+.</p>
       <pre class="lines">
 
 
-217</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 277</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -619,10 +627,10 @@ will pull and ack messages using API methods.</p>
       <pre class="lines">
 
 
-217</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 277</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -646,7 +654,10 @@ will pull and ack messages using API methods.</p>
     <p>Returns Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
 acknowledged, until they fall out of the +message_retention_duration+
-window.</p>
+window.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 
 
   </div>
@@ -667,7 +678,10 @@ window.</p>
         <div class='inline'><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&#39;s backlog, even if they are
 acknowledged, until they fall out of the +message_retention_duration+
-window.</p>
+window.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
       
     </li>
@@ -680,10 +694,10 @@ window.</p>
       <pre class="lines">
 
 
-217</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 277</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -741,10 +755,10 @@ deleted.</p>
       <pre class="lines">
 
 
-217</pre>
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 277</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::Subscription (class)">Subscription</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

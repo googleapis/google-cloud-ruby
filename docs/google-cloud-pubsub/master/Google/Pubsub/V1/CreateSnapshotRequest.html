@@ -89,7 +89,10 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request for the +CreateSnapshot+ method.</p>
+    <p>Request for the +CreateSnapshot+ method.<br><br>
+<b>ALPHA:</b> This feature is part of an alpha release. This API might be changed in
+backward-incompatible ways and is not recommended for production use.
+It is not subject to any SLA or deprecation policy.</p>
 
 
   </div>
@@ -103,6 +106,32 @@ js:
 
   <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#labels-instance_method" title="#labels (instance method)">#<strong>labels</strong>  &#x21d2; Hash{String =&gt; String} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>User labels.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -166,9 +195,64 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="name=-instance_method"></span>
+      <span id="labels=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="name-instance_method">
+  <h3 class="signature first" id="labels-instance_method">
+  
+    #<strong>labels</strong>  &#x21d2; <tt>Hash{String =&gt; String}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns User labels.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; String}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>User labels.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+517</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 517</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::CreateSnapshotRequest (class)">CreateSnapshotRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
   
     #<strong>name</strong>  &#x21d2; <tt>String</tt> 
   
@@ -217,10 +301,10 @@ Format is +projects/project/snapshots/snap+.</p>
       <pre class="lines">
 
 
-451</pre>
+517</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 451</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 517</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::CreateSnapshotRequest (class)">CreateSnapshotRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -288,10 +372,10 @@ Format is +projects/project/subscriptions/sub+.</p>
       <pre class="lines">
 
 
-451</pre>
+517</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 451</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 517</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::CreateSnapshotRequest (class)">CreateSnapshotRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The topic to update.</p>
+    <span class="summary_desc"><div class='inline'><p>The updated topic object.</p>
 </div></span>
   
 </li>
@@ -178,7 +178,7 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The topic to update.</p>
+    <p>Returns The updated topic object.</p>
 
 
   </div>
@@ -196,7 +196,7 @@ js:
       
       
         &mdash;
-        <div class='inline'><p>The topic to update.</p>
+        <div class='inline'><p>The updated topic object.</p>
 </div>
       
     </li>
@@ -209,10 +209,10 @@ js:
       <pre class="lines">
 
 
-81</pre>
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::UpdateTopicRequest (class)">UpdateTopicRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -233,8 +233,11 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Indicates which fields in the provided topic to update.
-Must be specified and non-empty.</p>
+    <p>Returns Indicates which fields in the provided topic to update. Must be specified
+and non-empty. Note that if +update_mask+ contains
+&quot;message_storage_policy&quot; then the new value will be determined based on the
+policy configured at the project or organization level. The
++message_storage_policy+ must not be set in the +topic+ provided above.</p>
 
 
   </div>
@@ -252,8 +255,11 @@ Must be specified and non-empty.</p>
       
       
         &mdash;
-        <div class='inline'><p>Indicates which fields in the provided topic to update.
-Must be specified and non-empty.</p>
+        <div class='inline'><p>Indicates which fields in the provided topic to update. Must be specified
+and non-empty. Note that if +update_mask+ contains
+&quot;message_storage_policy&quot; then the new value will be determined based on the
+policy configured at the project or organization level. The
++message_storage_policy+ must not be set in the +topic+ provided above.</p>
 </div>
       
     </li>
@@ -266,10 +272,10 @@ Must be specified and non-empty.</p>
       <pre class="lines">
 
 
-81</pre>
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 102</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::UpdateTopicRequest (class)">UpdateTopicRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

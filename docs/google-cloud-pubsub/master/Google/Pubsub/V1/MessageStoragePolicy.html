@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Pubsub::V1::PublishResponse - Google"
+title: "Class: Google::Pubsub::V1::MessageStoragePolicy - Google"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/docs.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Pubsub::V1::PublishResponse";
+  pathId = "Google::Pubsub::V1::MessageStoragePolicy";
   relpath = '../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../_index.html">Index (P)</a> &raquo;
+    <a href="../../../_index.html">Index (M)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Pubsub.html" title="Google::Pubsub (module)">Pubsub</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Pubsub::V1 (module)">V1</a></span></span>
      &raquo; 
-    <span class="title">PublishResponse</span>
+    <span class="title">MessageStoragePolicy</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Pubsub::V1::PublishResponse
+  <div id="content"><h1>Class: Google::Pubsub::V1::MessageStoragePolicy
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Pubsub::V1::PublishResponse</li>
+            <li class="next">Google::Pubsub::V1::MessageStoragePolicy</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -87,17 +87,7 @@ js:
   
 </div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    <p>Response for the +Publish+ method.</p>
 
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
 
 
 
@@ -107,7 +97,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#message_ids-instance_method" title="#message_ids (instance method)">#<strong>message_ids</strong>  &#x21d2; Array&lt;String&gt; </a>
+      <a href="#allowed_persistence_regions-instance_method" title="#allowed_persistence_regions (instance method)">#<strong>allowed_persistence_regions</strong>  &#x21d2; Array&lt;String&gt; </a>
     
 
     
@@ -124,7 +114,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The server-assigned ID of each published message, in the same order as the messages in the request.</p>
+    <span class="summary_desc"><div class='inline'><p>The list of GCP regions where messages that are published to the topic may be persisted in storage.</p>
 </div></span>
   
 </li>
@@ -140,11 +130,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="message_ids=-instance_method"></span>
+      <span id="allowed_persistence_regions=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="message_ids-instance_method">
+  <h3 class="signature first" id="allowed_persistence_regions-instance_method">
   
-    #<strong>message_ids</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+    #<strong>allowed_persistence_regions</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
   
 
   
@@ -152,9 +142,12 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The server-assigned ID of each published message, in the same order as
-the messages in the request. IDs are guaranteed to be unique within
-the topic.</p>
+    <p>Returns The list of GCP regions where messages that are published to the topic may
+be persisted in storage. Messages published by publishers running in
+non-allowed GCP regions (or running outside of GCP altogether) will be
+routed for storage in one of the allowed regions. An empty list indicates a
+misconfiguration at the project or organization level, which will result in
+all Publish operations failing.</p>
 
 
   </div>
@@ -172,9 +165,12 @@ the topic.</p>
       
       
         &mdash;
-        <div class='inline'><p>The server-assigned ID of each published message, in the same order as
-the messages in the request. IDs are guaranteed to be unique within
-the topic.</p>
+        <div class='inline'><p>The list of GCP regions where messages that are published to the topic may
+be persisted in storage. Messages published by publishers running in
+non-allowed GCP regions (or running outside of GCP altogether) will be
+routed for storage in one of the allowed regions. An empty list indicates a
+misconfiguration at the project or organization level, which will result in
+all Publish operations failing.</p>
 </div>
       
     </li>
@@ -187,12 +183,12 @@ the topic.</p>
       <pre class="lines">
 
 
-120</pre>
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 39</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::PublishResponse (class)">PublishResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::MessageStoragePolicy (class)">MessageStoragePolicy</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

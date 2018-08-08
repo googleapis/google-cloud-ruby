@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Pubsub::V1::ListTopicsRequest - Google"
+title: "Class: Google::Iam::V1::BindingDelta - Google"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/docs.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Pubsub::V1::ListTopicsRequest";
+  pathId = "Google::Iam::V1::BindingDelta";
   relpath = '../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../_index.html">Index (L)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Pubsub.html" title="Google::Pubsub (module)">Pubsub</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Pubsub::V1 (module)">V1</a></span></span>
+    <a href="../../../_index.html">Index (B)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Iam.html" title="Google::Iam (module)">Iam</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Iam::V1 (module)">V1</a></span></span>
      &raquo; 
-    <span class="title">ListTopicsRequest</span>
+    <span class="title">BindingDelta</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Pubsub::V1::ListTopicsRequest
+  <div id="content"><h1>Class: Google::Iam::V1::BindingDelta
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Pubsub::V1::ListTopicsRequest</li>
+            <li class="next">Google::Iam::V1::BindingDelta</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -82,14 +82,15 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb</dd>
+    <dd>lib/google/cloud/pubsub/v1/doc/google/iam/v1/policy.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Request for the +ListTopics+ method.</p>
+    <p>One delta entry for Binding. Each individual change (only one member in each
+entry) to a binding will be a separate entry.</p>
 
 
   </div>
@@ -107,7 +108,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#page_size-instance_method" title="#page_size (instance method)">#<strong>page_size</strong>  &#x21d2; Integer </a>
+      <a href="#action-instance_method" title="#action (instance method)">#<strong>action</strong>  &#x21d2; Google::Iam::V1::BindingDelta::Action </a>
     
 
     
@@ -124,7 +125,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Maximum number of topics to return.</p>
+    <span class="summary_desc"><div class='inline'><p>The action that was performed on a Binding.</p>
 </div></span>
   
 </li>
@@ -133,7 +134,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#page_token-instance_method" title="#page_token (instance method)">#<strong>page_token</strong>  &#x21d2; String </a>
+      <a href="#member-instance_method" title="#member (instance method)">#<strong>member</strong>  &#x21d2; String </a>
     
 
     
@@ -150,7 +151,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The value returned by the last +ListTopicsResponse+; indicates that this is a continuation of a prior +ListTopics+ call, and that the system should return the next page of data.</p>
+    <span class="summary_desc"><div class='inline'><p>A single identity requesting access for a Cloud Platform resource.</p>
 </div></span>
   
 </li>
@@ -159,7 +160,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#project-instance_method" title="#project (instance method)">#<strong>project</strong>  &#x21d2; String </a>
+      <a href="#role-instance_method" title="#role (instance method)">#<strong>role</strong>  &#x21d2; String </a>
     
 
     
@@ -176,7 +177,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The name of the cloud project that topics belong to.</p>
+    <span class="summary_desc"><div class='inline'><p>Role that is assigned to +members+.</p>
 </div></span>
   
 </li>
@@ -192,11 +193,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="page_size=-instance_method"></span>
+      <span id="action=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="page_size-instance_method">
+  <h3 class="signature first" id="action-instance_method">
   
-    #<strong>page_size</strong>  &#x21d2; <tt>Integer</tt> 
+    #<strong>action</strong>  &#x21d2; <tt>Google::Iam::V1::BindingDelta::Action</tt> 
   
 
   
@@ -204,7 +205,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Maximum number of topics to return.</p>
+    <p>Returns The action that was performed on a Binding.
+Required</p>
 
 
   </div>
@@ -217,12 +219,13 @@ js:
     <li>
       
       
-        <span class='type'>(<tt>Integer</tt>)</span>
+        <span class='type'>(<tt>Google::Iam::V1::BindingDelta::Action</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>Maximum number of topics to return.</p>
+        <div class='inline'><p>The action that was performed on a Binding.
+Required</p>
 </div>
       
     </li>
@@ -235,23 +238,23 @@ js:
       <pre class="lines">
 
 
-135</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/iam/v1/policy.rb', line 124</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::ListTopicsRequest (class)">ListTopicsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Iam::V1::BindingDelta (class)">BindingDelta</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
       
-      <span id="page_token=-instance_method"></span>
+      <span id="member=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="page_token-instance_method">
+  <h3 class="signature " id="member-instance_method">
   
-    #<strong>page_token</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>member</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -259,9 +262,9 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The value returned by the last +ListTopicsResponse+; indicates that this is
-a continuation of a prior +ListTopics+ call, and that the system should
-return the next page of data.</p>
+    <p>Returns A single identity requesting access for a Cloud Platform resource.
+Follows the same format of Binding.members.
+Required</p>
 
 
   </div>
@@ -279,9 +282,9 @@ return the next page of data.</p>
       
       
         &mdash;
-        <div class='inline'><p>The value returned by the last +ListTopicsResponse+; indicates that this is
-a continuation of a prior +ListTopics+ call, and that the system should
-return the next page of data.</p>
+        <div class='inline'><p>A single identity requesting access for a Cloud Platform resource.
+Follows the same format of Binding.members.
+Required</p>
 </div>
       
     </li>
@@ -294,23 +297,23 @@ return the next page of data.</p>
       <pre class="lines">
 
 
-135</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/iam/v1/policy.rb', line 124</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::ListTopicsRequest (class)">ListTopicsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Iam::V1::BindingDelta (class)">BindingDelta</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
       
-      <span id="project=-instance_method"></span>
+      <span id="role=-instance_method"></span>
       <div class="method_details ">
-  <h3 class="signature " id="project-instance_method">
+  <h3 class="signature " id="role-instance_method">
   
-    #<strong>project</strong>  &#x21d2; <tt>String</tt> 
+    #<strong>role</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -318,8 +321,9 @@ return the next page of data.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The name of the cloud project that topics belong to.
-Format is +projects/<span class='object_link'><a href="#project-instance_method" title="Google::Pubsub::V1::ListTopicsRequest#project (method)">#project</a></span>+.</p>
+    <p>Returns Role that is assigned to +members+.
+For example, +roles/viewer+, +roles/editor+, or +roles/owner+.
+Required</p>
 
 
   </div>
@@ -337,8 +341,9 @@ Format is +projects/<span class='object_link'><a href="#project-instance_method"
       
       
         &mdash;
-        <div class='inline'><p>The name of the cloud project that topics belong to.
-Format is +projects/<span class='object_link'><a href="#project-instance_method" title="Google::Pubsub::V1::ListTopicsRequest#project (method)">#project</a></span>+.</p>
+        <div class='inline'><p>Role that is assigned to +members+.
+For example, +roles/viewer+, +roles/editor+, or +roles/owner+.
+Required</p>
 </div>
       
     </li>
@@ -351,12 +356,12 @@ Format is +projects/<span class='object_link'><a href="#project-instance_method"
       <pre class="lines">
 
 
-135</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/pubsub/v1/pubsub.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/v1/doc/google/iam/v1/policy.rb', line 124</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Pubsub::V1::ListTopicsRequest (class)">ListTopicsRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Iam::V1::BindingDelta (class)">BindingDelta</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
