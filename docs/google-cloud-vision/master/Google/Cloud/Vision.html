@@ -67,7 +67,7 @@ js:
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/google/cloud/vision.rb<span class="defines">,<br />
-  lib/google/cloud/vision/image.rb,<br /> lib/google/cloud/vision/project.rb,<br /> lib/google/cloud/vision/service.rb,<br /> lib/google/cloud/vision/version.rb,<br /> lib/google/cloud/vision/annotate.rb,<br /> lib/google/cloud/vision/location.rb,<br /> lib/google/cloud/vision/annotation.rb,<br /> lib/google/cloud/vision/credentials.rb,<br /> lib/google/cloud/vision/annotation/web.rb,<br /> lib/google/cloud/vision/v1/credentials.rb,<br /> lib/google/cloud/vision/v1/geometry_pb.rb,<br /> lib/google/cloud/vision/annotation/face.rb,<br /> lib/google/cloud/vision/annotation/text.rb,<br /> lib/google/cloud/vision/v1/doc/overview.rb,<br /> lib/google/cloud/vision/annotation/entity.rb,<br /> lib/google/cloud/vision/annotation/vertex.rb,<br /> lib/google/cloud/vision/v1/web_detection_pb.rb,<br /> lib/google/cloud/vision/annotation/crop_hint.rb,<br /> lib/google/cloud/vision/annotation/properties.rb,<br /> lib/google/cloud/vision/v1/image_annotator_pb.rb,<br /> lib/google/cloud/vision/v1/text_annotation_pb.rb,<br /> lib/google/cloud/vision/annotation/safe_search.rb,<br /> lib/google/cloud/vision/v1/image_annotator_client.rb,<br /> lib/google/cloud/vision/v1/image_annotator_services_pb.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/geometry.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/web_detection.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/image_annotator.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/text_annotation.rb</span>
+  lib/google/cloud/vision/image.rb,<br /> lib/google/cloud/vision/project.rb,<br /> lib/google/cloud/vision/service.rb,<br /> lib/google/cloud/vision/version.rb,<br /> lib/google/cloud/vision/annotate.rb,<br /> lib/google/cloud/vision/location.rb,<br /> lib/google/cloud/vision/annotation.rb,<br /> lib/google/cloud/vision/credentials.rb,<br /> lib/google/cloud/vision/annotation/web.rb,<br /> lib/google/cloud/vision/v1/credentials.rb,<br /> lib/google/cloud/vision/v1/geometry_pb.rb,<br /> lib/google/cloud/vision/annotation/face.rb,<br /> lib/google/cloud/vision/annotation/text.rb,<br /> lib/google/cloud/vision/annotation/entity.rb,<br /> lib/google/cloud/vision/annotation/vertex.rb,<br /> lib/google/cloud/vision/v1/web_detection_pb.rb,<br /> lib/google/cloud/vision/annotation/crop_hint.rb,<br /> lib/google/cloud/vision/annotation/properties.rb,<br /> lib/google/cloud/vision/v1/image_annotator_pb.rb,<br /> lib/google/cloud/vision/v1/text_annotation_pb.rb,<br /> lib/google/cloud/vision/annotation/safe_search.rb,<br /> lib/google/cloud/vision/v1/image_annotator_client.rb,<br /> lib/google/cloud/vision/v1/image_annotator_services_pb.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/geometry.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/web_detection.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/image_annotator.rb,<br /> lib/google/cloud/vision/v1/doc/google/cloud/vision/v1/text_annotation.rb</span>
 </dd>
   </dl>
   
@@ -75,68 +75,39 @@ js:
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <h1>Ruby Client for Cloud Vision API (<a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby#versioning">Alpha</a>)</h1>
+    <h1>Google Cloud Vision</h1>
 
-<p><a href="https://cloud.google.com/vision">Cloud Vision API</a>:
-Integrates Google Vision features, including image labeling, face, logo, and
-landmark detection, optical character recognition (OCR), and detection of
-explicit content, into applications.</p>
+<p>Google Cloud Vision allows developers to easily integrate vision
+detection features within applications, including image labeling, face
+and landmark detection, optical character recognition (OCR), and tagging
+of explicit content.</p>
 
-<ul>
-<li><a href="https://cloud.google.com/vision">Product Documentation</a></li>
-</ul>
+<p>For more information about Cloud Vision, read the <a href="https://cloud.google.com/vision/docs/">Google Cloud Vision API
+Documentation</a>.</p>
 
-<h2>Quick Start</h2>
-
-<p>In order to use this library, you first need to go through the following
-steps:</p>
-
-<ol>
-<li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
-<li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
-<li><a href="https://console.cloud.google.com/apis/api/vision">Enable the Cloud Vision API.</a></li>
-<li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
-</ol>
-
-<h3>Installation</h3>
-
-<pre class="code ruby"><code class="ruby">$ gem install google-cloud-vision
-</code></pre>
-
-<h3>Preview</h3>
-
-<h4>ImageAnnotatorClient</h4>
-
-<pre class="code rb"><code class="rb">require &quot;google/cloud/vision&quot;
-
-image_annotator_client = Google::Cloud::Vision.new
-gcs_image_uri = &quot;gs://gapic-toolkit/President_Barack_Obama.jpg&quot;
-source = { gcs_image_uri: gcs_image_uri }
-image = { source: source }
-type = :FACE_DETECTION
-features_element = { type: type }
-features = [features_element]
-requests_element = { image: image, features: features }
-requests = [requests_element]
-response = image_annotator_client.batch_annotate_images(requests)
-</code></pre>
-
-<h3>Next Steps</h3>
-
-<ul>
-<li>Read the <a href="https://cloud.google.com/vision">Cloud Vision API Product documentation</a>
-to learn more about the product and see How-to Guides.</li>
-<li>View this <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/blob/master/README.md">repository&#39;s main README</a>
-to see the full list of Cloud APIs that we cover.</li>
-</ul>
+<p>The goal of google-cloud is to provide an API that is comfortable to
+Rubyists. Your authentication credentials are detected automatically in
+Google Cloud Platform environments such as Google Compute Engine, Google
+App Engine and Google Kubernetes Engine. In other environments you can
+configure authentication easily, either directly in your code or via
+environment variables. Read more about the options for connecting in the
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/authentication">Authentication
+Guide</a>.</p>
 
 <h2>Enabling Logging</h2>
 
-<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library.
-The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below,
-or a <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a>
-that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>. See <a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a>
-and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a> for additional information.</p>
+<p>To enable logging for this library, set the logger for the underlying
+<a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library. The
+logger that you set may be a Ruby stdlib
+<a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a>
+as shown below, or a
+<a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a>
+that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver
+Logging</a>. See
+<a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a>
+and the gRPC
+<a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a>
+for additional information.</p>
 
 <p>Configuring a Ruby stdlib logger:</p>
 
@@ -153,6 +124,177 @@ and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spe
 </span><span class='kw'>module</span> <span class='const'>GRPC</span>
   <span class='id identifier rubyid_extend'>extend</span> <span class='const'>MyLogger</span>
 <span class='kw'>end</span>
+</code></pre>
+
+<h2>Creating images</h2>
+
+<p>The Cloud Vision API supports UTF-8, UTF-16, and UTF-32 text encodings.
+(Ruby uses UTF-8 natively, which is the default sent to the API, so unless
+you&#39;re working with text processed in different platform, you should not
+need to set the encoding type.)
+a ). Be aware that Cloud Vision sets upper
+limits on file size as well as on the total combined size of all images in
+a request. Reducing your file size can significantly improve throughput;
+however, be careful not to reduce image quality in the process. See <a href="https://cloud.google.com/vision/docs/best-practices#image_sizing">Best
+Practices - Image
+Sizing</a>
+for current file size limits.</p>
+
+<p>Use <span class='object_link'><a href="Vision/Project.html#image-instance_method" title="Google::Cloud::Vision::Project#image (method)">Project#image</a></span> to create images for the Cloud Vision service.
+You can provide a file path:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Or any publicly-accessible image HTTP/HTTPS URL:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.example.com/images/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Or, you can initialize the image with a Google Cloud Storage URI:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gs://bucket-name/path_to_image_object</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>Creating an Image instance does not perform an API request.</p>
+
+<h2>Annotating images</h2>
+
+<p>The instance methods on <span class='object_link'><a href="Vision/Image.html" title="Google::Cloud::Vision::Image (class)">Image</a></span> invoke Cloud Vision&#39;s detection
+features individually. Each method call makes an API request. (If you want
+to run multiple features in a single request, see the examples for
+<span class='object_link'><a href="Vision/Project.html#annotate-instance_method" title="Google::Cloud::Vision::Project#annotate (method)">Project#annotate</a></span>, below.)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_face'>face</span> <span class='op'>=</span> <span class='id identifier rubyid_image'>image</span><span class='period'>.</span><span class='id identifier rubyid_face'>face</span>
+
+<span class='id identifier rubyid_face'>face</span><span class='period'>.</span><span class='id identifier rubyid_features'>features</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 9
+</span><span class='id identifier rubyid_face'>face</span><span class='period'>.</span><span class='id identifier rubyid_features'>features</span><span class='period'>.</span><span class='id identifier rubyid_eyes'>eyes</span><span class='period'>.</span><span class='id identifier rubyid_left'>left</span><span class='period'>.</span><span class='id identifier rubyid_pupil'>pupil</span>
+<span class='comment'>#&lt;Landmark (x: 190.41544, y: 84.4557, z: -1.3682901)&gt;
+</span><span class='id identifier rubyid_face'>face</span><span class='period'>.</span><span class='id identifier rubyid_features'>features</span><span class='period'>.</span><span class='id identifier rubyid_chin'>chin</span><span class='period'>.</span><span class='id identifier rubyid_center'>center</span>
+<span class='comment'>#&lt;Landmark (x: 233.21977, y: 189.47475, z: 19.487228)&gt;
+</span></code></pre>
+
+<p>To run multiple features on an image in a single request, pass the image
+(or a string file path, publicly-accessible image HTTP/HTTPS URL, or
+Storage URI) to <span class='object_link'><a href="Vision/Project.html#annotate-instance_method" title="Google::Cloud::Vision::Project#annotate (method)">Project#annotate</a></span>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_annotation'>annotation</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>true</span>
+<span class='id identifier rubyid_annotation'>annotation</span><span class='period'>.</span><span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotation'>annotation</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 4
+</span></code></pre>
+
+<p>You can also perform detection tasks on multiple images in a single
+request:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_face_image'>face_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_landmark_image'>landmark_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_annotations'>annotations</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_face_image'>face_image</span><span class='comma'>,</span>
+                              <span class='id identifier rubyid_landmark_image'>landmark_image</span><span class='comma'>,</span>
+                              <span class='label'>faces:</span> <span class='kw'>true</span><span class='comma'>,</span>
+                              <span class='label'>landmarks:</span> <span class='kw'>true</span><span class='comma'>,</span>
+                              <span class='label'>labels:</span> <span class='kw'>true</span>
+
+<span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 0
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 4
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 6
+</span></code></pre>
+
+<p>It is even possible to configure different features for multiple images in
+a single call using a block. The following example results in a single
+request to the Cloud Vision API:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_face_image'>face_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_landmark_image'>landmark_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/landmark.jpg</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_text_image'>text_image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/text.png</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_annotations'>annotations</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_annotate'>annotate</span><span class='op'>|</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_face_image'>face_image</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>labels:</span> <span class='kw'>true</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_landmark_image'>landmark_image</span><span class='comma'>,</span> <span class='label'>landmarks:</span> <span class='kw'>true</span>
+   <span class='id identifier rubyid_annotate'>annotate</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_text_image'>text_image</span><span class='comma'>,</span> <span class='label'>text:</span> <span class='kw'>true</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_labels'>labels</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 4
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_landmarks'>landmarks</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span><span class='id identifier rubyid_annotations'>annotations</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span></code></pre>
+
+<p>The maximum number of results returned when performing face, landmark,
+logo, and label detection are defined by
+<span class='object_link'><a href="#default_max_faces-class_method" title="Google::Cloud::Vision.default_max_faces (method)">Vision.default_max_faces</a></span>,
+<span class='object_link'><a href="#default_max_landmarks-class_method" title="Google::Cloud::Vision.default_max_landmarks (method)">Vision.default_max_landmarks</a></span>,
+<span class='object_link'><a href="#default_max_logos-class_method" title="Google::Cloud::Vision.default_max_logos (method)">Vision.default_max_logos</a></span>, and
+<span class='object_link'><a href="#default_max_labels-class_method" title="Google::Cloud::Vision.default_max_labels (method)">Vision.default_max_labels</a></span>, respectively. To change the
+global defaults, you can update the configuration:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_default_max_faces'><span class='object_link'><a href="#default_max_faces-class_method" title="Google::Cloud::Vision.default_max_faces (method)">default_max_faces</a></span></span> <span class='op'>=</span> <span class='int'>1</span>
+
+<span class='id identifier rubyid_annotation'>annotation</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='kw'>true</span>
+<span class='id identifier rubyid_annotation'>annotation</span><span class='period'>.</span><span class='id identifier rubyid_faces'>faces</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='comment'>#=&gt; 1
+</span></code></pre>
+
+<p>Or, to override a default for a single method call, simply pass an
+integer instead of a flag:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_image'>image</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>path/to/face.jpg</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Return just one face.
+</span><span class='id identifier rubyid_annotation'>annotation</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='int'>1</span>
+<span class='comment'># Return up to 5 faces.
+</span><span class='id identifier rubyid_annotation'>annotation</span> <span class='op'>=</span> <span class='id identifier rubyid_vision'>vision</span><span class='period'>.</span><span class='id identifier rubyid_annotate'>annotate</span> <span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='label'>faces:</span> <span class='int'>5</span>
+</code></pre>
+
+<h2>Configuring timeout</h2>
+
+<p>You can configure the request <code>timeout</code> value in seconds.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_vision'>vision</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'>Vision</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span> <span class='label'>timeout:</span> <span class='int'>120</span>
 </code></pre>
 
 

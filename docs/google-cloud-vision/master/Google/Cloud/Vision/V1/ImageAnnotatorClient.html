@@ -1112,9 +1112,9 @@ custom error handling.</p>
 </span>  <span class='comment'># @return [Google::Cloud::Vision::V1::BatchAnnotateImagesResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/vision&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/vision/v1&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   image_annotator_client = Google::Cloud::Vision.new(version: :v1)
+</span>  <span class='comment'>#   image_annotator_client = Google::Cloud::Vision::V1.new
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +requests+:
 </span>  <span class='comment'>#   requests = []
@@ -1148,9 +1148,9 @@ custom error handling.</p>
 </span>  <span class='comment'># @return [Google::Gax::Operation]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/vision&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/vision/v1&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   image_annotator_client = Google::Cloud::Vision.new(version: :v1)
+</span>  <span class='comment'>#   image_annotator_client = Google::Cloud::Vision::V1.new
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +requests+:
 </span>  <span class='comment'>#   requests = []
@@ -1239,9 +1239,9 @@ images per page. Progress and results can be retrieved through the
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision/v1</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
 
 <span class='comment'># TODO: Initialize +requests+:
 </span><span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1414,9 +1414,9 @@ retries, etc.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/vision/v1</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_image_annotator_client'>image_annotator_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Vision.html" title="Google::Cloud::Vision (module)">Vision</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Vision::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Vision.html#new-class_method" title="Google::Cloud::Vision.new (method)">new</a></span></span>
 
 <span class='comment'># TODO: Initialize +requests+:
 </span><span class='id identifier rubyid_requests'>requests</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
