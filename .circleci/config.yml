@@ -12,7 +12,6 @@ jobs:
         name: Install bundle
         command: gem update --system && gem install bundler && bundle update
     - run: bundle exec rake circleci:build
-    - run: bundle exec rake circleci:post
 
   test-ruby-2.4:
     docker:
@@ -25,7 +24,6 @@ jobs:
         name: Install bundle
         command: gem update --system && gem install bundler && bundle update
     - run: bundle exec rake circleci:build
-    - run: bundle exec rake test:coveralls
 
   test-ruby-2.3:
     docker:
@@ -38,6 +36,18 @@ jobs:
         name: Install bundle
         command: gem update --system && gem install bundler && bundle update
     - run: bundle exec rake circleci:build
+
+  post:
+    docker:
+    - image: circleci/ruby:2.5.1-stretch
+    working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
+    shell: /bin/bash --login -eo pipefail
+    steps:
+    - checkout
+    - run:
+        name: Install bundle
+        command: gem update --system && gem install bundler && bundle update
+    - run: bundle exec rake circleci:post
 
   release:
     working_directory: ~/GoogleCloudPlatform/google-cloud-ruby
@@ -68,6 +78,13 @@ workflows:
           <<: *test-filters
       - test-ruby-2.3:
           <<: *test-filters
+
+  post-build:
+    jobs:
+      - post:
+          filters:
+            branches:
+              only: master
 
   gem-release:
     jobs:
