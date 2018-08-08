@@ -219,7 +219,6 @@ js:
       <pre class="lines">
 
 
-58
 59
 60
 61
@@ -238,10 +237,12 @@ js:
 74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 59</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform (class)">DocumentTransform</a></span></span>
   <span class='comment'># A transformation of a field of the document.
@@ -258,7 +259,8 @@ js:
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>SERVER_VALUE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># The time at which the server processed the request.
+      <span class='comment'># The time at which the server processed the request, with millisecond
+</span>      <span class='comment'># precision.
 </span>      <span class='const'>REQUEST_TIME</span> <span class='op'>=</span> <span class='int'>1</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
@@ -282,7 +284,8 @@ js:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns The list of transformations to apply to the fields of the document, in
-order.</p>
+order.
+This must not be empty.</p>
 
 
   </div>
@@ -301,7 +304,8 @@ order.</p>
       
         &mdash;
         <div class='inline'><p>The list of transformations to apply to the fields of the document, in
-order.</p>
+order.
+This must not be empty.</p>
 </div>
       
     </li>
@@ -314,7 +318,6 @@ order.</p>
       <pre class="lines">
 
 
-58
 59
 60
 61
@@ -333,10 +336,12 @@ order.</p>
 74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 59</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform (class)">DocumentTransform</a></span></span>
   <span class='comment'># A transformation of a field of the document.
@@ -353,7 +358,8 @@ order.</p>
       <span class='comment'># Unspecified. This value must not be used.
 </span>      <span class='const'>SERVER_VALUE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
 
-      <span class='comment'># The time at which the server processed the request.
+      <span class='comment'># The time at which the server processed the request, with millisecond
+</span>      <span class='comment'># precision.
 </span>      <span class='const'>REQUEST_TIME</span> <span class='op'>=</span> <span class='int'>1</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>

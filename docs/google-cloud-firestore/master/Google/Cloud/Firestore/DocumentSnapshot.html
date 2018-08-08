@@ -96,6 +96,9 @@ document in a Cloud Firestore database.</p>
 
 <p>The snapshot can reference a non-existing document.</p>
 
+<p>See <span class='object_link'><a href="DocumentReference.html#get-instance_method" title="Google::Cloud::Firestore::DocumentReference#get (method)">Google::Cloud::Firestore::DocumentReference#get</a></span>, <span class='object_link'><a href="DocumentReference.html#listen-instance_method" title="Google::Cloud::Firestore::DocumentReference#listen (method)">Google::Cloud::Firestore::DocumentReference#listen</a></span>,
+<span class='object_link'><a href="Query.html#get-instance_method" title="Google::Cloud::Firestore::Query#get (method)">Query#get</a></span>, <span class='object_link'><a href="Query.html#listen-instance_method" title="Google::Cloud::Firestore::Query#listen (method)">Query#listen</a></span>, and <span class='object_link'><a href="QuerySnapshot.html#docs-instance_method" title="Google::Cloud::Firestore::QuerySnapshot#docs (method)">QuerySnapshot#docs</a></span>.</p>
+
 
   </div>
 </div>
@@ -114,6 +117,25 @@ document in a Cloud Firestore database.</p>
 
 <span class='comment'># Get the document data
 </span><span class='id identifier rubyid_nyc_snap'>nyc_snap</span><span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span> <span class='comment'>#=&gt; 1000000</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'><p>Listen to a document reference for changes:</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Get a document reference
+</span><span class='id identifier rubyid_nyc_ref'>nyc_ref</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_doc'>doc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cities/NYC</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_listener'>listener</span> <span class='op'>=</span> <span class='id identifier rubyid_nyc_ref'>nyc_ref</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_snapshot'>snapshot</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The population of </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_snapshot'>snapshot</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>is </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_snapshot'>snapshot</span><span class='lbracket'>[</span><span class='symbol'>:population</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='comment'># When ready, stop the listen operation and close the stream.
+</span><span class='id identifier rubyid_listener'>listener</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span></code></pre>
     
   </div>
 
@@ -193,7 +215,7 @@ document in a Cloud Firestore database.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#data-instance_method" title="#data (instance method)">#<strong>data</strong>  &#x21d2; Hash </a>
+      <a href="#data-instance_method" title="#data (instance method)">#<strong>data</strong>  &#x21d2; Hash<sup>?</sup> </a>
     
 
     
@@ -473,13 +495,13 @@ document in a Cloud Firestore database.</p>
       <pre class="lines">
 
 
-218
-219
-220
-221</pre>
+241
+242
+243
+244</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 218</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 241</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_created_at'>created_at</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_missing?'>missing?</span>
@@ -493,7 +515,7 @@ document in a Cloud Firestore database.</p>
       <div class="method_details ">
   <h3 class="signature " id="data-instance_method">
   
-    #<strong>data</strong>  &#x21d2; <tt>Hash</tt> 
+    #<strong>data</strong>  &#x21d2; <tt>Hash</tt><sup>?</sup> 
   
 
   
@@ -505,7 +527,9 @@ document in a Cloud Firestore database.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the document data.</p>
+    <p>Retrieves the document data. When the document exists the data hash is
+frozen and will not allow any changes. When the document does not
+exist <code>nil</code> will be returned.</p>
 
 
   </div>
@@ -533,7 +557,7 @@ document in a Cloud Firestore database.</p>
     <li>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Hash</tt>, <tt>nil</tt>)</span>
       
       
       
@@ -551,17 +575,17 @@ document in a Cloud Firestore database.</p>
       <pre class="lines">
 
 
-135
-136
-137
-138</pre>
+157
+158
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data'>data</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_missing?'>missing?</span>
-  <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_fields_to_hash'>fields_to_hash</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='period'>.</span><span class='id identifier rubyid_fields'>fields</span><span class='comma'>,</span> <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span>
+  <span class='ivar'>@data</span> <span class='op'>||=</span> <span class='const'>Convert</span><span class='period'>.</span><span class='id identifier rubyid_fields_to_hash'>fields_to_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_grpc'>grpc</span><span class='period'>.</span><span class='id identifier rubyid_fields'>fields</span><span class='comma'>,</span> <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_client'>client</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -610,12 +634,12 @@ document in a Cloud Firestore database.</p>
       <pre class="lines">
 
 
-52
-53
-54</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_document_id'>document_id</span>
   <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_document_id'>document_id</span>
@@ -668,12 +692,12 @@ document root of the database.</p>
       <pre class="lines">
 
 
-61
-62
-63</pre>
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_document_path'>document_path</span>
   <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_document_path'>document_path</span>
@@ -740,12 +764,12 @@ document root of the database.</p>
       <pre class="lines">
 
 
-265
-266
-267</pre>
+288
+289
+290</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 288</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_exists?'>exists?</span>
   <span class='op'>!</span><span class='id identifier rubyid_missing?'>missing?</span>
@@ -875,27 +899,28 @@ string, and should provided using a <span class='object_link'><a href="FieldPath
       <pre class="lines">
 
 
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206</pre>
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 189</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get'>get</span> <span class='id identifier rubyid_field_path'>field_path</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_field_path'>field_path</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="FieldPath.html" title="Google::Cloud::Firestore::FieldPath (class)">FieldPath</a></span></span>
@@ -903,8 +928,9 @@ string, and should provided using a <span class='object_link'><a href="FieldPath
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>=</span> <span class='id identifier rubyid_field_path'>field_path</span><span class='period'>.</span><span class='id identifier rubyid_fields'>fields</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_sym</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_selected_data'>selected_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_ref'>ref</span> <span class='kw'>if</span> <span class='id identifier rubyid_nodes'>nodes</span> <span class='op'>==</span> <span class='lbracket'>[</span><span class='symbol'>:__name__</span><span class='rbracket'>]</span>
 
+  <span class='id identifier rubyid_selected_data'>selected_data</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span>
   <span class='id identifier rubyid_nodes'>nodes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node'>node</span><span class='op'>|</span>
     <span class='kw'>unless</span> <span class='id identifier rubyid_selected_data'>selected_data</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Hash</span>
       <span class='id identifier rubyid_err_msg'>err_msg</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_field_path'>field_path</span><span class='period'>.</span><span class='id identifier rubyid_formatted_string'>formatted_string</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not </span><span class='tstring_end'>&quot;</span></span> \
@@ -977,12 +1003,12 @@ string, and should provided using a <span class='object_link'><a href="FieldPath
       <pre class="lines">
 
 
-284
-285
-286</pre>
+307
+308
+309</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 307</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_missing?'>missing?</span>
   <span class='id identifier rubyid_grpc'>grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1050,12 +1076,12 @@ string, and should provided using a <span class='object_link'><a href="FieldPath
       <pre class="lines">
 
 
-112
-113
-114</pre>
+132
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parent'>parent</span>
   <span class='id identifier rubyid_ref'>ref</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span>
@@ -1113,12 +1139,12 @@ string, and should provided using a <span class='object_link'><a href="FieldPath
       <pre class="lines">
 
 
-245
-246
-247</pre>
+268
+269
+270</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 268</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_at'>read_at</span>
   <span class='ivar'>@read_at</span>
@@ -1190,12 +1216,12 @@ string, and should provided using a <span class='object_link'><a href="FieldPath
       <pre class="lines">
 
 
-91
-92
-93</pre>
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ref'>ref</span>
   <span class='ivar'>@ref</span>
@@ -1254,13 +1280,13 @@ and increases each time the document is updated.</p>
       <pre class="lines">
 
 
-232
-233
-234
-235</pre>
+255
+256
+257
+258</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 232</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/document_snapshot.rb', line 255</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_updated_at'>updated_at</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_missing?'>missing?</span>

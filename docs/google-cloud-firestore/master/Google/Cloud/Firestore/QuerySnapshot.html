@@ -1,0 +1,687 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Firestore::QuerySnapshot - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Firestore::QuerySnapshot";
+  relpath = '../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../_index.html">Index (Q)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span>
+     &raquo; 
+    <span class="title">QuerySnapshot</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Firestore::QuerySnapshot
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Firestore::QuerySnapshot</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/firestore/query_snapshot.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <h1>QuerySnapshot</h1>
+
+<p>A query snapshot object is an immutable representation of query results,
+including chnages from the previous snapshot.</p>
+
+<p>See <span class='object_link'><a href="Query.html#listen-instance_method" title="Google::Cloud::Firestore::Query#listen (method)">Google::Cloud::Firestore::Query#listen</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/firestore</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_firestore'>firestore</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Firestore.html" title="Google::Cloud::Firestore (module)">Firestore</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Firestore.html#new-class_method" title="Google::Cloud::Firestore.new (method)">new</a></span></span>
+
+<span class='comment'># Create a query
+</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='id identifier rubyid_firestore'>firestore</span><span class='period'>.</span><span class='id identifier rubyid_col'>col</span><span class='lparen'>(</span><span class='symbol'>:cities</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='symbol'>:population</span><span class='comma'>,</span> <span class='symbol'>:desc</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_listener'>listener</span> <span class='op'>=</span> <span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_snapshot'>snapshot</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The query snapshot has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_snapshot'>snapshot</span><span class='period'>.</span><span class='id identifier rubyid_docs'>docs</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='embexpr_end'>}</span><span class='tstring_content'> documents </span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>and has </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_snapshot'>snapshot</span><span class='period'>.</span><span class='id identifier rubyid_changes'>changes</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='embexpr_end'>}</span><span class='tstring_content'> changes.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+
+<span class='comment'># When ready, stop the listen operation and close the stream.
+</span><span class='id identifier rubyid_listener'>listener</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span></code></pre>
+    
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#changes-instance_method" title="#changes (instance method)">#<strong>changes</strong>  &#x21d2; Array&lt;DocumentChange&gt; </a>
+    
+
+    
+      (also: #doc_changes, #document_changes)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The document change objects for the query snapshot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#docs-instance_method" title="#docs (instance method)">#<strong>docs</strong>  &#x21d2; Array&lt;DocumentSnapshot&gt; </a>
+    
+
+    
+      (also: #documents)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The documents in the snapshot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#empty%3F-instance_method" title="#empty? (instance method)">#<strong>empty?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Determines whether query results exists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query-instance_method" title="#query (instance method)">#<strong>query</strong>  &#x21d2; Query </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The query producing this snapshot.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_at-instance_method" title="#read_at (instance method)">#<strong>read_at</strong>  &#x21d2; Time </a>
+    
+
+    
+      (also: #read_time)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The time at which the snapshot was read.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size-instance_method" title="#size (instance method)">#<strong>size</strong>  &#x21d2; Integer </a>
+    
+
+    
+      (also: #count)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the number of documents in this query snapshot.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="changes-instance_method">
+  
+    #<strong>changes</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="DocumentChange.html" title="Google::Cloud::Firestore::DocumentChange (class)">DocumentChange</a></span>&gt;</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='doc_changes-instance_method'>doc_changes</span>, <span id='document_changes-instance_method'>document_changes</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The document change objects for the query snapshot.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="DocumentChange.html" title="Google::Cloud::Firestore::DocumentChange (class)">DocumentChange</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>document changes.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/query_snapshot.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_changes'>changes</span>
+  <span class='ivar'>@changes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="docs-instance_method">
+  
+    #<strong>docs</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span>&gt;</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='documents-instance_method'>documents</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The documents in the snapshot.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="DocumentSnapshot.html" title="Google::Cloud::Firestore::DocumentSnapshot (class)">DocumentSnapshot</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>document snapshots.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/query_snapshot.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_docs'>docs</span>
+  <span class='ivar'>@docs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="empty?-instance_method">
+  
+    #<strong>empty?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Determines whether query results exists.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Whether query results exists.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/query_snapshot.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_empty?'>empty?</span>
+  <span class='id identifier rubyid_docs'>docs</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query-instance_method">
+  
+    #<strong>query</strong>  &#x21d2; <tt><span class='object_link'><a href="Query.html" title="Google::Cloud::Firestore::Query (class)">Query</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The query producing this snapshot.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Query.html" title="Google::Cloud::Firestore::Query (class)">Query</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/query_snapshot.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span>
+  <span class='ivar'>@query</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_at-instance_method">
+  
+    #<strong>read_at</strong>  &#x21d2; <tt>Time</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='read_time-instance_method'>read_time</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The time at which the snapshot was read.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The time at which the documents were read.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/query_snapshot.rb', line 103</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_at'>read_at</span>
+  <span class='ivar'>@read_at</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="size-instance_method">
+  
+    #<strong>size</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='count-instance_method'>count</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the number of documents in this query snapshot.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The number of documents.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/query_snapshot.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_size'>size</span>
+  <span class='id identifier rubyid_docs'>docs</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
