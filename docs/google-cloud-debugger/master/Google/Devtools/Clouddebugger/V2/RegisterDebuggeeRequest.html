@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse - Stackdriver"
+title: "Class: Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest - Stackdriver"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/docs.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse";
+  pathId = "Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest";
   relpath = '../../../../';
 </script>
 
@@ -24,10 +24,10 @@ js:
   <div id="header">
     <div id="menu">
   
-    <a href="../../../../_index.html">Index (L)</a> &raquo;
+    <a href="../../../../_index.html">Index (R)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span>
      &raquo; 
-    <span class="title">ListDebuggeesResponse</span>
+    <span class="title">RegisterDebuggeeRequest</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse
+  <div id="content"><h1>Class: Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse</li>
+            <li class="next">Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -82,14 +82,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/debugger.rb</dd>
+    <dd>lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/controller.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Response for listing debuggees.</p>
+    <p>Request to register a debuggee.</p>
 
 
   </div>
@@ -107,7 +107,7 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#debuggees-instance_method" title="#debuggees (instance method)">#<strong>debuggees</strong>  &#x21d2; Array&lt;Google::Devtools::Clouddebugger::V2::Debuggee&gt; </a>
+      <a href="#debuggee-instance_method" title="#debuggee (instance method)">#<strong>debuggee</strong>  &#x21d2; Google::Devtools::Clouddebugger::V2::Debuggee </a>
     
 
     
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>List of debuggees accessible to the calling user.</p>
+    <span class="summary_desc"><div class='inline'><p>Debuggee information to register.</p>
 </div></span>
   
 </li>
@@ -140,11 +140,11 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="debuggees=-instance_method"></span>
+      <span id="debuggee=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="debuggees-instance_method">
+  <h3 class="signature first" id="debuggee-instance_method">
   
-    #<strong>debuggees</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Debuggee.html" title="Google::Devtools::Clouddebugger::V2::Debuggee (class)">Google::Devtools::Clouddebugger::V2::Debuggee</a></span>&gt;</tt> 
+    #<strong>debuggee</strong>  &#x21d2; <tt><span class='object_link'><a href="Debuggee.html" title="Google::Devtools::Clouddebugger::V2::Debuggee (class)">Google::Devtools::Clouddebugger::V2::Debuggee</a></span></tt> 
   
 
   
@@ -152,10 +152,9 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns List of debuggees accessible to the calling user.
-The fields +debuggee.id+ and +description+ are guaranteed to be set.
-The +description+ field is a human readable field provided by agents and
-can be displayed to users.</p>
+    <p>Returns Debuggee information to register.
+The fields +project+, +uniquifier+, +description+ and +agent_version+
+of the debuggee must be set.</p>
 
 
   </div>
@@ -168,15 +167,14 @@ can be displayed to users.</p>
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Debuggee.html" title="Google::Devtools::Clouddebugger::V2::Debuggee (class)">Google::Devtools::Clouddebugger::V2::Debuggee</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Debuggee.html" title="Google::Devtools::Clouddebugger::V2::Debuggee (class)">Google::Devtools::Clouddebugger::V2::Debuggee</a></span></tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>List of debuggees accessible to the calling user.
-The fields +debuggee.id+ and +description+ are guaranteed to be set.
-The +description+ field is a human readable field provided by agents and
-can be displayed to users.</p>
+        <div class='inline'><p>Debuggee information to register.
+The fields +project+, +uniquifier+, +description+ and +agent_version+
+of the debuggee must be set.</p>
 </div>
       
     </li>
@@ -189,12 +187,12 @@ can be displayed to users.</p>
       <pre class="lines">
 
 
-157</pre>
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/debugger.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/controller.rb', line 36</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::ListDebuggeesResponse (class)">ListDebuggeesResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest (class)">RegisterDebuggeeRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

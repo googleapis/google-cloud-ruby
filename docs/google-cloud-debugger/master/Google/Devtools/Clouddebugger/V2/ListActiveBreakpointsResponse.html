@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Class: Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse - Stackdriver"
+title: "Class: Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse - Stackdriver"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/docs.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse";
+  pathId = "Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse";
   relpath = '../../../../';
 </script>
 
@@ -27,7 +27,7 @@ js:
     <a href="../../../../_index.html">Index (L)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span>
      &raquo; 
-    <span class="title">ListBreakpointsResponse</span>
+    <span class="title">ListActiveBreakpointsResponse</span>
   
 </div>
 
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Class: Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse
+  <div id="content"><h1>Class: Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse
   
   
   
@@ -62,7 +62,7 @@ js:
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse</li>
+            <li class="next">Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -82,14 +82,14 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/debugger.rb</dd>
+    <dd>lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/controller.rb</dd>
   </dl>
   
 </div>
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Response for listing breakpoints.</p>
+    <p>Response for listing active breakpoints.</p>
 
 
   </div>
@@ -124,7 +124,7 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>List of breakpoints matching the request.</p>
+    <span class="summary_desc"><div class='inline'><p>List of all active breakpoints.</p>
 </div></span>
   
 </li>
@@ -150,7 +150,33 @@ js:
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A wait token that can be used in the next call to +list+ (REST) or +ListBreakpoints+ (RPC) to block until the list of breakpoints has changes.</p>
+    <span class="summary_desc"><div class='inline'><p>A token that can be used in the next method call to block until the list of breakpoints changes.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_expired-instance_method" title="#wait_expired (instance method)">#<strong>wait_expired</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to +true+, indicates that there is no change to the list of active breakpoints and the server-selected timeout has expired.</p>
 </div></span>
   
 </li>
@@ -178,10 +204,8 @@ js:
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns List of breakpoints matching the request.
-The fields +id+ and +location+ are guaranteed to be set on each breakpoint.
-The fields: +stack_frames+, +evaluated_expressions+ and +variable_table+
-are cleared on each breakpoint regardless of its status.</p>
+    <p>Returns List of all active breakpoints.
+The fields +id+ and +location+ are guaranteed to be set on each breakpoint.</p>
 
 
   </div>
@@ -199,10 +223,8 @@ are cleared on each breakpoint regardless of its status.</p>
       
       
         &mdash;
-        <div class='inline'><p>List of breakpoints matching the request.
-The fields +id+ and +location+ are guaranteed to be set on each breakpoint.
-The fields: +stack_frames+, +evaluated_expressions+ and +variable_table+
-are cleared on each breakpoint regardless of its status.</p>
+        <div class='inline'><p>List of all active breakpoints.
+The fields +id+ and +location+ are guaranteed to be set on each breakpoint.</p>
 </div>
       
     </li>
@@ -215,12 +237,12 @@ are cleared on each breakpoint regardless of its status.</p>
       <pre class="lines">
 
 
-134</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/debugger.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/controller.rb', line 82</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse (class)">ListBreakpointsResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse (class)">ListActiveBreakpointsResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -239,8 +261,8 @@ are cleared on each breakpoint regardless of its status.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns A wait token that can be used in the next call to +list+ (REST) or
-+ListBreakpoints+ (RPC) to block until the list of breakpoints has changes.</p>
+    <p>Returns A token that can be used in the next method call to block until
+the list of breakpoints changes.</p>
 
 
   </div>
@@ -258,8 +280,8 @@ are cleared on each breakpoint regardless of its status.</p>
       
       
         &mdash;
-        <div class='inline'><p>A wait token that can be used in the next call to +list+ (REST) or
-+ListBreakpoints+ (RPC) to block until the list of breakpoints has changes.</p>
+        <div class='inline'><p>A token that can be used in the next method call to block until
+the list of breakpoints changes.</p>
 </div>
       
     </li>
@@ -272,12 +294,71 @@ are cleared on each breakpoint regardless of its status.</p>
       <pre class="lines">
 
 
-134</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/debugger.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/controller.rb', line 82</span>
 
-<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::ListBreakpointsResponse (class)">ListBreakpointsResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse (class)">ListActiveBreakpointsResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="wait_expired=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="wait_expired-instance_method">
+  
+    #<strong>wait_expired</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If set to +true+, indicates that there is no change to the
+list of active breakpoints and the server-selected timeout has expired.
+The +breakpoints+ field would be empty and should be ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If set to +true+, indicates that there is no change to the
+list of active breakpoints and the server-selected timeout has expired.
+The +breakpoints+ field would be empty and should be ignored.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/doc/google/devtools/clouddebugger/v2/controller.rb', line 82</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse (class)">ListActiveBreakpointsResponse</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>

@@ -155,6 +155,21 @@ service.</p>
         </dt>
         <dd><pre class="code"><span class='int'>443</span></pre></dd>
       
+        <dt id="GRPC_INTERCEPTORS-constant" class="">GRPC_INTERCEPTORS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The default set of gRPC interceptors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='rbracket'>]</span></pre></dd>
+      
         <dt id="DEFAULT_TIMEOUT-constant" class="">DEFAULT_TIMEOUT =
           
         </dt>
@@ -231,7 +246,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(service_path: SERVICE_ADDRESS, port: DEFAULT_SERVICE_PORT, channel: nil, chan_creds: nil, updater_proc: nil, credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; Controller2Client </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; Controller2Client </a>
     
 
     
@@ -256,7 +271,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#list_active_breakpoints-instance_method" title="#list_active_breakpoints (instance method)">#<strong>list_active_breakpoints</strong>(debuggee_id, wait_token: nil, success_on_timeout: nil, options: nil)  &#x21d2; Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse </a>
+      <a href="#list_active_breakpoints-instance_method" title="#list_active_breakpoints (instance method)">#<strong>list_active_breakpoints</strong>(debuggee_id, wait_token: nil, success_on_timeout: nil, options: nil) {|result, operation| ... } &#x21d2; Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse </a>
     
 
     
@@ -279,7 +294,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#register_debuggee-instance_method" title="#register_debuggee (instance method)">#<strong>register_debuggee</strong>(debuggee, options: nil)  &#x21d2; Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse </a>
+      <a href="#register_debuggee-instance_method" title="#register_debuggee (instance method)">#<strong>register_debuggee</strong>(debuggee, options: nil) {|result, operation| ... } &#x21d2; Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse </a>
     
 
     
@@ -302,7 +317,7 @@ this service.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update_active_breakpoint-instance_method" title="#update_active_breakpoint (instance method)">#<strong>update_active_breakpoint</strong>(debuggee_id, breakpoint, options: nil)  &#x21d2; Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse </a>
+      <a href="#update_active_breakpoint-instance_method" title="#update_active_breakpoint (instance method)">#<strong>update_active_breakpoint</strong>(debuggee_id, breakpoint, options: nil) {|result, operation| ... } &#x21d2; Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse </a>
     
 
     
@@ -331,7 +346,7 @@ this service.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(service_path: SERVICE_ADDRESS, port: DEFAULT_SERVICE_PORT, channel: nil, chan_creds: nil, updater_proc: nil, credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::V2::Controller2Client (class)">Controller2Client</a></span></tt> 
+    #<strong>initialize</strong>(credentials: nil, scopes: ALL_SCOPES, client_config: {}, timeout: DEFAULT_TIMEOUT, metadata: nil, exception_transformer: nil, lib_name: nil, lib_version: &quot;&quot;)  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Debugger::V2::Controller2Client (class)">Controller2Client</a></span></tt> 
   
 
   
@@ -424,6 +439,37 @@ or the specified config is missing data points.</p>
       
     </li>
   
+    <li>
+      
+        <span class='name'>metadata</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Default metadata to be sent with each request. This can be overridden on a per call basis.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exception_transformer</span>
+      
+      
+        <span class='type'>(<tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional proc that intercepts any exceptions raised during an API call to inject
+custom error handling.</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 
@@ -433,12 +479,6 @@ or the specified config is missing data points.</p>
       <pre class="lines">
 
 
-102
-103
-104
-105
-106
-107
 108
 109
 110
@@ -523,21 +563,22 @@ or the specified config is missing data points.</p>
 189
 190
 191
-192</pre>
+192
+193
+194
+195
+196</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-    <span class='label'>service_path:</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Debugger::V2::Controller2Client::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span><span class='comma'>,</span>
-    <span class='label'>port:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span><span class='comma'>,</span>
-    <span class='label'>channel:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>chan_creds:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>updater_proc:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Debugger::V2::Controller2Client::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+    <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
   <span class='comment'># These require statements are intentionally placed here to initialize
@@ -546,21 +587,10 @@ or the specified config is missing data points.</p>
 </span>  <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/devtools/clouddebugger/v2/controller_services_pb</span><span class='tstring_end'>&quot;</span></span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_channel'>channel</span> <span class='op'>||</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>||</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The `channel`, `chan_creds`, and `updater_proc` parameters will be removed </span><span class='tstring_end'>&quot;</span></span> \
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>on 2017/09/08</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_channel'>channel</span>
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span>
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span>
-  <span class='kw'>end</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Debugger::V2::Controller2Client::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>||</span> <span class='id identifier rubyid_port'>port</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span>
-    <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`service_path` and `port` parameters are deprecated and will be removed</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Debugger::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+  <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Debugger::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Debugger::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+    <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Debugger::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
@@ -575,13 +605,16 @@ or the specified config is missing data points.</p>
     <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
   <span class='kw'>end</span>
 
+  <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-debugger</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/0.1.0 gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
   <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>controller2_client_config.json</span><span class='tstring_end'>&quot;</span></span>
   <span class='rparen'>)</span>
@@ -593,9 +626,14 @@ or the specified config is missing data points.</p>
       <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
       <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
       <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-      <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+      <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
     <span class='rparen'>)</span>
   <span class='kw'>end</span>
+
+  <span class='comment'># Allow overriding the service path/port in subclasses.
+</span>  <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+  <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+  <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
   <span class='ivar'>@controller2_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
     <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
     <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
@@ -603,20 +641,24 @@ or the specified config is missing data points.</p>
     <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
     <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
     <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>Controller2</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
   <span class='rparen'>)</span>
 
   <span class='ivar'>@register_debuggee</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:register_debuggee</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>register_debuggee</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>register_debuggee</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@list_active_breakpoints</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_active_breakpoints</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_active_breakpoints</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_active_breakpoints</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
   <span class='ivar'>@update_active_breakpoint</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
     <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_active_breakpoint</span><span class='rparen'>)</span><span class='comma'>,</span>
-    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_active_breakpoint</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_active_breakpoint</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+    <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -668,6 +710,9 @@ or the specified config is missing data points.</p>
       <pre class="lines">
 
 
+57
+58
+59
 60
 61
 62
@@ -938,10 +983,34 @@ or the specified config is missing data points.</p>
 327
 328
 329
-330</pre>
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 57</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Debugger::V2::Controller2Client (class)">Controller2Client</a></span></span>
   <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='symbol'>:controller2_stub</span>
@@ -952,6 +1021,9 @@ or the specified config is missing data points.</p>
   <span class='comment'># The default port of the service.
 </span>  <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span> <span class='op'>=</span> <span class='int'>443</span>
 
+  <span class='comment'># The default set of gRPC interceptors.
+</span>  <span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Debugger::V2::Controller2Client::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+
   <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span> <span class='op'>=</span> <span class='int'>30</span>
 
   <span class='comment'># The scopes needed to make gRPC calls to all of the methods defined in
@@ -960,6 +1032,7 @@ or the specified config is missing data points.</p>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud_debugger</span><span class='tstring_end'>&quot;</span></span>
   <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
+
 
   <span class='comment'># @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
 </span>  <span class='comment'>#   Provides the means for authenticating requests made by the client. This parameter can
@@ -985,16 +1058,18 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'>#   or the specified config is missing data points.
 </span>  <span class='comment'># @param timeout [Numeric]
 </span>  <span class='comment'>#   The default timeout, in seconds, for calls made through this client.
+</span>  <span class='comment'># @param metadata [Hash]
+</span>  <span class='comment'>#   Default metadata to be sent with each request. This can be overridden on a per call basis.
+</span>  <span class='comment'># @param exception_transformer [Proc]
+</span>  <span class='comment'>#   An optional proc that intercepts any exceptions raised during an API call to inject
+</span>  <span class='comment'>#   custom error handling.
 </span>  <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
-      <span class='label'>service_path:</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Debugger::V2::Controller2Client::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span><span class='comma'>,</span>
-      <span class='label'>port:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span><span class='comma'>,</span>
-      <span class='label'>channel:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>chan_creds:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>updater_proc:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='const'><span class='object_link'><a href="#ALL_SCOPES-constant" title="Google::Cloud::Debugger::V2::Controller2Client::ALL_SCOPES (constant)">ALL_SCOPES</a></span></span><span class='comma'>,</span>
       <span class='label'>client_config:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span>
       <span class='label'>timeout:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_TIMEOUT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_TIMEOUT (constant)">DEFAULT_TIMEOUT</a></span></span><span class='comma'>,</span>
+      <span class='label'>metadata:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>lib_version:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
     <span class='comment'># These require statements are intentionally placed here to initialize
@@ -1003,21 +1078,10 @@ or the specified config is missing data points.</p>
 </span>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/gax/grpc</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/devtools/clouddebugger/v2/controller_services_pb</span><span class='tstring_end'>&quot;</span></span>
 
-    <span class='kw'>if</span> <span class='id identifier rubyid_channel'>channel</span> <span class='op'>||</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span> <span class='op'>||</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span>
-      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The `channel`, `chan_creds`, and `updater_proc` parameters will be removed </span><span class='tstring_end'>&quot;</span></span> \
-        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>on 2017/09/08</span><span class='tstring_end'>&quot;</span></span>
-      <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_channel'>channel</span>
-      <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_chan_creds'>chan_creds</span>
-      <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Debugger::V2::Controller2Client::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>||</span> <span class='id identifier rubyid_port'>port</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="#DEFAULT_SERVICE_PORT-constant" title="Google::Cloud::Debugger::V2::Controller2Client::DEFAULT_SERVICE_PORT (constant)">DEFAULT_SERVICE_PORT</a></span></span>
-      <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`service_path` and `port` parameters are deprecated and will be removed</span><span class='tstring_end'>&quot;</span></span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Debugger::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+    <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Debugger::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
     <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Debugger::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../Debugger.html#new-class_method" title="Google::Cloud::Debugger.new (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
+      <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Debugger::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_credentials'>credentials</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
     <span class='kw'>end</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>Core</span><span class='op'>::</span><span class='const'>Channel</span><span class='rparen'>)</span>
       <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span>
@@ -1032,13 +1096,16 @@ or the specified config is missing data points.</p>
       <span class='id identifier rubyid_updater_proc'>updater_proc</span> <span class='op'>=</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='period'>.</span><span class='id identifier rubyid_updater_proc'>updater_proc</span>
     <span class='kw'>end</span>
 
+    <span class='id identifier rubyid_package_version'>package_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_loaded_specs'>loaded_specs</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>google-cloud-debugger</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span>
+
     <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gl-ruby/</span><span class='embexpr_beg'>#{</span><span class='const'>RUBY_VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_name'>lib_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_lib_version'>lib_version</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_lib_name'>lib_name</span>
-    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/0.1.0 gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> gapic/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_package_version'>package_version</span><span class='embexpr_end'>}</span><span class='tstring_content'> gax/</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> grpc/</span><span class='embexpr_beg'>#{</span><span class='const'>GRPC</span><span class='op'>::</span><span class='const'>VERSION</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_google_api_client'>google_api_client</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
     <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:&quot;x-goog-api-client&quot;</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_google_api_client'>google_api_client</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_headers'>headers</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='id identifier rubyid_metadata'>metadata</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_metadata'>metadata</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='id identifier rubyid_client_config_file'>client_config_file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span>
       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>controller2_client_config.json</span><span class='tstring_end'>&quot;</span></span>
     <span class='rparen'>)</span>
@@ -1050,9 +1117,14 @@ or the specified config is missing data points.</p>
         <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>STATUS_CODE_NAMES</span><span class='comma'>,</span>
         <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
         <span class='label'>errors:</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='op'>::</span><span class='const'>API_ERRORS</span><span class='comma'>,</span>
-        <span class='label'>kwargs:</span> <span class='id identifier rubyid_headers'>headers</span>
+        <span class='label'>metadata:</span> <span class='id identifier rubyid_headers'>headers</span>
       <span class='rparen'>)</span>
     <span class='kw'>end</span>
+
+    <span class='comment'># Allow overriding the service path/port in subclasses.
+</span>    <span class='id identifier rubyid_service_path'>service_path</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span>
+    <span class='id identifier rubyid_port'>port</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>DEFAULT_SERVICE_PORT</span>
+    <span class='id identifier rubyid_interceptors'>interceptors</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span>
     <span class='ivar'>@controller2_stub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='const'>Grpc</span><span class='period'>.</span><span class='id identifier rubyid_create_stub'>create_stub</span><span class='lparen'>(</span>
       <span class='id identifier rubyid_service_path'>service_path</span><span class='comma'>,</span>
       <span class='id identifier rubyid_port'>port</span><span class='comma'>,</span>
@@ -1060,20 +1132,24 @@ or the specified config is missing data points.</p>
       <span class='label'>channel:</span> <span class='id identifier rubyid_channel'>channel</span><span class='comma'>,</span>
       <span class='label'>updater_proc:</span> <span class='id identifier rubyid_updater_proc'>updater_proc</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+      <span class='label'>interceptors:</span> <span class='id identifier rubyid_interceptors'>interceptors</span><span class='comma'>,</span>
       <span class='op'>&amp;</span><span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>Controller2</span><span class='op'>::</span><span class='const'>Stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span>
     <span class='rparen'>)</span>
 
     <span class='ivar'>@register_debuggee</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:register_debuggee</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>register_debuggee</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>register_debuggee</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
     <span class='ivar'>@list_active_breakpoints</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:list_active_breakpoints</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_active_breakpoints</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>list_active_breakpoints</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
     <span class='ivar'>@update_active_breakpoint</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='period'>.</span><span class='id identifier rubyid_create_api_call'>create_api_call</span><span class='lparen'>(</span>
       <span class='ivar'>@controller2_stub</span><span class='period'>.</span><span class='id identifier rubyid_method'>method</span><span class='lparen'>(</span><span class='symbol'>:update_active_breakpoint</span><span class='rparen'>)</span><span class='comma'>,</span>
-      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_active_breakpoint</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>update_active_breakpoint</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>exception_transformer:</span> <span class='id identifier rubyid_exception_transformer'>exception_transformer</span>
     <span class='rparen'>)</span>
   <span class='kw'>end</span>
 
@@ -1099,23 +1175,29 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/debugger/v2&quot;
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +debuggee+:
 </span>  <span class='comment'>#   debuggee = {}
 </span>  <span class='comment'>#   response = controller2_client.register_debuggee(debuggee)
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_register_debuggee'>register_debuggee</span> \
       <span class='id identifier rubyid_debuggee'>debuggee</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>debuggee:</span> <span class='id identifier rubyid_debuggee'>debuggee</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>RegisterDebuggeeRequest</span><span class='rparen'>)</span>
-    <span class='ivar'>@register_debuggee</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/RegisterDebuggeeRequest.html" title="Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest (class)">RegisterDebuggeeRequest</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@register_debuggee</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Returns the list of all active breakpoints for the debuggee.
@@ -1149,12 +1231,17 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/debugger/v2&quot;
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +debuggee_id+:
 </span>  <span class='comment'>#   debuggee_id = &#39;&#39;
 </span>  <span class='comment'>#   response = controller2_client.list_active_breakpoints(debuggee_id)
 </span>
@@ -1162,14 +1249,15 @@ or the specified config is missing data points.</p>
       <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
       <span class='label'>wait_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
       <span class='label'>success_on_timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>debuggee_id:</span> <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
       <span class='label'>wait_token:</span> <span class='id identifier rubyid_wait_token'>wait_token</span><span class='comma'>,</span>
       <span class='label'>success_on_timeout:</span> <span class='id identifier rubyid_success_on_timeout'>success_on_timeout</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>ListActiveBreakpointsRequest</span><span class='rparen'>)</span>
-    <span class='ivar'>@list_active_breakpoints</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/ListActiveBreakpointsRequest.html" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsRequest (class)">ListActiveBreakpointsRequest</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@list_active_breakpoints</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='comment'># Updates the breakpoint state or mutable fields.
@@ -1192,26 +1280,34 @@ or the specified config is missing data points.</p>
 </span>  <span class='comment'># @param options [Google::Gax::CallOptions]
 </span>  <span class='comment'>#   Overrides the default settings for this call, e.g, timeout,
 </span>  <span class='comment'>#   retries, etc.
+</span>  <span class='comment'># @yield [result, operation] Access the result along with the RPC operation
+</span>  <span class='comment'># @yieldparam result [Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse]
+</span>  <span class='comment'># @yieldparam operation [GRPC::ActiveCall::Operation]
 </span>  <span class='comment'># @return [Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
 </span>  <span class='comment'>#   require &quot;google/cloud/debugger/v2&quot;
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   controller2_client = Google::Cloud::Debugger::V2::Controller2.new
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +debuggee_id+:
 </span>  <span class='comment'>#   debuggee_id = &#39;&#39;
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   # TODO: Initialize +breakpoint+:
 </span>  <span class='comment'>#   breakpoint = {}
 </span>  <span class='comment'>#   response = controller2_client.update_active_breakpoint(debuggee_id, breakpoint)
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_update_active_breakpoint'>update_active_breakpoint</span> \
       <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
       <span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='comma'>,</span>
-      <span class='label'>options:</span> <span class='kw'>nil</span>
+      <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
     <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>debuggee_id:</span> <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
       <span class='label'>breakpoint:</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span>
     <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>UpdateActiveBreakpointRequest</span><span class='rparen'>)</span>
-    <span class='ivar'>@update_active_breakpoint</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/UpdateActiveBreakpointRequest.html" title="Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest (class)">UpdateActiveBreakpointRequest</a></span></span><span class='rparen'>)</span>
+    <span class='ivar'>@update_active_breakpoint</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1229,7 +1325,7 @@ or the specified config is missing data points.</p>
       <div class="method_details first">
   <h3 class="signature first" id="list_active_breakpoints-instance_method">
   
-    #<strong>list_active_breakpoints</strong>(debuggee_id, wait_token: nil, success_on_timeout: nil, options: nil)  &#x21d2; <tt>Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse</tt> 
+    #<strong>list_active_breakpoints</strong>(debuggee_id, wait_token: nil, success_on_timeout: nil, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/ListActiveBreakpointsResponse.html" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse (class)">Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse</a></span></tt> 
   
 
   
@@ -1263,7 +1359,9 @@ setting those breakpoints again.</p>
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Controller2.html" title="Google::Cloud::Debugger::V2::Controller2 (module)">Controller2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Controller2.html#new-class_method" title="Google::Cloud::Debugger::V2::Controller2.new (method)">new</a></span></span>
-<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='comment'># TODO: Initialize +debuggee_id+:
+</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_list_active_breakpoints'>list_active_breakpoints</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1341,13 +1439,56 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/ListActiveBreakpointsResponse.html" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse (class)">Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt>Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/ListActiveBreakpointsResponse.html" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse (class)">Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsResponse</a></span></tt>)</span>
       
       
       
@@ -1378,35 +1519,37 @@ retries, etc.</p>
       <pre class="lines">
 
 
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287</pre>
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_active_breakpoints'>list_active_breakpoints</span> \
     <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
     <span class='label'>wait_token:</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='label'>success_on_timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>debuggee_id:</span> <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
     <span class='label'>wait_token:</span> <span class='id identifier rubyid_wait_token'>wait_token</span><span class='comma'>,</span>
     <span class='label'>success_on_timeout:</span> <span class='id identifier rubyid_success_on_timeout'>success_on_timeout</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>ListActiveBreakpointsRequest</span><span class='rparen'>)</span>
-  <span class='ivar'>@list_active_breakpoints</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/ListActiveBreakpointsRequest.html" title="Google::Devtools::Clouddebugger::V2::ListActiveBreakpointsRequest (class)">ListActiveBreakpointsRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@list_active_breakpoints</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1416,7 +1559,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="register_debuggee-instance_method">
   
-    #<strong>register_debuggee</strong>(debuggee, options: nil)  &#x21d2; <tt>Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse</tt> 
+    #<strong>register_debuggee</strong>(debuggee, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/RegisterDebuggeeResponse.html" title="Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse (class)">Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse</a></span></tt> 
   
 
   
@@ -1447,7 +1590,9 @@ from data loss, or change the +debuggee_id+ format. Agents must handle
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Controller2.html" title="Google::Cloud::Debugger::V2::Controller2 (module)">Controller2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Controller2.html#new-class_method" title="Google::Cloud::Debugger::V2::Controller2.new (method)">new</a></span></span>
-<span class='id identifier rubyid_debuggee'>debuggee</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+<span class='comment'># TODO: Initialize +debuggee+:
+</span><span class='id identifier rubyid_debuggee'>debuggee</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_register_debuggee'>register_debuggee</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee'>debuggee</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1491,13 +1636,56 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/RegisterDebuggeeResponse.html" title="Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse (class)">Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt>Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/RegisterDebuggeeResponse.html" title="Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse (class)">Google::Devtools::Clouddebugger::V2::RegisterDebuggeeResponse</a></span></tt>)</span>
       
       
       
@@ -1528,27 +1716,29 @@ retries, etc.</p>
       <pre class="lines">
 
 
-225
-226
-227
-228
-229
-230
-231
-232
-233</pre>
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 225</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 234</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_debuggee'>register_debuggee</span> \
     <span class='id identifier rubyid_debuggee'>debuggee</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>debuggee:</span> <span class='id identifier rubyid_debuggee'>debuggee</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>RegisterDebuggeeRequest</span><span class='rparen'>)</span>
-  <span class='ivar'>@register_debuggee</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/RegisterDebuggeeRequest.html" title="Google::Devtools::Clouddebugger::V2::RegisterDebuggeeRequest (class)">RegisterDebuggeeRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@register_debuggee</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1558,7 +1748,7 @@ retries, etc.</p>
       <div class="method_details ">
   <h3 class="signature " id="update_active_breakpoint-instance_method">
   
-    #<strong>update_active_breakpoint</strong>(debuggee_id, breakpoint, options: nil)  &#x21d2; <tt>Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse</tt> 
+    #<strong>update_active_breakpoint</strong>(debuggee_id, breakpoint, options: nil) {|result, operation| ... } &#x21d2; <tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/UpdateActiveBreakpointResponse.html" title="Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse (class)">Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse</a></span></tt> 
   
 
   
@@ -1587,8 +1777,12 @@ or snapping the location to the correct line of code.</p>
       <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/debugger/v2</span><span class='tstring_end'>&quot;</span></span>
 
 <span class='id identifier rubyid_controller2_client'>controller2_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Debugger.html" title="Google::Cloud::Debugger (module)">Debugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Debugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Controller2.html" title="Google::Cloud::Debugger::V2::Controller2 (module)">Controller2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Controller2.html#new-class_method" title="Google::Cloud::Debugger::V2::Controller2.new (method)">new</a></span></span>
-<span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
-<span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+
+<span class='comment'># TODO: Initialize +debuggee_id+:
+</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='comment'># TODO: Initialize +breakpoint+:
+</span><span class='id identifier rubyid_breakpoint'>breakpoint</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_controller2_client'>controller2_client</span><span class='period'>.</span><span class='id identifier rubyid_update_active_breakpoint'>update_active_breakpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='rparen'>)</span></code></pre>
     
   </div>
@@ -1647,13 +1841,56 @@ retries, etc.</p>
   
 </ul>
 
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>result</tt>, <tt>operation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Access the result along with the RPC operation</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/UpdateActiveBreakpointResponse.html" title="Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse (class)">Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operation</span>
+      
+      
+        <span class='type'>(<tt>GRPC::ActiveCall::Operation</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
     <li>
       
       
-        <span class='type'>(<tt>Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/UpdateActiveBreakpointResponse.html" title="Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse (class)">Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointResponse</a></span></tt>)</span>
       
       
       
@@ -1684,31 +1921,33 @@ retries, etc.</p>
       <pre class="lines">
 
 
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329</pre>
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 319</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/debugger/v2/controller2_client.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_active_breakpoint'>update_active_breakpoint</span> \
     <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
     <span class='id identifier rubyid_breakpoint'>breakpoint</span><span class='comma'>,</span>
-    <span class='label'>options:</span> <span class='kw'>nil</span>
+    <span class='label'>options:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='label'>debuggee_id:</span> <span class='id identifier rubyid_debuggee_id'>debuggee_id</span><span class='comma'>,</span>
     <span class='label'>breakpoint:</span> <span class='id identifier rubyid_breakpoint'>breakpoint</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'>UpdateActiveBreakpointRequest</span><span class='rparen'>)</span>
-  <span class='ivar'>@update_active_breakpoint</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_req'>req</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Gax</span><span class='op'>::</span><span class='id identifier rubyid_to_proto'>to_proto</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools.html" title="Google::Devtools (module)">Devtools</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger.html" title="Google::Devtools::Clouddebugger (module)">Clouddebugger</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2.html" title="Google::Devtools::Clouddebugger::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Devtools/Clouddebugger/V2/UpdateActiveBreakpointRequest.html" title="Google::Devtools::Clouddebugger::V2::UpdateActiveBreakpointRequest (class)">UpdateActiveBreakpointRequest</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@update_active_breakpoint</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req'>req</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
