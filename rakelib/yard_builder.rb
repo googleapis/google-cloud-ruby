@@ -12,13 +12,13 @@ class YardBuilder
 
   def build_master
     git_ref = current_git_commit master_dir
-    gems.each do |gem|
+    determine_gems(master_dir).each do |gem|
       build_gem_docs gem, "master", master_dir, gh_pages_dir
       ensure_gem_latest_dir gem
       ensure_gem_index_file gem
       commit_changes gh_pages_dir, "Build #{gem} documentation for commit #{git_ref}"
-      push_changes gh_pages_dir
     end
+    push_changes gh_pages_dir
   end
 
   def publish_tag tag
@@ -38,8 +38,8 @@ class YardBuilder
       ensure_gem_latest_dir gem
       ensure_gem_index_file gem
       commit_changes gh_pages_dir, "Rebuild #{gem} documentation for #{version} version"
-      push_changes gh_pages_dir
     end
+    push_changes gh_pages_dir
   end
 
   def rebuild_all
@@ -53,12 +53,8 @@ class YardBuilder
       ensure_gem_latest_dir gem
       ensure_gem_index_file gem
       commit_changes gh_pages_dir, "Rebuild all #{gem} documentation (all tags and master)"
-      push_changes gh_pages_dir
     end
-  end
-
-  def gems
-    determine_gems master_dir
+    push_changes gh_pages_dir
   end
 
   protected
