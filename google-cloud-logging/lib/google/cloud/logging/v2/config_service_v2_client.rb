@@ -308,9 +308,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -359,9 +359,9 @@ module Google
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #   response = config_service_v2_client.get_sink(formatted_sink_name)
 
@@ -416,9 +416,9 @@ module Google
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +sink+:
@@ -499,9 +499,9 @@ module Google
           # @return [Google::Logging::V2::LogSink]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #
           #   # TODO: Initialize +sink+:
@@ -546,9 +546,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
           #   config_service_v2_client.delete_sink(formatted_sink_name)
 
@@ -592,9 +592,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -643,9 +643,9 @@ module Google
           # @return [Google::Logging::V2::LogExclusion]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
           #   response = config_service_v2_client.get_exclusion(formatted_name)
 
@@ -687,9 +687,9 @@ module Google
           # @return [Google::Logging::V2::LogExclusion]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +exclusion+:
@@ -744,9 +744,9 @@ module Google
           # @return [Google::Logging::V2::LogExclusion]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
           #
           #   # TODO: Initialize +exclusion+:
@@ -790,9 +790,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   config_service_v2_client = Google::Cloud::Logging::Config.new(version: :v2)
+          #   config_service_v2_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
           #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
           #   config_service_v2_client.delete_exclusion(formatted_name)
 

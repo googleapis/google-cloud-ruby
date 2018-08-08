@@ -280,9 +280,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #   formatted_log_name = Google::Cloud::Logging::V2::LoggingServiceV2Client.log_path("[PROJECT]", "[LOG]")
           #   logging_service_v2_client.delete_log(formatted_log_name)
 
@@ -382,9 +382,9 @@ module Google
           # @return [Google::Logging::V2::WriteLogEntriesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
           #   # TODO: Initialize +entries+:
           #   entries = []
@@ -465,9 +465,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
           #   # TODO: Initialize +formatted_resource_names+:
           #   formatted_resource_names = []
@@ -526,9 +526,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #
           #   # Iterate over all results.
           #   logging_service_v2_client.list_monitored_resource_descriptors.each do |element|
@@ -583,9 +583,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   logging_service_v2_client = Google::Cloud::Logging::Logging.new(version: :v2)
+          #   logging_service_v2_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::LoggingServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.

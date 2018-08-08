@@ -38,6 +38,30 @@ s.copy(v2_library / 'lib/google/logging/v2')
 # own toplevel docs for the handwritten layer.
 os.remove('lib/google/cloud/logging/v2/doc/overview.rb')
 
+# PERMANENT: Handwritten layer owns Logging.new so low-level clients need to
+# use Logging::V2.new instead of Logging.new(version: :v2). Update the
+# examples and tests.
+s.replace(
+    [
+      'lib/google/cloud/logging/v2/config_service_v2_client.rb',
+      'lib/google/cloud/logging/v2/logging_service_v2_client.rb',
+      'lib/google/cloud/logging/v2/metrics_service_v2_client.rb'
+    ],
+    'require "google/cloud/logging"',
+    'require "google/cloud/logging/v2"')
+s.replace(
+    'lib/google/cloud/logging/v2/config_service_v2_client.rb',
+    'Google::Cloud::Logging::Config\\.new\\(version: :v2\\)',
+    'Google::Cloud::Logging::V2::ConfigServiceV2Client.new')
+s.replace(
+    'lib/google/cloud/logging/v2/logging_service_v2_client.rb',
+    'Google::Cloud::Logging::Logging\\.new\\(version: :v2\\)',
+    'Google::Cloud::Logging::V2::LoggingServiceV2Client.new')
+s.replace(
+    'lib/google/cloud/logging/v2/metrics_service_v2_client.rb',
+    'Google::Cloud::Logging::Metrics\\.new\\(version: :v2\\)',
+    'Google::Cloud::Logging::V2::MetricsServiceV2Client.new')
+
 # https://github.com/googleapis/gapic-generator/issues/2124
 s.replace(
     'lib/google/cloud/logging/v2/credentials.rb',

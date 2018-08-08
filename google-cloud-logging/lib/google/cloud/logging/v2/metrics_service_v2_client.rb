@@ -258,9 +258,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
+          #   metrics_service_v2_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::MetricsServiceV2Client.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -304,9 +304,9 @@ module Google
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
+          #   metrics_service_v2_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
           #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
           #   response = metrics_service_v2_client.get_log_metric(formatted_metric_name)
 
@@ -343,9 +343,9 @@ module Google
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
+          #   metrics_service_v2_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
           #   formatted_parent = Google::Cloud::Logging::V2::MetricsServiceV2Client.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +metric+:
@@ -388,9 +388,9 @@ module Google
           # @return [Google::Logging::V2::LogMetric]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
+          #   metrics_service_v2_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
           #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
           #
           #   # TODO: Initialize +metric+:
@@ -424,9 +424,9 @@ module Google
           # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/logging"
+          #   require "google/cloud/logging/v2"
           #
-          #   metrics_service_v2_client = Google::Cloud::Logging::Metrics.new(version: :v2)
+          #   metrics_service_v2_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
           #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
           #   metrics_service_v2_client.delete_log_metric(formatted_metric_name)
 
