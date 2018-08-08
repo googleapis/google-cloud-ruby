@@ -125,7 +125,7 @@ PartitionReadRequest.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The desired maximum number of partitions to return.</p>
+    <span class="summary_desc"><div class='inline'><p><strong>Note:</strong> This hint is currently ignored by PartitionQuery and PartitionRead requests.</p>
 </div></span>
   
 </li>
@@ -151,7 +151,7 @@ PartitionReadRequest.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The desired data size for each partition generated.</p>
+    <span class="summary_desc"><div class='inline'><p><strong>Note:</strong> This hint is currently ignored by PartitionQuery and PartitionRead requests.</p>
 </div></span>
   
 </li>
@@ -179,7 +179,10 @@ PartitionReadRequest.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The desired maximum number of partitions to return.  For example, this may
+    <p>Returns <strong>Note:</strong> This hint is currently ignored by PartitionQuery and
+PartitionRead requests.</p>
+
+<p>The desired maximum number of partitions to return.  For example, this may
 be set to the number of workers available.  The default for this option
 is currently 10,000. The maximum value is currently 200,000.  This is only
 a hint.  The actual number of partitions returned may be smaller or larger
@@ -201,7 +204,10 @@ than this maximum count request.</p>
       
       
         &mdash;
-        <div class='inline'><p>The desired maximum number of partitions to return.  For example, this may
+        <div class='inline'><p><strong>Note:</strong> This hint is currently ignored by PartitionQuery and
+PartitionRead requests.</p>
+
+<p>The desired maximum number of partitions to return.  For example, this may
 be set to the number of workers available.  The default for this option
 is currently 10,000. The maximum value is currently 200,000.  This is only
 a hint.  The actual number of partitions returned may be smaller or larger
@@ -218,10 +224,10 @@ than this maximum count request.</p>
       <pre class="lines">
 
 
-201</pre>
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 201</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 207</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionOptions (class)">PartitionOptions</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -242,7 +248,10 @@ than this maximum count request.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The desired data size for each partition generated.  The default for this
+    <p>Returns <strong>Note:</strong> This hint is currently ignored by PartitionQuery and
+PartitionRead requests.</p>
+
+<p>The desired data size for each partition generated.  The default for this
 option is currently 1 GiB.  This is only a hint. The actual size of each
 partition may be smaller or larger than this size request.</p>
 
@@ -262,7 +271,10 @@ partition may be smaller or larger than this size request.</p>
       
       
         &mdash;
-        <div class='inline'><p>The desired data size for each partition generated.  The default for this
+        <div class='inline'><p><strong>Note:</strong> This hint is currently ignored by PartitionQuery and
+PartitionRead requests.</p>
+
+<p>The desired data size for each partition generated.  The default for this
 option is currently 1 GiB.  This is only a hint. The actual size of each
 partition may be smaller or larger than this size request.</p>
 </div>
@@ -277,10 +289,10 @@ partition may be smaller or larger than this size request.</p>
       <pre class="lines">
 
 
-201</pre>
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 201</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/spanner.rb', line 207</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Spanner::V1::PartitionOptions (class)">PartitionOptions</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

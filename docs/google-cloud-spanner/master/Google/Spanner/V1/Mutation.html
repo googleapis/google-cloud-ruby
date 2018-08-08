@@ -334,7 +334,9 @@ rows were present.</p>
 74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 44</span>
@@ -371,6 +373,8 @@ rows were present.</p>
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
 </span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
+</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
+</span>  <span class='comment'>#     rows do not exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -457,7 +461,9 @@ the write or transaction fails with error +ALREADY_EXISTS+.</p>
 74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 44</span>
@@ -494,6 +500,8 @@ the write or transaction fails with error +ALREADY_EXISTS+.</p>
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
 </span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
+</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
+</span>  <span class='comment'>#     rows do not exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -582,7 +590,9 @@ column values not explicitly written are preserved.</p>
 74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 44</span>
@@ -619,6 +629,8 @@ column values not explicitly written are preserved.</p>
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
 </span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
+</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
+</span>  <span class='comment'>#     rows do not exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -709,7 +721,9 @@ explicitly written become +NULL+.</p>
 74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 44</span>
@@ -746,6 +760,8 @@ explicitly written become +NULL+.</p>
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
 </span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
+</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
+</span>  <span class='comment'>#     rows do not exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -832,7 +848,9 @@ already exist, the transaction fails with error +NOT_FOUND+.</p>
 74
 75
 76
-77</pre>
+77
+78
+79</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/v1/doc/google/spanner/v1/mutation.rb', line 44</span>
@@ -869,6 +887,8 @@ already exist, the transaction fails with error +NOT_FOUND+.</p>
 </span>  <span class='comment'># @!attribute [rw] key_set
 </span>  <span class='comment'>#   @return [Google::Spanner::V1::KeySet]
 </span>  <span class='comment'>#     Required. The primary keys of the rows within {Google::Spanner::V1::Mutation::Delete#table table} to delete.
+</span>  <span class='comment'>#     Delete is idempotent. The transaction will succeed even if some or all
+</span>  <span class='comment'>#     rows do not exist.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Mutation/Delete.html" title="Google::Spanner::V1::Mutation::Delete (class)">Delete</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
