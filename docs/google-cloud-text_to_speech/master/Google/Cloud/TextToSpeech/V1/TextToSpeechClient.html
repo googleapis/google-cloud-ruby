@@ -1046,9 +1046,9 @@ custom error handling.</p>
 </span>  <span class='comment'># @return [Google::Cloud::Texttospeech::V1::ListVoicesResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/text_to_speech/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/text_to_speech&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   text_to_speech_client = Google::Cloud::TextToSpeech::V1.new
+</span>  <span class='comment'>#   text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
 </span>  <span class='comment'>#   response = text_to_speech_client.list_voices
 </span>
   <span class='kw'>def</span> <span class='id identifier rubyid_list_voices'>list_voices</span> \
@@ -1086,9 +1086,9 @@ custom error handling.</p>
 </span>  <span class='comment'># @return [Google::Cloud::Texttospeech::V1::SynthesizeSpeechResponse]
 </span>  <span class='comment'># @raise [Google::Gax::GaxError] if the RPC is aborted.
 </span>  <span class='comment'># @example
-</span>  <span class='comment'>#   require &quot;google/cloud/text_to_speech/v1&quot;
+</span>  <span class='comment'>#   require &quot;google/cloud/text_to_speech&quot;
 </span>  <span class='comment'>#
-</span>  <span class='comment'>#   text_to_speech_client = Google::Cloud::TextToSpeech::V1.new
+</span>  <span class='comment'>#   text_to_speech_client = Google::Cloud::TextToSpeech.new(version: :v1)
 </span>  <span class='comment'>#
 </span>  <span class='comment'>#   # TODO: Initialize +input+:
 </span>  <span class='comment'>#   input = {}
@@ -1150,9 +1150,9 @@ supported for synthesis.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/text_to_speech/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/text_to_speech</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_text_to_speech_client'>text_to_speech_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../TextToSpeech.html" title="Google::Cloud::TextToSpeech (module)">TextToSpeech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::TextToSpeech::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::TextToSpeech::V1.new (method)">new</a></span></span>
+<span class='id identifier rubyid_text_to_speech_client'>text_to_speech_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../TextToSpeech.html" title="Google::Cloud::TextToSpeech (module)">TextToSpeech</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../TextToSpeech.html#new-class_method" title="Google::Cloud::TextToSpeech.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_text_to_speech_client'>text_to_speech_client</span><span class='period'>.</span><span class='id identifier rubyid_list_voices'>list_voices</span></code></pre>
     
   </div>
@@ -1331,9 +1331,9 @@ has been processed.</p>
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/text_to_speech/v1</span><span class='tstring_end'>&quot;</span></span>
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/text_to_speech</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='id identifier rubyid_text_to_speech_client'>text_to_speech_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../TextToSpeech.html" title="Google::Cloud::TextToSpeech (module)">TextToSpeech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::TextToSpeech::V1 (module)">V1</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../V1.html#new-class_method" title="Google::Cloud::TextToSpeech::V1.new (method)">new</a></span></span>
+<span class='id identifier rubyid_text_to_speech_client'>text_to_speech_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../TextToSpeech.html" title="Google::Cloud::TextToSpeech (module)">TextToSpeech</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../../TextToSpeech.html#new-class_method" title="Google::Cloud::TextToSpeech.new (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>version:</span> <span class='symbol'>:v1</span><span class='rparen'>)</span>
 
 <span class='comment'># TODO: Initialize +input+:
 </span><span class='id identifier rubyid_input'>input</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
