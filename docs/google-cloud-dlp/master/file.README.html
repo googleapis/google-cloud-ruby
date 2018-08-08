@@ -65,44 +65,13 @@ steps:</p>
 <ol>
 <li><a href="https://console.cloud.google.com/project">Select or create a Cloud Platform project.</a></li>
 <li><a href="https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project">Enable billing for your project.</a></li>
-<li><a href="https://console.cloud.google.com/apis/api/dlp">Enable the Cloud Data Loss Prevention (DLP) API.</a></li>
+<li><a href="https://console.cloud.google.com/apis/library/dlp.googleapis.com">Enable the Cloud Data Loss Prevention (DLP) API.</a></li>
 <li><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud/master/guides/authentication">Setup Authentication.</a></li>
 </ol>
 
 <h3>Installation</h3>
 
 <pre class="code ruby"><code class="ruby">$ gem install google-cloud-dlp
-</code></pre>
-
-<h3>Supported Ruby Versions</h3>
-
-<p>This library is supported on Ruby 2.3+.</p>
-
-<p>Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.3
-and later. Older versions of Ruby <em>may</em> still work, but are unsupported and not
-recommended. See <a href="https://www.ruby-lang.org/en/downloads/branches/">https://www.ruby-lang.org/en/downloads/branches/</a> for details
-about the Ruby support schedule.</p>
-
-<h3>Preview</h3>
-
-<h4>DlpServiceClient</h4>
-
-<pre class="code rb"><code class="rb">require &quot;google/cloud/dlp&quot;
-
-dlp = Google::Cloud::Dlp.new
-
-inspect_config = {
-  info_types: [{ name: &quot;PHONE_NUMBER&quot; }],
-  min_likelihood: :POSSIBLE
-}
-item = { value: &quot;my phone number is 215-512-1212&quot; }
-parent = &quot;projects/#{ENV[&quot;MY_PROJECT&quot;]}&quot;
-
-response = dlp.inspect_content parent,
-  inspect_config: inspect_config,
-  item: item
 </code></pre>
 
 <h3>Next Steps</h3>
@@ -118,7 +87,11 @@ to see the full list of Cloud APIs that we cover.</li>
 
 <h2>Enabling Logging</h2>
 
-<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library. The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below, or a <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a> that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>. See <a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a> and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a> for additional information.</p>
+<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library.
+The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below,
+or a <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a>
+that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>. See <a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a>
+and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a> for additional information.</p>
 
 <p>Configuring a Ruby stdlib logger:</p>
 
@@ -139,14 +112,14 @@ to see the full list of Cloud APIs that we cover.</li>
 
 <h2>Supported Ruby Versions</h2>
 
-<p>This library is supported on Ruby 2.0+.</p>
+<p>This library is supported on Ruby 2.3+.</p>
 
-<p>However, Ruby 2.3 or later is strongly recommended, as earlier releases have
-reached or are nearing end-of-life. After June 1, 2018, Google will provide
-official support only for Ruby versions that are considered current and
-supported by Ruby Core (that is, Ruby versions that are either in normal
-maintenance or in security maintenance).
-See <a href="https://www.ruby-lang.org/en/downloads/branches/">https://www.ruby-lang.org/en/downloads/branches/</a> for further details.</p>
+<p>Google provides official support for Ruby versions that are actively supported
+by Ruby Core—that is, Ruby versions that are either in normal maintenance or
+in security maintenance, and not end of life. Currently, this means Ruby 2.3
+and later. Older versions of Ruby <em>may</em> still work, but are unsupported and not
+recommended. See <a href="https://www.ruby-lang.org/en/downloads/branches/">https://www.ruby-lang.org/en/downloads/branches/</a> for details
+about the Ruby support schedule.</p>
 </div></div>
 
   <div id="footer">
