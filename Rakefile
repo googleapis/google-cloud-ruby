@@ -548,14 +548,10 @@ namespace :circleci do
 
   desc "Runs post-build logic on CircleCI."
   task :post do
-    # We don't run post-build on pull requests
-    if ENV["CIRCLE_PR_NUMBER"].nil?
-      if ENV["CIRCLE_BRANCH"] == "master"
-        Rake::Task["bundleupdate"].invoke
-        Rake::Task["jsondoc:master"].invoke
-        Rake::Task["docs:build_master"].invoke
-      end
-    end
+    Rake::Task["bundleupdate"].invoke
+    Rake::Task["jsondoc:master"].invoke
+    Rake::Task["docs:build_master"].invoke
+    Rake::Task["test:coveralls"].invoke
   end
 
   task :release do
