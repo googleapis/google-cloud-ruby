@@ -70,12 +70,36 @@ module Google
     #   @return [String]
     #     Required. The monitored resource type. This field must match
     #     the +type+ field of a {Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} object. For
-    #     example, the type of a Cloud SQL database is +"cloudsql_database"+.
+    #     example, the type of a Compute Engine VM instance is +gce_instance+.
     # @!attribute [rw] labels
     #   @return [Hash{String => String}]
     #     Required. Values for all of the labels listed in the associated monitored
-    #     resource descriptor. For example, Cloud SQL databases use the labels
-    #     +"database_id"+ and +"zone"+.
+    #     resource descriptor. For example, Compute Engine VM instances use the
+    #     labels +"project_id"+, +"instance_id"+, and +"zone"+.
     class MonitoredResource; end
+
+    # Auxiliary metadata for a {Google::Api::MonitoredResource MonitoredResource} object.
+    # {Google::Api::MonitoredResource MonitoredResource} objects contain the minimum set of information to
+    # uniquely identify a monitored resource instance. There is some other useful
+    # auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion
+    # pipeline to extract metadata for cloud resources of all types , and stores
+    # the metadata in this message.
+    # @!attribute [rw] system_labels
+    #   @return [Google::Protobuf::Struct]
+    #     Output only. Values for predefined system metadata labels.
+    #     System labels are a kind of metadata extracted by Google Stackdriver.
+    #     Stackdriver determines what system labels are useful and how to obtain
+    #     their values. Some examples: "machine_image", "vpc", "subnet_id",
+    #     "security_group", "name", etc.
+    #     System label values can be only strings, Boolean values, or a list of
+    #     strings. For example:
+    #
+    #         { "name": "my-test-instance",
+    #           "security_group": ["a", "b", "c"],
+    #           "spot_instance": false }
+    # @!attribute [rw] user_labels
+    #   @return [Hash{String => String}]
+    #     Output only. A map of user-defined metadata labels.
+    class MonitoredResourceMetadata; end
   end
 end

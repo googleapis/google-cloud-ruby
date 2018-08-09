@@ -13,6 +13,7 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/MethodDefParentheses:
   EnforcedStyle: require_no_parentheses
+
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-monitoring.rb"

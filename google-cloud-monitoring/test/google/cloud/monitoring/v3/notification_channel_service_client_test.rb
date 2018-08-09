@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockNotificationChannelServiceCredentials < Google::Cloud::Monitoring::Credentials
+class MockNotificationChannelServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -93,7 +93,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channel_descriptors")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -124,7 +124,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channel_descriptors")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -171,7 +171,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel_descriptor")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -179,6 +179,13 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_notification_channel_descriptor(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -199,7 +206,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel_descriptor")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -240,7 +247,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channels")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -271,7 +278,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channels")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -318,7 +325,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -326,6 +333,13 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_notification_channel(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -346,7 +360,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -395,7 +409,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("create_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -403,6 +417,13 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_notification_channel(formatted_name, notification_channel) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -425,7 +446,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("create_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -472,7 +493,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("update_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -480,6 +501,13 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_notification_channel(notification_channel) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -500,7 +528,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("update_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -534,7 +562,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("delete_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method
@@ -542,6 +570,13 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_notification_channel(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -562,7 +597,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
       mock_credentials = MockNotificationChannelServiceCredentials.new("delete_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
 
           # Call method

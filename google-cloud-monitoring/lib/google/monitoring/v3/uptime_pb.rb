@@ -6,6 +6,13 @@ require 'google/protobuf'
 require 'google/api/monitored_resource_pb'
 require 'google/protobuf/duration_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.monitoring.v3.InternalChecker" do
+    optional :project_id, :string, 1
+    optional :network, :string, 2
+    optional :gcp_zone, :string, 3
+    optional :checker_id, :string, 4
+    optional :display_name, :string, 5
+  end
   add_message "google.monitoring.v3.UptimeCheckConfig" do
     optional :name, :string, 1
     optional :display_name, :string, 2
@@ -13,7 +20,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :timeout, :message, 8, "google.protobuf.Duration"
     repeated :content_matchers, :message, 9, "google.monitoring.v3.UptimeCheckConfig.ContentMatcher"
     repeated :selected_regions, :enum, 10, "google.monitoring.v3.UptimeCheckRegion"
-    repeated :internal_checkers, :message, 14, "google.monitoring.v3.UptimeCheckConfig.InternalChecker"
+    optional :is_internal, :bool, 15
+    repeated :internal_checkers, :message, 14, "google.monitoring.v3.InternalChecker"
     oneof :resource do
       optional :monitored_resource, :message, 3, "google.api.MonitoredResource"
       optional :resource_group, :message, 4, "google.monitoring.v3.UptimeCheckConfig.ResourceGroup"
@@ -45,13 +53,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.UptimeCheckConfig.ContentMatcher" do
     optional :content, :string, 1
   end
-  add_message "google.monitoring.v3.UptimeCheckConfig.InternalChecker" do
-    optional :project_id, :string, 1
-    optional :network, :string, 2
-    optional :gcp_zone, :string, 3
-    optional :checker_id, :string, 4
-    optional :display_name, :string, 5
-  end
   add_message "google.monitoring.v3.UptimeCheckIp" do
     optional :region, :enum, 1, "google.monitoring.v3.UptimeCheckRegion"
     optional :location, :string, 2
@@ -74,13 +75,13 @@ end
 module Google
   module Monitoring
     module V3
+      InternalChecker = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.InternalChecker").msgclass
       UptimeCheckConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig").msgclass
       UptimeCheckConfig::ResourceGroup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ResourceGroup").msgclass
       UptimeCheckConfig::HttpCheck = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck").msgclass
       UptimeCheckConfig::HttpCheck::BasicAuthentication = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.BasicAuthentication").msgclass
       UptimeCheckConfig::TcpCheck = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.TcpCheck").msgclass
       UptimeCheckConfig::ContentMatcher = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher").msgclass
-      UptimeCheckConfig::InternalChecker = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.InternalChecker").msgclass
       UptimeCheckIp = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckIp").msgclass
       UptimeCheckRegion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckRegion").enummodule
       GroupResourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GroupResourceType").enummodule

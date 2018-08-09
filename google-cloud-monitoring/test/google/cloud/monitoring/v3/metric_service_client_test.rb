@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockMetricServiceCredentials < Google::Cloud::Monitoring::Credentials
+class MockMetricServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -93,7 +93,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("list_monitored_resource_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -124,7 +124,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("list_monitored_resource_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -171,7 +171,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("get_monitored_resource_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -179,6 +179,13 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_monitored_resource_descriptor(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -199,7 +206,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("get_monitored_resource_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -240,7 +247,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("list_metric_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -271,7 +278,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("list_metric_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -320,7 +327,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("get_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -328,6 +335,13 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_metric_descriptor(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -348,7 +362,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("get_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -399,7 +413,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("create_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -407,6 +421,13 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_metric_descriptor(formatted_name, metric_descriptor) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -429,7 +450,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("create_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -463,7 +484,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("delete_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -471,6 +492,13 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_metric_descriptor(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -491,7 +519,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("delete_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -538,7 +566,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("list_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -580,7 +608,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("list_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -624,7 +652,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("create_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method
@@ -632,6 +660,13 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.create_time_series(formatted_name, time_series) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -657,7 +692,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
       mock_credentials = MockMetricServiceCredentials.new("create_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Metric.new(version: :v3)
 
           # Call method

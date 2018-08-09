@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockGroupServiceCredentials < Google::Cloud::Monitoring::Credentials
+class MockGroupServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -93,7 +93,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("list_groups")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -124,7 +124,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("list_groups")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -173,7 +173,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("get_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -181,6 +181,13 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_group(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -201,7 +208,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("get_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -252,7 +259,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("create_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -260,6 +267,13 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_group(formatted_name, group) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -282,7 +296,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("create_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -331,7 +345,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("update_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -339,6 +353,13 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
 
           # Verify the response
           assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_group(group) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -359,7 +380,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("update_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -393,7 +414,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("delete_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -401,6 +422,13 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
 
           # Verify the response
           assert_nil(response)
+
+          # Call method with block
+          client.delete_group(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
         end
       end
     end
@@ -421,7 +449,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("delete_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -467,7 +495,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("list_group_members")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method
@@ -498,7 +526,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
       mock_credentials = MockGroupServiceCredentials.new("list_group_members")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Monitoring::Credentials.stub(:default, mock_credentials) do
+        Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Monitoring::Group.new(version: :v3)
 
           # Call method

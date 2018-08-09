@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/monitoring/v3/notification_service_pb"
-require "google/cloud/monitoring/credentials"
+require "google/cloud/monitoring/v3/credentials"
 
 module Google
   module Cloud
@@ -44,6 +44,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -143,11 +146,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -156,10 +166,10 @@ module Google
             require "google/gax/grpc"
             require "google/monitoring/v3/notification_service_services_pb"
 
-            credentials ||= Google::Cloud::Monitoring::Credentials.default
+            credentials ||= Google::Cloud::Monitoring::V3::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Monitoring::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Monitoring::V3::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -183,6 +193,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "notification_channel_service_client_config.json"
             )
@@ -195,13 +206,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @notification_channel_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -209,36 +221,44 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Monitoring::V3::NotificationChannelService::Stub.method(:new)
             )
 
             @list_notification_channel_descriptors = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:list_notification_channel_descriptors),
-              defaults["list_notification_channel_descriptors"]
+              defaults["list_notification_channel_descriptors"],
+              exception_transformer: exception_transformer
             )
             @get_notification_channel_descriptor = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:get_notification_channel_descriptor),
-              defaults["get_notification_channel_descriptor"]
+              defaults["get_notification_channel_descriptor"],
+              exception_transformer: exception_transformer
             )
             @list_notification_channels = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:list_notification_channels),
-              defaults["list_notification_channels"]
+              defaults["list_notification_channels"],
+              exception_transformer: exception_transformer
             )
             @get_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:get_notification_channel),
-              defaults["get_notification_channel"]
+              defaults["get_notification_channel"],
+              exception_transformer: exception_transformer
             )
             @create_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:create_notification_channel),
-              defaults["create_notification_channel"]
+              defaults["create_notification_channel"],
+              exception_transformer: exception_transformer
             )
             @update_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:update_notification_channel),
-              defaults["update_notification_channel"]
+              defaults["update_notification_channel"],
+              exception_transformer: exception_transformer
             )
             @delete_notification_channel = Google::Gax.create_api_call(
               @notification_channel_service_stub.method(:delete_notification_channel),
-              defaults["delete_notification_channel"]
+              defaults["delete_notification_channel"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -266,6 +286,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Monitoring::V3::NotificationChannelDescriptor>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::NotificationChannelDescriptor>]
           #   An enumerable of Google::Monitoring::V3::NotificationChannelDescriptor instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -273,9 +296,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::V3::NotificationChannel.new
+          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -294,13 +317,14 @@ module Google
           def list_notification_channel_descriptors \
               name,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListNotificationChannelDescriptorsRequest)
-            @list_notification_channel_descriptors.call(req, options)
+            @list_notification_channel_descriptors.call(req, options, &block)
           end
 
           # Gets a single channel descriptor. The descriptor indicates which fields
@@ -312,23 +336,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::NotificationChannelDescriptor]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::NotificationChannelDescriptor]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::V3::NotificationChannel.new
+          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_descriptor_path("[PROJECT]", "[CHANNEL_DESCRIPTOR]")
           #   response = notification_channel_service_client.get_notification_channel_descriptor(formatted_name)
 
           def get_notification_channel_descriptor \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetNotificationChannelDescriptorRequest)
-            @get_notification_channel_descriptor.call(req, options)
+            @get_notification_channel_descriptor.call(req, options, &block)
           end
 
           # Lists the notification channels that have been created for the project.
@@ -362,6 +390,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Monitoring::V3::NotificationChannel>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::NotificationChannel>]
           #   An enumerable of Google::Monitoring::V3::NotificationChannel instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -369,9 +400,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::V3::NotificationChannel.new
+          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -392,7 +423,8 @@ module Google
               filter: nil,
               order_by: nil,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               filter: filter,
@@ -400,7 +432,7 @@ module Google
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListNotificationChannelsRequest)
-            @list_notification_channels.call(req, options)
+            @list_notification_channels.call(req, options, &block)
           end
 
           # Gets a single notification channel. The channel includes the relevant
@@ -415,23 +447,27 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::NotificationChannel]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::NotificationChannel]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::V3::NotificationChannel.new
+          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
           #   response = notification_channel_service_client.get_notification_channel(formatted_name)
 
           def get_notification_channel \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetNotificationChannelRequest)
-            @get_notification_channel.call(req, options)
+            @get_notification_channel.call(req, options, &block)
           end
 
           # Creates a new notification channel, representing a single notification
@@ -453,12 +489,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::NotificationChannel]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::NotificationChannel]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::V3::NotificationChannel.new
+          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +notification_channel+:
@@ -468,13 +507,14 @@ module Google
           def create_notification_channel \
               name,
               notification_channel,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               notification_channel: notification_channel
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateNotificationChannelRequest)
-            @create_notification_channel.call(req, options)
+            @create_notification_channel.call(req, options, &block)
           end
 
           # Updates a notification channel. Fields not specified in the field mask
@@ -494,12 +534,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::NotificationChannel]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::NotificationChannel]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::V3::NotificationChannel.new
+          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #
           #   # TODO: Initialize +notification_channel+:
           #   notification_channel = {}
@@ -508,13 +551,14 @@ module Google
           def update_notification_channel \
               notification_channel,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               notification_channel: notification_channel,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::UpdateNotificationChannelRequest)
-            @update_notification_channel.call(req, options)
+            @update_notification_channel.call(req, options, &block)
           end
 
           # Deletes a notification channel.
@@ -530,24 +574,28 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   notification_channel_service_client = Google::Cloud::Monitoring::V3::NotificationChannel.new
+          #   notification_channel_service_client = Google::Cloud::Monitoring::NotificationChannel.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::NotificationChannelServiceClient.notification_channel_path("[PROJECT]", "[NOTIFICATION_CHANNEL]")
           #   notification_channel_service_client.delete_notification_channel(formatted_name)
 
           def delete_notification_channel \
               name,
               force: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name,
               force: force
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteNotificationChannelRequest)
-            @delete_notification_channel.call(req, options)
+            @delete_notification_channel.call(req, options, &block)
             nil
           end
         end

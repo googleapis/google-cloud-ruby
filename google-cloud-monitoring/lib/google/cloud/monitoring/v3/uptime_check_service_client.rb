@@ -25,7 +25,7 @@ require "pathname"
 require "google/gax"
 
 require "google/monitoring/v3/uptime_service_pb"
-require "google/cloud/monitoring/credentials"
+require "google/cloud/monitoring/v3/credentials"
 
 module Google
   module Cloud
@@ -50,6 +50,9 @@ module Google
 
           # The default port of the service.
           DEFAULT_SERVICE_PORT = 443
+
+          # The default set of gRPC interceptors.
+          GRPC_INTERCEPTORS = []
 
           DEFAULT_TIMEOUT = 30
 
@@ -132,11 +135,18 @@ module Google
           #   or the specified config is missing data points.
           # @param timeout [Numeric]
           #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
           def initialize \
               credentials: nil,
               scopes: ALL_SCOPES,
               client_config: {},
               timeout: DEFAULT_TIMEOUT,
+              metadata: nil,
+              exception_transformer: nil,
               lib_name: nil,
               lib_version: ""
             # These require statements are intentionally placed here to initialize
@@ -145,10 +155,10 @@ module Google
             require "google/gax/grpc"
             require "google/monitoring/v3/uptime_service_services_pb"
 
-            credentials ||= Google::Cloud::Monitoring::Credentials.default
+            credentials ||= Google::Cloud::Monitoring::V3::Credentials.default
 
             if credentials.is_a?(String) || credentials.is_a?(Hash)
-              updater_proc = Google::Cloud::Monitoring::Credentials.new(credentials).updater_proc
+              updater_proc = Google::Cloud::Monitoring::V3::Credentials.new(credentials).updater_proc
             end
             if credentials.is_a?(GRPC::Core::Channel)
               channel = credentials
@@ -172,6 +182,7 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "uptime_check_service_client_config.json"
             )
@@ -184,13 +195,14 @@ module Google
                 timeout,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
-                kwargs: headers
+                metadata: headers
               )
             end
 
             # Allow overriding the service path/port in subclasses.
             service_path = self.class::SERVICE_ADDRESS
             port = self.class::DEFAULT_SERVICE_PORT
+            interceptors = self.class::GRPC_INTERCEPTORS
             @uptime_check_service_stub = Google::Gax::Grpc.create_stub(
               service_path,
               port,
@@ -198,32 +210,39 @@ module Google
               channel: channel,
               updater_proc: updater_proc,
               scopes: scopes,
+              interceptors: interceptors,
               &Google::Monitoring::V3::UptimeCheckService::Stub.method(:new)
             )
 
             @list_uptime_check_configs = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:list_uptime_check_configs),
-              defaults["list_uptime_check_configs"]
+              defaults["list_uptime_check_configs"],
+              exception_transformer: exception_transformer
             )
             @get_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:get_uptime_check_config),
-              defaults["get_uptime_check_config"]
+              defaults["get_uptime_check_config"],
+              exception_transformer: exception_transformer
             )
             @create_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:create_uptime_check_config),
-              defaults["create_uptime_check_config"]
+              defaults["create_uptime_check_config"],
+              exception_transformer: exception_transformer
             )
             @update_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:update_uptime_check_config),
-              defaults["update_uptime_check_config"]
+              defaults["update_uptime_check_config"],
+              exception_transformer: exception_transformer
             )
             @delete_uptime_check_config = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:delete_uptime_check_config),
-              defaults["delete_uptime_check_config"]
+              defaults["delete_uptime_check_config"],
+              exception_transformer: exception_transformer
             )
             @list_uptime_check_ips = Google::Gax.create_api_call(
               @uptime_check_service_stub.method(:list_uptime_check_ips),
-              defaults["list_uptime_check_ips"]
+              defaults["list_uptime_check_ips"],
+              exception_transformer: exception_transformer
             )
           end
 
@@ -233,9 +252,8 @@ module Google
           # leaving out any invalid configurations.
           #
           # @param parent [String]
-          #   The project whose uptime check configurations are listed. The format is
-          #
-          #     +projects/[PROJECT_ID]+.
+          #   The project whose uptime check configurations are listed. The format
+          #     is +projects/[PROJECT_ID]+.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -245,6 +263,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Monitoring::V3::UptimeCheckConfig>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::UptimeCheckConfig>]
           #   An enumerable of Google::Monitoring::V3::UptimeCheckConfig instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -252,9 +273,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_parent = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
@@ -273,49 +294,52 @@ module Google
           def list_uptime_check_configs \
               parent,
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListUptimeCheckConfigsRequest)
-            @list_uptime_check_configs.call(req, options)
+            @list_uptime_check_configs.call(req, options, &block)
           end
 
           # Gets a single uptime check configuration.
           #
           # @param name [String]
-          #   The uptime check configuration to retrieve. The format is
-          #
-          #     +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
+          #   The uptime check configuration to retrieve. The format
+          #     is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::UptimeCheckConfig]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::UptimeCheckConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.uptime_check_config_path("[PROJECT]", "[UPTIME_CHECK_CONFIG]")
           #   response = uptime_check_service_client.get_uptime_check_config(formatted_name)
 
           def get_uptime_check_config \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::GetUptimeCheckConfigRequest)
-            @get_uptime_check_config.call(req, options)
+            @get_uptime_check_config.call(req, options, &block)
           end
 
           # Creates a new uptime check configuration.
           #
           # @param parent [String]
-          #   The project in which to create the uptime check. The format is:
-          #
-          #     +projects/[PROJECT_ID]+.
+          #   The project in which to create the uptime check. The format
+          #     is +projects/[PROJECT_ID]+.
           # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
           #   The new uptime check configuration.
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
@@ -323,12 +347,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::UptimeCheckConfig]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::UptimeCheckConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_parent = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize +uptime_check_config+:
@@ -338,13 +365,14 @@ module Google
           def create_uptime_check_config \
               parent,
               uptime_check_config,
-              options: nil
+              options: nil,
+              &block
             req = {
               parent: parent,
               uptime_check_config: uptime_check_config
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::CreateUptimeCheckConfigRequest)
-            @create_uptime_check_config.call(req, options)
+            @create_uptime_check_config.call(req, options, &block)
           end
 
           # Updates an uptime check configuration. You can either replace the entire
@@ -356,10 +384,14 @@ module Google
           #   Required. If an +"updateMask"+ has been specified, this field gives
           #   the values for the set of fields mentioned in the +"updateMask"+. If an
           #   +"updateMask"+ has not been given, this uptime check configuration replaces
-          #   the current configuration. If a field is mentioned in +"updateMask+" but
+          #   the current configuration. If a field is mentioned in +"updateMask"+ but
           #   the corresonding field is omitted in this partial uptime check
           #   configuration, it has the effect of deleting/clearing the field from the
           #   configuration on the server.
+          #
+          #   The following fields can be updated: +display_name+,
+          #   +http_check+, +tcp_check+, +timeout+, +content_matchers+, and
+          #   +selected_regions+.
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -372,12 +404,15 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Monitoring::V3::UptimeCheckConfig]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Monitoring::V3::UptimeCheckConfig]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #
           #   # TODO: Initialize +uptime_check_config+:
           #   uptime_check_config = {}
@@ -386,13 +421,14 @@ module Google
           def update_uptime_check_config \
               uptime_check_config,
               update_mask: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               uptime_check_config: uptime_check_config,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::UpdateUptimeCheckConfigRequest)
-            @update_uptime_check_config.call(req, options)
+            @update_uptime_check_config.call(req, options, &block)
           end
 
           # Deletes an uptime check configuration. Note that this method will fail
@@ -400,28 +436,31 @@ module Google
           # other dependent configs that would be rendered invalid by the deletion.
           #
           # @param name [String]
-          #   The uptime check configuration to delete. The format is
-          #
-          #     +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
+          #   The uptime check configuration to delete. The format
+          #     is +projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]+.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #   formatted_name = Google::Cloud::Monitoring::V3::UptimeCheckServiceClient.uptime_check_config_path("[PROJECT]", "[UPTIME_CHECK_CONFIG]")
           #   uptime_check_service_client.delete_uptime_check_config(formatted_name)
 
           def delete_uptime_check_config \
               name,
-              options: nil
+              options: nil,
+              &block
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::DeleteUptimeCheckConfigRequest)
-            @delete_uptime_check_config.call(req, options)
+            @delete_uptime_check_config.call(req, options, &block)
             nil
           end
 
@@ -436,6 +475,9 @@ module Google
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Monitoring::V3::UptimeCheckIp>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
           # @return [Google::Gax::PagedEnumerable<Google::Monitoring::V3::UptimeCheckIp>]
           #   An enumerable of Google::Monitoring::V3::UptimeCheckIp instances.
           #   See Google::Gax::PagedEnumerable documentation for other
@@ -443,9 +485,9 @@ module Google
           #   object.
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
-          #   require "google/cloud/monitoring/v3"
+          #   require "google/cloud/monitoring"
           #
-          #   uptime_check_service_client = Google::Cloud::Monitoring::V3::UptimeCheck.new
+          #   uptime_check_service_client = Google::Cloud::Monitoring::UptimeCheck.new(version: :v3)
           #
           #   # Iterate over all results.
           #   uptime_check_service_client.list_uptime_check_ips.each do |element|
@@ -462,12 +504,13 @@ module Google
 
           def list_uptime_check_ips \
               page_size: nil,
-              options: nil
+              options: nil,
+              &block
             req = {
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Monitoring::V3::ListUptimeCheckIpsRequest)
-            @list_uptime_check_ips.call(req, options)
+            @list_uptime_check_ips.call(req, options, &block)
           end
         end
       end
