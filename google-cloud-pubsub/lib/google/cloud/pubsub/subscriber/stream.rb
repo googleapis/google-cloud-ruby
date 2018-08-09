@@ -68,7 +68,7 @@ module Google
 
           def start
             synchronize do
-              break if @request_queue
+              break if @background_thread
 
               start_streaming!
             end
@@ -191,9 +191,28 @@ module Google
 
           protected
 
+          # @private
+          class RestartStream < StandardError; end
+
           # rubocop:disable all
 
-          def background_run enum
+          def background_run
+            # Don't allow a stream to restart if already stopped
+            return if @stopped
+
+            # signal to the previous queue to shut down
+            old_queue = []
+            old_queue = @request_queue.quit_and_dump_queue if @request_queue
+
+            # Always create a new request queue and enum
+            @request_queue = EnumeratorQueue.new self
+            @request_queue.push initial_input_request
+            old_queue.each { |obj| @request_queue.push obj }
+            enum = subscriber.service.streaming_pull @request_queue.each
+
+            @stopped = nil
+            @paused  = nil
+
             loop do
               synchronize do
                 if @paused && !@stopped
@@ -233,24 +252,29 @@ module Google
                 break
               end
             end
+
             # Has the loop broken but we aren't stopped?
             # Could be GRPC has thrown an internal error, so restart.
-            synchronize { raise "restart thread" unless @stopped }
-          rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
-                 GRPC::ResourceExhausted, GRPC::Internal, GRPC::Core::CallError
-            # The GAPIC layer will raise DeadlineExceeded when stream is opened
-            # longer than the timeout value it is configured for. When this
-            # happends, restart the stream stealthly.
-            # Also stealthly restart the stream on Unavailable, Cancelled,
-            # ResourceExhausted, and Internal.
-            # Also, also stealthly restart the stream when GRPC raises the
-            # internal CallError.
-            synchronize { start_streaming! }
+            raise RestartStream unless synchronize { @stopped }
+
+            # We must be stopped, tell the stream to quit.
+            @request_queue.push self
+          rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
+                 GRPC::ResourceExhausted, GRPC::Unauthenticated,
+                 GRPC::Unavailable, GRPC::Core::CallError
+            # Restart the stream with an incremental back for a retriable error.
+            # Also when GRPC raises the internal CallError.
+
+            retry
+          rescue RestartStream
+            retry
           rescue StandardError => e
             synchronize do
               subscriber.error! e
               start_streaming! unless @stopped
             end
+
+            retry
           end
 
           # rubocop:enable all
@@ -262,25 +286,13 @@ module Google
           end
 
           def start_streaming!
-            # Don't allow a stream to restart if already stopped
-            return if @stopped
-
-            # signal to the previous queue to shut down
-            old_queue = []
-            old_queue = @request_queue.quit_and_dump_queue if @request_queue
-
-            @request_queue = EnumeratorQueue.new self
-            @request_queue.push initial_input_request
-            old_queue.each { |obj| @request_queue.push obj }
-            output_enum = subscriber.service.streaming_pull @request_queue.each
-
-            @stopped = nil
-            @paused  = nil
+            # A Stream will only ever have one background thread. If the thread
+            # dies because it was stopped, or because of an unhandled error that
+            # could not be recovered from, so be it.
+            return if @background_thread
 
             # create new background thread to handle new enumerator
-            @background_thread = Thread.new(output_enum) do |enum|
-              background_run enum
-            end
+            @background_thread = Thread.new { background_run }
           end
 
           def pause_streaming!
