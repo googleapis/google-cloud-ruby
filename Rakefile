@@ -429,7 +429,8 @@ namespace :jsondoc do
           sh "git config --global user.email \"travis@travis-ci.org\""
           sh "git config --global user.name \"travis-ci\""
           sh "git commit -m \"Update documentation for #{git_ref}\""
-          sh "git push -q #{git_repo} gh-pages:gh-pages"
+          puts "pushing gh-pages"
+          `git push -q #{git_repo} gh-pages:gh-pages`
         else
           sh "git commit -m \"Update documentation for #{git_ref}\""
           sh "git push -q origin gh-pages"
