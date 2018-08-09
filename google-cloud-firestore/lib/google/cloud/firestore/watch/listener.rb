@@ -265,7 +265,10 @@ module Google
 
             # Has the loop broken but we aren't stopped?
             # Could be GRPC has thrown an internal error, so restart.
-            raise RestartStream
+            raise RestartStream unless synchronize { @stopped }
+
+            # We must be stopped, tell the stream to quit.
+            @request_queue.push self
           rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
                  GRPC::ResourceExhausted, GRPC::Unauthenticated,
                  GRPC::Unavailable, GRPC::Core::CallError
