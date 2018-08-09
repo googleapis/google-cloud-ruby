@@ -40,7 +40,9 @@ module Google
           end
 
           def add *ack_ids
-            ack_ids = Array(ack_ids).flatten
+            ack_ids.flatten!.compact!
+            return if ack_ids.empty?
+
             synchronize do
               @_ack_ids += ack_ids
               unless @stopped
@@ -50,7 +52,9 @@ module Google
           end
 
           def remove *ack_ids
-            ack_ids = Array(ack_ids).flatten
+            ack_ids.flatten!.compact!
+            return if ack_ids.empty?
+
             synchronize do
               @_ack_ids -= ack_ids
               if @_ack_ids.empty?
