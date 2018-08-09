@@ -77,7 +77,7 @@ class YardBuilder
     # memoize this so all commits happen on the same checkout
     @gh_pages_dir ||= begin
       dir = create_tmp_dir "gh-pages"
-      clone_gh_pages dir
+      clone_branch "gh-pages", dir
       dir
     end
   end
@@ -233,14 +233,10 @@ class YardBuilder
     FileUtils.remove_dir dir if Dir.exists? dir
   end
 
-  def clone_gh_pages gh_pages_repo_dir
-    # Creates a shallow clone
-    cmd "git clone --quiet --branch=gh-pages --depth=1 --single-branch #{git_repository} #{gh_pages_repo_dir} > /dev/null"
-  end
-
   def clone_branch branch, dir
     # Creates a shallow clone
-    cmd "git clone --quiet --branch=#{branch} --depth=1 --single-branch #{git_repository} #{dir} > /dev/null"
+    puts "cloning #{branch} to #{dir}"
+    `git clone --quiet --branch=#{branch} --depth=1 --single-branch #{git_repository} #{dir} > /dev/null`
   end
 
   def git_repository

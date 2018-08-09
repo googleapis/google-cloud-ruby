@@ -265,7 +265,8 @@ namespace :jsondoc do
     FileUtils.mkdir_p gh_pages
 
     # checkout the gh-pages branch
-    sh "git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null"
+    puts "cloning gh-pages to #{gh_pages}"
+    `git clone --quiet --branch=gh-pages --single-branch #{git_repo} #{gh_pages} > /dev/null`
   end
 
   desc "Copies a gem's jsondoc to gh-pages repo in temp dir."
