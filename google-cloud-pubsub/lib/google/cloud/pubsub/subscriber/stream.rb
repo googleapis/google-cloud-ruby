@@ -15,6 +15,7 @@
 
 require "google/cloud/pubsub/subscriber/async_unary_pusher"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
+require "google/cloud/pubsub/subscriber/inventory"
 require "google/cloud/pubsub/service"
 require "google/cloud/errors"
 require "monitor"
@@ -336,88 +337,6 @@ module Google
             return "error" if status.nil?
             return "stopped" if status == false
             status
-          end
-
-          ##
-          # @private
-          class Inventory
-            include MonitorMixin
-
-            attr_reader :stream, :limit
-
-            def initialize stream, limit
-              @stream = stream
-              @limit = limit
-              @_ack_ids = []
-              @wait_cond = new_cond
-
-              super()
-            end
-
-            def ack_ids
-              @_ack_ids
-            end
-
-            def add *ack_ids
-              ack_ids = Array(ack_ids).flatten
-              synchronize do
-                @_ack_ids += ack_ids
-                unless @stopped
-                  @background_thread ||= Thread.new { background_run }
-                end
-              end
-            end
-
-            def remove *ack_ids
-              ack_ids = Array(ack_ids).flatten
-              synchronize do
-                @_ack_ids -= ack_ids
-                if @_ack_ids.empty?
-                  if @background_thread
-                    @background_thread.kill
-                    @background_thread = nil
-                  end
-                end
-              end
-            end
-
-            def count
-              synchronize do
-                @_ack_ids.count
-              end
-            end
-
-            def empty?
-              synchronize do
-                @_ack_ids.empty?
-              end
-            end
-
-            def stop
-              synchronize do
-                @stopped = true
-                @background_thread.kill if @background_thread
-              end
-            end
-
-            def full?
-              count >= limit
-            end
-
-            protected
-
-            def background_run
-              until synchronize { @stopped }
-                delay = calc_delay
-                synchronize { @wait_cond.wait delay }
-
-                stream.delay_inventory!
-              end
-            end
-
-            def calc_delay
-              (stream.subscriber.deadline - 3) * rand(0.8..0.9)
-            end
           end
         end
       end
