@@ -74,8 +74,10 @@ js:
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The supported resource types that can be used as values of
-group_resource.resource_type. gae_app and uptime_url are not allowed
-because group checks on App Engine modules and URLs are not allowed.</p>
++group_resource.resource_type+.
++INSTANCE+ includes +gce_instance+ and +aws_ec2_instance+ resource types.
+The resource types +gae_app+ and +uptime_url+ are not valid here because
+group checks on App Engine modules and URLs are not allowed.</p>
 
 
   </div>
@@ -110,7 +112,8 @@ because group checks on App Engine modules and URLs are not allowed.</p>
         <dt id="INSTANCE-constant" class="">INSTANCE =
           <div class="docstring">
   <div class="discussion">
-    <p>A group of instances (could be either GCE or AWS_EC2).</p>
+    <p>A group of instances from Google Cloud Platform (GCP) or
+Amazon Web Services (AWS).</p>
 
 
   </div>
@@ -125,7 +128,7 @@ because group checks on App Engine modules and URLs are not allowed.</p>
         <dt id="AWS_ELB_LOAD_BALANCER-constant" class="">AWS_ELB_LOAD_BALANCER =
           <div class="docstring">
   <div class="discussion">
-    <p>A group of AWS load balancers.</p>
+    <p>A group of Amazon ELB load balancers.</p>
 
 
   </div>

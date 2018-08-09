@@ -424,8 +424,7 @@ receive new data points.</p>
 297
 298
 299
-300
-301</pre>
+300</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/alert.rb', line 151</span>
@@ -517,15 +516,14 @@ receive new data points.</p>
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>  <span class='comment'>#     The amount of time that a time series must violate the
 </span>  <span class='comment'>#     threshold to be considered failing. Currently, only values
-</span>  <span class='comment'>#     that are a multiple of a minute--e.g.  60, 120, or 300
+</span>  <span class='comment'>#     that are a multiple of a minute--e.g., 0, 60, 120, or 300
 </span>  <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>  <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
-</span>  <span class='comment'>#     ignored. When choosing a duration, it is useful to keep in mind the
-</span>  <span class='comment'>#     frequency of the underlying time series data (which may also be
-</span>  <span class='comment'>#     affected by any alignments specified in the +aggregation+ field);
-</span>  <span class='comment'>#     a good duration is long enough so that a single outlier does not
-</span>  <span class='comment'>#     generate spurious alerts, but short enough that unhealthy states
-</span>  <span class='comment'>#     are detected and alerted on quickly.
+</span>  <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
+</span>  <span class='comment'>#     keep in mind the frequency of the underlying time series data
+</span>  <span class='comment'>#     (which may also be affected by any alignments specified in the
+</span>  <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>  <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
+</span>  <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>  <span class='comment'># @!attribute [rw] trigger
 </span>  <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>  <span class='comment'>#     The number/percent of time series for which the comparison must hold
@@ -779,8 +777,7 @@ receive new data points.</p>
 297
 298
 299
-300
-301</pre>
+300</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/alert.rb', line 151</span>
@@ -872,15 +869,14 @@ receive new data points.</p>
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>  <span class='comment'>#     The amount of time that a time series must violate the
 </span>  <span class='comment'>#     threshold to be considered failing. Currently, only values
-</span>  <span class='comment'>#     that are a multiple of a minute--e.g.  60, 120, or 300
+</span>  <span class='comment'>#     that are a multiple of a minute--e.g., 0, 60, 120, or 300
 </span>  <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>  <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
-</span>  <span class='comment'>#     ignored. When choosing a duration, it is useful to keep in mind the
-</span>  <span class='comment'>#     frequency of the underlying time series data (which may also be
-</span>  <span class='comment'>#     affected by any alignments specified in the +aggregation+ field);
-</span>  <span class='comment'>#     a good duration is long enough so that a single outlier does not
-</span>  <span class='comment'>#     generate spurious alerts, but short enough that unhealthy states
-</span>  <span class='comment'>#     are detected and alerted on quickly.
+</span>  <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
+</span>  <span class='comment'>#     keep in mind the frequency of the underlying time series data
+</span>  <span class='comment'>#     (which may also be affected by any alignments specified in the
+</span>  <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>  <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
+</span>  <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>  <span class='comment'># @!attribute [rw] trigger
 </span>  <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>  <span class='comment'>#     The number/percent of time series for which the comparison must hold
@@ -1138,8 +1134,7 @@ display name for multiple conditions in the same policy.</p>
 297
 298
 299
-300
-301</pre>
+300</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/alert.rb', line 151</span>
@@ -1231,15 +1226,14 @@ display name for multiple conditions in the same policy.</p>
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>  <span class='comment'>#     The amount of time that a time series must violate the
 </span>  <span class='comment'>#     threshold to be considered failing. Currently, only values
-</span>  <span class='comment'>#     that are a multiple of a minute--e.g.  60, 120, or 300
+</span>  <span class='comment'>#     that are a multiple of a minute--e.g., 0, 60, 120, or 300
 </span>  <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>  <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
-</span>  <span class='comment'>#     ignored. When choosing a duration, it is useful to keep in mind the
-</span>  <span class='comment'>#     frequency of the underlying time series data (which may also be
-</span>  <span class='comment'>#     affected by any alignments specified in the +aggregation+ field);
-</span>  <span class='comment'>#     a good duration is long enough so that a single outlier does not
-</span>  <span class='comment'>#     generate spurious alerts, but short enough that unhealthy states
-</span>  <span class='comment'>#     are detected and alerted on quickly.
+</span>  <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
+</span>  <span class='comment'>#     keep in mind the frequency of the underlying time series data
+</span>  <span class='comment'>#     (which may also be affected by any alignments specified in the
+</span>  <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>  <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
+</span>  <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>  <span class='comment'># @!attribute [rw] trigger
 </span>  <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>  <span class='comment'>#     The number/percent of time series for which the comparison must hold
@@ -1543,8 +1537,7 @@ existing condition be deleted.</p>
 297
 298
 299
-300
-301</pre>
+300</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/alert.rb', line 151</span>
@@ -1636,15 +1629,14 @@ existing condition be deleted.</p>
 </span>  <span class='comment'>#   @return [Google::Protobuf::Duration]
 </span>  <span class='comment'>#     The amount of time that a time series must violate the
 </span>  <span class='comment'>#     threshold to be considered failing. Currently, only values
-</span>  <span class='comment'>#     that are a multiple of a minute--e.g.  60, 120, or 300
+</span>  <span class='comment'>#     that are a multiple of a minute--e.g., 0, 60, 120, or 300
 </span>  <span class='comment'>#     seconds--are supported. If an invalid value is given, an
-</span>  <span class='comment'>#     error will be returned. The +Duration.nanos+ field is
-</span>  <span class='comment'>#     ignored. When choosing a duration, it is useful to keep in mind the
-</span>  <span class='comment'>#     frequency of the underlying time series data (which may also be
-</span>  <span class='comment'>#     affected by any alignments specified in the +aggregation+ field);
-</span>  <span class='comment'>#     a good duration is long enough so that a single outlier does not
-</span>  <span class='comment'>#     generate spurious alerts, but short enough that unhealthy states
-</span>  <span class='comment'>#     are detected and alerted on quickly.
+</span>  <span class='comment'>#     error will be returned. When choosing a duration, it is useful to
+</span>  <span class='comment'>#     keep in mind the frequency of the underlying time series data
+</span>  <span class='comment'>#     (which may also be affected by any alignments specified in the
+</span>  <span class='comment'>#     +aggregations+ field); a good duration is long enough so that a single
+</span>  <span class='comment'>#     outlier does not generate spurious alerts, but short enough that
+</span>  <span class='comment'>#     unhealthy states are detected and alerted on quickly.
 </span>  <span class='comment'># @!attribute [rw] trigger
 </span>  <span class='comment'>#   @return [Google::Monitoring::V3::AlertPolicy::Condition::Trigger]
 </span>  <span class='comment'>#     The number/percent of time series for which the comparison must hold

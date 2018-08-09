@@ -104,7 +104,7 @@ availability.</p>
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span>, <span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span>, <span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span>, <span class='object_link'><a href="UptimeCheckConfig/ResourceGroup.html" title="Google::Monitoring::V3::UptimeCheckConfig::ResourceGroup (class)">ResourceGroup</a></span>, <span class='object_link'><a href="UptimeCheckConfig/TcpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::TcpCheck (class)">TcpCheck</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span>, <span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span>, <span class='object_link'><a href="UptimeCheckConfig/ResourceGroup.html" title="Google::Monitoring::V3::UptimeCheckConfig::ResourceGroup (class)">ResourceGroup</a></span>, <span class='object_link'><a href="UptimeCheckConfig/TcpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::TcpCheck (class)">TcpCheck</a></span>
     
   
 </p>
@@ -196,7 +196,7 @@ availability.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#internal_checkers-instance_method" title="#internal_checkers (instance method)">#<strong>internal_checkers</strong>  &#x21d2; Array&lt;Google::Monitoring::V3::UptimeCheckConfig::InternalChecker&gt; </a>
+      <a href="#internal_checkers-instance_method" title="#internal_checkers (instance method)">#<strong>internal_checkers</strong>  &#x21d2; Array&lt;Google::Monitoring::V3::InternalChecker&gt; </a>
     
 
     
@@ -222,6 +222,32 @@ availability.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#is_internal-instance_method" title="#is_internal (instance method)">#<strong>is_internal</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Denotes whether this is a check that egresses from InternalCheckers.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#monitored_resource-instance_method" title="#monitored_resource (instance method)">#<strong>monitored_resource</strong>  &#x21d2; Google::Api::MonitoredResource </a>
     
 
@@ -239,7 +265,7 @@ availability.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The monitored resource associated with the configuration.</p>
+    <span class="summary_desc"><div class='inline'><p>The <a href="https://cloud.google.com/monitoring/api/resources">monitored resource</a> associated with the configuration.</p>
 </div></span>
   
 </li>
@@ -291,7 +317,7 @@ availability.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>How often the uptime check is performed.</p>
+    <span class="summary_desc"><div class='inline'><p>How often, in seconds, the uptime check is performed.</p>
 </div></span>
   
 </li>
@@ -462,41 +488,6 @@ specified if a content match is required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -556,10 +547,27 @@ specified if a content match is required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -608,6 +616,7 @@ specified if a content match is required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -634,27 +643,8 @@ specified if a content match is required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -709,41 +699,6 @@ to identify; however, uniqueness is not enforced. Required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -803,10 +758,27 @@ to identify; however, uniqueness is not enforced. Required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -855,6 +827,7 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -881,27 +854,8 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -952,41 +906,6 @@ to identify; however, uniqueness is not enforced. Required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -1046,10 +965,27 @@ to identify; however, uniqueness is not enforced. Required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -1098,6 +1034,7 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -1124,27 +1061,8 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1156,7 +1074,7 @@ to identify; however, uniqueness is not enforced. Required.</p>
       <div class="method_details ">
   <h3 class="signature " id="internal_checkers-instance_method">
   
-    #<strong>internal_checkers</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">Google::Monitoring::V3::UptimeCheckConfig::InternalChecker</a></span>&gt;</tt> 
+    #<strong>internal_checkers</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="InternalChecker.html" title="Google::Monitoring::V3::InternalChecker (class)">Google::Monitoring::V3::InternalChecker</a></span>&gt;</tt> 
   
 
   
@@ -1164,7 +1082,9 @@ to identify; however, uniqueness is not enforced. Required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The internal checkers that this check will egress from.</p>
+    <p>Returns The internal checkers that this check will egress from. If +is_internal+ is
+true and this list is empty, the check will egress from all
+InternalCheckers configured for the project that owns this CheckConfig.</p>
 
 
   </div>
@@ -1177,12 +1097,14 @@ to identify; however, uniqueness is not enforced. Required.</p>
     <li>
       
       
-        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">Google::Monitoring::V3::UptimeCheckConfig::InternalChecker</a></span>&gt;</tt>)</span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="InternalChecker.html" title="Google::Monitoring::V3::InternalChecker (class)">Google::Monitoring::V3::InternalChecker</a></span>&gt;</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>The internal checkers that this check will egress from.</p>
+        <div class='inline'><p>The internal checkers that this check will egress from. If +is_internal+ is
+true and this list is empty, the check will egress from all
+InternalCheckers configured for the project that owns this CheckConfig.</p>
 </div>
       
     </li>
@@ -1195,41 +1117,6 @@ to identify; however, uniqueness is not enforced. Required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -1289,10 +1176,27 @@ to identify; however, uniqueness is not enforced. Required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -1341,6 +1245,7 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -1367,27 +1272,215 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="is_internal=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="is_internal-instance_method">
+  
+    #<strong>is_internal</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
 
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Denotes whether this is a check that egresses from InternalCheckers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Denotes whether this is a check that egresses from InternalCheckers.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
+  <span class='comment'># The resource submessage for group checks. It can be used instead of a
+</span>  <span class='comment'># monitored resource, when multiple resources are being monitored.
+</span>  <span class='comment'># @!attribute [rw] group_id
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
+</span>  <span class='comment'>#     The group of resources being monitored. Should be only the
+</span>  <span class='comment'>#     group_id, not projects/&lt;project_id&gt;/groups/&lt;group_id&gt;.
+</span>  <span class='comment'># @!attribute [rw] resource_type
+</span>  <span class='comment'>#   @return [Google::Monitoring::V3::GroupResourceType]
+</span>  <span class='comment'>#     The resource type of the group members.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ResourceGroup.html" title="Google::Monitoring::V3::UptimeCheckConfig::ResourceGroup (class)">ResourceGroup</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Information involved in an HTTP/HTTPS uptime check request.
+</span>  <span class='comment'># @!attribute [rw] use_ssl
+</span>  <span class='comment'>#   @return [true, false]
+</span>  <span class='comment'>#     If true, use HTTPS instead of HTTP to run the check.
+</span>  <span class='comment'># @!attribute [rw] path
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
+</span>  <span class='comment'>#     The path to the page to run the check against. Will be combined with the
+</span>  <span class='comment'>#     host (specified within the MonitoredResource) and port to construct the
+</span>  <span class='comment'>#     full URL. Optional (defaults to &quot;/&quot;).
+</span>  <span class='comment'># @!attribute [rw] port
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     The port to the page to run the check against. Will be combined with host
+</span>  <span class='comment'>#     (specified within the MonitoredResource) and path to construct the full
+</span>  <span class='comment'>#     URL. Optional (defaults to 80 without SSL, or 443 with SSL).
+</span>  <span class='comment'># @!attribute [rw] auth_info
+</span>  <span class='comment'>#   @return [Google::Monitoring::V3::UptimeCheckConfig::HttpCheck::BasicAuthentication]
+</span>  <span class='comment'>#     The authentication information. Optional when creating an HTTP check;
+</span>  <span class='comment'>#     defaults to empty.
+</span>  <span class='comment'># @!attribute [rw] mask_headers
+</span>  <span class='comment'>#   @return [true, false]
+</span>  <span class='comment'>#     Boolean specifiying whether to encrypt the header information.
+</span>  <span class='comment'>#     Encryption should be specified for any headers related to authentication
+</span>  <span class='comment'>#     that you do not wish to be seen when retrieving the configuration. The
+</span>  <span class='comment'>#     server will be responsible for encrypting the headers.
+</span>  <span class='comment'>#     On Get/List calls, if mask_headers is set to True then the headers
+</span>  <span class='comment'>#     will be obscured with ******.
+</span>  <span class='comment'># @!attribute [rw] headers
+</span>  <span class='comment'>#   @return [Hash{String =&gt; String}]
+</span>  <span class='comment'>#     The list of headers to send as part of the uptime check request.
+</span>  <span class='comment'>#     If two headers have the same key and different values, they should
+</span>  <span class='comment'>#     be entered as a single header, with the value being a comma-separated
+</span>  <span class='comment'>#     list of all the desired values as described at
+</span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
+</span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
+</span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
+    <span class='comment'># A type of authentication to perform against the specified resource or URL
+</span>    <span class='comment'># that uses username and password.
+</span>    <span class='comment'># Currently, only Basic authentication is supported in Uptime Monitoring.
+</span>    <span class='comment'># @!attribute [rw] username
+</span>    <span class='comment'>#   @return [String]
+</span>    <span class='comment'>#     The username to authenticate.
+</span>    <span class='comment'># @!attribute [rw] password
+</span>    <span class='comment'>#   @return [String]
+</span>    <span class='comment'>#     The password to authenticate.
+</span>    <span class='kw'>class</span> <span class='const'>BasicAuthentication</span><span class='semicolon'>;</span> <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Information required for a TCP uptime check request.
+</span>  <span class='comment'># @!attribute [rw] port
+</span>  <span class='comment'>#   @return [Integer]
+</span>  <span class='comment'>#     The port to the page to run the check against. Will be combined with host
+</span>  <span class='comment'>#     (specified within the MonitoredResource) to construct the full URL.
+</span>  <span class='comment'>#     Required.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/TcpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::TcpCheck (class)">TcpCheck</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># Used to perform string matching. Currently, this matches on the exact
+</span>  <span class='comment'># content. In the future, it can be expanded to allow for regular expressions
+</span>  <span class='comment'># and more complex matching.
+</span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1407,7 +1500,15 @@ to identify; however, uniqueness is not enforced. Required.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns The monitored resource associated with the configuration.</p>
+    <p>Returns The <a href="https://cloud.google.com/monitoring/api/resources">monitored
+resource</a> associated
+with the configuration.
+The following monitored resource types are supported for uptime checks:
+  uptime_url
+  gce_instance
+  gae_app
+  aws_ec2_instance
+  aws_elb_load_balancer</p>
 
 
   </div>
@@ -1425,7 +1526,15 @@ to identify; however, uniqueness is not enforced. Required.</p>
       
       
         &mdash;
-        <div class='inline'><p>The monitored resource associated with the configuration.</p>
+        <div class='inline'><p>The <a href="https://cloud.google.com/monitoring/api/resources">monitored
+resource</a> associated
+with the configuration.
+The following monitored resource types are supported for uptime checks:
+  uptime_url
+  gce_instance
+  gae_app
+  aws_ec2_instance
+  aws_elb_load_balancer</p>
 </div>
       
     </li>
@@ -1438,41 +1547,6 @@ to identify; however, uniqueness is not enforced. Required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -1532,10 +1606,27 @@ to identify; however, uniqueness is not enforced. Required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -1584,6 +1675,7 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -1610,27 +1702,8 @@ to identify; however, uniqueness is not enforced. Required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1693,41 +1766,6 @@ response.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -1787,10 +1825,27 @@ response.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -1839,6 +1894,7 @@ response.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -1865,27 +1921,8 @@ response.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1905,8 +1942,10 @@ response.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns How often the uptime check is performed.
-Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
+    <p>Returns How often, in seconds, the uptime check is performed.
+Currently, the only supported values are +60s+ (1 minute), +300s+
+(5 minutes), +600s+ (10 minutes), and +900s+ (15 minutes). Optional,
+defaults to +300s+.</p>
 
 
   </div>
@@ -1924,8 +1963,10 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
       
       
         &mdash;
-        <div class='inline'><p>How often the uptime check is performed.
-Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
+        <div class='inline'><p>How often, in seconds, the uptime check is performed.
+Currently, the only supported values are +60s+ (1 minute), +300s+
+(5 minutes), +600s+ (10 minutes), and +900s+ (15 minutes). Optional,
+defaults to +300s+.</p>
 </div>
       
     </li>
@@ -1938,41 +1979,6 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -2032,10 +2038,27 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -2084,6 +2107,7 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -2110,27 +2134,8 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2181,41 +2186,6 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -2275,10 +2245,27 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -2327,6 +2314,7 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -2353,27 +2341,8 @@ Currently, only 1, 5, 10, and 15 minutes are supported. Required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2432,41 +2401,6 @@ regions.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -2526,10 +2460,27 @@ regions.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -2578,6 +2529,7 @@ regions.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -2604,27 +2556,8 @@ regions.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2675,41 +2608,6 @@ regions.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -2769,10 +2667,27 @@ regions.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -2821,6 +2736,7 @@ regions.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -2847,27 +2763,8 @@ regions.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2920,41 +2817,6 @@ between 1 and 60 seconds). Required.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
@@ -3014,10 +2876,27 @@ between 1 and 60 seconds). Required.</p>
 163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/monitoring/v3/doc/google/monitoring/v3/uptime.rb', line 107</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Monitoring::V3::UptimeCheckConfig (class)">UptimeCheckConfig</a></span></span>
   <span class='comment'># The resource submessage for group checks. It can be used instead of a
@@ -3066,6 +2945,7 @@ between 1 and 60 seconds). Required.</p>
 </span>  <span class='comment'>#     https://www.w3.org/Protocols/rfc2616/rfc2616.txt (page 31).
 </span>  <span class='comment'>#     Entering two separate headers with the same key in a Create call will
 </span>  <span class='comment'>#     cause the first to be overwritten by the second.
+</span>  <span class='comment'>#     The maximum number of headers allowed is 100.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/HttpCheck.html" title="Google::Monitoring::V3::UptimeCheckConfig::HttpCheck (class)">HttpCheck</a></span></span>
     <span class='comment'># A type of authentication to perform against the specified resource or URL
 </span>    <span class='comment'># that uses username and password.
@@ -3092,27 +2972,8 @@ between 1 and 60 seconds). Required.</p>
 </span>  <span class='comment'># and more complex matching.
 </span>  <span class='comment'># @!attribute [rw] content
 </span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     String content to match
+</span>  <span class='comment'>#     String content to match (max 1024 bytes)
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/ContentMatcher.html" title="Google::Monitoring::V3::UptimeCheckConfig::ContentMatcher (class)">ContentMatcher</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
-
-  <span class='comment'># Nimbus InternalCheckers.
-</span>  <span class='comment'># @!attribute [rw] project_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP project ID. Not necessarily the same as the project_id for the config.
-</span>  <span class='comment'># @!attribute [rw] network
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The internal network to perform this uptime check on.
-</span>  <span class='comment'># @!attribute [rw] gcp_zone
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The GCP zone the uptime check should egress from. Only respected for
-</span>  <span class='comment'>#     internal uptime checks, where internal_network is specified.
-</span>  <span class='comment'># @!attribute [rw] checker_id
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker ID.
-</span>  <span class='comment'># @!attribute [rw] display_name
-</span>  <span class='comment'>#   @return [String]
-</span>  <span class='comment'>#     The checker&#39;s human-readable name.
-</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="UptimeCheckConfig/InternalChecker.html" title="Google::Monitoring::V3::UptimeCheckConfig::InternalChecker (class)">InternalChecker</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
