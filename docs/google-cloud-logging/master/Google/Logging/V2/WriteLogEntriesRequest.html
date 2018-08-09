@@ -107,6 +107,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#dry_run-instance_method" title="#dry_run (instance method)">#<strong>dry_run</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Optional.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#entries-instance_method" title="#entries (instance method)">#<strong>entries</strong>  &#x21d2; Array&lt;Google::Logging::V2::LogEntry&gt; </a>
     
 
@@ -244,9 +270,68 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="entries=-instance_method"></span>
+      <span id="dry_run=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="entries-instance_method">
+  <h3 class="signature first" id="dry_run-instance_method">
+  
+    #<strong>dry_run</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Optional. If true, the request should expect normal response, but the
+entries won&#39;t be persisted nor exported. Useful for checking whether the
+logging API endpoints are working properly before sending valuable data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Optional. If true, the request should expect normal response, but the
+entries won&#39;t be persisted nor exported. Useful for checking whether the
+logging API endpoints are working properly before sending valuable data.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 115</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="entries=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="entries-instance_method">
   
     #<strong>entries</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2::LogEntry (class)">Google::Logging::V2::LogEntry</a></span>&gt;</tt> 
   
@@ -260,7 +345,8 @@ js:
 entries in this list does not matter. Values supplied in this method&#39;s
 +log_name+, +resource+, and +labels+ fields are copied into those log
 entries in this list that do not include values for their corresponding
-fields. For more information, see the <span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span> type.</p>
+fields. For more information, see the
+<span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span> type.</p>
 
 <p>If the +timestamp+ or +insert_id+ fields are missing in log entries, then
 this method supplies the current time or a unique identifier, respectively.
@@ -270,8 +356,9 @@ the entries later in the list. See the +entries.list+ method.</p>
 
 <p>Log entries with timestamps that are more than the
 <a href="https://cloud.google.com/logging/quota-policy">logs retention period</a> in the past or more than
-24 hours in the future might be discarded. Discarding does not return
-an error.</p>
+24 hours in the future will not be available when calling +entries.list+.
+However, those log entries can still be exported with
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
 
 <p>To improve throughput and to avoid exceeding the
 <a href="https://cloud.google.com/logging/quota-policy">quota limit</a> for calls to +entries.write+,
@@ -298,7 +385,8 @@ rather than calling this method for each individual log entry.</p>
 entries in this list does not matter. Values supplied in this method&#39;s
 +log_name+, +resource+, and +labels+ fields are copied into those log
 entries in this list that do not include values for their corresponding
-fields. For more information, see the <span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span> type.</p>
+fields. For more information, see the
+<span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span> type.</p>
 
 <p>If the +timestamp+ or +insert_id+ fields are missing in log entries, then
 this method supplies the current time or a unique identifier, respectively.
@@ -308,8 +396,9 @@ the entries later in the list. See the +entries.list+ method.</p>
 
 <p>Log entries with timestamps that are more than the
 <a href="https://cloud.google.com/logging/quota-policy">logs retention period</a> in the past or more than
-24 hours in the future might be discarded. Discarding does not return
-an error.</p>
+24 hours in the future will not be available when calling +entries.list+.
+However, those log entries can still be exported with
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
 
 <p>To improve throughput and to avoid exceeding the
 <a href="https://cloud.google.com/logging/quota-policy">quota limit</a> for calls to +entries.write+,
@@ -327,10 +416,10 @@ rather than calling this method for each individual log entry.</p>
       <pre class="lines">
 
 
-112</pre>
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 115</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -388,10 +477,10 @@ See <span class='object_link'><a href="LogEntry.html" title="Google::Logging::V2
       <pre class="lines">
 
 
-112</pre>
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 115</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -469,10 +558,10 @@ For more information about log names, see
       <pre class="lines">
 
 
-112</pre>
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 115</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -532,10 +621,10 @@ keyed by the entries&#39; zero-based index in the +entries.write+ method.</p>
       <pre class="lines">
 
 
-112</pre>
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 115</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -603,10 +692,10 @@ entries in +entries+ that do not specify a value for +resource+. Example:</p>
       <pre class="lines">
 
 
-112</pre>
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/logging.rb', line 115</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::WriteLogEntriesRequest (class)">WriteLogEntriesRequest</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

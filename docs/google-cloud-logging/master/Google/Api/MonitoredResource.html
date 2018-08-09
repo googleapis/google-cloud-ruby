@@ -192,8 +192,8 @@ Engine VM instance could be represented by the following object, because the
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Required. Values for all of the labels listed in the associated monitored
-resource descriptor. For example, Cloud SQL databases use the labels
-+&quot;database_id&quot;+ and +&quot;zone&quot;+.</p>
+resource descriptor. For example, Compute Engine VM instances use the
+labels +&quot;project_id&quot;+, +&quot;instance_id&quot;+, and +&quot;zone&quot;+.</p>
 
 
   </div>
@@ -212,8 +212,8 @@ resource descriptor. For example, Cloud SQL databases use the labels
       
         &mdash;
         <div class='inline'><p>Required. Values for all of the labels listed in the associated monitored
-resource descriptor. For example, Cloud SQL databases use the labels
-+&quot;database_id&quot;+ and +&quot;zone&quot;+.</p>
+resource descriptor. For example, Compute Engine VM instances use the
+labels +&quot;project_id&quot;+, +&quot;instance_id&quot;+, and +&quot;zone&quot;+.</p>
 </div>
       
     </li>
@@ -252,7 +252,7 @@ resource descriptor. For example, Cloud SQL databases use the labels
   <div class="discussion">
     <p>Returns Required. The monitored resource type. This field must match
 the +type+ field of a <span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> object. For
-example, the type of a Cloud SQL database is +&quot;cloudsql_database&quot;+.</p>
+example, the type of a Compute Engine VM instance is +gce_instance+.</p>
 
 
   </div>
@@ -272,7 +272,7 @@ example, the type of a Cloud SQL database is +&quot;cloudsql_database&quot;+.</p
         &mdash;
         <div class='inline'><p>Required. The monitored resource type. This field must match
 the +type+ field of a <span class='object_link'><a href="MonitoredResourceDescriptor.html" title="Google::Api::MonitoredResourceDescriptor (class)">MonitoredResourceDescriptor</a></span> object. For
-example, the type of a Cloud SQL database is +&quot;cloudsql_database&quot;+.</p>
+example, the type of a Compute Engine VM instance is +gce_instance+.</p>
 </div>
       
     </li>

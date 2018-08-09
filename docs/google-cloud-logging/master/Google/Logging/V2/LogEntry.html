@@ -237,6 +237,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#metadata-instance_method" title="#metadata (instance method)">#<strong>metadata</strong>  &#x21d2; Google::Api::MonitoredResourceMetadata </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Output only.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#operation-instance_method" title="#operation (instance method)">#<strong>operation</strong>  &#x21d2; Google::Logging::V2::LogEntryOperation </a>
     
 
@@ -549,10 +575,10 @@ log entry, if applicable.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -614,10 +640,10 @@ to order log entries that have the same +timestamp+ value.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -630,7 +656,7 @@ to order log entries that have the same +timestamp+ value.</p>
       <div class="method_details ">
   <h3 class="signature " id="json_payload-instance_method">
   
-    #<strong>json_payload</strong>  &#x21d2; <tt>Google::Protobuf::Struct</tt> 
+    #<strong>json_payload</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Google::Protobuf::Struct</a></span></tt> 
   
 
   
@@ -652,7 +678,7 @@ expressed as a JSON object.</p>
     <li>
       
       
-        <span class='type'>(<tt>Google::Protobuf::Struct</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../../Protobuf/Struct.html" title="Google::Protobuf::Struct (class)">Google::Protobuf::Struct</a></span></tt>)</span>
       
       
       
@@ -671,10 +697,10 @@ expressed as a JSON object.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -728,10 +754,10 @@ information about the log entry.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -827,10 +853,69 @@ any results.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="metadata=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="metadata-instance_method">
+  
+    #<strong>metadata</strong>  &#x21d2; <tt><span class='object_link'><a href="../../Api/MonitoredResourceMetadata.html" title="Google::Api::MonitoredResourceMetadata (class)">Google::Api::MonitoredResourceMetadata</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Output only. Additional metadata about the monitored resource.
+Only +k8s_container+, +k8s_pod+, and +k8s_node+ MonitoredResources have
+this field populated.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Api/MonitoredResourceMetadata.html" title="Google::Api::MonitoredResourceMetadata (class)">Google::Api::MonitoredResourceMetadata</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Output only. Additional metadata about the monitored resource.
+Only +k8s_container+, +k8s_pod+, and +k8s_node+ MonitoredResources have
+this field populated.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -884,10 +969,10 @@ applicable.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -943,10 +1028,10 @@ entry payloads.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -998,10 +1083,10 @@ entry payloads.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1022,7 +1107,7 @@ entry payloads.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Required. The monitored resource associated with this log entry.
+    <p>Returns Required. The primary monitored resource associated with this log entry.
 Example: a log entry that reports a database error would be
 associated with the monitored resource designating the particular
 database that reported the error.</p>
@@ -1043,7 +1128,7 @@ database that reported the error.</p>
       
       
         &mdash;
-        <div class='inline'><p>Required. The monitored resource associated with this log entry.
+        <div class='inline'><p>Required. The primary monitored resource associated with this log entry.
 Example: a log entry that reports a database error would be
 associated with the monitored resource designating the particular
 database that reported the error.</p>
@@ -1059,10 +1144,10 @@ database that reported the error.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1116,10 +1201,10 @@ database that reported the error.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1173,10 +1258,10 @@ if any.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1197,11 +1282,10 @@ if any.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Optional. Id of the span within the trace associated with the log entry.
-e.g. &quot;0000000000000042&quot;
-For Stackdriver trace spans, this is the same format that the Stackdriver
-trace API uses.
-The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
+    <p>Returns Optional. The span ID within the trace associated with the log entry. For
+Stackdriver Trace spans, this is the same format that the Stackdriver Trace
+API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such
+as <code>&quot;000000000000004a&quot;</code>.</p>
 
 
   </div>
@@ -1219,11 +1303,10 @@ The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
       
       
         &mdash;
-        <div class='inline'><p>Optional. Id of the span within the trace associated with the log entry.
-e.g. &quot;0000000000000042&quot;
-For Stackdriver trace spans, this is the same format that the Stackdriver
-trace API uses.
-The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
+        <div class='inline'><p>Optional. The span ID within the trace associated with the log entry. For
+Stackdriver Trace spans, this is the same format that the Stackdriver Trace
+API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such
+as <code>&quot;000000000000004a&quot;</code>.</p>
 </div>
       
     </li>
@@ -1236,10 +1319,10 @@ The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1291,10 +1374,10 @@ The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1318,12 +1401,16 @@ The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
     <p>Returns Optional. The time the event described by the log entry occurred.
 This time is used to compute the log entry&#39;s age and to enforce
 the logs retention period. If this field is omitted in a new log
-entry, then Stackdriver Logging assigns it the current time.</p>
+entry, then Stackdriver Logging assigns it the current time.
+Timestamps have nanosecond accuracy, but trailing zeros in the fractional
+seconds might be omitted when the timestamp is displayed.</p>
 
 <p>Incoming log entries should have timestamps that are no more than
-the <a href="https://cloud.google.com/logging/quota-policy">logs retention period</a> in the past,
-and no more than 24 hours in the future.
-See the +entries.write+ API method for more information.</p>
+the <a href="https://cloud.google.com/logging/quotas">logs retention period</a> in the past,
+and no more than 24 hours in the future. Log entries outside those time
+boundaries will not be available when calling +entries.list+, but
+those log entries can still be exported with
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
 
 
   </div>
@@ -1344,12 +1431,16 @@ See the +entries.write+ API method for more information.</p>
         <div class='inline'><p>Optional. The time the event described by the log entry occurred.
 This time is used to compute the log entry&#39;s age and to enforce
 the logs retention period. If this field is omitted in a new log
-entry, then Stackdriver Logging assigns it the current time.</p>
+entry, then Stackdriver Logging assigns it the current time.
+Timestamps have nanosecond accuracy, but trailing zeros in the fractional
+seconds might be omitted when the timestamp is displayed.</p>
 
 <p>Incoming log entries should have timestamps that are no more than
-the <a href="https://cloud.google.com/logging/quota-policy">logs retention period</a> in the past,
-and no more than 24 hours in the future.
-See the +entries.write+ API method for more information.</p>
+the <a href="https://cloud.google.com/logging/quotas">logs retention period</a> in the past,
+and no more than 24 hours in the future. Log entries outside those time
+boundaries will not be available when calling +entries.list+, but
+those log entries can still be exported with
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
 </div>
       
     </li>
@@ -1362,10 +1453,10 @@ See the +entries.write+ API method for more information.</p>
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1423,10 +1514,10 @@ to +//tracing.googleapis.com+. Example:
       <pre class="lines">
 
 
-116</pre>
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/logging/v2/doc/google/logging/v2/log_entry.rb', line 124</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Logging::V2::LogEntry (class)">LogEntry</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
