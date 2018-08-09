@@ -21,6 +21,10 @@ require "json"
 require "base64"
 require "google/cloud/debugger"
 
+# Increase the time limit from the default of 0.05 secs to 0.2 secs because
+# coverage may run slowly.
+Google::Cloud::Debugger.configure.evaluation_time_limit = 0.2
+
 class MockDebugger < Minitest::Spec
   let(:project) { "test" }
   let(:default_options) { Google::Gax::CallOptions.new(kwargs: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
