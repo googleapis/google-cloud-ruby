@@ -247,11 +247,8 @@ module Google
             synchronize { start_streaming! }
           rescue StandardError => e
             synchronize do
-              if @stopped
-                raise Google::Cloud::Error.from_error(e)
-              else
-                start_streaming!
-              end
+              subscriber.error! e
+              start_streaming! unless @stopped
             end
           end
 

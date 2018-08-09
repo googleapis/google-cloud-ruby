@@ -46,18 +46,45 @@ class Google::Gax::CallOptions
 end
 
 class StreamingPullStub
-  attr_reader :request_enum, :responses
+  attr_reader :requests, :responses
 
-  def initialize responses
-    # EnumeratorQueue will return an enum that blocks
-    @responses = Google::Cloud::Pubsub::Subscriber::EnumeratorQueue.new
-    responses.each { |response| @responses.push response }
+  def initialize response_groups
+    @requests = []
+    @responses = response_groups.map do |responses|
+      RaisableEnumeratorQueue.new.tap do |q|
+        responses.each do |response|
+          q.push response
+        end
+      end
+    end
   end
 
   def streaming_pull request_enum, options: nil
-    @request_enum = request_enum
-    # return response enumerator
-    @responses.each
+    @requests << request_enum
+    @responses.shift.each
+  end
+
+  class RaisableEnumeratorQueue
+    def initialize sentinel = nil
+      @queue    = Queue.new
+      @sentinel = sentinel
+    end
+
+    def push obj
+      @queue.push obj
+    end
+
+    def each
+      return enum_for(:each) unless block_given?
+
+      loop do
+        obj = @queue.pop
+        # This is the only way to raise and have it be handled by the steam thread
+        raise obj if obj.is_a? StandardError
+        break if obj.equal? @sentinel
+        yield obj
+      end
+    end
   end
 end
 

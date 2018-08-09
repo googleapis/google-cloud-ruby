@@ -32,9 +32,9 @@ describe Google::Cloud::Pubsub::Subscriber, :delay, :mock_pubsub do
     rec_message_msg = "pulled-message"
     rec_message_ack_id = 123456789
     pull_res = Google::Pubsub::V1::StreamingPullResponse.decode_json rec_messages_json(rec_message_msg, rec_message_ack_id)
-    responses = [pull_res]
+    response_groups = [[pull_res]]
 
-    stub = StreamingPullStub.new responses.each
+    stub = StreamingPullStub.new response_groups
     called = false
 
     subscription.service.mocked_subscriber = stub
@@ -61,9 +61,9 @@ describe Google::Cloud::Pubsub::Subscriber, :delay, :mock_pubsub do
 
   it "can delay multiple messages" do
     pull_res = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc, rec_msg2_grpc, rec_msg3_grpc]
-    responses = [pull_res]
+    response_groups = [[pull_res]]
 
-    stub = StreamingPullStub.new responses.each
+    stub = StreamingPullStub.new response_groups
     called = 0
 
     subscription.service.mocked_subscriber = stub
