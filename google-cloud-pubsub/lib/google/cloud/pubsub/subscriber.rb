@@ -74,7 +74,7 @@ module Google
         def initialize subscription_name, callback, deadline: nil, streams: nil,
                        inventory: nil, threads: {}, service: nil
           @callback = callback
-          @error_callback = nil
+          @error_callbacks = []
           @subscription_name = subscription_name
           @deadline = deadline || 60
           @streams = streams || 4
@@ -176,6 +176,8 @@ module Google
         # If an unhandled error has occurred the subscriber will attempt to
         # recover from the error and resume listening.
         #
+        # Multiple error handlers can be added.
+        #
         # @yield [callback] The block to be called when an error is raised.
         # @yieldparam [Exception] error The error raised.
         #
@@ -205,7 +207,7 @@ module Google
         #
         def on_error &block
           synchronize do
-            @error_callback = block
+            @error_callbacks << block
           end
         end
 
@@ -245,11 +247,11 @@ module Google
 
         # @private returns error object from the stream thread.
         def error! error
-          error_callback = synchronize do
+          error_callbacks = synchronize do
             @last_error = error
-            @error_callback
+            @error_callbacks
           end
-          error_callback.call error unless error_callback.nil?
+          error_callbacks.each { |error_callback| error_callback.call error }
         end
 
         ##
