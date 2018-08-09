@@ -245,10 +245,11 @@ module Google
 
         # @private returns error object from the stream thread.
         def error! error
-          synchronize do
+          error_callback = synchronize do
             @last_error = error
-            @error_callback.call error unless @error_callback.nil?
+            @error_callback
           end
+          error_callback.call error unless error_callback.nil?
         end
 
         ##
