@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,9 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [LoggingServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
-    # | [ConfigServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
-    # | [MetricsServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
+    # | [MetricsServiceV2Client][] | Service for configuring logs-based metrics. |
     # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
     #
-    # [LoggingServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/loggingservicev2client
-    # [ConfigServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/configservicev2client
     # [MetricsServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/metricsservicev2client
     # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/datatypes
     #

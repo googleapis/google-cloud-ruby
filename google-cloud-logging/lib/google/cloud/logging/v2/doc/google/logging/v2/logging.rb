@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,14 +19,10 @@ module Google
     #
     # | Class | Description |
     # | ----- | ----------- |
-    # | [LoggingServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
-    # | [ConfigServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
-    # | [MetricsServiceV2Client][] | Writes log entries and manages your Stackdriver Logging configuration. |
+    # | [LoggingServiceV2Client][] | Service for ingesting and querying logs. |
     # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
     #
     # [LoggingServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/loggingservicev2client
-    # [ConfigServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/configservicev2client
-    # [MetricsServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/metricsservicev2client
     # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/datatypes
     #
     module V2
@@ -85,7 +81,8 @@ module Google
       #     entries in this list does not matter. Values supplied in this method's
       #     +log_name+, +resource+, and +labels+ fields are copied into those log
       #     entries in this list that do not include values for their corresponding
-      #     fields. For more information, see the {Google::Logging::V2::LogEntry LogEntry} type.
+      #     fields. For more information, see the
+      #     {Google::Logging::V2::LogEntry LogEntry} type.
       #
       #     If the +timestamp+ or +insert_id+ fields are missing in log entries, then
       #     this method supplies the current time or a unique identifier, respectively.
@@ -95,8 +92,9 @@ module Google
       #
       #     Log entries with timestamps that are more than the
       #     [logs retention period](https://cloud.google.com/logging/quota-policy) in the past or more than
-      #     24 hours in the future might be discarded. Discarding does not return
-      #     an error.
+      #     24 hours in the future will not be available when calling +entries.list+.
+      #     However, those log entries can still be exported with
+      #     [LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
       #
       #     To improve throughput and to avoid exceeding the
       #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to +entries.write+,
@@ -109,6 +107,11 @@ module Google
       #     entry is not written, then the response status is the error associated
       #     with one of the failed entries and the response includes error details
       #     keyed by the entries' zero-based index in the +entries.write+ method.
+      # @!attribute [rw] dry_run
+      #   @return [true, false]
+      #     Optional. If true, the request should expect normal response, but the
+      #     entries won't be persisted nor exported. Useful for checking whether the
+      #     logging API endpoints are working properly before sending valuable data.
       class WriteLogEntriesRequest; end
 
       # Result returned from WriteLogEntries.

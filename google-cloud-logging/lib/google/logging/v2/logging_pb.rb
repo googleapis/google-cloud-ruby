@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :labels, :string, :string, 3
     repeated :entries, :message, 4, "google.logging.v2.LogEntry"
     optional :partial_success, :bool, 5
+    optional :dry_run, :bool, 6
   end
   add_message "google.logging.v2.WriteLogEntriesResponse" do
   end
