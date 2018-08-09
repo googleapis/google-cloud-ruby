@@ -565,7 +565,6 @@ namespace :circleci do
     end
 
     Rake::Task["release"].invoke tag
-    Rake::Task["docs:publish_tag"].invoke tag
   end
 end
 
@@ -701,6 +700,7 @@ task :release, :tag do |t, args|
       puts "Successfully built and pushed #{package} for version #{version}"
 
       Rake::Task["jsondoc:package"].invoke tag
+      Rake::Task["docs:publish_tag"].invoke tag
     rescue => e
       puts "Error while releasing #{package} version #{version}: #{e.message}"
     end
