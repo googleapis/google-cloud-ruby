@@ -60,7 +60,6 @@ module Google
                 end
 
                 @batch_created_at ||= Time.now
-                @background_thread ||= Thread.new { run_background }
 
                 push_batch_request! if @batch.ready?
               end
@@ -89,7 +88,6 @@ module Google
                 end
 
                 @batch_created_at ||= Time.now
-                @background_thread ||= Thread.new { run_background }
 
                 push_batch_request! if @batch.ready?
               end
@@ -100,15 +98,25 @@ module Google
             nil
           end
 
-          def stop
+          def start
             synchronize do
-              @stopped = true
+              @stopped = false
 
-              # Stop any background activity, clean up happens in wait!
-              @background_thread.kill if @background_thread
+              @background_thread ||= Thread.new { run_background }
             end
 
-            push_batch_request!
+            self
+          end
+
+          def stop
+            synchronize do
+              push_batch_request!
+
+              @stopped = true
+              @cond.broadcast
+            end
+
+            self
           end
 
           def started?
@@ -119,25 +127,33 @@ module Google
             synchronize { @stopped }
           end
 
+          def batch_nil?
+            synchronize { @batch.nil? }
+          end
+
           protected
 
           def run_background
-            synchronize do
-              until @stopped
-                if @batch.nil?
-                  @cond.wait
+            until stopped?
+              if batch_nil?
+                synchronize do
+                  @cond.wait # wait until broadcast
                   next
                 end
+              end
 
-                time_since_batch_creation = Time.now - @batch_created_at
-                if time_since_batch_creation > @interval
-                  # interval met, publish the batch...
-                  push_batch_request!
-                  @cond.wait
-                else
-                  # still waiting for the interval to publish the batch...
-                  @cond.wait(@interval - time_since_batch_creation)
-                end
+              time_until_next_push = synchronize do
+                @interval - (Time.now - @batch_created_at)
+              end
+
+              if time_until_next_push <= 0
+                # interval met, publish the batch...
+                synchronize { push_batch_request! }
+                time_until_next_push = nil # wait until broadcast
+              end
+
+              synchronize do
+                @cond.wait time_until_next_push
               end
             end
           end

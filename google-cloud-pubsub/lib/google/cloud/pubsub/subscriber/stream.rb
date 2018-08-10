@@ -130,7 +130,7 @@ module Google
             return true if ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncUnaryPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new(self).start
               @async_pusher.acknowledge ack_ids
               @inventory.remove ack_ids
               unpause_streaming!
@@ -146,7 +146,7 @@ module Google
             return true if mod_ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncUnaryPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new(self).start
               @async_pusher.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
@@ -173,7 +173,7 @@ module Google
             synchronize do
               return true if @inventory.empty?
 
-              @async_pusher ||= AsyncUnaryPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new(self).start
               @async_pusher.delay subscriber.deadline, @inventory.ack_ids
             end
 
@@ -235,7 +235,7 @@ module Google
 
                 synchronize do
                   # Create receipt of received messages reception
-                  @async_pusher ||= AsyncUnaryPusher.new self
+                  @async_pusher ||= AsyncUnaryPusher.new(self).start
                   @async_pusher.delay subscriber.deadline, received_ack_ids
 
                   # Add received messages to inventory
