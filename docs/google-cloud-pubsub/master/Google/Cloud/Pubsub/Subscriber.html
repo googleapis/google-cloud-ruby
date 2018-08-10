@@ -347,6 +347,52 @@ Subscription. See <span class='object_link'><a href="Subscription.html#listen-in
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#last_error-instance_method" title="#last_error (instance method)">#<strong>last_error</strong>  &#x21d2; Exception<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The most recent unhandled error to occur while listening to messages on the subscriber.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_error-instance_method" title="#on_error (instance method)">#<strong>on_error</strong> {|callback| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Register to be notified of errors when raised.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#start-instance_method" title="#start (instance method)">#<strong>start</strong>  &#x21d2; Subscriber </a>
     
 
@@ -897,7 +943,208 @@ messages are pulled from.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="start-instance_method">
+  <h3 class="signature first" id="last_error-instance_method">
+  
+    #<strong>last_error</strong>  &#x21d2; <tt>Exception</tt><sup>?</sup> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The most recent unhandled error to occur while listening to messages
+on the subscriber.</p>
+
+<p>If an unhandled error has occurred the subscriber will attempt to
+recover from the error and resume listening.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># process message
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start listening for messages and errors.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># If an error was raised, it can be retrieved here:
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_last_error'>last_error</span> <span class='comment'>#=&gt; nil
+</span>
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Exception</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>error The most recent error raised.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+244
+245
+246</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 244</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_last_error'>last_error</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@last_error</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_error-instance_method">
+  
+    #<strong>on_error</strong> {|callback| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Register to be notified of errors when raised.</p>
+
+<p>If an unhandled error has occurred the subscriber will attempt to
+recover from the error and resume listening.</p>
+
+<p>Multiple error handlers can be added.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span>
+
+<span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># process message
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Register to be notified when unhandled errors occur.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_on_error'>on_error</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_error'>error</span><span class='op'>|</span>
+  <span class='comment'># log error
+</span>  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_error'>error</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start listening for messages and errors.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="#callback-instance_method" title="Google::Cloud::Pubsub::Subscriber#callback (method)">callback</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The block to be called when an error is raised.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>error</span>
+      
+      
+        <span class='type'>(<tt>Exception</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The error raised.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+208
+209
+210
+211
+212</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 208</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_on_error'>on_error</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
+  <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
+    <span class='ivar'>@error_callbacks</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="start-instance_method">
   
     #<strong>start</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="Google::Cloud::Pubsub::Subscriber (class)">Subscriber</a></span></tt> 
   
@@ -939,7 +1186,6 @@ received messages.</p>
       <pre class="lines">
 
 
-103
 104
 105
 106
@@ -951,10 +1197,11 @@ received messages.</p>
 112
 113
 114
-115</pre>
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start'>start</span>
   <span class='id identifier rubyid_start_pool'>start_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1016,12 +1263,12 @@ received messages.</p>
       <pre class="lines">
 
 
-160
 161
-162</pre>
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_started?'>started?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@started</span> <span class='rbrace'>}</span>
@@ -1076,7 +1323,6 @@ stopped and all received messages have been processed.</p>
       <pre class="lines">
 
 
-124
 125
 126
 127
@@ -1088,10 +1334,11 @@ stopped and all received messages have been processed.</p>
 133
 134
 135
-136</pre>
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 125</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
   <span class='id identifier rubyid_stop_pool'>stop_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -1153,12 +1400,12 @@ stopped and all received messages have been processed.</p>
       <pre class="lines">
 
 
-168
 169
-170</pre>
+170
+171</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 168</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 169</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stopped?'>stopped?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@stopped</span> <span class='rbrace'>}</span>
@@ -1213,7 +1460,6 @@ the subscriber is stopped.</p>
       <pre class="lines">
 
 
-145
 146
 147
 148
@@ -1222,10 +1468,11 @@ the subscriber is stopped.</p>
 151
 152
 153
-154</pre>
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/pubsub/subscriber.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait!'>wait!</span>
   <span class='id identifier rubyid_wait_pool'>wait_pool</span> <span class='op'>=</span> <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
