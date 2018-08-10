@@ -11,10 +11,9 @@
 set -eo pipefail
 
 cd github/google-cloud-ruby/
+
 # Print out Ruby version
 ruby --version
-
-
 
 # Temporary workaround for a known bundler+docker issue:
 # https://github.com/bundler/bundler/issues/6154
@@ -23,6 +22,7 @@ export BUNDLE_GEMFILE=
 bundle update
 
 # CHANGED_DIRS is the list of top-level directories that changed. CHANGED_DIRS will be empty when run on master.
+# See https://github.com/GoogleCloudPlatform/google-cloud-python/blob/master/.kokoro/build.sh for alt implementation
 CHANGED_DIRS=$(git --no-pager diff --name-only HEAD $(git merge-base HEAD master) | grep "/" | cut -d/ -f1 | sort | uniq || true)
 
 # Capture failures
@@ -35,15 +35,15 @@ function set_failed_status {
 # Setup service account credentials.
 export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 
-case $type in
+case $JOB_TYPE in
 test)
-  bundle update && bundle exec rake circleci:build || set_failed_status
+  (bundle update && bundle exec rake circleci:build) || set_failed_status
   ;;
 post)
-  bundle update && bundle exec rake circleci:post || set_failed_status
+  (bundle update && bundle exec rake circleci:post) || set_failed_status
   ;;
 release)
-  bundle update && bundle exec rake circleci:release || set_failed_status
+  (bundle update && bundle exec rake circleci:release) || set_failed_status
   ;;
 *)
   ;;
