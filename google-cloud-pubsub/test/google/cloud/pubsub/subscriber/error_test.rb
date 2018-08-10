@@ -14,7 +14,7 @@
 
 require "helper"
 
-describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
+describe Google::Cloud::Pubsub::Subscriber, :error, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
   let(:sub_name) { "subscription-name-goes-here" }
   let(:sub_json) { subscription_json topic_name, sub_name }
@@ -28,43 +28,15 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
   let(:rec_msg3_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message3-msg-goes-here", 1113) }
 
-  it "can acknowledge a single message" do
-    rec_message_msg = "pulled-message"
-    rec_message_ack_id = 123456789
-    pull_res = Google::Pubsub::V1::StreamingPullResponse.decode_json rec_messages_json(rec_message_msg, rec_message_ack_id)
-    response_groups = [[pull_res]]
-
-    stub = StreamingPullStub.new response_groups
-    called = false
-
-    subscription.service.mocked_subscriber = stub
-    subscriber = subscription.listen streams: 1 do |result|
-      assert_kind_of Google::Cloud::Pubsub::ReceivedMessage, result
-      assert_equal rec_message_msg, result.data
-      assert_equal "ack-id-#{rec_message_ack_id}", result.ack_id
-
-      result.ack!
-      called = true
-    end
-    subscriber.start
-
-    subscriber_retries = 0
-    while !called
-      fail "total number of calls were never made" if subscriber_retries > 100
-      subscriber_retries += 1
-      sleep 0.01
-    end
-
-    subscriber.stop
-    subscriber.wait!
-  end
-
-  it "can acknowledge multiple messages" do
-    pull_res = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc, rec_msg2_grpc, rec_msg3_grpc]
-    response_groups = [[pull_res]]
+  it "relays errors to the user" do
+    pull_res1 = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc]
+    pull_res2 = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg2_grpc]
+    pull_res3 = Google::Pubsub::V1::StreamingPullResponse.new received_messages: [rec_msg3_grpc]
+    response_groups = [[pull_res1, ArgumentError.new], [pull_res2, ZeroDivisionError.new], [pull_res3]]
 
     stub = StreamingPullStub.new response_groups
     called = 0
+    errors = []
 
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
@@ -72,6 +44,14 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
       msg.ack!
       called +=1
     end
+
+    subscriber.on_error do |error|
+      # raise error
+      errors << error
+    end
+
+    subscriber.last_error.must_be :nil?
+
     subscriber.start
 
     subscriber_retries = 0
@@ -80,6 +60,11 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
       subscriber_retries += 1
       sleep 0.01
     end
+
+    errors.count.must_equal 2
+    errors[0].must_be_kind_of ArgumentError
+    errors[1].must_be_kind_of ZeroDivisionError
+    subscriber.last_error.must_be_kind_of ZeroDivisionError
 
     subscriber.stop
     subscriber.wait!
