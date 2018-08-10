@@ -8,16 +8,18 @@
 #    are modified, in which case all tests will be run.
 #  * Nightly runs will run all tests.
 
-set -euxo pipefail
+set -eo pipefail
 
+cd github/google-cloud-ruby/
 # Print out Ruby version
 ruby --version
+
+
 
 # Temporary workaround for a known bundler+docker issue:
 # https://github.com/bundler/bundler/issues/6154
 export BUNDLE_GEMFILE=
 
-cd github/google-cloud-ruby/
 bundle update
 
 # CHANGED_DIRS is the list of top-level directories that changed. CHANGED_DIRS will be empty when run on master.
@@ -28,6 +30,10 @@ EXIT_STATUS=0 # everything passed
 function set_failed_status {
   EXIT_STATUS=1
 }
+
+
+# Setup service account credentials.
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
 
 case $type in
 test)
