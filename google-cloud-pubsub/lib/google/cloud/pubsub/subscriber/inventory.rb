@@ -45,9 +45,7 @@ module Google
 
             synchronize do
               @_ack_ids += ack_ids
-              unless @stopped
-                @background_thread ||= Thread.new { background_run }
-              end
+              @wait_cond.broadcast
             end
           end
 
@@ -57,12 +55,7 @@ module Google
 
             synchronize do
               @_ack_ids -= ack_ids
-              if @_ack_ids.empty?
-                if @background_thread
-                  @background_thread.kill
-                  @background_thread = nil
-                end
-              end
+              @wait_cond.broadcast
             end
           end
 
@@ -78,11 +71,23 @@ module Google
             end
           end
 
+          def start
+            @background_thread ||= Thread.new { background_run }
+
+            self
+          end
+
           def stop
             synchronize do
               @stopped = true
-              @background_thread.kill if @background_thread
+              @wait_cond.broadcast
             end
+
+            self
+          end
+
+          def stopped?
+            synchronize { @stopped }
           end
 
           def full?
@@ -92,12 +97,33 @@ module Google
           protected
 
           def background_run
-            until synchronize { @stopped }
-              delay = calc_delay
-              synchronize { @wait_cond.wait delay }
+            delay_target = nil
 
-              stream.delay_inventory!
+            synchronize do
+              until @stopped
+                if @_ack_ids.empty?
+                  delay_target = nil
+
+                  @wait_cond.wait # wait until broadcast
+                  next
+                end
+
+                delay_target ||= calc_target
+                delay_gap = delay_target - Time.now
+
+                unless delay_gap.positive?
+                  delay_target = nil
+                  delay_gap = nil # wait until broadcast
+                  stream.delay_inventory!
+                end
+
+                @wait_cond.wait delay_gap
+              end
             end
+          end
+
+          def calc_target
+            Time.now + calc_delay
           end
 
           def calc_delay

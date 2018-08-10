@@ -70,6 +70,8 @@ module Google
             synchronize do
               break if @background_thread
 
+              @inventory.start
+
               start_streaming!
             end
 
@@ -80,11 +82,12 @@ module Google
             synchronize do
               break if @stopped
 
+              # Close the stream by pushing the sentinel value.
+              # The unary pusher does not use the stream, so it can close here.
+              @request_queue.push self unless @request_queue.nil?
+
+              # signal to the background thread that we are stopped
               @stopped = true
-
-              @inventory.stop
-
-              # signal to the background thread that we are unpaused
               @pause_cond.broadcast
             end
 
@@ -106,16 +109,15 @@ module Google
               @callback_thread_pool.shutdown
               @callback_thread_pool.wait_for_termination
 
-              # Once all the callbacks are complete, we can stop the publisher
-              # and send the final request to the steeam.
+              # Once all the callbacks are complete, we can stop the inventory.
+              @inventory.stop
+
+              # Stop the publisher and send the final batch of changes.
               @async_pusher.stop if @async_pusher # will push current batch
 
-              # Close the push thread pool now that the pusher is closed.
+              # Close the push thread pool now that the pusher is stopped.
               @push_thread_pool.shutdown
               @push_thread_pool.wait_for_termination
-
-              # Close the stream now that all requests have been made.
-              @request_queue.push self unless @request_queue.nil?
             end
 
             self
@@ -290,6 +292,9 @@ module Google
             # dies because it was stopped, or because of an unhandled error that
             # could not be recovered from, so be it.
             return if @background_thread
+
+            @stopped = false
+            @paused  = false
 
             # create new background thread to handle new enumerator
             @background_thread = Thread.new { background_run }
