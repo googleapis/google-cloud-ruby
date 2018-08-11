@@ -145,36 +145,37 @@ module Google
           def push_batch_request!
             return unless @batch
 
-            subscriber = @stream.subscriber
-            sub_name = subscriber.subscription_name
-            push_pool = @stream.push_thread_pool
+            sub_name = @stream.subscriber.subscription_name
+            service = @stream.subscriber.service
 
             if @batch.ack?
               ack_ids = @batch.ack_ids
-              Concurrent::Future.new(executor: push_pool) do
-                begin
-                  subscriber.service.acknowledge sub_name, *ack_ids
-                rescue => push_error
-                  subscriber.error! push_error
-                end
-              end.execute
+              push_change_request do
+                service.acknowledge sub_name, *ack_ids
+              end
             end
             if @batch.delay?
               @batch.modify_deadline_hash.each do |delay_seconds, delay_ack_ids|
-                Concurrent::Future.new(executor: push_pool) do
-                  begin
-                    subscriber.service.modify_ack_deadline sub_name,
-                                                           delay_ack_ids,
-                                                           delay_seconds
-                  rescue => push_error
-                    subscriber.error! push_error
-                  end
-                end.execute
+                push_change_request do
+                  service.modify_ack_deadline sub_name,
+                                              delay_ack_ids,
+                                              delay_seconds
+                end
               end
             end
 
             @batch = nil
             @batch_created_at = nil
+          end
+
+          def push_change_request
+            Concurrent::Future.new(executor: @stream.push_thread_pool) do
+              begin
+                yield
+              rescue StandardError => push_error
+                @stream.subscriber.error! push_error
+              end
+            end.execute
           end
 
           class Batch

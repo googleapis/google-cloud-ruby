@@ -258,7 +258,7 @@ module Google
             Concurrent::Future.new(executor: callback_thread_pool) do
               begin
                 subscriber.callback.call rec_msg
-              rescue => callback_error
+              rescue StandardError => callback_error
                 subscriber.error! callback_error
               end
             end.execute
