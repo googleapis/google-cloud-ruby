@@ -20,6 +20,7 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_path) { sub_grpc.name }
   let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
   let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message1-msg-goes-here", 1111) }
@@ -57,6 +58,19 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
 
     subscriber.stop
     subscriber.wait!
+
+    stub.requests.map(&:to_a).must_equal [
+      [Google::Pubsub::V1::StreamingPullRequest.new(
+        subscription: sub_path,
+        stream_ack_deadline_seconds: 60
+      )]
+    ]
+    stub.acknowledge_requests.must_equal [
+      [sub_path, ["ack-id-123456789"]]
+    ]
+    stub.modify_ack_deadline_requests.must_equal [
+      [sub_path, ["ack-id-123456789"], 60]
+    ]
   end
 
   it "can acknowledge multiple messages" do
@@ -83,5 +97,18 @@ describe Google::Cloud::Pubsub::Subscriber, :acknowledge, :mock_pubsub do
 
     subscriber.stop
     subscriber.wait!
+
+    stub.requests.map(&:to_a).must_equal [
+      [Google::Pubsub::V1::StreamingPullRequest.new(
+        subscription: sub_path,
+        stream_ack_deadline_seconds: 60
+      )]
+    ]
+    stub.acknowledge_requests.must_equal [
+      [sub_path, ["ack-id-1111", "ack-id-1112", "ack-id-1113"]]
+    ]
+    stub.modify_ack_deadline_requests.must_equal [
+      [sub_path, ["ack-id-1111", "ack-id-1112", "ack-id-1113"], 60]
+    ]
   end
 end

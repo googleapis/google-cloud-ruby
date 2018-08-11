@@ -46,10 +46,12 @@ class Google::Gax::CallOptions
 end
 
 class StreamingPullStub
-  attr_reader :requests, :responses
+  attr_reader :requests, :responses, :acknowledge_requests, :modify_ack_deadline_requests
 
   def initialize response_groups
     @requests = []
+    @acknowledge_requests = []
+    @modify_ack_deadline_requests = []
     @responses = response_groups.map do |responses|
       RaisableEnumeratorQueue.new.tap do |q|
         responses.each do |response|
@@ -62,6 +64,16 @@ class StreamingPullStub
   def streaming_pull request_enum, options: nil
     @requests << request_enum
     @responses.shift.each
+  end
+
+  def acknowledge subscription_path, ack_ids, _hash = {}
+    # Don't save the options hash, makes it harder to check
+    @acknowledge_requests << [subscription_path, ack_ids.flatten.sort]
+  end
+
+  def modify_ack_deadline subscription_path, ids, deadline, _hash = {}
+    # Don't save the options hash, makes it harder to check
+    @modify_ack_deadline_requests << [subscription_path, ids.sort, deadline]
   end
 
   class RaisableEnumeratorQueue
