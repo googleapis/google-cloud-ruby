@@ -256,7 +256,11 @@ module Google
 
           def perform_callback_async rec_msg
             Concurrent::Future.new(executor: callback_thread_pool) do
-              subscriber.callback.call rec_msg
+              begin
+                subscriber.callback.call rec_msg
+              rescue => callback_error
+                subscriber.error! callback_error
+              end
             end.execute
           end
 
