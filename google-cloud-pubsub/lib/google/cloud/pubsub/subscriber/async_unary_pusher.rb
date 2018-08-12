@@ -127,32 +127,25 @@ module Google
             synchronize { @stopped }
           end
 
-          def batch_nil?
-            synchronize { @batch.nil? }
-          end
-
           protected
 
           def run_background
-            until stopped?
-              if batch_nil?
-                synchronize do
+            synchronize do
+              until @stopped
+                if @batch.nil?
                   @cond.wait # wait until broadcast
                   next
                 end
-              end
 
-              time_until_next_push = synchronize do
-                @interval - (Time.now - @batch_created_at)
-              end
+                time_from_batch_creation = Time.now - @batch_created_at
+                time_until_next_push = @interval - time_from_batch_creation
 
-              if time_until_next_push <= 0
-                # interval met, publish the batch...
-                synchronize { push_batch_request! }
-                time_until_next_push = nil # wait until broadcast
-              end
+                if time_until_next_push <= 0
+                  # interval met, publish the batch...
+                  push_batch_request!
+                  time_until_next_push = nil # wait until broadcast
+                end
 
-              synchronize do
                 @cond.wait time_until_next_push
               end
             end
