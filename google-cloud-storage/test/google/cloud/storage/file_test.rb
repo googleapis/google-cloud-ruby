@@ -209,7 +209,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     Tempfile.open "google-cloud" do |tmpfile|
       # write to the file since the mocked call won't
-      tmpfile.binmode
       tmpfile.write gzipped_data
       tmpfile.rewind
 
@@ -1358,7 +1357,6 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   def gzip_data data
     gz = StringIO.new("")
-    gz.set_encoding Encoding::ASCII_8BIT
     z = Zlib::GzipWriter.new(gz)
     z.write data
     z.close # write the gzip footer
