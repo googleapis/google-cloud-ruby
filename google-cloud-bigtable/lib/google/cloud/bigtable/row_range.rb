@@ -32,25 +32,25 @@ module Google
       #   table = bigtable.table("my-instance", "my-table")
       #
       #   # Range that includes all row keys including "user-001" to "user-005"
-      #   table.row_range.from("user-001").to("user-005", inclusive: true)
+      #   table.new_row_range.from("user-001").to("user-005", inclusive: true)
       #
       #   # Range that includes all row keys including "user-001" up to exclusive "user-010".
-      #   table.row_range.from("user-001").to("user-010")
+      #   table.new_row_range.from("user-001").to("user-010")
       #
       #   # Range that includes all row keys including "user-001" up until end of the row keys.
-      #   table.row_range.from("user-001")
+      #   table.new_row_range.from("user-001")
       #
       #   # Range that includes all row keys exclusive "user-001" up until end of the row keys.
-      #   table.row_range.from("user-001", inclusive: false)
+      #   table.new_row_range.from("user-001", inclusive: false)
       #
       #   # Range with unbounded from and the exclusive end "user-010"
-      #   table.row_range.to("user-010")
+      #   table.new_row_range.to("user-010")
       #
       #   # Range that includes all row keys including from and end row keys "user-001", "user-010"
-      #   table.row_range.between("user-001", "user-010")
+      #   table.new_row_range.between("user-001", "user-010")
       #
       #   # Range that includes all row keys including "user-001" up until "user-010"
-      #   table.row_range.of("user-001", "user-010")
+      #   table.new_row_range.of("user-001", "user-010")
       #
       class RowRange
         # @private
@@ -72,7 +72,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range.from("key-001")
+        #   range = table.new_row_range.from("key-001")
         #
         # @example Exclusive lower bound.
         #   require "google/cloud/bigtable"
@@ -80,7 +80,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range.from("key-001", inclusive: false)
+        #   range = table.new_row_range.from("key-001", inclusive: false)
         #
         def from key, inclusive: true
           if inclusive
@@ -104,7 +104,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range.to("key-001", inclusive: true)
+        #   range = table.new_row_range.to("key-001", inclusive: true)
         #
         # @example Exclusive upper bound.
         #   require "google/cloud/bigtable"
@@ -112,7 +112,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range.to("key-001")
+        #   range = table.new_row_range.to("key-001")
         #
         def to key, inclusive: false
           if inclusive
@@ -136,7 +136,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range.between("key-001", "key-010")
+        #   range = table.new_row_range.between("key-001", "key-010")
         #
         def between from_key, to_key
           from(from_key).to(to_key, inclusive: true)
@@ -155,7 +155,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range.of("key-001", "key-010")
+        #   range = table.new_row_range.of("key-001", "key-010")
         #
         def of from_key, to_key
           from(from_key).to(to_key)

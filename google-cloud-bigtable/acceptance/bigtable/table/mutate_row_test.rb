@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe "DataClient Mutate Row", :bigtable do
   let(:family) { "cf" }
-  let(:table) { bigtable_table }
+  let(:table) { bigtable_mutation_table }
 
   it "set cell and delete cells" do
     postfix = random_str

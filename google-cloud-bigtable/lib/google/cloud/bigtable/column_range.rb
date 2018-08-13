@@ -34,19 +34,19 @@ module Google
       #   table = bigtable.table("my-instance", "my-table")
       #
       #   # Range that includes all qualifiers including "user-001" up until "user-010"
-      #   table.column_range("cf").from("user-001").to("user-010")
+      #   table.new_column_range("cf").from("user-001").to("user-010")
       #
       #   # Range that includes all qualifiers including "user-001" up incluing "user-005"
-      #   table.column_range("cf").from("user-001").to("user-005", inclusive: true)
+      #   table.new_column_range("cf").from("user-001").to("user-005", inclusive: true)
       #
       #   # Range that includes all qualifiers until end of the row key "user-001".
-      #   table.column_range("cf").to("user-010") # exclusive
+      #   table.new_column_range("cf").to("user-010") # exclusive
       #
       #   # Range with unbounded start and the inclusive end "user-100"
-      #   table.column_range("cf").to("user-100", inclusive: true)
+      #   table.new_column_range("cf").to("user-100", inclusive: true)
       #
       #   # Range that includes all qualifiers including "user-001" up to including "user-100"
-      #   table.column_range("cf").between("user-001", "user-100")
+      #   table.new_column_range("cf").between("user-001", "user-100")
       #
       class ColumnRange
         # Create qualifier range instance.
@@ -86,7 +86,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   table.column_range("cf").from("qualifier-1")
+        #   table.new_column_range("cf").from("qualifier-1")
         #
         # @example Exclusive lower bound.
         #   require "google/cloud/bigtable"
@@ -94,7 +94,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   table.column_range("cf").from("qualifier-1", inclusive: false)
+        #   table.new_column_range("cf").from("qualifier-1", inclusive: false)
         #
         def from qualifier, inclusive: true
           if inclusive
@@ -118,7 +118,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   table.column_range("cf").to("qualifier-10", inclusive: true)
+        #   table.new_column_range("cf").to("qualifier-10", inclusive: true)
         #
         # @example Exclusive upper bound.
         #   require "google/cloud/bigtable"
@@ -126,7 +126,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   table.column_range("cf").to("qualifier-10")
+        #   table.new_column_range("cf").to("qualifier-10")
         #
         def to qualifier, inclusive: false
           if inclusive
@@ -149,7 +149,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   table.column_range("cf").between("qualifier-1", "qualifier-10")
+        #   table.new_column_range("cf").between("qualifier-1", "qualifier-10")
         #
         def between from_qualifier, to_qualifier
           from(from_qualifier).to(to_qualifier, inclusive: true)
@@ -167,7 +167,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   table.column_range("cf").of("qualifier-1", "qualifier-10")
+        #   table.new_column_range("cf").of("qualifier-1", "qualifier-10")
         #
         def of from_qualifier, to_qualifier
           from(from_qualifier).to(to_qualifier)

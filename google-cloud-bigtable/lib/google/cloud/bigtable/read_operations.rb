@@ -231,7 +231,7 @@ module Google
         #   range.to("xyz")
         #
         #   # OR
-        #   range = table.value_range.from("abc").to("xyz")
+        #   range = table.new_value_range.from("abc").to("xyz")
         #
         # @example With exclusive from range
         #   require "google/cloud/bigtable"
@@ -239,7 +239,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.value_range.from("abc", inclusive: false).to("xyz")
+        #   range = table.new_value_range.from("abc", inclusive: false).to("xyz")
         #
         def new_value_range
           Google::Cloud::Bigtable::ValueRange.new
@@ -261,7 +261,7 @@ module Google
         #   range.to("xyz")
         #
         #   # OR
-        #   range = table.row_range.from("key-1").to("key-5")
+        #   range = table.new_column_range("test-family").from("key-1").to("key-5")
         #
         # @example With exclusive from range
         #   require "google/cloud/bigtable"
@@ -269,7 +269,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.column_range("test-family").from("key-1", inclusive: false).to("key-5")
+        #   range = table.new_column_range("test-family").from("key-1", inclusive: false).to("key-5")
         #
         def new_column_range family
           Google::Cloud::Bigtable::ColumnRange.new(family)
@@ -290,7 +290,7 @@ module Google
         #   range.to("xyz")
         #
         #   # OR
-        #   range = table.row_range.from("key-1").to("key-5")
+        #   range = table.new_row_range.from("key-1").to("key-5")
         #
         # @example With exclusive from range
         #   require "google/cloud/bigtable"
@@ -298,7 +298,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table("my-instance", "my-table")
         #
-        #   range = table.row_range.from("key-1", inclusive: false).to("key-5")
+        #   range = table.new_row_range.from("key-1", inclusive: false).to("key-5")
         #
         def new_row_range
           Google::Cloud::Bigtable::RowRange.new

@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe "DataClient Read Modify Write Row", :bigtable do
   let(:family) { "cf" }
-  let(:table) { bigtable_table }
+  let(:table) { bigtable_mutation_table }
 
   it "append to row cell value" do
     row_key = "readmodify-#{random_str}"

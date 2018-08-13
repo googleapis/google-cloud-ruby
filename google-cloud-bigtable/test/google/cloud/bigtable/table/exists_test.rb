@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Table, :exists?, :mock_bigtable do
 
   it "checks existence of the table" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_grpc, [table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+    mock.expect :get_table, table_grpc, [table_path(instance_id, table_id), view: :NAME_ONLY]
     bigtable.service.mocked_tables = mock
 
     table = bigtable.table(instance_id, table_id)

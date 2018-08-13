@@ -87,11 +87,11 @@ module Google
           )
           response.each do |res|
             res.chunks.each do |chunk|
+              @retry_count = 0
               row = @chunk_processor.process(chunk)
               next if row.nil?
               yield row
               @rows_count += 1
-              @retry_count = 0
             end
           end
 

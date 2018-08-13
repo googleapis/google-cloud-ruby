@@ -229,8 +229,7 @@ module Google
         #
 
         def exists?
-          reload!(view: :SCHEMA_VIEW)
-          true
+          !service.get_table(instance_id, name, view: :NAME_ONLY).nil?
         rescue Google::Cloud::NotFoundError
           false
         end

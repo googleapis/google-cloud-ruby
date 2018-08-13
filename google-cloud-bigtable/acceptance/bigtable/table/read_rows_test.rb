@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe "DataClient Read Rows", :bigtable do
   let(:family) { "cf" }
-  let(:table) { bigtable_table }
+  let(:table) { bigtable_read_table }
 
   it "read single row" do
     row = table.read_row("test-1")

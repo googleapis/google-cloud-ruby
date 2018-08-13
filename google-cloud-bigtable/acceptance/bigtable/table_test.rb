@@ -18,62 +18,53 @@
 require "bigtable_helper"
 
 describe "Instance Tables", :bigtable do
-  let(:instance) { bigtable_instance }
+  let(:instance_id) { bigtable_instance_id }
 
   it "create, list all, get table and delete table" do
     table_id = "test-table-#{random_str}"
 
-    table = instance.create_table(table_id) do |cfs|
+    table = bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add("cf", Google::Cloud::Bigtable::GcRule.max_versions(3))
     end
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
 
-    tables = instance.tables.to_a
+    tables = bigtable.tables(instance_id).to_a
     tables.wont_be :empty?
     tables.each do |t|
       t.must_be_kind_of Google::Cloud::Bigtable::Table
     end
 
-    table = instance.table(table_id, perform_lookup: true)
+    table = bigtable.table(instance_id, table_id, perform_lookup: true)
     table.must_be_kind_of Google::Cloud::Bigtable::Table
 
     table.delete
-    table = instance.table(table_id)
     table.exists?.must_equal false
   end
 
-  it "create table with initial splits" do
+  it "create table with initial splits and granularity" do
     table_id = "test-table-#{random_str}"
 
     initial_splits = ["customer_1", "customer_10000"]
 
-    table = instance.create_table(table_id, initial_splits: initial_splits) do |cfs|
-      cfs.add("cf", Google::Cloud::Bigtable::GcRule.max_versions(1))
-    end
-
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
-    instance.table(table_id, view: :FULL, perform_lookup: true).wont_be :nil?
-    table.delete
-  end
-
-  it "create table with time granularity" do
-    table_id = "test-table-#{random_str}"
-
-    table = instance.create_table(table_id, granularity: :MILLIS) do |cfs|
+    table = bigtable.create_table(
+        instance_id,
+        table_id,
+        initial_splits: initial_splits,
+        granularity: :MILLIS) do |cfs|
       cfs.add("cf", Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     table.granularity_millis?.must_equal true
-    instance.table(table_id, view: :NAME_ONLY, perform_lookup: true).wont_be :nil?
+    table.exists?.must_equal true
     table.delete
   end
 
   it "modify column families" do
     table_id = "test-table-#{random_str}"
 
-    table = instance.create_table(table_id) do |cfs|
+    table = bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add("cf1", Google::Cloud::Bigtable::GcRule.max_versions(1))
       cfs.add("cf2", Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
@@ -105,28 +96,8 @@ describe "Instance Tables", :bigtable do
     table.delete
   end
 
-  describe "drop rows" do
-    it "delete all rows" do
-      table_id = "test-table-#{random_str}"
-      table = create_table(table_id, row_count: 2)
-      table.delete_all_rows.must_equal true
-
-      rows = table.read_rows.to_a
-      rows.must_be_empty
-    end
-
-    it "delete rows by prefix" do
-      table_id = "test-table-#{random_str}"
-      table = create_table(table_id, row_count: 2)
-      table.delete_rows_by_prefix("test-1").must_equal true
-
-      rows = table.read_rows.to_a
-      rows.length.must_equal 1
-    end
-  end
-
   describe "replication consistency" do
-    let(:table) { bigtable_table }
+    let(:table) { bigtable_read_table }
 
     it "generate consistency token and check consistency" do
       token = table.generate_consistency_token
