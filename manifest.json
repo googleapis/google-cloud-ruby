@@ -378,8 +378,9 @@
       "name": "google-cloud-os_login",
       "defaultService": "google/cloud/oslogin",
       "versions": [
-        "v0.1.0",
-        "master"
+        "v0.2.0",
+        "master",
+        "v0.1.0"
       ]
     },
     {
