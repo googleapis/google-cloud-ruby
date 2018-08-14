@@ -140,7 +140,8 @@ class YardBuilder
     require "yaml"
     sorted_data_pairs = data.each.sort.map do |gem, versions|
       # Sort in descending order
-      versions.uniq!.sort! do |a, b|
+      versions.uniq!
+      versions.sort! do |a, b|
         Gem::Version.new(b.sub(/^v/,"")) <=> Gem::Version.new(a.sub(/^v/,""))
       end
       [gem, versions]
