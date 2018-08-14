@@ -15,6 +15,7 @@
 
 require "google/cloud/pubsub/subscriber/async_unary_pusher"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
+require "google/cloud/pubsub/subscriber/inventory"
 require "google/cloud/pubsub/service"
 require "google/cloud/errors"
 require "monitor"
@@ -67,7 +68,9 @@ module Google
 
           def start
             synchronize do
-              break if @request_queue
+              break if @background_thread
+
+              @inventory.start
 
               start_streaming!
             end
@@ -79,11 +82,12 @@ module Google
             synchronize do
               break if @stopped
 
+              # Close the stream by pushing the sentinel value.
+              # The unary pusher does not use the stream, so it can close here.
+              @request_queue.push self unless @request_queue.nil?
+
+              # signal to the background thread that we are stopped
               @stopped = true
-
-              @inventory.stop
-
-              # signal to the background thread that we are unpaused
               @pause_cond.broadcast
             end
 
@@ -105,16 +109,15 @@ module Google
               @callback_thread_pool.shutdown
               @callback_thread_pool.wait_for_termination
 
-              # Once all the callbacks are complete, we can stop the publisher
-              # and send the final request to the steeam.
+              # Once all the callbacks are complete, we can stop the inventory.
+              @inventory.stop
+
+              # Stop the publisher and send the final batch of changes.
               @async_pusher.stop if @async_pusher # will push current batch
 
-              # Close the push thread pool now that the pusher is closed.
+              # Close the push thread pool now that the pusher is stopped.
               @push_thread_pool.shutdown
               @push_thread_pool.wait_for_termination
-
-              # Close the stream now that all requests have been made.
-              @request_queue.push self unless @request_queue.nil?
             end
 
             self
@@ -127,7 +130,7 @@ module Google
             return true if ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncUnaryPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new(self).start
               @async_pusher.acknowledge ack_ids
               @inventory.remove ack_ids
               unpause_streaming!
@@ -143,7 +146,7 @@ module Google
             return true if mod_ack_ids.empty?
 
             synchronize do
-              @async_pusher ||= AsyncUnaryPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new(self).start
               @async_pusher.delay deadline, mod_ack_ids
               @inventory.remove mod_ack_ids
               unpause_streaming!
@@ -170,7 +173,7 @@ module Google
             synchronize do
               return true if @inventory.empty?
 
-              @async_pusher ||= AsyncUnaryPusher.new self
+              @async_pusher ||= AsyncUnaryPusher.new(self).start
               @async_pusher.delay subscriber.deadline, @inventory.ack_ids
             end
 
@@ -190,9 +193,28 @@ module Google
 
           protected
 
+          # @private
+          class RestartStream < StandardError; end
+
           # rubocop:disable all
 
-          def background_run enum
+          def background_run
+            # Don't allow a stream to restart if already stopped
+            return if @stopped
+
+            # signal to the previous queue to shut down
+            old_queue = []
+            old_queue = @request_queue.quit_and_dump_queue if @request_queue
+
+            # Always create a new request queue and enum
+            @request_queue = EnumeratorQueue.new self
+            @request_queue.push initial_input_request
+            old_queue.each { |obj| @request_queue.push obj }
+            enum = subscriber.service.streaming_pull @request_queue.each
+
+            @stopped = nil
+            @paused  = nil
+
             loop do
               synchronize do
                 if @paused && !@stopped
@@ -213,7 +235,7 @@ module Google
 
                 synchronize do
                   # Create receipt of received messages reception
-                  @async_pusher ||= AsyncUnaryPusher.new self
+                  @async_pusher ||= AsyncUnaryPusher.new(self).start
                   @async_pusher.delay subscriber.deadline, received_ack_ids
 
                   # Add received messages to inventory
@@ -232,24 +254,29 @@ module Google
                 break
               end
             end
+
             # Has the loop broken but we aren't stopped?
             # Could be GRPC has thrown an internal error, so restart.
-            synchronize { raise "restart thread" unless @stopped }
-          rescue GRPC::DeadlineExceeded, GRPC::Unavailable, GRPC::Cancelled,
-                 GRPC::ResourceExhausted, GRPC::Internal, GRPC::Core::CallError
-            # The GAPIC layer will raise DeadlineExceeded when stream is opened
-            # longer than the timeout value it is configured for. When this
-            # happends, restart the stream stealthly.
-            # Also stealthly restart the stream on Unavailable, Cancelled,
-            # ResourceExhausted, and Internal.
-            # Also, also stealthly restart the stream when GRPC raises the
-            # internal CallError.
-            synchronize { start_streaming! }
+            raise RestartStream unless synchronize { @stopped }
+
+            # We must be stopped, tell the stream to quit.
+            @request_queue.push self
+          rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
+                 GRPC::ResourceExhausted, GRPC::Unauthenticated,
+                 GRPC::Unavailable, GRPC::Core::CallError
+            # Restart the stream with an incremental back for a retriable error.
+            # Also when GRPC raises the internal CallError.
+
+            retry
+          rescue RestartStream
+            retry
           rescue StandardError => e
             synchronize do
               subscriber.error! e
               start_streaming! unless @stopped
             end
+
+            retry
           end
 
           # rubocop:enable all
@@ -265,25 +292,16 @@ module Google
           end
 
           def start_streaming!
-            # Don't allow a stream to restart if already stopped
-            return if @stopped
+            # A Stream will only ever have one background thread. If the thread
+            # dies because it was stopped, or because of an unhandled error that
+            # could not be recovered from, so be it.
+            return if @background_thread
 
-            # signal to the previous queue to shut down
-            old_queue = []
-            old_queue = @request_queue.quit_and_dump_queue if @request_queue
-
-            @request_queue = EnumeratorQueue.new self
-            @request_queue.push initial_input_request
-            old_queue.each { |obj| @request_queue.push obj }
-            output_enum = subscriber.service.streaming_pull @request_queue.each
-
-            @stopped = nil
-            @paused  = nil
+            @stopped = false
+            @paused  = false
 
             # create new background thread to handle new enumerator
-            @background_thread = Thread.new(output_enum) do |enum|
-              background_run enum
-            end
+            @background_thread = Thread.new { background_run }
           end
 
           def pause_streaming!
@@ -340,88 +358,6 @@ module Google
             return "error" if status.nil?
             return "stopped" if status == false
             status
-          end
-
-          ##
-          # @private
-          class Inventory
-            include MonitorMixin
-
-            attr_reader :stream, :limit
-
-            def initialize stream, limit
-              @stream = stream
-              @limit = limit
-              @_ack_ids = []
-              @wait_cond = new_cond
-
-              super()
-            end
-
-            def ack_ids
-              @_ack_ids
-            end
-
-            def add *ack_ids
-              ack_ids = Array(ack_ids).flatten
-              synchronize do
-                @_ack_ids += ack_ids
-                unless @stopped
-                  @background_thread ||= Thread.new { background_run }
-                end
-              end
-            end
-
-            def remove *ack_ids
-              ack_ids = Array(ack_ids).flatten
-              synchronize do
-                @_ack_ids -= ack_ids
-                if @_ack_ids.empty?
-                  if @background_thread
-                    @background_thread.kill
-                    @background_thread = nil
-                  end
-                end
-              end
-            end
-
-            def count
-              synchronize do
-                @_ack_ids.count
-              end
-            end
-
-            def empty?
-              synchronize do
-                @_ack_ids.empty?
-              end
-            end
-
-            def stop
-              synchronize do
-                @stopped = true
-                @background_thread.kill if @background_thread
-              end
-            end
-
-            def full?
-              count >= limit
-            end
-
-            protected
-
-            def background_run
-              until synchronize { @stopped }
-                delay = calc_delay
-                synchronize { @wait_cond.wait delay }
-
-                stream.delay_inventory!
-              end
-            end
-
-            def calc_delay
-              (stream.subscriber.deadline - 3) * rand(0.8..0.9)
-            end
           end
         end
       end

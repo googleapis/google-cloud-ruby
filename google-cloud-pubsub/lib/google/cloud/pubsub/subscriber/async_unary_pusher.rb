@@ -59,9 +59,6 @@ module Google
                   end
                 end
 
-                @batch_created_at ||= Time.now
-                @background_thread ||= Thread.new { run_background }
-
                 push_batch_request! if @batch.ready?
               end
 
@@ -88,9 +85,6 @@ module Google
                   end
                 end
 
-                @batch_created_at ||= Time.now
-                @background_thread ||= Thread.new { run_background }
-
                 push_batch_request! if @batch.ready?
               end
 
@@ -100,15 +94,25 @@ module Google
             nil
           end
 
-          def stop
+          def start
             synchronize do
-              @stopped = true
+              @stopped = false
 
-              # Stop any background activity, clean up happens in wait!
-              @background_thread.kill if @background_thread
+              @background_thread ||= Thread.new { run_background }
             end
 
-            push_batch_request!
+            self
+          end
+
+          def stop
+            synchronize do
+              push_batch_request!
+
+              @stopped = true
+              @cond.broadcast
+            end
+
+            self
           end
 
           def started?
@@ -125,19 +129,20 @@ module Google
             synchronize do
               until @stopped
                 if @batch.nil?
-                  @cond.wait
+                  @cond.wait # wait until broadcast
                   next
                 end
 
-                time_since_batch_creation = Time.now - @batch_created_at
-                if time_since_batch_creation > @interval
+                time_from_batch_creation = Time.now - @batch.created_at
+                time_until_next_push = @interval - time_from_batch_creation
+
+                if time_until_next_push <= 0
                   # interval met, publish the batch...
                   push_batch_request!
-                  @cond.wait
-                else
-                  # still waiting for the interval to publish the batch...
-                  @cond.wait(@interval - time_since_batch_creation)
+                  time_until_next_push = nil # wait until broadcast
                 end
+
+                @cond.wait time_until_next_push
               end
             end
           end
@@ -165,7 +170,6 @@ module Google
             end
 
             @batch = nil
-            @batch_created_at = nil
           end
 
           def push_change_request
@@ -179,12 +183,13 @@ module Google
           end
 
           class Batch
-            attr_reader :max_bytes, :request
+            attr_reader :max_bytes, :request, :created_at
 
             def initialize max_bytes: 10000000
               @max_bytes = max_bytes
               @request = Google::Pubsub::V1::StreamingPullRequest.new
               @total_message_bytes = 0
+              @created_at = Time.now
             end
 
             def ack ack_id
