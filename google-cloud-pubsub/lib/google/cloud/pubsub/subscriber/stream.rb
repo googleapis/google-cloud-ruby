@@ -86,9 +86,22 @@ module Google
               # The unary pusher does not use the stream, so it can close here.
               @request_queue.push self unless @request_queue.nil?
 
-              # signal to the background thread that we are stopped
+              # Signal to the background thread that we are stopped.
               @stopped = true
               @pause_cond.broadcast
+
+              # Now that the reception thread is stopped, immediately stop the
+              # callback thread pool and purge all pending callbacks.
+              @callback_thread_pool.kill
+
+              # Once all the callbacks are stopped, we can stop the inventory.
+              @inventory.stop
+
+              # Stop the publisher and send the final batch of changes.
+              @async_pusher.stop if @async_pusher # will push current batch
+
+              # Stop the push thread pool now that the pusher is stopped.
+              @push_thread_pool.shutdown
             end
 
             self
@@ -104,20 +117,10 @@ module Google
 
           def wait!
             synchronize do
-              # Now that the reception thread is dead, make sure all recieved
-              # messages have had the callback called.
-              @callback_thread_pool.shutdown
-              @callback_thread_pool.wait_for_termination
-
-              # Once all the callbacks are complete, we can stop the inventory.
-              @inventory.stop
-
-              # Stop the publisher and send the final batch of changes.
-              @async_pusher.stop if @async_pusher # will push current batch
-
-              # Close the push thread pool now that the pusher is stopped.
-              @push_thread_pool.shutdown
-              @push_thread_pool.wait_for_termination
+              # # Wait for the push thread pool to finish pushing all remaining
+              # changes. Do not wait indefinitely.
+              @push_thread_pool.wait_for_termination 60
+              @push_thread_pool.kill if @push_thread_pool.shuttingdown?
             end
 
             self
