@@ -1,5 +1,10 @@
 # Release History
 
+### 0.31.1 / 2018-08-14
+
+* Fix bug in AsyncUnaryPusher,
+  * The modify_ack_deadline requests were malformed.
+
 ### 0.31.0 / 2018-06-12
 
 * Switch Subscriber to use unary RPC calls for ack/modack.
