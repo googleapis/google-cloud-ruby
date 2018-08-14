@@ -697,6 +697,8 @@ task :release, :tag do |t, args|
       ::Gems.push(File.new path_to_be_pushed)
       puts "Successfully built and pushed #{package} for version #{version}"
 
+      # jsondoc:package needs jsondoc to have been run prior
+      Rake::Task["jsondoc"].invoke tag
       Rake::Task["jsondoc:package"].invoke tag
       Rake::Task["docs:publish_tag"].invoke tag
     rescue => e
