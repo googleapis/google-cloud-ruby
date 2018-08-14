@@ -20,6 +20,7 @@ describe Google::Cloud::Pubsub::Subscriber, :error, :mock_pubsub do
   let(:sub_json) { subscription_json topic_name, sub_name }
   let(:sub_hash) { JSON.parse sub_json }
   let(:sub_grpc) { Google::Pubsub::V1::Subscription.decode_json(sub_json) }
+  let(:sub_path) { sub_grpc.name }
   let(:subscription) { Google::Cloud::Pubsub::Subscription.from_grpc sub_grpc, pubsub.service }
   let(:rec_msg1_grpc) { Google::Pubsub::V1::ReceivedMessage.decode_json \
                           rec_message_json("rec_message1-msg-goes-here", 1111) }
@@ -63,5 +64,7 @@ describe Google::Cloud::Pubsub::Subscriber, :error, :mock_pubsub do
 
     subscriber.stop
     subscriber.wait!
+
+    # stub requests are not guaranteed, so don't check in this test
   end
 end

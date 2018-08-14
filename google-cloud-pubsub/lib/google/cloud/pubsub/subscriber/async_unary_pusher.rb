@@ -251,9 +251,10 @@ module Google
             end
 
             def modify_deadline_hash
-              @request.modify_deadline_ack_ids.zip(
+              grouped_hash = @request.modify_deadline_ack_ids.zip(
                 @request.modify_deadline_seconds
               ).group_by { |_ack_id, seconds| seconds }
+              Hash[grouped_hash.map { |k, v| [k, v.map(&:first)] }]
             end
 
             def total_message_bytes
