@@ -286,7 +286,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
       job_resp_gapi = load_job_resp_gapi(table, "some/file/path.csv")
       job_resp_gapi.status = status "done"
       mock.expect :insert_job, job_resp_gapi,
-        [project, load_job_gapi(table_gapi.table_reference, "CSV", location: nil), upload_source: file, content_type: "text/comma-separated-values"]
+        [project, load_job_gapi(table_gapi.table_reference, "CSV", location: nil), upload_source: file, content_type: "text/csv"]
 
       result = table.load file, format: :csv
       result.must_equal true
