@@ -59,8 +59,6 @@ module Google
                   end
                 end
 
-                @batch_created_at ||= Time.now
-
                 push_batch_request! if @batch.ready?
               end
 
@@ -86,8 +84,6 @@ module Google
                     @batch.delay deadline, ack_id
                   end
                 end
-
-                @batch_created_at ||= Time.now
 
                 push_batch_request! if @batch.ready?
               end
@@ -137,7 +133,7 @@ module Google
                   next
                 end
 
-                time_from_batch_creation = Time.now - @batch_created_at
+                time_from_batch_creation = Time.now - @batch.created_at
                 time_until_next_push = @interval - time_from_batch_creation
 
                 if time_until_next_push <= 0
@@ -172,16 +168,16 @@ module Google
             end
 
             @batch = nil
-            @batch_created_at = nil
           end
 
           class Batch
-            attr_reader :max_bytes, :request
+            attr_reader :max_bytes, :request, :created_at
 
             def initialize max_bytes: 10000000
               @max_bytes = max_bytes
               @request = Google::Pubsub::V1::StreamingPullRequest.new
               @total_message_bytes = 0
+              @created_at = Time.now
             end
 
             def ack ack_id
