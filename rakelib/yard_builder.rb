@@ -83,9 +83,7 @@ class YardBuilder
   end
 
   def checkout_branch tag
-    dir = Pathname.new(Dir.tmpdir) + tag
-    FileUtils.remove_dir dir if Dir.exists? dir
-    FileUtils.mkdir_p dir
+    dir = create_tmp_dir tag
     clone_branch tag, dir
     yield dir
     safe_remove_dir dir
@@ -221,12 +219,13 @@ class YardBuilder
   end
 
   def create_tmp_dir dir_name
-    tmp_dir = Pathname.new(Dir.tmpdir) + dir_name
+    tmp_dir = ENV["GCLOUD_TMP_DIR"] || Dir.tmpdir
+    dir = Pathname.new(tmp_dir) + dir_name
 
-    safe_remove_dir tmp_dir
-    FileUtils.mkdir_p tmp_dir
+    safe_remove_dir dir
+    FileUtils.mkdir_p dir
 
-    tmp_dir
+    dir
   end
 
   def safe_remove_dir dir
