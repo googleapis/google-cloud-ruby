@@ -562,6 +562,8 @@ module Google
 
   # rubocop:disable all
 
+  # @private
+  #
   # IMPORTANT: These monkey-patches of Apis::StorageV1::StorageService and
   # Apis::Core::DownloadCommand must be verified and updated (if needed) for
   # every upgrade of google-api-client.
@@ -573,7 +575,9 @@ module Google
   # solution instead.
   #
   module Apis
+    # @private
     module StorageV1
+      # @private
       class StorageService
         # Returns a two-element array containing:
         #   * The `result` that is the usual return type of #get_object.
@@ -617,7 +621,9 @@ module Google
         end
       end
     end
+    # @private
     module Core
+      # @private
       # Streaming/resumable media download support
       class DownloadCommand < ApiCommand
         # Returns a two-element array containing:
