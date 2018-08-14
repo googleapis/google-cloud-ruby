@@ -145,25 +145,37 @@ module Google
           def push_batch_request!
             return unless @batch
 
+            sub_name = @stream.subscriber.subscription_name
             service = @stream.subscriber.service
-            name = @stream.subscriber.subscription_name
 
             if @batch.ack?
               ack_ids = @batch.ack_ids
-              Concurrent::Future.new(executor: @stream.push_thread_pool) do
-                service.acknowledge name, *ack_ids
-              end.execute
+              push_change_request do
+                service.acknowledge sub_name, *ack_ids
+              end
             end
             if @batch.delay?
               @batch.modify_deadline_hash.each do |delay_seconds, delay_ack_ids|
-                Concurrent::Future.new(executor: @stream.push_thread_pool) do
-                  service.modify_ack_deadline name, delay_ack_ids, delay_seconds
-                end.execute
+                push_change_request do
+                  service.modify_ack_deadline sub_name,
+                                              delay_ack_ids,
+                                              delay_seconds
+                end
               end
             end
 
             @batch = nil
             @batch_created_at = nil
+          end
+
+          def push_change_request
+            Concurrent::Future.new(executor: @stream.push_thread_pool) do
+              begin
+                yield
+              rescue StandardError => push_error
+                @stream.subscriber.error! push_error
+              end
+            end.execute
           end
 
           class Batch
