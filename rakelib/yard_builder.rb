@@ -11,6 +11,8 @@ class YardBuilder
   end
 
   def build_master
+    return if case_insensitive_check!
+
     git_ref = current_git_commit master_dir
     determine_gems(master_dir).each do |gem|
       build_gem_docs gem, "master", master_dir, gh_pages_dir
@@ -22,6 +24,8 @@ class YardBuilder
   end
 
   def publish_tag tag
+    return if case_insensitive_check!
+
     gem, version = split_tag tag
     add_release gem, version
     build_docs_for_tag tag
@@ -32,6 +36,8 @@ class YardBuilder
   end
 
   def rebuild_tag *tags
+    return if case_insensitive_check!
+
     tags.flatten.each do |tag|
       gem, version = split_tag tag
       build_docs_for_tag tag
@@ -43,6 +49,8 @@ class YardBuilder
   end
 
   def rebuild_all
+    return if case_insensitive_check!
+
     git_ref = current_git_commit master_dir
     load_releases.each do |gem, versions|
       versions.each do |version|
@@ -58,6 +66,26 @@ class YardBuilder
   end
 
   protected
+
+  def case_insensitive_fs?
+    dir = create_tmp_dir "fs-case-sensitivity"
+    File.write dir + "test", "hello world!"
+    sensitive = File.exists? dir + "TEST"
+    safe_remove_dir dir
+    sensitive
+  end
+
+  def case_insensitive_check!
+    if case_insensitive_fs?
+      puts "You are running on a case-insensitive file system."
+      puts "Documentation built on this file system may be incorrect."
+      puts "https://github.com/GoogleCloudPlatform/google-cloud-ruby/wiki/Working-with-documentation-on-a-case-insensitive-file-system"
+      puts "Are you sure you want to continue? [y/N]"
+      answer = STDIN.gets.strip.downcase
+      return true if answer != "y"
+    end
+    false
+  end
 
   def cmd line
     puts line
