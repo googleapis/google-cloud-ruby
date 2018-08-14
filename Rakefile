@@ -697,6 +697,9 @@ task :release, :tag do |t, args|
       ::Gems.push(File.new path_to_be_pushed)
       puts "Successfully built and pushed #{package} for version #{version}"
 
+      # jsondoc:package needs jsondoc to have been run prior
+      Rake::Task["bundleupdate"].invoke
+      Rake::Task["jsondoc"].invoke
       Rake::Task["jsondoc:package"].invoke tag
       Rake::Task["docs:publish_tag"].invoke tag
     rescue => e
@@ -948,7 +951,8 @@ def run_task_if_exists task_name, params = ""
 end
 
 def gh_pages_path gh_pages_dir
-  Pathname.new(Dir.home) + "tmp" + gh_pages_dir
+  tmp_dir = ENV["GCLOUD_TMP_DIR"] || "#{Dir.home}/tmp"
+  Pathname.new(tmp_dir) + gh_pages_dir
 end
 
 def git_repo
