@@ -1,6 +1,6 @@
 ---
 layout: yard_main
-title: "Module: Google::Cloud::Oslogin::V1beta - Google"
+title: "Module: Google::Cloud::OsLogin::V1beta - Google"
 css: 
   - /docs/css/style.css
   - /docs/css/common.css
@@ -10,7 +10,7 @@ js:
   - /js/docs.js
 ---
 <script type="text/javascript" charset="utf-8">
-  pathId = "Google::Cloud::Oslogin::V1beta";
+  pathId = "Google::Cloud::OsLogin::V1beta";
   relpath = '../../../';
 </script>
 
@@ -25,7 +25,7 @@ js:
     <div id="menu">
   
     <a href="../../../_index.html">Index (V)</a> &raquo;
-    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Oslogin.html" title="Google::Cloud::Oslogin (module)">Oslogin</a></span></span>
+    <span class='title'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../OsLogin.html" title="Google::Cloud::OsLogin (module)">OsLogin</a></span></span>
      &raquo; 
     <span class="title">V1beta</span>
   
@@ -47,7 +47,7 @@ js:
     <div class="clear"></div>
   </div>
 
-  <div id="content"><h1>Module: Google::Cloud::Oslogin::V1beta
+  <div id="content"><h1>Module: Google::Cloud::OsLogin::V1beta
   
   
   
@@ -66,44 +66,20 @@ js:
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>lib/google/cloud/os_login/v1beta/doc/google/cloud/oslogin/v1beta/oslogin.rb</dd>
+    <dd>lib/google/cloud/os_login/v1beta.rb<span class="defines">,<br />
+  lib/google/cloud/os_login/v1beta/doc/overview.rb,<br /> lib/google/cloud/os_login/v1beta/os_login_service_client.rb</span>
+</dd>
   </dl>
   
 </div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    <h1>Google Cloud OS Login API Contents</h1>
-
-<table><thead>
-<tr>
-<th>Class</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1beta/osloginserviceclient">OsLoginServiceClient</a></td>
-<td>Manages OS login configuration for Google account users.</td>
-</tr>
-<tr>
-<td><a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1beta/datatypes">Data Types</a></td>
-<td>Data types for Google::Cloud::OsLogin::V1beta</td>
-</tr>
-</tbody></table>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><h2>Defined Under Namespace</h2>
+<h2>Defined Under Namespace</h2>
 <p class="children">
   
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="V1beta/DeletePosixAccountRequest.html" title="Google::Cloud::Oslogin::V1beta::DeletePosixAccountRequest (class)">DeletePosixAccountRequest</a></span>, <span class='object_link'><a href="V1beta/DeleteSshPublicKeyRequest.html" title="Google::Cloud::Oslogin::V1beta::DeleteSshPublicKeyRequest (class)">DeleteSshPublicKeyRequest</a></span>, <span class='object_link'><a href="V1beta/GetLoginProfileRequest.html" title="Google::Cloud::Oslogin::V1beta::GetLoginProfileRequest (class)">GetLoginProfileRequest</a></span>, <span class='object_link'><a href="V1beta/GetSshPublicKeyRequest.html" title="Google::Cloud::Oslogin::V1beta::GetSshPublicKeyRequest (class)">GetSshPublicKeyRequest</a></span>, <span class='object_link'><a href="V1beta/ImportSshPublicKeyRequest.html" title="Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyRequest (class)">ImportSshPublicKeyRequest</a></span>, <span class='object_link'><a href="V1beta/ImportSshPublicKeyResponse.html" title="Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyResponse (class)">ImportSshPublicKeyResponse</a></span>, <span class='object_link'><a href="V1beta/LoginProfile.html" title="Google::Cloud::Oslogin::V1beta::LoginProfile (class)">LoginProfile</a></span>, <span class='object_link'><a href="V1beta/UpdateSshPublicKeyRequest.html" title="Google::Cloud::Oslogin::V1beta::UpdateSshPublicKeyRequest (class)">UpdateSshPublicKeyRequest</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="V1beta/OsLoginServiceClient.html" title="Google::Cloud::OsLogin::V1beta::OsLoginServiceClient (class)">OsLoginServiceClient</a></span>
     
   
 </p>
@@ -114,7 +90,198 @@ js:
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
 
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-class_method" title="new (class method)">.<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, lib_name: nil, lib_version: nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cloud OS Login API.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="new-class_method">
+  
+    .<strong>new</strong>(credentials: nil, scopes: nil, client_config: nil, timeout: nil, lib_name: nil, lib_version: nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Cloud OS Login API</p>
+
+<p>The Cloud OS Login API allows you to manage users and their associated SSH
+public keys for logging into virtual machines on Google Cloud Platform.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>credentials</span>
+      
+      
+        <span class='type'>(<tt>Google::Auth::Credentials</tt>, <tt>String</tt>, <tt>Hash</tt>, <tt>GRPC::Core::Channel</tt>, <tt>GRPC::Core::ChannelCredentials</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Provides the means for authenticating requests made by the client. This parameter can
+be many types.
+A <code>Google::Auth::Credentials</code> uses a the properties of its represented keyfile for
+authenticating requests made by this client.
+A <code>String</code> will be treated as the path to the keyfile to be used for the construction of
+credentials for this client.
+A <code>Hash</code> will be treated as the contents of a keyfile to be used for the construction of
+credentials for this client.
+A <code>GRPC::Core::Channel</code> will be used to make calls through.
+A <code>GRPC::Core::ChannelCredentials</code> for the setting up the RPC client. The channel credentials
+should already be composed with a <code>GRPC::Core::CallCredentials</code> object.
+A <code>Proc</code> will be used as an updater_proc for the Grpc channel. The proc transforms the
+metadata for requests, generally, to give OAuth credentials.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scopes</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The OAuth scopes for this service. This parameter is ignored if
+an updater_proc is supplied.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_config</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A Hash for call options for each method. See
+Google::Gax#construct_settings for the structure of
+this data. Falls back to the default config if not specified
+or the specified config is missing data points.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Numeric</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The default timeout, in seconds, for calls made through this client.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/os_login/v1beta.rb', line 80</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> \
+    <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
+    <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
+    <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
+    <span class='label'>timeout:</span> <span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span>
+    <span class='label'>lib_name:</span> <span class='id identifier rubyid_lib_name'>lib_name</span><span class='comma'>,</span>
+    <span class='label'>lib_version:</span> <span class='id identifier rubyid_lib_version'>lib_version</span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span> <span class='op'>!=</span> <span class='kw'>nil</span> <span class='rbrace'>}</span>
+  <span class='const'><span class='object_link'><a href="../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../OsLogin.html" title="Google::Cloud::OsLogin (module)">OsLogin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Google::Cloud::OsLogin::V1beta (module)">V1beta</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="V1beta/OsLoginServiceClient.html" title="Google::Cloud::OsLogin::V1beta::OsLoginServiceClient (class)">OsLoginServiceClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
