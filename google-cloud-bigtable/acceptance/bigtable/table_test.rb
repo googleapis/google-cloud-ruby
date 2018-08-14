@@ -44,8 +44,7 @@ describe "Instance Tables", :bigtable do
 
   it "create table with initial splits and granularity" do
     table_id = "test-table-#{random_str}"
-
-    initial_splits = ["customer_1", "customer_10000"]
+    initial_splits = ["customer-001", "customer-005", "customer-010"]
 
     table = bigtable.create_table(
         instance_id,
@@ -58,6 +57,19 @@ describe "Instance Tables", :bigtable do
     table.must_be_kind_of Google::Cloud::Bigtable::Table
     table.granularity_millis?.must_equal true
     table.exists?.must_equal true
+
+    entries = 10.times.map do |i|
+      key = "customer-#{"%03d" % (i+1).to_s}"
+      table.new_mutation_entry(key).set_cell("cf", "field1", "v-#{i+1}")
+    end
+
+    table.mutate_rows(entries)
+    sample_keys = table.sample_row_keys.to_a.map(&:key)
+
+    initial_splits.each do |key|
+      sample_keys.must_include(key)
+    end
+
     table.delete
   end
 
