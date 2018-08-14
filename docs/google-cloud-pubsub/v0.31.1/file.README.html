@@ -1,0 +1,185 @@
+---
+layout: yard_main
+title: "File: README - Google"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="file_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><div id='filecontents'><h1>google-cloud-pubsub</h1>
+
+<p><a href="https://cloud.google.com/pubsub/">Google Cloud Pub/Sub</a> (<a href="https://cloud.google.com/pubsub/docs/reference/rest/">docs</a>) is designed to provide reliable, many-to-many, asynchronous messaging between applications. Publisher applications can send messages to a “topic” and other applications can subscribe to that topic to receive the messages. By decoupling senders and receivers, Google Cloud Pub/Sub allows developers to communicate between independently written applications.</p>
+
+<ul>
+<li><a href="http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest">google-cloud-pubsub API documentation</a></li>
+<li><a href="https://rubygems.org/gems/google-cloud-pubsub">google-cloud-pubsub on RubyGems</a></li>
+<li><a href="https://cloud.google.com/pubsub/docs">Google Cloud Pub/Sub documentation</a></li>
+</ul>
+
+<h2>Quick Start</h2>
+
+<pre class="code sh"><code class="sh">$ gem install google-cloud-pubsub
+</code></pre>
+
+<h2>Authentication</h2>
+
+<p>This library uses Service Account credentials to connect to Google Cloud services. When running on Compute Engine the credentials will be discovered automatically. When running on other environments the Service Account credentials can be specified by providing the path to the JSON file, or the JSON itself, in environment variables.</p>
+
+<p>Instructions and configuration options are covered in the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/guides/authentication">Authentication Guide</a>.</p>
+
+<h2>Example</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>google/cloud/pubsub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='id identifier rubyid_pubsub'>pubsub</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Google/Cloud/Pubsub.html" title="Google::Cloud::Pubsub (module)">Pubsub</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Google/Cloud/Pubsub.html#new-class_method" title="Google::Cloud::Pubsub.new (method)">new</a></span></span><span class='lparen'>(</span>
+  <span class='label'>project_id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-project</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>credentials:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/path/to/keyfile.json</span><span class='tstring_end'>&quot;</span></span>
+<span class='rparen'>)</span>
+
+<span class='comment'># Retrieve a topic
+</span><span class='id identifier rubyid_topic'>topic</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_topic'>topic</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Publish a new message
+</span><span class='id identifier rubyid_msg'>msg</span> <span class='op'>=</span> <span class='id identifier rubyid_topic'>topic</span><span class='period'>.</span><span class='id identifier rubyid_publish'>publish</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new-message</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Retrieve a subscription
+</span><span class='id identifier rubyid_sub'>sub</span> <span class='op'>=</span> <span class='id identifier rubyid_pubsub'>pubsub</span><span class='period'>.</span><span class='id identifier rubyid_subscription'>subscription</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>my-topic-sub</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='comment'># Create a subscriber to listen for available messages
+</span><span class='id identifier rubyid_subscriber'>subscriber</span> <span class='op'>=</span> <span class='id identifier rubyid_sub'>sub</span><span class='period'>.</span><span class='id identifier rubyid_listen'>listen</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_received_message'>received_message</span><span class='op'>|</span>
+  <span class='comment'># process message
+</span>  <span class='id identifier rubyid_received_message'>received_message</span><span class='period'>.</span><span class='id identifier rubyid_acknowledge!'>acknowledge!</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Start background threads that will call the block passed to listen.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_start'>start</span>
+
+<span class='comment'># Shut down the subscriber when ready to stop receiving messages.
+</span><span class='id identifier rubyid_subscriber'>subscriber</span><span class='period'>.</span><span class='id identifier rubyid_stop'>stop</span><span class='period'>.</span><span class='id identifier rubyid_wait!'>wait!</span>
+</code></pre>
+
+<h2>Enabling Logging</h2>
+
+<p>To enable logging for this library, set the logger for the underlying <a href="https://github.com/grpc/grpc/tree/master/src/ruby">gRPC</a> library. The logger that you set may be a Ruby stdlib <a href="https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a> as shown below, or a <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/cloud/logging/logger"><code>Google::Cloud::Logging::Logger</code></a> that will write logs to <a href="https://cloud.google.com/logging/">Stackdriver Logging</a>. See <a href="https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb">grpc/logconfig.rb</a> and the gRPC <a href="https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb">spec_helper.rb</a> for additional information.</p>
+
+<p>Configuring a Ruby stdlib logger:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>logger</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='kw'>module</span> <span class='const'>MyLogger</span>
+  <span class='const'>LOGGER</span> <span class='op'>=</span> <span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='gvar'>$stderr</span><span class='comma'>,</span> <span class='label'>level:</span> <span class='const'>Logger</span><span class='op'>::</span><span class='const'>WARN</span>
+  <span class='kw'>def</span> <span class='id identifier rubyid_logger'>logger</span>
+    <span class='const'>LOGGER</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='comment'># Define a gRPC module-level logger method before grpc/logconfig.rb loads.
+</span><span class='kw'>module</span> <span class='const'>GRPC</span>
+  <span class='id identifier rubyid_extend'>extend</span> <span class='const'>MyLogger</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2>Supported Ruby Versions</h2>
+
+<p>This library is supported on Ruby 2.0+.</p>
+
+<p>However, Ruby 2.3 or later is strongly recommended, as earlier releases have
+reached or are nearing end-of-life. After June 1, 2018, Google will provide
+official support only for Ruby versions that are considered current and
+supported by Ruby Core (that is, Ruby versions that are either in normal
+maintenance or in security maintenance).
+See <a href="https://www.ruby-lang.org/en/downloads/branches/">https://www.ruby-lang.org/en/downloads/branches/</a> for further details.</p>
+
+<h2>Versioning</h2>
+
+<p>This library follows <a href="http://semver.org/">Semantic Versioning</a>.</p>
+
+<p>It is currently in major version zero (0.y.z), which means that anything may change at any time and the public API should not be considered stable.</p>
+
+<h2>Contributing</h2>
+
+<p>Contributions to this library are always welcome and highly encouraged.</p>
+
+<p>See the <a href="https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/guides/contributing">Contributing Guide</a> for more information on how to get started.</p>
+
+<p>Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. See <a href="../CODE_OF_CONDUCT.md">Code of Conduct</a> for more information.</p>
+
+<h2>License</h2>
+
+<p>This library is licensed under Apache 2.0. Full license text is available in <a href="LICENSE">LICENSE</a>.</p>
+
+<h2>Support</h2>
+
+<p>Please <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues">report bugs at the project on Github</a>.
+Don&#39;t hesitate to <a href="http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby">ask questions</a> about the client or APIs on <a href="http://stackoverflow.com">StackOverflow</a>.</p>
+</div></div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
