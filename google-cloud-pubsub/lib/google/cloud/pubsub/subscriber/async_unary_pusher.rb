@@ -173,6 +173,8 @@ module Google
           end
 
           def push_change_request
+            return unless @stream.push_thread_pool.running?
+
             Concurrent::Future.new(executor: @stream.push_thread_pool) do
               begin
                 yield

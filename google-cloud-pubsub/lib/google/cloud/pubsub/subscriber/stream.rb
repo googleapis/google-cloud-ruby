@@ -282,6 +282,8 @@ module Google
           # rubocop:enable all
 
           def perform_callback_async rec_msg
+            return unless callback_thread_pool.running?
+
             Concurrent::Future.new(executor: callback_thread_pool) do
               begin
                 subscriber.callback.call rec_msg
