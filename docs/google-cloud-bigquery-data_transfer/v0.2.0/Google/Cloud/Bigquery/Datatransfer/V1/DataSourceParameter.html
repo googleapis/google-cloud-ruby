@@ -1,0 +1,2134 @@
+---
+layout: yard_main
+title: "Class: Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter - BigQuery"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter";
+  relpath = '../../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../../_index.html">Index (D)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Bigquery.html" title="Google::Cloud::Bigquery (module)">Bigquery</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Datatransfer.html" title="Google::Cloud::Bigquery::Datatransfer (module)">Datatransfer</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Bigquery::Datatransfer::V1 (module)">V1</a></span></span>
+     &raquo; 
+    <span class="title">DataSourceParameter</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Represents a data source parameter with validation rules, so that
+parameters can be rendered in the UI. These parameters are given to us by
+supported data sources, and include all needed information for rendering
+and validation.
+Thus, whoever uses this api can decide to generate either generic ui,
+or custom data source specific forms.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span>
+    
+  
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#allowed_values-instance_method" title="#allowed_values (instance method)">#<strong>allowed_values</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>All possible values for the parameter.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#description-instance_method" title="#description (instance method)">#<strong>description</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parameter description.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_name-instance_method" title="#display_name (instance method)">#<strong>display_name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parameter display name in the user interface.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fields-instance_method" title="#fields (instance method)">#<strong>fields</strong>  &#x21d2; Array&lt;Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When parameter is a record, describes child fields.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#immutable-instance_method" title="#immutable (instance method)">#<strong>immutable</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Cannot be changed after initial creation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_value-instance_method" title="#max_value (instance method)">#<strong>max_value</strong>  &#x21d2; Google::Protobuf::DoubleValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>For integer and double values specifies maxminum allowed value.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#min_value-instance_method" title="#min_value (instance method)">#<strong>min_value</strong>  &#x21d2; Google::Protobuf::DoubleValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>For integer and double values specifies minimum allowed value.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#param_id-instance_method" title="#param_id (instance method)">#<strong>param_id</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parameter identifier.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#recurse-instance_method" title="#recurse (instance method)">#<strong>recurse</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>If set to true, schema should be taken from the parent with the same parameter_id.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#repeated-instance_method" title="#repeated (instance method)">#<strong>repeated</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Can parameter have multiple values.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#required-instance_method" title="#required (instance method)">#<strong>required</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Is parameter required.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-instance_method" title="#type (instance method)">#<strong>type</strong>  &#x21d2; Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Parameter type.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validation_description-instance_method" title="#validation_description (instance method)">#<strong>validation_description</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Description of the requirements for this field, in case the user input does not fulfill the regex pattern or min/max values.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validation_help_url-instance_method" title="#validation_help_url (instance method)">#<strong>validation_help_url</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>URL to a help document to further explain the naming requirements.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validation_regex-instance_method" title="#validation_regex (instance method)">#<strong>validation_regex</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Regular expression which can be used for parameter validation.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="allowed_values=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="allowed_values-instance_method">
+  
+    #<strong>allowed_values</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns All possible values for the parameter.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>All possible values for the parameter.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="description=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="description-instance_method">
+  
+    #<strong>description</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Parameter description.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parameter description.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="display_name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="display_name-instance_method">
+  
+    #<strong>display_name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Parameter display name in the user interface.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parameter display name in the user interface.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fields=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="fields-instance_method">
+  
+    #<strong>fields</strong>  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter</a></span>&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns When parameter is a record, describes child fields.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>When parameter is a record, describes child fields.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="immutable=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="immutable-instance_method">
+  
+    #<strong>immutable</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Cannot be changed after initial creation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Cannot be changed after initial creation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="max_value=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="max_value-instance_method">
+  
+    #<strong>max_value</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../../Protobuf/DoubleValue.html" title="Google::Protobuf::DoubleValue (class)">Google::Protobuf::DoubleValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns For integer and double values specifies maxminum allowed value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Protobuf/DoubleValue.html" title="Google::Protobuf::DoubleValue (class)">Google::Protobuf::DoubleValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>For integer and double values specifies maxminum allowed value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="min_value=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="min_value-instance_method">
+  
+    #<strong>min_value</strong>  &#x21d2; <tt><span class='object_link'><a href="../../../../Protobuf/DoubleValue.html" title="Google::Protobuf::DoubleValue (class)">Google::Protobuf::DoubleValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns For integer and double values specifies minimum allowed value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../../../Protobuf/DoubleValue.html" title="Google::Protobuf::DoubleValue (class)">Google::Protobuf::DoubleValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>For integer and double values specifies minimum allowed value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="param_id=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="param_id-instance_method">
+  
+    #<strong>param_id</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Parameter identifier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parameter identifier.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="recurse=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="recurse-instance_method">
+  
+    #<strong>recurse</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns If set to true, schema should be taken from the parent with the same
+parameter_id. Only applicable when parameter type is RECORD.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>If set to true, schema should be taken from the parent with the same
+parameter_id. Only applicable when parameter type is RECORD.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="repeated=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="repeated-instance_method">
+  
+    #<strong>repeated</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Can parameter have multiple values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Can parameter have multiple values.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="required=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="required-instance_method">
+  
+    #<strong>required</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Is parameter required.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Is parameter required.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="type=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="type-instance_method">
+  
+    #<strong>type</strong>  &#x21d2; <tt><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Parameter type.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Parameter type.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="validation_description=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="validation_description-instance_method">
+  
+    #<strong>validation_description</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Description of the requirements for this field, in case the user input does
+not fulfill the regex pattern or min/max values.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Description of the requirements for this field, in case the user input does
+not fulfill the regex pattern or min/max values.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="validation_help_url=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="validation_help_url-instance_method">
+  
+    #<strong>validation_help_url</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns URL to a help document to further explain the naming requirements.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>URL to a help document to further explain the naming requirements.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="validation_regex=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="validation_regex-instance_method">
+  
+    #<strong>validation_regex</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Regular expression which can be used for parameter validation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Regular expression which can be used for parameter validation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/v1/datatransfer.rb', line 84</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter (class)">DataSourceParameter</a></span></span>
+  <span class='comment'># Parameter type.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="DataSourceParameter/Type.html" title="Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type (module)">Type</a></span></span>
+    <span class='comment'># Type unspecified.
+</span>    <span class='const'>TYPE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># String parameter.
+</span>    <span class='const'>STRING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Integer parameter (64-bits).
+</span>    <span class='comment'># Will be serialized to json as string.
+</span>    <span class='const'>INTEGER</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Double precision floating point parameter.
+</span>    <span class='const'>DOUBLE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Boolean parameter.
+</span>    <span class='const'>BOOLEAN</span> <span class='op'>=</span> <span class='int'>4</span>
+
+    <span class='comment'># Record parameter.
+</span>    <span class='const'>RECORD</span> <span class='op'>=</span> <span class='int'>5</span>
+
+    <span class='comment'># Page ID for a Google+ Page.
+</span>    <span class='const'>PLUS_PAGE</span> <span class='op'>=</span> <span class='int'>6</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
