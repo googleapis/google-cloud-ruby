@@ -1,8 +1,0 @@
---no-private
---title=Stackdriver Core
---markup markdown
---markup-provider redcarpet
-
-./lib/**/*.rb
--
-README.md
