@@ -275,6 +275,8 @@ module Google
           annotations
         end
 
+        # rubocop:disable LineLength
+
         ##
         # Run asynchronous image detection and annotation for a list of generic
         # files, such as PDF files, which may contain multiple pages and
@@ -284,8 +286,7 @@ module Google
         # Operation.response contains AsyncBatchAnnotateFilesResponse
         # (results).
         #
-        # @param requests
-        #   [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest | Hash>]
+        # @param requests [Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest|Hash>]
         #   Individual async file annotation requests for this batch.
         #   A hash of the same form as
         #     `Google::Cloud::Vision::V1::AsyncAnnotateFileRequest` can also be
@@ -344,6 +345,8 @@ module Google
         def async_batch_annotate_files requests, options = {}
           service.service.async_batch_annotate_files requests, options
         end
+
+        # rubocop:enable LineLength
 
         alias mark annotate
         alias detect annotate
