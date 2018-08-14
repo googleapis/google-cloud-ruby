@@ -228,6 +228,8 @@ module Google
         end
 
         def publish_batch_async topic_name, batch
+          return unless @publish_thread_pool.running?
+
           Concurrent::Future.new(executor: @publish_thread_pool) do
             begin
               grpc = @service.publish topic_name, batch.messages
@@ -250,6 +252,8 @@ module Google
         end
 
         def execute_callback_async callback, publish_result
+          return unless @callback_thread_pool.running?
+
           Concurrent::Future.new(executor: @callback_thread_pool) do
             callback.call publish_result
           end.execute
