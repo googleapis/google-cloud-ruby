@@ -66,12 +66,20 @@ module Acceptance
       $bigtable_cluster_location
     end
 
-    def bigtable_table_id
-      $bigtable_table_id
+    def bigtable_read_table_id
+      $bigtable_read_table_id
     end
 
-    def bigtable_table
-      @table ||= @bigtable.table($bigtable_instance_id, $bigtable_table_id)
+    def bigtable_mutation_table_id
+      $bigtable_mutation_table_id
+    end
+
+    def bigtable_read_table
+      @bigtable.table($bigtable_instance_id, $bigtable_read_table_id)
+    end
+
+    def bigtable_mutation_table
+      @bigtable.table($bigtable_instance_id, $bigtable_mutation_table_id)
     end
 
     def random_str
@@ -134,7 +142,7 @@ end
 
 $table_list_for_cleanup = []
 
-def create_test_table instance_id, table_id, row_count: nil
+def create_test_table instance_id, table_id, row_count: nil, qualifiers: ["field1"]
   table = $bigtable.create_table(instance_id, table_id) do |cfs|
     cfs.add('cf', Google::Cloud::Bigtable::GcRule.max_versions(1))
   end
@@ -144,10 +152,12 @@ def create_test_table instance_id, table_id, row_count: nil
   return table unless row_count
 
   entries = row_count.times.map do |i|
-    table
-      .new_mutation_entry("test-#{i+1}")
-      .set_cell("cf", "field1", "value-#{i+1}")
-      .set_cell("cf", "field2", "value-#{i+1}")
+    entry = table.new_mutation_entry("test-#{i+1}")
+
+    qualifiers.each do |q|
+      entry.set_cell("cf", q, "value-#{i+1}")
+    end
+    entry
   end
 
   table.mutate_rows(entries)
@@ -173,14 +183,22 @@ $bigtable_instance_id = "google-cloud-ruby-tests"
 $bigtable_cluster_location = "us-east1-b"
 $bigtable_cluster_location_2 = "us-east1-c"
 $bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
-$bigtable_table_id = "rt-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
+$bigtable_read_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
+$bigtable_mutation_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 
 create_test_instance(
   $bigtable_instance_id,
   $bigtable_cluster_id,
   $bigtable_cluster_location
 )
-create_test_table($bigtable_instance_id, $bigtable_table_id, row_count: 10)
+
+create_test_table(
+  $bigtable_instance_id,
+  $bigtable_read_table_id,
+  row_count: 5,
+  qualifiers: ["field1", "field2"]
+)
+create_test_table($bigtable_instance_id, $bigtable_mutation_table_id)
 
 Minitest.after_run do
   clean_up_bigtable_objects($bigtable_instance_id, $table_list_for_cleanup)

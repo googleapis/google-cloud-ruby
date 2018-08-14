@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe "DataClient Sample Rows Keys", :bigtable do
   it "read sample rows keys" do
-    sample_row_keys = bigtable_table.sample_row_keys.to_a
+    sample_row_keys = bigtable_read_table.sample_row_keys.to_a
     sample_row_keys.wont_be :empty?
   end
 end

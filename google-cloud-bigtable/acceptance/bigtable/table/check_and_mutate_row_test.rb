@@ -19,10 +19,10 @@ require "bigtable_helper"
 
 describe "DataClient Check and Mutate Row", :bigtable do
   let(:family) { "cf" }
-  let(:table) { bigtable_table }
+  let(:table) { bigtable_mutation_table }
 
   it "check and mutate row" do
-    row_key = "checkmutate-#{random_str}"
+    row_key = "test-cm-#{random_str}"
     qualifier = "checkmutate"
 
     entry = table.new_mutation_entry(row_key)

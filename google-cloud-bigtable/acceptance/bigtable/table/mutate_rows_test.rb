@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe "DataClient Mutate Rows", :bigtable do
   let(:family) { "cf" }
-  let(:table) { bigtable_table }
+  let(:table) { bigtable_mutation_table }
 
   it "add multiple row entries" do
     postfix = random_str

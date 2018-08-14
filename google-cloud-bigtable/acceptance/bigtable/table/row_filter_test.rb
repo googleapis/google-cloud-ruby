@@ -19,7 +19,7 @@ require "bigtable_helper"
 
 describe "DataClient Read Rows Filters", :bigtable do
   let(:family) { "cf" }
-  let(:table) { bigtable_table }
+  let(:table) { bigtable_read_table }
 
   it "strip value filter" do
     filter = table.filter.strip_value
@@ -39,11 +39,10 @@ describe "DataClient Read Rows Filters", :bigtable do
     end
   end
 
-  it "sample filter" do
-    skip
-    filter = table.filter.sample(0.2)
+  it "sample probability filter" do
+    filter = table.filter.sample(0.5)
     rows = table.read_rows(filter: filter).to_a
-    rows.wont_be :empty?
+    rows.length.must_be :>=, 0
   end
 
   it "family filter" do
@@ -103,13 +102,12 @@ describe "DataClient Read Rows Filters", :bigtable do
   end
 
   it "cells per column filter" do
-    skip
     filter = table.filter.cells_per_column(1)
-    rows = table.read_rows(filter: filter, limit: 2).to_a
+    rows = table.read_rows(keys: ["test-1"], filter: filter).to_a
     rows.wont_be :empty?
 
     rows.each do |row|
-      row.cells[family].map(&:qualifier).length.must_equal 1
+      row.cells[family].map(&:qualifier).length.must_equal 2
     end
   end
 

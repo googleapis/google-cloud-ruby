@@ -18,12 +18,12 @@
 require "bigtable_helper"
 
 describe "Table ColumnFamily", :bigtable do
-  let(:instance) { bigtable_instance }
+  let(:instance_id) { bigtable_instance_id }
   let(:table_id) { "test-table-#{random_str}" }
   let(:table){
     add_table_to_cleanup_list(table_id)
 
-    instance.create_table(table_id) do |cfs|
+    bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add('cf1', Google::Cloud::Bigtable::GcRule.max_age(600))
       cfs.add('cf2', Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
@@ -37,7 +37,8 @@ describe "Table ColumnFamily", :bigtable do
     cf.name.must_equal "cfcreate"
     cf.gc_rule.max_versions.must_equal 1
 
-    instance.table(table_id).column_families.find{|cf| cf.name == "cfcreate"}.wont_be :nil?
+    table.reload!
+    table.column_families.find{|cf| cf.name == "cfcreate"}.wont_be :nil?
   end
 
   it "update column family" do
