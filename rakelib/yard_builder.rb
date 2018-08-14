@@ -68,7 +68,11 @@ class YardBuilder
   protected
 
   def case_insensitive_fs?
-    File.exists? master_dir + "RAKEFILE"
+    dir = create_tmp_dir "fs-case-sensitivity"
+    File.write dir + "test", "hello world!"
+    sensitive = File.exists? dir + "TEST"
+    safe_remove_dir dir
+    sensitive
   end
 
   def case_insensitive_check!
