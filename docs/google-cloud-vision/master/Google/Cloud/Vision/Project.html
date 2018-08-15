@@ -753,13 +753,12 @@ Operation.response contains AsyncBatchAnnotateFilesResponse
         <span class='name'>requests</span>
       
       
-        <span class='type'></span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="V1/AsyncAnnotateFileRequest.html" title="Google::Cloud::Vision::V1::AsyncAnnotateFileRequest (class)">Google::Cloud::Vision::V1::AsyncAnnotateFileRequest</a></span>|Hash&gt;</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>[Array<Google::Cloud::Vision::V1::AsyncAnnotateFileRequest | Hash>]
-Individual async file annotation requests for this batch.
+        <div class='inline'><p>Individual async file annotation requests for this batch.
 A hash of the same form as
   <code>Google::Cloud::Vision::V1::AsyncAnnotateFileRequest</code> can also be
 provided.</p>
@@ -824,12 +823,12 @@ retries, etc.</p>
       <pre class="lines">
 
 
-344
 345
-346</pre>
+346
+347</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/project.rb', line 344</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/vision/project.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_async_batch_annotate_files'>async_batch_annotate_files</span> <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_async_batch_annotate_files'>async_batch_annotate_files</span> <span class='id identifier rubyid_requests'>requests</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>
