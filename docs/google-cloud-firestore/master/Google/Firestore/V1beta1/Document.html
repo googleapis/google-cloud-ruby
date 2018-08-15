@@ -300,7 +300,7 @@ the +read_time+ of a query.</p>
 <p>The map keys represent field names.</p>
 
 <p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
-+0+ to +9+, or +<em>+, and must not start with +0+ to +9+ or +</em>+. For example,
++0+ to +9+, or +_+, and must not start with +0+ to +9+. For example,
 +foo_bar_17+.</p>
 
 <p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
@@ -344,7 +344,7 @@ escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
 <p>The map keys represent field names.</p>
 
 <p>A simple field name contains only characters +a+ to +z+, +A+ to +Z+,
-+0+ to +9+, or +<em>+, and must not start with +0+ to +9+ or +</em>+. For example,
++0+ to +9+, or +_+, and must not start with +0+ to +9+. For example,
 +foo_bar_17+.</p>
 
 <p>Field names matching the regular expression +<strong>.*</strong>+ are reserved. Reserved
@@ -461,7 +461,7 @@ escaped using a ++. For example, + +x&amp;y+ + represents +x&amp;y+ and</p>
   <div class="discussion">
     <p>Returns Output only. The time at which the document was last changed.</p>
 
-<p>This value is initally set to the +create_time+ then increases
+<p>This value is initially set to the +create_time+ then increases
 monotonically with each change to the document. It can also be
 compared to values from other documents and the +read_time+ of a query.</p>
 
@@ -483,7 +483,7 @@ compared to values from other documents and the +read_time+ of a query.</p>
         &mdash;
         <div class='inline'><p>Output only. The time at which the document was last changed.</p>
 
-<p>This value is initally set to the +create_time+ then increases
+<p>This value is initially set to the +create_time+ then increases
 monotonically with each change to the document. It can also be
 compared to values from other documents and the +read_time+ of a query.</p>
 </div>

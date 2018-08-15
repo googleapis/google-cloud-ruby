@@ -117,6 +117,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#append_missing_elements-instance_method" title="#append_missing_elements (instance method)">#<strong>append_missing_elements</strong>  &#x21d2; Google::Firestore::V1beta1::ArrayValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Append the given elements in order if they are not already present in the current field value.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#field_path-instance_method" title="#field_path (instance method)">#<strong>field_path</strong>  &#x21d2; String </a>
     
 
@@ -135,6 +161,32 @@ js:
 
   
     <span class="summary_desc"><div class='inline'><p>The path of the field.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_all_from_array-instance_method" title="#remove_all_from_array (instance method)">#<strong>remove_all_from_array</strong>  &#x21d2; Google::Firestore::V1beta1::ArrayValue </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Remove all of the given elements from the array in the field.</p>
 </div></span>
   
 </li>
@@ -176,9 +228,106 @@ js:
     <h2>Instance Attribute Details</h2>
     
       
-      <span id="field_path=-instance_method"></span>
+      <span id="append_missing_elements=-instance_method"></span>
       <div class="method_details first">
-  <h3 class="signature first" id="field_path-instance_method">
+  <h3 class="signature first" id="append_missing_elements-instance_method">
+  
+    #<strong>append_missing_elements</strong>  &#x21d2; <tt><span class='object_link'><a href="../ArrayValue.html" title="Google::Firestore::V1beta1::ArrayValue (class)">Google::Firestore::V1beta1::ArrayValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Append the given elements in order if they are not already present in
+the current field value.
+If the field is not an array, or if the field does not yet exist, it is
+first set to the empty array.</p>
+
+<p>Equivalent numbers of different types (e.g. 3L and 3.0) are
+considered equal when checking if a value is missing.
+NaN is equal to NaN, and Null is equal to Null.
+If the input contains multiple equivalent values, only the first will
+be considered.</p>
+
+<p>The corresponding transform_result will be the null value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../ArrayValue.html" title="Google::Firestore::V1beta1::ArrayValue (class)">Google::Firestore::V1beta1::ArrayValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Append the given elements in order if they are not already present in
+the current field value.
+If the field is not an array, or if the field does not yet exist, it is
+first set to the empty array.</p>
+
+<p>Equivalent numbers of different types (e.g. 3L and 3.0) are
+considered equal when checking if a value is missing.
+NaN is equal to NaN, and Null is equal to Null.
+If the input contains multiple equivalent values, only the first will
+be considered.</p>
+
+<p>The corresponding transform_result will be the null value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 95</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform (class)">FieldTransform</a></span></span>
+  <span class='comment'># A value that is calculated by the server.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="FieldTransform/ServerValue.html" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform::ServerValue (module)">ServerValue</a></span></span>
+    <span class='comment'># Unspecified. This value must not be used.
+</span>    <span class='const'>SERVER_VALUE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The time at which the server processed the request, with millisecond
+</span>    <span class='comment'># precision.
+</span>    <span class='const'>REQUEST_TIME</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="field_path=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="field_path-instance_method">
   
     #<strong>field_path</strong>  &#x21d2; <tt>String</tt> 
   
@@ -221,20 +370,113 @@ reference.</p>
       <pre class="lines">
 
 
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78</pre>
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 95</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform (class)">FieldTransform</a></span></span>
+  <span class='comment'># A value that is calculated by the server.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="FieldTransform/ServerValue.html" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform::ServerValue (module)">ServerValue</a></span></span>
+    <span class='comment'># Unspecified. This value must not be used.
+</span>    <span class='const'>SERVER_VALUE_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The time at which the server processed the request, with millisecond
+</span>    <span class='comment'># precision.
+</span>    <span class='const'>REQUEST_TIME</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="remove_all_from_array=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="remove_all_from_array-instance_method">
+  
+    #<strong>remove_all_from_array</strong>  &#x21d2; <tt><span class='object_link'><a href="../ArrayValue.html" title="Google::Firestore::V1beta1::ArrayValue (class)">Google::Firestore::V1beta1::ArrayValue</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Remove all of the given elements from the array in the field.
+If the field is not an array, or if the field does not yet exist, it is
+set to the empty array.</p>
+
+<p>Equivalent numbers of the different types (e.g. 3L and 3.0) are
+considered equal when deciding whether an element should be removed.
+NaN is equal to NaN, and Null is equal to Null.
+This will remove all equivalent values if there are duplicates.</p>
+
+<p>The corresponding transform_result will be the null value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../ArrayValue.html" title="Google::Firestore::V1beta1::ArrayValue (class)">Google::Firestore::V1beta1::ArrayValue</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Remove all of the given elements from the array in the field.
+If the field is not an array, or if the field does not yet exist, it is
+set to the empty array.</p>
+
+<p>Equivalent numbers of the different types (e.g. 3L and 3.0) are
+considered equal when deciding whether an element should be removed.
+NaN is equal to NaN, and Null is equal to Null.
+This will remove all equivalent values if there are duplicates.</p>
+
+<p>The corresponding transform_result will be the null value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 95</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform (class)">FieldTransform</a></span></span>
   <span class='comment'># A value that is calculated by the server.
@@ -296,20 +538,20 @@ reference.</p>
       <pre class="lines">
 
 
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78</pre>
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 95</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform (class)">FieldTransform</a></span></span>
   <span class='comment'># A value that is calculated by the server.

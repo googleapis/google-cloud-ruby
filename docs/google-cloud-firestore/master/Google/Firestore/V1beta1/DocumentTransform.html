@@ -219,7 +219,6 @@ js:
       <pre class="lines">
 
 
-59
 60
 61
 62
@@ -239,10 +238,37 @@ js:
 76
 77
 78
-79</pre>
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 60</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform (class)">DocumentTransform</a></span></span>
   <span class='comment'># A transformation of a field of the document.
@@ -253,6 +279,32 @@ js:
 </span>  <span class='comment'># @!attribute [rw] set_to_server_value
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::DocumentTransform::FieldTransform::ServerValue]
 </span>  <span class='comment'>#     Sets the field to the given server value.
+</span>  <span class='comment'># @!attribute [rw] append_missing_elements
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::ArrayValue]
+</span>  <span class='comment'>#     Append the given elements in order if they are not already present in
+</span>  <span class='comment'>#     the current field value.
+</span>  <span class='comment'>#     If the field is not an array, or if the field does not yet exist, it is
+</span>  <span class='comment'>#     first set to the empty array.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Equivalent numbers of different types (e.g. 3L and 3.0) are
+</span>  <span class='comment'>#     considered equal when checking if a value is missing.
+</span>  <span class='comment'>#     NaN is equal to NaN, and Null is equal to Null.
+</span>  <span class='comment'>#     If the input contains multiple equivalent values, only the first will
+</span>  <span class='comment'>#     be considered.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     The corresponding transform_result will be the null value.
+</span>  <span class='comment'># @!attribute [rw] remove_all_from_array
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::ArrayValue]
+</span>  <span class='comment'>#     Remove all of the given elements from the array in the field.
+</span>  <span class='comment'>#     If the field is not an array, or if the field does not yet exist, it is
+</span>  <span class='comment'>#     set to the empty array.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Equivalent numbers of the different types (e.g. 3L and 3.0) are
+</span>  <span class='comment'>#     considered equal when deciding whether an element should be removed.
+</span>  <span class='comment'>#     NaN is equal to NaN, and Null is equal to Null.
+</span>  <span class='comment'>#     This will remove all equivalent values if there are duplicates.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     The corresponding transform_result will be the null value.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="DocumentTransform/FieldTransform.html" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform (class)">FieldTransform</a></span></span>
     <span class='comment'># A value that is calculated by the server.
 </span>    <span class='kw'>module</span> <span class='const'>ServerValue</span>
@@ -318,7 +370,6 @@ This must not be empty.</p>
       <pre class="lines">
 
 
-59
 60
 61
 62
@@ -338,10 +389,37 @@ This must not be empty.</p>
 76
 77
 78
-79</pre>
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb', line 60</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Firestore::V1beta1::DocumentTransform (class)">DocumentTransform</a></span></span>
   <span class='comment'># A transformation of a field of the document.
@@ -352,6 +430,32 @@ This must not be empty.</p>
 </span>  <span class='comment'># @!attribute [rw] set_to_server_value
 </span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::DocumentTransform::FieldTransform::ServerValue]
 </span>  <span class='comment'>#     Sets the field to the given server value.
+</span>  <span class='comment'># @!attribute [rw] append_missing_elements
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::ArrayValue]
+</span>  <span class='comment'>#     Append the given elements in order if they are not already present in
+</span>  <span class='comment'>#     the current field value.
+</span>  <span class='comment'>#     If the field is not an array, or if the field does not yet exist, it is
+</span>  <span class='comment'>#     first set to the empty array.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Equivalent numbers of different types (e.g. 3L and 3.0) are
+</span>  <span class='comment'>#     considered equal when checking if a value is missing.
+</span>  <span class='comment'>#     NaN is equal to NaN, and Null is equal to Null.
+</span>  <span class='comment'>#     If the input contains multiple equivalent values, only the first will
+</span>  <span class='comment'>#     be considered.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     The corresponding transform_result will be the null value.
+</span>  <span class='comment'># @!attribute [rw] remove_all_from_array
+</span>  <span class='comment'>#   @return [Google::Firestore::V1beta1::ArrayValue]
+</span>  <span class='comment'>#     Remove all of the given elements from the array in the field.
+</span>  <span class='comment'>#     If the field is not an array, or if the field does not yet exist, it is
+</span>  <span class='comment'>#     set to the empty array.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     Equivalent numbers of the different types (e.g. 3L and 3.0) are
+</span>  <span class='comment'>#     considered equal when deciding whether an element should be removed.
+</span>  <span class='comment'>#     NaN is equal to NaN, and Null is equal to Null.
+</span>  <span class='comment'>#     This will remove all equivalent values if there are duplicates.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     The corresponding transform_result will be the null value.
 </span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="DocumentTransform/FieldTransform.html" title="Google::Firestore::V1beta1::DocumentTransform::FieldTransform (class)">FieldTransform</a></span></span>
     <span class='comment'># A value that is calculated by the server.
 </span>    <span class='kw'>module</span> <span class='const'>ServerValue</span>
