@@ -146,6 +146,32 @@ a Google Cloud Storage bucket.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#bytes_limit_per_file_percent-instance_method" title="#bytes_limit_per_file_percent (instance method)">#<strong>bytes_limit_per_file_percent</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Max percentage of bytes to scan from a file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#file_set-instance_method" title="#file_set (instance method)">#<strong>file_set</strong>  &#x21d2; Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet </a>
     
 
@@ -268,7 +294,8 @@ a Google Cloud Storage bucket.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Max number of bytes to scan from a file. If a scanned file&#39;s size is bigger
-than this value then the rest of the bytes are omitted.</p>
+than this value then the rest of the bytes are omitted. Only one
+of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
 
 
   </div>
@@ -287,7 +314,8 @@ than this value then the rest of the bytes are omitted.</p>
       
         &mdash;
         <div class='inline'><p>Max number of bytes to scan from a file. If a scanned file&#39;s size is bigger
-than this value then the rest of the bytes are omitted.</p>
+than this value then the rest of the bytes are omitted. Only one
+of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
 </div>
       
     </li>
@@ -300,31 +328,134 @@ than this value then the rest of the bytes are omitted.</p>
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240</pre>
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 246</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
+  <span class='comment'># Set of files to scan.
+</span>  <span class='comment'># @!attribute [rw] url
+</span>  <span class='comment'>#   @return [String]
+</span>  <span class='comment'>#     The url, in the format +gs://&lt;bucket&gt;/&lt;path&gt;+. Trailing wildcard in the
+</span>  <span class='comment'>#     path is allowed.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/FileSet.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::FileSet (class)">FileSet</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span>
+
+  <span class='comment'># How to sample bytes if not all bytes are scanned. Meaningful only when used
+</span>  <span class='comment'># in conjunction with bytes_limit_per_file. If not specified, scanning would
+</span>  <span class='comment'># start from the top.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="CloudStorageOptions/SampleMethod.html" title="Google::Privacy::Dlp::V2::CloudStorageOptions::SampleMethod (module)">SampleMethod</a></span></span>
+    <span class='const'>SAMPLE_METHOD_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Scan from the top (default).
+</span>    <span class='const'>TOP</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># For each file larger than bytes_limit_per_file, randomly pick the offset
+</span>    <span class='comment'># to start scanning. The scanned bytes are contiguous.
+</span>    <span class='const'>RANDOM_START</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="bytes_limit_per_file_percent=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="bytes_limit_per_file_percent-instance_method">
+  
+    #<strong>bytes_limit_per_file_percent</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Max percentage of bytes to scan from a file. The rest are omitted. The
+number of bytes scanned is rounded down. Must be between 0 and 100,
+inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
+of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Max percentage of bytes to scan from a file. The rest are omitted. The
+number of bytes scanned is rounded down. Must be between 0 and 100,
+inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
+of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 246</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
@@ -392,31 +523,31 @@ than this value then the rest of the bytes are omitted.</p>
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240</pre>
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 246</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
@@ -493,31 +624,31 @@ are applied.</p>
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240</pre>
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 246</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
@@ -594,31 +725,31 @@ inclusively. Both 0 and 100 means no limit. Defaults to 0.</p>
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240</pre>
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 246</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.
@@ -686,31 +817,31 @@ inclusively. Both 0 and 100 means no limit. Defaults to 0.</p>
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240</pre>
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 246</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CloudStorageOptions (class)">CloudStorageOptions</a></span></span>
   <span class='comment'># Set of files to scan.

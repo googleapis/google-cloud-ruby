@@ -107,7 +107,11 @@ matches for &quot;jennifer&quot;.</p>
 
 <p>Dictionary words containing a large number of characters that are not
 letters or digits may result in unexpected findings because such characters
-are treated as whitespace.</p>
+are treated as whitespace. The
+<a href="https://cloud.google.com/dlp/limits">limits</a> page contains details about
+the size limits of dictionaries. For dictionaries that do not fit within
+these constraints, consider using +LargeCustomDictionaryConfig+ in the
++StoredInfoType+ API.</p>
 
 
   </div>
@@ -239,18 +243,18 @@ is accepted.</p>
       <pre class="lines">
 
 
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 101</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
   <span class='comment'># Message defining a list of words or phrases to search for in the data.
@@ -310,18 +314,18 @@ is accepted.</p>
       <pre class="lines">
 
 
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 101</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::CustomInfoType::Dictionary (class)">Dictionary</a></span></span>
   <span class='comment'># Message defining a list of words or phrases to search for in the data.

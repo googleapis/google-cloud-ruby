@@ -169,6 +169,32 @@ js:
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#rows_limit_percent-instance_method" title="#rows_limit_percent (instance method)">#<strong>rows_limit_percent</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Max percentage of rows to scan.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#sample_method-instance_method" title="#sample_method (instance method)">#<strong>sample_method</strong>  &#x21d2; Google::Privacy::Dlp::V2::BigQueryOptions::SampleMethod </a>
     
 
@@ -272,23 +298,23 @@ Nested fields in the format, like +person.birthdate.year+, are allowed.</p>
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277</pre>
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
@@ -324,7 +350,8 @@ Nested fields in the format, like +person.birthdate.year+, are allowed.</p>
   <div class="discussion">
     <p>Returns Max number of rows to scan. If the table has more rows than this value, the
 rest of the rows are omitted. If not set, or if set to 0, all rows will be
-scanned. Cannot be used in conjunction with TimespanConfig.</p>
+scanned. Only one of rows_limit and rows_limit_percent can be specified.
+Cannot be used in conjunction with TimespanConfig.</p>
 
 
   </div>
@@ -344,7 +371,8 @@ scanned. Cannot be used in conjunction with TimespanConfig.</p>
         &mdash;
         <div class='inline'><p>Max number of rows to scan. If the table has more rows than this value, the
 rest of the rows are omitted. If not set, or if set to 0, all rows will be
-scanned. Cannot be used in conjunction with TimespanConfig.</p>
+scanned. Only one of rows_limit and rows_limit_percent can be specified.
+Cannot be used in conjunction with TimespanConfig.</p>
 </div>
       
     </li>
@@ -357,23 +385,112 @@ scanned. Cannot be used in conjunction with TimespanConfig.</p>
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277</pre>
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 306</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
+  <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
+</span>  <span class='comment'># in conjunction with rows_limit. If not specified, scanning would start
+</span>  <span class='comment'># from the top.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="BigQueryOptions/SampleMethod.html" title="Google::Privacy::Dlp::V2::BigQueryOptions::SampleMethod (module)">SampleMethod</a></span></span>
+    <span class='const'>SAMPLE_METHOD_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Scan from the top (default).
+</span>    <span class='const'>TOP</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Randomly pick the row to start scanning. The scanned rows are contiguous.
+</span>    <span class='const'>RANDOM_START</span> <span class='op'>=</span> <span class='int'>2</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="rows_limit_percent=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="rows_limit_percent-instance_method">
+  
+    #<strong>rows_limit_percent</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns Max percentage of rows to scan. The rest are omitted. The number of rows
+scanned is rounded down. Must be between 0 and 100, inclusively. Both 0 and
+100 means no limit. Defaults to 0. Only one of rows_limit and
+rows_limit_percent can be specified. Cannot be used in conjunction with
+TimespanConfig.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Max percentage of rows to scan. The rest are omitted. The number of rows
+scanned is rounded down. Must be between 0 and 100, inclusively. Both 0 and
+100 means no limit. Defaults to 0. Only one of rows_limit and
+rows_limit_percent can be specified. Cannot be used in conjunction with
+TimespanConfig.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
@@ -433,23 +550,23 @@ scanned. Cannot be used in conjunction with TimespanConfig.</p>
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277</pre>
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used
@@ -514,23 +631,23 @@ scanned. Cannot be used in conjunction with TimespanConfig.</p>
       <pre class="lines">
 
 
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277</pre>
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 306</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::BigQueryOptions (class)">BigQueryOptions</a></span></span>
   <span class='comment'># How to sample rows if not all rows are scanned. Meaningful only when used

@@ -151,7 +151,7 @@ Currently only supported when inspecting Google Cloud Storage and BigQuery.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Exclude files newer than this value.</p>
+    <span class="summary_desc"><div class='inline'><p>Exclude files or rows newer than this value.</p>
 </div></span>
   
 </li>
@@ -177,7 +177,7 @@ Currently only supported when inspecting Google Cloud Storage and BigQuery.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Exclude files older than this value.</p>
+    <span class="summary_desc"><div class='inline'><p>Exclude files or rows older than this value.</p>
 </div></span>
   
 </li>
@@ -268,10 +268,10 @@ time of the execution of the last run of the JobTrigger.</p>
       <pre class="lines">
 
 
-316</pre>
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 360</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig::TimespanConfig (class)">TimespanConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -292,7 +292,7 @@ time of the execution of the last run of the JobTrigger.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Exclude files newer than this value.
+    <p>Returns Exclude files or rows newer than this value.
 If set to zero, no upper time limit is applied.</p>
 
 
@@ -311,7 +311,7 @@ If set to zero, no upper time limit is applied.</p>
       
       
         &mdash;
-        <div class='inline'><p>Exclude files newer than this value.
+        <div class='inline'><p>Exclude files or rows newer than this value.
 If set to zero, no upper time limit is applied.</p>
 </div>
       
@@ -325,10 +325,10 @@ If set to zero, no upper time limit is applied.</p>
       <pre class="lines">
 
 
-316</pre>
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 360</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig::TimespanConfig (class)">TimespanConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -349,7 +349,7 @@ If set to zero, no upper time limit is applied.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns Exclude files older than this value.</p>
+    <p>Returns Exclude files or rows older than this value.</p>
 
 
   </div>
@@ -367,7 +367,7 @@ If set to zero, no upper time limit is applied.</p>
       
       
         &mdash;
-        <div class='inline'><p>Exclude files older than this value.</p>
+        <div class='inline'><p>Exclude files or rows older than this value.</p>
 </div>
       
     </li>
@@ -380,10 +380,10 @@ If set to zero, no upper time limit is applied.</p>
       <pre class="lines">
 
 
-316</pre>
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 360</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig::TimespanConfig (class)">TimespanConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -405,7 +405,9 @@ If set to zero, no upper time limit is applied.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns Specification of the field containing the timestamp of scanned items.
-Required for data sources like Datastore or BigQuery.
+Used for data sources like Datastore or BigQuery.
+If not specified for BigQuery, table last modification timestamp
+is checked against given time span.
 The valid data types of the timestamp field are:
 for BigQuery - timestamp, date, datetime;
 for Datastore - timestamp.
@@ -429,7 +431,9 @@ or its value is empty or invalid.</p>
       
         &mdash;
         <div class='inline'><p>Specification of the field containing the timestamp of scanned items.
-Required for data sources like Datastore or BigQuery.
+Used for data sources like Datastore or BigQuery.
+If not specified for BigQuery, table last modification timestamp
+is checked against given time span.
 The valid data types of the timestamp field are:
 for BigQuery - timestamp, date, datetime;
 for Datastore - timestamp.
@@ -447,10 +451,10 @@ or its value is empty or invalid.</p>
       <pre class="lines">
 
 
-316</pre>
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 360</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig::TimespanConfig (class)">TimespanConfig</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>

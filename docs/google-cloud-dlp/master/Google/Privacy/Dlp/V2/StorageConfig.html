@@ -270,51 +270,55 @@ js:
       <pre class="lines">
 
 
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317</pre>
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 291</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 333</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig (class)">StorageConfig</a></span></span>
   <span class='comment'># Configuration of the timespan of the items to include in scanning.
 </span>  <span class='comment'># Currently only supported when inspecting Google Cloud Storage and BigQuery.
 </span>  <span class='comment'># @!attribute [rw] start_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files older than this value.
+</span>  <span class='comment'>#     Exclude files or rows older than this value.
 </span>  <span class='comment'># @!attribute [rw] end_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files newer than this value.
+</span>  <span class='comment'>#     Exclude files or rows newer than this value.
 </span>  <span class='comment'>#     If set to zero, no upper time limit is applied.
 </span>  <span class='comment'># @!attribute [rw] timestamp_field
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
 </span>  <span class='comment'>#     Specification of the field containing the timestamp of scanned items.
-</span>  <span class='comment'>#     Required for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     Used for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     If not specified for BigQuery, table last modification timestamp
+</span>  <span class='comment'>#     is checked against given time span.
 </span>  <span class='comment'>#     The valid data types of the timestamp field are:
 </span>  <span class='comment'>#     for BigQuery - timestamp, date, datetime;
 </span>  <span class='comment'>#     for Datastore - timestamp.
@@ -377,51 +381,55 @@ js:
       <pre class="lines">
 
 
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317</pre>
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 291</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 333</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig (class)">StorageConfig</a></span></span>
   <span class='comment'># Configuration of the timespan of the items to include in scanning.
 </span>  <span class='comment'># Currently only supported when inspecting Google Cloud Storage and BigQuery.
 </span>  <span class='comment'># @!attribute [rw] start_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files older than this value.
+</span>  <span class='comment'>#     Exclude files or rows older than this value.
 </span>  <span class='comment'># @!attribute [rw] end_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files newer than this value.
+</span>  <span class='comment'>#     Exclude files or rows newer than this value.
 </span>  <span class='comment'>#     If set to zero, no upper time limit is applied.
 </span>  <span class='comment'># @!attribute [rw] timestamp_field
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
 </span>  <span class='comment'>#     Specification of the field containing the timestamp of scanned items.
-</span>  <span class='comment'>#     Required for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     Used for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     If not specified for BigQuery, table last modification timestamp
+</span>  <span class='comment'>#     is checked against given time span.
 </span>  <span class='comment'>#     The valid data types of the timestamp field are:
 </span>  <span class='comment'>#     for BigQuery - timestamp, date, datetime;
 </span>  <span class='comment'>#     for Datastore - timestamp.
@@ -484,51 +492,55 @@ js:
       <pre class="lines">
 
 
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317</pre>
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 291</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 333</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig (class)">StorageConfig</a></span></span>
   <span class='comment'># Configuration of the timespan of the items to include in scanning.
 </span>  <span class='comment'># Currently only supported when inspecting Google Cloud Storage and BigQuery.
 </span>  <span class='comment'># @!attribute [rw] start_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files older than this value.
+</span>  <span class='comment'>#     Exclude files or rows older than this value.
 </span>  <span class='comment'># @!attribute [rw] end_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files newer than this value.
+</span>  <span class='comment'>#     Exclude files or rows newer than this value.
 </span>  <span class='comment'>#     If set to zero, no upper time limit is applied.
 </span>  <span class='comment'># @!attribute [rw] timestamp_field
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
 </span>  <span class='comment'>#     Specification of the field containing the timestamp of scanned items.
-</span>  <span class='comment'>#     Required for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     Used for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     If not specified for BigQuery, table last modification timestamp
+</span>  <span class='comment'>#     is checked against given time span.
 </span>  <span class='comment'>#     The valid data types of the timestamp field are:
 </span>  <span class='comment'>#     for BigQuery - timestamp, date, datetime;
 </span>  <span class='comment'>#     for Datastore - timestamp.
@@ -586,51 +598,55 @@ js:
       <pre class="lines">
 
 
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317</pre>
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 291</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dlp/v2/doc/google/privacy/dlp/v2/storage.rb', line 333</span>
 
 <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Privacy::Dlp::V2::StorageConfig (class)">StorageConfig</a></span></span>
   <span class='comment'># Configuration of the timespan of the items to include in scanning.
 </span>  <span class='comment'># Currently only supported when inspecting Google Cloud Storage and BigQuery.
 </span>  <span class='comment'># @!attribute [rw] start_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files older than this value.
+</span>  <span class='comment'>#     Exclude files or rows older than this value.
 </span>  <span class='comment'># @!attribute [rw] end_time
 </span>  <span class='comment'>#   @return [Google::Protobuf::Timestamp]
-</span>  <span class='comment'>#     Exclude files newer than this value.
+</span>  <span class='comment'>#     Exclude files or rows newer than this value.
 </span>  <span class='comment'>#     If set to zero, no upper time limit is applied.
 </span>  <span class='comment'># @!attribute [rw] timestamp_field
 </span>  <span class='comment'>#   @return [Google::Privacy::Dlp::V2::FieldId]
 </span>  <span class='comment'>#     Specification of the field containing the timestamp of scanned items.
-</span>  <span class='comment'>#     Required for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     Used for data sources like Datastore or BigQuery.
+</span>  <span class='comment'>#     If not specified for BigQuery, table last modification timestamp
+</span>  <span class='comment'>#     is checked against given time span.
 </span>  <span class='comment'>#     The valid data types of the timestamp field are:
 </span>  <span class='comment'>#     for BigQuery - timestamp, date, datetime;
 </span>  <span class='comment'>#     for Datastore - timestamp.
