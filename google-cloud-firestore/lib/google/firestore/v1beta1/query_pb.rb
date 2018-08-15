@@ -48,6 +48,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :GREATER_THAN, 3
     value :GREATER_THAN_OR_EQUAL, 4
     value :EQUAL, 5
+    value :ARRAY_CONTAINS, 7
   end
   add_message "google.firestore.v1beta1.StructuredQuery.UnaryFilter" do
     optional :op, :enum, 1, "google.firestore.v1beta1.StructuredQuery.UnaryFilter.Operator"

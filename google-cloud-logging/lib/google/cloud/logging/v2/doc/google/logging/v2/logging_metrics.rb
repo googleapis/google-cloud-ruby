@@ -14,17 +14,6 @@
 
 module Google
   module Logging
-    ##
-    # # Stackdriver Logging API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [MetricsServiceV2Client][] | Service for configuring logs-based metrics. |
-    # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
-    #
-    # [MetricsServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/metricsservicev2client
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/datatypes
-    #
     module V2
       # Describes a logs-based metric.  The value of the metric is the
       # number of log entries that match a logs filter in a given time interval.

@@ -21,10 +21,10 @@ require "google/cloud/dialogflow"
 require "google/cloud/dialogflow/v2/sessions_client"
 require "google/cloud/dialogflow/v2/session_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockSessionsCredentials < Google::Cloud::Dialogflow::V2::Credentials
+class MockSessionsCredentials_v2 < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Dialogflow::V2::SessionsClient do
 
   describe 'detect_intent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionsClient#detect_intent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionsClient#detect_intent."
 
     it 'invokes detect_intent without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
         assert_equal(Google::Gax::to_proto(query_input, Google::Cloud::Dialogflow::V2::QueryInput), request.query_input)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:detect_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:detect_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionsCredentials.new("detect_intent")
+      mock_credentials = MockSessionsCredentials_v2.new("detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -124,10 +124,10 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
         assert_equal(Google::Gax::to_proto(query_input, Google::Cloud::Dialogflow::V2::QueryInput), request.query_input)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:detect_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:detect_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionsCredentials.new("detect_intent")
+      mock_credentials = MockSessionsCredentials_v2.new("detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -146,7 +146,7 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
   end
 
   describe 'streaming_detect_intent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionsClient#streaming_detect_intent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionsClient#streaming_detect_intent."
 
     it 'invokes streaming_detect_intent without error' do
       # Create request parameters
@@ -167,10 +167,10 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
         assert_equal(Google::Gax::to_proto(query_input, Google::Cloud::Dialogflow::V2::QueryInput), request.query_input)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:streaming_detect_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:streaming_detect_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionsCredentials.new("streaming_detect_intent")
+      mock_credentials = MockSessionsCredentials_v2.new("streaming_detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -200,10 +200,10 @@ describe Google::Cloud::Dialogflow::V2::SessionsClient do
         assert_equal(Google::Gax::to_proto(query_input, Google::Cloud::Dialogflow::V2::QueryInput), request.query_input)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:streaming_detect_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:streaming_detect_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionsCredentials.new("streaming_detect_intent")
+      mock_credentials = MockSessionsCredentials_v2.new("streaming_detect_intent")
 
       Google::Cloud::Dialogflow::V2::Sessions::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do

@@ -21,10 +21,10 @@ require "google/cloud/debugger/v2"
 require "google/cloud/debugger/v2/debugger2_client"
 require "google/devtools/clouddebugger/v2/debugger_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockDebugger2Credentials < Google::Cloud::Debugger::V2::Credentials
+class MockDebugger2Credentials_v2 < Google::Cloud::Debugger::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Debugger::V2::Debugger2Client do
 
   describe 'set_breakpoint' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#set_breakpoint."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#set_breakpoint."
 
     it 'invokes set_breakpoint without error' do
       # Create request parameters
@@ -88,10 +88,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_breakpoint, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:set_breakpoint, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("set_breakpoint")
+      mock_credentials = MockDebugger2Credentials_v2.new("set_breakpoint")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -135,10 +135,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_breakpoint, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:set_breakpoint, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("set_breakpoint")
+      mock_credentials = MockDebugger2Credentials_v2.new("set_breakpoint")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -161,7 +161,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
   end
 
   describe 'get_breakpoint' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#get_breakpoint."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#get_breakpoint."
 
     it 'invokes get_breakpoint without error' do
       # Create request parameters
@@ -181,10 +181,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_breakpoint, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_breakpoint, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("get_breakpoint")
+      mock_credentials = MockDebugger2Credentials_v2.new("get_breakpoint")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -228,10 +228,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_breakpoint, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_breakpoint, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("get_breakpoint")
+      mock_credentials = MockDebugger2Credentials_v2.new("get_breakpoint")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -254,7 +254,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
   end
 
   describe 'delete_breakpoint' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#delete_breakpoint."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#delete_breakpoint."
 
     it 'invokes delete_breakpoint without error' do
       # Create request parameters
@@ -270,10 +270,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_breakpoint, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_breakpoint, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("delete_breakpoint")
+      mock_credentials = MockDebugger2Credentials_v2.new("delete_breakpoint")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -317,10 +317,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_breakpoint, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_breakpoint, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("delete_breakpoint")
+      mock_credentials = MockDebugger2Credentials_v2.new("delete_breakpoint")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -343,7 +343,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
   end
 
   describe 'list_breakpoints' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#list_breakpoints."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#list_breakpoints."
 
     it 'invokes list_breakpoints without error' do
       # Create request parameters
@@ -362,10 +362,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_breakpoints, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_breakpoints, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("list_breakpoints")
+      mock_credentials = MockDebugger2Credentials_v2.new("list_breakpoints")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -399,10 +399,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_breakpoints, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_breakpoints, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("list_breakpoints")
+      mock_credentials = MockDebugger2Credentials_v2.new("list_breakpoints")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -421,7 +421,7 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
   end
 
   describe 'list_debuggees' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#list_debuggees."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Debugger::V2::Debugger2Client#list_debuggees."
 
     it 'invokes list_debuggees without error' do
       # Create request parameters
@@ -439,10 +439,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_debuggees, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_debuggees, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("list_debuggees")
+      mock_credentials = MockDebugger2Credentials_v2.new("list_debuggees")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do
@@ -476,10 +476,10 @@ describe Google::Cloud::Debugger::V2::Debugger2Client do
         assert_equal(client_version, request.client_version)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_debuggees, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_debuggees, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDebugger2Credentials.new("list_debuggees")
+      mock_credentials = MockDebugger2Credentials_v2.new("list_debuggees")
 
       Google::Devtools::Clouddebugger::V2::Debugger2::Stub.stub(:new, mock_stub) do
         Google::Cloud::Debugger::V2::Credentials.stub(:default, mock_credentials) do

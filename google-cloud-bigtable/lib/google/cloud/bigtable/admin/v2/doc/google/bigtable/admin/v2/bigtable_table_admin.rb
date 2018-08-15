@@ -15,17 +15,6 @@
 module Google
   module Bigtable
     module Admin
-      ##
-      # # Cloud Bigtable Admin API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [BigtableTableAdminClient][] | Service for creating, configuring, and deleting Cloud Bigtable tables. |
-      # | [Data Types][] | Data types for Google::Cloud::Bigtable::Admin::V2 |
-      #
-      # [BigtableTableAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtabletableadminclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/datatypes
-      #
       module V2
         # Request message for
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CreateTable}

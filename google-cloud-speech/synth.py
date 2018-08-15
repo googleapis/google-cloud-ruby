@@ -130,26 +130,6 @@ s.replace(
 
         gem.platform\\1= Gem::Platform::RUBY"""))
 
-# https://github.com/googleapis/gapic-generator/issues/2117
-s.replace(
-    'test/google/cloud/speech/v1/speech_client_test.rb',
-    'CustomTestError([^_])', 'CustomTestError_v1\\1')
-s.replace(
-    'test/google/cloud/speech/v1/speech_client_test.rb',
-    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1\\1')
-s.replace(
-    'test/google/cloud/speech/v1/speech_client_test.rb',
-    'MockSpeechCredentials([^_])', 'MockSpeechCredentials_v1\\1')
-s.replace(
-    'test/google/cloud/speech/v1p1beta1/speech_client_test.rb',
-    'CustomTestError([^_])', 'CustomTestError_v1p1beta1\\1')
-s.replace(
-    'test/google/cloud/speech/v1p1beta1/speech_client_test.rb',
-    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1p1beta1\\1')
-s.replace(
-    'test/google/cloud/speech/v1p1beta1/speech_client_test.rb',
-    'MockSpeechCredentials([^_])', 'MockSpeechCredentials_v1p1beta1\\1')
-
 # https://github.com/googleapis/gapic-generator/issues/2122
 s.replace(
     [
@@ -159,78 +139,3 @@ s.replace(
     ],
     'gs://gapic-toolkit/hello.flac',
     'gs://bucket-name/hello.flac')
-
-# https://github.com/googleapis/gapic-generator/issues/2174
-s.replace(
-    'lib/google/cloud/speech.rb',
-    'File\.join\(dir, "\.rb"\)',
-    'dir + ".rb"')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    [
-      'lib/google/cloud/speech/v1/credentials.rb',
-      'lib/google/cloud/speech/v1p1beta1/credentials.rb'
-    ],
-    'SPEECH_KEYFILE\\n(\s+)SPEECH_CREDENTIALS\n',
-    'SPEECH_CREDENTIALS\\n\\1SPEECH_KEYFILE\n')
-s.replace(
-    [
-      'lib/google/cloud/speech/v1/credentials.rb',
-      'lib/google/cloud/speech/v1p1beta1/credentials.rb'
-    ],
-    'SPEECH_KEYFILE_JSON\\n(\s+)SPEECH_CREDENTIALS_JSON\n',
-    'SPEECH_CREDENTIALS_JSON\\n\\1SPEECH_KEYFILE_JSON\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2185
-s.replace(
-    'acceptance/google/cloud/speech/v1/speech_smoke_test.rb',
-    'describe "SpeechSmokeTest"',
-    'describe "SpeechSmokeTest V1"')
-s.replace(
-    'acceptance/google/cloud/speech/v1/speech_smoke_test.rb',
-    'speech_client = Google::Cloud::Speech\\.new\n',
-    'speech_client = Google::Cloud::Speech.new version: :v1\n')
-s.replace(
-    'acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb',
-    'describe "SpeechSmokeTest"',
-    'describe "SpeechSmokeTest V1p1beta1"')
-s.replace(
-    'acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb',
-    'speech_client = Google::Cloud::Speech\\.new\n',
-    'speech_client = Google::Cloud::Speech.new version: :v1p1beta1\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2186
-s.replace(
-    '.rubocop.yml',
-    '- "acceptance/\\*\\*/\\*smoke_test\\.rb"',
-    '- "acceptance/**/*"')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    '.yardopts',
-    '\n--markup markdown\n\n',
-    '\n--markup markdown\n--markup-provider redcarpet\n\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    'google-cloud-speech.gemspec',
-    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
-    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
-s.replace(
-    'google-cloud-speech.gemspec',
-    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
-    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
-
-# https://github.com/googleapis/gapic-generator/issues/2195
-s.replace(
-    [
-      'README.md',
-      'lib/google/cloud/speech.rb',
-      'lib/google/cloud/speech/v1.rb',
-      'lib/google/cloud/speech/v1p1beta1.rb',
-      'lib/google/cloud/speech/v1/doc/overview.rb',
-      'lib/google/cloud/speech/v1p1beta1/doc/overview.rb'
-    ],
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/speech\\)',
-    '(https://console.cloud.google.com/apis/library/speech.googleapis.com)')

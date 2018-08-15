@@ -51,49 +51,6 @@ s.copy(v1_library / '.rubocop.yml')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-container.gemspec', merge=merge_gemspec)
 
-# https://github.com/googleapis/gapic-generator/issues/2174
-s.replace(
-    'lib/google/cloud/container.rb',
-    'File\.join\(dir, "\.rb"\)',
-    'dir + ".rb"')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/container/v1/credentials.rb',
-    'CONTAINER_KEYFILE\\n(\s+)CONTAINER_CREDENTIALS\n',
-    'CONTAINER_CREDENTIALS\\n\\1CONTAINER_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/container/v1/credentials.rb',
-    'CONTAINER_KEYFILE_JSON\\n(\s+)CONTAINER_CREDENTIALS_JSON\n',
-    'CONTAINER_CREDENTIALS_JSON\\n\\1CONTAINER_KEYFILE_JSON\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    '.yardopts',
-    '\n--markup markdown\n\n',
-    '\n--markup markdown\n--markup-provider redcarpet\n\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    'google-cloud-container.gemspec',
-    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
-    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
-s.replace(
-    'google-cloud-container.gemspec',
-    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
-    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
-
-# https://github.com/googleapis/gapic-generator/issues/2195
-s.replace(
-    [
-      'README.md',
-      'lib/google/cloud/container.rb',
-      'lib/google/cloud/container/v1.rb',
-      'lib/google/cloud/container/v1/doc/overview.rb'
-    ],
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/container\\)',
-    '(https://console.cloud.google.com/apis/library/container.googleapis.com)')
-
 # https://github.com/googleapis/gapic-generator/issues/2196
 s.replace(
     [

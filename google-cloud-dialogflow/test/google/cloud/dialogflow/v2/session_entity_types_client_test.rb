@@ -21,10 +21,10 @@ require "google/cloud/dialogflow"
 require "google/cloud/dialogflow/v2/session_entity_types_client"
 require "google/cloud/dialogflow/v2/session_entity_type_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockSessionEntityTypesCredentials < Google::Cloud::Dialogflow::V2::Credentials
+class MockSessionEntityTypesCredentials_v2 < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
 
   describe 'list_session_entity_types' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#list_session_entity_types."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#list_session_entity_types."
 
     it 'invokes list_session_entity_types without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_session_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_session_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("list_session_entity_types")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("list_session_entity_types")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -118,10 +118,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_session_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_session_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("list_session_entity_types")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("list_session_entity_types")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -140,7 +140,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
   end
 
   describe 'get_session_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#get_session_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#get_session_entity_type."
 
     it 'invokes get_session_entity_type without error' do
       # Create request parameters
@@ -157,10 +157,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("get_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("get_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -192,10 +192,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("get_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("get_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -214,7 +214,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
   end
 
   describe 'create_session_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#create_session_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#create_session_entity_type."
 
     it 'invokes create_session_entity_type without error' do
       # Create request parameters
@@ -233,10 +233,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(Google::Gax::to_proto(session_entity_type, Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("create_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("create_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -270,10 +270,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(Google::Gax::to_proto(session_entity_type, Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("create_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("create_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -292,7 +292,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
   end
 
   describe 'update_session_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#update_session_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#update_session_entity_type."
 
     it 'invokes update_session_entity_type without error' do
       # Create request parameters
@@ -309,10 +309,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(Google::Gax::to_proto(session_entity_type, Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("update_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("update_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -344,10 +344,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(Google::Gax::to_proto(session_entity_type, Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("update_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("update_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -366,7 +366,7 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
   end
 
   describe 'delete_session_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#delete_session_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::SessionEntityTypesClient#delete_session_entity_type."
 
     it 'invokes delete_session_entity_type without error' do
       # Create request parameters
@@ -378,10 +378,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("delete_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("delete_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -413,10 +413,10 @@ describe Google::Cloud::Dialogflow::V2::SessionEntityTypesClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_session_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_session_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockSessionEntityTypesCredentials.new("delete_session_entity_type")
+      mock_credentials = MockSessionEntityTypesCredentials_v2.new("delete_session_entity_type")
 
       Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do

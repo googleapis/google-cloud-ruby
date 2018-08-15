@@ -54,19 +54,3 @@ s.replace(
     ],
     'Google::Cloud::Firestore\\.new\\(version: :v1beta1\\)',
     'Google::Cloud::Firestore::V1beta1.new')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/firestore/v1beta1/credentials.rb',
-    'FIRESTORE_KEYFILE\\n(\s+)FIRESTORE_CREDENTIALS\n',
-    'FIRESTORE_CREDENTIALS\\n\\1FIRESTORE_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/firestore/v1beta1/credentials.rb',
-    'FIRESTORE_KEYFILE_JSON\\n(\s+)FIRESTORE_CREDENTIALS_JSON\n',
-    'FIRESTORE_CREDENTIALS_JSON\\n\\1FIRESTORE_KEYFILE_JSON\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2195
-s.replace(
-    'lib/google/cloud/firestore/v1beta1.rb',
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/firestore\\)',
-    '(https://console.cloud.google.com/apis/library/firestore.googleapis.com)')

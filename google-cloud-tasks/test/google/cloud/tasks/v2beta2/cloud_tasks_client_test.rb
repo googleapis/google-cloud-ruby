@@ -21,10 +21,10 @@ require "google/cloud/tasks"
 require "google/cloud/tasks/v2beta2/cloud_tasks_client"
 require "google/cloud/tasks/v2beta2/cloudtasks_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2beta2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2beta2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockCloudTasksCredentials < Google::Cloud::Tasks::V2beta2::Credentials
+class MockCloudTasksCredentials_v2beta2 < Google::Cloud::Tasks::V2beta2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
   describe 'list_queues' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#list_queues."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#list_queues."
 
     it 'invokes list_queues without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_queues, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:list_queues, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("list_queues")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("list_queues")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -118,10 +118,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_queues, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:list_queues, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("list_queues")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("list_queues")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -140,7 +140,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'get_queue' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_queue."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_queue."
 
     it 'invokes get_queue without error' do
       # Create request parameters
@@ -157,10 +157,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:get_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("get_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("get_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -192,10 +192,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:get_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("get_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("get_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -214,7 +214,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'create_queue' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#create_queue."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#create_queue."
 
     it 'invokes create_queue without error' do
       # Create request parameters
@@ -233,10 +233,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:create_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("create_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("create_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -270,10 +270,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:create_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("create_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("create_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -292,7 +292,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'update_queue' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#update_queue."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#update_queue."
 
     it 'invokes update_queue without error' do
       # Create request parameters
@@ -309,10 +309,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:update_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("update_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("update_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -344,10 +344,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:update_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("update_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("update_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -366,7 +366,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'delete_queue' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#delete_queue."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#delete_queue."
 
     it 'invokes delete_queue without error' do
       # Create request parameters
@@ -378,10 +378,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:delete_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("delete_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("delete_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -413,10 +413,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:delete_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("delete_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("delete_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -435,7 +435,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'purge_queue' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#purge_queue."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#purge_queue."
 
     it 'invokes purge_queue without error' do
       # Create request parameters
@@ -452,10 +452,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:purge_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:purge_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("purge_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("purge_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -487,10 +487,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:purge_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:purge_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("purge_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("purge_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -509,7 +509,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'pause_queue' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#pause_queue."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#pause_queue."
 
     it 'invokes pause_queue without error' do
       # Create request parameters
@@ -526,10 +526,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:pause_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:pause_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("pause_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("pause_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -561,10 +561,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:pause_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:pause_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("pause_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("pause_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -583,7 +583,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'resume_queue' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#resume_queue."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#resume_queue."
 
     it 'invokes resume_queue without error' do
       # Create request parameters
@@ -600,10 +600,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:resume_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:resume_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("resume_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("resume_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -635,10 +635,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:resume_queue, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:resume_queue, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("resume_queue")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("resume_queue")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -657,7 +657,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'get_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_iam_policy."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_iam_policy."
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
@@ -675,10 +675,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("get_iam_policy")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("get_iam_policy")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -710,10 +710,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_resource, request.resource)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("get_iam_policy")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("get_iam_policy")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -732,7 +732,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'set_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#set_iam_policy."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#set_iam_policy."
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
@@ -752,10 +752,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("set_iam_policy")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("set_iam_policy")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -789,10 +789,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("set_iam_policy")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("set_iam_policy")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -811,7 +811,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'test_iam_permissions' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#test_iam_permissions."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#test_iam_permissions."
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
@@ -829,10 +829,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(permissions, request.permissions)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("test_iam_permissions")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("test_iam_permissions")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -866,10 +866,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(permissions, request.permissions)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("test_iam_permissions")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("test_iam_permissions")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -888,7 +888,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'list_tasks' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#list_tasks."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#list_tasks."
 
     it 'invokes list_tasks without error' do
       # Create request parameters
@@ -907,10 +907,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_tasks, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:list_tasks, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("list_tasks")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("list_tasks")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -938,10 +938,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_tasks, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:list_tasks, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("list_tasks")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("list_tasks")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -960,7 +960,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'get_task' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_task."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_task."
 
     it 'invokes get_task without error' do
       # Create request parameters
@@ -977,10 +977,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:get_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("get_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("get_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1012,10 +1012,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:get_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("get_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("get_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1034,7 +1034,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'create_task' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#create_task."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#create_task."
 
     it 'invokes create_task without error' do
       # Create request parameters
@@ -1053,10 +1053,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(task, Google::Cloud::Tasks::V2beta2::Task), request.task)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:create_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("create_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("create_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1090,10 +1090,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(task, Google::Cloud::Tasks::V2beta2::Task), request.task)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:create_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("create_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("create_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1112,7 +1112,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'delete_task' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#delete_task."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#delete_task."
 
     it 'invokes delete_task without error' do
       # Create request parameters
@@ -1124,10 +1124,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:delete_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("delete_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("delete_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1159,10 +1159,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:delete_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("delete_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("delete_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1181,7 +1181,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'lease_tasks' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#lease_tasks."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#lease_tasks."
 
     it 'invokes lease_tasks without error' do
       # Create request parameters
@@ -1199,10 +1199,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:lease_tasks, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:lease_tasks, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("lease_tasks")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("lease_tasks")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1236,10 +1236,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:lease_tasks, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:lease_tasks, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("lease_tasks")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("lease_tasks")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1258,7 +1258,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'acknowledge_task' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#acknowledge_task."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#acknowledge_task."
 
     it 'invokes acknowledge_task without error' do
       # Create request parameters
@@ -1272,10 +1272,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:acknowledge_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:acknowledge_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("acknowledge_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("acknowledge_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1309,10 +1309,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:acknowledge_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:acknowledge_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("acknowledge_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("acknowledge_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1331,7 +1331,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'renew_lease' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#renew_lease."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#renew_lease."
 
     it 'invokes renew_lease without error' do
       # Create request parameters
@@ -1352,10 +1352,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:renew_lease, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:renew_lease, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("renew_lease")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("renew_lease")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1399,10 +1399,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:renew_lease, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:renew_lease, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("renew_lease")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("renew_lease")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1425,7 +1425,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'cancel_lease' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#cancel_lease."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#cancel_lease."
 
     it 'invokes cancel_lease without error' do
       # Create request parameters
@@ -1444,10 +1444,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_lease, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:cancel_lease, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("cancel_lease")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("cancel_lease")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1481,10 +1481,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_lease, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:cancel_lease, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("cancel_lease")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("cancel_lease")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1503,7 +1503,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   end
 
   describe 'run_task' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#run_task."
+    custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#run_task."
 
     it 'invokes run_task without error' do
       # Create request parameters
@@ -1520,10 +1520,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:run_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:run_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("run_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("run_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
@@ -1555,10 +1555,10 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:run_task, mock_method)
+      mock_stub = MockGrpcClientStub_v2beta2.new(:run_task, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudTasksCredentials.new("run_task")
+      mock_credentials = MockCloudTasksCredentials_v2beta2.new("run_task")
 
       Google::Cloud::Tasks::V2beta2::CloudTasks::Stub.stub(:new, mock_stub) do
         Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do

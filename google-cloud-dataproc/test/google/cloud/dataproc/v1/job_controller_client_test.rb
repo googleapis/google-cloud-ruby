@@ -21,10 +21,10 @@ require "google/cloud/dataproc"
 require "google/cloud/dataproc/v1/job_controller_client"
 require "google/cloud/dataproc/v1/jobs_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockJobControllerCredentials < Google::Cloud::Dataproc::V1::Credentials
+class MockJobControllerCredentials_v1 < Google::Cloud::Dataproc::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Dataproc::V1::JobControllerClient do
 
   describe 'submit_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#submit_job."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#submit_job."
 
     it 'invokes submit_job without error' do
       # Create request parameters
@@ -90,10 +90,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(Google::Gax::to_proto(job, Google::Cloud::Dataproc::V1::Job), request.job)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:submit_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:submit_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("submit_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("submit_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -137,10 +137,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(Google::Gax::to_proto(job, Google::Cloud::Dataproc::V1::Job), request.job)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:submit_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:submit_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("submit_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("submit_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -163,7 +163,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
   end
 
   describe 'get_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#get_job."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#get_job."
 
     it 'invokes get_job without error' do
       # Create request parameters
@@ -185,10 +185,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(job_id, request.job_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("get_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("get_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -232,10 +232,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(job_id, request.job_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("get_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("get_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -258,7 +258,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
   end
 
   describe 'list_jobs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#list_jobs."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#list_jobs."
 
     it 'invokes list_jobs without error' do
       # Create request parameters
@@ -279,10 +279,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(region, request.region)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_jobs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_jobs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("list_jobs")
+      mock_credentials = MockJobControllerCredentials_v1.new("list_jobs")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -312,10 +312,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(region, request.region)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_jobs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_jobs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("list_jobs")
+      mock_credentials = MockJobControllerCredentials_v1.new("list_jobs")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -334,7 +334,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
   end
 
   describe 'update_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#update_job."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#update_job."
 
     it 'invokes update_job without error' do
       # Create request parameters
@@ -360,10 +360,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("update_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("update_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -415,10 +415,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("update_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("update_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -443,7 +443,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
   end
 
   describe 'cancel_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#cancel_job."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#cancel_job."
 
     it 'invokes cancel_job without error' do
       # Create request parameters
@@ -465,10 +465,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(job_id, request.job_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:cancel_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("cancel_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("cancel_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -512,10 +512,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(job_id, request.job_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:cancel_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("cancel_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("cancel_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -538,7 +538,7 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
   end
 
   describe 'delete_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#delete_job."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::JobControllerClient#delete_job."
 
     it 'invokes delete_job without error' do
       # Create request parameters
@@ -554,10 +554,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(job_id, request.job_id)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("delete_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("delete_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -601,10 +601,10 @@ describe Google::Cloud::Dataproc::V1::JobControllerClient do
         assert_equal(job_id, request.job_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_job, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockJobControllerCredentials.new("delete_job")
+      mock_credentials = MockJobControllerCredentials_v1.new("delete_job")
 
       Google::Cloud::Dataproc::V1::JobController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do

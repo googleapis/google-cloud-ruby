@@ -14,17 +14,6 @@
 
 module Google
   module Monitoring
-    ##
-    # # Stackdriver Monitoring API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [AlertPolicyServiceClient][] | The AlertPolicyService API is used to manage (list, create, delete, edit) alert policies in Stackdriver Monitoring. |
-    # | [Data Types][] | Data types for Google::Cloud::Monitoring::V3 |
-    #
-    # [AlertPolicyServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/alertpolicyserviceclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/datatypes
-    #
     module V3
       # The protocol for the +CreateAlertPolicy+ request.
       # @!attribute [rw] name

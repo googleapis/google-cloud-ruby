@@ -21,10 +21,10 @@ require "google/cloud/text_to_speech"
 require "google/cloud/text_to_speech/v1/text_to_speech_client"
 require "google/cloud/texttospeech/v1/cloud_tts_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockTextToSpeechCredentials < Google::Cloud::TextToSpeech::V1::Credentials
+class MockTextToSpeechCredentials_v1 < Google::Cloud::TextToSpeech::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
 
   describe 'list_voices' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::TextToSpeech::V1::TextToSpeechClient#list_voices."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::TextToSpeech::V1::TextToSpeechClient#list_voices."
 
     it 'invokes list_voices without error' do
       # Create expected grpc response
@@ -79,10 +79,10 @@ describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
       mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_voices, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_voices, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockTextToSpeechCredentials.new("list_voices")
+      mock_credentials = MockTextToSpeechCredentials_v1.new("list_voices")
 
       Google::Cloud::Texttospeech::V1::TextToSpeech::Stub.stub(:new, mock_stub) do
         Google::Cloud::TextToSpeech::V1::Credentials.stub(:default, mock_credentials) do
@@ -109,10 +109,10 @@ describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
       mock_method = proc do
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_voices, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_voices, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockTextToSpeechCredentials.new("list_voices")
+      mock_credentials = MockTextToSpeechCredentials_v1.new("list_voices")
 
       Google::Cloud::Texttospeech::V1::TextToSpeech::Stub.stub(:new, mock_stub) do
         Google::Cloud::TextToSpeech::V1::Credentials.stub(:default, mock_credentials) do
@@ -131,7 +131,7 @@ describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
   end
 
   describe 'synthesize_speech' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::TextToSpeech::V1::TextToSpeechClient#synthesize_speech."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::TextToSpeech::V1::TextToSpeechClient#synthesize_speech."
 
     it 'invokes synthesize_speech without error' do
       # Create request parameters
@@ -152,10 +152,10 @@ describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
         assert_equal(Google::Gax::to_proto(audio_config, Google::Cloud::Texttospeech::V1::AudioConfig), request.audio_config)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:synthesize_speech, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:synthesize_speech, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockTextToSpeechCredentials.new("synthesize_speech")
+      mock_credentials = MockTextToSpeechCredentials_v1.new("synthesize_speech")
 
       Google::Cloud::Texttospeech::V1::TextToSpeech::Stub.stub(:new, mock_stub) do
         Google::Cloud::TextToSpeech::V1::Credentials.stub(:default, mock_credentials) do
@@ -199,10 +199,10 @@ describe Google::Cloud::TextToSpeech::V1::TextToSpeechClient do
         assert_equal(Google::Gax::to_proto(audio_config, Google::Cloud::Texttospeech::V1::AudioConfig), request.audio_config)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:synthesize_speech, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:synthesize_speech, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockTextToSpeechCredentials.new("synthesize_speech")
+      mock_credentials = MockTextToSpeechCredentials_v1.new("synthesize_speech")
 
       Google::Cloud::Texttospeech::V1::TextToSpeech::Stub.stub(:new, mock_stub) do
         Google::Cloud::TextToSpeech::V1::Credentials.stub(:default, mock_credentials) do

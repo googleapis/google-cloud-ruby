@@ -21,10 +21,10 @@ require "google/cloud/dlp"
 require "google/cloud/dlp/v2/dlp_service_client"
 require "google/privacy/dlp/v2/dlp_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockDlpServiceCredentials < Google::Cloud::Dlp::V2::Credentials
+class MockDlpServiceCredentials_v2 < Google::Cloud::Dlp::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Dlp::V2::DlpServiceClient do
 
   describe 'inspect_content' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#inspect_content."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#inspect_content."
 
     it 'invokes inspect_content without error' do
       # Create request parameters
@@ -84,10 +84,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:inspect_content, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("inspect_content")
+      mock_credentials = MockDlpServiceCredentials_v2.new("inspect_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -119,10 +119,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:inspect_content, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:inspect_content, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("inspect_content")
+      mock_credentials = MockDlpServiceCredentials_v2.new("inspect_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -141,7 +141,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'redact_image' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#redact_image."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#redact_image."
 
     it 'invokes redact_image without error' do
       # Create request parameters
@@ -159,10 +159,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:redact_image, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:redact_image, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("redact_image")
+      mock_credentials = MockDlpServiceCredentials_v2.new("redact_image")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -194,10 +194,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:redact_image, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:redact_image, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("redact_image")
+      mock_credentials = MockDlpServiceCredentials_v2.new("redact_image")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -216,7 +216,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'deidentify_content' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#deidentify_content."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#deidentify_content."
 
     it 'invokes deidentify_content without error' do
       # Create request parameters
@@ -232,10 +232,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:deidentify_content, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:deidentify_content, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("deidentify_content")
+      mock_credentials = MockDlpServiceCredentials_v2.new("deidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -267,10 +267,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:deidentify_content, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:deidentify_content, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("deidentify_content")
+      mock_credentials = MockDlpServiceCredentials_v2.new("deidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -289,7 +289,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'reidentify_content' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#reidentify_content."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#reidentify_content."
 
     it 'invokes reidentify_content without error' do
       # Create request parameters
@@ -305,10 +305,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:reidentify_content, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:reidentify_content, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("reidentify_content")
+      mock_credentials = MockDlpServiceCredentials_v2.new("reidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -340,10 +340,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:reidentify_content, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:reidentify_content, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("reidentify_content")
+      mock_credentials = MockDlpServiceCredentials_v2.new("reidentify_content")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -362,7 +362,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'list_info_types' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_info_types."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_info_types."
 
     it 'invokes list_info_types without error' do
       # Create expected grpc response
@@ -373,10 +373,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_info_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_info_types")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_info_types")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -403,10 +403,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_info_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_info_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_info_types")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_info_types")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -425,7 +425,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'create_inspect_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_inspect_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_inspect_template."
 
     it 'invokes create_inspect_template without error' do
       # Create request parameters
@@ -448,10 +448,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -483,10 +483,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -505,7 +505,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'update_inspect_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#update_inspect_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#update_inspect_template."
 
     it 'invokes update_inspect_template without error' do
       # Create request parameters
@@ -528,10 +528,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("update_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -563,10 +563,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("update_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -585,7 +585,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'get_inspect_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_inspect_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_inspect_template."
 
     it 'invokes get_inspect_template without error' do
       # Create expected grpc response
@@ -603,10 +603,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -633,10 +633,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
       mock_method = proc do
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -655,7 +655,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'list_inspect_templates' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_inspect_templates."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_inspect_templates."
 
     it 'invokes list_inspect_templates without error' do
       # Create request parameters
@@ -674,10 +674,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_inspect_templates, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_inspect_templates, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_inspect_templates")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_inspect_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -705,10 +705,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_inspect_templates, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_inspect_templates, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_inspect_templates")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_inspect_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -727,7 +727,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'delete_inspect_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_inspect_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_inspect_template."
 
     it 'invokes delete_inspect_template without error' do
       # Create request parameters
@@ -739,10 +739,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -774,10 +774,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_inspect_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_inspect_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_inspect_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_inspect_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -796,7 +796,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'create_deidentify_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_deidentify_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_deidentify_template."
 
     it 'invokes create_deidentify_template without error' do
       # Create request parameters
@@ -819,10 +819,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -854,10 +854,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -876,7 +876,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'update_deidentify_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#update_deidentify_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#update_deidentify_template."
 
     it 'invokes update_deidentify_template without error' do
       # Create request parameters
@@ -899,10 +899,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("update_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -934,10 +934,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("update_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -956,7 +956,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'get_deidentify_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_deidentify_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_deidentify_template."
 
     it 'invokes get_deidentify_template without error' do
       # Create request parameters
@@ -979,10 +979,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1014,10 +1014,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1036,7 +1036,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'list_deidentify_templates' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_deidentify_templates."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_deidentify_templates."
 
     it 'invokes list_deidentify_templates without error' do
       # Create request parameters
@@ -1055,10 +1055,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_deidentify_templates, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_deidentify_templates, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_deidentify_templates")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_deidentify_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1086,10 +1086,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_deidentify_templates, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_deidentify_templates, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_deidentify_templates")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_deidentify_templates")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1108,7 +1108,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'delete_deidentify_template' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_deidentify_template."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_deidentify_template."
 
     it 'invokes delete_deidentify_template without error' do
       # Create request parameters
@@ -1120,10 +1120,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1155,10 +1155,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_deidentify_template, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_deidentify_template, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_deidentify_template")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_deidentify_template")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1177,7 +1177,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'create_dlp_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_dlp_job."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_dlp_job."
 
     it 'invokes create_dlp_job without error' do
       # Create request parameters
@@ -1195,10 +1195,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1230,10 +1230,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1252,7 +1252,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'list_dlp_jobs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_dlp_jobs."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_dlp_jobs."
 
     it 'invokes list_dlp_jobs without error' do
       # Create request parameters
@@ -1271,10 +1271,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_dlp_jobs, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_dlp_jobs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_dlp_jobs")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_dlp_jobs")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1302,10 +1302,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_dlp_jobs, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_dlp_jobs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_dlp_jobs")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_dlp_jobs")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1324,7 +1324,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'get_dlp_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_dlp_job."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_dlp_job."
 
     it 'invokes get_dlp_job without error' do
       # Create request parameters
@@ -1342,10 +1342,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1377,10 +1377,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1399,7 +1399,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'delete_dlp_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_dlp_job."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_dlp_job."
 
     it 'invokes delete_dlp_job without error' do
       # Create request parameters
@@ -1411,10 +1411,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1446,10 +1446,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1468,7 +1468,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'cancel_dlp_job' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#cancel_dlp_job."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#cancel_dlp_job."
 
     it 'invokes cancel_dlp_job without error' do
       # Create request parameters
@@ -1480,10 +1480,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:cancel_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("cancel_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("cancel_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1515,10 +1515,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_dlp_job, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:cancel_dlp_job, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("cancel_dlp_job")
+      mock_credentials = MockDlpServiceCredentials_v2.new("cancel_dlp_job")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1537,7 +1537,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'list_job_triggers' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_job_triggers."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_job_triggers."
 
     it 'invokes list_job_triggers without error' do
       # Create request parameters
@@ -1556,10 +1556,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_job_triggers, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_job_triggers, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_job_triggers")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_job_triggers")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1587,10 +1587,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_job_triggers, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_job_triggers, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("list_job_triggers")
+      mock_credentials = MockDlpServiceCredentials_v2.new("list_job_triggers")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1609,7 +1609,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'get_job_trigger' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_job_trigger."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#get_job_trigger."
 
     it 'invokes get_job_trigger without error' do
       # Create request parameters
@@ -1632,10 +1632,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1667,10 +1667,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("get_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("get_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1689,7 +1689,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'delete_job_trigger' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_job_trigger."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#delete_job_trigger."
 
     it 'invokes delete_job_trigger without error' do
       # Create request parameters
@@ -1701,10 +1701,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1736,10 +1736,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("delete_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("delete_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1758,7 +1758,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'update_job_trigger' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#update_job_trigger."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#update_job_trigger."
 
     it 'invokes update_job_trigger without error' do
       # Create request parameters
@@ -1781,10 +1781,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("update_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1816,10 +1816,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("update_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("update_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1838,7 +1838,7 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
   end
 
   describe 'create_job_trigger' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_job_trigger."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#create_job_trigger."
 
     it 'invokes create_job_trigger without error' do
       # Create request parameters
@@ -1861,10 +1861,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
@@ -1896,10 +1896,10 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_job_trigger, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_job_trigger, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDlpServiceCredentials.new("create_job_trigger")
+      mock_credentials = MockDlpServiceCredentials_v2.new("create_job_trigger")
 
       Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do

@@ -43,13 +43,3 @@ s.replace(
     'lib/google/cloud/datastore/v1/credentials.rb',
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/datastore"].freeze')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/datastore/v1/credentials.rb',
-    'DATASTORE_KEYFILE\\n(\s+)DATASTORE_CREDENTIALS\n',
-    'DATASTORE_CREDENTIALS\\n\\1DATASTORE_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/datastore/v1/credentials.rb',
-    'DATASTORE_KEYFILE_JSON\\n(\s+)DATASTORE_CREDENTIALS_JSON\n',
-    'DATASTORE_CREDENTIALS_JSON\\n\\1DATASTORE_KEYFILE_JSON\n')

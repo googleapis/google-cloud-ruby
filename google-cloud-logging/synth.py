@@ -67,13 +67,3 @@ s.replace(
     'lib/google/cloud/logging/v2/credentials.rb',
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/logging.admin"].freeze')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/logging/v2/credentials.rb',
-    'LOGGING_KEYFILE\\n(\s+)LOGGING_CREDENTIALS\n',
-    'LOGGING_CREDENTIALS\\n\\1LOGGING_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/logging/v2/credentials.rb',
-    'LOGGING_KEYFILE_JSON\\n(\s+)LOGGING_CREDENTIALS_JSON\n',
-    'LOGGING_CREDENTIALS_JSON\\n\\1LOGGING_KEYFILE_JSON\n')

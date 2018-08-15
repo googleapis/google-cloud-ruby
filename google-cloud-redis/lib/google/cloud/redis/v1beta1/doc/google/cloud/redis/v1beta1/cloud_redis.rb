@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Redis
-      ##
-      # # Google Cloud Memorystore for Redis API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [CloudRedisClient][] | Configures and manages Cloud Memorystore for Redis instances |
-      # | [Data Types][] | Data types for Google::Cloud::Redis::V1beta1 |
-      #
-      # [CloudRedisClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest/google/cloud/redis/v1beta1/cloudredisclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest/google/cloud/redis/v1beta1/datatypes
-      #
       module V1beta1
         # A Google Cloud Redis instance.
         # @!attribute [rw] name

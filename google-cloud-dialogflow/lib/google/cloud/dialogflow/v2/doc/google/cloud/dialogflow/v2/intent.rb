@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Dialogflow
-      ##
-      # # Dialogflow API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [IntentsClient][] | An intent represents a mapping between input from a user and an action to be taken by your application. |
-      # | [Data Types][] | Data types for Google::Cloud::Dialogflow::V2 |
-      #
-      # [IntentsClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/intentsclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/datatypes
-      #
       module V2
         # Represents an intent.
         # Intents convert a number of user expressions or patterns into an action. An

@@ -22,10 +22,10 @@ require "google/cloud/dialogflow/v2/entity_types_client"
 require "google/cloud/dialogflow/v2/entity_type_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockEntityTypesCredentials < Google::Cloud::Dialogflow::V2::Credentials
+class MockEntityTypesCredentials_v2 < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
 
   describe 'list_entity_types' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#list_entity_types."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#list_entity_types."
 
     it 'invokes list_entity_types without error' do
       # Create request parameters
@@ -88,10 +88,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("list_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("list_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -119,10 +119,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("list_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("list_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -141,7 +141,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'get_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#get_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#get_entity_type."
 
     it 'invokes get_entity_type without error' do
       # Create request parameters
@@ -159,10 +159,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("get_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("get_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -194,10 +194,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("get_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("get_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -216,7 +216,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'create_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#create_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#create_entity_type."
 
     it 'invokes create_entity_type without error' do
       # Create request parameters
@@ -236,10 +236,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(Google::Gax::to_proto(entity_type, Google::Cloud::Dialogflow::V2::EntityType), request.entity_type)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("create_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("create_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -273,10 +273,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(Google::Gax::to_proto(entity_type, Google::Cloud::Dialogflow::V2::EntityType), request.entity_type)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("create_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("create_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -295,7 +295,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'update_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#update_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#update_entity_type."
 
     it 'invokes update_entity_type without error' do
       # Create request parameters
@@ -313,10 +313,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(Google::Gax::to_proto(entity_type, Google::Cloud::Dialogflow::V2::EntityType), request.entity_type)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("update_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("update_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -348,10 +348,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(Google::Gax::to_proto(entity_type, Google::Cloud::Dialogflow::V2::EntityType), request.entity_type)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("update_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("update_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -370,7 +370,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'delete_entity_type' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#delete_entity_type."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#delete_entity_type."
 
     it 'invokes delete_entity_type without error' do
       # Create request parameters
@@ -382,10 +382,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("delete_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("delete_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -417,10 +417,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_entity_type, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_entity_type, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("delete_entity_type")
+      mock_credentials = MockEntityTypesCredentials_v2.new("delete_entity_type")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -439,7 +439,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'batch_update_entity_types' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_update_entity_types."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_update_entity_types."
 
     it 'invokes batch_update_entity_types without error' do
       # Create request parameters
@@ -462,10 +462,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_update_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_update_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -500,10 +500,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_update_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_update_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -529,10 +529,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_update_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_update_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -551,7 +551,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'batch_delete_entity_types' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_delete_entity_types."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_delete_entity_types."
 
     it 'invokes batch_delete_entity_types without error' do
       # Create request parameters
@@ -576,10 +576,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entity_type_names, request.entity_type_names)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_delete_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_delete_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -616,10 +616,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entity_type_names, request.entity_type_names)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_delete_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_delete_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -647,10 +647,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entity_type_names, request.entity_type_names)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_entity_types, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_entity_types, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_delete_entity_types")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_delete_entity_types")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -669,7 +669,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'batch_create_entities' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_create_entities."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_create_entities."
 
     it 'invokes batch_create_entities without error' do
       # Create request parameters
@@ -697,10 +697,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entities, request.entities)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_create_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_create_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_create_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_create_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -740,10 +740,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entities, request.entities)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_create_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_create_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_create_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_create_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -774,10 +774,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entities, request.entities)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_create_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_create_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_create_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_create_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -796,7 +796,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'batch_update_entities' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_update_entities."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_update_entities."
 
     it 'invokes batch_update_entities without error' do
       # Create request parameters
@@ -824,10 +824,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entities, request.entities)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_update_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_update_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -867,10 +867,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entities, request.entities)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_update_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_update_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -901,10 +901,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entities, request.entities)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_update_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_update_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -923,7 +923,7 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
   end
 
   describe 'batch_delete_entities' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_delete_entities."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::EntityTypesClient#batch_delete_entities."
 
     it 'invokes batch_delete_entities without error' do
       # Create request parameters
@@ -948,10 +948,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entity_values, request.entity_values)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_delete_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_delete_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -988,10 +988,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entity_values, request.entity_values)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_delete_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_delete_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -1019,10 +1019,10 @@ describe Google::Cloud::Dialogflow::V2::EntityTypesClient do
         assert_equal(entity_values, request.entity_values)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_entities, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_entities, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockEntityTypesCredentials.new("batch_delete_entities")
+      mock_credentials = MockEntityTypesCredentials_v2.new("batch_delete_entities")
 
       Google::Cloud::Dialogflow::V2::EntityTypes::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do

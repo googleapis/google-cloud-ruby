@@ -138,6 +138,9 @@ module Google
 
             # Equal.
             EQUAL = 5
+
+            # Contains. Requires that the field is an array.
+            ARRAY_CONTAINS = 7
           end
         end
 

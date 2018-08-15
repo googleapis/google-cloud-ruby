@@ -15,17 +15,6 @@
 module Google
   module Privacy
     module Dlp
-      ##
-      # # Cloud Data Loss Prevention (DLP) API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [DlpServiceClient][] | The Cloud Data Loss Prevention (DLP) API is a service that allows clients to detect the presence of Personally Identifiable Information (PII) and other privacy-sensitive data in user-supplied, unstructured data streams, like text blocks or images. |
-      # | [Data Types][] | Data types for Google::Cloud::Dlp::V2 |
-      #
-      # [DlpServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest/google/privacy/dlp/v2/dlpserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dlp/latest/google/privacy/dlp/v2/datatypes
-      #
       module V2
         # Configuration description of the scanning process.
         # When used with redactContent only info_types and min_likelihood are currently
@@ -39,6 +28,11 @@ module Google
         #     When no InfoTypes or CustomInfoTypes are specified in a request, the
         #     system may automatically choose what detectors to run. By default this may
         #     be all types, but may change over time as detectors are updated.
+        #
+        #     The special InfoType name "ALL_BASIC" can be used to trigger all detectors,
+        #     but may change over time as new InfoTypes are added. If you need precise
+        #     control and predictability as to what detectors are run you should specify
+        #     specific InfoTypes listed in the reference.
         # @!attribute [rw] min_likelihood
         #   @return [Google::Privacy::Dlp::V2::Likelihood]
         #     Only returns findings equal or above this threshold. The default is
@@ -2219,6 +2213,153 @@ module Google
         #     projects/project-id/deidentifyTemplates/432452342.
         class DeleteDeidentifyTemplateRequest; end
 
+        # Configuration for a custom dictionary created from a data source of any size
+        # up to the maximum size defined in the
+        # [limits](https://cloud.google.com/dlp/limits) page. The artifacts of
+        # dictionary creation are stored in the specified Google Cloud Storage
+        # location. Consider using +CustomInfoType.Dictionary+ for smaller dictionaries
+        # that satisfy the size requirements.
+        # @!attribute [rw] output_path
+        #   @return [Google::Privacy::Dlp::V2::CloudStoragePath]
+        #     Location to store dictionary artifacts in Google Cloud Storage. These files
+        #     will only be accessible by project owners and the DLP API. If any of these
+        #     artifacts are modified, the dictionary is considered invalid and can no
+        #     longer be used.
+        # @!attribute [rw] cloud_storage_file_set
+        #   @return [Google::Privacy::Dlp::V2::CloudStorageFileSet]
+        #     Set of files containing newline-delimited lists of dictionary phrases.
+        # @!attribute [rw] big_query_field
+        #   @return [Google::Privacy::Dlp::V2::BigQueryField]
+        #     Field in a BigQuery table where each cell represents a dictionary phrase.
+        class LargeCustomDictionaryConfig; end
+
+        # Configuration for a StoredInfoType.
+        # @!attribute [rw] display_name
+        #   @return [String]
+        #     Display name of the StoredInfoType (max 256 characters).
+        # @!attribute [rw] description
+        #   @return [String]
+        #     Description of the StoredInfoType (max 256 characters).
+        # @!attribute [rw] large_custom_dictionary
+        #   @return [Google::Privacy::Dlp::V2::LargeCustomDictionaryConfig]
+        #     StoredInfoType where findings are defined by a dictionary of phrases.
+        class StoredInfoTypeConfig; end
+
+        # Version of a StoredInfoType, including the configuration used to build it,
+        # create timestamp, and current state.
+        # @!attribute [rw] config
+        #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeConfig]
+        #     StoredInfoType configuration.
+        # @!attribute [rw] create_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Create timestamp of the version. Read-only, determined by the system
+        #     when the version is created.
+        # @!attribute [rw] state
+        #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeState]
+        #     Stored info type version state. Read-only, updated by the system
+        #     during dictionary creation.
+        # @!attribute [rw] errors
+        #   @return [Array<Google::Privacy::Dlp::V2::Error>]
+        #     Errors that occurred when creating this storedInfoType version, or
+        #     anomalies detected in the storedInfoType data that render it unusable. Only
+        #     the five most recent errors will be displayed, with the most recent error
+        #     appearing first.
+        #     <p>For example, some of the data for stored custom dictionaries is put in
+        #     the user's Google Cloud Storage bucket, and if this data is modified or
+        #     deleted by the user or another system, the dictionary becomes invalid.
+        #     <p>If any errors occur, fix the problem indicated by the error message and
+        #     use the UpdateStoredInfoType API method to create another version of the
+        #     storedInfoType to continue using it, reusing the same +config+ if it was
+        #     not the source of the error.
+        class StoredInfoTypeVersion; end
+
+        # StoredInfoType resource message that contains information about the current
+        # version and any pending updates.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Resource name.
+        # @!attribute [rw] current_version
+        #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeVersion]
+        #     Current version of the stored info type.
+        # @!attribute [rw] pending_versions
+        #   @return [Array<Google::Privacy::Dlp::V2::StoredInfoTypeVersion>]
+        #     Pending versions of the stored info type. Empty if no versions are
+        #     pending.
+        class StoredInfoType; end
+
+        # Request message for CreateStoredInfoType.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     The parent resource name, for example projects/my-project-id or
+        #     organizations/my-org-id.
+        # @!attribute [rw] config
+        #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeConfig]
+        #     Configuration of the storedInfoType to create.
+        # @!attribute [rw] stored_info_type_id
+        #   @return [String]
+        #     The storedInfoType ID can contain uppercase and lowercase letters,
+        #     numbers, and hyphens; that is, it must match the regular
+        #     expression: +[a-zA-Z\\d-]++. The maximum length is 100
+        #     characters. Can be empty to allow the system to generate one.
+        class CreateStoredInfoTypeRequest; end
+
+        # Request message for UpdateStoredInfoType.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Resource name of organization and storedInfoType to be updated, for
+        #     example +organizations/433245324/storedInfoTypes/432452342+ or
+        #     projects/project-id/storedInfoTypes/432452342.
+        # @!attribute [rw] config
+        #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeConfig]
+        #     Updated configuration for the storedInfoType. If not provided, a new
+        #     version of the storedInfoType will be created with the existing
+        #     configuration.
+        # @!attribute [rw] update_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     Mask to control which fields get updated.
+        class UpdateStoredInfoTypeRequest; end
+
+        # Request message for GetStoredInfoType.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Resource name of the organization and storedInfoType to be read, for
+        #     example +organizations/433245324/storedInfoTypes/432452342+ or
+        #     projects/project-id/storedInfoTypes/432452342.
+        class GetStoredInfoTypeRequest; end
+
+        # Request message for ListStoredInfoTypes.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     The parent resource name, for example projects/my-project-id or
+        #     organizations/my-org-id.
+        # @!attribute [rw] page_token
+        #   @return [String]
+        #     Optional page token to continue retrieval. Comes from previous call
+        #     to +ListStoredInfoTypes+.
+        # @!attribute [rw] page_size
+        #   @return [Integer]
+        #     Optional size of the page, can be limited by server. If zero server returns
+        #     a page of max size 100.
+        class ListStoredInfoTypesRequest; end
+
+        # Response message for ListStoredInfoTypes.
+        # @!attribute [rw] stored_info_types
+        #   @return [Array<Google::Privacy::Dlp::V2::StoredInfoType>]
+        #     List of storedInfoTypes, up to page_size in ListStoredInfoTypesRequest.
+        # @!attribute [rw] next_page_token
+        #   @return [String]
+        #     If the next page is available then the next page token to be used
+        #     in following ListStoredInfoTypes request.
+        class ListStoredInfoTypesResponse; end
+
+        # Request message for DeleteStoredInfoType.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Resource name of the organization and storedInfoType to be deleted, for
+        #     example +organizations/433245324/storedInfoTypes/432452342+ or
+        #     projects/project-id/storedInfoTypes/432452342.
+        class DeleteStoredInfoTypeRequest; end
+
         # Options describing which parts of the provided content should be scanned.
         module ContentOption
           # Includes entire content of a file or a data stream.
@@ -2277,6 +2418,26 @@ module Google
 
           # The job executed a Risk Analysis computation.
           RISK_ANALYSIS_JOB = 2
+        end
+
+        # State of a StoredInfoType version.
+        module StoredInfoTypeState
+          STORED_INFO_TYPE_STATE_UNSPECIFIED = 0
+
+          # StoredInfoType version is being created.
+          PENDING = 1
+
+          # StoredInfoType version is ready for use.
+          READY = 2
+
+          # StoredInfoType creation failed. All relevant error messages are returned in
+          # the +StoredInfoTypeVersion+ message.
+          FAILED = 3
+
+          # StoredInfoType is no longer valid because artifacts stored in
+          # user-controlled storage were modified. To fix an invalid StoredInfoType,
+          # use the +UpdateStoredInfoType+ method to create a new version.
+          INVALID = 4
         end
       end
     end

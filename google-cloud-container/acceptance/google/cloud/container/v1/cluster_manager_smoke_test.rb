@@ -19,14 +19,14 @@ require "minitest/spec"
 
 require "google/cloud/container"
 
-describe "ClusterManagerSmokeTest" do
+describe "ClusterManagerSmokeTest v1" do
   it "runs one smoke test with list_clusters" do
     unless ENV["CONTAINER_TEST_PROJECT"]
       fail "CONTAINER_TEST_PROJECT environment variable must be defined"
     end
     project_id = ENV["CONTAINER_TEST_PROJECT"].freeze
 
-    cluster_manager_client = Google::Cloud::Container.new
+    cluster_manager_client = Google::Cloud::Container.new(version: :v1)
     project_id_2 = project_id
     zone = "us-central1-a"
     response = cluster_manager_client.list_clusters(project_id_2, zone)

@@ -22,10 +22,10 @@ require "google/cloud/redis/v1beta1/cloud_redis_client"
 require "google/cloud/redis/v1beta1/cloud_redis_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1beta1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1beta1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockCloudRedisCredentials < Google::Cloud::Redis::V1beta1::Credentials
+class MockCloudRedisCredentials_v1beta1 < Google::Cloud::Redis::V1beta1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
 
   describe 'list_instances' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#list_instances."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#list_instances."
 
     it 'invokes list_instances without error' do
       # Create request parameters
@@ -88,10 +88,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("list_instances")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("list_instances")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -119,10 +119,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("list_instances")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("list_instances")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -141,7 +141,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
   end
 
   describe 'get_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#get_instance."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#get_instance."
 
     it 'invokes get_instance without error' do
       # Create request parameters
@@ -182,10 +182,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("get_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("get_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -217,10 +217,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("get_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("get_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -239,7 +239,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
   end
 
   describe 'create_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#create_instance."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#create_instance."
 
     it 'invokes create_instance without error' do
       # Create request parameters
@@ -293,10 +293,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("create_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("create_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -341,10 +341,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("create_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("create_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -380,10 +380,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("create_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("create_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -406,7 +406,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
   end
 
   describe 'update_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#update_instance."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#update_instance."
 
     it 'invokes update_instance without error' do
       # Create request parameters
@@ -461,10 +461,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("update_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("update_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -506,10 +506,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("update_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("update_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -542,10 +542,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(Google::Gax::to_proto(instance, Google::Cloud::Redis::V1beta1::Instance), request.instance)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("update_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("update_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -564,7 +564,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
   end
 
   describe 'delete_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#delete_instance."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#delete_instance."
 
     it 'invokes delete_instance without error' do
       # Create request parameters
@@ -587,10 +587,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("delete_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("delete_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -625,10 +625,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("delete_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("delete_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -654,10 +654,10 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockCloudRedisCredentials.new("delete_instance")
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("delete_instance")
 
       Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
         Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do

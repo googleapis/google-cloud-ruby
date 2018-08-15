@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Dialogflow
-      ##
-      # # Dialogflow API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [AgentsClient][] | Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. |
-      # | [Data Types][] | Data types for Google::Cloud::Dialogflow::V2 |
-      #
-      # [AgentsClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/agentsclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/datatypes
-      #
       module V2
         # Represents a conversational agent.
         # @!attribute [rw] parent

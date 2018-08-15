@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Tasks
-      ##
-      # # Cloud Tasks API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [CloudTasksClient][] | Cloud Tasks allows developers to manage the execution of background work in their applications. |
-      # | [Data Types][] | Data types for Google::Cloud::Tasks::V2beta2 |
-      #
-      # [CloudTasksClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-tasks/latest/google/cloud/tasks/v2beta2/cloudtasksclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-tasks/latest/google/cloud/tasks/v2beta2/datatypes
-      #
       module V2beta2
         # Request message for {Google::Cloud::Tasks::V2beta2::CloudTasks::ListQueues ListQueues}.
         # @!attribute [rw] parent

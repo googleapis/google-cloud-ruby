@@ -14,19 +14,6 @@
 
 module Google
   module Pubsub
-    ##
-    # # Google Cloud Pub/Sub API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [PublisherClient][] | The service that an application uses to manipulate topics, and to send messages to a topic. |
-    # | [SubscriberClient][] | The service that an application uses to manipulate subscriptions and to consume messages from a subscription via the +Pull+ method or by establishing a bi-directional stream using the +StreamingPull+ method. |
-    # | [Data Types][] | Data types for Google::Cloud::Pubsub::V1 |
-    #
-    # [PublisherClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/publisherclient
-    # [SubscriberClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/subscriberclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-pubsub/latest/google/pubsub/v1/datatypes
-    #
     module V1
       # @!attribute [rw] allowed_persistence_regions
       #   @return [Array<String>]

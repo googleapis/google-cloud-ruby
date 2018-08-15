@@ -14,17 +14,6 @@
 
 module Google
   module Bigtable
-    ##
-    # # Cloud Bigtable API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [BigtableClient][] | Service for reading from and writing to existing Bigtable tables. |
-    # | [Data Types][] | Data types for Google::Cloud::Bigtable::V2 |
-    #
-    # [BigtableClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest/google/bigtable/v2/bigtableclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest/google/bigtable/v2/datatypes
-    #
     module V2
       # Request message for Bigtable.ReadRows.
       # @!attribute [rw] table_name

@@ -21,10 +21,10 @@ require "google/cloud/monitoring"
 require "google/cloud/monitoring/v3/alert_policy_service_client"
 require "google/monitoring/v3/alert_service_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v3 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v3
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockAlertPolicyServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
+class MockAlertPolicyServiceCredentials_v3 < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
 
   describe 'list_alert_policies' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#list_alert_policies."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#list_alert_policies."
 
     it 'invokes list_alert_policies without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_alert_policies, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_alert_policies, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("list_alert_policies")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("list_alert_policies")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -118,10 +118,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_alert_policies, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_alert_policies, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("list_alert_policies")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("list_alert_policies")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -140,7 +140,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
   end
 
   describe 'get_alert_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#get_alert_policy."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#get_alert_policy."
 
     it 'invokes get_alert_policy without error' do
       # Create request parameters
@@ -158,10 +158,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("get_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("get_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -193,10 +193,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("get_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("get_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -215,7 +215,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
   end
 
   describe 'create_alert_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#create_alert_policy."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#create_alert_policy."
 
     it 'invokes create_alert_policy without error' do
       # Create request parameters
@@ -235,10 +235,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(Google::Gax::to_proto(alert_policy, Google::Monitoring::V3::AlertPolicy), request.alert_policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("create_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("create_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -272,10 +272,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(Google::Gax::to_proto(alert_policy, Google::Monitoring::V3::AlertPolicy), request.alert_policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("create_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("create_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -294,7 +294,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
   end
 
   describe 'delete_alert_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#delete_alert_policy."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#delete_alert_policy."
 
     it 'invokes delete_alert_policy without error' do
       # Create request parameters
@@ -306,10 +306,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("delete_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("delete_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -341,10 +341,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("delete_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("delete_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -363,7 +363,7 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
   end
 
   describe 'update_alert_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#update_alert_policy."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::AlertPolicyServiceClient#update_alert_policy."
 
     it 'invokes update_alert_policy without error' do
       # Create request parameters
@@ -381,10 +381,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(Google::Gax::to_proto(alert_policy, Google::Monitoring::V3::AlertPolicy), request.alert_policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("update_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("update_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -416,10 +416,10 @@ describe Google::Cloud::Monitoring::V3::AlertPolicyServiceClient do
         assert_equal(Google::Gax::to_proto(alert_policy, Google::Monitoring::V3::AlertPolicy), request.alert_policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_alert_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_alert_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAlertPolicyServiceCredentials.new("update_alert_policy")
+      mock_credentials = MockAlertPolicyServiceCredentials_v3.new("update_alert_policy")
 
       Google::Monitoring::V3::AlertPolicyService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do

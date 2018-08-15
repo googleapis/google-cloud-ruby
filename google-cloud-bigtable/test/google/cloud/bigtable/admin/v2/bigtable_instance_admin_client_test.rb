@@ -22,10 +22,10 @@ require "google/cloud/bigtable/admin/v2/bigtable_instance_admin_client"
 require "google/bigtable/admin/v2/bigtable_instance_admin_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockBigtableInstanceAdminCredentials < Google::Cloud::Bigtable::Admin::V2::Credentials
+class MockBigtableInstanceAdminCredentials_v2 < Google::Cloud::Bigtable::Admin::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
 
   describe 'create_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#create_instance."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#create_instance."
 
     it 'invokes create_instance without error' do
       # Create request parameters
@@ -100,10 +100,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(clusters, request.clusters)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -149,10 +149,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(clusters, request.clusters)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -189,10 +189,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(clusters, request.clusters)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -216,7 +216,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'get_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_instance."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_instance."
 
     it 'invokes get_instance without error' do
       # Create request parameters
@@ -234,10 +234,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -269,10 +269,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -291,7 +291,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'list_instances' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#list_instances."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#list_instances."
 
     it 'invokes list_instances without error' do
       # Create request parameters
@@ -308,10 +308,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("list_instances")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("list_instances")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -343,10 +343,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_instances, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_instances, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("list_instances")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("list_instances")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -365,7 +365,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'update_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#update_instance."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#update_instance."
 
     it 'invokes update_instance without error' do
       # Create request parameters
@@ -389,10 +389,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(labels, request.labels)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -440,10 +440,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(labels, request.labels)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -467,7 +467,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'partial_update_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#partial_update_instance."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#partial_update_instance."
 
     it 'invokes partial_update_instance without error' do
       # Create request parameters
@@ -494,10 +494,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:partial_update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:partial_update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("partial_update_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("partial_update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -534,10 +534,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:partial_update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:partial_update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("partial_update_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("partial_update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -565,10 +565,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:partial_update_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:partial_update_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("partial_update_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("partial_update_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -587,7 +587,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'delete_instance' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#delete_instance."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#delete_instance."
 
     it 'invokes delete_instance without error' do
       # Create request parameters
@@ -599,10 +599,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("delete_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -634,10 +634,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_instance, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_instance, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_instance")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("delete_instance")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -656,7 +656,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'create_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#create_cluster."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#create_cluster."
 
     it 'invokes create_cluster without error' do
       # Create request parameters
@@ -690,10 +690,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -736,10 +736,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -773,10 +773,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Bigtable::Admin::V2::Cluster), request.cluster)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -799,7 +799,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'get_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_cluster."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_cluster."
 
     it 'invokes get_cluster without error' do
       # Create request parameters
@@ -822,10 +822,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -857,10 +857,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -879,7 +879,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'list_clusters' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#list_clusters."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#list_clusters."
 
     it 'invokes list_clusters without error' do
       # Create request parameters
@@ -896,10 +896,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("list_clusters")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("list_clusters")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -931,10 +931,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("list_clusters")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("list_clusters")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -953,7 +953,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'update_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#update_cluster."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#update_cluster."
 
     it 'invokes update_cluster without error' do
       # Create request parameters
@@ -985,10 +985,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(serve_nodes, request.serve_nodes)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1025,10 +1025,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(serve_nodes, request.serve_nodes)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1056,10 +1056,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(serve_nodes, request.serve_nodes)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1078,7 +1078,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'delete_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#delete_cluster."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#delete_cluster."
 
     it 'invokes delete_cluster without error' do
       # Create request parameters
@@ -1090,10 +1090,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("delete_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1125,10 +1125,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_cluster")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("delete_cluster")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1147,7 +1147,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'create_app_profile' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#create_app_profile."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#create_app_profile."
 
     it 'invokes create_app_profile without error' do
       # Create request parameters
@@ -1174,10 +1174,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(app_profile, Google::Bigtable::Admin::V2::AppProfile), request.app_profile)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1221,10 +1221,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(app_profile, Google::Bigtable::Admin::V2::AppProfile), request.app_profile)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("create_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("create_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1247,7 +1247,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'get_app_profile' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_app_profile."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_app_profile."
 
     it 'invokes get_app_profile without error' do
       # Create request parameters
@@ -1270,10 +1270,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1305,10 +1305,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1327,7 +1327,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'list_app_profiles' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#list_app_profiles."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#list_app_profiles."
 
     it 'invokes list_app_profiles without error' do
       # Create request parameters
@@ -1346,10 +1346,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_app_profiles, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_app_profiles, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("list_app_profiles")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("list_app_profiles")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1377,10 +1377,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_app_profiles, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_app_profiles, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("list_app_profiles")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("list_app_profiles")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1399,7 +1399,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'update_app_profile' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#update_app_profile."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#update_app_profile."
 
     it 'invokes update_app_profile without error' do
       # Create request parameters
@@ -1431,10 +1431,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1471,10 +1471,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1502,10 +1502,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("update_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("update_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1524,7 +1524,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'delete_app_profile' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#delete_app_profile."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#delete_app_profile."
 
     it 'invokes delete_app_profile without error' do
       # Create request parameters
@@ -1538,10 +1538,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(ignore_warnings, request.ignore_warnings)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("delete_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1575,10 +1575,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(ignore_warnings, request.ignore_warnings)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_app_profile, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_app_profile, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("delete_app_profile")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("delete_app_profile")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1597,7 +1597,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'get_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_iam_policy."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#get_iam_policy."
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
@@ -1615,10 +1615,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_iam_policy")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1650,10 +1650,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(formatted_resource, request.resource)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("get_iam_policy")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("get_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1672,7 +1672,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'set_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#set_iam_policy."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#set_iam_policy."
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
@@ -1692,10 +1692,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("set_iam_policy")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("set_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1729,10 +1729,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("set_iam_policy")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("set_iam_policy")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1751,7 +1751,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
   end
 
   describe 'test_iam_permissions' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#test_iam_permissions."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient#test_iam_permissions."
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
@@ -1769,10 +1769,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(permissions, request.permissions)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("test_iam_permissions")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("test_iam_permissions")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1806,10 +1806,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient do
         assert_equal(permissions, request.permissions)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableInstanceAdminCredentials.new("test_iam_permissions")
+      mock_credentials = MockBigtableInstanceAdminCredentials_v2.new("test_iam_permissions")
 
       Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do

@@ -19,10 +19,10 @@ require "minitest/spec"
 
 require "google/cloud/video_intelligence"
 
-describe "VideoIntelligenceServiceSmokeTest V1" do
+describe "VideoIntelligenceServiceSmokeTest v1" do
   it "runs one smoke test with annotate_video" do
 
-    video_intelligence_service_client = Google::Cloud::VideoIntelligence.new version: :v1
+    video_intelligence_service_client = Google::Cloud::VideoIntelligence.new(version: :v1)
     input_uri = "gs://demomaker/cat.mp4"
     features_element = :LABEL_DETECTION
     features = [features_element]

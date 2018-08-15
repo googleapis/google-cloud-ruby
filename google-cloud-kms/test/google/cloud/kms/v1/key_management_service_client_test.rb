@@ -22,10 +22,10 @@ require "google/cloud/kms/v1/key_management_service_client"
 require "google/cloud/kms/v1/service_services_pb"
 require "google/iam/v1/iam_policy_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockKeyManagementServiceCredentials < Google::Cloud::Kms::V1::Credentials
+class MockKeyManagementServiceCredentials_v1 < Google::Cloud::Kms::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
 
   describe 'list_key_rings' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_key_rings."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_key_rings."
 
     it 'invokes list_key_rings without error' do
       # Create request parameters
@@ -93,10 +93,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_key_rings, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_key_rings, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("list_key_rings")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_key_rings")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -124,10 +124,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_key_rings, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_key_rings, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("list_key_rings")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_key_rings")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -146,7 +146,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'list_crypto_keys' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_crypto_keys."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_crypto_keys."
 
     it 'invokes list_crypto_keys without error' do
       # Create request parameters
@@ -170,10 +170,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_crypto_keys, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_crypto_keys, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("list_crypto_keys")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_crypto_keys")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -201,10 +201,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_crypto_keys, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_crypto_keys, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("list_crypto_keys")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_crypto_keys")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -223,7 +223,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'list_crypto_key_versions' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_crypto_key_versions."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#list_crypto_key_versions."
 
     it 'invokes list_crypto_key_versions without error' do
       # Create request parameters
@@ -247,10 +247,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_crypto_key_versions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_crypto_key_versions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("list_crypto_key_versions")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_crypto_key_versions")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -278,10 +278,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_crypto_key_versions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_crypto_key_versions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("list_crypto_key_versions")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("list_crypto_key_versions")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -300,7 +300,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'get_key_ring' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_key_ring."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_key_ring."
 
     it 'invokes get_key_ring without error' do
       # Create request parameters
@@ -317,10 +317,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_key_ring, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_key_ring, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_key_ring")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_key_ring")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -352,10 +352,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_key_ring, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_key_ring, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_key_ring")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_key_ring")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -374,7 +374,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'get_crypto_key' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_crypto_key."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_crypto_key."
 
     it 'invokes get_crypto_key without error' do
       # Create request parameters
@@ -391,10 +391,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_crypto_key, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_crypto_key, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_crypto_key")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_crypto_key")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -426,10 +426,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_crypto_key, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_crypto_key, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_crypto_key")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_crypto_key")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -448,7 +448,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'get_crypto_key_version' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_crypto_key_version."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_crypto_key_version."
 
     it 'invokes get_crypto_key_version without error' do
       # Create request parameters
@@ -465,10 +465,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -500,10 +500,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -522,7 +522,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'create_key_ring' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_key_ring."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_key_ring."
 
     it 'invokes create_key_ring without error' do
       # Create request parameters
@@ -543,10 +543,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(key_ring, Google::Cloud::Kms::V1::KeyRing), request.key_ring)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_key_ring, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_key_ring, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("create_key_ring")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_key_ring")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -590,10 +590,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(key_ring, Google::Cloud::Kms::V1::KeyRing), request.key_ring)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_key_ring, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_key_ring, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("create_key_ring")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_key_ring")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -616,7 +616,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'create_crypto_key' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_crypto_key."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_crypto_key."
 
     it 'invokes create_crypto_key without error' do
       # Create request parameters
@@ -646,10 +646,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(crypto_key, Google::Cloud::Kms::V1::CryptoKey), request.crypto_key)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_crypto_key, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_crypto_key, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("create_crypto_key")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_crypto_key")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -702,10 +702,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(crypto_key, Google::Cloud::Kms::V1::CryptoKey), request.crypto_key)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_crypto_key, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_crypto_key, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("create_crypto_key")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_crypto_key")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -728,7 +728,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'create_crypto_key_version' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_crypto_key_version."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#create_crypto_key_version."
 
     it 'invokes create_crypto_key_version without error' do
       # Create request parameters
@@ -747,10 +747,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(crypto_key_version, Google::Cloud::Kms::V1::CryptoKeyVersion), request.crypto_key_version)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("create_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -784,10 +784,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(crypto_key_version, Google::Cloud::Kms::V1::CryptoKeyVersion), request.crypto_key_version)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("create_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("create_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -806,7 +806,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'update_crypto_key' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#update_crypto_key."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#update_crypto_key."
 
     it 'invokes update_crypto_key without error' do
       # Create request parameters
@@ -825,10 +825,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_crypto_key, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_crypto_key, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("update_crypto_key")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("update_crypto_key")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -862,10 +862,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_crypto_key, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_crypto_key, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("update_crypto_key")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("update_crypto_key")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -884,7 +884,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'update_crypto_key_version' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#update_crypto_key_version."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#update_crypto_key_version."
 
     it 'invokes update_crypto_key_version without error' do
       # Create request parameters
@@ -903,10 +903,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("update_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("update_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -940,10 +940,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("update_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("update_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -962,7 +962,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'encrypt' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#encrypt."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#encrypt."
 
     it 'invokes encrypt without error' do
       # Create request parameters
@@ -982,10 +982,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(plaintext, request.plaintext)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:encrypt, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:encrypt, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("encrypt")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("encrypt")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1019,10 +1019,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(plaintext, request.plaintext)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:encrypt, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:encrypt, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("encrypt")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("encrypt")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1041,7 +1041,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'decrypt' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#decrypt."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#decrypt."
 
     it 'invokes decrypt without error' do
       # Create request parameters
@@ -1060,10 +1060,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(ciphertext, request.ciphertext)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:decrypt, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:decrypt, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("decrypt")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("decrypt")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1097,10 +1097,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(ciphertext, request.ciphertext)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:decrypt, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:decrypt, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("decrypt")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("decrypt")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1119,7 +1119,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'update_crypto_key_primary_version' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#update_crypto_key_primary_version."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#update_crypto_key_primary_version."
 
     it 'invokes update_crypto_key_primary_version without error' do
       # Create request parameters
@@ -1138,10 +1138,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(crypto_key_version_id, request.crypto_key_version_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_crypto_key_primary_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_crypto_key_primary_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("update_crypto_key_primary_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("update_crypto_key_primary_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1175,10 +1175,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(crypto_key_version_id, request.crypto_key_version_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_crypto_key_primary_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_crypto_key_primary_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("update_crypto_key_primary_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("update_crypto_key_primary_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1197,7 +1197,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'destroy_crypto_key_version' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#destroy_crypto_key_version."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#destroy_crypto_key_version."
 
     it 'invokes destroy_crypto_key_version without error' do
       # Create request parameters
@@ -1214,10 +1214,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:destroy_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:destroy_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("destroy_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("destroy_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1249,10 +1249,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:destroy_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:destroy_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("destroy_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("destroy_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1271,7 +1271,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'restore_crypto_key_version' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#restore_crypto_key_version."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#restore_crypto_key_version."
 
     it 'invokes restore_crypto_key_version without error' do
       # Create request parameters
@@ -1288,10 +1288,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:restore_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:restore_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("restore_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("restore_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1323,10 +1323,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:restore_crypto_key_version, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:restore_crypto_key_version, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("restore_crypto_key_version")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("restore_crypto_key_version")
 
       Google::Cloud::Kms::V1::KeyManagementService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1345,7 +1345,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'set_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#set_iam_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#set_iam_policy."
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
@@ -1365,10 +1365,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("set_iam_policy")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("set_iam_policy")
 
       Google::Iam::V1::IAMPolicy::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1402,10 +1402,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("set_iam_policy")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("set_iam_policy")
 
       Google::Iam::V1::IAMPolicy::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1424,7 +1424,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'get_iam_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_iam_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#get_iam_policy."
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
@@ -1442,10 +1442,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_iam_policy")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_iam_policy")
 
       Google::Iam::V1::IAMPolicy::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1477,10 +1477,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(formatted_resource, request.resource)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_iam_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("get_iam_policy")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("get_iam_policy")
 
       Google::Iam::V1::IAMPolicy::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1499,7 +1499,7 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
   end
 
   describe 'test_iam_permissions' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#test_iam_permissions."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Kms::V1::KeyManagementServiceClient#test_iam_permissions."
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
@@ -1517,10 +1517,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(permissions, request.permissions)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("test_iam_permissions")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("test_iam_permissions")
 
       Google::Iam::V1::IAMPolicy::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
@@ -1554,10 +1554,10 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
         assert_equal(permissions, request.permissions)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:test_iam_permissions, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockKeyManagementServiceCredentials.new("test_iam_permissions")
+      mock_credentials = MockKeyManagementServiceCredentials_v1.new("test_iam_permissions")
 
       Google::Iam::V1::IAMPolicy::Stub.stub(:new, mock_stub) do
         Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do

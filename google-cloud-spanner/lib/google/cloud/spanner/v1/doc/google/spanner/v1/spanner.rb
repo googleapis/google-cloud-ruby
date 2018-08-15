@@ -14,17 +14,6 @@
 
 module Google
   module Spanner
-    ##
-    # # Cloud Spanner API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [SpannerClient][] | Cloud Spanner API |
-    # | [Data Types][] | Data types for Google::Cloud::Spanner::V1 |
-    #
-    # [SpannerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/spannerclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-spanner/latest/google/spanner/v1/datatypes
-    #
     module V1
       # The request for {Google::Spanner::V1::Spanner::CreateSession CreateSession}.
       # @!attribute [rw] database

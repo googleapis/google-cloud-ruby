@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Oslogin
-      ##
-      # # Google Cloud OS Login API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [OsLoginServiceClient][] | Cloud OS Login API |
-      # | [Data Types][] | Data types for Google::Cloud::OsLogin::V1beta |
-      #
-      # [OsLoginServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1beta/osloginserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/google/cloud/oslogin/v1beta/datatypes
-      #
       module V1beta
         # The user profile information used for logging in to a virtual machine on
         # Google Compute Engine.

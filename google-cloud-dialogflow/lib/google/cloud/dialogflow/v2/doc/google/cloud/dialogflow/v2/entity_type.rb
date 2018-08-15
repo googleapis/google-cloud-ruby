@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Dialogflow
-      ##
-      # # Dialogflow API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [EntityTypesClient][] | Entities are extracted from user input and represent parameters that are meaningful to your application. |
-      # | [Data Types][] | Data types for Google::Cloud::Dialogflow::V2 |
-      #
-      # [EntityTypesClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/entitytypesclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/datatypes
-      #
       module V2
         # Represents an entity type.
         # Entity types serve as a tool for extracting parameter values from natural

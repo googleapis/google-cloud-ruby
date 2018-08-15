@@ -22,10 +22,10 @@ require "google/cloud/dialogflow/v2/intents_client"
 require "google/cloud/dialogflow/v2/intent_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockIntentsCredentials < Google::Cloud::Dialogflow::V2::Credentials
+class MockIntentsCredentials_v2 < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Dialogflow::V2::IntentsClient do
 
   describe 'list_intents' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#list_intents."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#list_intents."
 
     it 'invokes list_intents without error' do
       # Create request parameters
@@ -88,10 +88,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("list_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("list_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -119,10 +119,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("list_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("list_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -141,7 +141,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
   end
 
   describe 'get_intent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#get_intent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#get_intent."
 
     it 'invokes get_intent without error' do
       # Create request parameters
@@ -176,10 +176,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("get_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("get_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -211,10 +211,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("get_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("get_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -233,7 +233,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
   end
 
   describe 'create_intent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#create_intent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#create_intent."
 
     it 'invokes create_intent without error' do
       # Create request parameters
@@ -270,10 +270,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(Google::Gax::to_proto(intent, Google::Cloud::Dialogflow::V2::Intent), request.intent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("create_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("create_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -307,10 +307,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(Google::Gax::to_proto(intent, Google::Cloud::Dialogflow::V2::Intent), request.intent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("create_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("create_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -329,7 +329,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
   end
 
   describe 'update_intent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#update_intent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#update_intent."
 
     it 'invokes update_intent without error' do
       # Create request parameters
@@ -366,10 +366,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(language_code, request.language_code)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("update_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("update_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -403,10 +403,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(language_code, request.language_code)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("update_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("update_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -425,7 +425,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
   end
 
   describe 'delete_intent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#delete_intent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#delete_intent."
 
     it 'invokes delete_intent without error' do
       # Create request parameters
@@ -437,10 +437,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("delete_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("delete_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -472,10 +472,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_intent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_intent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("delete_intent")
+      mock_credentials = MockIntentsCredentials_v2.new("delete_intent")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -494,7 +494,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
   end
 
   describe 'batch_update_intents' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#batch_update_intents."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#batch_update_intents."
 
     it 'invokes batch_update_intents without error' do
       # Create request parameters
@@ -519,10 +519,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(language_code, request.language_code)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("batch_update_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("batch_update_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -559,10 +559,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(language_code, request.language_code)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("batch_update_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("batch_update_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -590,10 +590,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(language_code, request.language_code)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_update_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_update_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("batch_update_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("batch_update_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -612,7 +612,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
   end
 
   describe 'batch_delete_intents' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#batch_delete_intents."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::IntentsClient#batch_delete_intents."
 
     it 'invokes batch_delete_intents without error' do
       # Create request parameters
@@ -640,10 +640,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(intents, request.intents)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("batch_delete_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("batch_delete_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -683,10 +683,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(intents, request.intents)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("batch_delete_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("batch_delete_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -717,10 +717,10 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
         assert_equal(intents, request.intents)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_delete_intents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:batch_delete_intents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockIntentsCredentials.new("batch_delete_intents")
+      mock_credentials = MockIntentsCredentials_v2.new("batch_delete_intents")
 
       Google::Cloud::Dialogflow::V2::Intents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do

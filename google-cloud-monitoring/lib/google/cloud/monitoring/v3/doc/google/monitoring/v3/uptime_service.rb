@@ -14,17 +14,6 @@
 
 module Google
   module Monitoring
-    ##
-    # # Stackdriver Monitoring API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [UptimeCheckServiceClient][] | The UptimeCheckService API is used to manage (list, create, delete, edit) uptime check configurations in the Stackdriver Monitoring product. |
-    # | [Data Types][] | Data types for Google::Cloud::Monitoring::V3 |
-    #
-    # [UptimeCheckServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/uptimecheckserviceclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/datatypes
-    #
     module V3
       # The protocol for the +ListUptimeCheckConfigs+ request.
       # @!attribute [rw] parent

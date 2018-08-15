@@ -21,10 +21,10 @@ require "google/cloud/bigquery/data_transfer"
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service_client"
 require "google/cloud/bigquery/datatransfer/v1/datatransfer_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockDataTransferServiceCredentials < Google::Cloud::Bigquery::DataTransfer::V1::Credentials
+class MockDataTransferServiceCredentials_v1 < Google::Cloud::Bigquery::DataTransfer::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
 
   describe 'get_data_source' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#get_data_source."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#get_data_source."
 
     it 'invokes get_data_source without error' do
       # Create request parameters
@@ -109,10 +109,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_data_source, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_data_source, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("get_data_source")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("get_data_source")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -144,10 +144,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_data_source, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_data_source, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("get_data_source")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("get_data_source")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -166,7 +166,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'list_data_sources' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_data_sources."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_data_sources."
 
     it 'invokes list_data_sources without error' do
       # Create request parameters
@@ -185,10 +185,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_data_sources, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_data_sources, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_data_sources")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_data_sources")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -216,10 +216,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_data_sources, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_data_sources, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_data_sources")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_data_sources")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -238,7 +238,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'create_transfer_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#create_transfer_config."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#create_transfer_config."
 
     it 'invokes create_transfer_config without error' do
       # Create request parameters
@@ -275,10 +275,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig), request.transfer_config)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("create_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("create_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -312,10 +312,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(Google::Gax::to_proto(transfer_config, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig), request.transfer_config)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("create_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("create_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -334,7 +334,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'update_transfer_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#update_transfer_config."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#update_transfer_config."
 
     it 'invokes update_transfer_config without error' do
       # Create request parameters
@@ -371,10 +371,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("update_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("update_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -408,10 +408,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("update_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("update_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -430,7 +430,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'delete_transfer_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#delete_transfer_config."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#delete_transfer_config."
 
     it 'invokes delete_transfer_config without error' do
       # Create request parameters
@@ -442,10 +442,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("delete_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -477,10 +477,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("delete_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -499,7 +499,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'get_transfer_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#get_transfer_config."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#get_transfer_config."
 
     it 'invokes get_transfer_config without error' do
       # Create request parameters
@@ -534,10 +534,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("get_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -569,10 +569,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_transfer_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_transfer_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_config")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("get_transfer_config")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -591,7 +591,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'list_transfer_configs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_transfer_configs."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_transfer_configs."
 
     it 'invokes list_transfer_configs without error' do
       # Create request parameters
@@ -610,10 +610,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_transfer_configs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_transfer_configs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_configs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_transfer_configs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -641,10 +641,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_transfer_configs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_transfer_configs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_configs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_transfer_configs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -663,7 +663,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'schedule_transfer_runs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#schedule_transfer_runs."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#schedule_transfer_runs."
 
     it 'invokes schedule_transfer_runs without error' do
       # Create request parameters
@@ -683,10 +683,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(Google::Gax::to_proto(end_time, Google::Protobuf::Timestamp), request.end_time)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:schedule_transfer_runs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:schedule_transfer_runs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("schedule_transfer_runs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("schedule_transfer_runs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -730,10 +730,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(Google::Gax::to_proto(end_time, Google::Protobuf::Timestamp), request.end_time)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:schedule_transfer_runs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:schedule_transfer_runs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("schedule_transfer_runs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("schedule_transfer_runs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -756,7 +756,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'get_transfer_run' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#get_transfer_run."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#get_transfer_run."
 
     it 'invokes get_transfer_run without error' do
       # Create request parameters
@@ -783,10 +783,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_transfer_run, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_transfer_run, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_run")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("get_transfer_run")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -818,10 +818,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_transfer_run, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_transfer_run, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("get_transfer_run")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("get_transfer_run")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -840,7 +840,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'delete_transfer_run' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#delete_transfer_run."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#delete_transfer_run."
 
     it 'invokes delete_transfer_run without error' do
       # Create request parameters
@@ -852,10 +852,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_transfer_run, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_transfer_run, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_run")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("delete_transfer_run")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -887,10 +887,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_transfer_run, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_transfer_run, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("delete_transfer_run")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("delete_transfer_run")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -909,7 +909,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'list_transfer_runs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_transfer_runs."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_transfer_runs."
 
     it 'invokes list_transfer_runs without error' do
       # Create request parameters
@@ -928,10 +928,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_transfer_runs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_transfer_runs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_runs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_transfer_runs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -959,10 +959,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_transfer_runs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_transfer_runs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_runs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_transfer_runs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -981,7 +981,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'list_transfer_logs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_transfer_logs."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#list_transfer_logs."
 
     it 'invokes list_transfer_logs without error' do
       # Create request parameters
@@ -1000,10 +1000,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_transfer_logs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_transfer_logs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_logs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_transfer_logs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -1031,10 +1031,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_transfer_logs, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_transfer_logs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("list_transfer_logs")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("list_transfer_logs")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -1053,7 +1053,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
   end
 
   describe 'check_valid_creds' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#check_valid_creds."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#check_valid_creds."
 
     it 'invokes check_valid_creds without error' do
       # Create request parameters
@@ -1070,10 +1070,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:check_valid_creds, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:check_valid_creds, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("check_valid_creds")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("check_valid_creds")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
@@ -1105,10 +1105,10 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:check_valid_creds, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:check_valid_creds, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials.new("check_valid_creds")
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("check_valid_creds")
 
       Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do

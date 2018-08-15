@@ -75,39 +75,10 @@ s.replace(
     'Google::Cloud::Bigtable\\.new\\(version: :v2\\)',
     'Google::Cloud::Bigtable::V2.new')
 
-# https://github.com/googleapis/gapic-generator/issues/2174
-s.replace(
-    'lib/google/cloud/bigtable/admin.rb',
-    'File\.join\(dir, "\.rb"\)',
-    'dir + ".rb"')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/bigtable/v2/credentials.rb',
-    'BIGTABLE_KEYFILE\\n(\s+)BIGTABLE_CREDENTIALS\n',
-    'BIGTABLE_CREDENTIALS\\n\\1BIGTABLE_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/bigtable/v2/credentials.rb',
-    'BIGTABLE_KEYFILE_JSON\\n(\s+)BIGTABLE_CREDENTIALS_JSON\n',
-    'BIGTABLE_CREDENTIALS_JSON\\n\\1BIGTABLE_KEYFILE_JSON\n')
-s.replace(
-    'lib/google/cloud/bigtable/admin/v2/credentials.rb',
-    'BIGTABLE_ADMIN_KEYFILE\\n(\s+)BIGTABLE_ADMIN_CREDENTIALS\n',
-    'BIGTABLE_ADMIN_CREDENTIALS\\n\\1BIGTABLE_ADMIN_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/bigtable/admin/v2/credentials.rb',
-    'BIGTABLE_ADMIN_KEYFILE_JSON\\n(\s+)BIGTABLE_ADMIN_CREDENTIALS_JSON\n',
-    'BIGTABLE_ADMIN_CREDENTIALS_JSON\\n\\1BIGTABLE_ADMIN_KEYFILE_JSON\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2195
-s.replace(
-    'lib/google/cloud/bigtable/v2.rb',
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/bigtable\\)',
-    '(https://console.cloud.google.com/apis/library/bigtable.googleapis.com)')
+# PERMANENT: API name for bigtableadmin
 s.replace(
     [
       'lib/google/cloud/bigtable/admin.rb',
       'lib/google/cloud/bigtable/admin/v2.rb',
     ],
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/bigtable-admin\\)',
-    '(https://console.cloud.google.com/apis/library/bigtableadmin.googleapis.com)')
+    '/bigtable-admin\\.googleapis\\.com', '/bigtableadmin.googleapis.com')

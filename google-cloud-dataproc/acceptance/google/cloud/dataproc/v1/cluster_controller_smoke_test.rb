@@ -19,14 +19,14 @@ require "minitest/spec"
 
 require "google/cloud/dataproc"
 
-describe "ClusterControllerSmokeTest" do
+describe "ClusterControllerSmokeTest v1" do
   it "runs one smoke test with list_clusters" do
     unless ENV["DATAPROC_TEST_PROJECT"]
       fail "DATAPROC_TEST_PROJECT environment variable must be defined"
     end
     project_id = ENV["DATAPROC_TEST_PROJECT"].freeze
 
-    cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new
+    cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new(version: :v1)
     project_id_2 = project_id
     region = "global"
 

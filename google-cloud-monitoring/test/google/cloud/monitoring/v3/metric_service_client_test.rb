@@ -21,10 +21,10 @@ require "google/cloud/monitoring"
 require "google/cloud/monitoring/v3/metric_service_client"
 require "google/monitoring/v3/metric_service_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v3 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v3
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockMetricServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
+class MockMetricServiceCredentials_v3 < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Monitoring::V3::MetricServiceClient do
 
   describe 'list_monitored_resource_descriptors' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#list_monitored_resource_descriptors."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#list_monitored_resource_descriptors."
 
     it 'invokes list_monitored_resource_descriptors without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_monitored_resource_descriptors, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_monitored_resource_descriptors, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("list_monitored_resource_descriptors")
+      mock_credentials = MockMetricServiceCredentials_v3.new("list_monitored_resource_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -118,10 +118,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_monitored_resource_descriptors, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_monitored_resource_descriptors, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("list_monitored_resource_descriptors")
+      mock_credentials = MockMetricServiceCredentials_v3.new("list_monitored_resource_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -140,7 +140,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
   end
 
   describe 'get_monitored_resource_descriptor' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#get_monitored_resource_descriptor."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#get_monitored_resource_descriptor."
 
     it 'invokes get_monitored_resource_descriptor without error' do
       # Create request parameters
@@ -165,10 +165,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_monitored_resource_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_monitored_resource_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("get_monitored_resource_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("get_monitored_resource_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -200,10 +200,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_monitored_resource_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_monitored_resource_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("get_monitored_resource_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("get_monitored_resource_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -222,7 +222,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
   end
 
   describe 'list_metric_descriptors' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#list_metric_descriptors."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#list_metric_descriptors."
 
     it 'invokes list_metric_descriptors without error' do
       # Create request parameters
@@ -241,10 +241,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_metric_descriptors, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_metric_descriptors, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("list_metric_descriptors")
+      mock_credentials = MockMetricServiceCredentials_v3.new("list_metric_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -272,10 +272,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_metric_descriptors, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_metric_descriptors, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("list_metric_descriptors")
+      mock_credentials = MockMetricServiceCredentials_v3.new("list_metric_descriptors")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -294,7 +294,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
   end
 
   describe 'get_metric_descriptor' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#get_metric_descriptor."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#get_metric_descriptor."
 
     it 'invokes get_metric_descriptor without error' do
       # Create request parameters
@@ -321,10 +321,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_metric_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_metric_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("get_metric_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("get_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -356,10 +356,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_metric_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_metric_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("get_metric_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("get_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -378,7 +378,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
   end
 
   describe 'create_metric_descriptor' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#create_metric_descriptor."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#create_metric_descriptor."
 
     it 'invokes create_metric_descriptor without error' do
       # Create request parameters
@@ -407,10 +407,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(Google::Gax::to_proto(metric_descriptor, Google::Api::MetricDescriptor), request.metric_descriptor)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_metric_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_metric_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("create_metric_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("create_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -444,10 +444,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(Google::Gax::to_proto(metric_descriptor, Google::Api::MetricDescriptor), request.metric_descriptor)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_metric_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_metric_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("create_metric_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("create_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -466,7 +466,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
   end
 
   describe 'delete_metric_descriptor' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#delete_metric_descriptor."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#delete_metric_descriptor."
 
     it 'invokes delete_metric_descriptor without error' do
       # Create request parameters
@@ -478,10 +478,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_metric_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_metric_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("delete_metric_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("delete_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -513,10 +513,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_metric_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_metric_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("delete_metric_descriptor")
+      mock_credentials = MockMetricServiceCredentials_v3.new("delete_metric_descriptor")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -535,7 +535,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
   end
 
   describe 'list_time_series' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#list_time_series."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#list_time_series."
 
     it 'invokes list_time_series without error' do
       # Create request parameters
@@ -560,10 +560,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(view, request.view)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_time_series, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_time_series, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("list_time_series")
+      mock_credentials = MockMetricServiceCredentials_v3.new("list_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -602,10 +602,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(view, request.view)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_time_series, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_time_series, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("list_time_series")
+      mock_credentials = MockMetricServiceCredentials_v3.new("list_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -629,7 +629,7 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
   end
 
   describe 'create_time_series' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#create_time_series."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::MetricServiceClient#create_time_series."
 
     it 'invokes create_time_series without error' do
       # Create request parameters
@@ -646,10 +646,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(time_series, request.time_series)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:create_time_series, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_time_series, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("create_time_series")
+      mock_credentials = MockMetricServiceCredentials_v3.new("create_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -686,10 +686,10 @@ describe Google::Cloud::Monitoring::V3::MetricServiceClient do
         assert_equal(time_series, request.time_series)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_time_series, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_time_series, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockMetricServiceCredentials.new("create_time_series")
+      mock_credentials = MockMetricServiceCredentials_v3.new("create_time_series")
 
       Google::Monitoring::V3::MetricService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
