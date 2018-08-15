@@ -56,22 +56,6 @@ s.replace(
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/cloud-platform"].freeze')
 
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    [
-      'lib/google/cloud/trace/v1/credentials.rb',
-      'lib/google/cloud/trace/v2/credentials.rb'
-    ],
-    'TRACE_KEYFILE\\n(\s+)TRACE_CREDENTIALS\n',
-    'TRACE_CREDENTIALS\\n\\1TRACE_KEYFILE\n')
-s.replace(
-    [
-      'lib/google/cloud/trace/v1/credentials.rb',
-      'lib/google/cloud/trace/v2/credentials.rb'
-    ],
-    'TRACE_KEYFILE_JSON\\n(\s+)TRACE_CREDENTIALS_JSON\n',
-    'TRACE_CREDENTIALS_JSON\\n\\1TRACE_KEYFILE_JSON\n')
-
 # TEMPORARY: Get rid of devsite markup
 s.replace(
     [

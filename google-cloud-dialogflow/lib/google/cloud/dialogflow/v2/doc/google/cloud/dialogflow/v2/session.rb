@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Dialogflow
-      ##
-      # # Dialogflow API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [SessionsClient][] | A session represents an interaction with a user. |
-      # | [Data Types][] | Data types for Google::Cloud::Dialogflow::V2 |
-      #
-      # [SessionsClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/sessionsclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dialogflow/latest/google/cloud/dialogflow/v2/datatypes
-      #
       module V2
         # The request to detect user's intent.
         # @!attribute [rw] session

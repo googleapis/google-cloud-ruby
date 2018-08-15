@@ -15,17 +15,6 @@
 module Google
   module Devtools
     module Clouderrorreporting
-      ##
-      # # Stackdriver Error Reporting API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [ErrorStatsServiceClient][] | An API for retrieving and managing error statistics as well as data for individual events. |
-      # | [Data Types][] | Data types for Google::Cloud::ErrorReporting::V1beta1 |
-      #
-      # [ErrorStatsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorstatsserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/datatypes
-      #
       module V1beta1
         # Specifies a set of +ErrorGroupStats+ to return.
         # @!attribute [rw] project_name

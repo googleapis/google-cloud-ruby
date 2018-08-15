@@ -14,17 +14,6 @@
 
 module Google
   module Datastore
-    ##
-    # # Google Cloud Datastore API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [DatastoreClient][] | Each RPC normalizes the partition IDs of the keys in its input entities, and always returns entities with keys with normalized partition IDs. |
-    # | [Data Types][] | Data types for Google::Cloud::Datastore::V1 |
-    #
-    # [DatastoreClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest/google/datastore/v1/datastoreclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-datastore/latest/google/datastore/v1/datatypes
-    #
     module V1
       # The request for {Google::Datastore::V1::Datastore::Lookup Datastore::Lookup}.
       # @!attribute [rw] project_id

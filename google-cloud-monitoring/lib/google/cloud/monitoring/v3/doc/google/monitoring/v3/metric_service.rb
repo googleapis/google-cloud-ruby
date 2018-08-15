@@ -14,17 +14,6 @@
 
 module Google
   module Monitoring
-    ##
-    # # Stackdriver Monitoring API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [MetricServiceClient][] | Manages metric descriptors, monitored resource descriptors, and time series data. |
-    # | [Data Types][] | Data types for Google::Cloud::Monitoring::V3 |
-    #
-    # [MetricServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/metricserviceclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/datatypes
-    #
     module V3
       # The +ListMonitoredResourceDescriptors+ request.
       # @!attribute [rw] name

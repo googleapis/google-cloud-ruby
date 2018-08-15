@@ -37,13 +37,3 @@ s.copy(v1beta1_library / 'lib/google/devtools/clouderrorreporting/v1beta1')
 # PERMANENT: We don't want the generated overview.rb file because we have our
 # own toplevel docs for the handwritten layer.
 os.remove('lib/google/cloud/error_reporting/v1beta1/doc/overview.rb')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/error_reporting/v1beta1/credentials.rb',
-    'ERROR_REPORTING_KEYFILE\\n(\s+)ERROR_REPORTING_CREDENTIALS\n',
-    'ERROR_REPORTING_CREDENTIALS\\n\\1ERROR_REPORTING_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/error_reporting/v1beta1/credentials.rb',
-    'ERROR_REPORTING_KEYFILE_JSON\\n(\s+)ERROR_REPORTING_CREDENTIALS_JSON\n',
-    'ERROR_REPORTING_CREDENTIALS_JSON\\n\\1ERROR_REPORTING_KEYFILE_JSON\n')

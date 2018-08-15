@@ -15,17 +15,6 @@
 module Google
   module Devtools
     module Cloudtrace
-      ##
-      # # Stackdriver Trace API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [TraceServiceClient][] | This file describes an API for collecting and viewing traces and spans within a trace. |
-      # | [Data Types][] | Data types for Google::Cloud::Trace::V1 |
-      #
-      # [TraceServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace/latest/google/devtools/cloudtrace/v1/traceserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-trace/latest/google/devtools/cloudtrace/v1/datatypes
-      #
       module V1
         # A trace describes how long it takes for an application to perform an
         # operation. It consists of a set of spans, each of which represent a single

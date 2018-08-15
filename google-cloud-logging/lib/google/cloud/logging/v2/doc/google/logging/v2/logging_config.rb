@@ -14,17 +14,6 @@
 
 module Google
   module Logging
-    ##
-    # # Stackdriver Logging API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [ConfigServiceV2Client][] | Service for configuring sinks used to export log entries outside of Stackdriver Logging. |
-    # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
-    #
-    # [ConfigServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/configservicev2client
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/datatypes
-    #
     module V2
       # Describes a sink used to export log entries to one of the following
       # destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a

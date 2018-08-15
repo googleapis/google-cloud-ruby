@@ -21,10 +21,10 @@ require "google/cloud/firestore/v1beta1"
 require "google/cloud/firestore/v1beta1/firestore_client"
 require "google/firestore/v1beta1/firestore_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1beta1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1beta1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockFirestoreCredentials < Google::Cloud::Firestore::V1beta1::Credentials
+class MockFirestoreCredentials_v1beta1 < Google::Cloud::Firestore::V1beta1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
 
   describe 'get_document' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#get_document."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#get_document."
 
     it 'invokes get_document without error' do
       # Create request parameters
@@ -85,10 +85,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("get_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("get_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -120,10 +120,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("get_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("get_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -142,7 +142,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'list_documents' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#list_documents."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#list_documents."
 
     it 'invokes list_documents without error' do
       # Create request parameters
@@ -163,10 +163,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(collection_id, request.collection_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_documents, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("list_documents")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("list_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -196,10 +196,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(collection_id, request.collection_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_documents, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("list_documents")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("list_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -218,7 +218,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'create_document' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#create_document."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#create_document."
 
     it 'invokes create_document without error' do
       # Create request parameters
@@ -241,10 +241,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1beta1::Document), request.document)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("create_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("create_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -292,10 +292,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1beta1::Document), request.document)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("create_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("create_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -319,7 +319,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'update_document' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#update_document."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#update_document."
 
     it 'invokes update_document without error' do
       # Create request parameters
@@ -338,10 +338,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Firestore::V1beta1::DocumentMask), request.update_mask)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:update_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("update_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("update_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -375,10 +375,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Firestore::V1beta1::DocumentMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:update_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("update_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("update_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -397,7 +397,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'delete_document' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#delete_document."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#delete_document."
 
     it 'invokes delete_document without error' do
       # Create request parameters
@@ -409,10 +409,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:delete_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("delete_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("delete_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -444,10 +444,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_document, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:delete_document, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("delete_document")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("delete_document")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -466,7 +466,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'batch_get_documents' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#batch_get_documents."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#batch_get_documents."
 
     it 'invokes batch_get_documents without error' do
       # Create request parameters
@@ -486,10 +486,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(documents, request.documents)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:batch_get_documents, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:batch_get_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("batch_get_documents")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("batch_get_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -517,10 +517,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(documents, request.documents)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_get_documents, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:batch_get_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("batch_get_documents")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("batch_get_documents")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -539,7 +539,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'begin_transaction' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#begin_transaction."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#begin_transaction."
 
     it 'invokes begin_transaction without error' do
       # Create request parameters
@@ -556,10 +556,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_database, request.database)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:begin_transaction, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:begin_transaction, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("begin_transaction")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("begin_transaction")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -591,10 +591,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_database, request.database)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:begin_transaction, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:begin_transaction, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("begin_transaction")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("begin_transaction")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -613,7 +613,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'commit' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#commit."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#commit."
 
     it 'invokes commit without error' do
       # Create request parameters
@@ -634,10 +634,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(writes, request.writes)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:commit, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:commit, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("commit")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("commit")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -674,10 +674,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(writes, request.writes)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:commit, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:commit, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("commit")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("commit")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -696,7 +696,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'rollback' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#rollback."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#rollback."
 
     it 'invokes rollback without error' do
       # Create request parameters
@@ -710,10 +710,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(transaction, request.transaction)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:rollback, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:rollback, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("rollback")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("rollback")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -747,10 +747,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(transaction, request.transaction)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:rollback, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:rollback, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("rollback")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("rollback")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -769,7 +769,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'run_query' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#run_query."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#run_query."
 
     it 'invokes run_query without error' do
       # Create request parameters
@@ -787,10 +787,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:run_query, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:run_query, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("run_query")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("run_query")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -816,10 +816,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:run_query, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:run_query, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("run_query")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("run_query")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -838,7 +838,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'write' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#write."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#write."
 
     it 'invokes write without error' do
       # Create request parameters
@@ -858,10 +858,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_database, request.database)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:write, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:write, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("write")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("write")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -889,10 +889,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_database, request.database)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:write, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:write, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("write")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("write")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -911,7 +911,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'listen' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#listen."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#listen."
 
     it 'invokes listen without error' do
       # Create request parameters
@@ -929,10 +929,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_database, request.database)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:listen, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:listen, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("listen")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("listen")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -960,10 +960,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_database, request.database)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:listen, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:listen, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("listen")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("listen")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -982,7 +982,7 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
   end
 
   describe 'list_collection_ids' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#list_collection_ids."
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Firestore::V1beta1::FirestoreClient#list_collection_ids."
 
     it 'invokes list_collection_ids without error' do
       # Create request parameters
@@ -1001,10 +1001,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_collection_ids, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_collection_ids, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("list_collection_ids")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("list_collection_ids")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do
@@ -1032,10 +1032,10 @@ describe Google::Cloud::Firestore::V1beta1::FirestoreClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_collection_ids, mock_method)
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_collection_ids, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreCredentials.new("list_collection_ids")
+      mock_credentials = MockFirestoreCredentials_v1beta1.new("list_collection_ids")
 
       Google::Firestore::V1beta1::Firestore::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::V1beta1::Credentials.stub(:default, mock_credentials) do

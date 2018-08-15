@@ -21,10 +21,10 @@ require "google/cloud/bigtable/v2"
 require "google/cloud/bigtable/v2/bigtable_client"
 require "google/bigtable/v2/bigtable_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockBigtableCredentials < Google::Cloud::Bigtable::V2::Credentials
+class MockBigtableCredentials_v2 < Google::Cloud::Bigtable::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Bigtable::V2::BigtableClient do
 
   describe 'read_rows' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#read_rows."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#read_rows."
 
     it 'invokes read_rows without error' do
       # Create request parameters
@@ -85,10 +85,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(formatted_table_name, request.table_name)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:read_rows, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:read_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("read_rows")
+      mock_credentials = MockBigtableCredentials_v2.new("read_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -114,10 +114,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(formatted_table_name, request.table_name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:read_rows, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:read_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("read_rows")
+      mock_credentials = MockBigtableCredentials_v2.new("read_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -136,7 +136,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
   end
 
   describe 'sample_row_keys' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#sample_row_keys."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#sample_row_keys."
 
     it 'invokes sample_row_keys without error' do
       # Create request parameters
@@ -154,10 +154,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(formatted_table_name, request.table_name)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:sample_row_keys, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:sample_row_keys, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("sample_row_keys")
+      mock_credentials = MockBigtableCredentials_v2.new("sample_row_keys")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -183,10 +183,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(formatted_table_name, request.table_name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:sample_row_keys, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:sample_row_keys, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("sample_row_keys")
+      mock_credentials = MockBigtableCredentials_v2.new("sample_row_keys")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
   end
 
   describe 'mutate_row' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#mutate_row."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#mutate_row."
 
     it 'invokes mutate_row without error' do
       # Create request parameters
@@ -228,10 +228,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(mutations, request.mutations)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:mutate_row, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("mutate_row")
+      mock_credentials = MockBigtableCredentials_v2.new("mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -278,10 +278,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(mutations, request.mutations)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:mutate_row, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("mutate_row")
+      mock_credentials = MockBigtableCredentials_v2.new("mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -304,7 +304,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
   end
 
   describe 'mutate_rows' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#mutate_rows."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#mutate_rows."
 
     it 'invokes mutate_rows without error' do
       # Create request parameters
@@ -325,10 +325,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(entries, request.entries)
         OpenStruct.new(execute: [expected_response])
       end
-      mock_stub = MockGrpcClientStub.new(:mutate_rows, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:mutate_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("mutate_rows")
+      mock_credentials = MockBigtableCredentials_v2.new("mutate_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -359,10 +359,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(entries, request.entries)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:mutate_rows, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:mutate_rows, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("mutate_rows")
+      mock_credentials = MockBigtableCredentials_v2.new("mutate_rows")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -381,7 +381,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
   end
 
   describe 'check_and_mutate_row' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#check_and_mutate_row."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#check_and_mutate_row."
 
     it 'invokes check_and_mutate_row without error' do
       # Create request parameters
@@ -400,10 +400,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(row_key, request.row_key)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:check_and_mutate_row, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:check_and_mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("check_and_mutate_row")
+      mock_credentials = MockBigtableCredentials_v2.new("check_and_mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -437,10 +437,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(row_key, request.row_key)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:check_and_mutate_row, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:check_and_mutate_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("check_and_mutate_row")
+      mock_credentials = MockBigtableCredentials_v2.new("check_and_mutate_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -459,7 +459,7 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
   end
 
   describe 'read_modify_write_row' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#read_modify_write_row."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::V2::BigtableClient#read_modify_write_row."
 
     it 'invokes read_modify_write_row without error' do
       # Create request parameters
@@ -482,10 +482,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(rules, request.rules)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:read_modify_write_row, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:read_modify_write_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("read_modify_write_row")
+      mock_credentials = MockBigtableCredentials_v2.new("read_modify_write_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do
@@ -532,10 +532,10 @@ describe Google::Cloud::Bigtable::V2::BigtableClient do
         assert_equal(rules, request.rules)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:read_modify_write_row, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:read_modify_write_row, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableCredentials.new("read_modify_write_row")
+      mock_credentials = MockBigtableCredentials_v2.new("read_modify_write_row")
 
       Google::Bigtable::V2::Bigtable::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::V2::Credentials.stub(:default, mock_credentials) do

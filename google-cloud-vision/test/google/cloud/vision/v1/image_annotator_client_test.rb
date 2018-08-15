@@ -22,10 +22,10 @@ require "google/cloud/vision/v1/image_annotator_client"
 require "google/cloud/vision/v1/image_annotator_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockImageAnnotatorCredentials < Google::Cloud::Vision::V1::Credentials
+class MockImageAnnotatorCredentials_v1 < Google::Cloud::Vision::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
 
   describe 'batch_annotate_images' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Vision::V1::ImageAnnotatorClient#batch_annotate_images."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ImageAnnotatorClient#batch_annotate_images."
 
     it 'invokes batch_annotate_images without error' do
       # Create request parameters
@@ -88,10 +88,10 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
         assert_equal(requests, request.requests)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:batch_annotate_images, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:batch_annotate_images, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockImageAnnotatorCredentials.new("batch_annotate_images")
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("batch_annotate_images")
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
@@ -126,10 +126,10 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
         assert_equal(requests, request.requests)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:batch_annotate_images, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:batch_annotate_images, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockImageAnnotatorCredentials.new("batch_annotate_images")
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("batch_annotate_images")
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
@@ -148,7 +148,7 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
   end
 
   describe 'async_batch_annotate_files' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Vision::V1::ImageAnnotatorClient#async_batch_annotate_files."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Vision::V1::ImageAnnotatorClient#async_batch_annotate_files."
 
     it 'invokes async_batch_annotate_files without error' do
       # Create request parameters
@@ -174,10 +174,10 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
         assert_equal(requests, request.requests)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:async_batch_annotate_files, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:async_batch_annotate_files, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockImageAnnotatorCredentials.new("async_batch_annotate_files")
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("async_batch_annotate_files")
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
@@ -215,10 +215,10 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
         assert_equal(requests, request.requests)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:async_batch_annotate_files, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:async_batch_annotate_files, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockImageAnnotatorCredentials.new("async_batch_annotate_files")
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("async_batch_annotate_files")
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do
@@ -247,10 +247,10 @@ describe Google::Cloud::Vision::V1::ImageAnnotatorClient do
         assert_equal(requests, request.requests)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:async_batch_annotate_files, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:async_batch_annotate_files, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockImageAnnotatorCredentials.new("async_batch_annotate_files")
+      mock_credentials = MockImageAnnotatorCredentials_v1.new("async_batch_annotate_files")
 
       Google::Cloud::Vision::V1::ImageAnnotator::Stub.stub(:new, mock_stub) do
         Google::Cloud::Vision::V1::Credentials.stub(:default, mock_credentials) do

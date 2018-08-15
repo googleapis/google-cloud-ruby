@@ -48,67 +48,7 @@ s.copy(v1beta_library / 'lib/google/cloud/os_login/v1beta.rb')
 s.copy(v1beta_library / 'lib/google/cloud/oslogin/v1beta')
 s.copy(v1beta_library / 'test/google/cloud/os_login/v1beta')
 
-# https://github.com/googleapis/gapic-generator/issues/2117
-s.replace(
-    'test/google/cloud/os_login/v1/os_login_service_client_test.rb',
-    'CustomTestError([^_])', 'CustomTestError_v1\\1')
-s.replace(
-    'test/google/cloud/os_login/v1/os_login_service_client_test.rb',
-    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1\\1')
-s.replace(
-    'test/google/cloud/os_login/v1/os_login_service_client_test.rb',
-    'MockOsLoginServiceCredentials([^_])',
-    'MockOsLoginServiceCredentials_v1\\1')
-s.replace(
-    'test/google/cloud/os_login/v1beta/os_login_service_client_test.rb',
-    'CustomTestError([^_])', 'CustomTestError_v1beta\\1')
-s.replace(
-    'test/google/cloud/os_login/v1beta/os_login_service_client_test.rb',
-    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1beta\\1')
-s.replace(
-    'test/google/cloud/os_login/v1beta/os_login_service_client_test.rb',
-    'MockOsLoginServiceCredentials([^_])',
-    'MockOsLoginServiceCredentials_v1beta\\1')
-
-# https://github.com/googleapis/gapic-generator/issues/2174
-s.replace(
-    'lib/google/cloud/os_login.rb',
-    'File\.join\(dir, "\.rb"\)',
-    'dir + ".rb"')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    [
-      'lib/google/cloud/os_login/v1/credentials.rb',
-      'lib/google/cloud/os_login/v1beta/credentials.rb'
-    ],
-    'OS_LOGIN_KEYFILE\\n(\s+)OS_LOGIN_CREDENTIALS\n',
-    'OS_LOGIN_CREDENTIALS\\n\\1OS_LOGIN_KEYFILE\n')
-s.replace(
-    [
-      'lib/google/cloud/os_login/v1/credentials.rb',
-      'lib/google/cloud/os_login/v1beta/credentials.rb'
-    ],
-    'OS_LOGIN_KEYFILE_JSON\\n(\s+)OS_LOGIN_CREDENTIALS_JSON\n',
-    'OS_LOGIN_CREDENTIALS_JSON\\n\\1OS_LOGIN_KEYFILE_JSON\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    '.yardopts',
-    '\n--markup markdown\n\n',
-    '\n--markup markdown\n--markup-provider redcarpet\n\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    'google-cloud-os_login.gemspec',
-    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
-    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
-s.replace(
-    'google-cloud-os_login.gemspec',
-    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
-    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
-
-# https://github.com/googleapis/gapic-generator/issues/2195
+# PERMANENT: API name for oslogin
 s.replace(
     [
       'README.md',
@@ -118,8 +58,7 @@ s.replace(
       'lib/google/cloud/os_login/v1/doc/overview.rb',
       'lib/google/cloud/os_login/v1beta/doc/overview.rb'
     ],
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/os-login\\)',
-    '(https://console.cloud.google.com/apis/library/oslogin.googleapis.com)')
+    '/os-login\\.googleapis\\.com', '/oslogin.googleapis.com')
 
 # https://github.com/googleapis/gapic-generator/issues/2196
 s.replace(

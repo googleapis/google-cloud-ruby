@@ -15,17 +15,6 @@
 module Google
   module Devtools
     module Clouderrorreporting
-      ##
-      # # Stackdriver Error Reporting API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [ReportErrorsServiceClient][] | An API for reporting error events. |
-      # | [Data Types][] | Data types for Google::Cloud::ErrorReporting::V1beta1 |
-      #
-      # [ReportErrorsServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/reporterrorsserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/datatypes
-      #
       module V1beta1
         # A request for reporting an individual error event.
         # @!attribute [rw] project_name

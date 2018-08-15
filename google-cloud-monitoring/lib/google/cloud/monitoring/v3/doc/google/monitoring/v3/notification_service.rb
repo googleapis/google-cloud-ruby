@@ -14,17 +14,6 @@
 
 module Google
   module Monitoring
-    ##
-    # # Stackdriver Monitoring API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [NotificationChannelServiceClient][] | The Notification Channel API provides access to configuration that controls how messages related to incidents are sent. |
-    # | [Data Types][] | Data types for Google::Cloud::Monitoring::V3 |
-    #
-    # [NotificationChannelServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/notificationchannelserviceclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/datatypes
-    #
     module V3
       # The +ListNotificationChannelDescriptors+ request.
       # @!attribute [rw] name

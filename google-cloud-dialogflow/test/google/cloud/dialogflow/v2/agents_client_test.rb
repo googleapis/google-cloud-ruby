@@ -22,10 +22,10 @@ require "google/cloud/dialogflow/v2/agents_client"
 require "google/cloud/dialogflow/v2/agent_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockAgentsCredentials < Google::Cloud::Dialogflow::V2::Credentials
+class MockAgentsCredentials_v2 < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Dialogflow::V2::AgentsClient do
 
   describe 'get_agent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#get_agent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#get_agent."
 
     it 'invokes get_agent without error' do
       # Create request parameters
@@ -102,10 +102,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("get_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("get_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -137,10 +137,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("get_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("get_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -159,7 +159,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
   end
 
   describe 'search_agents' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#search_agents."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#search_agents."
 
     it 'invokes search_agents without error' do
       # Create request parameters
@@ -178,10 +178,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:search_agents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:search_agents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("search_agents")
+      mock_credentials = MockAgentsCredentials_v2.new("search_agents")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -209,10 +209,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:search_agents, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:search_agents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("search_agents")
+      mock_credentials = MockAgentsCredentials_v2.new("search_agents")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -231,7 +231,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
   end
 
   describe 'train_agent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#train_agent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#train_agent."
 
     it 'invokes train_agent without error' do
       # Create request parameters
@@ -254,10 +254,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:train_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:train_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("train_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("train_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -292,10 +292,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:train_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:train_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("train_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("train_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -321,10 +321,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:train_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:train_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("train_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("train_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -343,7 +343,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
   end
 
   describe 'export_agent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#export_agent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#export_agent."
 
     it 'invokes export_agent without error' do
       # Create request parameters
@@ -367,10 +367,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:export_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:export_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("export_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("export_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -405,10 +405,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:export_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:export_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("export_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("export_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -434,10 +434,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:export_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:export_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("export_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("export_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -456,7 +456,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
   end
 
   describe 'import_agent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#import_agent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#import_agent."
 
     it 'invokes import_agent without error' do
       # Create request parameters
@@ -479,10 +479,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:import_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:import_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("import_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("import_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -517,10 +517,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:import_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:import_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("import_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("import_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -546,10 +546,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:import_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:import_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("import_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("import_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -568,7 +568,7 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
   end
 
   describe 'restore_agent' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#restore_agent."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#restore_agent."
 
     it 'invokes restore_agent without error' do
       # Create request parameters
@@ -591,10 +591,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:restore_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:restore_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("restore_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("restore_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -629,10 +629,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:restore_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:restore_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("restore_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("restore_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -658,10 +658,10 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:restore_agent, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:restore_agent, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockAgentsCredentials.new("restore_agent")
+      mock_credentials = MockAgentsCredentials_v2.new("restore_agent")
 
       Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do

@@ -21,10 +21,10 @@ require "google/cloud/container"
 require "google/cloud/container/v1/cluster_manager_client"
 require "google/container/v1/cluster_service_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockClusterManagerCredentials < Google::Cloud::Container::V1::Credentials
+class MockClusterManagerCredentials_v1 < Google::Cloud::Container::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Container::V1::ClusterManagerClient do
 
   describe 'list_clusters' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#list_clusters."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#list_clusters."
 
     it 'invokes list_clusters without error' do
       # Create request parameters
@@ -86,10 +86,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("list_clusters")
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_clusters")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -123,10 +123,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("list_clusters")
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_clusters")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -145,7 +145,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'get_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_cluster."
 
     it 'invokes get_cluster without error' do
       # Create request parameters
@@ -210,10 +210,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -257,10 +257,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -283,7 +283,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'create_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#create_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#create_cluster."
 
     it 'invokes create_cluster without error' do
       # Create request parameters
@@ -320,10 +320,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Container::V1::Cluster), request.cluster)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("create_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("create_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -367,10 +367,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Container::V1::Cluster), request.cluster)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("create_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("create_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -393,7 +393,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'update_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#update_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#update_cluster."
 
     it 'invokes update_cluster without error' do
       # Create request parameters
@@ -432,10 +432,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(update, Google::Container::V1::ClusterUpdate), request.update)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("update_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("update_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -483,10 +483,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(update, Google::Container::V1::ClusterUpdate), request.update)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("update_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("update_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -510,7 +510,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'update_node_pool' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#update_node_pool."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#update_node_pool."
 
     it 'invokes update_node_pool without error' do
       # Create request parameters
@@ -553,10 +553,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(image_type, request.image_type)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("update_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("update_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -612,10 +612,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(image_type, request.image_type)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("update_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("update_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -641,7 +641,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_node_pool_autoscaling' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_node_pool_autoscaling."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_node_pool_autoscaling."
 
     it 'invokes set_node_pool_autoscaling without error' do
       # Create request parameters
@@ -682,10 +682,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(autoscaling, Google::Container::V1::NodePoolAutoscaling), request.autoscaling)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_node_pool_autoscaling, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_node_pool_autoscaling, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_node_pool_autoscaling")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_node_pool_autoscaling")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -737,10 +737,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(autoscaling, Google::Container::V1::NodePoolAutoscaling), request.autoscaling)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_node_pool_autoscaling, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_node_pool_autoscaling, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_node_pool_autoscaling")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_node_pool_autoscaling")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -765,7 +765,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_logging_service' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_logging_service."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_logging_service."
 
     it 'invokes set_logging_service without error' do
       # Create request parameters
@@ -804,10 +804,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(logging_service, request.logging_service)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_logging_service, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_logging_service, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_logging_service")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_logging_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -855,10 +855,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(logging_service, request.logging_service)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_logging_service, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_logging_service, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_logging_service")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_logging_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -882,7 +882,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_monitoring_service' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_monitoring_service."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_monitoring_service."
 
     it 'invokes set_monitoring_service without error' do
       # Create request parameters
@@ -921,10 +921,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(monitoring_service, request.monitoring_service)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_monitoring_service, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_monitoring_service, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_monitoring_service")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_monitoring_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -972,10 +972,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(monitoring_service, request.monitoring_service)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_monitoring_service, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_monitoring_service, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_monitoring_service")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_monitoring_service")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -999,7 +999,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_addons_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_addons_config."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_addons_config."
 
     it 'invokes set_addons_config without error' do
       # Create request parameters
@@ -1038,10 +1038,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(addons_config, Google::Container::V1::AddonsConfig), request.addons_config)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_addons_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_addons_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_addons_config")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_addons_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1089,10 +1089,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(addons_config, Google::Container::V1::AddonsConfig), request.addons_config)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_addons_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_addons_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_addons_config")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_addons_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1116,7 +1116,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_locations' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_locations."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_locations."
 
     it 'invokes set_locations without error' do
       # Create request parameters
@@ -1155,10 +1155,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(locations, request.locations)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_locations, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_locations, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_locations")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_locations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1206,10 +1206,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(locations, request.locations)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_locations, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_locations, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_locations")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_locations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1233,7 +1233,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'update_master' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#update_master."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#update_master."
 
     it 'invokes update_master without error' do
       # Create request parameters
@@ -1272,10 +1272,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(master_version, request.master_version)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_master, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_master, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("update_master")
+      mock_credentials = MockClusterManagerCredentials_v1.new("update_master")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1323,10 +1323,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(master_version, request.master_version)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_master, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_master, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("update_master")
+      mock_credentials = MockClusterManagerCredentials_v1.new("update_master")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1350,7 +1350,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_master_auth' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_master_auth."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_master_auth."
 
     it 'invokes set_master_auth without error' do
       # Create request parameters
@@ -1391,10 +1391,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(update, Google::Container::V1::MasterAuth), request.update)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_master_auth, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_master_auth, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_master_auth")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_master_auth")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1446,10 +1446,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(update, Google::Container::V1::MasterAuth), request.update)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_master_auth, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_master_auth, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_master_auth")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_master_auth")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1474,7 +1474,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'delete_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#delete_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#delete_cluster."
 
     it 'invokes delete_cluster without error' do
       # Create request parameters
@@ -1511,10 +1511,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("delete_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("delete_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1558,10 +1558,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("delete_cluster")
+      mock_credentials = MockClusterManagerCredentials_v1.new("delete_cluster")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1584,7 +1584,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'list_operations' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#list_operations."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#list_operations."
 
     it 'invokes list_operations without error' do
       # Create request parameters
@@ -1602,10 +1602,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_operations, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_operations, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("list_operations")
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_operations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1639,10 +1639,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_operations, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_operations, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("list_operations")
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_operations")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1661,7 +1661,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'get_operation' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_operation."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_operation."
 
     it 'invokes get_operation without error' do
       # Create request parameters
@@ -1698,10 +1698,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(operation_id, request.operation_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_operation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_operation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_operation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1745,10 +1745,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(operation_id, request.operation_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_operation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_operation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_operation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1771,7 +1771,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'cancel_operation' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#cancel_operation."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#cancel_operation."
 
     it 'invokes cancel_operation without error' do
       # Create request parameters
@@ -1787,10 +1787,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(operation_id, request.operation_id)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_operation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:cancel_operation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("cancel_operation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("cancel_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1834,10 +1834,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(operation_id, request.operation_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:cancel_operation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:cancel_operation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("cancel_operation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("cancel_operation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1860,7 +1860,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'get_server_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_server_config."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_server_config."
 
     it 'invokes get_server_config without error' do
       # Create request parameters
@@ -1880,10 +1880,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_server_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_server_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_server_config")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_server_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1917,10 +1917,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(zone, request.zone)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_server_config, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_server_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_server_config")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_server_config")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -1939,7 +1939,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'list_node_pools' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#list_node_pools."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#list_node_pools."
 
     it 'invokes list_node_pools without error' do
       # Create request parameters
@@ -1959,10 +1959,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_node_pools, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_node_pools, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("list_node_pools")
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_node_pools")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2006,10 +2006,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_node_pools, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_node_pools, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("list_node_pools")
+      mock_credentials = MockClusterManagerCredentials_v1.new("list_node_pools")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2032,7 +2032,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'get_node_pool' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_node_pool."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#get_node_pool."
 
     it 'invokes get_node_pool without error' do
       # Create request parameters
@@ -2065,10 +2065,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_pool_id, request.node_pool_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2116,10 +2116,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_pool_id, request.node_pool_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("get_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("get_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2143,7 +2143,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'create_node_pool' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#create_node_pool."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#create_node_pool."
 
     it 'invokes create_node_pool without error' do
       # Create request parameters
@@ -2182,10 +2182,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(node_pool, Google::Container::V1::NodePool), request.node_pool)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("create_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("create_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2233,10 +2233,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(node_pool, Google::Container::V1::NodePool), request.node_pool)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("create_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("create_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2260,7 +2260,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'delete_node_pool' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#delete_node_pool."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#delete_node_pool."
 
     it 'invokes delete_node_pool without error' do
       # Create request parameters
@@ -2299,10 +2299,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_pool_id, request.node_pool_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("delete_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("delete_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2350,10 +2350,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_pool_id, request.node_pool_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_node_pool, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_node_pool, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("delete_node_pool")
+      mock_credentials = MockClusterManagerCredentials_v1.new("delete_node_pool")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2377,7 +2377,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'rollback_node_pool_upgrade' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#rollback_node_pool_upgrade."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#rollback_node_pool_upgrade."
 
     it 'invokes rollback_node_pool_upgrade without error' do
       # Create request parameters
@@ -2416,10 +2416,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_pool_id, request.node_pool_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:rollback_node_pool_upgrade, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:rollback_node_pool_upgrade, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("rollback_node_pool_upgrade")
+      mock_credentials = MockClusterManagerCredentials_v1.new("rollback_node_pool_upgrade")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2467,10 +2467,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_pool_id, request.node_pool_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:rollback_node_pool_upgrade, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:rollback_node_pool_upgrade, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("rollback_node_pool_upgrade")
+      mock_credentials = MockClusterManagerCredentials_v1.new("rollback_node_pool_upgrade")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2494,7 +2494,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_node_pool_management' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_node_pool_management."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_node_pool_management."
 
     it 'invokes set_node_pool_management without error' do
       # Create request parameters
@@ -2535,10 +2535,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(management, Google::Container::V1::NodeManagement), request.management)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_node_pool_management, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_node_pool_management, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_node_pool_management")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_node_pool_management")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2590,10 +2590,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(management, Google::Container::V1::NodeManagement), request.management)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_node_pool_management, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_node_pool_management, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_node_pool_management")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_node_pool_management")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2618,7 +2618,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_labels' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_labels."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_labels."
 
     it 'invokes set_labels without error' do
       # Create request parameters
@@ -2659,10 +2659,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(label_fingerprint, request.label_fingerprint)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_labels, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_labels, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_labels")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_labels")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2714,10 +2714,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(label_fingerprint, request.label_fingerprint)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_labels, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_labels, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_labels")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_labels")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2742,7 +2742,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_legacy_abac' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_legacy_abac."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_legacy_abac."
 
     it 'invokes set_legacy_abac without error' do
       # Create request parameters
@@ -2781,10 +2781,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(enabled, request.enabled)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_legacy_abac, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_legacy_abac, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_legacy_abac")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_legacy_abac")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2832,10 +2832,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(enabled, request.enabled)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_legacy_abac, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_legacy_abac, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_legacy_abac")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_legacy_abac")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2859,7 +2859,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'start_ip_rotation' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#start_ip_rotation."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#start_ip_rotation."
 
     it 'invokes start_ip_rotation without error' do
       # Create request parameters
@@ -2896,10 +2896,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:start_ip_rotation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:start_ip_rotation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("start_ip_rotation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("start_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2943,10 +2943,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:start_ip_rotation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:start_ip_rotation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("start_ip_rotation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("start_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -2969,7 +2969,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'complete_ip_rotation' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#complete_ip_rotation."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#complete_ip_rotation."
 
     it 'invokes complete_ip_rotation without error' do
       # Create request parameters
@@ -3006,10 +3006,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:complete_ip_rotation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:complete_ip_rotation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("complete_ip_rotation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("complete_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -3053,10 +3053,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(cluster_id, request.cluster_id)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:complete_ip_rotation, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:complete_ip_rotation, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("complete_ip_rotation")
+      mock_credentials = MockClusterManagerCredentials_v1.new("complete_ip_rotation")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -3079,7 +3079,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_node_pool_size' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_node_pool_size."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_node_pool_size."
 
     it 'invokes set_node_pool_size without error' do
       # Create request parameters
@@ -3120,10 +3120,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_count, request.node_count)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_node_pool_size, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_node_pool_size, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_node_pool_size")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_node_pool_size")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -3175,10 +3175,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(node_count, request.node_count)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_node_pool_size, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_node_pool_size, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_node_pool_size")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_node_pool_size")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -3203,7 +3203,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_network_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_network_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_network_policy."
 
     it 'invokes set_network_policy without error' do
       # Create request parameters
@@ -3242,10 +3242,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(network_policy, Google::Container::V1::NetworkPolicy), request.network_policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_network_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_network_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_network_policy")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_network_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -3293,10 +3293,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(network_policy, Google::Container::V1::NetworkPolicy), request.network_policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_network_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_network_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_network_policy")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_network_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -3320,7 +3320,7 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
   end
 
   describe 'set_maintenance_policy' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_maintenance_policy."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Container::V1::ClusterManagerClient#set_maintenance_policy."
 
     it 'invokes set_maintenance_policy without error' do
       # Create request parameters
@@ -3359,10 +3359,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(maintenance_policy, Google::Container::V1::MaintenancePolicy), request.maintenance_policy)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:set_maintenance_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_maintenance_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_maintenance_policy")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_maintenance_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do
@@ -3410,10 +3410,10 @@ describe Google::Cloud::Container::V1::ClusterManagerClient do
         assert_equal(Google::Gax::to_proto(maintenance_policy, Google::Container::V1::MaintenancePolicy), request.maintenance_policy)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:set_maintenance_policy, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:set_maintenance_policy, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterManagerCredentials.new("set_maintenance_policy")
+      mock_credentials = MockClusterManagerCredentials_v1.new("set_maintenance_policy")
 
       Google::Container::V1::ClusterManager::Stub.stub(:new, mock_stub) do
         Google::Cloud::Container::V1::Credentials.stub(:default, mock_credentials) do

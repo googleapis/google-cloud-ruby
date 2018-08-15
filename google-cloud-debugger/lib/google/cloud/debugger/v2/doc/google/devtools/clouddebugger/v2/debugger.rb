@@ -15,17 +15,6 @@
 module Google
   module Devtools
     module Clouddebugger
-      ##
-      # # Stackdriver Debugger API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [Debugger2Client][] | The Debugger service provides the API that allows users to collect run-time information from a running application, without stopping or slowing it down and without modifying its state. |
-      # | [Data Types][] | Data types for Google::Cloud::Debugger::V2 |
-      #
-      # [Debugger2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/debugger2client
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/datatypes
-      #
       module V2
         # Request to set a breakpoint
         # @!attribute [rw] debuggee_id

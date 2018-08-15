@@ -43,13 +43,3 @@ s.replace(
     'lib/google/cloud/pubsub/v1/credentials.rb',
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/pubsub"].freeze')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/pubsub/v1/credentials.rb',
-    'PUBSUB_KEYFILE\\n(\s+)PUBSUB_CREDENTIALS\n',
-    'PUBSUB_CREDENTIALS\\n\\1PUBSUB_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/pubsub/v1/credentials.rb',
-    'PUBSUB_KEYFILE_JSON\\n(\s+)PUBSUB_CREDENTIALS_JSON\n',
-    'PUBSUB_CREDENTIALS_JSON\\n\\1PUBSUB_KEYFILE_JSON\n')

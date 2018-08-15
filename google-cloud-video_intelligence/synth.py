@@ -70,89 +70,7 @@ s.copy(v1beta2_library / 'lib/google/cloud/video_intelligence/v1beta2.rb')
 s.copy(v1beta2_library / 'lib/google/cloud/videointelligence/v1beta2')
 s.copy(v1beta2_library / 'test/google/cloud/video_intelligence/v1beta2')
 
-# https://github.com/googleapis/gapic-generator/issues/2117
-s.replace(
-    'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
-    'CustomTestError([^_])', 'CustomTestError_v1\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
-    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1/video_intelligence_service_client_test.rb',
-    'MockVideoIntelligenceServiceCredentials([^_])',
-    'MockVideoIntelligenceServiceCredentials_v1\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client_test.rb',
-    'CustomTestError([^_])', 'CustomTestError_v1beta1\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client_test.rb',
-    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1beta1\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1beta1/video_intelligence_service_client_test.rb',
-    'MockVideoIntelligenceServiceCredentials([^_])',
-    'MockVideoIntelligenceServiceCredentials_v1beta1\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client_test.rb',
-    'CustomTestError([^_])', 'CustomTestError_v1beta2\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client_test.rb',
-    'MockGrpcClientStub([^_])', 'MockGrpcClientStub_v1beta2\\1')
-s.replace(
-    'test/google/cloud/video_intelligence/v1beta2/video_intelligence_service_client_test.rb',
-    'MockVideoIntelligenceServiceCredentials([^_])',
-    'MockVideoIntelligenceServiceCredentials_v1beta2\\1')
-
-# https://github.com/googleapis/gapic-generator/issues/2174
-s.replace(
-    'lib/google/cloud/video_intelligence.rb',
-    'File\.join\(dir, "\.rb"\)',
-    'dir + ".rb"')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    [
-      'lib/google/cloud/video_intelligence/v1/credentials.rb',
-      'lib/google/cloud/video_intelligence/v1beta1/credentials.rb',
-      'lib/google/cloud/video_intelligence/v1beta2/credentials.rb'
-    ],
-    'VIDEO_INTELLIGENCE_KEYFILE\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS\n',
-    'VIDEO_INTELLIGENCE_CREDENTIALS\\n\\1VIDEO_INTELLIGENCE_KEYFILE\n')
-s.replace(
-    [
-      'lib/google/cloud/video_intelligence/v1/credentials.rb',
-      'lib/google/cloud/video_intelligence/v1beta1/credentials.rb',
-      'lib/google/cloud/video_intelligence/v1beta2/credentials.rb'
-    ],
-    'VIDEO_INTELLIGENCE_KEYFILE_JSON\\n(\s+)VIDEO_INTELLIGENCE_CREDENTIALS_JSON\n',
-    'VIDEO_INTELLIGENCE_CREDENTIALS_JSON\\n\\1VIDEO_INTELLIGENCE_KEYFILE_JSON\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2185
-s.replace(
-    'acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb',
-    'describe "VideoIntelligenceServiceSmokeTest"',
-    'describe "VideoIntelligenceServiceSmokeTest V1"')
-s.replace(
-    'acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb',
-    'video_intelligence_service_client = Google::Cloud::VideoIntelligence\\.new\n',
-    'video_intelligence_service_client = Google::Cloud::VideoIntelligence.new version: :v1\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    '.yardopts',
-    '\n--markup markdown\n\n',
-    '\n--markup markdown\n--markup-provider redcarpet\n\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2194
-s.replace(
-    'google-cloud-video_intelligence.gemspec',
-    '\n  gem\\.add_development_dependency "minitest", "~> ([\\d\\.]+)"\n  gem\\.add_development_dependency "rubocop"',
-    '\n  gem.add_development_dependency "minitest", "~> \\1"\n  gem.add_development_dependency "redcarpet", "~> 3.0"\n  gem.add_development_dependency "rubocop"')
-s.replace(
-    'google-cloud-video_intelligence.gemspec',
-    '\n  gem\\.add_development_dependency "simplecov", "~> ([\\d\\.]+)"\nend',
-    '\n  gem.add_development_dependency "simplecov", "~> \\1"\n  gem.add_development_dependency "yard", "~> 0.9"\nend')
-
-# https://github.com/googleapis/gapic-generator/issues/2195
+# PERMANENT: API name for videointelligence
 s.replace(
     [
       'README.md',
@@ -164,5 +82,4 @@ s.replace(
       'lib/google/cloud/video_intelligence/v1beta1/doc/overview.rb',
       'lib/google/cloud/video_intelligence/v1beta2/doc/overview.rb'
     ],
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/video-intelligence\\)',
-    '(https://console.cloud.google.com/apis/library/videointelligence.googleapis.com)')
+    '/video-intelligence\\.googleapis\\.com', '/videointelligence.googleapis.com')

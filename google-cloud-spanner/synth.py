@@ -37,13 +37,3 @@ s.copy(v1_library / 'lib/google/spanner/v1')
 # PERMANENT: We don't want the generated overview.rb file because we have our
 # own toplevel docs for the handwritten layer.
 os.remove('lib/google/cloud/spanner/v1/doc/overview.rb')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/spanner/v1/credentials.rb',
-    'SPANNER_KEYFILE\\n(\s+)SPANNER_CREDENTIALS\n',
-    'SPANNER_CREDENTIALS\\n\\1SPANNER_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/spanner/v1/credentials.rb',
-    'SPANNER_KEYFILE_JSON\\n(\s+)SPANNER_CREDENTIALS_JSON\n',
-    'SPANNER_CREDENTIALS_JSON\\n\\1SPANNER_KEYFILE_JSON\n')

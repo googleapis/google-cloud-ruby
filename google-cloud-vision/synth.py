@@ -54,19 +54,3 @@ s.replace(
     ],
     'Google::Cloud::Vision\\.new\\(version: :v1\\)',
     'Google::Cloud::Vision::V1.new')
-
-# https://github.com/googleapis/gapic-generator/issues/2182
-s.replace(
-    'lib/google/cloud/vision/v1/credentials.rb',
-    'VISION_KEYFILE\\n(\s+)VISION_CREDENTIALS\n',
-    'VISION_CREDENTIALS\\n\\1VISION_KEYFILE\n')
-s.replace(
-    'lib/google/cloud/vision/v1/credentials.rb',
-    'VISION_KEYFILE_JSON\\n(\s+)VISION_CREDENTIALS_JSON\n',
-    'VISION_CREDENTIALS_JSON\\n\\1VISION_KEYFILE_JSON\n')
-
-# https://github.com/googleapis/gapic-generator/issues/2195
-s.replace(
-    'lib/google/cloud/vision/v1.rb',
-    '\\(https://console\\.cloud\\.google\\.com/apis/api/vision\\)',
-    '(https://console.cloud.google.com/apis/library/vision.googleapis.com)')

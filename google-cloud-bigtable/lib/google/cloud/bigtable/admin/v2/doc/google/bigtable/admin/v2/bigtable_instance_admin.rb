@@ -15,17 +15,6 @@
 module Google
   module Bigtable
     module Admin
-      ##
-      # # Cloud Bigtable Admin API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [BigtableInstanceAdminClient][] | Service for creating, configuring, and deleting Cloud Bigtable Instances and Clusters. |
-      # | [Data Types][] | Data types for Google::Cloud::Bigtable::Admin::V2 |
-      #
-      # [BigtableInstanceAdminClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/bigtableinstanceadminclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable-admin/latest/google/bigtable/admin/v2/datatypes
-      #
       module V2
         # Request message for BigtableInstanceAdmin.CreateInstance.
         # @!attribute [rw] parent

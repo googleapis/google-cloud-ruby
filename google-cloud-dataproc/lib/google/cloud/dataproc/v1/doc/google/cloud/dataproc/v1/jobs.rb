@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Dataproc
-      ##
-      # # Google Cloud Dataproc API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [JobControllerClient][] | The JobController provides methods to manage jobs. |
-      # | [Data Types][] | Data types for Google::Cloud::Dataproc::V1 |
-      #
-      # [JobControllerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1/jobcontrollerclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1/datatypes
-      #
       module V1
         # The runtime logging config of the job.
         # @!attribute [rw] driver_log_levels

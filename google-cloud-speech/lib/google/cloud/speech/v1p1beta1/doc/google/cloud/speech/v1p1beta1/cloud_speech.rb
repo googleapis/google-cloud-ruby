@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Speech
-      ##
-      # # Cloud Speech API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [SpeechClient][] | Service that implements Google Cloud Speech API. |
-      # | [Data Types][] | Data types for Google::Cloud::Speech::V1p1beta1 |
-      #
-      # [SpeechClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest/google/cloud/speech/v1p1beta1/speechclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-speech/latest/google/cloud/speech/v1p1beta1/datatypes
-      #
       module V1p1beta1
         # The top-level message sent by the client for the +Recognize+ method.
         # @!attribute [rw] config

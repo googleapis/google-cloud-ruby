@@ -21,10 +21,10 @@ require "google/cloud/monitoring"
 require "google/cloud/monitoring/v3/notification_channel_service_client"
 require "google/monitoring/v3/notification_service_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v3 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v3
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockNotificationChannelServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
+class MockNotificationChannelServiceCredentials_v3 < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
 
   describe 'list_notification_channel_descriptors' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#list_notification_channel_descriptors."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#list_notification_channel_descriptors."
 
     it 'invokes list_notification_channel_descriptors without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_notification_channel_descriptors, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_notification_channel_descriptors, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channel_descriptors")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("list_notification_channel_descriptors")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -118,10 +118,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_notification_channel_descriptors, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_notification_channel_descriptors, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channel_descriptors")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("list_notification_channel_descriptors")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -140,7 +140,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
   end
 
   describe 'get_notification_channel_descriptor' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#get_notification_channel_descriptor."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#get_notification_channel_descriptor."
 
     it 'invokes get_notification_channel_descriptor without error' do
       # Create request parameters
@@ -165,10 +165,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_notification_channel_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_notification_channel_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel_descriptor")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("get_notification_channel_descriptor")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -200,10 +200,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_notification_channel_descriptor, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_notification_channel_descriptor, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel_descriptor")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("get_notification_channel_descriptor")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -222,7 +222,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
   end
 
   describe 'list_notification_channels' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#list_notification_channels."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#list_notification_channels."
 
     it 'invokes list_notification_channels without error' do
       # Create request parameters
@@ -241,10 +241,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_notification_channels, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_notification_channels, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channels")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("list_notification_channels")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -272,10 +272,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_notification_channels, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_notification_channels, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("list_notification_channels")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("list_notification_channels")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -294,7 +294,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
   end
 
   describe 'get_notification_channel' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#get_notification_channel."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#get_notification_channel."
 
     it 'invokes get_notification_channel without error' do
       # Create request parameters
@@ -319,10 +319,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("get_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -354,10 +354,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("get_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("get_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -376,7 +376,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
   end
 
   describe 'create_notification_channel' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#create_notification_channel."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#create_notification_channel."
 
     it 'invokes create_notification_channel without error' do
       # Create request parameters
@@ -403,10 +403,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(Google::Gax::to_proto(notification_channel, Google::Monitoring::V3::NotificationChannel), request.notification_channel)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("create_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("create_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -440,10 +440,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(Google::Gax::to_proto(notification_channel, Google::Monitoring::V3::NotificationChannel), request.notification_channel)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("create_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("create_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -462,7 +462,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
   end
 
   describe 'update_notification_channel' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#update_notification_channel."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#update_notification_channel."
 
     it 'invokes update_notification_channel without error' do
       # Create request parameters
@@ -487,10 +487,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(Google::Gax::to_proto(notification_channel, Google::Monitoring::V3::NotificationChannel), request.notification_channel)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("update_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("update_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -522,10 +522,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(Google::Gax::to_proto(notification_channel, Google::Monitoring::V3::NotificationChannel), request.notification_channel)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("update_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("update_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -544,7 +544,7 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
   end
 
   describe 'delete_notification_channel' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#delete_notification_channel."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::NotificationChannelServiceClient#delete_notification_channel."
 
     it 'invokes delete_notification_channel without error' do
       # Create request parameters
@@ -556,10 +556,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("delete_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("delete_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -591,10 +591,10 @@ describe Google::Cloud::Monitoring::V3::NotificationChannelServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_notification_channel, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_notification_channel, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockNotificationChannelServiceCredentials.new("delete_notification_channel")
+      mock_credentials = MockNotificationChannelServiceCredentials_v3.new("delete_notification_channel")
 
       Google::Monitoring::V3::NotificationChannelService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do

@@ -22,10 +22,10 @@ require "google/cloud/bigtable/admin/v2/bigtable_table_admin_client"
 require "google/bigtable/admin/v2/bigtable_table_admin_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockBigtableTableAdminCredentials < Google::Cloud::Bigtable::Admin::V2::Credentials
+class MockBigtableTableAdminCredentials_v2 < Google::Cloud::Bigtable::Admin::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
   describe 'create_table' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#create_table."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#create_table."
 
     it 'invokes create_table without error' do
       # Create request parameters
@@ -90,10 +90,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(Google::Gax::to_proto(table, Google::Bigtable::Admin::V2::Table), request.table)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("create_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -137,10 +137,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(Google::Gax::to_proto(table, Google::Bigtable::Admin::V2::Table), request.table)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("create_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -163,7 +163,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'create_table_from_snapshot' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#create_table_from_snapshot."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#create_table_from_snapshot."
 
     it 'invokes create_table_from_snapshot without error' do
       # Create request parameters
@@ -191,10 +191,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(source_snapshot, request.source_snapshot)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_table_from_snapshot, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_table_from_snapshot, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("create_table_from_snapshot")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_table_from_snapshot")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -237,10 +237,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(source_snapshot, request.source_snapshot)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_table_from_snapshot, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_table_from_snapshot, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("create_table_from_snapshot")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_table_from_snapshot")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -274,10 +274,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(source_snapshot, request.source_snapshot)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_table_from_snapshot, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_table_from_snapshot, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("create_table_from_snapshot")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_table_from_snapshot")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -300,7 +300,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'list_tables' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#list_tables."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#list_tables."
 
     it 'invokes list_tables without error' do
       # Create request parameters
@@ -319,10 +319,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_tables, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_tables, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("list_tables")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("list_tables")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -350,10 +350,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_tables, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_tables, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("list_tables")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("list_tables")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -372,7 +372,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'get_table' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#get_table."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#get_table."
 
     it 'invokes get_table without error' do
       # Create request parameters
@@ -389,10 +389,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("get_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -424,10 +424,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("get_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -446,7 +446,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'delete_table' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#delete_table."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#delete_table."
 
     it 'invokes delete_table without error' do
       # Create request parameters
@@ -458,10 +458,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("delete_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("delete_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -493,10 +493,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("delete_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("delete_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -515,7 +515,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'modify_column_families' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#modify_column_families."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#modify_column_families."
 
     it 'invokes modify_column_families without error' do
       # Create request parameters
@@ -537,10 +537,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(modifications, request.modifications)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:modify_column_families, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:modify_column_families, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("modify_column_families")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("modify_column_families")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -577,10 +577,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(modifications, request.modifications)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:modify_column_families, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:modify_column_families, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("modify_column_families")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("modify_column_families")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -599,7 +599,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'drop_row_range' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#drop_row_range."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#drop_row_range."
 
     it 'invokes drop_row_range without error' do
       # Create request parameters
@@ -611,10 +611,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:drop_row_range, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:drop_row_range, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("drop_row_range")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("drop_row_range")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -646,10 +646,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:drop_row_range, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:drop_row_range, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("drop_row_range")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("drop_row_range")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -668,7 +668,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'generate_consistency_token' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#generate_consistency_token."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#generate_consistency_token."
 
     it 'invokes generate_consistency_token without error' do
       # Create request parameters
@@ -685,10 +685,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:generate_consistency_token, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:generate_consistency_token, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("generate_consistency_token")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("generate_consistency_token")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -720,10 +720,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:generate_consistency_token, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:generate_consistency_token, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("generate_consistency_token")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("generate_consistency_token")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -742,7 +742,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'check_consistency' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#check_consistency."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#check_consistency."
 
     it 'invokes check_consistency without error' do
       # Create request parameters
@@ -761,10 +761,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(consistency_token, request.consistency_token)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:check_consistency, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:check_consistency, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("check_consistency")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("check_consistency")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -798,10 +798,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(consistency_token, request.consistency_token)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:check_consistency, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:check_consistency, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("check_consistency")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("check_consistency")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -820,7 +820,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'snapshot_table' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#snapshot_table."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#snapshot_table."
 
     it 'invokes snapshot_table without error' do
       # Create request parameters
@@ -856,10 +856,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(description, request.description)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:snapshot_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:snapshot_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("snapshot_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("snapshot_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -905,10 +905,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(description, request.description)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:snapshot_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:snapshot_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("snapshot_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("snapshot_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -945,10 +945,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(description, request.description)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:snapshot_table, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:snapshot_table, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("snapshot_table")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("snapshot_table")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -972,7 +972,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'get_snapshot' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#get_snapshot."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#get_snapshot."
 
     it 'invokes get_snapshot without error' do
       # Create request parameters
@@ -995,10 +995,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_snapshot, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_snapshot, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("get_snapshot")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_snapshot")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1030,10 +1030,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_snapshot, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_snapshot, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("get_snapshot")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_snapshot")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1052,7 +1052,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'list_snapshots' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#list_snapshots."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#list_snapshots."
 
     it 'invokes list_snapshots without error' do
       # Create request parameters
@@ -1071,10 +1071,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_snapshots, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_snapshots, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("list_snapshots")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("list_snapshots")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1102,10 +1102,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_snapshots, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_snapshots, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("list_snapshots")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("list_snapshots")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1124,7 +1124,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
   end
 
   describe 'delete_snapshot' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#delete_snapshot."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#delete_snapshot."
 
     it 'invokes delete_snapshot without error' do
       # Create request parameters
@@ -1136,10 +1136,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_snapshot, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_snapshot, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("delete_snapshot")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("delete_snapshot")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
@@ -1171,10 +1171,10 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_snapshot, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_snapshot, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockBigtableTableAdminCredentials.new("delete_snapshot")
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("delete_snapshot")
 
       Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do

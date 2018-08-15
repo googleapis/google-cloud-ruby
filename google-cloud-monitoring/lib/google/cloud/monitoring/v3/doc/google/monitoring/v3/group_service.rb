@@ -14,17 +14,6 @@
 
 module Google
   module Monitoring
-    ##
-    # # Stackdriver Monitoring API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [GroupServiceClient][] | The Group API lets you inspect and manage your [groups](https://cloud.google.com#google.monitoring.v3.Group). |
-    # | [Data Types][] | Data types for Google::Cloud::Monitoring::V3 |
-    #
-    # [GroupServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/groupserviceclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/google/monitoring/v3/datatypes
-    #
     module V3
       # The +ListGroup+ request.
       # @!attribute [rw] name

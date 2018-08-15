@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Language
-      ##
-      # # Google Cloud Natural Language API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [LanguageServiceClient][] | Provides text analysis operations such as sentiment analysis and entity recognition. |
-      # | [Data Types][] | Data types for Google::Cloud::Language::V1 |
-      #
-      # [LanguageServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1/languageserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/latest/google/cloud/language/v1/datatypes
-      #
       module V1
         # ================================================================ #
         #

@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Texttospeech
-      ##
-      # # Cloud Text-to-Speech API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [TextToSpeechClient][] | Service that implements Google Cloud Text-to-Speech API. |
-      # | [Data Types][] | Data types for Google::Cloud::TextToSpeech::V1 |
-      #
-      # [TextToSpeechClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-text_to_speech/latest/google/cloud/texttospeech/v1/texttospeechclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-text_to_speech/latest/google/cloud/texttospeech/v1/datatypes
-      #
       module V1
         # The top-level message sent by the client for the +ListVoices+ method.
         # @!attribute [rw] language_code

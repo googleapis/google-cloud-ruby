@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Dataproc
-      ##
-      # # Google Cloud Dataproc API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [ClusterControllerClient][] | The ClusterControllerService provides methods to manage clusters of Google Compute Engine instances. |
-      # | [Data Types][] | Data types for Google::Cloud::Dataproc::V1 |
-      #
-      # [ClusterControllerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1/clustercontrollerclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-dataproc/latest/google/cloud/dataproc/v1/datatypes
-      #
       module V1
         # Describes the identifying information, config, and status of
         # a cluster of Google Compute Engine instances.

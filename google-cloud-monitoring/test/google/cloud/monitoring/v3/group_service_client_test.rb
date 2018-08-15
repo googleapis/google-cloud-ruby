@@ -21,10 +21,10 @@ require "google/cloud/monitoring"
 require "google/cloud/monitoring/v3/group_service_client"
 require "google/monitoring/v3/group_service_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v3 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v3
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockGroupServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
+class MockGroupServiceCredentials_v3 < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Monitoring::V3::GroupServiceClient do
 
   describe 'list_groups' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#list_groups."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#list_groups."
 
     it 'invokes list_groups without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_groups, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_groups, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("list_groups")
+      mock_credentials = MockGroupServiceCredentials_v3.new("list_groups")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -118,10 +118,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_groups, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_groups, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("list_groups")
+      mock_credentials = MockGroupServiceCredentials_v3.new("list_groups")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -140,7 +140,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
   end
 
   describe 'get_group' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#get_group."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#get_group."
 
     it 'invokes get_group without error' do
       # Create request parameters
@@ -167,10 +167,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("get_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("get_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -202,10 +202,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("get_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("get_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -224,7 +224,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
   end
 
   describe 'create_group' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#create_group."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#create_group."
 
     it 'invokes create_group without error' do
       # Create request parameters
@@ -253,10 +253,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(Google::Gax::to_proto(group, Google::Monitoring::V3::Group), request.group)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("create_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("create_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -290,10 +290,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(Google::Gax::to_proto(group, Google::Monitoring::V3::Group), request.group)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("create_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("create_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -312,7 +312,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
   end
 
   describe 'update_group' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#update_group."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#update_group."
 
     it 'invokes update_group without error' do
       # Create request parameters
@@ -339,10 +339,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(Google::Gax::to_proto(group, Google::Monitoring::V3::Group), request.group)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("update_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("update_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -374,10 +374,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(Google::Gax::to_proto(group, Google::Monitoring::V3::Group), request.group)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("update_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("update_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -396,7 +396,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
   end
 
   describe 'delete_group' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#delete_group."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#delete_group."
 
     it 'invokes delete_group without error' do
       # Create request parameters
@@ -408,10 +408,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("delete_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("delete_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -443,10 +443,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_group, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_group, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("delete_group")
+      mock_credentials = MockGroupServiceCredentials_v3.new("delete_group")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -465,7 +465,7 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
   end
 
   describe 'list_group_members' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#list_group_members."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::GroupServiceClient#list_group_members."
 
     it 'invokes list_group_members without error' do
       # Create request parameters
@@ -489,10 +489,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_group_members, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_group_members, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("list_group_members")
+      mock_credentials = MockGroupServiceCredentials_v3.new("list_group_members")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -520,10 +520,10 @@ describe Google::Cloud::Monitoring::V3::GroupServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_group_members, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_group_members, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockGroupServiceCredentials.new("list_group_members")
+      mock_credentials = MockGroupServiceCredentials_v3.new("list_group_members")
 
       Google::Monitoring::V3::GroupService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do

@@ -15,17 +15,6 @@
 module Google
   module Devtools
     module Clouddebugger
-      ##
-      # # Stackdriver Debugger API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [Controller2Client][] | The Controller service provides the API for orchestrating a collection of debugger agents to perform debugging tasks. |
-      # | [Data Types][] | Data types for Google::Cloud::Debugger::V2 |
-      #
-      # [Controller2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/controller2client
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-debugger/latest/google/devtools/clouddebugger/v2/datatypes
-      #
       module V2
         # Request to register a debuggee.
         # @!attribute [rw] debuggee

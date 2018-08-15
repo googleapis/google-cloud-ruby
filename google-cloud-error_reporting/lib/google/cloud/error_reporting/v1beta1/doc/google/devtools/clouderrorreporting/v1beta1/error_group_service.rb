@@ -15,17 +15,6 @@
 module Google
   module Devtools
     module Clouderrorreporting
-      ##
-      # # Stackdriver Error Reporting API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [ErrorGroupServiceClient][] | Service for retrieving and updating individual error groups. |
-      # | [Data Types][] | Data types for Google::Cloud::ErrorReporting::V1beta1 |
-      #
-      # [ErrorGroupServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/errorgroupserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-error_reporting/latest/google/devtools/clouderrorreporting/v1beta1/datatypes
-      #
       module V1beta1
         # A request to return an individual group.
         # @!attribute [rw] group_name

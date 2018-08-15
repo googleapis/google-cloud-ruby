@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Videointelligence
-      ##
-      # # Google Cloud Video Intelligence API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [VideoIntelligenceServiceClient][] | Service that implements Google Cloud Video Intelligence API. |
-      # | [Data Types][] | Data types for Google::Cloud::VideoIntelligence::V1beta1 |
-      #
-      # [VideoIntelligenceServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1beta1/videointelligenceserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-video_intelligence/latest/google/cloud/videointelligence/v1beta1/datatypes
-      #
       module V1beta1
         # Video annotation request.
         # @!attribute [rw] input_uri

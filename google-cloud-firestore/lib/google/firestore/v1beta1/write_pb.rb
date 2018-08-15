@@ -25,6 +25,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :field_path, :string, 1
     oneof :transform_type do
       optional :set_to_server_value, :enum, 2, "google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue"
+      optional :append_missing_elements, :message, 6, "google.firestore.v1beta1.ArrayValue"
+      optional :remove_all_from_array, :message, 7, "google.firestore.v1beta1.ArrayValue"
     end
   end
   add_enum "google.firestore.v1beta1.DocumentTransform.FieldTransform.ServerValue" do

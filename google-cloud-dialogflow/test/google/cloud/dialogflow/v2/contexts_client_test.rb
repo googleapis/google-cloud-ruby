@@ -21,10 +21,10 @@ require "google/cloud/dialogflow"
 require "google/cloud/dialogflow/v2/contexts_client"
 require "google/cloud/dialogflow/v2/context_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v2 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v2
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockContextsCredentials < Google::Cloud::Dialogflow::V2::Credentials
+class MockContextsCredentials_v2 < Google::Cloud::Dialogflow::V2::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Dialogflow::V2::ContextsClient do
 
   describe 'list_contexts' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#list_contexts."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#list_contexts."
 
     it 'invokes list_contexts without error' do
       # Create request parameters
@@ -87,10 +87,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_contexts, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_contexts, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("list_contexts")
+      mock_credentials = MockContextsCredentials_v2.new("list_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -118,10 +118,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_contexts, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:list_contexts, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("list_contexts")
+      mock_credentials = MockContextsCredentials_v2.new("list_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -140,7 +140,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
   end
 
   describe 'get_context' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#get_context."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#get_context."
 
     it 'invokes get_context without error' do
       # Create request parameters
@@ -158,10 +158,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("get_context")
+      mock_credentials = MockContextsCredentials_v2.new("get_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -193,10 +193,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:get_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("get_context")
+      mock_credentials = MockContextsCredentials_v2.new("get_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -215,7 +215,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
   end
 
   describe 'create_context' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#create_context."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#create_context."
 
     it 'invokes create_context without error' do
       # Create request parameters
@@ -235,10 +235,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(Google::Gax::to_proto(context, Google::Cloud::Dialogflow::V2::Context), request.context)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("create_context")
+      mock_credentials = MockContextsCredentials_v2.new("create_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -272,10 +272,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(Google::Gax::to_proto(context, Google::Cloud::Dialogflow::V2::Context), request.context)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:create_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("create_context")
+      mock_credentials = MockContextsCredentials_v2.new("create_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -294,7 +294,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
   end
 
   describe 'update_context' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#update_context."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#update_context."
 
     it 'invokes update_context without error' do
       # Create request parameters
@@ -312,10 +312,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(Google::Gax::to_proto(context, Google::Cloud::Dialogflow::V2::Context), request.context)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("update_context")
+      mock_credentials = MockContextsCredentials_v2.new("update_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -347,10 +347,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(Google::Gax::to_proto(context, Google::Cloud::Dialogflow::V2::Context), request.context)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:update_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("update_context")
+      mock_credentials = MockContextsCredentials_v2.new("update_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -369,7 +369,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
   end
 
   describe 'delete_context' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#delete_context."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#delete_context."
 
     it 'invokes delete_context without error' do
       # Create request parameters
@@ -381,10 +381,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("delete_context")
+      mock_credentials = MockContextsCredentials_v2.new("delete_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -416,10 +416,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_context, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_context, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("delete_context")
+      mock_credentials = MockContextsCredentials_v2.new("delete_context")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -438,7 +438,7 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
   end
 
   describe 'delete_all_contexts' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#delete_all_contexts."
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::ContextsClient#delete_all_contexts."
 
     it 'invokes delete_all_contexts without error' do
       # Create request parameters
@@ -450,10 +450,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_all_contexts, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_all_contexts, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("delete_all_contexts")
+      mock_credentials = MockContextsCredentials_v2.new("delete_all_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
@@ -485,10 +485,10 @@ describe Google::Cloud::Dialogflow::V2::ContextsClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_all_contexts, mock_method)
+      mock_stub = MockGrpcClientStub_v2.new(:delete_all_contexts, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockContextsCredentials.new("delete_all_contexts")
+      mock_credentials = MockContextsCredentials_v2.new("delete_all_contexts")
 
       Google::Cloud::Dialogflow::V2::Contexts::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do

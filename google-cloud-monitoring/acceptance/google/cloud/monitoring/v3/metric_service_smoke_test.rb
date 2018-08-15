@@ -19,14 +19,14 @@ require "minitest/spec"
 
 require "google/cloud/monitoring"
 
-describe "MetricServiceSmokeTest" do
+describe "MetricServiceSmokeTest v3" do
   it "runs one smoke test with list_monitored_resource_descriptors" do
     unless ENV["MONITORING_TEST_PROJECT"]
       fail "MONITORING_TEST_PROJECT environment variable must be defined"
     end
     project_id = ENV["MONITORING_TEST_PROJECT"].freeze
 
-    metric_service_client = Google::Cloud::Monitoring::Metric.new
+    metric_service_client = Google::Cloud::Monitoring::Metric.new(version: :v3)
     formatted_name = Google::Cloud::Monitoring::V3::MetricServiceClient.project_path(project_id)
 
     # Iterate over all results.

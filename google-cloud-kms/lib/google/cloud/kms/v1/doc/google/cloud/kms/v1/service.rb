@@ -15,17 +15,6 @@
 module Google
   module Cloud
     module Kms
-      ##
-      # # Google Cloud Key Management Service (KMS) API Contents
-      #
-      # | Class | Description |
-      # | ----- | ----------- |
-      # | [KeyManagementServiceClient][] | Google Cloud Key Management Service |
-      # | [Data Types][] | Data types for Google::Cloud::Kms::V1 |
-      #
-      # [KeyManagementServiceClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-kms/latest/google/cloud/kms/v1/keymanagementserviceclient
-      # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-kms/latest/google/cloud/kms/v1/datatypes
-      #
       module V1
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::ListKeyRings KeyManagementService::ListKeyRings}.
         # @!attribute [rw] parent

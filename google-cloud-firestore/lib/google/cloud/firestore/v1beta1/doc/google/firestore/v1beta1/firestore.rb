@@ -14,17 +14,6 @@
 
 module Google
   module Firestore
-    ##
-    # # Google Cloud Firestore API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [FirestoreClient][] | The Cloud Firestore service. |
-    # | [Data Types][] | Data types for Google::Cloud::Firestore::V1beta1 |
-    #
-    # [FirestoreClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest/google/firestore/v1beta1/firestoreclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-firestore/latest/google/firestore/v1beta1/datatypes
-    #
     module V1beta1
       # The request for {Google::Firestore::V1beta1::Firestore::GetDocument Firestore::GetDocument}.
       # @!attribute [rw] name

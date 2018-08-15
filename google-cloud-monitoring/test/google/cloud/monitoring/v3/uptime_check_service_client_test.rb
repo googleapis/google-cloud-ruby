@@ -21,10 +21,10 @@ require "google/cloud/monitoring"
 require "google/cloud/monitoring/v3/uptime_check_service_client"
 require "google/monitoring/v3/uptime_service_services_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v3 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v3
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -52,7 +52,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockUptimeCheckServiceCredentials < Google::Cloud::Monitoring::V3::Credentials
+class MockUptimeCheckServiceCredentials_v3 < Google::Cloud::Monitoring::V3::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -68,7 +68,7 @@ end
 describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
 
   describe 'list_uptime_check_configs' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#list_uptime_check_configs."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#list_uptime_check_configs."
 
     it 'invokes list_uptime_check_configs without error' do
       # Create request parameters
@@ -92,10 +92,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(formatted_parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_uptime_check_configs, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_uptime_check_configs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_configs")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("list_uptime_check_configs")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -123,10 +123,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(formatted_parent, request.parent)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_uptime_check_configs, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_uptime_check_configs, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_configs")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("list_uptime_check_configs")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -145,7 +145,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
   end
 
   describe 'get_uptime_check_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#get_uptime_check_config."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#get_uptime_check_config."
 
     it 'invokes get_uptime_check_config without error' do
       # Create request parameters
@@ -168,10 +168,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("get_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("get_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -203,10 +203,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:get_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("get_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("get_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -225,7 +225,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
   end
 
   describe 'create_uptime_check_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#create_uptime_check_config."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#create_uptime_check_config."
 
     it 'invokes create_uptime_check_config without error' do
       # Create request parameters
@@ -250,10 +250,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(Google::Gax::to_proto(uptime_check_config, Google::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:create_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("create_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("create_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -287,10 +287,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(Google::Gax::to_proto(uptime_check_config, Google::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:create_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("create_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("create_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -309,7 +309,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
   end
 
   describe 'update_uptime_check_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#update_uptime_check_config."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#update_uptime_check_config."
 
     it 'invokes update_uptime_check_config without error' do
       # Create request parameters
@@ -332,10 +332,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(Google::Gax::to_proto(uptime_check_config, Google::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:update_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("update_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("update_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -367,10 +367,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(Google::Gax::to_proto(uptime_check_config, Google::Monitoring::V3::UptimeCheckConfig), request.uptime_check_config)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:update_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("update_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("update_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -389,7 +389,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
   end
 
   describe 'delete_uptime_check_config' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#delete_uptime_check_config."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#delete_uptime_check_config."
 
     it 'invokes delete_uptime_check_config without error' do
       # Create request parameters
@@ -401,10 +401,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("delete_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("delete_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -436,10 +436,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
         assert_equal(formatted_name, request.name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_uptime_check_config, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:delete_uptime_check_config, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("delete_uptime_check_config")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("delete_uptime_check_config")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -458,7 +458,7 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
   end
 
   describe 'list_uptime_check_ips' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#list_uptime_check_ips."
+    custom_error = CustomTestError_v3.new "Custom test error for Google::Cloud::Monitoring::V3::UptimeCheckServiceClient#list_uptime_check_ips."
 
     it 'invokes list_uptime_check_ips without error' do
       # Create expected grpc response
@@ -472,10 +472,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_uptime_check_ips, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_uptime_check_ips, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_ips")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("list_uptime_check_ips")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do
@@ -498,10 +498,10 @@ describe Google::Cloud::Monitoring::V3::UptimeCheckServiceClient do
       mock_method = proc do
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_uptime_check_ips, mock_method)
+      mock_stub = MockGrpcClientStub_v3.new(:list_uptime_check_ips, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockUptimeCheckServiceCredentials.new("list_uptime_check_ips")
+      mock_credentials = MockUptimeCheckServiceCredentials_v3.new("list_uptime_check_ips")
 
       Google::Monitoring::V3::UptimeCheckService::Stub.stub(:new, mock_stub) do
         Google::Cloud::Monitoring::V3::Credentials.stub(:default, mock_credentials) do

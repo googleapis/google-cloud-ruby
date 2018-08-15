@@ -22,10 +22,10 @@ require "google/cloud/dataproc/v1/cluster_controller_client"
 require "google/cloud/dataproc/v1/clusters_services_pb"
 require "google/longrunning/operations_pb"
 
-class CustomTestError < StandardError; end
+class CustomTestError_v1 < StandardError; end
 
 # Mock for the GRPC::ClientStub class.
-class MockGrpcClientStub
+class MockGrpcClientStub_v1
 
   # @param expected_symbol [Symbol] the symbol of the grpc method to be mocked.
   # @param mock_method [Proc] The method that is being mocked.
@@ -53,7 +53,7 @@ class MockGrpcClientStub
   end
 end
 
-class MockClusterControllerCredentials < Google::Cloud::Dataproc::V1::Credentials
+class MockClusterControllerCredentials_v1 < Google::Cloud::Dataproc::V1::Credentials
   def initialize(method_name)
     @method_name = method_name
   end
@@ -69,7 +69,7 @@ end
 describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
 
   describe 'create_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#create_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#create_cluster."
 
     it 'invokes create_cluster without error' do
       # Create request parameters
@@ -103,10 +103,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Cloud::Dataproc::V1::Cluster), request.cluster)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("create_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("create_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -149,10 +149,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Cloud::Dataproc::V1::Cluster), request.cluster)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("create_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("create_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -186,10 +186,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(Google::Gax::to_proto(cluster, Google::Cloud::Dataproc::V1::Cluster), request.cluster)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:create_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:create_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("create_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("create_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -212,7 +212,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
   end
 
   describe 'update_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#update_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#update_cluster."
 
     it 'invokes update_cluster without error' do
       # Create request parameters
@@ -250,10 +250,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("update_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("update_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -302,10 +302,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("update_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("update_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -345,10 +345,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:update_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:update_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("update_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("update_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -373,7 +373,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
   end
 
   describe 'delete_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#delete_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#delete_cluster."
 
     it 'invokes delete_cluster without error' do
       # Create request parameters
@@ -400,10 +400,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("delete_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("delete_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -446,10 +446,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("delete_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("delete_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -483,10 +483,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:delete_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:delete_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("delete_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("delete_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -509,7 +509,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
   end
 
   describe 'get_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#get_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#get_cluster."
 
     it 'invokes get_cluster without error' do
       # Create request parameters
@@ -536,10 +536,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("get_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("get_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -583,10 +583,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:get_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:get_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("get_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("get_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -609,7 +609,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
   end
 
   describe 'list_clusters' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#list_clusters."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#list_clusters."
 
     it 'invokes list_clusters without error' do
       # Create request parameters
@@ -630,10 +630,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(region, request.region)
         OpenStruct.new(execute: expected_response)
       end
-      mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("list_clusters")
+      mock_credentials = MockClusterControllerCredentials_v1.new("list_clusters")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -663,10 +663,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(region, request.region)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:list_clusters, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:list_clusters, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("list_clusters")
+      mock_credentials = MockClusterControllerCredentials_v1.new("list_clusters")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -685,7 +685,7 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
   end
 
   describe 'diagnose_cluster' do
-    custom_error = CustomTestError.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#diagnose_cluster."
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Dataproc::V1::ClusterControllerClient#diagnose_cluster."
 
     it 'invokes diagnose_cluster without error' do
       # Create request parameters
@@ -712,10 +712,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:diagnose_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:diagnose_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("diagnose_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("diagnose_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -758,10 +758,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub.new(:diagnose_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:diagnose_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("diagnose_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("diagnose_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do
@@ -795,10 +795,10 @@ describe Google::Cloud::Dataproc::V1::ClusterControllerClient do
         assert_equal(cluster_name, request.cluster_name)
         raise custom_error
       end
-      mock_stub = MockGrpcClientStub.new(:diagnose_cluster, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:diagnose_cluster, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockClusterControllerCredentials.new("diagnose_cluster")
+      mock_credentials = MockClusterControllerCredentials_v1.new("diagnose_cluster")
 
       Google::Cloud::Dataproc::V1::ClusterController::Stub.stub(:new, mock_stub) do
         Google::Cloud::Dataproc::V1::Credentials.stub(:default, mock_credentials) do

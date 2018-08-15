@@ -25,6 +25,18 @@ module Google
         #     a built-in type.
         class InfoType; end
 
+        # A reference to a StoredInfoType to use with scanning.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Resource name of the requested +StoredInfoType+, for example
+        #     +organizations/433245324/storedInfoTypes/432452342+ or
+        #     +projects/project-id/storedInfoTypes/432452342+.
+        # @!attribute [rw] create_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Timestamp indicating when the version of the +StoredInfoType+ used for
+        #     inspection was created. Output-only field, populated by the system.
+        class StoredType; end
+
         # Custom information type provided by the user. Used to find domain-specific
         # sensitive information configurable to the data in question.
         # @!attribute [rw] info_type
@@ -46,6 +58,10 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::CustomInfoType::SurrogateType]
         #     Message for detecting output from deidentification transformations that
         #     support reversing.
+        # @!attribute [rw] stored_type
+        #   @return [Google::Privacy::Dlp::V2::StoredType]
+        #     Load an existing +StoredInfoType+ resource for use in
+        #     +InspectDataSource+. Not currently supported in +InspectContent+.
         # @!attribute [rw] detection_rules
         #   @return [Array<Google::Privacy::Dlp::V2::CustomInfoType::DetectionRule>]
         #     Set of detection rules to apply to all findings of this CustomInfoType.
@@ -70,7 +86,11 @@ module Google
           #
           # Dictionary words containing a large number of characters that are not
           # letters or digits may result in unexpected findings because such characters
-          # are treated as whitespace.
+          # are treated as whitespace. The
+          # [limits](https://cloud.google.com/dlp/limits) page contains details about
+          # the size limits of dictionaries. For dictionaries that do not fit within
+          # these constraints, consider using +LargeCustomDictionaryConfig+ in the
+          # +StoredInfoType+ API.
           # @!attribute [rw] word_list
           #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary::WordList]
           #     List of words or phrases to search for.
@@ -203,7 +223,14 @@ module Google
         # @!attribute [rw] bytes_limit_per_file
         #   @return [Integer]
         #     Max number of bytes to scan from a file. If a scanned file's size is bigger
-        #     than this value then the rest of the bytes are omitted.
+        #     than this value then the rest of the bytes are omitted. Only one
+        #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+        # @!attribute [rw] bytes_limit_per_file_percent
+        #   @return [Integer]
+        #     Max percentage of bytes to scan from a file. The rest are omitted. The
+        #     number of bytes scanned is rounded down. Must be between 0 and 100,
+        #     inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
+        #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
         # @!attribute [rw] file_types
         #   @return [Array<Google::Privacy::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
@@ -239,6 +266,13 @@ module Google
           end
         end
 
+        # Message representing a set of files in Cloud Storage.
+        # @!attribute [rw] url
+        #   @return [String]
+        #     The url, in the format +gs://<bucket>/<path>+. Trailing wildcard in the
+        #     path is allowed.
+        class CloudStorageFileSet; end
+
         # Message representing a single file or path in Cloud Storage.
         # @!attribute [rw] path
         #   @return [String]
@@ -258,7 +292,15 @@ module Google
         #   @return [Integer]
         #     Max number of rows to scan. If the table has more rows than this value, the
         #     rest of the rows are omitted. If not set, or if set to 0, all rows will be
-        #     scanned. Cannot be used in conjunction with TimespanConfig.
+        #     scanned. Only one of rows_limit and rows_limit_percent can be specified.
+        #     Cannot be used in conjunction with TimespanConfig.
+        # @!attribute [rw] rows_limit_percent
+        #   @return [Integer]
+        #     Max percentage of rows to scan. The rest are omitted. The number of rows
+        #     scanned is rounded down. Must be between 0 and 100, inclusively. Both 0 and
+        #     100 means no limit. Defaults to 0. Only one of rows_limit and
+        #     rows_limit_percent can be specified. Cannot be used in conjunction with
+        #     TimespanConfig.
         # @!attribute [rw] sample_method
         #   @return [Google::Privacy::Dlp::V2::BigQueryOptions::SampleMethod]
         class BigQueryOptions
@@ -293,15 +335,17 @@ module Google
           # Currently only supported when inspecting Google Cloud Storage and BigQuery.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
-          #     Exclude files older than this value.
+          #     Exclude files or rows older than this value.
           # @!attribute [rw] end_time
           #   @return [Google::Protobuf::Timestamp]
-          #     Exclude files newer than this value.
+          #     Exclude files or rows newer than this value.
           #     If set to zero, no upper time limit is applied.
           # @!attribute [rw] timestamp_field
           #   @return [Google::Privacy::Dlp::V2::FieldId]
           #     Specification of the field containing the timestamp of scanned items.
-          #     Required for data sources like Datastore or BigQuery.
+          #     Used for data sources like Datastore or BigQuery.
+          #     If not specified for BigQuery, table last modification timestamp
+          #     is checked against given time span.
           #     The valid data types of the timestamp field are:
           #     for BigQuery - timestamp, date, datetime;
           #     for Datastore - timestamp.
@@ -400,6 +444,15 @@ module Google
         #   @return [String]
         #     Name of the table.
         class BigQueryTable; end
+
+        # Message defining a field of a BigQuery table.
+        # @!attribute [rw] table
+        #   @return [Google::Privacy::Dlp::V2::BigQueryTable]
+        #     Source table of the field.
+        # @!attribute [rw] field
+        #   @return [Google::Privacy::Dlp::V2::FieldId]
+        #     Designated field in the BigQuery table.
+        class BigQueryField; end
 
         # An entity in a dataset is a field or set of fields that correspond to a
         # single person. For example, in medical records the +EntityId+ might be a

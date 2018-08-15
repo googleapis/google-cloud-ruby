@@ -14,17 +14,6 @@
 
 module Google
   module Container
-    ##
-    # # Google Container Engine API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [ClusterManagerClient][] | Google Container Engine Cluster Manager v1 |
-    # | [Data Types][] | Data types for Google::Cloud::Container::V1 |
-    #
-    # [ClusterManagerClient]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-container/latest/google/container/v1/clustermanagerclient
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-container/latest/google/container/v1/datatypes
-    #
     module V1
       # Parameters that describe the nodes in a cluster.
       # @!attribute [rw] machine_type

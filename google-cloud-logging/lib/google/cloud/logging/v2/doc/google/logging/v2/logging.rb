@@ -14,17 +14,6 @@
 
 module Google
   module Logging
-    ##
-    # # Stackdriver Logging API Contents
-    #
-    # | Class | Description |
-    # | ----- | ----------- |
-    # | [LoggingServiceV2Client][] | Service for ingesting and querying logs. |
-    # | [Data Types][] | Data types for Google::Cloud::Logging::V2 |
-    #
-    # [LoggingServiceV2Client]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/loggingservicev2client
-    # [Data Types]: https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-logging/latest/google/logging/v2/datatypes
-    #
     module V2
       # The parameters to DeleteLog.
       # @!attribute [rw] log_name
