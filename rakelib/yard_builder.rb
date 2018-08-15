@@ -237,9 +237,9 @@ class YardBuilder
       Dir.chdir(gh_pages_repo_dir + "docs" + gem) do
         Dir.glob(File.join("**","*.html")).each do |file_path|
           file_contents = File.read file_path
-          file_contents.gsub! "dynamic print site_values.console_name %",
-                              "Google Cloud Platform Console"
           file_contents.gsub! "{% dynamic print site_values.console_name %}",
+                              "Google Cloud Platform Console"
+          file_contents.gsub! "dynamic print site_values.console_name %",
                               "Google Cloud Platform Console"
           File.write file_path, file_contents
         end
