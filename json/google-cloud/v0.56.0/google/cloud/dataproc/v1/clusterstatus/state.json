@@ -1,0 +1,1 @@
+{"id":"google/cloud/dataproc/v1/clusterstatus/state","name":"State","title":["Google","Cloud","Dataproc","V1","ClusterStatus","State"],"description":"<p>The cluster state.</p>","source":"google-cloud-dataproc/lib/google/cloud/dataproc/v1/doc/google/cloud/dataproc/v1/clusters.rb#L312","resources":[],"examples":[],"methods":[]}

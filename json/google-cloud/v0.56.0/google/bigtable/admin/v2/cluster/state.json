@@ -1,0 +1,1 @@
+{"id":"google/bigtable/admin/v2/cluster/state","name":"State","title":["Google","Bigtable","Admin","V2","Cluster","State"],"description":"<p>Possible states of a cluster.</p>","source":"google-cloud-bigtable/lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/instance.rb#L120","resources":[],"examples":[],"methods":[]}

@@ -1,0 +1,1 @@
+{"id":"google/container/v1/networkpolicy/provider","name":"Provider","title":["Google","Container","V1","NetworkPolicy","Provider"],"description":"<p>Allowed Network Policy providers.</p>","source":"google-cloud-container/lib/google/cloud/container/v1/doc/google/container/v1/cluster_service.rb#L262","resources":[],"examples":[],"methods":[]}

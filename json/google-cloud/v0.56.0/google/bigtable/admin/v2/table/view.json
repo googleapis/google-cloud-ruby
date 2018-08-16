@@ -1,0 +1,1 @@
+{"id":"google/bigtable/admin/v2/table/view","name":"View","title":["Google","Bigtable","Admin","V2","Table","View"],"description":"<p>Defines a view over a table’s fields.</p>","source":"google-cloud-bigtable/lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/table.rb#L91","resources":[],"examples":[],"methods":[]}
