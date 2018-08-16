@@ -1,0 +1,1 @@
+{"id":"google/bigtable/v2/mutation/deletefromrow","name":"DeleteFromRow","title":["Google","Bigtable","V2","Mutation","DeleteFromRow"],"description":"<p>A Mutation which deletes all cells from the containing row.</p>","source":"google-cloud-bigtable/lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/data.rb#L464","resources":[],"examples":[],"methods":[]}

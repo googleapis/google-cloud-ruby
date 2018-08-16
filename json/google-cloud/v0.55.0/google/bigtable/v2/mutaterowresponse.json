@@ -1,0 +1,1 @@
+{"id":"google/bigtable/v2/mutaterowresponse","name":"MutateRowResponse","title":["Google","Bigtable","V2","MutateRowResponse"],"description":"<p>Response message for Bigtable.MutateRow.</p>","source":"google-cloud-bigtable/lib/google/cloud/bigtable/v2/doc/google/bigtable/v2/bigtable.rb#L167","resources":[],"examples":[],"methods":[]}
