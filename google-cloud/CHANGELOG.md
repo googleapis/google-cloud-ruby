@@ -1,5 +1,10 @@
 # Release History
 
+### 0.56.0 / 2018-08-16
+
+* Add Cloud Bigtable
+* Add Cloud Text-to-Speech API
+
 ### 0.55.0 / 2018-07-06
 
 * Add Google Cloud KMS
