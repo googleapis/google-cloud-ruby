@@ -319,6 +319,7 @@ namespace :jsondoc do
       # google/cloud/bigquery.json "guide" with blank output. See issue #2007.
       "google-cloud-bigquery-data_transfer",
       "google-cloud-bigquery",
+      "google-cloud-bigtable",
       "google-cloud-container",
       "google-cloud-core",
       "google-cloud-dataproc",

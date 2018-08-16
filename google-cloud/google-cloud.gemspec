@@ -20,6 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-bigquery", "~> 1.1"
   gem.add_dependency "google-cloud-bigquery-data_transfer", "~> 0.1"
+  gem.add_dependency "google-cloud-bigtable", "~> 0.1"
   gem.add_dependency "google-cloud-container", "~> 0.1"
   gem.add_dependency "google-cloud-dataproc", "~> 0.1"
   gem.add_dependency "google-cloud-datastore", "~> 1.4"

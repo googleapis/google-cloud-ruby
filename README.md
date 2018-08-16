@@ -32,6 +32,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
+* [Cloud Bigtable](#cloud-bigtable-alpha) (Alpha)
 * [Container Engine](#container-engine-alpha) (Alpha)
 * [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
 * [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
@@ -142,6 +143,39 @@ data_transfer_service_client.list_data_sources(formatted_parent).each_page do |p
     # Process element.
   end
 end
+```
+
+### Cloud Bigtable (Alpha)
+
+- [google-cloud-bigtable README](google-cloud-bigtable/README.md)
+- [google-cloud-bigtable API documentation](http://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-bigtable/latest)
+- [google-cloud-bigtable on RubyGems](https://rubygems.org/gems/google-cloud-bigtable)
+- [Cloud Bigtable documentation](https://cloud.google.com/bigtable/docs)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-bigtable
+```
+
+#### Preview
+
+```ruby
+require "google/cloud/bigtable"
+
+bigtable = Google::Cloud::Bigtable.new
+
+table = bigtable.table("my-instance", "my-table")
+
+entry = table.new_mutation_entry("user-1")
+entry.set_cell(
+  "cf-1",
+  "field-1",
+  "XYZ"
+  timestamp: Time.now.to_i * 1000 # Time stamp in milli seconds.
+).delete_from_column("cf2", "field02")
+
+table.mutate_row(entry)
 ```
 
 ### Cloud Datastore (GA)

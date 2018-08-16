@@ -78,6 +78,59 @@
       ]
     },
     {
+      "title": "Bigtable",
+      "type": "google/cloud/bigtable",
+      "patterns": ["\/bigtable", "google\/protobuf", "google\/rpc", "google\/iam"],
+      "nav": [
+        {
+          "title": "Project",
+          "type": "google/cloud/bigtable/project"
+        },
+        {
+          "title": "Instance",
+          "type": "google/cloud/bigtable/instance"
+        },
+        {
+          "title": "Cluster",
+          "type": "google/cloud/bigtable/cluster"
+        },
+        {
+          "title": "V2",
+          "type": "google/cloud/bigtable/v2",
+          "patterns": ["\/bigtable\/v2", "google\/protobuf", "google\/rpc"],
+          "nav": [
+            {
+              "title": "BigtableClient",
+              "type": "google/cloud/bigtable/v2/bigtableclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/bigtable/v2/datatypes"
+            }
+          ]
+        },
+        {
+          "title": "Admin V2",
+          "type": "google/cloud/bigtable/admin/v2",
+          "patterns": ["\/bigtable\/admin\/v2", "google\/protobuf", "google\/rpc", "google\/iam"],
+          "nav": [
+            {
+              "title": "BigtableInstanceAdminClient",
+              "type": "google/cloud/bigtable/admin/v2/bigtableinstanceadminclient"
+            },
+            {
+              "title": "BigtableTableAdminClient",
+              "type": "google/cloud/bigtable/admin/v2/bigtabletableadminclient"
+            },
+            {
+              "title": "Data Types",
+              "type": "google/bigtable/v2/datatypes"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Container",
       "type": "google/cloud/container",
       "patterns": ["\/container", "google\/api", "google\/protobuf"],

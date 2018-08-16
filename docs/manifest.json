@@ -122,6 +122,15 @@
       ]
     },
     {
+      "id": "google-cloud-bigtable",
+      "name": "google-cloud-bigtable",
+      "defaultService": "google/cloud/bigtable",
+      "versions": [
+        "v0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "google-cloud-container",
       "name": "google-cloud-container",
       "defaultService": "google/cloud/container",

@@ -8,6 +8,7 @@ gem "gcloud-jsondoc",
 gem "google-cloud-bigquery", path: "../google-cloud-bigquery"
 gem "google-cloud-bigquery-data_transfer",
     path: "../google-cloud-bigquery-data_transfer"
+gem "google-cloud-bigtable", path: "../google-cloud-bigtable"
 gem "google-cloud-container", path: "../google-cloud-container"
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-dataproc", path: "../google-cloud-dataproc"
