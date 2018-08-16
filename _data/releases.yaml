@@ -69,6 +69,8 @@ google-cloud-bigquery:
 google-cloud-bigquery-data_transfer:
 - v0.2.0
 - v0.1.0
+google-cloud-bigtable:
+- v0.1.0
 google-cloud-container:
 - v0.1.0
 google-cloud-core:

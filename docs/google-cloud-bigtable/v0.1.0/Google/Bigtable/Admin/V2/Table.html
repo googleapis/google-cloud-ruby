@@ -1,0 +1,1003 @@
+---
+layout: yard_main
+title: "Class: Google::Bigtable::Admin::V2::Table - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Bigtable::Admin::V2::Table";
+  relpath = '../../../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../../../_index.html">Index (T)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../../Bigtable.html" title="Google::Bigtable (module)">Bigtable</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../../Admin.html" title="Google::Bigtable::Admin (module)">Admin</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../V2.html" title="Google::Bigtable::Admin::V2 (module)">V2</a></span></span>
+     &raquo; 
+    <span class="title">Table</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Bigtable::Admin::V2::Table
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Bigtable::Admin::V2::Table</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/table.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A collection of user data indexed by row, column, and timestamp.
+Each table is served using the resources of its parent cluster.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Table/TimestampGranularity.html" title="Google::Bigtable::Admin::V2::Table::TimestampGranularity (module)">TimestampGranularity</a></span>, <span class='object_link'><a href="Table/View.html" title="Google::Bigtable::Admin::V2::Table::View (module)">View</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cluster_states-instance_method" title="#cluster_states (instance method)">#<strong>cluster_states</strong>  &#x21d2; Hash{String =&gt; Google::Bigtable::Admin::V2::Table::ClusterState} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) Map from cluster ID to per-cluster table state.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#column_families-instance_method" title="#column_families (instance method)">#<strong>column_families</strong>  &#x21d2; Hash{String =&gt; Google::Bigtable::Admin::V2::ColumnFamily} </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>(+CreationOnly+) The column families configured for this table, mapped by column family ID.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#granularity-instance_method" title="#granularity (instance method)">#<strong>granularity</strong>  &#x21d2; Google::Bigtable::Admin::V2::Table::TimestampGranularity </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>(+CreationOnly+) The granularity (i.e. +MILLIS+) at which timestamps are stored in this table.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">#<strong>name</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>(+OutputOnly+) The unique name of the table.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="cluster_states=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="cluster_states-instance_method">
+  
+    #<strong>cluster_states</strong>  &#x21d2; <tt>Hash{String =&gt; <span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">Google::Bigtable::Admin::V2::Table::ClusterState</a></span>}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns (+OutputOnly+)
+Map from cluster ID to per-cluster table state.
+If it could not be determined whether or not the table has data in a
+particular cluster (for example, if its zone is unavailable), then
+there will be an entry for the cluster with UNKNOWN +replication_status+.
+Views: +REPLICATION_VIEW+, +FULL+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">Google::Bigtable::Admin::V2::Table::ClusterState</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(+OutputOnly+)
+Map from cluster ID to per-cluster table state.
+If it could not be determined whether or not the table has data in a
+particular cluster (for example, if its zone is unavailable), then
+there will be an entry for the cluster with UNKNOWN +replication_status+.
+Views: +REPLICATION_VIEW+, +FULL+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/table.rb', line 47</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::Table (class)">Table</a></span></span>
+  <span class='comment'># The state of a table&#39;s data in a particular cluster.
+</span>  <span class='comment'># @!attribute [rw] replication_state
+</span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
+</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     The state of replication for the table in this cluster.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
+    <span class='comment'># Table replication states.
+</span>    <span class='kw'>module</span> <span class='const'>ReplicationState</span>
+      <span class='comment'># The replication state of the table is unknown in this cluster.
+</span>      <span class='const'>STATE_NOT_KNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># The cluster was recently created, and the table must finish copying
+</span>      <span class='comment'># over pre-existing data from other clusters before it can begin
+</span>      <span class='comment'># receiving live replication updates and serving Data API requests.
+</span>      <span class='const'>INITIALIZING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to planned internal maintenance.
+</span>      <span class='const'>PLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to unplanned or emergency maintenance.
+</span>      <span class='const'>UNPLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+      <span class='comment'># The table can serve Data API requests from this cluster. Depending on
+</span>      <span class='comment'># replication delay, reads may not immediately reflect the state of the
+</span>      <span class='comment'># table in other clusters.
+</span>      <span class='const'>READY</span> <span class='op'>=</span> <span class='int'>4</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Possible timestamp granularities to use when keeping multiple versions
+</span>  <span class='comment'># of data in a table.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/TimestampGranularity.html" title="Google::Bigtable::Admin::V2::Table::TimestampGranularity (module)">TimestampGranularity</a></span></span>
+    <span class='comment'># The user did not specify a granularity. Should not be returned.
+</span>    <span class='comment'># When specified during table creation, MILLIS will be used.
+</span>    <span class='const'>TIMESTAMP_GRANULARITY_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The table keeps data versioned at a granularity of 1ms.
+</span>    <span class='const'>MILLIS</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Defines a view over a table&#39;s fields.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/View.html" title="Google::Bigtable::Admin::V2::Table::View (module)">View</a></span></span>
+    <span class='comment'># Uses the default view for each method as documented in its request.
+</span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Only populates +name+.
+</span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+</span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+</span>    <span class='comment'># replication state.
+</span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Populates all fields.
+</span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="column_families=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="column_families-instance_method">
+  
+    #<strong>column_families</strong>  &#x21d2; <tt>Hash{String =&gt; <span class='object_link'><a href="ColumnFamily.html" title="Google::Bigtable::Admin::V2::ColumnFamily (class)">Google::Bigtable::Admin::V2::ColumnFamily</a></span>}</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns (+CreationOnly+)
+The column families configured for this table, mapped by column family ID.
+Views: +SCHEMA_VIEW+, +FULL+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{String =&gt; <span class='object_link'><a href="ColumnFamily.html" title="Google::Bigtable::Admin::V2::ColumnFamily (class)">Google::Bigtable::Admin::V2::ColumnFamily</a></span>}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(+CreationOnly+)
+The column families configured for this table, mapped by column family ID.
+Views: +SCHEMA_VIEW+, +FULL+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/table.rb', line 47</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::Table (class)">Table</a></span></span>
+  <span class='comment'># The state of a table&#39;s data in a particular cluster.
+</span>  <span class='comment'># @!attribute [rw] replication_state
+</span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
+</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     The state of replication for the table in this cluster.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
+    <span class='comment'># Table replication states.
+</span>    <span class='kw'>module</span> <span class='const'>ReplicationState</span>
+      <span class='comment'># The replication state of the table is unknown in this cluster.
+</span>      <span class='const'>STATE_NOT_KNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># The cluster was recently created, and the table must finish copying
+</span>      <span class='comment'># over pre-existing data from other clusters before it can begin
+</span>      <span class='comment'># receiving live replication updates and serving Data API requests.
+</span>      <span class='const'>INITIALIZING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to planned internal maintenance.
+</span>      <span class='const'>PLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to unplanned or emergency maintenance.
+</span>      <span class='const'>UNPLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+      <span class='comment'># The table can serve Data API requests from this cluster. Depending on
+</span>      <span class='comment'># replication delay, reads may not immediately reflect the state of the
+</span>      <span class='comment'># table in other clusters.
+</span>      <span class='const'>READY</span> <span class='op'>=</span> <span class='int'>4</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Possible timestamp granularities to use when keeping multiple versions
+</span>  <span class='comment'># of data in a table.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/TimestampGranularity.html" title="Google::Bigtable::Admin::V2::Table::TimestampGranularity (module)">TimestampGranularity</a></span></span>
+    <span class='comment'># The user did not specify a granularity. Should not be returned.
+</span>    <span class='comment'># When specified during table creation, MILLIS will be used.
+</span>    <span class='const'>TIMESTAMP_GRANULARITY_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The table keeps data versioned at a granularity of 1ms.
+</span>    <span class='const'>MILLIS</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Defines a view over a table&#39;s fields.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/View.html" title="Google::Bigtable::Admin::V2::Table::View (module)">View</a></span></span>
+    <span class='comment'># Uses the default view for each method as documented in its request.
+</span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Only populates +name+.
+</span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+</span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+</span>    <span class='comment'># replication state.
+</span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Populates all fields.
+</span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="granularity=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="granularity-instance_method">
+  
+    #<strong>granularity</strong>  &#x21d2; <tt><span class='object_link'><a href="Table/TimestampGranularity.html" title="Google::Bigtable::Admin::V2::Table::TimestampGranularity (module)">Google::Bigtable::Admin::V2::Table::TimestampGranularity</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns (+CreationOnly+)
+The granularity (i.e. +MILLIS+) at which timestamps are stored in
+this table. Timestamps not matching the granularity will be rejected.
+If unspecified at creation time, the value will be set to +MILLIS+.
+Views: +SCHEMA_VIEW+, +FULL+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Table/TimestampGranularity.html" title="Google::Bigtable::Admin::V2::Table::TimestampGranularity (module)">Google::Bigtable::Admin::V2::Table::TimestampGranularity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(+CreationOnly+)
+The granularity (i.e. +MILLIS+) at which timestamps are stored in
+this table. Timestamps not matching the granularity will be rejected.
+If unspecified at creation time, the value will be set to +MILLIS+.
+Views: +SCHEMA_VIEW+, +FULL+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/table.rb', line 47</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::Table (class)">Table</a></span></span>
+  <span class='comment'># The state of a table&#39;s data in a particular cluster.
+</span>  <span class='comment'># @!attribute [rw] replication_state
+</span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
+</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     The state of replication for the table in this cluster.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
+    <span class='comment'># Table replication states.
+</span>    <span class='kw'>module</span> <span class='const'>ReplicationState</span>
+      <span class='comment'># The replication state of the table is unknown in this cluster.
+</span>      <span class='const'>STATE_NOT_KNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># The cluster was recently created, and the table must finish copying
+</span>      <span class='comment'># over pre-existing data from other clusters before it can begin
+</span>      <span class='comment'># receiving live replication updates and serving Data API requests.
+</span>      <span class='const'>INITIALIZING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to planned internal maintenance.
+</span>      <span class='const'>PLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to unplanned or emergency maintenance.
+</span>      <span class='const'>UNPLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+      <span class='comment'># The table can serve Data API requests from this cluster. Depending on
+</span>      <span class='comment'># replication delay, reads may not immediately reflect the state of the
+</span>      <span class='comment'># table in other clusters.
+</span>      <span class='const'>READY</span> <span class='op'>=</span> <span class='int'>4</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Possible timestamp granularities to use when keeping multiple versions
+</span>  <span class='comment'># of data in a table.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/TimestampGranularity.html" title="Google::Bigtable::Admin::V2::Table::TimestampGranularity (module)">TimestampGranularity</a></span></span>
+    <span class='comment'># The user did not specify a granularity. Should not be returned.
+</span>    <span class='comment'># When specified during table creation, MILLIS will be used.
+</span>    <span class='const'>TIMESTAMP_GRANULARITY_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The table keeps data versioned at a granularity of 1ms.
+</span>    <span class='const'>MILLIS</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Defines a view over a table&#39;s fields.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/View.html" title="Google::Bigtable::Admin::V2::Table::View (module)">View</a></span></span>
+    <span class='comment'># Uses the default view for each method as documented in its request.
+</span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Only populates +name+.
+</span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+</span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+</span>    <span class='comment'># replication state.
+</span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Populates all fields.
+</span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="name-instance_method">
+  
+    #<strong>name</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns (+OutputOnly+)
+The unique name of the table. Values are of the form
++projects/<project>/instances/<instance>/tables/[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+.
+Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(+OutputOnly+)
+The unique name of the table. Values are of the form
++projects/<project>/instances/<instance>/tables/[<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*+.
+Views: +NAME_ONLY+, +SCHEMA_VIEW+, +REPLICATION_VIEW+, +FULL+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/bigtable/admin/v2/table.rb', line 47</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Bigtable::Admin::V2::Table (class)">Table</a></span></span>
+  <span class='comment'># The state of a table&#39;s data in a particular cluster.
+</span>  <span class='comment'># @!attribute [rw] replication_state
+</span>  <span class='comment'>#   @return [Google::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
+</span>  <span class='comment'>#     (+OutputOnly+)
+</span>  <span class='comment'>#     The state of replication for the table in this cluster.
+</span>  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="Table/ClusterState.html" title="Google::Bigtable::Admin::V2::Table::ClusterState (class)">ClusterState</a></span></span>
+    <span class='comment'># Table replication states.
+</span>    <span class='kw'>module</span> <span class='const'>ReplicationState</span>
+      <span class='comment'># The replication state of the table is unknown in this cluster.
+</span>      <span class='const'>STATE_NOT_KNOWN</span> <span class='op'>=</span> <span class='int'>0</span>
+
+      <span class='comment'># The cluster was recently created, and the table must finish copying
+</span>      <span class='comment'># over pre-existing data from other clusters before it can begin
+</span>      <span class='comment'># receiving live replication updates and serving Data API requests.
+</span>      <span class='const'>INITIALIZING</span> <span class='op'>=</span> <span class='int'>1</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to planned internal maintenance.
+</span>      <span class='const'>PLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>2</span>
+
+      <span class='comment'># The table is temporarily unable to serve Data API requests from this
+</span>      <span class='comment'># cluster due to unplanned or emergency maintenance.
+</span>      <span class='const'>UNPLANNED_MAINTENANCE</span> <span class='op'>=</span> <span class='int'>3</span>
+
+      <span class='comment'># The table can serve Data API requests from this cluster. Depending on
+</span>      <span class='comment'># replication delay, reads may not immediately reflect the state of the
+</span>      <span class='comment'># table in other clusters.
+</span>      <span class='const'>READY</span> <span class='op'>=</span> <span class='int'>4</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Possible timestamp granularities to use when keeping multiple versions
+</span>  <span class='comment'># of data in a table.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/TimestampGranularity.html" title="Google::Bigtable::Admin::V2::Table::TimestampGranularity (module)">TimestampGranularity</a></span></span>
+    <span class='comment'># The user did not specify a granularity. Should not be returned.
+</span>    <span class='comment'># When specified during table creation, MILLIS will be used.
+</span>    <span class='const'>TIMESTAMP_GRANULARITY_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># The table keeps data versioned at a granularity of 1ms.
+</span>    <span class='const'>MILLIS</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Defines a view over a table&#39;s fields.
+</span>  <span class='kw'>module</span> <span class='const'><span class='object_link'><a href="Table/View.html" title="Google::Bigtable::Admin::V2::Table::View (module)">View</a></span></span>
+    <span class='comment'># Uses the default view for each method as documented in its request.
+</span>    <span class='const'>VIEW_UNSPECIFIED</span> <span class='op'>=</span> <span class='int'>0</span>
+
+    <span class='comment'># Only populates +name+.
+</span>    <span class='const'>NAME_ONLY</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s schema.
+</span>    <span class='const'>SCHEMA_VIEW</span> <span class='op'>=</span> <span class='int'>2</span>
+
+    <span class='comment'># Only populates +name+ and fields related to the table&#39;s
+</span>    <span class='comment'># replication state.
+</span>    <span class='const'>REPLICATION_VIEW</span> <span class='op'>=</span> <span class='int'>3</span>
+
+    <span class='comment'># Populates all fields.
+</span>    <span class='const'>FULL</span> <span class='op'>=</span> <span class='int'>4</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>

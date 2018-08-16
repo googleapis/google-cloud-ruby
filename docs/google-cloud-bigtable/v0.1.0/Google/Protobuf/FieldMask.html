@@ -1,0 +1,443 @@
+---
+layout: yard_main
+title: "Class: Google::Protobuf::FieldMask - Cloud"
+css: 
+  - /docs/css/style.css
+  - /docs/css/common.css
+  - /css/docs.css
+js: 
+  - /docs/js/app.js
+  - /js/docs.js
+---
+<script type="text/javascript" charset="utf-8">
+  pathId = "Google::Protobuf::FieldMask";
+  relpath = '../../';
+</script>
+
+
+<div class="nav_wrap">
+  <iframe id="nav" src="../../class_list.html?1"></iframe>
+  <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+  <div id="header">
+    <div id="menu">
+  
+    <a href="../../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Google.html" title="Google (module)">Google</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Protobuf.html" title="Google::Protobuf (module)">Protobuf</a></span></span>
+     &raquo; 
+    <span class="title">FieldMask</span>
+  
+</div>
+
+    <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="content"><h1>Class: Google::Protobuf::FieldMask
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Google::Protobuf::FieldMask</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/google/cloud/bigtable/admin/v2/doc/google/protobuf/field_mask.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>+FieldMask+ represents a set of symbolic field paths, for example:</p>
+
+<pre class="code ruby"><code class="ruby">paths: &quot;f.a&quot;
+paths: &quot;f.b.d&quot;
+</code></pre>
+
+<p>Here +f+ represents a field in some root message, +a+ and +b+
+fields in the message found in +f+, and +d+ a field found in the
+message in +f.b+.</p>
+
+<p>Field masks are used to specify a subset of fields that should be
+returned by a get operation or modified by an update operation.
+Field masks also have a custom JSON encoding (see below).</p>
+
+<p>= Field Masks in Projections</p>
+
+<p>When used in the context of a projection, a response message or
+sub-message is filtered by the API to only contain those fields as
+specified in the mask. For example, if the mask in the previous
+example is applied to a response message as follows:</p>
+
+<pre class="code ruby"><code class="ruby">f {
+  a : 22
+  b {
+    d : 1
+    x : 2
+  }
+  y : 13
+}
+z: 8
+</code></pre>
+
+<p>The result will not contain specific values for fields x,y and z
+(their value will be set to the default, and omitted in proto text
+output):</p>
+
+<pre class="code ruby"><code class="ruby">f {
+  a : 22
+  b {
+    d : 1
+  }
+}
+</code></pre>
+
+<p>A repeated field is not allowed except at the last position of a
+paths string.</p>
+
+<p>If a FieldMask object is not present in a get operation, the
+operation applies to all fields (as if a FieldMask of all fields
+had been specified).</p>
+
+<p>Note that a field mask does not necessarily apply to the
+top-level response message. In case of a REST get operation, the
+field mask applies directly to the response, but in case of a REST
+list operation, the mask instead applies to each individual message
+in the returned resource list. In case of a REST custom method,
+other definitions may be used. Where the mask applies will be
+clearly documented together with its declaration in the API.  In
+any case, the effect on the returned resource/resources is required
+behavior for APIs.</p>
+
+<p>= Field Masks in Update Operations</p>
+
+<p>A field mask in update operations specifies which fields of the
+targeted resource are going to be updated. The API is required
+to only change the values of the fields as specified in the mask
+and leave the others untouched. If a resource is passed in to
+describe the updated values, the API ignores the values of all
+fields not covered by the mask.</p>
+
+<p>If a repeated field is specified for an update operation, the existing
+repeated values in the target resource will be overwritten by the new values.
+Note that a repeated field is only allowed in the last position of a +paths+
+string.</p>
+
+<p>If a sub-message is specified in the last position of the field mask for an
+update operation, then the existing sub-message in the target resource is
+overwritten. Given the target message:</p>
+
+<pre class="code ruby"><code class="ruby">f {
+  b {
+    d : 1
+    x : 2
+  }
+  c : 1
+}
+</code></pre>
+
+<p>And an update message:</p>
+
+<pre class="code ruby"><code class="ruby">f {
+  b {
+    d : 10
+  }
+}
+</code></pre>
+
+<p>then if the field mask is:</p>
+
+<p>paths: &quot;f.b&quot;</p>
+
+<p>then the result will be:</p>
+
+<pre class="code ruby"><code class="ruby">f {
+  b {
+    d : 10
+  }
+  c : 1
+}
+</code></pre>
+
+<p>However, if the update mask was:</p>
+
+<p>paths: &quot;f.b.d&quot;</p>
+
+<p>then the result would be:</p>
+
+<pre class="code ruby"><code class="ruby">f {
+  b {
+    d : 10
+    x : 2
+  }
+  c : 1
+}
+</code></pre>
+
+<p>In order to reset a field&#39;s value to the default, the field must
+be in the mask and set to the default value in the provided resource.
+Hence, in order to reset all fields of a resource, provide a default
+instance of the resource and set all fields in the mask, or do
+not provide a mask as described below.</p>
+
+<p>If a field mask is not present on update, the operation applies to
+all fields (as if a field mask of all fields has been specified).
+Note that in the presence of schema evolution, this may mean that
+fields the client does not know and has therefore not filled into
+the request will be reset to their default. If this is unwanted
+behavior, a specific service may require a client to always specify
+a field mask, producing an error if not.</p>
+
+<p>As with get operations, the location of the resource which
+describes the updated values in the request message depends on the
+operation kind. In any case, the effect of the field mask is
+required to be honored by the API.</p>
+
+<p>== Considerations for HTTP REST</p>
+
+<p>The HTTP kind of an update operation which uses a field mask must
+be set to PATCH instead of PUT in order to satisfy HTTP semantics
+(PUT must only be used for full updates).</p>
+
+<p>= JSON Encoding of Field Masks</p>
+
+<p>In JSON, a field mask is encoded as a single string where paths are
+separated by a comma. Fields name in each path are converted
+to/from lower-camel naming conventions.</p>
+
+<p>As an example, consider the following message declarations:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_message'>message</span> <span class='const'>Profile</span> <span class='lbrace'>{</span>
+  <span class='const'>User</span> <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='int'>1</span><span class='semicolon'>;</span>
+  <span class='const'>Photo</span> <span class='id identifier rubyid_photo'>photo</span> <span class='op'>=</span> <span class='int'>2</span><span class='semicolon'>;</span>
+<span class='rbrace'>}</span>
+<span class='id identifier rubyid_message'>message</span> <span class='const'>User</span> <span class='lbrace'>{</span>
+  <span class='id identifier rubyid_string'>string</span> <span class='id identifier rubyid_display_name'>display_name</span> <span class='op'>=</span> <span class='int'>1</span><span class='semicolon'>;</span>
+  <span class='id identifier rubyid_string'>string</span> <span class='id identifier rubyid_address'>address</span> <span class='op'>=</span> <span class='int'>2</span><span class='semicolon'>;</span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<p>In proto a field mask for +Profile+ may look as such:</p>
+
+<pre class="code ruby"><code class="ruby">mask {
+  paths: &quot;user.display_name&quot;
+  paths: &quot;photo&quot;
+}
+</code></pre>
+
+<p>In JSON, the same mask is represented as below:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='lbrace'>{</span>
+  <span class='label'>mask:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user.displayName,photo</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<p>= Field Masks and Oneof Fields</p>
+
+<p>Field masks treat fields in oneofs just as regular fields. Consider the
+following message:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_message'>message</span> <span class='const'>SampleMessage</span> <span class='lbrace'>{</span>
+  <span class='id identifier rubyid_oneof'>oneof</span> <span class='id identifier rubyid_test_oneof'>test_oneof</span> <span class='lbrace'>{</span>
+    <span class='id identifier rubyid_string'>string</span> <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='int'>4</span><span class='semicolon'>;</span>
+    <span class='const'>SubMessage</span> <span class='id identifier rubyid_sub_message'>sub_message</span> <span class='op'>=</span> <span class='int'>9</span><span class='semicolon'>;</span>
+  <span class='rbrace'>}</span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<p>The field mask can be:</p>
+
+<pre class="code ruby"><code class="ruby">mask {
+  paths: &quot;name&quot;
+}
+</code></pre>
+
+<p>Or:</p>
+
+<pre class="code ruby"><code class="ruby">mask {
+  paths: &quot;sub_message&quot;
+}
+</code></pre>
+
+<p>Note that oneof type names (&quot;test_oneof&quot; in this case) cannot be used in
+paths.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#paths-instance_method" title="#paths (instance method)">#<strong>paths</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The set of field mask paths.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="paths=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="paths-instance_method">
+  
+    #<strong>paths</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns The set of field mask paths.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The set of field mask paths.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+221</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/bigtable/admin/v2/doc/google/protobuf/field_mask.rb', line 221</span>
+
+<span class='kw'>class</span> <span class='const'><span class='object_link'><a href="" title="Google::Protobuf::FieldMask (class)">FieldMask</a></span></span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+  <div id="footer">
+  <ul class="footer-links">
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby" title="Google Cloud on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> GitHub
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/GoogleCloudPlatform/google-cloud-ruby/issues" title="Google Cloud issues on Github">
+        <img src="/google-cloud-ruby/img/icon-link-github.svg" alt="GitHub icon"> Issues
+      </a>
+    </li>
+    <li>
+      <a href="http://stackoverflow.com/questions/tagged/google-cloud-ruby" title="Google Cloud on StackOverflow">
+      <img src="/google-cloud-ruby/img/icon-link-stackoverflow.svg" alt="StackOverflow icon"> StackOverflow
+    </a>
+    </li>
+    <li>
+      <a href="http://rubygems.org/gems/google-cloud" title="Google Cloud on RubyGems">
+        <img src="/google-cloud-ruby/img/icon-link-package-manager.svg" alt="RubyGems icon"> RubyGems
+      </a>
+    </li>
+  </ul>
+
+  <p>
+    Documentation generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>.
+  </p>
+</div>
+
+</div>
