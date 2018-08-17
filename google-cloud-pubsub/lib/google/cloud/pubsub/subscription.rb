@@ -108,8 +108,8 @@ module Google
         ##
         # Indicates whether to retain acknowledged messages. If `true`, then
         # messages are not expunged from the subscription's backlog, even if
-        # they are acknowledged, until they fall out of the
-        # {#retention_duration} window. Default is `false`.
+        # they are acknowledged, until they fall out of the {#retention} window.
+        # Default is `false`.
         #
         # @return [Boolean] Returns `true` if acknowledged messages are
         #   retained.
