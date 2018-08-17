@@ -76,7 +76,7 @@ module Google
     #   present, the default project for the credentials is used.
     # @param [String, Hash, Google::Auth::Credentials] credentials The path to
     #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-    #   Google::Auth::Credentials object. (See {Datastore::Credentials})
+    #   Google::Auth::Credentials object. (See {Firestore::Credentials})
     # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling the
     #   set of resources and operations that the connection can access. See
     #   [Using OAuth 2.0 to Access Google

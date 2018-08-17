@@ -30,7 +30,7 @@ module Google
       # atomically at a single logical point in time in a database.
       #
       # All changes are accumulated in memory until the block passed to
-      # {Database#batch} completes. Unlike transactions, batches don't lock on
+      # {Client#batch} completes. Unlike transactions, batches don't lock on
       # document reads, should only fail if users provide preconditions, and are
       # not automatically retried.
       #

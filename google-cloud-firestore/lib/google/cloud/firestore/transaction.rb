@@ -29,9 +29,9 @@ module Google
       # execute atomically at a single logical point in time.
       #
       # All changes are accumulated in memory until the block passed to
-      # {Database#transaction} completes. Transactions will be automatically
+      # {Client#transaction} completes. Transactions will be automatically
       # retried when documents change before the transaction is committed. See
-      # {Database#transaction}.
+      # {Client#transaction}.
       #
       # @example
       #   require "google/cloud/firestore"
