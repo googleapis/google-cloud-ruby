@@ -1,5 +1,16 @@
 # Release History
 
+### 0.32.0 / 2018-08-14
+
+* Updated Subscriber implementation
+  * Revised shutdown mechanics
+    * Fixes stop and wait! would hanging indefinitely.
+    * Reduce the number of GRPC warnings printed.
+  * Added error callbacks to the API
+    *  Use error handler to be notified when unhandled errors
+       occur on a subscriber's stream thread.
+* Documentation updates.
+
 ### 0.31.1 / 2018-08-14
 
 * Fix bug in AsyncUnaryPusher,
