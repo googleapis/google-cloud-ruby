@@ -1,5 +1,25 @@
 # Release History
 
+### 0.23.0 / 2018-08-17
+
+* Add Firestore Watch
+  * A document reference or a collection reference/query can now be
+    listened to for changes.
+  * The following methods were added:
+    * DocumentReference#listen
+    * Query#listen
+  * The following classes were added:
+    * DocumentSnapshot
+    * DocumentChange
+    * DocumentListener
+    * QuerySnapshot
+    * QueryListener
+* Support DocumentSnapshot objects as cursors.
+* Fix mapping of geo Hash to GeoPoint resource.
+* Query#select is no longer additive, it now replaces any previously
+  selected fields.
+* Documentation updates.
+
 ### 0.22.0 / 2018-07-05
 
 * Remove Base64 encoding for BYTES values, as it is unnecessary for gRPC endpoints.
