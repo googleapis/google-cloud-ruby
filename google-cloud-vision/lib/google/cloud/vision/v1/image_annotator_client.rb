@@ -60,6 +60,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-vision"
           ].freeze
 
+          # @private
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = ImageAnnotatorClient::SERVICE_ADDRESS
             self::GRPC_INTERCEPTORS = ImageAnnotatorClient::GRPC_INTERCEPTORS

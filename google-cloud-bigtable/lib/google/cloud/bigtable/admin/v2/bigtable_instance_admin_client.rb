@@ -77,6 +77,7 @@ module Google
               "https://www.googleapis.com/auth/cloud-platform.read-only"
             ].freeze
 
+            # @private
             class OperationsClient < Google::Longrunning::OperationsClient
               self::SERVICE_ADDRESS = BigtableInstanceAdminClient::SERVICE_ADDRESS
               self::GRPC_INTERCEPTORS = BigtableInstanceAdminClient::GRPC_INTERCEPTORS

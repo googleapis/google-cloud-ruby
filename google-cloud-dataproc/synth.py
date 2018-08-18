@@ -65,3 +65,9 @@ s.replace(
         end
         desc "Run the CI build, with acceptance tests."
         task :acceptance do"""))
+
+# https://github.com/googleapis/gapic-generator/issues/2232
+s.replace(
+    'lib/google/cloud/dataproc/v1/cluster_controller_client.rb',
+    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')

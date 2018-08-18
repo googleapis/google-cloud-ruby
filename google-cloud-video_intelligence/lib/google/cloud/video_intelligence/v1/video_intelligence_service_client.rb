@@ -57,6 +57,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
+          # @private
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = VideoIntelligenceServiceClient::SERVICE_ADDRESS
             self::GRPC_INTERCEPTORS = VideoIntelligenceServiceClient::GRPC_INTERCEPTORS

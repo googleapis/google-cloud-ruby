@@ -49,3 +49,13 @@ s.copy(v2_library / '.gitignore')
 s.copy(v2_library / '.rubocop.yml')
 s.copy(v2_library / '.yardopts')
 s.copy(v2_library / 'google-cloud-dialogflow.gemspec', merge=merge_gemspec)
+
+# https://github.com/googleapis/gapic-generator/issues/2232
+s.replace(
+    [
+      'lib/google/cloud/dialogflow/v2/agents_client.rb',
+      'lib/google/cloud/dialogflow/v2/entity_types_client.rb',
+      'lib/google/cloud/dialogflow/v2/intents_client.rb'
+    ],
+    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
