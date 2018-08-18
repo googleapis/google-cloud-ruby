@@ -98,17 +98,7 @@ of Google Compute Engine instances.</p>
 <div class="tags">
   
 
-</div><h2>Defined Under Namespace</h2>
-<p class="children">
-  
-    
-  
-    
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="ClusterControllerClient/OperationsClient.html" title="Google::Cloud::Dataproc::V1::ClusterControllerClient::OperationsClient (class)">OperationsClient</a></span>
-    
-  
-</p>
-
+</div>
   
     <h2>
       Constant Summary
@@ -539,7 +529,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-104
 105
 106
 107
@@ -652,10 +641,11 @@ custom error handling.</p>
 214
 215
 216
-217</pre>
+217
+218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -674,7 +664,7 @@ custom error handling.</p>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Dataproc::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Dataproc::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ClusterControllerClient/OperationsClient.html" title="Google::Cloud::Dataproc::V1::ClusterControllerClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -1508,7 +1498,8 @@ custom error handling.</p>
 726
 727
 728
-729</pre>
+729
+730</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 41</span>
@@ -1542,7 +1533,8 @@ custom error handling.</p>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
   <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
-  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="ClusterControllerClient/OperationsClient.html" title="Google::Cloud::Dataproc::V1::ClusterControllerClient::OperationsClient (class)">OperationsClient</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
+  <span class='comment'># @private
+</span>  <span class='kw'>class</span> <span class='const'>OperationsClient</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterControllerClient (class)">ClusterControllerClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Dataproc::V1::ClusterControllerClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dataproc::V1::ClusterControllerClient (class)">ClusterControllerClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Dataproc::V1::ClusterControllerClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span>
   <span class='kw'>end</span>
@@ -1593,7 +1585,7 @@ custom error handling.</p>
 
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dataproc.html" title="Google::Cloud::Dataproc (module)">Dataproc</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Dataproc::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Dataproc::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ClusterControllerClient/OperationsClient.html" title="Google::Cloud::Dataproc::V1::ClusterControllerClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Dataproc::V1::ClusterControllerClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Dataproc::V1::ClusterControllerClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
       <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
       <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -2383,7 +2375,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-278
 279
 280
 281
@@ -2403,10 +2394,11 @@ retries, etc.</p>
 295
 296
 297
-298</pre>
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 278</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 279</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_cluster'>create_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2601,7 +2593,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-496
 497
 498
 499
@@ -2621,10 +2612,11 @@ retries, etc.</p>
 513
 514
 515
-516</pre>
+516
+517</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 496</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 497</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_cluster'>delete_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -2821,7 +2813,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-708
 709
 710
 711
@@ -2841,10 +2832,11 @@ retries, etc.</p>
 725
 726
 727
-728</pre>
+728
+729</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 708</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 709</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_diagnose_cluster'>diagnose_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -3056,7 +3048,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-550
 551
 552
 553
@@ -3069,10 +3060,11 @@ retries, etc.</p>
 560
 561
 562
-563</pre>
+563
+564</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 550</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 551</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_cluster'>get_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -3330,7 +3322,6 @@ object.</p>
       <pre class="lines">
 
 
-634
 635
 636
 637
@@ -3345,10 +3336,11 @@ object.</p>
 646
 647
 648
-649</pre>
+649
+650</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 634</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 635</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_clusters'>list_clusters</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
@@ -3628,7 +3620,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-415
 416
 417
 418
@@ -3652,10 +3643,11 @@ retries, etc.</p>
 436
 437
 438
-439</pre>
+439
+440</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 415</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dataproc/v1/cluster_controller_client.rb', line 416</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_cluster'>update_cluster</span> \
     <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span>
