@@ -1321,7 +1321,7 @@ acknowledge the message.</p>
         <div class='inline'><p>Indicates whether to retain acknowledged
 messages. If <code>true</code>, then messages are not expunged from the
 subscription&#39;s backlog, even if they are acknowledged, until they
-fall out of the <code>retention_duration</code> window. Default is <code>false</code>.</p>
+fall out of the <code>retention</code> window. Default is <code>false</code>.</p>
 </div>
       
     </li>
@@ -1340,9 +1340,9 @@ fall out of the <code>retention_duration</code> window. Default is <code>false</
 in the subscription&#39;s backlog, from the moment a message is
 published. If <code>retain_acked</code> is <code>true</code>, then this also configures
 the retention of acknowledged messages, and thus configures how far
-back in time a #seek can be done. Cannot be more than 604,800
-seconds (7 days) or less than 600 seconds (10 minutes). Default is
-604,800 seconds (7 days).</p>
+back in time a <span class='object_link'><a href="Subscription.html#seek-instance_method" title="Google::Cloud::Pubsub::Subscription#seek (method)">Subscription#seek</a></span> can be done. Cannot be more than
+604,800 seconds (7 days) or less than 600 seconds (10 minutes).
+Default is 604,800 seconds (7 days).</p>
 </div>
       
     </li>
