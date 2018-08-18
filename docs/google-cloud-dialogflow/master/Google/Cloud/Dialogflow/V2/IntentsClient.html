@@ -127,17 +127,7 @@ Dialogflow API agent to better match intents.</p></li>
 <div class="tags">
   
 
-</div><h2>Defined Under Namespace</h2>
-<p class="children">
-  
-    
-  
-    
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="IntentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::IntentsClient::OperationsClient (class)">OperationsClient</a></span>
-    
-  
-</p>
-
+</div>
   
     <h2>
       Constant Summary
@@ -669,7 +659,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-182
 183
 184
 185
@@ -787,10 +776,11 @@ custom error handling.</p>
 297
 298
 299
-300</pre>
+300
+301</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 182</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -809,7 +799,7 @@ custom error handling.</p>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Dialogflow::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="IntentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::IntentsClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -1611,7 +1601,8 @@ custom error handling.</p>
 718
 719
 720
-721</pre>
+721
+722</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 70</span>
@@ -1645,7 +1636,8 @@ custom error handling.</p>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
   <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
-  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="IntentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::IntentsClient::OperationsClient (class)">OperationsClient</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
+  <span class='comment'># @private
+</span>  <span class='kw'>class</span> <span class='const'>OperationsClient</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::IntentsClient (class)">IntentsClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Dialogflow::V2::IntentsClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::IntentsClient (class)">IntentsClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Dialogflow::V2::IntentsClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span>
   <span class='kw'>end</span>
@@ -1745,7 +1737,7 @@ custom error handling.</p>
 
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Dialogflow::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="IntentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::IntentsClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Dialogflow::V2::IntentsClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Dialogflow::V2::IntentsClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
       <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
       <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -2344,15 +2336,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-146
 147
 148
 149
 150
-151</pre>
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_agent_path'>agent_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_agent'>agent</span>
   <span class='const'>AGENT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2429,15 +2421,15 @@ custom error handling.</p>
       <pre class="lines">
 
 
-135
 136
 137
 138
 139
-140</pre>
+140
+141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_intent_path'>intent_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_intent'>intent</span>
   <span class='const'>INTENT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2503,14 +2495,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-125
 126
 127
 128
-129</pre>
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_agent_path'>project_agent_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_AGENT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2680,7 +2672,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-702
 703
 704
 705
@@ -2698,10 +2689,11 @@ retries, etc.</p>
 717
 718
 719
-720</pre>
+720
+721</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 702</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 703</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_delete_intents'>batch_delete_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2946,7 +2938,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-621
 622
 623
 624
@@ -2972,10 +2963,11 @@ retries, etc.</p>
 644
 645
 646
-647</pre>
+647
+648</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 621</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 622</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_batch_update_intents'>batch_update_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3209,7 +3201,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-449
 450
 451
 452
@@ -3224,10 +3215,11 @@ retries, etc.</p>
 461
 462
 463
-464</pre>
+464
+465</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 449</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 450</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_intent'>create_intent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3387,7 +3379,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-541
 542
 543
 544
@@ -3397,10 +3388,11 @@ retries, etc.</p>
 548
 549
 550
-551</pre>
+551
+552</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 541</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 542</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_intent'>delete_intent</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3598,7 +3590,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-399
 400
 401
 402
@@ -3611,10 +3602,11 @@ retries, etc.</p>
 409
 410
 411
-412</pre>
+412
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 399</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 400</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_intent'>get_intent</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -3853,7 +3845,6 @@ object.</p>
       <pre class="lines">
 
 
-354
 355
 356
 357
@@ -3868,10 +3859,11 @@ object.</p>
 366
 367
 368
-369</pre>
+369
+370</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 354</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 355</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_intents'>list_intents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -4098,7 +4090,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-505
 506
 507
 508
@@ -4113,10 +4104,11 @@ retries, etc.</p>
 517
 518
 519
-520</pre>
+520
+521</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 505</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/intents_client.rb', line 506</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_intent'>update_intent</span> \
     <span class='id identifier rubyid_intent'>intent</span><span class='comma'>,</span>

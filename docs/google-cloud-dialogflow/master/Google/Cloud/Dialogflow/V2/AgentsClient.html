@@ -121,17 +121,7 @@ currency, and so on.</p>
 <div class="tags">
   
 
-</div><h2>Defined Under Namespace</h2>
-<p class="children">
-  
-    
-  
-    
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="AgentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::AgentsClient::OperationsClient (class)">OperationsClient</a></span>
-    
-  
-</p>
-
+</div>
   
     <h2>
       Constant Summary
@@ -594,7 +584,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-142
 143
 144
 145
@@ -707,10 +696,11 @@ custom error handling.</p>
 252
 253
 254
-255</pre>
+255
+256</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 143</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -729,7 +719,7 @@ custom error handling.</p>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Dialogflow::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="AgentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::AgentsClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -1474,7 +1464,8 @@ custom error handling.</p>
 660
 661
 662
-663</pre>
+663
+664</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 64</span>
@@ -1508,7 +1499,8 @@ custom error handling.</p>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
   <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
-  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="AgentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::AgentsClient::OperationsClient (class)">OperationsClient</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
+  <span class='comment'># @private
+</span>  <span class='kw'>class</span> <span class='const'>OperationsClient</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::AgentsClient (class)">AgentsClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Dialogflow::V2::AgentsClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Dialogflow::V2::AgentsClient (class)">AgentsClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Dialogflow::V2::AgentsClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span>
   <span class='kw'>end</span>
@@ -1574,7 +1566,7 @@ custom error handling.</p>
 
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Dialogflow.html" title="Google::Cloud::Dialogflow (module)">Dialogflow</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V2.html" title="Google::Cloud::Dialogflow::V2 (module)">V2</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Dialogflow::V2::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="AgentsClient/OperationsClient.html" title="Google::Cloud::Dialogflow::V2::AgentsClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Dialogflow::V2::AgentsClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Dialogflow::V2::AgentsClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
       <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
       <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -2144,14 +2136,14 @@ custom error handling.</p>
       <pre class="lines">
 
 
-107
 108
 109
 110
-111</pre>
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_project_path'>project_path</span> <span class='id identifier rubyid_project'>project</span>
   <span class='const'>PROJECT_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2318,7 +2310,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-465
 466
 467
 468
@@ -2336,10 +2327,11 @@ retries, etc.</p>
 480
 481
 482
-483</pre>
+483
+484</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 465</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 466</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_export_agent'>export_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2511,7 +2503,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-279
 280
 281
 282
@@ -2520,10 +2511,11 @@ retries, etc.</p>
 285
 286
 287
-288</pre>
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 279</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 280</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_agent'>get_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2720,7 +2712,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-553
 554
 555
 556
@@ -2740,10 +2731,11 @@ retries, etc.</p>
 570
 571
 572
-573</pre>
+573
+574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 553</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 554</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_import_agent'>import_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2950,7 +2942,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-642
 643
 644
 645
@@ -2970,10 +2961,11 @@ retries, etc.</p>
 659
 660
 661
-662</pre>
+662
+663</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 642</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 643</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_agent'>restore_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3191,7 +3183,6 @@ object.</p>
       <pre class="lines">
 
 
-338
 339
 340
 341
@@ -3202,10 +3193,11 @@ object.</p>
 346
 347
 348
-349</pre>
+349
+350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 338</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 339</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_agents'>search_agents</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3356,7 +3348,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-397
 398
 399
 400
@@ -3372,10 +3363,11 @@ retries, etc.</p>
 410
 411
 412
-413</pre>
+413
+414</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 397</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/dialogflow/v2/agents_client.rb', line 398</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_train_agent'>train_agent</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
