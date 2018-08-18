@@ -73,6 +73,7 @@ module Google
                 "https://www.googleapis.com/auth/spanner.admin"
               ].freeze
 
+              # @private
               class OperationsClient < Google::Longrunning::OperationsClient
                 SERVICE_ADDRESS = SERVICE_ADDRESS
               end

@@ -82,3 +82,12 @@ s.replace(
       'lib/google/cloud/bigtable/admin/v2.rb',
     ],
     '/bigtable-admin\\.googleapis\\.com', '/bigtableadmin.googleapis.com')
+
+# https://github.com/googleapis/gapic-generator/issues/2232
+s.replace(
+    [
+      'lib/google/cloud/bigtable/admin/v2/bigtable_instance_admin_client.rb',
+      'lib/google/cloud/bigtable/admin/v2/bigtable_table_admin_client.rb'
+    ],
+    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')

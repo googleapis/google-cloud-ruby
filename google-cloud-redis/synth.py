@@ -45,3 +45,9 @@ s.replace(
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/redis\n',
     '[Product Documentation]: https://cloud.google.com/memorystore\n')
+
+# https://github.com/googleapis/gapic-generator/issues/2232
+s.replace(
+    'lib/google/cloud/redis/v1beta1/cloud_redis_client.rb',
+    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')

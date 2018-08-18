@@ -54,3 +54,9 @@ s.replace(
     ],
     'Google::Cloud::Vision\\.new\\(version: :v1\\)',
     'Google::Cloud::Vision::V1.new')
+
+# https://github.com/googleapis/gapic-generator/issues/2232
+s.replace(
+    'lib/google/cloud/vision/v1/image_annotator_client.rb',
+    '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
+    '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')

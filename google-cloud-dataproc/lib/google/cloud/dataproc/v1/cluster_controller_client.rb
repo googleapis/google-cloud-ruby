@@ -67,6 +67,7 @@ module Google
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
+          # @private
           class OperationsClient < Google::Longrunning::OperationsClient
             self::SERVICE_ADDRESS = ClusterControllerClient::SERVICE_ADDRESS
             self::GRPC_INTERCEPTORS = ClusterControllerClient::GRPC_INTERCEPTORS
