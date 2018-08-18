@@ -99,17 +99,7 @@ js:
 <div class="tags">
   
 
-</div><h2>Defined Under Namespace</h2>
-<p class="children">
-  
-    
-  
-    
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="SpeechClient/OperationsClient.html" title="Google::Cloud::Speech::V1::SpeechClient::OperationsClient (class)">OperationsClient</a></span>
-    
-  
-</p>
-
+</div>
   
     <h2>
       Constant Summary
@@ -471,7 +461,6 @@ custom error handling.</p>
       <pre class="lines">
 
 
-94
 95
 96
 97
@@ -568,10 +557,11 @@ custom error handling.</p>
 188
 189
 190
-191</pre>
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/speech_client.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/speech_client.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -590,7 +580,7 @@ custom error handling.</p>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Speech.html" title="Google::Cloud::Speech (module)">Speech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Speech::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Speech::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="SpeechClient/OperationsClient.html" title="Google::Cloud::Speech::V1::SpeechClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -1004,7 +994,8 @@ custom error handling.</p>
 321
 322
 323
-324</pre>
+324
+325</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/speech_client.rb', line 40</span>
@@ -1029,7 +1020,8 @@ custom error handling.</p>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/cloud-platform</span><span class='tstring_end'>&quot;</span></span>
   <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
-  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="SpeechClient/OperationsClient.html" title="Google::Cloud::Speech::V1::SpeechClient::OperationsClient (class)">OperationsClient</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
+  <span class='comment'># @private
+</span>  <span class='kw'>class</span> <span class='const'>OperationsClient</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Longrunning.html" title="Google::Longrunning (module)">Longrunning</a></span></span><span class='op'>::</span><span class='const'>OperationsClient</span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>SERVICE_ADDRESS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::SpeechClient (class)">SpeechClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Speech::V1::SpeechClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span>
     <span class='kw'>self</span><span class='op'>::</span><span class='const'>GRPC_INTERCEPTORS</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="Google::Cloud::Speech::V1::SpeechClient (class)">SpeechClient</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="#GRPC_INTERCEPTORS-constant" title="Google::Cloud::Speech::V1::SpeechClient::GRPC_INTERCEPTORS (constant)">GRPC_INTERCEPTORS</a></span></span>
   <span class='kw'>end</span>
@@ -1080,7 +1072,7 @@ custom error handling.</p>
 
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Speech.html" title="Google::Cloud::Speech (module)">Speech</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../V1.html" title="Google::Cloud::Speech::V1 (module)">V1</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Credentials.html" title="Google::Cloud::Speech::V1::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="SpeechClient/OperationsClient.html" title="Google::Cloud::Speech::V1::SpeechClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Speech::V1::SpeechClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Speech::V1::SpeechClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
       <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
       <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -1466,7 +1458,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-305
 306
 307
 308
@@ -1484,10 +1475,11 @@ retries, etc.</p>
 320
 321
 322
-323</pre>
+323
+324</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/speech_client.rb', line 305</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/speech_client.rb', line 306</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_long_running_recognize'>long_running_recognize</span> \
     <span class='id identifier rubyid_config'>config</span><span class='comma'>,</span>
@@ -1688,7 +1680,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-231
 232
 233
 234
@@ -1699,10 +1690,11 @@ retries, etc.</p>
 239
 240
 241
-242</pre>
+242
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/speech_client.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/speech/v1/speech_client.rb', line 232</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_recognize'>recognize</span> \
     <span class='id identifier rubyid_config'>config</span><span class='comma'>,</span>
