@@ -701,10 +701,10 @@ module Google
         # accepts only mutations and makes a single API request.
         #
         # **Note:** This method does not feature replay protection present in
-        # {Transaction#commit} (See {#transaction}). This method makes a single
-        # RPC, whereas {Transaction#commit} requires two RPCs (one of which may
-        # be performed in advance), and so this method may be appropriate for
-        # latency sensitive and/or high throughput blind changes.
+        # {#transaction}. This method makes a single RPC, whereas {#transaction}
+        # requires two RPCs (one of which may be performed in advance), and so
+        # this method may be appropriate for latency sensitive and/or high
+        # throughput blind changes.
         #
         # @yield [commit] The block for mutating the data.
         # @yieldparam [Google::Cloud::Spanner::Commit] commit The Commit object.

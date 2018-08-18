@@ -245,7 +245,7 @@ module Google
         #     puts database.database_id
         #   end
         #
-        # @example Retrieve all: (See {Instance::Config::List::List#all})
+        # @example Retrieve all: (See {Instance::Config::List#all})
         #   require "google/cloud/spanner"
         #
         #   spanner = Google::Cloud::Spanner.new

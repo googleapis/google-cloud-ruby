@@ -33,8 +33,7 @@ module Google
       # request can then be executed independently over each partition while
       # observing the same snapshot of the database. A BatchSnapshot can also be
       # shared across multiple processes/machines by passing around its
-      # serialized value and then recreating the transaction using
-      # {BatchClient#dump}.
+      # serialized value and then recreating the transaction using {#dump}.
       #
       # Unlike locking read-write transactions, BatchSnapshot will never abort.
       # They can fail if the chosen read timestamp is garbage collected; however
@@ -291,7 +290,7 @@ module Google
         end
 
         ##
-        # Execute the partition to return a {ResultSet}. The result returned
+        # Execute the partition to return a {Results}. The result returned
         # could be zero or more rows. The row metadata may be absent if no rows
         # are returned.
         #
