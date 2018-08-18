@@ -101,17 +101,7 @@ databases.</p>
 <div class="tags">
   
 
-</div><h2>Defined Under Namespace</h2>
-<p class="children">
-  
-    
-  
-    
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="DatabaseAdminClient/OperationsClient.html" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient::OperationsClient (class)">OperationsClient</a></span>
-    
-  
-</p>
-
+</div>
   
     <h2>
       Constant Summary
@@ -621,7 +611,6 @@ or the specified config is missing data points.</p>
       <pre class="lines">
 
 
-140
 141
 142
 143
@@ -735,10 +724,11 @@ or the specified config is missing data points.</p>
 251
 252
 253
-254</pre>
+254
+255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> \
     <span class='label'>credentials:</span> <span class='kw'>nil</span><span class='comma'>,</span>
@@ -755,7 +745,7 @@ or the specified config is missing data points.</p>
 
   <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Spanner::Admin::Database::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="DatabaseAdminClient/OperationsClient.html" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
     <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
     <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -1536,7 +1526,8 @@ or the specified config is missing data points.</p>
 678
 679
 680
-681</pre>
+681
+682</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 49</span>
@@ -1568,7 +1559,8 @@ or the specified config is missing data points.</p>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.googleapis.com/auth/spanner.admin</span><span class='tstring_end'>&quot;</span></span>
   <span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span>
 
-  <span class='kw'>class</span> <span class='const'><span class='object_link'><a href="DatabaseAdminClient/OperationsClient.html" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient::OperationsClient (class)">OperationsClient</a></span></span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Longrunning</span><span class='op'>::</span><span class='const'>OperationsClient</span>
+  <span class='comment'># @private
+</span>  <span class='kw'>class</span> <span class='const'>OperationsClient</span> <span class='op'>&lt;</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'>Longrunning</span><span class='op'>::</span><span class='const'>OperationsClient</span>
     <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#SERVICE_ADDRESS-constant" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient::SERVICE_ADDRESS (constant)">SERVICE_ADDRESS</a></span></span>
   <span class='kw'>end</span>
 
@@ -1647,7 +1639,7 @@ or the specified config is missing data points.</p>
 
     <span class='id identifier rubyid_credentials'>credentials</span> <span class='op'>||=</span> <span class='const'><span class='object_link'><a href="../../../../../../Google.html" title="Google (module)">Google</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../../Cloud.html" title="Google::Cloud (module)">Cloud</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../../Spanner.html" title="Google::Cloud::Spanner (module)">Spanner</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../../Admin.html" title="Google::Cloud::Spanner::Admin (module)">Admin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../../Database.html" title="Google::Cloud::Spanner::Admin::Database (module)">Database</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Credentials.html" title="Google::Cloud::Spanner::Admin::Database::Credentials (class)">Credentials</a></span></span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
 
-    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="DatabaseAdminClient/OperationsClient.html" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient::OperationsClient (class)">OperationsClient</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+    <span class='ivar'>@operations_client</span> <span class='op'>=</span> <span class='const'>OperationsClient</span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#initialize (method)">new</a></span></span><span class='lparen'>(</span>
       <span class='label'>credentials:</span> <span class='id identifier rubyid_credentials'>credentials</span><span class='comma'>,</span>
       <span class='label'>scopes:</span> <span class='id identifier rubyid_scopes'>scopes</span><span class='comma'>,</span>
       <span class='label'>client_config:</span> <span class='id identifier rubyid_client_config'>client_config</span><span class='comma'>,</span>
@@ -2261,16 +2253,16 @@ or the specified config is missing data points.</p>
       <pre class="lines">
 
 
-108
 109
 110
 111
 112
 113
-114</pre>
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_database_path'>database_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span><span class='comma'>,</span> <span class='id identifier rubyid_database'>database</span>
   <span class='const'>DATABASE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2348,15 +2340,15 @@ or the specified config is missing data points.</p>
       <pre class="lines">
 
 
-96
 97
 98
 99
 100
-101</pre>
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_instance_path'>instance_path</span> <span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_instance'>instance</span>
   <span class='const'>INSTANCE_PATH_TEMPLATE</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span><span class='lparen'>(</span>
@@ -2549,7 +2541,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-371
 372
 373
 374
@@ -2569,10 +2560,11 @@ retries, etc.</p>
 388
 389
 390
-391</pre>
+391
+392</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 371</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 372</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_database'>create_database</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -2689,7 +2681,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-528
 529
 530
 531
@@ -2698,10 +2689,11 @@ retries, etc.</p>
 534
 535
 536
-537</pre>
+537
+538</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 528</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 529</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_drop_database'>drop_database</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -2821,7 +2813,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-410
 411
 412
 413
@@ -2829,10 +2820,11 @@ retries, etc.</p>
 415
 416
 417
-418</pre>
+418
+419</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 410</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 411</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_database'>get_database</span> \
     <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
@@ -2952,7 +2944,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-557
 558
 559
 560
@@ -2960,10 +2951,11 @@ retries, etc.</p>
 562
 563
 564
-565</pre>
+565
+566</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 557</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 558</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_database_ddl'>get_database_ddl</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
@@ -3087,7 +3079,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-631
 632
 633
 634
@@ -3095,10 +3086,11 @@ retries, etc.</p>
 636
 637
 638
-639</pre>
+639
+640</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 631</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 632</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_iam_policy'>get_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3255,7 +3247,6 @@ object.</p>
       <pre class="lines">
 
 
-297
 298
 299
 300
@@ -3265,10 +3256,11 @@ object.</p>
 304
 305
 306
-307</pre>
+307
+308</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 297</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 298</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_databases'>list_databases</span> \
     <span class='id identifier rubyid_parent'>parent</span><span class='comma'>,</span>
@@ -3415,7 +3407,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-597
 598
 599
 600
@@ -3425,10 +3416,11 @@ retries, etc.</p>
 604
 605
 606
-607</pre>
+607
+608</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 597</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 598</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_iam_policy'>set_iam_policy</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3574,7 +3566,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-670
 671
 672
 673
@@ -3584,10 +3575,11 @@ retries, etc.</p>
 677
 678
 679
-680</pre>
+680
+681</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 670</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 671</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_iam_permissions'>test_iam_permissions</span> \
     <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span>
@@ -3788,7 +3780,6 @@ retries, etc.</p>
       <pre class="lines">
 
 
-491
 492
 493
 494
@@ -3808,10 +3799,11 @@ retries, etc.</p>
 508
 509
 510
-511</pre>
+511
+512</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 491</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/admin/database/v1/database_admin_client.rb', line 492</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_database_ddl'>update_database_ddl</span> \
     <span class='id identifier rubyid_database'>database</span><span class='comma'>,</span>
