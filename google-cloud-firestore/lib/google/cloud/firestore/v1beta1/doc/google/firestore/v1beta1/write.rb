@@ -22,7 +22,7 @@ module Google
       # @!attribute [rw] delete
       #   @return [String]
       #     A document name to delete. In the format:
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       # @!attribute [rw] transform
       #   @return [Google::Firestore::V1beta1::DocumentTransform]
       #     Applies a tranformation to a document.

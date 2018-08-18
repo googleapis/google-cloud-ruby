@@ -37,14 +37,14 @@ module Google
             rpc :SubmitJob, SubmitJobRequest, Job
             # Gets the resource representation for a job in a project.
             rpc :GetJob, GetJobRequest, Job
-            # Lists regions/{region}/jobs in a project.
+            # Lists regions/\\{region}/jobs in a project.
             rpc :ListJobs, ListJobsRequest, ListJobsResponse
             # Updates a job in a project.
             rpc :UpdateJob, UpdateJobRequest, Job
             # Starts a job cancellation request. To access the job resource
             # after cancellation, call
-            # [regions/{region}/jobs.list](/dataproc/docs/reference/rest/v1/projects.regions.jobs/list) or
-            # [regions/{region}/jobs.get](/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
+            # [regions/\\{region}/jobs.list](/dataproc/docs/reference/rest/v1/projects.regions.jobs/list) or
+            # [regions/\\{region}/jobs.get](/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
             rpc :CancelJob, CancelJobRequest, Job
             # Deletes the job from the project. If the job is active, the delete fails,
             # and the response returns `FAILED_PRECONDITION`.

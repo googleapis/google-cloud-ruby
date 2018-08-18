@@ -365,7 +365,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/{project_id}/dataSources/{data_source_id}+
+            #   +projects/\\{project_id}/dataSources/\\{data_source_id}+
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -397,7 +397,7 @@ module Google
             #
             # @param parent [String]
             #   The BigQuery project id for which data sources should be returned.
-            #   Must be in the form: +projects/{project_id}+
+            #   Must be in the form: +projects/\\{project_id}+
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
             #   response. If page streaming is performed per-resource, this
@@ -452,7 +452,7 @@ module Google
             #
             # @param parent [String]
             #   The BigQuery project id where the transfer configuration should be created.
-            #   Must be in the format /projects/{project_id}/locations/{location_id}
+            #   Must be in the format /projects/\\{project_id}/locations/\\{location_id}
             #   If specified location and location of the destination bigquery dataset
             #   do not match - the request will fail.
             # @param transfer_config [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig | Hash]
@@ -577,7 +577,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/{project_id}/transferConfigs/{config_id}+
+            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -608,7 +608,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/{project_id}/transferConfigs/{config_id}+
+            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -639,7 +639,7 @@ module Google
             #
             # @param parent [String]
             #   The BigQuery project id for which data sources
-            #   should be returned: +projects/{project_id}+.
+            #   should be returned: +projects/\\{project_id}+.
             # @param data_source_ids [Array<String>]
             #   When specified, only configurations of requested data sources are returned.
             # @param page_size [Integer]
@@ -701,7 +701,7 @@ module Google
             #
             # @param parent [String]
             #   Transfer configuration name in the form:
-            #   +projects/{project_id}/transferConfigs/{config_id}+.
+            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+.
             # @param start_time [Google::Protobuf::Timestamp | Hash]
             #   Start time of the range of transfer runs. For example,
             #   +"2017-05-25T00:00:00+00:00"+.
@@ -752,7 +752,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+
+            #   +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -783,7 +783,7 @@ module Google
             #
             # @param name [String]
             #   The field will contain name of the resource requested, for example:
-            #   +projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}+
+            #   +projects/\\{project_id}/transferConfigs/\\{config_id}/runs/\\{run_id}+
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -815,7 +815,7 @@ module Google
             # @param parent [String]
             #   Name of transfer configuration for which transfer runs should be retrieved.
             #   Format of transfer configuration resource name is:
-            #   +projects/{project_id}/transferConfigs/{config_id}+.
+            #   +projects/\\{project_id}/transferConfigs/\\{config_id}+.
             # @param states [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferState>]
             #   When specified, only transfer runs with requested states are returned.
             # @param page_size [Integer]
@@ -878,7 +878,7 @@ module Google
             #
             # @param parent [String]
             #   Transfer run name in the form:
-            #   +projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}+.
+            #   +projects/\\{project_id}/transferConfigs/\\{config_Id}/runs/\\{run_id}+.
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
             #   response. If page streaming is performed per-resource, this
@@ -943,7 +943,7 @@ module Google
             #
             # @param name [String]
             #   The data source in the form:
-            #   +projects/{project_id}/dataSources/{data_source_id}+
+            #   +projects/\\{project_id}/dataSources/\\{data_source_id}+
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.

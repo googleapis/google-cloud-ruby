@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import os
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -54,3 +55,16 @@ s.replace(
     ],
     'Google::Cloud::Firestore\\.new\\(version: :v1beta1\\)',
     'Google::Cloud::Firestore::V1beta1.new')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/firestore/v1beta1/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)

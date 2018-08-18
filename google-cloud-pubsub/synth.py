@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import os
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -43,3 +44,16 @@ s.replace(
     'lib/google/cloud/pubsub/v1/credentials.rb',
     'SCOPE = \[[^\]]+\]\.freeze',
     'SCOPE = ["https://www.googleapis.com/auth/pubsub"].freeze')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/pubsub/v1/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)

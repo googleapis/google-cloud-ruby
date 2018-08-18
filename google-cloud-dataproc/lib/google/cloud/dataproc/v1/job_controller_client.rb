@@ -298,7 +298,7 @@ module Google
             @get_job.call(req, options, &block)
           end
 
-          # Lists regions/{region}/jobs in a project.
+          # Lists regions/\\{region}/jobs in a project.
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the job
@@ -463,8 +463,8 @@ module Google
 
           # Starts a job cancellation request. To access the job resource
           # after cancellation, call
-          # [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list) or
-          # [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
+          # [regions/\\{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list) or
+          # [regions/\\{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the job

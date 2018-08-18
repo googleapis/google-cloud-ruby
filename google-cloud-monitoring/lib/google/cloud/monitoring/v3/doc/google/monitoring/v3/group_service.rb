@@ -19,22 +19,22 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The project whose groups are to be listed. The format is
-      #     +"projects/{project_id_or_number}"+.
+      #     +"projects/\\{project_id_or_number}"+.
       # @!attribute [rw] children_of_group
       #   @return [String]
-      #     A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
+      #     A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
       #     Returns groups whose +parentName+ field contains the group
       #     name.  If no groups have this parent, the results are empty.
       # @!attribute [rw] ancestors_of_group
       #   @return [String]
-      #     A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
+      #     A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
       #     Returns groups that are ancestors of the specified group.
       #     The groups are returned in order, starting with the immediate parent and
       #     ending with the most distant ancestor.  If the specified group has no
       #     immediate parent, the results are empty.
       # @!attribute [rw] descendants_of_group
       #   @return [String]
-      #     A group name: +"projects/{project_id_or_number}/groups/{group_id}"+.
+      #     A group name: +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
       #     Returns the descendants of the specified group.  This is a superset of
       #     the results returned by the +childrenOfGroup+ filter, and includes
       #     children-of-children, and so forth.
@@ -63,14 +63,14 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The group to retrieve. The format is
-      #     +"projects/{project_id_or_number}/groups/{group_id}"+.
+      #     +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
       class GetGroupRequest; end
 
       # The +CreateGroup+ request.
       # @!attribute [rw] name
       #   @return [String]
       #     The project in which to create the group. The format is
-      #     +"projects/{project_id_or_number}"+.
+      #     +"projects/\\{project_id_or_number}"+.
       # @!attribute [rw] group
       #   @return [Google::Monitoring::V3::Group]
       #     A group definition. It is an error to define the +name+ field because
@@ -94,14 +94,14 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The group to delete. The format is
-      #     +"projects/{project_id_or_number}/groups/{group_id}"+.
+      #     +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
       class DeleteGroupRequest; end
 
       # The +ListGroupMembers+ request.
       # @!attribute [rw] name
       #   @return [String]
       #     The group whose members are listed. The format is
-      #     +"projects/{project_id_or_number}/groups/{group_id}"+.
+      #     +"projects/\\{project_id_or_number}/groups/\\{group_id}"+.
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     A positive number that is the maximum number of results to return.

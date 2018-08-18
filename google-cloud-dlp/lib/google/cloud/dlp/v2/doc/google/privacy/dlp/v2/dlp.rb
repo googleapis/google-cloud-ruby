@@ -1819,7 +1819,7 @@ module Google
           #     Cloud Pub/Sub topic to send notifications to. The topic must have given
           #     publishing access rights to the DLP API service account executing
           #     the long running DlpJob sending the notifications.
-          #     Format is projects/{project}/topics/{topic}.
+          #     Format is projects/\\{project}/topics/\\{topic}.
           class PublishToPubSub; end
 
           # Publish the result summary of a DlpJob to the Cloud Security

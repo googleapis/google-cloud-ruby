@@ -563,7 +563,7 @@ module Google
             @get_cluster.call(req, options, &block)
           end
 
-          # Lists all regions/{region}/clusters in a project.
+          # Lists all regions/\\{region}/clusters in a project.
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the cluster

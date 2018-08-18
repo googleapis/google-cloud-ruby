@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import os
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -37,3 +38,16 @@ s.copy(v1beta1_library / 'lib/google/devtools/clouderrorreporting/v1beta1')
 # PERMANENT: We don't want the generated overview.rb file because we have our
 # own toplevel docs for the handwritten layer.
 os.remove('lib/google/cloud/error_reporting/v1beta1/doc/overview.rb')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/error_reporting/v1beta1/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)

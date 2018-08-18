@@ -21,7 +21,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The resource name of the document, for example
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       # @!attribute [rw] fields
       #   @return [Hash{String => Google::Firestore::V1beta1::Value}]
       #     The document's fields.
@@ -99,7 +99,7 @@ module Google
       # @!attribute [rw] reference_value
       #   @return [String]
       #     A reference to a document. For example:
-      #     +projects/{project_id}/databases/{database_id}/documents/{document_path}+.
+      #     +projects/\\{project_id}/databases/\\{database_id}/documents/\\{document_path}+.
       # @!attribute [rw] geo_point_value
       #   @return [Google::Type::LatLng]
       #     A geo point value representing a point on the surface of Earth.

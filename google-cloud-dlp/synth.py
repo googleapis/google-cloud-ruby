@@ -47,3 +47,16 @@ s.copy(v2_library / '.gitignore')
 s.copy(v2_library / '.rubocop.yml')
 s.copy(v2_library / '.yardopts')
 s.copy(v2_library / 'google-cloud-dlp.gemspec', merge=merge_gemspec)
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    'lib/google/cloud/dlp/v2/**/*.rb',
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)

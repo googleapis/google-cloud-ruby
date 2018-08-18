@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import logging
 import os
+import re
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -46,3 +47,19 @@ s.replace(
     ],
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
+
+# https://github.com/googleapis/gapic-generator/issues/2242
+def escape_braces(match):
+    expr = re.compile('([^#\\$\\\\])\\{([\\w,]+)\\}')
+    content = match.group(0)
+    while True:
+        content, count = expr.subn('\\1\\\\\\\\{\\2}', content)
+        if count == 0:
+            return content
+s.replace(
+    [
+      'lib/google/cloud/spanner/v1/**/*.rb',
+      'lib/google/cloud/spanner/admin/**/*.rb'
+    ],
+    '\n(\\s+)#[^\n]*[^\n#\\$\\\\]\\{[\\w,]+\\}',
+    escape_braces)
