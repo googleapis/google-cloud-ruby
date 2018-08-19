@@ -39,6 +39,7 @@ module Google
         # @!attribute [r] cluster_controller_stub
         #   @return [Google::Cloud::Dataproc::V1::ClusterController::Stub]
         class ClusterControllerClient
+          # @private
           attr_reader :cluster_controller_stub
 
           # The default address of the service.

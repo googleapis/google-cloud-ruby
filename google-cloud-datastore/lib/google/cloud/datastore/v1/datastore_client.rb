@@ -41,6 +41,7 @@ module Google
         # @!attribute [r] datastore_stub
         #   @return [Google::Datastore::V1::Datastore::Stub]
         class DatastoreClient
+          # @private
           attr_reader :datastore_stub
 
           # The default address of the service.

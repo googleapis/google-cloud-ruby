@@ -47,6 +47,7 @@ module Google
         # @!attribute [r] group_service_stub
         #   @return [Google::Monitoring::V3::GroupService::Stub]
         class GroupServiceClient
+          # @private
           attr_reader :group_service_stub
 
           # The default address of the service.

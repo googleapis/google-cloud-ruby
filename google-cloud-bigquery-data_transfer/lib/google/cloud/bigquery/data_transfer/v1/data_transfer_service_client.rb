@@ -40,6 +40,7 @@ module Google
           # @!attribute [r] data_transfer_service_stub
           #   @return [Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub]
           class DataTransferServiceClient
+            # @private
             attr_reader :data_transfer_service_stub
 
             # The default address of the service.

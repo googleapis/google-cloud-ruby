@@ -36,6 +36,7 @@ module Google
         # @!attribute [r] error_group_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupService::Stub]
         class ErrorGroupServiceClient
+          # @private
           attr_reader :error_group_service_stub
 
           # The default address of the service.

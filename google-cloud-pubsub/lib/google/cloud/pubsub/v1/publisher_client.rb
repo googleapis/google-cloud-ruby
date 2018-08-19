@@ -40,6 +40,7 @@ module Google
         # @!attribute [r] publisher_stub
         #   @return [Google::Pubsub::V1::Publisher::Stub]
         class PublisherClient
+          # @private
           attr_reader :iam_policy_stub, :publisher_stub
 
           # The default address of the service.

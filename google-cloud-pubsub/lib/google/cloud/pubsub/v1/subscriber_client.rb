@@ -41,6 +41,7 @@ module Google
         # @!attribute [r] subscriber_stub
         #   @return [Google::Pubsub::V1::Subscriber::Stub]
         class SubscriberClient
+          # @private
           attr_reader :iam_policy_stub, :subscriber_stub
 
           # The default address of the service.

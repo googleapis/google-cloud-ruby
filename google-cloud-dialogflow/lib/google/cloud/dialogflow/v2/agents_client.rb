@@ -62,6 +62,7 @@ module Google
         # @!attribute [r] agents_stub
         #   @return [Google::Cloud::Dialogflow::V2::Agents::Stub]
         class AgentsClient
+          # @private
           attr_reader :agents_stub
 
           # The default address of the service.

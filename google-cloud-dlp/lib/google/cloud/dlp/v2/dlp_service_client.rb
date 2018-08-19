@@ -44,6 +44,7 @@ module Google
         # @!attribute [r] dlp_service_stub
         #   @return [Google::Privacy::Dlp::V2::DlpService::Stub]
         class DlpServiceClient
+          # @private
           attr_reader :dlp_service_stub
 
           # The default address of the service.

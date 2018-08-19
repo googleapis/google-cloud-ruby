@@ -37,6 +37,7 @@ module Google
         # @!attribute [r] error_stats_service_stub
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorStatsService::Stub]
         class ErrorStatsServiceClient
+          # @private
           attr_reader :error_stats_service_stub
 
           # The default address of the service.

@@ -41,6 +41,7 @@ module Google
           # @!attribute [r] bigtable_instance_admin_stub
           #   @return [Google::Bigtable::Admin::V2::BigtableInstanceAdmin::Stub]
           class BigtableInstanceAdminClient
+            # @private
             attr_reader :bigtable_instance_admin_stub
 
             # The default address of the service.

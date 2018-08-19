@@ -36,6 +36,7 @@ module Google
         # @!attribute [r] text_to_speech_stub
         #   @return [Google::Cloud::Texttospeech::V1::TextToSpeech::Stub]
         class TextToSpeechClient
+          # @private
           attr_reader :text_to_speech_stub
 
           # The default address of the service.

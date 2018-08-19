@@ -36,6 +36,7 @@ module Google
         # @!attribute [r] job_controller_stub
         #   @return [Google::Cloud::Dataproc::V1::JobController::Stub]
         class JobControllerClient
+          # @private
           attr_reader :job_controller_stub
 
           # The default address of the service.

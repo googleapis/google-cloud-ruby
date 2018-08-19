@@ -47,6 +47,7 @@ module Google
             # @!attribute [r] database_admin_stub
             #   @return [Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub]
             class DatabaseAdminClient
+              # @private
               attr_reader :database_admin_stub
 
               # The default address of the service.

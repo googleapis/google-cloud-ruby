@@ -39,6 +39,7 @@ module Google
         # @!attribute [r] spanner_stub
         #   @return [Google::Spanner::V1::Spanner::Stub]
         class SpannerClient
+          # @private
           attr_reader :spanner_stub
 
           # The default address of the service.

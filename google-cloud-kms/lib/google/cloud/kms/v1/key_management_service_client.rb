@@ -46,6 +46,7 @@ module Google
         # @!attribute [r] iam_policy_stub
         #   @return [Google::Iam::V1::IAMPolicy::Stub]
         class KeyManagementServiceClient
+          # @private
           attr_reader :key_management_service_stub, :iam_policy_stub
 
           # The default address of the service.

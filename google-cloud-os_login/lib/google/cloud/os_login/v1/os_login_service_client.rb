@@ -39,6 +39,7 @@ module Google
         # @!attribute [r] os_login_service_stub
         #   @return [Google::Cloud::Oslogin::V1::OsLoginService::Stub]
         class OsLoginServiceClient
+          # @private
           attr_reader :os_login_service_stub
 
           # The default address of the service.

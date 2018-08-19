@@ -59,3 +59,9 @@ s.replace(
     ],
     '\n\n(\\s+)class OperationsClient < Google::Longrunning::OperationsClient',
     '\n\n\\1# @private\n\\1class OperationsClient < Google::Longrunning::OperationsClient')
+
+# https://github.com/googleapis/gapic-generator/issues/2243
+s.replace(
+    'lib/google/cloud/dialogflow/*/*_client.rb',
+    '(\n\\s+class \\w+Client\n)(\\s+)(attr_reader :\\w+_stub)',
+    '\\1\\2# @private\n\\2\\3')

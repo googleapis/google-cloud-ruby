@@ -63,6 +63,7 @@ module Google
             # @!attribute [r] instance_admin_stub
             #   @return [Google::Spanner::Admin::Instance::V1::InstanceAdmin::Stub]
             class InstanceAdminClient
+              # @private
               attr_reader :instance_admin_stub
 
               # The default address of the service.

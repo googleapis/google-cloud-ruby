@@ -36,6 +36,7 @@ module Google
         # @!attribute [r] metrics_service_v2_stub
         #   @return [Google::Logging::V2::MetricsServiceV2::Stub]
         class MetricsServiceV2Client
+          # @private
           attr_reader :metrics_service_v2_stub
 
           # The default address of the service.
