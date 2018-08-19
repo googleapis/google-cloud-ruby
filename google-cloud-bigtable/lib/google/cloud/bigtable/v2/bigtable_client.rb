@@ -269,7 +269,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable/v2"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable::V2::BigtableClient.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #   bigtable_client.read_rows(formatted_table_name).each do |element|
           #     # Process element.
@@ -315,7 +315,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable/v2"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable::V2::BigtableClient.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #   bigtable_client.sample_row_keys(formatted_table_name).each do |element|
           #     # Process element.
@@ -362,7 +362,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable/v2"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable::V2::BigtableClient.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize +row_key+:
@@ -416,7 +416,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable/v2"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable::V2::BigtableClient.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize +entries+:
@@ -485,7 +485,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable/v2"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable::V2::BigtableClient.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize +row_key+:
@@ -546,7 +546,7 @@ module Google
           # @example
           #   require "google/cloud/bigtable/v2"
           #
-          #   bigtable_client = Google::Cloud::Bigtable::V2.new
+          #   bigtable_client = Google::Cloud::Bigtable::V2::BigtableClient.new
           #   formatted_table_name = Google::Cloud::Bigtable::V2::BigtableClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
           #
           #   # TODO: Initialize +row_key+:
