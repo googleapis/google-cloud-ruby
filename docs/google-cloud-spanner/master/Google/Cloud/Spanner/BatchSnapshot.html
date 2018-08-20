@@ -98,8 +98,7 @@ additionally allows to partition a read or query request. The read/query
 request can then be executed independently over each partition while
 observing the same snapshot of the database. A BatchSnapshot can also be
 shared across multiple processes/machines by passing around its
-serialized value and then recreating the transaction using
-BatchClient#dump.</p>
+serialized value and then recreating the transaction using <span class='object_link'><a href="#dump-instance_method" title="Google::Cloud::Spanner::BatchSnapshot#dump (method)">#dump</a></span>.</p>
 
 <p>Unlike locking read-write transactions, BatchSnapshot will never abort.
 They can fail if the chosen read timestamp is garbage collected; however
@@ -240,7 +239,7 @@ in practice.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Execute the partition to return a ResultSet.</p>
+    <span class="summary_desc"><div class='inline'><p>Execute the partition to return a <span class='object_link'><a href="Results.html" title="Google::Cloud::Spanner::Results (class)">Results</a></span>.</p>
 </div></span>
   
 </li>
@@ -420,14 +419,14 @@ render the batch snapshot invalid everywhere.</p>
       <pre class="lines">
 
 
+354
 355
 356
 357
-358
-359</pre>
+358</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 355</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 354</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -517,12 +516,12 @@ process. See <span class='object_link'><a href="BatchClient.html#load_batch_snap
       <pre class="lines">
 
 
+613
 614
-615
-616</pre>
+615</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 614</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 613</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dump'>dump</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span> <span class='id identifier rubyid_to_h'>to_h</span>
@@ -833,17 +832,17 @@ execution.</p>
       <pre class="lines">
 
 
+513
 514
 515
 516
 517
 518
 519
-520
-521</pre>
+520</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 514</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 513</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute'>execute</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -869,7 +868,7 @@ execution.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Execute the partition to return a ResultSet. The result returned
+    <p>Execute the partition to return a <span class='object_link'><a href="Results.html" title="Google::Cloud::Spanner::Results (class)">Results</a></span>. The result returned
 could be zero or more rows. The row metadata may be absent if no rows
 are returned.</p>
 
@@ -925,6 +924,7 @@ be executed.</p>
       <pre class="lines">
 
 
+315
 316
 317
 318
@@ -938,11 +938,10 @@ be executed.</p>
 326
 327
 328
-329
-330</pre>
+329</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 315</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute_partition'>execute_partition</span> <span class='id identifier rubyid_partition'>partition</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -1222,6 +1221,7 @@ created by the query partition.</p>
       <pre class="lines">
 
 
+190
 191
 192
 193
@@ -1246,11 +1246,10 @@ created by the query partition.</p>
 212
 213
 214
-215
-216</pre>
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 190</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_query'>partition_query</span> <span class='id identifier rubyid_sql'>sql</span><span class='comma'>,</span> <span class='label'>params:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>types:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                     <span class='label'>partition_size_bytes:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_partitions:</span> <span class='kw'>nil</span>
@@ -1457,6 +1456,7 @@ created by the read partition.</p>
       <pre class="lines">
 
 
+262
 263
 264
 265
@@ -1484,11 +1484,10 @@ created by the read partition.</p>
 287
 288
 289
-290
-291</pre>
+290</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 263</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 262</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_partition_read'>partition_read</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span> <span class='label'>keys:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='kw'>nil</span><span class='comma'>,</span>
                    <span class='label'>partition_size_bytes:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_partitions:</span> <span class='kw'>nil</span>
@@ -1672,6 +1671,7 @@ operation.</p>
       <pre class="lines">
 
 
+556
 557
 558
 559
@@ -1679,11 +1679,10 @@ operation.</p>
 561
 562
 563
-564
-565</pre>
+564</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 557</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 556</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span> <span class='id identifier rubyid_table'>table</span><span class='comma'>,</span> <span class='id identifier rubyid_columns'>columns</span><span class='comma'>,</span> <span class='label'>keys:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span>
   <span class='id identifier rubyid_ensure_session!'>ensure_session!</span>
@@ -1741,13 +1740,13 @@ operation.</p>
       <pre class="lines">
 
 
+86
 87
 88
-89
-90</pre>
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_timestamp'>timestamp</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1800,13 +1799,13 @@ operation.</p>
       <pre class="lines">
 
 
+78
 79
 80
-81
-82</pre>
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/google/cloud/spanner/batch_snapshot.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_transaction_id'>transaction_id</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_grpc'>grpc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>

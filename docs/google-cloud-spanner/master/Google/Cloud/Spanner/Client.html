@@ -669,10 +669,10 @@ Unlike <span class='object_link'><a href="#transaction-instance_method" title="G
 accepts only mutations and makes a single API request.</p>
 
 <p><strong>Note:</strong> This method does not feature replay protection present in
-Transaction#commit (See <span class='object_link'><a href="#transaction-instance_method" title="Google::Cloud::Spanner::Client#transaction (method)">#transaction</a></span>). This method makes a single
-RPC, whereas Transaction#commit requires two RPCs (one of which may
-be performed in advance), and so this method may be appropriate for
-latency sensitive and/or high throughput blind changes.</p>
+<span class='object_link'><a href="#transaction-instance_method" title="Google::Cloud::Spanner::Client#transaction (method)">#transaction</a></span>. This method makes a single RPC, whereas <span class='object_link'><a href="#transaction-instance_method" title="Google::Cloud::Spanner::Client#transaction (method)">#transaction</a></span>
+requires two RPCs (one of which may be performed in advance), and so
+this method may be appropriate for latency sensitive and/or high
+throughput blind changes.</p>
 
 
   </div>
