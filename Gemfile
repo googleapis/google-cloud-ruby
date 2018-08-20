@@ -19,6 +19,7 @@ gem "rack", ">= 0.1"
 
 gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
+gem "google-cloud-asset", path: "google-cloud-asset"
 gem "google-cloud-bigquery", path: "google-cloud-bigquery"
 gem "google-cloud-bigquery-data_transfer", path: "google-cloud-bigquery-data_transfer"
 gem "google-cloud-bigtable", path: "google-cloud-bigtable"
