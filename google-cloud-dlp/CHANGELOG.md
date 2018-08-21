@@ -1,5 +1,10 @@
 # Release History
 
+### 0.6.0 / 2018-08-21
+
+* Update V2 API.
+* Update documentation.
+
 ### 0.5.0 / 2018-07-10
 
 * Documentation updates
