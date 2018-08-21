@@ -1,6 +1,6 @@
 --no-private
 --title=Google Cloud Pub/Sub
---exclude lib/google/pubsub/v1
+--exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
 

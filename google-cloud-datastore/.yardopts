@@ -1,6 +1,6 @@
 --no-private
 --title=Google Cloud Datastore
---exclude lib/google/datastore/v1
+--exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
 

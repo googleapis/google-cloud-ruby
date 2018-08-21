@@ -1,8 +1,6 @@
 --no-private
 --title=Google Cloud Spanner
---exclude lib/google/spanner
---exclude lib/google/cloud/spanner/admin/database/v1.rb
---exclude lib/google/cloud/spanner/admin/instance/v1.rb
+--exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
 
