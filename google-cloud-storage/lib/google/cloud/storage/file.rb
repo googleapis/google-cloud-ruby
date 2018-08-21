@@ -453,7 +453,7 @@ module Google
         # version. You can turn versioning on or off for a bucket at any time
         # with {Bucket#versioning=}. Turning versioning off leaves existing file
         # versions in place and causes the bucket to stop accumulating new
-        # archived object versions. (See {Bucket#versioning} and
+        # archived object versions. (See {Bucket#versioning?} and
         # {File#generation})
         #
         # @see https://cloud.google.com/storage/docs/object-versioning Object
